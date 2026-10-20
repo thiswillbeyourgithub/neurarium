@@ -344,7 +344,7 @@ export function wireFocus({
   // / drug search pick, so you can go from a target to every drug acting on it.
   info.onDrug(selectDrug);
 
-  // Clicking a "Neurotransmitter tone" row in a drug panel focuses that projection
+  // Clicking a "Pharmacodynamics: net neurotransmission" row in a drug panel focuses that projection
   // group (isolates its arrows + opens its tab), exactly like its Projections legend
   // row, so you can go from a drug to the pathway system it engages.
   info.onProjectionGroup((group) => focusProjectionGroup(group, { frame: true }));

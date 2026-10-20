@@ -12,7 +12,7 @@ export function makeAddons(P) {
   } = P;
 
   // --- Addon nodes: the panel-slot annotation kind ------------------------------
-  // Every other node kind has an implied home (a binding belongs in "Direct molecular targets", an
+  // Every other node kind has an implied home (a binding belongs in "Pharmacodynamics: binding profile", an
   // enzyme row in "Metabolism"), so its collection decides where it draws. An addon
   // is the kind for a claim with no such home: it carries its OWN insertion point
   // (see tools/data_generators/addons.py), and these two pieces are the whole hook

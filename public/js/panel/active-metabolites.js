@@ -22,10 +22,10 @@ export function activeMetabolitesSubsection(P, drug, opts = {}) {
   // Active metabolites: one row per metabolite (its own sourced identity node).
   // A metabolite that is itself a modeled drug links to it (jump via onDrugPick);
   // each shows its own T½ underneath, a bit like a binding's Ki. What a metabolite
-  // binds is not listed here: its rows sit in "Direct molecular targets" beside the
+  // binds is not listed here: its rows sit in "Pharmacodynamics: binding profile" beside the
   // parent's, each naming its compound (views/drug.js).
   if (!drug.metabolites || !drug.metabolites.length) return { sec: null, flash: null };
-  const metaEl = subSection(t("drug.metabolites"), "info-metabolites");
+  const metaEl = subSection(t("drug.metabolites"), "info-metabolites", t("drug.metabolitesSub"));
   metaEl.dataset.tourSec = "metabolites";
   const ul = el("ul");
   let flashLi = null; // the row to scroll to + flash (opts.highlightMetabolite)

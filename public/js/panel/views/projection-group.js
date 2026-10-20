@@ -65,7 +65,7 @@ export function showProjectionGroup(P, group) {
         li.appendChild(el("span", "bind-target", d.displayName));
         const cat = d.categoryLabels && d.categoryLabels[0];
         if (cat) li.appendChild(el("span", "legend-tag", cat));
-        // Symmetric sourcing with the drug panel's "Neurotransmitter tone" row:
+        // Symmetric sourcing with the drug panel's "Pharmacodynamics: net neurotransmission" row:
         // the drug<->system link is one node, so both ends carry the same source,
         // the strongest-affinity binding feeding this system.
         const rep = strongestBindingForKind(d.bindings, group.key);

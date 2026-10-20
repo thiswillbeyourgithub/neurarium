@@ -128,7 +128,7 @@ export function makeSections(P) {
     return mix;
   };
 
-  // The drug panel's derived "Inferred effects" (BETA): the drug's
+  // The drug panel's derived "Predicted effects (target-based)" (BETA): the drug's
   // directional bindings joined with the receptor_effect nodes of their targets, read
   // from the build-time effect index (data.possibleEffectsByDrug, see
   // tools/data_generators/effect_index.py). Never stored, and worded conditionally: it
@@ -137,7 +137,8 @@ export function makeSections(P) {
   const appendPossibleEffects = (drug) => {
     const effects = data.possibleEffectsByDrug.get(drug.id) || [];
     if (!effects.length) return;
-    const { sec, ul, close } = betaSection("effects", "effects.drugHeading", "effects.drugHint");
+    const { sec, ul, close } = betaSection("effects", "effects.drugHeading", "effects.drugHint",
+      { subKey: "effects.drugHeadingSub" });
     const mix = mixedCompounds(drug, sec, ul, effects.flatMap((e) => e.via));
     for (const e of effects) {
       ul.appendChild(derivedRow(effectLink(e.effect, t("effects.couldCause", { effect: e.label })),
@@ -233,14 +234,15 @@ export function makeSections(P) {
     close();
   };
 
-  // The drug panel's "Genetic variability": every receptor_variant
+  // The drug panel's "Pharmacogenomic associations (ClinPGx)": every receptor_variant
   // node naming this drug, grouped under the target whose gene carries it (the
   // heading jumps to that target). Folded with the rest of the drug panel.
   const appendDrugVariants = (drug) => {
     const hits = variantsForDrug(drug.id, data.targets);
     if (!hits.length) return;
     const { group, close } = betaSection("variants", "variant.drugHeading", "variant.drugHint",
-      { cls: "info-variants", grouped: true, caveatKey: "variant.caveat" });
+      { cls: "info-variants", grouped: true, caveatKey: "variant.caveat",
+        subKey: "variant.drugHeadingSub" });
     const byTarget = new Map();
     for (const { target, row } of hits) {
       if (!byTarget.has(target)) byTarget.set(target, []);
@@ -258,7 +260,7 @@ export function makeSections(P) {
     close();
   };
 
-  // The drug panel's derived "Possible release changes" (BETA): its directional
+  // The drug panel's derived "Presynaptic modulation" (BETA): its directional
   // bindings joined with the release-modulation nodes of their receptors
   // (js/release-modulation.js), an antagonist flipping the effect of activation and
   // affinity_only contributing nothing. Computed, never stored, worded conditionally.
@@ -266,7 +268,8 @@ export function makeSections(P) {
     const changes = deriveReleaseChanges(
       drug.allBindings, (tid) => data.modulationByTarget.get(tid) || [], data.meta.effectModes);
     if (!changes.length) return;
-    const { sec, ul, close } = betaSection("downstream", "relmod.drugHeading", "relmod.drugHint");
+    const { sec, ul, close } = betaSection("downstream", "relmod.drugHeading", "relmod.drugHint",
+      { subKey: "relmod.drugHeadingSub" });
     const mix = mixedCompounds(drug, sec, ul, changes.flatMap((c) => c.via));
     for (const c of changes) {
       ul.appendChild(derivedRow(t(`relmod.could.${c.direction}`,
@@ -283,7 +286,7 @@ export function makeSections(P) {
   const appendWorkup = (drug) => {
     if (!drug.workup || !drug.workup.length) return;
     const { group, close } = betaSection("workup", "drug.workup", "drug.workupHint",
-      { grouped: true, caveatKey: "drug.workupCaveat" });
+      { grouped: true, caveatKey: "drug.workupCaveat", subKey: "drug.workupSub" });
     for (const g of groupWorkup(drug.workup)) {
       const list = group(t(`drug.workup.${g.timing}`));
       for (const n of g.rows) {

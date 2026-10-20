@@ -87,7 +87,7 @@ export function createInfoPanel(data, sourcingModal) {
   // from a receptor panel's Effects row or a drug panel's derived "could cause" row.
   const onEffectPick = delegate("onEffectPick");
   // Set by the caller (onProjectionGroup): what to do when a projection-group row in
-  // a drug panel's "Neurotransmitter tone" list is clicked. The panel hands back the
+  // a drug panel's "Pharmacodynamics: net neurotransmission" list is clicked. The panel hands back the
   // group record; the caller focuses it exactly like its Projections legend row.
   const onProjectionGroupPick = delegate("onProjectionGroupPick");
   // Set by the caller (onSearch): run a search query. A drug panel's clickable
@@ -220,7 +220,7 @@ export function createInfoPanel(data, sourcingModal) {
     /**
      * Populate the panel for a *drug* (clicking a drug legend/list row or a drug
      * search result): its name, primary category, a Wikipedia link, a one-line
-     * description, its class(es) + nomenclature, then the "Direct molecular targets" list of
+     * description, its class(es) + nomenclature, then the "Pharmacodynamics: binding profile" list of
      * molecular targets (each binding's effect swatch + target name + action,
      * with a note / "speculative" marker when present, and a source pill: its own
      * quote-level source or the drug-level Stahl citation as a fallback).
@@ -283,7 +283,7 @@ export function createInfoPanel(data, sourcingModal) {
 
     /**
      * Register the handler run when a projection-group row in a drug panel's
-     * "Neurotransmitter tone" list is clicked. Called with the group record; the
+     * "Pharmacodynamics: net neurotransmission" list is clicked. Called with the group record; the
      * caller focuses it exactly like its Projections legend row / search pick.
      */
     onProjectionGroup(fn) {

@@ -146,7 +146,7 @@ export function createViewerTour({
     tourPanelToTop();
   };
   // The olanzapine panel, re-opened only when it is not already the active tab: the
-  // drug walk-through (Acts on -> Metabolism -> Psychotropic interactions -> the H1 row) is
+  // drug walk-through (Binding profile -> Metabolism -> Pharmacokinetic interactions -> the H1 row) is
   // four sub-steps reading ONE panel, so they share this before().
   const tourDrugPanel = tourEnsureTab("drug:olanzapine", tourOlanzapine, focusDrug);
   // Every detail panel's sections start folded (see foldSections): a step that points
@@ -341,7 +341,7 @@ export function createViewerTour({
     { title: t("tour.drugTap.title"), body: tHtml("tour.drugTap.body"),
       target: '[data-tour-id="drug:olanzapine"]', interactive: true, scrollTo: true,
       before: () => tourOpenSection("drugs") },
-    // 15. The drug's "Direct molecular targets" list (dim:false so the live animation stays visible). The
+    // 15. The drug's "Pharmacodynamics: binding profile" list (dim:false so the live animation stays visible). The
     //    body flags the drug animations as the least-scientific, still-WIP part.
     { title: t("tour.drugActs.title"), body: tHtml("tour.drugActs.body"),
       target: '[data-tour-sec="bindings"]', dim: false, scrollTo: true, scrollAlign: "top",

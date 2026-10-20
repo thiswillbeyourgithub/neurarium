@@ -1,4 +1,4 @@
-// The drug panel's "Psychotropic interactions" subsection (derived, never stored): the
+// The drug panel's "Pharmacokinetic interactions" subsection (derived, never stored): the
 // drugs this one meets at a shared enzyme, grouped by drug or by isoform. Split out of
 // panel/views/drug.js, which appends it last in the Metabolism section.
 
@@ -15,7 +15,7 @@ const { t } = window.__I18N__;
  */
 export function pkInteractionsSection(P, drug) {
   const { data, el, enzymeById, onDrugPick, onEnzymePick } = P;
-  // Psychotropic interactions: derived, never stored (see pkInteractionsOf). This drug
+  // Pharmacokinetic interactions: derived, never stored (see pkInteractionsOf). This drug
   // and the listed one meet at the same enzyme, so one COULD shift the other's
   // level; the wording stays conditional throughout because the edge is an
   // inference from the enzyme roles, not a measured interaction study.
@@ -29,7 +29,7 @@ export function pkInteractionsSection(P, drug) {
   // the count in its title so the reader sees how many rows follow. info-interactors
   // reuses that section's .drug-cat sub-heading style.
   const pkWrap = subSection(`${t("drug.pkInteractions")} (${edges.length})`,
-    "info-interactors");
+    "info-interactors", t("drug.pkInteractionsSub"));
   pkWrap.dataset.tourSec = "pk"; // guided-tour section anchor
   pkWrap.appendChild(el("p", "legend-caption", t("drug.pkInteractionsHint")));
 

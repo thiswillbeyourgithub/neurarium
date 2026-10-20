@@ -1,7 +1,7 @@
 """Who a drug comes from: its originator lab, that lab's country, its current holders.
 
 Three node kinds hang off a drug here (see ``docs/DRUGS.md`` "Regulatory history"),
-shown in the panel's "Administrative" section next to the first approval:
+shown in the panel's "Identification" section next to the first approval:
 
 * ``drug_holders``: ONE node per (drug, market), ``holders[] = {market, names[],
   sources}``: the company that holds the marketing authorisation in that market TODAY,

@@ -82,7 +82,7 @@
   .structure-image.loading .img-spinner { animation: none; }
 }
 
-/* Drug panel: the "Direct molecular targets" molecular-target list. Each row is the
+/* Drug panel: the "Pharmacodynamics: binding profile" molecular-target list. Each row is the
    effect swatch + the target name + (action · note); a speculative
    binding is dimmed + italic. */
 .info-bindings { margin: 0 0 var(--sp-xl); }

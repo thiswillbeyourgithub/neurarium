@@ -1,4 +1,4 @@
-// Pre-prescription workup (BETA): the drug panel's "Checks the French label asks for"
+// Pre-prescription workup (BETA): the drug panel's "Monitoring (French SmPC)"
 // section (node kind drug_workup, BDPM RCP corpus #24; mapped in js/data.js). One node
 // per (drug, test, timing), the test and timing labels coming from meta.workup_tests /
 // meta.workup_timings. Pure helpers only (no DOM), so tools/tests/workup.test.mjs can

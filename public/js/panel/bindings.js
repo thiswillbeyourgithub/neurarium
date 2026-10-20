@@ -13,7 +13,7 @@ export function makeBindings(P) {
 
   // The strongest-affinity binding a drug has feeding a transmitter system (the
   // binding whose flowKind == kind, min representative Ki), or undefined. The one
-  // node behind the drug<->system link, so the drug panel's "Neurotransmitter tone"
+  // node behind the drug<->system link, so the drug panel's "Pharmacodynamics: net neurotransmission"
   // row and the projection-group panel's "Drugs acting on this system" row rank +
   // source it identically. (bindingKi, the shared Ki key, is module-scope above.)
   const strongestBindingForKind = (bindings, kind) =>
@@ -124,7 +124,7 @@ export function makeBindings(P) {
     return a;
   };
 
-  // One binding row, shared by the drug panel's "Direct molecular targets" list and a
+  // One binding row, shared by the drug panel's "Pharmacodynamics: binding profile" list and a
   // receptor/target panel's "Interacting drugs" list: the two render the *same*
   // resolved binding from opposite ends (a drug's target vs a target's drug), so
   // the markup lives once. Layout: the effect glyph, then a text column holding
@@ -214,7 +214,7 @@ export function makeBindings(P) {
     for (const cat of order) {
       container.appendChild(el("h4", "drug-cat", cats[cat] || cat));
       const ul = el("ul");
-      // Same shared row builder as the drug panel's "Direct molecular targets" list (same resolved
+      // Same shared row builder as the drug panel's "Pharmacodynamics: binding profile" list (same resolved
       // binding, seen from the target's side), so the effect glyph, action, the
       // measured Ki chip and the shared source pill all render identically here;
       // clicking a row opens that drug.

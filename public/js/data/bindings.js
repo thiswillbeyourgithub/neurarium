@@ -151,7 +151,7 @@ export function borrowBindings(drugs) {
   // first), yet focusing it should light what its active metabolite hits. So before
   // the loop resolves bindings, it borrows each metabolite's raw bindings (its own
   // `bindings[]`, else its linked modeled drug's), tagged `via_metabolite`: the scene,
-  // flow and "Direct molecular targets" treat them like the drug's, while every list that counts a
+  // flow and "Pharmacodynamics: binding profile" treat them like the drug's, while every list that counts a
   // binding node once (receptor panels, node browser, simulation) skips the tag,
   // since the metabolite already owns that node. Runs on raw records, before any
   // drug's bindings are mapped.

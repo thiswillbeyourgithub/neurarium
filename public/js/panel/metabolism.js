@@ -19,7 +19,7 @@ export function makeMetabolism(P) {
   // affinity drug first (by this target's binding Ki, Infinity when unmeasured; equal
   // Ki tie-broken by name); classes ordered by the class's hardest binding (its min
   // Ki), classes with no measured Ki keeping the meta / Drugs-legend order among
-  // themselves. Matches the drug panel's "Direct molecular targets" order and the target legend.
+  // themselves. Matches the drug panel's "Pharmacodynamics: binding profile" order and the target legend.
   /**
    * One row of a metabolism list, shared by the drug panel's Metabolism section and
    * the enzyme panel's drug list so both render the same claim identically (the
@@ -87,7 +87,7 @@ export function makeMetabolism(P) {
     const blocks = drug.pgx || [];
     if (!blocks.length) return null;
     // A subsection of the drug's Metabolism section, right under the isoforms.
-    const wrap = subSection(t("drug.pgx"), "info-pgx");
+    const wrap = subSection(t("drug.pgx"), "info-pgx", t("drug.pgxSub"));
     wrap.dataset.tourSec = "pgx";
     wrap.appendChild(el("p", "legend-caption", t("drug.pgxHint")));
 

@@ -34,7 +34,7 @@ export function toneWeightOf(ki) {
 }
 
 /**
- * A drug's indicative tone per transmitter system (the "Neurotransmitter tone"
+ * A drug's indicative tone per transmitter system (the "Pharmacodynamics: net neurotransmission"
  * section and the flow overlay): every tone-setting binding adds
  * `toneSign * toneFactor * toneWeight` to its system's sum; postsynaptic receptors carry
  * toneSign 0 and add nothing. A zero sum drops the system (opposing bindings cancel).

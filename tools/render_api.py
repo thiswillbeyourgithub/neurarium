@@ -8,8 +8,8 @@ at the end of the page.
 **Stored fields only**, with one exception: the BETA ``/api/effect/<id>`` pages (an effect
 -> the receptors whose stored nodes carry it -> the drugs whose bindings could reach it),
 the same index the viewer's Effects panel reads (``data_generators/effect_index.py``),
-labelled as derived on the page. Everything the viewer derives in the browser (release
-changes, neurotransmitter tone, drug-drug interactions, the simulation) is not here, so
+labelled as derived on the page. Everything the viewer derives in the browser (presynaptic
+modulation, net neurotransmission, pharmacokinetic interactions, the simulation) is not here, so
 nothing duplicates the JS that computes it. The rendering is generic (a record's keys in
 order, nested values as bullets), so a new data field shows up with no edit here.
 
@@ -305,8 +305,8 @@ class Renderer:
                      "[grade quote_id], the verbatim quotes listed under Sources at the end of each "
                      "page, except the BETA effect pages, a derived effect -> receptors -> drugs "
                      "index. The human version (the 3D viewer) shows slightly more: what else it "
-                     "computes in the browser from these facts (a drug's possible effects, release "
-                     "changes, neurotransmitter tone, drug interactions, simulation) is not included. "
+                     "computes in the browser from these facts (a drug's predicted effects, presynaptic "
+                     "modulation, net neurotransmission, pharmacokinetic interactions, simulation) is not included. "
                      f"Every page: [{API}/]({API}/). Overview and raw data: {llms_txt.SITE_URL}/llms.txt")
         for kind in kinds or self.pages:
             lines += self.listing(kind)

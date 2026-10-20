@@ -29,7 +29,7 @@ export function formatHalfLife(hl) {
 
 // A drug binding's representative Ki (its median), or Infinity when unmeasured. The
 // single "how hard does this drug grip this target" ranking key, shared by the info
-// panel (the drug's "Direct molecular targets" order, each system's strongest binding) and the target
+// panel (the drug's "Pharmacodynamics: binding profile" order, each system's strongest binding) and the target
 // legend's affinity sort, so every affinity ordering agrees.
 export const bindingKi = (b) =>
   b.ki && typeof b.ki.median === "number" ? b.ki.median : Infinity;

@@ -118,7 +118,7 @@ export function resolveDrugs({ drugs, receptors, byId, allIds, metaRecord, v },
     // a prodrug, which already took them as its own), resolved the same way and
     // flagged `fromMetabolite`. They stay out of the lit regions (those are the parent
     // molecule's), but every panel readout of bindings reads `allBindings`: the
-    // "Direct molecular targets" rows, the tone and its flow overlay below, the inferred
+    // "Pharmacodynamics: binding profile" rows, the tone and its flow overlay below, the inferred
     // effects and the release changes, each row naming the compound (`viaMetabolite`).
     const scratch = new Set();
     d.metaboliteBindings = (d.metabolite_bindings || [])
@@ -143,7 +143,7 @@ export function resolveDrugs({ drugs, receptors, byId, allIds, metaRecord, v },
     }
     // Drives the flowing-beads overlay (main.js filters arrows by these kinds, then
     // js/circuit-anim.js animates them with the per-kind direction/weight above) and
-    // the panel's "Neurotransmitter tone" list. Empty for a drug that sets no tone (a
+    // the panel's "Pharmacodynamics: net neurotransmission" list. Empty for a drug that sets no tone (a
     // purely postsynaptic agent gets just dots + wash).
     d.flowKinds = Object.keys(d.flowSystems);
     // Static "context" pathways (viewer-side, split from the flow): the ascending

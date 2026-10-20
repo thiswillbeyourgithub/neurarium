@@ -206,9 +206,9 @@
    right beside it, not stranded at the far panel edge (same treatment as the
    "Found in" .loc-name and the binding .bind-text). Applies to every pathway
    list: a structure's connections, a circuit/group's members, and the drug
-   panel's "Neurotransmitter tone". */
+   panel's "Pharmacodynamics: net neurotransmission". */
 .info-connections .conn-label { flex: 0 1 auto; min-width: 0; }
-/* Neurotransmitter tone: a system row's signed value, then the per-binding
+/* Pharmacodynamics: net neurotransmission: a system row's signed value, then the per-binding
    arithmetic behind it as indented, dimmer lines (never a pointer row itself). */
 .tone-value { font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .info-connections li.tone-terms {

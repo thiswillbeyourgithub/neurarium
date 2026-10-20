@@ -29,7 +29,7 @@ export function el(tag, cls, text) {
 /**
  * A stable key for one folded panel section (a `details.panel-sec`), the same on
  * every render of that panel: its tour anchor, else its heading text with the counts
- * stripped ("Psychotropic interactions (12)" -> "Psychotropic interactions").
+ * stripped ("Pharmacokinetic interactions (12)" -> "Pharmacokinetic interactions").
  * @param {HTMLDetailsElement} det
  * @returns {string}
  */
@@ -72,7 +72,7 @@ export function heading(tag, title, sub, cls) {
 }
 
 /**
- * A titled subsection inside a panel section (Brain entry under Pharmacokinetics,
+ * A titled subsection inside a panel section (CNS penetration under Pharmacokinetics,
  * Active metabolites under Metabolism): a `div.panel-subsec` headed by an `<h4>`.
  * An `<h4>`, not an `<h3>`, so foldSections never folds it into a section of its own.
  * @param {string} title  the localized heading

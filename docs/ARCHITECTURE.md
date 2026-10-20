@@ -450,7 +450,7 @@ Viewer (`public/`):
   count, whose reading mode motivates the two view toggles: bring the 3D back, fold the panel away),
   then walks the data; the data demos
   are hands-on and follow the data graph (focus a **drug** (olanzapine), read its pharmacodynamics then
-  its pharmacokinetics (**Metabolism**, ending in **Psychotropic interactions**), follow one of its
+  its pharmacokinetics (**Metabolism**, ending in **Pharmacokinetic interactions**), follow one of its
   bindings to a **receptor** (H1), then visit a **structure** (hippocampus) and a **projection system**
   (dopamine, a static group, not a circuit); each opened by tapping the highlighted row via its
   `data-tour-id`, each panel section reached via its `data-tour-sec`),
@@ -477,7 +477,7 @@ Viewer (`public/`):
 - `js/panel/`: the detail panel: `info.js` (`createInfoPanel`, dispatching to `views/<kind>.js`,
   one `show*()` per node kind), `tabs.js` (detail-tab strip), and the shared row builders
   (`pills.js`, `tooltip.js`, `bindings.js`, `metabolism.js`, `expression.js`, `pathways.js`,
-  `sections.js`, `addons.js`, `reference.js`, `format.js`, `dom.js`), plus `pk-interactions.js` (the drug panel's derived Psychotropic interactions subsection, last in Metabolism) and `active-metabolites.js` (the Active metabolites subsection opening its Metabolism section).
+  `sections.js`, `addons.js`, `reference.js`, `format.js`, `dom.js`), plus `pk-interactions.js` (the drug panel's derived Pharmacokinetic interactions subsection, last in Metabolism) and `active-metabolites.js` (the Active metabolites subsection opening its Metabolism section).
 - `js/legend/`: the browse sections (`anatomy.js`, `targets.js`, `drugs.js`, `browse.js` for
   enzymes + effects, `key.js`, shared `item.js`). `js/about/`: the popups (`modals.js`) and the
   Sources & provenance tally (`sourcing.js`). `js/search/query.js`: search text folding; `js/search/index.js`: `buildSearchItems`, the search box's row index (every searchable thing + the `data-search` controls, each with its pick action).
@@ -500,8 +500,8 @@ Viewer (`public/`):
   banners), `js/theme.js` (Theme), `js/loading.js` `createLoadingScreen()` (Loading overlay), `version.js`
   `window.__APP_VERSION__` (Versioning), `js/render-order.js` `DECOR_RENDER_ORDER`
   (Rendering / decoration draw order).
-- `js/physchem.js`: `appendPhyschemChips` (the drug panel's "Brain entry" section: XLogP3, TPSA and BBB chips on `tdm.js`'s `valueChip`) and the `formatLogP` / `formatTpsa` / `formatBbb` wording the node browser shares.
-- `js/workup.js`: `groupWorkup` (a drug's workup rows split before / during) and `formatWorkup` (one node as "test, timing"), shared by the drug panel's BETA "Checks the French label asks for" section (`js/panel/sections.js`) and the node browser.
+- `js/physchem.js`: `appendPhyschemChips` (the drug panel's "CNS penetration" section: XLogP3, TPSA and BBB chips on `tdm.js`'s `valueChip`) and the `formatLogP` / `formatTpsa` / `formatBbb` wording the node browser shares.
+- `js/workup.js`: `groupWorkup` (a drug's workup rows split before / during) and `formatWorkup` (one node as "test, timing"), shared by the drug panel's BETA "Monitoring (French SmPC)" section (`js/panel/sections.js`) and the node browser.
 - `js/drug-history.js`: `appendDrugHistory` (a drug's first-approval + withdrawal fact rows) and the `formatApproval` / `formatWithdrawal` wording the node browser shares.
 - `js/node-browser.js` (re-exports `js/node-browser/`: `collect.js` the pure `collectNodes`, `view.js` the `createNodeBrowser` UI): the Data browser (`#nodes`): every
   graded knowledge node as one filterable/sortable list, opened as a **detail tab** (deep link

@@ -5,7 +5,7 @@ import { appendDrugHistory } from "../../drug-history.js";
 import { appendPhyschemChips, hasPhyschem } from "../../physchem.js";
 import { appendTdmChips, valueChip } from "../../tdm.js";
 import { bindingKi, formatHalfLife } from "../format.js";
-import { flashRow, btn, subSection } from "../dom.js";
+import { flashRow, btn, heading, subSection } from "../dom.js";
 import { pkInteractionsSection } from "../pk-interactions.js";
 import { activeMetabolitesSubsection } from "../active-metabolites.js";
 import { toneWeightOf } from "../../data.js";
@@ -181,11 +181,11 @@ export function showDrug(P, drug, opts = {}) {
     }
     return row;
   };
-  // Administrative: the class and NbN nomenclature, the regulatory history (first
+  // Identification: the class and NbN nomenclature, the regulatory history (first
   // approval + years since, withdrawals) and the brands, i.e. what the drug is as a
   // named, marketed product rather than as a molecule.
   const admin = el("div", "info-bindings info-admin");
-  admin.appendChild(el("h3", null, t("drug.admin")));
+  admin.appendChild(heading("h3", t("drug.admin"), t("drug.adminSub")));
   // Classification facts: the coarse class(es) and the NbN nomenclature line.
   // Both are clickable: each runs a search (class:"..." / nbn:"...") that filters
   // to the matching drugs, so you can pivot from one drug to its whole class. The
@@ -224,7 +224,7 @@ export function showDrug(P, drug, opts = {}) {
   if (moleculeBrands.length) {
     const brandsEl = el("div", "info-brands");
     brandsEl.dataset.tourSec = "brands"; // guided-tour section anchor
-    brandsEl.appendChild(el("h4", null, t("drug.brands")));
+    brandsEl.appendChild(heading("h4", t("drug.brands"), t("drug.brandsSub")));
     brandsEl.appendChild(brandRow(moleculeBrands));
     admin.appendChild(brandsEl);
   }
@@ -255,7 +255,7 @@ export function showDrug(P, drug, opts = {}) {
   if (drug.halfLife || drug.tmax || drug.therapeuticRange || drug.alertLevel
       || forms.length || hasPhyschem(drug)) {
     const hlEl = el("div", "info-bindings info-halflife");
-    hlEl.appendChild(el("h3", null, t("drug.pkTiming")));
+    hlEl.appendChild(heading("h3", t("drug.pkTiming"), t("drug.pkTimingSub")));
     const chipHelpers = { el, nodePill, t,
                           lang: window.__I18N__.lang };
     if (drug.tmax) {
@@ -293,7 +293,7 @@ export function showDrug(P, drug, opts = {}) {
     // above, which no source tied to a product.
     if (forms.length) {
       const wrap = el("div", "formulations");
-      wrap.appendChild(el("h4", null, t("drug.formulations")));
+      wrap.appendChild(heading("h4", t("drug.formulations"), t("drug.formulationsSub")));
       for (const f of forms) {
         // One block per formulation: its release type (pill: the claim that
         // the product exists) and its Tmax / T½ on one line, its brands below.
@@ -323,12 +323,12 @@ export function showDrug(P, drug, opts = {}) {
       }
       hlEl.appendChild(wrap);
     }
-    // Brain entry: the computed lipophilicity and polar surface (PubChem) beside the
+    // CNS penetration: the computed lipophilicity and polar surface (PubChem) beside the
     // curated blood-brain-barrier label (B3DB), each its own node. A subsection, since
     // the timing above says when the drug peaks and how long it stays, this whether
     // and how easily it reaches the brain at all.
     if (hasPhyschem(drug)) {
-      const pc = subSection(t("drug.physchem"), "info-physchem");
+      const pc = subSection(t("drug.physchem"), "info-physchem", t("drug.physchemSub"));
       appendPhyschemChips(pc.appendChild(el("div", "pk-chips")), drug, chipHelpers);
       hlEl.appendChild(pc);
     }
@@ -340,7 +340,7 @@ export function showDrug(P, drug, opts = {}) {
   // What it binds: one row per target, coloured by the action's net effect.
   const acts = el("div", "info-bindings");
   acts.dataset.tourSec = "bindings"; // guided-tour section anchor
-  acts.appendChild(el("h3", null, t("drug.actsOn")));
+  acts.appendChild(heading("h3", t("drug.actsOn"), t("drug.actsOnSub")));
   // A prodrug's own graded claim (kind drug_prodrug): it binds nothing itself, so
   // every row below is borrowed from its active metabolite ("via ...").
   if (drug.prodrug) {
@@ -382,7 +382,7 @@ export function showDrug(P, drug, opts = {}) {
   // the drug is shown per-binding (each binding's pill above), so a source
   // always refers to a specific binding node rather than "the whole drug".
 
-  // Neurotransmitter tone (indicative): the ascending systems this drug's flow
+  // Pharmacodynamics: net neurotransmission (estimate): the ascending systems this drug's flow
   // overlay lights (drug.flowKinds, from meta.system_flow_kinds). A *derived*
   // inference from the drug's *tone-setter* bindings only (a reuptake/enzyme/
   // vesicle target or a presynaptic autoreceptor, see js/data.js toneBySystem):
@@ -398,7 +398,7 @@ export function showDrug(P, drug, opts = {}) {
   const contextKinds = drug.contextKinds || [];
   if ((flowKinds.length || contextKinds.length) && groupsByKey) {
     const proj = el("div", "info-connections info-tone");
-    proj.appendChild(el("h3", null, t("drug.tone")));
+    proj.appendChild(heading("h3", t("drug.tone"), t("drug.toneSub")));
     const warn = derivedBox("caution", t("drug.toneWarnTitle"));
     warn.appendChild(el("p", "addon-text", t("drug.toneWarn")));
     proj.appendChild(warn);
@@ -473,7 +473,7 @@ export function showDrug(P, drug, opts = {}) {
   }
 
   // Metabolism, last of the established sections: pharmacokinetics has no anatomy, so
-  // it sits AFTER the sections that do (Direct molecular targets / Neurotransmitter
+  // it sits AFTER the sections that do (Pharmacodynamics: binding profile / Neurotransmitter
   // tone); only the BETA sections follow it.
   // Its active metabolites first (what the drug turns into), then the enzymes that
   // clear it or whose activity it changes, the CPIC dosing subsection, and the
@@ -484,12 +484,12 @@ export function showDrug(P, drug, opts = {}) {
   if (metab.sec || hasEnzymes || pgx) {
     const metabWrap = el("div", "info-bindings");
     metabWrap.dataset.tourSec = "metabolism"; // guided-tour section anchor
-    metabWrap.appendChild(el("h3", null, t("drug.metabolism")));
+    metabWrap.appendChild(heading("h3", t("drug.metabolism"), t("drug.metabolismSub")));
     if (metab.sec) metabWrap.appendChild(metab.sec);
     // Under a metabolites subsection the enzymes get one of their own, or their rows
     // would read as part of the metabolites above.
     const enzWrap = !hasEnzymes ? null
-      : metab.sec ? metabWrap.appendChild(subSection(t("drug.metabEnzymes")))
+      : metab.sec ? metabWrap.appendChild(subSection(t("drug.metabEnzymes"), "", t("drug.metabEnzymesSub")))
       : metabWrap;
     if (hasEnzymes) {
       enzWrap.appendChild(el("p", "legend-caption", t("drug.metabolismHint")));
@@ -550,7 +550,7 @@ export function showDrug(P, drug, opts = {}) {
     // clinician's question together, since the enzyme rows say who clears the drug
     // and these say what happens to someone who clears it slowly.
     if (pgx) metabWrap.appendChild(pgx);
-    // Psychotropic interactions (panel/pk-interactions.js), last: the drug -> drug
+    // Pharmacokinetic interactions (panel/pk-interactions.js), last: the drug -> drug
     // edges the enzyme roles above imply.
     const pkSec = hasEnzymes ? pkInteractionsSection(P, drug) : null;
     if (pkSec) metabWrap.appendChild(pkSec);
