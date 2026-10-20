@@ -86,7 +86,7 @@ export function makeMetabolism(P) {
   const pgxSection = (drug) => {
     const blocks = drug.pgx || [];
     if (!blocks.length) return null;
-    // A subsection of the drug's Metabolism section, right under the isoforms.
+    // A subsection of the drug's Pharmacogenomics section (views/drug.js), first.
     const wrap = subSection(t("drug.pgx"), "info-pgx", t("drug.pgxSub"));
     wrap.dataset.tourSec = "pgx";
     wrap.appendChild(el("p", "legend-caption", t("drug.pgxHint")));

@@ -215,6 +215,7 @@
    on a drug panel), then "[Level 3 · low] may be associated with ..." + pill,
    and a muted phenotype / population / ClinPGx line wrapping under it. */
 .info-variants .var-name { margin: 9px 0 2px; font-size: 11px; font-weight: 600;
+  text-transform: none; letter-spacing: normal; /* not the .panel-subsec > h4 title look */
   color: var(--accent-light); overflow-wrap: anywhere; }
 .info-variants li.var-row { flex-wrap: wrap; align-items: baseline; margin-bottom: 3px; }
 .info-variants .var-level {

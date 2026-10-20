@@ -19,8 +19,8 @@ export function makeSections(P) {
   // receptor_effect (BETA) section heading: the label plus the same quiet "beta"
   // qualifier the Simulation section wears (.beta-tag, i18n sim.beta), then the
   // subtitle (withSubtitle) after the tag.
-  const betaHeading = (key, vars, sub) => {
-    const h = el("h3", null, t(key, vars));
+  const betaHeading = (key, vars, sub, tag = "h3") => {
+    const h = el(tag, tag === "h4" ? "panel-subsec-title" : null, t(key, vars));
     h.appendChild(el("span", "beta-tag", t("sim.beta")));
     return withSubtitle(h, sub);
   };
@@ -30,13 +30,18 @@ export function makeSections(P) {
   // quiet "beta" tag unless `beta: false`, and the `subKey` subtitle), its caption, then either one list (`ul`)
   // or, `grouped`, one sub-heading + list per `group(label)` call (a label string, or
   // a ready heading node). `close()` appends the not-medical-advice style caveat
-  // (`caveatKey`) after the content and mounts the section on the panel.
+  // (`caveatKey`) after the content and mounts the section on the panel. `nested`
+  // makes it an `<h4>` subsection (dom.js subSection's look) of a section the caller
+  // builds: `close()` then returns it unmounted, for the caller to place.
   const betaSection = (tourSec, headingKey, hintKey,
-    { vars, grouped = false, caveatKey = null, beta = true, cls = "info-effects", subKey = null } = {}) => {
-    const sec = el("div", `info-locations ${cls}`);
+    { vars, grouped = false, caveatKey = null, beta = true, cls = "info-effects", subKey = null,
+      nested = false } = {}) => {
+    const sec = el("div", `info-locations ${cls}${nested ? " panel-subsec" : ""}`);
     sec.dataset.tourSec = tourSec;
     const sub = subKey && t(subKey);
-    sec.appendChild(beta ? betaHeading(headingKey, vars, sub) : heading("h3", t(headingKey, vars), sub));
+    const tag = nested ? "h4" : "h3";
+    sec.appendChild(beta ? betaHeading(headingKey, vars, sub, tag)
+      : heading(tag, t(headingKey, vars), sub, nested ? "panel-subsec-title" : null));
     sec.appendChild(el("p", "legend-caption", t(hintKey)));
     const ul = grouped ? null : sec.appendChild(el("ul"));
     const group = (label, headCls = "loc-group-label") => {
@@ -45,7 +50,8 @@ export function makeSections(P) {
     };
     const close = () => {
       if (caveatKey) sec.appendChild(el("p", "var-caveat", t(caveatKey)));
-      body.appendChild(sec);
+      if (!nested) body.appendChild(sec);
+      return sec;
     };
     return { sec, ul, group, close };
   };
@@ -236,13 +242,14 @@ export function makeSections(P) {
 
   // The drug panel's "Pharmacogenomic associations (ClinPGx)": every receptor_variant
   // node naming this drug, grouped under the target whose gene carries it (the
-  // heading jumps to that target). Folded with the rest of the drug panel.
-  const appendDrugVariants = (drug) => {
+  // heading jumps to that target). A BETA subsection of the drug's Pharmacogenomics
+  // section (views/drug.js), returned for the caller to place; null when none.
+  const drugVariantsSubsection = (drug) => {
     const hits = variantsForDrug(drug.id, data.targets);
-    if (!hits.length) return;
+    if (!hits.length) return null;
     const { group, close } = betaSection("variants", "variant.drugHeading", "variant.drugHint",
       { cls: "info-variants", grouped: true, caveatKey: "variant.caveat",
-        subKey: "variant.drugHeadingSub" });
+        subKey: "variant.drugHeadingSub", nested: true });
     const byTarget = new Map();
     for (const { target, row } of hits) {
       if (!byTarget.has(target)) byTarget.set(target, []);
@@ -257,7 +264,7 @@ export function makeSections(P) {
       const ul = group(head);
       for (const row of rows) ul.appendChild(variantRow(row, row.variant));
     }
-    close();
+    return close();
   };
 
   // The drug panel's derived "Presynaptic modulation" (BETA): its directional
@@ -302,7 +309,7 @@ export function makeSections(P) {
   };
 
   return {
-    appendDemographics, appendDownstream, appendDrugVariants, appendEffects,
+    appendDemographics, appendDownstream, drugVariantsSubsection, appendEffects,
     appendPossibleEffects, appendReleaseChanges, appendVariants, appendWorkup,
     betaHeading, betaSection, derivedRow, effectLink, inStructure, linkName,
     variantRow, viaChip,

@@ -562,6 +562,8 @@ window.__I18N_MESSAGES__.en = {
   "drug.metabEnzymes": "Metabolic pathways",
   "drug.metabEnzymesSub": "Enzymes that clear it, and those it inhibits or induces",
   "drug.metabolismHint": "The liver enzymes that clear this drug, or whose activity it changes. Pharmacokinetics, so nothing is lit in the 3D view.",
+  "drug.pharmacogenomics": "Pharmacogenomics",
+  "drug.pharmacogenomicsSub": "How genes change dosing and response",
   "drug.pgx": "Pharmacogenomic dosing (CPIC)",
   "drug.pgxSub": "Dose adjustment by metabolizer genotype",
   "drug.pgxHint": "What a clearance speed means for this prescription, in CPIC's own words, beside how common that speed is. Pick a population group to put a number on each row.",

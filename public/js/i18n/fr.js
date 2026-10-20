@@ -562,6 +562,8 @@ window.__I18N_MESSAGES__.fr = {
   "drug.metabEnzymes": "Voies métaboliques",
   "drug.metabEnzymesSub": "Enzymes qui l'éliminent, et celles qu'il inhibe ou induit",
   "drug.metabolismHint": "Les enzymes hépatiques qui éliminent cette substance, ou dont elle modifie l'activité. Pharmacocinétique : rien n'est allumé dans la vue 3D.",
+  "drug.pharmacogenomics": "Pharmacogénétique",
+  "drug.pharmacogenomicsSub": "Comment les gènes modifient la posologie et la réponse",
   "drug.pgx": "Posologie pharmacogénétique (CPIC)",
   "drug.pgxSub": "Ajustement de dose selon le génotype métaboliseur",
   "drug.pgxHint": "Ce qu'une vitesse d'élimination implique pour cette prescription, dans les termes mêmes du CPIC, à côté de sa fréquence. Choisissez un groupe de population pour chiffrer chaque ligne.",

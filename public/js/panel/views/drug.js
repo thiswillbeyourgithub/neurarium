@@ -15,10 +15,11 @@ const { t } = window.__I18N__;
 
 export function showDrug(P, drug, opts = {}) {
   const {
-    addFactRow, appendAddons, appendDrugVariants, appendLookupLink,
+    addFactRow, appendAddons, appendLookupLink,
     appendPossibleEffects, appendReference, appendReleaseChanges, appendWorkup,
     bindingRow, body, clearBody, clinpgxSearchUrl, data, derivedActiveMetabolites,
-    derivedAutoModulation, derivedBox, directionArrow, drugById, drugNameLink, el,
+    derivedAutoModulation, derivedBox, directionArrow, drugById, drugNameLink,
+    drugVariantsSubsection, el,
     enzymeById, enzymeRow, fmtTone, foldBody, metaboliteContributors, netTone,
     nodePill, onDrugPick,
     onEnzymePick, onImagePick, onProjectionGroupPick, onTargetPick, pgxSection,
@@ -472,16 +473,14 @@ export function showDrug(P, drug, opts = {}) {
     body.appendChild(proj);
   }
 
-  // Metabolism, last of the established sections: pharmacokinetics has no anatomy, so
-  // it sits AFTER the sections that do (Pharmacodynamics: binding profile / Neurotransmitter
-  // tone); only the BETA sections follow it.
-  // Its active metabolites first (what the drug turns into), then the enzymes that
-  // clear it or whose activity it changes, the CPIC dosing subsection, and the
-  // drug -> drug interactions those roles imply.
+  // Metabolism: pharmacokinetics has no anatomy, so it sits AFTER the sections that
+  // do (the two Pharmacodynamics ones); only Pharmacogenomics and the BETA sections
+  // follow it. Its active metabolites first (what the drug turns into), then the
+  // enzymes that clear it or whose activity it changes, and the drug -> drug
+  // interactions those roles imply.
   const metab = activeMetabolitesSubsection(P, drug, opts);
   const hasEnzymes = Boolean(drug.enzymes && drug.enzymes.length);
-  const pgx = pgxSection(drug);
-  if (metab.sec || hasEnzymes || pgx) {
+  if (metab.sec || hasEnzymes) {
     const metabWrap = el("div", "info-bindings");
     metabWrap.dataset.tourSec = "metabolism"; // guided-tour section anchor
     metabWrap.appendChild(heading("h3", t("drug.metabolism"), t("drug.metabolismSub")));
@@ -545,11 +544,6 @@ export function showDrug(P, drug, opts = {}) {
       }
       flashRow(flashEnz);
     }
-    // What a clearance speed means for THIS prescription (CPIC, corpus #15), a
-    // subsection right under the isoforms that clear it: the two only answer a
-    // clinician's question together, since the enzyme rows say who clears the drug
-    // and these say what happens to someone who clears it slowly.
-    if (pgx) metabWrap.appendChild(pgx);
     // Pharmacokinetic interactions (panel/pk-interactions.js), last: the drug -> drug
     // edges the enzyme roles above imply.
     const pkSec = hasEnzymes ? pkInteractionsSection(P, drug) : null;
@@ -559,11 +553,24 @@ export function showDrug(P, drug, opts = {}) {
     // the user sees why the parent drug opened.
     flashRow(metab.flash);
   }
+  // Pharmacogenomics, right under Metabolism: how genes change dosing (CPIC, corpus
+  // #15: what a clearance speed means for THIS prescription, read against the
+  // isoforms just above) and response (ClinPGx #20, the one BETA subsection, so it
+  // wears its own tag). Omitted when the drug has neither.
+  const pgx = pgxSection(drug);
+  const variants = drugVariantsSubsection(drug);
+  if (pgx || variants) {
+    const pgxWrap = el("div", "info-bindings");
+    pgxWrap.dataset.tourSec = "pharmacogenomics"; // guided-tour section anchor
+    pgxWrap.appendChild(heading("h3", t("drug.pharmacogenomics"), t("drug.pharmacogenomicsSub")));
+    if (pgx) pgxWrap.appendChild(pgx);
+    if (variants) pgxWrap.appendChild(variants);
+    body.appendChild(pgxWrap);
+  }
   // The BETA sections (panel/sections.js betaSection), at the bottom so they never
   // push the established sections down, in this relative order.
   appendPossibleEffects(drug);
   appendReleaseChanges(drug);
-  appendDrugVariants(drug);
   appendWorkup(drug);
   // Every headed section starts collapsed (a drug panel is long): the heading
   // opens it, its content indented under it.

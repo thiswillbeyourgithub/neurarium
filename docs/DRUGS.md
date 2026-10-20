@@ -66,7 +66,7 @@ fixed Stahl list.
   antipsychotic reads dopaminergic-**up** (blocking the D2 *autoreceptor* disinhibits release); its
   postsynaptic blockade shows in the block-coloured dots. (This is why the dataset carries the ascending
   monoamine pathways.)
-- **Panel** (`showDrug`): every `h3`-headed section (Identification: class, NbN, history, brands; Pharmacokinetics with its CNS penetration subsection; Pharmacodynamics: binding profile; Pharmacodynamics: net neurotransmission; Metabolism, whose `h4` subsections (`panel/dom.js` `subSection`) are Active metabolites (`panel/active-metabolites.js`), Enzymes, Pharmacogenomic dosing (CPIC) and Pharmacokinetic interactions (`panel/pk-interactions.js`); then the BETA sections, last: Predicted effects (target-based), Presynaptic modulation, Pharmacogenomic associations (ClinPGx), Monitoring (French SmPC)) starts folded, like every detail panel (see
+- **Panel** (`showDrug`): every `h3`-headed section (Identification: class, NbN, history, brands; Pharmacokinetics with its CNS penetration subsection; Pharmacodynamics: binding profile; Pharmacodynamics: net neurotransmission; Metabolism, whose `h4` subsections (`panel/dom.js` `subSection`) are Active metabolites (`panel/active-metabolites.js`), Metabolic pathways and Pharmacokinetic interactions (`panel/pk-interactions.js`); Pharmacogenomics, whose `h4` subsections are Pharmacogenomic dosing (CPIC) and the BETA Pharmacogenomic associations (ClinPGx), omitted when the drug has neither; then the BETA sections, last: Predicted effects (target-based), Presynaptic modulation, Monitoring (French SmPC)); every heading carries a plain-language subtitle (`panel/dom.js` `withSubtitle`, i18n `<key>Sub`) that stays visible while folded) starts folded, like every detail panel (see
   `docs/VIEWER.md` "Folded panel sections"). A name shown beside the INN (`DRUG_NAME_QUALIFIERS`, display-only + searchable:
   "Paliperidone (9-OH-risperidone)") becomes `drug.label`; a metabolite that is a modeled drug shows under that
   label as a plain `drugNameLink` (the Drugs-list row look), and that drug's own panel opens with "Active
@@ -385,7 +385,7 @@ nothing draws.
   (`buildEnzymeLegend`) opens `showEnzyme`: a ClinPGx search (the variant / poor-vs-ultra-rapid
   metabolizer story this dataset does not model), the metabolites that isoform forms, then its drugs
   grouped by role. Both ends share one `enzymeRow` builder (same node, either side).
-  `pgxSection` then adds **Pharmacogenomic dosing (CPIC)**, a subsection of Metabolism, below the enzyme list: one
+  `pgxSection` then adds **Pharmacogenomic dosing (CPIC)**, the first subsection of the **Pharmacogenomics** section right under Metabolism: one
   `<select>` picking a population group, then per gene a block (CPIC level + guideline link) whose
   rows run slowest to fastest, each a swatch from the *same* `--var-*` ramp as the enzyme bars, that
   group's frequency, a grade pill, CPIC's implication, its recommendation, the strength, and the
