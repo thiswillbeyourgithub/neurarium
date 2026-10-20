@@ -66,6 +66,8 @@ gate). Read directly in the tour wiring, not by `applyViewParams`.
 
 `tools/tour_walk.py [--lang en|fr]` walks the whole tour headlessly with real mouse input (Next, tap the ringed target, drag the brain, wheel the panel) and fails on a stuck step, an unclean end state (overlay still up, "seen" unset, click guard still swallowing clicks) or any console error; run it after any UI change (`PLAYWRIGHT_BROWSERS_PATH=~/.cache/ms-playwright uv run --with playwright==1.61.0 python tools/tour_walk.py`, about 10 min under SwiftShader).
 
+`node --test tools/tests/tour_anchors.test.mjs` is its sub-second static twin: it imports the tour steps and fails, naming the step, when a selector, `data-tour-*` hook, row id or i18n key a step uses no longer exists (static markup in `index.html`, runtime-built anchors via its `DYNAMIC` token map).
+
 ### Deep links: the URL fragment IS the UI state
 
 Everything on screen is described by the URL **fragment**, so the address bar is always
