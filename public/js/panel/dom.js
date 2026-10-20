@@ -34,8 +34,41 @@ export function el(tag, cls, text) {
  * @returns {string}
  */
 export function panelSectionKey(det) {
-  return det.dataset.tourSec
-    || (det.querySelector(":scope > summary")?.textContent || "").replace(/[\d()]/g, "").trim();
+  if (det.dataset.tourSec) return det.dataset.tourSec;
+  const summary = det.querySelector(":scope > summary");
+  // The subtitle (see withSubtitle) is not part of the key: only the heading's own text.
+  const own = summary ? [...summary.childNodes]
+    .filter((n) => !n.classList?.contains("section-sub"))
+    .map((n) => n.textContent).join("") : "";
+  return own.replace(/[\d()]/g, "").trim();
+}
+
+/**
+ * Append a section's plain-language subtitle (small, muted `span.section-sub`) to
+ * its heading, the one way every panel heading carries one. It rides INSIDE the
+ * heading, so foldSections moves it into the `<summary>` with the title and it stays
+ * visible while the section is folded (it says what the folded section holds);
+ * panelSectionKey ignores it. A falsy `sub` adds nothing.
+ * @param {HTMLElement} head
+ * @param {?string} [sub]
+ * @returns {HTMLElement} `head`
+ */
+export function withSubtitle(head, sub) {
+  if (sub) head.appendChild(el("span", "section-sub", sub));
+  return head;
+}
+
+/**
+ * A panel heading (`<h3>` for a foldable section, `<h4>` inside one) with an
+ * optional subtitle (see withSubtitle).
+ * @param {string} tag
+ * @param {string} title  the localized heading
+ * @param {?string} [sub]  the localized subtitle
+ * @param {?string} [cls]
+ * @returns {HTMLElement}
+ */
+export function heading(tag, title, sub, cls) {
+  return withSubtitle(el(tag, cls, title), sub);
 }
 
 /**
@@ -44,11 +77,12 @@ export function panelSectionKey(det) {
  * An `<h4>`, not an `<h3>`, so foldSections never folds it into a section of its own.
  * @param {string} title  the localized heading
  * @param {string} [cls]  extra classes for the wrapper
+ * @param {?string} [sub]  the localized subtitle (see withSubtitle)
  * @returns {HTMLDivElement}
  */
-export function subSection(title, cls = "") {
+export function subSection(title, cls = "", sub = null) {
   const sec = el("div", `panel-subsec ${cls}`.trim());
-  sec.appendChild(el("h4", "panel-subsec-title", title));
+  sec.appendChild(heading("h4", title, sub, "panel-subsec-title"));
   return sec;
 }
 

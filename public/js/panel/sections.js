@@ -3,7 +3,7 @@
 
 import { attachTip } from "./tooltip.js";
 import { isWebUrl } from "../web-url.js";
-import { extLink, btn } from "./dom.js";
+import { extLink, btn, heading, withSubtitle } from "./dom.js";
 import { deriveReleaseChanges, transmitterVars } from "../release-modulation.js";
 import { formatConditions, groupWorkup } from "../workup.js";
 import { groupByVariant, variantsForDrug } from "../receptor-variants.js";
@@ -17,24 +17,26 @@ export function makeSections(P) {
   } = P;
 
   // receptor_effect (BETA) section heading: the label plus the same quiet "beta"
-  // qualifier the Simulation section wears (.beta-tag, i18n sim.beta).
-  const betaHeading = (key, vars) => {
+  // qualifier the Simulation section wears (.beta-tag, i18n sim.beta), then the
+  // subtitle (withSubtitle) after the tag.
+  const betaHeading = (key, vars, sub) => {
     const h = el("h3", null, t(key, vars));
     h.appendChild(el("span", "beta-tag", t("sim.beta")));
-    return h;
+    return withSubtitle(h, sub);
   };
 
   // The shell every list section of a panel shares (effects, release modulation,
   // demographics, variants, workup): a tour-anchored block, its heading (with the
-  // quiet "beta" tag unless `beta: false`), its caption, then either one list (`ul`)
+  // quiet "beta" tag unless `beta: false`, and the `subKey` subtitle), its caption, then either one list (`ul`)
   // or, `grouped`, one sub-heading + list per `group(label)` call (a label string, or
   // a ready heading node). `close()` appends the not-medical-advice style caveat
   // (`caveatKey`) after the content and mounts the section on the panel.
   const betaSection = (tourSec, headingKey, hintKey,
-    { vars, grouped = false, caveatKey = null, beta = true, cls = "info-effects" } = {}) => {
+    { vars, grouped = false, caveatKey = null, beta = true, cls = "info-effects", subKey = null } = {}) => {
     const sec = el("div", `info-locations ${cls}`);
     sec.dataset.tourSec = tourSec;
-    sec.appendChild(beta ? betaHeading(headingKey, vars) : el("h3", null, t(headingKey, vars)));
+    const sub = subKey && t(subKey);
+    sec.appendChild(beta ? betaHeading(headingKey, vars, sub) : heading("h3", t(headingKey, vars), sub));
     sec.appendChild(el("p", "legend-caption", t(hintKey)));
     const ul = grouped ? null : sec.appendChild(el("ul"));
     const group = (label, headCls = "loc-group-label") => {

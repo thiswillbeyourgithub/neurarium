@@ -39,6 +39,18 @@
   color: var(--muted);
   margin: 0 0 var(--sp-m);
 }
+/* A heading's plain-language subtitle (panel/dom.js withSubtitle): its own line
+   under the title, sentence case, inside the <summary> so it shows while folded. */
+.section-sub {
+  display: block;
+  margin-top: 2px;
+  font-size: 11px;
+  font-weight: normal;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--muted);
+  opacity: 0.85;
+}
 .info-bindings > summary:hover,
 .panel-sec > summary:hover { color: var(--text); }
 /* A folded detail-panel section (js/main.js foldSections): the open body sits
