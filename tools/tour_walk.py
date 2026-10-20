@@ -36,7 +36,16 @@ STATE_JS = """() => {
   const rect = (el) => { if (!vis(el)) return null; const r = el.getBoundingClientRect();
     return r.width && r.height ? [r.x, r.y, r.width, r.height] : null; };
   const root = q('#tour-root'), ring = q('.tour-ring'), next = q('.tour-next');
-  const target = (id) => { const el = q(id), r = rect(ring);
+  // The ring's resting box: the left/top/width/height layoutStep writes, which is also
+  // exactly the blocker's click-through hole. NOT its painted rect: the ring glides on
+  // a CSS transition, and on a starved compositor (SwiftShader on a loaded host paints
+  // one frame every 10-30 s) the paint can sit at the previous step's spot for many
+  // seconds while the hole is already on the new target, so a tap aimed at the paint
+  // lands on the blocker. The hole has no transition, so this box is what a tap hits.
+  const ringBox = () => { if (!vis(ring)) return null; const s = ring.style;
+    const b = [s.left, s.top, s.width, s.height].map(parseFloat);
+    return b.every(Number.isFinite) && b[2] && b[3] ? b : null; };
+  const target = (id) => { const el = q(id), r = ringBox();
     if (!el || !r) return false; const b = el.getBoundingClientRect();
     return b.left < r[0] + r[2] && b.right > r[0] && b.top < r[1] + r[3] && b.bottom > r[1]; };
   return {
@@ -45,7 +54,7 @@ STATE_JS = """() => {
     title: (q('.tour-title') || {}).textContent || '',
     nextRect: next && !next.hidden ? rect(next) : null,
     nextDisabled: !!(next && next.disabled),
-    ring: ring && !ring.hidden ? rect(ring) : null,
+    ring: ring && !ring.hidden ? ringBox() : null,
     ringInteractive: !!(ring && ring.classList.contains('interactive')),
     modalOpen: ['legend-modal', 'sourcing-modal'].some((id) => vis(q('#' + id))),
     onSlider: target('#explode'),
@@ -118,7 +127,8 @@ def act(page, state: dict, attempt: int = 0) -> str:
         return "next"
     if state["ringInteractive"] or state["modalOpen"] or state["onSlider"]:
         # Tap only once the overlay faded in (pre-reveal holds the hole shut) and the
-        # ring stopped gliding to its row, or the click lands on the blocker.
+        # ring's box stopped tracking a row still scrolling in, or the click lands on
+        # the blocker.
         page.wait_for_function("() => !document.querySelector('#tour-root.pre-reveal')")
         state = settle(page, "ring")
         if state["onSlider"]:
@@ -126,7 +136,7 @@ def act(page, state: dict, attempt: int = 0) -> str:
             x, y = r[0] + r[2] * 0.7, r[1] + r[3] / 2
         else:
             if page.evaluate(CENTRE_LINK_JS, state["ring"]):
-                # A ring still gliding to a scrolled-in row can pass over the header
+                # A ring still tracking a row mid-scroll can pass over the header
                 # byline: only a centre that stays on a link once at rest counts.
                 page.wait_for_timeout(1500)
                 state = settle(page, "ring")
