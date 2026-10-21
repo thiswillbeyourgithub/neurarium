@@ -765,6 +765,11 @@ window.__I18N_MESSAGES__.en = {
     "<li><b>A dotted arrow instead of a solid one: that pathway is tentative.</b> " +
     "The connection is proposed rather than well established, and its source grade " +
     "in the panel says how well it is backed.</li>",
+  "about.llmText":
+    "<strong>A text-only version exists for LLMs</strong> (and anyone who cannot run 3D): " +
+    "<a href=\"llms.txt\" target=\"_blank\" rel=\"noopener noreferrer\">llms.txt</a> explains the dataset, and " +
+    "<a href=\"api/\" target=\"_blank\" rel=\"noopener noreferrer\">/api/</a> holds one Markdown page per drug, " +
+    "receptor, region and pathway, every claim tagged with its source grade.",
   "about.dataSummary": "Click to access the structured data",
   "about.dataIntro":
     "The whole dataset is plain JSONL / JSON, kept separate from the rendering and " +

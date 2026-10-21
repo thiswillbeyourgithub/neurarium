@@ -772,6 +772,11 @@ window.__I18N_MESSAGES__.fr = {
     "<li><b>Une flèche en pointillés plutôt que pleine : cette voie est " +
     "hypothétique.</b> La connexion est proposée plutôt que bien établie, et sa note " +
     "de source dans la fiche dit à quel point elle est étayée.</li>",
+  "about.llmText":
+    "<strong>Une version texte existe pour les LLM</strong> (et pour qui ne peut pas afficher la 3D) : " +
+    "<a href=\"llms.txt\" target=\"_blank\" rel=\"noopener noreferrer\">llms.txt</a> présente le jeu de données, et " +
+    "<a href=\"api/\" target=\"_blank\" rel=\"noopener noreferrer\">/api/</a> contient une page Markdown par médicament, " +
+    "récepteur, région et voie, chaque affirmation portant son niveau de source.",
   "about.dataSummary": "Cliquez pour accéder aux données structurées",
   "about.dataIntro":
     "L’ensemble des données est du simple JSONL / JSON, séparé du rendu et libre de " +

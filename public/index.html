@@ -666,6 +666,9 @@
              the raw graph) plus the source repository via the shared #about-source2
              link (href set from sourceUrl by js/main.js, like the Source code row);
              the intro + summary come from i18n. -->
+        <!-- The text-only twin for LLMs and screen-free readers (llms.txt + /api/),
+             kept outside the collapsed dropdown so it is seen without a click. -->
+        <p class="about-text" id="about-llm-text" data-i18n-html="about.llmText"></p>
         <details class="about-data" id="about-data-files">
           <summary data-i18n="about.dataSummary"></summary>
           <p class="about-text" data-i18n-html="about.dataIntro"></p>
