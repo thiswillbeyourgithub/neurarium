@@ -44,5 +44,16 @@ class LigandIdStereoTest(unittest.TestCase):
         self.assertEqual([r["Ligand ID"] for r in got], ["63"])
 
 
+class AliasEnantiomerTest(unittest.TestCase):
+    """No alias may map a name onto its single-enantiomer form (the header rule)."""
+    PREFIXES = ("es", "dex", "lev", "ar", "(s)-", "(r)-", "(+)-", "(-)-")
+
+    def test_no_alias_onto_an_enantiomer(self):
+        bad = [(ours, theirs) for ours, theirs in gk._RAW_ALIASES.items()
+               for p in self.PREFIXES
+               if theirs.lower() == p + ours.lower()]
+        self.assertFalse(bad, "aliasing a racemate onto one enantiomer leaks its assays")
+
+
 if __name__ == "__main__":
     unittest.main()

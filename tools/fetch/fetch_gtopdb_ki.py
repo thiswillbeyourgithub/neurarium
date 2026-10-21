@@ -111,7 +111,6 @@ _RAW_ALIASES: dict[str, str] = {
     "Benztropine": "benzatropine", "Pipothiazine": "pipotiazine",
     "Norquetiapine": "N-desalkylquetiapine",
     "Meta-chlorophenylpiperazine": "mCPP",
-    "Licarbazepine": "eslicarbazepine",
 }
 
 # Affinity parameters, most to least directly comparable to a Ki. pKi/pKd are true
