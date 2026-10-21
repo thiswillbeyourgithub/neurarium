@@ -64,6 +64,20 @@ def _qids(sources):
     return [s for s in sources if isinstance(s, dict) and "quote_id" in s]
 
 
+def _picked_ki_claim(add, binding: dict, subject: str, tname: str, site: str) -> None:
+    """The claim a literature Ki quoted from prose or a paper's table backs (corpus #17
+    picks it by model, so it needs a judge like any picked quote), for a drug's or an
+    active metabolite's binding. A code-copied Ki row (PDSP, GtoPdb, a Wikipedia table)
+    is stamped `page_code` and never asks."""
+    ki_src = (binding.get("ki") or {}).get("source") or {}
+    if not str(ki_src.get("pipeline", "")).startswith("page_llm"):
+        return
+    for q in _qids([ki_src]):
+        add(q, f"{subject} binds target '{tname}' with a measured affinity "
+               f"({ki_src.get('param') or 'Ki'}) of {ki_src.get('value_nm'):g} nM.",
+            f"{site}/ki")
+
+
 def site_of(claim: str) -> str:
     """The citation site a claim line names (``site | text``), else :data:`UNPLACED`."""
     head, sep, _ = claim.partition(" | ")
@@ -290,17 +304,8 @@ def reconstruct_claims(quotes, data=None, on_cite=None, site_kinds=None):
             for q in _qids(b.get("sources", [])):
                 add(q, f"Drug {nm} acts on target '{tname}' as {b['action']}{tag}.",
                     CS.site("drug", d["id"], f"bindings[{CS.binding_key(b)}]"), b)
-            # A literature Ki quoted from prose or a paper's table (corpus #17 picks it
-            # by model, so it needs a judge like any picked quote). A code-copied Ki row
-            # (PDSP, GtoPdb, a Wikipedia table) is stamped `page_code` and never asks.
-            ki_src = (b.get("ki") or {}).get("source") or {}
-            if not str(ki_src.get("pipeline", "")).startswith("page_llm"):
-                ki_src = {}
-            for q in _qids([ki_src]):
-                param = ki_src.get("param") or "Ki"
-                add(q, f"Drug {nm} binds target '{tname}' with a measured affinity "
-                       f"({param}) of {ki_src.get('value_nm'):g} nM.",
-                    CS.site("drug", d["id"], f"bindings[{CS.binding_key(b)}]/ki"))
+            _picked_ki_claim(add, b, f"Drug {nm}", tname,
+                             CS.site("drug", d["id"], f"bindings[{CS.binding_key(b)}]"))
         kind["now"] = "drug_categories"
         for q in _qids(d.get("category_sources", [])):
             cats = [cat_labels.get(c, c) for c in d.get("categories", [])]
@@ -464,6 +469,8 @@ def reconstruct_claims(quotes, data=None, on_cite=None, site_kinds=None):
                 add(q, f"{mn}, an active metabolite of {of}, acts on target "
                        f"'{mt}' as {mb.get('action') or 'a binder'}.",
                     CS.site("metabolite", mid, f"bindings[{CS.binding_key(mb)}]"), mb)
+            _picked_ki_claim(add, mb, f"{mn}, an active metabolite of {of},", mt,
+                             CS.site("metabolite", mid, f"bindings[{CS.binding_key(mb)}]"))
 
     for r in data["receptors"]:
         nm = r["name"]
