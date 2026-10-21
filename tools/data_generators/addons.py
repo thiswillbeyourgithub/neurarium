@@ -204,17 +204,19 @@ ADDONS: list[dict[str, Any]] = [
             "fr": "Pharmacocinétique non linéaire",
         },
         "text": {
-            "en": "Paroxetine is a mechanism-based (\"suicide\") inhibitor of "
-                  "CYP2D6, the isoform that clears it: it inactivates its own "
-                  "route of elimination. Plasma levels therefore rise faster "
-                  "than the dose, and the substrate + inhibitor rows below "
-                  "describe a moving target rather than a fixed rate.",
-            "fr": "La paroxétine est un inhibiteur suicide (dépendant du "
-                  "mécanisme) du CYP2D6, l'isoforme qui l'élimine : elle "
-                  "inactive sa propre voie d'élimination. Les concentrations "
-                  "plasmatiques augmentent donc plus vite que la dose, et les "
-                  "lignes substrat + inhibiteur ci-dessous décrivent une cible "
-                  "mouvante plutôt qu'un débit fixe.",
+            "en": "Paroxetine inactivates CYP2D6, the very enzyme that clears "
+                  "it (mechanism-based, or \"suicide\", inhibition), so it "
+                  "shuts down its own route of elimination. Plasma levels "
+                  "therefore rise more than in proportion to the dose. The "
+                  "substrate and inhibitor rows below describe a moving target, "
+                  "not a fixed rate.",
+            "fr": "La paroxétine inactive le CYP2D6, l'enzyme même qui "
+                  "l'élimine (inhibition dépendante du mécanisme, dite « "
+                  "suicide ») : elle bloque sa propre voie d'élimination. Les "
+                  "concentrations plasmatiques augmentent donc plus que "
+                  "proportionnellement à la dose. Les lignes substrat et "
+                  "inhibiteur ci-dessous décrivent une cible mouvante, pas un "
+                  "débit fixe.",
         },
         "sources": [
             {
@@ -246,17 +248,21 @@ ADDONS: list[dict[str, Any]] = [
             "fr": "Pharmacocinétique non linéaire",
         },
         "text": {
-            "en": "MDMA inhibits the CYP2D6 that metabolises it "
+            "en": "MDMA inhibits CYP2D6, the enzyme that metabolises it "
                   "(autoinhibition), so clearance saturates as the dose rises: "
-                  "kinetics become zero-order, and repeated doses give "
-                  "disproportionately higher, longer-lasting levels. The "
-                  "substrate row below is the mechanism, not the rate.",
-            "fr": "La MDMA inhibe le CYP2D6 qui la métabolise "
+                  "the body removes a roughly fixed amount per hour instead of "
+                  "a fixed fraction (zero-order kinetics). Repeated doses "
+                  "therefore give disproportionately higher, longer-lasting "
+                  "levels. The substrate row below names the route, not its "
+                  "rate.",
+            "fr": "La MDMA inhibe le CYP2D6, l'enzyme qui la métabolise "
                   "(auto-inhibition) : la clairance sature quand la dose "
-                  "augmente, la cinétique devient d'ordre zéro et des prises "
-                  "répétées donnent des concentrations disproportionnellement "
-                  "plus élevées et plus durables. La ligne substrat ci-dessous "
-                  "donne le mécanisme, pas le débit.",
+                  "augmente, et l'organisme élimine alors une quantité à peu "
+                  "près fixe par heure au lieu d'une fraction fixe (cinétique "
+                  "d'ordre zéro). Des prises répétées donnent donc des "
+                  "concentrations disproportionnellement plus élevées et plus "
+                  "durables. La ligne substrat ci-dessous nomme la voie, pas "
+                  "son débit.",
         },
         "sources": [
             {
@@ -300,7 +306,7 @@ ADDONS: list[dict[str, Any]] = [
                   "which side, so the dataset stores one arrow and the viewer mirrors "
                   "it onto the other hemisphere. No quote backs that mirrored copy, "
                   "and a real pathway can be stronger on one side (lateralization). "
-                  "A mirrored pair counts as one node here, not two.",
+                  "A mirrored pair counts as one fact in the sourcing tally, not two.",
             "fr": "Presque toutes les voies ci-dessous sont dessinées deux fois, une "
                   "dans chaque hémisphère, car nous supposons que les cerveaux gauche "
                   "et droit sont câblés de la même façon. Les sources décrivent un "
@@ -308,7 +314,7 @@ ADDONS: list[dict[str, Any]] = [
                   "stocke donc une flèche et l'affichage la reflète dans l'autre "
                   "hémisphère. Aucune citation n'appuie cette copie miroir, et une "
                   "voie réelle peut être plus marquée d'un côté (latéralisation). "
-                  "Une paire miroir compte ici pour un seul nœud, pas deux.",
+                  "Une paire miroir compte pour un seul fait dans le bilan des sources, pas deux.",
         },
     },
     {
@@ -336,19 +342,19 @@ ADDONS: list[dict[str, Any]] = [
             "fr": "Liste de voies non exhaustive",
         },
         "text": {
-            "en": "Each row above is sourced on its own, but the list is not: it "
-                  "holds the routes a source here happens to name, and no corpus "
-                  "claims to name them all. An isoform missing from it means no "
-                  "source stated that route, never that the drug avoids it. The "
-                  "interactions below are derived from this same list, so an "
-                  "unnamed shared route is simply an interaction nothing draws.",
-            "fr": "Chaque ligne ci-dessus est sourcée individuellement, mais pas la "
-                  "liste : elle contient les voies qu'une source citée ici nomme, et "
-                  "aucun corpus ne prétend les nommer toutes. Une isoforme absente "
-                  "signifie qu'aucune source n'a énoncé cette voie, jamais que la "
-                  "substance l'évite. Les interactions ci-dessous sont dérivées de "
-                  "cette même liste : une voie commune non nommée est donc une "
-                  "interaction que rien n'affiche.",
+            "en": "Each enzyme above is sourced, but the list may be incomplete: "
+                  "it holds only the routes our sources happen to name, and none "
+                  "of them claims to name every one. A missing enzyme means no "
+                  "source named it, never that the drug avoids it. The "
+                  "interactions below are built from this same list, so a shared "
+                  "enzyme nobody named produces no interaction row.",
+            "fr": "Chaque enzyme ci-dessus est sourcée, mais la liste peut être "
+                  "incomplète : elle ne contient que les voies que nos sources "
+                  "nomment, et aucune ne prétend les nommer toutes. Une enzyme "
+                  "absente signifie qu'aucune source ne l'a nommée, jamais que la "
+                  "substance l'évite. Les interactions ci-dessous sont construites "
+                  "à partir de cette même liste : une enzyme commune que personne "
+                  "n'a nommée ne donne donc aucune ligne d'interaction.",
         },
     },
 ]
