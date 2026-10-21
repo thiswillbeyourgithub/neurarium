@@ -41,14 +41,8 @@ window.__I18N_MESSAGES__.fr = {
   "nodes.sortKind": "Type",
   "nodes.count": "{shown} sur {total}",
   "nodes.twins": "Afficher les deux hémisphères",
-  "nodes.twinsHint": "Une région gauche/droite forme deux faits qui disent la "
-    + "même chose : chaque région est donc lue une seule fois, sans son côté. "
-    + "Cochez pour les lister séparément, ce que comptent les statistiques de "
-    + "sources.",
-  "nodes.intro": "Chaque fait ci-dessous est un nœud : une chose nommée (name) "
-    + "qui énonce une notion, d’un certain type (kind), avec un niveau de source "
-    + "(grade). Une ligne = un nœud ; cliquez la pastille pour voir sa source, ou "
-    + "la ligne pour ouvrir ce à quoi elle appartient.",
+  "nodes.twinsHint": "La plupart des régions existent en deux copies, gauche et droite, qui disent la même chose : la liste montre donc chaque région une seule fois, sans son côté. Cochez pour lister les deux côtés séparément, comme les comptent les statistiques de sources.",
+  "nodes.intro": "Chaque ligne est un fait (un « nœud ») : ce dont il parle (name), ce qu'il affirme (notion), son type de fait (kind) et la qualité de sa source (grade). Cliquez la pastille pour voir sa source, ou la ligne pour ouvrir la fiche à laquelle il appartient.",
   "nodes.dataFiles": "Les mêmes données en fichiers →",
   "nodes.dataFilesHint": "Ouvrir la liste des fichiers de données téléchargeables "
     + "(et le dépôt du code source) depuis la fenêtre À propos",
@@ -323,8 +317,8 @@ window.__I18N_MESSAGES__.fr = {
   "info.provDetails": "Cliquez pour savoir comment chaque information de neurarium est sourcée",
   "info.provNone": "Aucune source pour ce nœud pour l’instant.",
   "info.provLlm": "Niveau de source : LLM seul. Produite de mémoire par un LLM, sans vérification dans aucun document : il peut donc s’agir d’une hallucination.",
-  "info.provSourced": "Niveau de source : documentée. Rédigée par un LLM ayant eu accès au document source (par ex. le guide de Stahl), mais ce nœud précis n’a pas été vérifié par citation.",
-  "info.provVerified": "Niveau de source : vérifiée. Un LLM a extrait une citation, sa présence dans la source a été confirmée par programme, et un second LLM a confirmé qu’elle étaye ce nœud. C’est le niveau le plus élevé disponible ici et il reste piloté par un LLM : il peut donc encore se tromper. Aller plus loin demanderait un effort humain considérable, lui-même sujet à erreur, et sort donc du cadre de ce projet.",
+  "info.provSourced": "Niveau de source : documentée. Un LLM l'a rédigée en lisant le document source (par ex. le guide de Stahl), mais aucune citation n'a été vérifiée pour ce fait précis.",
+  "info.provVerified": "Niveau de source : vérifiée. Un LLM a choisi une citation, du code a confirmé qu'elle figure mot pour mot dans la source, et un second LLM a confirmé qu'elle étaye ce fait. C'est le niveau le plus élevé ici, mais il reste piloté par des LLM et peut donc se tromper : une relecture humaine complète demanderait un effort considérable, ferait ses propres erreurs, et sort du cadre de ce projet.",
   "info.provUncertain": "Niveau de source : incertaine. La citation ci-dessous figure bien dans la source et porte bien sur ce sujet, mais elle n’énonce jamais cette affirmation précise : elle dit quelque chose de plus large, la rattacher ici est donc une inférence. Les raisons d’en douter sont listées ci-dessus, chacune avec sa propre source.",
   "info.uncertainLead": "Voici des raisons, rédigées par un LLM, de douter de cette affirmation :",
   "uncertain.side_effect_rule": "La phrase source explique un effet indésirable, et son sujet est le mécanisme plutôt que la substance : elle n’affirme donc jamais que cette substance a cette action.",
@@ -341,10 +335,10 @@ window.__I18N_MESSAGES__.fr = {
   "info.quoteChain": "Parcours de cette citation :",
   "quotechain.raw_data": "données brutes",
   "quotechain.page": "page source",
-  "quotechain.extract_code": "extraction déterministe",
+  "quotechain.extract_code": "copiée d'un tableau par du code (sans LLM)",
   "quotechain.extract_llm": "un LLM trouve la citation",
   "quotechain.gate": "le code vérifie que la citation est sur la page",
-  "quotechain.judge_llm": "un LLM amnésique juge la citation",
+  "quotechain.judge_llm": "un second LLM, sans voir le premier, juge la citation",
   "quotechain.neurarium": "neurarium",
   "info.provWikipedia": "Chargé directement depuis Wikipédia. Ce texte est récupéré en direct et tel quel depuis l’article Wikipédia actuel (CC BY-SA), sans aucun LLM : il ne peut donc pas s’écarter de l’article. Voir le lien Référence ci-dessus pour inspecter la source.",
   "enzyme.gradesRole": "Niveau de source du rôle : {role}",
@@ -358,7 +352,7 @@ window.__I18N_MESSAGES__.fr = {
   "prov.name.none": "Aucune source",
   "prov.name.dataset": "À propos de ces données : une remarque sur la construction de ce jeu de données, pas une affirmation sur le cerveau ou une substance, donc aucune source ne pourrait l’étayer.",
   "prov.name.unknown": "Inconnu : recherché, aucune source ne l’indique",
-  "info.provUnknown": "Inconnu : toutes les sources que ce jeu de données utilise pour ce type d’affirmation ont été consultées, et aucune ne l’indique. Un constat sur la littérature à cette date, pas un manque de notre part : il est mis à part du bilan de couverture.",
+  "info.provUnknown": "Inconnu : toutes les sources que ce jeu de données utilise pour ce type de fait ont été consultées, et aucune ne l'indique. C'est un constat sur la littérature à cette date, pas un manque de notre part : il n'est donc pas compté dans le bilan de couverture.",
   "info.unknownSearched": "Recherché le {date}, aucune source ne l’indique :",
   "info.descFromWikipedia": "Cette description est l’introduction de l’article Wikipédia de la substance, reprise telle quelle sous licence CC BY-SA. Voir le lien Référence ci-dessus.",
   "info.sourceRef": "{corpus}, p. {page}",
@@ -819,11 +813,7 @@ window.__I18N_MESSAGES__.fr = {
   "changelog.cat.fixed": "Corrections",
   "changelog.cat.data": "Données et sources",
   "changelog.cat.docs": "Documentation",
-  "about.sourcingIntro":
-    "Chaque nœud de ce jeu de données (toute donnée sourçable : une région, " +
-    "une voie, un récepteur, une liaison médicamenteuse, ...) porte un niveau " +
-    "de source. Rien n’a encore été vérifié par un humain : même un nœud " +
-    "« vérifié » peut être faux. Les niveaux :",
+  "about.sourcingIntro": "Chaque fait de ce jeu de données (un « nœud » : une région, une voie, un récepteur, une liaison médicamenteuse, ...) porte un niveau de source. Aucun humain n'a encore rien vérifié : même un fait « vérifié » peut être faux. Les niveaux :",
   "about.sourcingCaveat":
     "Une donnée sourcée n’est pas pour autant vraie. La source peut elle-même se " +
     "tromper, l’IA peut avoir rattaché une citation correcte à la mauvaise affirmation, " +
@@ -835,7 +825,7 @@ window.__I18N_MESSAGES__.fr = {
   "about.gradeLlm":
     "IA seule : peut être une hallucination.",
   "about.gradeNone": "Sans source : aucune réunie pour l’instant.",
-  "about.gradeUnknown": "Inconnu : toutes les sources requises ont été consultées à une date enregistrée, et aucune ne l’indique. Mis à part du % (ni étayé ni manquant) ; refait chaque année.",
+  "about.gradeUnknown": "Inconnu : toutes les sources requises ont été consultées à une date enregistrée, et aucune ne l'indique. Exclu du % (compté ni comme étayé ni comme manquant) et recherché à nouveau chaque année.",
   "about.requiredCitations": "Certaines sources demandent que toute réutilisation de leurs données les cite. Neurarium le fait ici, et sous chacune de leurs pastilles de source :",
   "about.quoteChains": "Toutes les coches vertes ne s’obtiennent pas de la même manière : certaines citations ont été recopiées d’un tableau lisible par machine par du code seul, d’autres ont été trouvées sur une page de livre par un LLM, vérifiées mot pour mot sur cette page, puis jugées par un second LLM qui n’avait pas vu le raisonnement du premier. Chaque infobulle de source se termine par le parcours exact qui l’a produite, pour que vous puissiez en juger vous-même.",
   "about.gradeUncertain":
@@ -849,8 +839,7 @@ window.__I18N_MESSAGES__.fr = {
   "about.segUnknown": "Inconnu",
   "about.sourcingUnknown": "S’y ajoutent {n} affirmation(s) recherchées dans toutes les sources requises sans résultat (∅ Inconnu), exclues de ce %.",
   "about.coverageTitle": "Couverture",
-  "about.sourcingHeadline":
-    "{pct} % des {total} nœuds de connaissance ici sont sourcés ou vérifiés.",
+  "about.sourcingHeadline": "{pct} % des {total} faits (nœuds de connaissance) présentés ici sont sourcés ou vérifiés.",
   "about.sourcingByKind": "Détailler par type de nœud",
   "about.exampleLead": "p. ex.",
   "about.kiCoverage":

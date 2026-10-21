@@ -43,12 +43,8 @@ window.__I18N_MESSAGES__.en = {
   "nodes.sortKind": "Kind",
   "nodes.count": "{shown} of {total}",
   "nodes.twins": "Show both hemispheres",
-  "nodes.twinsHint": "A left/right pair of a region is two facts saying the same "
-    + "thing, so each region is read once, without its side. Tick to list both "
-    + "separately, which is what the sourcing counts count.",
-  "nodes.intro": "Every fact below is one node: a named thing (name) stating one "
-    + "notion, of one kind, backed at one grade. One row is one node; click a "
-    + "grade badge for its source, or the row to open what it belongs to.",
+  "nodes.twinsHint": "Most regions exist as a left and a right copy stating the same thing, so the list shows each region once, without its side. Tick to list both sides separately, which is how the sourcing counts count them.",
+  "nodes.intro": "Each row is one fact (a \"node\"): what it is about (name), what it states (notion), which sort of fact it is (kind) and how well it is sourced (grade). Click a grade badge to see its source, or the row to open the panel it belongs to.",
   "nodes.dataFiles": "The same data as files →",
   "nodes.dataFilesHint": "Open the list of downloadable data files (and the "
     + "source repository) from the About popup",
@@ -323,8 +319,8 @@ window.__I18N_MESSAGES__.en = {
   "info.provDetails": "Click to read how every piece of information in neurarium is sourced",
   "info.provNone": "No source for this node yet.",
   "info.provLlm": "Source grade: LLM-only. Produced by an LLM from memory and not checked against any document, so it may be a hallucination.",
-  "info.provSourced": "Source grade: sourced. Written by an LLM that was given the source document (e.g. Stahl's guide), but this specific node was not quote-verified.",
-  "info.provVerified": "Source grade: verified. An LLM extracted a quote, it was programmatically confirmed to appear in the source, and a separate LLM agreed the quote supports this node. This is still the highest grade available here and remains LLM-driven, so it can still be wrong: going further would take considerable human effort and is itself error-prone, so it is out of scope for this project.",
+  "info.provSourced": "Source grade: sourced. An LLM wrote this while reading the source document (e.g. Stahl's guide), but no quote was checked for this specific fact.",
+  "info.provVerified": "Source grade: verified. An LLM picked a supporting quote, code confirmed that the quote appears word for word in the source, and a second LLM agreed it supports this fact. This is the highest grade here, but it is still LLM-driven and can be wrong: a full human review would take considerable effort, would make errors of its own, and is out of scope for this project.",
   "info.provUncertain": "Source grade: uncertain. The quote below really is in the source and really is about this subject, but it never states this precise claim: it says something broader, so pinning it here is an inference. The reasons to doubt it are listed above, each with its own source.",
   "info.uncertainLead": "Here are LLM-written reasons to be uncertain about this claim:",
   "uncertain.side_effect_rule": "The source sentence explains a side effect, and its subject is the mechanism rather than the drug, so it never states that this drug has the action.",
@@ -341,10 +337,10 @@ window.__I18N_MESSAGES__.en = {
   "info.quoteChain": "How this quote got here:",
   "quotechain.raw_data": "raw data",
   "quotechain.page": "source page",
-  "quotechain.extract_code": "deterministic extraction",
+  "quotechain.extract_code": "copied from a table by code (no LLM)",
   "quotechain.extract_llm": "an LLM finds the quote",
   "quotechain.gate": "code checks the quote is on the page",
-  "quotechain.judge_llm": "an amnesic LLM judges the quote",
+  "quotechain.judge_llm": "a second LLM, blind to the first, judges the quote",
   "quotechain.neurarium": "neurarium",
   "info.provWikipedia": "Loaded directly from Wikipedia. This text is fetched live and verbatim from the current Wikipedia article (CC BY-SA), with no LLM in the loop, so it cannot drift from the article. See the Reference link above to inspect the source.",
   "enzyme.gradesRole": "Source grade for the role: {role}",
@@ -358,7 +354,7 @@ window.__I18N_MESSAGES__.en = {
   "prov.name.none": "No source",
   "prov.name.dataset": "About this dataset: a statement on how this dataset is built, not a claim about the brain or a drug, so no source could back it.",
   "prov.name.unknown": "Unknown: searched, no source states it",
-  "info.provUnknown": "Unknown: every source this dataset draws on for this kind of claim was searched, and none states it. A finding about the literature as of that date, not a gap we left: it is set aside from the coverage tally.",
+  "info.provUnknown": "Unknown: every source this dataset uses for this kind of fact was searched, and none states it. That says something about the literature on that date, not about a gap we left, so it is not counted in the coverage tally.",
   "info.unknownSearched": "Searched on {date}, no source states it:",
   "info.descFromWikipedia": "This description is the lead section of the drug's Wikipedia article, used verbatim under CC BY-SA. See the Reference link above.",
   "info.sourceRef": "{corpus}, p. {page}",
@@ -811,10 +807,7 @@ window.__I18N_MESSAGES__.en = {
   "changelog.cat.fixed": "Fixed",
   "changelog.cat.data": "Data & sources",
   "changelog.cat.docs": "Documentation",
-  "about.sourcingIntro":
-    "Every node in this dataset (any sourceable datum: a region, a pathway, a " +
-    "receptor, a drug binding, ...) carries a source grade. None of it has been " +
-    "checked by a human yet, so even a verified node can be wrong. The grades:",
+  "about.sourcingIntro": "Every fact in this dataset (a \"node\": a region, a pathway, a receptor, a drug binding, ...) carries a source grade. No human has checked any of it yet, so even a verified fact can be wrong. The grades:",
   "about.sourcingCaveat":
     "Being sourced does not make a claim true. A source can itself be wrong, the AI " +
     "may have attached a correct quote to the wrong claim, and the viewer code has " +
@@ -825,7 +818,7 @@ window.__I18N_MESSAGES__.en = {
   "about.gradeLlm":
     "AI only: may be a hallucination.",
   "about.gradeNone": "No source: none gathered yet.",
-  "about.gradeUnknown": "Unknown: every required source was searched on a recorded date, and none states it. Set aside from the % (neither backed nor missing); redone yearly.",
+  "about.gradeUnknown": "Unknown: every required source was searched on a recorded date, and none states it. Left out of the % (counted neither as backed nor as missing) and searched again every year.",
   "about.requiredCitations": "Some sources ask that any reuse of their data cite them. Neurarium does so here, and under each of their source pills:",
   "about.quoteChains": "Not every green check was earned the same way: some quotes were copied out of a machine-readable table by code alone, others were found on a book page by an LLM, checked word for word against that page, then judged by a second LLM that had not seen the first one’s reasoning. Each source tooltip ends with the exact chain that produced it, so you can weigh it yourself.",
   "about.gradeUncertain":
@@ -839,8 +832,7 @@ window.__I18N_MESSAGES__.en = {
   "about.segUnknown": "Unknown",
   "about.sourcingUnknown": "Plus {n} claim(s) searched for in every required source with nothing found (∅ Unknown), left out of this %.",
   "about.coverageTitle": "Coverage",
-  "about.sourcingHeadline":
-    "{pct}% of the {total} knowledge nodes here are sourced or verified.",
+  "about.sourcingHeadline": "{pct}% of the {total} facts (knowledge nodes) here are sourced or verified.",
   // The global sourcing bar is clickable to reveal the per-node-kind breakdown;
   // each kind row is in turn clickable to reveal its grade counts + an example node.
   "about.sourcingByKind": "Break it down by node kind",
