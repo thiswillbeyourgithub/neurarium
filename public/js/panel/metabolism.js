@@ -14,7 +14,7 @@ export function makeMetabolism(P) {
 
   // Group a {drug, binding}[] by primary drug category and append the category
   // sub-headings + rows into `container`. Shared by the group/target's own
-  // "Interacting drugs" list and the per-subtype dropdowns below it, so the sort +
+  // "Ligands (drugs)" list and the per-subtype dropdowns below it, so the sort +
   // row shape can never drift between the two. Sort: within a class, strongest-
   // affinity drug first (by this target's binding Ki, Infinity when unmeasured; equal
   // Ki tie-broken by name); classes ordered by the class's hardest binding (its min

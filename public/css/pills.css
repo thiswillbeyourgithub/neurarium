@@ -204,7 +204,7 @@
 .info-connections li:hover { color: var(--accent-bright); }
 /* The label only takes the width it needs so its summary provenance pill sits
    right beside it, not stranded at the far panel edge (same treatment as the
-   "Found in" .loc-name and the binding .bind-text). Applies to every pathway
+   "Regional distribution" .loc-name and the binding .bind-text). Applies to every pathway
    list: a structure's connections, a circuit/group's members, and the drug
    panel's "Pharmacodynamics: net neurotransmission". */
 .info-connections .conn-label { flex: 0 1 auto; min-width: 0; }

@@ -2,6 +2,7 @@
 // grouped by legend group), and the targets expressed in a structure.
 
 import { groupTargetsBySystem } from "../legend/targets.js";
+import { heading } from "./dom.js";
 
 const { t } = window.__I18N__;
 
@@ -11,7 +12,7 @@ export function makeExpression(P) {
     onTargetPick, speciesLabel,
   } = P;
 
-  // One "Found in" region row: the name (clickable -> jump when the base resolves)
+  // One "Regional distribution" region row: the name (clickable -> jump when the base resolves)
   // plus, when `meta` is given, its own per-region provenance pill (since "found in
   // region B" is graded per region, separate from the mechanism/type pill above).
   const locationRow = (name, base, meta, density) => {
@@ -52,7 +53,7 @@ export function makeExpression(P) {
     return li;
   };
 
-  // The "Found in" region list shared by showReceptor / showTarget: parallel arrays
+  // The "Regional distribution" region list shared by showReceptor / showTarget: parallel arrays
   // of display names + their base ids (+ optional per-region provenance `info`).
   // Rows are grouped under anatomical-group headings in the SAME order as the
   // Structures legend (data.meta.groupLabels key order), so the list reads like that
@@ -103,7 +104,7 @@ export function makeExpression(P) {
     return container;
   };
 
-  // "Receptors found here": the reverse of a receptor's "Found in" list, read off
+  // "Receptor expression": the reverse of a receptor's "Regional distribution" list, read off
   // data.targetsByStructure. The expression claim belongs to the (target, region)
   // pair, so each row carries THAT region's own graded node, the same pill (and the
   // same amber non-human species tag) the receptor panel shows for this structure:
@@ -175,7 +176,7 @@ export function makeExpression(P) {
   };
 
   /**
-   * The "Found in" section a receptor and a target panel share: a heading, then the
+   * The "Regional distribution" section a receptor and a target panel share: a heading, then the
    * graded region list, or the "no regional role" note when there is none. Only a
    * receptor can be `ubiquitous` (expressed everywhere, one sourced sentence instead
    * of a list). `P.sourcesTip` / `P.makeProvenancePill` are read at call time: the
@@ -188,7 +189,7 @@ export function makeExpression(P) {
   const appendFoundIn = (owner, bases, tourSec = null) => {
     const where = el("div", "info-locations");
     if (tourSec) where.dataset.tourSec = tourSec;
-    where.appendChild(el("h3", null, t("receptor.foundIn")));
+    where.appendChild(heading("h3", t("receptor.foundIn"), t("receptor.foundInSub")));
     if (owner.ubiquitous) {
       const p = el("p", "info-desc info-desc-pilled", t("receptor.ubiquitous"));
       const u = owner.ubiquitousInfo;

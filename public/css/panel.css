@@ -131,7 +131,7 @@
   white-space: nowrap;
   cursor: default;
 }
-/* Relative amount per region (Allen mRNA), when the owner carries a measured
+/* Expression density per region (Allen mRNA), when the owner carries a measured
    profile. The caption + its grade pill sit once above the rows because the
    profile is ONE claim; only the value varies per row. */
 .info-locations .loc-density-caption {
@@ -230,7 +230,7 @@
   color: var(--accent-bright); cursor: pointer; text-align: left;
 }
 .info-variants .var-target:disabled { color: var(--muted); cursor: default; }
-/* Anatomical-group sub-headings inside the "Found in" list (one per group, in
+/* Anatomical-group sub-headings inside the "Regional distribution" list (one per group, in
    the Structures-legend order): a level below the section's h3, with top space
    so each group reads as its own block (which also spreads the pills apart). */
 .info-locations .loc-groups { display: flex; flex-direction: column; }

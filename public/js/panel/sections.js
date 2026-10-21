@@ -112,7 +112,7 @@ export function makeSections(P) {
     const has = !!(rows && rows.length);
     if (!has && !unknown) return;
     const { ul, group, close } = betaSection("effects", "effects.heading", "effects.hint",
-      { grouped: has });
+      { grouped: has, subKey: "effects.headingSub" });
     if (!has) {
       const li = el("li");
       li.appendChild(el("span", "loc-name", t("effects.unknown")));
@@ -165,12 +165,13 @@ export function makeSections(P) {
         || resolveBase(base)?.name || base })
     : "");
 
-  // A receptor panel's "Downstream" section (BETA): one row per
+  // A receptor panel's "Release modulation" section (BETA): one row per
   // receptor_release_modulation node, "activating it decreases dopamine release"
   // + "heteroreceptor on GABA interneurons in VTA" with that node's own pill.
   const appendDownstream = (rows) => {
     if (!rows || !rows.length) return;
-    const { ul, close } = betaSection("downstream", "relmod.heading", "relmod.hint");
+    const { ul, close } = betaSection("downstream", "relmod.heading", "relmod.hint",
+      { subKey: "relmod.headingSub" });
     for (const n of rows) {
       const li = el("li", "eff-row");
       li.appendChild(el("span", "loc-name", t(`relmod.activation.${n.effect}`,
@@ -183,13 +184,14 @@ export function makeSections(P) {
     close();
   };
 
-  // A receptor / target panel's "Across age and sex" section (BETA): one row per
+  // A receptor / target panel's "Age and sex differences" section (BETA): one row per
   // receptor_demographic node, a direction chip ("↓ Age") then the conditional
   // sentence ("reported to decline with age in Caudate nucleus") with that node's own
   // pill, and the paper's own magnitude wording under it when it states one.
   const appendDemographics = (rows) => {
     if (!rows || !rows.length) return;
-    const { ul, close } = betaSection("demographics", "demog.heading", "demog.hint");
+    const { ul, close } = betaSection("demographics", "demog.heading", "demog.hint",
+      { subKey: "demog.headingSub" });
     for (const n of rows) {
       const li = el("li", "eff-row");
       li.appendChild(el("span", "demog-chip", `${n.glyph} ${n.factorLabel}`));
@@ -232,13 +234,14 @@ export function makeSections(P) {
     return li;
   };
 
-  // A receptor / target panel's "Genetic variants" section (ClinPGx #20): the gene's
+  // A receptor / target panel's "Pharmacogenomics" section (ClinPGx #20): the gene's
   // annotated variants, one sub-heading per variant, strongest level first, folded,
   // with the not-medical-advice caveat once at the end.
   const appendVariants = (rows) => {
     if (!rows || !rows.length) return;
     const { group, close } = betaSection("variants", "variant.heading", "variant.hint",
-      { beta: false, cls: "info-variants", grouped: true, caveatKey: "variant.caveat" });
+      { beta: false, cls: "info-variants", grouped: true, caveatKey: "variant.caveat",
+        subKey: "variant.headingSub" });
     for (const g of groupByVariant(rows)) {
       const ul = group(g.variant, "var-name");
       for (const row of g.rows) ul.appendChild(variantRow(row));
@@ -282,7 +285,7 @@ export function makeSections(P) {
       drug.allBindings, (tid) => data.modulationByTarget.get(tid) || [], data.meta.effectModes);
     if (!changes.length) return;
     const { sec, ul, close } = betaSection("downstream", "relmod.drugHeading", "relmod.drugHint",
-      { subKey: "relmod.drugHeadingSub" });
+      { subKey: "relmod.headingSub" });
     const mix = mixedCompounds(drug, sec, ul, changes.flatMap((c) => c.via));
     for (const c of changes) {
       ul.appendChild(derivedRow(t(`relmod.could.${c.direction}`,

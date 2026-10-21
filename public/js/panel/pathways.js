@@ -13,7 +13,7 @@ export function makePathways(P) {
 
   // One route endpoint (a structure id) for the connection panel's route line: its
   // name, made clickable to jump to (and isolate) that structure when the id
-  // resolves to a modeled mesh, exactly like a "Found in" region row. A non-
+  // resolves to a modeled mesh, exactly like a "Regional distribution" region row. A non-
   // resolving id degrades to plain text.
   const endpointEl = (id) => {
     const name = nameOf(id);

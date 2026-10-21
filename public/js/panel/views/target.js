@@ -65,7 +65,7 @@ export function showTarget(P, target) {
   }
   if (facts.childElementCount) body.appendChild(facts);
 
-  // Where it sits (the same "Found in" list as a receptor; empty -> no footprint).
+  // Where it sits (the same "Regional distribution" list as a receptor; empty -> no footprint).
   appendFoundIn(target, target.locationBases);
   appendEffects(target.effectInfo, target.effectsUnknown);
   appendDemographics(target.demographicInfo);

@@ -1,6 +1,7 @@
 // Drug-binding rows: the Ki chip with its corpus reference, the effect glyph, the
 // binding row itself, and the lists of drugs acting on a target (grouped by category).
 
+import { heading } from "./dom.js";
 import { bindingKi, EFFECT_GLYPHS } from "./format.js";
 
 const { t } = window.__I18N__;
@@ -125,7 +126,7 @@ export function makeBindings(P) {
   };
 
   // One binding row, shared by the drug panel's "Pharmacodynamics: binding profile" list and a
-  // receptor/target panel's "Interacting drugs" list: the two render the *same*
+  // receptor/target panel's "Ligands (drugs)" list: the two render the *same*
   // resolved binding from opposite ends (a drug's target vs a target's drug), so
   // the markup lives once. Layout: the effect glyph, then a text column holding
   // the leading name, the action line, and (stacked under them) the measured Ki
@@ -257,8 +258,8 @@ export function makeBindings(P) {
     if (!list.length && !borrowed.length) return;
     const wrap = el("div", "info-bindings info-interactors");
     wrap.dataset.tourSec = "drugs"; // guided-tour section anchor
-    wrap.appendChild(el(
-      "h3", null, `${t("targets.interactingDrugs")} (${list.length})`));
+    wrap.appendChild(heading("h3", `${t("targets.interactingDrugs")} (${list.length})`,
+      t("targets.interactingDrugsSub")));
     appendDrugsByCategory([...list, ...borrowed], wrap);
     body.appendChild(wrap);
   };

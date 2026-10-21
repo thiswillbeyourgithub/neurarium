@@ -30,7 +30,7 @@ export function resolveReceptors({ receptors, byId, baseName, allIds, v }) {
       );
     }
     r.locationNames = r.locations.map((b) => baseName.get(b) || b);
-    // Per-region expression provenance: the "Found in" node "this receptor is
+    // Per-region expression provenance: the "Regional distribution" node "this receptor is
     // expressed in region B" is graded per region (default llm when unsourced), so
     // the panel shows a pill per row. Parallel to locations/locationNames.
     const locSrc = r.location_sources || {};

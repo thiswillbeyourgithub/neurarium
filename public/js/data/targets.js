@@ -77,17 +77,17 @@ export function buildTargets({ receptors, byId, baseName, v }) {
       polaritySources: tgt.polarity_sources || [],
       locationNames: (tgt.regions || []).map((b) => baseName.get(b) || b),
       // The raw base ids parallel to locationNames, so the panel can make each
-      // "Found in" row jump to that structure (the receptor records keep their own
+      // "Regional distribution" row jump to that structure (the receptor records keep their own
       // `locations` for the same purpose).
       locationBases: (tgt.regions || []).slice(),
-      // Per-region expression provenance ("Found in"), parallel to locationBases:
+      // Per-region expression provenance ("Regional distribution"), parallel to locationBases:
       // "target T is found in region B" is its own graded node (default llm when
       // unsourced), so the panel shows a per-row pill, exactly like a receptor's
       // locationInfo. From the emitted target.location_sources ({base: [source]}).
       locationInfo: (tgt.regions || []).map((b) =>
         locationEntry(b, baseName.get(b) || b, (tgt.location_sources || {})[b],
           (tgt.location_uncertainty || {})[b])),
-      // Relative amount per region, the mirror of a receptor's densityInfo.
+      // Expression density per region, the mirror of a receptor's densityInfo.
       densityInfo: densityEntry(tgt.density),
       keywords: [typeLabel, systemLabel].filter(Boolean).join(" "),
     });
@@ -96,7 +96,7 @@ export function buildTargets({ receptors, byId, baseName, v }) {
 }
 
 export function indexTargetsByStructure({ targets, baseName }) {
-  // The reverse of a receptor's "Found in": region base -> the targets expressed
+  // The reverse of a receptor's "Regional distribution": region base -> the targets expressed
   // there. Same node, read from the other end (the expression claim belongs to the
   // (target, region) pair, not to the target), so each entry carries THAT region's
   // own graded `info` and the structure panel shows the very pill the receptor panel

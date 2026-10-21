@@ -339,7 +339,7 @@ export function wireFocus({
     if (mesh) selectStructure(mesh, { frame: true, isolate: true });
   });
 
-  // Clicking a drug in a receptor / target panel's "Interacting drugs" list focuses
+  // Clicking a drug in a receptor / target panel's "Ligands (drugs)" list focuses
   // that drug (dim + animation + drug panel + tab), exactly like a Drugs legend row
   // / drug search pick, so you can go from a target to every drug acting on it.
   info.onDrug(selectDrug);

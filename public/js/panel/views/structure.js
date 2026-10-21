@@ -67,7 +67,7 @@ export function showStructure(P, structure) {
     body.appendChild(wrap);
   }
 
-  // What is expressed here: the receptors + non-receptor targets whose "Found in"
+  // What is expressed here: the receptors + non-receptor targets whose "Regional distribution"
   // list names this region. A structure with no pathway can still carry plenty of
   // them, so this section is outside the branch above.
   appendExpressedTargets(stripSide(structure.id));

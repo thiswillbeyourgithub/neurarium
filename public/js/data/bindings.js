@@ -87,7 +87,7 @@ export function makeBindingResolver(v) {
     };
   };
   // Resolve the display + provenance fields of a binding, shared by a drug's own
-  // bindings and a metabolite's inline bindings (the receptor "Interacting drugs"
+  // bindings and a metabolite's inline bindings (the receptor "Ligands (drugs)"
   // row reads exactly these). It deliberately OMITS the animation fields
   // (structureIds / flowKind / affinityWeight / toneSign): those drive the 3D
   // overlay, which only a focusable drug plays, so the drug loop adds them on top.

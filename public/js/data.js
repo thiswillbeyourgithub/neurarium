@@ -64,7 +64,7 @@ export {
  * @property {Map<string, object[]>} targetsByStructure  The reverse expression index:
  *   region base id -> `{target, info, ubiquitous}` for every target expressed there,
  *   `info` being that region's own graded expression node (the same one the receptor
- *   panel's "Found in" row shows). Lets a structure panel answer "what sits here?".
+ *   panel's "Regional distribution" row shows). Lets a structure panel answer "what sits here?".
  * @property {object[]} drugs  Drug records (from drugs.jsonl, sourced from Stahl's
  *   Prescriber's Guide). Each is augmented with localized `description` / `nbn`,
  *   `categoryLabels` (+ primary `category`), and resolved `bindings` (each binding

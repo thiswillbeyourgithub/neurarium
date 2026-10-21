@@ -246,7 +246,7 @@ export function makePills(P) {
   };
 
   // The provenance pill for a drug binding row (shared by the drug panel's "Acts
-  // on" list and a target panel's "Interacting drugs" list, the same resolved
+  // on" list and a target panel's "Ligands (drugs)" list, the same resolved
   // binding object). Its grade + tooltip come from whatever backs the binding: its
   // own quote-level Stahl source if present, else its measured PDSP Ki (which lifts
   // it to verified, mirroring _binding_grade), else nothing -> a NOSOURCE pill.
@@ -356,7 +356,7 @@ export function makePills(P) {
   // Prepend uncertaintyTip to whatever tooltip content a pill would otherwise get
   // (a string of source lines, a node, or nothing). Returns `extra` untouched when
   // the node is not flagged, so every non-flagged pill is byte-identical.
-  // One "Found in" region's pill (a locationEntry): orange with its reasons first when
+  // One "Regional distribution" region's pill (a locationEntry): orange with its reasons first when
   // the region carries bullets (animal-only evidence), else its own grade.
   const locationPill = (meta) => {
     const doubt = meta.uncertainty && meta.uncertainty.length ? meta.uncertainty : null;

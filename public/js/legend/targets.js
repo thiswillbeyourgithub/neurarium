@@ -41,7 +41,7 @@ export function groupTargetsBySystem(targets, weightOf) {
  * groups), grouped by neurotransmitter `system`, so a transporter like SERT sits
  * under "Serotonergic" beside the 5-HT receptors. System headings are ordered by
  * **total knowledge nodes** (biggest first: the sum over the system's targets of
- * each target's own node + its "Found in" regions + the drug bindings on it, so a
+ * each target's own node + its "Regional distribution" regions + the drug bindings on it, so a
  * heavily-expressed, heavily-drugged system like dopaminergic leads), with the
  * system-less "Other" bucket pinned last; members within a system are ordered
  * **lexicographically** by name. Each row is coloured by its swatch (a receptor's
@@ -64,7 +64,7 @@ export function buildTargetLegend(data, onPick) {
   const drugsByTarget = data.drugsByTarget || new Map();
 
   // Each target's "size" is its knowledge nodes: the target itself, its expression
-  // "Found in" regions (a ubiquitous receptor is one "throughout the brain" node),
+  // "Regional distribution" regions (a ubiquitous receptor is one "throughout the brain" node),
   // and the drug bindings acting on it (data.drugsByTarget, deduped one per drug).
   // A system's weight is the sum over its targets, so a heavily-expressed,
   // heavily-drugged system (dopaminergic) outweighs a sparse one (melatoninergic).

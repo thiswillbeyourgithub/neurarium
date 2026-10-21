@@ -79,7 +79,7 @@ export function createInfoPanel(data, sourcingModal) {
   // *base* id; the caller resolves it to a mesh and jumps to that structure.
   const onStructurePick = delegate("onStructurePick");
   // Set by the caller (onDrug): what to do when a drug row in a receptor / target
-  // panel's "Interacting drugs" list is clicked. The panel hands back the drug
+  // panel's "Ligands (drugs)" list is clicked. The panel hands back the drug
   // record; the caller focuses it exactly like its Drugs legend row / search pick.
   const onDrugPick = delegate("onDrugPick");
   const onEnzymePick = delegate("onEnzymePick");
@@ -260,7 +260,7 @@ export function createInfoPanel(data, sourcingModal) {
 
     /**
      * Register the handler run when a drug row in a receptor / target panel's
-     * "Interacting drugs" list is clicked. Called with the drug record; the caller
+     * "Ligands (drugs)" list is clicked. Called with the drug record; the caller
      * focuses it exactly like its Drugs legend row / search pick.
      */
     onDrug(fn) {

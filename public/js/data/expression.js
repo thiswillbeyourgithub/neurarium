@@ -1,9 +1,9 @@
-// Expression nodes: one "Found in" region entry and a relative-density profile,
+// Expression nodes: one "Regional distribution" region entry and a relative-density profile,
 // shared by receptors and non-receptor targets (same node shapes).
 
 import { strongestGrade } from "../grades.js";
 
-// Build one "Found in" region entry (its per-region expression provenance +
+// Build one "Regional distribution" region entry (its per-region expression provenance +
 // the assay species). An expression source (e.g. a GtoPdb tissue-distribution
 // quote) carries the species it was checked in; the panel flags a non-human
 // claim amber, like the Ki chip, and shows the species in the pill tooltip.

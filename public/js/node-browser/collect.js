@@ -85,7 +85,7 @@ export function collectNodes(data, deps, opts = {}) {
   // peak of that ranking: the region the profile puts first (they are emitted in
   // descending order) AND how far above this gene's brain-wide average it sits. The
   // region alone would name the claim without stating it. Signed to two decimals, the
-  // same way a panel's "Found in" row writes the z beside its bar.
+  // same way a panel's "Regional distribution" row writes the z beside its bar.
   const topRegion = (info) => {
     const entries = info && info.profile ? Object.entries(info.profile) : [];
     if (!entries.length) return "";
