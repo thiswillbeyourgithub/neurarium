@@ -19,15 +19,14 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent
-I18N_DIR = ROOT / "public" / "js" / "i18n"
-ENTRY = re.compile(r'^\s*"([A-Za-z0-9_.]+)":\s*"((?:[^"\\]|\\.)*)"', re.MULTILINE)
+sys.path.insert(0, str(ROOT / "tools"))
+from lib.i18n_catalogue import entries  # noqa: E402 (the one en.js / fr.js reader)
 PLACEHOLDER = re.compile(r"\{([a-zA-Z0-9_]+)\}")
 
 
 def catalogues():
     """``(en, fr)`` as ``key -> string``, one per language's table file."""
-    return tuple(dict(ENTRY.findall((I18N_DIR / f"{lang}.js").read_text(encoding="utf-8")))
-                 for lang in ("en", "fr"))
+    return tuple(dict(entries(lang)) for lang in ("en", "fr"))
 
 
 class CatalogueParityTest(unittest.TestCase):
@@ -45,7 +44,7 @@ class CatalogueParityTest(unittest.TestCase):
         # A JS object literal keeps the last of two equal keys without a word, so a
         # duplicate silently shadows the string someone is editing.
         for lang in ("en", "fr"):
-            keys = [k for k, _ in ENTRY.findall((I18N_DIR / f"{lang}.js").read_text("utf-8"))]
+            keys = [k for k, _ in entries(lang)]
             self.assertEqual(sorted({k for k in keys if keys.count(k) > 1}), [], lang)
 
     def test_no_key_is_missing_its_translation(self):

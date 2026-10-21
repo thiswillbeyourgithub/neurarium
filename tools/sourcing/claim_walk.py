@@ -15,7 +15,6 @@ Made with the help of Claude Code.
 import collections
 import json
 import os
-import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -23,6 +22,7 @@ DATA = os.path.join(ROOT, "public", "data")
 
 sys.path.insert(0, os.path.join(ROOT, "tools"))
 from data_generators import history as HIST  # noqa: E402
+from lib.i18n_catalogue import catalogue as _catalogue  # noqa: E402
 from data_generators import workup as WORKUP  # noqa: E402
 from data_generators import formulations as FORM  # noqa: E402
 from data_generators import provenance as PROV  # noqa: E402
@@ -114,23 +114,18 @@ UNRECONSTRUCTED_CLAIM = ("This quote is cited as the source of a dataset claim w
                          "verbatim on the page and states a coherent, correct fact.")
 
 
-_UNCERTAIN_RE = re.compile(r'^\s*"uncertain\.([a-z_]+)":\s*"((?:[^"\\]|\\.)*)"',
-                           re.MULTILINE)
+I18N_EN = _catalogue("en")
 
 
 def _uncertainty_reasons():
     """``kind -> the English sentence the viewer prints for that doubt``.
 
-    Read off ``js/i18n/en.js`` rather than restated here: the judge must be shown the
-    same words a reader is shown, and a second copy would drift the day a reason is
-    reworded.
+    Read off ``js/i18n/en.js`` (``lib.i18n_catalogue``) rather than restated here: the
+    judge must be shown the same words a reader is shown, and a second copy would drift
+    the day a reason is reworded.
     """
-    fn = os.path.join(ROOT, "public", "js", "i18n", "en.js")
-    out = {}
-    with open(fn, encoding="utf-8") as fh:
-        for kind, text in _UNCERTAIN_RE.findall(fh.read()):
-            out.setdefault(kind, text.replace('\\"', '"').replace("\\'", "'"))
-    return out
+    return {k.removeprefix("uncertain."): v for k, v in I18N_EN.items()
+            if k.startswith("uncertain.") and k.count(".") == 1}
 
 
 UNCERTAINTY_REASONS = _uncertainty_reasons()
