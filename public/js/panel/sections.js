@@ -8,12 +8,15 @@ import { deriveReleaseChanges, transmitterVars } from "../release-modulation.js"
 import { formatConditions, groupWorkup } from "../workup.js";
 import { groupByVariant, variantsForDrug } from "../receptor-variants.js";
 import { groupByMode } from "../receptor-effects.js";
+import { EFFECT_GROUPINGS, groupPossibleEffects, loadEffectGrouping, saveEffectGrouping }
+  from "../effect-grouping.js";
+import { bindingKi } from "./format.js";
 
 const { ofNoun, t } = window.__I18N__;
 
 export function makeSections(P) {
   const {
-    body, data, derivedActiveMetabolites, effectById, el, metaboliteContributors,
+    body, data, derivedActiveMetabolites, effectById, el, fmtKi, metaboliteContributors,
     nodePill, onEffectPick, onTargetPick, resolveBase, sourceBackedPill, targetById,
   } = P;
 
@@ -78,7 +81,8 @@ export function makeSections(P) {
     if (tgt && tgt.focusable) chip.addEventListener("click", () => onTargetPick(tgt));
     else chip.disabled = true;
     const wrap = el("span", "eff-via-item");
-    wrap.append(chip, nodePill(node));
+    wrap.appendChild(chip);
+    if (node) wrap.appendChild(nodePill(node));
     return wrap;
   };
 
@@ -148,11 +152,20 @@ export function makeSections(P) {
     return mix;
   };
 
+  // The drug's Ki at one binding, compact ("Ki 1.1 nM", the binding profile's
+  // number), or null when unmeasured.
+  const kiTag = (binding) => {
+    const ki = bindingKi(binding);
+    return Number.isFinite(ki) ? el("span", "eff-ki", `Ki ${fmtKi(ki)} nM`) : null;
+  };
+
   // The drug panel's derived "Predicted effects (target-based)" (BETA): the drug's
   // directional bindings joined with the receptor_effect nodes of their targets, read
   // from the build-time effect index (data.possibleEffectsByDrug, see
-  // tools/data_generators/effect_index.py). Never stored, and worded conditionally: it
-  // says what acting on these receptors can cause, never that this drug does.
+  // tools/data_generators/effect_index.py). Never stored, and worded conditionally: one
+  // "could cause" lead line says what acting on these receptors can cause, never that
+  // this drug does. A segmented switch groups by effect (the default) or by receptor,
+  // both ordered by the drug's Ki (js/effect-grouping.js), persisted via js/prefs.js.
   // Folded with the rest of the drug panel by its final foldSections.
   const appendPossibleEffects = (drug) => {
     const effects = data.possibleEffectsByDrug.get(drug.id) || [];
@@ -160,10 +173,49 @@ export function makeSections(P) {
       { subKey: "effects.drugHeadingSub", empty: effects.length ? null : "drug" });
     if (!effects.length) return close();
     const mix = mixedCompounds(drug, sec, ul, effects.flatMap((e) => e.via));
-    for (const e of effects) {
-      ul.appendChild(derivedRow(effectLink(e.effect, t("effects.couldCause", { effect: e.label })),
-        e.via, mix && mix.compoundOf));
+    const compoundOf = mix && mix.compoundOf;
+    const modeSwitch = el("div", "seg-switch");
+    sec.insertBefore(modeSwitch, ul);
+    sec.insertBefore(el("p", "eff-lead", t("effects.couldCauseLead")), ul);
+    const render = (mode) => {
+      ul.innerHTML = "";
+      for (const seg of modeSwitch.children) seg.classList.toggle("active", seg.dataset.mode === mode);
+      for (const g of groupPossibleEffects(effects, mode, bindingKi)) {
+        if (mode === "effect") {
+          const li = derivedRow(effectLink(g.key, g.label), g.items, compoundOf);
+          // The Ki sits right after each via chip (before its pill), items in order.
+          [...li.querySelectorAll(".eff-via-item")].forEach((item, i) => {
+            const tag = kiTag(g.items[i].binding);
+            if (tag) item.insertBefore(tag, item.children[1] || null);
+          });
+          ul.appendChild(li);
+          continue;
+        }
+        const li = el("li", "eff-row");
+        const head = viaChip(g.key, null, compoundOf && compoundOf(g.key));
+        const tag = kiTag(g.key);
+        if (tag) head.appendChild(tag);
+        li.appendChild(head);
+        const box = el("span", "eff-via");
+        for (const it of g.items) {
+          const item = el("span", "eff-via-item");
+          item.append(effectLink(it.effect, it.label), nodePill(it.node));
+          box.appendChild(item);
+        }
+        li.appendChild(box);
+        ul.appendChild(li);
+      }
+    };
+    for (const mode of EFFECT_GROUPINGS) {
+      const seg = btn("seg-btn", t(mode === "effect" ? "effects.byEffect" : "effects.byReceptor"));
+      seg.dataset.mode = mode;
+      seg.addEventListener("click", () => {
+        saveEffectGrouping(mode);
+        render(mode);
+      });
+      modeSwitch.appendChild(seg);
     }
+    render(loadEffectGrouping());
     close();
   };
 

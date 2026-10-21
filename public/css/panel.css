@@ -188,7 +188,7 @@
 .info-locations li.clickable { cursor: pointer; }
 .info-locations li.clickable:hover { color: var(--accent-bright); }
 /* receptor_effect rows (BETA): "<effect>  <mode>" + the node's pill on a
-   receptor / target panel; on a drug panel, "could cause <effect>" then one
+   receptor / target panel; on a drug panel, one "could cause" lead line, then per effect (or per receptor) one
    "via" chip per binding (jumps to the target) with that effect node's pill. */
 .info-effects .eff-mode { font-size: 10px; color: var(--muted); white-space: nowrap; }
 .info-effects li.eff-row { flex-wrap: wrap; align-items: baseline; }
@@ -209,6 +209,10 @@
 }
 /* A row head that opens another panel (an effect, a drug): see linkName. */
 .info-effects .eff-link { cursor: pointer; }
+/* Drug panel's predicted effects: the one conditional lead line over the list, and each
+   binding's compact Ki (the binding profile's median). */
+.info-effects .eff-lead { margin: 0 0 4px; font-size: 12px; font-style: italic; color: var(--muted); }
+.info-effects .eff-ki { font-size: 10px; color: var(--muted); white-space: nowrap; }
 .info-effects .eff-link:hover { color: var(--accent-light); text-decoration: underline; }
 .info-effects .eff-chip:disabled { color: var(--muted); cursor: default; }
 /* receptor_release_modulation rows (BETA): the site line ("heteroreceptor on
