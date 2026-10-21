@@ -1,6 +1,27 @@
 {
   "versions": [
     {
+      "version": "3.138.0",
+      "date": "2026-10-21",
+      "entries": [
+        {
+          "category": "added",
+          "text": "A drug's Predicted effects can be grouped by effect or by receptor with a switch at the top of the section, and the choice is remembered",
+          "commits": [
+            "df1a280",
+            "81a16fc"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Predicted effects say \"could cause\" once at the top instead of on every row, and are ordered by the drug's Ki (tightest binding first, unmeasured last), each receptor showing its Ki",
+          "commits": [
+            "81a16fc"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.137.0",
       "date": "2026-10-21",
       "entries": [
