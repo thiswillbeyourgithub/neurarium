@@ -60,12 +60,13 @@ export function wireToolbar({ focus, meshes, arrows, data, selection, tabs, urlS
 
   // Type-filter chips above the results: scope the search to one kind of thing
   // (a structure, a drug, ...). The label reuses each section's own heading so the
-  // chip can't drift from the panel. Only types actually present become chips, plus
+  // chip can't drift from the panel, except connections (the structure panel's
+  // "Connectivity" heading names a property, not a kind, so the chip has its own key). Only types actually present become chips, plus
   // an "All" reset; `activeType` (null = all) persists for the session like the
   // query text does. Built once (the item set is static).
   const searchFilters = document.getElementById("search-filters");
   const FILTER_LABELS = {
-    structure: "panel.structures", connection: "info.connections",
+    structure: "panel.structures", connection: "search.filterConnections",
     target: "panel.receptors", drug: "panel.drugs",
     circuit: "legend.circuits", group: "legendKey.pathways",
     enzyme: "panel.enzymes", effect: "panel.effects", command: "search.filterCommands",

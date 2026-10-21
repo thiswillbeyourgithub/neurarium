@@ -2,6 +2,7 @@
 // there, and its reference material.
 
 import { stripSide } from "../../util.js";
+import { heading } from "../dom.js";
 
 const { t } = window.__I18N__;
 
@@ -61,8 +62,8 @@ export function showStructure(P, structure) {
       };
     });
     const wrap = el("div", "info-connections");
-    wrap.appendChild(el(
-      "h3", null, `${t("info.connections")} (${count})`));
+    wrap.appendChild(heading("h3", `${t("info.connections")} (${count})`,
+      t("info.connectionsSub")));
     wrap.appendChild(ul);
     body.appendChild(wrap);
   }

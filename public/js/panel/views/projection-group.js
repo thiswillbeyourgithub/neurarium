@@ -23,7 +23,8 @@ export function showProjectionGroup(P, group) {
   // grade below.
   appendSourcedHeading(
     group.mode === "sign" ? t("group.signHeading") : t("group.kindHeading"),
-    group.provenance, group.sources, true);
+    group.provenance, group.sources, true,
+    group.mode === "sign" ? t("group.signHeadingSub") : null);
 
   // Description (LLM-authored) + the Wikipedia reference below it, then the live
   // lead refresh (upgrades the paragraph to the current WP lead when reachable),

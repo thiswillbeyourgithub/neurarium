@@ -123,7 +123,8 @@ export function makeExpression(P) {
     const families = data.meta.receptorFamilyLabels || {};
     const wrap = el("div", "info-bindings info-interactors");
     wrap.dataset.tourSec = "expressed"; // guided-tour section anchor
-    wrap.appendChild(el("h3", null, `${t("structure.expressed")} (${byId.size})`));
+    wrap.appendChild(heading("h3", `${t("structure.expressed")} (${byId.size})`,
+      t("structure.expressedSub")));
     wrap.appendChild(el("p", "info-caption", t("structure.expressedCaption")));
     const groups = groupTargetsBySystem([...byId.values()].map((e) => e.target),
       () => 1);

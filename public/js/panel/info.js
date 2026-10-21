@@ -2,7 +2,7 @@
 // reference links, addon slots) and returns the show*() views, each in panel/views/.
 
 import { closeOpenTip } from "./tooltip.js";
-import { el, btn, flashRow, foldSections } from "./dom.js";
+import { el, btn, flashRow, foldSections, withSubtitle } from "./dom.js";
 import { showEffect } from "./views/effect.js";
 import { showCircuit } from "./views/circuit.js";
 import { showProjectionGroup } from "./views/projection-group.js";
@@ -169,14 +169,15 @@ export function createInfoPanel(data, sourcingModal) {
   // grade rides this line, never a "Sources" block below the member lists (which would
   // read as grading the members). `always` shows a NOSOURCE pill even when ungraded,
   // for nodes whose badge is required (circuit / group are llm-only today); a structure
-  // omits the pill when its anatomy grade is absent.
-  const appendSourcedHeading = (labelText, provenance, sources, always = false) => {
+  // omits the pill when its anatomy grade is absent. `sub` is an optional
+  // plain-language subtitle (dom.js withSubtitle) on its own line below.
+  const appendSourcedHeading = (labelText, provenance, sources, always = false, sub = null) => {
     const groupEl = el("div", "info-group", labelText);
     if (always || provenance) {
       groupEl.appendChild(document.createTextNode(" "));
       groupEl.appendChild(nodePill({ provenance, sources }));
     }
-    body.appendChild(groupEl);
+    body.appendChild(withSubtitle(groupEl, sub));
   };
 
   // The panel kit: what the views in panel/views/ take from this closure (each
