@@ -74,8 +74,9 @@ named in the abstract, plus an action word, an effect word and a human-study wor
 **The cited-paper mode, ``--ki-prose``**, follows a Wikipedia article's own citations to a
 measured affinity its prose states but no table or database carries (viloxazine's
 "K i = 3,900 nM and 6,400 nM" at 5-HT2B / 5-HT2C, PDSP and GtoPdb having nothing). For
-every drug with a binding that has no Ki, it reads the drug's stored EN article
-(``data_sources/wikipedia/raw/<slug>.html``, corpus #9), keeps each paragraph that states
+every drug or active metabolite with a binding that has no Ki, it reads the owner's stored
+EN article (``data_sources/wikipedia/raw/<slug>.html``, corpus #9; a metabolite's OWN
+article only, see :func:`metabolite_articles`), keeps each paragraph that states
 an affinity (:func:`states_affinity`: a Ki / Kd and a concentration), stores the abstracts
 of the PubMed ids that paragraph cites, and offers every abstract sentence that itself
 states an affinity, with **no verdict**, in ``tools/generated_cache/ki_prose_worklist.json``.
@@ -83,7 +84,7 @@ The paragraph is the reason the page exists (it rides along as ``context``), nev
 source: the Ki is quoted from the paper. One LLM pass answers by index, and
 ``tools/sourcing/apply_ki_prose.py`` gates and writes (see its docstring)::
 
-    python tools/fetch/fetch_europepmc.py --ki-prose          # --only <drug ids> scopes
+    python tools/fetch/fetch_europepmc.py --ki-prose          # --only <drug / metabolite ids> scopes
 
 Built with the help of Claude Code.
 """
@@ -504,6 +505,58 @@ def affinity_candidates(page: str) -> list[dict]:
     return out
 
 
+def ki_less(bindings: list[dict]) -> list[str]:
+    """The targets of ``bindings`` still without a Ki. A Ki this pass wrote itself
+    (apply_ki_prose.py) still counts as missing, so a rebuild keeps offering the
+    candidate the applier re-applies on every run.
+
+    >>> ki_less([{"target": "d2"}, {"target": "h1", "ki": {"source": {"corpus": "pdsp_ki"}}},
+    ...          {"target": "m1", "ki": {"source": {"corpus": "europepmc"}}}])
+    ['d2', 'm1']
+    """
+    return sorted({b["target"] for b in bindings
+                   if (b.get("ki") or {}).get("source", {}).get("corpus", "europepmc")
+                   == "europepmc"})
+
+
+def metabolite_articles() -> dict[str, str]:
+    """Metabolite name -> slug of its OWN stored article, as the metabolite-bindings
+    worklist confirmed it (``fetch_metabolite_bindings.OWN_ARTICLE``). A parent's article
+    is never read here: its affinity prose is about the parent."""
+    path = ROOT / "tools" / "generated_cache" / "metabolite_bindings_worklist.json"
+    if not path.exists():
+        return {}
+    return {e["metabolite"]: e["slug"] for e in json.loads(path.read_text("utf-8"))
+            if e.get("own_article") and e.get("slug")}
+
+
+def _ki_prose_entry(name: str, missing: list[str], raw: Path, names: dict,
+                    refresh: bool) -> tuple[dict | None, int]:
+    """``(worklist entry or None, failed requests)`` for one owner (a drug or an active
+    metabolite) whose stored article is ``raw``."""
+    paragraphs = cited_affinity_pmids(raw.read_text("utf-8"))
+    cands, failed = [], 0
+    for pmid in sorted({pm for _, pms in paragraphs for pm in pms}):
+        page = page_path(PAGES_DIR, pmid)
+        raw_rec = page_path(RAW_DIR, pmid, ".json")
+        # The full text is what a table row lives in: an abstract-only page whose
+        # stored record says open access is re-stored once to add it.
+        rec = (json.loads(raw_rec.read_text("utf-8"))
+               if raw_rec.exists() and not refresh else None)
+        if (not page.exists() or refresh or rec is None or (
+                licence_of(rec) and FULL_TEXT_MARKER not in read_page_file(page))):
+            rec = rec if rec is not None and not refresh else record(pmid)
+            if not rec or not store(rec, refresh, full_text=True):
+                failed += rec is None
+                continue
+        cands += [{"corpus": "europepmc", "page": pmid, **c}
+                  for c in affinity_candidates(read_page_file(page))]
+    if not cands:
+        return None, failed
+    return {"name": name, "missing": {t: names.get(t, t) for t in missing},
+            "context": [text for text, _ in paragraphs], "candidates": cands}, failed
+
+
 def ki_prose(only: set | None, refresh: bool) -> int:
     """The ``--ki-prose`` worklist (see the module docstring)."""
     sys.path.insert(0, str(ROOT / "tools"))
@@ -515,49 +568,31 @@ def ki_prose(only: set | None, refresh: bool) -> int:
     names = ta.target_names()
     RAW_DIR.mkdir(parents=True, exist_ok=True)
     PAGES_DIR.mkdir(parents=True, exist_ok=True)
-    drugs, failed = {}, 0
-    for d in drugs_io.load_drugs():
-        if only is not None and d["id"] not in only:
+    own = metabolite_articles()
+    # (section, owner, stored-article slug or None): drugs, then active metabolites.
+    owners = [("drugs", d, Path(p).stem if (p := page_for(d)) else None)
+              for d in drugs_io.load_drugs()]
+    owners += [("metabolites", m, own.get(m["name"])) for m in drugs_io.load_metabolites()]
+    built, failed = {"drugs": {}, "metabolites": {}}, 0
+    for section, owner, slug in owners:
+        if only is not None and owner["id"] not in only:
             continue
-        # A Ki this pass wrote itself (apply_ki_prose.py) still counts as missing, so a
-        # rebuild keeps offering the candidate the applier re-applies on every run.
-        missing = sorted({b["target"] for b in d.get("bindings", [])
-                          if (b.get("ki") or {}).get("source", {}).get("corpus", "europepmc")
-                          == "europepmc"})
-        path = page_for(d) if missing else None
-        raw = page_path(WIKI_RAW, Path(path).stem, ".html") if path else None
+        missing = ki_less(owner.get("bindings", []))
+        raw = page_path(WIKI_RAW, slug, ".html") if missing and slug else None
         if not raw or not raw.exists():
             continue
-        paragraphs = cited_affinity_pmids(raw.read_text("utf-8"))
-        cands = []
-        for pmid in sorted({pm for _, pms in paragraphs for pm in pms}):
-            page = page_path(PAGES_DIR, pmid)
-            raw_rec = page_path(RAW_DIR, pmid, ".json")
-            # The full text is what a table row lives in: an abstract-only page whose
-            # stored record says open access is re-stored once to add it.
-            rec = (json.loads(raw_rec.read_text("utf-8"))
-                   if raw_rec.exists() and not refresh else None)
-            if (not page.exists() or refresh or rec is None or (
-                    licence_of(rec) and FULL_TEXT_MARKER not in read_page_file(page))):
-                rec = rec if rec is not None and not refresh else record(pmid)
-                if not rec or not store(rec, refresh, full_text=True):
-                    failed += rec is None
-                    continue
-            cands += [{"corpus": "europepmc", "page": pmid, **c}
-                      for c in affinity_candidates(read_page_file(page))]
-        if cands:
-            drugs[d["id"]] = {"name": d["name"],
-                              "missing": {t: names.get(t, t) for t in missing},
-                              "context": [text for text, _ in paragraphs],
-                              "candidates": cands}
-            print(f"{d['id']}: {len(cands)} candidate sentence(s)")
-    built = {"drugs": drugs}
+        entry, n = _ki_prose_entry(owner["name"], missing, raw, names, refresh)
+        failed += n
+        if entry:
+            built[section][owner["id"]] = entry
+            print(f"{owner['id']}: {len(entry['candidates'])} candidate sentence(s)")
     if only is not None and KI_PROSE_WORKLIST.exists():
-        built = worklist_io.merge_scoped(json.loads(KI_PROSE_WORKLIST.read_text("utf-8")),
-                                         built, "drugs")
+        # A scoped run only looked at ``only``: keep every other owner's entry.
+        prior = json.loads(KI_PROSE_WORKLIST.read_text("utf-8"))
+        built = {sec: {**prior.get(sec, {}), **got} for sec, got in built.items()}
     worklist_io.write(KI_PROSE_WORKLIST, built)
-    print(f"{len(drugs)} drug(s) with candidates -> "
-          f"{KI_PROSE_WORKLIST.relative_to(ROOT)}; {failed} failed request(s)")
+    print(f"{len(built['drugs'])} drug(s) + {len(built['metabolites'])} metabolite(s) with "
+          f"candidates -> {KI_PROSE_WORKLIST.relative_to(ROOT)}; {failed} failed request(s)")
     return 1 if failed else 0
 
 

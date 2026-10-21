@@ -96,6 +96,17 @@ class KiProseGateTest(unittest.TestCase):
         self.assertIn("not written", A.check_pick(self.pick(value_nm=3800), self.CAND,
                                                    self.PAGE, {"5ht2b"}))
 
+    def test_a_micromolar_value_converts_to_nm(self):
+        cand = {"page": "1", "line": "Ki values at NMDA receptors were 0.97±0.1 μM"}
+        page = "# T\n\n" + cand["line"] + "\n"
+        ok = self.pick(quote=cand["line"], value_nm=970, unit="μM", stated_value=0.97)
+        self.assertIsNone(A.check_pick(ok, cand, page, {"5ht2b"}))
+        self.assertIn("does not convert", A.check_pick({**ok, "value_nm": 0.97}, cand, page,
+                                                       {"5ht2b"}))
+        self.assertIn("unit", A.check_pick({**ok, "unit": "mM"}, cand, page, {"5ht2b"}))
+        self.assertIn("unit pM is not written", A.check_pick(
+            {**ok, "unit": "pM", "value_nm": 0.00097}, cand, page, {"5ht2b"}))
+
     def test_a_potency_is_not_an_affinity(self):
         self.assertIn("not an affinity", A.check_pick(self.pick(param="IC50"), self.CAND,
                                                        self.PAGE, {"5ht2b"}))
@@ -112,6 +123,42 @@ class KiProseGateTest(unittest.TestCase):
         ki = A.ki_object(self.pick(), self.CAND, page)
         self.assertEqual(ki["source"]["licence"], "CC BY-NC")
         self.assertEqual(ki["source"]["extraction"], "llm")
+
+
+class MetaboliteSectionTest(unittest.TestCase):
+    """The pass reaches active metabolites too: a metabolite binding left Ki-less by
+    PDSP / GtoPdb / Wikipedia (norketamine at NMDA) is offered from its OWN article and
+    written into the metabolite store, under the same gates as a drug's."""
+
+    def test_ki_less_keeps_this_pass_own_ki_as_missing(self):
+        self.assertEqual(E.ki_less([
+            {"target": "nmda"},
+            {"target": "d2", "ki": {"source": {"corpus": "pdsp_ki"}}},
+            {"target": "m1", "ki": {"source": {"corpus": "europepmc"}}}]), ["m1", "nmda"])
+
+    def test_apply_section_writes_a_gated_metabolite_ki(self):
+        from pipeline.judged import qid, text_of
+        line = "The Ki values of norketamine at NMDA receptors were 0.97 μM."
+        cand = {"corpus": "europepmc", "page": "1", "line": line}
+        records = [{"id": "norketamine",
+                    "bindings": [{"target": "nmda"}, {"target": "nachr_a7"}]}]
+        work = {"norketamine": {"missing": {"nmda": "NMDA"}, "candidates": [cand]}}
+
+        def pick(target, value, **kw):
+            return {"target": target, "candidate": 0, "qid": qid(text_of(cand)),
+                    "quote": line, "value_nm": value, "param": "Ki", **kw}
+
+        old = A.page_of
+        A.page_of = lambda c: "# T\n\n" + line + "\n"
+        self.addCleanup(setattr, A, "page_of", old)
+        # 970 is not written in "0.97 μM" without its unit; nachr_a7 was never missing.
+        self.assertEqual(A.apply_section(records, work, {"norketamine": [
+            pick("nmda", 970), pick("nachr_a7", 970, unit="μM", stated_value=0.97)]}), (0, 2))
+        self.assertEqual(A.apply_section(records, work, {"norketamine": [
+            pick("nmda", 970, unit="μM", stated_value=0.97)]}), (1, 0))
+        self.assertEqual(records[0]["bindings"][0]["ki"]["median"], 970.0)
+        self.assertEqual(records[0]["bindings"][0]["ki"]["source"]["corpus"], "europepmc")
+        self.assertNotIn("ki", records[0]["bindings"][1])
 
 
 class PageOfTest(unittest.TestCase):
