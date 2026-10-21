@@ -19,7 +19,7 @@ A source that records no species (a textbook, Wikipedia, Stahl) is **unknown**, 
 unknown source is enough to leave the claim unflagged: the flag says "nothing here is
 human", which an unread species cannot support. Covers drug and metabolite bindings,
 projections (the route and its transmitter / sign sub-claims), and every receptor /
-target "Found in" region (``location_uncertainty``, keyed like ``location_sources``).
+target "Regional distribution" region (``location_uncertainty``, keyed like ``location_sources``).
 
 Built with the help of Claude Code.
 """

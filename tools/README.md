@@ -97,7 +97,7 @@ attribute a *different* quote than the main one, or several to back a compound v
      allowed: the drug still opens its panel (lithium), it just lights nothing. A new coarse target/category/action needs a `DRUG_TARGETS` /
      `DRUG_CATEGORY_LABELS` / `DRUG_ACTIONS` entry (with `{en,fr}` labels; a `DRUG_TARGETS`
      entry needs a `type` + optional `wikipedia`). Target classification grade
-     overridable in `TARGET_PROVENANCE`; an individual "Locations" region is sourced
+     overridable in `TARGET_PROVENANCE`; an individual "Regional distribution" region is sourced
      (above `llm`) by adding a `{target_id: {base: [quote-source]}}` entry to
      `TARGET_LOCATION_SOURCES` (mirror of `RECEPTOR_LOCATION_SOURCES`). The drug's class
      classification grade is overridable in `DRUG_CATEGORY_PROVENANCE` (or upgraded by a

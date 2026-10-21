@@ -219,7 +219,7 @@ class QuoteGate:
                 self.check_one(f"{uctx} sources[{k}]", src)
 
     def check_location_uncertainty(self, what, owner):
-        """A "Found in" region's bullets, keyed like its location_sources."""
+        """A "Regional distribution" region's bullets, keyed like its location_sources."""
         for base, bullets in (owner.get("location_uncertainty") or {}).items():
             if base not in (owner.get("location_sources") or {}):
                 self.report.error(f"{what} location_uncertainty[{base}]: no "

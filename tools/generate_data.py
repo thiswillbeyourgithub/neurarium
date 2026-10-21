@@ -638,7 +638,7 @@ def _receptor_record(rec: dict[str, Any],
                     f"Receptor {rec['id']!r} location {base!r} is not a known "
                     f"structure base")
         out["locations"] = list(locations)
-        # Per-region expression sources (upgrade individual "Locations" regions above
+        # Per-region expression sources (upgrade individual "Regional distribution" regions above
         # the default llm). Omitted when nothing is sourced, so a plain receptor's
         # every region honestly grades as llm in the viewer + the coverage tally.
         loc_sources = _location_sources(
@@ -758,7 +758,7 @@ def _build_drug_targets(receptors: list[dict[str, Any]]) -> dict[str, dict[str, 
                 if _GRADE_RANK[pq["provenance"]] > _GRADE_RANK[pol_grade]:
                     pol_grade = pq["provenance"]
             targets[tid]["polarity_provenance"] = pol_grade
-        # Per-region expression sources ("Locations"): each region is its own graded
+        # Per-region expression sources ("Regional distribution"): each region is its own graded
         # node (kind target_locations), llm unless sourced here. Omitted when empty.
         tloc = _location_sources(
             TARGET_LOCATION_SOURCES, tid, spec["regions"], "Target")

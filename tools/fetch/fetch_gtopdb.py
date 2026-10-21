@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """Fetch IUPHAR/BPS Guide to Pharmacology (GtoPdb) tissue-distribution statements
-for the dataset's receptors, to source their expression-region ("Found in") nodes.
+for the dataset's receptors, to source their expression-region ("Regional distribution") nodes.
 
 Each receptor's expression regions are separately-graded nodes (kind
 ``receptor_locations``); today they are all ``llm``. GtoPdb publishes, per target, a

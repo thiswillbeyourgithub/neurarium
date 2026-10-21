@@ -67,8 +67,8 @@ right(+), `y` down(-)/up(+), `z` posterior(-)/anterior(+).
 - receptor `receptors.jsonl` classification, four graded sub-claims: `family` -> `receptors`, `receptor_class`, `sign` -> `receptor_sign`, `synaptic` -> `receptor_synaptic`
 - receptor/target `effects[]` -> `receptor_effect` (BETA; one node per (mode, effect) from closed vocabularies, in the headline; a drug's possible effects and the effect -> receptors -> drugs index (the BETA Effects section / `showEffect`, `/api/effect/<id>`) are derived only by `data_generators/effect_index.py` (the viewer fetches its build-time `/derived/effects.json`, written by `render_api.py --effects-out` in the Docker `api` stage and by `tools/serve.py`), never stored; an owner with no node may carry an owner-level UNKNOWN `effects_unknown`, never indexed as an effect)
 - receptor `release_modulation[]` -> `receptor_release_modulation` (BETA; one node per (kind, site, transmitter, direction): auto/heteroreceptor control of release; a drug's release changes are derived in `js/release-modulation.js`, never stored)
-- receptor/target `demographics[]` -> `receptor_demographic` (BETA; one node per (factor age|sex, direction, structure) from human PET/SPECT Europe PMC abstracts, optional verbatim `magnitude`; panel section "Across age and sex")
-- receptor/target `variants[]` -> `receptor_variant` (one node per ClinPGx clinical annotation on the owner's gene, levels 1A-3 only, via `genes.GENE_OWNERS`; panel section "Genetic variants", a drug panel lists those naming it under Pharmacogenomics, `js/receptor-variants.js`)
+- receptor/target `demographics[]` -> `receptor_demographic` (BETA; one node per (factor age|sex, direction, structure) from human PET/SPECT Europe PMC abstracts, optional verbatim `magnitude`; panel section "Age and sex differences")
+- receptor/target `variants[]` -> `receptor_variant` (one node per ClinPGx clinical annotation on the owner's gene, levels 1A-3 only, via `genes.GENE_OWNERS`; panel section "Pharmacogenomics", a drug panel lists those naming it under its own Pharmacogenomics section, `js/receptor-variants.js`)
 - target `meta.drug_targets` -> `targets`; `polarity_provenance` -> `target_polarity`
 - expression: `location_sources` -> `receptor_locations` / `target_locations`; `density` -> `receptor_density` / `target_density` (ONE node per profile, not per region)
 - drug `bindings[]` -> `drug_bindings`; binding `action` -> `drug_binding_action` (graded by quote sources only: a Ki attests binding, never direction; `affinity_only` = NOSOURCE)
@@ -237,7 +237,7 @@ Corpora (`SOURCE_CORPORA`):
 - #2 `kandel` / #6 `nieuwenhuys`: pathways + region anatomy.
 - #3 `stahl_essential`: receptor/target mechanism classification. #4 `carlat`: drug cross-checks.
 - #5 `pdsp_ki`: measured binding Ki (a CSV row id, not a page).
-- #7 `gtopdb`: receptor "Locations" regions (with assay species). #8 `allen_ahba`: target + residual receptor regions (PACall, no judge) and expression density.
+- #7 `gtopdb`: receptor "Regional distribution" regions (with assay species). #8 `allen_ahba`: target + residual receptor regions (PACall, no judge) and expression density.
 - #9 `wikipedia_pharm`: fallback Ki, binding directions, metabolite bindings, CYP roles, Tmax, non-Stahl drug classes (#10 FR leads as fallback), receptor synaptic site / ion-channel sign / target type (with #3 prose). #10 `wikipedia_fr`: eu/fr brands.
 - #11 `gtopdb_ki`: Ki/direction where PDSP has no assay. #12 `gtopdb_class`: target type + GPCR sign (mapped from transduction).
 - #13 `pharmfreq`: enzyme metabolizer-phenotype variability. #14 `dailymed`: US label Tmax.

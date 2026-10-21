@@ -79,7 +79,7 @@ def check_reachability(report, meta, structures, projections, circuits,
         for loc in receptor.get("locations", []):
             if loc not in base_ids:
                 report.error(f"receptor {rid}: location {loc!r} is not a structure "
-                             f"base (not in the atlas, so its panel 'Found in' row "
+                             f"base (not in the atlas, so its panel 'Regional distribution' row "
                              f"would not be clickable)")
         # A per-region expression source must grade one of the receptor's own
         # locations (the "ALL" sentinel is the ubiquitous receptor's one claim).
@@ -103,7 +103,7 @@ def check_reachability(report, meta, structures, projections, circuits,
         for region in target.get("regions", []):
             if region not in base_ids:
                 report.error(f"target {key}: region {region!r} is not a structure "
-                             f"base (not in the atlas, so its panel 'Found in' row "
+                             f"base (not in the atlas, so its panel 'Regional distribution' row "
                              f"would not be clickable)")
         # A per-region expression source must grade one of the target's own regions
         # (mirror of the receptor location_sources key check above).
@@ -200,7 +200,7 @@ def check_reachability(report, meta, structures, projections, circuits,
     # id from each parent's metabolites[]. Every ref must resolve, every record must be
     # referenced (an orphan is a molecule no panel reaches), a linked drug_id must be a
     # real drug, and a metabolite binding target must be a known target (so it can be
-    # attributed in the receptor 'Interacting drugs' list).
+    # attributed in the receptor 'Ligands (drugs)' list).
     metab_ids = {m.get("id") for m in metabolites}
     referenced_metabs = set()
     for drug in drugs:
@@ -277,7 +277,7 @@ def check_reachability(report, meta, structures, projections, circuits,
     if report.errors == before:
         report.ok("every cross-reference (drug -> target/action/category, projection "
                   "-> structure/kind, circuit/receptor/target -> structure) resolves; "
-                  "every receptor/target region is in the atlas (its panel 'Found in' "
+                  "every receptor/target region is in the atlas (its panel 'Regional distribution' "
                   "row is clickable)")
 
     if compat_errors == 0:

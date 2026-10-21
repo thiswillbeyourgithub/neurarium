@@ -241,7 +241,7 @@ class Renderer:
                  "bindings acts on such a receptor in a direction the mode covers, so each COULD "
                  "cause it; a drug listed here does not necessarily cause it. "
                  f"Index: [all pages]({API}/)."]
-        lines += ["", f"## Receptors and targets ({len(e['owners'])})"]
+        lines += ["", f"## Mediating receptors and targets ({len(e['owners'])})"]
         for label, owners in effect_index.owners_by_mode(e, self.modes):
             lines += ["", f"### {label}", ""]
             for o in owners:

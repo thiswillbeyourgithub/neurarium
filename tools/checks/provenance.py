@@ -155,7 +155,7 @@ def check_provenance(report, meta, structures, projections, circuits,
             for i, src in enumerate(entry.get("sources") or []):
                 grade(src.get("provenance"),
                       f"receptor {receptor.get('id')} classification[{attr}] sources[{i}]")
-        # Per-region expression sources (the "Found in" grading): each carries a grade.
+        # Per-region expression sources (the "Regional distribution" grading): each carries a grade.
         for base, srcs in (receptor.get("location_sources") or {}).items():
             for i, src in enumerate(srcs or []):
                 grade(src.get("provenance"),
@@ -177,7 +177,7 @@ def check_provenance(report, meta, structures, projections, circuits,
             for i, src in enumerate(target.get("polarity_sources") or []):
                 grade(src.get("provenance"),
                       f"target {key} polarity_sources[{i}]")
-        # Per-region expression sources (the target's "Found in" grading), mirror of
+        # Per-region expression sources (the target's "Regional distribution" grading), mirror of
         # the receptor location_sources above; each carries a grade.
         for base, srcs in (target.get("location_sources") or {}).items():
             for i, src in enumerate(srcs or []):

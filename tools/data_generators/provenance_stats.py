@@ -270,7 +270,7 @@ def _provenance_stats(structures: list[dict[str, Any]],
     # one per authored metabolite across all drugs, graded by that metabolite's own
     # sources (the Stahl line naming it). The metabolite's optional T½ is an extra
     # sourced fact shown in the panel; its receptor BINDINGS are their own tally kind
-    # below (each a graded graph edge appearing on the receptor's Interacting drugs).
+    # below (each a graded graph edge appearing on the receptor's Ligands (drugs)).
     # A (grade, is_uncertain) pair: a link another corpus denies is active buckets as
     # ``uncertain`` however strong its own quote (CONTRADICTIONS).
     metabolite_grades = [_node_grade(m) for d in drugs for m in d.get("metabolites", [])]
@@ -341,7 +341,7 @@ def _provenance_stats(structures: list[dict[str, Any]],
     receptor_class_grades = [_attr_grade(r, "receptor_class") for r in scored_receptors]
     receptor_sign_grades = [_attr_grade(r, "sign") for r in scored_receptors]
     receptor_synaptic_grades = [_attr_grade(r, "synaptic") for r in scored_receptors]
-    # Expression-region nodes ("Found in"), one node PER (owner, region): the claim
+    # Expression-region nodes ("Regional distribution"), one node PER (owner, region): the claim
     # "owner O is expressed in region B", distinct from O's classification node. Each
     # region's grade = the strongest of that region's location_sources (default llm
     # when unsourced). A ubiquitous receptor is one "throughout the brain" node (its

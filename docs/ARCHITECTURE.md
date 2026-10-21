@@ -95,7 +95,7 @@ Wikipedia reference. CLAUDE.md ("Nodes") keeps a one-line-per-kind summary; the 
 - pharmacogenomic prescribing -> a drug's `pgx[].rows[]` -> `drug_pgx` (ONE node per (drug, gene, phenotype), carrying two CPIC #15 citations: the implication, then the recommendation)
 - drug active metabolite -> a drug's `metabolites[]` reference (`{id, sources, formed_by?}`, the per-parent "is a metabolite of" claim) -> `drug_metabolites`; the molecule itself (`{id, name, drug_id?, half_life?, bindings?}`) is ONE record in `metabolites.jsonl` (authored `tools/data/metabolites_data.jsonl`) however many drugs make it, joined by id in `js/data.js` (a metabolite that is itself a modeled drug links via `drug_id` + reuses its bindings/T½)
 - metabolite-forming enzyme -> a metabolite's `formed_by[]` (`{enzyme, reaction?, sources}`) -> `drug_metabolite_enzyme` (one node per (parent, metabolite, enzyme); the mirror of `drug_enzymes`, counted per PARENT since two parents make it by two reactions)
-- non-modeled-metabolite receptor binding -> a `metabolites.jsonl` record's `bindings[]` -> `drug_metabolite_bindings` (one node per record, not per parent; sourced from the metabolite's own Wikipedia pharmacology, corpus #9; graded like a drug binding, a separate kind so the drug Ki coverage is unperturbed; surfaces on the receptor's Interacting drugs)
+- non-modeled-metabolite receptor binding -> a `metabolites.jsonl` record's `bindings[]` -> `drug_metabolite_bindings` (one node per record, not per parent; sourced from the metabolite's own Wikipedia pharmacology, corpus #9; graded like a drug binding, a separate kind so the drug Ki coverage is unperturbed; surfaces on the receptor's Ligands (drugs))
 - panel annotation -> `addons.jsonl` -> `addons` (an **addon node**: the kind whose record carries its own insertion point, for a claim no other kind has a home for. `owner_kind` + `owner` name the node it annotates, `slot` a `meta.addon_slots` hook, `display`/`tone` how it draws; authored in `tools/data_generators/addons.py`, see Addon nodes in VIEWER.md)
 - Wikipedia reference -> any node's `wikipedia` -> `references` (a pointer *at* a node, tallied but excluded from the headline; a reference is not itself a knowledge node)
 
@@ -381,7 +381,7 @@ Viewer (`public/`):
   `targetName`/`actionLabel`/`effect`/`effectColor`/`structureIds`/`flowKind` + the drug's union
   `structureIds`/`flowKinds`/`focusable`/search `keywords`); builds the merged `targets` browse
   list, the `drugsByTarget` + `targetsByStructure` reverse indexes (the latter reads a receptor's
-  "Locations" from the region's end, so a structure panel can list what is expressed there carrying
+  "Regional distribution" from the region's end, so a structure panel can list what is expressed there carrying
   the very same graded node), and `projectionGroupsByKey` (`${mode}:${key}`).
 - `js/shapes.js`: `buildGeometry()` dispatches on type to `buildBlobGeometry`/
   `buildCurveGeometry`/`buildCompositeGeometry`; `mirrorGeometryX` for the left member.
@@ -416,9 +416,9 @@ Viewer (`public/`):
   targets (Effects).
 - `js/release-modulation.js`: `resolveModulation` (a receptor's `release_modulation[]` ->
   display rows) + `deriveReleaseChanges` (the drug panel's direction-aware join) +
-  `transmitterVars`. Pure, no DOM. See Receptors & targets (Downstream).
+  `transmitterVars`. Pure, no DOM. See Receptors & targets (Release modulation).
 - `js/receptor-demographics.js`: `resolveDemographics` (an owner's `demographics[]` ->
-  display rows, age first). Pure, no DOM. See Receptors & targets (Across age and sex).
+  display rows, age first). Pure, no DOM. See Receptors & targets (Age and sex differences).
 - `js/receptor-variants.js`: `resolveVariants` (an owner's `variants[]` -> display rows),
   `groupByVariant`, `variantsForDrug` (the drug panel's join). Pure, no DOM.
 - `js/drug-anim.js`: `createDrugAnimation`: per-drug effect-coloured gem dots +
