@@ -290,23 +290,25 @@ ADDONS: list[dict[str, Any]] = [
         "display": "admonition",
         "tone": "info",
         "title": {
-            "en": "Both sides are a modelling assumption",
-            "fr": "La bilatéralité est une hypothèse de modélisation",
+            "en": "Left/right symmetry is assumed",
+            "fr": "La symétrie gauche/droite est supposée",
         },
         "text": {
-            "en": "Nearly every pathway below is drawn on both sides of the brain: "
-                  "the dataset stores one arrow and the viewer reflects it left to "
-                  "right. The sources describe a tract once, so no quote backs the "
-                  "mirrored copy, and the symmetry is our reading of the anatomy "
-                  "rather than a claim any corpus makes. A mirrored pair therefore "
-                  "counts as one node here, not two.",
-            "fr": "Presque toutes les voies ci-dessous sont dessinées des deux "
-                  "côtés du cerveau : le jeu de données ne stocke qu'une flèche et "
-                  "l'affichage la reflète de gauche à droite. Les sources décrivent "
-                  "un faisceau une seule fois, donc aucune citation n'appuie la "
-                  "copie miroir : la symétrie est notre lecture de l'anatomie, pas "
-                  "une affirmation d'un corpus. Une paire miroir compte donc ici "
-                  "pour un seul nœud, pas deux.",
+            "en": "Nearly every pathway below is drawn twice, once in each "
+                  "hemisphere, because we assume the left and right brain are wired "
+                  "the same way. The sources describe a tract once, without saying "
+                  "which side, so the dataset stores one arrow and the viewer mirrors "
+                  "it onto the other hemisphere. No quote backs that mirrored copy, "
+                  "and a real pathway can be stronger on one side (lateralization). "
+                  "A mirrored pair counts as one node here, not two.",
+            "fr": "Presque toutes les voies ci-dessous sont dessinées deux fois, une "
+                  "dans chaque hémisphère, car nous supposons que les cerveaux gauche "
+                  "et droit sont câblés de la même façon. Les sources décrivent un "
+                  "faisceau une seule fois, sans préciser le côté : le jeu de données "
+                  "stocke donc une flèche et l'affichage la reflète dans l'autre "
+                  "hémisphère. Aucune citation n'appuie cette copie miroir, et une "
+                  "voie réelle peut être plus marquée d'un côté (latéralisation). "
+                  "Une paire miroir compte ici pour un seul nœud, pas deux.",
         },
     },
     {
