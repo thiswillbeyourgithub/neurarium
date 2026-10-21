@@ -34,7 +34,7 @@ holds the detail; this file is only the CLI that loads the data and runs them in
    binding whose ``target`` is not a key of ``meta.drug_targets`` can never be
    focused from its panel. This also covers every receptor ``location`` / target
    ``region``: it must name a structure **base** present in the atlas, otherwise
-   its "Found in" row in the panel would point at nothing and so be **unclickable**.
+   its "Locations" row in the panel would point at nothing and so be **unclickable**.
    All dangling references are **errors**.
 
 3. **TODOs**. A literal ``"TODO"`` placeholder anywhere **outside** a source url

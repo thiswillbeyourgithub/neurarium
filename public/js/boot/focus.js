@@ -257,7 +257,7 @@ export function wireFocus({
   // double-click to isolate.
   const selectStructure = (mesh, { frame = false, isolate = false, preview = false } = {}) => {
     if (frame && !preview) focus.focusStructure(mesh);
-    // A search result or a detail-panel jump (e.g. a "Found in" region row) picks a
+    // A search result or a detail-panel jump (e.g. a "Locations" region row) picks a
     // structure the way a legend row does: isolate its hemisphere pair so the rest
     // of the brain dims (setCircuit with no pinned arrows is exactly the dimming a
     // legend-row toggleIsolate produces). A plain 3D click and the legend's own
@@ -329,7 +329,7 @@ export function wireFocus({
   // picking the target in the "Receptors & targets" legend or in search.
   info.onTarget(selectTarget);
 
-  // Clicking a region in a receptor / target panel's "Found in" list jumps to
+  // Clicking a region in a receptor / target panel's "Locations" list jumps to
   // that structure (frames it + halos it + opens its tab), like a structure
   // search pick. A base resolves to its midline mesh, else its _R then _L
   // hemisphere (the receptor footprint spans both; we centre one).

@@ -216,7 +216,7 @@ DRUG_CATEGORY_PROVENANCE: dict[str, str] = {}
 # grade defaults to `llm`, upgraded only by a TARGET_POLARITY_QUOTES quote.
 TARGET_POLARITY_PROVENANCE: dict[str, str] = {}
 
-# Per-region provenance for a receptor's *expression locations* ("Found in"): the
+# Per-region provenance for a receptor's *expression locations* ("Locations"): the
 # claim "receptor R is expressed in region B" is distinct from R's mechanism
 # classification and is authored from general knowledge, so every location defaults
 # to ``"llm"`` (unsourced). This registry upgrades an individual (receptor, region)
@@ -224,10 +224,10 @@ TARGET_POLARITY_PROVENANCE: dict[str, str] = {}
 # ``_receptor_record`` validates each base is one of that receptor's own locations
 # and emits the sources; the viewer shows a per-region pill and the coverage tally
 # counts each region separately. Empty for now: no expression atlas is wired yet, so
-# every "Found in" region is honestly ``"llm"``. Add entries as regions are sourced.
+# every "Locations" region is honestly ``"llm"``. Add entries as regions are sourced.
 RECEPTOR_LOCATION_SOURCES: dict[str, dict[str, list[dict[str, Any]]]] = {}
 
-# The same, for a non-receptor drug target's *expression regions* ("Found in"): the
+# The same, for a non-receptor drug target's *expression regions* ("Locations"): the
 # claim "target T is found in region B" is a distinct node from T's type/system
 # classification, so each region grades separately (default ``"llm"``). Keyed by
 # DRUG_TARGETS id: ``{target_id: {base: [ {corpus, page, quote, provenance} ]}}``.
@@ -474,7 +474,7 @@ def _location_sources(
         registry: dict[str, dict[str, list[dict[str, Any]]]], owner_id: str,
         regions: list[str], label: str) -> dict[str, list[dict[str, Any]]]:
     """Emitted per-region ``location_sources`` (``{base: [quote-source, ...]}``) for
-    an owner whose "Found in" regions are each a separately-graded expression node: a
+    an owner whose "Locations" regions are each a separately-graded expression node: a
     receptor (:data:`RECEPTOR_LOCATION_SOURCES`) or a non-receptor drug target
     (:data:`TARGET_LOCATION_SOURCES`).
 

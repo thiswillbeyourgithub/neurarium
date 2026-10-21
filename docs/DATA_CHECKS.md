@@ -23,7 +23,7 @@ Three severities: `[ERROR]` fails the run, `[warn]` is printed for a human to ac
   projection endpoints/kind, circuit/receptor/target structure refs, projection-
   group `kind`/`sign` key, receptor classification keys, target type + region bases,
   every receptor also a `drug_targets` key). The region-base check is what
-  guarantees the panels' "Found in" rows are clickable. Dangling refs = error.
+  guarantees the panels' "Locations" rows are clickable. Dangling refs = error.
   Addon nodes are checked from both ends here: the anchored node must exist in its
   kind's pool AND the `slot`/`display`/`tone` must be in the emitted vocabularies
   (an addon in a slot no panel offers would ship graded, counted and invisible).

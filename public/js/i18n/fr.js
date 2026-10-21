@@ -397,7 +397,7 @@ window.__I18N_MESSAGES__.fr = {
   "receptor.type": "Type",
   "receptor.effect": "Effet",
   "receptor.synaptic": "Site synaptique",
-  "receptor.foundIn": "Présent dans",
+  "receptor.foundIn": "Localisations",
   "effects.heading": "Effets",
   "effects.hint": "Effets cliniques qu'une source attribue à une action de ce type sur la cible, chez l'humain. Un énoncé sur le récepteur, pas sur un médicament en particulier.",
   "effects.drugHeading": "Effets prédits (selon les cibles)",

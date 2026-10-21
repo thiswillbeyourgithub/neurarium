@@ -122,7 +122,7 @@ A focusable section listing the merged `data.targets` = every receptor (`recepto
 as `RECEPTORS`) **plus** every non-receptor drug target from `meta.drug_targets` (transporters,
 enzymes, ion channels, receptor groups), so a target like SERT is explorable on its own. Built by
 `buildTargetLegend`, grouped by neurotransmitter **system**. **System headings** order by total
-knowledge nodes (each target's own node + its "Found in" regions + the bindings on it via
+knowledge nodes (each target's own node + its "Locations" regions + the bindings on it via
 `data.drugsByTarget`), so a heavily-drugged system leads; "Other" is pinned last. **Members** order
 lexicographically (`localeCompare` `numeric`, so 5-HT2 precedes 5-HT10). Both sources are normalized
 in `js/data/targets.js`.
@@ -137,7 +137,7 @@ in `js/data/targets.js`.
 - Panels: a receptor opens `showReceptor` (system, Wikipedia link, live-refreshed description, then
   the four classification facts (family / class / sign / synaptic) each carrying their *own*
   per-attribute grade pill (a quote grades only the attributes it substantiates, so an unsourced
-  GPCR/sign/site reads honestly as `llm` instead of borrowing a neighbour's quote), then the "Found in" list via
+  GPCR/sign/site reads honestly as `llm` instead of borrowing a neighbour's quote), then the "Locations" list via
   `locationList` grouped under `groupLabels` sub-headings, each region carrying its **own**
   expression-provenance pill + an amber "· <species>" tag when it has no human assay (`locationEntry`
   prefers Human, so an Allen confirmation clears it), or one pilled "Throughout the brain" for
@@ -145,7 +145,7 @@ in `js/data/targets.js`.
   grade pills, a **Tone polarity** row for a target carrying a direction-flipping `vesicular`/`sign`/
   `synaptic` flag (its *own* graded node `target_polarity`, not the classification grade, since the flag
   flips the drug-flow overlay's sign; `TARGET_POLARITY_QUOTES` upgrades it, else `llm`), then the same
-  per-region "Found in" list, kind `target_locations`). Both add **PDSP
+  per-region "Locations" list, kind `target_locations`). Both add **PDSP
   Ki** + **ClinPGx** lookup links (`appendLookupLink`); a receptor also gets **UniProt** (human-only) +
   **GtoPdb** search links (`uniprotSearchUrl`/`clinpgxSearchUrl`/`gtopdbSearchUrl`, no pill). The
   gene databases (UniProt, ClinPGx) search the node's `gene`, its HGNC symbol (α1A -> `ADRA1A`; an
@@ -155,7 +155,7 @@ in `js/data/targets.js`.
   `info.onDrug`). A **receptor_group** target (α2/glutamate) additionally lists, under its own
   Interacting drugs, one collapsed **By receptor subtype** dropdown per modeled subtype that has drugs
   (`appendSubtypeInteractors` off `target.subtypes`, a sourceless taxonomy in `meta.drug_targets`), so
-  a subtype binder (asenapine at α2A) is reachable from the coarse panel. Both make each "Found in"
+  a subtype binder (asenapine at α2A) is reachable from the coarse panel. Both make each "Locations"
   region clickable (`info.onStructure` -> `selectStructure`). A stub receptor / unlocated target renders muted.
 
 Receptor data: `_receptor_record` validates every family/class/sign/synaptic key + location base;
@@ -176,7 +176,7 @@ are authored in `DRUG_TARGETS`; its regions grade identically (kind `target_loca
 
 ### Expression density
 
-The "Found in" list answers *where*, not *how much*; a `density` profile ranks those regions
+The "Locations" list answers *where*, not *how much*; a `density` profile ranks those regions
 against each other. Derived from **Allen AHBA** (corpus #8) microarray intensity: per donor, the
 representative probe's log2 intensity is z-scored across all that donor's samples, averaged per
 base, then averaged across donors, so a region's `z` reads "this many standard deviations from
@@ -203,7 +203,7 @@ regions the owner already claims, never adding one.
 
 ### Effects (BETA)
 
-- Each `receptor_effect` node is one row of a receptor / target panel's **Effects** section (`appendEffects` in `js/panel/sections.js`, folded, after "Found in", with the `.beta-tag`): `<effect> · <mode>` + the node's own grade pill.
+- Each `receptor_effect` node is one row of a receptor / target panel's **Effects** section (`appendEffects` in `js/panel/sections.js`, folded, after "Locations", with the `.beta-tag`): `<effect> · <mode>` + the node's own grade pill.
 - A drug panel adds a derived **Predicted effects (target-based)** section (`appendPossibleEffects`, the first of the BETA sections closing the panel after Metabolism and Pharmacogenomics, from `data.possibleEffectsByDrug`): the build-time effect index (`tools/data_generators/effect_index.py`, see the Effects bullet below) joins the drug's bindings with its targets' effect nodes, **direction-aware** (a binding inherits a node only when its `action` is in that mode's `actions`, emitted in `meta.receptor_effect_modes`, so an antagonist never inherits agonism effects) and an `affinity_only` binding (no action) contributes nothing. Worded "could cause", never "causes": it is a statement about the receptors, not about the drug. Each chip jumps to the target; nothing lights the 3D scene.
 - The **Effects** browse section (`#effects`, `buildEffectLegend`, after Enzymes) turns the same nodes around: one row per effect some target carries (`data.effects`, read by `readEffectIndex` from `derived/effects.json`, which `tools/render_api.py --effects-out` writes from `tools/data_generators/effect_index.py` at image build time and `tools/serve.py` per request; never committed. One join, so the effect panel, every drug panel, llms.txt and `/api/` cannot disagree; a failed fetch raises a red banner and leaves both empty), tagged with its drug count. A row, a search hit (its label in both languages via `search_names.fr.json`) or any effect name in a receptor / drug panel opens `showEffect`: the receptors / targets carrying it grouped by mode with their pills, then "Drugs that could cause it", each naming the bindings that lead there. A panel-only focus like an enzyme's (`focusEffect`, no 3D state), deep-linked as `#tabs=effect:<id>`. The same module feeds llms.txt's "Clinical effects" section and the `/api/effect/<id>` pages.
 

@@ -26,7 +26,7 @@ const { ofNoun, t } = window.__I18N__;
 /**
  * Build the detail panel renderer. The panel is a **node view**: each show*()
  * method renders one node (a connection / structure / receptor / target / drug /
- * circuit / projection group) plus the nodes linked to it (a receptor's "Found in"
+ * circuit / projection group) plus the nodes linked to it (a receptor's "Locations"
  * regions + interacting drugs, a drug's target bindings, a structure's pathways,
  * ...), each linked node clickable to navigate to it. See the Nodes section of
  * CLAUDE.md. It is pure rendering: opening the matching tab + applying the 3D focus
@@ -75,7 +75,7 @@ export function createInfoPanel(data, sourcingModal) {
   // exactly like its "Receptors & targets" legend row.
   const onTargetPick = delegate("onTargetPick");
   // Set by the caller (onStructure): what to do when a region row in a receptor /
-  // target panel's "Found in" list is clicked. The panel hands back the structure
+  // target panel's "Locations" list is clicked. The panel hands back the structure
   // *base* id; the caller resolves it to a mesh and jumps to that structure.
   const onStructurePick = delegate("onStructurePick");
   // Set by the caller (onDrug): what to do when a drug row in a receptor / target
@@ -119,7 +119,7 @@ export function createInfoPanel(data, sourcingModal) {
   const baseResolves = (base) => !!resolveBase(base);
 
   // The anatomical group (lobe / basal_ganglia / ...) a structure *base* belongs to,
-  // or null if it doesn't resolve. Lets the "Found in" list group its regions the
+  // or null if it doesn't resolve. Lets the "Locations" list group its regions the
   // same way the Structures legend does.
   const groupOfBase = (base) => resolveBase(base)?.group ?? null;
 
@@ -251,7 +251,7 @@ export function createInfoPanel(data, sourcingModal) {
 
     /**
      * Register the handler run when a region row in a receptor / target panel's
-     * "Found in" list is clicked. Called with the structure base id; the caller
+     * "Locations" list is clicked. Called with the structure base id; the caller
      * resolves it to a mesh and jumps to that structure.
      */
     onStructure(fn) {

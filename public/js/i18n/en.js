@@ -397,7 +397,7 @@ window.__I18N_MESSAGES__.en = {
   "receptor.type": "Type",
   "receptor.effect": "Effect",
   "receptor.synaptic": "Synaptic site",
-  "receptor.foundIn": "Found in",
+  "receptor.foundIn": "Locations",
   "effects.heading": "Effects",
   "effects.hint": "Clinical effects a source attributes to acting on it this way, in humans. A statement about the receptor, not about any one drug.",
   "effects.drugHeading": "Predicted effects (target-based)",

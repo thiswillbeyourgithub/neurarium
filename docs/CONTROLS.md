@@ -290,7 +290,7 @@ whether first picked or re-shown. An empty-space click returns to Settings
 > receptor / target / drug / enzyme / circuit / projection-group) share the same building
 > blocks (`makeProvenancePill`, `appendSourcedHeading` = a node's identity line +
 > its grade pill, `pathwayRow` / `appendPathwayList`, `locationList`,
-> `appendReference` / `appendWikiImages`, the "Interacting drugs" / "Found in" lists).
+> `appendReference` / `appendWikiImages`, the "Interacting drugs" / "Locations" lists).
 > When you change what one panel shows or how it renders a row, **check whether the
 > other panel kinds carry the analogous node and would benefit from the same change,
 > and ask the user about any you find** before finishing. Prefer editing the shared
@@ -329,7 +329,7 @@ Views:
   summary pill (`proj.provenance`, resolved in `js/data/anatomy.js`), orange ⚠ when the pathway is a blanket
   claim. Left/right twin pathways collapse to
   one row (by direction + other-endpoint `base_name` + label). Then **Receptors found here**
-  (`appendExpressedTargets`), the reverse of a receptor's "Found in": every target expressed in this
+  (`appendExpressedTargets`), the reverse of a receptor's "Locations": every target expressed in this
   region, off `data.targetsByStructure`, grouped by neurotransmitter system in the
   `groupTargetsBySystem` order (biggest system in THIS region first, capped 8 per group with the rest
   expandable in place). Each row carries that region's OWN expression node (grade pill + amber species
