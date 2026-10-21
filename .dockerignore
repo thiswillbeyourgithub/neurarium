@@ -3,12 +3,15 @@
 *
 !docker/entrypoint.sh
 !tools/render_api.py
+!tools/api_sections.py
 !tools/lib/__init__.py
 !tools/lib/page_file.py
 !tools/lib/structure_ids.py
+!tools/lib/i18n_catalogue.py
 !tools/data_generators/llms_txt.py
 !tools/data_generators/effect_index.py
 !tools/data_generators/node_id.py
 !public/version.js
+!public/js/i18n/en.js
 !public/data/*.jsonl
 !public/data/meta.json

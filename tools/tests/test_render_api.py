@@ -15,6 +15,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import render_api  # noqa: E402
+import api_sections  # noqa: E402 (the panel's own words, read from en.js)
 
 LINK = re.compile(r"\]\(/api/([^)]*)\)")
 MARKER = re.compile(r"\[(?:verified|sourced|llm|uncertain) (q_[0-9a-f]+)\]")
@@ -69,11 +70,11 @@ class RenderApiTest(unittest.TestCase):
         # A `<claim>_sources` key renders beside its claim, never as its own section or
         # bullet (it once read "## category sources" far below "categories" in Facts).
         for name, text in self.pages.items():
-            self.assertNotRegex(text, r"(?m)^## .*\b(sources|provenance)$", name)
+            self.assertNotRegex(text, r"(?m)^## [a-z][a-z_ ]*\b(sources|provenance)$", name)
             self.assertNotRegex(text, r"(?m)^\s*- [a-z_]+_sources:", name)
         facts = self.pages["drug/sertraline/facts.md"]
-        self.assertRegex(facts, r"(?m)^- categories: .*\[verified q_[0-9a-f]+\]")
-        self.assertRegex(facts, r"(?m)^- nbn: .*\[verified q_[0-9a-f]+\]")
+        self.assertRegex(facts, r"(?m)^- Class \(categories\): .*\[verified q_[0-9a-f]+\]")
+        self.assertRegex(facts, r"(?m)^- Nomenclature \(nbn\): .*\[verified q_[0-9a-f]+\]")
 
     def test_llm_grade_always_flagged_unsourced(self):
         # An LLM-memory claim must never read like a citation to an agent.
@@ -86,8 +87,8 @@ class RenderApiTest(unittest.TestCase):
         full = self.pages["drug/sertraline.md"]
         self.assertIn("(/api/drug/sertraline/bindings)", full)
         part = self.pages["drug/sertraline/bindings.md"]
-        self.assertIn("## bindings", part)
-        self.assertNotIn("## brands", part)
+        self.assertIn(f"## {api_sections.text('drug.actsOn')}\n", part)
+        self.assertNotIn(f"## {api_sections.text('drug.brands')}\n", part)
         # each section page lists exactly the quotes it cites
         self.assertEqual(set(MARKER.findall(part)), set(LISTED.findall(part)))
         self.assertIn("drug/sertraline/index.md", self.pages)
@@ -105,7 +106,7 @@ class RenderApiTest(unittest.TestCase):
         self.assertIn("Kind: effect (BETA)", page)
         self.assertIn("#tabs=effect:nausea", page)
         self.assertIn("(/api/receptor/5ht3)", page)
-        self.assertIn("## Drugs that could cause it (derived, ", page)
+        self.assertIn("## " + api_sections.text("effect.drugs").split("{")[0], page)
         self.assertIn("(/api/drug/ondansetron)", self.pages["effect/antiemetic.md"])
         self.assertIn("(/api/effect/nausea)", self.pages["effect/index.md"])
 

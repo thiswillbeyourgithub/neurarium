@@ -42,14 +42,14 @@ from lib.structure_ids import base_id  # noqa: E402 (the one hemisphere-suffix r
 import effect_index  # noqa: E402 (the effect -> receptors -> drugs join, BETA)
 import llms_txt  # noqa: E402 (SITE_URL + the version, defined once there)
 import node_id  # noqa: E402 (the id shape check_data enforces)
+import api_sections as AS  # noqa: E402 (the panel's labels + layout, one table)
 
 PUBLIC = Path(__file__).resolve().parent.parent / "public"
 COLLECTIONS = ("structures", "projections", "circuits", "projection_groups",
                "receptors", "drugs", "metabolites", "addons")
 
-# Presentation-only fields: geometry and colours mean nothing as text.
-SKIP = {"id", "name", "color", "position", "shape_file", "shape", "focusable", "mirror",
-        "structure_image", "structure_image_gallery"}
+# Presentation-only fields (geometry, colours, images), each with its reason there.
+SKIP = set(AS.HIDDEN)
 # The viewer's `#tabs=<kind>:<id>` opener for each page kind, where one exists.
 TAB_KIND = {"drug": "drug", "receptor": "target", "target": "target", "structure": "structure",
             "circuit": "circuit", "group": "group", "effect": "effect"}
@@ -124,9 +124,8 @@ class Renderer:
         self.base_to_structure = {}
         for sid in self.pages["structure"]:
             self.base_to_structure.setdefault(base_id(sid), sid)
-        self.addons: dict[tuple[str, str], list[dict[str, Any]]] = {}
-        for a in data["addons"]:
-            self.addons.setdefault((a["owner_kind"], a["owner"]), []).append(a)
+        self.addons = data["addons"]
+        self.value_labels = {k: data["meta"].get(m) or {} for k, m in AS.VALUE_LABELS.items()}
 
     # -- links ---------------------------------------------------------------------------
     def link(self, kind: str, ident: str, label: str | None = None) -> str:
@@ -265,7 +264,9 @@ class Renderer:
                  "bindings acts on such a receptor in a direction the mode covers, so each COULD "
                  "cause it; a drug listed here does not necessarily cause it. "
                  f"Index: [all pages]({API}/)."]
-        lines += ["", f"## Mediating receptors and targets ({len(e['owners'])})"]
+        owners_h, owners_intro = self.heading("effect", "owners", {})
+        drugs_h, drugs_intro = self.heading("effect", "drugs", {})
+        lines += ["", "## " + AS.fill(owners_h, n=len(e["owners"])), ""] + owners_intro[:-1]
         for label, owners in effect_index.owners_by_mode(e, self.modes):
             lines += ["", f"### {label}", ""]
             for o in owners:
@@ -273,7 +274,7 @@ class Renderer:
                 doubt = ", ".join(u["kind"] for u in o["node"].get("uncertainty") or [])
                 note = f" (uncertain: {doubt})" if doubt else ""
                 lines.append(f"- {self.link(o['kind'], o['id'])}{note} {srcs}".rstrip())
-        lines += ["", f"## Drugs that could cause it (derived, {len(e['drugs'])})", ""]
+        lines += ["", "## " + AS.fill(drugs_h, n=len(e["drugs"])), ""] + drugs_intro
         for d in sorted(e["drugs"], key=lambda d: str(d["drug"].get("name") or d["drug"]["id"]).lower()):
             via = ", ".join(f"{self.link('target', b['target'])} {b['action']}"
                             + (f" via {b['via_metabolite']}" if b.get("via_metabolite") else "")
@@ -342,13 +343,93 @@ class Renderer:
                 tags.append(f"({extra.replace('_', ' ')}: {tag})" if extra else tag)
         return (" " + " ".join(tags)) if tags else "", nested
 
+    # -- panel labels (api_sections) -------------------------------------------------------
+    def fact_label(self, kind: str, k: str, rec: dict[str, Any]) -> str:
+        """A Facts line's label: the panel's row label, the field name after it so a
+        reader can match /data, else the bare field name."""
+        lab = AS.label(kind, k)
+        txt = AS.text(lab.key, rec) if lab else None
+        return f"{txt} ({k})" if txt else k
+
+    def heading(self, kind: str, k: str, rec: dict[str, Any]) -> tuple[str, list[str]]:
+        """A section's heading (the panel's) and the lines opening it: the subtitle in
+        italics, then the panel section it sits inside, when it has one."""
+        lab = AS.label(kind, k)
+        if lab is None:
+            return k.replace("_", " "), []
+        intro = []
+        sub = AS.text(lab.sub, rec)
+        if sub:
+            intro += [f"*{sub}*", ""]
+        parent = AS.parent_text(lab)
+        if parent:
+            intro += [f"In the viewer under: {parent}.", ""]
+        return AS.text(lab.key, rec) or k.replace("_", " "), intro
+
+    def worded(self, kind: str, k: str, v: Any) -> str:
+        """A stored value as the panel words it (``ssri`` -> ``SSRI (ssri)``), via the
+        meta label map api_sections.VALUE_LABELS names; unchanged when it has none."""
+        labels = self.value_labels.get((kind, k))
+        if not labels:
+            return self.scalar(k, v, kind)
+        one = lambda x: f"{labels[x]} ({x})" if labels.get(x) not in (None, x) else str(x)  # noqa: E731
+        return ", ".join(map(one, v)) if isinstance(v, list) else one(v)
+
+    def folded(self, kind: str, rec: dict[str, Any]) -> dict[str, str]:
+        """``attribute -> inline tags`` from a per-attribute grade map (a receptor's
+        ``classification``), so each grade rides its attribute's line as the pill does."""
+        out: dict[str, str] = {}
+        for field in (f for kd, f in AS.FOLDED if kd == kind and isinstance(rec.get(f), dict)):
+            for attr, entry in rec[field].items():
+                srcs = entry.get("sources")
+                tag = self.tags("sources", srcs) if srcs else self.tags("grade", entry.get("grade") or "llm")
+                doubt = ", ".join(u.get("kind", "") for u in entry.get("uncertainty") or [])
+                out[attr] = f" {tag}" + (f" (uncertain: {doubt})" if doubt else "")
+        return out
+
+    # -- addons ------------------------------------------------------------------------------
+    def notes(self, kind: str, rec: dict[str, Any]) -> dict[str | None, list[dict[str, Any]]]:
+        """This page's addons by the field whose section holds them (None: page top),
+        placed per api_sections.SLOT_PLACE. A ``section.*`` addon belongs to a panel
+        section, so it lands on every page that shows that section."""
+        out: dict[str | None, list[dict[str, Any]]] = {}
+        own = {self.ident, base_id(self.ident)} if kind == "structure" else {self.ident}
+        for a in sorted(self.addons, key=lambda a: a["owner_kind"] != "section"):
+            pkind, fields = AS.SLOT_PLACE[a["slot"]]
+            if pkind != kind or (a["owner_kind"] != "section" and a["owner"] not in own):
+                continue
+            field = next((f for f in fields if f in rec), None)
+            if fields and field is None and a["owner_kind"] == "section":
+                continue  # the section it annotates is not on this page
+            out.setdefault(field, []).append(a)
+        return out
+
+    def note_lines(self, notes: list[dict[str, Any]]) -> list[str]:
+        """Each addon as the panel's admonition box: a blockquote, title, tone, grade."""
+        lines = []
+        for a in notes:
+            tags = self.tags("sources", a["sources"]) if a.get("sources") else ""
+            basis = " (about this dataset, not a claim a source could back)" \
+                if a.get("basis") == "dataset" else ""
+            lines += ["", f"> **{a['title']}** ({a.get('tone', 'info')}){basis} {tags}".rstrip(),
+                      f"> {a['text']}"]
+        return lines
+
     def sections(self, kind: str, rec: dict[str, Any]) -> list[tuple[str, str, list[str], dict]]:
-        """The page body as (slug, heading, lines, quotes cited) sections. Each source key
-        renders next to the claim it grades, never in a section of its own."""
+        """The page body as (slug, heading, lines, quotes cited) sections, in panel order
+        (api_sections.FIELDS), headed and labelled with the panel's own words. Each source
+        key renders next to the claim it grades, never in a section of its own. The
+        page-top addons are left in ``self.top`` as (lines, quotes cited)."""
         att, sourced = self.attach(rec)
         out = []
+        notes = self.notes(kind, rec)
+        self.cited = {}
+        self.top = (self.note_lines(notes.get(None, [])), self.cited)
         self.cited = {}
         facts = []
+        folded = self.folded(kind, rec)
+        is_section = lambda k, v: not self.is_scalar(v) or (  # noqa: E731
+            AS.label(kind, k) or AS.Label(None)).section
         # A graded claim with no field of its own (a target's derived `polarity` flag):
         # its grade and its quotes still share one line, named after the claim.
         orphans: dict[str, list[str]] = {}
@@ -359,40 +440,40 @@ class Renderer:
         for stem, keys in orphans.items():
             pseudo = {stem: "", **{k: rec[k] for k in keys}}
             tags, nested = self.inline(pseudo, {stem: keys}, stem, 1, kind)
-            facts += [f"- {stem}:{tags}"] + nested
+            facts += [f"- {self.fact_label(kind, stem, rec)}:{tags}"] + nested
             sourced = sourced | set(keys)
-        for k, v in rec.items():
-            if k in SKIP or k in sourced or not self.is_scalar(v):
+        keys = AS.order(kind, rec)
+        for k in keys:
+            v = rec[k]
+            if k in SKIP or k in sourced or is_section(k, v):
                 continue
-            line = f"- {k}: {self.scalar(k, v, kind)}{self.flag(k, v)}"
+            line = (f"- {self.fact_label(kind, k, rec)}: {self.worded(kind, k, v)}"
+                    f"{self.flag(k, v)}{folded.get(k, '')}")
             tags, nested = self.inline(rec, att, k, 1, kind)
             facts += [line + tags] + nested
         own = rec.get("sources")
         if isinstance(own, list) and own and all(self.is_ref(x) for x in own):
             # The record's own sources (a group's, a circuit's): they back the record as a
             # whole, so they sit with its facts rather than in a "sources" section.
-            facts.append(f"- sources (this {kind} as a whole): {self.tags('sources', own)}")
+            lab = AS.text((AS.label(kind, "sources") or AS.Label(None)).key, rec)
+            name = f"{lab} (sources, this {kind} as a whole)" if lab \
+                else f"sources (this {kind} as a whole)"
+            facts.append(f"- {name}: {self.tags('sources', own)}")
             sourced = sourced | {"sources"}
         if facts:
             out.append(("facts", "Facts", facts, self.cited))
-        for k, v in rec.items():
-            if k in SKIP or k in sourced or self.is_scalar(v):
+        folds = {f for kd, f in AS.FOLDED if kd == kind}
+        for k in keys:
+            v = rec[k]
+            if k in SKIP or k in sourced or k in folds or not is_section(k, v):
                 continue
             self.cited = {}
-            lines = self.value(k, v, 0, kind)
+            head, lines = self.heading(kind, k, rec)
+            lines = lines + self.value(k, v, 0, kind)
             tags, nested = self.inline(rec, att, k, 0, kind)
             if tags:
                 lines.append(f"- sources:{tags}")
-            out.append((k, k.replace("_", " "), lines + nested, self.cited))
-        notes = self.addons.get((kind, self.ident), [])
-        if notes:
-            self.cited = {}
-            lines = []
-            for a in notes:
-                lines += [f"- note ({a.get('tone', 'info')}):"]
-                lines += self.value("note", {k: v for k, v in a.items()
-                                             if k not in ("id", "owner_kind", "owner")}, 1)
-            out.append(("notes", "Notes", lines, self.cited))
+            out.append((k, head, lines + nested + self.note_lines(notes.get(k, [])), self.cited))
         return out
 
     def header(self, kind: str, ident: str, rec: dict[str, Any], title: str) -> list[str]:
@@ -437,8 +518,9 @@ class Renderer:
         toc = ("Sections (each also its own page): "
                + ", ".join(f"[{h}]({base}/{slug})" for slug, h, _, _ in secs)) if secs else ""
         head = self.header(kind, ident, rec, title)
-        full = head + ([toc] if toc else [])
-        cited: dict[str, dict[str, Any]] = {}
+        top, cited = self.top  # the page-top addons, under the title as in the panel
+        full = head + ([toc] if toc else []) + top
+        cited = dict(cited)
         for _, h, body, c in secs:
             full += ["", f"## {h}", ""] + body
             for qid, q in c.items():
