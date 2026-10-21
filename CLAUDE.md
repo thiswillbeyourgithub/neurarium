@@ -111,7 +111,7 @@ Files (`public/`, the full per-file map is in `docs/ARCHITECTURE.md`): `main.js`
 
 ## Git hooks
 
-> Moved to [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) to keep this file terse: repo-tracked hooks under `tools/git-hooks/`, activated per-clone; `pre-push` guards `main`, always runs `tools/check_js.py` + offers the data check.
+> Moved to [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) to keep this file terse: repo-tracked hooks under `tools/git-hooks/`, activated per-clone; `pre-push` guards `main`, always runs `tools/check_js.py` + the node JS tests + offers the data check.
 
 ## Data checks
 

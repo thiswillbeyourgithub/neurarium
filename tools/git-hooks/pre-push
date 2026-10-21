@@ -45,6 +45,18 @@ if [ "$status" -eq 0 ]; then
   fi
 fi
 
+# Same footing for the JS unit tests (tools/tests/*.test.mjs, node's built-in runner,
+# about two seconds, no author-side data): they pin the viewer's pure modules and the
+# tour's selector anchors, which nothing else exercises before a visitor does.
+if [ "$status" -eq 0 ]; then
+  if ! command -v node >/dev/null 2>&1; then
+    echo "pre-push: no node found; skipping the JS tests." >&2
+  elif ! node --test tools/tests/*.test.mjs >&2; then
+    echo "pre-push: JS tests failed; aborting push." >&2
+    status=1
+  fi
+fi
+
 # Same footing for the freshness family of the dataset check (check_data.py
 # --only freshness): an editable online corpus (Wikipedia, PDSP, GtoPdb, ...) cited
 # from a download over 12 months old must be refetched, and that must not hinge on

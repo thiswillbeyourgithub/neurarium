@@ -29,7 +29,9 @@ fresh clone runs it). Current:
 
 - `pre-push`: refuses any ref but `main`. On `main` it always runs
   `tools/check_js.py` (under a second, no author-side data, so no prompt and no way
-  past it) and aborts on an unbound JS reference; it likewise always runs
+  past it) and aborts on an unbound JS reference; it always runs the JS unit tests
+  (`node --test tools/tests/*.test.mjs`, skipped with a message when `node` is missing) and
+  aborts on a failure; it likewise always runs
   `tools/check_data.py --only freshness` (committed files only) and aborts when an
   editable online corpus is cited from a download over 12 months old; it always runs
   `tools/tests/test_generated_artifacts_fresh.py` (offline, about two seconds) and aborts when
