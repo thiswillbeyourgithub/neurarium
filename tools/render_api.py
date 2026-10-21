@@ -2,11 +2,14 @@
 
 The text twin of the viewer's detail panels, for LLM agents and anything that cannot run
 WebGL: ``/api/`` lists every page, ``/api/drug/sertraline`` holds that drug's
-stored fields, each claim tagged with its grade + quote id on its own line (a claim's
+stored fields in panel order, under the panel's own headings, subtitles and row labels
+(read from ``public/js/i18n/en.js`` through the one table in ``api_sections.py``, the
+stored field name kept in parentheses on a Facts line), with the panel's addons as
+admonitions where its slots sit, each claim tagged with its grade + quote id on its own line (a claim's
 ``*_sources`` / ``*_provenance`` keys are folded into it, never a separate section) and the
 verbatim quotes listed once at the end of the page. A grades legend heads every page and an
 ``llm`` grade is spelled out as UNSOURCED, so a reader never takes LLM memory for a citation.
-Each section is also its own page (``/api/drug/sertraline/bindings``, listed at
+Each section is also its own page, at its stored field name (``/api/drug/sertraline/bindings``, listed at
 ``/api/drug/sertraline/``), carrying only the sources it cites.
 
 **Stored fields only**, with one exception: the BETA ``/api/effect/<id>`` pages (an effect
@@ -15,7 +18,9 @@ the same index the viewer's Effects panel reads (``data_generators/effect_index.
 labelled as derived on the page. Everything the viewer derives in the browser (presynaptic
 modulation, net neurotransmission, pharmacokinetic interactions, the simulation) is not here, so
 nothing duplicates the JS that computes it. The rendering is generic (a record's keys in
-order, nested values as bullets), so a new data field shows up with no edit here.
+order, nested values as bullets), so a new data field shows up with no edit here, though
+``tests/test_panel_md_parity.py`` fails until ``api_sections.py`` decides how it is worded
+(as it does for a new panel heading with no Markdown twin).
 
 Built into the Docker image (``docker/Dockerfile``, ``api`` stage), never committed:
 ``python tools/render_api.py --out <dir>``. ``--effects-out <file>`` also (or only) writes
