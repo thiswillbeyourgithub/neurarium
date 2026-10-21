@@ -448,9 +448,13 @@ class Renderer:
             facts += [f"- {self.fact_label(kind, stem, rec)}:{tags}"] + nested
             sourced = sourced | set(keys)
         keys = AS.order(kind, rec)
+        # The sections the panel shows empty (api_sections.ALWAYS): their fields hold
+        # nothing worth a line, the placeholder below says so once.
+        empty = AS.empty_sections(kind, rec, self.derived_sections(kind, rec))
+        hush = {f for _, sec in empty for f in AS.section_fields(kind, sec.key)}
         for k in keys:
             v = rec[k]
-            if k in SKIP or k in sourced or is_section(k, v):
+            if k in SKIP or k in sourced or k in hush or is_section(k, v):
                 continue
             line = (f"- {self.fact_label(kind, k, rec)}: {self.worded(kind, k, v)}"
                     f"{self.flag(k, v)}{folded.get(k, '')}")
@@ -470,7 +474,7 @@ class Renderer:
         folds = {f for kd, f in AS.FOLDED if kd == kind}
         for k in keys:
             v = rec[k]
-            if k in SKIP or k in sourced or k in folds or not is_section(k, v):
+            if k in SKIP or k in sourced or k in folds or k in hush or not is_section(k, v):
                 continue
             self.cited = {}
             head, lines = self.heading(kind, k, rec)
@@ -479,6 +483,35 @@ class Renderer:
             if tags:
                 lines.append(f"- sources:{tags}")
             out.append((k, head, lines + nested + self.note_lines(notes.get(k, [])), self.cited))
+        return self.with_empty(kind, out, empty)
+
+    def derived_sections(self, kind: str, rec: dict[str, Any]) -> frozenset[str]:
+        """Slugs a viewer-only derived list fills on this page: the drug panel's ClinPGx
+        variants (receptor-variants.js variantsForDrug) keep its Pharmacogenomics
+        section from reading "no information" when only CPIC is missing."""
+        if kind != "drug":
+            return frozenset()
+        did = rec.get("id")
+        named = any(did in (v.get("drugs") or [])
+                    for k in ("receptor", "target") for t in self.pages[k].values()
+                    for v in t.get("variants") or [])
+        return frozenset({"pharmacogenomics"}) if named else frozenset()
+
+    @staticmethod
+    def with_empty(kind: str, out: list, empty: list) -> list:
+        """``out`` with one placeholder section per empty panel section, each where the
+        panel puts it: before the first rendered section that comes after it in panel
+        order. Its heading, subtitle, enclosing sections and sentence are the panel's."""
+        order = list(AS.FIELDS[kind])
+        pos = lambda slug: order.index(slug) if slug in order else -1  # noqa: E731
+        for slug, sec in empty:
+            sub, parent = AS.section_head(kind, sec.key)
+            lines = ([f"*{AS.EN[sub]}*", ""] if sub else []) \
+                + ([f"In the viewer under: {parent}.", ""] if parent else []) \
+                + [AS.EN[sec.none] if sec.none else AS.no_data(kind, sec.key)]
+            at = order.index(AS.anchor(kind, sec.key))
+            i = next((i for i, (s, *_) in enumerate(out) if s != "facts" and pos(s) > at), len(out))
+            out.insert(i, (slug, AS.EN[sec.key], lines, {}))
         return out
 
     def header(self, kind: str, ident: str, rec: dict[str, Any], title: str) -> list[str]:

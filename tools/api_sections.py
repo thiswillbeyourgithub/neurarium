@@ -19,6 +19,9 @@ refuses, so a new stored field or a new panel section forces a decision here).
 - ``SLOT_PLACE``: where each addon slot (``meta.addon_slots``) lands on a page.
 - ``VIEWER_ONLY``: panel headings with no Markdown twin, each with the reason (the viewer
   derives that section in the browser; see ``render_api``'s docstring).
+- ``ALWAYS``: the panel sections shown even when empty (dom.js emptySection): an absent
+  one renders as its heading, subtitle and the shared ``info.noData`` sentence, so a
+  reader of one page learns the dataset tracks that section for other nodes.
 
 Stdlib only.
 """
@@ -26,7 +29,7 @@ from __future__ import annotations
 
 import sys
 from pathlib import Path
-from typing import Any, NamedTuple
+from typing import Any, Callable, NamedTuple
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from lib.i18n_catalogue import catalogue, fill  # noqa: E402
@@ -267,3 +270,105 @@ def order(kind: str, rec: dict[str, Any]) -> list[str]:
     """``rec``'s keys in panel order (the table's), unknown ones after, in record order."""
     known = list(FIELDS.get(kind, {}))
     return [k for k in known if k in rec] + [k for k in rec if k not in FIELDS.get(kind, {})]
+
+
+class Section(NamedTuple):
+    key: str                 # i18n key of the panel heading (a field's own, or a PARENTS one)
+    none: str | None = None  # i18n key of the empty text, when not the generic info.noData
+    # True when the record holds this section's data under another field (a brand sold
+    # under one formulation, a salt borrowing its constituent's bindings).
+    elsewhere: Callable[[dict[str, Any]], bool] | None = None
+
+
+# Slug (the /api section page) -> section, per page kind. A field's section is every
+# FIELDS entry headed by it or sitting inside it (Label.parent).
+ALWAYS: dict[str, dict[str, Section]] = {
+    "drug": {
+        "brands": Section("drug.brands", elsewhere=lambda r: any(
+            f.get("brands") for f in r.get("formulations") or [])),
+        "pharmacokinetics": Section("drug.pkTiming"),
+        "formulations": Section("drug.formulations"),
+        "physchem": Section("drug.physchem"),
+        "bindings": Section("drug.actsOn", elsewhere=lambda r: bool(r.get("constituents"))),
+        "metabolism": Section("drug.metabolism"),
+        "metabolites": Section("drug.metabolites"),
+        "enzymes": Section("drug.metabEnzymes"),
+        "pharmacogenomics": Section("drug.pharmacogenomics"),
+        "pgx": Section("drug.pgx"),
+        "workup": Section("drug.workup"),
+    },
+    **{kind: {
+        regions: Section("receptor.foundIn", none="receptor.noRole"),
+        "effects": Section("effects.heading"),
+        **({"release_modulation": Section("relmod.heading")} if kind == "receptor" else {}),
+        "demographics": Section("demog.heading"),
+        "variants": Section("variant.heading"),
+    } for kind, regions in (("receptor", "locations"), ("target", "regions"))},
+    "circuit": {"structures": Section("circuit.structures")},
+}
+
+
+def lower_first(s: str) -> str:
+    """A heading lowered for mid-sentence use, its first letter only and never an
+    acronym's. Twin of public/js/panel/dom.js lowerFirst."""
+    if not s or (len(s) > 1 and s[1] != s[1].lower()):
+        return s
+    return s[0].lower() + s[1:]
+
+
+def no_data(kind: str, key: str) -> str:
+    """The panel's empty-section sentence for heading ``key`` on a ``kind`` page."""
+    return fill(EN["info.noData"], what=lower_first(EN[key]), kind=EN[f"info.kindThis.{kind}"])
+
+
+def _chain(kind: str, key: str) -> list[str]:
+    """``key``'s enclosing panel sections, outermost first."""
+    for lab in FIELDS[kind].values():
+        chain = lab.parent.split(" > ") if lab.parent else []
+        if lab.key == key:
+            return chain
+        if key in chain:
+            return chain[:chain.index(key)]
+    return []
+
+
+def section_fields(kind: str, key: str) -> list[str]:
+    """The fields shown in (or under) panel section ``key``, in panel order."""
+    return [f for f, lab in FIELDS[kind].items()
+            if lab.key == key or (lab.parent and key in lab.parent.split(" > "))]
+
+
+def section_head(kind: str, key: str) -> tuple[str | None, str | None]:
+    """``(subtitle key, enclosing-sections text)`` of panel section ``key``."""
+    own = next((lab for lab in FIELDS[kind].values() if lab.key == key), None)
+    sub = own.sub if own else PARENTS.get(key)
+    chain = _chain(kind, key)
+    return sub, parent_text(Label(key, parent=" > ".join(chain))) if chain else None
+
+
+def is_empty(v: Any) -> bool:
+    return v is None or v is False or v == "" or v == [] or v == {}
+
+
+def empty_sections(kind: str, rec: dict[str, Any],
+                   derived: frozenset[str] = frozenset()) -> list[tuple[str, Section]]:
+    """The ``ALWAYS`` sections ``rec`` holds nothing for, in panel order, minus any
+    inside an enclosing section that is itself empty (one line says it for both).
+    ``derived`` names the slugs a viewer-only derived list fills on this page (a
+    drug's ClinPGx variants, joined from the receptor pages), so they are not empty."""
+    always = ALWAYS.get(kind, {})
+    empty = {slug: sec for slug, sec in always.items()
+             if all(is_empty(rec.get(f)) for f in section_fields(kind, sec.key))
+             and not (sec.elsewhere and sec.elsewhere(rec)) and slug not in derived}
+    keys = {sec.key for sec in empty.values()}
+    order = list(FIELDS[kind])
+    return sorted(((slug, sec) for slug, sec in empty.items()
+                   if not keys & set(_chain(kind, sec.key))),
+                  key=lambda it: order.index(anchor(kind, it[1].key)))
+
+
+def anchor(kind: str, key: str) -> str:
+    """The field whose place in panel order section ``key`` takes: its own, else its
+    first inner one."""
+    fields = section_fields(kind, key)
+    return next((f for f in fields if FIELDS[kind][f].key == key), fields[0])

@@ -14,7 +14,9 @@ stored field wears which panel heading. The tests close the remaining gaps:
   reason, so a new data field cannot ship without a decision either;
 - (c) every mapped heading, subtitle and row label renders with exactly the en.js text;
 - (d) every addon renders (title and text) on its owner's page, in the section its slot
-  sits in, and on every page showing a ``section.*`` slot's section.
+  sits in, and on every page showing a ``section.*`` slot's section;
+- (e) every ``api_sections.ALWAYS`` section a record holds nothing for still renders, as
+  its heading, subtitle and the panel's own "no information" sentence.
 
 Run: ``python -m unittest discover -s tools/tests -t tools/tests -p test_panel_md_parity.py``
 Built with the help of Claude Code.
@@ -230,6 +232,64 @@ class RenderedWordsTest(unittest.TestCase):
                 lab = AS.label(kind, k)
                 if lab and lab.key and k not in slugs and k != "sources":
                     self.assertIn(f"\n- {AS.text(lab.key, rec)} ({k}): ", full, f"{kind}/{ident} {k}")
+
+
+class EmptySectionsTest(unittest.TestCase):
+    """(e) a section the panel shows empty (dom.js emptySection) shows empty in the
+    Markdown too: heading, subtitle and the same en.js sentence, on the full page and on
+    its own section page."""
+
+    def test_lower_first_matches_the_panel(self):
+        # The same examples as tools/tests/empty_section.test.mjs (dom.js lowerFirst).
+        for raw, low in (("Age and sex differences", "age and sex differences"),
+                         ("CNS penetration", "CNS penetration"),
+                         ("Pharmacogenomics", "pharmacogenomics"), ("", ""), ("A", "a")):
+            self.assertEqual(AS.lower_first(raw), low)
+        self.assertEqual(AS.fill(AS.EN["info.noData"], what="x", kind=AS.EN["info.kindThis.drug"]),
+                         "No information about x for this drug yet.")
+
+    def test_every_always_section_is_a_panel_heading(self):
+        scanned = panel_heading_keys()
+        for kind, secs in AS.ALWAYS.items():
+            for slug, sec in secs.items():
+                self.assertIn(sec.key, scanned, f"{kind}/{slug}")
+                self.assertTrue(AS.section_fields(kind, sec.key), f"{kind}/{slug}: no field")
+
+    def test_an_absent_section_renders_its_placeholder(self):
+        r, pages = Rendered.get()
+        seen = set()
+        for (kind, ident), (rec, pset, _) in pages.items():
+            for slug, sec in AS.empty_sections(kind, rec, r.derived_sections(kind, rec)):
+                seen.add((kind, slug))
+                where = f"{kind}/{ident} {slug}"
+                text = AS.EN[sec.none] if sec.none else AS.no_data(kind, sec.key)
+                head = f"\n## {AS.EN[sec.key]}\n"
+                sub, parent = AS.section_head(kind, sec.key)
+                self.assertIn(slug, pset, where + ": no section page")
+                for page in (pset[None], pset[slug]):
+                    self.assertIn(head, page, where)
+                    self.assertIn(text, page, where)
+                    if sub:
+                        self.assertIn(f"*{AS.EN[sub]}*", page, where)
+                    if parent:
+                        self.assertIn(f"In the viewer under: {parent}.", page, where)
+        # A guard on the guard: the real data must exercise the placeholders.
+        for probe in (("receptor", "demographics"), ("drug", "workup"), ("drug", "metabolism")):
+            self.assertIn(probe, seen)
+
+    def test_sample_placeholder(self):
+        _, pages = Rendered.get()
+        page = pages[("receptor", "5ht3")][1][None]
+        self.assertIn("No information about age and sex differences for this receptor yet.", page)
+
+    def test_derived_variants_keep_pharmacogenomics(self):
+        """Lithium has no CPIC rows, but receptor pages' ClinPGx variants name it (the
+        drug panel lists them), so only the CPIC subsection is empty, never the whole
+        Pharmacogenomics section."""
+        _, pages = Rendered.get()
+        page = pages[("drug", "lithium")][1][None]
+        self.assertNotIn("No information about pharmacogenomics for this drug", page)
+        self.assertIn("No information about pharmacogenomic dosing (CPIC) for this drug yet.", page)
 
 
 class AddonsTest(unittest.TestCase):
