@@ -239,7 +239,7 @@ def load_page(title: str, no_fetch: bool, refresh: bool):
     return (True, real_title, slug, page_text, soup)
 
 
-def pdsp_targets(name: str) -> list[dict]:
+def pdsp_targets(name: str, owner_id: str | None = None) -> list[dict]:
     """Every modeled target for which the PDSP Ki database (corpus #5) has an ACTIVE
     (sub-10 uM) assay measured on this metabolite's OWN name -> ``[{target, ki_id,
     value_nm}]`` for a representative assay.
@@ -249,7 +249,7 @@ def pdsp_targets(name: str) -> list[dict]:
     but present in PDSP (norfluoxetine: 40 assays across 15 sites) still gets its measured
     bindings. The applier turns each into an ``affinity_only`` binding (a measured Ki, no
     functional direction); the judge may still attach an action from prose."""
-    rows = ki.rows_by_name(name) or []   # None: no PDSP CSV on this checkout
+    rows = ki.rows_by_name(name, owner_id) or []   # None: no PDSP CSV on this checkout
     out = []
     for tid in sorted({ki.resolve_target(r) for r in rows} - {None}):
         s = ki.summarize_target(rows, tid)
@@ -303,8 +303,8 @@ def main() -> int:
                  "wiki_title": "", "slug": "", "own_article": own, "found": False,
                  "from_parent": not own, "ki_bindings": [], "unresolved_ki": [],
                  "action_candidates": [], "pages": [],
-                 # PDSP target discovery (corpus #5), keyed by the metabolite's own name.
-                 "pdsp_targets": pdsp_targets(m["name"])}
+                 # PDSP target discovery (corpus #5), by the metabolite's names + store id.
+                 "pdsp_targets": pdsp_targets(m["name"], m["id"])}
 
         seen_lines: set[str] = set()
         for title, is_own in to_read:

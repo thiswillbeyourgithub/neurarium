@@ -258,6 +258,12 @@ ALIAS = {
     "quazepam": (["2-Oxoquazepam"], "metabolite", "2-oxoquazepam"),
     "lofexidine": (["Levlofexidine"], "enantiomer", "levlofexidine"),
     "pethidine": (["Meperidine"], "identity", "meperidine"),
+    # Active metabolites (keyed by their metabolite-store id, see rows_by_name). The
+    # levo isomers must take ONLY their own tagged rows: PDSP's untagged "Amphetamine"
+    # is the racemate (see amphetamine_dl), so a stem synonym would leak it in.
+    "l_amphetamine": (["Amphetamine,(-)", "(-)-Amphetamine"], "identity",
+                      "(-)-amphetamine"),
+    "l_methamphetamine": (["METHAMPHETAMINE (-)"], "identity", "(-)-methamphetamine"),
 }
 
 # Pure name synonyms: the SAME molecule filed under a second label, usually an
@@ -268,6 +274,7 @@ ALIAS = {
 # the identical substance; anything with a different structure belongs in ALIAS.
 SYNONYMS = {
     "phencyclidine": ["PCP"],
+    "norquetiapine": ["N-Desalkylquetiapine"],
 }
 
 _ALL_ROWS = None
@@ -304,19 +311,22 @@ def _stem_tag(raw):
 _CSV_MISSING_WARNED = False
 
 
-def rows_by_name(name: str) -> list[dict] | None:
-    """Every PDSP row measured on ``name`` alone (no roster drug id, so no alias or
-    synonym map), or None when the CSV itself is absent (a clone without the
-    author-side ``data_sources/`` tree), warned once on stderr.
+def rows_by_name(name: str, owner_id: str | None = None) -> list[dict] | None:
+    """Every PDSP row measured on ``name`` under any name it goes by, or None when
+    the CSV itself is absent (a clone without the author-side ``data_sources/``
+    tree), warned once on stderr.
 
-    Used by the metabolite pass, which looks a metabolite up by its own name. Only a
+    Used by the metabolite pass, which looks a metabolite up by its own name: every
+    name of ``"Norclozapine (N-desmethylclozapine)"`` (``drugs_io.names_of``) joins,
+    since PDSP files it as "N-DESMETHYLCLOZAPINE". ``owner_id`` (the metabolite-store
+    id) brings in its :data:`ALIAS` / :data:`SYNONYMS` entries and its chirality. Only a
     missing CSV is folded into None: any other error (a malformed row, a bug in the
     join) raises, so "PDSP has no assay" can never be faked by a crash that would
     silently drop a measured Ki (norfluoxetine's PDSP-discovered sites, for one).
     """
     global _CSV_MISSING_WARNED
     try:
-        rows, _mapping = resolve_rows(name, None)
+        rows, _mapping = resolve_rows(name, owner_id, drugs_io.names_of(name))
     except FileNotFoundError:
         if not _CSV_MISSING_WARNED:
             print(f"warning: PDSP CSV missing ({CSV_PATH}): metabolite PDSP lookups "
@@ -326,11 +336,12 @@ def rows_by_name(name: str) -> list[dict] | None:
     return rows
 
 
-def resolve_rows(name, drug_id):
+def resolve_rows(name, drug_id, names=()):
     """Return (rows, mapping) for a drug. mapping is None for a direct name match,
-    else {pdsp_names, relation, note} when recovered through the alias map."""
+    else {pdsp_names, relation, note} when recovered through the alias map. ``names``
+    are extra already-folded names to join on (a metabolite's synonyms)."""
     rows = all_rows()
-    want = {norm(name), norm(drug_id)}
+    want = {norm(name), norm(drug_id), *names}
     want |= {norm(s) for s in SYNONYMS.get(drug_id, ())}
     direct = [r for r in rows if _ligand_is(r.get(COL_LIGAND), want, drug_id)]
     aliased, mapping = [], None

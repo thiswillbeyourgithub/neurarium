@@ -65,8 +65,11 @@ _RACEMIC = {"±", "+/-", "+-", "-/+"}
 
 
 def plain(s: str) -> str:
-    """Strip markup + entities from a source's ligand name (GtoPdb ships HTML)."""
-    return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", s or ""))).strip()
+    """Strip markup + entities from a source's ligand name (GtoPdb ships HTML), and
+    repair a double-encoded "±": PDSP files 640 names as "(Â±)-...", a racemate tag
+    that otherwise stays glued to the stem and never joins (MDA's 37 assays)."""
+    s = html.unescape(re.sub(r"<[^>]+>", "", s or "")).replace("Â±", "±")
+    return re.sub(r"\s+", " ", s).strip()
 
 
 def split_stereo(name: str):

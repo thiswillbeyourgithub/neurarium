@@ -269,13 +269,59 @@ class RowsByNameTest(unittest.TestCase):
         self.assertIsNone(fetch_ki.rows_by_name("norfluoxetine"))
 
     def test_other_errors_raise(self):
-        def boom(name, drug_id):
+        def boom(name, drug_id, names=()):
             raise KeyError("broken join")
         orig = fetch_ki.resolve_rows
         fetch_ki.resolve_rows = boom
         self.addCleanup(setattr, fetch_ki, "resolve_rows", orig)
         with self.assertRaises(KeyError):
             fetch_ki.rows_by_name("norfluoxetine")
+
+
+class MetaboliteNamesTest(unittest.TestCase):
+    """A metabolite joins PDSP under every name it goes by, and its store id brings in
+    its ALIAS / SYNONYMS and chirality. The lookup used to query only the display name,
+    so "Norclozapine (N-desmethylclozapine)" never met PDSP's 60 "N-DESMETHYLCLOZAPINE"
+    assays, nor norquetiapine its "N-Desalkylquetiapine" ones."""
+
+    LIGANDS = ["N-DESMETHYLCLOZAPINE", "N-Desalkylquetiapine", "Amphetamine",
+               "Amphetamine,(+)", "Amphetamine,(-)", "(-)-Amphetamine",
+               "(\u00c2\u00b1)-3,4-Methylenedioxyamphetamine", "MDA,R(-)", "MDA"]
+
+    def setUp(self):
+        saved = fetch_ki._ALL_ROWS
+        self.addCleanup(setattr, fetch_ki, "_ALL_ROWS", saved)
+        fetch_ki._ALL_ROWS = [{fetch_ki.COL_LIGAND: n} for n in self.LIGANDS]
+
+    def ligands(self, name, owner_id):
+        return sorted(r[fetch_ki.COL_LIGAND] for r in fetch_ki.rows_by_name(name, owner_id))
+
+    def test_parenthesised_synonym_joins(self):
+        self.assertEqual(self.ligands("Norclozapine (N-desmethylclozapine)", "norclozapine"),
+                         ["N-DESMETHYLCLOZAPINE"])
+
+    def test_store_id_brings_synonyms(self):
+        self.assertEqual(self.ligands("Norquetiapine", "norquetiapine"),
+                         ["N-Desalkylquetiapine"])
+
+    def test_levo_isomer_takes_only_its_own_rows(self):
+        # PDSP's untagged "Amphetamine" is the racemate: it must not count as l-amphetamine.
+        self.assertEqual(self.ligands("L-Amphetamine", "l_amphetamine"),
+                         ["(-)-Amphetamine", "Amphetamine,(-)"])
+
+    def test_double_encoded_racemate_tag(self):
+        # "(Â±)" is a mojibake "(±)": the racemate row joins MDA, the R(-) one never does.
+        self.assertEqual(self.ligands("3,4-Methylenedioxyamphetamine (MDA)",
+                                      "3_4_methylenedioxyamphetamine"),
+                         ["(\u00c2\u00b1)-3,4-Methylenedioxyamphetamine", "MDA"])
+
+    def test_alias_keys_name_a_drug_or_metabolite(self):
+        """A typo'd key would make its alias silently dead."""
+        from lib import drugs_io
+        ids = ({d["id"] for d in drugs_io.load_drugs()}
+               | {m["id"] for m in drugs_io.load_metabolites()})
+        self.assertEqual(set(fetch_ki.ALIAS) - ids, set())
+        self.assertEqual(set(fetch_ki.SYNONYMS) - ids, set())
 
 
 if __name__ == "__main__":

@@ -86,10 +86,11 @@ def _permalink(slug: str) -> str:
     return wikistore.stored_meta(html)[1]
 
 
-def _pdsp_ki(name: str, target: str) -> dict | None:
-    """A measured PDSP Ki for (metabolite name, target), or None. Preferred over the
+def _pdsp_ki(name: str, target: str, owner_id: str | None = None) -> dict | None:
+    """A measured PDSP Ki for (metabolite name, target), or None (``owner_id``: see
+    ``fetch_ki.rows_by_name``). Preferred over the
     Wikipedia table value when it exists (a raw assay beats a literature figure)."""
-    rows = fetch_ki.rows_by_name(name)
+    rows = fetch_ki.rows_by_name(name, owner_id)
     if rows is None:   # no PDSP CSV on this checkout: keep the Wikipedia value
         return None
     s = fetch_ki.summarize_target(rows, target)
@@ -99,7 +100,7 @@ def _pdsp_ki(name: str, target: str) -> dict | None:
 
 
 def build_bindings(metab_name: str, entry: dict, judged: dict,
-                   valid_ids: set[str], warn) -> list[dict]:
+                   valid_ids: set[str], warn, owner_id: str | None = None) -> list[dict]:
     """Build one metabolite's ``bindings`` list from its worklist entry + judge picks.
 
     ``entry`` is the fetcher worklist record (slug, ki_bindings, ...); ``judged`` is the
@@ -115,7 +116,7 @@ def build_bindings(metab_name: str, entry: dict, judged: dict,
     wiki_ki = {b["target"]: b for b in entry.get("ki_bindings", [])}
 
     def ki_for(target: str) -> dict | None:
-        pdsp = _pdsp_ki(metab_name, target)
+        pdsp = _pdsp_ki(metab_name, target, owner_id)
         if pdsp:
             return pdsp
         w = wiki_ki.get(target)
@@ -187,7 +188,7 @@ def build_bindings(metab_name: str, entry: dict, judged: dict,
         target = pt["target"]
         if target in emitted:
             continue
-        ki = _pdsp_ki(metab_name, target)
+        ki = _pdsp_ki(metab_name, target, owner_id)
         if ki:
             out.append({"target": target, "affinity_only": True, "ki": ki})
             emitted.add(target)
@@ -264,7 +265,8 @@ def main() -> int:
             m.pop("bindings", None)
             continue
         bindings = keep_foreign(m.get("bindings") or [],
-                                build_bindings(m["name"], entry, judged.get(key), valid_ids, warn))
+                                build_bindings(m["name"], entry, judged.get(key), valid_ids, warn,
+                                             owner_id=m["id"]))
         if bindings:
             m["bindings"] = bindings
             n_metab += 1

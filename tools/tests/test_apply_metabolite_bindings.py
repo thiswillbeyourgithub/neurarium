@@ -48,7 +48,7 @@ class CitedCorpusGateTest(unittest.TestCase):
         (pages / "sibutramine.md").write_text("unrelated article text\n", encoding="utf-8")
         gate = self.m.PageGate({"europepmc": pages, "wikipedia_pharm": pages})
         for name, value in (("GATE", gate),
-                            ("_pdsp_ki", lambda name, target: None)):
+                            ("_pdsp_ki", lambda name, target, owner_id=None: None)):
             patcher = mock.patch.object(self.m, name, value)
             patcher.start()
             self.addCleanup(patcher.stop)
