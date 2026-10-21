@@ -144,9 +144,8 @@ const DYNAMIC = {
   '[data-tour-sec="pk"]': { module: "js/panel/pk-interactions.js", token: 'tourSec = "pk"' },
   '[data-tour-sec="facts"]': { module: "js/panel/views/receptor.js", token: 'tourSec = "facts"' },
   '[data-tour-sec="regions"]': { module: "js/panel/views/receptor.js", token: '"regions"' },
-  // tourPanelIntro's optional figure: tagged by the circuit (and drug) panels only;
-  // the structure panel's appendWikiImages call passes no tourSec.
-  '[data-tour-sec="wiki"]': { module: "js/panel/views/circuit.js", token: 'circuit.name, "wiki"' },
+  // tourPanelIntro's figure: step 24 opens the hippocampus structure panel.
+  '[data-tour-sec="wiki"]': { module: "js/panel/views/structure.js", token: 'structure.name, "wiki"' },
 };
 // `data-tour-id="<prefix>:<id>"` rows: the prefix's builder, plus the ids the data has.
 const drugTargets = JSON.parse(read("data/meta.json")).drug_targets || {};

@@ -34,7 +34,7 @@ export function showStructure(P, structure) {
   // an infobox image) + its lazy "show more" gallery, via the shared helper (see
   // appendWikiImages): hot-linked, spinner while loading, silent hide on failure.
   appendWikiImages(structure.structureImage, structure.structureImageGallery,
-    structure.name);
+    structure.name, "wiki");
 
   // External reference (Wikipedia) + its live lead summary, via the shared
   // appendReference (structures carry no baked description, so the live lead,
