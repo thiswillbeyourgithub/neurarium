@@ -7,6 +7,7 @@ import { extLink, btn, heading, withSubtitle } from "./dom.js";
 import { deriveReleaseChanges, transmitterVars } from "../release-modulation.js";
 import { formatConditions, groupWorkup } from "../workup.js";
 import { groupByVariant, variantsForDrug } from "../receptor-variants.js";
+import { groupByMode } from "../receptor-effects.js";
 
 const { ofNoun, t } = window.__I18N__;
 
@@ -103,24 +104,29 @@ export function makeSections(P) {
   };
 
   // A receptor / target panel's "Effects" section (BETA): one row per receptor_effect
-  // node, "<effect> · <mode>" with that node's own pill. An owner with no effect but a
-  // recorded search (`unknown`, {searched, corpora}) gets one row with the blue UNKNOWN
-  // pill naming that search; with neither, nothing.
+  // node with its own pill, grouped under one heading per mode (Agonism, Antagonism,
+  // ..., groupByMode). An owner with no effect but a recorded search (`unknown`,
+  // {searched, corpora}) gets one row with the blue UNKNOWN pill naming that search;
+  // with neither, nothing.
   const appendEffects = (rows, unknown) => {
-    if ((!rows || !rows.length) && !unknown) return;
-    const { ul, close } = betaSection("effects", "effects.heading", "effects.hint");
-    if (!rows || !rows.length) {
+    const has = !!(rows && rows.length);
+    if (!has && !unknown) return;
+    const { ul, group, close } = betaSection("effects", "effects.heading", "effects.hint",
+      { grouped: has });
+    if (!has) {
       const li = el("li");
       li.appendChild(el("span", "loc-name", t("effects.unknown")));
       li.appendChild(sourceBackedPill("unknown", { unknown }));
       ul.appendChild(li);
     }
-    for (const e of rows || []) {
-      const li = el("li");
-      li.appendChild(effectLink(e.effect, e.label));
-      li.appendChild(el("span", "eff-mode", e.modeLabel));
-      li.appendChild(nodePill(e));
-      ul.appendChild(li);
+    for (const { rows: inMode } of groupByMode(rows, (e) => e.mode, data.meta.effectModes)) {
+      const list = group(inMode[0].modeLabel, "drug-cat");
+      for (const e of inMode) {
+        const li = el("li");
+        li.appendChild(effectLink(e.effect, e.label));
+        li.appendChild(nodePill(e));
+        list.appendChild(li);
+      }
     }
     close();
   };

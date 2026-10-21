@@ -8,7 +8,7 @@ import { execFileSync } from "node:child_process";
 import { mkdtempSync, readFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { resolveEffects, readEffectIndex } from "../../public/js/receptor-effects.js";
+import { groupByMode, resolveEffects, readEffectIndex } from "../../public/js/receptor-effects.js";
 
 const modes = {
   agonism: { label: "Agonism", actions: ["agonist", "partial_agonist"] },
@@ -109,4 +109,14 @@ test("the file tools/render_api.py writes from the emitted data reads back whole
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
+});
+
+test("groupByMode follows the vocabulary order and keeps an unknown mode last", () => {
+  const modes = { agonism: {}, antagonism: {}, both: {} };
+  const rows = [{ m: "antagonism", id: 1 }, { m: "odd", id: 2 }, { m: "agonism", id: 3 },
+    { m: "antagonism", id: 4 }];
+  const got = groupByMode(rows, (r) => r.m, modes);
+  assert.deepEqual(got.map((g) => [g.mode, g.rows.map((r) => r.id)]),
+    [["agonism", [3]], ["antagonism", [1, 4]], ["odd", [2]]]);
+  assert.deepEqual(groupByMode(null, (r) => r.m, modes), []);
 });

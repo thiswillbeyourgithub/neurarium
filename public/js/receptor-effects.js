@@ -90,3 +90,26 @@ export function readEffectIndex(json, targetsById, effectsByTarget, drugsById, l
   for (const list of byDrug.values()) list.sort((a, b) => a.label.localeCompare(b.label));
   return { effects, byDrug };
 }
+
+/**
+ * Group rows by receptor_effect mode, in the closed vocabulary's order
+ * (meta.receptor_effect_modes: agonism, antagonism, ...), so a receptor panel and an
+ * effect panel list the same modes the same way. Empty modes are left out; a mode
+ * missing from the vocabulary goes last, so no row is ever dropped.
+ * @param {object[]} rows
+ * @param {(row: object) => string} modeOf
+ * @param {Object<string, unknown>} modes meta.receptor_effect_modes
+ * @returns {{mode: string, rows: object[]}[]} e.g. `[{mode: "antagonism", rows: [...]}]`
+ */
+export function groupByMode(rows, modeOf, modes) {
+  const order = Object.keys(modes || {});
+  const byMode = new Map();
+  for (const r of rows || []) {
+    const m = modeOf(r);
+    if (!byMode.has(m)) byMode.set(m, []);
+    byMode.get(m).push(r);
+  }
+  const rank = (m) => (order.includes(m) ? order.indexOf(m) : order.length);
+  return [...byMode.keys()].sort((a, b) => rank(a) - rank(b))
+    .map((mode) => ({ mode, rows: byMode.get(mode) }));
+}

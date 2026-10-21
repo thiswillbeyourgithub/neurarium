@@ -1,6 +1,8 @@
 // The Effect view (BETA): the receptors / targets carrying one clinical effect, by
 // mode, then the drugs that could cause it through their bindings.
 
+import { groupByMode } from "../../receptor-effects.js";
+
 const { t } = window.__I18N__;
 
 /**
@@ -24,10 +26,8 @@ export function showEffect(P, effect) {
 
   const owners = betaSection("effectOwners", "effect.owners", "effects.hint",
     { vars: { n: effect.owners.length }, grouped: true });
-  for (const mode of Object.keys(data.meta.effectModes)) {
-    const group = effect.owners.filter((o) => o.node.mode === mode)
-      .sort((a, b) => a.target.name.localeCompare(b.target.name));
-    if (!group.length) continue;
+  for (const { rows } of groupByMode(effect.owners, (o) => o.node.mode, data.meta.effectModes)) {
+    const group = rows.sort((a, b) => a.target.name.localeCompare(b.target.name));
     const ul = owners.group(group[0].node.modeLabel, "drug-cat");
     for (const { target, node } of group) {
       const li = el("li");
