@@ -410,6 +410,7 @@ Viewer (`public/`):
 - `js/receptor-markers.js`: `createReceptorMarkers`: gem-dot expression clouds for
   a focused receptor/target. Exports `buildGemCloud` + `GEM_DOT_SIZE` (reused by
   the drug animation). See Receptors & targets.
+- `js/effect-grouping.js`: `groupPossibleEffects` (a drug's predicted effects grouped by effect or by receptor, Ki-ordered) + the persisted grouping (`loadEffectGrouping` / `saveEffectGrouping`), pure, for the drug panel's BETA Predicted effects section.
 - `js/receptor-effects.js`: `resolveEffects` (an owner's `effects[]` -> display rows) +
   `readEffectIndex` (resolves the ids of the build-time `derived/effects.json`; the join
   itself is `tools/data_generators/effect_index.py`). Pure, no DOM. See Receptors &
