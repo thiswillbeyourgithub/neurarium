@@ -186,8 +186,7 @@ window.__I18N_MESSAGES__.en = {
   "tour.legendLook.body":
     "Every colour and symbol the 3D view uses, in one place. It stays a click away in the toolbar. Close it (the <b>&times;</b>) to continue.",
   "tour.sourcesOpen.title": "Every fact is sourced",
-  "tour.sourcesOpen.body":
-    "The data is LLM-assisted, so every fact is graded. Click <b>Sources &amp; provenance</b> to see the breakdown.",
+  "tour.sourcesOpen.body": "An LLM helped build the data, so every fact carries a grade saying how well it is sourced. Click <b>Sources &amp; provenance</b> to see the breakdown.",
   "tour.sourcesDetail.title": "The provenance breakdown",
   "tour.sourcesDetail.body":
     "How much of the data is verified, sourced, or still unchecked. Close it (the <b>&times;</b>) to continue.",
@@ -234,8 +233,7 @@ window.__I18N_MESSAGES__.en = {
   "tour.closePanel.body":
     "Done reading? Click the <b>&times;</b> to close the panel.",
   "tour.openStructures.title": "Open a structure",
-  "tour.openStructures.body":
-    "A different kind of node. Click <b>Brain structures</b> to open the list.",
+  "tour.openStructures.body": "Now a brain region instead of a drug. Click <b>Brain structures</b> to open the list.",
   "tour.structureTap.title": "Isolate a region",
   "tour.structureTap.body":
     "Click <b>Hippocampus</b>. It's isolated so you can see it on its own.",
@@ -243,8 +241,7 @@ window.__I18N_MESSAGES__.en = {
   "tour.structureLook.body":
     "Each panel opens with an image and a live Wikipedia description. <b>Scroll down</b> to continue.",
   "tour.openProjections.title": "Open the projections",
-  "tour.openProjections.body":
-    "Last kind of node: the pathways between regions. Click <b>Projections &amp; Circuits</b>.",
+  "tour.openProjections.body": "Last, the pathways between regions. Click <b>Projections &amp; Circuits</b>.",
   "tour.projectionTap.title": "A whole system",
   "tour.projectionTap.body":
     "Click the <b>Dopamine</b> system. It pins every dopaminergic pathway at once.",

@@ -184,8 +184,7 @@ window.__I18N_MESSAGES__.fr = {
   "tour.legendLook.body":
     "Toutes les couleurs et tous les symboles de la vue 3D, au même endroit. Elle reste à un clic dans la barre d'outils. Fermez-la (le <b>&times;</b>) pour continuer.",
   "tour.sourcesOpen.title": "Chaque fait est sourcé",
-  "tour.sourcesOpen.body":
-    "Les données sont assistées par IA : chaque fait est noté. Cliquez sur <b>Sources et provenance</b> pour voir le détail.",
+  "tour.sourcesOpen.body": "Un LLM a aidé à construire les données : chaque fait porte donc un niveau qui dit à quel point il est sourcé. Cliquez sur <b>Sources et provenance</b> pour voir le détail.",
   "tour.sourcesDetail.title": "Le récapitulatif de provenance",
   "tour.sourcesDetail.body":
     "La part des données vérifiée, sourcée, ou encore non contrôlée. Fermez-la (le <b>&times;</b>) pour continuer.",
@@ -232,8 +231,7 @@ window.__I18N_MESSAGES__.fr = {
   "tour.closePanel.body":
     "Lecture terminée ? Cliquez sur le <b>&times;</b> pour fermer le panneau.",
   "tour.openStructures.title": "Ouvrir une structure",
-  "tour.openStructures.body":
-    "Un autre type de nœud. Cliquez sur <b>Structures cérébrales</b> pour ouvrir la liste.",
+  "tour.openStructures.body": "Maintenant une région du cerveau plutôt qu'un médicament. Cliquez sur <b>Structures cérébrales</b> pour ouvrir la liste.",
   "tour.structureTap.title": "Isoler une région",
   "tour.structureTap.body":
     "Cliquez sur <b>hippocampe</b>. Il est isolé pour que vous le voyiez seul.",
@@ -241,8 +239,7 @@ window.__I18N_MESSAGES__.fr = {
   "tour.structureLook.body":
     "Chaque panneau s'ouvre sur une image et une description Wikipédia en direct. <b>Faites défiler</b> vers le bas pour continuer.",
   "tour.openProjections.title": "Ouvrir les projections",
-  "tour.openProjections.body":
-    "Dernier type de nœud : les voies entre régions. Cliquez sur <b>Projections et circuits</b>.",
+  "tour.openProjections.body": "Pour finir, les voies entre régions. Cliquez sur <b>Projections et circuits</b>.",
   "tour.projectionTap.title": "Un système entier",
   "tour.projectionTap.body":
     "Cliquez sur le système <b>dopamine</b>. Il épingle d'un coup toutes les voies dopaminergiques.",
