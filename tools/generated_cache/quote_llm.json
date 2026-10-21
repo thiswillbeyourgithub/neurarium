@@ -5891,6 +5891,9 @@
 "q_860ad3848b35": {
 "drug:reboxetine/first_approval": "opus"
 },
+"q_8620797e2730": {
+"metabolite:norketamine/bindings[nmda:antagonist]/ki": "opus"
+},
 "q_86251a715747": {
 "drug:chlorprothixene/bindings[alpha1a:antagonist]": "sonnet",
 "drug:chlorprothixene/bindings[alpha1b:antagonist]": "sonnet",

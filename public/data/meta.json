@@ -11338,6 +11338,7 @@
         "2569655": "https://doi.org/10.1016/0024-3205(89)90145-8",
         "26170874": "https://doi.org/10.1155/2015/483942",
         "26234524": "https://doi.org/10.1016/j.diabet.2015.06.005",
+        "26240948": "https://doi.org/10.1016/j.neuropharm.2015.07.037",
         "27028222": "https://doi.org/10.1007/s00429-016-1216-y",
         "27335411": "https://doi.org/10.1523/jneurosci.3667-15.2016",
         "2808769": "https://doi.org/10.1002/cne.902890210",
@@ -11763,13 +11764,13 @@
         "unknown": 0
       },
       "drug_binding_action": {
-        "total": 1466,
+        "total": 1520,
         "verified": 1177,
         "uncertain": 117,
         "sourced": 0,
         "llm": 132,
-        "nosource": 40,
-        "missing": 172,
+        "nosource": 94,
+        "missing": 226,
         "unknown": 656
       },
       "drug_nbn": {
@@ -12013,9 +12014,9 @@
         "unknown": 0
       },
       "drug_metabolite_bindings": {
-        "total": 151,
-        "verified": 140,
-        "uncertain": 11,
+        "total": 205,
+        "verified": 191,
+        "uncertain": 14,
         "sourced": 0,
         "llm": 0,
         "nosource": 0,
@@ -12234,15 +12235,15 @@
       }
     },
     "nodes": {
-      "total": 10213,
-      "verified": 9478,
-      "uncertain": 439,
+      "total": 10321,
+      "verified": 9529,
+      "uncertain": 442,
       "sourced": 0,
       "llm": 230,
-      "nosource": 66,
-      "missing": 296,
+      "nosource": 120,
+      "missing": 350,
       "unknown": 667,
-      "backed": 9917,
+      "backed": 9971,
       "pct_backed": 97
     },
     "ki_coverage": {

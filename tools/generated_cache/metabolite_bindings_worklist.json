@@ -169,7 +169,48 @@
       "3_4_methylenedioxyamphetamine",
       "mdma"
     ],
-    "pdsp_targets": []
+    "pdsp_targets": [
+      {
+        "target": "5ht1a",
+        "ki_id": 78865,
+        "value_nm": 3762.0
+      },
+      {
+        "target": "5ht2a",
+        "ki_id": 2918,
+        "value_nm": 8340.0
+      },
+      {
+        "target": "5ht2b",
+        "ki_id": 79027,
+        "value_nm": 91.0
+      },
+      {
+        "target": "5ht2c",
+        "ki_id": 79058,
+        "value_nm": 6418.0
+      },
+      {
+        "target": "5ht7",
+        "ki_id": 79151,
+        "value_nm": 3547.7
+      },
+      {
+        "target": "alpha2",
+        "ki_id": 79421,
+        "value_nm": 690.3
+      },
+      {
+        "target": "alpha2a",
+        "ki_id": 79395,
+        "value_nm": 1655.0
+      },
+      {
+        "target": "alpha2c",
+        "ki_id": 79445,
+        "value_nm": 229.0
+      }
+    ]
   },
   {
     "metabolite": "3-Hydroxybromazepam",
@@ -912,7 +953,23 @@
       "levoamphetamine",
       "selegiline"
     ],
-    "pdsp_targets": []
+    "pdsp_targets": [
+      {
+        "target": "dat",
+        "ki_id": 63571,
+        "value_nm": 2800.0
+      },
+      {
+        "target": "net",
+        "ki_id": 33021,
+        "value_nm": 58.0
+      },
+      {
+        "target": "sert",
+        "ki_id": 33034,
+        "value_nm": 1000.0
+      }
+    ]
   },
   {
     "metabolite": "L-Methamphetamine",
@@ -934,7 +991,18 @@
       "levomethamphetamine",
       "selegiline"
     ],
-    "pdsp_targets": []
+    "pdsp_targets": [
+      {
+        "target": "dat",
+        "ki_id": 50011,
+        "value_nm": 4840.0
+      },
+      {
+        "target": "net",
+        "ki_id": 49963,
+        "value_nm": 234.0
+      }
+    ]
   },
   {
     "metabolite": "Licarbazepine",
@@ -1401,7 +1469,173 @@
       "desmethylclozapine",
       "clozapine"
     ],
-    "pdsp_targets": []
+    "pdsp_targets": [
+      {
+        "target": "5ht1a",
+        "ki_id": 41610,
+        "value_nm": 13.9
+      },
+      {
+        "target": "5ht1b",
+        "ki_id": 41611,
+        "value_nm": 406.8
+      },
+      {
+        "target": "5ht1d",
+        "ki_id": 41612,
+        "value_nm": 476.2
+      },
+      {
+        "target": "5ht1e",
+        "ki_id": 41613,
+        "value_nm": 393.4
+      },
+      {
+        "target": "5ht2a",
+        "ki_id": 41614,
+        "value_nm": 10.9
+      },
+      {
+        "target": "5ht2b",
+        "ki_id": 41620,
+        "value_nm": 2.8
+      },
+      {
+        "target": "5ht2c",
+        "ki_id": 41615,
+        "value_nm": 11.9
+      },
+      {
+        "target": "5ht3",
+        "ki_id": 41616,
+        "value_nm": 272.2
+      },
+      {
+        "target": "5ht6",
+        "ki_id": 41618,
+        "value_nm": 11.6
+      },
+      {
+        "target": "5ht7",
+        "ki_id": 41619,
+        "value_nm": 60.1
+      },
+      {
+        "target": "alpha1a",
+        "ki_id": 41621,
+        "value_nm": 104.8
+      },
+      {
+        "target": "alpha1b",
+        "ki_id": 41622,
+        "value_nm": 85.2
+      },
+      {
+        "target": "alpha2a",
+        "ki_id": 41623,
+        "value_nm": 137.6
+      },
+      {
+        "target": "alpha2b",
+        "ki_id": 41624,
+        "value_nm": 95.1
+      },
+      {
+        "target": "alpha2c",
+        "ki_id": 41625,
+        "value_nm": 117.7
+      },
+      {
+        "target": "beta1",
+        "ki_id": 41626,
+        "value_nm": 6239.04
+      },
+      {
+        "target": "beta2",
+        "ki_id": 41627,
+        "value_nm": 4725.0
+      },
+      {
+        "target": "d1",
+        "ki_id": 41632,
+        "value_nm": 14.3
+      },
+      {
+        "target": "d2",
+        "ki_id": 19742,
+        "value_nm": 100.0
+      },
+      {
+        "target": "d3",
+        "ki_id": 41634,
+        "value_nm": 234.0
+      },
+      {
+        "target": "d4",
+        "ki_id": 41635,
+        "value_nm": 101.82
+      },
+      {
+        "target": "d5",
+        "ki_id": 41636,
+        "value_nm": 283.6
+      },
+      {
+        "target": "delta",
+        "ki_id": 41608,
+        "value_nm": 127.9
+      },
+      {
+        "target": "h1",
+        "ki_id": 41628,
+        "value_nm": 3.4
+      },
+      {
+        "target": "h2",
+        "ki_id": 41629,
+        "value_nm": 345.1
+      },
+      {
+        "target": "h4",
+        "ki_id": 41631,
+        "value_nm": 1028.0
+      },
+      {
+        "target": "m1",
+        "ki_id": 41639,
+        "value_nm": 67.6
+      },
+      {
+        "target": "m2",
+        "ki_id": 41640,
+        "value_nm": 414.5
+      },
+      {
+        "target": "m3",
+        "ki_id": 41641,
+        "value_nm": 95.7
+      },
+      {
+        "target": "m4",
+        "ki_id": 41642,
+        "value_nm": 169.9
+      },
+      {
+        "target": "m5",
+        "ki_id": 41643,
+        "value_nm": 35.4
+      },
+      {
+        "target": "net",
+        "ki_id": 41638,
+        "value_nm": 493.9
+      },
+      {
+        "target": "sert",
+        "ki_id": 41653,
+        "value_nm": 316.6
+      }
+    ]
   },
   {
     "metabolite": "Nordoxepin",
@@ -1702,7 +1936,138 @@
       "norquetiapine",
       "quetiapine"
     ],
-    "pdsp_targets": []
+    "pdsp_targets": [
+      {
+        "target": "5ht1a",
+        "ki_id": 98189,
+        "value_nm": 45.0
+      },
+      {
+        "target": "5ht1b",
+        "ki_id": 98206,
+        "value_nm": 1117.0
+      },
+      {
+        "target": "5ht1d",
+        "ki_id": 98207,
+        "value_nm": 249.0
+      },
+      {
+        "target": "5ht1e",
+        "ki_id": 98208,
+        "value_nm": 97.0
+      },
+      {
+        "target": "5ht2a",
+        "ki_id": 98192,
+        "value_nm": 48.0
+      },
+      {
+        "target": "5ht2b",
+        "ki_id": 98209,
+        "value_nm": 14.0
+      },
+      {
+        "target": "5ht2c",
+        "ki_id": 98193,
+        "value_nm": 107.0
+      },
+      {
+        "target": "5ht3",
+        "ki_id": 98210,
+        "value_nm": 394.0
+      },
+      {
+        "target": "5ht6",
+        "ki_id": 98196,
+        "value_nm": 503.0
+      },
+      {
+        "target": "5ht7",
+        "ki_id": 98197,
+        "value_nm": 76.0
+      },
+      {
+        "target": "alpha1a",
+        "ki_id": 98186,
+        "value_nm": 144.0
+      },
+      {
+        "target": "alpha1b",
+        "ki_id": 98205,
+        "value_nm": 95.0
+      },
+      {
+        "target": "alpha2a",
+        "ki_id": 98185,
+        "value_nm": 237.0
+      },
+      {
+        "target": "alpha2b",
+        "ki_id": 98187,
+        "value_nm": 378.0
+      },
+      {
+        "target": "alpha2c",
+        "ki_id": 98188,
+        "value_nm": 736.0
+      },
+      {
+        "target": "d4",
+        "ki_id": 98213,
+        "value_nm": 1297.0
+      },
+      {
+        "target": "d5",
+        "ki_id": 98214,
+        "value_nm": 1419.0
+      },
+      {
+        "target": "h1",
+        "ki_id": 98201,
+        "value_nm": 3.5
+      },
+      {
+        "target": "h2",
+        "ki_id": 98216,
+        "value_nm": 298.0
+      },
+      {
+        "target": "h4",
+        "ki_id": 98218,
+        "value_nm": 1660.0
+      },
+      {
+        "target": "m1",
+        "ki_id": 98219,
+        "value_nm": 39.0
+      },
+      {
+        "target": "m2",
+        "ki_id": 98220,
+        "value_nm": 453.0
+      },
+      {
+        "target": "m3",
+        "ki_id": 98204,
+        "value_nm": 23.0
+      },
+      {
+        "target": "m4",
+        "ki_id": 98221,
+        "value_nm": 110.0
+      },
+      {
+        "target": "m5",
+        "ki_id": 98222,
+        "value_nm": 23.0
+      },
+      {
+        "target": "net",
+        "ki_id": 98223,
+        "value_nm": 58.0
+      }
+    ]
   },
   {
     "metabolite": "Norzimelidine",

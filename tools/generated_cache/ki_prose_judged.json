@@ -20,5 +20,20 @@
     "qid": "92a29ac1"
    }
   ]
+ },
+ "metabolites": {
+  "norketamine": [
+   {
+    "target": "nmda",
+    "candidate": 0,
+    "qid": "551700e1",
+    "quote": "The Ki values of ketamine, norketamine and dehydronorketamine at NMDA receptors were 0.119±0.01, 0.97±0.1 and 3.21±0.3 μM, respectively.",
+    "value_nm": 970,
+    "param": "Ki",
+    "unit": "μM",
+    "stated_value": 0.97,
+    "note": "[3H]MK-801 binding; the abstract names no enantiomer, so it is read as the unqualified (racemic) norketamine."
+   }
+  ]
  }
 }

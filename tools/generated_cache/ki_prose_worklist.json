@@ -391,5 +391,42 @@
     }
    ]
   }
+ },
+ "metabolites": {
+  "hydroxynorketamine": {
+   "name": "Hydroxynorketamine",
+   "missing": {
+    "nachr_a7": "Neuronal α7 nAChR"
+   },
+   "context": [
+    "In contrast to ketamine and norketamine, HNK is inactive as an anesthetic and psychostimulant . [ 4 ] [ 5 ] In accordance, it has only very weak affinity for the NMDA receptor (K i = 21.19 μM and > 100 μM for (2 S ,6 S )-HNK and (2 R ,6 R )-HNK, respectively). [ 6 ] However, HNK does still show biological activity , having been found to act as a potent and selective negative allosteric modulator of the α 7 -nicotinic acetylcholine receptor ( IC 50 < 1 μM). [ 6 ] Moreover, (2 S ,6 S )-HNK was tested and found to increase the function of the mammalian target of rapamycin (mTOR), a marker of the antidepressant activity of ketamine, far more potently than ketamine itself (0.05 nM for (2 S ,6 S )-HNK, 10 nM for ( S )-norketamine, and 1,000 nM for ( S )-ketamine ( esketamine ), respectively), an action that was observed to correlate closely with their ability to inhibit the α 7 -nicotinic acetylcholine receptor. [ 7 ] [ 8 ] [ 9 ] This finding has led to a call of reassessment of the understanding of the rapid antidepressant effects of ketamine and their mechanisms. [ 10 ] However, subsequent research has found that dehydronorketamine , which is a potent and selective antagonist of the α 7 -nicotinic acetylcholine receptor similarly to HNK, is inactive in the forced swim test at doses up to 50 mg/kg in mice, and this is in contrast to ketamine and norketamine, which are effective at doses of 10 mg/kg and 50 mg/kg, respectively. [ 11 ]"
+   ],
+   "candidates": [
+    {
+     "corpus": "europepmc",
+     "page": "26240948",
+     "line": "The Ki values of ketamine, norketamine and dehydronorketamine at NMDA receptors were 0.119±0.01, 0.97±0.1 and 3.21±0.3 μM, respectively.",
+     "qid": "551700e1"
+    }
+   ]
+  },
+  "norketamine": {
+   "name": "Norketamine",
+   "missing": {
+    "nachr_a7": "Neuronal α7 nAChR",
+    "nmda": "NMDA"
+   },
+   "context": [
+    "Similarly to ketamine, norketamine acts as a noncompetitive NMDA receptor antagonist (K i = 1.7 μM and 13 μM for ( S )-(+)-norketamine and ( R )-(–)-norketamine, respectively). Also, similarly again to ketamine, norketamine binds to the μ- and κ-opioid receptors . [ 5 ] Relative to ketamine, norketamine is much more potent as an antagonist of the α 7 -nicotinic acetylcholine receptor , and produces rapid antidepressant effects in animal models which have been reported to correlate with its activity at this receptor. [ 6 ] However, norketamine is about 1/5 as potent as ketamine as an antidepressant in mice as per the forced swim test , and this seems also to be in accordance with its 3–5-fold reduced comparative potency in vivo as an NMDA receptor antagonist. [ 7 ] Norketamine's metabolites, dehydronorketamine (DHNK) and hydroxynorketamine (HNK), are far less or negligibly active as NMDA receptor antagonists in comparison, [ 2 ] but retain activity as potent antagonists of the α 7 -nicotinic acetylcholine receptor. [ 8 ] [ 9 ]"
+   ],
+   "candidates": [
+    {
+     "corpus": "europepmc",
+     "page": "26240948",
+     "line": "The Ki values of ketamine, norketamine and dehydronorketamine at NMDA receptors were 0.119±0.01, 0.97±0.1 and 3.21±0.3 μM, respectively.",
+     "qid": "551700e1"
+    }
+   ]
+  }
  }
 }
