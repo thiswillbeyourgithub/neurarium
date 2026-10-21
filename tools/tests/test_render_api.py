@@ -34,10 +34,14 @@ class RenderApiTest(unittest.TestCase):
     def tearDownClass(cls):
         cls.tmp.cleanup()
 
+    def top(self):
+        """The node pages and indexes, without the per-section pages under ``<id>/``."""
+        return {n: t for n, t in self.pages.items() if n.count("/") <= 1}
+
     def test_one_page_per_node_plus_index(self):
         kinds = {name.split("/")[0] for name in self.pages if "/" in name}
         # + one index per kind, the top index and the 404 page
-        self.assertEqual(len(self.pages), self.n + len(kinds) + 2)
+        self.assertEqual(len(self.top()), self.n + len(kinds) + 2)
         self.assertIn("drug/sertraline.md", self.pages)
         self.assertIn("receptor/d2.md", self.pages)
 
@@ -57,9 +61,36 @@ class RenderApiTest(unittest.TestCase):
     def test_not_found_lists_every_page(self):
         text = self.pages["not_found.md"]
         self.assertIn("No page at this address", text)
-        for name in self.pages:
+        for name in self.top():
             if not name.endswith("index.md") and name != "not_found.md":
                 self.assertIn(f"(/api/{name.removesuffix('.md')})", text)
+
+    def test_sources_sit_on_their_claim_line(self):
+        # A `<claim>_sources` key renders beside its claim, never as its own section or
+        # bullet (it once read "## category sources" far below "categories" in Facts).
+        for name, text in self.pages.items():
+            self.assertNotRegex(text, r"(?m)^## .*\b(sources|provenance)$", name)
+            self.assertNotRegex(text, r"(?m)^\s*- [a-z_]+_sources:", name)
+        facts = self.pages["drug/sertraline/facts.md"]
+        self.assertRegex(facts, r"(?m)^- categories: .*\[verified q_[0-9a-f]+\]")
+        self.assertRegex(facts, r"(?m)^- nbn: .*\[verified q_[0-9a-f]+\]")
+
+    def test_llm_grade_always_flagged_unsourced(self):
+        # An LLM-memory claim must never read like a citation to an agent.
+        for name, text in self.pages.items():
+            for line in text.splitlines():
+                if re.search(r"\[llm[\] ]|: llm\b", line) and "Grades:" not in line:
+                    self.assertIn("UNSOURCED", line, f"{name}: {line}")
+
+    def test_section_pages_split_the_full_page(self):
+        full = self.pages["drug/sertraline.md"]
+        self.assertIn("(/api/drug/sertraline/bindings)", full)
+        part = self.pages["drug/sertraline/bindings.md"]
+        self.assertIn("## bindings", part)
+        self.assertNotIn("## brands", part)
+        # each section page lists exactly the quotes it cites
+        self.assertEqual(set(MARKER.findall(part)), set(LISTED.findall(part)))
+        self.assertIn("drug/sertraline/index.md", self.pages)
 
     def test_source_links_match_the_viewer_tooltip(self):
         # A DailyMed quote carries its label page (corpus page_url), as the tooltip does.

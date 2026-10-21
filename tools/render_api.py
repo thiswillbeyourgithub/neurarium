@@ -2,8 +2,12 @@
 
 The text twin of the viewer's detail panels, for LLM agents and anything that cannot run
 WebGL: ``/api/`` lists every page, ``/api/drug/sertraline`` holds that drug's
-stored fields, each claim tagged with its grade + quote id and the verbatim quotes listed once
-at the end of the page.
+stored fields, each claim tagged with its grade + quote id on its own line (a claim's
+``*_sources`` / ``*_provenance`` keys are folded into it, never a separate section) and the
+verbatim quotes listed once at the end of the page. A grades legend heads every page and an
+``llm`` grade is spelled out as UNSOURCED, so a reader never takes LLM memory for a citation.
+Each section is also its own page (``/api/drug/sertraline/bindings``, listed at
+``/api/drug/sertraline/``), carrying only the sources it cites.
 
 **Stored fields only**, with one exception: the BETA ``/api/effect/<id>`` pages (an effect
 -> the receptors whose stored nodes carry it -> the drugs whose bindings could reach it),
@@ -56,6 +60,22 @@ NOT_FOUND = ("**No page at this address.** Page paths are `/api/<kind>/<id>` wit
              "kind and the record id (lowercase, underscores, e.g. `/api/drug/sertraline`, "
              "`/api/drug/amphetamine_dl`, `/api/structure/putamen_R`); a pathway id is "
              "`<from>--<to>`. Every valid page is listed below with its id.")
+# What each grade means, stated once at the top of every page so a reader never takes an
+# LLM-memory claim for a sourced one. Mirrors the viewer's pills (PROVENANCE_LEVELS).
+GRADES = ("Grades: `verified` = the quote was found verbatim on the cited page and a separate "
+          "LLM judge confirmed it states the claim; `sourced` = written from the cited document, "
+          "but the quote was not checked; `llm` = UNSOURCED, produced by an LLM from memory and "
+          "never checked against any document, so treat it as unverified general knowledge, not "
+          "as a citation; `uncertain` bullets list reasons to doubt an otherwise backed claim. A "
+          "claim with no [grade] tag next to it has no source at all.")
+LLM_FLAG = " (UNSOURCED: LLM memory, unchecked)"
+# A claim's sources sit under `<claim>_sources` / `<claim>_provenance`; these name the
+# claim key where the stem alone does not (`category_sources` grades `categories`).
+SOURCE_SUFFIXES = ("_sources", "_provenance")
+CLAIM_ALIASES = {"category": ("categories",), "originator_now": ("originator",),
+                 "location": ("locations", "regions")}
+# Source keys that grade the record as a whole, not one field: kept as a Facts line.
+RECORD_GRADES = {"classification_provenance"}
 KIND_TITLES = {"drug": "Drugs", "metabolite": "Active metabolites", "receptor": "Receptors",
                "target": "Other drug targets", "structure": "Brain regions",
                "projection": "Pathways", "circuit": "Circuits", "group": "Projection groups",
@@ -148,15 +168,16 @@ class Renderer:
         where = self.corpora.get(corpus, {}).get("ref", corpus or "unknown source")
         extra = "; ".join(f"{k}: {v}" for k, v in ref.items()
                           if k not in ("corpus", "provenance", "quote_id", "pipeline") and v is not None)
+        flag = LLM_FLAG if grade == "llm" else ""
         if q:
             self.cited.setdefault(q["id"], q)
-            return f"[{grade} {q['id']}]" + (f" ({extra})" if extra else "")
+            return f"[{grade} {q['id']}]{flag}" + (f" ({extra})" if extra else "")
         # A bare database row links where the viewer's Ki tooltip does: its own
         # reference URL, else the corpus's generic one.
         url = self.page_link(corpus, ref.get("page"))
         if url and "http" not in extra:
             extra = f"{extra}; {url}" if extra else url
-        return f"[{grade}] {where}" + (f" ({extra})" if extra else "")
+        return f"[{grade}]{flag} {where}" + (f" ({extra})" if extra else "")
 
     # -- values --------------------------------------------------------------------------
     def scalar(self, key: str, v: Any, parent: str) -> str:
@@ -178,14 +199,20 @@ class Renderer:
             return [f"{pad}- {self.source(x)}" for x in v]
         if isinstance(v, dict):
             out = []
+            att, sourced = self.attach(v)
             for k, x in v.items():
+                if k in sourced:
+                    continue
+                tags, nested = self.inline(v, att, k, depth + 1, key)
                 if self.is_ref(x):
                     out.append(f"{pad}- {k}: {self.source(x)}")
                 elif self.is_scalar(x):
-                    out.append(f"{pad}- {self.linked(k, k, key) or k}: {self.scalar(k, x, key)}")
+                    out.append(f"{pad}- {self.linked(k, k, key) or k}: {self.scalar(k, x, key)}"
+                               f"{self.flag(k, x)}{tags}")
                 else:
-                    out.append(f"{pad}- {self.linked(k, k, key) or k}:")
+                    out.append(f"{pad}- {self.linked(k, k, key) or k}:{tags}")
                     out += self.value(k, x, depth + 1, key)
+                out += nested
             return out
         if isinstance(v, list):
             out = []
@@ -193,13 +220,25 @@ class Renderer:
                 if not isinstance(item, dict):
                     out.append(f"{pad}- {self.scalar(key, item, key)}")
                     continue
-                head = "; ".join(f"{k}: {self.scalar(k, x, key)}" for k, x in item.items()
-                                 if self.is_scalar(x))
-                out.append(f"{pad}- {head or '(item)'}")
+                att, sourced = self.attach(item)
+                # The item's own `sources` grade the item: on its line, not below it.
+                own = item.get("sources")
+                own_tags = (self.tags("sources", own) if "sources" not in sourced
+                            and isinstance(own, list) and own else None)
+                parts, rest = [], []
                 for k, x in item.items():
-                    if not self.is_scalar(x):
-                        out.append(f"{pad}  - {k}:")
-                        out += self.value(k, x, depth + 2, key)
+                    if k in sourced or (k == "sources" and own_tags):
+                        continue
+                    tags, nested = self.inline(item, att, k, depth + 2, key)
+                    if self.is_scalar(x):
+                        parts.append(f"{k}: {self.scalar(k, x, key)}{self.flag(k, x)}{tags}")
+                    else:
+                        rest.append(f"{pad}  - {k}:{tags}")
+                        rest += self.value(k, x, depth + 2, key)
+                    rest += nested
+                head = "; ".join(parts) or "(item)"
+                out.append(f"{pad}- {head}" + (f" {own_tags}" if own_tags else ""))
+                out += rest
             return out
         return [f"{pad}- {self.scalar(key, v, parent)}"]
 
@@ -214,21 +253,6 @@ class Renderer:
             if c.get("page_url"):
                 return c["page_url"].replace("{page}", quote(str(page), safe=URI_SAFE))
         return c.get("url")
-
-    def sources_section(self) -> list[str]:
-        """The quotes this page cited, once each, in first-cited order."""
-        if not self.cited:
-            return []
-        lines = ["", "## Sources", ""]
-        for qid, q in self.cited.items():
-            where = self.corpora.get(q.get("corpus"), {}).get("ref", q.get("corpus"))
-            has_page = q.get("page") not in (None, "")
-            page = f", {q['page']}" if has_page else ""
-            # The page's public URL, the link the viewer's tooltip shows (see page_link).
-            link = self.page_link(q.get("corpus"), q['page'] if has_page else None)
-            link = f" {link}" if link else ""
-            lines.append(f"- `{qid}` ({where}{page}){link}: \"{q['quote']}\"")
-        return lines
 
     def effect_page(self, ident: str) -> str:
         """An effect's page (BETA): its stored owners by mode, then the derived drugs."""
@@ -258,33 +282,179 @@ class Renderer:
         lines += self.sources_section()
         return "\n".join(lines) + "\n"
 
-    def page(self, kind: str, ident: str, rec: dict[str, Any]) -> str:
-        self.cited: dict[str, dict[str, Any]] = {}
-        if kind == "effect":
-            return self.effect_page(ident)
-        title = rec.get("name") or rec.get("label") or ident
+    @staticmethod
+    def claim_of(key: str, rec: dict[str, Any]) -> str | None:
+        """The field a ``<claim>_sources`` / ``<claim>_provenance`` key grades, or None
+        when ``key`` is not a source key (or grades the whole record)."""
+        if key in RECORD_GRADES:
+            return None
+        for suffix in SOURCE_SUFFIXES:
+            if key.endswith(suffix):
+                stem = key[:-len(suffix)]
+                return next((c for c in (stem, *CLAIM_ALIASES.get(stem, ())) if c in rec), None)
+        return None
+
+    @staticmethod
+    def flag(key: str, v: Any) -> str:
+        """The UNSOURCED warning after a bare `llm` grade value (`*_provenance`, `grade`)."""
+        return LLM_FLAG if v == "llm" and (key == "grade" or key.endswith("_provenance")) else ""
+
+    def tags(self, key: str, v: Any) -> str | None:
+        """``v`` (a source key's value) as inline grade tags, or None when it is a nested
+        structure (a per-region map) that needs its own bullets."""
+        if isinstance(v, str):  # a bare grade (`*_provenance`)
+            return f"[{v}]" + (LLM_FLAG if v == "llm" else "")
+        if isinstance(v, list) and all(self.is_ref(x) for x in v):
+            return " ".join(self.source(x) for x in v)
+        if self.is_ref(v):
+            return self.source(v)
+        return None
+
+    def attach(self, d: dict[str, Any]) -> tuple[dict[str, list[str]], set[str]]:
+        """claim key -> the source keys grading it, and the set of those source keys."""
+        att: dict[str, list[str]] = {}
+        for k in d:
+            claim = self.claim_of(k, d)
+            if claim:
+                att.setdefault(claim, []).append(k)
+        return att, {k for ks in att.values() for k in ks}
+
+    def inline(self, d: dict[str, Any], att: dict[str, list[str]], k: str, depth: int,
+               parent: str) -> tuple[str, list[str]]:
+        """(" [tags]" to append to claim ``k``'s line, nested bullets for a source that
+        cannot be inlined). A bare `*_provenance` grade is shown only when no quoted source
+        sits beside it, since each quote already carries its own grade."""
+        keys = att.get(k, [])
+        quoted = any(not isinstance(d[sk], str) for sk in keys)
+        tags, nested = [], []
+        for sk in keys:
+            if quoted and isinstance(d[sk], str):
+                continue
+            tag = self.tags(sk, d[sk])
+            if tag is None:
+                nested += ([f"{'  ' * depth}- {sk.replace('_', ' ')}:"]
+                           + self.value(sk, d[sk], depth + 1, parent))
+            else:
+                # Name a second source key (`originator_now_sources`) so it is not read as
+                # the claim's own.
+                stem = sk.rsplit("_", 1)[0]
+                extra = stem.removeprefix(f"{k}_") if stem.startswith(f"{k}_") else ""
+                tags.append(f"({extra.replace('_', ' ')}: {tag})" if extra else tag)
+        return (" " + " ".join(tags)) if tags else "", nested
+
+    def sections(self, kind: str, rec: dict[str, Any]) -> list[tuple[str, str, list[str], dict]]:
+        """The page body as (slug, heading, lines, quotes cited) sections. Each source key
+        renders next to the claim it grades, never in a section of its own."""
+        att, sourced = self.attach(rec)
+        out = []
+        self.cited = {}
+        facts = []
+        # A graded claim with no field of its own (a target's derived `polarity` flag):
+        # its grade and its quotes still share one line, named after the claim.
+        orphans: dict[str, list[str]] = {}
+        for k in rec:
+            stem = next((k[:-len(x)] for x in SOURCE_SUFFIXES if k.endswith(x)), None)
+            if stem and k not in RECORD_GRADES and k not in sourced:
+                orphans.setdefault(stem, []).append(k)
+        for stem, keys in orphans.items():
+            pseudo = {stem: "", **{k: rec[k] for k in keys}}
+            tags, nested = self.inline(pseudo, {stem: keys}, stem, 1, kind)
+            facts += [f"- {stem}:{tags}"] + nested
+            sourced = sourced | set(keys)
+        for k, v in rec.items():
+            if k in SKIP or k in sourced or not self.is_scalar(v):
+                continue
+            line = f"- {k}: {self.scalar(k, v, kind)}{self.flag(k, v)}"
+            tags, nested = self.inline(rec, att, k, 1, kind)
+            facts += [line + tags] + nested
+        own = rec.get("sources")
+        if isinstance(own, list) and own and all(self.is_ref(x) for x in own):
+            # The record's own sources (a group's, a circuit's): they back the record as a
+            # whole, so they sit with its facts rather than in a "sources" section.
+            facts.append(f"- sources (this {kind} as a whole): {self.tags('sources', own)}")
+            sourced = sourced | {"sources"}
+        if facts:
+            out.append(("facts", "Facts", facts, self.cited))
+        for k, v in rec.items():
+            if k in SKIP or k in sourced or self.is_scalar(v):
+                continue
+            self.cited = {}
+            lines = self.value(k, v, 0, kind)
+            tags, nested = self.inline(rec, att, k, 0, kind)
+            if tags:
+                lines.append(f"- sources:{tags}")
+            out.append((k, k.replace("_", " "), lines + nested, self.cited))
+        notes = self.addons.get((kind, self.ident), [])
+        if notes:
+            self.cited = {}
+            lines = []
+            for a in notes:
+                lines += [f"- note ({a.get('tone', 'info')}):"]
+                lines += self.value("note", {k: v for k, v in a.items()
+                                             if k not in ("id", "owner_kind", "owner")}, 1)
+            out.append(("notes", "Notes", lines, self.cited))
+        return out
+
+    def header(self, kind: str, ident: str, rec: dict[str, Any], title: str) -> list[str]:
         lines = [f"# {title}", "", f"Kind: {kind}. Id: `{ident}`."]
         if kind in TAB_KIND:
             lines.append(f"Open in the viewer: {llms_txt.SITE_URL}/#tabs={TAB_KIND[kind]}:{ident}")
         if rec.get("mirror"):
             lines.append("Paired: stated once for the right hemisphere, the left twin is implied.")
-        lines.append("Each claim lists its sources as [grade quote_id]; the verbatim quotes are under "
-                     "Sources at the end (also in /data/quotes.jsonl by id). A source without a quote "
-                     f"id (a database row) is spelled out inline. Index: [all pages]({API}/).")
-        facts = [(k, v) for k, v in rec.items() if k not in SKIP and self.is_scalar(v)]
-        if facts:
-            lines += ["", "## Facts", ""]
-            lines += [f"- {k}: {self.scalar(k, v, kind)}" for k, v in facts]
-        for k, v in rec.items():
-            if k in SKIP or self.is_scalar(v):
-                continue
-            lines += ["", f"## {k.replace('_', ' ')}", ""] + self.value(k, v, 0, kind)
-        for a in self.addons.get((kind, ident), []):
-            lines += ["", f"## Note ({a.get('tone', 'info')})", ""]
-            lines += self.value("note", {k: v for k, v in a.items()
-                                         if k not in ("id", "owner_kind", "owner")}, 0)
-        lines += self.sources_section()
-        return "\n".join(lines) + "\n"
+        lines.append("Each claim lists its sources as [grade quote_id] on the same line; the verbatim "
+                     "quotes are under Sources at the end (also in /data/quotes.jsonl by id). A source "
+                     f"without a quote id (a database row) is spelled out inline. {GRADES} "
+                     f"Index: [all pages]({API}/).")
+        return lines
+
+    def sources_section(self, cited: dict | None = None) -> list[str]:
+        """The quotes cited (this page's, or one section's), once each, first-cited order."""
+        cited = self.cited if cited is None else cited
+        if not cited:
+            return []
+        lines = ["", "## Sources", ""]
+        for qid, q in cited.items():
+            where = self.corpora.get(q.get("corpus"), {}).get("ref", q.get("corpus"))
+            has_page = q.get("page") not in (None, "")
+            page = f", {q['page']}" if has_page else ""
+            # The page's public URL, the link the viewer's tooltip shows (see page_link).
+            link = self.page_link(q.get("corpus"), q['page'] if has_page else None)
+            link = f" {link}" if link else ""
+            lines.append(f"- `{qid}` ({where}{page}){link}: \"{q['quote']}\"")
+        return lines
+
+    def page_set(self, kind: str, ident: str, rec: dict[str, Any]) -> dict[str | None, str]:
+        """``{page: Markdown}``: the full page under ``None``, plus one page per section slug
+        (and an ``index`` listing them), served under ``<id>/`` so a reader can fetch only
+        the part it needs."""
+        if kind == "effect":
+            self.cited = {}
+            return {None: self.effect_page(ident)}
+        title = rec.get("name") or rec.get("label") or ident
+        self.ident = ident
+        secs = self.sections(kind, rec)
+        base = f"{API}/{kind}/{ident}"
+        toc = ("Sections (each also its own page): "
+               + ", ".join(f"[{h}]({base}/{slug})" for slug, h, _, _ in secs)) if secs else ""
+        head = self.header(kind, ident, rec, title)
+        full = head + ([toc] if toc else [])
+        cited: dict[str, dict[str, Any]] = {}
+        for _, h, body, c in secs:
+            full += ["", f"## {h}", ""] + body
+            for qid, q in c.items():
+                cited.setdefault(qid, q)
+        out: dict[str | None, str] = {None: "\n".join(full + self.sources_section(cited)) + "\n"}
+        if secs:
+            out["index"] = "\n".join(head + [toc, f"Full page: [{title}]({base})"]) + "\n"
+        for slug, h, body, c in secs:
+            sub = self.header(kind, ident, rec, f"{title}: {h}")
+            sub.append(f"One section of [{title}]({base}); other sections: [{ident}]({base}/).")
+            out[slug] = "\n".join(sub + ["", f"## {h}", ""] + body
+                                                  + self.sources_section(c)) + "\n"
+        return out
+
+    def page(self, kind: str, ident: str, rec: dict[str, Any]) -> str:
+        return self.page_set(kind, ident, rec)[None]
 
     def listing(self, kind: str) -> list[str]:
         """One kind's pages, by name, as a Markdown section."""
@@ -336,7 +506,13 @@ def render(data_dir: Path, out: Path, version: str) -> int:
         (out / kind).mkdir(parents=True)
         for ident, rec in records.items():
             _check_page_id(kind, ident)
-            page_path(out / kind, ident).write_text(r.page(kind, ident, rec), encoding="utf-8")
+            for section, text in r.page_set(kind, ident, rec).items():
+                if section is None:
+                    page_path(out / kind, ident).write_text(text, encoding="utf-8")
+                else:  # a section page, under <id>/
+                    sub = page_path(out / kind, ident).with_suffix("")
+                    sub.mkdir(exist_ok=True)
+                    page_path(sub, section).write_text(text, encoding="utf-8")
             n += 1
         (out / kind / "index.md").write_text(r.index(version, [kind]), encoding="utf-8")
     (out / "index.md").write_text(r.index(version), encoding="utf-8")
