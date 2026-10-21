@@ -2,16 +2,16 @@
 // drugs this one meets at a shared enzyme, grouped by drug or by isoform. Split out of
 // panel/views/drug.js, which appends it last in the Metabolism section.
 
-import { btn, subSection } from "./dom.js";
+import { btn, emptySection, heading, subSection } from "./dom.js";
 import { loadPkGrouping, savePkGrouping } from "../legend/drugs.js";
 
 const { t } = window.__I18N__;
 
 /**
- * The PK-interactions subsection for `drug`, or null when it shares no enzyme.
+ * The PK-interactions subsection for `drug` (the empty subsection when it shares no enzyme).
  * @param {object} P  the panel context showDrug receives
  * @param {object} drug
- * @returns {HTMLElement|null}
+ * @returns {HTMLElement}
  */
 export function pkInteractionsSection(P, drug) {
   const { data, el, enzymeById, onDrugPick, onEnzymePick } = P;
@@ -24,7 +24,10 @@ export function pkInteractionsSection(P, drug) {
     ...pk.affects.map((x) => ({ ...x, outgoing: true })),
     ...pk.affectedBy.map((x) => ({ ...x, outgoing: false })),
   ] : [];
-  if (!edges.length) return null;
+  if (!edges.length) {
+    return emptySection(heading("h4", t("drug.pkInteractions"), t("drug.pkInteractionsSub"),
+      "panel-subsec-title"), "drug", { tourSec: "pk", cls: "info-interactors" });
+  }
   // The last subsection of the drug's Metabolism section (an <h4>, see subSection),
   // the count in its title so the reader sees how many rows follow. info-interactors
   // reuses that section's .drug-cat sub-heading style.

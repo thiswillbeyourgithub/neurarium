@@ -628,7 +628,6 @@ window.__I18N_MESSAGES__.fr = {
   "drug.actsOnSub": "Récepteurs et transporteurs auxquels il se lie, par affinité",
   "drug.activeMetabMixed": "Prudence : plusieurs composés contribuent à ce qui est affiché ici, cette substance et ses métabolites actifs ({names}). Chaque ligne indique le composé dont elle provient.",
   "drug.activeMetabSee": "Les voir",
-  "drug.noTargets": "Aucune cible moléculaire répertoriée pour l'instant.",
   "drug.tone": "Pharmacodynamie : neurotransmission nette (estimation)",
   "drug.toneSub": "S'il augmente ou diminue chaque système de neurotransmetteur",
   "drug.toneWarnTitle": "Valeur indicative",

@@ -629,7 +629,6 @@ window.__I18N_MESSAGES__.en = {
   "drug.actsOnSub": "Receptors and transporters it binds, by affinity",
   "drug.activeMetabMixed": "Be careful: several compounds contribute to what is shown here, this drug and its active metabolites ({names}). Each row names the compound it comes from.",
   "drug.activeMetabSee": "See them",
-  "drug.noTargets": "No mapped molecular targets yet.",
   "drug.tone": "Pharmacodynamics: net neurotransmission (estimate)",
   "drug.toneSub": "Whether it raises or lowers each transmitter system",
   "drug.toneWarnTitle": "Indicative only",

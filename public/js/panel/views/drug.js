@@ -5,7 +5,7 @@ import { appendDrugHistory } from "../../drug-history.js";
 import { appendPhyschemChips, hasPhyschem } from "../../physchem.js";
 import { appendTdmChips, valueChip } from "../../tdm.js";
 import { bindingKi, formatHalfLife } from "../format.js";
-import { flashRow, btn, heading, subSection } from "../dom.js";
+import { flashRow, btn, emptySection, heading, noDataText, subSection } from "../dom.js";
 import { pkInteractionsSection } from "../pk-interactions.js";
 import { activeMetabolitesSubsection } from "../active-metabolites.js";
 import { toneWeightOf } from "../../data.js";
@@ -228,6 +228,11 @@ export function showDrug(P, drug, opts = {}) {
     brandsEl.appendChild(heading("h4", t("drug.brands"), t("drug.brandsSub")));
     brandsEl.appendChild(brandRow(moleculeBrands));
     admin.appendChild(brandsEl);
+  } else if (!(drug.brandsOrdered || []).length) {
+    // No brand at all (a formulation's own brands, listed under Pharmacokinetics,
+    // count: the row is then simply not repeated here).
+    admin.appendChild(emptySection(heading("h4", t("drug.brands"), t("drug.brandsSub")), "drug",
+      { tourSec: "brands", cls: "info-brands" }));
   }
   if (admin.childElementCount > 1) body.appendChild(admin);
 
@@ -253,8 +258,11 @@ export function showDrug(P, drug, opts = {}) {
   // levels the AGNP guideline monitors (therapeutic range, alert level) close
   // the block: they are where on that curve the concentration should sit.
   const forms = drug.formulations || [];
-  if (drug.halfLife || drug.tmax || drug.therapeuticRange || drug.alertLevel
-      || forms.length || hasPhyschem(drug)) {
+  if (!(drug.halfLife || drug.tmax || drug.therapeuticRange || drug.alertLevel
+      || forms.length || hasPhyschem(drug))) {
+    body.appendChild(emptySection(heading("h3", t("drug.pkTiming"), t("drug.pkTimingSub")),
+      "drug", { cls: "info-halflife" }));
+  } else {
     const hlEl = el("div", "info-bindings info-halflife");
     hlEl.appendChild(heading("h3", t("drug.pkTiming"), t("drug.pkTimingSub")));
     const chipHelpers = { el, nodePill, t,
@@ -323,6 +331,9 @@ export function showDrug(P, drug, opts = {}) {
         wrap.appendChild(row);
       }
       hlEl.appendChild(wrap);
+    } else {
+      hlEl.appendChild(emptySection(heading("h4", t("drug.formulations"), t("drug.formulationsSub")),
+        "drug", { cls: "formulations" }));
     }
     // CNS penetration: the computed lipophilicity and polar surface (PubChem) beside the
     // curated blood-brain-barrier label (B3DB), each its own node. A subsection, since
@@ -332,6 +343,9 @@ export function showDrug(P, drug, opts = {}) {
       const pc = subSection(t("drug.physchem"), "info-physchem", t("drug.physchemSub"));
       appendPhyschemChips(pc.appendChild(el("div", "pk-chips")), drug, chipHelpers);
       hlEl.appendChild(pc);
+    } else {
+      hlEl.appendChild(emptySection(heading("h4", t("drug.physchem"), t("drug.physchemSub")),
+        "drug", { cls: "info-physchem" }));
     }
     body.appendChild(hlEl);
   }
@@ -339,9 +353,13 @@ export function showDrug(P, drug, opts = {}) {
   // (Ki ranking uses the shared bindingKi helper.)
 
   // What it binds: one row per target, coloured by the action's net effect.
+  const actsHead = heading("h3", t("drug.actsOn"), t("drug.actsOnSub"));
+  if (!drug.prodrug && !drug.allBindings.length) {
+    body.appendChild(emptySection(actsHead, "drug", { tourSec: "bindings", cls: "info-bindings" }));
+  }
   const acts = el("div", "info-bindings");
   acts.dataset.tourSec = "bindings"; // guided-tour section anchor
-  acts.appendChild(heading("h3", t("drug.actsOn"), t("drug.actsOnSub")));
+  acts.appendChild(actsHead);
   // A prodrug's own graded claim (kind drug_prodrug): it binds nothing itself, so
   // every row below is borrowed from its active metabolite ("via ...").
   if (drug.prodrug) {
@@ -356,7 +374,8 @@ export function showDrug(P, drug, opts = {}) {
   const mix = metaboliteContributors(drug, drug.allBindings);
   if (mix) acts.appendChild(derivedActiveMetabolites(drug, body, mix));
   if (!drug.allBindings.length) {
-    acts.appendChild(el("p", "info-desc", t("drug.noTargets")));
+    // Only a prodrug reaches here empty (its own claim above): the shared line under it.
+    acts.appendChild(el("p", "panel-sec-none", noDataText(t("drug.actsOn"), "drug")));
   } else {
     const ul = el("ul");
     // Parent rows first, then each metabolite's, the order the tone terms use; within
@@ -377,7 +396,7 @@ export function showDrug(P, drug, opts = {}) {
     }
     acts.appendChild(ul);
   }
-  body.appendChild(acts);
+  if (drug.prodrug || drug.allBindings.length) body.appendChild(acts);
 
   // No standalone drug-level "Source(s)" block: the Stahl citation that backs
   // the drug is shown per-binding (each binding's pill above), so a source
@@ -471,6 +490,9 @@ export function showDrug(P, drug, opts = {}) {
     }
     proj.appendChild(ul);
     body.appendChild(proj);
+  } else {
+    body.appendChild(emptySection(heading("h3", t("drug.tone"), t("drug.toneSub")), "drug",
+      { cls: "info-connections info-tone" }));
   }
 
   // Metabolism: pharmacokinetics has no anatomy, so it sits AFTER the sections that
@@ -480,16 +502,22 @@ export function showDrug(P, drug, opts = {}) {
   // interactions those roles imply.
   const metab = activeMetabolitesSubsection(P, drug, opts);
   const hasEnzymes = Boolean(drug.enzymes && drug.enzymes.length);
-  if (metab.sec || hasEnzymes) {
+  const metabHead = heading("h3", t("drug.metabolism"), t("drug.metabolismSub"));
+  if (!metab.sec && !hasEnzymes) {
+    body.appendChild(emptySection(metabHead, "drug",
+      { tourSec: "metabolism", cls: "info-bindings" }));
+  } else {
     const metabWrap = el("div", "info-bindings");
     metabWrap.dataset.tourSec = "metabolism"; // guided-tour section anchor
-    metabWrap.appendChild(heading("h3", t("drug.metabolism"), t("drug.metabolismSub")));
-    if (metab.sec) metabWrap.appendChild(metab.sec);
-    // Under a metabolites subsection the enzymes get one of their own, or their rows
-    // would read as part of the metabolites above.
-    const enzWrap = !hasEnzymes ? null
-      : metab.sec ? metabWrap.appendChild(subSection(t("drug.metabEnzymes"), "", t("drug.metabEnzymesSub")))
-      : metabWrap;
+    metabWrap.appendChild(metabHead);
+    // Each half its own subsection, the missing one as the shared empty line, so
+    // the enzyme rows never read as part of the metabolites above.
+    const subHead = (key) => heading("h4", t(key), t(`${key}Sub`), "panel-subsec-title");
+    metabWrap.appendChild(metab.sec || emptySection(subHead("drug.metabolites"), "drug",
+      { tourSec: "metabolites", cls: "info-metabolites" }));
+    const enzWrap = metabWrap.appendChild(hasEnzymes
+      ? subSection(t("drug.metabEnzymes"), "", t("drug.metabEnzymesSub"))
+      : emptySection(subHead("drug.metabEnzymes"), "drug"));
     if (hasEnzymes) {
       enzWrap.appendChild(el("p", "legend-caption", t("drug.metabolismHint")));
       // Where to go read the pharmacokinetic pathways themselves: the enzyme rows
@@ -546,8 +574,8 @@ export function showDrug(P, drug, opts = {}) {
     }
     // Pharmacokinetic interactions (panel/pk-interactions.js), last: the drug -> drug
     // edges the enzyme roles above imply.
-    const pkSec = hasEnzymes ? pkInteractionsSection(P, drug) : null;
-    if (pkSec) metabWrap.appendChild(pkSec);
+    // Absent only without enzymes, whose own empty line already says so.
+    if (hasEnzymes) metabWrap.appendChild(pkInteractionsSection(P, drug));
     body.appendChild(metabWrap);
     // Arrived from a metabolite's receptor row: bring it into view and flash it, so
     // the user sees why the parent drug opened.
@@ -558,13 +586,18 @@ export function showDrug(P, drug, opts = {}) {
   // isoforms just above) and response (ClinPGx #20, the one BETA subsection, so it
   // wears its own tag). Omitted when the drug has neither.
   const pgx = pgxSection(drug);
-  const variants = drugVariantsSubsection(drug);
-  if (pgx || variants) {
+  const variants = drugVariantsSubsection(drug); // its empty subsection when none
+  const pgxHead = heading("h3", t("drug.pharmacogenomics"), t("drug.pharmacogenomicsSub"));
+  if (!pgx && variants.classList.contains("panel-sec-empty")) {
+    body.appendChild(emptySection(pgxHead, "drug",
+      { tourSec: "pharmacogenomics", cls: "info-bindings" }));
+  } else {
     const pgxWrap = el("div", "info-bindings");
     pgxWrap.dataset.tourSec = "pharmacogenomics"; // guided-tour section anchor
-    pgxWrap.appendChild(heading("h3", t("drug.pharmacogenomics"), t("drug.pharmacogenomicsSub")));
-    if (pgx) pgxWrap.appendChild(pgx);
-    if (variants) pgxWrap.appendChild(variants);
+    pgxWrap.appendChild(pgxHead);
+    pgxWrap.appendChild(pgx || emptySection(heading("h4", t("drug.pgx"), t("drug.pgxSub"),
+      "panel-subsec-title"), "drug", { tourSec: "pgx", cls: "info-pgx" }));
+    pgxWrap.appendChild(variants);
     body.appendChild(pgxWrap);
   }
   // The BETA sections (panel/sections.js betaSection), at the bottom so they never
