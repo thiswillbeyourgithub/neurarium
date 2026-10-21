@@ -2,7 +2,7 @@
 // there, and its reference material.
 
 import { stripSide } from "../../util.js";
-import { heading } from "../dom.js";
+import { emptySection, heading } from "../dom.js";
 
 const { t } = window.__I18N__;
 
@@ -51,7 +51,8 @@ export function showStructure(P, structure) {
   const conns = data.projections.filter(
     (p) => p.from === structure.id || p.to === structure.id);
   if (conns.length === 0) {
-    body.appendChild(el("p", "info-desc", t("info.noConnections")));
+    body.appendChild(emptySection(heading("h3", t("info.connections"), t("info.connectionsSub")),
+      "structure"));
   } else {
     const { ul, count } = pathwayList(conns, (proj) => {
       const outgoing = proj.from === structure.id;

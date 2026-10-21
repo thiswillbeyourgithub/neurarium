@@ -1,6 +1,8 @@
 // The Projection group view: the pathways sharing one transmitter / sign, with the
 // regions they link.
 
+import { emptySection } from "../dom.js";
+
 const { t } = window.__I18N__;
 
 /**
@@ -40,7 +42,7 @@ export function showProjectionGroup(P, group) {
   // list always matches what is lit on screen.
   const members = data.projections.filter((p) =>
     group.mode === "sign" ? p.sign === group.key : p.kind === group.key);
-  appendPathwayList(t("group.pathways"), members);
+  appendPathwayList(t("group.pathways"), members, "group");
 
   // Drugs acting on this system: the mirror of the drug panel's "Projections
   // affected". Every focusable drug whose flow overlay lights this group (its
@@ -79,6 +81,8 @@ export function showProjectionGroup(P, group) {
       }
       wrap.appendChild(ul);
       body.appendChild(wrap);
+    } else {
+      body.appendChild(emptySection(el("h3", null, t("group.actingDrugs")), "group"));
     }
   }
   // Headed sections start folded, like the drug panel (see foldSections).

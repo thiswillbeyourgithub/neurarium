@@ -381,7 +381,6 @@ window.__I18N_MESSAGES__.en = {
   "info.kindThis.circuit": "this circuit",
   "info.kindThis.group": "this projection group",
   "info.kindThis.enzyme": "this enzyme",
-  "info.noConnections": "No mapped connections yet.",
   "info.connections": "Connectivity",
   "info.connectionsSub": "Afferent (inputs) and efferent (outputs) projections",
   "search.filterConnections": "Connections",

@@ -2,6 +2,7 @@
 // and the population variability of its metabolizer phenotypes.
 
 import { attachTip } from "../tooltip.js";
+import { emptySection } from "../dom.js";
 
 const { t } = window.__I18N__;
 
@@ -59,6 +60,8 @@ export function showEnzyme(P, enzyme) {
     }
     box.appendChild(ul);
     body.appendChild(box);
+  } else {
+    body.appendChild(emptySection(el("h3", null, t("enzyme.forms")), "enzyme"));
   }
 
   // How fast people clear a drug through this isoform, and how common each speed

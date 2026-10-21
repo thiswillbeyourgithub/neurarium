@@ -1,6 +1,7 @@
 // The Circuit view: a named circuit's member regions and the pathways between them.
 
 import { stripSide } from "../../util.js";
+import { emptySection } from "../dom.js";
 
 const { t } = window.__I18N__;
 
@@ -66,6 +67,9 @@ export function showCircuit(P, circuit) {
     where.appendChild(el("h3", null, t("circuit.structures")));
     where.appendChild(locationList(names, bases));
     body.appendChild(where);
+  } else {
+    body.appendChild(emptySection(el("h3", null, t("circuit.structures")), "circuit",
+      { tourSec: "structures" }));
   }
 
   // Member pathways: every projection with both endpoints inside the loop (the
@@ -74,7 +78,7 @@ export function showCircuit(P, circuit) {
   const idSet = new Set(circuit.structures);
   const members = data.projections.filter(
     (p) => idSet.has(p.from) && idSet.has(p.to));
-  appendPathwayList(t("circuit.pathways"), members, "pathways");
+  appendPathwayList(t("circuit.pathways"), members, "circuit", "pathways");
   // Headed sections start folded, like the drug panel (see foldSections).
   foldBody();
 }

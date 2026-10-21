@@ -1,7 +1,7 @@
 // Pathway lists: the direction arrow glyph, one row per projection (left/right twins
 // collapsed), the headed list on a structure panel, and a connection's endpoint link.
 
-import { btn } from "./dom.js";
+import { emptySection, btn } from "./dom.js";
 
 const { t } = window.__I18N__;
 
@@ -121,8 +121,12 @@ export function makePathways(P) {
   // A titled "member pathways" list (the circuit + projection-group panels): one
   // pathwayRow per projection, each showing its full from -> to route (twins
   // collapsed via pathwayList).
-  const appendPathwayList = (titleText, projs, tourSec = "") => {
-    if (!projs.length) return;
+  // `kind`: the panel's node kind ("circuit" | "group"), the empty section's wording.
+  const appendPathwayList = (titleText, projs, kind, tourSec = "") => {
+    if (!projs.length) {
+      body.appendChild(emptySection(el("h3", null, titleText), kind, { tourSec }));
+      return;
+    }
     const { ul, count } = pathwayList(projs, (proj) => {
       const glyph = proj.bidirectional ? "↔" : "→";
       return {

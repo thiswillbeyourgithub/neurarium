@@ -379,7 +379,6 @@ window.__I18N_MESSAGES__.fr = {
   "info.kindThis.circuit": "ce circuit",
   "info.kindThis.group": "ce groupe de projections",
   "info.kindThis.enzyme": "cette enzyme",
-  "info.noConnections": "Aucune connexion répertoriée pour l’instant.",
   "info.connections": "Connectivité",
   "info.connectionsSub": "Projections afférentes (entrées) et efférentes (sorties)",
   "search.filterConnections": "Connexions",
