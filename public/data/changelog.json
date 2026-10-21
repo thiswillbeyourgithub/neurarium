@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.136.0",
+      "date": "2026-10-21",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "A receptor's Effects section now groups its effects under Agonism, Antagonism and the other modes, instead of naming the mode on every row",
+          "commits": [
+            "23d9bbd"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.135.1",
       "date": "2026-10-20",
       "entries": [
