@@ -1,6 +1,104 @@
 {
   "versions": [
     {
+      "version": "3.137.0",
+      "date": "2026-10-21",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Every panel section now always appears, even when empty: an empty one says \"No information about ... for this receptor yet\", so a panel shows what the dataset tracks elsewhere (e.g. age and sex differences on 5-HT3)",
+          "commits": [
+            "464c96c",
+            "8f98cb9",
+            "cf4a7df"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "The About popup now says a text-only version exists for LLMs and links llms.txt and /api/",
+          "commits": [
+            "8866eb9"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Each section of an /api text page is also served alone, e.g. /api/drug/sertraline/bindings, so an LLM reads only what it needs",
+          "commits": [
+            "a47fb09",
+            "f60c93f"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "The /api text pages now use exactly the panel's headings, subtitles, labels and notes, read from the same strings, and a test fails whenever the panels and the text version drift apart",
+          "commits": [
+            "54cc989",
+            "98de2a3",
+            "569d0ce",
+            "d038e6a"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "In the /api text pages each claim carries its sources on its own line, a grades legend heads every page, and a claim written by an LLM from memory is spelled out as UNSOURCED",
+          "commits": [
+            "a47fb09",
+            "f00ee6e"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Clinical section names and plain-language subtitles across the receptor, structure, connection, circuit, group, effect and enzyme panels; \"Found in\" becomes \"Regional distribution\"",
+          "commits": [
+            "be1d605",
+            "1dbe131",
+            "8629d61",
+            "9a4313d",
+            "b07349c"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Plainer explanations for psychiatrists across hints, notes, the Sources popup and the tour",
+          "commits": [
+            "3fc0ffc",
+            "f23c8bb",
+            "09c2b4f",
+            "8ae82f3",
+            "840ef56"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "Source links in some tooltips (enzyme roles, doubted claims, median Ki) showed as plain text instead of a clickable link",
+          "commits": [
+            "25f6915"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "The pathway symmetry note now says plainly that left/right symmetry is assumed",
+          "commits": [
+            "9072ca7"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "The guided tour frames the structure illustration again",
+          "commits": [
+            "2fa1ce1"
+          ]
+        },
+        {
+          "category": "docs",
+          "text": "The pre-push hook also runs the JavaScript tests",
+          "commits": [
+            "0f58053"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.136.0",
       "date": "2026-10-21",
       "entries": [
