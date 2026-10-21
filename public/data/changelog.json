@@ -1,6 +1,21 @@
 {
   "versions": [
     {
+      "version": "3.138.1",
+      "date": "2026-10-21",
+      "entries": [
+        {
+          "category": "data",
+          "text": "Active metabolites gain 11 measured Ki values (norclozapine at D2, D3, M1, M2, M4 and delta-opioid; norquetiapine at 5-HT2B; levoamphetamine at DAT and NET; levomethamphetamine at NET; norketamine at NMDA) and 54 newly found PDSP binding sites, so their predicted effects sort by affinity instead of falling last",
+          "commits": [
+            "e8622ab",
+            "e302f8b",
+            "0a82a75"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.138.0",
       "date": "2026-10-21",
       "entries": [
