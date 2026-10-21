@@ -89,6 +89,8 @@ export function makeBindings(P) {
     ].filter(Boolean).join(", ");
     let tip = t("drug.kiTip", { h: ki.nHuman, n: ki.nNonhuman,
       assay: `${ki.corpusRef}: ${assay}` });
+    // A string tip is linkified (tooltip.js), so the database URL becomes the link.
+    if (ki.corpusUrl) tip += `\n${ki.corpusUrl}`;
     if (ki.nHuman === 0) {
       tip += "\n\n" + t("drug.kiTipNonHuman", { species: ki.species || "?" });
     }

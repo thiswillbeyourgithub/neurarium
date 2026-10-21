@@ -269,7 +269,7 @@ export function makePills(P) {
       const frag = document.createDocumentFragment();
       frag.append(el("strong", null, what), document.createTextNode("\n\n"));
       if (extra instanceof Node) frag.append(extra);
-      else if (extra) frag.append(document.createTextNode(extra));
+      else if (extra) frag.append(linkifiedText(extra));
       return frag;
     };
     const doubt = node && node.uncertainty && node.uncertainty.length
@@ -346,7 +346,11 @@ export function makePills(P) {
         t(`uncertain.${u.kind}`, uncertaintyArgs(u.args))));
       const src = (u.sources || []).map(sourceTipLine)
         .filter((line) => line && !shown.includes(line)).join("\n\n");
-      if (src) li.appendChild(el("div", "src-uncertain-src", src));
+      if (src) {
+        const srcEl = el("div", "src-uncertain-src");
+        srcEl.appendChild(linkifiedText(src));
+        li.appendChild(srcEl);
+      }
       ul.appendChild(li);
     }
     box.appendChild(ul);
@@ -371,7 +375,7 @@ export function makePills(P) {
     frag.appendChild(uncertaintyTip(list,
       extra instanceof Node ? extra.textContent : extra || ""));
     if (extra instanceof Node) frag.append(extra);
-    else if (extra) frag.append(document.createTextNode(extra));
+    else if (extra) frag.append(linkifiedText(extra));
     return frag;
   };
 
