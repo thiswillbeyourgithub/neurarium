@@ -1,7 +1,7 @@
 // Drug-binding rows: the Ki chip with its corpus reference, the effect glyph, the
 // binding row itself, and the lists of drugs acting on a target (grouped by category).
 
-import { heading } from "./dom.js";
+import { emptySection, heading } from "./dom.js";
 import { bindingKi, EFFECT_GLYPHS } from "./format.js";
 
 const { t } = window.__I18N__;
@@ -255,9 +255,14 @@ export function makeBindings(P) {
     borrowed: (data.prodrugsByTarget && data.prodrugsByTarget.get(targetId)) || [],
   });
 
-  const appendInteractingDrugs = (targetId) => {
+  // `kind`: "receptor" | "target", the empty section's wording.
+  const appendInteractingDrugs = (targetId, kind) => {
     const { list, borrowed } = interactorsOf(targetId);
-    if (!list.length && !borrowed.length) return;
+    if (!list.length && !borrowed.length) {
+      body.appendChild(emptySection(heading("h3", t("targets.interactingDrugs"),
+        t("targets.interactingDrugsSub")), kind, { tourSec: "drugs" }));
+      return;
+    }
     const wrap = el("div", "info-bindings info-interactors");
     wrap.dataset.tourSec = "drugs"; // guided-tour section anchor
     wrap.appendChild(heading("h3", `${t("targets.interactingDrugs")} (${list.length})`,
@@ -277,7 +282,10 @@ export function makeBindings(P) {
     const withDrugs = subtypes
       .map(interactorsOf)
       .filter((s) => s.list.length || s.borrowed.length);
-    if (!withDrugs.length) return;
+    if (!withDrugs.length) {
+      body.appendChild(emptySection(el("h3", null, t("targets.bySubtype")), "target"));
+      return;
+    }
     const wrap = el("div", "info-bindings info-interactors info-subtype-interactors");
     wrap.appendChild(el("h3", null, t("targets.bySubtype")));
     for (const { list, borrowed } of withDrugs) {

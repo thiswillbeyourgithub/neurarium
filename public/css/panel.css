@@ -32,6 +32,7 @@
 .info-bindings h3,
 .info-bindings > summary, /* a collapsed section's summary IS its heading */
 .panel-sec > summary,
+.panel-sec-empty > .panel-sec-head, /* an empty section: a summary look, no fold */
 .info-locations h3 {
   font-size: 11px;
   text-transform: uppercase;
@@ -57,6 +58,13 @@
    one step in under its heading. */
 .panel-sec { margin: 0 0 var(--sp-m); }
 .panel-sec > .panel-sec-body { padding-left: var(--sp-indent); }
+/* An empty section (panel/dom.js emptySection): its heading stays unfolded, the
+   caret's room kept blank so it lines up with the folded ones, then one muted line. */
+.panel-sec-empty > .panel-sec-head::before {
+  content: "\25B8"; display: inline-block; margin-right: 6px; visibility: hidden;
+}
+.panel-sec-none { margin: 0; font-size: 12px; font-style: italic; color: var(--muted); }
+.panel-sec.panel-sec-empty > .panel-sec-none { padding-left: var(--sp-indent); }
 .info-connections ul,
 .info-bindings ul,
 .info-locations ul { list-style: none; margin: 0; padding: 0; }

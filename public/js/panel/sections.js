@@ -3,7 +3,7 @@
 
 import { attachTip } from "./tooltip.js";
 import { isWebUrl } from "../web-url.js";
-import { extLink, btn, heading, withSubtitle } from "./dom.js";
+import { extLink, btn, emptySection, heading, withSubtitle } from "./dom.js";
 import { deriveReleaseChanges, transmitterVars } from "../release-modulation.js";
 import { formatConditions, groupWorkup } from "../workup.js";
 import { groupByVariant, variantsForDrug } from "../receptor-variants.js";
@@ -34,15 +34,23 @@ export function makeSections(P) {
   // (`caveatKey`) after the content and mounts the section on the panel. `nested`
   // makes it an `<h4>` subsection (dom.js subSection's look) of a section the caller
   // builds: `close()` then returns it unmounted, for the caller to place.
+  // `empty` (the panel's node kind): no data, so the section is its heading plus the
+  // shared "no information" line (dom.js emptySection), no caption; `close()` mounts
+  // it the same way and the list builders are never used.
   const betaSection = (tourSec, headingKey, hintKey,
     { vars, grouped = false, caveatKey = null, beta = true, cls = "info-effects", subKey = null,
-      nested = false } = {}) => {
-    const sec = el("div", `info-locations ${cls}${nested ? " panel-subsec" : ""}`);
-    sec.dataset.tourSec = tourSec;
+      nested = false, empty = null } = {}) => {
     const sub = subKey && t(subKey);
     const tag = nested ? "h4" : "h3";
-    sec.appendChild(beta ? betaHeading(headingKey, vars, sub, tag)
-      : heading(tag, t(headingKey, vars), sub, nested ? "panel-subsec-title" : null));
+    const head = beta ? betaHeading(headingKey, vars, sub, tag)
+      : heading(tag, t(headingKey, vars), sub, nested ? "panel-subsec-title" : null);
+    if (empty) {
+      const sec = emptySection(head, empty, { tourSec, cls: `info-locations ${cls}` });
+      return { sec, close: () => (nested ? sec : body.appendChild(sec)) };
+    }
+    const sec = el("div", `info-locations ${cls}${nested ? " panel-subsec" : ""}`);
+    sec.dataset.tourSec = tourSec;
+    sec.appendChild(head);
     sec.appendChild(el("p", "legend-caption", t(hintKey)));
     const ul = grouped ? null : sec.appendChild(el("ul"));
     const group = (label, headCls = "loc-group-label") => {
@@ -107,12 +115,12 @@ export function makeSections(P) {
   // node with its own pill, grouped under one heading per mode (Agonism, Antagonism,
   // ..., groupByMode). An owner with no effect but a recorded search (`unknown`,
   // {searched, corpora}) gets one row with the blue UNKNOWN pill naming that search;
-  // with neither, nothing.
-  const appendEffects = (rows, unknown) => {
+  // with neither, the empty section. `kind`: "receptor" | "target" (its wording).
+  const appendEffects = (rows, unknown, kind) => {
     const has = !!(rows && rows.length);
-    if (!has && !unknown) return;
     const { ul, group, close } = betaSection("effects", "effects.heading", "effects.hint",
-      { grouped: has, subKey: "effects.headingSub" });
+      { grouped: has, subKey: "effects.headingSub", empty: has || unknown ? null : kind });
+    if (!has && !unknown) return close();
     if (!has) {
       const li = el("li");
       li.appendChild(el("span", "loc-name", t("effects.unknown")));
@@ -148,9 +156,9 @@ export function makeSections(P) {
   // Folded with the rest of the drug panel by its final foldSections.
   const appendPossibleEffects = (drug) => {
     const effects = data.possibleEffectsByDrug.get(drug.id) || [];
-    if (!effects.length) return;
     const { sec, ul, close } = betaSection("effects", "effects.drugHeading", "effects.drugHint",
-      { subKey: "effects.drugHeadingSub" });
+      { subKey: "effects.drugHeadingSub", empty: effects.length ? null : "drug" });
+    if (!effects.length) return close();
     const mix = mixedCompounds(drug, sec, ul, effects.flatMap((e) => e.via));
     for (const e of effects) {
       ul.appendChild(derivedRow(effectLink(e.effect, t("effects.couldCause", { effect: e.label })),
@@ -168,10 +176,11 @@ export function makeSections(P) {
   // A receptor panel's "Release modulation" section (BETA): one row per
   // receptor_release_modulation node, "activating it decreases dopamine release"
   // + "heteroreceptor on GABA interneurons in VTA" with that node's own pill.
-  const appendDownstream = (rows) => {
-    if (!rows || !rows.length) return;
+  const appendDownstream = (rows, kind) => {
+    const has = !!(rows && rows.length);
     const { ul, close } = betaSection("downstream", "relmod.heading", "relmod.hint",
-      { subKey: "relmod.headingSub" });
+      { subKey: "relmod.headingSub", empty: has ? null : kind });
+    if (!has) return close();
     for (const n of rows) {
       const li = el("li", "eff-row");
       li.appendChild(el("span", "loc-name", t(`relmod.activation.${n.effect}`,
@@ -188,10 +197,11 @@ export function makeSections(P) {
   // receptor_demographic node, a direction chip ("↓ Age") then the conditional
   // sentence ("reported to decline with age in Caudate nucleus") with that node's own
   // pill, and the paper's own magnitude wording under it when it states one.
-  const appendDemographics = (rows) => {
-    if (!rows || !rows.length) return;
+  const appendDemographics = (rows, kind) => {
+    const has = !!(rows && rows.length);
     const { ul, close } = betaSection("demographics", "demog.heading", "demog.hint",
-      { subKey: "demog.headingSub" });
+      { subKey: "demog.headingSub", empty: has ? null : kind });
+    if (!has) return close();
     for (const n of rows) {
       const li = el("li", "eff-row");
       li.appendChild(el("span", "demog-chip", `${n.glyph} ${n.factorLabel}`));
@@ -237,11 +247,12 @@ export function makeSections(P) {
   // A receptor / target panel's "Pharmacogenomics" section (ClinPGx #20): the gene's
   // annotated variants, one sub-heading per variant, strongest level first, folded,
   // with the not-medical-advice caveat once at the end.
-  const appendVariants = (rows) => {
-    if (!rows || !rows.length) return;
+  const appendVariants = (rows, kind) => {
+    const has = !!(rows && rows.length);
     const { group, close } = betaSection("variants", "variant.heading", "variant.hint",
       { beta: false, cls: "info-variants", grouped: true, caveatKey: "variant.caveat",
-        subKey: "variant.headingSub" });
+        subKey: "variant.headingSub", empty: has ? null : kind });
+    if (!has) return close();
     for (const g of groupByVariant(rows)) {
       const ul = group(g.variant, "var-name");
       for (const row of g.rows) ul.appendChild(variantRow(row));
@@ -252,13 +263,14 @@ export function makeSections(P) {
   // The drug panel's "Pharmacogenomic associations (ClinPGx)": every receptor_variant
   // node naming this drug, grouped under the target whose gene carries it (the
   // heading jumps to that target). A BETA subsection of the drug's Pharmacogenomics
-  // section (views/drug.js), returned for the caller to place; null when none.
+  // section (views/drug.js), returned for the caller to place (the empty subsection
+  // when none).
   const drugVariantsSubsection = (drug) => {
     const hits = variantsForDrug(drug.id, data.targets);
-    if (!hits.length) return null;
     const { group, close } = betaSection("variants", "variant.drugHeading", "variant.drugHint",
       { cls: "info-variants", grouped: true, caveatKey: "variant.caveat",
-        subKey: "variant.drugHeadingSub", nested: true });
+        subKey: "variant.drugHeadingSub", nested: true, empty: hits.length ? null : "drug" });
+    if (!hits.length) return close();
     const byTarget = new Map();
     for (const { target, row } of hits) {
       if (!byTarget.has(target)) byTarget.set(target, []);
@@ -283,9 +295,9 @@ export function makeSections(P) {
   const appendReleaseChanges = (drug) => {
     const changes = deriveReleaseChanges(
       drug.allBindings, (tid) => data.modulationByTarget.get(tid) || [], data.meta.effectModes);
-    if (!changes.length) return;
     const { sec, ul, close } = betaSection("downstream", "relmod.drugHeading", "relmod.drugHint",
-      { subKey: "relmod.headingSub" });
+      { subKey: "relmod.headingSub", empty: changes.length ? null : "drug" });
+    if (!changes.length) return close();
     const mix = mixedCompounds(drug, sec, ul, changes.flatMap((c) => c.via));
     for (const c of changes) {
       ul.appendChild(derivedRow(t(`relmod.could.${c.direction}`,
@@ -300,9 +312,11 @@ export function makeSections(P) {
   // hover). Neutral wording ("the French label asks for"), plus the not-medical-advice
   // caveat, since a label's checklist is a regulatory text, not a care plan.
   const appendWorkup = (drug) => {
-    if (!drug.workup || !drug.workup.length) return;
+    const has = !!(drug.workup && drug.workup.length);
     const { group, close } = betaSection("workup", "drug.workup", "drug.workupHint",
-      { grouped: true, caveatKey: "drug.workupCaveat", subKey: "drug.workupSub" });
+      { grouped: true, caveatKey: "drug.workupCaveat", subKey: "drug.workupSub",
+        empty: has ? null : "drug" });
+    if (!has) return close();
     for (const g of groupWorkup(drug.workup)) {
       const list = group(t(`drug.workup.${g.timing}`));
       for (const n of g.rows) {

@@ -67,12 +67,12 @@ export function showTarget(P, target) {
 
   // Where it sits (the same "Regional distribution" list as a receptor; empty -> no footprint).
   appendFoundIn(target, target.locationBases);
-  appendEffects(target.effectInfo, target.effectsUnknown);
-  appendDemographics(target.demographicInfo);
-  appendVariants(target.variantInfo);
+  appendEffects(target.effectInfo, target.effectsUnknown, "target");
+  appendDemographics(target.demographicInfo, "target");
+  appendVariants(target.variantInfo, "target");
 
   // Drugs that act on this target, grouped by category.
-  appendInteractingDrugs(target.id);
+  appendInteractingDrugs(target.id, "target");
   // For a receptor_group (α2 / glutamate): drugs binding each modeled subtype
   // (α2A/B/C/D, ...) in a collapsed per-subtype dropdown below the group's own.
   appendSubtypeInteractors(target.subtypes);

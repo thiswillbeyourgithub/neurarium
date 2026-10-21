@@ -2,7 +2,7 @@
 // grouped by legend group), and the targets expressed in a structure.
 
 import { groupTargetsBySystem } from "../legend/targets.js";
-import { heading } from "./dom.js";
+import { emptySection, heading } from "./dom.js";
 
 const { t } = window.__I18N__;
 
@@ -116,7 +116,11 @@ export function makeExpression(P) {
 
   const appendExpressedTargets = (base) => {
     const entries = (data.targetsByStructure || new Map()).get(base) || [];
-    if (!entries.length) return;
+    if (!entries.length) {
+      body.appendChild(emptySection(heading("h3", t("structure.expressed"),
+        t("structure.expressedSub")), "structure", { tourSec: "expressed" }));
+      return;
+    }
     // One row per target: a target cannot be expressed twice in one region, but the
     // index is built per (target, region) so guard anyway rather than double-list.
     const byId = new Map(entries.map((e) => [e.target.id, e]));
@@ -188,9 +192,16 @@ export function makeExpression(P) {
    * @param {?string} [tourSec] guided-tour section anchor (`data-tour-sec`)
    */
   const appendFoundIn = (owner, bases, tourSec = null) => {
+    const head = heading("h3", t("receptor.foundIn"), t("receptor.foundInSub"));
+    // No region and not ubiquitous: a stub with no CNS role, said in its own words.
+    if (!owner.ubiquitous && !owner.locationNames.length) {
+      body.appendChild(emptySection(head, owner.kind === "receptor" ? "receptor" : "target",
+        { tourSec, cls: "info-locations", text: t("receptor.noRole") }));
+      return;
+    }
     const where = el("div", "info-locations");
     if (tourSec) where.dataset.tourSec = tourSec;
-    where.appendChild(heading("h3", t("receptor.foundIn"), t("receptor.foundInSub")));
+    where.appendChild(head);
     if (owner.ubiquitous) {
       const p = el("p", "info-desc info-desc-pilled", t("receptor.ubiquitous"));
       const u = owner.ubiquitousInfo;
@@ -200,8 +211,6 @@ export function makeExpression(P) {
         p.appendChild(P.makeProvenancePill(u.provenance, tip));
       }
       where.appendChild(p);
-    } else if (!owner.locationNames.length) {
-      where.appendChild(el("p", "info-desc", t("receptor.noRole")));
     } else {
       where.appendChild(locationList(owner.locationNames, bases,
         owner.locationInfo, owner.densityInfo));

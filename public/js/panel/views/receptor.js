@@ -64,13 +64,13 @@ export function showReceptor(P, receptor) {
 
   // Where it is expressed.
   appendFoundIn(receptor, receptor.locations, "regions"); // guided-tour section anchor
-  appendEffects(receptor.effectInfo, receptor.effectsUnknown);
-  appendDownstream(receptor.modulationInfo);
-  appendDemographics(receptor.demographicInfo);
-  appendVariants(receptor.variantInfo);
+  appendEffects(receptor.effectInfo, receptor.effectsUnknown, "receptor");
+  appendDownstream(receptor.modulationInfo, "receptor");
+  appendDemographics(receptor.demographicInfo, "receptor");
+  appendVariants(receptor.variantInfo, "receptor");
 
   // Drugs that act on this receptor, grouped by category.
-  appendInteractingDrugs(receptor.id);
+  appendInteractingDrugs(receptor.id, "receptor");
   // Headed sections start folded, like the drug panel (see foldSections).
   foldBody();
 }

@@ -86,6 +86,61 @@ export function subSection(title, cls = "", sub = null) {
   return sec;
 }
 
+/**
+ * A heading's text lowered for use mid-sentence ("Age and sex differences" ->
+ * "age and sex differences"), its first letter only, and never an acronym's ("CNS
+ * penetration" stays). Twin of tools/api_sections.py lower_first (same rule, so the
+ * /api placeholder reads exactly like the panel's).
+ * @param {string} s
+ * @returns {string}
+ */
+export function lowerFirst(s) {
+  if (!s || (s.length > 1 && s[1] !== s[1].toLowerCase())) return s;
+  return s[0].toLowerCase() + s.slice(1);
+}
+
+/**
+ * The one "nothing recorded yet" sentence of an empty panel section (i18n
+ * `info.noData`): "No information about <section> for this <kind> yet.", so a reader
+ * of one panel still learns the dataset tracks that section for other nodes.
+ * @param {string} title  the section's localized heading
+ * @param {string} kind   the panel's node kind (`info.kindThis.<kind>`)
+ * @returns {string}
+ */
+export function noDataText(title, kind) {
+  const { t } = window.__I18N__;
+  return t("info.noData", { what: lowerFirst(title), kind: t(`info.kindThis.${kind}`) });
+}
+
+/**
+ * An empty panel section: its heading (+ subtitle, + beta tag) then one muted
+ * placeholder line, never an accordion with nothing inside. An `<h3>` head is turned
+ * into a `div.panel-sec-head` so foldSections leaves the section open (no caret to
+ * click into emptiness); an `<h4>` head makes it an empty subsection. Every panel
+ * section skipped for lack of data goes through here (flags, such as the prodrug or
+ * combo notes and addon slots, simply stay hidden).
+ * @param {HTMLElement} head  built by heading() / betaHeading()
+ * @param {string} kind  the panel's node kind (see noDataText)
+ * @param {{tourSec?: ?string, cls?: string, text?: ?string}} [opts]  `text` replaces
+ *   the generic sentence where a section has its own (Regional distribution's
+ *   "no significant role" note)
+ * @returns {HTMLDivElement}
+ */
+export function emptySection(head, kind, { tourSec = null, cls = "", text = null } = {}) {
+  const title = [...head.childNodes].filter((n) => n.nodeType === 3)
+    .map((n) => n.textContent).join("").trim();
+  const sub = head.tagName === "H4";
+  const sec = el("div", `${sub ? "panel-subsec" : "panel-sec"} panel-sec-empty ${cls}`.trim());
+  if (tourSec) sec.dataset.tourSec = tourSec;
+  let top = head;
+  if (!sub) {
+    top = el("div", "panel-sec-head");
+    top.append(...head.childNodes);
+  }
+  sec.append(top, el("p", "panel-sec-none", text || noDataText(title, kind)));
+  return sec;
+}
+
 export function btn(cls, text) {
   const b = el("button", cls, text);
   b.type = "button";
