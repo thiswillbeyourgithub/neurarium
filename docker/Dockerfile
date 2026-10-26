@@ -9,7 +9,7 @@ RUN xcaddy build --with github.com/mholt/caddy-ratelimit
 
 # The /api Markdown pages (tools/render_api.py): rendered here from the data being
 # deployed, so they are never committed. Stdlib only, so a bare python image.
-FROM python:3.13-alpine AS api
+FROM python:3.15-alpine AS api
 COPY tools/render_api.py /src/tools/render_api.py
 COPY tools/api_sections.py /src/tools/api_sections.py
 COPY tools/lib/__init__.py /src/tools/lib/__init__.py
