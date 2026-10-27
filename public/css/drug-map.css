@@ -141,3 +141,7 @@
 #drugs-map:hover { background: rgba(var(--ink), 0.12); }
 #drugs-map .beta-tag { margin-left: 0; }
 .drugs-map-icon { width: 14px; height: 14px; fill: var(--accent); }
+
+/* "by Olivier Cornelis" under the title, like the main panel's byline. */
+#drugmap-title { margin-bottom: 0; }
+.dm-byline { margin: 2px 0 12px; }
