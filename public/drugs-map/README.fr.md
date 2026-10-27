@@ -1,14 +1,14 @@
-# Carte des substances
+# DrugsMap
 
 [English version](README.md)
 
-**En ligne :** [drugsmap.olicorne.org](https://drugsmap.olicorne.org/) (aussi sur [neurarium.olicorne.org/drugs-map](https://neurarium.olicorne.org/drugs-map))
-
-[![La carte des substances : les antipsychotiques atypiques et conventionnels placés selon leurs liaisons dopaminergiques, cholinergiques et histaminiques](screenshot.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmmkt=0&dmtgt=aadc,comt,d1,d2,d3,d4,d5,dat,mao_b,vmat2,ache,bche,m1,m2,m3,m4,m5,nachr_a4b2,nachr_a7,h1,h2,h3,h4)
-
-*Les antipsychotiques atypiques et conventionnels, placés selon leurs seules cibles dopaminergiques, cholinergiques et histaminiques (cliquer pour ouvrir exactement cette vue). La boîte « Sens des axes » indique les cibles qui pèsent le plus sur chaque axe.*
-
 Une carte interactive des médicaments psychiatriques et actifs sur le système nerveux central, placés selon la ressemblance de leurs profils de liaison aux récepteurs. Les substances qui touchent les mêmes récepteurs dans les mêmes proportions se retrouvent proches ; celles aux mécanismes sans rapport se retrouvent éloignées. C'est une page compagnon de [neurarium](https://neurarium.olicorne.org/), un atlas 3D interactif du cerveau pour les neurosciences psychiatriques, entièrement construite à partir du jeu de données sourcé que neurarium sert librement.
+
+Elle permet par exemple d'afficher les antipsychotiques de manière à représenter leur affinité dopaminergique, cholinergique et histaminergique (cliquer sur l'image pour ouvrir cette vue) :
+
+[![DrugsMap : les antipsychotiques atypiques et conventionnels placés selon leurs liaisons dopaminergiques, cholinergiques et histaminiques](screenshot.fr.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmmkt=0&dmtgt=aadc,comt,d1,d2,d3,d4,d5,dat,mao_b,vmat2,ache,bche,m1,m2,m3,m4,m5,nachr_a4b2,nachr_a7,h1,h2,h3,h4)
+
+**En ligne :** [drugsmap.olicorne.org](https://drugsmap.olicorne.org/) (aussi sur [neurarium.olicorne.org/drugs-map](https://neurarium.olicorne.org/drugs-map))
 
 Elle a été réalisée avec l'aide de [Claude Code](https://claude.com/claude-code).
 

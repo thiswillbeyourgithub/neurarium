@@ -2,13 +2,13 @@
 
 [Version française](README.fr.md)
 
-**Live:** [drugsmap.olicorne.org](https://drugsmap.olicorne.org/) (also at [neurarium.olicorne.org/drugs-map](https://neurarium.olicorne.org/drugs-map))
-
-[![The drugs map: the atypical and conventional antipsychotics placed by their dopamine, cholinergic and histamine binding](screenshot.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmmkt=0&dmtgt=aadc,comt,d1,d2,d3,d4,d5,dat,mao_b,vmat2,ache,bche,m1,m2,m3,m4,m5,nachr_a4b2,nachr_a7,h1,h2,h3,h4)
-
-*The atypical and conventional antipsychotics, placed by their dopamine, cholinergic and histamine targets only (click to open this exact view). The "Axis meaning" box names the targets each axis weighs most.*
-
 An interactive map of psychiatric and CNS-active drugs, placed by how similar their receptor binding profiles are. Drugs that hit the same receptors in the same proportions land close together; drugs with unrelated mechanisms land far apart. It is a companion page of [neurarium](https://neurarium.olicorne.org/), an interactive 3D atlas of the brain for psychiatric neuroscience, and it is built entirely from neurarium's openly served, sourced dataset.
+
+For example, it can lay out the antipsychotics so as to show their dopaminergic, cholinergic and histaminergic affinities (click the picture to open this view):
+
+[![The drugs map: the atypical and conventional antipsychotics placed by their dopamine, cholinergic and histamine binding](screenshot.en.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmmkt=0&dmtgt=aadc,comt,d1,d2,d3,d4,d5,dat,mao_b,vmat2,ache,bche,m1,m2,m3,m4,m5,nachr_a4b2,nachr_a7,h1,h2,h3,h4)
+
+**Live:** [drugsmap.olicorne.org](https://drugsmap.olicorne.org/) (also at [neurarium.olicorne.org/drugs-map](https://neurarium.olicorne.org/drugs-map))
 
 It was built with the help of [Claude Code](https://claude.com/claude-code).
 
