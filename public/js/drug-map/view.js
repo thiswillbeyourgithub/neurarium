@@ -1,12 +1,15 @@
-// The drug map popup (#drugmap-modal): every drug placed by a 2-component PCA of its
-// binding profile (js/drug-map/model.js), recomputed for whatever the filters leave
-// on screen. Controls: colour mode, names on/off, profile normalization, a year
-// range, per-category chips, and right-click (long-press) to hide a drug. Clicking a
-// point focuses that drug. Its whole view is mirrored into the URL (`dm*` keys).
+// The drug map popup (#drugmap-modal): every drug placed by 2-component PCA of its
+// feature vector (js/drug-map/model.js: receptor affinities, net transmitter tone, or
+// both), recomputed for whatever the filters leave on screen; pick one or two features
+// and they are plotted directly instead. Controls: feature source, colour mode, names
+// on/off, normalization, signed (agonist vs antagonist), year range, feature picker,
+// per-category chips, and right-click (long-press) to hide a drug. Clicking a point
+// opens that drug in a new browser tab. The whole view is mirrored into the URL
+// (`dm*` keys).
 
 import {
-  buildProfiles, categoryColor, colorize, COLOR_MODES, DEFAULT_VIEW, filterDrugs, pca,
-  primaryCategory,
+  buildProfiles, categoryColor, colorize, COLOR_MODES, DEFAULT_VIEW, directPoints,
+  FEATURE_SOURCES, filterDrugs, pca, primaryCategory, TONE_PREFIX,
 } from "./model.js";
 import { setDrugMapOpener } from "./link.js";
 import { LIST_SEP } from "../url-state.js";
@@ -29,18 +32,24 @@ const svgEl = (tag, attrs) => {
 };
 
 /**
- * @param {{data: object, wireModal: Function, onPick: (drug: object) => void,
- *   onChange: () => void}} o  onChange runs after every view change (URL sync)
+ * @param {{data: object, wireModal: Function, onChange: () => void}} o
+ *   onChange runs after any view change (URL sync)
  * @returns {{open: (patch?: object) => void, close: () => void, isOpen: boolean,
  *   registerUrl: (urlState: object) => void}}
  */
-export function createDrugMap({ data, wireModal, onPick, onChange }) {
+export function createDrugMap({ data, wireModal, onChange }) {
   const body = document.getElementById("drugmap-body");
   const drugs = data.drugs || [];
   const catLabels = data.meta.drugCategoryLabels || {};
-  const targetName = new Map();
-  for (const d of drugs) for (const b of d.bindings || []) targetName.set(b.target, b.targetName || b.target);
-  const profiles = { true: buildProfiles(drugs), false: buildProfiles(drugs, { normalize: false }) };
+  // Every feature key -> its display name: targets, then `tone:<kind>` systems.
+  const featureName = new Map();
+  for (const d of drugs) for (const b of d.bindings || []) featureName.set(b.target, b.targetName || b.target);
+  for (const d of drugs) {
+    for (const kind of Object.keys(d.flowSystems || {})) {
+      featureName.set(TONE_PREFIX + kind, t("drugmap.toneOf", { kind: (data.meta.kindLabels || {})[kind] || kind }));
+    }
+  }
+  const nameOf = (key) => featureName.get(key) || key;
   let view = { ...DEFAULT_VIEW, hidden: new Set() };
   let box = null; // the SVG viewBox once zoomed / panned, null = fit
   const ctrl = wireModal({
@@ -76,9 +85,48 @@ export function createDrugMap({ data, wireModal, onPick, onChange }) {
     lab.append(input, el("span", null, label));
     return { lab, input };
   };
+  const sourceSwitch = el("div", "seg-switch");
+  sourceSwitch.setAttribute("role", "group");
+  sourceSwitch.setAttribute("aria-label", t("drugmap.source"));
+  for (const m of FEATURE_SOURCES) {
+    const b = el("button", "seg-btn", t(`drugmap.source.${m}`));
+    b.type = "button";
+    b.dataset.mode = m;
+    b.title = t(`drugmap.sourceTip.${m}`);
+    b.addEventListener("click", () => setView({ source: m }));
+    sourceSwitch.appendChild(b);
+  }
   const labelsT = toggle("labels", t("drugmap.labels"));
   const normT = toggle("normalize", t("drugmap.normalize"));
   normT.lab.title = t("drugmap.normalizeTip");
+  const signT = toggle("signed", t("drugmap.signed"));
+  signT.lab.title = t("drugmap.signedTip");
+  // Feature picker: type a target / system name, Enter or pick adds it; each chosen
+  // feature is a removable chip. One or two = direct axes, more = PCA on that subset.
+  const picker = el("div", "dm-features");
+  const pickInput = el("input", "drugs-filter dm-feature-input");
+  pickInput.type = "search";
+  pickInput.placeholder = t("drugmap.pick");
+  pickInput.title = t("drugmap.pickTip");
+  pickInput.setAttribute("list", "dm-feature-list");
+  const datalist = el("datalist");
+  datalist.id = "dm-feature-list";
+  const keyByName = new Map([...featureName].map(([k, n]) => [n.toLowerCase(), k]));
+  for (const n of [...featureName.values()].sort((a, b) => a.localeCompare(b))) {
+    const o = el("option");
+    o.value = n;
+    datalist.appendChild(o);
+  }
+  const pickedBox = el("span", "dm-picked");
+  const addPicked = () => {
+    const key = keyByName.get(pickInput.value.trim().toLowerCase());
+    if (!key) return;
+    pickInput.value = "";
+    if (!(view.only || []).includes(key)) setView({ only: [...(view.only || []), key] });
+  };
+  pickInput.addEventListener("change", addPicked);
+  pickInput.addEventListener("keydown", (ev) => { if (ev.key === "Enter") addPicked(); });
+  picker.append(pickInput, datalist, pickedBox);
   const yearBox = el("span", "dm-years");
   const yearInput = (ph) => {
     const i = el("input", "drugs-filter dm-year");
@@ -96,7 +144,7 @@ export function createDrugMap({ data, wireModal, onPick, onChange }) {
   const unhide = el("button", "dm-unhide");
   unhide.type = "button";
   unhide.addEventListener("click", () => setView({ hidden: new Set() }));
-  controls.append(colorSwitch, labelsT.lab, normT.lab, yearBox, unhide);
+  controls.append(sourceSwitch, colorSwitch, labelsT.lab, normT.lab, signT.lab, yearBox, unhide);
 
   const chips = el("div", "dm-chips");
   const presentCats = [...new Set([...Object.keys(catLabels), ...drugs.map(primaryCategory)])]
@@ -129,7 +177,9 @@ export function createDrugMap({ data, wireModal, onPick, onChange }) {
   const axes = el("p", "dm-axes info-desc");
   const legend = el("div", "dm-legend");
   const note = el("p", "dm-note info-desc");
-  body.replaceChildren(controls, chips, svg, axes, legend, note);
+  const plotWrap = el("div", "dm-plot-wrap");
+  plotWrap.append(svg, el("span", "dm-watermark", `${t("drugmap.watermark")} · ${location.host}`));
+  body.replaceChildren(controls, picker, chips, plotWrap, axes, legend, note);
   wireZoom(svg, () => box, (b) => { box = b; drawPoints(); });
 
   // ---- Render: filter, project, colour, draw.
@@ -137,8 +187,19 @@ export function createDrugMap({ data, wireModal, onPick, onChange }) {
   let fit = { x: 0, y: 0, w: W, h: H };
   function render() {
     for (const b of colorSwitch.children) b.classList.toggle("active", b.dataset.mode === view.color);
+    for (const b of sourceSwitch.children) b.classList.toggle("active", b.dataset.mode === view.source);
     labelsT.input.checked = view.labels;
     normT.input.checked = view.normalize;
+    signT.input.checked = view.signed;
+    pickedBox.replaceChildren(...(view.only || []).map((key, i) => {
+      const chip = el("button", "dm-chip active", `${view.only.length <= 2 ? `${"xy"[i]}: ` : ""}${nameOf(key)} ×`);
+      chip.type = "button";
+      chip.addEventListener("click", () => {
+        const only = view.only.filter((k) => k !== key);
+        setView({ only: only.length ? only : null });
+      });
+      return chip;
+    }));
     yearFrom.value = view.years && view.years[0] ? view.years[0] : "";
     yearTo.value = view.years && view.years[1] < 9999 ? view.years[1] : "";
     unhide.hidden = !view.hidden.size;
@@ -148,14 +209,18 @@ export function createDrugMap({ data, wireModal, onPick, onChange }) {
       chip.classList.toggle("active", !!view.cats && view.cats.has(chip.dataset.cat));
     }
 
-    const prof = profiles[view.normalize];
+    // One or two picked features are the axes themselves: raw values, since unit
+    // length over two numbers would put every drug on a circle.
+    const direct = view.only && view.only.length <= 2;
+    const prof = buildProfiles(drugs, { ...view, normalize: view.normalize && !direct });
     const kept = filterDrugs(drugs, view);
     const shown = kept.filter((d) => prof.has(d.id));
     const unplaced = kept.length - shown.length;
-    const { points, axes: pcs } = shown.length
-      ? pca(shown.map((d) => d.id), prof) : { points: new Map(), axes: [] };
+    const ids = shown.map((d) => d.id);
+    const { points, axes: pcs } = !shown.length ? { points: new Map(), axes: [] }
+      : direct ? { points: directPoints(ids, prof, view.only), axes: null } : pca(ids, prof);
     const { colorOf, legend: keyRows, ramp } = colorize(shown, view.color,
-      { catLabels, unknown: t("drugmap.unknown") });
+      { catLabels, unknown: t("drugmap.unknown"), t });
     placed = shown.map((d) => ({ drug: d, ...points.get(d.id), color: colorOf.get(d.id) }));
     const xs = placed.map((p) => p.x), ys = placed.map((p) => p.y);
     const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
@@ -169,7 +234,9 @@ export function createDrugMap({ data, wireModal, onPick, onChange }) {
     fit = { x: 0, y: 0, w: W, h: H };
     drawPoints();
 
-    axes.replaceChildren(...pcs.map((ax, i) => el("span", "dm-axis", axisText(ax, i))));
+    axes.replaceChildren(...(pcs
+      ? pcs.map((ax, i) => el("span", "dm-axis", axisText(ax, i)))
+      : view.only.map((key, i) => el("span", "dm-axis", t("drugmap.axisDirect", { axis: ["x →", "y ↑"][i], name: nameOf(key) })))));
     legend.replaceChildren(...legendRows(keyRows, ramp));
     note.textContent = [
       t("drugmap.count", { n: shown.length }),
@@ -180,7 +247,7 @@ export function createDrugMap({ data, wireModal, onPick, onChange }) {
 
   // "PC1 (34%): D2, 5-HT2A, H1 vs SERT, NET": the targets that pull each way most.
   function axisText(ax, i) {
-    const name = (l) => targetName.get(l.target) || l.target;
+    const name = (l) => nameOf(l.target);
     const pos = ax.loadings.filter((l) => l.w > 0).slice(0, 3).map(name);
     const neg = ax.loadings.filter((l) => l.w < 0).slice(0, 3).map(name);
     return t("drugmap.axis", {
@@ -221,7 +288,7 @@ export function createDrugMap({ data, wireModal, onPick, onChange }) {
       title.textContent = [p.drug.displayName, p.drug.categoryLabels.join(" · "), yr,
         p.drug.originator && p.drug.originator.name].filter(Boolean).join("\n");
       c.appendChild(title);
-      c.addEventListener("click", () => { ctrl.close(); onPick(p.drug); });
+      c.addEventListener("click", () => window.open(drugUrl(p.drug), "_blank", "noopener"));
       c.addEventListener("contextmenu", (ev) => {
         ev.preventDefault();
         setView({ hidden: new Set([...view.hidden, p.drug.id]) });
@@ -267,9 +334,17 @@ export function createDrugMap({ data, wireModal, onPick, onChange }) {
         (v) => ({ color: COLOR_MODES.includes(v) ? v : DEFAULT_VIEW.color }));
       reg("dmlabels", () => (view.labels ? "1" : null), (v) => ({ labels: v === "1" }));
       reg("dmnorm", () => (view.normalize ? null : "0"), (v) => ({ normalize: v !== "0" }));
+      reg("dmsign", () => (view.signed ? "1" : null), (v) => ({ signed: v === "1" }));
+      reg("dmsrc", () => (view.source !== DEFAULT_VIEW.source ? view.source : null),
+        (v) => ({ source: FEATURE_SOURCES.includes(v) ? v : DEFAULT_VIEW.source }));
+      reg("dmtgt", () => (view.only ? view.only.join(LIST_SEP) : null),
+        (v) => ({ only: v ? v.split(LIST_SEP) : null }));
     },
   };
 }
+
+// This page, opened on one drug's tab (the `tabs` deep link, js/url-state.js).
+const drugUrl = (drug) => `${location.origin}${location.pathname}${location.search}#tabs=drug:${encodeURIComponent(drug.id)}`;
 
 // Wheel to zoom about the pointer, drag to pan, double-click to refit: all by moving
 // the SVG viewBox (`get` null = the fitted frame).

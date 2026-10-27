@@ -32,9 +32,26 @@
   cursor: grab;
   touch-action: none;
 }
-.dm-point { cursor: pointer; stroke: var(--page-bg); stroke-width: 0.6; }
+/* The outline reads the ink token so pale points stay visible on the light page too. */
+.dm-point { cursor: pointer; stroke: rgba(var(--ink), 0.35); stroke-width: 0.6; }
 .dm-point:hover { stroke: var(--text); }
 .dm-label { fill: var(--text); pointer-events: none; }
+.dm-plot-wrap { position: relative; }
+/* A legible but quiet credit, so a shared screenshot says where it came from. */
+.dm-watermark {
+  position: absolute;
+  right: 10px;
+  bottom: 6px;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  opacity: 0.35;
+  pointer-events: none;
+  user-select: none;
+}
+.dm-features { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; margin: 8px 0 0; }
+.drugs-filter.dm-feature-input { width: 200px; margin: 0; padding: 2px 6px; }
+.dm-picked { display: inline-flex; flex-wrap: wrap; gap: 4px; }
 .dm-axes { display: flex; flex-direction: column; gap: 2px; margin: 8px 0 4px; font-size: 11px; }
 .dm-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; font-size: 11px; color: var(--muted); }
 .dm-key { display: inline-flex; align-items: center; gap: 5px; }

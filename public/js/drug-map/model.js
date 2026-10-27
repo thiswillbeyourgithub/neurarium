@@ -2,19 +2,31 @@
 // each drug's binding profile as an affinity vector over the targets, a 2-component
 // PCA of the drugs on screen, the view filter, and the point colours.
 //
-// Affinity: one dimension per target, `pKi - PKI_FLOOR` where pKi = 9 - log10(Ki nM),
-// so a Ki of 10 µM or weaker scores 0 (too weak to matter) and 1 nM scores 4. A binding
-// with no measured Ki (a Stahl-listed one, say) is not ignored: it is a binding a source
-// states, so it gets PKI_UNMEASURED, a middling affinity. With `normalize` (the default)
-// each profile is then scaled to unit length, so the map places drugs by the SHAPE of
-// their profile (which targets, in what proportion), not by how potent they are overall
-// or how many targets a corpus happened to list; without it, raw affinities, so a
-// potent, promiscuous drug sits further out than a weak, selective one.
+// Features, each drug one vector over named keys:
+//   - receptors: one key per target, affinity `pKi - PKI_FLOOR` where pKi = 9 - log10(Ki
+//     nM), so a Ki of 10 µM or weaker scores 0 (too weak to matter) and 1 nM scores 4. A
+//     binding with no measured Ki (a Stahl-listed one, say) is not ignored: a source
+//     states it, so it gets PKI_UNMEASURED, a middling affinity. `signed` multiplies it
+//     by the binding's net effect (EFFECT_SIGN), so an agonist and an antagonist of one
+//     receptor land on opposite sides; a binding with no stated direction then counts 0.
+//   - tone: one key per transmitter system (`tone:<kind>`), the drug's signed net tone
+//     (`drug.flowSystems[kind].sum`, the panel's "net neurotransmission").
+//   - both: the two blocks side by side.
+// With `normalize` (the default) each block is scaled to unit length on its own, so the
+// map places drugs by the SHAPE of a profile (which targets, in what proportion), not by
+// overall potency or how many targets a corpus happened to list, and in "both" the
+// receptor and tone blocks weigh the same; without it, raw values, so a potent,
+// promiscuous drug sits further out than a weak, selective one.
 
 /** pKi at and below which a binding counts as no binding (Ki >= 10 µM). */
 export const PKI_FLOOR = 5;
 /** Assumed pKi for a stated binding without a measured Ki (100 nM). */
 export const PKI_UNMEASURED = 7;
+/** Signed mode: a binding's net effect as a sign. A partial agonist / modulator
+ *  ("modulate") counts as half an agonist; an affinity-only binding (no effect) as 0. */
+export const EFFECT_SIGN = { boost: 1, block: -1, modulate: 0.5 };
+export const FEATURE_SOURCES = ["receptors", "tone", "both"];
+export const TONE_PREFIX = "tone:";
 
 const affinityOf = (b) => {
   const ki = b.ki && typeof b.ki.median === "number" ? b.ki.median : null;
@@ -23,29 +35,53 @@ const affinityOf = (b) => {
 };
 
 /**
- * Each drug's unit-length affinity profile. Uses `drug.bindings` (which carries a
- * prodrug's borrowed bindings, so lisdexamfetamine sits by dextroamphetamine) and not
- * the separate active-metabolite bindings. A target bound twice keeps its strongest
- * affinity. Drugs with no nonzero affinity get no profile (they cannot be placed).
+ * Each drug's feature vector (see the module comment). Receptor features use
+ * `drug.bindings` (which carries a prodrug's borrowed bindings, so lisdexamfetamine sits
+ * by dextroamphetamine), not the separate active-metabolite bindings; a target bound
+ * twice keeps its strongest value. `only` keeps just those keys (target ids and/or
+ * `tone:<kind>`). Drugs whose vector is all zero get none (they cannot be placed).
  * @param {object[]} drugs
- * @param {{normalize?: boolean}} [opts]  scale each profile to unit length (default on)
- * @returns {Map<string, Map<string, number>>} drug id -> (target id -> weight)
+ * @param {{normalize?: boolean, signed?: boolean, source?: string, only?: string[]|null}} [opts]
+ * @returns {Map<string, Map<string, number>>} drug id -> (feature key -> value)
  */
-export function buildProfiles(drugs, { normalize = true } = {}) {
+export function buildProfiles(drugs, { normalize = true, signed = false, source = "receptors", only = null } = {}) {
+  const keep = only && only.length ? new Set(only) : null;
   const out = new Map();
   for (const d of drugs) {
-    const v = new Map();
-    for (const b of d.bindings || []) {
-      if (!b.target) continue;
-      const a = affinityOf(b);
-      if (a > (v.get(b.target) || 0)) v.set(b.target, a);
+    const rec = new Map(), tone = new Map();
+    if (source !== "tone") {
+      for (const b of d.bindings || []) {
+        if (!b.target) continue;
+        const a = affinityOf(b) * (signed ? EFFECT_SIGN[b.effect] || 0 : 1);
+        if (Math.abs(a) > Math.abs(rec.get(b.target) || 0)) rec.set(b.target, a);
+      }
     }
-    const norm = Math.hypot(...v.values());
-    if (!norm) continue;
-    if (normalize) for (const [k, w] of v) v.set(k, w / norm);
-    out.set(d.id, v);
+    if (source !== "receptors") {
+      for (const [kind, f] of Object.entries(d.flowSystems || {})) {
+        if (f.sum) tone.set(TONE_PREFIX + kind, f.sum);
+      }
+    }
+    const v = new Map();
+    for (const block of [rec, tone]) {
+      const kept = [...block].filter(([k, w]) => w && (!keep || keep.has(k)));
+      const norm = Math.hypot(...kept.map(([, w]) => w));
+      for (const [k, w] of kept) v.set(k, normalize ? w / norm : w);
+    }
+    if (v.size) out.set(d.id, v);
   }
   return out;
+}
+
+/**
+ * Plot one or two chosen features directly, no PCA: x = the first key's value, y =
+ * the second's (0 when only one is chosen). What "5-HT2A vs D2" asks for.
+ * @returns {Map<string, {x:number, y:number}>}
+ */
+export function directPoints(ids, profiles, keys) {
+  return new Map(ids.map((id) => {
+    const v = profiles.get(id);
+    return [id, { x: v.get(keys[0]) || 0, y: keys[1] ? v.get(keys[1]) || 0 : 0 }];
+  }));
 }
 
 /**
@@ -137,9 +173,31 @@ export const DEFAULT_VIEW = Object.freeze({
   color: "category",   // one of COLOR_MODES
   labels: false,
   normalize: true,     // unit-length profiles (see buildProfiles)
+  signed: false,       // agonist vs antagonist on opposite signs
+  source: "receptors", // one of FEATURE_SOURCES
+  only: null,          // null = every feature, else the chosen keys, in pick order
 });
 
-export const COLOR_MODES = ["category", "nbn", "year", "lab"];
+// A drug's major metabolic route: the enzymes a source calls its MAJOR substrate route,
+// else its one substrate enzyme when it has only one (its only stated route).
+function routeOf(d) {
+  const subs = (d.enzymes || []).filter((e) => e.role === "substrate");
+  const major = subs.filter((e) => e.strength === "major");
+  const pick = major.length ? major : subs.length === 1 ? subs : [];
+  if (!pick.length) return null;
+  const names = [...new Set(pick.map((e) => e.label || e.enzyme))].sort();
+  return [names.join(" + "), names.join(" + ")];
+}
+
+// Whether a drug's bindings all carry a measured Ki: "all" / "some" / "none".
+function kiCoverage(d) {
+  const bs = d.bindings || [];
+  if (!bs.length) return null;
+  const n = bs.filter((b) => b.ki && typeof b.ki.median === "number").length;
+  return n === bs.length ? "all" : n ? "some" : "none";
+}
+
+export const COLOR_MODES = ["category", "nbn", "year", "lab", "route", "ki"];
 
 export const primaryCategory = (d) => (d.categories && d.categories[0]) || "other";
 
@@ -157,6 +215,9 @@ export function filterDrugs(drugs, view) {
 }
 
 const UNKNOWN_COLOR = "#8a8f98";
+// Ki coverage reads as a traffic light: every binding measured, some, none.
+const KI_KEYS = ["all", "some", "none"];
+const KI_COLORS = { all: "hsl(140, 55%, 52%)", some: "hsl(42, 80%, 55%)", none: "hsl(355, 70%, 60%)" };
 // Categorical hue for the i-th key: golden-angle steps keep neighbours apart.
 const hue = (i) => `hsl(${Math.round((i * 137.508) % 360)}, 62%, 56%)`;
 
@@ -173,11 +234,11 @@ export function categoryColor(cat, catLabels) {
  * `keyOrder` then of the drugs; `year` is a ramp, older paler, more recent stronger.
  * @param {object[]} drugs  the placed drugs
  * @param {string} mode
- * @param {{catLabels: Object<string,string>, unknown: string}} ctx
+ * @param {{catLabels: Object<string,string>, unknown: string, t: Function}} ctx
  * @returns {{colorOf: Map<string,string>, legend: {label:string, color:string, count:number}[],
  *   ramp: {from:number, to:number}|null}}
  */
-export function colorize(drugs, mode, { catLabels, unknown }) {
+export function colorize(drugs, mode, { catLabels, unknown, t }) {
   const colorOf = new Map();
   if (mode === "year") {
     const years = drugs.map((d) => d.firstApproval && d.firstApproval.year).filter(Boolean);
@@ -194,6 +255,8 @@ export function colorize(drugs, mode, { catLabels, unknown }) {
     category: (d) => [primaryCategory(d), catLabels[primaryCategory(d)] || primaryCategory(d)],
     nbn: (d) => (d.nbn ? [d.nbn, d.nbn] : null),
     lab: (d) => (d.originator && d.originator.name ? [d.originator.name, d.originator.name] : null),
+    route: routeOf,
+    ki: (d) => { const k = kiCoverage(d); return k ? [k, t(`drugmap.ki.${k}`)] : null; },
   }[mode];
   // Category keys follow the meta order (so a class keeps its colour across views);
   // the others by frequency, the commonest first.
@@ -204,11 +267,12 @@ export function colorize(drugs, mode, { catLabels, unknown }) {
     if (!counts.has(k[0])) counts.set(k[0], { label: k[1], count: 0 });
     counts.get(k[0]).count++;
   }
-  const keys = mode === "category"
-    ? [...Object.keys(catLabels), ...counts.keys()].filter((k, i, a) => counts.has(k) && a.indexOf(k) === i)
+  const fixed = { category: Object.keys(catLabels), ki: KI_KEYS }[mode];
+  const keys = fixed
+    ? [...fixed, ...counts.keys()].filter((k, i, a) => counts.has(k) && a.indexOf(k) === i)
     : [...counts.keys()].sort((a, b) => counts.get(b).count - counts.get(a).count || a.localeCompare(b));
   const colorKey = new Map(keys.map((k, i) =>
-    [k, mode === "category" ? categoryColor(k, catLabels) : hue(i)]));
+    [k, mode === "category" ? categoryColor(k, catLabels) : mode === "ki" ? KI_COLORS[k] : hue(i)]));
   for (const d of drugs) {
     const k = keyOf(d);
     colorOf.set(d.id, k ? colorKey.get(k[0]) : UNKNOWN_COLOR);

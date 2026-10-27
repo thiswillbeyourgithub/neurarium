@@ -238,9 +238,9 @@ async function main() {
     t, pick: window.__I18N__.pick, wireModal,
   });
   const aboutModal = wireAboutModal(sourcingModal, changelog); // the toolbar info-button popup
-  // The Drugs list's drug map popup (a PCA of binding profiles); a point focuses its drug.
+  // The Drugs list's drug map popup (a PCA of binding profiles); a point opens its drug in a new tab.
   const drugMap = createDrugMap({
-    data, wireModal, onPick: (drug) => focusDrug(drug, { frame: true }),
+    data, wireModal,
     onChange: () => urlState.sync(),
   });
   drugMap.registerUrl(urlState);
