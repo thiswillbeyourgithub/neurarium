@@ -12,6 +12,8 @@ For example, it can lay out the antipsychotics so as to show their dopaminergic,
 
 It was built with the help of [Claude Code](https://claude.com/claude-code).
 
+**Contents:** [Presets](#presets) · [What you are looking at](#what-you-are-looking-at) · [Where the data comes from](#where-the-data-comes-from) · [Hosting](#hosting)
+
 ## Presets
 
 The **Presets** box at the top of the page loads a ready-made view in one click. Click a title to unfold its picture, then the picture to open that view live:
@@ -102,6 +104,9 @@ Everything comes from neurarium's public data files (`/data/*.jsonl`, described 
 
 ## Hosting
 
+<details>
+<summary>How the page is hosted, and how its pictures are made (click to unfold)</summary>
+
 The page is not a separate project: it is `public/drugs-map.html` in the neurarium repository, booted by `public/js/drugs-map-main.js`, and it reuses the viewer's own modules (the data loader, the URL state, the theme and language switch). It loads none of the 3D code. The neurarium container serves it at `/drugs-map`.
 
 `drugsmap.olicorne.org` is the same container behind the outer reverse proxy, which rewrites the root to the page, so the address bar keeps showing `drugsmap.olicorne.org` while every asset is served from neurarium. With Caddy as the outer proxy:
@@ -119,3 +124,5 @@ drugsmap.olicorne.org {
 The picture at the top and the preset pictures (with the Presets section listing them) are rendered by `uv run tools/shot_drugs_map.py` (the top view is the script's `DEFAULT_HASH`, the presets are read off the page's buttons): rerun it whenever the map's look or its presets change.
 
 Links from the map to the 3D atlas detect this case (the page served at `/`) and point at `https://neurarium.olicorne.org/` instead of a relative path. Visits are counted by the same umami site as neurarium, under the `drugsmap.olicorne.org` hostname.
+
+</details>

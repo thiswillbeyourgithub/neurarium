@@ -12,6 +12,8 @@ Elle permet par exemple d'afficher les antipsychotiques de manière à représen
 
 Elle a été réalisée avec l'aide de [Claude Code](https://claude.com/claude-code).
 
+**Sommaire :** [Préréglages](#préréglages) · [Ce que montre la carte](#ce-que-montre-la-carte) · [D'où viennent les données](#doù-viennent-les-données) · [Hébergement](#hébergement)
+
 ## Préréglages
 
 La boîte **Préréglages** en haut de la page charge une vue toute faite en un clic. Cliquer sur un titre déplie son image, puis sur l'image pour ouvrir cette vue en ligne :
@@ -102,6 +104,9 @@ Tout vient des fichiers de données publics de neurarium (`/data/*.jsonl`, décr
 
 ## Hébergement
 
+<details>
+<summary>Comment la page est hébergée, et comment ses images sont faites (cliquer pour déplier)</summary>
+
 Cette page n'est pas un projet séparé : c'est `public/drugs-map.html` dans le dépôt de neurarium, démarrée par `public/js/drugs-map-main.js`, qui réutilise les modules du visualiseur (chargement des données, état de l'URL, thème et langue) sans charger le code 3D. Le conteneur neurarium la sert sur `/drugs-map`.
 
 `drugsmap.olicorne.org` est le même conteneur derrière le reverse proxy extérieur, qui réécrit la racine vers la page : la barre d'adresse garde `drugsmap.olicorne.org` alors que tout est servi par neurarium. Avec Caddy comme proxy extérieur :
@@ -119,3 +124,5 @@ drugsmap.olicorne.org {
 L'image en haut et les images des préréglages (avec la section Préréglages qui les liste) sont rendues par `uv run tools/shot_drugs_map.py` (la vue du haut est le `DEFAULT_HASH` du script, les préréglages sont lus sur les boutons de la page) : la relancer dès que l'apparence de la carte ou ses préréglages changent.
 
 Les liens de la carte vers l'atlas 3D détectent ce cas (page servie sur `/`) et pointent vers `https://neurarium.olicorne.org/` au lieu d'un chemin relatif. Les visites sont comptées par le même site umami que neurarium, sous le nom d'hôte `drugsmap.olicorne.org`.
+
+</details>
