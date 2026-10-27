@@ -205,7 +205,9 @@ body.no-3d #controls:has(#controls-body:not([hidden])) {
    the author link stays clickable without also toggling the panel. This is
    what lets the byline sit beside the title (a plain <a> can't nest in a
    <button>). */
-#controls-header { position: relative; justify-content: flex-start; align-items: baseline; }
+/* touch-action: none so a vertical swipe on the bar reaches js/boot/panel-swipe.js
+   instead of being taken by the browser (pull-to-refresh, pointercancel). */
+#controls-header { position: relative; justify-content: flex-start; align-items: baseline; touch-action: none; }
 #controls-header > .collapse-hit { position: absolute; inset: 0; width: 100%; padding: 0; margin: 0; background: none; border: 0; cursor: pointer; }
 #controls-header > :not(.collapse-hit) { position: relative; pointer-events: none; }
 #controls-header .panel-byline a { pointer-events: auto; }

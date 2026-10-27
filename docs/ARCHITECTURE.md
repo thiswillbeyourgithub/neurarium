@@ -468,7 +468,7 @@ Viewer (`public/`):
   (adaptive quality), `selection.js` (halo + isolate state).
 - `js/boot/`: one `wire*()` per UI concern, called once from `main.js`: `controls.js` (Settings
   pane), `toolbar.js` (reset + search popup over `search/index.js`), `shortcuts.js`, `picking.js` (canvas click / tap /
-  hover), `header-toggles.js` (theme + panel-only mode), `speed-slider.js`, `tour-steps.js` (the
+  hover), `header-toggles.js` (theme + panel-only mode), `panel-swipe.js` (header swipe: collapsed / half / full), `speed-slider.js`, `tour-steps.js` (the
   guided tour's steps), `url-bindings.js` (data-bound deep-link keys), `legends.js` (anatomy legend +
   colour key + arrow colour mode), plus the boot stages: `meshing.js` (baked / SDF-pool / synchronous
   structure meshes), `focus.js` (`wireFocus`: every `focus*` / `select*` helper, `createSceneFocus` +

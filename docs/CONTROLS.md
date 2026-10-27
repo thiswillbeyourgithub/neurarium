@@ -72,6 +72,7 @@ is pinned and exactly one inner region scrolls (`#controls-main`, or `#details-p
   `wireControls`' own so the body's `hidden` already reflects the click). A view that merely wants the room
   (the Data browser) passes `{persist: false}` so it borrows the mode without rewriting the
   visitor's stored preference.
+- **Header swipe** (`js/boot/panel-swipe.js`, `swipeStep`): a vertical swipe on `#controls-header` steps the panel one size, collapsed <-> half <-> full (the reading mode above, borrowed with `{persist: false}`); up grows, down shrinks, a tap still toggles. Every step goes through the toggle click or `setNo3d`, and the click ending a swipe is swallowed. The header has `touch-action: none` so the browser does not take the swipe.
 - **Arrow colour-mode** (`#color-mode`, default Neurotransmitter): Neurotransmitter =
   `projection.color` per molecule; Potential = `projection.signColor` by coarse sign (from meta
   `signColors`/`signLabels`). `setColorMode` recolours in place + rebuilds the Projections section

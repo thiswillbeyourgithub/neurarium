@@ -34,6 +34,7 @@ import { wireShortcuts } from "./boot/shortcuts.js";
 import { wireUrlBindings } from "./boot/url-bindings.js";
 import { wireCanvasPicking } from "./boot/picking.js";
 import { wireHeaderToggles } from "./boot/header-toggles.js";
+import { wirePanelSwipe } from "./boot/panel-swipe.js";
 import { wireSpeedSlider } from "./boot/speed-slider.js";
 import { buildStructureMeshes } from "./boot/meshing.js";
 import { wireFocus } from "./boot/focus.js";
@@ -289,6 +290,7 @@ async function main() {
 
   // Panel header toggles: day/night + the panel-only "reading" mode.
   const { no3dOn, setNo3d } = wireHeaderToggles({ theme, expandPanel, invalidate, intro, urlState });
+  wirePanelSwipe({ no3dOn, setNo3d });
 
   loop.start({
     scene, camera, labels, urlState, intro, autoSpread, arrowRetrim, focus,
