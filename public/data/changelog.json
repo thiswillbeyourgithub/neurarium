@@ -1,6 +1,27 @@
 {
   "versions": [
     {
+      "version": "3.140.0",
+      "date": "2026-10-27",
+      "entries": [
+        {
+          "category": "added",
+          "text": "A Drug map button atop the Drugs list (and a \"map\" link on each list heading) opens a 2D map of every drug placed by a PCA of its binding profile, recomputed for the drugs on screen, with class chips, an approval-year range, hidden drugs, names, normalization and colouring by class, nomenclature, year or lab, all kept in the URL",
+          "commits": [
+            "d99306f"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "The drug map can plot chosen targets directly (for example 5-HT2A against D2), count agonists and antagonists with opposite signs, place drugs by net neurotransmission or by receptors and net tone together, and colour drugs by major metabolic route or by Ki coverage; clicking a drug opens it in a new tab",
+          "commits": [
+            "f8a80f4",
+            "1b61f99"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.139.0",
       "date": "2026-10-27",
       "entries": [
