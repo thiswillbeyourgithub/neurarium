@@ -14,6 +14,12 @@ import { LIST_SEP } from "../url-state.js";
 
 /** The viewer's public address: one of the hardcoded SEO spots (see CLAUDE.md). */
 export const NEURARIUM_URL = "https://neurarium.olicorne.org/";
+/** The source repository: the map's README is linked there, where GitHub renders it,
+ *  rather than as the raw Markdown file this site also serves. */
+export const REPO_URL = "https://github.com/thiswillbeyourgithub/neurarium";
+/** The map's README on GitHub, in the page's language. */
+export const readmeUrl = (lang) =>
+  `${REPO_URL}/blob/main/public/drugs-map/README${lang === "fr" ? ".fr" : ""}.md`;
 /** The map page's file, relative to the site root. */
 export const MAP_PAGE = "drugs-map.html";
 

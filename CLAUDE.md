@@ -92,7 +92,7 @@ Full detail (principles, data flow, module graph, boot sequence, per-file map): 
 - Check `geometry_refinements/STATUS.md` before editing `data/shapes/*` or `shapes.js` geometry.
 - `sw.js` always revalidates conditionally (not stale-while-revalidate); bump `CACHE` when caching logic changes.
 - Caddy `encode` uses an explicit content-type list (a new asset type ships uncompressed until added) and pins `.webmanifest`/`.jsonl` types.
-- SEO canonical / `og:url` / `og:image` / JSON-LD URLs are hardcoded (4 spots in `index.html` + `sitemap.xml`/`robots.txt` + `llms_txt.SITE_URL`; the drugs map's in `drugs-map.html` + `js/drug-map/site.js` `NEURARIUM_URL`).
+- SEO canonical / `og:url` / `og:image` / JSON-LD URLs are hardcoded (4 spots in `index.html` + `sitemap.xml`/`robots.txt` + `llms_txt.SITE_URL`; the drugs map's in `drugs-map.html` + `js/drug-map/site.js` `NEURARIUM_URL` + `REPO_URL`, the latter also `llms_txt.REPO_URL`).
 - UI-chrome colours are `--accent*` tokens in `css/tokens.css`; data colours live in `meta.json`.
 - Search matches both languages (`data/search_names.fr.json`) and search-only acronyms (`aliases` on structures via `STRUCTURE_ALIASES`, on drugs via `DRUG_ALIASES`). A control is searchable via `data-search` in `index.html`; `js/url-state.js` writes nothing at defaults; `js/prefs.js` is the only `localStorage` touch (classic `i18n.js` excepted).
 - Any UI change must be checked against `js/tour.js` by running the tour end to end (headless, step by step): its steps (in `js/boot/tour-steps.js`) anchor on selectors and `data-tour-*` hooks and break silently.

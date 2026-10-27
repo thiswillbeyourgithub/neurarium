@@ -124,7 +124,7 @@ Static JSON Lines (one record per line) and JSON, regenerated from the repositor
 
 Hash deep links open detail panels: `{SITE_URL}/#tabs=drug:sertraline` (kinds `drug`, `target`, `structure`, `circuit`, `group`, `enzyme`; several comma-separated, e.g. `#tabs=drug:sertraline,target:d2`).
 
-The drugs map, every drug placed by a PCA of its binding profile (an example of a tool built on these data files alone), is at `https://drugsmap.olicorne.org/` (also `{SITE_URL}/drugs-map`), filterable by hash: `#dmcat=<category ids, comma-separated>`, `#dmyear=<from>-<to>`; its README: `{SITE_URL}/drugs-map/README.md`.
+The drugs map, every drug placed by a PCA of its binding profile (an example of a tool built on these data files alone), is at `https://drugsmap.olicorne.org/` (also `{SITE_URL}/drugs-map`), filterable by hash: `#dmcat=<category ids, comma-separated>`, `#dmyear=<from>-<to>`; its README: `{REPO_URL}/blob/main/public/drugs-map/README.md`.
 
 ## Feature ideas, errors, questions
 

@@ -119,7 +119,7 @@ Static JSON Lines (one record per line) and JSON, regenerated from the repositor
 
 Hash deep links open detail panels: `https://neurarium.olicorne.org/#tabs=drug:sertraline` (kinds `drug`, `target`, `structure`, `circuit`, `group`, `enzyme`; several comma-separated, e.g. `#tabs=drug:sertraline,target:d2`).
 
-The drugs map, every drug placed by a PCA of its binding profile (an example of a tool built on these data files alone), is at `https://drugsmap.olicorne.org/` (also `https://neurarium.olicorne.org/drugs-map`), filterable by hash: `#dmcat=<category ids, comma-separated>`, `#dmyear=<from>-<to>`; its README: `https://neurarium.olicorne.org/drugs-map/README.md`.
+The drugs map, every drug placed by a PCA of its binding profile (an example of a tool built on these data files alone), is at `https://drugsmap.olicorne.org/` (also `https://neurarium.olicorne.org/drugs-map`), filterable by hash: `#dmcat=<category ids, comma-separated>`, `#dmyear=<from>-<to>`; its README: `https://github.com/thiswillbeyourgithub/neurarium/blob/main/public/drugs-map/README.md`.
 
 ## Feature ideas, errors, questions
 

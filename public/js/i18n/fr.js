@@ -499,7 +499,7 @@ window.__I18N_MESSAGES__.fr = {
   "drugs.none": "Aucune substance correspondante.",
   "drugmap.open": "Afficher sur une carte",
   "drugmap.title": "Carte des substances (ACP des profils de liaison)",
-  "drugmap.page.intro": "Chaque substance du jeu de données de neurarium, placée selon la ressemblance de son profil de liaison aux récepteurs avec celui des autres (une analyse en composantes principales, recalculée pour ce que les filtres laissent à l'écran). Cliquez sur une substance pour l'ouvrir dans l'atlas 3D du cerveau, clic droit (appui long) pour la masquer.",
+  "drugmap.page.intro": "Visualisez les relations entre toutes les substances psychopharmacologiques, à partir des données de <a href=\"{url}\">neurarium</a>, l'atlas 3D du cerveau. Cliquez sur une substance pour l'y ouvrir, clic droit (appui long) pour la masquer.",
   "drugmap.page.viewer": "Ouvrir neurarium, l'atlas 3D du cerveau",
   "drugmap.page.readme": "À propos de cette carte",
   "drugmap.link": "carte",
@@ -872,7 +872,7 @@ window.__I18N_MESSAGES__.fr = {
     "L’ensemble des données est du simple JSONL / JSON, séparé du rendu et libre de " +
     "réutilisation (pour un exemple de ce que l’on peut construire avec ces seuls fichiers, voir la " +
     "<a href=\"drugs-map.html\" target=\"_blank\" rel=\"noopener\">carte des substances</a> et " +
-    "<a href=\"drugs-map/README.fr.md\" target=\"_blank\" rel=\"noopener\">son README</a>). Chaque fichier ci-dessous est servi directement depuis ce site " +
+    "<a href=\"https://github.com/thiswillbeyourgithub/neurarium/blob/main/public/drugs-map/README.fr.md\" target=\"_blank\" rel=\"noopener\">son README</a>). Chaque fichier ci-dessous est servi directement depuis ce site " +
     "(un objet JSON par ligne, auto-descriptif, chaque ligne graduée et sourcée) :",
   "about.dataRepo": "Ou parcourez-les dans le dépôt du code source →",
   "about.outreach":

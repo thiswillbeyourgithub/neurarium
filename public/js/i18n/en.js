@@ -501,7 +501,7 @@ window.__I18N_MESSAGES__.en = {
   "drugs.none": "No matching drug.",
   "drugmap.open": "Show on a map",
   "drugmap.title": "Drugs map (binding-profile PCA)",
-  "drugmap.page.intro": "Every drug in neurarium's dataset placed by how similar its receptor binding profile is to the others (a principal component analysis, recomputed for whatever the filters leave on screen). Click a drug to open it in the 3D brain atlas, right-click (long-press) to hide it.",
+  "drugmap.page.intro": "Visualize the relationships between all psychopharmacological substances, based on data from <a href=\"{url}\">neurarium</a>, the 3D brain atlas. Click a drug to open it there, right-click (long-press) to hide it.",
   "drugmap.page.viewer": "Open neurarium, the 3D brain atlas",
   "drugmap.page.readme": "About this map",
   "drugmap.link": "map",
@@ -865,7 +865,7 @@ window.__I18N_MESSAGES__.en = {
     "The whole dataset is plain JSONL / JSON, kept separate from the rendering and " +
     "free to reuse (for an example of what can be built on these files alone, see the " +
     "<a href=\"drugs-map.html\" target=\"_blank\" rel=\"noopener\">drugs map</a> and " +
-    "<a href=\"drugs-map/README.md\" target=\"_blank\" rel=\"noopener\">its README</a>). " +
+    "<a href=\"https://github.com/thiswillbeyourgithub/neurarium/blob/main/public/drugs-map/README.md\" target=\"_blank\" rel=\"noopener\">its README</a>). " +
     "Each file below is served directly from this site (one JSON " +
     "object per line, self-describing, every row graded and sourced):",
   "about.dataRepo": "Or browse it in the source repository →",

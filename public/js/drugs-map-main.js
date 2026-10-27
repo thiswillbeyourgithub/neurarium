@@ -10,17 +10,18 @@ import { createTheme } from "./theme.js";
 import { stampVersion } from "./boot/version-stamp.js";
 import { wireThemeButton } from "./boot/header-toggles.js";
 import { createDrugMap } from "./drug-map/view.js";
-import { viewerUrl } from "./drug-map/site.js";
+import { viewerUrl, readmeUrl } from "./drug-map/site.js";
 
-const { t, lang } = window.__I18N__;
+const { t, tHtml, lang } = window.__I18N__;
 
 async function main() {
   stampVersion();
   wireThemeButton(createTheme());
-  const viewerLink = document.getElementById("dmp-viewer");
-  if (viewerLink) viewerLink.href = viewerUrl();
-  const readme = document.getElementById("dmp-readme");
-  if (readme && lang === "fr") readme.href = "drugs-map/README.fr.md";
+  // Rendered here rather than by i18n.js's data-i18n-html pass, which runs at
+  // DOMContentLoaded and would overwrite a link filled before it with the bare template.
+  document.getElementById("dmp-intro").innerHTML = tHtml("drugmap.page.intro", { url: viewerUrl() });
+  document.getElementById("dmp-viewer").href = viewerUrl();
+  document.getElementById("dmp-readme").href = readmeUrl(lang);
 
   let data;
   try {

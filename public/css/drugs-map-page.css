@@ -12,7 +12,7 @@ html:has(body.dmp), body.dmp { height: auto; min-height: 100%; overflow: auto; t
 .dmp-byline { margin: 4px 0 10px; }
 .dmp-intro { max-width: 70ch; margin: 0 0 8px; font-size: 14px; line-height: 1.45; color: var(--muted); }
 .dmp-links { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 14px; }
-.dmp-links a { color: var(--accent-light); }
+.dmp-links a, .dmp-intro a { color: var(--accent-light); }
 .dmp-main { padding: 8px 0 32px; font-size: 14px; }
 .dmp-loading { color: var(--muted); }
 @media (max-width: 560px) {

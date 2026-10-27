@@ -75,12 +75,13 @@
         </div>
       </div>
       <p class="panel-byline dmp-byline"><span data-i18n-html="common.byline">by <a href="https://olicorne.org/en" target="_blank" rel="noopener noreferrer">Olivier Cornelis</a></span> · <span data-app-version></span></p>
-      <p class="dmp-intro" data-i18n="drugmap.page.intro"></p>
-      <!-- hrefs filled by js/drugs-map-main.js: the viewer's address depends on the
-           host (js/drug-map/site.js), the README on the language. -->
+      <!-- The intro (its neurarium link) and the link hrefs are filled by
+           js/drugs-map-main.js: the viewer's address depends on the host
+           (js/drug-map/site.js), the README (on GitHub, rendered) on the language. -->
+      <p class="dmp-intro" id="dmp-intro"></p>
       <nav class="dmp-links">
         <a id="dmp-viewer" href="./" data-i18n="drugmap.page.viewer"></a>
-        <a id="dmp-readme" href="drugs-map/README.md" target="_blank" rel="noopener" data-i18n="drugmap.page.readme"></a>
+        <a id="dmp-readme" href="https://github.com/thiswillbeyourgithub/neurarium/blob/main/public/drugs-map/README.md" target="_blank" rel="noopener" data-i18n="drugmap.page.readme"></a>
       </nav>
     </header>
     <main class="dmp-main">
