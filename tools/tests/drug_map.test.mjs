@@ -160,3 +160,10 @@ test("colorize nbn: each nomenclature takes the class colour it shares most drug
   assert.notEqual(nbn.get("a3"), nbn.get("a1"));
   assert.notEqual(nbn.get("a3"), nbn.get("s1"));
 });
+
+test("filter: marketed keeps only drugs with a current holder", () => {
+  const drugs = [drug("on", [], { holders: [{ market: "us" }] }), drug("off", []), drug("empty", [], { holders: [] })];
+  const ids = filterDrugs(drugs, { ...DEFAULT_VIEW, hidden: new Set(), marketed: true }).map((d) => d.id);
+  assert.deepEqual(ids, ["on"]);
+  assert.equal(filterDrugs(drugs, { ...DEFAULT_VIEW, hidden: new Set() }).length, 3);
+});

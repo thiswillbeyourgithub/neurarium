@@ -171,9 +171,10 @@ export const DEFAULT_VIEW = Object.freeze({
   years: null,         // null = any year, else [from, to] (drugs with no year drop out)
   hidden: new Set(),   // drug ids hidden by hand
   color: "category",   // one of COLOR_MODES
-  labels: false,
+  labels: true,
   normalize: true,     // unit-length profiles (see buildProfiles)
-  signed: false,       // agonist vs antagonist on opposite signs
+  signed: true,        // agonist vs antagonist on opposite signs
+  marketed: false,     // only drugs with a current marketing authorisation (US or FR holder)
   source: "receptors", // one of FEATURE_SOURCES
   only: null,          // null = every feature, else the chosen keys, in pick order
 });
@@ -206,6 +207,9 @@ export function filterDrugs(drugs, view) {
   return drugs.filter((d) => {
     if (view.hidden.has(d.id)) return false;
     if (view.cats && !view.cats.has(primaryCategory(d))) return false;
+    // "Marketed" = someone holds a marketing authorisation today (a `holders[]` row,
+    // US or France): withdrawn, discontinued and never-approved drugs drop.
+    if (view.marketed && !(d.holders && d.holders.length)) return false;
     if (view.years) {
       const y = d.firstApproval && d.firstApproval.year;
       if (!y || y < view.years[0] || y > view.years[1]) return false;

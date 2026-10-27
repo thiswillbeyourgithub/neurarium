@@ -73,8 +73,7 @@ export function createDrugMap({ data, wireModal, onChange }) {
     onChange();
   };
 
-  // ---- Static chrome, built once: controls row, chips, plot, captions, legend.
-  const controls = el("div", "dm-controls");
+  // ---- Static chrome, built once: control sections, plot, captions, legend.
   const colorSwitch = el("div", "seg-switch");
   colorSwitch.setAttribute("role", "group");
   colorSwitch.setAttribute("aria-label", t("drugmap.colorBy"));
@@ -135,26 +134,19 @@ export function createDrugMap({ data, wireModal, onChange }) {
   pickInput.addEventListener("change", addPicked);
   pickInput.addEventListener("keydown", (ev) => { if (ev.key === "Enter") addPicked(); });
   picker.append(pickInput, datalist, pickedBox);
-  const yearBox = el("span", "dm-years");
-  const yearInput = (ph) => {
-    const i = el("input", "drugs-filter dm-year");
-    i.type = "number";
-    i.placeholder = ph;
-    i.addEventListener("change", () => {
-      const [a, b] = [yearFrom.value, yearTo.value].map((v) => (v ? Number(v) : null));
-      setView({ years: a || b ? [a || 0, b || 9999] : null });
-    });
-    return i;
-  };
-  const yearFrom = yearInput(t("drugmap.from"));
-  const yearTo = yearInput(t("drugmap.to"));
-  yearBox.append(el("span", null, t("drugmap.years")), yearFrom, el("span", null, "–"), yearTo);
+  const marketT = toggle("marketed", t("drugmap.marketed"));
+  marketT.lab.title = t("drugmap.marketedTip");
+  // An approval-year range has no control of its own: only a decade heading's "map"
+  // link sets one, shown as a removable chip among the filters.
+  const yearChip = el("button", "dm-chip active");
+  yearChip.type = "button";
+  yearChip.addEventListener("click", () => setView({ years: null }));
   const unhide = el("button", "dm-unhide");
   unhide.type = "button";
   unhide.addEventListener("click", () => setView({ hidden: new Set() }));
-  controls.append(sourceSwitch, colorSwitch, labelsT.lab, normT.lab, signT.lab, yearBox, unhide);
 
   const chips = el("div", "dm-chips");
+  chips.append(yearChip, unhide);
   const presentCats = [...new Set([...Object.keys(catLabels), ...drugs.map(primaryCategory)])]
     .filter((c) => drugs.some((d) => primaryCategory(d) === c));
   const chipAll = el("button", "dm-chip dm-chip-all", t("drugmap.all"));
@@ -211,8 +203,37 @@ export function createDrugMap({ data, wireModal, onChange }) {
   const legend = el("div", "dm-legend");
   const note = el("p", "dm-note info-desc");
   const plotWrap = el("div", "dm-plot-wrap");
-  plotWrap.append(svg, el("span", "dm-watermark", `${t("drugmap.watermark")} · ${location.host}`));
-  body.replaceChildren(controls, picker, chips, plotWrap, axes, legend, note);
+  // Fullscreen: the browser's own where it exists, else (iPhone Safari) a fixed overlay.
+  const fsBtn = el("button", "dm-fullscreen", "⛶");
+  fsBtn.type = "button";
+  fsBtn.title = t("drugmap.fullscreen");
+  fsBtn.setAttribute("aria-label", t("drugmap.fullscreen"));
+  fsBtn.addEventListener("click", () => {
+    const on = !plotWrap.classList.contains("dm-fs");
+    plotWrap.classList.toggle("dm-fs", on);
+    if (on && plotWrap.requestFullscreen) plotWrap.requestFullscreen().catch(() => {});
+    else if (!on && document.fullscreenElement) document.exitFullscreen().catch(() => {});
+  });
+  document.addEventListener("fullscreenchange", () => {
+    if (!document.fullscreenElement) plotWrap.classList.remove("dm-fs");
+  });
+  plotWrap.append(svg, fsBtn, el("span", "dm-watermark", `${t("drugmap.watermark")} · ${location.host}`));
+  // Four labelled steps: what places the drugs, what colours them, which are shown,
+  // and the advanced switches folded away.
+  const section = (title, ...kids) => {
+    const s = el("div", "dm-section");
+    s.append(el("span", "dm-section-title", title), ...kids);
+    return s;
+  };
+  const advanced = el("details", "dm-advanced");
+  const advRow = el("div", "dm-controls");
+  advRow.append(labelsT.lab, normT.lab, signT.lab, marketT.lab);
+  advanced.append(el("summary", "dm-section-title", t("drugmap.sec.advanced")), advRow);
+  body.replaceChildren(
+    section(t("drugmap.sec.input"), sourceSwitch, picker),
+    section(t("drugmap.sec.color"), colorSwitch),
+    section(t("drugmap.sec.filter"), chips),
+    advanced, plotWrap, axes, legend, note);
   wireZoom(svg, () => box, (b) => { box = b; drawPoints(); });
   // Names are sized in screen px, so a resized popup re-lays them out.
   if (typeof ResizeObserver === "function") {
@@ -228,6 +249,7 @@ export function createDrugMap({ data, wireModal, onChange }) {
     labelsT.input.checked = view.labels;
     normT.input.checked = view.normalize;
     signT.input.checked = view.signed;
+    marketT.input.checked = view.marketed;
     pickedBox.replaceChildren(...(view.only || []).map((key, i) => {
       const chip = el("button", "dm-chip active", `${view.only.length <= 2 ? `${"xy"[i]}: ` : ""}${nameOf(key)} ×`);
       chip.type = "button";
@@ -237,8 +259,11 @@ export function createDrugMap({ data, wireModal, onChange }) {
       });
       return chip;
     }));
-    yearFrom.value = view.years && view.years[0] ? view.years[0] : "";
-    yearTo.value = view.years && view.years[1] < 9999 ? view.years[1] : "";
+    yearChip.hidden = !view.years;
+    if (view.years) {
+      yearChip.textContent = t("drugmap.yearChip", {
+        from: view.years[0] || "…", to: view.years[1] < 9999 ? view.years[1] : "…" });
+    }
     unhide.hidden = !view.hidden.size;
     unhide.textContent = t("drugmap.unhide", { n: view.hidden.size });
     chipAll.classList.toggle("active", !view.cats);
@@ -400,9 +425,10 @@ export function createDrugMap({ data, wireModal, onChange }) {
         (v) => ({ hidden: new Set(v ? v.split(LIST_SEP) : []) }));
       reg("dmcolor", () => (view.color !== DEFAULT_VIEW.color ? view.color : null),
         (v) => ({ color: COLOR_MODES.includes(v) ? v : DEFAULT_VIEW.color }));
-      reg("dmlabels", () => (view.labels ? "1" : null), (v) => ({ labels: v === "1" }));
+      reg("dmlabels", () => (view.labels ? null : "0"), (v) => ({ labels: v !== "0" }));
       reg("dmnorm", () => (view.normalize ? null : "0"), (v) => ({ normalize: v !== "0" }));
-      reg("dmsign", () => (view.signed ? "1" : null), (v) => ({ signed: v === "1" }));
+      reg("dmsign", () => (view.signed ? null : "0"), (v) => ({ signed: v !== "0" }));
+      reg("dmmkt", () => (view.marketed ? "1" : null), (v) => ({ marketed: v === "1" }));
       reg("dmsrc", () => (view.source !== DEFAULT_VIEW.source ? view.source : null),
         (v) => ({ source: FEATURE_SOURCES.includes(v) ? v : DEFAULT_VIEW.source }));
       reg("dmtgt", () => (view.only ? view.only.join(LIST_SEP) : null),

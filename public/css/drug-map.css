@@ -4,8 +4,31 @@
 .modal.drugmap { width: min(1100px, calc(100vw - 32px)); }
 .dm-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; }
 .dm-controls .seg-switch, .dm-controls .list-toggle { margin: 0; }
-.dm-years { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; color: var(--muted); }
-.drugs-filter.dm-year { width: 64px; margin: 0; padding: 2px 6px; }
+/* One labelled step per row: title on the left, its controls wrapping beside it. */
+.dm-section, .dm-advanced { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 0 0 8px; }
+.dm-section-title { flex: 0 0 auto; min-width: 118px; font-size: 11px; font-weight: 600; color: var(--muted); }
+.dm-section .dm-chips, .dm-section .dm-features { flex: 1 1 0; min-width: 240px; margin: 0; }
+.dm-advanced { display: block; }
+.dm-advanced summary { cursor: pointer; }
+.dm-advanced .dm-controls { margin: 6px 0 0 0; }
+.dm-fullscreen {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  padding: 2px 7px;
+  font: inherit;
+  font-size: 15px;
+  line-height: 1.2;
+  color: var(--muted);
+  background: rgba(var(--ink), 0.08);
+  border: 1px solid rgba(var(--ink), 0.15);
+  border-radius: 5px;
+  cursor: pointer;
+}
+.dm-fullscreen:hover { color: var(--text); }
+/* Fullscreen (or its fixed-overlay fallback): the plot fills the screen. */
+.dm-plot-wrap.dm-fs { position: fixed; inset: 0; z-index: 1000; background: var(--dm-plot-bg); }
+.dm-plot-wrap.dm-fs .dm-plot { width: 100%; height: 100%; aspect-ratio: auto; border: 0; border-radius: 0; }
 .dm-unhide, .dm-chip {
   padding: 2px 8px;
   font: inherit;
@@ -56,7 +79,7 @@
   pointer-events: none;
   user-select: none;
 }
-.dm-features { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; margin: 8px 0 0; }
+.dm-features { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; }
 .drugs-filter.dm-feature-input { width: 200px; margin: 0; padding: 2px 6px; }
 .dm-picked { display: inline-flex; flex-wrap: wrap; gap: 4px; }
 .dm-axes { display: flex; flex-direction: column; gap: 2px; margin: 8px 0 4px; font-size: 11px; }
