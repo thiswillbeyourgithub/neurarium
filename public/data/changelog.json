@@ -1,6 +1,50 @@
 {
   "versions": [
     {
+      "version": "3.143.0",
+      "date": "2026-10-27",
+      "entries": [
+        {
+          "category": "added",
+          "text": "The drug map can be rotated with a two-finger twist (or shift-scroll), and touching dots are spread apart by at most one dot width, with a faint line back to their true place",
+          "commits": [
+            "f30a40b",
+            "0e01f1d"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "The drug map's class filter groups the classes into families (antidepressants, antipsychotics, stimulants...), each selectable as a whole",
+          "commits": [
+            "307ba4f",
+            "0e01f1d"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "The drug map's controls sit in rounded boxes folded by default (Inputs with its type and axes, Color by, Filter by, Advanced), and its legend and axis meaning in folded boxes under the plot",
+          "commits": [
+            "0e01f1d"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Drug map dots slide to their new place when the view changes, and fade in or out when they appear or leave; a spinner shows while a slow device recomputes, with a hint to reload past 5 seconds",
+          "commits": [
+            "0e01f1d"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "The drug map carries an author byline under its title, and its watermark carries the app version",
+          "commits": [
+            "45117ad",
+            "0e01f1d"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.142.0",
       "date": "2026-10-27",
       "entries": [
