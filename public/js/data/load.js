@@ -32,9 +32,13 @@ import { resolveAddons } from "./addons.js";
  * structures/projections/circuits.jsonl) plus every referenced shape file, all
  * fetched in parallel.
  * @param {string} [dataDir="data"] Directory the data files live under.
+ * @param {Function|null} [onProgress] Called with `{stage, ...}` as the load advances.
+ * @param {{shapes?: boolean}} [opts] `shapes: false` skips the shape files: a page
+ *   that draws no brain (the drugs map, js/drugs-map-main.js) needs every other stage
+ *   but not the geometry, and each structure is then left without `shape`.
  * @returns {Promise<import("../data.js").BrainData>}
  */
-export async function loadBrainData(dataDir = "data", onProgress = null) {
+export async function loadBrainData(dataDir = "data", onProgress = null, { shapes = true } = {}) {
   onProgress?.({ stage: "meta" });
   // The emitted data is English-only; the French translations live in a single
   // side table (data/translations.fr.json) that `window.__I18N__.pick` looks each
@@ -101,7 +105,7 @@ export async function loadBrainData(dataDir = "data", onProgress = null) {
   const ds = { metaRecord, structures, projections, circuits, projectionGroups,
                receptors, drugs, v };
   const projectionGroupsByKey = resolveAnatomy(ds);
-  await loadShapes(structures, onProgress);
+  if (shapes) await loadShapes(structures, onProgress);
   Object.assign(ds, indexStructures(structures));
   const { byId } = ds;
   resolveReceptors(ds);

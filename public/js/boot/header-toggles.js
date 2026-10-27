@@ -11,20 +11,7 @@ const NO3D_KEY = "neurarium.no3d";
  * @returns {{no3dOn: () => boolean, setNo3d: (on: boolean, opts?: {persist?: boolean}) => void}}
  */
 export function wireHeaderToggles({ theme, expandPanel, invalidate, intro, urlState }) {
-  // Day/night: a pure viewing preference, so it owns no app state at all.
-  // js/theme.js persists the choice and repaints the scene; the button only flips
-  // it and re-announces itself.
-  const themeBtn = document.getElementById("toggle-theme");
-  if (themeBtn) {
-    const labelTheme = () => {
-      const next = theme.get() === "dark" ? "light" : "dark";
-      const label = t(next === "light" ? "panel.themeLight" : "panel.themeDark");
-      themeBtn.setAttribute("title", label);
-      themeBtn.setAttribute("aria-label", label);
-    };
-    labelTheme();
-    themeBtn.addEventListener("click", () => { theme.toggle(); labelTheme(); });
-  }
+  wireThemeButton(theme);
 
   // Panel-only ("reading") mode: the stylesheet hides the canvas + label overlay
   // and lets the expanded panel fill the viewport, for reading the sourced texts
@@ -77,4 +64,24 @@ export function wireHeaderToggles({ theme, expandPanel, invalidate, intro, urlSt
   });
 
   return { no3dOn, setNo3d };
+}
+
+/**
+ * Day/night (#toggle-theme): a pure viewing preference, so it owns no app state at all.
+ * js/theme.js persists the choice (and, in the viewer, repaints the scene); the button
+ * only flips it and re-announces itself. Exported on its own because the drugs map page
+ * (js/drugs-map-main.js) carries the same button but none of the 3D toggles.
+ * @param {{get: () => string, toggle: () => string}} theme from createTheme
+ */
+export function wireThemeButton(theme) {
+  const themeBtn = document.getElementById("toggle-theme");
+  if (!themeBtn) return;
+  const labelTheme = () => {
+    const next = theme.get() === "dark" ? "light" : "dark";
+    const label = t(next === "light" ? "panel.themeLight" : "panel.themeDark");
+    themeBtn.setAttribute("title", label);
+    themeBtn.setAttribute("aria-label", label);
+  };
+  labelTheme();
+  themeBtn.addEventListener("click", () => { theme.toggle(); labelTheme(); });
 }

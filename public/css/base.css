@@ -25,3 +25,17 @@ html, body {
   font-size: 14px;
   user-select: none;
 }
+
+/* "beta" beside a feature's name (the Simulation section, the drugs map): a quiet
+   qualifier, not a badge that competes with the name it qualifies. Here rather than
+   in a feature's sheet because both pages (index.html, drugs-map.html) load base.css. */
+.beta-tag {
+  margin-left: 6px;
+  padding: 1px 4px;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sem-caution);
+  border: 1px solid var(--sem-caution);
+  border-radius: 3px;
+}

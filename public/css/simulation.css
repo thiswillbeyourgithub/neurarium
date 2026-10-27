@@ -180,15 +180,3 @@
    from the picker's .sim-hit chips: one is an SVG rect, the other a button. */
 .sim-colhit { fill: rgba(var(--ink), 0); }
 .sim-colhit.on { fill: rgba(var(--ink), 0.08); }
-/* "beta" beside the Simulation section's name: a quiet qualifier, not a badge
-   that competes with the name it qualifies. */
-.beta-tag {
-  margin-left: 6px;
-  padding: 1px 4px;
-  font-size: 9px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--sem-caution);
-  border: 1px solid var(--sem-caution);
-  border-radius: 3px;
-}
