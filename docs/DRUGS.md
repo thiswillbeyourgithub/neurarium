@@ -32,8 +32,8 @@ fixed Stahl list.
   ids. A binding's net `effect`: agonist / reuptake-inhibitor / releaser / enzyme-inhibitor / PAM ->
   **boost**; antagonist / inverse-agonist / NAM / blocker -> **block**; partial-agonist / modulator
   -> **modulate**.
-- **Animation** (`js/drug-anim.js`). Clicking a drug row (`buildDrugLegend`, grouped by category,
-  with the live `#drugs-filter`) focuses it: dims to the union of its targets' regions
+- **Animation** (`js/drug-anim.js`). Clicking a drug row (`buildDrugLegend`, grouped by the `#drugs-sort` switch: class, A-Z, approval decade or half-life bucket via `js/legend/drug-groups.js`,
+  with the live `#drugs-filter`, which also matches the approval year) focuses it: dims to the union of its targets' regions
   (`selection.setCircuit(regionMeshes, flowArrows)`) + `createDrugAnimation.show(...)`, which
   scatters a `buildGemCloud` coloured by net effect (pulsed per effect) under a `buildWashShell`
   in the same colour, **one pair per (region, effect)**, not per binding: a region carrying many

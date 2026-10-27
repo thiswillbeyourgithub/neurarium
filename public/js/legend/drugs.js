@@ -4,6 +4,7 @@
 import { addLegendItem, reflectRows } from "./item.js";
 import { foldText } from "../search/query.js";
 import { formatHalfLife } from "../panel/format.js";
+import { DRUG_SORT_MODES, groupDrugs } from "./drug-groups.js";
 import { loadFlag, loadString, saveFlag, saveString } from "../prefs.js";
 
 const { t } = window.__I18N__;
@@ -26,12 +27,12 @@ function drugSwatchColor(drug, effectColors) {
 
 /**
  * Build the Drugs legend section (#drugs-list) from the live dataset, grouped by
- * coarse category (in the meta category-label order, drugs sorted A->Z within
- * each). Each row is coloured by the drug's dominant net effect and clickable to
+ * the #drugs-sort mode (class, name, approval decade or half-life bucket; see
+ * js/legend/drug-groups.js). Each row is coloured by the drug's dominant net effect and clickable to
  * focus it (dim the brain to the regions it acts on + animate its targets, via
  * the caller's `onPick`); a drug with no recorded bindings renders muted + inert.
  * The #drugs-filter box narrows the visible rows live (matching name + class +
- * targets), hiding emptied category headings and showing a "no match" note.
+ * targets + approval year), hiding emptied category headings and showing a "no match" note.
  * Returns a `reflect(activeId)` callback that lights the active drug's row.
  * @param {import("./data.js").BrainData} data
  * @param {(drug: object) => void} onPick
@@ -53,11 +54,14 @@ export function savePkGrouping(mode) {
 // localStorage key for the Drugs list's "show active metabolites" toggle (default
 // on). Persisted so the choice survives reloads (see js/prefs.js).
 const METAB_TOGGLE_KEY = "neurarium.metabolites";
+// localStorage key for the Drugs list's sort mode (see js/legend/drug-groups.js).
+const SORT_KEY = "neurarium.drugSort";
 
 export function buildDrugLegend(data, onPick) {
   const container = document.getElementById("drugs-list");
   const filterInput = document.getElementById("drugs-filter");
   const metabToggle = document.getElementById("drugs-show-metabolites");
+  const sortSwitch = document.getElementById("drugs-sort");
   // Drug id -> drug. NOT data.byId, which is the *structure* index: looking a drug up
   // there always missed, so a metabolite bullet that should link to its own drug row
   // silently rendered inert.
@@ -117,50 +121,51 @@ export function buildDrugLegend(data, onPick) {
     }
   }
 
-  // Group drugs by their primary (first) category.
-  const byCat = new Map();
-  for (const drug of data.drugs || []) {
-    const cat = (drug.categories && drug.categories[0]) || "other";
-    if (!byCat.has(cat)) byCat.set(cat, []);
-    byCat.get(cat).push(drug);
-  }
-  // Category order = the meta order first, then any leftover keys.
-  const order = [...Object.keys(cats),
-                 ...[...byCat.keys()].filter((c) => !(c in cats))];
-  const done = new Set();
-  for (const cat of order) {
-    if (done.has(cat)) continue;
-    done.add(cat);
-    const list = byCat.get(cat);
-    if (!list || !list.length) continue;
-    list.sort((a, b) => a.name.localeCompare(b.name));
-    const h = document.createElement("h2");
-    h.textContent = cats[cat] || cat;
-    container.appendChild(h);
-    const groupRows = [];
-    for (const drug of list) {
-      const row = addLegendItem(
-        container, drugSwatchColor(drug, effectColors), drug.displayName, true);
-      row.classList.add("drug-item");
-      rowInfo.set(row, { haystack: foldText(`${drug.name} ${drug.keywords}`), isMetab: false, ancestors: [] });
-      row.dataset.tourId = `drug:${drug.id}`; // guided-tour target hook
-      // Every drug opens its panel, even one with nothing to light (see js/data.js).
-      row.classList.add("clickable");
-      row.title = drug.categoryLabels.join(" · ");
-      row.addEventListener("click", () => onPick(drug));
-      rows.push({ row, id: drug.id });
-      groupRows.push(row);
-      addMetabRows(drug, [row], 1, new Set([drug.id]), groupRows);
-    }
-    groups.push({ heading: h, rows: groupRows });
-  }
-
   // "No match" note for the filter (hidden unless every row is filtered out).
   const empty = document.createElement("p");
   empty.className = "drugs-empty info-desc";
   empty.textContent = t("drugs.none");
-  empty.hidden = true;
-  container.appendChild(empty);
+
+  // (Re)render the rows for one sort mode: the filter + metabolite state carry over.
+  const render = (mode) => {
+    container.replaceChildren();
+    rows.length = 0;
+    groups.length = 0;
+    for (const { label, drugs } of groupDrugs(data.drugs || [], mode, { cats, t })) {
+      const h = document.createElement("h2");
+      h.textContent = label;
+      container.appendChild(h);
+      const groupRows = [];
+      for (const drug of drugs) {
+        const row = addLegendItem(
+          container, drugSwatchColor(drug, effectColors), drug.displayName, true);
+        row.classList.add("drug-item");
+        // The sort key trails the row, so a by-year or by-T½ list reads its order.
+        const tagText = mode === "year" ? drug.firstApproval?.year
+          : mode === "halflife" ? formatHalfLife(drug.halfLife) : null;
+        if (tagText) {
+          const tag = document.createElement("span");
+          tag.className = "legend-tag";
+          tag.textContent = String(tagText);
+          row.appendChild(tag);
+        }
+        const year = drug.firstApproval?.year || "";
+        rowInfo.set(row, { haystack: foldText(`${drug.name} ${drug.keywords} ${year}`), isMetab: false, ancestors: [] });
+        row.dataset.tourId = `drug:${drug.id}`; // guided-tour target hook
+        // Every drug opens its panel, even one with nothing to light (see js/data.js).
+        row.classList.add("clickable");
+        row.title = drug.categoryLabels.join(" · ");
+        row.addEventListener("click", () => onPick(drug));
+        rows.push({ row, id: drug.id });
+        groupRows.push(row);
+        addMetabRows(drug, [row], 1, new Set([drug.id]), groupRows);
+      }
+      groups.push({ heading: h, rows: groupRows });
+    }
+    container.appendChild(empty);
+    applyFilter();
+    lightRows(activeId);
+  };
 
   const applyFilter = () => {
     const q = foldText((filterInput?.value || "").trim());
@@ -190,18 +195,50 @@ export function buildDrugLegend(data, onPick) {
     }
     empty.hidden = anyVisible;
   };
+  // Assigned (not addEventListener'd): this builder re-runs on a language switch, and
+  // a stacked listener would keep filtering the rows of every previous build.
   if (filterInput) {
     filterInput.value = "";
-    filterInput.addEventListener("input", applyFilter);
+    filterInput.oninput = applyFilter;
   }
   if (metabToggle) {
     metabToggle.checked = loadFlag(METAB_TOGGLE_KEY);
-    metabToggle.addEventListener("change", () => {
+    metabToggle.onchange = () => {
       saveFlag(METAB_TOGGLE_KEY, metabToggle.checked);
       applyFilter();
-    });
+    };
   }
-  applyFilter(); // apply the persisted toggle state on first build
 
-  return reflectRows(rows);
+  // The sort switch: one segmented button per mode, rebuilt with the labels so a
+  // language switch retranslates it. Persisted like the metabolite toggle; fires
+  // `change` on #drugs-sort so js/boot/focus.js can mirror it into the URL.
+  let mode = loadString(SORT_KEY);
+  if (!DRUG_SORT_MODES.includes(mode)) mode = "class";
+  if (sortSwitch) {
+    sortSwitch.replaceChildren();
+    for (const m of DRUG_SORT_MODES) {
+      const seg = document.createElement("button");
+      seg.type = "button";
+      seg.className = "seg-btn";
+      seg.dataset.mode = m;
+      seg.textContent = t(`drugs.sort.${m}`);
+      seg.classList.toggle("active", m === mode);
+      seg.addEventListener("click", () => {
+        if (m === mode) return;
+        mode = m;
+        saveString(SORT_KEY, m);
+        for (const b of sortSwitch.children) b.classList.toggle("active", b.dataset.mode === m);
+        render(m);
+        sortSwitch.dispatchEvent(new Event("change"));
+      });
+      sortSwitch.appendChild(seg);
+    }
+  }
+
+  // Rows are rebuilt on a sort change, so the reflector reads the live `rows` array
+  // and remembers the active id to re-light it after a re-render.
+  let activeId = null;
+  const lightRows = reflectRows(rows);
+  render(mode);
+  return (id) => { activeId = id; lightRows(id); };
 }

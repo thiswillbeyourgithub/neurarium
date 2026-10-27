@@ -218,7 +218,7 @@ export function wireFocus({
     buildLegend: (toggle) => buildDrugLegend(data, toggle),
   });
   const selectDrug = (drug, opts = {}) => focusDrug(drug, { frame: true, ...opts });
-  // The Drugs section's two list controls. Registered here (once) rather than inside
+  // The Drugs section's three list controls. Registered here (once) rather than inside
   // buildDrugLegend, which re-runs on a language switch: the inputs are static markup,
   // so one registration covers every rebuild. Each write drives the input's own event,
   // so the live filter + the persisted metabolite preference behave as if typed/clicked.
@@ -242,6 +242,17 @@ export function wireFocus({
       },
     });
     metabToggle.addEventListener("change", () => urlState.sync());
+  }
+  const sortSwitch = document.getElementById("drugs-sort");
+  if (sortSwitch) {
+    urlState.register("drugsort", {
+      read: () => {
+        const m = sortSwitch.querySelector(".seg-btn.active")?.dataset.mode;
+        return m && m !== "class" ? m : null;
+      },
+      write: (v) => sortSwitch.querySelector(`.seg-btn[data-mode="${v || "class"}"]`)?.click(),
+    });
+    sortSwitch.addEventListener("change", () => urlState.sync());
   }
 
   // Every way of picking content (click/tap, double-click, search, a
