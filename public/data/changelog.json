@@ -1,6 +1,27 @@
 {
   "versions": [
     {
+      "version": "3.149.0",
+      "date": "2026-10-27",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "DrugsMap shows far more drug names: each name tries eight positions around its dot, then floats a little farther on a thin line back to it when the dot is crowded, a name is moved aside when that frees room for a missing one, and names keep clear of the watermark. Every small preset now names all its drugs.",
+          "commits": [
+            "7b63885",
+            "f8bc2f6"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "The drugs map is now called DrugsMap in English as well.",
+          "commits": [
+            "c2a7169"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.148.1",
       "date": "2026-10-27",
       "entries": [
