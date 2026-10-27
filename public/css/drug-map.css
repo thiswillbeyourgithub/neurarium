@@ -7,7 +7,7 @@
 /* One labelled step per row: title on the left, its controls wrapping beside it. */
 .dm-section, .dm-advanced { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 0 0 8px; }
 .dm-section-title { flex: 0 0 auto; min-width: 118px; font-size: 11px; font-weight: 600; color: var(--muted); }
-.dm-section .dm-chips, .dm-section .dm-features { flex: 1 1 0; min-width: 240px; margin: 0; }
+.dm-section .dm-chips { flex: 1 1 0; min-width: 240px; margin: 0; }
 .dm-advanced { display: block; }
 .dm-advanced summary { cursor: pointer; }
 .dm-advanced .dm-controls { margin: 6px 0 0 0; }
@@ -79,9 +79,26 @@
   pointer-events: none;
   user-select: none;
 }
-.dm-features { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; }
-.drugs-filter.dm-feature-input { width: 200px; margin: 0; padding: 2px 6px; }
-.dm-picked { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+/* Target picker: a folded list, each system's heading above its indented targets. */
+.dm-targets { flex: 1 1 100%; }
+.dm-targets summary { cursor: pointer; font-size: 12px; }
+.dm-tbar { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; margin: 6px 0; }
+.dm-hint { font-size: 11px; color: var(--muted); }
+.dm-tlist { max-height: 260px; overflow-y: auto; padding-right: 4px; }
+.dm-tgroup { margin: 0 0 6px; }
+.dm-tgroup-head {
+  padding: 1px 6px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.dm-tgroup-head.active { color: var(--text); border-color: rgba(var(--ink), 0.15); }
+.dm-titems { display: flex; flex-wrap: wrap; gap: 4px; margin: 3px 0 0 18px; }
 .dm-axes { display: flex; flex-direction: column; gap: 2px; margin: 8px 0 4px; font-size: 11px; }
 .dm-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; font-size: 11px; color: var(--muted); }
 .dm-key { display: inline-flex; align-items: center; gap: 5px; }

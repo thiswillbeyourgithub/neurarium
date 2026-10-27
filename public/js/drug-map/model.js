@@ -39,13 +39,14 @@ const affinityOf = (b) => {
  * `drug.bindings` (which carries a prodrug's borrowed bindings, so lisdexamfetamine sits
  * by dextroamphetamine), not the separate active-metabolite bindings; a target bound
  * twice keeps its strongest value. `only` keeps just those keys (target ids and/or
- * `tone:<kind>`). Drugs whose vector is all zero get none (they cannot be placed).
+ * `tone:<kind>`; `[]` keeps none, null every one). Drugs whose vector is all zero get
+ * none (they cannot be placed).
  * @param {object[]} drugs
  * @param {{normalize?: boolean, signed?: boolean, source?: string, only?: string[]|null}} [opts]
  * @returns {Map<string, Map<string, number>>} drug id -> (feature key -> value)
  */
 export function buildProfiles(drugs, { normalize = true, signed = false, source = "receptors", only = null } = {}) {
-  const keep = only && only.length ? new Set(only) : null;
+  const keep = only ? new Set(only) : null;
   const out = new Map();
   for (const d of drugs) {
     const rec = new Map(), tone = new Map();
@@ -70,6 +71,30 @@ export function buildProfiles(drugs, { normalize = true, signed = false, source 
     if (v.size) out.set(d.id, v);
   }
   return out;
+}
+
+/**
+ * One selection gesture on a filter list (the class chips, the target picker). `cur`
+ * null = everything selected; `keys` = what was clicked (one class, one target, or a
+ * whole system's targets). "pick" narrows everything to `keys`, else toggles them (all
+ * already in -> out, otherwise added); "drop" removes them from `cur` (or everything).
+ * Order is kept and new keys appended, since the picker's first two are the x / y axes.
+ * e.g. universe ["d2", "h1", "5ht2a"]:
+ *   pickSet(null, ["d2"], "pick", u)         -> ["d2"]
+ *   pickSet(["d2"], ["5ht2a"], "pick", u)    -> ["d2", "5ht2a"]
+ *   pickSet(["d2", "h1"], ["h1"], "pick", u) -> ["d2"]
+ *   pickSet(null, ["h1"], "drop", u)         -> ["d2", "5ht2a"]
+ * @param {string[]|null} cur
+ * @param {string[]} keys
+ * @param {"pick"|"drop"} mode
+ * @param {string[]} universe
+ * @returns {string[]}
+ */
+export function pickSet(cur, keys, mode, universe) {
+  if (mode === "drop") return (cur || universe).filter((k) => !keys.includes(k));
+  if (!cur) return [...keys];
+  if (keys.every((k) => cur.includes(k))) return cur.filter((k) => !keys.includes(k));
+  return [...cur, ...keys.filter((k) => !cur.includes(k))];
 }
 
 /**

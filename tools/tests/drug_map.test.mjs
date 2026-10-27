@@ -4,7 +4,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
-  buildProfiles, pca, filterDrugs, colorize, directPoints, DEFAULT_VIEW, PKI_FLOOR, PKI_UNMEASURED,
+  buildProfiles, pca, filterDrugs, colorize, directPoints, DEFAULT_VIEW, PKI_FLOOR, PKI_UNMEASURED, pickSet,
 } from "../../public/js/drug-map/model.js";
 import { placeLabels, sizesFor, FONT_PX } from "../../public/js/drug-map/layout.js";
 
@@ -166,4 +166,21 @@ test("filter: marketed keeps only drugs with a current holder", () => {
   const ids = filterDrugs(drugs, { ...DEFAULT_VIEW, hidden: new Set(), marketed: true }).map((d) => d.id);
   assert.deepEqual(ids, ["on"]);
   assert.equal(filterDrugs(drugs, { ...DEFAULT_VIEW, hidden: new Set() }).length, 3);
+});
+
+test("pickSet: pick narrows from all, then toggles; drop removes; axis order kept", () => {
+  const u = ["d2", "h1", "5ht2a"];
+  assert.deepEqual(pickSet(null, ["d2"], "pick", u), ["d2"]);
+  assert.deepEqual(pickSet(["d2"], ["5ht2a"], "pick", u), ["d2", "5ht2a"]);
+  assert.deepEqual(pickSet(["d2", "h1"], ["h1"], "pick", u), ["d2"]);
+  assert.deepEqual(pickSet(null, ["h1"], "drop", u), ["d2", "5ht2a"]);
+  // A whole group: added when partly in, removed when fully in.
+  assert.deepEqual(pickSet(["h1"], ["d2", "h1"], "pick", u), ["h1", "d2"]);
+  assert.deepEqual(pickSet(["h1", "d2"], ["d2", "h1"], "pick", u), []);
+});
+
+test("only: [] keeps no feature (the picker's None), null keeps every one", () => {
+  const drugs = [drug("a", [b("d2", 1), b("h1", 1)])];
+  assert.equal(buildProfiles(drugs, { only: [] }).size, 0);
+  assert.equal(buildProfiles(drugs, { only: null }).get("a").size, 2);
 });

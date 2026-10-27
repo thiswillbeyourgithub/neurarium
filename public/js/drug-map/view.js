@@ -2,17 +2,18 @@
 // feature vector (js/drug-map/model.js: receptor affinities, net transmitter tone, or
 // both), recomputed for whatever the filters leave on screen; pick one or two features
 // and they are plotted directly instead. Controls: feature source, colour mode, names
-// on/off, normalization, signed (agonist vs antagonist), year range, feature picker,
-// per-category chips (collapsed past the first few; shift-click or long-press drops a
-// class), and right-click (long-press) to
-// hide a drug; wheel or pinch zooms. Clicking a point
+// on/off, normalization, signed (agonist vs antagonist), year range, a target picker
+// grouped by transmitter system, per-category chips (collapsed past the first few); in
+// both lists a click picks, shift-click or long-press drops. Right-click (long-press)
+// hides a drug; wheel or pinch zooms, one-finger drag pans. Clicking a point
 // opens that drug in a new browser tab. The whole view is mirrored into the URL
 // (`dm*` keys).
 
 import {
   buildProfiles, categoryColor, colorize, COLOR_MODES, DEFAULT_VIEW, directPoints,
-  FEATURE_SOURCES, filterDrugs, pca, primaryCategory, TONE_PREFIX,
+  FEATURE_SOURCES, filterDrugs, pca, pickSet, primaryCategory, TONE_PREFIX,
 } from "./model.js";
+import { groupTargetsBySystem } from "../legend/targets.js";
 import { placeLabels, sizesFor } from "./layout.js";
 import { setDrugMapOpener } from "./link.js";
 import { LIST_SEP } from "../url-state.js";
@@ -27,12 +28,39 @@ const CHIPS_SHOWN = 8;
 const LEGEND_SHOWN = 8;
 const LONG_PRESS_MS = 500;
 const GRID_PX = 60;
+// A pointer moving less than this (px) is still a click, not a pan.
+const DRAG_SLOP_PX = 5;
 const el = (tag, cls, text) => {
   const e = document.createElement(tag);
   if (cls) e.className = cls;
   if (text !== undefined) e.textContent = text;
   return e;
 };
+const button = (cls, text, onClick) => {
+  const b = el("button", cls, text);
+  b.type = "button";
+  if (onClick) b.addEventListener("click", onClick);
+  return b;
+};
+// The gesture every filter row here shares: a click picks, shift-click or a long press
+// (touch) drops. The long press swallows the click that follows it.
+function pickOrDrop(node, pick, drop) {
+  let pressed = null, longPressed = false;
+  node.addEventListener("pointerdown", (ev) => {
+    longPressed = false;
+    if (ev.pointerType === "mouse") return;
+    pressed = setTimeout(() => { longPressed = true; drop(); }, LONG_PRESS_MS);
+  });
+  for (const type of ["pointerup", "pointercancel", "pointerleave"]) {
+    node.addEventListener(type, () => clearTimeout(pressed));
+  }
+  node.addEventListener("contextmenu", (ev) => ev.preventDefault());
+  node.addEventListener("click", (ev) => {
+    if (longPressed) return;
+    if (ev.shiftKey) drop();
+    else pick();
+  });
+}
 const svgEl = (tag, attrs) => {
   const e = document.createElementNS(SVG, tag);
   for (const [k, v] of Object.entries(attrs || {})) e.setAttribute(k, v);
@@ -108,32 +136,70 @@ export function createDrugMap({ data, wireModal, onChange }) {
   normT.lab.title = t("drugmap.normalizeTip");
   const signT = toggle("signed", t("drugmap.signed"));
   signT.lab.title = t("drugmap.signedTip");
-  // Feature picker: type a target / system name, Enter or pick adds it; each chosen
-  // feature is a removable chip. One or two = direct axes, more = PCA on that subset.
-  const picker = el("div", "dm-features");
-  const pickInput = el("input", "drugs-filter dm-feature-input");
-  pickInput.type = "search";
-  pickInput.placeholder = t("drugmap.pick");
-  pickInput.title = t("drugmap.pickTip");
-  pickInput.setAttribute("list", "dm-feature-list");
-  const datalist = el("datalist");
-  datalist.id = "dm-feature-list";
-  const keyByName = new Map([...featureName].map(([k, n]) => [n.toLowerCase(), k]));
-  for (const n of [...featureName.values()].sort((a, b) => a.localeCompare(b))) {
-    const o = el("option");
-    o.value = n;
-    datalist.appendChild(o);
+  // Target picker: every feature of the current source, targets grouped by transmitter
+  // system in the Receptors & targets legend's order (most-bound system first), the
+  // net-tone features as one last group. One or two picked = direct axes, more = PCA
+  // on that subset. Folded behind a summary naming the selection.
+  const families = data.meta.receptorFamilyLabels || {};
+  const systemOf = new Map(), boundBy = new Map();
+  for (const d of drugs) {
+    for (const b of d.bindings || []) {
+      if (!b.target) continue;
+      systemOf.set(b.target, b.system);
+      boundBy.set(b.target, (boundBy.get(b.target) || 0) + 1);
+    }
   }
-  const pickedBox = el("span", "dm-picked");
-  const addPicked = () => {
-    const key = keyByName.get(pickInput.value.trim().toLowerCase());
-    if (!key) return;
-    pickInput.value = "";
-    if (!(view.only || []).includes(key)) setView({ only: [...(view.only || []), key] });
-  };
-  pickInput.addEventListener("change", addPicked);
-  pickInput.addEventListener("keydown", (ev) => { if (ev.key === "Enter") addPicked(); });
-  picker.append(pickInput, datalist, pickedBox);
+  const targetGroups = groupTargetsBySystem(
+    [...systemOf].map(([id, system]) => ({ id, system, name: nameOf(id) })),
+    (x) => boundBy.get(x.id)).map(([key, list]) => [
+    key === "_other" ? t("targets.otherSystem") : families[key] || key, list.map((x) => x.id)]);
+  const toneKeys = [...featureName.keys()].filter((k) => k.startsWith(TONE_PREFIX));
+  const groupsFor = (source) => [
+    ...(source !== "tone" ? targetGroups : []),
+    ...(source !== "receptors" && toneKeys.length ? [[t("drugmap.source.tone"), toneKeys]] : []),
+  ];
+  const picker = el("details", "dm-targets");
+  const pickSummary = el("summary");
+  const pickList = el("div", "dm-tlist");
+  const pickBar = el("div", "dm-tbar");
+  pickBar.append(
+    button("dm-chip", t("drugmap.pickAll"), () => setView({ only: null })),
+    button("dm-chip", t("drugmap.pickNone"), () => setView({ only: [] })),
+    el("span", "dm-hint", t("drugmap.pickTip")));
+  picker.append(pickSummary, pickBar, pickList);
+  function renderPicker() {
+    const groups = groupsFor(view.source);
+    const universe = groups.flatMap(([, keys]) => keys);
+    const on = (k) => !view.only || view.only.includes(k);
+    const apply = (keys, mode) => {
+      const next = pickSet(view.only, keys, mode, universe);
+      setView({ only: universe.every((k) => next.includes(k)) ? null : next });
+    };
+    const axis = (k) => {
+      const i = view.only && view.only.length <= 2 ? view.only.indexOf(k) : -1;
+      return i < 0 ? "" : `${"xy"[i]}: `;
+    };
+    pickList.replaceChildren(...groups.map(([label, keys]) => {
+      const box = el("div", "dm-tgroup");
+      const head = button("dm-tgroup-head", label);
+      head.classList.toggle("active", keys.every(on));
+      pickOrDrop(head, () => apply(keys, "pick"), () => apply(keys, "drop"));
+      const items = el("div", "dm-titems");
+      for (const k of keys) {
+        const b = button("dm-chip", `${axis(k)}${nameOf(k)}`);
+        b.classList.toggle("active", on(k));
+        pickOrDrop(b, () => apply([k], "pick"), () => apply([k], "drop"));
+        items.appendChild(b);
+      }
+      box.append(head, items);
+      return box;
+    }));
+    const n = view.only ? view.only.filter((k) => universe.includes(k)).length : universe.length;
+    pickSummary.textContent = !view.only ? t("drugmap.pickSumAll", { n })
+      : !n ? t("drugmap.pickSumNone")
+      : view.only.length <= 2 ? view.only.map((k) => `${axis(k)}${nameOf(k)}`).join(" · ")
+      : t("drugmap.pickSumSome", { k: n, n: universe.length });
+  }
   const marketT = toggle("marketed", t("drugmap.marketed"));
   marketT.lab.title = t("drugmap.marketedTip");
   // An approval-year range has no control of its own: only a decade heading's "map"
@@ -161,32 +227,12 @@ export function createDrugMap({ data, wireModal, onChange }) {
     dot.style.background = categoryColor(c, catLabels);
     chip.append(dot, document.createTextNode(catLabels[c] || c));
     // A click narrows to that class alone (from "all") or toggles it in the set;
-    // emptying the set returns to "all". Shift-click (long-press on touch) instead
-    // removes that one class from what is shown, starting from every class.
-    const exclude = () => {
-      const cats = new Set(view.cats || presentCats);
-      cats.delete(c);
-      setView({ cats: cats.size ? cats : null });
+    // emptying the set returns to "all". Dropping removes it from what is shown.
+    const apply = (mode) => {
+      const cats = pickSet(view.cats && [...view.cats], [c], mode, presentCats);
+      setView({ cats: cats.length ? new Set(cats) : null });
     };
-    let pressed = null, longPressed = false;
-    chip.addEventListener("pointerdown", (ev) => {
-      longPressed = false;
-      if (ev.pointerType === "mouse") return;
-      pressed = setTimeout(() => { longPressed = true; exclude(); }, LONG_PRESS_MS);
-    });
-    for (const type of ["pointerup", "pointercancel", "pointerleave"]) {
-      chip.addEventListener(type, () => clearTimeout(pressed));
-    }
-    chip.addEventListener("contextmenu", (ev) => ev.preventDefault());
-    chip.addEventListener("click", (ev) => {
-      if (longPressed) return;
-      if (ev.shiftKey) return exclude();
-      const cats = new Set(view.cats || []);
-      if (!view.cats) cats.add(c);
-      else if (cats.has(c)) cats.delete(c);
-      else cats.add(c);
-      setView({ cats: cats.size ? cats : null });
-    });
+    pickOrDrop(chip, () => apply("pick"), () => apply("drop"));
     chips.appendChild(chip);
   }
   // The class list runs to 4 rows, so past CHIPS_SHOWN it folds behind an ellipsis
@@ -250,15 +296,7 @@ export function createDrugMap({ data, wireModal, onChange }) {
     normT.input.checked = view.normalize;
     signT.input.checked = view.signed;
     marketT.input.checked = view.marketed;
-    pickedBox.replaceChildren(...(view.only || []).map((key, i) => {
-      const chip = el("button", "dm-chip active", `${view.only.length <= 2 ? `${"xy"[i]}: ` : ""}${nameOf(key)} ×`);
-      chip.type = "button";
-      chip.addEventListener("click", () => {
-        const only = view.only.filter((k) => k !== key);
-        setView({ only: only.length ? only : null });
-      });
-      return chip;
-    }));
+    renderPicker();
     yearChip.hidden = !view.years;
     if (view.years) {
       yearChip.textContent = t("drugmap.yearChip", {
@@ -282,7 +320,7 @@ export function createDrugMap({ data, wireModal, onChange }) {
 
     // One or two picked features are the axes themselves: raw values, since unit
     // length over two numbers would put every drug on a circle.
-    const direct = view.only && view.only.length <= 2;
+    const direct = view.only && view.only.length > 0 && view.only.length <= 2;
     const prof = buildProfiles(drugs, { ...view, normalize: view.normalize && !direct });
     const kept = filterDrugs(drugs, view);
     const shown = kept.filter((d) => prof.has(d.id));
@@ -431,8 +469,9 @@ export function createDrugMap({ data, wireModal, onChange }) {
       reg("dmmkt", () => (view.marketed ? "1" : null), (v) => ({ marketed: v === "1" }));
       reg("dmsrc", () => (view.source !== DEFAULT_VIEW.source ? view.source : null),
         (v) => ({ source: FEATURE_SOURCES.includes(v) ? v : DEFAULT_VIEW.source }));
-      reg("dmtgt", () => (view.only ? view.only.join(LIST_SEP) : null),
-        (v) => ({ only: v ? v.split(LIST_SEP) : null }));
+      // "-" = none picked (an empty value would read back as "every target").
+      reg("dmtgt", () => (!view.only ? null : view.only.length ? view.only.join(LIST_SEP) : "-"),
+        (v) => ({ only: !v ? null : v === "-" ? [] : v.split(LIST_SEP) }));
     },
   };
 }
@@ -479,42 +518,61 @@ function wireZoom(svg, get, set) {
     zoomTo(current().w * (ev.deltaY > 0 ? 1.15 : 1 / 1.15), toSvg(ev), frac(ev));
   }, { passive: false });
 
-  const touches = new Map(); // pointerId -> last event, for the two-finger pinch
-  let drag = null, pinch = null;
+  // Every pointer down on the plot is tracked, a dot included (so a finger landing on
+  // a dot can still start a pan or a pinch): one = drag to pan once it moves past
+  // DRAG_SLOP_PX, two = pinch, and going from two back to one resumes the pan from the
+  // finger left. Moves and ends are read on `window`, so a pointer released off the
+  // plot never stays behind as a ghost that turns the next touch into a pinch. A
+  // gesture swallows the click that ends it, so a pan never opens a drug.
+  const touches = new Map(); // pointerId -> last event
+  let drag = null, pinch = null, gestured = false;
   const mid = () => {
     const [a, b] = [...touches.values()];
     return { clientX: (a.clientX + b.clientX) / 2, clientY: (a.clientY + b.clientY) / 2,
       dist: Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY) };
   };
+  const startDrag = (ev, moved) => {
+    drag = { start: toSvg(ev), b: current(), x0: ev.clientX, y0: ev.clientY, moved };
+  };
   svg.addEventListener("pointerdown", (ev) => {
     if (ev.button !== 0) return;
+    if (!touches.size) gestured = false;
     touches.set(ev.pointerId, ev);
     if (touches.size === 2) {
       const m = mid();
       drag = null;
+      gestured = true;
       pinch = { dist: m.dist || 1, at: toSvg(m), b: current() };
-    } else if (touches.size === 1 && !ev.target.closest(".dm-point")) {
-      drag = { start: toSvg(ev), b: current() };
-    } else return;
-    try { svg.setPointerCapture(ev.pointerId); } catch { /* pointer already gone */ }
+    } else if (touches.size === 1) startDrag(ev, false);
   });
-  svg.addEventListener("pointermove", (ev) => {
+  window.addEventListener("pointermove", (ev) => {
     if (!touches.has(ev.pointerId)) return;
     touches.set(ev.pointerId, ev);
     if (pinch && touches.size === 2) {
       const m = mid();
       zoomTo(pinch.b.w * (pinch.dist / (m.dist || 1)), pinch.at, frac(m));
     } else if (drag) {
+      if (!drag.moved && Math.hypot(ev.clientX - drag.x0, ev.clientY - drag.y0) < DRAG_SLOP_PX) return;
+      drag.moved = gestured = true;
       const { fx, fy } = frac(ev);
       set({ ...drag.b, x: drag.start.x - fx * drag.b.w, y: drag.start.y - fy * drag.b.h });
     }
   });
   const end = (ev) => {
-    touches.delete(ev.pointerId);
-    if (touches.size < 2) pinch = null;
-    if (!touches.size) drag = null;
+    if (!touches.delete(ev.pointerId)) return;
+    pinch = null;
+    drag = null;
+    if (touches.size === 1) startDrag([...touches.values()][0], true);
   };
-  svg.addEventListener("pointerup", end);
-  svg.addEventListener("pointercancel", end);
+  window.addEventListener("pointerup", end);
+  window.addEventListener("pointercancel", end);
+  // Capture phase, ahead of a dot's own click (open) and contextmenu (hide) handlers.
+  for (const type of ["click", "contextmenu"]) {
+    svg.addEventListener(type, (ev) => {
+      if (!gestured) return;
+      ev.stopPropagation();
+      ev.preventDefault();
+    }, true);
+  }
   svg.addEventListener("dblclick", () => set(null));
 }
