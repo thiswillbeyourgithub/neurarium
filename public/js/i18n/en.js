@@ -548,7 +548,7 @@ window.__I18N_MESSAGES__.en = {
   "drugmap.axis": "PC{n} ({share}% of variance): {pos} vs {neg}",
   "drugmap.count": "{n} drugs placed.",
   "drugmap.unplaced": "{n} more have no binding stronger than the 10 µM cutoff and cannot be placed.",
-  "drugmap.help": "Axes are recomputed for the drugs on screen. Affinity per target is pKi - 5 (Ki of 10 µM or weaker counts as none; a stated binding with no measured Ki counts as 100 nM). Shift-click (long-press) a class to drop it. Click a point to open the drug in a new tab, right-click or long-press to hide it; scroll or pinch to zoom, drag to pan, double-click to refit.",
+  "drugmap.help": "Axes are recomputed for the drugs on screen. Affinity per target is pKi - 5 (Ki of 10 µM or weaker counts as none; a stated binding with no measured Ki counts as 100 nM). Shift-click (long-press) a class to drop it. Click a point or its name to open the drug in a new tab, right-click or long-press to hide it; scroll or pinch to zoom, drag to pan, double-click to refit.",
   "drugs.sortBy": "Sort drugs by",
   "drugs.sort.class": "Class",
   "drugs.sort.name": "A-Z",

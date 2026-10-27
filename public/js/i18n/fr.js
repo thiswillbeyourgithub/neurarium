@@ -546,7 +546,7 @@ window.__I18N_MESSAGES__.fr = {
   "drugmap.axis": "CP{n} ({share} % de la variance) : {pos} contre {neg}",
   "drugmap.count": "{n} substances placées.",
   "drugmap.unplaced": "{n} autres n’ont aucune liaison plus forte que le seuil de 10 µM et ne peuvent être placées.",
-  "drugmap.help": "Les axes sont recalculés pour les substances affichées. Affinité par cible = pKi - 5 (un Ki de 10 µM ou plus faible ne compte pas ; une liaison citée sans Ki mesuré compte pour 100 nM). Maj-clic (appui long) sur une classe la retire. Cliquer sur un point ouvre la substance dans un nouvel onglet, clic droit ou appui long la masque ; molette ou pincement pour zoomer, glisser pour déplacer, double-clic pour recadrer.",
+  "drugmap.help": "Les axes sont recalculés pour les substances affichées. Affinité par cible = pKi - 5 (un Ki de 10 µM ou plus faible ne compte pas ; une liaison citée sans Ki mesuré compte pour 100 nM). Maj-clic (appui long) sur une classe la retire. Cliquer sur un point ou son nom ouvre la substance dans un nouvel onglet, clic droit ou appui long la masque ; molette ou pincement pour zoomer, glisser pour déplacer, double-clic pour recadrer.",
   "drugs.sortBy": "Trier les substances par",
   "drugs.sort.class": "Classe",
   "drugs.sort.name": "A-Z",

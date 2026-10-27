@@ -377,6 +377,18 @@ export function createDrugMap({ data, wireModal, onChange }) {
     });
   }
 
+  // A dot and its name both open the drug in a new tab (click) or hide it (right-click,
+  // long-press), with the same tooltip.
+  function linkDrug(node, p) {
+    const title = svgEl("title");
+    title.textContent = p.tip;
+    node.appendChild(title);
+    node.addEventListener("click", () => window.open(drugUrl(p.drug), "_blank", "noopener"));
+    node.addEventListener("contextmenu", (ev) => {
+      ev.preventDefault();
+      setView({ hidden: new Set([...view.hidden, p.drug.id]) });
+    });
+  }
   let legendOpen = false;
   function legendRows(rows, ramp) {
     if (ramp) {
@@ -415,15 +427,9 @@ export function createDrugMap({ data, wireModal, onChange }) {
     for (const p of placed) {
       const c = svgEl("circle", { cx: p.px, cy: p.py, r: r * k, fill: p.color, class: "dm-point" });
       const yr = p.drug.firstApproval && p.drug.firstApproval.year;
-      const title = svgEl("title");
-      title.textContent = [p.drug.displayName, p.drug.categoryLabels.join(" · "), yr,
+      p.tip = [p.drug.displayName, p.drug.categoryLabels.join(" · "), yr,
         p.drug.originator && p.drug.originator.name].filter(Boolean).join("\n");
-      c.appendChild(title);
-      c.addEventListener("click", () => window.open(drugUrl(p.drug), "_blank", "noopener"));
-      c.addEventListener("contextmenu", (ev) => {
-        ev.preventDefault();
-        setView({ hidden: new Set([...view.hidden, p.drug.id]) });
-      });
+      linkDrug(c, p);
       g.appendChild(c);
     }
     for (const q of screen) {
@@ -431,6 +437,7 @@ export function createDrugMap({ data, wireModal, onChange }) {
       if (!at) continue;
       const txt = svgEl("text", { x: b.x + at.x * k, y: b.y + at.y * k, class: "dm-label", "font-size": font * k });
       txt.textContent = q.text;
+      linkDrug(txt, q.p);
       g.appendChild(txt);
     }
     svg.replaceChildren(g);

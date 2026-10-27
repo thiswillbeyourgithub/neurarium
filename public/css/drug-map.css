@@ -65,7 +65,8 @@
 .dm-legend-more summary { cursor: pointer; color: var(--muted); }
 .dm-legend-more[open] summary { flex-basis: 100%; }
 .dm-point:hover { stroke: var(--text); }
-.dm-label { fill: var(--text); pointer-events: none; }
+.dm-label { fill: var(--text); cursor: pointer; }
+.dm-label:hover { text-decoration: underline; }
 .dm-plot-wrap { position: relative; }
 /* A legible but quiet credit, so a shared screenshot says where it came from. */
 .dm-watermark {
