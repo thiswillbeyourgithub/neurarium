@@ -1,6 +1,27 @@
 {
   "versions": [
     {
+      "version": "3.143.1",
+      "date": "2026-10-27",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "The drug map is renamed the drugs map, and opens on currently marketed drugs only (untick it in Advanced to see every drug)",
+          "commits": [
+            "11da138",
+            "aaaf59f"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "Drugs with identical binding profiles (the benzodiazepines) no longer pile into one illegible lump on the drugs map: they unfold into a spiral spaced a dot apart",
+          "commits": [
+            "87a1f14"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.143.0",
       "date": "2026-10-27",
       "entries": [
