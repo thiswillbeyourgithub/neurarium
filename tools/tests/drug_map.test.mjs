@@ -1,5 +1,5 @@
 // Unit tests for public/js/drug-map/model.js: affinity profiles (Ki floor, unmeasured
-// default, normalization, signed / tone / subset features), the 2-component PCA, the view filter and the colouring.
+// default, normalization, signed / tone / subset features), the 2-component PCA, the view filter, the colouring, label placement and the overlap spread.
 // Run by tools/tests/test_js_units.py via `node --test`.
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -7,6 +7,7 @@ import {
   buildProfiles, pca, filterDrugs, colorize, directPoints, DEFAULT_VIEW, PKI_FLOOR, PKI_UNMEASURED, pickSet,
 } from "../../public/js/drug-map/model.js";
 import { placeLabels, sizesFor, FONT_PX } from "../../public/js/drug-map/layout.js";
+import { spreadPoints } from "../../public/js/drug-map/spread.js";
 
 const b = (target, ki) => ({ target, ki: ki === undefined ? null : { median: ki } });
 const drug = (id, bindings, extra = {}) => ({ id, name: id, bindings, categories: ["x"], ...extra });
@@ -183,4 +184,35 @@ test("only: [] keeps no feature (the picker's None), null keeps every one", () =
   const drugs = [drug("a", [b("d2", 1), b("h1", 1)])];
   assert.equal(buildProfiles(drugs, { only: [] }).size, 0);
   assert.equal(buildProfiles(drugs, { only: null }).get("a").size, 2);
+});
+
+test("spread: touching dots move apart, by at most one diameter each", () => {
+  const r = 4;
+  const pts = [{ id: "a", x: 100, y: 100 }, { id: "b", x: 102, y: 100 }, { id: "far", x: 300, y: 300 }];
+  const out = spreadPoints(pts, r);
+  assert.ok(!out.has("far"), "a dot touching nothing stays put");
+  const at = (p) => out.get(p.id) || p;
+  const [a, b] = [at(pts[0]), at(pts[1])];
+  assert.ok(Math.hypot(a.x - b.x, a.y - b.y) >= 2 * r + 1 - 1e-6, "they end a dot width apart");
+  for (const p of pts.slice(0, 2)) {
+    const q = at(p);
+    assert.ok(Math.hypot(q.x - p.x, q.y - p.y) <= 2 * r + 1e-6, "each moves at most one diameter");
+  }
+  // The direction survives: a stays left of b.
+  assert.ok(a.x < b.x);
+});
+
+test("spread: dots already a dot width apart do not move", () => {
+  assert.equal(spreadPoints([{ id: "a", x: 0, y: 0 }, { id: "b", x: 9, y: 0 }], 4).size, 0);
+});
+
+test("spread: coincident dots fan out, deterministically by id", () => {
+  const pts = ["c", "a", "b"].map((id) => ({ id, x: 50, y: 50 }));
+  const one = spreadPoints(pts, 4), two = spreadPoints([...pts].reverse(), 4);
+  assert.equal(one.size, 3);
+  for (const id of ["a", "b", "c"]) assert.deepEqual(one.get(id), two.get(id));
+  const q = [...one.values()];
+  for (let i = 0; i < q.length; i++) {
+    for (let j = i + 1; j < q.length; j++) assert.ok(Math.hypot(q[i].x - q[j].x, q[i].y - q[j].y) > 4);
+  }
 });
