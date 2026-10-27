@@ -22,6 +22,7 @@ import { spreadPoints } from "./spread.js";
 import { button, el, foldBox, H, rotate, svgEl, W } from "./dom.js";
 import { wireGestures } from "./gestures.js";
 import { createFocus } from "./focus.js";
+import { plotTitle } from "./title.js";
 import { createControls } from "./controls.js";
 import { LIST_SEP } from "../url-state.js";
 import { viewerUrl } from "./site.js";
@@ -31,6 +32,8 @@ const PAD = 30;
 // Room on the right for the names of the rightmost points.
 const PAD_RIGHT = 130;
 const GRID_PX = 60;
+// Kept free under the plot title: about one name line, so a name above a dot clears it.
+const TITLE_GAP_PX = 30;
 // Transition length, and how long a re-render may run before the busy spinner shows
 // (a fast one never flashes it) and before the "suspiciously slow" hint joins it.
 const ANIM_MS = 450;
@@ -96,7 +99,10 @@ export function createDrugMap({ data, onChange }) {
   const busyText = el("p", "dm-busy-text", t("drugmap.slow"));
   busy.append(el("span", "dm-spinner"), busyText);
   busy.hidden = true;
-  plotWrap.append(svg, fsBtn, unrotate, busy, el("span", "dm-watermark",
+  // What is on screen, in one sentence (title.js), over the top of the plot; fitPoints
+  // keeps the points below it, however many lines it wraps to.
+  const plotTitleEl = el("div", "dm-plot-title");
+  plotWrap.append(svg, plotTitleEl, fsBtn, unrotate, busy, el("span", "dm-watermark",
     `${t("drugmap.watermark")} v${window.__APP_VERSION__} · ${location.host}`));
   const legendBox = foldBox(t("drugmap.sec.legend"));
   const legend = el("div", "dm-legend");
@@ -117,7 +123,12 @@ export function createDrugMap({ data, onChange }) {
   wireGestures(svg, () => cam, setCam, () => fitFrame());
   // Names are sized in screen px, so a resized window re-lays them out.
   if (typeof ResizeObserver === "function") {
-    new ResizeObserver(() => { if (placed.length) drawPoints(); }).observe(plotWrap);
+    new ResizeObserver(() => {
+      if (!placed.length) return;
+      // A narrower plot can wrap the title onto another line: refit below it.
+      if (titlePad() !== fitTop) fitPoints(placed);
+      drawPoints();
+    }).observe(plotWrap);
   }
 
   // ---- Render: filter, project, colour, then transition to the new placement. Async:
@@ -153,6 +164,10 @@ export function createDrugMap({ data, onChange }) {
       await yieldFrame();
       if (my !== gen) return;
       const next = shown.map((d) => ({ drug: d, ...points.get(d.id), color: colorOf.get(d.id) }));
+      plotTitleEl.textContent = plotTitle(view, {
+        t, families: controls.families, systems: controls.groupsFor(view.source),
+        catName: (c) => catLabels[c] || c, nameOf,
+      });
       fitPoints(next);
       const prev = placed;
       placed = next;
@@ -170,10 +185,20 @@ export function createDrugMap({ data, onChange }) {
   // Fit the data into the W x H frame, y up (a PCA has no preferred orientation, but a
   // plot reads with "more of PC2" upward), at ONE scale for both axes and centred, so a
   // distance on screen (and the grid's squares) means the same either way.
+  // The top band is left to the plot title: its rendered height, plus one name line (a
+  // name may sit above its dot, layout.js), turned into viewBox units (the svg
+  // letterboxes the W x H frame, hence the larger of the two ratios).
+  let fitTop = 0;
+  function titlePad() {
+    const w = svg.clientWidth, h = svg.clientHeight;
+    if (!w || !h || !plotTitleEl.textContent) return 0;
+    return Math.ceil((plotTitleEl.offsetHeight + TITLE_GAP_PX) * Math.max(W / w, H / h));
+  }
   function fitPoints(pts) {
     const xs = pts.map((p) => p.x), ys = pts.map((p) => p.y);
     const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
-    const aw = W - PAD - PAD_RIGHT, ah = H - 2 * PAD;
+    fitTop = titlePad();
+    const aw = W - PAD - PAD_RIGHT, ah = H - 2 * PAD - fitTop;
     const s = Math.min(aw / (x1 - x0 || 1), ah / (y1 - y0 || 1));
     const ox = PAD + (aw - (x1 - x0) * s) / 2, oy = H - PAD - (ah - (y1 - y0) * s) / 2;
     for (const p of pts) {

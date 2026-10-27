@@ -14,7 +14,10 @@ const { t } = window.__I18N__;
 /**
  * @param {{data: object, drugs: object[], nameOf: (key: string) => string,
  *   featureKeys: string[], getView: () => object, setView: (patch: object) => void}} o
- * @returns {{boxes: HTMLElement[], render: () => void}}
+ * @returns {{boxes: HTMLElement[], render: () => void,
+ *   groupsFor: (source: string) => [string, string[]][], families: [string, string[]][]}}
+ *   groupsFor / families: the axes picker's and the class list's groupings, which the
+ *   plot title (js/drug-map/title.js) names a picked set by
  */
 export function createControls({ data, drugs, nameOf, featureKeys, getView, setView }) {
   const catLabels = data.meta.drugCategoryLabels || {};
@@ -234,5 +237,8 @@ export function createControls({ data, drugs, nameOf, featureKeys, getView, setV
     ].filter(Boolean).join(" · "));
   }
 
-  return { boxes: [presets.box, inputs.box, filter.box, color.box, advanced.box], render };
+  return {
+    boxes: [presets.box, inputs.box, filter.box, color.box, advanced.box], render, groupsFor,
+    families: [...catGroups].map(([g, cats]) => [groupLabels[g] || g, cats]),
+  };
 }
