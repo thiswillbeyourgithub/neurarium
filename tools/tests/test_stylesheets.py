@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-"""The viewer's CSS lives in public/css/*.css, linked from index.html in cascade order.
+"""The site's CSS lives in public/css/*.css, linked from each page (`PAGES`: index.html,
+drugs-map.html) in cascade order.
 
 Two ways that split rots silently: a new .css file that nobody links (its rules simply
 never apply), and a linked file the service worker's precached shell (`SHELL` in
@@ -13,7 +14,7 @@ import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from viewer_source import INDEX, stylesheet_hrefs  # noqa: E402
+from viewer_source import INDEX, PAGES, stylesheet_hrefs  # noqa: E402
 
 PUBLIC = INDEX.parent
 
@@ -21,10 +22,13 @@ PUBLIC = INDEX.parent
 class StylesheetsTest(unittest.TestCase):
 
     def test_every_css_file_is_linked_once(self):
-        hrefs = stylesheet_hrefs()
-        self.assertEqual(len(hrefs), len(set(hrefs)), "a stylesheet is linked twice")
+        linked = set()
+        for page in PAGES:
+            hrefs = stylesheet_hrefs(page)
+            self.assertEqual(len(hrefs), len(set(hrefs)), f"a stylesheet is linked twice in {page.name}")
+            linked |= set(hrefs)
         on_disk = sorted(p.relative_to(PUBLIC).as_posix() for p in (PUBLIC / "css").glob("*.css"))
-        self.assertEqual(sorted(hrefs), on_disk)
+        self.assertEqual(sorted(linked), on_disk)
 
     def test_no_inline_style_block_left(self):
         html = INDEX.read_text(encoding="utf-8")
@@ -35,7 +39,8 @@ class StylesheetsTest(unittest.TestCase):
         sw = (PUBLIC / "sw.js").read_text(encoding="utf-8")
         shell = re.search(r"const SHELL = \[(.*?)\];", sw, re.S).group(1)
         listed = set(re.findall(r'"([^"]+)"', shell))
-        self.assertEqual(set(stylesheet_hrefs()) - listed, set())
+        for page in PAGES:
+            self.assertEqual(set(stylesheet_hrefs(page)) - listed, set(), page.name)
 
 
 if __name__ == "__main__":

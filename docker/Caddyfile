@@ -114,6 +114,13 @@
 		root * /opt/neurarium
 		file_server
 	}
+	# The drugs map page (public/drugs-map.html) at a short address. Exactly
+	# /drugs-map, never /drugs-map/: the page loads its assets by relative path, which
+	# a trailing slash would resolve under /drugs-map/ (that folder only holds the
+	# page's README.md / README.fr.md). The dedicated drugsmap.olicorne.org host does
+	# its own `rewrite / /drugs-map.html` in the OUTER proxy (public/drugs-map/README.md).
+	redir /drugs-map/ /drugs-map 308
+	rewrite /drugs-map /drugs-map.html
 	handle {
 		file_server
 	}
@@ -182,8 +189,10 @@
 	# keeps the French strings from being decoded as latin-1. There is no registered
 	# JSONL type a browser renders any better: one JSON object per line is not valid
 	# JSON, so `application/json` would only make a JSON viewer report a parse error.
-	# Everything under /api is Markdown (a page, an index, or the 404 page), typed as such.
-	@md path /api/*
+	# Everything under /api is Markdown (a page, an index, or the 404 page), typed as such,
+	# and so is any other .md (the drugs map's READMEs under /drugs-map/), which Go's
+	# mime table would otherwise type without a charset, garbling the French one.
+	@md path /api/* *.md
 	header @md Content-Type "text/markdown; charset=utf-8"
 
 	@jsonl path *.jsonl

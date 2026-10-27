@@ -1,4 +1,4 @@
-// The drug map popup (#drugmap-modal): every drug placed by 2-component PCA of its
+// The drugs map page (drugs-map.html, booted by js/drugs-map-main.js): every drug placed by 2-component PCA of its
 // feature vector (js/drug-map/model.js: receptor affinities, net transmitter tone, or
 // both), recomputed for whatever the filters leave on screen; pick one or two features
 // and they are plotted directly instead. The control boxes live in controls.js, the
@@ -6,8 +6,12 @@
 // overlap nudge in spread.js. A re-render yields between its steps behind a busy
 // indicator (with a "suspiciously slow" hint past SLOW_MS), then slides the dots that
 // stay and fades the ones that come or go. Clicking a point or its name opens that drug
-// in a new browser tab, right-click (long-press) hides it. The whole view is mirrored
-// into the URL (`dm*` keys).
+// in the 3D viewer in a new browser tab, right-click (long-press) hides it. The whole
+// view is mirrored into the URL (`dm*` keys).
+//
+// It is a page of its own rather than a popup of the viewer so it can be shown alone
+// (also served as drugsmap.olicorne.org, see docs/drugs-map/README.md) without loading
+// three.js, the meshes or the panels.
 
 import {
   buildProfiles, colorize, COLOR_MODES, DEFAULT_VIEW, directPoints,
@@ -18,8 +22,8 @@ import { spreadPoints } from "./spread.js";
 import { button, el, foldBox, H, rotate, svgEl, W } from "./dom.js";
 import { wireGestures } from "./gestures.js";
 import { createControls } from "./controls.js";
-import { setDrugMapOpener } from "./link.js";
 import { LIST_SEP } from "../url-state.js";
+import { viewerUrl } from "./site.js";
 
 const { t } = window.__I18N__;
 const PAD = 30;
@@ -33,12 +37,13 @@ const BUSY_MS = 150;
 const SLOW_MS = 5000;
 
 /**
- * @param {{data: object, wireModal: Function, onChange: () => void}} o
+ * Build the map into #drugmap-body. Nothing is drawn until the first `render()`, so the
+ * caller can apply the URL's view first and the map opens on it without a transition.
+ * @param {{data: object, onChange: () => void}} o
  *   onChange runs after any view change (URL sync)
- * @returns {{open: (patch?: object) => void, close: () => void, isOpen: boolean,
- *   registerUrl: (urlState: object) => void}}
+ * @returns {{render: () => Promise<void>, registerUrl: (urlState: object) => void}}
  */
-export function createDrugMap({ data, wireModal, onChange }) {
+export function createDrugMap({ data, onChange }) {
   const body = document.getElementById("drugmap-body");
   const drugs = data.drugs || [];
   const catLabels = data.meta.drugCategoryLabels || {};
@@ -54,17 +59,13 @@ export function createDrugMap({ data, wireModal, onChange }) {
   let view = { ...DEFAULT_VIEW, hidden: new Set() };
   // The camera: viewBox once zoomed / panned (null = fit) and the rotation (radians).
   let cam = { box: null, angle: 0 };
-  const ctrl = wireModal({
-    modalId: "drugmap-modal", toggleId: "drugs-map", closeId: "drugmap-close",
-    onOpen: () => render(),
-  });
-  if (!body) return { ...ctrl, registerUrl() {} };
+  if (!body) return { render: async () => {}, registerUrl() {} };
 
   // A view change refits the frame but keeps the rotation the reader chose.
   const setView = (patch) => {
     view = { ...view, ...patch };
     cam = { ...cam, box: null };
-    if (ctrl.isOpen) render();
+    render();
     onChange();
   };
 
@@ -107,9 +108,9 @@ export function createDrugMap({ data, wireModal, onChange }) {
 
   const setCam = (next) => { cam = next; anim = null; drawPoints(); };
   wireGestures(svg, () => cam, setCam, () => fitFrame());
-  // Names are sized in screen px, so a resized popup re-lays them out.
+  // Names are sized in screen px, so a resized window re-lays them out.
   if (typeof ResizeObserver === "function") {
-    new ResizeObserver(() => { if (ctrl.isOpen && placed.length) drawPoints(); }).observe(plotWrap);
+    new ResizeObserver(() => { if (placed.length) drawPoints(); }).observe(plotWrap);
   }
 
   // ---- Render: filter, project, colour, then transition to the new placement. Async:
@@ -321,19 +322,12 @@ export function createDrugMap({ data, wireModal, onChange }) {
     svg.replaceChildren(g);
   }
 
-  setDrugMapOpener((patch) => {
-    view = { ...DEFAULT_VIEW, hidden: new Set(), ...patch };
-    cam = { box: null, angle: 0 };
-    ctrl.open();
-  });
-
   return {
-    ...ctrl,
-    get isOpen() { return ctrl.isOpen; },
+    render,
     /** Mirror the view into the URL, one key per control, absent at its default. */
     registerUrl(urlState) {
       const reg = (key, read, write) => urlState.register(key, {
-        read: () => (ctrl.isOpen ? read() : null),
+        read,
         write: (v) => setView(write(v)),
         reset: () => setView({ ...DEFAULT_VIEW, hidden: new Set() }),
       });
@@ -389,5 +383,5 @@ function gridLines(b, k, angle) {
   return g;
 }
 
-// This page, opened on one drug's tab (the `tabs` deep link, js/url-state.js).
-const drugUrl = (drug) => `${location.origin}${location.pathname}${location.search}#tabs=drug:${encodeURIComponent(drug.id)}`;
+// The 3D viewer opened on one drug's tab (the `tabs` deep link, js/url-state.js).
+const drugUrl = (drug) => `${viewerUrl()}#tabs=drug:${encodeURIComponent(drug.id)}`;

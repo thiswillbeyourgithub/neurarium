@@ -42,7 +42,7 @@ import { wireLegends } from "./boot/legends.js";
 import { wireViews } from "./boot/views.js";
 import { launchScene } from "./boot/launch.js";
 import { createRenderLoop } from "./boot/render-loop.js";
-import { createDrugMap } from "./drug-map/view.js";
+import { stampVersion } from "./boot/version-stamp.js";
 
 // UI string lookup (js/i18n.js, a classic script that ran before this module).
 // `t(key, vars)` returns the current-language UI string; data strings are
@@ -52,15 +52,8 @@ const { t } = window.__I18N__;
 async function main() {
   const { scene, camera, renderer, controls, baseDpr, theme } = initThree();
 
-  // Stamp the version into every [data-app-version] slot (the panel header and the
-  // loading overlay's title; single source: window.__APP_VERSION__ from version.js).
-  // Done before the data load so it shows even if that fails; a new display spot is
-  // then markup-only, no second lookup here.
-  if (window.__APP_VERSION__) {
-    for (const el of document.querySelectorAll("[data-app-version]")) {
-      el.textContent = `v${window.__APP_VERSION__}`;
-    }
-  }
+  // Done before the data load so the version shows even if that fails.
+  stampVersion();
 
   // Startup loading overlay (the #loading element, visible by default): a progress
   // bar over the canvas so a slow first load shows feedback. Fetch fills the first
@@ -240,12 +233,7 @@ async function main() {
   });
   const aboutModal = wireAboutModal(sourcingModal, changelog); // the toolbar info-button popup
   // The Drugs list's drug map popup (a PCA of binding profiles); a point opens its drug in a new tab.
-  const drugMap = createDrugMap({
-    data, wireModal,
-    onChange: () => urlState.sync(),
-  });
-  drugMap.registerUrl(urlState);
-  wireShortcuts(shortcutsHelp, tabs, selection, lightbox, aboutModal, legendModal, sourcingModal, changelog, drugMap); // single-key shortcuts (n/s/l/p/k/c/r/m/f/?/Esc) + Tab cycles detail tabs
+  wireShortcuts(shortcutsHelp, tabs, selection, lightbox, aboutModal, legendModal, sourcingModal, changelog); // single-key shortcuts (n/s/l/p/k/c/r/m/f/?/Esc) + Tab cycles detail tabs
   projVis.apply(); // established arrows visible, tentative ones start hidden
   // Honor screenshot/deep-link view params (?only=, ?view=, ?explode=, ...).
   applyViewParams({ scene, camera, controls, meshes, arrows, labels, urlState });
@@ -267,7 +255,7 @@ async function main() {
   });
 
   wireUrlBindings({
-    aboutModal, arrows, changelog, data, drugMap, focusCircuit, focusDrug,
+    aboutModal, arrows, changelog, data, focusCircuit, focusDrug,
     focusEffect, focusEnzyme, focusProjectionGroup, focusTarget, legendModal, meshes,
     selectConnection, selectStructure, shortcutsHelp,
     showNodeBrowser, showSimulation,

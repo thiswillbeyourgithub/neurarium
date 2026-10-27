@@ -6,9 +6,10 @@ import { LIST_SEP } from "../url-state.js";
 import { foldText } from "../search/query.js";
 import { setModalToggle } from "../about/modals.js";
 import { stripSide } from "../util.js";
+import { MAP_PAGE } from "../drug-map/site.js";
 
 export function wireUrlBindings({
-  aboutModal, arrows, changelog, data, drugMap, focusCircuit, focusDrug, focusEffect,
+  aboutModal, arrows, changelog, data, focusCircuit, focusDrug, focusEffect,
   focusEnzyme, focusProjectionGroup, focusTarget, legendModal, meshes,
   selectConnection, selectStructure, shortcutsHelp, showNodeBrowser, showSimulation,
   simulation, sourcingModal, tabs, urlState,
@@ -160,11 +161,20 @@ export function wireUrlBindings({
   // reached from a panel, not a state of the UI.
   const POPUPS = {
     about: aboutModal, legend: legendModal, sources: sourcingModal,
-    shortcuts: shortcutsHelp, whatsnew: changelog, drugmap: drugMap,
+    shortcuts: shortcutsHelp, whatsnew: changelog,
   };
   urlState.register("popup", {
     read: () => Object.keys(POPUPS).find((name) => POPUPS[name].isOpen) || null,
     write: (v) => {
+      // The drugs map was a popup here before it became its own page: a link shared
+      // back then (`popup=drugmap&dmcat=...`) is sent on to the page, its `dm*` view
+      // keys carried over unchanged (the page reads the same keys).
+      if (v === "drugmap") {
+        const dm = [...new URLSearchParams(location.hash.slice(1))]
+          .filter(([k]) => k.startsWith("dm")).map(([k, x]) => `${k}=${x}`).join("&");
+        location.replace(`${MAP_PAGE}${dm ? `#${dm}` : ""}`);
+        return;
+      }
       for (const [name, ctrl] of Object.entries(POPUPS)) {
         if (name !== v && ctrl.isOpen) ctrl.close();
       }

@@ -208,6 +208,9 @@ window.__I18N_MESSAGES__.en = {
   "tour.openDrugs.title": "Open a list",
   "tour.openDrugs.body":
     "Start with a drug. Click <b>Drugs</b> to open the list.",
+  "tour.drugsMap.title": "The drugs map",
+  "tour.drugsMap.body":
+    "This button opens the <b>drugs map</b> in a new tab: every drug placed by how alike its receptor binding profile is, filterable by class or approval year. A group heading in the list can also carry a small <b>map</b> link showing just that group.",
   "tour.drugTap.title": "Focus a drug",
   "tour.drugTap.body":
     "Click <b>Olanzapine</b>. The brain dims and its effects animate on the regions it reaches.",
@@ -498,6 +501,9 @@ window.__I18N_MESSAGES__.en = {
   "drugs.none": "No matching drug.",
   "drugmap.open": "Show on a map",
   "drugmap.title": "Drugs map (binding-profile PCA)",
+  "drugmap.page.intro": "Every drug in neurarium's dataset placed by how similar its receptor binding profile is to the others (a principal component analysis, recomputed for whatever the filters leave on screen). Click a drug to open it in the 3D brain atlas, right-click (long-press) to hide it.",
+  "drugmap.page.viewer": "Open neurarium, the 3D brain atlas",
+  "drugmap.page.readme": "About this map",
   "drugmap.link": "map",
   "drugmap.linkTip": "Open the drugs map on this group",
   "drugmap.colorBy": "Colour points by",
@@ -857,7 +863,10 @@ window.__I18N_MESSAGES__.en = {
   "about.dataSummary": "Click to access the structured data",
   "about.dataIntro":
     "The whole dataset is plain JSONL / JSON, kept separate from the rendering and " +
-    "free to reuse. Each file below is served directly from this site (one JSON " +
+    "free to reuse (for an example of what can be built on these files alone, see the " +
+    "<a href=\"drugs-map.html\" target=\"_blank\" rel=\"noopener\">drugs map</a> and " +
+    "<a href=\"drugs-map/README.md\" target=\"_blank\" rel=\"noopener\">its README</a>). " +
+    "Each file below is served directly from this site (one JSON " +
     "object per line, self-describing, every row graded and sourced):",
   "about.dataRepo": "Or browse it in the source repository →",
   "about.outreach":

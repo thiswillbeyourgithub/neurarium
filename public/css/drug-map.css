@@ -1,7 +1,6 @@
-/* The drug map popup (#drugmap-modal, js/drug-map/view.js): wider than the reading
-   popups, folded control boxes, the SVG scatter, then legend + axis boxes.
-   Point colours are data (set inline); everything else reads the theme tokens. */
-.modal.drugmap { width: min(1100px, calc(100vw - 32px)); }
+/* The drugs map (drugs-map.html, js/drug-map/view.js): folded control boxes, the SVG
+   scatter, then legend + axis boxes. Point colours are data (set inline); everything
+   else reads the theme tokens. The page around it is css/drugs-map-page.css. */
 .dm-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; }
 .dm-controls .seg-switch, .dm-controls .list-toggle { margin: 0; }
 /* Each control section is a rounded box, folded by default, its summary showing the
@@ -146,8 +145,11 @@
   border-bottom: 1px dotted rgba(var(--ink), 0.3);
 }
 .drugs-map-link:hover { color: var(--text); }
-/* The list's entry point: a full-width accent button, so it is not missed. */
+/* The list's entry point (a link to the map page): a full-width accent button, so it
+   is not missed. */
 #drugs-map {
+  box-sizing: border-box;
+  text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -168,6 +170,3 @@
 #drugs-map .beta-tag { margin-left: 0; }
 .drugs-map-icon { width: 14px; height: 14px; fill: var(--accent); }
 
-/* "by Olivier Cornelis" under the title, like the main panel's byline. */
-#drugmap-title { margin-bottom: 0; }
-.dm-byline { margin: 2px 0 12px; }

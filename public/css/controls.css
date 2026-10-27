@@ -220,7 +220,7 @@ body.no-3d #controls:has(#controls-body:not([hidden])) {
    panel-only mode): same 24px box, same muted-to-text hover. Only the FIRST of
    them carries the row's right-aligning margin, or flexbox would split the free
    space between the two autos and separate the pair. */
-#controls-header .panel-hdr-btn {
+#controls-header .panel-hdr-btn, .dmp-title-row .panel-hdr-btn {
   pointer-events: auto;
   align-self: center;
   width: 24px;
@@ -235,17 +235,21 @@ body.no-3d #controls:has(#controls-body:not([hidden])) {
   color: var(--muted);
   cursor: pointer;
 }
-#controls-header .panel-hdr-btn svg { width: 16px; height: 16px; display: block; }
-#controls-header .panel-hdr-btn:hover { color: var(--text); background: rgba(var(--ink), 0.12); }
+#controls-header .panel-hdr-btn svg, .dmp-title-row .panel-hdr-btn svg { width: 16px; height: 16px; display: block; }
+#controls-header .panel-hdr-btn:hover, .dmp-title-row .panel-hdr-btn:hover { color: var(--text); background: rgba(var(--ink), 0.12); }
 #controls-header .panel-hdr-btn[aria-pressed="true"] { color: var(--accent-light); }
 #controls-header .panel-theme-btn { margin-left: auto; }
 #controls-header .panel-hdr-btn + .chevron { margin-left: 6px; }
 /* One <svg> per theme, the inactive one hidden: the button shows what a click
    would GIVE you (a moon while light is on), which is the reading a sun/moon
-   pair is understood by. */
-#controls-header .panel-theme-btn .theme-moon { display: none; }
-:root[data-theme="light"] #controls-header .panel-theme-btn .theme-sun { display: none; }
-:root[data-theme="light"] #controls-header .panel-theme-btn .theme-moon { display: block; }
+   pair is understood by. The drugs map page (drugs-map.html) carries the same
+   button in .dmp-title-row. Scoped like the box rules above, or they would win. */
+#controls-header .panel-theme-btn .theme-moon,
+.dmp-title-row .panel-theme-btn .theme-moon { display: none; }
+:root[data-theme="light"] #controls-header .panel-theme-btn .theme-sun,
+:root[data-theme="light"] .dmp-title-row .panel-theme-btn .theme-sun { display: none; }
+:root[data-theme="light"] #controls-header .panel-theme-btn .theme-moon,
+:root[data-theme="light"] .dmp-title-row .panel-theme-btn .theme-moon { display: block; }
 #controls-header .chevron { margin-left: auto; align-self: center; }
 #controls-header:has(> .collapse-hit[aria-expanded="true"]) .chevron { transform: rotate(90deg); }
 .row { margin: 12px 0; }

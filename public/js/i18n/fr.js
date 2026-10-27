@@ -206,6 +206,9 @@ window.__I18N_MESSAGES__.fr = {
   "tour.openDrugs.title": "Ouvrir une liste",
   "tour.openDrugs.body":
     "Commençons par une substance. Cliquez sur <b>Substances</b> pour ouvrir la liste.",
+  "tour.drugsMap.title": "La carte des substances",
+  "tour.drugsMap.body":
+    "Ce bouton ouvre la <b>carte des substances</b> dans un nouvel onglet : chaque substance placée selon la ressemblance de son profil de liaison aux récepteurs, filtrable par classe ou année d'autorisation. Un titre de groupe de la liste peut aussi porter un petit lien <b>carte</b> qui ne montre que ce groupe.",
   "tour.drugTap.title": "Mettre une substance en avant",
   "tour.drugTap.body":
     "Cliquez sur <b>olanzapine</b>. Le cerveau s'assombrit et ses effets s'animent sur les régions qu'elle atteint.",
@@ -496,6 +499,9 @@ window.__I18N_MESSAGES__.fr = {
   "drugs.none": "Aucune substance correspondante.",
   "drugmap.open": "Afficher sur une carte",
   "drugmap.title": "Carte des substances (ACP des profils de liaison)",
+  "drugmap.page.intro": "Chaque substance du jeu de données de neurarium, placée selon la ressemblance de son profil de liaison aux récepteurs avec celui des autres (une analyse en composantes principales, recalculée pour ce que les filtres laissent à l'écran). Cliquez sur une substance pour l'ouvrir dans l'atlas 3D du cerveau, clic droit (appui long) pour la masquer.",
+  "drugmap.page.viewer": "Ouvrir neurarium, l'atlas 3D du cerveau",
+  "drugmap.page.readme": "À propos de cette carte",
   "drugmap.link": "carte",
   "drugmap.linkTip": "Ouvrir la carte des substances sur ce groupe",
   "drugmap.colorBy": "Colorer les points par",
@@ -864,7 +870,9 @@ window.__I18N_MESSAGES__.fr = {
   "about.dataSummary": "Cliquez pour accéder aux données structurées",
   "about.dataIntro":
     "L’ensemble des données est du simple JSONL / JSON, séparé du rendu et libre de " +
-    "réutilisation. Chaque fichier ci-dessous est servi directement depuis ce site " +
+    "réutilisation (pour un exemple de ce que l’on peut construire avec ces seuls fichiers, voir la " +
+    "<a href=\"drugs-map.html\" target=\"_blank\" rel=\"noopener\">carte des substances</a> et " +
+    "<a href=\"drugs-map/README.fr.md\" target=\"_blank\" rel=\"noopener\">son README</a>). Chaque fichier ci-dessous est servi directement depuis ce site " +
     "(un objet JSON par ligne, auto-descriptif, chaque ligne graduée et sourcée) :",
   "about.dataRepo": "Ou parcourez-les dans le dépôt du code source →",
   "about.outreach":

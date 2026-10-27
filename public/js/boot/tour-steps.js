@@ -338,6 +338,11 @@ export function createViewerTour({
     { title: t("tour.openDrugs.title"), body: tHtml("tour.openDrugs.body"),
       target: "#drugs-toggle", interactive: true, scrollTo: true,
       before: () => { tourReset(); tourCloseSection("drugs"); } },
+    // The drugs map link at the top of the list: pointed at, never clicked, since it
+    //    opens another page (drugs-map.html) in a new tab and would leave the tour.
+    { title: t("tour.drugsMap.title"), body: tHtml("tour.drugsMap.body"),
+      target: "#drugs-map", scrollTo: true,
+      before: () => tourOpenSection("drugs") },
     { title: t("tour.drugTap.title"), body: tHtml("tour.drugTap.body"),
       target: '[data-tour-id="drug:olanzapine"]', interactive: true, scrollTo: true,
       before: () => tourOpenSection("drugs") },

@@ -1,0 +1,20 @@
+/* The standalone drugs map page (drugs-map.html): a scrolling reading page, not the
+   viewer's fixed full-screen canvas, so it undoes base.css's html/body lock. The map
+   itself keeps its css/drug-map.css look; this file is only the page around it. */
+html:has(body.dmp), body.dmp { height: auto; min-height: 100%; overflow: auto; touch-action: auto; }
+.dmp-header, .dmp-main { width: min(1100px, calc(100vw - 32px)); margin: 0 auto; }
+.dmp-header { padding: 18px 0 8px; }
+.dmp-title-row { display: flex; align-items: center; gap: 10px; }
+.dmp-title { margin: 0; font-size: 20px; }
+.dmp-title .beta-tag { margin-left: 8px; vertical-align: middle; }
+.dmp-title-row .panel-theme-btn { margin-left: auto; }
+.dmp-lang { margin: 0; }
+.dmp-byline { margin: 4px 0 10px; }
+.dmp-intro { max-width: 70ch; margin: 0 0 8px; font-size: 14px; line-height: 1.45; color: var(--muted); }
+.dmp-links { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 14px; }
+.dmp-links a { color: var(--accent-light); }
+.dmp-main { padding: 8px 0 32px; font-size: 14px; }
+.dmp-loading { color: var(--muted); }
+@media (max-width: 560px) {
+  .dmp-header, .dmp-main { width: calc(100vw - 20px); }
+}
