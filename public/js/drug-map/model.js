@@ -197,6 +197,7 @@ export const DEFAULT_VIEW = Object.freeze({
   hidden: new Set(),   // drug ids hidden by hand
   color: "category",   // one of COLOR_MODES
   labels: true,
+  spread: true,        // nudge overlapping dots apart on screen (js/drug-map/spread.js)
   normalize: true,     // unit-length profiles (see buildProfiles)
   signed: true,        // agonist vs antagonist on opposite signs
   marketed: false,     // only drugs with a current marketing authorisation (US or FR holder)

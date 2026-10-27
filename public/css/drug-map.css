@@ -1,20 +1,24 @@
 /* The drug map popup (#drugmap-modal, js/drug-map/view.js): wider than the reading
-   popups, a controls row, category chips, the SVG scatter, axis captions + legend.
+   popups, folded control boxes, the SVG scatter, then legend + axis boxes.
    Point colours are data (set inline); everything else reads the theme tokens. */
 .modal.drugmap { width: min(1100px, calc(100vw - 32px)); }
 .dm-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; }
 .dm-controls .seg-switch, .dm-controls .list-toggle { margin: 0; }
-/* One labelled step per row: title on the left, its controls wrapping beside it. */
-.dm-section, .dm-advanced { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 0 0 8px; }
-.dm-section-title { flex: 0 0 auto; min-width: 118px; font-size: 11px; font-weight: 600; color: var(--muted); }
-.dm-section .dm-chips { flex: 1 1 0; min-width: 240px; margin: 0; }
-.dm-advanced { display: block; }
-.dm-advanced summary { cursor: pointer; }
-.dm-advanced .dm-controls { margin: 6px 0 0 0; }
-.dm-fullscreen {
+/* Each control section is a rounded box, folded by default, its summary showing the
+   current value so a folded box still says what it is set to. */
+.dm-box { margin: 0 0 6px; border: 1px solid rgba(var(--ink), 0.14); border-radius: 8px; }
+.dm-box > summary { display: flex; align-items: baseline; gap: 10px; padding: 5px 10px; cursor: pointer; }
+.dm-box-title { flex: 0 0 auto; font-size: 12px; font-weight: 600; }
+.dm-box-value { overflow: hidden; font-size: 11px; color: var(--muted); white-space: nowrap; text-overflow: ellipsis; }
+.dm-box-body { padding: 2px 10px 8px; }
+.dm-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 0 0 6px; }
+.dm-row-label { flex: 0 0 auto; min-width: 48px; font-size: 11px; font-weight: 600; color: var(--muted); }
+.dm-row-value { font-size: 11px; color: var(--muted); }
+.dm-row .seg-switch { margin: 0; }
+.dm-panel { margin: 0 0 4px; }
+.dm-plot-btn {
   position: absolute;
   top: 6px;
-  right: 6px;
   padding: 2px 7px;
   font: inherit;
   font-size: 15px;
@@ -25,7 +29,10 @@
   border-radius: 5px;
   cursor: pointer;
 }
-.dm-fullscreen:hover { color: var(--text); }
+.dm-plot-btn:hover { color: var(--text); }
+.dm-plot-btn[hidden] { display: none; }
+.dm-fullscreen { right: 6px; }
+.dm-unrotate { right: 44px; font-size: 12px; }
 /* Fullscreen (or its fixed-overlay fallback): the plot fills the screen. */
 .dm-plot-wrap.dm-fs { position: fixed; inset: 0; z-index: 1000; background: var(--dm-plot-bg); }
 .dm-plot-wrap.dm-fs .dm-plot { width: 100%; height: 100%; aspect-ratio: auto; border: 0; border-radius: 0; }
@@ -40,10 +47,8 @@
   cursor: pointer;
 }
 .dm-unhide:hover, .dm-chip:hover { color: var(--text); background: rgba(var(--ink), 0.12); }
-.dm-chips { display: flex; flex-wrap: wrap; gap: 4px; margin: 10px 0 8px; }
 .dm-chip { display: inline-flex; align-items: center; gap: 5px; }
 .dm-chip[hidden] { display: none; }
-.dm-chip-more { font-style: italic; }
 .dm-chip.active { color: var(--text); border-color: var(--accent); background: var(--accent-soft); }
 .dm-dot { width: 9px; height: 9px; border-radius: 50%; flex: 0 0 auto; }
 .dm-plot {
@@ -60,14 +65,37 @@
 /* The outline reads the ink token so pale points stay visible on the light page too. */
 .dm-point { cursor: pointer; stroke: rgba(var(--ink), 0.35); stroke-width: 0.6; }
 .dm-grid line { stroke: var(--dm-grid); }
-.dm-chips.dm-no-dots .dm-dot { display: none; }
-.dm-legend-more { display: contents; }
-.dm-legend-more summary { cursor: pointer; color: var(--muted); }
-.dm-legend-more[open] summary { flex-basis: 100%; }
+.dm-cats.dm-no-dots .dm-dot { display: none; }
+/* A nudged dot's faint line back to its true place, and a dot fading out on re-render. */
+.dm-leader { stroke: rgba(var(--ink), 0.35); }
+.dm-ghost { pointer-events: none; stroke: rgba(var(--ink), 0.35); stroke-width: 0.6; }
 .dm-point:hover { stroke: var(--text); }
 .dm-label { fill: var(--text); cursor: pointer; }
 .dm-label:hover { text-decoration: underline; }
 .dm-plot-wrap { position: relative; }
+/* Re-render under way: a spinner over the plot (shown only past a short delay), plus
+   a "suspiciously slow" hint past a few seconds. */
+.dm-busy {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  pointer-events: none;
+}
+.dm-busy[hidden], .dm-busy-text[hidden] { display: none; }
+.dm-spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid rgba(var(--ink), 0.15);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: dm-spin 0.8s linear infinite;
+}
+@keyframes dm-spin { to { transform: rotate(360deg); } }
+.dm-busy-text { max-width: 320px; margin: 0; padding: 4px 8px; font-size: 12px; text-align: center; color: var(--text); background: var(--dm-plot-bg); border-radius: 5px; }
 /* A legible but quiet credit, so a shared screenshot says where it came from. */
 .dm-watermark {
   position: absolute;
@@ -80,9 +108,7 @@
   pointer-events: none;
   user-select: none;
 }
-/* Target picker: a folded list, each system's heading above its indented targets. */
-.dm-targets { flex: 1 1 100%; }
-.dm-targets summary { cursor: pointer; font-size: 12px; }
+/* Pickers: each group's heading above its indented items. */
 .dm-tbar { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; margin: 6px 0; }
 .dm-hint { font-size: 11px; color: var(--muted); }
 .dm-tlist { max-height: 260px; overflow-y: auto; padding-right: 4px; }
@@ -100,7 +126,7 @@
 }
 .dm-tgroup-head.active { color: var(--text); border-color: rgba(var(--ink), 0.15); }
 .dm-titems { display: flex; flex-wrap: wrap; gap: 4px; margin: 3px 0 0 18px; }
-.dm-axes { display: flex; flex-direction: column; gap: 2px; margin: 8px 0 4px; font-size: 11px; }
+.dm-axes { display: flex; flex-direction: column; gap: 2px; font-size: 11px; }
 .dm-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; font-size: 11px; color: var(--muted); }
 .dm-key { display: inline-flex; align-items: center; gap: 5px; }
 .dm-ramp {
