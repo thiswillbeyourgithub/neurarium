@@ -1,6 +1,40 @@
 {
   "versions": [
     {
+      "version": "3.148.1",
+      "date": "2026-10-27",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Drugs map: a \"Default view\" preset that brings back the default display in one click.",
+          "commits": [
+            "fca9981"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Drugs map: the name shown under the pointer is larger and the nearby names it would cover step aside, so it no longer doubles the drug's own name or collides with its neighbours.",
+          "commits": [
+            "39db204"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "The drugs map is named DrugsMap in French too.",
+          "commits": [
+            "8ec23de"
+          ]
+        },
+        {
+          "category": "docs",
+          "text": "Drugs map README: the presets are shown as a two-column picture table instead of folded sections.",
+          "commits": [
+            "767d7a6"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.148.0",
       "date": "2026-10-27",
       "entries": [
