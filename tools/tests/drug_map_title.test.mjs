@@ -6,7 +6,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { DEFAULT_VIEW } from "../../public/js/drug-map/model.js";
-import { plotTitle, nameSet } from "../../public/js/drug-map/title.js";
+import { plotTitle, nameSet, shortName } from "../../public/js/drug-map/title.js";
 
 // Load the English messages the browser would (i18n/en.js assigns onto a global).
 globalThis.window = { __I18N_MESSAGES__: {} };
@@ -22,8 +22,9 @@ const ctx = {
   families: [["Antipsychotics", ["antipsychotic_atypical", "antipsychotic_conventional"]],
     ["Antidepressants", ["ssri", "snri"]]],
   systems: [["Dopaminergic", ["d1", "d2", "dat"]], ["Histaminergic", ["h1", "h2"]], ["GABAergic", ["gaba_a"]]],
-  catName: (c) => ({ ssri: "SSRI", antipsychotic_atypical: "Atypical antipsychotic" })[c] || c,
-  nameOf: (k) => ({ d2: "D2", h1: "H1", "5ht2a": "5-HT2A" })[k] || k,
+  catName: (c) => ({ ssri: "SSRIs", antipsychotic_atypical: "Atypical antipsychotics" })[c] || c,
+  nameOf: (k) => ({ d2: "D2", h1: "H1", "5ht2a": "5-HT2A", mao_a: "Monoamine oxidase A (MAO-A)",
+    mao_b: "Monoamine oxidase B (MAO-B)" })[k] || k,
 };
 const view = (patch) => ({ ...DEFAULT_VIEW, hidden: new Set(), ...patch });
 const AP = new Set(["antipsychotic_atypical", "antipsychotic_conventional"]);
@@ -37,13 +38,16 @@ test("whole families and whole systems are named by their group", () => {
     "Antipsychotics by dopaminergic and H1 binding, colored by nomenclature");
   // A partial family lists its classes; GABAergic keeps its capitals.
   assert.equal(plotTitle(view({ cats: new Set(["ssri", "antipsychotic_atypical"]), only: ["gaba_a", "d2", "h1"] }), ctx),
-    "SSRI and atypical antipsychotic by GABAergic, D2 and H1 binding");
+    "SSRIs and atypical antipsychotics by GABAergic, D2 and H1 binding");
 });
 
 test("one or two targets read as direct axes", () => {
   assert.equal(plotTitle(view({ cats: AP, only: ["d2", "5ht2a"] }), ctx),
     "Antipsychotics by D2 affinity (x) vs 5-HT2A affinity (y)");
   assert.equal(plotTitle(view({ only: ["d2"] }), ctx), "All drugs by D2 affinity");
+  // Full target names shrink to their alias.
+  assert.equal(plotTitle(view({ cats: new Set(["ssri"]), only: ["mao_a", "mao_b"] }), ctx),
+    "SSRIs by MAO-A affinity (x) vs MAO-B affinity (y)");
   assert.equal(plotTitle(view({ only: [] }), ctx), "All drugs: no target picked");
 });
 
@@ -60,6 +64,13 @@ test("tone source, years, and a long set falls back to a count", () => {
   const sys = { ...ctx, systems: [["Dopaminergic", ["d1", "d2", "d3", "d4", "d5", "dat", "comt"]]] };
   assert.equal(plotTitle(view({ only: ["d1", "d2", "d3", "d4", "d5", "dat"] }), sys),
     "All drugs by binding to 6 dopaminergic targets");
+});
+
+test("shortName keeps the shorter of a name and its trailing alias", () => {
+  assert.equal(shortName("Serotonin transporter (SERT)"), "SERT");
+  assert.equal(shortName("μ (MOR)"), "μ");
+  assert.equal(shortName("D2"), "D2");
+  assert.equal(shortName("Orexin receptors (OX1R/OX2R)"), "OX1R/OX2R");
 });
 
 test("nameSet: whole groups first, leftovers in pick order", () => {

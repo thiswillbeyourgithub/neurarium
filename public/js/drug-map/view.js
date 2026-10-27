@@ -166,7 +166,7 @@ export function createDrugMap({ data, onChange }) {
       const next = shown.map((d) => ({ drug: d, ...points.get(d.id), color: colorOf.get(d.id) }));
       plotTitleEl.textContent = plotTitle(view, {
         t, families: controls.families, systems: controls.groupsFor(view.source),
-        catName: (c) => catLabels[c] || c, nameOf,
+        catName: (c) => (data.meta.drugCategoryPlurals || {})[c] || catLabels[c] || c, nameOf,
       });
       fitPoints(next);
       const prev = placed;

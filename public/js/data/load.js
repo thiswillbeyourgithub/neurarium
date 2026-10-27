@@ -125,7 +125,7 @@ export async function loadBrainData(dataDir = "data", onProgress = null, { shape
   const { projectionColors, signColors, groupLabels, kindLabels, signLabels,
           receptorFamilyLabels, receptorFamilyColors, receptorClassLabels,
           synapticLabels, targetTypeLabels, targetTypeColors, drugCategoryLabels,
-          drugCategoryGroups, drugCategoryGroupLabels,
+          drugCategoryPlurals, drugCategoryGroups, drugCategoryGroupLabels,
           drugEffectColors, drugEffectLabels, systemFlowKinds, sourceCorpora,
           densityMinReliability, provenanceStats, addonSlots, addonTones,
           quotePipelines } = v;
@@ -166,6 +166,7 @@ export async function loadBrainData(dataDir = "data", onProgress = null, { shape
       targetTypeLabels,
       targetTypeColors,
       drugCategoryLabels,
+      drugCategoryPlurals,
       drugCategoryGroups,
       drugCategoryGroupLabels,
       drugEffectColors,

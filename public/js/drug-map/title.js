@@ -17,6 +17,17 @@ const lowerFirst = (s) => (s.length > 1 && s[1] === s[1].toLowerCase() && s[1] !
   ? s[0].toLowerCase() + s.slice(1) : s);
 
 /**
+ * A target's name as a title says it: the shorter of the name and its trailing
+ * parenthesised alias, so "Monoamine oxidase A (MAO-A)" -> "MAO-A" but "μ (MOR)" -> "μ".
+ * @param {string} name
+ * @returns {string}
+ */
+export function shortName(name) {
+  const m = /^(.*\S)\s*\(([^()]+)\)$/.exec(name);
+  return m && m[2].length < m[1].length ? m[2] : m ? m[1] : name;
+}
+
+/**
  * Name a picked set by its whole groups first, then the leftover members one by one.
  * @param {string[]} picked
  * @param {[string, string[]][]} groups  [label, member keys]
@@ -41,10 +52,12 @@ export function nameSet(picked, groups, nameOf) {
  * @param {{t: Function, families: [string, string[]][], systems: [string, string[]][],
  *   catName: (key: string) => string, nameOf: (key: string) => string}} ctx
  *   families: class families [label, class keys]; systems: the axes picker's groups for
- *   `view.source` [label, feature keys]
+ *   `view.source` [label, feature keys]; catName: a class's PLURAL label ("Antihistamines");
+ *   nameOf: a target's full name, shortened here (shortName)
  * @returns {string}
  */
-export function plotTitle(view, { t, families, systems, catName, nameOf }) {
+export function plotTitle(view, { t, families, systems, catName, nameOf: fullName }) {
+  const nameOf = (k) => shortName(fullName(k));
   const list = (items) => (items.length < 2 ? items.join("")
     : `${items.slice(0, -1).join(", ")}${t("drugmap.ttl.and")}${items[items.length - 1]}`);
 

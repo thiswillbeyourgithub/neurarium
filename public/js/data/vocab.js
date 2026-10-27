@@ -38,6 +38,8 @@ export function readVocab(metaRecord) {
   // as raw maps (their `name`/`label` are localized per binding below); the colour
   // map is language-neutral.
   const drugCategoryLabels = localizeMap(metaRecord.drug_category_labels);
+  // Their plurals, for a sentence naming a class as a whole (the drug map's plot title).
+  const drugCategoryPlurals = localizeMap(metaRecord.drug_category_plurals);
   // Broad families over those categories (group id -> member categories), and labels.
   const drugCategoryGroups = metaRecord.drug_category_groups || {};
   const drugCategoryGroupLabels = localizeMap(metaRecord.drug_category_group_labels);
@@ -105,6 +107,7 @@ export function readVocab(metaRecord) {
     targetTypeLabels,
     targetTypeColors,
     drugCategoryLabels,
+    drugCategoryPlurals,
     drugCategoryGroups,
     drugCategoryGroupLabels,
     historyCountries,

@@ -132,6 +132,43 @@ assert sorted(_grouped) == sorted(DRUG_CATEGORY_LABELS), \
     "DRUG_CATEGORY_GROUPS must hold every DRUG_CATEGORY_LABELS key exactly once"
 assert DRUG_CATEGORY_GROUP_LABELS.keys() == DRUG_CATEGORY_GROUPS.keys()
 
+# The plural of each category label, for a sentence naming the class as a whole (the
+# drug map's plot title, js/drug-map/title.js: "Antihistamines by H1 vs M1"), where the
+# singular legend heading would read "Antihistamine by ...".
+DRUG_CATEGORY_PLURALS: dict[str, dict[str, str]] = {
+    "ssri": {"en": "SSRIs", "fr": "ISRS"},
+    "snri": {"en": "SNRIs", "fr": "IRSN"},
+    "tricyclic": {"en": "Tricyclic / tetracyclic antidepressants", "fr": "Antidépresseurs tricycliques / tétracycliques"},
+    "maoi": {"en": "MAO inhibitors", "fr": "Inhibiteurs de la MAO"},
+    "antidepressant_other": {"en": "Other antidepressants", "fr": "Autres antidépresseurs"},
+    "antipsychotic_atypical": {"en": "Atypical antipsychotics", "fr": "Antipsychotiques atypiques"},
+    "antipsychotic_conventional": {"en": "Conventional antipsychotics", "fr": "Antipsychotiques classiques"},
+    "anxiolytic": {"en": "Anxiolytics", "fr": "Anxiolytiques"},
+    "hypnotic": {"en": "Hypnotics / sedatives", "fr": "Hypnotiques / sédatifs"},
+    "benzodiazepine": {"en": "Benzodiazepines", "fr": "Benzodiazépines"},
+    "mood_stabilizer": {"en": "Mood stabilizers / anticonvulsants", "fr": "Thymorégulateurs / anticonvulsivants"},
+    "stimulant": {"en": "Stimulants / wake-promoting agents", "fr": "Stimulants / éveillants"},
+    "adhd_nonstimulant": {"en": "ADHD non-stimulants", "fr": "Non-stimulants (TDAH)"},
+    "cognitive_enhancer": {"en": "Cognitive enhancers", "fr": "Activateurs cognitifs"},
+    "substance_use": {"en": "Substance-use treatments", "fr": "Traitements des addictions"},
+    "opioid": {"en": "Opioids / opioid modulators", "fr": "Opioïdes / modulateurs opioïdes"},
+    "recreational": {"en": "Recreational / psychoactive drugs", "fr": "Substances récréatives / psychoactives"},
+    "antihistamine": {"en": "Antihistamines", "fr": "Antihistaminiques"},
+    "anticholinergic": {"en": "Anticholinergics", "fr": "Anticholinergiques"},
+    "alpha_blocker": {"en": "Alpha blockers", "fr": "Alpha-bloquants"},
+    "beta_blocker": {"en": "Beta blockers", "fr": "Bêta-bloquants"},
+    "h3_antagonist": {"en": "H3 antagonists (wake-promoters)", "fr": "Antagonistes H3 (éveillants)"},
+    "antiemetic": {"en": "Antiemetics / prokinetics", "fr": "Antiémétiques / procinétiques"},
+    "anesthetic": {"en": "Anesthetics", "fr": "Anesthésiques"},
+    "anticonvulsant": {"en": "Anticonvulsants", "fr": "Anticonvulsivants"},
+    "antiparkinson": {"en": "Antiparkinson drugs", "fr": "Antiparkinsoniens"},
+    "antimigraine": {"en": "Antimigraine drugs", "fr": "Antimigraineux"},
+    "appetite_suppressant": {"en": "Appetite suppressants", "fr": "Anorexigènes"},
+    "other": {"en": "Other drugs", "fr": "Autres substances"},
+}
+assert DRUG_CATEGORY_PLURALS.keys() == DRUG_CATEGORY_LABELS.keys(), \
+    "every DRUG_CATEGORY_LABELS key needs its DRUG_CATEGORY_PLURALS entry"
+
 # Binding action (a key) -> {label {en,fr}, effect}. ``effect`` (boost / block /
 # modulate) is the net direction of the drug's action at that target and drives
 # the animation colour (DRUG_EFFECT_COLORS). A binding may override ``effect`` for
