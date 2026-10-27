@@ -122,7 +122,7 @@ Controls (boxes above the plot):
 
 - **Presets:** ready-made views, one click each (see [Presets](#presets)).
 
-- **Place drugs by:** receptor affinities, net transmitter tone (the drug's signed effect on each [neurotransmitter](https://en.wikipedia.org/wiki/Neurotransmitter) system), or both.
+- **Place drugs by:** any combination of receptor affinities, neurotransmitter tone (the drug's signed effect on each [neurotransmitter](https://en.wikipedia.org/wiki/Neurotransmitter) system) and body effects (beta: the effects its receptors may produce, inferred from the sourced receptor effects and the direction of each binding, weighted by affinity).
 - **Signed:** an [agonist](https://en.wikipedia.org/wiki/Agonist) and an [antagonist](https://en.wikipedia.org/wiki/Receptor_antagonist) of the same receptor point in opposite directions.
 - **Targets:** restrict the vectors to some targets; pick one or two and they become the axes themselves (no PCA).
 - **Filter points by:** drug class, first approval year, marketed only.

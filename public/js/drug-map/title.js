@@ -6,8 +6,12 @@
 // A class set that covers whole families is named by the family ("Antipsychotics"), a
 // target set that covers whole transmitter systems by the system ("dopaminergic"), so
 // the sentence stays short; past MAX_ITEMS it falls back to a count, still naming the
-// systems the targets belong to when those are few ("6 dopaminergic targets"). DOM-free (node
+// systems the targets belong to when those are few ("6 dopaminergic targets"). Picked
+// keys from several feature sources (targets, `tone:<kind>`, `effect:<id>`) each get
+// their own clause: "All drugs by D2 and H1 binding and sedation". DOM-free (node
 // tests): the caller passes `t` and the groupings the controls already built.
+
+import { EFFECT_PREFIX, TONE_PREFIX } from "./model.js";
 
 /** Past this many named classes / systems / targets, the title gives a count. */
 export const MAX_ITEMS = 5;
@@ -15,6 +19,9 @@ export const MAX_ITEMS = 5;
 // "Dopaminergic" -> "dopaminergic" mid-sentence, but "GABAergic" / "D2" stay as they are.
 const lowerFirst = (s) => (s.length > 1 && s[1] === s[1].toLowerCase() && s[1] !== s[1].toUpperCase()
   ? s[0].toLowerCase() + s.slice(1) : s);
+
+// A receptor / target key, as opposed to a tone or a body-effect key.
+const isTarget = (k) => !k.startsWith(TONE_PREFIX) && !k.startsWith(EFFECT_PREFIX);
 
 /**
  * A target's name as a title says it: the shorter of the name and its trailing
@@ -52,14 +59,18 @@ export function nameSet(picked, groups, nameOf) {
  * @param {{t: Function, families: [string, string[]][], systems: [string, string[]][],
  *   catName: (key: string) => string, nameOf: (key: string) => string}} ctx
  *   families: class families [label, class keys]; systems: the axes picker's groups for
- *   `view.source` [label, feature keys]; catName: a class's PLURAL label ("Antihistamines");
- *   nameOf: a target's full name, shortened here (shortName)
+ *   `view.sources` [label, feature keys]; catName: a class's PLURAL label ("Antihistamines");
+ *   nameOf: a feature's full name (a target's is shortened here, shortName)
  * @returns {string}
  */
 export function plotTitle(view, { t, families, systems, catName, nameOf: fullName }) {
-  const nameOf = (k) => shortName(fullName(k));
+  // An effect label keeps its parenthesis ("Extrapyramidal symptoms (parkinsonism)").
+  const nameOf = (k) => (isTarget(k) ? shortName(fullName(k)) : fullName(k));
   const list = (items) => (items.length < 2 ? items.join("")
     : `${items.slice(0, -1).join(", ")}${t("drugmap.ttl.and")}${items[items.length - 1]}`);
+  // One feature as an axis: a target by its affinity, a tone or an effect by its name.
+  const axisName = (k) => (isTarget(k) ? t("drugmap.ttl.affinity", { name: nameOf(k) })
+    : t("drugmap.ttl.named", { name: lowerFirst(nameOf(k)) }));
 
   let subject = t("drugmap.ttl.all");
   if (view.cats) {
@@ -71,22 +82,36 @@ export function plotTitle(view, { t, families, systems, catName, nameOf: fullNam
   const only = view.only;
   let title;
   if (only && !only.length) title = t("drugmap.ttl.none", { subject });
-  else if (only && only.length === 1) title = t("drugmap.ttl.byOne", { subject, x: nameOf(only[0]) });
+  else if (only && only.length === 1) title = t("drugmap.ttl.byOne", { subject, x: axisName(only[0]) });
   else if (only && only.length === 2) {
-    title = t("drugmap.ttl.byTwo", { subject, x: nameOf(only[0]), y: nameOf(only[1]) });
+    title = t("drugmap.ttl.byTwo", { subject, x: axisName(only[0]), y: axisName(only[1]) });
   } else if (only) {
     // Only the keys the picker offers (a link may name a target no mapped drug binds,
     // which has no display name and moves no point), like the Axes summary.
     const known = only.filter((k) => systems.some(([, keys]) => keys.includes(k)));
-    const names = nameSet(known, systems, nameOf).map(lowerFirst);
-    // Too many to list: count them, naming their systems when those are few.
-    const owners = systems.filter(([, keys]) => known.some((k) => keys.includes(k))).map(([label]) => lowerFirst(label));
-    title = names.length <= MAX_ITEMS ? t("drugmap.ttl.byBinding", { subject, list: list(names) })
-      : owners.length <= 3 ? t("drugmap.ttl.byManySystemTargets", { subject, n: known.length, list: list(owners) })
-        : t("drugmap.ttl.byManyTargets", { subject, n: known.length });
+    const parts = [];
+    const targets = known.filter(isTarget);
+    if (targets.length) {
+      const groups = systems.filter(([, keys]) => keys.some(isTarget));
+      const names = nameSet(targets, groups, nameOf).map(lowerFirst);
+      // Too many to list: count them, naming their systems when those are few.
+      const owners = groups.filter(([, keys]) => targets.some((k) => keys.includes(k))).map(([label]) => lowerFirst(label));
+      parts.push(names.length <= MAX_ITEMS ? t("drugmap.ttl.binding", { list: list(names) })
+        : owners.length <= 3 ? t("drugmap.ttl.manySystemTargets", { n: targets.length, list: list(owners) })
+          : t("drugmap.ttl.manyTargets", { n: targets.length }));
+    }
+    // Tones and effects: one clause each, a whole group named by its label.
+    for (const [prefix, one, many] of [[TONE_PREFIX, "drugmap.ttl.tones", "drugmap.ttl.manyTones"],
+      [EFFECT_PREFIX, "drugmap.ttl.effects", "drugmap.ttl.manyEffects"]]) {
+      const keys = known.filter((k) => k.startsWith(prefix));
+      if (!keys.length) continue;
+      const groups = systems.filter(([, ks]) => ks.some((k) => k.startsWith(prefix)));
+      const names = nameSet(keys, groups, nameOf).map(lowerFirst);
+      parts.push(names.length <= MAX_ITEMS ? t(one, { list: list(names) }) : t(many, { n: keys.length }));
+    }
+    title = t("drugmap.ttl.by", { subject, list: list(parts) });
   } else {
-    title = t({ receptors: "drugmap.ttl.byProfile", tone: "drugmap.ttl.byTone", both: "drugmap.ttl.byBoth" }[view.source]
-      || "drugmap.ttl.byProfile", { subject });
+    title = t("drugmap.ttl.by", { subject, list: list(view.sources.map((s) => t(`drugmap.ttl.src.${s}`))) });
   }
 
   if (view.color !== "category") {

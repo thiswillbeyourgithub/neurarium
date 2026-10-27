@@ -15,7 +15,7 @@
 
 import {
   buildProfiles, colorize, COLOR_MODES, DEFAULT_VIEW, directPoints,
-  FEATURE_SOURCES, filterDrugs, mappableDrugs, pca, TONE_PREFIX,
+  EFFECT_PREFIX, filterDrugs, mappableDrugs, parseSources, pca, TONE_PREFIX,
 } from "./model.js";
 import { placeLabels, sizesFor } from "./layout.js";
 import { spreadPoints } from "./spread.js";
@@ -49,9 +49,12 @@ const SLOW_MS = 5000;
  */
 export function createDrugMap({ data, onChange }) {
   const body = document.getElementById("drugmap-body");
-  const drugs = mappableDrugs(data.drugs || []);
+  // Each drug carries its possible body effects (the build-time effect index, BETA), the
+  // "effects" feature source (see buildProfiles).
+  const effectsOf = data.possibleEffectsByDrug || new Map();
+  const drugs = mappableDrugs(data.drugs || []).map((d) => ({ ...d, possibleEffects: effectsOf.get(d.id) || [] }));
   const catLabels = data.meta.drugCategoryLabels || {};
-  // Every feature key -> its display name: targets, then `tone:<kind>` systems.
+  // Every feature key -> its display name: targets, `tone:<kind>` systems, `effect:<id>`.
   const featureName = new Map();
   for (const d of drugs) for (const b of d.bindings || []) featureName.set(b.target, b.targetName || b.target);
   for (const d of drugs) {
@@ -59,6 +62,7 @@ export function createDrugMap({ data, onChange }) {
       featureName.set(TONE_PREFIX + kind, t("drugmap.toneOf", { kind: (data.meta.kindLabels || {})[kind] || kind }));
     }
   }
+  for (const d of drugs) for (const e of d.possibleEffects) featureName.set(EFFECT_PREFIX + e.effect, e.label);
   const nameOf = (key) => featureName.get(key) || key;
   let view = { ...DEFAULT_VIEW, hidden: new Set() };
   // The camera: viewBox once zoomed / panned (null = fit) and the rotation (radians).
@@ -165,7 +169,7 @@ export function createDrugMap({ data, onChange }) {
       if (my !== gen) return;
       const next = shown.map((d) => ({ drug: d, ...points.get(d.id), color: colorOf.get(d.id) }));
       plotTitleEl.textContent = plotTitle(view, {
-        t, families: controls.families, systems: controls.groupsFor(view.source),
+        t, families: controls.families, systems: controls.groupsFor(view.sources),
         catName: (c) => (data.meta.drugCategoryPlurals || {})[c] || catLabels[c] || c, nameOf,
       });
       fitPoints(next);
@@ -388,8 +392,8 @@ export function createDrugMap({ data, onChange }) {
       flag("dmsign", "signed");
       flag("dmmkt", "marketed");
       flag("dmki", "measuredKi");
-      reg("dmsrc", () => (view.source !== DEFAULT_VIEW.source ? view.source : null),
-        (v) => ({ source: FEATURE_SOURCES.includes(v) ? v : DEFAULT_VIEW.source }));
+      reg("dmsrc", () => (view.sources.join(LIST_SEP) !== DEFAULT_VIEW.sources.join(LIST_SEP) ? view.sources.join(LIST_SEP) : null),
+        (v) => ({ sources: parseSources(v) }));
       // "-" = none picked (an empty value would read back as "every target").
       reg("dmtgt", () => (!view.only ? null : view.only.length ? view.only.join(LIST_SEP) : "-"),
         (v) => ({ only: !v ? null : v === "-" ? [] : v.split(LIST_SEP) }));

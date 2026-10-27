@@ -3,9 +3,7 @@
 // Run by tools/tests/test_js_units.py via `node --test`.
 import test from "node:test";
 import assert from "node:assert/strict";
-import {
-  buildProfiles, pca, filterDrugs, colorize, directPoints, DEFAULT_VIEW, PKI_FLOOR, PKI_UNMEASURED, pickSet, mappableDrugs,
-} from "../../public/js/drug-map/model.js";
+import { DEFAULT_VIEW, PKI_FLOOR, PKI_UNMEASURED, buildProfiles, colorize, directPoints, filterDrugs, mappableDrugs, parseSources, pca, pickSet } from "../../public/js/drug-map/model.js";
 import { placeLabels, sizesFor, FONT_PX } from "../../public/js/drug-map/layout.js";
 import { spreadPoints } from "../../public/js/drug-map/spread.js";
 
@@ -94,14 +92,34 @@ test("signed: agonist and antagonist get opposite signs, direction-less counts 0
   assert.equal(p.get("part").get("d2"), 2);
 });
 
-test("tone and both: tone keys, each block normalized on its own", () => {
+test("tone and combined sources: tone keys, each block normalized on its own", () => {
   const flow = { dopamine: { sum: -0.6 }, serotonin: { sum: 0.8 } };
   const d = drug("a", [b("d2", 1)], { flowSystems: flow });
-  const tone = buildProfiles([d], { source: "tone", normalize: false }).get("a");
+  const tone = buildProfiles([d], { sources: ["tone"], normalize: false }).get("a");
   assert.deepEqual([...tone], [["tone:dopamine", -0.6], ["tone:serotonin", 0.8]]);
-  const both = buildProfiles([d], { source: "both" }).get("a");
+  const both = buildProfiles([d], { sources: ["receptors", "tone"] }).get("a");
   assert.equal(both.get("d2"), 1);                 // receptor block alone: unit length
   assert.ok(Math.abs(Math.hypot(both.get("tone:dopamine"), both.get("tone:serotonin")) - 1) < 1e-12);
+});
+
+test("effects: the strongest affinity behind each possible effect, measuredKi applies", () => {
+  const d2 = b("d2", 1), h1 = b("h1", 100);
+  const d = drug("a", [d2, h1], {
+    possibleEffects: [{ effect: "sedation", via: [{ binding: h1 }, { binding: d2 }] },
+      { effect: "weight_gain", via: [{ binding: h1 }] }, { effect: "dizziness", via: [{ binding: { target: "x" } }] }],
+  });
+  const p = buildProfiles([d], { sources: ["effects"], normalize: false, measuredKi: true }).get("a");
+  assert.equal(p.get("effect:sedation"), 4);       // the D2 Ki of 1 nM, not H1's 100 nM
+  assert.equal(p.get("effect:weight_gain"), 2);
+  assert.equal(p.has("effect:dizziness"), false);  // its only binding has no measured Ki
+  assert.equal(p.has("d2"), false);                // receptors not asked for
+});
+
+test("parseSources: URL order-free, old 'both' kept, default when empty", () => {
+  assert.deepEqual(parseSources("effects,tone"), ["tone", "effects"]);
+  assert.deepEqual(parseSources("both"), ["receptors", "tone"]);
+  assert.deepEqual(parseSources("nope"), ["receptors"]);
+  assert.deepEqual(parseSources(null), ["receptors"]);
 });
 
 test("only + directPoints: 5-HT2A vs D2 as raw axes, a drug lacking both drops", () => {

@@ -4,7 +4,7 @@
 // `render()` reflects the view. In both lists a click picks, shift-click or long-press
 // drops (`pickOrDrop`, `pickSet`).
 
-import { categoryColor, COLOR_MODES, FEATURE_SOURCES, pickSet, primaryCategory, TONE_PREFIX } from "./model.js";
+import { categoryColor, COLOR_MODES, EFFECT_PREFIX, FEATURE_SOURCES, pickSet, primaryCategory, TONE_PREFIX } from "./model.js";
 import { button, chipSearch, el, foldBox, pickOrDrop } from "./dom.js";
 import { groupTargetsBySystem } from "../legend/targets.js";
 import { matchesPreset, PRESETS, presetView } from "./presets.js";
@@ -15,7 +15,7 @@ const { t } = window.__I18N__;
  * @param {{data: object, drugs: object[], nameOf: (key: string) => string,
  *   featureKeys: string[], getView: () => object, setView: (patch: object) => void}} o
  * @returns {{boxes: HTMLElement[], render: () => void,
- *   groupsFor: (source: string) => [string, string[]][], families: [string, string[]][]}}
+ *   groupsFor: (sources: string[]) => [string, string[]][], families: [string, string[]][]}}
  *   groupsFor / families: the axes picker's and the class list's groupings, which the
  *   plot title (js/drug-map/title.js) names a picked set by
  */
@@ -54,7 +54,21 @@ export function createControls({ data, drugs, nameOf, featureKeys, getView, setV
   // ---- Inputs: feature type, then the axes (targets grouped by transmitter system in
   // the Receptors & targets legend's order, the net-tone features as one last group).
   const inputs = foldBox(t("drugmap.sec.input"));
-  const sourceSwitch = seg(FEATURE_SOURCES, t("drugmap.source"), "drugmap.source", "source", "drugmap.sourceTip");
+  // Feature sources are toggles, not a switch: any non-empty combination (the last one
+  // on cannot be turned off, a map with no feature has nothing to place).
+  const sourceSwitch = el("div", "seg-switch");
+  sourceSwitch.setAttribute("role", "group");
+  sourceSwitch.setAttribute("aria-label", t("drugmap.source"));
+  for (const s of FEATURE_SOURCES) {
+    const b = button("seg-btn", t(s === "effects" ? "drugmap.source.effectsBeta" : `drugmap.source.${s}`), () => {
+      const cur = getView().sources;
+      const next = cur.includes(s) ? cur.filter((x) => x !== s) : FEATURE_SOURCES.filter((x) => x === s || cur.includes(x));
+      if (next.length) setView({ sources: next });
+    });
+    b.dataset.mode = s;
+    b.title = t(`drugmap.sourceTip.${s}`);
+    sourceSwitch.appendChild(b);
+  }
   const families = data.meta.receptorFamilyLabels || {};
   const systemOf = new Map(), boundBy = new Map();
   for (const d of drugs) {
@@ -69,9 +83,12 @@ export function createControls({ data, drugs, nameOf, featureKeys, getView, setV
     (x) => boundBy.get(x.id)).map(([key, list]) => [
     key === "_other" ? t("targets.otherSystem") : families[key] || key, list.map((x) => x.id)]);
   const toneKeys = featureKeys.filter((k) => k.startsWith(TONE_PREFIX));
-  const groupsFor = (source) => [
-    ...(source !== "tone" ? targetGroups : []),
-    ...(source !== "receptors" && toneKeys.length ? [[t("drugmap.source.tone"), toneKeys]] : []),
+  const effectKeys = featureKeys.filter((k) => k.startsWith(EFFECT_PREFIX))
+    .sort((a, b) => nameOf(a).localeCompare(nameOf(b)));
+  const groupsFor = (sources) => [
+    ...(sources.includes("receptors") ? targetGroups : []),
+    ...(sources.includes("tone") && toneKeys.length ? [[t("drugmap.source.tone"), toneKeys]] : []),
+    ...(sources.includes("effects") && effectKeys.length ? [[t("drugmap.source.effects"), effectKeys]] : []),
   ];
   const axesValue = el("span", "dm-row-value");
   const axesPanel = el("div", "dm-panel");
@@ -167,7 +184,11 @@ export function createControls({ data, drugs, nameOf, featureKeys, getView, setV
 
   function render() {
     const view = getView();
-    for (const b of sourceSwitch.children) b.classList.toggle("active", b.dataset.mode === view.source);
+    for (const b of sourceSwitch.children) {
+      const on = view.sources.includes(b.dataset.mode);
+      b.classList.toggle("active", on);
+      b.setAttribute("aria-pressed", String(on));
+    }
     for (const b of colorSwitch.children) b.classList.toggle("active", b.dataset.mode === view.color);
     for (const x of toggles) x.input.checked = view[x.key];
     const lit = presetBtns.find(({ p }) => matchesPreset(view, p));
@@ -175,7 +196,7 @@ export function createControls({ data, drugs, nameOf, featureKeys, getView, setV
     presets.setValue(lit ? lit.b.textContent : "");
 
     // Axes.
-    const groups = groupsFor(view.source);
+    const groups = groupsFor(view.sources);
     const universe = groups.flatMap(([, keys]) => keys);
     const on = (k) => !view.only || view.only.includes(k);
     const applyAxes = (keys, mode) => {
@@ -210,7 +231,7 @@ export function createControls({ data, drugs, nameOf, featureKeys, getView, setV
       : !n ? t("drugmap.pickSumNone")
       : view.only.length <= 2 ? view.only.map((k) => `${axis(k)}${nameOf(k)}`).join(" · ")
       : t("drugmap.pickSumSome", { k: n, n: universe.length });
-    inputs.setValue(`${t(`drugmap.source.${view.source}`)} · ${axesValue.textContent}`);
+    inputs.setValue(`${view.sources.map((s) => t(`drugmap.source.${s}`)).join(" + ")} · ${axesValue.textContent}`);
     color.setValue(t(`drugmap.color.${view.color}`));
 
     // Filter.

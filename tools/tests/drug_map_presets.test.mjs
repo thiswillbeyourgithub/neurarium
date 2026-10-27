@@ -52,7 +52,7 @@ test("every receptor preset places at least 3 drugs", () => {
   // A class with no measured Ki at all (the mood stabilizers: channel blockers PDSP and
   // GtoPdb hold no Ki for) never reaches the map, so its preset would load an empty plot.
   // Tone presets are skipped: their profile is derived in the viewer (flowSystems).
-  for (const p of PRESETS.filter((q) => presetView(q).source === "receptors")) {
+  for (const p of PRESETS.filter((q) => presetView(q).sources.every((s) => s === "receptors"))) {
     const v = presetView(p);
     const kept = mappableDrugs(filterDrugs(viewerDrugs, v));
     const placed = buildProfiles(kept, { normalize: v.normalize, signed: v.signed, only: v.only, measuredKi: v.measuredKi });

@@ -20,6 +20,9 @@ export const PRESETS = [
   // (anticholinergic), alpha1 (orthostatic hypotension), 5-HT2C (weight).
   { id: "ap_side", view: { cats: ANTIPSYCHOTICS, only: ["h1", "m1", "alpha1a", "5ht2c"] } },
   // Serotonin against noradrenaline reuptake: SSRIs, SNRIs and tricyclics fan out.
+  // The body effects each antipsychotic may produce (BETA, derived from its bindings):
+  // groups them by side-effect profile rather than by receptor.
+  { id: "ap_effects", view: { cats: ANTIPSYCHOTICS, sources: ["effects"] } },
   { id: "ad_sert_net", view: { cats: ANTIDEPRESSANTS, only: ["sert", "net"] } },
   // Every antidepressant on its whole binding profile, coloured by NbN mechanism.
   { id: "ad_profile", view: { cats: ANTIDEPRESSANTS, color: "nbn" } },
@@ -27,7 +30,7 @@ export const PRESETS = [
   // sedating antihistamines.
   { id: "sleep", view: { cats: ["benzodiazepine", "hypnotic", "anxiolytic", "antihistamine"] } },
   // The whole roster by its signed effect on each transmitter system, not by receptor.
-  { id: "all_tone", view: { source: "tone" } },
+  { id: "all_tone", view: { sources: ["tone"] } },
   // Sedating antihistamines: H1 (sedation) against M1 (anticholinergic load), plotted directly.
   { id: "antihistamines", view: { cats: ["antihistamine"], only: ["h1", "m1"] } },
   // The serotonergic psychedelics (no class of their own: they sit in "recreational") on
@@ -74,7 +77,7 @@ export function matchesPreset(view, preset) {
   return Object.keys(DEFAULT_VIEW).every((k) => {
     if (k === "hidden") return true;
     if (k === "cats") return sameSet(view.cats, want.cats);
-    if (k === "only" || k === "years") return sameList(view[k], want[k]);
+    if (k === "only" || k === "years" || k === "sources") return sameList(view[k], want[k]);
     return view[k] === want[k];
   });
 }

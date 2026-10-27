@@ -122,7 +122,7 @@ Réglages (des boîtes au-dessus du graphique) :
 
 - **Préréglages :** des vues toutes faites, un clic chacune (voir [Préréglages](#préréglages)).
 
-- **Placer selon :** les affinités aux récepteurs, le tonus net par [neurotransmetteur](https://fr.wikipedia.org/wiki/Neurotransmetteur) (l'effet signé de la substance sur chaque système), ou les deux.
+- **Placer selon :** toute combinaison des affinités aux récepteurs, du tonus des [neurotransmetteurs](https://fr.wikipedia.org/wiki/Neurotransmetteur) (l'effet signé de la substance sur chaque système) et des effets corporels (bêta : les effets que ses récepteurs peuvent produire, déduits des effets sourcés des récepteurs et du sens de chaque liaison, pondérés par l'affinité).
 - **Signé :** un [agoniste](https://fr.wikipedia.org/wiki/Agoniste) et un [antagoniste](https://fr.wikipedia.org/wiki/Antagoniste) du même récepteur partent dans des directions opposées.
 - **Cibles :** restreindre les vecteurs à certaines cibles ; en choisir une ou deux en fait directement les axes (sans ACP).
 - **Filtrer les points par :** classe, année de première autorisation, commercialisées uniquement.

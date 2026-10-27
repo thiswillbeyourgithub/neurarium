@@ -52,8 +52,10 @@ test("one or two targets read as direct axes", () => {
 });
 
 test("tone source, years, and a long set falls back to a count", () => {
-  assert.equal(plotTitle(view({ source: "tone", years: [1990, 9999] }), ctx),
-    "All drugs by net transmitter tone (approved 1990–…)");
+  assert.equal(plotTitle(view({ sources: ["tone"], years: [1990, 9999] }), ctx),
+    "All drugs by net neurotransmitter tone (approved 1990–…)");
+  assert.equal(plotTitle(view({ sources: ["receptors", "tone", "effects"] }), ctx),
+    "All drugs by whole receptor binding profile, net neurotransmitter tone and possible body effects");
   const many = ["a", "b", "c", "d", "e", "f"];
   const wide = { ...ctx, systems: many.map((k) => [k.toUpperCase(), [k, `${k}2`]]) };
   assert.equal(plotTitle(view({ cats: new Set(many), only: [...many, "a2"] }), wide),
@@ -71,6 +73,14 @@ test("shortName keeps the shorter of a name and its trailing alias", () => {
   assert.equal(shortName("μ (MOR)"), "μ");
   assert.equal(shortName("D2"), "D2");
   assert.equal(shortName("Orexin receptors (OX1R/OX2R)"), "OX1R/OX2R");
+});
+
+test("picked keys from several sources each get their clause", () => {
+  const mixed = { ...ctx, systems: [...ctx.systems, ["Body effects", ["effect:sedation", "effect:weight_gain", "effect:nausea"]]],
+    nameOf: (k) => ({ "effect:sedation": "Sedation", "effect:weight_gain": "Weight gain", "effect:nausea": "Nausea" })[k] || ctx.nameOf(k) };
+  assert.equal(plotTitle(view({ only: ["d2", "h1", "effect:sedation"] }), mixed), "All drugs by D2 and H1 binding and sedation");
+  assert.equal(plotTitle(view({ only: ["effect:sedation", "effect:weight_gain"] }), mixed),
+    "All drugs by sedation (x) vs weight gain (y)");
 });
 
 test("nameSet: whole groups first, leftovers in pick order", () => {

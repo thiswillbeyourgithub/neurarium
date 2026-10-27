@@ -14,11 +14,16 @@
 //     receptor land on opposite sides; a binding with no stated direction then counts 0.
 //   - tone: one key per transmitter system (`tone:<kind>`), the drug's signed net tone
 //     (`drug.flowSystems[kind].sum`, the panel's "net neurotransmission").
-//   - both: the two blocks side by side.
+//   - effects (BETA): one key per body effect the drug may produce (`effect:<id>`, the
+//     derived effect index, `drug.possibleEffects`: a receptor's sourced effect joined
+//     to the drug's binding direction), valued by the strongest affinity among the
+//     bindings behind it (same `pKi - PKI_FLOOR` scale, `measuredKi` applies). Unsigned:
+//     an effect is a possibility, it has no opposite.
+//   Any non-empty set of sources sits side by side in one vector (`sources`).
 // With `normalize` (the default) each block is scaled to unit length on its own, so the
 // map places drugs by the SHAPE of a profile (which targets, in what proportion), not by
-// overall potency or how many targets a corpus happened to list, and in "both" the
-// receptor and tone blocks weigh the same; without it, raw values, so a potent,
+// overall potency or how many targets a corpus happened to list, and combined blocks
+// weigh the same; without it, raw values, so a potent,
 // promiscuous drug sits further out than a weak, selective one.
 
 /** pKi at and below which a binding counts as no binding (Ki >= 10 µM). */
@@ -28,8 +33,9 @@ export const PKI_UNMEASURED = 7;
 /** Signed mode: a binding's net effect as a sign. A partial agonist / modulator
  *  ("modulate") counts as half an agonist; an affinity-only binding (no effect) as 0. */
 export const EFFECT_SIGN = { boost: 1, block: -1, modulate: 0.5 };
-export const FEATURE_SOURCES = ["receptors", "tone", "both"];
+export const FEATURE_SOURCES = ["receptors", "tone", "effects"];
 export const TONE_PREFIX = "tone:";
+export const EFFECT_PREFIX = "effect:";
 
 const hasMeasuredKi = (b) => !!b.ki && typeof b.ki.median === "number" && b.ki.median > 0;
 const affinityOf = (b) => {
@@ -41,34 +47,41 @@ const affinityOf = (b) => {
  * Each drug's feature vector (see the module comment). Receptor features use
  * `drug.bindings` (which carries a prodrug's borrowed bindings, so lisdexamfetamine sits
  * by dextroamphetamine), not the separate active-metabolite bindings; a target bound
- * twice keeps its strongest value. `only` keeps just those keys (target ids and/or
- * `tone:<kind>`; `[]` keeps none, null every one). `measuredKi` drops the bindings
- * with no measured Ki from the receptor block. Drugs whose vector is all zero get
- * none (they cannot be placed).
+ * twice keeps its strongest value. `only` keeps just those keys (target ids,
+ * `tone:<kind>` and/or `effect:<id>`; `[]` keeps none, null every one). `measuredKi`
+ * drops the bindings with no measured Ki from the receptor and effect blocks. Drugs
+ * whose vector is all zero get none (they cannot be placed).
  * @param {object[]} drugs
- * @param {{normalize?: boolean, signed?: boolean, source?: string, only?: string[]|null,
+ * @param {{normalize?: boolean, signed?: boolean, sources?: string[], only?: string[]|null,
  *   measuredKi?: boolean}} [opts]
  * @returns {Map<string, Map<string, number>>} drug id -> (feature key -> value)
  */
-export function buildProfiles(drugs, { normalize = true, signed = false, source = "receptors", only = null, measuredKi = false } = {}) {
+export function buildProfiles(drugs, { normalize = true, signed = false, sources = ["receptors"], only = null, measuredKi = false } = {}) {
   const keep = only ? new Set(only) : null;
   const out = new Map();
   for (const d of drugs) {
-    const rec = new Map(), tone = new Map();
-    if (source !== "tone") {
+    const rec = new Map(), tone = new Map(), eff = new Map();
+    if (sources.includes("receptors")) {
       for (const b of d.bindings || []) {
         if (!b.target || (measuredKi && !hasMeasuredKi(b))) continue;
         const a = affinityOf(b) * (signed ? EFFECT_SIGN[b.effect] || 0 : 1);
         if (Math.abs(a) > Math.abs(rec.get(b.target) || 0)) rec.set(b.target, a);
       }
     }
-    if (source !== "receptors") {
+    if (sources.includes("tone")) {
       for (const [kind, f] of Object.entries(d.flowSystems || {})) {
         if (f.sum) tone.set(TONE_PREFIX + kind, f.sum);
       }
     }
+    if (sources.includes("effects")) {
+      for (const e of d.possibleEffects || []) {
+        const a = Math.max(0, ...e.via.map(({ binding }) =>
+          (measuredKi && !hasMeasuredKi(binding) ? 0 : affinityOf(binding))));
+        if (a) eff.set(EFFECT_PREFIX + e.effect, a);
+      }
+    }
     const v = new Map();
-    for (const block of [rec, tone]) {
+    for (const block of [rec, tone, eff]) {
       const kept = [...block].filter(([k, w]) => w && (!keep || keep.has(k)));
       const norm = Math.hypot(...kept.map(([, w]) => w));
       for (const [k, w] of kept) v.set(k, normalize ? w / norm : w);
@@ -207,7 +220,7 @@ export const DEFAULT_VIEW = Object.freeze({
   signed: true,        // agonist vs antagonist on opposite signs
   marketed: true,      // only drugs with a current marketing authorisation (US or FR holder)
   measuredKi: true,    // leave out bindings with no measured Ki (see buildProfiles)
-  source: "receptors", // one of FEATURE_SOURCES
+  sources: ["receptors"], // a non-empty subset of FEATURE_SOURCES, in that order
   only: null,          // null = every feature, else the chosen keys, in pick order
 });
 
@@ -233,6 +246,19 @@ function kiCoverage(d) {
 /** The drugs the map can show at all: those with at least one measured Ki. A drug with
  *  none (most benzodiazepines, barbiturates, anticonvulsants) would be placed by
  *  placeholder affinities alone, so it is left off rather than shown at a made-up spot. */
+/**
+ * The `sources` a `dmsrc` URL value names, in FEATURE_SOURCES order; the default when it
+ * names none. An old link's "both" still reads as receptors + tone.
+ * e.g. "effects,tone" -> ["tone", "effects"]; "both" -> ["receptors", "tone"]; "x" -> ["receptors"]
+ * @param {string|null} value
+ * @returns {string[]}
+ */
+export function parseSources(value) {
+  const names = new Set(String(value || "").split(",").flatMap((s) => (s === "both" ? ["receptors", "tone"] : [s])));
+  const out = FEATURE_SOURCES.filter((s) => names.has(s));
+  return out.length ? out : [...DEFAULT_VIEW.sources];
+}
+
 export const mappableDrugs = (drugs) => drugs.filter((d) => (d.bindings || []).some(hasMeasuredKi));
 
 export const COLOR_MODES = ["category", "nbn", "year", "lab", "route", "ki"];
