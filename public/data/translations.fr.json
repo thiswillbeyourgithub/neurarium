@@ -631,6 +631,7 @@
   "Mood stabilizers & anticonvulsants": "Thymorégulateurs et anticonvulsivants",
   "Most abundant dopamine receptor; Gs-coupled, excitatory; drives the striatal direct pathway.": "Récepteur dopaminergique le plus abondant ; couplé à Gs, excitateur ; active la voie directe striatale.",
   "Motor thalamus excites frontal cortex, closing the cortico-basal-ganglia-thalamo-cortical loop.": "Le thalamus moteur excite le cortex frontal, fermant la boucle cortico-ganglions de la base-thalamo-corticale.",
+  "Moving the mouse over the brain no longer slows its rotation: the structure under the cursor is looked up at most 20 times a second instead of on every mouse move": "Déplacer la souris sur le cerveau ne ralentit plus sa rotation : la structure sous le curseur est recherchée au plus 20 fois par seconde au lieu de chaque mouvement de souris",
   "Muscle weakness / paralysis": "Faiblesse musculaire / paralysie",
   "N and P/Q types": "types N et P/Q",
   "N-type, partial": "type N, partiel",

@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.143.3",
+      "date": "2026-10-27",
+      "entries": [
+        {
+          "category": "fixed",
+          "text": "Moving the mouse over the brain no longer slows its rotation: the structure under the cursor is looked up at most 20 times a second instead of on every mouse move",
+          "commits": [
+            "a0ee206"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.143.2",
       "date": "2026-10-27",
       "entries": [
