@@ -208,9 +208,9 @@ window.__I18N_MESSAGES__.en = {
   "tour.openDrugs.title": "Open a list",
   "tour.openDrugs.body":
     "Start with a drug. Click <b>Drugs</b> to open the list.",
-  "tour.drugsMap.title": "The drugs map",
+  "tour.drugsMap.title": "DrugsMap",
   "tour.drugsMap.body":
-    "This button opens the <b>drugs map</b> in a new tab: every drug placed by how alike its receptor binding profile is, filterable by class or approval year. A group heading in the list can also carry a small <b>map</b> link showing just that group.",
+    "This button opens <b>DrugsMap</b> in a new tab: every drug placed by how alike its receptor binding profile is, filterable by class or approval year. A group heading in the list can also carry a small <b>map</b> link showing just that group.",
   "tour.drugTap.title": "Focus a drug",
   "tour.drugTap.body":
     "Click <b>Olanzapine</b>. The brain dims and its effects animate on the regions it reaches.",
@@ -500,12 +500,12 @@ window.__I18N_MESSAGES__.en = {
   "drugs.filter": "Filter drugs…",
   "drugs.none": "No matching drug.",
   "drugmap.open": "Show on a map",
-  "drugmap.title": "Drugs map",
+  "drugmap.title": "DrugsMap",
   "drugmap.page.intro": "Visualize the relationships between all psychopharmacological substances, based on data from <a href=\"{url}\">neurarium</a>, the 3D brain atlas. Click a drug to open it there, right-click (long-press) to hide it.",
   "drugmap.page.viewer": "Open neurarium, the 3D brain atlas",
   "drugmap.page.readme": "About this map",
   "drugmap.link": "map",
-  "drugmap.linkTip": "Open the drugs map on this group",
+  "drugmap.linkTip": "Open DrugsMap on this group",
   "drugmap.colorBy": "Colour points by",
   "drugmap.color.category": "Class",
   "drugmap.color.nbn": "Nomenclature",
@@ -535,7 +535,7 @@ window.__I18N_MESSAGES__.en = {
   "drugmap.searchClasses": "Find a class…",
   "drugmap.searchTargets": "Find a target…",
   "drugmap.axisDirect": "{axis}: {name}",
-  "drugmap.watermark": "Neurarium drugs map",
+  "drugmap.watermark": "Neurarium DrugsMap",
   "drugmap.sec.presets": "Presets",
   "drugmap.ttl.all": "All drugs",
   "drugmap.ttl.manyClasses": "{n} drug classes",
@@ -904,7 +904,7 @@ window.__I18N_MESSAGES__.en = {
   "about.dataIntro":
     "The whole dataset is plain JSONL / JSON, kept separate from the rendering and " +
     "free to reuse (for an example of what can be built on these files alone, see the " +
-    "<a href=\"drugs-map.html\" target=\"_blank\" rel=\"noopener\">drugs map</a> and " +
+    "<a href=\"drugs-map.html\" target=\"_blank\" rel=\"noopener\">DrugsMap</a> and " +
     "<a href=\"https://github.com/thiswillbeyourgithub/neurarium/blob/main/public/drugs-map/README.md\" target=\"_blank\" rel=\"noopener\">its README</a>). " +
     "Each file below is served directly from this site (one JSON " +
     "object per line, self-describing, every row graded and sourced):",

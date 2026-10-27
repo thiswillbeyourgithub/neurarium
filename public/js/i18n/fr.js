@@ -533,7 +533,7 @@ window.__I18N_MESSAGES__.fr = {
   "drugmap.searchClasses": "Chercher une classe…",
   "drugmap.searchTargets": "Chercher une cible…",
   "drugmap.axisDirect": "{axis} : {name}",
-  "drugmap.watermark": "DrugsMap Neurarium",
+  "drugmap.watermark": "Neurarium DrugsMap",
   "drugmap.sec.presets": "Préréglages",
   "drugmap.ttl.all": "Toutes les substances",
   "drugmap.ttl.manyClasses": "{n} classes de substances",

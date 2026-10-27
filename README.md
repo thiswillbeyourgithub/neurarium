@@ -322,7 +322,7 @@ https://neurarium.olicorne.org/llms.txt
 
 That page tells the assistant where the whole dataset lives and how to read it, including a plain-text version of every panel at [`/api/`](https://neurarium.olicorne.org/api/) (one page per drug, receptor, region and pathway). From then on you can ask it things like "according to neurarium, what does aripiprazole bind, and how well sourced is each binding?" and it can quote the exact source sentence and grade behind each answer instead of answering from memory. Whether it keeps the link across conversations depends on the assistant's own memory feature; if it forgets, paste the link again.
 
-The same open data files also make it easy to build other tools on top of neurarium. The [drugs map](public/drugs-map/README.md) is one example: a standalone page that places every drug by a PCA of its binding profile, built on those files alone (live at [drugsmap.olicorne.org](https://drugsmap.olicorne.org/)).
+The same open data files also make it easy to build other tools on top of neurarium. [DrugsMap](public/drugs-map/README.md) is one example: a standalone page that places every drug by a PCA of its binding profile, built on those files alone (live at [drugsmap.olicorne.org](https://drugsmap.olicorne.org/)).
 
 The assistant only reads what neurarium states, so the work-in-progress warning above still applies. The text version also holds slightly less than the viewer: the sections the viewer computes in your browser from the stored facts (a drug's predicted effects and presynaptic modulation, its net neurotransmission estimate, its pharmacokinetic interactions, the simulation) are only in the 3D version.
 

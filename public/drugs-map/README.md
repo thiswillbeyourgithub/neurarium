@@ -1,4 +1,4 @@
-# Drugs map
+# DrugsMap
 
 [Version française](README.fr.md)
 
@@ -6,7 +6,7 @@ An interactive map of psychiatric and CNS-active drugs, placed by how similar th
 
 For example, it can lay out the antipsychotics so as to show their dopaminergic, cholinergic and histaminergic affinities (click the picture to open this view):
 
-[![The drugs map: the atypical and conventional antipsychotics placed by their dopamine, cholinergic and histamine binding](screenshot.en.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmmkt=0&dmtgt=aadc,comt,d1,d2,d3,d4,d5,dat,mao_b,vmat2,ache,bche,m1,m2,m3,m4,m5,nachr_a4b2,nachr_a7,h1,h2,h3,h4)
+[![DrugsMap: the atypical and conventional antipsychotics placed by their dopamine, cholinergic and histamine binding](screenshot.en.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmmkt=0&dmtgt=aadc,comt,d1,d2,d3,d4,d5,dat,mao_b,vmat2,ache,bche,m1,m2,m3,m4,m5,nachr_a4b2,nachr_a7,h1,h2,h3,h4)
 
 **Live:** [drugsmap.olicorne.org](https://drugsmap.olicorne.org/) (also at [neurarium.olicorne.org/drugs-map](https://neurarium.olicorne.org/drugs-map))
 
