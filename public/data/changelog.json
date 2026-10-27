@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.146.2",
+      "date": "2026-10-27",
+      "entries": [
+        {
+          "category": "docs",
+          "text": "The drugs map README opens with what the map does, then an example picture in the README’s own language; the French README is titled DrugsMap",
+          "commits": [
+            "fa18eeb"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.146.1",
       "date": "2026-10-27",
       "entries": [
