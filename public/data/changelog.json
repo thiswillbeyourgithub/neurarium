@@ -1,6 +1,41 @@
 {
   "versions": [
     {
+      "version": "3.147.0",
+      "date": "2026-10-27",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Drugs map: a Presets box loads a ready-made view in one click (antipsychotics by dopamine receptors, D2 vs 5-HT2A, side-effect receptors, antidepressants by SERT vs NET or by profile, sleep and anxiety drugs, every drug by transmitter tone)",
+          "commits": [
+            "b3bd361"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Drugs map: the drug nearest the pointer always shows its name, even when it was hidden by another; on a phone the first tap shows and highlights it, a second tap opens it",
+          "commits": [
+            "b95b0ec"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Drugs map: a title over the plot says what is on screen, and the default zoom backs off so it never hides a point",
+          "commits": [
+            "2b95b42"
+          ]
+        },
+        {
+          "category": "docs",
+          "text": "Drugs map README: one folded picture per preset, a table of contents, and the hosting notes folded away",
+          "commits": [
+            "1b45ab6",
+            "619cd9a"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.146.3",
       "date": "2026-10-27",
       "entries": [
