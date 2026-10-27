@@ -71,6 +71,8 @@
 .dm-point:hover { stroke: var(--text); }
 .dm-label { fill: var(--text); cursor: pointer; }
 .dm-label:hover { text-decoration: underline; }
+/* focus.js: a placed name under the focus name (or its own drug's) steps aside. */
+.dm-label.dm-label-under { visibility: hidden; }
 /* focus.js: the meant drug's ring and name, over everything, with a halo in the plot's
    own background so the name stays legible across dots and other names. */
 .dm-plot.dm-pointing { cursor: pointer; }

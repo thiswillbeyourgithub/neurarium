@@ -8,6 +8,9 @@
 // - touch: a tap on or near a dot (NEAR_PX.touch, a finger is wider) selects it (name +
 //   ring); a second tap on the same dot opens it. A tap on empty plot clears it.
 // - right-click / long-press hides the meant drug, as before.
+// The focus name is drawn larger than the placed names, and while it shows, the placed
+// names it would collide with (its own drug's included, so a name never shows twice)
+// are hidden (`dm-label-under`), so it reads cleanly inside a crowded cluster.
 // "Near" is measured from the pointer, so a tap between two dots picks the closer one,
 // and a tiny dot needs no pixel-exact aim. A click on a placed name means its drug even
 // when that name runs farther than NEAR_PX from the dot.
@@ -18,6 +21,18 @@ import { svgEl } from "./dom.js";
 
 /** How far (screen px) from a dot the pointer still means it. */
 export const NEAR_PX = { mouse: 24, touch: 32 };
+
+/** How much larger (px) the focus name is than the placed names. */
+const FOCUS_FONT_GAIN = 4;
+
+/**
+ * Whether two {x, y, width, height} boxes overlap (DOM-free, node tests).
+ * @param {{x: number, y: number, width: number, height: number}} a
+ * @param {{x: number, y: number, width: number, height: number}} b
+ * @returns {boolean}
+ */
+export const boxesOverlap = (a, b) => a.x < b.x + b.width && b.x < a.x + a.width
+  && a.y < b.y + b.height && b.y < a.y + a.height;
 
 /**
  * The dot nearest (x, y), if within `maxPx`.
@@ -64,8 +79,10 @@ export function createFocus({ svg, onOpen, onHide }) {
 
   function paint() {
     layer.replaceChildren();
+    for (const n of svg.querySelectorAll(".dm-label-under")) n.classList.remove("dm-label-under");
     if (!frame) return;
     const { k, r, font, b } = frame;
+    const shown = [];
     for (const id of new Set([picked, hover])) {
       const d = id && frame.dots.find((x) => x.id === id);
       if (!d) continue;
@@ -75,12 +92,23 @@ export function createFocus({ svg, onOpen, onHide }) {
       const txt = svgEl("text", {
         x: d.x + (left ? -1 : 1) * (r + 6) * k, y: d.y + font * 0.35 * k,
         "text-anchor": left ? "end" : "start", class: "dm-focus-label",
-        "font-size": (font + 1) * k, "stroke-width": 3 * k,
+        "font-size": (font + FOCUS_FONT_GAIN) * k, "stroke-width": 3 * k,
       });
       txt.textContent = d.p.drug.name;
       layer.appendChild(txt);
+      shown.push({ id, txt });
     }
     svg.appendChild(layer); // last child: drawn over every dot and name
+    if (!shown.length) return;
+    // getBBox needs the text in the document, hence after the append (viewBox units).
+    const boxes = shown.map(({ txt }) => txt.getBBox());
+    for (const n of svg.querySelectorAll("text.dm-label")) {
+      if (shown.some(({ id }) => id === n.dataset.drug)) n.classList.add("dm-label-under");
+      else {
+        const nb = n.getBBox();
+        if (boxes.some((fb) => boxesOverlap(fb, nb))) n.classList.add("dm-label-under");
+      }
+    }
   }
 
   svg.addEventListener("pointerdown", (ev) => { pointerType = ev.pointerType || "mouse"; });
