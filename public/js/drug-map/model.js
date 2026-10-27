@@ -4,9 +4,12 @@
 //
 // Features, each drug one vector over named keys:
 //   - receptors: one key per target, affinity `pKi - PKI_FLOOR` where pKi = 9 - log10(Ki
-//     nM), so a Ki of 10 µM or weaker scores 0 (too weak to matter) and 1 nM scores 4. A
-//     binding with no measured Ki (a Stahl-listed one, say) is not ignored: a source
-//     states it, so it gets PKI_UNMEASURED, a middling affinity. `signed` multiplies it
+//     nM), so a Ki of 10 µM or weaker scores 0 (too weak to matter) and 1 nM scores 4.
+//     With `measuredKi` (the view's default) a binding with no measured Ki (a
+//     Stahl-listed one, say) is left out, so every position rests on measured
+//     affinities; without it a source still states it, so it gets PKI_UNMEASURED, a
+//     middling affinity. A drug with no measured Ki at all is never mapped
+//     (`mappableDrugs`): its whole vector would be placeholders. `signed` multiplies it
 //     by the binding's net effect (EFFECT_SIGN), so an agonist and an antagonist of one
 //     receptor land on opposite sides; a binding with no stated direction then counts 0.
 //   - tone: one key per transmitter system (`tone:<kind>`), the drug's signed net tone
@@ -28,9 +31,9 @@ export const EFFECT_SIGN = { boost: 1, block: -1, modulate: 0.5 };
 export const FEATURE_SOURCES = ["receptors", "tone", "both"];
 export const TONE_PREFIX = "tone:";
 
+const hasMeasuredKi = (b) => !!b.ki && typeof b.ki.median === "number" && b.ki.median > 0;
 const affinityOf = (b) => {
-  const ki = b.ki && typeof b.ki.median === "number" ? b.ki.median : null;
-  const pki = ki && ki > 0 ? 9 - Math.log10(ki) : PKI_UNMEASURED;
+  const pki = hasMeasuredKi(b) ? 9 - Math.log10(b.ki.median) : PKI_UNMEASURED;
   return Math.max(0, pki - PKI_FLOOR);
 };
 
@@ -39,20 +42,22 @@ const affinityOf = (b) => {
  * `drug.bindings` (which carries a prodrug's borrowed bindings, so lisdexamfetamine sits
  * by dextroamphetamine), not the separate active-metabolite bindings; a target bound
  * twice keeps its strongest value. `only` keeps just those keys (target ids and/or
- * `tone:<kind>`; `[]` keeps none, null every one). Drugs whose vector is all zero get
+ * `tone:<kind>`; `[]` keeps none, null every one). `measuredKi` drops the bindings
+ * with no measured Ki from the receptor block. Drugs whose vector is all zero get
  * none (they cannot be placed).
  * @param {object[]} drugs
- * @param {{normalize?: boolean, signed?: boolean, source?: string, only?: string[]|null}} [opts]
+ * @param {{normalize?: boolean, signed?: boolean, source?: string, only?: string[]|null,
+ *   measuredKi?: boolean}} [opts]
  * @returns {Map<string, Map<string, number>>} drug id -> (feature key -> value)
  */
-export function buildProfiles(drugs, { normalize = true, signed = false, source = "receptors", only = null } = {}) {
+export function buildProfiles(drugs, { normalize = true, signed = false, source = "receptors", only = null, measuredKi = false } = {}) {
   const keep = only ? new Set(only) : null;
   const out = new Map();
   for (const d of drugs) {
     const rec = new Map(), tone = new Map();
     if (source !== "tone") {
       for (const b of d.bindings || []) {
-        if (!b.target) continue;
+        if (!b.target || (measuredKi && !hasMeasuredKi(b))) continue;
         const a = affinityOf(b) * (signed ? EFFECT_SIGN[b.effect] || 0 : 1);
         if (Math.abs(a) > Math.abs(rec.get(b.target) || 0)) rec.set(b.target, a);
       }
@@ -201,6 +206,7 @@ export const DEFAULT_VIEW = Object.freeze({
   normalize: true,     // unit-length profiles (see buildProfiles)
   signed: true,        // agonist vs antagonist on opposite signs
   marketed: true,      // only drugs with a current marketing authorisation (US or FR holder)
+  measuredKi: true,    // leave out bindings with no measured Ki (see buildProfiles)
   source: "receptors", // one of FEATURE_SOURCES
   only: null,          // null = every feature, else the chosen keys, in pick order
 });
@@ -220,9 +226,14 @@ function routeOf(d) {
 function kiCoverage(d) {
   const bs = d.bindings || [];
   if (!bs.length) return null;
-  const n = bs.filter((b) => b.ki && typeof b.ki.median === "number").length;
+  const n = bs.filter(hasMeasuredKi).length;
   return n === bs.length ? "all" : n ? "some" : "none";
 }
+
+/** The drugs the map can show at all: those with at least one measured Ki. A drug with
+ *  none (most benzodiazepines, barbiturates, anticonvulsants) would be placed by
+ *  placeholder affinities alone, so it is left off rather than shown at a made-up spot. */
+export const mappableDrugs = (drugs) => drugs.filter((d) => (d.bindings || []).some(hasMeasuredKi));
 
 export const COLOR_MODES = ["category", "nbn", "year", "lab", "route", "ki"];
 
@@ -245,9 +256,10 @@ export function filterDrugs(drugs, view) {
 }
 
 const UNKNOWN_COLOR = "#8a8f98";
-// Ki coverage reads as a traffic light: every binding measured, some, none.
-const KI_KEYS = ["all", "some", "none"];
-const KI_COLORS = { all: "hsl(140, 55%, 52%)", some: "hsl(42, 80%, 55%)", none: "hsl(355, 70%, 60%)" };
+// Ki coverage: every binding measured, or only some ("none" never reaches the map,
+// see mappableDrugs).
+const KI_KEYS = ["all", "some"];
+const KI_COLORS = { all: "hsl(140, 55%, 52%)", some: "hsl(42, 80%, 55%)" };
 // Categorical hue for the i-th key: golden-angle steps keep neighbours apart.
 const hue = (i) => `hsl(${Math.round((i * 137.508) % 360)}, 62%, 56%)`;
 

@@ -15,7 +15,7 @@
 
 import {
   buildProfiles, colorize, COLOR_MODES, DEFAULT_VIEW, directPoints,
-  FEATURE_SOURCES, filterDrugs, pca, TONE_PREFIX,
+  FEATURE_SOURCES, filterDrugs, mappableDrugs, pca, TONE_PREFIX,
 } from "./model.js";
 import { placeLabels, sizesFor } from "./layout.js";
 import { spreadPoints } from "./spread.js";
@@ -45,7 +45,7 @@ const SLOW_MS = 5000;
  */
 export function createDrugMap({ data, onChange }) {
   const body = document.getElementById("drugmap-body");
-  const drugs = data.drugs || [];
+  const drugs = mappableDrugs(data.drugs || []);
   const catLabels = data.meta.drugCategoryLabels || {};
   // Every feature key -> its display name: targets, then `tone:<kind>` systems.
   const featureName = new Map();
@@ -351,6 +351,7 @@ export function createDrugMap({ data, onChange }) {
       flag("dmnorm", "normalize");
       flag("dmsign", "signed");
       flag("dmmkt", "marketed");
+      flag("dmki", "measuredKi");
       reg("dmsrc", () => (view.source !== DEFAULT_VIEW.source ? view.source : null),
         (v) => ({ source: FEATURE_SOURCES.includes(v) ? v : DEFAULT_VIEW.source }));
       // "-" = none picked (an empty value would read back as "every target").

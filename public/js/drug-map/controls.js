@@ -1,6 +1,6 @@
 // The drug map's control boxes, each a rounded <details> folded by default whose
-// summary shows its current value: Inputs (feature type + the axes picker), Color by,
-// Filter by (classes grouped into families) and Advanced (the switches). Built once;
+// summary shows its current value: Inputs (feature type + the axes picker), Filter
+// points by (classes grouped into families), Color by and Advanced (the switches). Built once;
 // `render()` reflects the view. In both lists a click picks, shift-click or long-press
 // drops (`pickOrDrop`, `pickSet`).
 
@@ -134,7 +134,7 @@ export function createControls({ data, drugs, nameOf, featureKeys, getView, setV
 
   // ---- Advanced: the switches, all on by default.
   const advanced = foldBox(t("drugmap.sec.advanced"));
-  const toggles = ["labels", "spread", "normalize", "signed", "marketed"].map((key) => {
+  const toggles = ["labels", "spread", "normalize", "signed", "measuredKi", "marketed"].map((key) => {
     const lab = el("label", "list-toggle");
     const input = el("input");
     input.type = "checkbox";
@@ -215,5 +215,5 @@ export function createControls({ data, drugs, nameOf, featureKeys, getView, setV
     ].filter(Boolean).join(" · "));
   }
 
-  return { boxes: [inputs.box, color.box, filter.box, advanced.box], render };
+  return { boxes: [inputs.box, filter.box, color.box, advanced.box], render };
 }

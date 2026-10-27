@@ -4,7 +4,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
-  buildProfiles, pca, filterDrugs, colorize, directPoints, DEFAULT_VIEW, PKI_FLOOR, PKI_UNMEASURED, pickSet,
+  buildProfiles, pca, filterDrugs, colorize, directPoints, DEFAULT_VIEW, PKI_FLOOR, PKI_UNMEASURED, pickSet, mappableDrugs,
 } from "../../public/js/drug-map/model.js";
 import { placeLabels, sizesFor, FONT_PX } from "../../public/js/drug-map/layout.js";
 import { spreadPoints } from "../../public/js/drug-map/spread.js";
@@ -19,6 +19,15 @@ test("affinity: Ki floor, unmeasured default, strongest duplicate", () => {
   assert.equal(raw.get("d2"), 9 - PKI_FLOOR);       // 1 nM, the stronger duplicate
   assert.equal(raw.has("h1"), false);              // 20 µM: below the floor
   assert.equal(raw.get("m1"), PKI_UNMEASURED - PKI_FLOOR);
+});
+
+test("measuredKi leaves unmeasured bindings out; a drug with no measured Ki is not mappable", () => {
+  const drugs = [drug("some", [b("d2", 1), b("m1")]), drug("none", [b("gaba_a"), b("h1")]), drug("empty", [])];
+  const p = buildProfiles(drugs, { normalize: false, measuredKi: true });
+  assert.deepEqual([...p.get("some").keys()], ["d2"]);
+  assert.equal(p.has("none"), false);
+  assert.equal(DEFAULT_VIEW.measuredKi, true);
+  assert.deepEqual(mappableDrugs(drugs).map((d) => d.id), ["some"]);
 });
 
 test("normalize scales each profile to unit length; drugs with nothing drop out", () => {
@@ -116,9 +125,9 @@ test("colorize: metabolic route (major, else sole substrate) and Ki coverage", (
   assert.equal(route.colorOf.get("major"), route.colorOf.get("sole"));
   assert.deepEqual(route.legend.map((r) => [r.label, r.count]), [["CYP2D6", 2], ["?", 1]]);
   const ki = colorize([
-    drug("all", [b("d2", 1)]), drug("some", [b("d2", 1), b("h1")]), drug("none", [b("h1")]), drug("empty", []),
+    drug("all", [b("d2", 1)]), drug("some", [b("d2", 1), b("h1")]), drug("empty", []),
   ], "ki", { catLabels: {}, unknown: "?", t: (k) => k });
-  assert.deepEqual(ki.legend.map((r) => r.label), ["drugmap.ki.all", "drugmap.ki.some", "drugmap.ki.none", "?"]);
+  assert.deepEqual(ki.legend.map((r) => r.label), ["drugmap.ki.all", "drugmap.ki.some", "?"]);
 });
 
 test("layout: name size follows crowding, within its range", () => {

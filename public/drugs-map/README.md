@@ -20,14 +20,14 @@ A concrete example of one drug's vector, in "Receptors" mode: one number per tar
 olanzapine = {"D2": 2.7, "5-HT2A": 3.5, "H1": 3.6, "M1": 3.3, "SERT": 0.6, ...}
 ```
 
-A binding a source states but with no measured Ki still counts, with a middling affinity. By default each vector is scaled to unit length, so the map compares the *shape* of a profile (which targets, in what proportion) rather than raw potency.
+Only measured affinities count by default: a drug with no measured Ki at all is not on the map, and a binding a source states without a measured Ki is left out (switch off **Measured Ki only** to count it at an assumed 100 nM). By default each vector is scaled to unit length, so the map compares the *shape* of a profile (which targets, in what proportion) rather than raw potency.
 
 Controls (all folded boxes above the plot):
 
 - **Place drugs by:** receptor affinities, net transmitter tone (the drug's signed effect on each neurotransmitter system), or both.
 - **Signed:** an agonist and an antagonist of the same receptor point in opposite directions.
 - **Targets:** restrict the vectors to some targets; pick one or two and they become the axes themselves (no PCA).
-- **Filters:** drug class, first approval year, marketed only.
+- **Filter points by:** drug class, first approval year, marketed only.
 - **Colour by:** class, Neuroscience-based Nomenclature, approval year, originator lab, metabolism, or Ki coverage.
 - **Plot:** scroll / pinch to zoom, drag to pan, two-finger twist (or the rotate gesture) to rotate, fullscreen button.
 

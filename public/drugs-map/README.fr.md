@@ -20,14 +20,14 @@ Un exemple concret du vecteur d'une substance, en mode « Récepteurs » : un no
 olanzapine = {"D2": 2.7, "5-HT2A": 3.5, "H1": 3.6, "M1": 3.3, "SERT": 0.6, ...}
 ```
 
-Une liaison qu'une source affirme mais sans Ki mesuré compte quand même, avec une affinité moyenne. Par défaut chaque vecteur est ramené à une longueur unité, pour que la carte compare la *forme* d'un profil (quelles cibles, dans quelles proportions) plutôt que la puissance brute.
+Par défaut seules les affinités mesurées comptent : une substance sans aucun Ki mesuré n'est pas sur la carte, et une liaison qu'une source affirme sans Ki mesuré est écartée (décocher **Ki mesurés uniquement** pour la compter à 100 nM supposés). Par défaut chaque vecteur est ramené à une longueur unité, pour que la carte compare la *forme* d'un profil (quelles cibles, dans quelles proportions) plutôt que la puissance brute.
 
 Réglages (des boîtes repliées au-dessus du graphique) :
 
 - **Placer selon :** les affinités aux récepteurs, le tonus net par neurotransmetteur (l'effet signé de la substance sur chaque système), ou les deux.
 - **Signé :** un agoniste et un antagoniste du même récepteur partent dans des directions opposées.
 - **Cibles :** restreindre les vecteurs à certaines cibles ; en choisir une ou deux en fait directement les axes (sans ACP).
-- **Filtres :** classe, année de première autorisation, commercialisées uniquement.
+- **Filtrer les points par :** classe, année de première autorisation, commercialisées uniquement.
 - **Couleur selon :** classe, nomenclature NbN, année d'autorisation, laboratoire d'origine, métabolisme, ou couverture des Ki.
 - **Graphique :** molette / pincement pour zoomer, glisser pour déplacer, rotation à deux doigts pour tourner, bouton plein écran.
 
