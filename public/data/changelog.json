@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.139.0",
+      "date": "2026-10-27",
+      "entries": [
+        {
+          "category": "added",
+          "text": "The Drugs list can be sorted by class, name, first approval decade or half-life, with each row showing its year or half-life, and the filter box now also matches an approval year",
+          "commits": [
+            "b7b1c40"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.138.1",
       "date": "2026-10-21",
       "entries": [
