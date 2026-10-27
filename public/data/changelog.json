@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.145.2",
+      "date": "2026-10-27",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "The drugs map page opens with a short pitch linking to neurarium, and its README opens on GitHub, in your language, instead of as raw text",
+          "commits": [
+            "1637ee8"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.145.1",
       "date": "2026-10-27",
       "entries": [
