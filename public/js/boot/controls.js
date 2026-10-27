@@ -83,12 +83,14 @@ export function wireControls({ camera, controls, meshes, arrows, labels, focus, 
     if (!open || !visible) {
       focus.setScreenOffset(0, 0);
     } else if (portrait.matches) {
+      // From the panel's top edge, so its bottom margin counts as covered too.
       const frac =
-        controlsPanel.getBoundingClientRect().height / window.innerHeight;
+        1 - controlsPanel.getBoundingClientRect().top / window.innerHeight;
       focus.setScreenOffset(0, Math.min(0.4, frac / 2));
     } else {
+      // To the panel's right edge, so its left margin counts as covered too.
       const frac =
-        controlsPanel.getBoundingClientRect().width / window.innerWidth;
+        controlsPanel.getBoundingClientRect().right / window.innerWidth;
       focus.setScreenOffset(Math.min(0.3, frac / 2), 0);
     }
   };
