@@ -8,6 +8,8 @@ import { QUERY, isFramedView } from "../boot/query.js";
 // Padding around the whole assembled brain when a load / the reset button frames it
 // (createCameraFocus fitAll): 1 would touch the viewport edge.
 const FIT_ALL_MARGIN = 1.15;
+// Headings around the vertical axis the whole-brain fit must hold at (fitAll).
+const FIT_HEADINGS = 8;
 
 // Camera directions for `?view=` (unit vectors from the framed target back to
 // the camera). World axes: x right, y up, z toward the viewer / anterior.
@@ -156,22 +158,22 @@ export function createCameraFocus({ camera, controls, meshes, getFocusMeshes }) 
     return dir.normalize();
   };
 
-  // Whole-brain fit, seen along `dir` from `center`: the distance at which every
-  // visible vertex lands inside the viewport on both axes, and inside the part the
-  // expanded panel leaves clear (the screen offset slides the brain there, so only
-  // that part counts), times `margin`; plus how far off-centre the silhouette sits
-  // at that distance (`shiftX`/`shiftY`, world units along the screen axes). Exact
-  // rather than a bounding sphere: the sphere around the brain's box is much wider
-  // than the brain seen from any side, which left a desktop load framed far too
-  // loosely. One pass over the vertices, only on a load / reset, never per frame.
-  const measureFit = (center, dir, margin) => {
+  // Whole-brain fit, seen from `center` along each of `dirs`: the smallest distance at
+  // which every visible vertex lands inside the viewport on both axes from all of
+  // them, and inside the part the expanded panel leaves clear (the screen offset
+  // slides the brain there, so only that part counts), times `margin`. Exact rather
+  // than a bounding sphere: the sphere around the brain's box is much wider than the
+  // brain seen from any side, which left a desktop load framed far too loosely. One
+  // pass over the vertices, only on a load / reset, never per frame.
+  const measureFit = (center, dirs, margin) => {
     const tanV = Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2);
     const clearV = tanV * (1 - 2 * Math.abs(offsetTarget.y));
     const clearH = tanV * camera.aspect * (1 - 2 * Math.abs(offsetTarget.x));
-    const right = new THREE.Vector3().crossVectors(camera.up, dir).normalize();
-    const up = new THREE.Vector3().crossVectors(dir, right);
+    const axes = dirs.map((dir) => {
+      const right = new THREE.Vector3().crossVectors(camera.up, dir).normalize();
+      return { dir, right, up: new THREE.Vector3().crossVectors(dir, right) };
+    });
     const v = new THREE.Vector3();
-    const pts = [];
     let dist = 0;
     for (const mesh of meshes) {
       if (!mesh.visible) continue;
@@ -179,39 +181,31 @@ export function createCameraFocus({ camera, controls, meshes, getFocusMeshes }) 
       mesh.updateMatrixWorld();
       for (let i = 0; i < pos.count; i++) {
         v.fromBufferAttribute(pos, i).applyMatrix4(mesh.matrixWorld).sub(center);
-        const x = v.dot(right), y = v.dot(up), z = v.dot(dir);
-        pts.push(x, y, z);
-        dist = Math.max(dist, z + Math.abs(x) / clearH, z + Math.abs(y) / clearV);
+        for (const a of axes) {
+          const z = v.dot(a.dir);
+          dist = Math.max(dist, z + Math.abs(v.dot(a.right)) / clearH, z + Math.abs(v.dot(a.up)) / clearV);
+        }
       }
     }
-    dist = Math.max(controls.minDistance, dist * margin);
-    // Screen extents (as tangents) from that distance, mapped back to the pivot plane.
-    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
-    for (let i = 0; i < pts.length; i += 3) {
-      const depth = dist - pts[i + 2];
-      const sx = pts[i] / depth, sy = pts[i + 1] / depth;
-      if (sx < minX) minX = sx;
-      if (sx > maxX) maxX = sx;
-      if (sy < minY) minY = sy;
-      if (sy > maxY) maxY = sy;
-    }
-    return { dist, right, up, shiftX: ((minX + maxX) / 2) * dist, shiftY: ((minY + maxY) / 2) * dist };
+    return Math.max(controls.minDistance, dist * margin);
   };
 
   // The center + distance framing the whole visible brain from the present view
   // direction, or null when nothing is visible. Shared by recenter + frameAllNow so
-  // the reset button and a fresh load land on the same pose. Measured twice: once
-  // about the box centre to find how far off-centre the silhouette sits, then again
-  // about the silhouette's centre (the olfactory bulbs alone pull the box forward).
+  // the reset button and a fresh load land on the same pose. The pivot is the middle
+  // of the brain's extent on every axis, not the silhouette's centre from one angle:
+  // auto-rotate turns about it, and a pivot centred for the starting view only drifts
+  // the brain off-centre as it turns. The distance fits FIT_HEADINGS headings around
+  // the vertical axis at the present elevation, so the whole turn stays in frame.
   const fitAll = () => {
     box.makeEmpty();
     for (const mesh of meshes) if (mesh.visible) box.expandByObject(mesh);
     if (box.isEmpty()) return null;
     const center = box.getCenter(new THREE.Vector3());
     const dir = viewDir();
-    const first = measureFit(center, dir, FIT_ALL_MARGIN);
-    center.addScaledVector(first.right, first.shiftX).addScaledVector(first.up, first.shiftY);
-    return { center, dir, dist: measureFit(center, dir, FIT_ALL_MARGIN).dist };
+    const headings = Array.from({ length: FIT_HEADINGS },
+      (_, i) => dir.clone().applyAxisAngle(camera.up, (i * 2 * Math.PI) / FIT_HEADINGS));
+    return { center, dir, dist: measureFit(center, headings, FIT_ALL_MARGIN) };
   };
 
   // Begin a tween that looks at `center` and frames a sphere of `radius` (or sits

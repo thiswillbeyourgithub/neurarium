@@ -7,13 +7,6 @@ import { createIntroAnimation } from "../scene/intro.js";
 import { createViewerTour } from "./tour-steps.js";
 import { AUTOMATED_VIEW, HAS_EXPLODE, TOUR_FORCED } from "./query.js";
 
-// When the dev / WIP banner is shown (DEV=1 container), the brain is presented a
-// touch lower and further back so it sits clear below the banner: the resting
-// camera is pulled out by this factor and the look-point lifted by this many
-// world units (so the brain renders lower in the frame).
-const DEV_BANNER_UNZOOM = 1.15;
-const DEV_BANNER_DROP = 1.6;
-
 /**
  * @param {object} deps the scene (arrows, camera, controls, meshes, meshById, focus,
  *   selection, autoSpread, arrowRetrim), the focus functions the tour drives, the
@@ -116,15 +109,6 @@ export function launchScene({
       // roughly matched). Done first, so the DEV-banner nudge + intro capture build
       // on the centered pose.
       focus.frameAllNow();
-      // When the dev / WIP banner is up (DEV=1 container; same flag dev-banner.js
-      // reads), present the brain a little lower + further back so it sits clear
-      // below the banner. Done before intro.start() so the captured resting pose
-      // (what the intro settles on) already includes it.
-      if ((window.__APP_CONFIG__ || {}).dev === "1") {
-        camera.position.multiplyScalar(DEV_BANNER_UNZOOM);
-        controls.target.y += DEV_BANNER_DROP;
-        controls.update();
-      }
       // The assemble intro is a decorative animation, so honor the Animations toggle:
       // when off, present the brain already whole (explode 0) instead of playing it in.
       if (animSettings.enabled) {

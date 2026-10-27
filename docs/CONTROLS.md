@@ -84,8 +84,9 @@ is pinned and exactly one inner region scrolls (`#controls-main`, or `#details-p
   raises the spread; a manual slider grab cancels; a plain 3D click doesn't trigger it.
 - **Intro** (`createIntroAnimation`): on load the regions assemble from blown-out (Separate 1->0)
   while the camera follows + sweeps `INTRO_ROTATION_TURNS`. Drives the slider; suspends/restores
-  auto-rotate; cancelled on a slider grab; skipped when `?explode=` is pinned. Under the dev banner
-  the brain settles lower/further back (`DEV_BANNER_DROP`/`_UNZOOM`).
+  auto-rotate; cancelled on a slider grab; skipped when `?explode=` is pinned. It settles on the
+  reset button's framing (`fitAll`): pivot at the middle of the brain's extent on every axis, distance
+  fitting the brain from 8 headings so auto-rotate never drifts it off-centre or out of frame.
 - **Transparency** slider = material opacity (depth-write off while translucent). Owned by the
   selection controller, so it composes with isolate dimming.
 
