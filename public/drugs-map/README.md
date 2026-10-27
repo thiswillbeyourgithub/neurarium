@@ -4,6 +4,10 @@
 
 **Live:** [drugsmap.olicorne.org](https://drugsmap.olicorne.org/) (also at [neurarium.olicorne.org/drugs-map](https://neurarium.olicorne.org/drugs-map))
 
+[![The drugs map: the atypical and conventional antipsychotics placed by their dopamine, cholinergic and histamine binding](screenshot.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmmkt=0&dmtgt=aadc,comt,d1,d2,d3,d4,d5,dat,mao_b,vmat2,ache,bche,m1,m2,m3,m4,m5,nachr_a4b2,nachr_a7,h1,h2,h3,h4)
+
+*The atypical and conventional antipsychotics, placed by their dopamine, cholinergic and histamine targets only (click to open this exact view). The "Axis meaning" box names the targets each axis weighs most.*
+
 An interactive map of psychiatric and CNS-active drugs, placed by how similar their receptor binding profiles are. Drugs that hit the same receptors in the same proportions land close together; drugs with unrelated mechanisms land far apart. It is a companion page of [neurarium](https://neurarium.olicorne.org/), an interactive 3D atlas of the brain for psychiatric neuroscience, and it is built entirely from neurarium's openly served, sourced dataset.
 
 It was built with the help of [Claude Code](https://claude.com/claude-code).
@@ -54,5 +58,7 @@ drugsmap.olicorne.org {
 	reverse_proxy <the same upstream as the neurarium.olicorne.org block>
 }
 ```
+
+The picture at the top is rendered by `uv run tools/shot_drugs_map.py` (its view is the script's `DEFAULT_HASH`): rerun it whenever the map's look changes.
 
 Links from the map to the 3D atlas detect this case (the page served at `/`) and point at `https://neurarium.olicorne.org/` instead of a relative path. Visits are counted by the same umami site as neurarium, under the `drugsmap.olicorne.org` hostname.
