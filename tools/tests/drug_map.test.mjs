@@ -207,6 +207,18 @@ test("spread: dots already a dot width apart do not move", () => {
   assert.equal(spreadPoints([{ id: "a", x: 0, y: 0 }, { id: "b", x: 9, y: 0 }], 4).size, 0);
 });
 
+test("spread: a big coincident lump unfolds with no two dots overlapping", () => {
+  // e.g. 15 benzodiazepines with identical profiles share one pixel.
+  const r = 4, pts = Array.from({ length: 15 }, (_, i) => ({ id: `bz${i}`, x: 200, y: 200 }));
+  const q = [...spreadPoints(pts, r).values()];
+  assert.equal(q.length, 15);
+  for (let i = 0; i < q.length; i++) {
+    for (let j = i + 1; j < q.length; j++) {
+      assert.ok(Math.hypot(q[i].x - q[j].x, q[i].y - q[j].y) >= 2 * r, `dots ${i} and ${j} overlap`);
+    }
+  }
+});
+
 test("spread: coincident dots fan out, deterministically by id", () => {
   const pts = ["c", "a", "b"].map((id) => ({ id, x: 50, y: 50 }));
   const one = spreadPoints(pts, 4), two = spreadPoints([...pts].reverse(), 4);
