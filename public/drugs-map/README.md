@@ -67,6 +67,41 @@ The **Presets** box at the top of the page loads a ready-made view in one click.
 [![All drugs by transmitter tone](presets/all_tone.en.png)](https://drugsmap.olicorne.org/#dmsrc=tone)
 
 </details>
+
+<details>
+<summary>Antihistamines: H1 vs M1</summary>
+
+[![Antihistamines: H1 vs M1](presets/antihistamines.en.png)](https://drugsmap.olicorne.org/#dmcat=antihistamine&dmtgt=h1,m1)
+
+</details>
+
+<details>
+<summary>Psychedelics: serotonin receptors</summary>
+
+[![Psychedelics: serotonin receptors](presets/psychedelics.en.png)](https://drugsmap.olicorne.org/#dmcat=recreational&dmmkt=0&dmtgt=5ht2a,5ht2c,5ht1a,5ht2b)
+
+</details>
+
+<details>
+<summary>MAOIs: MAO-A vs MAO-B</summary>
+
+[![MAOIs: MAO-A vs MAO-B](presets/maois.en.png)](https://drugsmap.olicorne.org/#dmcat=maoi&dmtgt=mao_a,mao_b)
+
+</details>
+
+<details>
+<summary>Opioids: mu, kappa, delta</summary>
+
+[![Opioids: mu, kappa, delta](presets/opioids.en.png)](https://drugsmap.olicorne.org/#dmcat=opioid&dmtgt=mu,kappa,delta)
+
+</details>
+
+<details>
+<summary>Stimulants: DAT vs NET</summary>
+
+[![Stimulants: DAT vs NET](presets/stimulants.en.png)](https://drugsmap.olicorne.org/#dmcat=stimulant&dmtgt=dat,net)
+
+</details>
 <!-- presets:end -->
 
 ## What you are looking at

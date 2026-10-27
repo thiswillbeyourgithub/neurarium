@@ -67,6 +67,41 @@ La boîte **Préréglages** en haut de la page charge une vue toute faite en un 
 [![Toutes les substances par tonus](presets/all_tone.fr.png)](https://drugsmap.olicorne.org/#dmsrc=tone)
 
 </details>
+
+<details>
+<summary>Antihistaminiques : H1 contre M1</summary>
+
+[![Antihistaminiques : H1 contre M1](presets/antihistamines.fr.png)](https://drugsmap.olicorne.org/#dmcat=antihistamine&dmtgt=h1,m1)
+
+</details>
+
+<details>
+<summary>Psychédéliques : récepteurs sérotoninergiques</summary>
+
+[![Psychédéliques : récepteurs sérotoninergiques](presets/psychedelics.fr.png)](https://drugsmap.olicorne.org/#dmcat=recreational&dmmkt=0&dmtgt=5ht2a,5ht2c,5ht1a,5ht2b)
+
+</details>
+
+<details>
+<summary>IMAO : MAO-A contre MAO-B</summary>
+
+[![IMAO : MAO-A contre MAO-B](presets/maois.fr.png)](https://drugsmap.olicorne.org/#dmcat=maoi&dmtgt=mao_a,mao_b)
+
+</details>
+
+<details>
+<summary>Opioïdes : mu, kappa, delta</summary>
+
+[![Opioïdes : mu, kappa, delta](presets/opioids.fr.png)](https://drugsmap.olicorne.org/#dmcat=opioid&dmtgt=mu,kappa,delta)
+
+</details>
+
+<details>
+<summary>Psychostimulants : DAT contre NET</summary>
+
+[![Psychostimulants : DAT contre NET](presets/stimulants.fr.png)](https://drugsmap.olicorne.org/#dmcat=stimulant&dmtgt=dat,net)
+
+</details>
 <!-- presets:end -->
 
 ## Ce que montre la carte
