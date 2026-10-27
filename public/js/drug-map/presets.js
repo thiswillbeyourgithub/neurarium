@@ -11,6 +11,8 @@ const ANTIDEPRESSANTS = ["ssri", "snri", "tricyclic", "maoi", "antidepressant_ot
 
 /** @type {{id: string, view: object}[]} in display order */
 export const PRESETS = [
+  // Back to the defaults: every drug on its whole receptor binding profile.
+  { id: "default", view: {} },
   // Where each antipsychotic sits on the dopamine system alone, coloured by its NbN
   // mechanism: separates the D2 antagonists from the partial agonists and the D4-leaning ones.
   { id: "ap_dopamine", view: { cats: ANTIPSYCHOTICS, only: ["d1", "d2", "d3", "d4", "d5", "dat"], color: "nbn" } },
@@ -19,10 +21,10 @@ export const PRESETS = [
   // The receptors behind the usual side effects: H1 (sedation, weight), M1
   // (anticholinergic), alpha1 (orthostatic hypotension), 5-HT2C (weight).
   { id: "ap_side", view: { cats: ANTIPSYCHOTICS, only: ["h1", "m1", "alpha1a", "5ht2c"] } },
-  // Serotonin against noradrenaline reuptake: SSRIs, SNRIs and tricyclics fan out.
   // The body effects each antipsychotic may produce (BETA, derived from its bindings):
   // groups them by side-effect profile rather than by receptor.
   { id: "ap_effects", view: { cats: ANTIPSYCHOTICS, sources: ["effects"] } },
+  // Serotonin against noradrenaline reuptake: SSRIs, SNRIs and tricyclics fan out.
   { id: "ad_sert_net", view: { cats: ANTIDEPRESSANTS, only: ["sert", "net"] } },
   // Every antidepressant on its whole binding profile, coloured by NbN mechanism.
   { id: "ad_profile", view: { cats: ANTIDEPRESSANTS, color: "nbn" } },

@@ -561,6 +561,7 @@ window.__I18N_MESSAGES__.en = {
   "drugmap.preset.ap_dopamine": "Antipsychotics: dopamine",
   "drugmap.preset.ap_d2_5ht2a": "Antipsychotics: D2 vs 5-HT2A",
   "drugmap.preset.ap_side": "Antipsychotics: side-effect receptors",
+  "drugmap.preset.default": "Default view",
   "drugmap.preset.ap_effects": "Antipsychotics: body effects",
   "drugmap.preset.ad_sert_net": "Antidepressants: SERT vs NET",
   "drugmap.preset.ad_profile": "Antidepressants by mechanism",
