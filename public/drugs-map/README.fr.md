@@ -12,6 +12,61 @@ Elle permet par exemple d'afficher les antipsychotiques de manière à représen
 
 Elle a été réalisée avec l'aide de [Claude Code](https://claude.com/claude-code).
 
+## Préréglages
+
+La boîte **Préréglages** en haut de la page charge une vue toute faite en un clic. Cliquer sur un titre déplie son image, puis sur l'image pour ouvrir cette vue en ligne :
+
+<!-- presets:start -->
+<details>
+<summary>Antipsychotiques : dopamine</summary>
+
+[![Antipsychotiques : dopamine](presets/ap_dopamine.fr.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmcolor=nbn&dmtgt=d1,d2,d3,d4,d5,dat)
+
+</details>
+
+<details>
+<summary>Antipsychotiques : D2 contre 5-HT2A</summary>
+
+[![Antipsychotiques : D2 contre 5-HT2A](presets/ap_d2_5ht2a.fr.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmtgt=d2,5ht2a)
+
+</details>
+
+<details>
+<summary>Antipsychotiques : récepteurs des effets indésirables</summary>
+
+[![Antipsychotiques : récepteurs des effets indésirables](presets/ap_side.fr.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmtgt=h1,m1,alpha1a,5ht2c)
+
+</details>
+
+<details>
+<summary>Antidépresseurs : SERT contre NET</summary>
+
+[![Antidépresseurs : SERT contre NET](presets/ad_sert_net.fr.png)](https://drugsmap.olicorne.org/#dmcat=ssri,snri,tricyclic,maoi,antidepressant_other&dmtgt=sert,net)
+
+</details>
+
+<details>
+<summary>Antidépresseurs par mécanisme</summary>
+
+[![Antidépresseurs par mécanisme](presets/ad_profile.fr.png)](https://drugsmap.olicorne.org/#dmcat=ssri,snri,tricyclic,maoi,antidepressant_other&dmcolor=nbn)
+
+</details>
+
+<details>
+<summary>Sommeil et anxiété</summary>
+
+[![Sommeil et anxiété](presets/sleep.fr.png)](https://drugsmap.olicorne.org/#dmcat=benzodiazepine,hypnotic,anxiolytic,antihistamine)
+
+</details>
+
+<details>
+<summary>Toutes les substances par tonus</summary>
+
+[![Toutes les substances par tonus](presets/all_tone.fr.png)](https://drugsmap.olicorne.org/#dmsrc=tone)
+
+</details>
+<!-- presets:end -->
+
 ## Ce que montre la carte
 
 Chaque substance devient un vecteur, puis une [analyse en composantes principales](https://fr.wikipedia.org/wiki/Analyse_en_composantes_principales) (ACP) projette tous ces vecteurs sur les deux axes qui écartent le plus les substances. L'ACP est recalculée pour ce que les filtres laissent à l'écran : filtrer sur les antipsychotiques donne les axes qui séparent le mieux *les antipsychotiques*, pas toute la liste.
@@ -26,7 +81,9 @@ olanzapine = {"D2": 2.7, "5-HT2A": 3.5, "H1": 3.6, "M1": 3.3, "SERT": 0.6, ...}
 
 Par défaut seules les affinités mesurées comptent : une substance sans aucun Ki mesuré n'est pas sur la carte, et une liaison qu'une source affirme sans Ki mesuré est écartée (décocher **Ki mesurés uniquement** pour la compter à 100 nM supposés). Par défaut chaque vecteur est ramené à une longueur unité, pour que la carte compare la *forme* d'un profil (quelles cibles, dans quelles proportions) plutôt que la puissance brute.
 
-Réglages (des boîtes repliées au-dessus du graphique) :
+Réglages (des boîtes au-dessus du graphique) :
+
+- **Préréglages :** des vues toutes faites, un clic chacune (voir [Préréglages](#préréglages)).
 
 - **Placer selon :** les affinités aux récepteurs, le tonus net par [neurotransmetteur](https://fr.wikipedia.org/wiki/Neurotransmetteur) (l'effet signé de la substance sur chaque système), ou les deux.
 - **Signé :** un [agoniste](https://fr.wikipedia.org/wiki/Agoniste) et un [antagoniste](https://fr.wikipedia.org/wiki/Antagoniste) du même récepteur partent dans des directions opposées.
@@ -59,6 +116,6 @@ drugsmap.olicorne.org {
 }
 ```
 
-L'image en haut est rendue par `uv run tools/shot_drugs_map.py` (sa vue est le `DEFAULT_HASH` du script) : la relancer dès que l'apparence de la carte change.
+L'image en haut et les images des préréglages (avec la section Préréglages qui les liste) sont rendues par `uv run tools/shot_drugs_map.py` (la vue du haut est le `DEFAULT_HASH` du script, les préréglages sont lus sur les boutons de la page) : la relancer dès que l'apparence de la carte ou ses préréglages changent.
 
 Les liens de la carte vers l'atlas 3D détectent ce cas (page servie sur `/`) et pointent vers `https://neurarium.olicorne.org/` au lieu d'un chemin relatif. Les visites sont comptées par le même site umami que neurarium, sous le nom d'hôte `drugsmap.olicorne.org`.

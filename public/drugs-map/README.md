@@ -12,6 +12,61 @@ For example, it can lay out the antipsychotics so as to show their dopaminergic,
 
 It was built with the help of [Claude Code](https://claude.com/claude-code).
 
+## Presets
+
+The **Presets** box at the top of the page loads a ready-made view in one click. Click a title to unfold its picture, then the picture to open that view live:
+
+<!-- presets:start -->
+<details>
+<summary>Antipsychotics: dopamine</summary>
+
+[![Antipsychotics: dopamine](presets/ap_dopamine.en.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmcolor=nbn&dmtgt=d1,d2,d3,d4,d5,dat)
+
+</details>
+
+<details>
+<summary>Antipsychotics: D2 vs 5-HT2A</summary>
+
+[![Antipsychotics: D2 vs 5-HT2A](presets/ap_d2_5ht2a.en.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmtgt=d2,5ht2a)
+
+</details>
+
+<details>
+<summary>Antipsychotics: side-effect receptors</summary>
+
+[![Antipsychotics: side-effect receptors](presets/ap_side.en.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmtgt=h1,m1,alpha1a,5ht2c)
+
+</details>
+
+<details>
+<summary>Antidepressants: SERT vs NET</summary>
+
+[![Antidepressants: SERT vs NET](presets/ad_sert_net.en.png)](https://drugsmap.olicorne.org/#dmcat=ssri,snri,tricyclic,maoi,antidepressant_other&dmtgt=sert,net)
+
+</details>
+
+<details>
+<summary>Antidepressants by mechanism</summary>
+
+[![Antidepressants by mechanism](presets/ad_profile.en.png)](https://drugsmap.olicorne.org/#dmcat=ssri,snri,tricyclic,maoi,antidepressant_other&dmcolor=nbn)
+
+</details>
+
+<details>
+<summary>Sleep and anxiety</summary>
+
+[![Sleep and anxiety](presets/sleep.en.png)](https://drugsmap.olicorne.org/#dmcat=benzodiazepine,hypnotic,anxiolytic,antihistamine)
+
+</details>
+
+<details>
+<summary>All drugs by transmitter tone</summary>
+
+[![All drugs by transmitter tone](presets/all_tone.en.png)](https://drugsmap.olicorne.org/#dmsrc=tone)
+
+</details>
+<!-- presets:end -->
+
 ## What you are looking at
 
 Each drug becomes one vector, then a [principal component analysis](https://en.wikipedia.org/wiki/Principal_component_analysis) (PCA) squeezes all those vectors onto the two axes that spread the drugs out the most. The PCA is recomputed for whatever the filters leave on screen, so filtering to the antipsychotics gives the axes that best separate *antipsychotics*, not the whole roster.
@@ -26,7 +81,9 @@ olanzapine = {"D2": 2.7, "5-HT2A": 3.5, "H1": 3.6, "M1": 3.3, "SERT": 0.6, ...}
 
 Only measured affinities count by default: a drug with no measured Ki at all is not on the map, and a binding a source states without a measured Ki is left out (switch off **Measured Ki only** to count it at an assumed 100 nM). By default each vector is scaled to unit length, so the map compares the *shape* of a profile (which targets, in what proportion) rather than raw potency.
 
-Controls (all folded boxes above the plot):
+Controls (boxes above the plot):
+
+- **Presets:** ready-made views, one click each (see [Presets](#presets)).
 
 - **Place drugs by:** receptor affinities, net transmitter tone (the drug's signed effect on each [neurotransmitter](https://en.wikipedia.org/wiki/Neurotransmitter) system), or both.
 - **Signed:** an [agonist](https://en.wikipedia.org/wiki/Agonist) and an [antagonist](https://en.wikipedia.org/wiki/Receptor_antagonist) of the same receptor point in opposite directions.
@@ -59,6 +116,6 @@ drugsmap.olicorne.org {
 }
 ```
 
-The picture at the top is rendered by `uv run tools/shot_drugs_map.py` (its view is the script's `DEFAULT_HASH`): rerun it whenever the map's look changes.
+The picture at the top and the preset pictures (with the Presets section listing them) are rendered by `uv run tools/shot_drugs_map.py` (the top view is the script's `DEFAULT_HASH`, the presets are read off the page's buttons): rerun it whenever the map's look or its presets change.
 
 Links from the map to the 3D atlas detect this case (the page served at `/`) and point at `https://neurarium.olicorne.org/` instead of a relative path. Visits are counted by the same umami site as neurarium, under the `drugsmap.olicorne.org` hostname.
