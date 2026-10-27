@@ -41,6 +41,13 @@ La boîte **Préréglages** en haut de la page charge une vue toute faite en un 
 </details>
 
 <details>
+<summary>Antipsychotiques : effets corporels</summary>
+
+[![Antipsychotiques : effets corporels](presets/ap_effects.fr.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmsrc=effects)
+
+</details>
+
+<details>
 <summary>Antidépresseurs : SERT contre NET</summary>
 
 [![Antidépresseurs : SERT contre NET](presets/ad_sert_net.fr.png)](https://drugsmap.olicorne.org/#dmcat=ssri,snri,tricyclic,maoi,antidepressant_other&dmtgt=sert,net)
@@ -62,9 +69,9 @@ La boîte **Préréglages** en haut de la page charge une vue toute faite en un 
 </details>
 
 <details>
-<summary>Toutes les substances par tonus</summary>
+<summary>Toutes les substances par tonus des neurotransmetteurs</summary>
 
-[![Toutes les substances par tonus](presets/all_tone.fr.png)](https://drugsmap.olicorne.org/#dmsrc=tone)
+[![Toutes les substances par tonus des neurotransmetteurs](presets/all_tone.fr.png)](https://drugsmap.olicorne.org/#dmsrc=tone)
 
 </details>
 
