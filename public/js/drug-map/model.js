@@ -200,7 +200,7 @@ export const DEFAULT_VIEW = Object.freeze({
   spread: true,        // nudge overlapping dots apart on screen (js/drug-map/spread.js)
   normalize: true,     // unit-length profiles (see buildProfiles)
   signed: true,        // agonist vs antagonist on opposite signs
-  marketed: false,     // only drugs with a current marketing authorisation (US or FR holder)
+  marketed: true,      // only drugs with a current marketing authorisation (US or FR holder)
   source: "receptors", // one of FEATURE_SOURCES
   only: null,          // null = every feature, else the chosen keys, in pick order
 });

@@ -132,7 +132,7 @@ export function createControls({ data, drugs, nameOf, featureKeys, getView, setV
   }
   filter.body.append(filterBar, catList);
 
-  // ---- Advanced: the switches, all on by default except "marketed".
+  // ---- Advanced: the switches, all on by default.
   const advanced = foldBox(t("drugmap.sec.advanced"));
   const toggles = ["labels", "spread", "normalize", "signed", "marketed"].map((key) => {
     const lab = el("label", "list-toggle");

@@ -50,7 +50,7 @@ test("filter: categories, year range (unknown year drops), hidden", () => {
     drug("new", [], { categories: ["ap"], firstApproval: { year: 2015 } }),
     drug("nod", [], { categories: ["ad"] }),
   ];
-  const ids = (v) => filterDrugs(drugs, { ...DEFAULT_VIEW, ...v }).map((d) => d.id);
+  const ids = (v) => filterDrugs(drugs, { ...DEFAULT_VIEW, marketed: false, ...v }).map((d) => d.id);
   assert.deepEqual(ids({}), ["old", "new", "nod"]);
   assert.deepEqual(ids({ cats: new Set(["ap"]) }), ["old", "new"]);
   assert.deepEqual(ids({ years: [1950, 1999] }), ["old"]);
@@ -166,7 +166,8 @@ test("filter: marketed keeps only drugs with a current holder", () => {
   const drugs = [drug("on", [], { holders: [{ market: "us" }] }), drug("off", []), drug("empty", [], { holders: [] })];
   const ids = filterDrugs(drugs, { ...DEFAULT_VIEW, hidden: new Set(), marketed: true }).map((d) => d.id);
   assert.deepEqual(ids, ["on"]);
-  assert.equal(filterDrugs(drugs, { ...DEFAULT_VIEW, hidden: new Set() }).length, 3);
+  assert.equal(filterDrugs(drugs, { ...DEFAULT_VIEW, hidden: new Set(), marketed: false }).length, 3);
+  assert.equal(DEFAULT_VIEW.marketed, true, "the map opens on marketed drugs only");
 });
 
 test("pickSet: pick narrows from all, then toggles; drop removes; axis order kept", () => {
