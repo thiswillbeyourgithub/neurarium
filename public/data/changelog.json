@@ -1,6 +1,33 @@
 {
   "versions": [
     {
+      "version": "3.146.3",
+      "date": "2026-10-27",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "Drugs map: a search box at the top of the class filter and of the axes picker finds a class or a target by typing (accents, case and dashes ignored, so \"5ht2a\" finds 5-HT2A)",
+          "commits": [
+            "ad558b7"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Drugs map: the title is centred and shortened to \"Drugs map\", and the introduction uses the full page width",
+          "commits": [
+            "f2c75f5"
+          ]
+        },
+        {
+          "category": "docs",
+          "text": "The drugs map READMEs link the terms they use (principal component analysis, affinity, agonist, NbN, PDSP, Guide to Pharmacology...) to their Wikipedia article in the README’s language, or to the official site",
+          "commits": [
+            "a3e3dee"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.146.2",
       "date": "2026-10-27",
       "entries": [
