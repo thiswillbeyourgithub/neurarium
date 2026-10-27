@@ -16,7 +16,7 @@ Elle a été réalisée avec l'aide de [Claude Code](https://claude.com/claude-c
 
 ## Préréglages
 
-La boîte **Préréglages** en haut de la page charge une vue toute faite en un clic. Cliquer sur une image ouvre cette vue en ligne (le préréglage **Vue par défaut** ramène la capture principale ci-dessus) :
+La boîte **Préréglages** en haut de la page charge une vue toute faite en un clic. Cliquer sur une image ouvre cette vue en ligne (le préréglage **Vue par défaut** remet la carte à ses réglages par défaut) :
 
 <!-- presets:start -->
 | | |

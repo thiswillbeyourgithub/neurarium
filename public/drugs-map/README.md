@@ -16,7 +16,7 @@ It was built with the help of [Claude Code](https://claude.com/claude-code).
 
 ## Presets
 
-The **Presets** box at the top of the page loads a ready-made view in one click. Click a picture to open that view live (the **Default view** preset brings back the main screenshot above):
+The **Presets** box at the top of the page loads a ready-made view in one click. Click a picture to open that view live (the **Default view** preset brings the map back to its defaults):
 
 <!-- presets:start -->
 | | |

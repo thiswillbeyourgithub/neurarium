@@ -15,7 +15,7 @@ saves ``presets/<id>.<lang>.png`` and rewrites each README's block between the
 ``<!-- presets:start -->`` / ``<!-- presets:end -->`` markers: a PRESET_COLUMNS-wide
 table, one cell per preset holding its picture (linking the live map on that
 preset's view, the URL hash the click produced) over the button's own label. The
-``default`` preset is skipped: it is the README's main screenshot already. Rerun it
+``default`` preset is skipped: the map as it first opens needs no picture of its own. Rerun it
 whenever the map's UI or the presets change so the README pictures stay current::
 
     uv run tools/shot_drugs_map.py                  # -> public/drugs-map/screenshot.{en,fr}.png + presets/
@@ -43,7 +43,7 @@ LIVE_URL = "https://drugsmap.olicorne.org/"
 PRESETS_START, PRESETS_END = "<!-- presets:start -->", "<!-- presets:end -->"
 # Pictures per README table row: two keep each picture legible on a GitHub page.
 PRESET_COLUMNS = 2
-# Presets with no picture of their own (the default view is the main screenshot).
+# Presets with no picture of their own (the default view is just the map as it opens).
 SKIP_PRESETS = {"default"}
 
 # The README's view: the two antipsychotic classes, withdrawn drugs included, on
