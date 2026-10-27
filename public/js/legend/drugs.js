@@ -5,6 +5,7 @@ import { addLegendItem, reflectRows } from "./item.js";
 import { foldText } from "../search/query.js";
 import { formatHalfLife } from "../panel/format.js";
 import { DRUG_SORT_MODES, groupDrugs } from "./drug-groups.js";
+import { openDrugMap } from "../drug-map/link.js";
 import { loadFlag, loadString, saveFlag, saveString } from "../prefs.js";
 
 const { t } = window.__I18N__;
@@ -126,14 +127,31 @@ export function buildDrugLegend(data, onPick) {
   empty.className = "drugs-empty info-desc";
   empty.textContent = t("drugs.none");
 
+  // A heading's "map" link: the drug map filtered to that group. A real href, so it
+  // can be copied as a deep link; a plain click opens the popup in place.
+  const mapLink = ({ cats: groupCats, years }) => {
+    const a = document.createElement("a");
+    a.className = "drugs-map-link";
+    a.textContent = t("drugmap.link");
+    a.title = t("drugmap.linkTip");
+    a.href = groupCats ? `#popup=drugmap&dmcat=${groupCats.join(",")}`
+      : `#popup=drugmap&dmyear=${years[0]}-${years[1]}`;
+    a.addEventListener("click", (ev) => {
+      ev.preventDefault();
+      openDrugMap(groupCats ? { cats: new Set(groupCats) } : { years });
+    });
+    return a;
+  };
+
   // (Re)render the rows for one sort mode: the filter + metabolite state carry over.
   const render = (mode) => {
     container.replaceChildren();
     rows.length = 0;
     groups.length = 0;
-    for (const { label, drugs } of groupDrugs(data.drugs || [], mode, { cats, t })) {
+    for (const { label, drugs, map } of groupDrugs(data.drugs || [], mode, { cats, t })) {
       const h = document.createElement("h2");
       h.textContent = label;
+      if (map) h.appendChild(mapLink(map));
       container.appendChild(h);
       const groupRows = [];
       for (const drug of drugs) {

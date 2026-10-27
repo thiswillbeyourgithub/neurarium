@@ -20,7 +20,7 @@
  * dim) so the brain returns to its plain state, see the Escape case. `lightbox` is
  * the image popup: when it is open Esc closes it before anything else.
  */
-export function wireShortcuts(help, tabs, selection, lightbox, aboutModal, legendModal, sourcingModal, changelog) {
+export function wireShortcuts(help, tabs, selection, lightbox, aboutModal, legendModal, sourcingModal, changelog, drugMap) {
   const click = (id) => document.getElementById(id)?.click();
   const isTyping = (el) =>
     !!el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA"
@@ -158,7 +158,7 @@ export function wireShortcuts(help, tabs, selection, lightbox, aboutModal, legen
         event.preventDefault();
         return;
       }
-      for (const modal of [lightbox, help, changelog, aboutModal, legendModal, sourcingModal]) {
+      for (const modal of [lightbox, help, changelog, drugMap, aboutModal, legendModal, sourcingModal]) {
         if (modal?.isOpen) {
           modal.close();
           event.preventDefault();

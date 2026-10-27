@@ -281,6 +281,14 @@ Scope rule, applied at pick time and re-read by the judge: a check the label ask
 
 Pipeline: corpus #24 (see docs/PROVENANCE.md), fetch -> index pick -> `apply_workup.py` (seven gates, sole writer of `workup.json`) -> recheck (runbook: [tools/README.md#physicochemistry-workup-and-tdm-19-21-22-24](../tools/README.md#physicochemistry-workup-and-tdm-19-21-22-24)). Coverage: 246 nodes over 85 drugs, 85 of them conditional (170 drugs have an RCP page, 8 of them through an EPAR found by name: asenapine, brexpiprazole, cariprazine, deutetrabenazine, guanfacine, lurasidone, tasimelteon, zuranolone; 145 offer at least one candidate line; most others are neither marketed in France nor authorised in the EU), blood pressure 36, weight 32, ECG 29, blood glucose 25, liver tests 24, blood count 18.
 
+### Drug map
+
+A popup (`#drugmap-modal`, opened by the Drugs list's **Drug map** button or a list heading's "map" link) placing every drug in 2D by a PCA of its binding profile. Like the Simulation, it **computes**, never stores: nothing here is a node.
+
+- **Vectors** (`js/drug-map/model.js` `buildProfiles`): one dimension per target, affinity `pKi - 5` (`PKI_FLOOR`: a Ki of 10 µM or weaker counts as none), a stated binding without a measured Ki assumed at 100 nM (`PKI_UNMEASURED`), a target bound twice keeping its strongest. Uses `drug.bindings` (a prodrug's borrowed ones included, active-metabolite bindings not). **Normalize** (default on) scales each profile to unit length, so position reflects the profile's shape rather than overall potency.
+- **PCA** (`pca`): centred over the drugs on screen and **recomputed for every view** (power iteration with deflation on the p x p covariance, a few ms for ~300 drugs x ~150 targets), each axis sign-fixed so a small filter change does not mirror the map; the captions name each axis's strongest loadings both ways.
+- **Controls** (`js/drug-map/view.js`): colour by class / nomenclature / year (ramp) / originator lab, names on/off (greedy overlap skip), normalize, an approval-year range, class chips, right-click to hide a drug, wheel zoom / drag pan / double-click refit. The whole view is in the URL (see docs/RUNNING.md).
+
 ## Drug metabolism
 
 Which enzymes clear a drug, or have their activity changed by it. **Pharmacokinetics, so it

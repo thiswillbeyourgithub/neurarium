@@ -8,7 +8,7 @@ import { setModalToggle } from "../about/modals.js";
 import { stripSide } from "../util.js";
 
 export function wireUrlBindings({
-  aboutModal, arrows, changelog, data, focusCircuit, focusDrug, focusEffect,
+  aboutModal, arrows, changelog, data, drugMap, focusCircuit, focusDrug, focusEffect,
   focusEnzyme, focusProjectionGroup, focusTarget, legendModal, meshes,
   selectConnection, selectStructure, shortcutsHelp, showNodeBrowser, showSimulation,
   simulation, sourcingModal, tabs, urlState,
@@ -160,7 +160,7 @@ export function wireUrlBindings({
   // reached from a panel, not a state of the UI.
   const POPUPS = {
     about: aboutModal, legend: legendModal, sources: sourcingModal,
-    shortcuts: shortcutsHelp, whatsnew: changelog,
+    shortcuts: shortcutsHelp, whatsnew: changelog, drugmap: drugMap,
   };
   urlState.register("popup", {
     read: () => Object.keys(POPUPS).find((name) => POPUPS[name].isOpen) || null,

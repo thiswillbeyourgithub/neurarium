@@ -17,13 +17,14 @@ const yearOf = (d) => (d.firstApproval && d.firstApproval.year) || null;
 const hoursOf = (d) => (d.halfLife && typeof d.halfLife.hours === "number" ? d.halfLife.hours : null);
 
 /**
- * Group drugs for one sort mode. Each group is `{label, drugs}` in display order; a
- * drug with no value for the sort key lands in a trailing "unknown" group rather
- * than disappearing.
+ * Group drugs for one sort mode. Each group is `{label, drugs, map?}` in display
+ * order; a drug with no value for the sort key lands in a trailing "unknown" group
+ * rather than disappearing. `map` is the drug-map filter showing that group alone
+ * (`{cats:[key]}` for a class, `{years:[from, to]}` for a decade), when one exists.
  * @param {object[]} drugs  the loaded drugs (name, categories, firstApproval, halfLife)
  * @param {string} mode     one of DRUG_SORT_MODES
  * @param {{cats: Object<string,string>, t: Function}} ctx  category labels + i18n
- * @returns {{label: string, drugs: object[]}[]}
+ * @returns {{label: string, drugs: object[], map?: object}[]}
  */
 export function groupDrugs(drugs, mode, { cats, t }) {
   if (mode === "name") {
@@ -32,9 +33,10 @@ export function groupDrugs(drugs, mode, { cats, t }) {
   if (mode === "year") {
     const known = drugs.filter(yearOf)
       .sort((a, b) => yearOf(a) - yearOf(b) || byName(a, b));
-    return withUnknown(
-      bucket(known, (d) => t("drugs.decade", { decade: Math.floor(yearOf(d) / 10) * 10 })),
-      drugs.filter((d) => !yearOf(d)), t("drugs.unknownYear"));
+    const decade = (d) => Math.floor(yearOf(d) / 10) * 10;
+    const groups = bucket(known, (d) => t("drugs.decade", { decade: decade(d) }));
+    for (const g of groups) g.map = { years: [decade(g.drugs[0]), decade(g.drugs[0]) + 9] };
+    return withUnknown(groups, drugs.filter((d) => !yearOf(d)), t("drugs.unknownYear"));
   }
   if (mode === "halflife") {
     const known = drugs.filter((d) => hoursOf(d) !== null)
@@ -53,7 +55,7 @@ export function groupDrugs(drugs, mode, { cats, t }) {
   }
   const order = [...Object.keys(cats), ...[...byCat.keys()].filter((c) => !(c in cats))];
   return order.filter((c) => byCat.has(c))
-    .map((c) => ({ label: cats[c] || c, drugs: byCat.get(c).sort(byName) }));
+    .map((c) => ({ label: cats[c] || c, drugs: byCat.get(c).sort(byName), map: { cats: [c] } }));
 }
 
 // Split an already-ordered list into consecutive runs sharing `keyOf`.

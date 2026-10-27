@@ -96,7 +96,8 @@ moment it registers.
 | --- | --- |
 | `#tabs=<kind>:<id>,...` | the open detail tabs, in strip order (the order is state: tabs are drag-reorderable) |
 | `#tab=<index>` | which of them is active; omitted when it is the last (where opening the list already lands), `s` = the pinned Settings tab |
-| `#popup=about\|legend\|sources\|shortcuts\|whatsnew` | the open popup |
+| `#popup=about\|legend\|sources\|shortcuts\|whatsnew\|drugmap` | the open popup |
+| `#dmcat=<cat>,...` / `#dmyear=<from>-<to>` / `#dmhide=<id>,...` / `#dmcolor=<mode>` / `#dmlabels=1` / `#dmnorm=0` | the drug map's view (only while it is open): class chips, approval-year range (either end may be empty), hidden drugs, colour mode, names, normalization off |
 | `#cam=<az>,<polar>,<dist>[,<tx>,<ty>,<tz>]` | the orbit: degrees around the pivot, distance from it, and the pivot when a focus moved it off centre |
 | `#explode=0..1` / `#transparency=0.1..1` | the two sliders |
 | `#names=1` / `#arrows=1` / `#inside=1` | Show all names / Show projections / See inside |

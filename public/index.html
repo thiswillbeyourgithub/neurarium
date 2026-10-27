@@ -161,6 +161,7 @@
     <link rel="stylesheet" href="css/legend.css" />
     <link rel="stylesheet" href="css/node-browser.css" />
     <link rel="stylesheet" href="css/simulation.css" />
+    <link rel="stylesheet" href="css/drug-map.css" />
     <link rel="stylesheet" href="css/panel.css" />
     <link rel="stylesheet" href="css/pills.css" />
     <link rel="stylesheet" href="css/panel-drug.css" />
@@ -501,6 +502,7 @@
               <span class="chevron" aria-hidden="true">&#9656;</span>
             </button>
             <div id="drugs-body" hidden>
+              <button type="button" id="drugs-map" data-search="pca similarity similarité carte"><span data-i18n="drugmap.open"></span></button>
               <input type="text" id="drugs-filter" class="drugs-filter" data-i18n-attr="placeholder:drugs.filter" autocomplete="off" />
               <div id="drugs-sort" class="seg-switch" role="group" data-i18n-attr="aria-label:drugs.sortBy"></div>
               <label class="list-toggle"><input type="checkbox" id="drugs-show-metabolites" data-search checked /><span data-i18n="drugs.showMetabolites"></span></label>
@@ -783,6 +785,18 @@
                 data-i18n-attr="aria-label:image.close">&times;</button>
         <h2 id="changelog-title" data-i18n="changelog.title"></h2>
         <div id="changelog-body"></div>
+      </div>
+    </div>
+
+    <!-- Drug map: every drug placed by a PCA of its binding profile, recomputed for the
+         filtered view (js/drug-map/view.js). Opened by #drugs-map or a Drugs-list
+         heading's "map" link; `popup=drugmap` + the dm* keys in the URL. -->
+    <div id="drugmap-modal" class="modal-overlay" hidden>
+      <div class="modal panel drugmap" role="dialog" aria-modal="true" aria-labelledby="drugmap-title">
+        <button type="button" id="drugmap-close" class="info-close" aria-label="Close"
+                data-i18n-attr="aria-label:image.close">&times;</button>
+        <h2 id="drugmap-title" data-i18n="drugmap.title"></h2>
+        <div id="drugmap-body"></div>
       </div>
     </div>
 

@@ -53,6 +53,7 @@ const SHELL = [
   "css/legend.css",
   "css/node-browser.css",
   "css/simulation.css",
+  "css/drug-map.css",
   "css/panel.css",
   "css/pills.css",
   "css/panel-drug.css",

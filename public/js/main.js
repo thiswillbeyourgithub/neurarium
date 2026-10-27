@@ -41,6 +41,7 @@ import { wireLegends } from "./boot/legends.js";
 import { wireViews } from "./boot/views.js";
 import { launchScene } from "./boot/launch.js";
 import { createRenderLoop } from "./boot/render-loop.js";
+import { createDrugMap } from "./drug-map/view.js";
 
 // UI string lookup (js/i18n.js, a classic script that ran before this module).
 // `t(key, vars)` returns the current-language UI string; data strings are
@@ -237,7 +238,13 @@ async function main() {
     t, pick: window.__I18N__.pick, wireModal,
   });
   const aboutModal = wireAboutModal(sourcingModal, changelog); // the toolbar info-button popup
-  wireShortcuts(shortcutsHelp, tabs, selection, lightbox, aboutModal, legendModal, sourcingModal, changelog); // single-key shortcuts (n/s/l/p/k/c/r/m/f/?/Esc) + Tab cycles detail tabs
+  // The Drugs list's drug map popup (a PCA of binding profiles); a point focuses its drug.
+  const drugMap = createDrugMap({
+    data, wireModal, onPick: (drug) => focusDrug(drug, { frame: true }),
+    onChange: () => urlState.sync(),
+  });
+  drugMap.registerUrl(urlState);
+  wireShortcuts(shortcutsHelp, tabs, selection, lightbox, aboutModal, legendModal, sourcingModal, changelog, drugMap); // single-key shortcuts (n/s/l/p/k/c/r/m/f/?/Esc) + Tab cycles detail tabs
   projVis.apply(); // established arrows visible, tentative ones start hidden
   // Honor screenshot/deep-link view params (?only=, ?view=, ?explode=, ...).
   applyViewParams({ scene, camera, controls, meshes, arrows, labels, urlState });
@@ -259,7 +266,7 @@ async function main() {
   });
 
   wireUrlBindings({
-    aboutModal, arrows, changelog, data, focusCircuit, focusDrug,
+    aboutModal, arrows, changelog, data, drugMap, focusCircuit, focusDrug,
     focusEffect, focusEnzyme, focusProjectionGroup, focusTarget, legendModal, meshes,
     selectConnection, selectStructure, shortcutsHelp,
     showNodeBrowser, showSimulation,

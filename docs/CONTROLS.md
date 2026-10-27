@@ -15,7 +15,7 @@ the `#lang-switch` (EN/FR) + a keyboard-shortcuts / reset / search / legend / so
   **Auto-rotate** / **Show all names** / **Show projections** / **See inside** checkboxes, and the
   **arrow colour-mode** switch (`#color-mode`). Ships open; toggles independently of the accordion.
 - Five **single-open-accordion** sections (opening one closes the others), in on-screen order
-  **Drugs** (`#drugs`, with `#drugs-filter`), **Receptors & targets** (`#receptors`), **Metabolising
+  **Drugs** (`#drugs`, with `#drugs-filter`, `#drugs-sort` and the `#drugs-map` popup, see docs/DRUGS.md "Drug map"), **Receptors & targets** (`#receptors`), **Metabolising
   enzymes** (`#enzymes`), **Brain structures**
   (`#structures`, headed by the `panel.structures` string), **Projections** (`#projections`, "Projections & Circuits"). Markup order in
   `index.html` sets the order (see the browse-section comment there).

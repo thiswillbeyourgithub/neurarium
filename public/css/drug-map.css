@@ -1,0 +1,58 @@
+/* The drug map popup (#drugmap-modal, js/drug-map/view.js): wider than the reading
+   popups, a controls row, category chips, the SVG scatter, axis captions + legend.
+   Point colours are data (set inline); everything else reads the theme tokens. */
+.modal.drugmap { width: min(1100px, calc(100vw - 32px)); }
+.dm-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; }
+.dm-controls .seg-switch, .dm-controls .list-toggle { margin: 0; }
+.dm-years { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; color: var(--muted); }
+.drugs-filter.dm-year { width: 64px; margin: 0; padding: 2px 6px; }
+.dm-unhide, .dm-chip, #drugs-map {
+  padding: 2px 8px;
+  font: inherit;
+  font-size: 11px;
+  color: var(--muted);
+  background: rgba(var(--ink), 0.06);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.dm-unhide:hover, .dm-chip:hover, #drugs-map:hover { color: var(--text); background: rgba(var(--ink), 0.12); }
+.dm-chips { display: flex; flex-wrap: wrap; gap: 4px; margin: 10px 0 8px; }
+.dm-chip { display: inline-flex; align-items: center; gap: 5px; }
+.dm-chip.active { color: var(--text); border-color: var(--accent); background: var(--accent-soft); }
+.dm-dot { width: 9px; height: 9px; border-radius: 50%; flex: 0 0 auto; }
+.dm-plot {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1000 / 640;
+  /* Opaque: the modal panel is translucent and the 3D scene would show through. */
+  background: var(--page-bg);
+  border: 1px solid rgba(var(--ink), 0.1);
+  border-radius: 6px;
+  cursor: grab;
+  touch-action: none;
+}
+.dm-point { cursor: pointer; stroke: var(--page-bg); stroke-width: 0.6; }
+.dm-point:hover { stroke: var(--text); }
+.dm-label { fill: var(--text); pointer-events: none; }
+.dm-axes { display: flex; flex-direction: column; gap: 2px; margin: 8px 0 4px; font-size: 11px; }
+.dm-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; font-size: 11px; color: var(--muted); }
+.dm-key { display: inline-flex; align-items: center; gap: 5px; }
+.dm-ramp {
+  width: 160px;
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(to right, hsl(212, 12%, 74%), hsl(212, 90%, 48%));
+}
+.dm-note { margin: 8px 0 0; font-size: 11px; }
+/* The Drugs list's "map" link in a section heading, and the list's own map button. */
+.drugs-map-link {
+  margin-left: 8px;
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(var(--ink), 0.3);
+}
+.drugs-map-link:hover { color: var(--text); }
+#drugs-map { margin: 0 0 6px; }
