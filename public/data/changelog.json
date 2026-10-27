@@ -1,6 +1,27 @@
 {
   "versions": [
     {
+      "version": "3.148.0",
+      "date": "2026-10-27",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Drugs map: body effects (beta) as a third input, so drugs can be placed by the effects their receptors may produce (inferred from the sourced receptor effects and each binding's direction, weighted by the strongest affinity), alone or with receptors and neurotransmitter tone. New \"Antipsychotics: body effects\" preset.",
+          "commits": [
+            "90ab97a",
+            "b24c344"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Drugs map: the inputs are now toggles combinable freely instead of a receptors / tone / both switch, \"net tone\" is renamed neurotransmitter tone, and the plot title gets one clause per input. Old links with both still open.",
+          "commits": [
+            "90ab97a"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.147.2",
       "date": "2026-10-27",
       "entries": [
