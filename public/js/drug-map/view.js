@@ -3,7 +3,9 @@
 // both), recomputed for whatever the filters leave on screen; pick one or two features
 // and they are plotted directly instead. Controls: feature source, colour mode, names
 // on/off, normalization, signed (agonist vs antagonist), year range, feature picker,
-// per-category chips, and right-click (long-press) to hide a drug. Clicking a point
+// per-category chips (collapsed past the first few; shift-click or long-press drops a
+// class), and right-click (long-press) to
+// hide a drug; wheel or pinch zooms. Clicking a point
 // opens that drug in a new browser tab. The whole view is mirrored into the URL
 // (`dm*` keys).
 
@@ -11,6 +13,7 @@ import {
   buildProfiles, categoryColor, colorize, COLOR_MODES, DEFAULT_VIEW, directPoints,
   FEATURE_SOURCES, filterDrugs, pca, primaryCategory, TONE_PREFIX,
 } from "./model.js";
+import { placeLabels, sizesFor } from "./layout.js";
 import { setDrugMapOpener } from "./link.js";
 import { LIST_SEP } from "../url-state.js";
 
@@ -19,6 +22,11 @@ const SVG = "http://www.w3.org/2000/svg";
 const W = 1000, H = 640, PAD = 30;
 // Room on the right for the names of the rightmost points.
 const PAD_RIGHT = 130;
+// Class chips shown before the rest fold behind the ellipsis chip.
+const CHIPS_SHOWN = 8;
+const LEGEND_SHOWN = 8;
+const LONG_PRESS_MS = 500;
+const GRID_PX = 60;
 const el = (tag, cls, text) => {
   const e = document.createElement(tag);
   if (cls) e.className = cls;
@@ -161,8 +169,26 @@ export function createDrugMap({ data, wireModal, onChange }) {
     dot.style.background = categoryColor(c, catLabels);
     chip.append(dot, document.createTextNode(catLabels[c] || c));
     // A click narrows to that class alone (from "all") or toggles it in the set;
-    // emptying the set returns to "all".
-    chip.addEventListener("click", () => {
+    // emptying the set returns to "all". Shift-click (long-press on touch) instead
+    // removes that one class from what is shown, starting from every class.
+    const exclude = () => {
+      const cats = new Set(view.cats || presentCats);
+      cats.delete(c);
+      setView({ cats: cats.size ? cats : null });
+    };
+    let pressed = null, longPressed = false;
+    chip.addEventListener("pointerdown", (ev) => {
+      longPressed = false;
+      if (ev.pointerType === "mouse") return;
+      pressed = setTimeout(() => { longPressed = true; exclude(); }, LONG_PRESS_MS);
+    });
+    for (const type of ["pointerup", "pointercancel", "pointerleave"]) {
+      chip.addEventListener(type, () => clearTimeout(pressed));
+    }
+    chip.addEventListener("contextmenu", (ev) => ev.preventDefault());
+    chip.addEventListener("click", (ev) => {
+      if (longPressed) return;
+      if (ev.shiftKey) return exclude();
       const cats = new Set(view.cats || []);
       if (!view.cats) cats.add(c);
       else if (cats.has(c)) cats.delete(c);
@@ -171,6 +197,13 @@ export function createDrugMap({ data, wireModal, onChange }) {
     });
     chips.appendChild(chip);
   }
+  // The class list runs to 4 rows, so past CHIPS_SHOWN it folds behind an ellipsis
+  // chip (an active class always stays visible).
+  let chipsOpen = false;
+  const chipMore = el("button", "dm-chip dm-chip-more");
+  chipMore.type = "button";
+  chipMore.addEventListener("click", () => { chipsOpen = !chipsOpen; render(); });
+  chips.appendChild(chipMore);
 
   const svg = svgEl("svg", { class: "dm-plot", role: "img" });
   svg.setAttribute("aria-label", t("drugmap.title"));
@@ -181,6 +214,10 @@ export function createDrugMap({ data, wireModal, onChange }) {
   plotWrap.append(svg, el("span", "dm-watermark", `${t("drugmap.watermark")} · ${location.host}`));
   body.replaceChildren(controls, picker, chips, plotWrap, axes, legend, note);
   wireZoom(svg, () => box, (b) => { box = b; drawPoints(); });
+  // Names are sized in screen px, so a resized popup re-lays them out.
+  if (typeof ResizeObserver === "function") {
+    new ResizeObserver(() => { if (ctrl.isOpen && placed.length) drawPoints(); }).observe(plotWrap);
+  }
 
   // ---- Render: filter, project, colour, draw.
   let placed = []; // [{drug, x, y, color}] in data coordinates
@@ -205,9 +242,18 @@ export function createDrugMap({ data, wireModal, onChange }) {
     unhide.hidden = !view.hidden.size;
     unhide.textContent = t("drugmap.unhide", { n: view.hidden.size });
     chipAll.classList.toggle("active", !view.cats);
-    for (const chip of chips.querySelectorAll("[data-cat]")) {
-      chip.classList.toggle("active", !!view.cats && view.cats.has(chip.dataset.cat));
-    }
+    let folded = 0;
+    chips.querySelectorAll("[data-cat]").forEach((chip, i) => {
+      const active = !!view.cats && view.cats.has(chip.dataset.cat);
+      chip.classList.toggle("active", active);
+      chip.hidden = !chipsOpen && i >= CHIPS_SHOWN && !active;
+      if (chip.hidden) folded++;
+    });
+    chipMore.hidden = !chipsOpen && !folded;
+    // The chips' dots are the class colours, so they only show when points use them:
+    // in another colour mode they would read as that mode's legend.
+    chips.classList.toggle("dm-no-dots", view.color !== "category");
+    chipMore.textContent = chipsOpen ? t("drugmap.fewerClasses") : t("drugmap.moreClasses", { n: folded });
 
     // One or two picked features are the axes themselves: raw values, since unit
     // length over two numbers would put every drug on a circle.
@@ -225,11 +271,14 @@ export function createDrugMap({ data, wireModal, onChange }) {
     const xs = placed.map((p) => p.x), ys = placed.map((p) => p.y);
     const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
     // Fit the data into the W x H frame, y up (a PCA has no preferred orientation, but
-    // a plot reads with "more of PC2" upward).
-    const sx = (W - PAD - PAD_RIGHT) / (x1 - x0 || 1), sy = (H - 2 * PAD) / (y1 - y0 || 1);
+    // a plot reads with "more of PC2" upward), at ONE scale for both axes and centred,
+    // so a distance on screen (and the grid's squares) means the same either way.
+    const aw = W - PAD - PAD_RIGHT, ah = H - 2 * PAD;
+    const s = Math.min(aw / (x1 - x0 || 1), ah / (y1 - y0 || 1));
+    const ox = PAD + (aw - (x1 - x0) * s) / 2, oy = H - PAD - (ah - (y1 - y0) * s) / 2;
     for (const p of placed) {
-      p.px = PAD + (p.x - x0) * sx;
-      p.py = H - PAD - (p.y - y0) * sy;
+      p.px = ox + (p.x - x0) * s;
+      p.py = oy - (p.y - y0) * s;
     }
     fit = { x: 0, y: 0, w: W, h: H };
     drawPoints();
@@ -237,7 +286,16 @@ export function createDrugMap({ data, wireModal, onChange }) {
     axes.replaceChildren(...(pcs
       ? pcs.map((ax, i) => el("span", "dm-axis", axisText(ax, i)))
       : view.only.map((key, i) => el("span", "dm-axis", t("drugmap.axisDirect", { axis: ["x →", "y ↑"][i], name: nameOf(key) })))));
-    legend.replaceChildren(...legendRows(keyRows, ramp));
+    const rows = legendRows(keyRows, ramp);
+    if (rows.length > LEGEND_SHOWN + 1) {
+      // A long legend (labs, routes) folds past its first rows behind a <details>.
+      const more = el("details", "dm-legend-more");
+      more.open = legendOpen;
+      more.addEventListener("toggle", () => { legendOpen = more.open; });
+      more.append(el("summary", null, t("drugmap.moreKeys", { n: rows.length - LEGEND_SHOWN })),
+        ...rows.slice(LEGEND_SHOWN));
+      legend.replaceChildren(...rows.slice(0, LEGEND_SHOWN), more);
+    } else legend.replaceChildren(...rows);
     note.textContent = [
       t("drugmap.count", { n: shown.length }),
       unplaced ? t("drugmap.unplaced", { n: unplaced }) : "",
@@ -256,6 +314,7 @@ export function createDrugMap({ data, wireModal, onChange }) {
     });
   }
 
+  let legendOpen = false;
   function legendRows(rows, ramp) {
     if (ramp) {
       const bar = el("span", "dm-ramp");
@@ -270,19 +329,28 @@ export function createDrugMap({ data, wireModal, onChange }) {
     });
   }
 
-  // Points + names, sized to the current zoom so they stay the same on screen. A name
-  // that would overlap one already drawn is skipped (greedy, in list order), so a dense
-  // cluster stays readable; zooming in frees the room to show it.
+  // Points + names, laid out in screen pixels (js/drug-map/layout.js): their size follows
+  // how crowded the visible points are, and a name never covers a dot or another name.
+  // Recomputed on every zoom / pan, so zooming into a cluster grows and frees its names.
+  const measureCtx = document.createElement("canvas").getContext("2d");
   function drawPoints() {
     const b = box || fit;
     svg.setAttribute("viewBox", `${b.x} ${b.y} ${b.w} ${b.h}`);
-    const k = b.w / W;
+    const width = svg.clientWidth || W, height = svg.clientHeight || H;
+    const k = b.w / width; // viewBox units per screen px
+    const screen = placed
+      .map((p) => ({ id: p.drug.id, text: p.drug.name, p, x: (p.px - b.x) / k, y: (p.py - b.y) / k }))
+      .filter((q) => q.x >= 0 && q.x <= width && q.y >= 0 && q.y <= height);
+    const { font, r } = sizesFor(screen);
+    let names = new Map();
+    if (view.labels) {
+      measureCtx.font = `${font}px ${getComputedStyle(svg).fontFamily}`;
+      names = placeLabels(screen, { font, r, width, height, measure: (s) => measureCtx.measureText(s).width });
+    }
     const g = svgEl("g");
-    const taken = [];
-    const free = (r) => !taken.some((o) =>
-      r.x < o.x + o.w && o.x < r.x + r.w && r.y < o.y + o.h && o.y < r.y + r.h);
+    g.appendChild(gridLines(b, k));
     for (const p of placed) {
-      const c = svgEl("circle", { cx: p.px, cy: p.py, r: 6 * k, fill: p.color, class: "dm-point" });
+      const c = svgEl("circle", { cx: p.px, cy: p.py, r: r * k, fill: p.color, class: "dm-point" });
       const yr = p.drug.firstApproval && p.drug.firstApproval.year;
       const title = svgEl("title");
       title.textContent = [p.drug.displayName, p.drug.categoryLabels.join(" · "), yr,
@@ -294,13 +362,13 @@ export function createDrugMap({ data, wireModal, onChange }) {
         setView({ hidden: new Set([...view.hidden, p.drug.id]) });
       });
       g.appendChild(c);
-      const rect = { x: p.px + 8 * k, y: p.py - 6 * k, w: p.drug.name.length * 6.4 * k, h: 12 * k };
-      if (view.labels && free(rect)) {
-        taken.push(rect);
-        const txt = svgEl("text", { x: p.px + 8 * k, y: p.py + 4 * k, class: "dm-label", "font-size": 12 * k });
-        txt.textContent = p.drug.name;
-        g.appendChild(txt);
-      }
+    }
+    for (const q of screen) {
+      const at = names.get(q.id);
+      if (!at) continue;
+      const txt = svgEl("text", { x: b.x + at.x * k, y: b.y + at.y * k, class: "dm-label", "font-size": font * k });
+      txt.textContent = q.text;
+      g.appendChild(txt);
     }
     svg.replaceChildren(g);
   }
@@ -343,38 +411,83 @@ export function createDrugMap({ data, wireModal, onChange }) {
   };
 }
 
+// Grid lines over the visible frame `b`, about GRID_PX apart on screen at a round
+// step (1, 2 or 5 x 10^n viewBox units), so zooming in subdivides it rather than
+// sliding it, and squares stay square (one scale for both axes).
+function gridLines(b, k) {
+  const raw = GRID_PX * k, mag = 10 ** Math.floor(Math.log10(raw));
+  const step = mag * ([1, 2, 5, 10].find((m) => mag * m >= raw));
+  const g = svgEl("g", { class: "dm-grid", "stroke-width": k });
+  for (let x = Math.ceil(b.x / step) * step; x <= b.x + b.w; x += step) {
+    g.appendChild(svgEl("line", { x1: x, x2: x, y1: b.y, y2: b.y + b.h }));
+  }
+  for (let y = Math.ceil(b.y / step) * step; y <= b.y + b.h; y += step) {
+    g.appendChild(svgEl("line", { x1: b.x, x2: b.x + b.w, y1: y, y2: y }));
+  }
+  return g;
+}
+
 // This page, opened on one drug's tab (the `tabs` deep link, js/url-state.js).
 const drugUrl = (drug) => `${location.origin}${location.pathname}${location.search}#tabs=drug:${encodeURIComponent(drug.id)}`;
 
-// Wheel to zoom about the pointer, drag to pan, double-click to refit: all by moving
-// the SVG viewBox (`get` null = the fitted frame).
+// Wheel or pinch to zoom about the pointer / the fingers' midpoint, drag to pan,
+// double-click to refit: all by moving the SVG viewBox (`get` null = the fitted frame).
 function wireZoom(svg, get, set) {
   const current = () => get() || { x: 0, y: 0, w: W, h: H };
-  const toSvg = (ev) => {
-    const r = svg.getBoundingClientRect(), b = current();
-    return { x: b.x + ((ev.clientX - r.left) / r.width) * b.w, y: b.y + ((ev.clientY - r.top) / r.height) * b.h };
+  const frac = (ev) => {
+    const r = svg.getBoundingClientRect();
+    return { fx: (ev.clientX - r.left) / r.width, fy: (ev.clientY - r.top) / r.height };
+  };
+  const toSvg = (ev, b = current()) => {
+    const { fx, fy } = frac(ev);
+    return { x: b.x + fx * b.w, y: b.y + fy * b.h };
+  };
+  // Zoom so the frame is `w` wide, keeping the svg point `at` under screen fraction (fx, fy).
+  const zoomTo = (w, at, { fx, fy }) => {
+    w = Math.min(W * 2, Math.max(W / 40, w));
+    const h = w * (H / W);
+    set({ x: at.x - fx * w, y: at.y - fy * h, w, h });
   };
   svg.addEventListener("wheel", (ev) => {
     ev.preventDefault();
-    const b = current(), at = toSvg(ev);
-    const f = Math.min(Math.max(ev.deltaY > 0 ? 1.15 : 1 / 1.15, 0), 4);
-    const w = Math.min(W * 2, Math.max(W / 40, b.w * f)), h = w * (H / W);
-    set({ x: at.x - ((at.x - b.x) * w) / b.w, y: at.y - ((at.y - b.y) * h) / b.h, w, h });
+    zoomTo(current().w * (ev.deltaY > 0 ? 1.15 : 1 / 1.15), toSvg(ev), frac(ev));
   }, { passive: false });
-  let drag = null;
+
+  const touches = new Map(); // pointerId -> last event, for the two-finger pinch
+  let drag = null, pinch = null;
+  const mid = () => {
+    const [a, b] = [...touches.values()];
+    return { clientX: (a.clientX + b.clientX) / 2, clientY: (a.clientY + b.clientY) / 2,
+      dist: Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY) };
+  };
   svg.addEventListener("pointerdown", (ev) => {
-    if (ev.button !== 0 || ev.target.closest(".dm-point")) return;
-    drag = { start: toSvg(ev), b: current() };
-    svg.setPointerCapture(ev.pointerId);
+    if (ev.button !== 0) return;
+    touches.set(ev.pointerId, ev);
+    if (touches.size === 2) {
+      const m = mid();
+      drag = null;
+      pinch = { dist: m.dist || 1, at: toSvg(m), b: current() };
+    } else if (touches.size === 1 && !ev.target.closest(".dm-point")) {
+      drag = { start: toSvg(ev), b: current() };
+    } else return;
+    try { svg.setPointerCapture(ev.pointerId); } catch { /* pointer already gone */ }
   });
   svg.addEventListener("pointermove", (ev) => {
-    if (!drag) return;
-    const r = svg.getBoundingClientRect();
-    const dx = ((ev.clientX - r.left) / r.width) * drag.b.w + drag.b.x - drag.start.x;
-    const dy = ((ev.clientY - r.top) / r.height) * drag.b.h + drag.b.y - drag.start.y;
-    set({ ...drag.b, x: drag.b.x - dx, y: drag.b.y - dy });
+    if (!touches.has(ev.pointerId)) return;
+    touches.set(ev.pointerId, ev);
+    if (pinch && touches.size === 2) {
+      const m = mid();
+      zoomTo(pinch.b.w * (pinch.dist / (m.dist || 1)), pinch.at, frac(m));
+    } else if (drag) {
+      const { fx, fy } = frac(ev);
+      set({ ...drag.b, x: drag.start.x - fx * drag.b.w, y: drag.start.y - fy * drag.b.h });
+    }
   });
-  const end = () => { drag = null; };
+  const end = (ev) => {
+    touches.delete(ev.pointerId);
+    if (touches.size < 2) pinch = null;
+    if (!touches.size) drag = null;
+  };
   svg.addEventListener("pointerup", end);
   svg.addEventListener("pointercancel", end);
   svg.addEventListener("dblclick", () => set(null));

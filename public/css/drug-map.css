@@ -6,7 +6,7 @@
 .dm-controls .seg-switch, .dm-controls .list-toggle { margin: 0; }
 .dm-years { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; color: var(--muted); }
 .drugs-filter.dm-year { width: 64px; margin: 0; padding: 2px 6px; }
-.dm-unhide, .dm-chip, #drugs-map {
+.dm-unhide, .dm-chip {
   padding: 2px 8px;
   font: inherit;
   font-size: 11px;
@@ -16,9 +16,11 @@
   border-radius: 10px;
   cursor: pointer;
 }
-.dm-unhide:hover, .dm-chip:hover, #drugs-map:hover { color: var(--text); background: rgba(var(--ink), 0.12); }
+.dm-unhide:hover, .dm-chip:hover { color: var(--text); background: rgba(var(--ink), 0.12); }
 .dm-chips { display: flex; flex-wrap: wrap; gap: 4px; margin: 10px 0 8px; }
 .dm-chip { display: inline-flex; align-items: center; gap: 5px; }
+.dm-chip[hidden] { display: none; }
+.dm-chip-more { font-style: italic; }
 .dm-chip.active { color: var(--text); border-color: var(--accent); background: var(--accent-soft); }
 .dm-dot { width: 9px; height: 9px; border-radius: 50%; flex: 0 0 auto; }
 .dm-plot {
@@ -26,7 +28,7 @@
   width: 100%;
   aspect-ratio: 1000 / 640;
   /* Opaque: the modal panel is translucent and the 3D scene would show through. */
-  background: var(--page-bg);
+  background: var(--dm-plot-bg);
   border: 1px solid rgba(var(--ink), 0.1);
   border-radius: 6px;
   cursor: grab;
@@ -34,6 +36,11 @@
 }
 /* The outline reads the ink token so pale points stay visible on the light page too. */
 .dm-point { cursor: pointer; stroke: rgba(var(--ink), 0.35); stroke-width: 0.6; }
+.dm-grid line { stroke: var(--dm-grid); }
+.dm-chips.dm-no-dots .dm-dot { display: none; }
+.dm-legend-more { display: contents; }
+.dm-legend-more summary { cursor: pointer; color: var(--muted); }
+.dm-legend-more[open] summary { flex-basis: 100%; }
 .dm-point:hover { stroke: var(--text); }
 .dm-label { fill: var(--text); pointer-events: none; }
 .dm-plot-wrap { position: relative; }
@@ -72,4 +79,24 @@
   border-bottom: 1px dotted rgba(var(--ink), 0.3);
 }
 .drugs-map-link:hover { color: var(--text); }
-#drugs-map { margin: 0 0 6px; }
+/* The list's entry point: a full-width accent button, so it is not missed. */
+#drugs-map {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  margin: 0 0 8px;
+  padding: 6px 10px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  cursor: pointer;
+}
+#drugs-map:hover { background: rgba(var(--ink), 0.12); }
+#drugs-map .beta-tag { margin-left: 0; }
+.drugs-map-icon { width: 14px; height: 14px; fill: var(--accent); }

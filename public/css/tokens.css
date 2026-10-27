@@ -16,6 +16,9 @@
   --sp-xl: 12px;
   --sp-indent: 12px;
   --page-bg: #0e1116;
+  /* Drug map plot: a grey well a notch off the page, its grid a faint ink line. */
+  --dm-plot-bg: #262a31;
+  --dm-grid: rgba(255, 255, 255, 0.07);
   --panel-bg: rgba(20, 24, 31, 0.82);
   --text: #e7ecf2;
   --muted: #9aa6b3;
@@ -81,6 +84,8 @@
 :root[data-theme="light"] {
   color-scheme: light;
   --page-bg: #f5f3fa;
+  --dm-plot-bg: #e4e5ea;
+  --dm-grid: rgba(0, 0, 0, 0.08);
   --panel-bg: rgba(255, 255, 255, 0.88);
   --text: #1b1f27;
   --muted: #5d6673;

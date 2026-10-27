@@ -6,6 +6,7 @@ import assert from "node:assert/strict";
 import {
   buildProfiles, pca, filterDrugs, colorize, directPoints, DEFAULT_VIEW, PKI_FLOOR, PKI_UNMEASURED,
 } from "../../public/js/drug-map/model.js";
+import { placeLabels, sizesFor, FONT_PX } from "../../public/js/drug-map/layout.js";
 
 const b = (target, ki) => ({ target, ki: ki === undefined ? null : { median: ki } });
 const drug = (id, bindings, extra = {}) => ({ id, name: id, bindings, categories: ["x"], ...extra });
@@ -117,4 +118,45 @@ test("colorize: metabolic route (major, else sole substrate) and Ki coverage", (
     drug("all", [b("d2", 1)]), drug("some", [b("d2", 1), b("h1")]), drug("none", [b("h1")]), drug("empty", []),
   ], "ki", { catLabels: {}, unknown: "?", t: (k) => k });
   assert.deepEqual(ki.legend.map((r) => r.label), ["drugmap.ki.all", "drugmap.ki.some", "drugmap.ki.none", "?"]);
+});
+
+test("layout: name size follows crowding, within its range", () => {
+  const grid = (step) => Array.from({ length: 25 }, (_, i) => ({ x: (i % 5) * step, y: Math.floor(i / 5) * step }));
+  assert.equal(sizesFor(grid(100)).font, FONT_PX[1]);
+  assert.equal(sizesFor(grid(5)).font, FONT_PX[0]);
+  const mid = sizesFor(grid(30)).font;
+  assert.ok(mid > FONT_PX[0] && mid < FONT_PX[1]);
+});
+
+test("layout: names never overlap a dot or each other, and fall back to another side", () => {
+  const measure = (s) => s.length * 7;
+  const o = { font: 12, r: 5, width: 400, height: 300, measure };
+  // A close right neighbour blocks the right slot of one, so its name goes elsewhere.
+  const pts = [{ id: "a", x: 200, y: 150, text: "Alpha" }, { id: "b", x: 215, y: 150, text: "Beta" }];
+  const out = placeLabels(pts, o);
+  const box = (id) => {
+    const at = out.get(id), p = pts.find((q) => q.id === id);
+    return { x: at.x, y: at.y - 12, w: measure(p.text), h: 12 * 1.3 };
+  };
+  const hit = (a, c) => a.x < c.x + c.w && c.x < a.x + a.w && a.y < c.y + c.h && c.y < a.y + a.h;
+  assert.equal(out.size, 2);
+  for (const id of ["a", "b"]) for (const p of pts) assert.ok(!hit(box(id), { x: p.x - 5, y: p.y - 5, w: 10, h: 10 }));
+  assert.ok(!hit(box("a"), box("b")));
+  // A name with no room at all inside the frame is dropped rather than overlapping.
+  assert.equal(placeLabels([{ id: "c", x: 2, y: 2, text: "Long name here" }], { ...o, width: 20, height: 20 }).size, 0);
+});
+
+test("colorize nbn: each nomenclature takes the class colour it shares most drugs with", () => {
+  const catLabels = { atyp: "Atypical", ssri: "SSRI", other: "Other" };
+  const d = (id, cat, nbn) => drug(id, [], { categories: [cat], nbn });
+  const drugs = [
+    d("a1", "atyp", "DS-RAn"), d("a2", "atyp", "DS-RAn"), d("a3", "atyp", "D-RAn"),
+    d("s1", "ssri", "S-RI"), d("s2", "ssri", "S-RI"), d("x", "atyp", "S-RI"),
+  ];
+  const ctx = { catLabels, unknown: "?", t: (k) => k };
+  const cls = colorize(drugs, "category", ctx).colorOf, nbn = colorize(drugs, "nbn", ctx).colorOf;
+  // DS-RAn keeps the atypical colour, S-RI the SSRI one; D-RAn takes a spare colour.
+  for (const id of ["a1", "a2", "s1", "s2"]) assert.equal(nbn.get(id), cls.get(id));
+  assert.notEqual(nbn.get("a3"), nbn.get("a1"));
+  assert.notEqual(nbn.get("a3"), nbn.get("s1"));
 });

@@ -229,6 +229,37 @@ export function categoryColor(cat, catLabels) {
 }
 
 /**
+ * Give each key (a nomenclature, say) a class colour, chosen so switching the map from
+ * "class" to this mode repaints as few points as possible: the (key, class) pairs that
+ * share the most drugs claim their colour first, each class colour used once (a greedy
+ * maximum-weight matching); keys left over take the unused class colours, then fresh hues.
+ * E.g. NbN "dopamine, serotonin receptor antagonist" (mostly atypicals) inherits the
+ * atypical colour, so those points keep theirs.
+ * @returns {Map<string, string>} key -> colour
+ */
+export function matchClassColors(drugs, keys, keyOf, catLabels) {
+  const overlap = new Map(); // "key\u0000cat" -> shared drugs
+  for (const d of drugs) {
+    const k = keyOf(d);
+    if (!k) continue;
+    const id = `${k[0]}\u0000${primaryCategory(d)}`;
+    overlap.set(id, (overlap.get(id) || 0) + 1);
+  }
+  const pairs = [...overlap].map(([id, n]) => [...id.split("\u0000"), n])
+    .sort((a, b) => b[2] - a[2] || a[0].localeCompare(b[0]) || a[1].localeCompare(b[1]));
+  const out = new Map(), usedCats = new Set();
+  for (const [k, cat] of pairs) {
+    if (out.has(k) || usedCats.has(cat) || categoryColor(cat, catLabels) === UNKNOWN_COLOR) continue;
+    out.set(k, categoryColor(cat, catLabels));
+    usedCats.add(cat);
+  }
+  const spare = Object.keys(catLabels).filter((c) => !usedCats.has(c)).map((c) => categoryColor(c, catLabels));
+  let fresh = Object.keys(catLabels).length;
+  for (const k of keys) if (!out.has(k)) out.set(k, spare.shift() || hue(fresh++));
+  return out;
+}
+
+/**
  * Colour each drug for a mode, plus the legend that explains it.
  * Categorical modes (category / nbn / lab) colour by key, in first-seen order of
  * `keyOrder` then of the drugs; `year` is a ramp, older paler, more recent stronger.
@@ -271,8 +302,9 @@ export function colorize(drugs, mode, { catLabels, unknown, t }) {
   const keys = fixed
     ? [...fixed, ...counts.keys()].filter((k, i, a) => counts.has(k) && a.indexOf(k) === i)
     : [...counts.keys()].sort((a, b) => counts.get(b).count - counts.get(a).count || a.localeCompare(b));
-  const colorKey = new Map(keys.map((k, i) =>
-    [k, mode === "category" ? categoryColor(k, catLabels) : mode === "ki" ? KI_COLORS[k] : hue(i)]));
+  const colorKey = mode === "nbn" ? matchClassColors(drugs, keys, keyOf, catLabels)
+    : new Map(keys.map((k, i) =>
+      [k, mode === "category" ? categoryColor(k, catLabels) : mode === "ki" ? KI_COLORS[k] : hue(i)]));
   for (const d of drugs) {
     const k = keyOf(d);
     colorOf.set(d.id, k ? colorKey.get(k[0]) : UNKNOWN_COLOR);
