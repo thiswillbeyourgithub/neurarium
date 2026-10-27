@@ -4,7 +4,7 @@
 // guided tour is on screen.
 
 import * as THREE from "three";
-import { isPickableMesh } from "../scene/see-inside.js";
+import { isPickableMesh, hoverMesh } from "../scene/pick-filter.js";
 import { throttleLatest } from "../util.js";
 
 // Minimum gap between two hover picks, ms (see the pointermove handler).
@@ -115,23 +115,11 @@ export function wireCanvasPicking({
     return true;
   };
 
-  // Hover picking. When a focus is active (a halo'd structure, an isolated set,
-  // a circuit, a receptor's regions, ...), a focused region the ray passes
-  // through wins even when a non-focused region sits nearer the camera, so the
-  // thing you focused always names *itself* on hover rather than whatever happens
-  // to occlude it (e.g. an isolated deep nucleus hidden behind the dimmed
-  // cortex). With nothing focused this is just the nearest visible structure.
+  // Hover picking: the focused region the ray passes through, else the nearest
+  // pickable structure, never a see-inside glass shell (hoverMesh, js/scene/pick-filter.js).
   const pickHover = (clientX, clientY) => {
     setPointer(clientX, clientY);
-    const hits = raycaster.intersectObjects(meshes, false);
-    const focus = selection.getSelected();
-    if (focus && focus.meshes.size) {
-      for (const hit of hits) {
-        if (hit.object.visible && focus.meshes.has(hit.object)) return hit.object;
-      }
-    }
-    for (const hit of hits) if (hit.object.visible) return hit.object;
-    return null;
+    return hoverMesh(raycaster.intersectObjects(meshes, false), selection.getSelected()?.meshes);
   };
 
   // Mouse: hover a region to reveal its name. Mouse-only so that touch-drag

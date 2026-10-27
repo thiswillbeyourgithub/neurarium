@@ -1,5 +1,5 @@
 // See-inside: fade the shell meshes (lobes, cerebellum) the camera sits inside or
-// right behind, so the deep nuclei stay visible; plus which meshes are pickable.
+// right behind, so the deep nuclei stay visible (which meshes a pick may land on is js/scene/pick-filter.js).
 
 import * as THREE from "three";
 
@@ -39,11 +39,6 @@ export function writeMeshOpacity(mesh) {
   mesh.material.opacity = op;
   mesh.material.depthWrite = op >= 0.99;
 }
-
-/** A structure a click / hover can land on: shown, and not faded to glass by "See
- *  inside" (so a deep nucleus is picked through the near cortex in front of it). */
-export const isPickableMesh = (mesh) =>
-  mesh.visible && (mesh.userData.insideFade ?? 1) > 0.5;
 
 /**
  * Toggleable "see inside" mode: fade the cortical shell between you and the core to

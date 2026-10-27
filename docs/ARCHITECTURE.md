@@ -464,7 +464,7 @@ Viewer (`public/`):
   objects to the `js/boot/` modules in order (meshes, arrows, selection, focus, picking, legends,
   views, controls, launch, URL bindings, render loop).
 - `js/scene/`: `setup.js` (renderer, camera, lights, OrbitControls, theme repaint), `camera.js`
-  (named views + focus tween), `explode.js`, `see-inside.js`, `intro.js`, `quality.js`
+  (named views + focus tween), `explode.js`, `see-inside.js`, `pick-filter.js`, `intro.js`, `quality.js`
   (adaptive quality), `selection.js` (halo + isolate state).
 - `js/boot/`: one `wire*()` per UI concern, called once from `main.js`: `controls.js` (Settings
   pane), `toolbar.js` (reset + search popup over `search/index.js`), `shortcuts.js`, `picking.js` (canvas click / tap /
