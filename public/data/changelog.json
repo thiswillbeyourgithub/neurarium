@@ -1,6 +1,20 @@
 {
   "versions": [
     {
+      "version": "3.147.1",
+      "date": "2026-10-27",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Drugs map: five more presets, antihistamines by H1 vs M1, psychedelics on the serotonin receptors, MAOIs by MAO-A vs MAO-B, opioids on mu / kappa / delta, stimulants by DAT vs NET",
+          "commits": [
+            "3eae3d6",
+            "b4dbffc"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.147.0",
       "date": "2026-10-27",
       "entries": [
