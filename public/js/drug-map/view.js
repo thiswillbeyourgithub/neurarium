@@ -152,10 +152,11 @@ export function createDrugMap({ data, onChange }) {
       transition(prev, next);
       renderCaptions({ pcs, direct, keyRows, ramp, shown: shown.length, unplaced: kept.length - shown.length });
     } finally {
-      if (my === gen) {
-        timers.forEach(clearTimeout);
-        busy.hidden = true;
-      }
+      // Always cancel this render's own timers, even when a newer one superseded it:
+      // left armed, a stale timer would show the spinner after the newer render had
+      // already hidden it, for good. Only the newest render hides the spinner.
+      timers.forEach(clearTimeout);
+      if (my === gen) busy.hidden = true;
     }
   }
 
