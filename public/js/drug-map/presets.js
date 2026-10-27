@@ -28,6 +28,21 @@ export const PRESETS = [
   { id: "sleep", view: { cats: ["benzodiazepine", "hypnotic", "anxiolytic", "antihistamine"] } },
   // The whole roster by its signed effect on each transmitter system, not by receptor.
   { id: "all_tone", view: { source: "tone" } },
+  // Sedating antihistamines: H1 (sedation) against M1 (anticholinergic load), plotted directly.
+  { id: "antihistamines", view: { cats: ["antihistamine"], only: ["h1", "m1"] } },
+  // The serotonergic psychedelics (no class of their own: they sit in "recreational") on
+  // the 5-HT1A / 5-HT2A / 5-HT2B / 5-HT2C receptors. A drug binding none of those drops
+  // out of the map, which leaves LSD, DMT, mescaline, 2C-B, MDMA and psilocybin (placed by
+  // its metabolite psilocin's bindings). None is marketed,
+  // hence the marketed filter off.
+  { id: "psychedelics", view: { cats: ["recreational"], only: ["5ht2a", "5ht2c", "5ht1a", "5ht2b"], marketed: false } },
+  // MAO inhibitors by MAO-A against MAO-B: moclobemide / clorgiline vs selegiline /
+  // rasagiline, the non-selective ones on the diagonal.
+  { id: "maois", view: { cats: ["maoi"], only: ["mao_a", "mao_b"] } },
+  // Opioids on the three opioid receptors (mu, kappa, delta).
+  { id: "opioids", view: { cats: ["opioid"], only: ["mu", "kappa", "delta"] } },
+  // Stimulants by dopamine against noradrenaline reuptake.
+  { id: "stimulants", view: { cats: ["stimulant"], only: ["dat", "net"] } },
 ];
 
 /**

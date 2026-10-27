@@ -6,12 +6,18 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { DEFAULT_VIEW } from "../../public/js/drug-map/model.js";
+import { buildProfiles, DEFAULT_VIEW, filterDrugs, mappableDrugs } from "../../public/js/drug-map/model.js";
 import { matchesPreset, PRESETS, presetView } from "../../public/js/drug-map/presets.js";
 
 const root = new URL("../../public/", import.meta.url);
 const drugs = readFileSync(new URL("data/drugs.jsonl", root), "utf8")
   .split("\n").filter(Boolean).map((l) => JSON.parse(l));
+// The `effect` each binding carries in the viewer (signed profiles read it), derived as
+// js/data/bindings.js bindingDisplayFields does: the full resolver also wants the quote
+// table, too heavy here, so this repeats its one rule.
+const actions = JSON.parse(readFileSync(new URL("data/meta.json", root), "utf8")).drug_actions;
+const viewerDrugs = drugs.map((d) => ({ ...d, bindings: (d.bindings || []).map((b) => ({ ...b,
+  effect: b.affinity_only ? null : b.effect || (actions[b.action] || {}).effect || "modulate" })) }));
 
 test("presetView starts from the defaults and holds cats as a Set", () => {
   const ap = PRESETS.find((p) => p.id === "ap_dopamine");
@@ -39,6 +45,18 @@ test("every preset class and target exists in the dataset", () => {
   for (const p of PRESETS) {
     for (const c of p.view.cats || []) assert.ok(cats.has(c), `${p.id}: class ${c}`);
     for (const k of p.view.only || []) assert.ok(targets.has(k), `${p.id}: target ${k}`);
+  }
+});
+
+test("every receptor preset places at least 3 drugs", () => {
+  // A class with no measured Ki at all (the mood stabilizers: channel blockers PDSP and
+  // GtoPdb hold no Ki for) never reaches the map, so its preset would load an empty plot.
+  // Tone presets are skipped: their profile is derived in the viewer (flowSystems).
+  for (const p of PRESETS.filter((q) => presetView(q).source === "receptors")) {
+    const v = presetView(p);
+    const kept = mappableDrugs(filterDrugs(viewerDrugs, v));
+    const placed = buildProfiles(kept, { normalize: v.normalize, signed: v.signed, only: v.only, measuredKi: v.measuredKi });
+    assert.ok(placed.size >= 3, `${p.id}: ${placed.size} drug(s) placed`);
   }
 });
 
