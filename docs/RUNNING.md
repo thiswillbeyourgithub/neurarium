@@ -96,8 +96,8 @@ moment it registers.
 | --- | --- |
 | `#tabs=<kind>:<id>,...` | the open detail tabs, in strip order (the order is state: tabs are drag-reorderable) |
 | `#tab=<index>` | which of them is active; omitted when it is the last (where opening the list already lands), `s` = the pinned Settings tab |
-| `#popup=about\|legend\|sources\|shortcuts\|whatsnew\|drugmap` | the open popup |
-| `#dmcat=<cat>,...` / `#dmyear=<from>-<to>` / `#dmhide=<id>,...` / `#dmcolor=<mode>` / `#dmlabels=0` / `#dmspread=0` / `#dmnorm=0` / `#dmsign=0` / `#dmmkt=0` / `#dmsrc=<source>` / `#dmtgt=<key>,...` (`-` = none) | the drug map's view (only while it is open): class chips, approval-year range (either end may be empty; set by a decade heading's map link), hidden drugs, colour mode, names off, overlap spread off, normalization off, signs off, currently marketed only off, feature source (`tone`, `both`), picked features in axis order (target ids or `tone:<kind>`) |
+| `#popup=about\|legend\|sources\|shortcuts\|whatsnew` | the open popup (a legacy `drugmap` value forwards to `drugs-map.html`, carrying its `dm*` keys) |
+| `#dmcat=<cat>,...` / `#dmyear=<from>-<to>` / `#dmhide=<id>,...` / `#dmcolor=<mode>` / `#dmlabels=0` / `#dmspread=0` / `#dmnorm=0` / `#dmsign=0` / `#dmmkt=0` / `#dmsrc=<source>` / `#dmtgt=<key>,...` (`-` = none) | the drugs map page's view (`drugs-map.html#dm...`): class chips, approval-year range (either end may be empty; set by a decade heading's map link), hidden drugs, colour mode, names off, overlap spread off, normalization off, signs off, currently marketed only off, feature source (`tone`, `both`), picked features in axis order (target ids or `tone:<kind>`) |
 | `#cam=<az>,<polar>,<dist>[,<tx>,<ty>,<tz>]` | the orbit: degrees around the pivot, distance from it, and the pivot when a focus moved it off centre |
 | `#explode=0..1` / `#transparency=0.1..1` | the two sliders |
 | `#names=1` / `#arrows=1` / `#inside=1` | Show all names / Show projections / See inside |
