@@ -1,6 +1,33 @@
 {
   "versions": [
     {
+      "version": "3.141.0",
+      "date": "2026-10-27",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "The drug map button is bigger, reads \"Show on a map\" and carries a beta tag; the map has a grey plot well with a grid at one scale for both axes, pinch zoom, names sized to how crowded the points are and never overlapping, a folded class list and legend, shift-click (long-press) to drop one class, and nomenclature colours matched to class colours",
+          "commits": [
+            "e27a59e"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "The drug map controls sit in labelled rows (input coordinates, colour, filters, then a folded Advanced with names, normalization and signs all on by default), with a fullscreen button and a \"currently marketed only\" filter; the approval-year inputs are gone, a decade link still sets a range shown as a removable chip",
+          "commits": [
+            "d9b4c99"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "One spelling per Neuroscience-based Nomenclature label: SN-RI, DN-RIRe, Glu-CB and Glu were each written two ways, now guarded by a test",
+          "commits": [
+            "cb696c7"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.140.0",
       "date": "2026-10-27",
       "entries": [
