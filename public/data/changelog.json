@@ -1,6 +1,20 @@
 {
   "versions": [
     {
+      "version": "3.143.2",
+      "date": "2026-10-27",
+      "entries": [
+        {
+          "category": "fixed",
+          "text": "The brain starts centred in the space beside the panel and stays centred as it auto-rotates, instead of drifting right and low (it turned about a point centred for the first angle only)",
+          "commits": [
+            "fda961c",
+            "fcc1162"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.143.1",
       "date": "2026-10-27",
       "entries": [
