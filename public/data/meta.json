@@ -200,6 +200,63 @@
     "appetite_suppressant": "Appetite suppressant",
     "other": "Other"
   },
+  "drug_category_groups": {
+    "antidepressants": [
+      "ssri",
+      "snri",
+      "tricyclic",
+      "maoi",
+      "antidepressant_other"
+    ],
+    "antipsychotics": [
+      "antipsychotic_atypical",
+      "antipsychotic_conventional"
+    ],
+    "anxiolytics_sedatives": [
+      "anxiolytic",
+      "benzodiazepine",
+      "hypnotic",
+      "anesthetic"
+    ],
+    "mood_anticonvulsants": [
+      "mood_stabilizer",
+      "anticonvulsant"
+    ],
+    "stimulants": [
+      "stimulant",
+      "adhd_nonstimulant",
+      "h3_antagonist",
+      "appetite_suppressant"
+    ],
+    "addiction_opioids": [
+      "substance_use",
+      "opioid",
+      "recreational"
+    ],
+    "neurology": [
+      "cognitive_enhancer",
+      "antiparkinson",
+      "anticholinergic",
+      "antimigraine"
+    ],
+    "other": [
+      "antihistamine",
+      "antiemetic",
+      "alpha_blocker",
+      "beta_blocker",
+      "other"
+    ]
+  },
+  "drug_category_group_labels": {
+    "antidepressants": "Antidepressants",
+    "antipsychotics": "Antipsychotics",
+    "anxiolytics_sedatives": "Anxiolytics & sedatives",
+    "mood_anticonvulsants": "Mood stabilizers & anticonvulsants",
+    "stimulants": "Stimulants & ADHD",
+    "addiction_opioids": "Opioids, addiction & recreational",
+    "neurology": "Neurology",
+    "other": "Other"
+  },
   "drug_releases": {
     "ir": "Immediate release",
     "xr": "Extended release",

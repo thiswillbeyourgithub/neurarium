@@ -25,6 +25,8 @@ from data_generators.addons import (
 )
 from data_generators.drugs import (
     DRUG_ACTIONS,
+    DRUG_CATEGORY_GROUP_LABELS,
+    DRUG_CATEGORY_GROUPS,
     DRUG_CATEGORY_LABELS,
     DRUG_EFFECT_COLORS,
     DRUG_EFFECT_LABELS,
@@ -104,6 +106,8 @@ def build_meta(*, structures, projections, circuits, projection_groups, receptor
         # block near the top). drug_targets merges DRUG_TARGETS with every
         # receptor id so a binding can target either.
         "drug_category_labels": DRUG_CATEGORY_LABELS,
+        "drug_category_groups": DRUG_CATEGORY_GROUPS,
+        "drug_category_group_labels": DRUG_CATEGORY_GROUP_LABELS,
         # Regulatory history vocabularies (first approval + withdrawals): id -> {en,fr}.
         "drug_releases": formulations.labels(),
         "drug_history_countries": history.labels(history.COUNTRIES),

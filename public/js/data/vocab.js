@@ -38,6 +38,9 @@ export function readVocab(metaRecord) {
   // as raw maps (their `name`/`label` are localized per binding below); the colour
   // map is language-neutral.
   const drugCategoryLabels = localizeMap(metaRecord.drug_category_labels);
+  // Broad families over those categories (group id -> member categories), and labels.
+  const drugCategoryGroups = metaRecord.drug_category_groups || {};
+  const drugCategoryGroupLabels = localizeMap(metaRecord.drug_category_group_labels);
   // Regulatory history vocabularies (first approval + withdrawals): id -> label.
   const historyCountries = localizeMap(metaRecord.drug_history_countries);
   const historyScopes = new Set(metaRecord.drug_history_scopes || []);
@@ -102,6 +105,8 @@ export function readVocab(metaRecord) {
     targetTypeLabels,
     targetTypeColors,
     drugCategoryLabels,
+    drugCategoryGroups,
+    drugCategoryGroupLabels,
     historyCountries,
     historyScopes,
     historyAgencies,

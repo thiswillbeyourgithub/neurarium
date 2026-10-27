@@ -102,6 +102,36 @@ DRUG_CATEGORY_LABELS: dict[str, dict[str, str]] = {
     "other": {"en": "Other", "fr": "Autre"},
 }
 
+# Broad families over the categories above (group id -> member categories, in display
+# order), for a filter that offers "every antidepressant" in one click (the drug map's
+# class chips). Every category sits in exactly one group (checked below).
+DRUG_CATEGORY_GROUPS: dict[str, list[str]] = {
+    "antidepressants": ["ssri", "snri", "tricyclic", "maoi", "antidepressant_other"],
+    "antipsychotics": ["antipsychotic_atypical", "antipsychotic_conventional"],
+    "anxiolytics_sedatives": ["anxiolytic", "benzodiazepine", "hypnotic", "anesthetic"],
+    "mood_anticonvulsants": ["mood_stabilizer", "anticonvulsant"],
+    "stimulants": ["stimulant", "adhd_nonstimulant", "h3_antagonist", "appetite_suppressant"],
+    "addiction_opioids": ["substance_use", "opioid", "recreational"],
+    "neurology": ["cognitive_enhancer", "antiparkinson", "anticholinergic", "antimigraine"],
+    "other": ["antihistamine", "antiemetic", "alpha_blocker", "beta_blocker", "other"],
+}
+DRUG_CATEGORY_GROUP_LABELS: dict[str, dict[str, str]] = {
+    "antidepressants": {"en": "Antidepressants", "fr": "Antidépresseurs"},
+    "antipsychotics": {"en": "Antipsychotics", "fr": "Antipsychotiques"},
+    "anxiolytics_sedatives": {"en": "Anxiolytics & sedatives", "fr": "Anxiolytiques et sédatifs"},
+    "mood_anticonvulsants": {"en": "Mood stabilizers & anticonvulsants",
+                             "fr": "Thymorégulateurs et anticonvulsivants"},
+    "stimulants": {"en": "Stimulants & ADHD", "fr": "Stimulants et TDAH"},
+    "addiction_opioids": {"en": "Opioids, addiction & recreational",
+                          "fr": "Opioïdes, addictions et usage récréatif"},
+    "neurology": {"en": "Neurology", "fr": "Neurologie"},
+    "other": {"en": "Other", "fr": "Autre"},
+}
+_grouped = [c for cats in DRUG_CATEGORY_GROUPS.values() for c in cats]
+assert sorted(_grouped) == sorted(DRUG_CATEGORY_LABELS), \
+    "DRUG_CATEGORY_GROUPS must hold every DRUG_CATEGORY_LABELS key exactly once"
+assert DRUG_CATEGORY_GROUP_LABELS.keys() == DRUG_CATEGORY_GROUPS.keys()
+
 # Binding action (a key) -> {label {en,fr}, effect}. ``effect`` (boost / block /
 # modulate) is the net direction of the drug's action at that target and drives
 # the animation colour (DRUG_EFFECT_COLORS). A binding may override ``effect`` for
