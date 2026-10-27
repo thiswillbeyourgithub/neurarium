@@ -71,6 +71,12 @@
 .dm-point:hover { stroke: var(--text); }
 .dm-label { fill: var(--text); cursor: pointer; }
 .dm-label:hover { text-decoration: underline; }
+/* focus.js: the meant drug's ring and name, over everything, with a halo in the plot's
+   own background so the name stays legible across dots and other names. */
+.dm-plot.dm-pointing { cursor: pointer; }
+.dm-focus { pointer-events: none; }
+.dm-focus-ring { fill: none; stroke: var(--text); }
+.dm-focus-label { fill: var(--text); font-weight: 600; stroke: var(--dm-plot-bg); paint-order: stroke; stroke-linejoin: round; }
 .dm-plot-wrap { position: relative; }
 /* Re-render under way: a spinner over the plot (shown only past a short delay), plus
    a "suspiciously slow" hint past a few seconds. */

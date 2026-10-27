@@ -21,6 +21,7 @@ import { placeLabels, sizesFor } from "./layout.js";
 import { spreadPoints } from "./spread.js";
 import { button, el, foldBox, H, rotate, svgEl, W } from "./dom.js";
 import { wireGestures } from "./gestures.js";
+import { createFocus } from "./focus.js";
 import { createControls } from "./controls.js";
 import { LIST_SEP } from "../url-state.js";
 import { viewerUrl } from "./site.js";
@@ -107,6 +108,12 @@ export function createDrugMap({ data, onChange }) {
   body.replaceChildren(...controls.boxes, plotWrap, legendBox.box, axesBox.box, note);
 
   const setCam = (next) => { cam = next; anim = null; drawPoints(); };
+  // Which drug the pointer means + its name on top (focus.js): opens / hides it too.
+  const focus = createFocus({
+    svg,
+    onOpen: (drug) => window.open(drugUrl(drug), "_blank", "noopener"),
+    onHide: (drug) => setView({ hidden: new Set([...view.hidden, drug.id]) }),
+  });
   wireGestures(svg, () => cam, setCam, () => fitFrame());
   // Names are sized in screen px, so a resized window re-lays them out.
   if (typeof ResizeObserver === "function") {
@@ -233,19 +240,15 @@ export function createDrugMap({ data, onChange }) {
     });
   }
 
-  // A dot and its name both open the drug in a new tab (click) or hide it (right-click,
-  // long-press), with the same tooltip.
+  // A dot and its name carry the same tooltip and name their drug (`data-drug`), which
+  // focus.js reads to open it (click) or hide it (right-click, long-press).
   function linkDrug(node, p) {
     const title = svgEl("title");
     const yr = p.drug.firstApproval && p.drug.firstApproval.year;
     title.textContent = [p.drug.displayName, p.drug.categoryLabels.join(" · "), yr,
       p.drug.originator && p.drug.originator.name].filter(Boolean).join("\n");
     node.appendChild(title);
-    node.addEventListener("click", () => window.open(drugUrl(p.drug), "_blank", "noopener"));
-    node.addEventListener("contextmenu", (ev) => {
-      ev.preventDefault();
-      setView({ hidden: new Set([...view.hidden, p.drug.id]) });
-    });
+    node.dataset.drug = p.drug.id;
   }
   function legendRows(rows, ramp) {
     if (ramp) {
@@ -321,6 +324,13 @@ export function createDrugMap({ data, onChange }) {
       }
     }
     svg.replaceChildren(g);
+    focus.draw({
+      k, r, font, b,
+      dots: screen.map((q) => {
+        const m = at(q);
+        return { id: q.id, p: q.p, x: m.x, y: m.y, sx: (m.x - b.x) / k, sy: (m.y - b.y) / k };
+      }),
+    });
   }
 
   return {
