@@ -1,6 +1,20 @@
 {
   "versions": [
     {
+      "version": "3.147.2",
+      "date": "2026-10-27",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "Drugs map: the plot title names a class in the plural (\"Antihistamines\", \"MAO inhibitors\") and a target by its short name (\"MAO-A\" rather than \"Monoamine oxidase A (MAO-A)\")",
+          "commits": [
+            "991d947",
+            "13c9daa"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.147.1",
       "date": "2026-10-27",
       "entries": [
