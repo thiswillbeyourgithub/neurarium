@@ -1,6 +1,27 @@
 {
   "versions": [
     {
+      "version": "3.146.1",
+      "date": "2026-10-27",
+      "entries": [
+        {
+          "category": "fixed",
+          "text": "The drugs map’s loading spinner could stay on screen over a finished map after quick successive changes (resizing, fast filter clicks)",
+          "commits": [
+            "0ad2a97"
+          ]
+        },
+        {
+          "category": "docs",
+          "text": "The drugs map README opens with a picture of the map that links to the same live view",
+          "commits": [
+            "3067deb",
+            "75340c6"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.146.0",
       "date": "2026-10-27",
       "entries": [
