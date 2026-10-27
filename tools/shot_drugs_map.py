@@ -12,9 +12,10 @@ then screenshots the map body, once per UI language (README.md shows the English
 picture, README.fr.md the French one). Then it clicks every preset button
 (js/drug-map/presets.js, read off the page so a new preset needs no edit here),
 saves ``presets/<id>.<lang>.png`` and rewrites each README's block between the
-``<!-- presets:start -->`` / ``<!-- presets:end -->`` markers: one folded
-``<details>`` per preset, titled with the button's own label, whose picture links
-the live map on that preset's view (the URL hash the click produced). Rerun it
+``<!-- presets:start -->`` / ``<!-- presets:end -->`` markers: a PRESET_COLUMNS-wide
+table, one cell per preset holding its picture (linking the live map on that
+preset's view, the URL hash the click produced) over the button's own label. The
+``default`` preset is skipped: it is the README's main screenshot already. Rerun it
 whenever the map's UI or the presets change so the README pictures stay current::
 
     uv run tools/shot_drugs_map.py                  # -> public/drugs-map/screenshot.{en,fr}.png + presets/
@@ -40,6 +41,10 @@ LANGS = ("en", "fr")
 README = {"en": "README.md", "fr": "README.fr.md"}
 LIVE_URL = "https://drugsmap.olicorne.org/"
 PRESETS_START, PRESETS_END = "<!-- presets:start -->", "<!-- presets:end -->"
+# Pictures per README table row: two keep each picture legible on a GitHub page.
+PRESET_COLUMNS = 2
+# Presets with no picture of their own (the default view is the main screenshot).
+SKIP_PRESETS = {"default"}
 
 # The README's view: the two antipsychotic classes, withdrawn drugs included, on
 # the dopamine / cholinergic / histamine targets only, so the PCA axes read as
@@ -108,7 +113,7 @@ def capture_presets(new_page, base: str, lang: str, out_dir: Path) -> list[dict]
         "[data-preset]", "bs => bs.map(b => ({id: b.dataset.preset, label: b.textContent}))")
     page.close()
     shots = []
-    for b in buttons:
+    for b in (b for b in buttons if b["id"] not in SKIP_PRESETS):
         page = new_page()
         open_map(page, base, "", lang)
         page.click(f"[data-preset='{b['id']}']")
@@ -124,11 +129,17 @@ def capture_presets(new_page, base: str, lang: str, out_dir: Path) -> list[dict]
 
 
 def write_presets_block(readme: Path, shots: list[dict]) -> None:
-    """Replace the README's presets block with one folded picture per preset."""
-    items = "\n\n".join(
-        f"<details>\n<summary>{s['label']}</summary>\n\n"
-        f"[![{s['label']}]({s['img']})]({LIVE_URL}{s['hash']})\n\n</details>"
-        for s in shots)
+    """Replace the README's presets block with a table of preset pictures, PRESET_COLUMNS wide.
+
+    Each cell is the picture (linking the live map on that view) with its label under it;
+    a last short row is padded with empty cells so the table stays rectangular.
+    """
+    cells = [f"[![{s['label']}]({s['img']})]({LIVE_URL}{s['hash']})<br>**{s['label']}**" for s in shots]
+    cells += [""] * (-len(cells) % PRESET_COLUMNS)
+    rows = [cells[i:i + PRESET_COLUMNS] for i in range(0, len(cells), PRESET_COLUMNS)]
+    # GitHub needs a header row: an empty one keeps the pictures as the whole table.
+    items = "\n".join(["|" + " |" * PRESET_COLUMNS, "|" + " --- |" * PRESET_COLUMNS]
+                       + ["| " + " | ".join(r) + " |" for r in rows])
     text = readme.read_text(encoding="utf-8")
     block = re.compile(re.escape(PRESETS_START) + ".*?" + re.escape(PRESETS_END), re.S)
     if not block.search(text):

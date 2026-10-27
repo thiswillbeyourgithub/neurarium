@@ -16,99 +16,18 @@ It was built with the help of [Claude Code](https://claude.com/claude-code).
 
 ## Presets
 
-The **Presets** box at the top of the page loads a ready-made view in one click. Click a title to unfold its picture, then the picture to open that view live:
+The **Presets** box at the top of the page loads a ready-made view in one click. Click a picture to open that view live (the **Default view** preset brings back the main screenshot above):
 
 <!-- presets:start -->
-<details>
-<summary>Antipsychotics: dopamine</summary>
-
-[![Antipsychotics: dopamine](presets/ap_dopamine.en.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmcolor=nbn&dmtgt=d1,d2,d3,d4,d5,dat)
-
-</details>
-
-<details>
-<summary>Antipsychotics: D2 vs 5-HT2A</summary>
-
-[![Antipsychotics: D2 vs 5-HT2A](presets/ap_d2_5ht2a.en.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmtgt=d2,5ht2a)
-
-</details>
-
-<details>
-<summary>Antipsychotics: side-effect receptors</summary>
-
-[![Antipsychotics: side-effect receptors](presets/ap_side.en.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmtgt=h1,m1,alpha1a,5ht2c)
-
-</details>
-
-<details>
-<summary>Antipsychotics: body effects</summary>
-
-[![Antipsychotics: body effects](presets/ap_effects.en.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmsrc=effects)
-
-</details>
-
-<details>
-<summary>Antidepressants: SERT vs NET</summary>
-
-[![Antidepressants: SERT vs NET](presets/ad_sert_net.en.png)](https://drugsmap.olicorne.org/#dmcat=ssri,snri,tricyclic,maoi,antidepressant_other&dmtgt=sert,net)
-
-</details>
-
-<details>
-<summary>Antidepressants by mechanism</summary>
-
-[![Antidepressants by mechanism](presets/ad_profile.en.png)](https://drugsmap.olicorne.org/#dmcat=ssri,snri,tricyclic,maoi,antidepressant_other&dmcolor=nbn)
-
-</details>
-
-<details>
-<summary>Sleep and anxiety</summary>
-
-[![Sleep and anxiety](presets/sleep.en.png)](https://drugsmap.olicorne.org/#dmcat=benzodiazepine,hypnotic,anxiolytic,antihistamine)
-
-</details>
-
-<details>
-<summary>All drugs by neurotransmitter tone</summary>
-
-[![All drugs by neurotransmitter tone](presets/all_tone.en.png)](https://drugsmap.olicorne.org/#dmsrc=tone)
-
-</details>
-
-<details>
-<summary>Antihistamines: H1 vs M1</summary>
-
-[![Antihistamines: H1 vs M1](presets/antihistamines.en.png)](https://drugsmap.olicorne.org/#dmcat=antihistamine&dmtgt=h1,m1)
-
-</details>
-
-<details>
-<summary>Psychedelics: serotonin receptors</summary>
-
-[![Psychedelics: serotonin receptors](presets/psychedelics.en.png)](https://drugsmap.olicorne.org/#dmcat=recreational&dmmkt=0&dmtgt=5ht2a,5ht2c,5ht1a,5ht2b)
-
-</details>
-
-<details>
-<summary>MAOIs: MAO-A vs MAO-B</summary>
-
-[![MAOIs: MAO-A vs MAO-B](presets/maois.en.png)](https://drugsmap.olicorne.org/#dmcat=maoi&dmtgt=mao_a,mao_b)
-
-</details>
-
-<details>
-<summary>Opioids: mu, kappa, delta</summary>
-
-[![Opioids: mu, kappa, delta](presets/opioids.en.png)](https://drugsmap.olicorne.org/#dmcat=opioid&dmtgt=mu,kappa,delta)
-
-</details>
-
-<details>
-<summary>Stimulants: DAT vs NET</summary>
-
-[![Stimulants: DAT vs NET](presets/stimulants.en.png)](https://drugsmap.olicorne.org/#dmcat=stimulant&dmtgt=dat,net)
-
-</details>
+| | |
+| --- | --- |
+| [![Antipsychotics: dopamine](presets/ap_dopamine.en.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmcolor=nbn&dmtgt=d1,d2,d3,d4,d5,dat)<br>**Antipsychotics: dopamine** | [![Antipsychotics: D2 vs 5-HT2A](presets/ap_d2_5ht2a.en.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmtgt=d2,5ht2a)<br>**Antipsychotics: D2 vs 5-HT2A** |
+| [![Antipsychotics: side-effect receptors](presets/ap_side.en.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmtgt=h1,m1,alpha1a,5ht2c)<br>**Antipsychotics: side-effect receptors** | [![Antipsychotics: body effects](presets/ap_effects.en.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmsrc=effects)<br>**Antipsychotics: body effects** |
+| [![Antidepressants: SERT vs NET](presets/ad_sert_net.en.png)](https://drugsmap.olicorne.org/#dmcat=ssri,snri,tricyclic,maoi,antidepressant_other&dmtgt=sert,net)<br>**Antidepressants: SERT vs NET** | [![Antidepressants by mechanism](presets/ad_profile.en.png)](https://drugsmap.olicorne.org/#dmcat=ssri,snri,tricyclic,maoi,antidepressant_other&dmcolor=nbn)<br>**Antidepressants by mechanism** |
+| [![Sleep and anxiety](presets/sleep.en.png)](https://drugsmap.olicorne.org/#dmcat=benzodiazepine,hypnotic,anxiolytic,antihistamine)<br>**Sleep and anxiety** | [![All drugs by neurotransmitter tone](presets/all_tone.en.png)](https://drugsmap.olicorne.org/#dmsrc=tone)<br>**All drugs by neurotransmitter tone** |
+| [![Antihistamines: H1 vs M1](presets/antihistamines.en.png)](https://drugsmap.olicorne.org/#dmcat=antihistamine&dmtgt=h1,m1)<br>**Antihistamines: H1 vs M1** | [![Psychedelics: serotonin receptors](presets/psychedelics.en.png)](https://drugsmap.olicorne.org/#dmcat=recreational&dmmkt=0&dmtgt=5ht2a,5ht2c,5ht1a,5ht2b)<br>**Psychedelics: serotonin receptors** |
+| [![MAOIs: MAO-A vs MAO-B](presets/maois.en.png)](https://drugsmap.olicorne.org/#dmcat=maoi&dmtgt=mao_a,mao_b)<br>**MAOIs: MAO-A vs MAO-B** | [![Opioids: mu, kappa, delta](presets/opioids.en.png)](https://drugsmap.olicorne.org/#dmcat=opioid&dmtgt=mu,kappa,delta)<br>**Opioids: mu, kappa, delta** |
+| [![Stimulants: DAT vs NET](presets/stimulants.en.png)](https://drugsmap.olicorne.org/#dmcat=stimulant&dmtgt=dat,net)<br>**Stimulants: DAT vs NET** |  |
 <!-- presets:end -->
 
 ## What you are looking at

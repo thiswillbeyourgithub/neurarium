@@ -16,99 +16,18 @@ Elle a été réalisée avec l'aide de [Claude Code](https://claude.com/claude-c
 
 ## Préréglages
 
-La boîte **Préréglages** en haut de la page charge une vue toute faite en un clic. Cliquer sur un titre déplie son image, puis sur l'image pour ouvrir cette vue en ligne :
+La boîte **Préréglages** en haut de la page charge une vue toute faite en un clic. Cliquer sur une image ouvre cette vue en ligne (le préréglage **Vue par défaut** ramène la capture principale ci-dessus) :
 
 <!-- presets:start -->
-<details>
-<summary>Antipsychotiques : dopamine</summary>
-
-[![Antipsychotiques : dopamine](presets/ap_dopamine.fr.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmcolor=nbn&dmtgt=d1,d2,d3,d4,d5,dat)
-
-</details>
-
-<details>
-<summary>Antipsychotiques : D2 contre 5-HT2A</summary>
-
-[![Antipsychotiques : D2 contre 5-HT2A](presets/ap_d2_5ht2a.fr.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmtgt=d2,5ht2a)
-
-</details>
-
-<details>
-<summary>Antipsychotiques : récepteurs des effets indésirables</summary>
-
-[![Antipsychotiques : récepteurs des effets indésirables](presets/ap_side.fr.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmtgt=h1,m1,alpha1a,5ht2c)
-
-</details>
-
-<details>
-<summary>Antipsychotiques : effets corporels</summary>
-
-[![Antipsychotiques : effets corporels](presets/ap_effects.fr.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmsrc=effects)
-
-</details>
-
-<details>
-<summary>Antidépresseurs : SERT contre NET</summary>
-
-[![Antidépresseurs : SERT contre NET](presets/ad_sert_net.fr.png)](https://drugsmap.olicorne.org/#dmcat=ssri,snri,tricyclic,maoi,antidepressant_other&dmtgt=sert,net)
-
-</details>
-
-<details>
-<summary>Antidépresseurs par mécanisme</summary>
-
-[![Antidépresseurs par mécanisme](presets/ad_profile.fr.png)](https://drugsmap.olicorne.org/#dmcat=ssri,snri,tricyclic,maoi,antidepressant_other&dmcolor=nbn)
-
-</details>
-
-<details>
-<summary>Sommeil et anxiété</summary>
-
-[![Sommeil et anxiété](presets/sleep.fr.png)](https://drugsmap.olicorne.org/#dmcat=benzodiazepine,hypnotic,anxiolytic,antihistamine)
-
-</details>
-
-<details>
-<summary>Toutes les substances par tonus des neurotransmetteurs</summary>
-
-[![Toutes les substances par tonus des neurotransmetteurs](presets/all_tone.fr.png)](https://drugsmap.olicorne.org/#dmsrc=tone)
-
-</details>
-
-<details>
-<summary>Antihistaminiques : H1 contre M1</summary>
-
-[![Antihistaminiques : H1 contre M1](presets/antihistamines.fr.png)](https://drugsmap.olicorne.org/#dmcat=antihistamine&dmtgt=h1,m1)
-
-</details>
-
-<details>
-<summary>Psychédéliques : récepteurs sérotoninergiques</summary>
-
-[![Psychédéliques : récepteurs sérotoninergiques](presets/psychedelics.fr.png)](https://drugsmap.olicorne.org/#dmcat=recreational&dmmkt=0&dmtgt=5ht2a,5ht2c,5ht1a,5ht2b)
-
-</details>
-
-<details>
-<summary>IMAO : MAO-A contre MAO-B</summary>
-
-[![IMAO : MAO-A contre MAO-B](presets/maois.fr.png)](https://drugsmap.olicorne.org/#dmcat=maoi&dmtgt=mao_a,mao_b)
-
-</details>
-
-<details>
-<summary>Opioïdes : mu, kappa, delta</summary>
-
-[![Opioïdes : mu, kappa, delta](presets/opioids.fr.png)](https://drugsmap.olicorne.org/#dmcat=opioid&dmtgt=mu,kappa,delta)
-
-</details>
-
-<details>
-<summary>Psychostimulants : DAT contre NET</summary>
-
-[![Psychostimulants : DAT contre NET](presets/stimulants.fr.png)](https://drugsmap.olicorne.org/#dmcat=stimulant&dmtgt=dat,net)
-
-</details>
+| | |
+| --- | --- |
+| [![Antipsychotiques : dopamine](presets/ap_dopamine.fr.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmcolor=nbn&dmtgt=d1,d2,d3,d4,d5,dat)<br>**Antipsychotiques : dopamine** | [![Antipsychotiques : D2 contre 5-HT2A](presets/ap_d2_5ht2a.fr.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmtgt=d2,5ht2a)<br>**Antipsychotiques : D2 contre 5-HT2A** |
+| [![Antipsychotiques : récepteurs des effets indésirables](presets/ap_side.fr.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmtgt=h1,m1,alpha1a,5ht2c)<br>**Antipsychotiques : récepteurs des effets indésirables** | [![Antipsychotiques : effets corporels](presets/ap_effects.fr.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmsrc=effects)<br>**Antipsychotiques : effets corporels** |
+| [![Antidépresseurs : SERT contre NET](presets/ad_sert_net.fr.png)](https://drugsmap.olicorne.org/#dmcat=ssri,snri,tricyclic,maoi,antidepressant_other&dmtgt=sert,net)<br>**Antidépresseurs : SERT contre NET** | [![Antidépresseurs par mécanisme](presets/ad_profile.fr.png)](https://drugsmap.olicorne.org/#dmcat=ssri,snri,tricyclic,maoi,antidepressant_other&dmcolor=nbn)<br>**Antidépresseurs par mécanisme** |
+| [![Sommeil et anxiété](presets/sleep.fr.png)](https://drugsmap.olicorne.org/#dmcat=benzodiazepine,hypnotic,anxiolytic,antihistamine)<br>**Sommeil et anxiété** | [![Toutes les substances par tonus des neurotransmetteurs](presets/all_tone.fr.png)](https://drugsmap.olicorne.org/#dmsrc=tone)<br>**Toutes les substances par tonus des neurotransmetteurs** |
+| [![Antihistaminiques : H1 contre M1](presets/antihistamines.fr.png)](https://drugsmap.olicorne.org/#dmcat=antihistamine&dmtgt=h1,m1)<br>**Antihistaminiques : H1 contre M1** | [![Psychédéliques : récepteurs sérotoninergiques](presets/psychedelics.fr.png)](https://drugsmap.olicorne.org/#dmcat=recreational&dmmkt=0&dmtgt=5ht2a,5ht2c,5ht1a,5ht2b)<br>**Psychédéliques : récepteurs sérotoninergiques** |
+| [![IMAO : MAO-A contre MAO-B](presets/maois.fr.png)](https://drugsmap.olicorne.org/#dmcat=maoi&dmtgt=mao_a,mao_b)<br>**IMAO : MAO-A contre MAO-B** | [![Opioïdes : mu, kappa, delta](presets/opioids.fr.png)](https://drugsmap.olicorne.org/#dmcat=opioid&dmtgt=mu,kappa,delta)<br>**Opioïdes : mu, kappa, delta** |
+| [![Psychostimulants : DAT contre NET](presets/stimulants.fr.png)](https://drugsmap.olicorne.org/#dmcat=stimulant&dmtgt=dat,net)<br>**Psychostimulants : DAT contre NET** |  |
 <!-- presets:end -->
 
 ## Ce que montre la carte
