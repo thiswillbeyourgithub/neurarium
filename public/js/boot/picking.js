@@ -5,6 +5,10 @@
 
 import * as THREE from "three";
 import { isPickableMesh } from "../scene/see-inside.js";
+import { throttleLatest } from "../util.js";
+
+// Minimum gap between two hover picks, ms (see the pointermove handler).
+const HOVER_MS = 50;
 
 export function wireCanvasPicking({
   arrows, camera, canvas, focus, isolateGroupFor, labels, meshes, selectConnection,
@@ -131,13 +135,23 @@ export function wireCanvasPicking({
   };
 
   // Mouse: hover a region to reveal its name. Mouse-only so that touch-drag
-  // rotation doesn't flicker labels (touch uses tap, below).
+  // rotation doesn't flicker labels (touch uses tap, below). A raycast walks every
+  // triangle under the ray (~8 ms on the full brain) and a mouse fires moves at up to
+  // 1000 Hz, so picking on every event starved the auto-rotation: moves are coalesced
+  // into one pick per HOVER_MS on the latest position, and skipped while a button is
+  // held (a drag rotates, it does not hover).
+  // A pick landing after the pointer left (`inside` false) clears instead.
+  let inside = false;
+  const hover = throttleLatest((x, y) => labels.setHovered(inside ? pickHover(x, y) : null), HOVER_MS);
   canvas.addEventListener("pointermove", (event) => {
-    if (event.pointerType !== "mouse") return;
-    labels.setHovered(pickHover(event.clientX, event.clientY));
+    if (event.pointerType !== "mouse" || event.buttons) return;
+    inside = true;
+    hover(event.clientX, event.clientY);
   });
   canvas.addEventListener("pointerleave", (event) => {
-    if (event.pointerType === "mouse") labels.setHovered(null);
+    if (event.pointerType !== "mouse") return;
+    inside = false;
+    labels.setHovered(null);
   });
 
   // Mouse click (a press + release that didn't drag) selects: an arrow opens its

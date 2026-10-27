@@ -40,3 +40,25 @@ export const mirrorId = (id) =>
 // Fold a drug / metabolite name for joining ("Desmethyldiazepam (nordazepam)" ->
 // "desmethyldiazepamnordazepam").
 export const normName = (s) => (s || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+
+/**
+ * Rate-limit `fn` to one call per `ms`, always on the latest arguments: a burst of
+ * calls runs `fn` once (at most `ms` after the previous run) with the last ones.
+ * e.g. 1000 pointer moves in one second run a 50 ms-throttled `fn` ~20 times.
+ * @template {unknown[]} A
+ * @param {(...args: A) => void} fn
+ * @param {number} ms
+ * @returns {(...args: A) => void}
+ */
+export function throttleLatest(fn, ms) {
+  let args = null, timer = null, last = -Infinity;
+  const run = () => {
+    timer = null;
+    last = Date.now();
+    fn(...args);
+  };
+  return (...next) => {
+    args = next;
+    if (timer === null) timer = setTimeout(run, Math.max(0, last + ms - Date.now()));
+  };
+}
