@@ -2,7 +2,7 @@
 
 [Version française](README.fr.md)
 
-An interactive map of psychiatric and CNS-active drugs, placed by how similar their receptor binding profiles are. Drugs that hit the same receptors in the same proportions land close together; drugs with unrelated mechanisms land far apart. It is a companion page of [neurarium](https://neurarium.olicorne.org/), an interactive 3D atlas of the brain for psychiatric neuroscience, and it is built entirely from neurarium's openly served, sourced dataset.
+An interactive map of psychiatric and CNS-active drugs, placed by how similar their [receptor](https://en.wikipedia.org/wiki/Receptor_(biochemistry)) binding profiles are. Drugs that hit the same receptors in the same proportions land close together; drugs with unrelated mechanisms land far apart. It is a companion page of [neurarium](https://neurarium.olicorne.org/), an interactive 3D atlas of the brain for psychiatric neuroscience, and it is built entirely from neurarium's openly served, sourced dataset.
 
 For example, it can lay out the antipsychotics so as to show their dopaminergic, cholinergic and histaminergic affinities (click the picture to open this view):
 
@@ -14,9 +14,9 @@ It was built with the help of [Claude Code](https://claude.com/claude-code).
 
 ## What you are looking at
 
-Each drug becomes one vector, then a principal component analysis (PCA) squeezes all those vectors onto the two axes that spread the drugs out the most. The PCA is recomputed for whatever the filters leave on screen, so filtering to the antipsychotics gives the axes that best separate *antipsychotics*, not the whole roster.
+Each drug becomes one vector, then a [principal component analysis](https://en.wikipedia.org/wiki/Principal_component_analysis) (PCA) squeezes all those vectors onto the two axes that spread the drugs out the most. The PCA is recomputed for whatever the filters leave on screen, so filtering to the antipsychotics gives the axes that best separate *antipsychotics*, not the whole roster.
 
-A concrete example of one drug's vector, in "Receptors" mode: one number per target, the affinity `pKi - 5` where `pKi = 9 - log10(Ki in nM)`.
+A concrete example of one drug's vector, in "Receptors" mode: one number per target, the [affinity](https://en.wikipedia.org/wiki/Dissociation_constant) `pKi - 5` where `pKi = 9 - log10(Ki in nM)`.
 
 ```python
 # Ki 1 nM -> pKi 9 -> 4.0 ; Ki 100 nM -> pKi 7 -> 2.0 ; Ki >= 10 µM -> 0 (too weak to matter)
@@ -28,20 +28,20 @@ Only measured affinities count by default: a drug with no measured Ki at all is 
 
 Controls (all folded boxes above the plot):
 
-- **Place drugs by:** receptor affinities, net transmitter tone (the drug's signed effect on each neurotransmitter system), or both.
-- **Signed:** an agonist and an antagonist of the same receptor point in opposite directions.
+- **Place drugs by:** receptor affinities, net transmitter tone (the drug's signed effect on each [neurotransmitter](https://en.wikipedia.org/wiki/Neurotransmitter) system), or both.
+- **Signed:** an [agonist](https://en.wikipedia.org/wiki/Agonist) and an [antagonist](https://en.wikipedia.org/wiki/Receptor_antagonist) of the same receptor point in opposite directions.
 - **Targets:** restrict the vectors to some targets; pick one or two and they become the axes themselves (no PCA).
 - **Filter points by:** drug class, first approval year, marketed only.
-- **Colour by:** class, Neuroscience-based Nomenclature, approval year, originator lab, metabolism, or Ki coverage.
+- **Colour by:** class, [Neuroscience-based Nomenclature](https://nbn2r.com/), approval year, originator lab, [metabolism](https://en.wikipedia.org/wiki/Drug_metabolism), or Ki coverage.
 - **Plot:** scroll / pinch to zoom, drag to pan, two-finger twist (or the rotate gesture) to rotate, fullscreen button.
 
 Click a drug to open it in neurarium's 3D atlas (its full panel: bindings with their quoted sources, metabolism, history...). Right-click or long-press hides it from the map. The whole view lives in the address bar, so a URL is a shareable link to exactly what is on screen.
 
 ## Where the data comes from
 
-Everything comes from neurarium's public data files (`/data/*.jsonl`, described in [`llms.txt`](https://neurarium.olicorne.org/llms.txt), with one Markdown page per node under [`/api/`](https://neurarium.olicorne.org/api/)). The bindings come from Stahl's Prescriber's Guide, the PDSP Ki database, the IUPHAR/BPS Guide to Pharmacology and Wikipedia, each binding carrying its quoted source and a provenance grade, which you can inspect by clicking the drug. This page is an example of what can be built on top of that open dataset.
+Everything comes from neurarium's public data files (`/data/*.jsonl`, described in [`llms.txt`](https://neurarium.olicorne.org/llms.txt), with one Markdown page per node under [`/api/`](https://neurarium.olicorne.org/api/)). The bindings come from Stahl's Prescriber's Guide, the [PDSP Ki database](https://pdspdb.unc.edu/databases/kidb.php), the [IUPHAR/BPS Guide to Pharmacology](https://en.wikipedia.org/wiki/Guide_to_Pharmacology) and Wikipedia, each binding carrying its quoted source and a provenance grade, which you can inspect by clicking the drug. This page is an example of what can be built on top of that open dataset.
 
-**Caveats:** this is an exploratory visualisation, not medical advice. Ki values are measured in vitro, often on rodent receptors, and say nothing about the dose actually reached in a brain; a PCA keeps only the two most spread-out directions, so two drugs close on the map can still differ on a target the axes do not capture (the axis captions name which targets each axis weighs most).
+**Caveats:** this is an exploratory visualisation, not medical advice. Ki values are measured [in vitro](https://en.wikipedia.org/wiki/In_vitro), often on rodent receptors, and say nothing about the dose actually reached in a brain; a PCA keeps only the two most spread-out directions, so two drugs close on the map can still differ on a target the axes do not capture (the axis captions name which targets each axis weighs most).
 
 ## Hosting
 

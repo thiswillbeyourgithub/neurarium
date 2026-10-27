@@ -2,7 +2,7 @@
 
 [English version](README.md)
 
-Une carte interactive des médicaments psychiatriques et actifs sur le système nerveux central, placés selon la ressemblance de leurs profils de liaison aux récepteurs. Les substances qui touchent les mêmes récepteurs dans les mêmes proportions se retrouvent proches ; celles aux mécanismes sans rapport se retrouvent éloignées. C'est une page compagnon de [neurarium](https://neurarium.olicorne.org/), un atlas 3D interactif du cerveau pour les neurosciences psychiatriques, entièrement construite à partir du jeu de données sourcé que neurarium sert librement.
+Une carte interactive des médicaments psychiatriques et actifs sur le système nerveux central, placés selon la ressemblance de leurs profils de liaison aux [récepteurs](https://fr.wikipedia.org/wiki/R%C3%A9cepteur_(biochimie)). Les substances qui touchent les mêmes récepteurs dans les mêmes proportions se retrouvent proches ; celles aux mécanismes sans rapport se retrouvent éloignées. C'est une page compagnon de [neurarium](https://neurarium.olicorne.org/), un atlas 3D interactif du cerveau pour les neurosciences psychiatriques, entièrement construite à partir du jeu de données sourcé que neurarium sert librement.
 
 Elle permet par exemple d'afficher les antipsychotiques de manière à représenter leur affinité dopaminergique, cholinergique et histaminergique (cliquer sur l'image pour ouvrir cette vue) :
 
@@ -14,9 +14,9 @@ Elle a été réalisée avec l'aide de [Claude Code](https://claude.com/claude-c
 
 ## Ce que montre la carte
 
-Chaque substance devient un vecteur, puis une analyse en composantes principales (ACP) projette tous ces vecteurs sur les deux axes qui écartent le plus les substances. L'ACP est recalculée pour ce que les filtres laissent à l'écran : filtrer sur les antipsychotiques donne les axes qui séparent le mieux *les antipsychotiques*, pas toute la liste.
+Chaque substance devient un vecteur, puis une [analyse en composantes principales](https://fr.wikipedia.org/wiki/Analyse_en_composantes_principales) (ACP) projette tous ces vecteurs sur les deux axes qui écartent le plus les substances. L'ACP est recalculée pour ce que les filtres laissent à l'écran : filtrer sur les antipsychotiques donne les axes qui séparent le mieux *les antipsychotiques*, pas toute la liste.
 
-Un exemple concret du vecteur d'une substance, en mode « Récepteurs » : un nombre par cible, l'affinité `pKi - 5` avec `pKi = 9 - log10(Ki en nM)`.
+Un exemple concret du vecteur d'une substance, en mode « Récepteurs » : un nombre par cible, l'[affinité](https://fr.wikipedia.org/wiki/Constante_de_dissociation) `pKi - 5` avec `pKi = 9 - log10(Ki en nM)`.
 
 ```python
 # Ki 1 nM -> pKi 9 -> 4.0 ; Ki 100 nM -> pKi 7 -> 2.0 ; Ki >= 10 µM -> 0 (trop faible pour compter)
@@ -28,20 +28,20 @@ Par défaut seules les affinités mesurées comptent : une substance sans aucun 
 
 Réglages (des boîtes repliées au-dessus du graphique) :
 
-- **Placer selon :** les affinités aux récepteurs, le tonus net par neurotransmetteur (l'effet signé de la substance sur chaque système), ou les deux.
-- **Signé :** un agoniste et un antagoniste du même récepteur partent dans des directions opposées.
+- **Placer selon :** les affinités aux récepteurs, le tonus net par [neurotransmetteur](https://fr.wikipedia.org/wiki/Neurotransmetteur) (l'effet signé de la substance sur chaque système), ou les deux.
+- **Signé :** un [agoniste](https://fr.wikipedia.org/wiki/Agoniste) et un [antagoniste](https://fr.wikipedia.org/wiki/Antagoniste) du même récepteur partent dans des directions opposées.
 - **Cibles :** restreindre les vecteurs à certaines cibles ; en choisir une ou deux en fait directement les axes (sans ACP).
 - **Filtrer les points par :** classe, année de première autorisation, commercialisées uniquement.
-- **Couleur selon :** classe, nomenclature NbN, année d'autorisation, laboratoire d'origine, métabolisme, ou couverture des Ki.
+- **Couleur selon :** classe, nomenclature [NbN](https://nbn2r.com/), année d'autorisation, laboratoire d'origine, [métabolisme](https://fr.wikipedia.org/wiki/Métabolisme_des_médicaments), ou couverture des Ki.
 - **Graphique :** molette / pincement pour zoomer, glisser pour déplacer, rotation à deux doigts pour tourner, bouton plein écran.
 
 Cliquer sur une substance l'ouvre dans l'atlas 3D de neurarium (sa fiche complète : liaisons avec leurs sources citées, métabolisme, histoire...). Un clic droit ou un appui long la masque de la carte. Toute la vue est dans la barre d'adresse : une URL est un lien partageable vers exactement ce qui est à l'écran.
 
 ## D'où viennent les données
 
-Tout vient des fichiers de données publics de neurarium (`/data/*.jsonl`, décrits dans [`llms.txt`](https://neurarium.olicorne.org/llms.txt), avec une page Markdown par nœud sous [`/api/`](https://neurarium.olicorne.org/api/)). Les liaisons viennent du Prescriber's Guide de Stahl, de la base de Ki PDSP, du Guide to Pharmacology IUPHAR/BPS et de Wikipédia ; chaque liaison porte sa source citée et un niveau de provenance, consultables en cliquant sur la substance. Cette page est un exemple de ce que l'on peut construire sur ce jeu de données ouvert.
+Tout vient des fichiers de données publics de neurarium (`/data/*.jsonl`, décrits dans [`llms.txt`](https://neurarium.olicorne.org/llms.txt), avec une page Markdown par nœud sous [`/api/`](https://neurarium.olicorne.org/api/)). Les liaisons viennent du Prescriber's Guide de Stahl, de la [base de Ki PDSP](https://pdspdb.unc.edu/databases/kidb.php), du [Guide to Pharmacology IUPHAR/BPS](https://www.guidetopharmacology.org/) et de Wikipédia ; chaque liaison porte sa source citée et un niveau de provenance, consultables en cliquant sur la substance. Cette page est un exemple de ce que l'on peut construire sur ce jeu de données ouvert.
 
-**Limites :** c'est une visualisation exploratoire, pas un avis médical. Les Ki sont mesurés in vitro, souvent sur des récepteurs de rongeur, et ne disent rien de la dose réellement atteinte dans un cerveau ; une ACP ne garde que les deux directions les plus étalées, donc deux substances proches sur la carte peuvent différer sur une cible que les axes ne captent pas (la légende des axes indique quelles cibles pèsent le plus sur chacun).
+**Limites :** c'est une visualisation exploratoire, pas un avis médical. Les Ki sont mesurés [in vitro](https://fr.wikipedia.org/wiki/In_vitro), souvent sur des récepteurs de rongeur, et ne disent rien de la dose réellement atteinte dans un cerveau ; une ACP ne garde que les deux directions les plus étalées, donc deux substances proches sur la carte peuvent différer sur une cible que les axes ne captent pas (la légende des axes indique quelles cibles pèsent le plus sur chacun).
 
 ## Hébergement
 
