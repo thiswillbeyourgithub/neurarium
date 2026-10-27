@@ -1,6 +1,27 @@
 {
   "versions": [
     {
+      "version": "3.146.0",
+      "date": "2026-10-27",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "The drugs map places drugs by measured affinities only: drugs with no measured Ki are no longer shown, and a new “Measured Ki only” switch (on by default) leaves out bindings without one instead of guessing their strength. “Filter by” is now “Filter points by” and comes before “Color by”",
+          "commits": [
+            "fa293f9"
+          ]
+        },
+        {
+          "category": "docs",
+          "text": "In the README, the drugs map links to its own README, with the live site in parentheses",
+          "commits": [
+            "e71937b",
+            "8bb4df0"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.145.2",
       "date": "2026-10-27",
       "entries": [
