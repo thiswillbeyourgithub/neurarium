@@ -1,6 +1,8 @@
 // Small DOM helpers shared by the drug map's modules (view, controls, gestures), and the
 // plot's fixed frame: W x H viewBox units, rotation about its centre.
 
+import { foldText } from "../search/query.js";
+
 export const SVG = "http://www.w3.org/2000/svg";
 export const W = 1000, H = 640;
 export const LONG_PRESS_MS = 500;
@@ -24,6 +26,41 @@ export const svgEl = (tag, attrs) => {
   for (const [k, v] of Object.entries(attrs || {})) e.setAttribute(k, v);
   return e;
 };
+
+/**
+ * A search box over a grouped chip list (`.dm-tgroup` = a `.dm-tgroup-head` + its
+ * `.dm-titems` chips), so a long list (60+ targets, 40+ classes) is found by typing
+ * instead of scrolling. Matching folds case, accents, Greek letters and dashes like the
+ * main search (`foldText`), so "5ht2a" finds "5-HT2A". A chip shows when it matches or
+ * its group heading does (typing "dopamine" keeps every dopamine target); a group left
+ * with no chip hides. Filtering only hides chips, it never changes the selection.
+ * `apply()` re-filters, for a list rebuilt after typing (the axes list re-renders).
+ * @param {HTMLElement} list
+ * @param {string} placeholder
+ * @returns {{input: HTMLInputElement, apply: () => void}}
+ */
+export function chipSearch(list, placeholder) {
+  const input = el("input", "dm-search");
+  input.type = "search";
+  input.placeholder = placeholder;
+  input.setAttribute("aria-label", placeholder);
+  const apply = () => {
+    const q = foldText(input.value.trim());
+    for (const group of list.querySelectorAll(".dm-tgroup")) {
+      const head = group.querySelector(".dm-tgroup-head");
+      const headHit = !q || foldText(head.textContent).includes(q);
+      let any = false;
+      for (const chip of group.querySelectorAll(".dm-titems .dm-chip")) {
+        const hit = headHit || foldText(chip.textContent).includes(q);
+        chip.hidden = !hit;
+        any = any || hit;
+      }
+      group.hidden = !any;
+    }
+  };
+  input.addEventListener("input", apply);
+  return { input, apply };
+}
 
 /** A folded section: a rounded box whose summary names it and shows its current value. */
 export function foldBox(title, cls = "") {

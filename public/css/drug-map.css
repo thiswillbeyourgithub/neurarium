@@ -107,6 +107,22 @@
   pointer-events: none;
   user-select: none;
 }
+/* chipSearch's box (js/drug-map/dom.js) above a grouped chip list; the chips and groups
+   it hides carry [hidden], which the chips' own display rule would otherwise beat. */
+.dm-search {
+  box-sizing: border-box;
+  width: min(100%, 320px);
+  margin: 4px 0 2px;
+  padding: 4px 8px;
+  font: inherit;
+  font-size: 12px;
+  color: var(--text);
+  background: rgba(var(--ink), 0.06);
+  border: 1px solid rgba(var(--ink), 0.15);
+  border-radius: 6px;
+}
+.dm-search:focus { outline: none; border-color: var(--accent); }
+.dm-tlist [hidden] { display: none !important; }
 /* Pickers: each group's heading above its indented items. */
 .dm-tbar { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; margin: 6px 0; }
 .dm-hint { font-size: 11px; color: var(--muted); }

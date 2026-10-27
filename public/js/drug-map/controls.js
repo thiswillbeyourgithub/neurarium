@@ -5,7 +5,7 @@
 // drops (`pickOrDrop`, `pickSet`).
 
 import { categoryColor, COLOR_MODES, FEATURE_SOURCES, pickSet, primaryCategory, TONE_PREFIX } from "./model.js";
-import { button, el, foldBox, pickOrDrop } from "./dom.js";
+import { button, chipSearch, el, foldBox, pickOrDrop } from "./dom.js";
 import { groupTargetsBySystem } from "../legend/targets.js";
 
 const { t } = window.__I18N__;
@@ -71,7 +71,8 @@ export function createControls({ data, drugs, nameOf, featureKeys, getView, setV
     button("dm-chip", t("drugmap.pickAll"), () => setView({ only: null })),
     button("dm-chip", t("drugmap.pickNone"), () => setView({ only: [] })),
     el("span", "dm-hint", t("drugmap.pickTip")));
-  axesPanel.append(axesBar, axesList);
+  const axesSearch = chipSearch(axesList, t("drugmap.searchTargets"));
+  axesPanel.append(axesSearch.input, axesBar, axesList);
   inputs.body.append(row(t("drugmap.type"), sourceSwitch), row(t("drugmap.axes"), axesBtn, axesValue), axesPanel);
 
   // ---- Color by.
@@ -130,7 +131,8 @@ export function createControls({ data, drugs, nameOf, featureKeys, getView, setV
     box.append(head, items);
     catList.appendChild(box);
   }
-  filter.body.append(filterBar, catList);
+  const catSearch = chipSearch(catList, t("drugmap.searchClasses"));
+  filter.body.append(catSearch.input, filterBar, catList);
 
   // ---- Advanced: the switches, all on by default.
   const advanced = foldBox(t("drugmap.sec.advanced"));
@@ -181,6 +183,7 @@ export function createControls({ data, drugs, nameOf, featureKeys, getView, setV
         box.append(head, items);
         return box;
       }));
+      axesSearch.apply();
     }
     axesBtn.classList.toggle("active", !axesPanel.hidden);
     const n = view.only ? view.only.filter((k) => universe.includes(k)).length : universe.length;
