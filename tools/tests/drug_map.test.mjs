@@ -174,6 +174,51 @@ test("layout: names never overlap a dot or each other, and fall back to another 
   assert.equal(placeLabels([{ id: "c", x: 2, y: 2, text: "Long name here" }], { ...o, width: 20, height: 20 }).size, 0);
 });
 
+test("layout: a crowded dot floats its name on a leader that crosses no name", () => {
+  const measure = (s) => s.length * 7;
+  const o = { font: 12, r: 4, width: 600, height: 400, measure };
+  // A tight 3 x 3 block: the centre dot's 8 touching positions are all covered, so it
+  // can only be named on a farther ring, through a leader.
+  const pts = [];
+  for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) pts.push({ id: `p${i}${j}`, x: 300 + i * 12, y: 200 + j * 12, text: `N${i}${j}` });
+  const out = placeLabels(pts, o);
+  assert.equal(out.size, 9);
+  const floated = [...out.values()].filter((v) => v.leader);
+  assert.ok(floated.length > 0);
+  const boxes = [...out].map(([id, v]) => ({ id, x: v.x, y: v.y - 12, w: measure(pts.find((p) => p.id === id).text), h: 12 * 1.3 }));
+  const hit = (a, c) => a.x < c.x + c.w && c.x < a.x + a.w && a.y < c.y + c.h && c.y < a.y + a.h;
+  for (const a of boxes) for (const c of boxes) if (a !== c) assert.ok(!hit(a, c), `${a.id} vs ${c.id}`);
+  // No leader runs through another name (sampled along the line).
+  for (const [id, v] of out) {
+    if (!v.leader) continue;
+    const L = v.leader;
+    for (let s = 0; s <= 20; s++) {
+      const x = L.x1 + (L.x2 - L.x1) * s / 20, y = L.y1 + (L.y2 - L.y1) * s / 20;
+      for (const c of boxes) if (c.id !== id) assert.ok(!hit({ x, y, w: 0.01, h: 0.01 }, c), `${id} leader over ${c.id}`);
+    }
+  }
+});
+
+test("layout: the repair pass names more dots, and `avoid` boxes stay clear", () => {
+  const measure = (s) => s.length * 7;
+  const o = { font: 12, r: 4, width: 400, height: 300, measure, rings: 1 };
+  // A dense random cloud (fixed seed): moving one blocking name aside frees room.
+  let seed = 1;
+  const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const cloud = Array.from({ length: 60 }, (_, i) => ({ id: `c${i}`, x: 50 + rnd() * 300, y: 50 + rnd() * 200, text: `Name${i}` }));
+  const withRepair = placeLabels(cloud, o), without = placeLabels(cloud, { ...o, repair: false });
+  assert.ok(withRepair.size > without.size, `${withRepair.size} vs ${without.size}`);
+  const boxes = [...withRepair].map(([id, v]) => ({ x: v.x, y: v.y - 12, w: measure(cloud.find((p) => p.id === id).text), h: 12 * 1.3 }));
+  const hit = (a, c) => a.x < c.x + c.w && c.x < a.x + a.w && a.y < c.y + c.h && c.y < a.y + a.h;
+  for (const a of boxes) for (const c of boxes) if (a !== c) assert.ok(!hit(a, c));
+  for (const a of boxes) for (const p of cloud) assert.ok(!hit(a, { x: p.x - 4, y: p.y - 4, w: 8, h: 8 }));
+  // A name never lands on an avoided box (the watermark).
+  const solo = [{ id: "x", x: 200, y: 150, text: "Xx" }];
+  const right = placeLabels(solo, o).get("x");
+  const moved = placeLabels(solo, { ...o, avoid: [{ x: 200, y: 130, w: 60, h: 40 }] }).get("x");
+  assert.ok(right.x > 200 && moved.x < 200);
+});
+
 test("colorize nbn: each nomenclature takes the class colour it shares most drugs with", () => {
   const catLabels = { atyp: "Atypical", ssri: "SSRI", other: "Other" };
   const d = (id, cat, nbn) => drug(id, [], { categories: [cat], nbn });

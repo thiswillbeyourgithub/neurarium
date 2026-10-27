@@ -103,11 +103,11 @@ export function createFocus({ svg, onOpen, onHide }) {
     // getBBox needs the text in the document, hence after the append (viewBox units).
     const boxes = shown.map(({ txt }) => txt.getBBox());
     for (const n of svg.querySelectorAll("text.dm-label")) {
-      if (shown.some(({ id }) => id === n.dataset.drug)) n.classList.add("dm-label-under");
-      else {
-        const nb = n.getBBox();
-        if (boxes.some((fb) => boxesOverlap(fb, nb))) n.classList.add("dm-label-under");
-      }
+      const id = n.dataset.drug;
+      if (!shown.some((s) => s.id === id) && !boxes.some((fb) => boxesOverlap(fb, n.getBBox()))) continue;
+      n.classList.add("dm-label-under");
+      // Its leader line (a floated name, layout.js) goes with it.
+      for (const l of svg.querySelectorAll(`line.dm-name-leader[data-drug="${CSS.escape(id)}"]`)) l.classList.add("dm-label-under");
     }
   }
 

@@ -106,8 +106,8 @@ export function createDrugMap({ data, onChange }) {
   // What is on screen, in one sentence (title.js), over the top of the plot; fitPoints
   // keeps the points below it, however many lines it wraps to.
   const plotTitleEl = el("div", "dm-plot-title");
-  plotWrap.append(svg, plotTitleEl, fsBtn, unrotate, busy, el("span", "dm-watermark",
-    `${t("drugmap.watermark")} v${window.__APP_VERSION__} · ${location.host}`));
+  const watermark = el("span", "dm-watermark", `${t("drugmap.watermark")} v${window.__APP_VERSION__} · ${location.host}`);
+  plotWrap.append(svg, plotTitleEl, fsBtn, unrotate, busy, watermark);
   const legendBox = foldBox(t("drugmap.sec.legend"));
   const legend = el("div", "dm-legend");
   legendBox.body.append(legend);
@@ -342,10 +342,21 @@ export function createDrugMap({ data, onChange }) {
     if (settled && view.labels) {
       measureCtx.font = `${font}px ${getComputedStyle(svg).fontFamily}`;
       const shifted = inView.map((q) => (moved.has(q.id) ? { ...q, ...moved.get(q.id) } : q));
-      const names = placeLabels(shifted, { font, r, width, height, measure: (s) => measureCtx.measureText(s).width });
+      // The watermark sits over the plot's corner: names keep clear of it.
+      const sr = svg.getBoundingClientRect(), wr = watermark.getBoundingClientRect();
+      const avoid = wr.width ? [{ x: wr.left - sr.left, y: wr.top - sr.top, w: wr.width, h: wr.height }] : [];
+      const names = placeLabels(shifted, { font, r, width, height, avoid, measure: (s) => measureCtx.measureText(s).width });
       for (const q of shifted) {
         const pos = names.get(q.id);
         if (!pos) continue;
+        // A name floated away from a crowded dot (layout.js rings > 0) keeps a thin line back to it.
+        if (pos.leader) {
+          const L = pos.leader;
+          const line = svgEl("line", { x1: b.x + L.x1 * k, y1: b.y + L.y1 * k, x2: b.x + L.x2 * k, y2: b.y + L.y2 * k,
+            class: "dm-name-leader", "stroke-width": k });
+          line.dataset.drug = q.id;
+          g.appendChild(line);
+        }
         const txt = svgEl("text", { x: b.x + pos.x * k, y: b.y + pos.y * k, class: "dm-label", "font-size": font * k });
         txt.textContent = q.text;
         linkDrug(txt, q.p);
