@@ -1,5 +1,5 @@
-// The drug map's control boxes, each a rounded <details> folded by default whose
-// summary shows its current value: Inputs (feature type + the axes picker), Filter
+// The drug map's control boxes, each a rounded <details> whose summary shows its
+// current value: Presets (open, one button per js/drug-map/presets.js view), Inputs (feature type + the axes picker), Filter
 // points by (classes grouped into families), Color by and Advanced (the switches). Built once;
 // `render()` reflects the view. In both lists a click picks, shift-click or long-press
 // drops (`pickOrDrop`, `pickSet`).
@@ -7,6 +7,7 @@
 import { categoryColor, COLOR_MODES, FEATURE_SOURCES, pickSet, primaryCategory, TONE_PREFIX } from "./model.js";
 import { button, chipSearch, el, foldBox, pickOrDrop } from "./dom.js";
 import { groupTargetsBySystem } from "../legend/targets.js";
+import { matchesPreset, PRESETS, presetView } from "./presets.js";
 
 const { t } = window.__I18N__;
 
@@ -34,6 +35,18 @@ export function createControls({ data, drugs, nameOf, featureKeys, getView, setV
     r.append(el("span", "dm-row-label", label), ...kids);
     return r;
   };
+
+  // ---- Presets: a click replaces the whole view (presetView starts from the defaults).
+  const presets = foldBox(t("drugmap.sec.presets"));
+  presets.box.open = true;
+  const presetRow = el("div", "dm-controls dm-presets");
+  const presetBtns = PRESETS.map((p) => {
+    const b = button("dm-chip", t(`drugmap.preset.${p.id}`), () => setView(presetView(p)));
+    b.dataset.preset = p.id;
+    return { p, b };
+  });
+  presetRow.append(...presetBtns.map((x) => x.b));
+  presets.body.append(presetRow);
 
   // ---- Inputs: feature type, then the axes (targets grouped by transmitter system in
   // the Receptors & targets legend's order, the net-tone features as one last group).
@@ -154,6 +167,9 @@ export function createControls({ data, drugs, nameOf, featureKeys, getView, setV
     for (const b of sourceSwitch.children) b.classList.toggle("active", b.dataset.mode === view.source);
     for (const b of colorSwitch.children) b.classList.toggle("active", b.dataset.mode === view.color);
     for (const x of toggles) x.input.checked = view[x.key];
+    const lit = presetBtns.find(({ p }) => matchesPreset(view, p));
+    for (const { b } of presetBtns) b.classList.toggle("active", b === lit?.b);
+    presets.setValue(lit ? lit.b.textContent : "");
 
     // Axes.
     const groups = groupsFor(view.source);
@@ -218,5 +234,5 @@ export function createControls({ data, drugs, nameOf, featureKeys, getView, setV
     ].filter(Boolean).join(" · "));
   }
 
-  return { boxes: [inputs.box, filter.box, color.box, advanced.box], render };
+  return { boxes: [presets.box, inputs.box, filter.box, color.box, advanced.box], render };
 }
