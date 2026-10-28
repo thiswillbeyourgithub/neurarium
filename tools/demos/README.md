@@ -44,12 +44,15 @@ uv run tools/demos/neurarium.py --story compare # one story
 uv run tools/demos/neurarium.py --fps 30        # half the capture time (draft takes)
 uv run tools/demos/neurarium.py --out-dir /tmp/nd
 uv run tools/demos/neurarium.py --keep-frames   # keep the PNGs to re-encode without re-recording
-uv run tools/demos/neurarium.py --posters-only  # only re-grab the README gallery stills (<base>.poster.webp) from the AV1s
 ```
 
 A 60 fps take of a ~20 s story captures ~1200 frames at about 7 frames/s of wall clock, so roughly 3-5 minutes plus encoding.
 
-The README shows only the hero animated: a README cannot stop an `<img>` from autoplaying, and several animated WebPs at once bog a phone down, so the gallery shows each story's still (`Story.poster`, seconds into the take, grabbed after every recording) linking to its animated WebP.
+The neurarium README does not embed these files: a README cannot pause an `<img>`, and several autoplaying animated WebPs bog a phone down. It shows GitHub video players instead, which GitHub renders only for a video uploaded through its web UI (dragged into an issue comment or the web editor, never submitted), giving a `https://github.com/user-attachments/assets/<id>` URL put on its own line. After re-recording a story, make its upload copy (H.264, since older iPhones cannot decode AV1; free accounts cap uploads at 10 MB), upload it, and swap the new URL into `README.md` + `README.fr.md`:
+
+```sh
+ffmpeg -i docs/videos/<base>.av1.mp4 -vf scale=1280:-2:flags=lanczos -c:v libx264 -preset slow -crf 20 -pix_fmt yuv420p -movflags +faststart -an <base>.mp4
+```
 
 ## Write your own scenario
 

@@ -207,15 +207,14 @@ class Story(NamedTuple):
     path: str = ""            # start page
     height: int = 720         # viewport height (the drugs map needs its whole chart)
     webp_width: int = 1280    # the dense flow of `compare` would weigh ~12 MB at 1280
-    poster: float | None = None  # seconds in: a still for the README gallery (None = no still)
 
 
 STORIES = {
     "drug": Story(story_drug, "preview"),
-    "anatomy": Story(story_anatomy, "demo-anatomy", poster=17),
-    "compare": Story(story_compare, "demo-compare", webp_width=960, poster=28),
-    "drugsmap": Story(story_drugsmap, "demo-drugsmap", "drugs-map.html", height=1240, poster=6),
-    "receptor": Story(story_receptor, "demo-receptor", poster=14),
+    "anatomy": Story(story_anatomy, "demo-anatomy"),
+    "compare": Story(story_compare, "demo-compare", webp_width=960),
+    "drugsmap": Story(story_drugsmap, "demo-drugsmap", "drugs-map.html", height=1240),
+    "receptor": Story(story_receptor, "demo-receptor"),
 }
 
 
@@ -224,22 +223,6 @@ def _out_dirs(args: argparse.Namespace) -> tuple[Path, Path]:
     if args.out_dir:
         return Path(args.out_dir), Path(args.out_dir)
     return REPO_ROOT / "docs" / "images", REPO_ROOT / "docs" / "videos"
-
-
-def make_poster(name: str, args: argparse.Namespace) -> None:
-    """Grab the story's still off its AV1 into `<base>.poster.webp`. A README
-    cannot stop an animated image from autoplaying, so the gallery shows these
-    stills, each linking to its animated WebP."""
-    story = STORIES[name]
-    if story.poster is None:
-        return
-    images, videos = _out_dirs(args)
-    out = images / f"{story.base}.poster.webp"
-    subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", str(story.poster),
-                    "-i", str(videos / f"{story.base}.av1.mp4"), "-frames:v", "1",
-                    "-vf", "scale=960:-1:flags=lanczos", "-c:v", "libwebp",
-                    "-quality", "85", str(out)], check=True)
-    print(f"[neurarium] poster: {out} ({out.stat().st_size / 1024:.0f}KB)", flush=True)
 
 
 def record(port: int, name: str, args: argparse.Namespace) -> None:
@@ -259,7 +242,6 @@ def record(port: int, name: str, args: argparse.Namespace) -> None:
         keep_frames=args.keep_frames,
     ) as d:
         story.run(d)
-    make_poster(name, args)
 
 
 def main() -> None:
@@ -270,14 +252,8 @@ def main() -> None:
     ap.add_argument("--fps", type=int, default=60, help="capture framerate (the AV1 keeps it)")
     ap.add_argument("--headed", action="store_true", help="show a visible window")
     ap.add_argument("--keep-frames", action="store_true", help="keep the PNG frames (to re-encode)")
-    ap.add_argument("--posters-only", action="store_true",
-                    help="only re-grab the README stills from the existing AV1s")
     args = ap.parse_args()
     names = list(STORIES) if args.story == "all" else [args.story]
-    if args.posters_only:
-        for name in names:
-            make_poster(name, args)
-        return
 
     port = _free_port()
     server = subprocess.Popen(
