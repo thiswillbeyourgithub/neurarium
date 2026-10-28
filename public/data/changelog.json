@@ -1,6 +1,26 @@
 {
   "versions": [
     {
+      "version": "3.151.0",
+      "date": "2026-10-28",
+      "entries": [
+        {
+          "category": "added",
+          "text": "DrugsMap's Legend has a new Extra details section: the numbers behind the map in tabs (input coordinates, normalized input coordinates, axis weights, PCA formula) as coloured JSON Lines, each with a copy button, plus one to copy every tab. The axis meaning now sits in the Legend itself.",
+          "commits": [
+            "79ecbce"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "A ⋮ menu at the top right of DrugsMap's plot: fullscreen, reset rotation, and copy the plot as an image.",
+          "commits": [
+            "257f72e"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.150.0",
       "date": "2026-10-28",
       "entries": [
