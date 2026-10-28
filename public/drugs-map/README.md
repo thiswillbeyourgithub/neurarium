@@ -8,6 +8,10 @@ For example, it can lay out the antipsychotics so as to show their dopaminergic,
 
 [![DrugsMap: the atypical and conventional antipsychotics placed by their dopamine, cholinergic and histamine binding](screenshot.en.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmmkt=0&dmtgt=aadc,comt,d1,d2,d3,d4,d5,dat,mao_b,vmat2,ache,bche,m1,m2,m3,m4,m5,nachr_a4b2,nachr_a7,h1,h2,h3,h4)
 
+Here it is in motion: every drug by its whole binding profile, then the antipsychotic presets (D2 against 5-HT2A, then the side-effect receptors), hovering a few drugs:
+
+https://github.com/user-attachments/assets/567c9c1e-7af2-4b72-bb72-bd8a5282450c
+
 **Live:** [drugsmap.olicorne.org](https://drugsmap.olicorne.org/) (also at [neurarium.olicorne.org/drugs-map](https://neurarium.olicorne.org/drugs-map))
 
 **Contents:** [Presets](#presets) · [What you are looking at](#what-you-are-looking-at) · [Where the data comes from](#where-the-data-comes-from) · [Hosting](#hosting)

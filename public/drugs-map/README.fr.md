@@ -8,6 +8,10 @@ Elle permet par exemple d'afficher les antipsychotiques de manière à représen
 
 [![DrugsMap : les antipsychotiques atypiques et conventionnels placés selon leurs liaisons dopaminergiques, cholinergiques et histaminiques](screenshot.fr.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmmkt=0&dmtgt=aadc,comt,d1,d2,d3,d4,d5,dat,mao_b,vmat2,ache,bche,m1,m2,m3,m4,m5,nachr_a4b2,nachr_a7,h1,h2,h3,h4)
 
+La voici en mouvement : chaque médicament selon son profil de liaison complet, puis les préréglages antipsychotiques (D2 contre 5-HT2A, puis les récepteurs des effets indésirables), en survolant quelques médicaments :
+
+https://github.com/user-attachments/assets/567c9c1e-7af2-4b72-bb72-bd8a5282450c
+
 **En ligne :** [drugsmap.olicorne.org](https://drugsmap.olicorne.org/) (aussi sur [neurarium.olicorne.org/drugs-map](https://neurarium.olicorne.org/drugs-map))
 
 **Sommaire :** [Préréglages](#préréglages) · [Ce que montre la carte](#ce-que-montre-la-carte) · [D'où viennent les données](#doù-viennent-les-données) · [Hébergement](#hébergement)
