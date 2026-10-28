@@ -85,6 +85,7 @@
 .dm-label:hover { text-decoration: underline; }
 /* focus.js: a placed name under the focus name (or its own drug's) steps aside. */
 .dm-label.dm-label-under, .dm-name-leader.dm-label-under { visibility: hidden; }
+.dm-label.dm-label-focus { font-weight: 700; }
 /* view.js: the thin line from a crowded dot to its floated name (layout.js rings). */
 .dm-name-leader { stroke: rgba(var(--ink), 0.35); pointer-events: none; }
 /* focus.js: the meant drug's ring and name, over everything, with a halo in the plot's

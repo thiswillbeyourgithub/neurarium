@@ -8,9 +8,11 @@
 // - touch: a tap on or near a dot (NEAR_PX.touch, a finger is wider) selects it (name +
 //   ring); a second tap on the same dot opens it. A tap on empty plot clears it.
 // - right-click / long-press hides the meant drug, as before.
-// The focus name is drawn larger than the placed names, and while it shows, the placed
-// names it would collide with (its own drug's included, so a name never shows twice)
-// are hidden (`dm-label-under`), so it reads cleanly inside a crowded cluster.
+// A drug whose name layout.js already placed keeps that name, only boldened in place
+// (`dm-label-focus`): drawing a second copy elsewhere made the eye jump. A nameless drug
+// gets a focus name, drawn larger than the placed names, and while it shows, the placed
+// names it would collide with are hidden (`dm-label-under`), so it reads cleanly inside
+// a crowded cluster.
 // "Near" is measured from the pointer, so a tap between two dots picks the closer one,
 // and a tiny dot needs no pixel-exact aim. The mouse hover is sticky (`stickyNearest`):
 // between two close dots a plain nearest-dot test flips at the exact midpoint, so a
@@ -111,7 +113,7 @@ export function createFocus({ svg, onOpen, onHide }) {
 
   function paint() {
     layer.replaceChildren();
-    for (const n of svg.querySelectorAll(".dm-label-under")) n.classList.remove("dm-label-under");
+    for (const n of svg.querySelectorAll(".dm-label-under, .dm-label-focus")) n.classList.remove("dm-label-under", "dm-label-focus");
     if (!frame) return;
     const { k, r, font, b } = frame;
     const shown = [];
@@ -119,6 +121,8 @@ export function createFocus({ svg, onOpen, onHide }) {
       const d = id && frame.dots.find((x) => x.id === id);
       if (!d) continue;
       layer.appendChild(svgEl("circle", { cx: d.x, cy: d.y, r: (r + 3) * k, class: "dm-focus-ring", "stroke-width": 2 * k }));
+      const placed = svg.querySelector(`text.dm-label[data-drug="${CSS.escape(id)}"]`);
+      if (placed) { placed.classList.add("dm-label-focus"); continue; }
       // Right of the dot, or left of it when the name would run off the frame.
       const left = d.x > b.x + b.w * 0.7;
       const txt = svgEl("text", {
@@ -136,7 +140,8 @@ export function createFocus({ svg, onOpen, onHide }) {
     const boxes = shown.map(({ txt }) => txt.getBBox());
     for (const n of svg.querySelectorAll("text.dm-label")) {
       const id = n.dataset.drug;
-      if (!shown.some((s) => s.id === id) && !boxes.some((fb) => boxesOverlap(fb, n.getBBox()))) continue;
+      // A boldened placed name stays, whatever a focus name overlaps.
+      if (n.classList.contains("dm-label-focus") || !boxes.some((fb) => boxesOverlap(fb, n.getBBox()))) continue;
       n.classList.add("dm-label-under");
       // Its leader line (a floated name, layout.js) goes with it.
       for (const l of svg.querySelectorAll(`line.dm-name-leader[data-drug="${CSS.escape(id)}"]`)) l.classList.add("dm-label-under");
