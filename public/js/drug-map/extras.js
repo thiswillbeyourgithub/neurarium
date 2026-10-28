@@ -6,15 +6,13 @@
 //                          features, which are plotted raw, see view.js `direct`)
 //   axis weights           {"feature":"D2","PC1":0.45,"PC2":-0.1,"mean":0.12}   each input
 //                          axis' weight on each map axis, and the mean the PCA centred on
-//   PCA formula            {"step":3,"name":"center","formula":"c[f] = u[f] - mean[f]",...}
 // The text builders are DOM-free (node tests, tools/tests/drug_map_extras.test.mjs); the
 // tabs are built once and fill lazily: a tab's text is only computed while the box is open
 // and that tab is shown, since the coordinates of every drug run to hundreds of lines.
 
 import { button, el, foldBox } from "./dom.js";
-import { EFFECT_SIGN, PKI_FLOOR } from "./model.js";
 
-export const TABS = ["input", "normalized", "weights", "formula"];
+export const TABS = ["input", "normalized", "weights"];
 
 // 4 decimals: enough to recompute a position, short enough to read.
 const round = (x) => Math.round(x * 1e4) / 1e4;
@@ -58,40 +56,6 @@ export function weightsText(pcs, direct, nameOf) {
     }
   });
   return [...rows.values()].sort((a, b) => Math.abs(b.PC1) - Math.abs(a.PC1)).map(line).join("\n");
-}
-
-/**
- * The transform from a drug's bindings to its dot, step by step, with this view's
- * settings and counts filled in. `formula` is maths (language-neutral), `what` the words.
- * @param {{view: object, direct: string[]|null, pcs: object[]|null, n: number, features: number,
- *   nameOf: (key: string) => string, t: Function}} ctx
- * @returns {string}
- */
-export function formulaText({ view, direct, pcs, n, features, nameOf, t }) {
-  const steps = [];
-  const add = (name, formula, extra = {}) => steps.push({ step: steps.length + 1, name, formula, ...extra });
-  const src = view.sources;
-  if (src.includes("receptors")) {
-    add("receptor affinity", `a[f] = max(0, pKi - ${PKI_FLOOR}), pKi = 9 - log10(Ki nM)`
-      + (view.signed ? ` ; v[f] = a[f] * sign(effect), ${Object.entries(EFFECT_SIGN).map(([k, s]) => `${k} ${s > 0 ? "+" : ""}${s}`).join(", ")}` : " ; v[f] = a[f]"),
-    { what: t(view.measuredKi ? "drugmap.fx.receptorsMeasured" : "drugmap.fx.receptors"), signed: view.signed });
-  }
-  if (src.includes("tone")) add("neurotransmitter tone", "v[tone:k] = net tone sum of system k", { what: t("drugmap.fx.tone") });
-  if (src.includes("effects")) add("body effects", "v[effect:e] = max a[f] over the bindings behind e", { what: t("drugmap.fx.effects") });
-  if (direct) {
-    add("axes", `x = v[${nameOf(direct[0])}]` + (direct[1] ? `, y = v[${nameOf(direct[1])}]` : ", y = 0"),
-      { what: t("drugmap.fx.direct") });
-  } else {
-    add("normalize", view.normalize ? "u[f] = v[f] / sqrt(sum over g in block(f) of v[g]^2)" : "u[f] = v[f]",
-      { what: t(view.normalize ? "drugmap.fx.normalize" : "drugmap.fx.noNormalize"), applied: view.normalize });
-    add("center", "c[f] = u[f] - mean[f]", { what: t("drugmap.fx.center"), drugs: n });
-    add("covariance", "C = sum over drugs of c c^T", { what: t("drugmap.fx.covariance"), features });
-    add("axes", "w1, w2 = top two eigenvectors of C",
-      { what: t("drugmap.fx.eigen"), PC1_share: pcs ? round(pcs[0].share) : 0, PC2_share: pcs && pcs[1] ? round(pcs[1].share) : 0 });
-    add("project", "x = sum_f c[f] * w1[f], y = sum_f c[f] * w2[f]", { what: t("drugmap.fx.project") });
-  }
-  add("screen", "one scale for x and y, y up", { what: t(view.spread ? "drugmap.fx.screenSpread" : "drugmap.fx.screen") });
-  return steps.map(line).join("\n");
 }
 
 // JSON tokens -> classed spans: a string followed by ":" is a key.
@@ -155,8 +119,7 @@ export function createExtras(t) {
       const s = state;
       cache.set(k, k === "input" ? coordinatesText(s.ids, s.raw(), s)
         : k === "normalized" ? coordinatesText(s.ids, s.profiles, s)
-          : k === "weights" ? weightsText(s.pcs, s.direct, s.nameOf)
-            : formulaText({ ...s, n: s.ids.length, features: s.featureCount }));
+          : weightsText(s.pcs, s.direct, s.nameOf));
     }
     return cache.get(k);
   };

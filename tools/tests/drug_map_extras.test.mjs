@@ -4,7 +4,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { coordinatesText, formulaText, weightsText } from "../../public/js/drug-map/extras.js";
+import { coordinatesText, weightsText } from "../../public/js/drug-map/extras.js";
 import { DEFAULT_VIEW, pca } from "../../public/js/drug-map/model.js";
 
 globalThis.window = { __I18N_MESSAGES__: {} };
@@ -38,18 +38,4 @@ test("weights: every feature with PC1, PC2 and the mean the PCA centred on", () 
   // Directly plotted features are the axes themselves.
   assert.deepEqual(parse(weightsText(null, ["d2", "h1"], nameOf)),
     [{ feature: "D2", x: 1, y: 0 }, { feature: "H1", x: 0, y: 1 }]);
-});
-
-test("formula: the steps follow the view (normalize, direct plot, sources)", () => {
-  const { axes } = pca(ids, prof);
-  const view = { ...DEFAULT_VIEW, hidden: new Set() };
-  const steps = parse(formulaText({ view, direct: null, pcs: axes, n: 3, features: 3, nameOf, t }));
-  assert.deepEqual(steps.map((s) => s.name),
-    ["receptor affinity", "normalize", "center", "covariance", "axes", "project", "screen"]);
-  assert.equal(steps.find((s) => s.name === "center").drugs, 3);
-  assert.equal(steps.find((s) => s.name === "axes").PC1_share, Math.round(axes[0].share * 1e4) / 1e4);
-  const direct = parse(formulaText({ view: { ...view, sources: ["receptors", "tone"] }, direct: ["d2", "h1"],
-    pcs: null, n: 3, features: 2, nameOf, t }));
-  assert.deepEqual(direct.map((s) => s.name), ["receptor affinity", "neurotransmitter tone", "axes", "screen"]);
-  assert.equal(direct[2].formula, "x = v[D2], y = v[H1]");
 });

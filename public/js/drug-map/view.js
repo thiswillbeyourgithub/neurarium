@@ -225,7 +225,6 @@ export function createDrugMap({ data, onChange }) {
       extras.update({
         view, t, nameOf, ids, profiles: prof, pcs, direct: direct ? view.only : null,
         drugName: (id) => names.get(id) || id,
-        featureCount: new Set(ids.flatMap((id) => [...prof.get(id).keys()])).size,
         raw: () => buildProfiles(drugs, { ...view, normalize: false }),
       });
     } finally {
