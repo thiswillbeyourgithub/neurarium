@@ -20,7 +20,7 @@ telling you how well it is sourced, so you always know how much to trust it.
 
 Live at **[neurarium.olicorne.org](https://neurarium.olicorne.org)**.
 
-[![neurarium demo](docs/images/preview.webp)](https://neurarium.olicorne.org)
+https://github.com/user-attachments/assets/957c90e6-b2d4-4cf4-993b-57ed08f03419
 
 > [!IMPORTANT]
 > <!-- SOURCED_HEADLINE:START --><b>97% of the 10321 knowledge nodes are sourced or verified</b><!-- SOURCED_HEADLINE:END -->
