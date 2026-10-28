@@ -3,6 +3,11 @@
 // Wheel or pinch zooms about the pointer / the fingers' midpoint, shift-wheel or a
 // two-finger twist rotates about it, one-finger drag pans, double-click refits (and
 // unrotates).
+//
+// The camera is bounded so it cannot lose the map: zooming out stops at MAX_UNZOOM x the
+// fitted frame (a little room to peek behind the watermark or the title, no more: further
+// out only shrinks the dots, and a wheel scroll meant for the page kept zooming out), and a
+// pan stops once half the screen shows empty space past the fitted frame (`clampBox`).
 
 import { W, H, rotate } from "./dom.js";
 
@@ -10,6 +15,34 @@ const ZOOM_STEP = 1.15;
 const ROTATE_STEP = Math.PI / 36; // 5 degrees per shift-wheel notch
 // A pointer moving less than this (px) is still a click, not a pan.
 const DRAG_SLOP_PX = 5;
+/** How far (x the fitted frame's width) the reader may zoom out. */
+export const MAX_UNZOOM = 1.1;
+
+/**
+ * Bound a viewBox against the fitted frame `fit`: at most MAX_UNZOOM x its width (shrunk
+ * about its own centre), and shifted so its centre stays inside `fit`, i.e. at most half the
+ * screen past the frame's edge. E.g. fit {x:0, y:0, w:1000, h:600} and a 500-wide box at
+ * x = 900 (centre 1150, past the right edge) comes back at x = 750 (centre 1000).
+ * DOM-free (node tests).
+ * @param {{x: number, y: number, w: number, h: number}} box
+ * @param {{x: number, y: number, w: number, h: number}} fit
+ * @returns {{x: number, y: number, w: number, h: number}}
+ */
+export function clampBox(box, fit) {
+  let { x, y, w, h } = box;
+  const maxW = fit.w * MAX_UNZOOM;
+  if (w > maxW) {
+    const k = maxW / w;
+    x += (w - maxW) / 2;
+    y += (h - h * k) / 2;
+    w = maxW;
+    h *= k;
+  }
+  const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+  x = clamp(x, fit.x - w / 2, fit.x + fit.w - w / 2);
+  y = clamp(y, fit.y - h / 2, fit.y + fit.h - h / 2);
+  return { x, y, w, h };
+}
 
 /**
  * @param {SVGSVGElement} svg
@@ -17,7 +50,10 @@ const DRAG_SLOP_PX = 5;
  * @param {(cam: {box: object|null, angle: number}) => void} set
  * @param {() => object} fitted  the frame shown when `box` is null
  */
-export function wireGestures(svg, get, set, fitted) {
+export function wireGestures(svg, get, rawSet, fitted) {
+  // Every gesture goes through the bounds; the zoom-out cap itself sits in `camAt` (so a
+  // capped wheel keeps the pointer's point still), clampBox's shrink is the pinch backstop.
+  const set = (cam) => rawSet(cam.box ? { ...cam, box: clampBox(cam.box, fitted()) } : cam);
   const frame = () => get().box || fitted();
   const frac = (ev) => {
     const r = svg.getBoundingClientRect();
@@ -30,7 +66,7 @@ export function wireGestures(svg, get, set, fitted) {
   // The camera that is `w` wide, turned by `angle`, and keeps the unrotated point `at`
   // under screen fraction (fx, fy): zoom, rotation and pan in one formula.
   const camAt = (w, angle, at, { fx, fy }) => {
-    w = Math.min(W * 2, Math.max(W / 40, w));
+    w = Math.min(fitted().w * MAX_UNZOOM, Math.max(W / 40, w));
     const h = w * (H / W), q = rotate(at, angle);
     return { box: { x: q.x - fx * w, y: q.y - fy * h, w, h }, angle };
   };
