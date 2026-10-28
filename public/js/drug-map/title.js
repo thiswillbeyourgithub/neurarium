@@ -11,7 +11,7 @@
 // their own clause: "All drugs by D2 and H1 binding and sedation". DOM-free (node
 // tests): the caller passes `t` and the groupings the controls already built.
 
-import { EFFECT_PREFIX, TONE_PREFIX } from "./model.js";
+import { EFFECT_PREFIX, isTargetKey as isTarget, TONE_PREFIX } from "./model.js";
 
 /** Past this many named classes / systems / targets, the title gives a count. */
 export const MAX_ITEMS = 5;
@@ -19,9 +19,6 @@ export const MAX_ITEMS = 5;
 // "Dopaminergic" -> "dopaminergic" mid-sentence, but "GABAergic" / "D2" stay as they are.
 const lowerFirst = (s) => (s.length > 1 && s[1] === s[1].toLowerCase() && s[1] !== s[1].toUpperCase()
   ? s[0].toLowerCase() + s.slice(1) : s);
-
-// A receptor / target key, as opposed to a tone or a body-effect key.
-const isTarget = (k) => !k.startsWith(TONE_PREFIX) && !k.startsWith(EFFECT_PREFIX);
 
 /**
  * A target's name as a title says it: the shorter of the name and its trailing

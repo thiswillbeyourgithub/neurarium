@@ -36,6 +36,8 @@ export const EFFECT_SIGN = { boost: 1, block: -1, modulate: 0.5 };
 export const FEATURE_SOURCES = ["receptors", "tone", "effects"];
 export const TONE_PREFIX = "tone:";
 export const EFFECT_PREFIX = "effect:";
+/** A receptor / target feature key, as opposed to a tone or a body-effect key. */
+export const isTargetKey = (k) => !k.startsWith(TONE_PREFIX) && !k.startsWith(EFFECT_PREFIX);
 
 const hasMeasuredKi = (b) => !!b.ki && typeof b.ki.median === "number" && b.ki.median > 0;
 const affinityOf = (b) => {
@@ -136,7 +138,8 @@ export function directPoints(ids, profiles, keys) {
  * @param {string[]} ids  drug ids to place (each must have a profile)
  * @param {Map<string, Map<string, number>>} profiles
  * @returns {{points: Map<string, {x:number, y:number}>,
- *   axes: {share:number, loadings:{target:string, w:number}[]}[]}}
+ *   axes: {share:number, loadings:{target:string, w:number, mean:number}[]}[]}}
+ *   (`mean` is the feature's raw mean over `ids`: its sign says what most of them do to it, js/drug-map/axis.js)
  */
 export function pca(ids, profiles) {
   const targets = [...new Set(ids.flatMap((id) => [...profiles.get(id).keys()]))].sort();
@@ -173,7 +176,7 @@ export function pca(ids, profiles) {
     axes.push({
       vec,
       share: total > 0 ? Math.max(0, value) / total : 0,
-      loadings: targets.map((target, i) => ({ target, w: vec[i] }))
+      loadings: targets.map((target, i) => ({ target, w: vec[i], mean: mean[i] }))
         .filter((l) => l.w).sort((a, b) => Math.abs(b.w) - Math.abs(a.w)),
     });
   }

@@ -23,6 +23,7 @@ import { button, el, foldBox, H, rotate, svgEl, W } from "./dom.js";
 import { wireGestures } from "./gestures.js";
 import { createFocus } from "./focus.js";
 import { plotTitle } from "./title.js";
+import { axisCaption, axisTooltip } from "./axis.js";
 import { createControls } from "./controls.js";
 import { LIST_SEP } from "../url-state.js";
 import { viewerUrl } from "./site.js";
@@ -245,7 +246,12 @@ export function createDrugMap({ data, onChange }) {
 
   function renderCaptions({ pcs, direct, keyRows, ramp, shown, unplaced }) {
     axes.replaceChildren(...(pcs
-      ? pcs.map((ax, i) => el("span", "dm-axis", axisText(ax, i)))
+      ? pcs.map((ax, i) => {
+        const ctx = { signed: view.signed, nameOf, t };
+        const span = el("span", "dm-axis", axisCaption(ax, i, ctx));
+        span.title = axisTooltip(ax, i, ctx);
+        return span;
+      })
       : direct ? view.only.map((key, i) => el("span", "dm-axis", t("drugmap.axisDirect", { axis: ["x →", "y ↑"][i], name: nameOf(key) })))
       : []));
     axesBox.setValue(pcs ? t("drugmap.axesPca") : direct ? t("drugmap.axesDirect") : "");
@@ -256,17 +262,6 @@ export function createDrugMap({ data, onChange }) {
       unplaced ? t("drugmap.unplaced", { n: unplaced }) : "",
       t("drugmap.help"),
     ].filter(Boolean).join(" ");
-  }
-
-  // "PC1 (34%): D2, 5-HT2A, H1 vs SERT, NET": the targets that pull each way most.
-  function axisText(ax, i) {
-    const name = (l) => nameOf(l.target);
-    const pos = ax.loadings.filter((l) => l.w > 0).slice(0, 3).map(name);
-    const neg = ax.loadings.filter((l) => l.w < 0).slice(0, 3).map(name);
-    return t("drugmap.axis", {
-      n: i + 1, share: Math.round(ax.share * 100),
-      pos: pos.join(", ") || "-", neg: neg.join(", ") || "-",
-    });
   }
 
   // A dot and its name carry the same tooltip and name their drug (`data-drug`), which
