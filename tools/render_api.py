@@ -26,6 +26,11 @@ Built into the Docker image (``docker/Dockerfile``, ``api`` stage), never commit
 ``python tools/render_api.py --out <dir>``. ``--effects-out <file>`` also (or only) writes
 the viewer's effect index (``effect_index.to_json``, served at ``/derived/effects.json``;
 ``tools/serve.py`` calls ``write_effects`` itself). Stdlib only.
+
+Every written page carries, under its title, a Caddy template (``UPTIME``, executed per
+request by the ``templates`` directive on ``/api/*`` in ``docker/Caddyfile``) that on a DEV
+instance says roughly how long ago the server restarted, so an agent reading a page knows
+it may have changed recently. Off DEV it renders to nothing and the page reads as built.
 """
 
 from __future__ import annotations
@@ -81,6 +86,33 @@ CLAIM_ALIASES = {"category": ("categories",), "originator_now": ("originator",),
                  "location": ("locations", "regions")}
 # Source keys that grade the record as a whole, not one field: kept as a Facts line.
 RECORD_GRADES = {"classification_provenance"}
+# The restart line (see the module docstring). Custom delimiters `{{%` / `%}}` so no page
+# text can be taken for template syntax (render() refuses a page containing them). DEV and
+# STARTED_AT are the container env (docker-compose.yml, docker/entrypoint.sh); the age is
+# coarse on purpose, like /status.json's floored start time. `now`, `env`, `atoi`, `sub`,
+# `div` and `unixEpoch` are sprig functions, which Caddy templates include.
+UPTIME_OPEN, UPTIME_CLOSE = "{{%", "%}}"
+UPTIME = (
+    '{{%if and (eq (env "DEV") "1") (env "STARTED_AT")%}}'
+    '{{%$up := sub (now | unixEpoch | atoi) (env "STARTED_AT" | atoi)%}}'
+    "\n> This server restarted "
+    "{{%if lt $up 3600%}}less than an hour"
+    "{{%else if lt $up 7200%}}about an hour"
+    "{{%else if lt $up 86400%}}about {{%div $up 3600%}} hours"
+    "{{%else if lt $up 172800%}}about a day"
+    "{{%else%}}about {{%div $up 86400%}} days{{%end%}}"
+    " ago (a development instance): this page may have changed recently.\n\n"
+    "{{%end%}}")
+
+
+def with_uptime(text: str) -> str:
+    """``text`` with the UPTIME template after its title line (blank lines around it when
+    shown, so the quote never runs into the next line). Refuses page text that already holds the delimiters."""
+    if UPTIME_OPEN in text or UPTIME_CLOSE in text:
+        raise ValueError(f"page text contains the template delimiters {UPTIME_OPEN} / {UPTIME_CLOSE}")
+    head, _, tail = text.partition("\n")
+    return f"{head}\n{UPTIME}{tail}"
+
 KIND_TITLES = {"drug": "Drugs", "metabolite": "Active metabolites", "receptor": "Receptors",
                "target": "Other drug targets", "structure": "Brain regions",
                "projection": "Pathways", "circuit": "Circuits", "group": "Projection groups",
@@ -628,17 +660,17 @@ def render(data_dir: Path, out: Path, version: str) -> int:
             _check_page_id(kind, ident)
             for section, text in r.page_set(kind, ident, rec).items():
                 if section is None:
-                    page_path(out / kind, ident).write_text(text, encoding="utf-8")
+                    page_path(out / kind, ident).write_text(with_uptime(text), encoding="utf-8")
                 else:  # a section page, under <id>/
                     sub = page_path(out / kind, ident).with_suffix("")
                     sub.mkdir(exist_ok=True)
-                    page_path(sub, section).write_text(text, encoding="utf-8")
+                    page_path(sub, section).write_text(with_uptime(text), encoding="utf-8")
             n += 1
-        (out / kind / "index.md").write_text(r.index(version, [kind]), encoding="utf-8")
-    (out / "index.md").write_text(r.index(version), encoding="utf-8")
+        (out / kind / "index.md").write_text(with_uptime(r.index(version, [kind])), encoding="utf-8")
+    (out / "index.md").write_text(with_uptime(r.index(version)), encoding="utf-8")
     # Served (status 404) for any /api address with no page, so a mistyped or guessed
     # id still leads somewhere: the full list, ids shown, is the way out.
-    (out / "not_found.md").write_text(r.index(version, lead=NOT_FOUND), encoding="utf-8")
+    (out / "not_found.md").write_text(with_uptime(r.index(version, lead=NOT_FOUND)), encoding="utf-8")
     return n
 
 

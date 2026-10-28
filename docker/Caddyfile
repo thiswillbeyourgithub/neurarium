@@ -92,6 +92,14 @@
 	# the full page list with ids, under a 404 status: a way out, not a dead end.
 	handle /api/* {
 		root * /opt/neurarium
+		# Each page carries a template line (tools/render_api.py UPTIME) saying, on a DEV
+		# instance only, roughly how long ago the server restarted. Custom delimiters, so
+		# nothing else in a page is ever read as a template; the mime matches the
+		# Content-Type pinned for .md below.
+		templates {
+			mime text/markdown
+			between {{% %}}
+		}
 		# The folder index before {path} itself: a trailing-slash {path} matches the folder.
 		@page file {path}.md {path}/index.md {path}
 		handle @page {

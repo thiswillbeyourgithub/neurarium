@@ -139,3 +139,30 @@ class PageIdGuardTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class UptimeLineTest(unittest.TestCase):
+    """The DEV restart line (render_api.UPTIME), executed by Caddy's `templates` on /api/*.
+    The template itself was checked against a real Caddy in a docker build; here: where it
+    goes, that it vanishes cleanly when it renders empty, and that the Caddyfile wires it."""
+
+    def test_inserted_under_the_title(self):
+        out = render_api.with_uptime("# Sertraline\nKind: drug.\n")
+        self.assertEqual(out, f"# Sertraline\n{render_api.UPTIME}Kind: drug.\n")
+
+    def test_renders_to_the_built_page_when_off(self):
+        # Off DEV the whole {{%if%}} block yields "", which must give back the page as built.
+        page = "# Neurarium API (version 1.0.0)\n\nOne page per node.\n"
+        self.assertEqual(render_api.with_uptime(page).replace(render_api.UPTIME, ""), page)
+
+    def test_refuses_text_holding_the_delimiters(self):
+        for bad in ("# A\nsee {{% here", "# A\nend %}}"):
+            with self.assertRaises(ValueError):
+                render_api.with_uptime(bad)
+
+    def test_caddyfile_runs_the_template_with_the_same_delimiters(self):
+        caddy = (Path(__file__).resolve().parents[2] / "docker" / "Caddyfile").read_text()
+        block = caddy[caddy.index("handle /api/* {"):]
+        self.assertIn("templates {", block)
+        self.assertIn(f"between {render_api.UPTIME_OPEN} {render_api.UPTIME_CLOSE}", block)
+        self.assertIn("mime text/markdown", block)
