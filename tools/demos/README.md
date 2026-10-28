@@ -21,7 +21,12 @@ Anything the page animates must therefore go through timers / `requestAnimationF
 ## Files
 
 - `recorder.py`: the engine. Import `Demo` and script a page with the Python API (`goto` / `wait` / `wait_for` / `wait_gone` / `begin` / `move` / `click` / `hover` / `type` / `key` / `scroll` / `slider` / `drag` / `zoom`). Generic: point it at any URL. Copy this one file to use it in another project.
-- `neurarium.py`: the neurarium showcase (an example scenario, "a drug in action"). It serves the local site with `tools/serve.py` on a free port, marks the tour + "What's new" as seen, clicks through the loading overlay, then records: the whole brain auto-rotating -> exploded -> olanzapine searched (gem dots + effect flow, zoomed in) -> its binding profile opened and scrolled.
+- `neurarium.py`: the neurarium showcase, five scripted stories (`STORIES`, each `name -> (story, output basename, start page)`). It serves the local site with `tools/serve.py` on a free port, marks the tour + "What's new" as seen, clicks through the loading overlay, then records one story per output:
+    - `drug` (`preview`, the README hero): the whole brain auto-rotating -> exploded -> olanzapine searched (gem dots + effect flow, zoomed in) -> its binding profile opened and scrolled.
+    - `anatomy` (`demo-anatomy`): explode + reassemble, the hippocampus isolated, the Papez circuit pulsing, fluoxetine's serotonergic flow.
+    - `compare` (`demo-compare`): haloperidol's binding profile, then clozapine's much broader one.
+    - `drugsmap` (`demo-drugsmap`): the drugs map page (`drugs-map.html`), its antipsychotic presets, a few drugs hovered.
+    - `receptor` (`demo-receptor`): 5-HT2A's expression regions, the drugs binding it, then LSD picked from that list.
 
 ## Requirements
 
@@ -31,16 +36,17 @@ Anything the page animates must therefore go through timers / `requestAnimationF
 
 In this checkout the run needs the Claude Code sandbox off (Chromium launch + GPU access).
 
-## Run the neurarium demo
+## Run the neurarium demos
 
 ```sh
-uv run tools/demos/neurarium.py                 # -> docs/images/preview.webp + docs/videos/preview.av1.mp4 (README hero)
+uv run tools/demos/neurarium.py                 # every story -> docs/images/<base>.webp + docs/videos/<base>.av1.mp4
+uv run tools/demos/neurarium.py --story compare # one story
 uv run tools/demos/neurarium.py --fps 30        # half the capture time (draft takes)
-uv run tools/demos/neurarium.py --out /tmp/nd --video-out /tmp/nd
+uv run tools/demos/neurarium.py --out-dir /tmp/nd
 uv run tools/demos/neurarium.py --keep-frames   # keep the PNGs to re-encode without re-recording
 ```
 
-A 60 fps take of the ~20 s story captures ~1200 frames at about 7 frames/s of wall clock, so roughly 3-5 minutes plus encoding.
+A 60 fps take of a ~20 s story captures ~1200 frames at about 7 frames/s of wall clock, so roughly 3-5 minutes plus encoding.
 
 ## Write your own scenario
 

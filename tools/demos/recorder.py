@@ -375,7 +375,7 @@ class Demo:
         Call once the app is ready (after a loading overlay clears) so the output
         does not show the boring startup.
         """
-        now = self.page.evaluate("Date.now()")
+        now = int(self.page.evaluate("Date.now()"))
         self.page.clock.pause_at(now + 1)
         self._recording = True
         self._wall0 = time.monotonic()
