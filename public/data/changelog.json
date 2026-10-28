@@ -1,6 +1,33 @@
 {
   "versions": [
     {
+      "version": "3.156.0",
+      "date": "2026-10-28",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "DrugsMap's axis captions end with \"…\" to show they list only the first few features, and each caption opens a dropdown listing every weight with a filter box, instead of a very long tooltip.",
+          "commits": [
+            "84fec39"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Hovering a DrugsMap dot whose name is already shown boldens that name in place instead of drawing it a second time elsewhere.",
+          "commits": [
+            "169558b"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "DrugsMap now starts with no normalization, in the default view and every preset. The picker lists None first, and \"Shape\" is renamed \"Proportions\".",
+          "commits": [
+            "bbb6e21"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.155.0",
       "date": "2026-10-28",
       "entries": [
