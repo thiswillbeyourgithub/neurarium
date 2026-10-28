@@ -39,3 +39,5 @@ fresh clone runs it). Current:
   the baked-mesh hashes) differs from what its generator writes; then it prompts on the terminal
   (`y/N`, via `/dev/tty`) to run `tools/check_data.py`; a check that reports
   **errors** aborts the push (warnings pass). A non-interactive push skips the prompt.
+  `NEURARIUM_DATA_CHECK=y` (or `n`) answers it in advance, with or without a terminal; the local
+  deploy script sets it from its own answer when it pushes for you (see `CLAUDE.local.md`).

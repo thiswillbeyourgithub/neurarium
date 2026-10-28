@@ -91,23 +91,36 @@ if [ "$status" -eq 0 ] && [ -n "$py" ]; then
     status=1
   fi
 fi
-if [ "$status" -eq 0 ] && ( : >/dev/tty ) 2>/dev/null; then
-  printf 'pre-push: run the data integrity check (tools/check_data.py) first? [y/N] ' >/dev/tty
-  read -r answer </dev/tty
+# NEURARIUM_DATA_CHECK=y|n answers the prompt below in advance (no tty needed): the
+# local deploy script sets it from its own -y / prompt when it pushes (`deploy.sh
+# --push`), so one answer covers the push and the deploy and the check runs once.
+# Any other value, or unset, falls back to asking on the terminal.
+answer="${NEURARIUM_DATA_CHECK:-}"
+case "$answer" in
+  [YyNn]*) tty_out=/dev/stderr ;;
+  *) answer="" ; tty_out=/dev/tty ;;
+esac
+if [ "$status" -eq 0 ] && { [ -n "$answer" ] || ( : >/dev/tty ) 2>/dev/null; }; then
+  if [ -z "$answer" ]; then
+    printf 'pre-push: run the data integrity check (tools/check_data.py) first? [y/N] ' >/dev/tty
+    read -r answer </dev/tty
+  else
+    echo "pre-push: data check answer '$answer' from NEURARIUM_DATA_CHECK." >"$tty_out"
+  fi
   case "$answer" in
     [Yy]*)
       py=$(command -v python || command -v python3)
       if [ -z "$py" ]; then
-        echo "pre-push: no python interpreter found; skipping the data check." >/dev/tty
-      elif "$py" tools/check_data.py >/dev/tty 2>&1; then
-        echo "pre-push: data check passed." >/dev/tty
+        echo "pre-push: no python interpreter found; skipping the data check." >"$tty_out"
+      elif "$py" tools/check_data.py >"$tty_out" 2>&1; then
+        echo "pre-push: data check passed." >"$tty_out"
       else
-        echo "pre-push: data check reported errors; aborting push." >/dev/tty
+        echo "pre-push: data check reported errors; aborting push." >"$tty_out"
         status=1
       fi
       ;;
     *)
-      echo "pre-push: skipping the data check." >/dev/tty
+      echo "pre-push: skipping the data check." >"$tty_out"
       ;;
   esac
 fi
