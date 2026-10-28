@@ -44,9 +44,12 @@ uv run tools/demos/neurarium.py --story compare # one story
 uv run tools/demos/neurarium.py --fps 30        # half the capture time (draft takes)
 uv run tools/demos/neurarium.py --out-dir /tmp/nd
 uv run tools/demos/neurarium.py --keep-frames   # keep the PNGs to re-encode without re-recording
+uv run tools/demos/neurarium.py --posters-only  # only re-grab the README gallery stills (<base>.poster.webp) from the AV1s
 ```
 
 A 60 fps take of a ~20 s story captures ~1200 frames at about 7 frames/s of wall clock, so roughly 3-5 minutes plus encoding.
+
+The README shows only the hero animated: a README cannot stop an `<img>` from autoplaying, and several animated WebPs at once bog a phone down, so the gallery shows each story's still (`Story.poster`, seconds into the take, grabbed after every recording) linking to its animated WebP.
 
 ## Write your own scenario
 

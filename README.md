@@ -40,26 +40,28 @@ Live at **[neurarium.olicorne.org](https://neurarium.olicorne.org)**.
 
 ## More demos
 
+Click a picture to play its demo (they are stills here so the page stays light).
+
 <table>
 <tr>
-<td width="50%"><img src="docs/images/demo-anatomy.webp" alt="demo-anatomy"><br>
+<td width="50%"><a href="docs/images/demo-anatomy.webp"><img src="docs/images/demo-anatomy.poster.webp" alt="demo-anatomy (click to play)"></a><br>
 
 Anatomy: blow the brain apart, isolate the hippocampus, play the Papez circuit, then fluoxetine's serotonergic flow.
 
 </td>
-<td width="50%"><img src="docs/images/demo-receptor.webp" alt="demo-receptor"><br>
+<td width="50%"><a href="docs/images/demo-receptor.webp"><img src="docs/images/demo-receptor.poster.webp" alt="demo-receptor (click to play)"></a><br>
 
 A receptor: where 5-HT2A is expressed, every drug that binds it, then LSD picked from that list.
 
 </td>
 </tr>
 <tr>
-<td width="50%"><img src="docs/images/demo-compare.webp" alt="demo-compare"><br>
+<td width="50%"><a href="docs/images/demo-compare.webp"><img src="docs/images/demo-compare.poster.webp" alt="demo-compare (click to play)"></a><br>
 
 Two antipsychotics compared: haloperidol's binding profile, then clozapine's much broader one.
 
 </td>
-<td width="50%"><img src="docs/images/demo-drugsmap.webp" alt="demo-drugsmap"><br>
+<td width="50%"><a href="docs/images/demo-drugsmap.webp"><img src="docs/images/demo-drugsmap.poster.webp" alt="demo-drugsmap (click to play)"></a><br>
 
 [DrugsMap](https://drugsmap.olicorne.org/): every drug placed by its binding profile, then the antipsychotic presets.
 
