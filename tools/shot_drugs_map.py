@@ -55,9 +55,10 @@ DEFAULT_HASH = (
     "nachr_a4b2,nachr_a7,h1,h2,h3,h4"
 )
 
-# Keep the plot, the Legend and the "Axis meaning" boxes, hide the rest. The map
-# body's first children are the control boxes (js/drug-map/controls.js), then the
-# plot, the two boxes below it and a footnote (js/drug-map/view.js).
+# Keep the plot and the Legend box (colour keys + axis meaning; its nested Extra details
+# fold stays shut, UNFOLD_BELOW_PLOT only opens the body's own children), hide the rest.
+# The map body's first children are the control boxes (js/drug-map/controls.js), then
+# the plot, the Legend and a footnote (js/drug-map/view.js).
 HIDE_CSS = """
 .dmp-header, #drugmap-body > .dm-box:not(.dm-keep), .dm-note,
 .dm-plot-btn, .dm-watermark { display: none !important; }

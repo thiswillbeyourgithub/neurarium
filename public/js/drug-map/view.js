@@ -24,6 +24,7 @@ import { wireGestures } from "./gestures.js";
 import { createFocus } from "./focus.js";
 import { plotTitle } from "./title.js";
 import { axisCaption, axisTooltip } from "./axis.js";
+import { createExtras } from "./extras.js";
 import { createControls } from "./controls.js";
 import { LIST_SEP } from "../url-state.js";
 import { viewerUrl } from "./site.js";
@@ -109,14 +110,16 @@ export function createDrugMap({ data, onChange }) {
   const plotTitleEl = el("div", "dm-plot-title");
   const watermark = el("span", "dm-watermark", `${t("drugmap.watermark")} v${window.__APP_VERSION__} · ${location.host}`);
   plotWrap.append(svg, plotTitleEl, fsBtn, unrotate, busy, watermark);
+  // The Legend folds as a whole; inside it the colour keys, then the axis meaning (always
+  // shown with the legend), then the numbers behind the map in their own fold (extras.js).
   const legendBox = foldBox(t("drugmap.sec.legend"));
   const legend = el("div", "dm-legend");
-  legendBox.body.append(legend);
-  const axesBox = foldBox(t("drugmap.sec.axes"));
+  const axesHead = el("div", "dm-sub-head");
   const axes = el("div", "dm-axes");
-  axesBox.body.append(axes);
+  const extras = createExtras(t);
+  legendBox.body.append(legend, axesHead, axes, extras.box);
   const note = el("p", "dm-note info-desc");
-  body.replaceChildren(...controls.boxes, plotWrap, legendBox.box, axesBox.box, note);
+  body.replaceChildren(...controls.boxes, plotWrap, legendBox.box, note);
 
   const setCam = (next) => { cam = next; anim = null; drawPoints(); };
   // Which drug the pointer means + its name on top (focus.js): opens / hides it too.
@@ -178,6 +181,13 @@ export function createDrugMap({ data, onChange }) {
       placed = next;
       transition(prev, next);
       renderCaptions({ pcs, direct, keyRows, ramp, shown: shown.length, unplaced: kept.length - shown.length });
+      const names = new Map(shown.map((d) => [d.id, d.displayName]));
+      extras.update({
+        view, t, nameOf, ids, profiles: prof, pcs, direct: direct ? view.only : null,
+        drugName: (id) => names.get(id) || id,
+        featureCount: new Set(ids.flatMap((id) => [...prof.get(id).keys()])).size,
+        raw: () => buildProfiles(drugs, { ...view, normalize: false }),
+      });
     } finally {
       // Always cancel this render's own timers, even when a newer one superseded it:
       // left armed, a stale timer would show the spinner after the newer render had
@@ -254,7 +264,8 @@ export function createDrugMap({ data, onChange }) {
       })
       : direct ? view.only.map((key, i) => el("span", "dm-axis", t("drugmap.axisDirect", { axis: ["x →", "y ↑"][i], name: nameOf(key) })))
       : []));
-    axesBox.setValue(pcs ? t("drugmap.axesPca") : direct ? t("drugmap.axesDirect") : "");
+    axesHead.textContent = pcs ? `${t("drugmap.sec.axes")}: ${t("drugmap.axesPca")}`
+      : direct ? `${t("drugmap.sec.axes")}: ${t("drugmap.axesDirect")}` : "";
     legend.replaceChildren(...legendRows(keyRows, ramp));
     legendBox.setValue(ramp ? `${ramp.from}–${ramp.to}` : t("drugmap.keysN", { n: keyRows.length }));
     note.textContent = [

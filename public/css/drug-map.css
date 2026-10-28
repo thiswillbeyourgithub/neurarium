@@ -168,6 +168,27 @@
 .dm-tgroup-head.active { color: var(--text); border-color: rgba(var(--ink), 0.15); }
 .dm-titems { display: flex; flex-wrap: wrap; gap: 4px; margin: 3px 0 0 18px; }
 .dm-axes { display: flex; flex-direction: column; gap: 2px; font-size: 11px; }
+/* Inside the Legend: the axis meaning's heading, then the nested Extra details fold. */
+.dm-sub-head { margin: 8px 0 2px; font-size: 11px; font-weight: 600; }
+.dm-sub-head:empty { display: none; }
+.dm-extras { margin: 8px 0 0; }
+.dm-tabs { display: flex; flex-wrap: wrap; gap: 4px; margin: 2px 0 6px; }
+.dm-tab, .dm-copy, .dm-copy-all { font: inherit; font-size: 11px; padding: 2px 8px; border-radius: 6px; cursor: pointer;
+  color: var(--text); background: rgba(var(--ink), 0.06); border: 1px solid rgba(var(--ink), 0.16); }
+.dm-tab.on { border-color: var(--accent); background: var(--accent-soft); }
+.dm-tab:disabled { opacity: 0.4; cursor: not-allowed; }
+.dm-copy-all { margin-top: 6px; }
+/* The JSONL field: copy button pinned top right, the text scrolls under it. */
+.dm-jsonl-wrap { position: relative; }
+.dm-copy { position: absolute; top: 6px; right: 6px; background: var(--panel-bg); }
+.dm-jsonl { margin: 0; padding: 8px 64px 8px 8px; max-height: 320px; overflow: auto; white-space: pre;
+  font: 11px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  background: rgba(var(--ink), 0.04); border: 1px solid rgba(var(--ink), 0.12); border-radius: 6px; }
+.dm-j-key { color: var(--accent-light); }
+.dm-j-str { color: var(--sem-verified); }
+.dm-j-num { color: var(--sem-sourced); }
+.dm-j-lit { color: var(--sem-unknown); }
+.dm-j-punct { color: var(--muted); }
 .dm-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; font-size: 11px; color: var(--muted); }
 .dm-key { display: inline-flex; align-items: center; gap: 5px; }
 .dm-ramp {

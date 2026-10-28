@@ -41,7 +41,7 @@ python tools/shot.py --params "only=putamen_R&view=iso" --out /tmp/putamen.png
 Needs `playwright` + `playwright install chromium` once (or `uv run tools/shot.py`,
 inline deps). `--headed` opens a real window; `--wait` ms before capture (default 6000).
 
-`uv run tools/shot_drugs_map.py` renders the drugs map README pictures, one per UI language (`public/drugs-map/screenshot.{en,fr}.png`: plot + Legend + Axis meaning only, view in its `DEFAULT_HASH`, `--hash` / `--out-dir` / `--lang` to vary), plus one picture per preset (`presets/<id>.<lang>.png`, by clicking each preset button) and the READMEs' `<!-- presets:start -->` block (`--no-presets` skips both); rerun it after a drugs map UI or preset change.
+`uv run tools/shot_drugs_map.py` renders the drugs map README pictures, one per UI language (`public/drugs-map/screenshot.{en,fr}.png`: plot + Legend (Extra details folded) only, view in its `DEFAULT_HASH`, `--hash` / `--out-dir` / `--lang` to vary), plus one picture per preset (`presets/<id>.<lang>.png`, by clicking each preset button) and the READMEs' `<!-- presets:start -->` block (`--no-presets` skips both); rerun it after a drugs map UI or preset change.
 
 The `--params` string is the URL query parsed by `applyViewParams` in `js/scene/camera.js`.
 `explode` / `transparency` / `names` are ordinary UI state, so they are handed straight
