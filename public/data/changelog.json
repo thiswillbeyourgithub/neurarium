@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.155.0",
+      "date": "2026-10-28",
+      "entries": [
+        {
+          "category": "added",
+          "text": "DrugsMap's Advanced box has a Normalization picker: Shape (each profile at unit length, the default), Equal dose (each drug dosed until its strongest binding is 80% occupied, every target showing the occupancy that dose reaches, so potency drops out as it does in the clinic) and Off (raw affinities).",
+          "commits": [
+            "57f0992"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.154.0",
       "date": "2026-10-28",
       "entries": [
