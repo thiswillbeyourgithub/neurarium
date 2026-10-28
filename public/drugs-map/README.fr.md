@@ -2,7 +2,7 @@
 
 [English version](README.md)
 
-Une carte interactive des médicaments psychiatriques et actifs sur le système nerveux central, placés selon la ressemblance de leurs profils de liaison aux [récepteurs](https://fr.wikipedia.org/wiki/R%C3%A9cepteur_(biochimie)). Les substances qui touchent les mêmes récepteurs dans les mêmes proportions se retrouvent proches ; celles aux mécanismes sans rapport se retrouvent éloignées. Elle se base sur les données de [neurarium](https://neurarium.olicorne.org/), du même auteur, un atlas interactif du cerveau pour les neurosciences psychiatriques.
+Une carte interactive des médicaments psychiatriques et actifs sur le système nerveux central, placés selon la ressemblance de leurs profils de liaison aux [récepteurs](https://fr.wikipedia.org/wiki/R%C3%A9cepteur_(biochimie)). Les substances qui touchent les mêmes récepteurs dans les mêmes proportions se retrouvent proches ; celles aux mécanismes sans rapport se retrouvent éloignées. Elle se base sur les données de [neurarium](https://neurarium.olicorne.org/), du même auteur, un atlas interactif du cerveau pour les neurosciences psychiatriques. Elle sert aussi d'exemple concret de réutilisation des données ouvertes de neurarium dans un outil à soi (voir [D'où viennent les données](#doù-viennent-les-données)).
 
 Elle permet par exemple d'afficher les antipsychotiques de manière à représenter leur affinité dopaminergique, cholinergique et histaminergique (cliquer sur l'image pour ouvrir cette vue) :
 

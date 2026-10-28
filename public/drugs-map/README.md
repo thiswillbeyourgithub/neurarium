@@ -2,7 +2,7 @@
 
 [Version française](README.fr.md)
 
-An interactive map of psychiatric and CNS-active drugs, placed by how similar their [receptor](https://en.wikipedia.org/wiki/Receptor_(biochemistry)) binding profiles are. Drugs that hit the same receptors in the same proportions land close together; drugs with unrelated mechanisms land far apart. It is based on the data of [neurarium](https://neurarium.olicorne.org/), by the same author, an interactive atlas of the brain for psychiatric neuroscience.
+An interactive map of psychiatric and CNS-active drugs, placed by how similar their [receptor](https://en.wikipedia.org/wiki/Receptor_(biochemistry)) binding profiles are. Drugs that hit the same receptors in the same proportions land close together; drugs with unrelated mechanisms land far apart. It is based on the data of [neurarium](https://neurarium.olicorne.org/), by the same author, an interactive atlas of the brain for psychiatric neuroscience. It is also meant as a worked example of how to reuse neurarium's open data in a tool of your own (see [Where the data comes from](#where-the-data-comes-from)).
 
 For example, it can lay out the antipsychotics so as to show their dopaminergic, cholinergic and histaminergic affinities (click the picture to open this view):
 
