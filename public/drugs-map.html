@@ -57,6 +57,11 @@
     <link rel="stylesheet" href="css/banners.css" />
   </head>
   <body class="dmp">
+    <!-- Top banner stack, as in index.html: the optional WIP banner (js/dev-banner.js,
+         hidden unless DEV=1) and the error banners (js/error-banner.js) write here. -->
+    <div id="banners">
+      <div id="dev-banner" role="status" aria-live="polite" hidden></div>
+    </div>
     <header class="dmp-header">
       <div class="dmp-title-row">
         <h1 class="dmp-title"><span data-i18n="drugmap.title"></span><span class="beta-tag" data-i18n="sim.beta"></span></h1>

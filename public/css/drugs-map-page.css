@@ -2,6 +2,9 @@
    viewer's fixed full-screen canvas, so it undoes base.css's html/body lock. The map
    itself keeps its css/drug-map.css look; this file is only the page around it. */
 html:has(body.dmp), body.dmp { height: auto; min-height: 100%; overflow: auto; touch-action: auto; }
+/* The page scrolls, so the fixed #banners stack would cover the header: push the page
+   below it (js/error-banner.js keeps --banners-height in sync with the stack). */
+body.dmp { padding-top: var(--banners-height, 0px); }
 .dmp-header, .dmp-main { width: min(1100px, calc(100vw - 32px)); margin: 0 auto; }
 .dmp-header { padding: 18px 0 8px; }
 /* Title centred over the page, theme + language buttons pinned right: a 3-column grid
