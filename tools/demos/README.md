@@ -69,8 +69,8 @@ with Demo("http://localhost:5173/", out="login_demo") as d:
 | `gl` | `"gpu"` | `"swiftshader"` where no GPU is reachable (slower, same output) |
 | `init_scripts` | `()` | JS run before the page's own (e.g. seed `localStorage`) |
 | `cursor` / `cursor_speed` | `True` / `1600` | the injected cursor; px/s glide speed |
-| `webp_fps` / `webp_width` / `webp_quality` | `30` / `1280` / `80` | the size levers of the hero file |
-| `av1_width` / `av1_crf` / `av1_preset` | `1920` / `30` / `6` | lower crf = better/bigger |
+| `webp_fps` / `webp_width` / `webp_quality` | `24` / `1280` / `75` | the size levers of the hero file |
+| `av1_width` / `av1_crf` / `av1_preset` | `1920` / `36` / `6` | lower crf = better/bigger |
 | `gif` / `gif_fps` / `gif_width` | `False` / `20` / `640` | optional GIF |
 | `keep_frames` | `False` | keep the PNG frames dir (its path is logged) |
 

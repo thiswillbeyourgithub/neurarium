@@ -234,15 +234,15 @@ class Demo:
         action_timeout: int = 8000,
         # Animated WebP (the README hero).
         webp: bool = True,
-        webp_fps: int = 30,
+        webp_fps: int = 24,
         webp_width: int | None = 1280,  # None keeps the capture width
-        webp_quality: int = 80,         # libwebp 0-100
+        webp_quality: int = 75,         # libwebp 0-100 (barely moves the size: frame count does)
         # AV1 master.
         av1: bool = True,
         av1_out: str | None = None,      # basename for the .av1.mp4 (defaults to `out`)
         av1_width: int | None = 1920,
         av1_encoder: str = "libsvtav1",  # or "av1_nvenc" for GPU
-        av1_crf: int = 30,
+        av1_crf: int = 36,
         av1_preset: int = 6,             # libsvtav1: 0 (slow/best) .. 13 (fast)
         # GIF (gifski), off by default: WebP replaces it.
         gif: bool = False,

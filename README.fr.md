@@ -26,7 +26,7 @@ sache toujours quelle confiance lui accorder.
 
 En ligne sur **[neurarium.olicorne.org](https://neurarium.olicorne.org)**.
 
-[![démo neurarium](docs/images/preview.gif)](https://neurarium.olicorne.org)
+[![démo neurarium](docs/images/preview.webp)](https://neurarium.olicorne.org)
 
 > [!IMPORTANT]
 > <!-- SOURCED_HEADLINE:START --><b>97% of the 10321 knowledge nodes are sourced or verified</b><!-- SOURCED_HEADLINE:END -->
