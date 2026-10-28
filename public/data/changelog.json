@@ -1,6 +1,26 @@
 {
   "versions": [
     {
+      "version": "3.150.0",
+      "date": "2026-10-28",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "DrugsMap's PCA axis captions now say which way the drugs move: \"↑ GABA-A boosted, H1 blocked · ↓ orexin blocked\". Before, a blocked target could be listed at the wrong end, because blocking counts as negative. Hovering a caption lists every feature's weight with what the drugs shown mostly do to it.",
+          "commits": [
+            "6f66928"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "The DrugsMap page now shows the work-in-progress banner and error banners, like the 3D atlas.",
+          "commits": [
+            "4ca2af2"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.149.0",
       "date": "2026-10-27",
       "entries": [
