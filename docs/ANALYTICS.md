@@ -34,6 +34,7 @@ misconfiguration is loud, not silently tracking nothing).
 Optional "work in progress" top banner, same runtime-injection plumbing as
 analytics. `DEV` in `docker/.env` (default 0); `entrypoint.sh` stamps
 `STARTED_AT=$(date +%s)` and renders both into `/gen/app-config.js`.
+The same two variables (inherited by Caddy, which `entrypoint.sh` execs) drive the agents' twin: every `/api/` page carries a Caddy template under its title (`tools/render_api.py` `UPTIME`, `{{% %}}` delimiters, run by `templates` on `/api/*`) saying "this server restarted about N hours ago" when `DEV=1`, and nothing otherwise.
 `js/dev-banner.js` reveals `#dev-banner` (amber, in `#banners`) when `dev === "1"`
 and computes "X ago" from `startedAt` (refreshed per minute). Clicking dismisses it
 for the current view only (not persisted, so a reload brings it back). It ends with

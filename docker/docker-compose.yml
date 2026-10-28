@@ -90,7 +90,8 @@ services:
       - ANALYTICS_SRI=${ANALYTICS_SRI:-}
       - ANALYTICS_DNT=${ANALYTICS_DNT:-true}
       # DEV=1 shows a top "work in progress / restarted X ago" banner (see
-      # js/dev-banner.js); defaults to 0 (off). STARTED_AT is set by the
+      # js/dev-banner.js) and a rough restart age atop every /api/ page (the
+      # Caddyfile's `templates`); defaults to 0 (off). STARTED_AT is set by the
       # entrypoint above, not here.
       - DEV=${DEV:-0}
       # SOURCE_URL backs the "source" link (e.g. in the dev banner). Defaults to
