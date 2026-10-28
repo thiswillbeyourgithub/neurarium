@@ -52,11 +52,11 @@ En ligne sur **[neurarium.olicorne.org](https://neurarium.olicorne.org)**.
 - [Qui a fait neurarium ?](#who-made-neurarium)
 - [Pourquoi l'avoir fait ?](#why-did-you-make-it)
 - [Est-ce gratuit ?](#is-it-free)
-- [Comment le lancer moi-même ?](#how-do-i-run-it-myself)
 - [Comment fonctionne le sourçage ?](#how-does-the-sourcing-work)
 - [Quelles sont les sources ?](#what-are-the-sources)
-- [Comment réutiliser les données ?](#how-can-i-reuse-the-data)
 - [Puis-je interroger un assistant IA à son sujet ?](#can-i-ask-an-ai-assistant-about-it)
+- [Comment réutiliser les données ?](#how-can-i-reuse-the-data)
+- [Comment le lancer moi-même ?](#how-do-i-run-it-myself)
 - [Quelle est la licence, et pourquoi ?](#whats-the-license-and-why)
 - [Qu'y a-t-il sur la feuille de route ?](#whats-on-the-roadmap)
 - [Avec quoi est-ce construit ?](#what-is-it-built-with)
@@ -126,25 +126,7 @@ sous-jacentes sont libres de réutilisation (voir [Comment réutiliser les donn�
 Pas de compte, pas de pistage au-delà de simples compteurs d'usage anonymes, pas de
 péage.
 
-</details>
-
-<a name="how-do-i-run-it-myself"></a>
-<details>
-<summary><strong>Comment le lancer moi-même ?</strong></summary>
-
-La page charge ses données avec `fetch()`, elle doit donc être servie en HTTP (pas
-ouverte depuis le disque). Le site servi est `public/`. Depuis la racine du dépôt :
-
-```sh
-python tools/serve.py            # sert public/ avec le cache désactivé
-# ou : cd public && python -m http.server 8000
-```
-
-Puis ouvrez <http://localhost:8000/>.
-
-Pour le déploiement, il existe un conteneur [Caddy](https://caddyserver.com/) durci sous
-`docker/` ; le flux de données complet et le graphe des modules sont dans
-[`ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+Franchement, cela devrait être la norme : faire payer l'accès au savoir ralentit l'humanité.
 
 </details>
 
@@ -304,6 +286,24 @@ python tools/check_data.py            # revérifie que chaque citation est sur l
 
 </details>
 
+<a name="can-i-ask-an-ai-assistant-about-it"></a>
+<details>
+<summary><strong>Puis-je interroger un assistant IA à son sujet ?</strong></summary>
+
+Oui, neurarium est utilisable par les IA. Collez une fois ce lien dans Claude, ChatGPT, Le Chat de Mistral, Gemini ou tout assistant capable de lire des pages web, et demandez-lui de retenir le site :
+
+```
+https://neurarium.olicorne.org/llms.txt
+```
+
+Cette page indique à l'assistant où se trouve l'ensemble des données et comment les lire, y compris une version texte de chaque panneau sur [`/api/`](https://neurarium.olicorne.org/api/) (une page par médicament, récepteur, région et voie). Vous pouvez ensuite lui demander par exemple « d'après neurarium, sur quoi se lie l'aripiprazole, et à quel point chaque liaison est-elle sourcée ? » : il peut citer la phrase source exacte et le niveau de preuve derrière chaque réponse au lieu de répondre de mémoire. Qu'il garde le lien d'une conversation à l'autre dépend de la fonction mémoire de l'assistant ; s'il l'oublie, recollez le lien.
+
+L'assistant ne lit que ce qu'affirme neurarium : l'avertissement « travail en cours » ci-dessus s'applique toujours. La version texte contient aussi un peu moins que la vue 3D : les sections que celle-ci calcule dans votre navigateur à partir des faits stockés (effets prédits d'un médicament et modulation présynaptique, sa neurotransmission nette estimée, ses interactions pharmacocinétiques, la simulation) n'existent que dans la version 3D.
+
+**Pourquoi pas de serveur MCP ?** Le [Model Context Protocol](https://fr.wikipedia.org/wiki/Model_Context_Protocol) est l'autre façon courante de brancher un site sur un assistant IA, mais il demande un programme serveur à côté du site, un connecteur que chaque utilisateur doit ajouter à la main, et un entretien continu au fil des évolutions du protocole. J'ai choisi de m'en passer : neurarium suit plutôt la convention [`/llms.txt`](https://llmstxt.org), de simples fichiers que tout assistant capable de lire une page web peut utiliser sans rien installer, et qui ne coûtent rien de plus au serveur.
+
+</details>
+
 <a name="how-can-i-reuse-the-data"></a>
 <details>
 <summary><strong>Comment réutiliser les données ?</strong></summary>
@@ -331,25 +331,27 @@ référence par outil et le contrat de champs des données émises, voir
 [`tools/README.md`](tools/README.md). Les données sont sous la même
 [licence](#whats-the-license-and-why) que le code.
 
-</details>
-
-<a name="can-i-ask-an-ai-assistant-about-it"></a>
-<details>
-<summary><strong>Puis-je interroger un assistant IA à son sujet ?</strong></summary>
-
-Oui, neurarium est utilisable par les IA. Collez une fois ce lien dans Claude, ChatGPT, Le Chat de Mistral, Gemini ou tout assistant capable de lire des pages web, et demandez-lui de retenir le site :
-
-```
-https://neurarium.olicorne.org/llms.txt
-```
-
-Cette page indique à l'assistant où se trouve l'ensemble des données et comment les lire, y compris une version texte de chaque panneau sur [`/api/`](https://neurarium.olicorne.org/api/) (une page par médicament, récepteur, région et voie). Vous pouvez ensuite lui demander par exemple « d'après neurarium, sur quoi se lie l'aripiprazole, et à quel point chaque liaison est-elle sourcée ? » : il peut citer la phrase source exacte et le niveau de preuve derrière chaque réponse au lieu de répondre de mémoire. Qu'il garde le lien d'une conversation à l'autre dépend de la fonction mémoire de l'assistant ; s'il l'oublie, recollez le lien.
-
 Ces mêmes fichiers de données ouverts permettent aussi de construire d'autres outils au-dessus de neurarium. [DrugsMap](public/drugs-map/README.fr.md) est là comme exemple de réutilisation des données de neurarium : une page autonome qui place chaque substance par une ACP de son profil de liaison, construite à partir de ces seuls fichiers, si bien que son code montre comment les charger et les utiliser (en ligne sur [drugsmap.olicorne.org](https://drugsmap.olicorne.org/)).
 
-L'assistant ne lit que ce qu'affirme neurarium : l'avertissement « travail en cours » ci-dessus s'applique toujours. La version texte contient aussi un peu moins que la vue 3D : les sections que celle-ci calcule dans votre navigateur à partir des faits stockés (effets prédits d'un médicament et modulation présynaptique, sa neurotransmission nette estimée, ses interactions pharmacocinétiques, la simulation) n'existent que dans la version 3D.
+</details>
 
-**Pourquoi pas de serveur MCP ?** Le [Model Context Protocol](https://fr.wikipedia.org/wiki/Model_Context_Protocol) est l'autre façon courante de brancher un site sur un assistant IA, mais il demande un programme serveur à côté du site, un connecteur que chaque utilisateur doit ajouter à la main, et un entretien continu au fil des évolutions du protocole. J'ai choisi de m'en passer : neurarium suit plutôt la convention [`/llms.txt`](https://llmstxt.org), de simples fichiers que tout assistant capable de lire une page web peut utiliser sans rien installer, et qui ne coûtent rien de plus au serveur.
+<a name="how-do-i-run-it-myself"></a>
+<details>
+<summary><strong>Comment le lancer moi-même ?</strong></summary>
+
+La page charge ses données avec `fetch()`, elle doit donc être servie en HTTP (pas
+ouverte depuis le disque). Le site servi est `public/`. Depuis la racine du dépôt :
+
+```sh
+python tools/serve.py            # sert public/ avec le cache désactivé
+# ou : cd public && python -m http.server 8000
+```
+
+Puis ouvrez <http://localhost:8000/>.
+
+Pour le déploiement, il existe un conteneur [Caddy](https://caddyserver.com/) durci sous
+`docker/` ; le flux de données complet et le graphe des modules sont dans
+[`ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 </details>
 
