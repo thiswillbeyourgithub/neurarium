@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.154.0",
+      "date": "2026-10-28",
+      "entries": [
+        {
+          "category": "added",
+          "text": "DrugsMap's Legend shows an arch score under the axis meaning: how much one PCA axis is just the other bent into an arch (the \"horseshoe\" effect), with a warning past 30% and the explanation on hover. It is part of the copied image too.",
+          "commits": [
+            "417fd72"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.153.0",
       "date": "2026-10-28",
       "entries": [
