@@ -262,6 +262,30 @@ export function parseSources(value) {
   return out.length ? out : [...DEFAULT_VIEW.sources];
 }
 
+/**
+ * The Advanced switches that cannot change the map in this view, each with the i18n key
+ * of why (shown greyed out with that reason, the stored value kept for when it applies
+ * again). From buildProfiles: Signed only signs receptor bindings, Measured Ki only
+ * filters bindings (read by the receptor and body-effect blocks, never by tone), and
+ * Normalize is skipped when one or two picked features are plotted directly. A picked
+ * subset (`only`) counts too: Signed is inert with only tone / effect features picked.
+ * e.g. {sources: ["effects"]} -> {signed: "drugmap.inert.signed"}
+ *      {sources: ["tone"]}    -> {signed: ..., measuredKi: "drugmap.inert.measuredKi"}
+ * @param {{sources: string[], only: string[]|null}} view
+ * @returns {Object<string, string>}  switch key -> reason i18n key
+ */
+export function inertOptions(view) {
+  const keys = view.only && view.only.length ? view.only : null;
+  const uses = (source, test) => view.sources.includes(source) && (!keys || keys.some(test));
+  const receptors = uses("receptors", isTargetKey);
+  const effects = uses("effects", (k) => k.startsWith(EFFECT_PREFIX));
+  const out = {};
+  if (!receptors) out.signed = "drugmap.inert.signed";
+  if (!receptors && !effects) out.measuredKi = "drugmap.inert.measuredKi";
+  if (keys && keys.length <= 2) out.normalize = "drugmap.inert.normalize";
+  return out;
+}
+
 export const mappableDrugs = (drugs) => drugs.filter((d) => (d.bindings || []).some(hasMeasuredKi));
 
 export const COLOR_MODES = ["category", "nbn", "year", "lab", "route", "ki"];

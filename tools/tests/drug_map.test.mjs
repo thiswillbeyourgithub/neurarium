@@ -301,3 +301,17 @@ test("spread: coincident dots fan out, deterministically by id", () => {
     for (let j = i + 1; j < q.length; j++) assert.ok(Math.hypot(q[i].x - q[j].x, q[i].y - q[j].y) > 4);
   }
 });
+
+test("inertOptions: the Advanced switches that cannot change this view", async () => {
+  const { inertOptions } = await import("../../public/js/drug-map/model.js");
+  const v = (sources, only = null) => inertOptions({ sources, only });
+  assert.deepEqual(v(["receptors"]), {});
+  assert.deepEqual(Object.keys(v(["effects"])), ["signed"]);
+  assert.deepEqual(Object.keys(v(["tone"])), ["signed", "measuredKi"]);
+  assert.deepEqual(v(["receptors", "effects"]), {});
+  // A picked subset counts: only tone / effect features picked leaves Signed inert.
+  assert.deepEqual(Object.keys(v(["receptors", "tone"], ["tone:serotonin", "tone:dopamine", "tone:gaba"])), ["signed", "measuredKi"]);
+  assert.deepEqual(v(["receptors", "effects"], ["d2", "h1", "effect:sedation"]), {});
+  // One or two picked features are plotted raw: Normalize is inert.
+  assert.deepEqual(Object.keys(v(["receptors"], ["d2", "h1"])), ["normalize"]);
+});

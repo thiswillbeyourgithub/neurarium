@@ -4,7 +4,7 @@
 // `render()` reflects the view. In both lists a click picks, shift-click or long-press
 // drops (`pickOrDrop`, `pickSet`).
 
-import { categoryColor, COLOR_MODES, EFFECT_PREFIX, FEATURE_SOURCES, pickSet, primaryCategory, TONE_PREFIX } from "./model.js";
+import { categoryColor, COLOR_MODES, EFFECT_PREFIX, FEATURE_SOURCES, inertOptions, pickSet, primaryCategory, TONE_PREFIX } from "./model.js";
 import { button, chipSearch, el, foldBox, pickOrDrop } from "./dom.js";
 import { groupTargetsBySystem } from "../legend/targets.js";
 import { matchesPreset, PRESETS, presetView } from "./presets.js";
@@ -175,7 +175,6 @@ export function createControls({ data, drugs, nameOf, featureKeys, getView, setV
     input.type = "checkbox";
     input.addEventListener("change", () => setView({ [key]: input.checked }));
     lab.append(input, el("span", null, t(`drugmap.${key}`)));
-    if (key !== "labels") lab.title = t(`drugmap.${key}Tip`);
     return { key, input, lab };
   });
   const advRow = el("div", "dm-controls");
@@ -190,7 +189,15 @@ export function createControls({ data, drugs, nameOf, featureKeys, getView, setV
       b.setAttribute("aria-pressed", String(on));
     }
     for (const b of colorSwitch.children) b.classList.toggle("active", b.dataset.mode === view.color);
-    for (const x of toggles) x.input.checked = view[x.key];
+    // A switch that cannot change this view is greyed out with the reason (model.js
+    // inertOptions); its stored value is kept and shown, for when it applies again.
+    const inert = inertOptions(view);
+    for (const x of toggles) {
+      x.input.checked = view[x.key];
+      x.input.disabled = !!inert[x.key];
+      x.lab.classList.toggle("dm-inert", !!inert[x.key]);
+      x.lab.title = inert[x.key] ? t(inert[x.key]) : x.key === "labels" ? "" : t(`drugmap.${x.key}Tip`);
+    }
     const lit = presetBtns.find(({ p }) => matchesPreset(view, p));
     for (const { b } of presetBtns) b.classList.toggle("active", b === lit?.b);
     presets.setValue(lit ? lit.b.textContent : "");

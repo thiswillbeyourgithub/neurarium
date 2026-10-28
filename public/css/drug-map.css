@@ -3,6 +3,8 @@
    else reads the theme tokens. The page around it is css/drugs-map-page.css. */
 .dm-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; }
 .dm-controls .seg-switch, .dm-controls .list-toggle { margin: 0; }
+/* An Advanced switch that cannot change this view (controls.js, model.js inertOptions). */
+.dm-controls .list-toggle.dm-inert { opacity: 0.45; cursor: not-allowed; }
 /* Each control section is a rounded box, folded by default, its summary showing the
    current value so a folded box still says what it is set to. */
 .dm-box { margin: 0 0 6px; border: 1px solid rgba(var(--ink), 0.14); border-radius: 8px; }
