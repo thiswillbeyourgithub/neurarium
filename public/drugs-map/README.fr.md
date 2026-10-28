@@ -2,15 +2,13 @@
 
 [English version](README.md)
 
-Une carte interactive des médicaments psychiatriques et actifs sur le système nerveux central, placés selon la ressemblance de leurs profils de liaison aux [récepteurs](https://fr.wikipedia.org/wiki/R%C3%A9cepteur_(biochimie)). Les substances qui touchent les mêmes récepteurs dans les mêmes proportions se retrouvent proches ; celles aux mécanismes sans rapport se retrouvent éloignées. C'est une page compagnon de [neurarium](https://neurarium.olicorne.org/), un atlas 3D interactif du cerveau pour les neurosciences psychiatriques, entièrement construite à partir du jeu de données sourcé que neurarium sert librement.
+Une carte interactive des médicaments psychiatriques et actifs sur le système nerveux central, placés selon la ressemblance de leurs profils de liaison aux [récepteurs](https://fr.wikipedia.org/wiki/R%C3%A9cepteur_(biochimie)). Les substances qui touchent les mêmes récepteurs dans les mêmes proportions se retrouvent proches ; celles aux mécanismes sans rapport se retrouvent éloignées. Elle se base sur les données de [neurarium](https://neurarium.olicorne.org/), du même auteur, un atlas interactif du cerveau pour les neurosciences psychiatriques.
 
 Elle permet par exemple d'afficher les antipsychotiques de manière à représenter leur affinité dopaminergique, cholinergique et histaminergique (cliquer sur l'image pour ouvrir cette vue) :
 
 [![DrugsMap : les antipsychotiques atypiques et conventionnels placés selon leurs liaisons dopaminergiques, cholinergiques et histaminiques](screenshot.fr.png)](https://drugsmap.olicorne.org/#dmcat=antipsychotic_atypical,antipsychotic_conventional&dmmkt=0&dmtgt=aadc,comt,d1,d2,d3,d4,d5,dat,mao_b,vmat2,ache,bche,m1,m2,m3,m4,m5,nachr_a4b2,nachr_a7,h1,h2,h3,h4)
 
 **En ligne :** [drugsmap.olicorne.org](https://drugsmap.olicorne.org/) (aussi sur [neurarium.olicorne.org/drugs-map](https://neurarium.olicorne.org/drugs-map))
-
-Elle a été réalisée avec l'aide de [Claude Code](https://claude.com/claude-code).
 
 **Sommaire :** [Préréglages](#préréglages) · [Ce que montre la carte](#ce-que-montre-la-carte) · [D'où viennent les données](#doù-viennent-les-données) · [Hébergement](#hébergement)
 
@@ -87,3 +85,5 @@ L'image en haut et les images des préréglages (avec la section Préréglages q
 Les liens de la carte vers l'atlas 3D détectent ce cas (page servie sur `/`) et pointent vers `https://neurarium.olicorne.org/` au lieu d'un chemin relatif. Les visites sont comptées par le même site umami que neurarium, sous le nom d'hôte `drugsmap.olicorne.org`.
 
 </details>
+
+Cette page a été réalisée avec l'aide de [Claude Code](https://claude.com/claude-code).
