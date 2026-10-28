@@ -19,11 +19,11 @@ import {
 } from "./model.js";
 import { placeLabels, sizesFor } from "./layout.js";
 import { spreadPoints } from "./spread.js";
-import { button, el, foldBox, H, rotate, svgEl, W } from "./dom.js";
+import { button, chipSearch, el, foldBox, H, rotate, svgEl, W } from "./dom.js";
 import { wireGestures } from "./gestures.js";
 import { createFocus } from "./focus.js";
 import { plotTitle } from "./title.js";
-import { ARCH_HIGH, archScore, axisCaption, axisTooltip } from "./axis.js";
+import { ARCH_HIGH, archScore, axisCaption, axisRows } from "./axis.js";
 import { createExtras } from "./extras.js";
 import { copyPng, plotPng } from "./snapshot.js";
 import { createControls } from "./controls.js";
@@ -301,10 +301,21 @@ export function createDrugMap({ data, onChange }) {
   function renderCaptions({ pcs, direct, keyRows, ramp, arch, shown, unplaced }) {
     axes.replaceChildren(...(pcs
       ? pcs.map((ax, i) => {
+        // A dropdown: the caption names a few features per end, opening it lists every
+        // weight, with a filter box (a long list, dozens of targets).
         const ctx = { signed: view.signed, nameOf, t };
-        const span = el("span", "dm-axis", axisCaption(ax, i, ctx));
-        span.title = axisTooltip(ax, i, ctx);
-        return span;
+        const box = el("details", "dm-axis dm-axis-drop");
+        const list = el("div", "dm-axlist");
+        for (const r of axisRows(ax, ctx)) {
+          const row = el("div", "dm-axrow");
+          row.append(el("span", "dm-axw", r.w), el("span", null, r.name), el("span", "dm-axact", r.act));
+          list.appendChild(row);
+        }
+        const search = chipSearch(list, t("drugmap.searchFeatures"));
+        box.append(el("summary", null, axisCaption(ax, i, ctx)),
+          el("p", "dm-axhelp", t(view.signed ? "drugmap.axisTipSigned" : "drugmap.axisTip", { n: i + 1 })),
+          search.input, list);
+        return box;
       })
       : direct ? view.only.map((key, i) => el("span", "dm-axis", t("drugmap.axisDirect", { axis: ["x →", "y ↑"][i], name: nameOf(key) })))
       : []));

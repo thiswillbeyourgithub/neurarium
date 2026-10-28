@@ -35,6 +35,8 @@ export const svgEl = (tag, attrs) => {
  * its group heading does (typing "dopamine" keeps every dopamine target); a group left
  * with no chip hides. Filtering only hides chips, it never changes the selection.
  * `apply()` re-filters, for a list rebuilt after typing (the axes list re-renders).
+ * A flat list with no `.dm-tgroup` (a PC caption's weights, view.js) filters its children,
+ * one row each.
  * @param {HTMLElement} list
  * @param {string} placeholder
  * @returns {{input: HTMLInputElement, apply: () => void}}
@@ -46,6 +48,11 @@ export function chipSearch(list, placeholder) {
   input.setAttribute("aria-label", placeholder);
   const apply = () => {
     const q = foldText(input.value.trim());
+    // A flat list (no groups, the axis dropdowns): each child is one row.
+    if (!list.querySelector(".dm-tgroup")) {
+      for (const row of list.children) row.hidden = !!q && !foldText(row.textContent).includes(q);
+      return;
+    }
     for (const group of list.querySelectorAll(".dm-tgroup")) {
       const head = group.querySelector(".dm-tgroup-head");
       const headHit = !q || foldText(head.textContent).includes(q);

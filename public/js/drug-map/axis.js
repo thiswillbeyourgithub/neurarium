@@ -18,7 +18,8 @@
 
 import { isTargetKey, TONE_PREFIX } from "./model.js";
 
-/** Features named at each end of an axis caption; the hover lists them all. */
+/** Features named at each end of an axis caption ("…" when it has more); the caption's
+ * dropdown lists them all (axisRows). */
 export const POLE_ITEMS = 3;
 
 /**
@@ -40,18 +41,24 @@ export function actionOf(l, signed) {
  * @param {{target: string, w: number, mean: number}[]} loadings
  * @param {boolean} signed
  * @param {number} [n]  features kept per end
- * @returns {{pos: {target: string, act: string|null}[], neg: {target: string, act: string|null}[]}}
+ * `posMore` / `negMore`: that end has more features than the `n` kept (the caption ends
+ * it with "…").
+ * @returns {{pos: {target: string, act: string|null}[], neg: {target: string, act: string|null}[],
+ *   posMore: boolean, negMore: boolean}}
  */
 export function axisPoles(loadings, signed, n = POLE_ITEMS) {
   const pos = [], neg = [];
+  let posMore = false, negMore = false;
   for (const l of loadings) {
-    const act = actionOf(l, signed);
     // A drug doing what most do to this feature moves along sign(w) x sign(mean).
-    const side = l.w * (l.mean < 0 ? -1 : 1) > 0 ? pos : neg;
-    if (side.length < n) side.push({ target: l.target, act });
-    if (pos.length >= n && neg.length >= n) break;
+    const up = l.w * (l.mean < 0 ? -1 : 1) > 0;
+    const side = up ? pos : neg;
+    if (side.length < n) side.push({ target: l.target, act: actionOf(l, signed) });
+    else if (up) posMore = true;
+    else negMore = true;
+    if (posMore && negMore) break;
   }
-  return { pos, neg };
+  return { pos, neg, posMore, negMore };
 }
 
 /**
@@ -60,17 +67,19 @@ export function axisPoles(loadings, signed, n = POLE_ITEMS) {
  * @param {{target: string, act: string|null}[]} items
  * @param {(key: string) => string} nameOf
  * @param {Function} t  i18n lookup; "drugmap.act.<act>" templates take {list}
+ * @param {boolean} [more]  the end has more features than listed: end with ", …"
  * @returns {string}
  */
-export function poleText(items, nameOf, t) {
+export function poleText(items, nameOf, t, more = false) {
   const runs = [];
   for (const it of items) {
     const last = runs[runs.length - 1];
     if (last && last.act === it.act) last.names.push(nameOf(it.target));
     else runs.push({ act: it.act, names: [nameOf(it.target)] });
   }
-  return runs.map((r) => (r.act ? t(`drugmap.act.${r.act}`, { list: r.names.join(", ") }) : r.names.join(", ")))
+  const text = runs.map((r) => (r.act ? t(`drugmap.act.${r.act}`, { list: r.names.join(", ") }) : r.names.join(", ")))
     .join(", ") || "-";
+  return more ? `${text}, …` : text;
 }
 
 /**
@@ -82,30 +91,29 @@ export function poleText(items, nameOf, t) {
  * @returns {string}
  */
 export function axisCaption(ax, i, { signed, nameOf, t }) {
-  const { pos, neg } = axisPoles(ax.loadings, signed);
+  const { pos, neg, posMore, negMore } = axisPoles(ax.loadings, signed);
   const [up, down] = i ? ["↑", "↓"] : ["→", "←"];
   return t("drugmap.axis", {
     n: i + 1, share: Math.round(ax.share * 100), up, down,
-    pos: poleText(pos, nameOf, t), neg: poleText(neg, nameOf, t),
+    pos: poleText(pos, nameOf, t, posMore), neg: poleText(neg, nameOf, t, negMore),
   });
 }
 
 /**
- * The hover: every loading, largest first, one per line, with what the drugs do to it.
- * "+0.45  Orexin receptors (OX1R/OX2R): mostly blocked"
+ * The caption's dropdown: every loading, largest first, with what the drugs do to it.
+ * e.g. [{w: "+0.45", name: "Orexin receptors (OX1R/OX2R)", act: "mostly blocked"}, ...]
+ * (`act` "" for a feature with no direction). Its explanation line is
+ * "drugmap.axisTip" / "drugmap.axisTipSigned".
  * @param {{loadings: object[]}} ax
- * @param {number} i
  * @param {{signed: boolean, nameOf: (key: string) => string, t: Function}} ctx
- * @returns {string}
+ * @returns {{w: string, name: string, act: string}[]}
  */
-export function axisTooltip(ax, i, { signed, nameOf, t }) {
-  const lines = ax.loadings.map((l) => {
+export function axisRows(ax, { signed, nameOf, t }) {
+  return ax.loadings.map((l) => {
     const act = actionOf(l, signed);
-    const w = `${l.w > 0 ? "+" : "−"}${Math.abs(l.w).toFixed(2)}`;
-    return act ? t("drugmap.axisTipRowAct", { w, name: nameOf(l.target), act: t(`drugmap.actTip.${act}`) })
-      : t("drugmap.axisTipRow", { w, name: nameOf(l.target) });
+    return { w: `${l.w > 0 ? "+" : "−"}${Math.abs(l.w).toFixed(2)}`, name: nameOf(l.target),
+      act: act ? t(`drugmap.actTip.${act}`) : "" };
   });
-  return [t(signed ? "drugmap.axisTipSigned" : "drugmap.axisTip", { n: i + 1 }), ...lines].join("\n");
 }
 
 /** Arch score (%) from which the caption warns that one axis mostly bends the other. A

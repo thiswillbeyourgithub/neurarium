@@ -5,7 +5,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { axisCaption, axisPoles, axisTooltip } from "../../public/js/drug-map/axis.js";
+import { axisCaption, axisPoles, axisRows } from "../../public/js/drug-map/axis.js";
 import { pca } from "../../public/js/drug-map/model.js";
 
 globalThis.window = { __I18N_MESSAGES__: {} };
@@ -45,11 +45,19 @@ test("unsigned: no action words, PC1 uses horizontal arrows, runs group under on
     "PC2 (10% of variance): ↑ GABA-A, Orexin boosted · ↓ Serotonin tone lowered, Sedation");
 });
 
-test("the tooltip lists every loading with what drugs do to it", () => {
-  const tip = axisTooltip({ loadings: LOADINGS }, 1, { signed: true, nameOf, t }).split("\n");
-  assert.equal(tip.length, 1 + LOADINGS.length);
-  assert.equal(tip[1], "+0.45  Orexin: mostly blocked");
-  assert.equal(tip[3], "−0.35  H1: mostly blocked");
+test("the dropdown lists every loading with what drugs do to it", () => {
+  const rows = axisRows({ loadings: LOADINGS }, { signed: true, nameOf, t });
+  assert.equal(rows.length, LOADINGS.length);
+  assert.deepEqual(rows[0], { w: "+0.45", name: "Orexin", act: "mostly blocked" });
+  assert.deepEqual(rows[2], { w: "−0.35", name: "H1", act: "mostly blocked" });
+  assert.equal(axisRows({ loadings: LOADINGS }, { signed: false, nameOf, t })[0].act, "");
+});
+
+test("an end with more features than listed ends with an ellipsis", () => {
+  const many = ["a", "b", "c", "d"].map((target, i) => ({ target, w: 0.5 - i * 0.1, mean: 1 }))
+    .concat([{ target: "z", w: -0.05, mean: 1 }]);
+  assert.equal(axisCaption({ share: 0.2, loadings: many }, 0, { signed: false, nameOf, t }),
+    "PC1 (20% of variance): → a, b, c, … · ← z");
 });
 
 test("pca loadings carry the raw mean of each feature", () => {

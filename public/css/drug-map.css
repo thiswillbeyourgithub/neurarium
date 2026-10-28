@@ -181,6 +181,18 @@
 .dm-tgroup-head.active { color: var(--text); border-color: rgba(var(--ink), 0.15); }
 .dm-titems { display: flex; flex-wrap: wrap; gap: 4px; margin: 3px 0 0 18px; }
 .dm-axes { display: flex; flex-direction: column; gap: 2px; font-size: 11px; }
+/* A PC caption is a dropdown (view.js renderCaptions): every weight, filterable. */
+.dm-axis-drop > summary { cursor: pointer; }
+.dm-axis-drop[open] { padding-bottom: 4px; }
+.dm-axhelp { margin: 4px 0 0 14px; color: var(--muted); }
+.dm-axis-drop .dm-search { margin-left: 14px; }
+.dm-axlist { max-height: 240px; overflow-y: auto; margin-left: 14px; }
+.dm-axlist [hidden] { display: none !important; }
+.dm-axrow { display: flex; flex-wrap: wrap; gap: 0 8px; padding: 1px 4px; }
+.dm-axrow .dm-axw { flex: 0 0 3.5em; }
+.dm-axrow:nth-child(odd) { background: rgba(var(--ink), 0.04); }
+.dm-axw { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; text-align: right; }
+.dm-axact { color: var(--muted); }
 /* Inside the Legend: the axis meaning's heading, then the nested Extra details fold. */
 .dm-sub-head { margin: 8px 0 2px; font-size: 11px; font-weight: 600; }
 .dm-sub-head:empty { display: none; }

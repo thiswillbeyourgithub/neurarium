@@ -7,7 +7,7 @@
 //      crisp), over the plot background;
 //   3. draw the title and the watermark on top with canvas text, at the boxes they occupy
 //      on screen, in their computed font and colour.
-//   4. draw the Legend under the plot (colour keys, then the axis meaning), read off its
+//   4. draw the Legend under the plot (colour keys, then the axis meaning, a dropdown caption by its summary line only), read off its
 //      DOM whether its fold is open or not, so the picture explains itself. The nested
 //      "Extra details" fold is simply never drawn (it is the numbers, not the legend).
 // The page font is a system stack (css/base.css), which an svg image can use too, so the
@@ -127,7 +127,9 @@ function legendBlock(ctx, { keys, head, axes }, top, width, draw) {
   }
   if (keys.children.length) y += lh;
   ctx.textBaseline = "top";
-  for (const [node, bold] of [[head, true], ...[...axes.children].map((n) => [n, false])]) {
+  // A PC caption is a <details> dropdown: only its summary line belongs in the picture.
+  const lineOf = (n) => n.querySelector(":scope > summary") || n;
+  for (const [node, bold] of [[head, true], ...[...axes.children].map((n) => [lineOf(n), false])]) {
     if (!node.textContent) continue;
     const cs = getComputedStyle(node);
     ctx.font = fontOf(cs);
