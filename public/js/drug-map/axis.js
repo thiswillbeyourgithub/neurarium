@@ -107,3 +107,53 @@ export function axisTooltip(ax, i, { signed, nameOf, t }) {
   });
   return [t(signed ? "drugmap.axisTipSigned" : "drugmap.axisTip", { n: i + 1 }), ...lines].join("\n");
 }
+
+/** Arch score (%) from which the caption warns that one axis mostly bends the other. A
+ * rough rule: past about a third of an axis explained by a parabola of the other, reading
+ * the two as independent directions misleads. */
+export const ARCH_HIGH = 30;
+
+/**
+ * The arch ("horseshoe") score: how much one axis is a bent copy of the other, i.e. the
+ * better R² of the least-squares fits PC2 ~ a + b PC1 + c PC1² and PC1 ~ a + b PC2 + c PC2².
+ * PCA makes the two axes linearly uncorrelated, so whatever a fit explains is curvature: a
+ * long gradient folded into an arch, whose two ends bend towards each other. Both ways,
+ * since the gradient need not be PC1: an arch opening sideways ("<", both ends on one side)
+ * is PC1 bent by PC2. 0 = no arch, 1 = every drug on one parabola.
+ * e.g. PC1 [-2,-1,0,1,2], PC2 [2,-1,-2,-1,2] -> ≈ 1.
+ * @param {Iterable<{x: number, y: number}>} points
+ * @returns {number|null}  null below 4 points or with a flat axis
+ */
+export function archScore(points) {
+  const pts = [...points];
+  const a = parabolaR2(pts), b = parabolaR2(pts.map(({ x, y }) => ({ x: y, y: x })));
+  return a === null ? b : b === null ? a : Math.max(a, b);
+}
+
+// R² of y ~ a + b x + c x² (see archScore), null when it cannot be fitted.
+function parabolaR2(pts) {
+  const n = pts.length;
+  if (n < 4) return null;
+  // Normal equations of y = a + b x + c x², solved by Cramer's rule (3 x 3).
+  let s1 = 0, s2 = 0, s3 = 0, s4 = 0, t0 = 0, t1 = 0, t2 = 0, my = 0;
+  for (const { x, y } of pts) {
+    const x2 = x * x;
+    s1 += x; s2 += x2; s3 += x2 * x; s4 += x2 * x2;
+    t0 += y; t1 += x * y; t2 += x2 * y;
+  }
+  my = t0 / n;
+  const det3 = (m) => m[0][0] * (m[1][1] * m[2][2] - m[1][2] * m[2][1])
+    - m[0][1] * (m[1][0] * m[2][2] - m[1][2] * m[2][0])
+    + m[0][2] * (m[1][0] * m[2][1] - m[1][1] * m[2][0]);
+  const A = [[n, s1, s2], [s1, s2, s3], [s2, s3, s4]];
+  const d = det3(A);
+  if (Math.abs(d) < 1e-12) return null;
+  const col = (i) => A.map((r, k) => r.map((v, j) => (j === i ? [t0, t1, t2][k] : v)));
+  const [a, b, c] = [0, 1, 2].map((i) => det3(col(i)) / d);
+  let ssRes = 0, ssTot = 0;
+  for (const { x, y } of pts) {
+    ssRes += (y - (a + b * x + c * x * x)) ** 2;
+    ssTot += (y - my) ** 2;
+  }
+  return ssTot > 0 ? Math.max(0, 1 - ssRes / ssTot) : null;
+}

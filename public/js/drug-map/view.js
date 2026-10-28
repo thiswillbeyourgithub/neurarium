@@ -23,7 +23,7 @@ import { button, el, foldBox, H, rotate, svgEl, W } from "./dom.js";
 import { wireGestures } from "./gestures.js";
 import { createFocus } from "./focus.js";
 import { plotTitle } from "./title.js";
-import { axisCaption, axisTooltip } from "./axis.js";
+import { ARCH_HIGH, archScore, axisCaption, axisTooltip } from "./axis.js";
 import { createExtras } from "./extras.js";
 import { copyPng, plotPng } from "./snapshot.js";
 import { createControls } from "./controls.js";
@@ -221,7 +221,7 @@ export function createDrugMap({ data, onChange }) {
       const prev = placed;
       placed = next;
       transition(prev, next);
-      renderCaptions({ pcs, direct, keyRows, ramp, shown: shown.length, unplaced: kept.length - shown.length });
+      renderCaptions({ pcs, direct, keyRows, ramp, arch: pcs && pcs.length > 1 ? archScore(points.values()) : null, shown: shown.length, unplaced: kept.length - shown.length });
       const names = new Map(shown.map((d) => [d.id, d.displayName]));
       extras.update({
         view, t, nameOf, ids, profiles: prof, pcs, direct: direct ? view.only : null,
@@ -294,7 +294,7 @@ export function createDrugMap({ data, onChange }) {
     requestAnimationFrame(step);
   }
 
-  function renderCaptions({ pcs, direct, keyRows, ramp, shown, unplaced }) {
+  function renderCaptions({ pcs, direct, keyRows, ramp, arch, shown, unplaced }) {
     axes.replaceChildren(...(pcs
       ? pcs.map((ax, i) => {
         const ctx = { signed: view.signed, nameOf, t };
@@ -304,6 +304,13 @@ export function createDrugMap({ data, onChange }) {
       })
       : direct ? view.only.map((key, i) => el("span", "dm-axis", t("drugmap.axisDirect", { axis: ["x →", "y ↑"][i], name: nameOf(key) })))
       : []));
+    // Under the axes, the arch score (axis.js archScore): how far PC2 merely bends PC1.
+    if (arch !== null) {
+      const pct = Math.round(arch * 100);
+      const span = el("span", "dm-axis dm-arch", t(pct >= ARCH_HIGH ? "drugmap.archHigh" : "drugmap.arch", { pct }));
+      span.title = t("drugmap.archTip");
+      axes.appendChild(span);
+    }
     axesHead.textContent = pcs ? `${t("drugmap.sec.axes")}: ${t("drugmap.axesPca")}`
       : direct ? `${t("drugmap.sec.axes")}: ${t("drugmap.axesDirect")}` : "";
     legend.replaceChildren(...legendRows(keyRows, ramp));

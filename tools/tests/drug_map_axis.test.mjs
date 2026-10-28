@@ -58,3 +58,21 @@ test("pca loadings carry the raw mean of each feature", () => {
   const x = axes[0].loadings.find((l) => l.target === "x");
   assert.equal(x.mean, -2);
 });
+
+test("archScore: a parabola is all arch, noise or a line none", async () => {
+  const { archScore } = await import("../../public/js/drug-map/axis.js");
+  const pts = (xs, f) => xs.map((x) => ({ x, y: f(x) }));
+  const xs = [-2, -1, 0, 1, 2, 3, -3];
+  assert.ok(archScore(pts(xs, (x) => x * x - 2)) > 0.999);
+  // PCA's PC2 is uncorrelated with PC1; a scatter with no curve scores near 0.
+  const scatter = [[-2, 1], [-1, -1], [0, 1], [1, -1], [2, 1], [-2, -1], [-1, 1], [0, -1], [1, 1], [2, -1]];
+  assert.ok(archScore(scatter.map(([x, y]) => ({ x, y }))) < 0.05);
+  assert.equal(archScore(pts([1, 2, 3], (x) => x)), null);
+  assert.equal(archScore(pts([1, 1, 1, 1], (x) => x)), null);
+});
+
+test("archScore: an arch opening sideways (both ends on one side) counts too", async () => {
+  const { archScore } = await import("../../public/js/drug-map/axis.js");
+  const ys = [-3, -2, -1, 0, 1, 2, 3];
+  assert.ok(archScore(ys.map((y) => ({ x: 4 - y * y, y }))) > 0.999);
+});
