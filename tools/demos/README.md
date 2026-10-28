@@ -1,97 +1,80 @@
 # Demo recorder
 
-A small, **site-agnostic** tool to record showcase demos of a website: it drives
-a real (non-headless) browser through a scripted click sequence with a visible
-glowing cursor, records the page at an exact 720p, and produces
+A small, **site-agnostic** tool to record showcase demos of a website: it drives a headless Chromium through a scripted click sequence with a visible glowing cursor, captures it **frame by frame on a faked clock**, and produces
 
-- an **AV1** master (`*.av1.mp4`, `libsvtav1`) for maximum compressibility, and
-- a **gifski GIF** (`*.gif`) with a **configurable framerate** for smoothness.
+- an **animated WebP** (`*.webp`), the README-embeddable hero: full colour, so no GIF 256-colour banding on gradients and glows,
+- an **AV1** master (`*.av1.mp4`, `libsvtav1`), the compact shareable video,
+- optionally a **gifski GIF** (`*.gif`, `gif=True`) for hosts that take nothing else.
 
-Capture is Playwright-native (the page surface, not the OS window), so the
-output is deterministic and exactly the chosen size; the cursor is injected DOM,
-so it is part of the recording. Built with the help of Claude Code.
+Built with the help of Claude Code.
+
+## How capture works
+
+Playwright's fake clock (`page.clock`) owns `Date`, timers, `performance.now` and `requestAnimationFrame`. The page loads in real time; `begin()` pauses the clock, and from then on every `wait()` advances it by exactly one frame (1/`fps` s), steps the page's CSS transitions and Web Animations by the same amount (they run on the compositor, outside the faked clock), and grabs a lossless PNG screenshot at `scale` x the viewport (default 2x, so 2560x1440 for a 1280x720 viewport). So:
+
+- the output is exactly `fps` and never drops a frame, however slow the renderer is (a SwiftShader software-WebGL run only takes longer, it is not choppier);
+- frames are supersampled, then downscaled with lanczos by the encoders, so text and edges stay sharp;
+- a run is deterministic.
+
+Anything the page animates must therefore go through timers / `requestAnimationFrame` / CSS animations; the browser's native smooth scroll does not, which is why `scroll()` tweens on `requestAnimationFrame` instead.
 
 ## Files
 
-- `recorder.py` — the engine. Import `Demo` and script a page with the Python
-  API (`goto` / `wait` / `wait_for` / `wait_gone` / `begin` / `move` / `click` /
-  `hover` / `type` / `key` / `scroll` / `slider`). Generic: point it at any URL.
-  Copy this one file to use it in another project. `begin()` marks the clip start
-  (trims a slow startup off the front); `slider()` drags a range input smoothly.
-- `neurarium.py` — the neurarium showcase tour (an example scenario). It serves
-  the local site with `tools/serve.py`, waits out the loading overlay, runs the
-  tour (assemble -> explode -> reassemble -> drug focus), and writes the outputs.
+- `recorder.py`: the engine. Import `Demo` and script a page with the Python API (`goto` / `wait` / `wait_for` / `wait_gone` / `begin` / `move` / `click` / `hover` / `type` / `key` / `scroll` / `slider` / `drag` / `zoom`). Generic: point it at any URL. Copy this one file to use it in another project.
+- `neurarium.py`: the neurarium showcase (an example scenario, "a drug in action"). It serves the local site with `tools/serve.py` on a free port, marks the tour + "What's new" as seen, clicks through the loading overlay, then records: the whole brain auto-rotating -> exploded -> olanzapine searched (gem dots + effect flow, zoomed in) -> its binding profile opened and scrolled.
 
 ## Requirements
 
-All already present in this environment; for a fresh machine:
+- `playwright` + a browser: `pip install playwright && playwright install chromium` (or run a scenario with `uv run`, which resolves the inline dep).
+- `ffmpeg` built with `libwebp` (WebP) and `libsvtav1` (AV1); `av1_nvenc` also works (`av1_encoder=`).
+- `gifski` on `PATH`, only for `gif=True`.
 
-- `playwright` + a browser: `pip install playwright && playwright install chromium`
-  (or run a scenario with `uv run`, which resolves the inline dep).
-- `ffmpeg` built with `libsvtav1` (AV1) — `av1_nvenc` also works (`av1_encoder=`).
-- `gifski` on `PATH` (`cargo install gifski`, or the prebuilt binary).
-- A GPU + display for hardware rendering (see Rendering).
-
-## Rendering (headless vs headed, GPU)
-
-The engine launches Chromium with ANGLE/desktop-GL flags so it renders on the
-real GPU. **Record headless** (the neurarium demo's default): the page renders on
-the GPU *and* the video is captured cleanly. Plain headless without those flags
-falls back to the SwiftShader software renderer (slow, choppy WebGL), and headed
-mode, while it does use the GPU, can letterbox the captured video (a grey bar) on
-some platforms because the headed screencast is unreliable. So: headless for the
-clean capture, `--headed` only if you want to watch it run.
+In this checkout the run needs the Claude Code sandbox off (Chromium launch + GPU access).
 
 ## Run the neurarium demo
 
 ```sh
-uv run tools/demos/neurarium.py                 # -> docs/images/preview.gif + docs/videos/preview.av1.mp4 (README hero)
-uv run tools/demos/neurarium.py --gif-fps 24    # smaller GIF
-uv run tools/demos/neurarium.py --out /tmp/nd   # choose output basename
-uv run tools/demos/neurarium.py --headed        # show a window (see Rendering below)
+uv run tools/demos/neurarium.py                 # -> docs/images/preview.webp + docs/videos/preview.av1.mp4 (README hero)
+uv run tools/demos/neurarium.py --fps 30        # half the capture time (draft takes)
+uv run tools/demos/neurarium.py --out /tmp/nd --video-out /tmp/nd
+uv run tools/demos/neurarium.py --keep-frames   # keep the PNGs to re-encode without re-recording
 ```
+
+A 60 fps take of the ~20 s story captures ~1200 frames at about 7 frames/s of wall clock, so roughly 3-5 minutes plus encoding.
 
 ## Write your own scenario
 
 ```python
 from recorder import Demo
 
-with Demo("http://localhost:5173/", out="login_demo", gif_fps=30) as d:
-    d.wait(800)
+with Demo("http://localhost:5173/", out="login_demo") as d:
+    d.wait_for("#email")        # real time, not captured
+    d.begin()                   # capture starts
     d.click("#email")
     d.type("#email", "demo@example.com", click_first=False)
-    d.click("#password")
-    d.type("#password", "hunter2", click_first=False)
     d.click("button[type=submit]")
     d.wait(1500)
     d.scroll(to="bottom")
     d.wait(1000)
-# AV1 + GIF are written on exit.
+# WebP + AV1 are written on exit.
 ```
 
 ### Tuning knobs (`Demo(...)`)
 
 | arg | default | note |
 | --- | --- | --- |
-| `width`, `height` | `1280`, `720` | capture size (exact) |
-| `headless` | `True` | renders on the GPU + captures cleanly; `False` to watch (may letterbox) |
-| `cursor` | `True` | the injected glowing cursor + click ripples |
-| `cursor_speed` | `1600` | px/s; glide duration derives from distance |
-| `av1` / `av1_encoder` | `True` / `libsvtav1` | set `av1_encoder="av1_nvenc"` for GPU |
-| `av1_crf` / `av1_preset` | `30` / `6` | lower crf = better/bigger; lower preset = slower/better |
-| `gif` | `True` | also emit the GIF |
-| `gif_fps` | `20` | **bump for smoothness** (e.g. `30`); drives GIF size |
-| `gif_width` | `640` | `None` keeps capture width |
-| `gif_quality` | `90` | gifski quality (1-100) |
-| `keep_raw` | `False` | also keep the raw Playwright `.webm` |
+| `width`, `height` | `1280`, `720` | viewport (CSS px) |
+| `scale` | `2` | device pixel ratio of the captured frames |
+| `fps` | `60` | capture rate; the AV1 keeps it |
+| `gl` | `"gpu"` | `"swiftshader"` where no GPU is reachable (slower, same output) |
+| `init_scripts` | `()` | JS run before the page's own (e.g. seed `localStorage`) |
+| `cursor` / `cursor_speed` | `True` / `1600` | the injected cursor; px/s glide speed |
+| `webp_fps` / `webp_width` / `webp_quality` | `30` / `1280` / `80` | the size levers of the hero file |
+| `av1_width` / `av1_crf` / `av1_preset` | `1920` / `30` / `6` | lower crf = better/bigger |
+| `gif` / `gif_fps` / `gif_width` | `False` / `20` / `640` | optional GIF |
+| `keep_frames` | `False` | keep the PNG frames dir (its path is logged) |
 
 ### Notes
 
-- GIF size scales with duration x fps x width. The AV1 master stays small
-  regardless; if a GIF is too big, lower `gif_fps` / `gif_width`, or keep the
-  demo short. HEVC/AV1 do not embed in most browsers/READMEs, so the GIF is the
-  embeddable artifact and the AV1 is the compact shareable video.
-- The GIF and AV1 come from the same single recording (same duration).
-- Interact only with elements that are visible; a hidden/animating target makes
-  the action time out (fast-fail at `action_timeout`, default 8s). For panels
-  that hide/show, navigate them first (the neurarium tour uses Esc + search).
+- WebP size scales with duration x `webp_fps` x `webp_width`^2: it has no inter-frame motion prediction, so a moving 3D scene costs a lot per frame. The AV1 is several times smaller at better quality, but a GitHub README cannot embed a repo-committed video, so the WebP is the hero and the AV1 the shareable file.
+- Interact only with visible elements; a hidden target fails fast at `action_timeout` (default 8 s).
