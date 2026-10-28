@@ -39,6 +39,7 @@ import sys
 import time
 from contextlib import closing
 from pathlib import Path
+from typing import Callable, NamedTuple
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from recorder import Demo  # noqa: E402
@@ -112,8 +113,8 @@ def open_and_scroll(d: Demo, tour_sec: str, *, by: int = 300) -> None:
     """Bring a folded panel section into view, open it, scroll through it."""
     d.scroll(section(tour_sec), within=PANE, dur=1000)
     d.click(section(tour_sec), settle=700)
-    d.scroll(within=PANE, by=by, dur=1800)
     d.move((900, 640))                    # park the cursor off the rows (no grade tooltip)
+    d.scroll(within=PANE, by=by, dur=1800)
 
 
 def story_drug(d: Demo) -> None:
@@ -169,10 +170,14 @@ def story_drugsmap(d: Demo) -> None:
     d.page.set_default_timeout(8000)
     d.begin()
     d.wait(1500)
-    d.click("[data-preset='ap_d2_5ht2a']", settle=2600)   # D2 against 5-HT2A, the atypicality plot
-    d.click("[data-preset='ap_side']", settle=2600)       # side-effect receptors (PCA)
-    for drug in ("clozapine", "haloperidol", "aripiprazole"):
-        d.hover(f"circle.dm-point[data-drug='{drug}']", hold=1300)
+    dot = "circle.dm-point[data-drug='{}']".format
+    d.hover(dot("clozapine"), hold=1300)                  # every drug by its whole binding profile
+    d.click("[data-preset='ap_d2_5ht2a']", settle=2200)   # D2 against 5-HT2A, the atypicality plot
+    for drug in ("haloperidol", "aripiprazole"):
+        d.hover(dot(drug), hold=1300)
+    d.click("[data-preset='ap_side']", settle=2200)       # side-effect receptors
+    for drug in ("clozapine", "olanzapine"):
+        d.hover(dot(drug), hold=1300)
     d.wait(800)
 
 
@@ -188,27 +193,37 @@ def story_receptor(d: Demo) -> None:
     d.wait(800)
     lsd = f'{PANE} [data-tour-id="ixdrug:lsd"]'
     d.scroll(lsd, within=PANE, dur=900)
-    d.click(lsd, settle=4500)             # jump to LSD: its own flow
-    d.wait(1000)
+    d.click(lsd, settle=1200)             # jump to LSD: its own flow
+    d.zoom(4, at=(820, 360))
+    d.wait(4000)
 
 
-# name -> (story, output basename under docs/images + docs/videos, start page)
+class Story(NamedTuple):
+    run: Callable[[Demo], None]
+    base: str                 # output basename under docs/images + docs/videos
+    path: str = ""            # start page
+    height: int = 720         # viewport height (the drugs map needs its whole chart)
+    webp_width: int = 1280    # the dense flow of `compare` would weigh ~12 MB at 1280
+
+
 STORIES = {
-    "drug": (story_drug, "preview", ""),
-    "anatomy": (story_anatomy, "demo-anatomy", ""),
-    "compare": (story_compare, "demo-compare", ""),
-    "drugsmap": (story_drugsmap, "demo-drugsmap", "drugs-map.html"),
-    "receptor": (story_receptor, "demo-receptor", ""),
+    "drug": Story(story_drug, "preview"),
+    "anatomy": Story(story_anatomy, "demo-anatomy"),
+    "compare": Story(story_compare, "demo-compare", webp_width=960),
+    "drugsmap": Story(story_drugsmap, "demo-drugsmap", "drugs-map.html", height=1240),
+    "receptor": Story(story_receptor, "demo-receptor"),
 }
 
 
 def record(port: int, name: str, args: argparse.Namespace) -> None:
-    story, base, path = STORIES[name]
+    story = STORIES[name]
     out_dir = Path(args.out_dir) if args.out_dir else None
     with Demo(
-        f"http://localhost:{port}/{path}",
-        out=str((out_dir or REPO_ROOT / "docs" / "images") / base),
-        av1_out=str((out_dir or REPO_ROOT / "docs" / "videos") / base),
+        f"http://localhost:{port}/{story.path}",
+        out=str((out_dir or REPO_ROOT / "docs" / "images") / story.base),
+        av1_out=str((out_dir or REPO_ROOT / "docs" / "videos") / story.base),
+        height=story.height,
+        webp_width=story.webp_width,
         fps=args.fps,
         headless=not args.headed,
         init_scripts=(SEEN_SCRIPT,),
@@ -216,7 +231,7 @@ def record(port: int, name: str, args: argparse.Namespace) -> None:
         max_glide_ms=900,
         keep_frames=args.keep_frames,
     ) as d:
-        story(d)
+        story.run(d)
 
 
 def main() -> None:
