@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.152.0",
+      "date": "2026-10-28",
+      "entries": [
+        {
+          "category": "added",
+          "text": "On a development instance, every /api/ page for LLM agents now says roughly how long ago the server restarted, so an agent knows the page may have changed recently.",
+          "commits": [
+            "9b1e5d6"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.151.1",
       "date": "2026-10-28",
       "entries": [
