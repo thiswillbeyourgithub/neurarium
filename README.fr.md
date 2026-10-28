@@ -48,34 +48,21 @@ https://github.com/user-attachments/assets/957c90e6-b2d4-4cf4-993b-57ed08f03419
 
 ## Autres démos
 
-Cliquez sur une image pour lancer sa démo (ce sont des images fixes ici pour que la page reste légère).
-
-<table>
-<tr>
-<td width="50%"><a href="docs/images/demo-anatomy.webp"><img src="docs/images/demo-anatomy.poster.webp" alt="demo-anatomy (cliquer pour lancer)"></a><br>
-
 Anatomie : le cerveau éclaté, l'hippocampe isolé, le circuit de Papez animé, puis le flux sérotoninergique de la fluoxétine.
 
-</td>
-<td width="50%"><a href="docs/images/demo-receptor.webp"><img src="docs/images/demo-receptor.poster.webp" alt="demo-receptor (cliquer pour lancer)"></a><br>
+https://github.com/user-attachments/assets/996ac7aa-1f9a-4049-a839-26dbb65b8be6
 
 Un récepteur : où 5-HT2A est exprimé, tous les médicaments qui s'y lient, puis le LSD choisi dans cette liste.
 
-</td>
-</tr>
-<tr>
-<td width="50%"><a href="docs/images/demo-compare.webp"><img src="docs/images/demo-compare.poster.webp" alt="demo-compare (cliquer pour lancer)"></a><br>
+https://github.com/user-attachments/assets/3bfde806-7156-4f13-8941-f93c5c3eaa8e
 
 Deux antipsychotiques comparés : le profil de liaison de l'halopéridol, puis celui, bien plus large, de la clozapine.
 
-</td>
-<td width="50%"><a href="docs/images/demo-drugsmap.webp"><img src="docs/images/demo-drugsmap.poster.webp" alt="demo-drugsmap (cliquer pour lancer)"></a><br>
+https://github.com/user-attachments/assets/1d01fcc1-0e37-494c-b50f-4224d1e8cb8f
 
 [DrugsMap](https://drugsmap.olicorne.org/) : chaque médicament placé selon son profil de liaison, puis les préréglages antipsychotiques.
 
-</td>
-</tr>
-</table>
+https://github.com/user-attachments/assets/567c9c1e-7af2-4b72-bb72-bd8a5282450c
 
 Les vidéos AV1 en pleine résolution sont dans [`docs/videos/`](docs/videos/) ; elles sont enregistrées par [`tools/demos/`](tools/demos/README.md).
 
