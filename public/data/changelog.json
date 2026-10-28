@@ -1,6 +1,40 @@
 {
   "versions": [
     {
+      "version": "3.153.0",
+      "date": "2026-10-28",
+      "entries": [
+        {
+          "category": "added",
+          "text": "DrugsMap's \"Copy image\" now includes the legend under the plot (colour keys and axis meaning), without the Extra details.",
+          "commits": [
+            "af00e00"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "DrugsMap greys out the Advanced switches that cannot change the current view, and says why on hover: Signed without any receptor input (body effects or tone only), Measured Ki only with tone alone, Normalize when one or two features are plotted directly.",
+          "commits": [
+            "d4732a1"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "DrugsMap's Extra details drop the PCA formula tab, which added nothing to the axis weights.",
+          "commits": [
+            "7695fa6"
+          ]
+        },
+        {
+          "category": "docs",
+          "text": "The READMEs say DrugsMap is also an example of how to reuse neurarium's open data.",
+          "commits": [
+            "841e247"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.152.0",
       "date": "2026-10-28",
       "entries": [
