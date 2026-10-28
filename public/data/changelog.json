@@ -1,6 +1,26 @@
 {
   "versions": [
     {
+      "version": "3.151.1",
+      "date": "2026-10-28",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "DrugsMap can no longer lose its map: zooming out stops just past the fitted view (1.1x), and a pan stops once half the screen is empty.",
+          "commits": [
+            "58ff8dc"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "On DrugsMap, hovering between two close drugs no longer flickers between their names: the hovered drug holds until the pointer is clearly nearer the other one.",
+          "commits": [
+            "6eabc2b"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.151.0",
       "date": "2026-10-28",
       "entries": [
