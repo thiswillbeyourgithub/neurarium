@@ -46,6 +46,37 @@ En ligne sur **[neurarium.olicorne.org](https://neurarium.olicorne.org)**.
 > [!TIP]
 > **Utilisable par les IA :** collez une fois [`neurarium.olicorne.org/llms.txt`](https://neurarium.olicorne.org/llms.txt) dans Claude, ChatGPT, Le Chat, Gemini ou un autre assistant et demandez-lui de retenir le site : il pourra ensuite chercher et vérifier les faits de neurarium avec leurs citations sources (voir [Puis-je interroger un assistant IA à son sujet ?](#can-i-ask-an-ai-assistant-about-it)).
 
+## Autres démos
+
+<table>
+<tr>
+<td width="50%"><img src="docs/images/demo-anatomy.webp" alt="demo-anatomy"><br>
+
+Anatomie : le cerveau éclaté, l'hippocampe isolé, le circuit de Papez animé, puis le flux sérotoninergique de la fluoxétine.
+
+</td>
+<td width="50%"><img src="docs/images/demo-receptor.webp" alt="demo-receptor"><br>
+
+Un récepteur : où 5-HT2A est exprimé, tous les médicaments qui s'y lient, puis le LSD choisi dans cette liste.
+
+</td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/images/demo-compare.webp" alt="demo-compare"><br>
+
+Deux antipsychotiques comparés : le profil de liaison de l'halopéridol, puis celui, bien plus large, de la clozapine.
+
+</td>
+<td width="50%"><img src="docs/images/demo-drugsmap.webp" alt="demo-drugsmap"><br>
+
+[DrugsMap](https://drugsmap.olicorne.org/) : chaque médicament placé selon son profil de liaison, puis les préréglages antipsychotiques.
+
+</td>
+</tr>
+</table>
+
+Les vidéos AV1 en pleine résolution sont dans [`docs/videos/`](docs/videos/) ; elles sont enregistrées par [`tools/demos/`](tools/demos/README.md).
+
 ## FAQ
 
 - [Quelles informations trouve-t-on à l'intérieur ?](#what-kind-of-information-is-inside)

@@ -38,6 +38,37 @@ Live at **[neurarium.olicorne.org](https://neurarium.olicorne.org)**.
 > [!TIP]
 > **AI-ready:** paste [`neurarium.olicorne.org/llms.txt`](https://neurarium.olicorne.org/llms.txt) once into Claude, ChatGPT, Le Chat, Gemini or another assistant and ask it to remember the site: it can then look up and check neurarium's facts against their quoted sources (see [Can I ask an AI assistant about it?](#can-i-ask-an-ai-assistant-about-it)).
 
+## More demos
+
+<table>
+<tr>
+<td width="50%"><img src="docs/images/demo-anatomy.webp" alt="demo-anatomy"><br>
+
+Anatomy: blow the brain apart, isolate the hippocampus, play the Papez circuit, then fluoxetine's serotonergic flow.
+
+</td>
+<td width="50%"><img src="docs/images/demo-receptor.webp" alt="demo-receptor"><br>
+
+A receptor: where 5-HT2A is expressed, every drug that binds it, then LSD picked from that list.
+
+</td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/images/demo-compare.webp" alt="demo-compare"><br>
+
+Two antipsychotics compared: haloperidol's binding profile, then clozapine's much broader one.
+
+</td>
+<td width="50%"><img src="docs/images/demo-drugsmap.webp" alt="demo-drugsmap"><br>
+
+[DrugsMap](https://drugsmap.olicorne.org/): every drug placed by its binding profile, then the antipsychotic presets.
+
+</td>
+</tr>
+</table>
+
+The full-resolution AV1 videos sit in [`docs/videos/`](docs/videos/); they are recorded by [`tools/demos/`](tools/demos/README.md).
+
 ## FAQ
 
 - [What kind of information is inside?](#what-kind-of-information-is-inside)
