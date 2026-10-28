@@ -124,7 +124,7 @@ CURSOR_JS = r"""
   // scroll, which runs on compositor time the faked clock cannot hold).
   // `within` names the scroll container (null = the page); `mode` is 'top',
   // 'bottom', 'by' (arg = px) or 'into' (arg = a selector centred in view).
-  function tweenScroll(within, mode, arg, dur) {
+  function tweenScroll(within, mode, arg, dur, align) {
     const box = within ? document.querySelector(within) : document.scrollingElement;
     if (!box) return;
     const from = box.scrollTop, max = box.scrollHeight - box.clientHeight;
@@ -134,7 +134,7 @@ CURSOR_JS = r"""
       if (!el) return;
       const top = within ? box.getBoundingClientRect().top : 0;
       const r = el.getBoundingClientRect();
-      to = from + (r.top - top) - (box.clientHeight - r.height) / 2;
+      to = from + (r.top - top) - (align === 'top' ? 0 : (box.clientHeight - r.height) / 2);
     }
     to = Math.max(0, Math.min(max, to));
     let start = null;
@@ -428,17 +428,18 @@ class Demo:
 
     def scroll(self, selector: str | None = None, *, to: str | None = None,
                by: float | None = None, within: str | None = None,
-               dur: int = 700) -> "Demo":
-        """Tween a scroll: bring `selector` to the centre, or go `to` 'top'/'bottom',
-        or scroll `by` px; inside the `within` container (default: the page)."""
+               dur: int = 700, align: str = "center") -> "Demo":
+        """Tween a scroll: bring `selector` to the centre (or the top with
+        `align="top"`), or go `to` 'top'/'bottom', or scroll `by` px; inside the
+        `within` container (default: the page)."""
         if selector is not None:
             mode, arg = "into", selector
         elif by is not None:
             mode, arg = "by", by
         else:
             mode, arg = (to or "top"), None
-        self.page.evaluate("([w, m, a, d]) => window.__demo.tweenScroll(w, m, a, d)",
-                           [within, mode, arg, dur])
+        self.page.evaluate("([w, m, a, d, al]) => window.__demo.tweenScroll(w, m, a, d, al)",
+                           [within, mode, arg, dur, align])
         self.wait(dur)
         return self
 
@@ -551,6 +552,9 @@ class Demo:
             "([x, y, d]) => { window.__demo.moveTo(x, y, d); }", [x, y, duration]
         )
         self.wait(duration)
+        # The real pointer follows, or whatever sits under its old spot (a row
+        # scrolled under it) still gets the hover and pops its tooltip.
+        self.page.mouse.move(x, y)
         self.cx, self.cy = x, y
 
     # -- post-processing ----------------------------------------------------

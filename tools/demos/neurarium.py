@@ -109,12 +109,15 @@ def search(d: Demo, term: str, *, watch: int) -> None:
     d.wait(watch)
 
 
-def open_and_scroll(d: Demo, tour_sec: str, *, by: int = 300) -> None:
-    """Bring a folded panel section into view, open it, scroll through it."""
+def open_and_scroll(d: Demo, tour_sec: str, *, by: int = 0) -> None:
+    """Bring a folded panel section into view, open it, lift it to the top of the
+    pane so its rows show at once, then scroll `by` px further through them."""
     d.scroll(section(tour_sec), within=PANE, dur=1000)
-    d.click(section(tour_sec), settle=700)
+    d.click(section(tour_sec), settle=500)
     d.move((900, 640))                    # park the cursor off the rows (no grade tooltip)
-    d.scroll(within=PANE, by=by, dur=1800)
+    d.scroll(section(tour_sec), within=PANE, dur=1000, align="top")
+    if by:
+        d.scroll(within=PANE, by=by, dur=1800)
 
 
 def story_drug(d: Demo) -> None:
@@ -125,7 +128,7 @@ def story_drug(d: Demo) -> None:
     search(d, "olanzapine", watch=1600)   # gem dots on its targets' regions + effect flow
     d.zoom(4, at=(820, 360))              # the focus frames from afar: close in on the flow
     d.wait(4000)
-    open_and_scroll(d, "bindings")        # the sourced, graded binding rows
+    open_and_scroll(d, "bindings", by=200)  # the sourced, graded binding rows
     d.wait(2400)
 
 
@@ -153,12 +156,12 @@ def story_compare(d: Demo) -> None:
     search(d, "haloperidol", watch=1200)  # narrow: dopamine D2 blockade
     d.zoom(4, at=(820, 360))
     d.wait(3500)
-    open_and_scroll(d, "bindings", by=200)
+    open_and_scroll(d, "bindings")
     d.wait(1200)
     search(d, "clozapine", watch=1200)    # broad: dozens of receptors light up
     d.zoom(4, at=(820, 360))
     d.wait(3300)
-    open_and_scroll(d, "bindings", by=420)
+    open_and_scroll(d, "bindings", by=250)
     d.wait(2000)
 
 
@@ -189,7 +192,7 @@ def story_receptor(d: Demo) -> None:
     search(d, "5-HT2A", watch=1200)       # gem dots on the regions expressing it
     d.zoom(4, at=(820, 360))
     d.wait(3000)
-    open_and_scroll(d, "drugs", by=200)   # every drug that binds it, by affinity
+    open_and_scroll(d, "drugs")          # every drug that binds it, by affinity
     d.wait(800)
     lsd = f'{PANE} [data-tour-id="ixdrug:lsd"]'
     d.scroll(lsd, within=PANE, dur=900)
