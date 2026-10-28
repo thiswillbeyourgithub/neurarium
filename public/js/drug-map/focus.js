@@ -12,15 +12,24 @@
 // names it would collide with (its own drug's included, so a name never shows twice)
 // are hidden (`dm-label-under`), so it reads cleanly inside a crowded cluster.
 // "Near" is measured from the pointer, so a tap between two dots picks the closer one,
-// and a tiny dot needs no pixel-exact aim. A click on a placed name means its drug even
+// and a tiny dot needs no pixel-exact aim. The mouse hover is sticky (`stickyNearest`):
+// between two close dots a plain nearest-dot test flips at the exact midpoint, so a
+// hand's jitter there made the focus flicker; the hovered drug now holds until another
+// dot is HYST_PX closer, and up to NEAR_PX + HYST_PX away. The focus name itself is
+// hit-testable and names its drug: it hides the placed name under it, and were it
+// transparent to the pointer, the pointer would then fall through to nothing, drop the
+// hover, bring the placed name back, and loop. A click on a placed name means its drug even
 // when that name runs farther than NEAR_PX from the dot.
 //
-// `nearestDot` is DOM-free (node tests); `createFocus` wires the events and draws.
+// `nearestDot` / `stickyNearest` are DOM-free (node tests); `createFocus` wires the events and draws.
 
 import { svgEl } from "./dom.js";
 
 /** How far (screen px) from a dot the pointer still means it. */
 export const NEAR_PX = { mouse: 24, touch: 32 };
+
+/** Screen px another dot must be closer by to take the mouse hover over (see top). */
+export const HYST_PX = 8;
 
 /** How much larger (px) the focus name is than the placed names. */
 const FOCUS_FONT_GAIN = 4;
@@ -52,6 +61,28 @@ export function nearestDot(dots, x, y, maxPx) {
 }
 
 /**
+ * The nearest dot with hysteresis towards `currentId`: the current dot stays meant while
+ * within `maxPx + hystPx`, unless another is more than `hystPx` closer. E.g. dots 10 px
+ * apart at x = 0 (current) and x = 10: the pointer at x = 6 keeps the first (6 vs 4, not
+ * 8 closer); at x = 10 the second wins (10 vs 0).
+ * @param {{id: string, sx: number, sy: number}[]} dots
+ * @param {number} x
+ * @param {number} y
+ * @param {string|null} currentId
+ * @param {number} maxPx
+ * @param {number} [hystPx]
+ * @returns {object|null}
+ */
+export function stickyNearest(dots, x, y, currentId, maxPx, hystPx = HYST_PX) {
+  const best = nearestDot(dots, x, y, maxPx);
+  const cur = currentId && dots.find((d) => d.id === currentId);
+  if (!cur) return best;
+  const dCur = Math.hypot(cur.sx - x, cur.sy - y);
+  if (dCur > maxPx + hystPx) return best;
+  return best && Math.hypot(best.sx - x, best.sy - y) < dCur - hystPx ? best : cur;
+}
+
+/**
  * @param {{svg: SVGSVGElement, onOpen: (drug: object) => void,
  *   onHide: (drug: object) => void}} o
  * @returns {{draw: (frame: object) => void, clear: () => void}}
@@ -69,12 +100,13 @@ export function createFocus({ svg, onOpen, onHide }) {
     return { x: ev.clientX - rect.left, y: ev.clientY - rect.top };
   };
   // The drug an event means: a placed name's own drug, else the nearest dot.
-  const meant = (ev, maxPx) => {
+  // `sticky` (the mouse hover) holds the hovered drug against near ties (stickyNearest).
+  const meant = (ev, maxPx, sticky = false) => {
     if (!frame) return null;
     const id = ev.target?.dataset?.drug;
     if (id) return frame.dots.find((d) => d.id === id) || null;
     const { x, y } = local(ev);
-    return nearestDot(frame.dots, x, y, maxPx);
+    return sticky ? stickyNearest(frame.dots, x, y, hover, maxPx) : nearestDot(frame.dots, x, y, maxPx);
   };
 
   function paint() {
@@ -92,7 +124,7 @@ export function createFocus({ svg, onOpen, onHide }) {
       const txt = svgEl("text", {
         x: d.x + (left ? -1 : 1) * (r + 6) * k, y: d.y + font * 0.35 * k,
         "text-anchor": left ? "end" : "start", class: "dm-focus-label",
-        "font-size": (font + FOCUS_FONT_GAIN) * k, "stroke-width": 3 * k,
+        "font-size": (font + FOCUS_FONT_GAIN) * k, "stroke-width": 3 * k, "data-drug": id,
       });
       txt.textContent = d.p.drug.name;
       layer.appendChild(txt);
@@ -114,7 +146,7 @@ export function createFocus({ svg, onOpen, onHide }) {
   svg.addEventListener("pointerdown", (ev) => { pointerType = ev.pointerType || "mouse"; });
   svg.addEventListener("pointermove", (ev) => {
     if (ev.pointerType !== "mouse" || ev.buttons) return;
-    const d = meant(ev, NEAR_PX.mouse);
+    const d = meant(ev, NEAR_PX.mouse, true);
     svg.classList.toggle("dm-pointing", !!d);
     if ((d?.id || null) === hover) return;
     hover = d?.id || null;

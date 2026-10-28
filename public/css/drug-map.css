@@ -90,7 +90,8 @@
 .dm-plot.dm-pointing { cursor: pointer; }
 .dm-focus { pointer-events: none; }
 .dm-focus-ring { fill: none; stroke: var(--text); }
-.dm-focus-label { fill: var(--text); font-weight: 600; stroke: var(--dm-plot-bg); paint-order: stroke; stroke-linejoin: round; }
+/* Hit-testable (unlike the rest of .dm-focus): see js/drug-map/focus.js on the flicker. */
+.dm-focus-label { pointer-events: auto; cursor: pointer; fill: var(--text); font-weight: 600; stroke: var(--dm-plot-bg); paint-order: stroke; stroke-linejoin: round; }
 .dm-plot-wrap { position: relative; }
 /* view.js plot title (js/drug-map/title.js): centred over the plot, clear of the corner
    buttons, wrapping as needed; the points are fitted below it. */
