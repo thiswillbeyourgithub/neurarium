@@ -119,6 +119,7 @@ export function createDrugMap({ data, onChange }) {
   const copyItem = item(async () => {
     const res = await copyPng(() => plotPng(svg, {
       overlays: [{ node: plotTitleEl, align: "center" }, { node: watermark, align: "right" }],
+      legend: { keys: legend, head: axesHead, axes },
     }), "drugsmap.png").catch(() => "failed");
     flashKebab(t(`drugmap.image.${res}`));
   });
