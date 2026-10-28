@@ -200,7 +200,10 @@ export function createDrugMap({ data, onChange }) {
       // One or two picked features are the axes themselves: raw values, since unit
       // length over two numbers would put every drug on a circle.
       const direct = view.only && view.only.length > 0 && view.only.length <= 2;
-      const prof = buildProfiles(drugs, { ...view, normalize: view.normalize && !direct });
+      // One or two picked features are plotted as they are: unit length would put every
+      // drug on one circle. "dose" is per value, not per vector, so it still applies.
+      const norm = direct && view.normalize === "shape" ? "off" : view.normalize;
+      const prof = buildProfiles(drugs, { ...view, normalize: norm });
       const kept = filterDrugs(drugs, view);
       const shown = kept.filter((d) => prof.has(d.id));
       const ids = shown.map((d) => d.id);
@@ -226,7 +229,8 @@ export function createDrugMap({ data, onChange }) {
       extras.update({
         view, t, nameOf, ids, profiles: prof, pcs, direct: direct ? view.only : null,
         drugName: (id) => names.get(id) || id,
-        raw: () => buildProfiles(drugs, { ...view, normalize: false }),
+        norm,
+        raw: () => buildProfiles(drugs, { ...view, normalize: "off" }),
       });
     } finally {
       // Always cancel this render's own timers, even when a newer one superseded it:
@@ -452,7 +456,9 @@ export function createDrugMap({ data, onChange }) {
         (v) => ({ color: COLOR_MODES.includes(v) ? v : DEFAULT_VIEW.color }));
       flag("dmlabels", "labels");
       flag("dmspread", "spread");
-      flag("dmnorm", "normalize");
+      // "0" (= off) is what the on/off switch wrote, so old links keep their meaning.
+      reg("dmnorm", () => ({ shape: null, off: "0", dose: "dose" })[view.normalize] ?? null,
+        (v) => ({ normalize: v === "0" ? "off" : v === "dose" ? "dose" : "shape" }));
       flag("dmsign", "signed");
       flag("dmmkt", "marketed");
       flag("dmki", "measuredKi");

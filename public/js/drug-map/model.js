@@ -20,11 +20,23 @@
 //     bindings behind it (same `pKi - PKI_FLOOR` scale, `measuredKi` applies). Unsigned:
 //     an effect is a possibility, it has no opposite.
 //   Any non-empty set of sources sits side by side in one vector (`sources`).
-// With `normalize` (the default) each block is scaled to unit length on its own, so the
-// map places drugs by the SHAPE of a profile (which targets, in what proportion), not by
-// overall potency or how many targets a corpus happened to list, and combined blocks
-// weigh the same; without it, raw values, so a potent,
-// promiscuous drug sits further out than a weak, selective one.
+// `normalize` is one of NORM_MODES:
+//   "shape" (the default): each block scaled to unit length on its own, so the map places
+//     drugs by the SHAPE of a profile (which targets, in what proportion), not by overall
+//     potency or how many targets a corpus happened to list, and combined blocks weigh
+//     the same.
+//   "dose": dose-equalized occupancy. Potency alone is clinically invisible (a drug twice
+//     as weak is just given at twice the dose), so each drug is "dosed" until its
+//     strongest binding sits at DOSE_OCCUPANCY (80%), and every receptor / effect value
+//     becomes the occupancy that dose reaches there: C = 4 Ki_main, occ_i = C / (C + Ki_i),
+//     i.e. 1 / (1 + 10^(pKi_main - pKi_i) / 4). e.g. Ki_main 1 nM: a 10 nM target 0.29,
+//     a 100 nM one 0.04. The anchor is the drug's strongest binding over ALL its bindings
+//     (Measured Ki only applies), whatever is plotted: the dose is the drug's, not the
+//     view's. It assumes that binding is the one titrated, which is not always so
+//     (quetiapine binds H1 harder than D2). Tone has no Ki to dose against, so it gets
+//     "shape" scaling.
+//   "off": raw values, so a potent, promiscuous drug sits further out than a weak,
+//     selective one.
 
 /** pKi at and below which a binding counts as no binding (Ki >= 10 µM). */
 export const PKI_FLOOR = 5;
@@ -39,6 +51,10 @@ export const EFFECT_PREFIX = "effect:";
 /** A receptor / target feature key, as opposed to a tone or a body-effect key. */
 export const isTargetKey = (k) => !k.startsWith(TONE_PREFIX) && !k.startsWith(EFFECT_PREFIX);
 
+export const NORM_MODES = ["shape", "dose", "off"];
+/** "dose" normalization: the occupancy each drug's strongest binding is dosed to. */
+export const DOSE_OCCUPANCY = 0.8;
+
 const hasMeasuredKi = (b) => !!b.ki && typeof b.ki.median === "number" && b.ki.median > 0;
 const affinityOf = (b) => {
   const pki = hasMeasuredKi(b) ? 9 - Math.log10(b.ki.median) : PKI_UNMEASURED;
@@ -52,13 +68,14 @@ const affinityOf = (b) => {
  * twice keeps its strongest value. `only` keeps just those keys (target ids,
  * `tone:<kind>` and/or `effect:<id>`; `[]` keeps none, null every one). `measuredKi`
  * drops the bindings with no measured Ki from the receptor and effect blocks. Drugs
- * whose vector is all zero get none (they cannot be placed).
+ * whose vector is all zero get none (they cannot be placed). `normalize`: see the module
+ * comment.
  * @param {object[]} drugs
- * @param {{normalize?: boolean, signed?: boolean, sources?: string[], only?: string[]|null,
+ * @param {{normalize?: "shape"|"dose"|"off", signed?: boolean, sources?: string[], only?: string[]|null,
  *   measuredKi?: boolean}} [opts]
  * @returns {Map<string, Map<string, number>>} drug id -> (feature key -> value)
  */
-export function buildProfiles(drugs, { normalize = true, signed = false, sources = ["receptors"], only = null, measuredKi = false } = {}) {
+export function buildProfiles(drugs, { normalize = "shape", signed = false, sources = ["receptors"], only = null, measuredKi = false } = {}) {
   const keep = only ? new Set(only) : null;
   const out = new Map();
   for (const d of drugs) {
@@ -82,15 +99,35 @@ export function buildProfiles(drugs, { normalize = true, signed = false, sources
         if (a) eff.set(EFFECT_PREFIX + e.effect, a);
       }
     }
+    // The affinity blocks' values are pKi - PKI_FLOOR, so the anchor is too.
+    const occupancy = normalize === "dose" ? doseOccupancy(d, measuredKi) : null;
     const v = new Map();
     for (const block of [rec, tone, eff]) {
       const kept = [...block].filter(([k, w]) => w && (!keep || keep.has(k)));
       const norm = Math.hypot(...kept.map(([, w]) => w));
-      for (const [k, w] of kept) v.set(k, normalize ? w / norm : w);
+      const scale = normalize === "off" ? (w) => w
+        : occupancy && block !== tone ? occupancy : (w) => w / norm;
+      for (const [k, w] of kept) v.set(k, scale(w));
     }
     if (v.size) out.set(d.id, v);
   }
   return out;
+}
+
+/**
+ * "dose" normalization for one drug: a value (pKi - PKI_FLOOR, signed or not) -> the
+ * occupancy at that affinity once the drug's strongest binding is dosed to
+ * DOSE_OCCUPANCY (see the module comment), keeping its sign.
+ * e.g. strongest pKi 9 (a = 4): a = 4 -> 0.8, a = 3 -> 0.29, a = -2 (blocked, pKi 7) -> -0.04
+ * @param {object} d
+ * @param {boolean} measuredKi
+ * @returns {(w: number) => number}
+ */
+function doseOccupancy(d, measuredKi) {
+  const top = Math.max(0, ...(d.bindings || [])
+    .filter((b) => b.target && (!measuredKi || hasMeasuredKi(b))).map(affinityOf));
+  const k = DOSE_OCCUPANCY / (1 - DOSE_OCCUPANCY); // C / Ki_main
+  return (w) => Math.sign(w) / (1 + 10 ** (top - Math.abs(w)) / k);
 }
 
 /**
@@ -219,7 +256,7 @@ export const DEFAULT_VIEW = Object.freeze({
   color: "category",   // one of COLOR_MODES
   labels: true,
   spread: true,        // nudge overlapping dots apart on screen (js/drug-map/spread.js)
-  normalize: true,     // unit-length profiles (see buildProfiles)
+  normalize: "shape",  // one of NORM_MODES (see buildProfiles)
   signed: true,        // agonist vs antagonist on opposite signs
   marketed: true,      // only drugs with a current marketing authorisation (US or FR holder)
   measuredKi: true,    // leave out bindings with no measured Ki (see buildProfiles)
@@ -267,7 +304,8 @@ export function parseSources(value) {
  * of why (shown greyed out with that reason, the stored value kept for when it applies
  * again). From buildProfiles: Signed only signs receptor bindings, Measured Ki only
  * filters bindings (read by the receptor and body-effect blocks, never by tone), and
- * Normalize is skipped when one or two picked features are plotted directly. A picked
+ * the "shape" normalization is skipped when one or two picked features are plotted
+ * directly (unit length would put every drug on one circle; "dose" still applies). A picked
  * subset (`only`) counts too: Signed is inert with only tone / effect features picked.
  * e.g. {sources: ["effects"]} -> {signed: "drugmap.inert.signed"}
  *      {sources: ["tone"]}    -> {signed: ..., measuredKi: "drugmap.inert.measuredKi"}

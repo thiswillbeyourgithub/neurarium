@@ -2,8 +2,8 @@
 // reader can check or reuse what the plot shows. Four tabs, each one record per line:
 //   input coordinates      {"drug":"Haloperidol","D2":3.6,"5-HT2A":-2.1,...}   raw profile
 //   normalized coordinates {"drug":"Haloperidol","D2":0.71,...}   what the PCA actually got
-//                          (disabled when Normalize is off, or with one or two picked
-//                          features, which are plotted raw, see view.js `direct`)
+//                          (disabled when no normalization applies: off, or "shape" with
+//                          one or two picked features, plotted raw, see view.js `norm`)
 //   axis weights           {"feature":"D2","PC1":0.45,"PC2":-0.1,"mean":0.12}   each input
 //                          axis' weight on each map axis, and the mean the PCA centred on
 // The text builders are DOM-free (node tests, tools/tests/drug_map_extras.test.mjs); the
@@ -112,7 +112,7 @@ export function createExtras(t) {
   let state = null;
   let active = "input";
   const cache = new Map();
-  const disabled = (k) => k === "normalized" && !!state && (!state.view.normalize || !!state.direct);
+  const disabled = (k) => k === "normalized" && !!state && state.norm === "off";
   const textOf = (k) => {
     if (!state) return "";
     if (!cache.has(k)) {

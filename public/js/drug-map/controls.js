@@ -4,7 +4,7 @@
 // `render()` reflects the view. In both lists a click picks, shift-click or long-press
 // drops (`pickOrDrop`, `pickSet`).
 
-import { categoryColor, COLOR_MODES, EFFECT_PREFIX, FEATURE_SOURCES, inertOptions, pickSet, primaryCategory, TONE_PREFIX } from "./model.js";
+import { categoryColor, COLOR_MODES, EFFECT_PREFIX, FEATURE_SOURCES, inertOptions, NORM_MODES, pickSet, primaryCategory, TONE_PREFIX } from "./model.js";
 import { button, chipSearch, el, foldBox, pickOrDrop } from "./dom.js";
 import { groupTargetsBySystem } from "../legend/targets.js";
 import { matchesPreset, PRESETS, presetView } from "./presets.js";
@@ -167,9 +167,10 @@ export function createControls({ data, drugs, nameOf, featureKeys, getView, setV
   const catSearch = chipSearch(catList, t("drugmap.searchClasses"));
   filter.body.append(catSearch.input, filterBar, catList);
 
-  // ---- Advanced: the switches, all on by default.
+  // ---- Advanced: the normalization picker, then the switches, all on by default.
   const advanced = foldBox(t("drugmap.sec.advanced"));
-  const toggles = ["labels", "spread", "normalize", "signed", "measuredKi", "marketed"].map((key) => {
+  const normSwitch = seg(NORM_MODES, t("drugmap.normalize"), "drugmap.norm", "normalize", "drugmap.normTip");
+  const toggles = ["labels", "spread", "signed", "measuredKi", "marketed"].map((key) => {
     const lab = el("label", "list-toggle");
     const input = el("input");
     input.type = "checkbox";
@@ -179,7 +180,7 @@ export function createControls({ data, drugs, nameOf, featureKeys, getView, setV
   });
   const advRow = el("div", "dm-controls");
   advRow.append(...toggles.map((x) => x.lab));
-  advanced.body.append(advRow);
+  advanced.body.append(row(t("drugmap.normalize"), normSwitch), advRow);
 
   function render() {
     const view = getView();
@@ -197,6 +198,14 @@ export function createControls({ data, drugs, nameOf, featureKeys, getView, setV
       x.input.disabled = !!inert[x.key];
       x.lab.classList.toggle("dm-inert", !!inert[x.key]);
       x.lab.title = inert[x.key] ? t(inert[x.key]) : x.key === "labels" ? "" : t(`drugmap.${x.key}Tip`);
+    }
+    // "shape" greyed out like a switch when it cannot apply (inert.normalize).
+    for (const b of normSwitch.children) {
+      const inertHere = b.dataset.mode === "shape" && !!inert.normalize;
+      b.classList.toggle("active", b.dataset.mode === view.normalize);
+      b.classList.toggle("dm-inert", inertHere);
+      b.disabled = inertHere;
+      b.title = t(inertHere ? inert.normalize : `drugmap.normTip.${b.dataset.mode}`);
     }
     const lit = presetBtns.find(({ p }) => matchesPreset(view, p));
     for (const { b } of presetBtns) b.classList.toggle("active", b === lit?.b);

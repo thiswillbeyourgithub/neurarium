@@ -13,7 +13,7 @@ const drug = (id, bindings, extra = {}) => ({ id, name: id, bindings, categories
 test("affinity: Ki floor, unmeasured default, strongest duplicate", () => {
   const raw = buildProfiles([
     drug("a", [b("d2", 1), b("h1", 20000), b("m1"), b("d2", 100)]),
-  ], { normalize: false }).get("a");
+  ], { normalize: "off" }).get("a");
   assert.equal(raw.get("d2"), 9 - PKI_FLOOR);       // 1 nM, the stronger duplicate
   assert.equal(raw.has("h1"), false);              // 20 µM: below the floor
   assert.equal(raw.get("m1"), PKI_UNMEASURED - PKI_FLOOR);
@@ -21,7 +21,7 @@ test("affinity: Ki floor, unmeasured default, strongest duplicate", () => {
 
 test("measuredKi leaves unmeasured bindings out; a drug with no measured Ki is not mappable", () => {
   const drugs = [drug("some", [b("d2", 1), b("m1")]), drug("none", [b("gaba_a"), b("h1")]), drug("empty", [])];
-  const p = buildProfiles(drugs, { normalize: false, measuredKi: true });
+  const p = buildProfiles(drugs, { normalize: "off", measuredKi: true });
   assert.deepEqual([...p.get("some").keys()], ["d2"]);
   assert.equal(p.has("none"), false);
   assert.equal(DEFAULT_VIEW.measuredKi, true);
@@ -32,6 +32,23 @@ test("normalize scales each profile to unit length; drugs with nothing drop out"
   const p = buildProfiles([drug("a", [b("d2", 1), b("m1", 1)]), drug("none", [b("h1", 1e6)])]);
   assert.ok(Math.abs(Math.hypot(...p.get("a").values()) - 1) < 1e-12);
   assert.equal(p.has("none"), false);
+});
+
+test("dose normalization: strongest binding at 80%, others at the occupancy that dose reaches", () => {
+  const close = (a, x) => assert.ok(Math.abs(a - x) < 1e-9, `${a} vs ${x}`);
+  // Ki 1 nM is the anchor: C = 4 nM, so 10 nM -> 4/14, 100 nM -> 4/104.
+  const strong = drug("strong", [b("d2", 1), b("h1", 10), b("m1", 100)]);
+  const p = buildProfiles([strong], { normalize: "dose" }).get("strong");
+  close(p.get("d2"), 0.8); close(p.get("h1"), 4 / 14); close(p.get("m1"), 4 / 104);
+  // Potency drops out: the same profile 10x weaker lands on the same values.
+  const weak = drug("weak", [b("d2", 10), b("h1", 100), b("m1", 1000)]);
+  assert.deepEqual([...buildProfiles([weak], { normalize: "dose" }).get("weak").values()], [...p.values()]);
+  // The anchor is the drug's, not the view's: picking only H1 keeps D2 as the dose.
+  close(buildProfiles([strong], { normalize: "dose", only: ["h1"] }).get("strong").get("h1"), 4 / 14);
+  // Signed keeps the sign: a blocked target reads as negative occupancy.
+  const sp = buildProfiles([drug("s", [{ ...b("d2", 1), effect: "block" }, { ...b("h1", 10), effect: "boost" }])],
+    { normalize: "dose", signed: true }).get("s");
+  close(sp.get("d2"), -0.8); close(sp.get("h1"), 4 / 14);
 });
 
 test("pca separates two binding families along PC1, deterministically", () => {
@@ -85,7 +102,7 @@ test("signed: agonist and antagonist get opposite signs, direction-less counts 0
     drug("ago", [act("d2", 1, "boost"), act("h1", 1)]),
     drug("ant", [act("d2", 1, "block")]),
     drug("part", [act("d2", 1, "modulate")]),
-  ], { normalize: false, signed: true });
+  ], { normalize: "off", signed: true });
   assert.equal(p.get("ago").get("d2"), 4);
   assert.equal(p.get("ago").has("h1"), false);
   assert.equal(p.get("ant").get("d2"), -4);
@@ -95,7 +112,7 @@ test("signed: agonist and antagonist get opposite signs, direction-less counts 0
 test("tone and combined sources: tone keys, each block normalized on its own", () => {
   const flow = { dopamine: { sum: -0.6 }, serotonin: { sum: 0.8 } };
   const d = drug("a", [b("d2", 1)], { flowSystems: flow });
-  const tone = buildProfiles([d], { sources: ["tone"], normalize: false }).get("a");
+  const tone = buildProfiles([d], { sources: ["tone"], normalize: "off" }).get("a");
   assert.deepEqual([...tone], [["tone:dopamine", -0.6], ["tone:serotonin", 0.8]]);
   const both = buildProfiles([d], { sources: ["receptors", "tone"] }).get("a");
   assert.equal(both.get("d2"), 1);                 // receptor block alone: unit length
@@ -108,7 +125,7 @@ test("effects: the strongest affinity behind each possible effect, measuredKi ap
     possibleEffects: [{ effect: "sedation", via: [{ binding: h1 }, { binding: d2 }] },
       { effect: "weight_gain", via: [{ binding: h1 }] }, { effect: "dizziness", via: [{ binding: { target: "x" } }] }],
   });
-  const p = buildProfiles([d], { sources: ["effects"], normalize: false, measuredKi: true }).get("a");
+  const p = buildProfiles([d], { sources: ["effects"], normalize: "off", measuredKi: true }).get("a");
   assert.equal(p.get("effect:sedation"), 4);       // the D2 Ki of 1 nM, not H1's 100 nM
   assert.equal(p.get("effect:weight_gain"), 2);
   assert.equal(p.has("effect:dizziness"), false);  // its only binding has no measured Ki
@@ -124,7 +141,7 @@ test("parseSources: URL order-free, old 'both' kept, default when empty", () => 
 
 test("only + directPoints: 5-HT2A vs D2 as raw axes, a drug lacking both drops", () => {
   const drugs = [drug("a", [b("d2", 1), b("5ht2a", 10), b("h1", 1)]), drug("b", [b("d2", 10)]), drug("c", [b("h1", 1)])];
-  const p = buildProfiles(drugs, { only: ["5ht2a", "d2"], normalize: false });
+  const p = buildProfiles(drugs, { only: ["5ht2a", "d2"], normalize: "off" });
   assert.equal(p.has("c"), false);
   assert.equal(p.get("a").has("h1"), false);
   const pts = directPoints(["a", "b"], p, ["5ht2a", "d2"]);
