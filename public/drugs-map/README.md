@@ -53,7 +53,7 @@ Controls (boxes above the plot):
 - **Targets:** restrict the vectors to some targets; pick one or two and they become the axes themselves (no PCA).
 - **Filter points by:** drug class, first approval year, marketed only.
 - **Colour by:** class, [Neuroscience-based Nomenclature](https://nbn2r.com/), approval year, originator lab, [metabolism](https://en.wikipedia.org/wiki/Drug_metabolism), or Ki coverage.
-- **Plot:** scroll / pinch to zoom, drag to pan, two-finger twist (or the rotate gesture) to rotate, fullscreen button.
+- **Plot:** scroll / pinch to zoom, drag to pan, two-finger twist (or the rotate gesture) to rotate; the ⋮ menu at the top right goes fullscreen, resets the rotation or copies the plot as an image.
 
 Click a drug to open it in neurarium's 3D atlas (its full panel: bindings with their quoted sources, metabolism, history...). Right-click or long-press hides it from the map. The whole view lives in the address bar, so a URL is a shareable link to exactly what is on screen.
 

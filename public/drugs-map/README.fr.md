@@ -53,7 +53,7 @@ Réglages (des boîtes au-dessus du graphique) :
 - **Cibles :** restreindre les vecteurs à certaines cibles ; en choisir une ou deux en fait directement les axes (sans ACP).
 - **Filtrer les points par :** classe, année de première autorisation, commercialisées uniquement.
 - **Couleur selon :** classe, nomenclature [NbN](https://nbn2r.com/), année d'autorisation, laboratoire d'origine, [métabolisme](https://fr.wikipedia.org/wiki/Métabolisme_des_médicaments), ou couverture des Ki.
-- **Graphique :** molette / pincement pour zoomer, glisser pour déplacer, rotation à deux doigts pour tourner, bouton plein écran.
+- **Graphique :** molette / pincement pour zoomer, glisser pour déplacer, rotation à deux doigts pour tourner ; le menu ⋮ en haut à droite passe en plein écran, réinitialise la rotation ou copie le graphique en image.
 
 Cliquer sur une substance l'ouvre dans l'atlas 3D de neurarium (sa fiche complète : liaisons avec leurs sources citées, métabolisme, histoire...). Un clic droit ou un appui long la masque de la carte. Toute la vue est dans la barre d'adresse : une URL est un lien partageable vers exactement ce qui est à l'écran.
 

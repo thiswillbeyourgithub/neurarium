@@ -30,7 +30,17 @@
 }
 .dm-plot-btn:hover { color: var(--text); }
 .dm-plot-btn[hidden] { display: none; }
-.dm-fullscreen { right: 6px; }
+.dm-kebab { right: 6px; min-width: 30px; }
+.dm-kebab-note { font-size: 11px; }
+/* The kebab's drop-down, under the button. */
+.dm-menu { position: absolute; top: 36px; right: 6px; z-index: 3; display: flex; flex-direction: column; min-width: 160px;
+  padding: 4px; background: var(--tip-bg); border: 1px solid rgba(var(--ink), 0.18); border-radius: 6px;
+  box-shadow: 0 4px 14px var(--tip-shadow); }
+.dm-menu[hidden] { display: none; }
+.dm-menu-item { font: inherit; font-size: 12px; text-align: left; padding: 5px 10px; color: var(--text);
+  background: none; border: 0; border-radius: 4px; cursor: pointer; }
+.dm-menu-item:hover:not(:disabled) { background: rgba(var(--ink), 0.08); }
+.dm-menu-item:disabled { opacity: 0.4; cursor: default; }
 .dm-unrotate { right: 44px; font-size: 12px; }
 /* Fullscreen (or its fixed-overlay fallback): the plot fills the screen. */
 .dm-plot-wrap.dm-fs { position: fixed; inset: 0; z-index: 1000; background: var(--dm-plot-bg); }

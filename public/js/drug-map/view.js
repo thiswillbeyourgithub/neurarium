@@ -25,6 +25,7 @@ import { createFocus } from "./focus.js";
 import { plotTitle } from "./title.js";
 import { axisCaption, axisTooltip } from "./axis.js";
 import { createExtras } from "./extras.js";
+import { copyPng, plotPng } from "./snapshot.js";
 import { createControls } from "./controls.js";
 import { LIST_SEP } from "../url-state.js";
 import { viewerUrl } from "./site.js";
@@ -87,17 +88,56 @@ export function createDrugMap({ data, onChange }) {
   svg.setAttribute("aria-label", t("drugmap.title"));
   const plotWrap = el("div", "dm-plot-wrap");
   // Fullscreen: the browser's own where it exists, else (iPhone Safari) a fixed overlay.
-  const fsBtn = button("dm-plot-btn dm-fullscreen", "⛶", () => {
+  const toggleFullscreen = () => {
     const on = !plotWrap.classList.contains("dm-fs");
     plotWrap.classList.toggle("dm-fs", on);
     if (on && plotWrap.requestFullscreen) plotWrap.requestFullscreen().catch(() => {});
     else if (!on && document.fullscreenElement) document.exitFullscreen().catch(() => {});
-  });
-  fsBtn.title = t("drugmap.fullscreen");
-  fsBtn.setAttribute("aria-label", t("drugmap.fullscreen"));
+  };
   document.addEventListener("fullscreenchange", () => {
     if (!document.fullscreenElement) plotWrap.classList.remove("dm-fs");
   });
+  // The kebab menu (top right of the plot): fullscreen, reset rotation, copy the image.
+  // Each item's label / disabled state is refreshed when the menu opens.
+  const menu = el("div", "dm-menu");
+  menu.hidden = true;
+  menu.setAttribute("role", "menu");
+  const kebab = button("dm-plot-btn dm-kebab", "⋮", (e) => {
+    e.stopPropagation();
+    if (menu.hidden) openMenu(); else menu.hidden = true;
+  });
+  kebab.title = t("drugmap.menu");
+  kebab.setAttribute("aria-label", t("drugmap.menu"));
+  kebab.setAttribute("aria-haspopup", "menu");
+  const item = (onPick) => {
+    const b = button("dm-menu-item", "", () => { menu.hidden = true; onPick(b); });
+    b.setAttribute("role", "menuitem");
+    return b;
+  };
+  const fsItem = item(toggleFullscreen);
+  const rotItem = item(() => setCam({ ...cam, angle: 0 }));
+  const copyItem = item(async () => {
+    const res = await copyPng(() => plotPng(svg, {
+      overlays: [{ node: plotTitleEl, align: "center" }, { node: watermark, align: "right" }],
+    }), "drugsmap.png").catch(() => "failed");
+    flashKebab(t(`drugmap.image.${res}`));
+  });
+  menu.append(fsItem, rotItem, copyItem);
+  function openMenu() {
+    fsItem.textContent = t(plotWrap.classList.contains("dm-fs") ? "drugmap.exitFullscreen" : "drugmap.fullscreen");
+    rotItem.textContent = t("drugmap.resetRotation");
+    rotItem.disabled = !cam.angle;
+    copyItem.textContent = t("drugmap.copyImage");
+    menu.hidden = false;
+  }
+  // The outcome of "Copy image", shown on the kebab itself for a moment.
+  const flashKebab = (text) => {
+    kebab.textContent = text;
+    kebab.classList.add("dm-kebab-note");
+    setTimeout(() => { kebab.textContent = "⋮"; kebab.classList.remove("dm-kebab-note"); }, 1500);
+  };
+  document.addEventListener("click", (e) => { if (!menu.contains(e.target)) menu.hidden = true; });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") menu.hidden = true; });
   // Shown only once rotated: the angle, and a click turns the map back upright.
   const unrotate = button("dm-plot-btn dm-unrotate", "", () => setCam({ ...cam, angle: 0 }));
   unrotate.title = t("drugmap.unrotate");
@@ -109,7 +149,7 @@ export function createDrugMap({ data, onChange }) {
   // keeps the points below it, however many lines it wraps to.
   const plotTitleEl = el("div", "dm-plot-title");
   const watermark = el("span", "dm-watermark", `${t("drugmap.watermark")} v${window.__APP_VERSION__} · ${location.host}`);
-  plotWrap.append(svg, plotTitleEl, fsBtn, unrotate, busy, watermark);
+  plotWrap.append(svg, plotTitleEl, kebab, menu, unrotate, busy, watermark);
   // The Legend folds as a whole; inside it the colour keys, then the axis meaning (always
   // shown with the legend), then the numbers behind the map in their own fold (extras.js).
   const legendBox = foldBox(t("drugmap.sec.legend"));
