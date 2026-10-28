@@ -1,6 +1,29 @@
 {
   "versions": [
     {
+      "version": "3.156.1",
+      "date": "2026-10-28",
+      "entries": [
+        {
+          "category": "docs",
+          "text": "The README opens on a sharper, current demo recording, followed by four more short demos: anatomy and circuits, a receptor and its drugs, two antipsychotics compared, and DrugsMap.",
+          "commits": [
+            "ad2e1d7",
+            "e3381f9",
+            "0874177",
+            "5eb125f"
+          ]
+        },
+        {
+          "category": "docs",
+          "text": "The README FAQ now answers \"Can I ask an AI assistant about it?\" before \"How can I reuse the data?\" (which now presents DrugsMap) and \"How do I run it myself?\".",
+          "commits": [
+            "96d8a8d"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.156.0",
       "date": "2026-10-28",
       "entries": [
