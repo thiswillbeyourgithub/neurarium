@@ -29,7 +29,7 @@ test("measuredKi leaves unmeasured bindings out; a drug with no measured Ki is n
 });
 
 test("normalize scales each profile to unit length; drugs with nothing drop out", () => {
-  const p = buildProfiles([drug("a", [b("d2", 1), b("m1", 1)]), drug("none", [b("h1", 1e6)])]);
+  const p = buildProfiles([drug("a", [b("d2", 1), b("m1", 1)]), drug("none", [b("h1", 1e6)])], { normalize: "shape" });
   assert.ok(Math.abs(Math.hypot(...p.get("a").values()) - 1) < 1e-12);
   assert.equal(p.has("none"), false);
 });
@@ -114,7 +114,7 @@ test("tone and combined sources: tone keys, each block normalized on its own", (
   const d = drug("a", [b("d2", 1)], { flowSystems: flow });
   const tone = buildProfiles([d], { sources: ["tone"], normalize: "off" }).get("a");
   assert.deepEqual([...tone], [["tone:dopamine", -0.6], ["tone:serotonin", 0.8]]);
-  const both = buildProfiles([d], { sources: ["receptors", "tone"] }).get("a");
+  const both = buildProfiles([d], { sources: ["receptors", "tone"], normalize: "shape" }).get("a");
   assert.equal(both.get("d2"), 1);                 // receptor block alone: unit length
   assert.ok(Math.abs(Math.hypot(both.get("tone:dopamine"), both.get("tone:serotonin")) - 1) < 1e-12);
 });

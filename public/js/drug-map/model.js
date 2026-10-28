@@ -21,7 +21,9 @@
 //     an effect is a possibility, it has no opposite.
 //   Any non-empty set of sources sits side by side in one vector (`sources`).
 // `normalize` is one of NORM_MODES:
-//   "shape" (the default): each block scaled to unit length on its own, so the map places
+//   "off" (the default) / "none" in the UI: raw values, so a potent, promiscuous drug
+//     sits further out than a weak, selective one.
+//   "shape" ("Proportions" in the UI): each block scaled to unit length on its own, so the map places
 //     drugs by the SHAPE of a profile (which targets, in what proportion), not by overall
 //     potency or how many targets a corpus happened to list, and combined blocks weigh
 //     the same.
@@ -35,8 +37,6 @@
 //     view's. It assumes that binding is the one titrated, which is not always so
 //     (quetiapine binds H1 harder than D2). Tone has no Ki to dose against, so it gets
 //     "shape" scaling.
-//   "off": raw values, so a potent, promiscuous drug sits further out than a weak,
-//     selective one.
 
 /** pKi at and below which a binding counts as no binding (Ki >= 10 µM). */
 export const PKI_FLOOR = 5;
@@ -51,7 +51,7 @@ export const EFFECT_PREFIX = "effect:";
 /** A receptor / target feature key, as opposed to a tone or a body-effect key. */
 export const isTargetKey = (k) => !k.startsWith(TONE_PREFIX) && !k.startsWith(EFFECT_PREFIX);
 
-export const NORM_MODES = ["shape", "dose", "off"];
+export const NORM_MODES = ["off", "shape", "dose"]; // picker order, "off" first
 /** "dose" normalization: the occupancy each drug's strongest binding is dosed to. */
 export const DOSE_OCCUPANCY = 0.8;
 
@@ -75,7 +75,7 @@ const affinityOf = (b) => {
  *   measuredKi?: boolean}} [opts]
  * @returns {Map<string, Map<string, number>>} drug id -> (feature key -> value)
  */
-export function buildProfiles(drugs, { normalize = "shape", signed = false, sources = ["receptors"], only = null, measuredKi = false } = {}) {
+export function buildProfiles(drugs, { normalize = "off", signed = false, sources = ["receptors"], only = null, measuredKi = false } = {}) {
   const keep = only ? new Set(only) : null;
   const out = new Map();
   for (const d of drugs) {
@@ -256,7 +256,7 @@ export const DEFAULT_VIEW = Object.freeze({
   color: "category",   // one of COLOR_MODES
   labels: true,
   spread: true,        // nudge overlapping dots apart on screen (js/drug-map/spread.js)
-  normalize: "shape",  // one of NORM_MODES (see buildProfiles)
+  normalize: "off",    // one of NORM_MODES (see buildProfiles); presets inherit it
   signed: true,        // agonist vs antagonist on opposite signs
   marketed: true,      // only drugs with a current marketing authorisation (US or FR holder)
   measuredKi: true,    // leave out bindings with no measured Ki (see buildProfiles)

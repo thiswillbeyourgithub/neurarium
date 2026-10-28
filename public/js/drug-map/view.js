@@ -13,10 +13,7 @@
 // (also served as drugsmap.olicorne.org, see docs/drugs-map/README.md) without loading
 // three.js, the meshes or the panels.
 
-import {
-  buildProfiles, colorize, COLOR_MODES, DEFAULT_VIEW, directPoints,
-  EFFECT_PREFIX, filterDrugs, mappableDrugs, parseSources, pca, TONE_PREFIX,
-} from "./model.js";
+import { buildProfiles, COLOR_MODES, colorize, DEFAULT_VIEW, directPoints, EFFECT_PREFIX, filterDrugs, mappableDrugs, NORM_MODES, parseSources, pca, TONE_PREFIX } from "./model.js";
 import { placeLabels, sizesFor } from "./layout.js";
 import { spreadPoints } from "./spread.js";
 import { button, chipSearch, el, foldBox, H, rotate, svgEl, W } from "./dom.js";
@@ -467,9 +464,9 @@ export function createDrugMap({ data, onChange }) {
         (v) => ({ color: COLOR_MODES.includes(v) ? v : DEFAULT_VIEW.color }));
       flag("dmlabels", "labels");
       flag("dmspread", "spread");
-      // "0" (= off) is what the on/off switch wrote, so old links keep their meaning.
-      reg("dmnorm", () => ({ shape: null, off: "0", dose: "dose" })[view.normalize] ?? null,
-        (v) => ({ normalize: v === "0" ? "off" : v === "dose" ? "dose" : "shape" }));
+      // Absent = "off", the default; anything unknown (an old "0") reads as off too.
+      reg("dmnorm", () => (view.normalize === "off" ? null : view.normalize),
+        (v) => ({ normalize: NORM_MODES.includes(v) ? v : "off" }));
       flag("dmsign", "signed");
       flag("dmmkt", "marketed");
       flag("dmki", "measuredKi");
