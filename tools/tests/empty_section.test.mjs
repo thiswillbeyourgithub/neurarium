@@ -12,7 +12,16 @@ window.__I18N__ = {
   t: (key, vars = {}) => Object.entries(vars)
     .reduce((s, [k, v]) => s.replaceAll(`{${k}}`, v), EN[key] ?? key),
 };
-const { lowerFirst, noDataText } = await import("../../public/js/panel/dom.js");
+const { lowerFirst, noDataText, sectionSelector } = await import("../../public/js/panel/dom.js");
+
+test("sectionSelector finds a section by its tour anchor, else all its classes", () => {
+  assert.equal(sectionSelector({ tourSec: "workup", cls: "info-locations" }),
+    '[data-tour-sec="workup"]');
+  assert.equal(sectionSelector({ cls: "info-connections info-tone" }),
+    ".info-connections.info-tone");
+  assert.equal(sectionSelector({ cls: "" }), null);
+  assert.equal(sectionSelector(), null);
+});
 
 test("lowerFirst lowers a heading's first letter, never an acronym", () => {
   assert.equal(lowerFirst("Age and sex differences"), "age and sex differences");

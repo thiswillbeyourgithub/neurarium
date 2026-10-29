@@ -18,7 +18,11 @@ export function makeSections(P) {
   const {
     body, data, derivedActiveMetabolites, effectById, el, fmtKi, metaboliteContributors,
     nodePill, onEffectPick, onTargetPick, resolveBase, sourceBackedPill, targetById,
+    withOtherForms,
   } = P;
+  // A drug section's `empty` line plus, when `has(form)` holds for another stereo form
+  // of `drug`, the link to it (panel/other-forms.js).
+  const otherFormsExtra = (drug, tourSec, has) => withOtherForms(drug, has, { tourSec }).extra;
 
   // receptor_effect (BETA) section heading: the label plus the same quiet "beta"
   // qualifier the Simulation section wears (.beta-tag, i18n sim.beta), then the
@@ -39,16 +43,16 @@ export function makeSections(P) {
   // builds: `close()` then returns it unmounted, for the caller to place.
   // `empty` (the panel's node kind): no data, so the section is its heading plus the
   // shared "no information" line (dom.js emptySection), no caption; `close()` mounts
-  // it the same way and the list builders are never used.
+  // it the same way and the list builders are never used; `extra` follows that line.
   const betaSection = (tourSec, headingKey, hintKey,
     { vars, grouped = false, caveatKey = null, beta = true, cls = "info-effects", subKey = null,
-      nested = false, empty = null } = {}) => {
+      nested = false, empty = null, extra = null } = {}) => {
     const sub = subKey && t(subKey);
     const tag = nested ? "h4" : "h3";
     const head = beta ? betaHeading(headingKey, vars, sub, tag)
       : heading(tag, t(headingKey, vars), sub, nested ? "panel-subsec-title" : null);
     if (empty) {
-      const sec = emptySection(head, empty, { tourSec, cls: `info-locations ${cls}` });
+      const sec = emptySection(head, empty, { tourSec, cls: `info-locations ${cls}`, extra });
       return { sec, close: () => (nested ? sec : body.appendChild(sec)) };
     }
     const sec = el("div", `info-locations ${cls}${nested ? " panel-subsec" : ""}`);
@@ -168,9 +172,11 @@ export function makeSections(P) {
   // both ordered by the drug's Ki (js/effect-grouping.js), persisted via js/prefs.js.
   // Folded with the rest of the drug panel by its final foldSections.
   const appendPossibleEffects = (drug) => {
-    const effects = data.possibleEffectsByDrug.get(drug.id) || [];
+    const effectsOf = (d) => data.possibleEffectsByDrug.get(d.id) || [];
+    const effects = effectsOf(drug);
     const { sec, ul, close } = betaSection("effects", "effects.drugHeading", "effects.drugHint",
-      { subKey: "effects.drugHeadingSub", empty: effects.length ? null : "drug" });
+      { subKey: "effects.drugHeadingSub", empty: effects.length ? null : "drug",
+        extra: otherFormsExtra(drug, "effects", (d) => effectsOf(d).length) });
     if (!effects.length) return close();
     const mix = mixedCompounds(drug, sec, ul, effects.flatMap((e) => e.via));
     const compoundOf = mix && mix.compoundOf;
@@ -321,7 +327,8 @@ export function makeSections(P) {
     const hits = variantsForDrug(drug.id, data.targets);
     const { group, close } = betaSection("variants", "variant.drugHeading", "variant.drugHint",
       { cls: "info-variants", grouped: true, caveatKey: "variant.caveat",
-        subKey: "variant.drugHeadingSub", nested: true, empty: hits.length ? null : "drug" });
+        subKey: "variant.drugHeadingSub", nested: true, empty: hits.length ? null : "drug",
+        extra: otherFormsExtra(drug, "variants", (d) => variantsForDrug(d.id, data.targets).length) });
     if (!hits.length) return close();
     const byTarget = new Map();
     for (const { target, row } of hits) {
@@ -345,10 +352,12 @@ export function makeSections(P) {
   // (js/release-modulation.js), an antagonist flipping the effect of activation and
   // affinity_only contributing nothing. Computed, never stored, worded conditionally.
   const appendReleaseChanges = (drug) => {
-    const changes = deriveReleaseChanges(
-      drug.allBindings, (tid) => data.modulationByTarget.get(tid) || [], data.meta.effectModes);
+    const changesOf = (d) => deriveReleaseChanges(
+      d.allBindings, (tid) => data.modulationByTarget.get(tid) || [], data.meta.effectModes);
+    const changes = changesOf(drug);
     const { sec, ul, close } = betaSection("downstream", "relmod.drugHeading", "relmod.drugHint",
-      { subKey: "relmod.headingSub", empty: changes.length ? null : "drug" });
+      { subKey: "relmod.headingSub", empty: changes.length ? null : "drug",
+        extra: otherFormsExtra(drug, "downstream", (d) => changesOf(d).length) });
     if (!changes.length) return close();
     const mix = mixedCompounds(drug, sec, ul, changes.flatMap((c) => c.via));
     for (const c of changes) {
@@ -364,10 +373,11 @@ export function makeSections(P) {
   // hover). Neutral wording ("the French label asks for"), plus the not-medical-advice
   // caveat, since a label's checklist is a regulatory text, not a care plan.
   const appendWorkup = (drug) => {
-    const has = !!(drug.workup && drug.workup.length);
+    const hasWorkup = (d) => !!(d.workup && d.workup.length);
+    const has = hasWorkup(drug);
     const { group, close } = betaSection("workup", "drug.workup", "drug.workupHint",
       { grouped: true, caveatKey: "drug.workupCaveat", subKey: "drug.workupSub",
-        empty: has ? null : "drug" });
+        empty: has ? null : "drug", extra: otherFormsExtra(drug, "workup", hasWorkup) });
     if (!has) return close();
     for (const g of groupWorkup(drug.workup)) {
       const list = group(t(`drug.workup.${g.timing}`));

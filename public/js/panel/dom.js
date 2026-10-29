@@ -121,12 +121,13 @@ export function noDataText(title, kind) {
  * combo notes and addon slots, simply stay hidden).
  * @param {HTMLElement} head  built by heading() / betaHeading()
  * @param {string} kind  the panel's node kind (see noDataText)
- * @param {{tourSec?: ?string, cls?: string, text?: ?string}} [opts]  `text` replaces
- *   the generic sentence where a section has its own (Regional distribution's
- *   "no significant role" note)
+ * @param {{tourSec?: ?string, cls?: string, text?: ?string, extra?: ?Node}} [opts]  `text`
+ *   replaces the generic sentence where a section has its own (Regional distribution's
+ *   "no significant role" note); `extra` follows it (other-forms.js's link to the
+ *   stereo form that fills the section)
  * @returns {HTMLDivElement}
  */
-export function emptySection(head, kind, { tourSec = null, cls = "", text = null } = {}) {
+export function emptySection(head, kind, { tourSec = null, cls = "", text = null, extra = null } = {}) {
   const title = [...head.childNodes].filter((n) => n.nodeType === 3)
     .map((n) => n.textContent).join("").trim();
   const sub = head.tagName === "H4";
@@ -138,7 +139,20 @@ export function emptySection(head, kind, { tourSec = null, cls = "", text = null
     top.append(...head.childNodes);
   }
   sec.append(top, el("p", "panel-sec-none", text || noDataText(title, kind)));
+  if (extra) sec.appendChild(extra);
   return sec;
+}
+
+/**
+ * The CSS selector finding a section by the same `{tourSec, cls}` options emptySection
+ * takes, so a section's empty and filled renderings answer to one selector.
+ * @param {{tourSec?: ?string, cls?: string}} opts
+ * @returns {?string}
+ */
+export function sectionSelector({ tourSec = null, cls = "" } = {}) {
+  if (tourSec) return `[data-tour-sec="${tourSec}"]`;
+  const classes = cls.split(/\s+/).filter(Boolean);
+  return classes.length ? classes.map((c) => `.${c}`).join("") : null;
 }
 
 export function btn(cls, text) {

@@ -116,13 +116,14 @@ export function makeBindings(P) {
 
   // A drug's name as a plain clickable label, the same `.legend-item.clickable` look
   // as the Drugs list rows, so a name that jumps to a drug reads alike everywhere.
-  const drugNameLink = (drug, text = drug.label || drug.name) => {
+  // `opts` rides along to onDrugPick (the "why did this open" hints, see info.showDrug).
+  const drugNameLink = (drug, text = drug.label || drug.name, opts = {}) => {
     const a = el("span", "legend-item clickable drug-name-link", text);
     a.setAttribute("role", "link");
     a.tabIndex = 0;
-    a.addEventListener("click", () => onDrugPick(drug));
+    a.addEventListener("click", () => onDrugPick(drug, opts));
     a.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onDrugPick(drug); }
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onDrugPick(drug, opts); }
     });
     return a;
   };

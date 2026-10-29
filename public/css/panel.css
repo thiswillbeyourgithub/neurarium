@@ -65,6 +65,9 @@
 }
 .panel-sec-none { margin: 0; font-size: 12px; font-style: italic; color: var(--muted); }
 .panel-sec.panel-sec-empty > .panel-sec-none { padding-left: var(--sp-indent); }
+/* The link to another stereo form filling this empty section (panel/other-forms.js). */
+.other-forms { margin: 2px 0 0; font-size: 12px; color: var(--muted); }
+.panel-sec.panel-sec-empty > .other-forms { padding-left: var(--sp-indent); }
 .info-connections ul,
 .info-bindings ul,
 .info-locations ul { list-style: none; margin: 0; padding: 0; }

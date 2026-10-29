@@ -457,6 +457,31 @@ DRUG_NAME_QUALIFIERS: dict[str, str] = {
     "paliperidone": "9-OH-risperidone",
 }
 
+# The drugs that are stereo forms of ONE molecule (a racemate and its single
+# enantiomer), one group each. A source often states a fact for one form only (the
+# French label lists checks for D,L-methylphenidate, none for the D form), so a
+# panel section empty on one form points at the form where it is filled
+# (js/panel/other-forms.js). Navigation only, like DRUG_ALIASES: a chemical identity
+# fact, not a brain claim, so ungraded; it never lends one form's data to the other
+# (an enantiomer's assay is not the racemate's, see lib/chirality.py).
+DRUG_STEREO_FORMS: list[tuple[str, ...]] = [
+    ("amphetamine_dl", "amphetamine_d"),
+    ("methylphenidate_dl", "methylphenidate_d"),
+    ("ketamine", "esketamine"),
+    ("modafinil", "armodafinil"),
+    ("citalopram", "escitalopram"),
+    ("zopiclone", "eszopiclone"),
+    ("milnacipran", "levomilnacipran"),
+]
+
+
+def stereo_forms_of(drug_id: str) -> list[str]:
+    """The other stereo forms of `drug_id`'s molecule, in table order ([] if none)."""
+    for group in DRUG_STEREO_FORMS:
+        if drug_id in group:
+            return [d for d in group if d != drug_id]
+    return []
+
 # Extra names a user might type in the search box for a drug we already model:
 # street names, chemical synonyms, abbreviations, and the alternate INN/USAN spellings
 # a non-English reader reaches for. Search-only, never displayed, which is why they are

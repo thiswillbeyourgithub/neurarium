@@ -19,6 +19,7 @@ from data_generators.drugs import (
     DRUG_ACTIONS,
     DRUG_ALIASES,
     DRUG_NAME_QUALIFIERS,
+    DRUG_STEREO_FORMS,
     DRUG_TARGETS,
     TARGET_TYPE_LABELS,
     TONE_FACTORS,
@@ -142,8 +143,10 @@ def validate_drug_aliases(drug_ids: set[str]) -> None:
     An alias keyed on a typo is silently inert (nothing ever looks it up), which
     would read as "GHB still doesn't find it" with nothing to grep for.
     """
+    stereo = {d for group in DRUG_STEREO_FORMS for d in group}
     for name, table in (("DRUG_ALIASES", DRUG_ALIASES),
-                        ("DRUG_NAME_QUALIFIERS", DRUG_NAME_QUALIFIERS)):
+                        ("DRUG_NAME_QUALIFIERS", DRUG_NAME_QUALIFIERS),
+                        ("DRUG_STEREO_FORMS", stereo)):
         unknown = sorted(set(table) - drug_ids)
         if unknown:
             raise SystemExit(

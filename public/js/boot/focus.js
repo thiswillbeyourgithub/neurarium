@@ -209,10 +209,10 @@ export function wireFocus({
       circuitAnim.play(flowArrows, drug.flowSystems || {}); // no-op for a drug with no mapped pathways
       return meshSet;
     },
-    // highlightMetabolite / highlightEnzymes: pass-through "why did this open" hints
-    // for the panel (see info.showDrug), not focus state.
-    show: (drug, { highlightMetabolite = null, highlightEnzymes = null }) =>
-      info.showDrug(drug, { highlightMetabolite, highlightEnzymes }),
+    // highlightMetabolite / highlightEnzymes / highlightSection: pass-through "why did
+    // this open" hints for the panel (see info.showDrug), not focus state.
+    show: (drug, { highlightMetabolite = null, highlightEnzymes = null, highlightSection = null }) =>
+      info.showDrug(drug, { highlightMetabolite, highlightEnzymes, highlightSection }),
     title: (drug) => drug.displayName,
     watch: drugAnim,
     buildLegend: (toggle) => buildDrugLegend(data, toggle),

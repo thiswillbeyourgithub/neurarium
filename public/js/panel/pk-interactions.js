@@ -14,19 +14,23 @@ const { t } = window.__I18N__;
  * @returns {HTMLElement}
  */
 export function pkInteractionsSection(P, drug) {
-  const { data, el, enzymeById, onDrugPick, onEnzymePick } = P;
+  const { data, el, enzymeById, onDrugPick, onEnzymePick, withOtherForms } = P;
   // Pharmacokinetic interactions: derived, never stored (see pkInteractionsOf). This drug
   // and the listed one meet at the same enzyme, so one COULD shift the other's
   // level; the wording stays conditional throughout because the edge is an
   // inference from the enzyme roles, not a measured interaction study.
-  const pk = data.pkInteractionsOf ? data.pkInteractionsOf(drug) : null;
-  const edges = pk ? [
-    ...pk.affects.map((x) => ({ ...x, outgoing: true })),
-    ...pk.affectedBy.map((x) => ({ ...x, outgoing: false })),
-  ] : [];
+  const edgesOf = (d) => {
+    const pk = data.pkInteractionsOf ? data.pkInteractionsOf(d) : null;
+    return pk ? [
+      ...pk.affects.map((x) => ({ ...x, outgoing: true })),
+      ...pk.affectedBy.map((x) => ({ ...x, outgoing: false })),
+    ] : [];
+  };
+  const edges = edgesOf(drug);
   if (!edges.length) {
     return emptySection(heading("h4", t("drug.pkInteractions"), t("drug.pkInteractionsSub"),
-      "panel-subsec-title"), "drug", { tourSec: "pk", cls: "info-interactors" });
+      "panel-subsec-title"), "drug", withOtherForms(drug, (d) => edgesOf(d).length,
+      { tourSec: "pk", cls: "info-interactors" }));
   }
   // The last subsection of the drug's Metabolism section (an <h4>, see subSection),
   // the count in its title so the reader sees how many rows follow. info-interactors

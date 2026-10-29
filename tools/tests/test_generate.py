@@ -131,6 +131,19 @@ class ReferentialIntegrityTest(unittest.TestCase):
                 f"pathway {twin} is both stored and produced by a mirror twin (duplicate)",
             )
 
+    def test_stereo_forms_are_mutual(self):
+        """Each emitted ``stereo_forms`` link names a real drug that links back, so an
+        empty section on either form can point at the other (panel/other-forms.js)."""
+        by_id = {d["id"]: d for d in self.drugs}
+        linked = [d for d in self.drugs if d.get("stereo_forms")]
+        self.assertIn("methylphenidate_dl",
+                      by_id["methylphenidate_d"].get("stereo_forms", []))
+        for d in linked:
+            for other in d["stereo_forms"]:
+                self.assertIn(other, by_id, f"{d['id']}: unknown stereo form {other!r}")
+                self.assertIn(d["id"], by_id[other].get("stereo_forms", []),
+                              f"{other} does not link back to {d['id']}")
+
 
 class MetaAndTranslationsTest(unittest.TestCase):
     def test_meta_loads_with_provenance_stats(self):

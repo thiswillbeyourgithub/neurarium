@@ -92,6 +92,7 @@ from data_generators.drugs import (  # noqa: E402
     PRODRUG_OWN_ACTIONS,
     DRUG_ALIASES,
     DRUG_NAME_QUALIFIERS,
+    stereo_forms_of,
     DRUG_CATEGORY_LABELS,
     DRUG_EFFECT_COLORS,
     DRUG_TARGETS,
@@ -1351,6 +1352,11 @@ def _drug_record(drug: dict[str, Any], valid_targets: set[str],
     # Display-only chemical synonym shown beside the name (see DRUG_NAME_QUALIFIERS).
     if drug["id"] in DRUG_NAME_QUALIFIERS:
         out["name_qualifier"] = DRUG_NAME_QUALIFIERS[drug["id"]]
+    # The other stereo forms of the same molecule (see DRUG_STEREO_FORMS), so an empty
+    # panel section can point at the form that fills it. Ungraded navigation.
+    stereo = stereo_forms_of(drug["id"])
+    if stereo:
+        out["stereo_forms"] = stereo
     # A combination product is normally NAMED after its parts, so the viewer reads
     # them off the name. A salt of two molecules carries an INN of its own instead
     # (dimenhydrinate IS diphenhydramine + 8-chlorotheophylline), so it states them

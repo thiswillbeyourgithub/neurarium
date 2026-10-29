@@ -17,6 +17,7 @@ import { makeAddons } from "./addons.js";
 import { makeBindings } from "./bindings.js";
 import { makeReference } from "./reference.js";
 import { makeMetabolism } from "./metabolism.js";
+import { makeOtherForms } from "./other-forms.js";
 import { makePathways } from "./pathways.js";
 import { makeSections } from "./sections.js";
 import { makeExpression } from "./expression.js";
@@ -195,6 +196,7 @@ export function createInfoPanel(data, sourcingModal) {
   Object.assign(P, makePills(P));
   Object.assign(P, makeAddons(P));
   Object.assign(P, makeBindings(P));
+  Object.assign(P, makeOtherForms(P));
   Object.assign(P, makeReference(P));
   Object.assign(P, makeMetabolism(P));
   Object.assign(P, makePathways(P));
@@ -234,6 +236,8 @@ export function createInfoPanel(data, sourcingModal) {
     //   metabolite (which deep-links to its parent, having no standalone view).
     // opts.highlightEnzymes: enzyme ids, in the "Metabolism" section. Used when arriving
     //   from another drug's Interactions row, which names the isoform they share.
+    // opts.highlightSection: a section selector (dom.js sectionSelector). Used when
+    //   arriving from another stereo form's empty section (panel/other-forms.js).
     showDrug: (...args) => showDrug(P, ...args),
 
     showCircuit: (...args) => showCircuit(P, ...args),
