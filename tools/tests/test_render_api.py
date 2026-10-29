@@ -46,6 +46,11 @@ class RenderApiTest(unittest.TestCase):
         self.assertIn("drug/sertraline.md", self.pages)
         self.assertIn("receptor/d2.md", self.pages)
 
+    def test_stereo_forms_link_the_other_form(self):
+        """A stereo form's page links its counterpart, as the viewer's empty sections do."""
+        self.assertIn("[Methylphenidate (D,L)](/api/drug/methylphenidate_dl)",
+                      self.pages["drug/methylphenidate_d.md"])
+
     def test_every_link_resolves(self):
         for name, text in self.pages.items():
             for target in LINK.findall(text):

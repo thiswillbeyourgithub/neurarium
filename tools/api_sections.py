@@ -110,7 +110,7 @@ FIELDS: dict[str, dict[str, Label]] = {
         "wikipedia": _REFERENCE,
         "aliases": _ALIASES,
         "name_qualifier": Label(None, why="folded into the panel title"),
-        "stereo_forms": Label(None, why="navigation only: an empty section links the other form"),
+        "stereo_forms": Label("drug.stereoForms"),
     },
     "metabolite": {
         **_DRUG_PK,

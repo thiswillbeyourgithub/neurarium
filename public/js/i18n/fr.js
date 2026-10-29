@@ -706,6 +706,7 @@ window.__I18N_MESSAGES__.fr = {
   "drug.workupHint": "Cités depuis le résumé des caractéristiques du produit (RCP, rubriques 4.2 à 4.4) de la base officielle de l'ANSM (ou, pour un médicament sans spécialité française, le RCP européen que l'EMA publie en français). Un contrôle que le RCP réserve à certains patients (diabétiques, âgés, à risque) est marqué « seulement si », avec les mots du RCP.",
   "drug.workupOnlyIf": "seulement si :",
   "drug.otherFormsHas": "Renseigné pour une autre forme stéréochimique de cette molécule :",
+  "drug.stereoForms": "Autres formes stéréochimiques de cette molécule",
   "drug.workup.before": "Le RCP demande ceci avant l'instauration :",
   "drug.workup.during": "Le RCP demande ceci en cours de traitement :",
   "drug.workupShort": "Bilan :",

@@ -708,6 +708,7 @@ window.__I18N_MESSAGES__.en = {
   "drug.workupHint": "Quoted from the French product label (RCP, sections 4.2 to 4.4) in the official ANSM database (or, for a drug with no French product, the EU-wide label EMA publishes in French). A check the label reserves for some patients (diabetic, elderly, at-risk) is marked 'only if', with the label's own French wording of who.",
   "drug.workupOnlyIf": "only if:",
   "drug.otherFormsHas": "Stated for another stereo form of this molecule:",
+  "drug.stereoForms": "Other stereo forms of this molecule",
   "drug.workup.before": "The French label (RCP) asks for these before starting:",
   "drug.workup.during": "The French label (RCP) asks for these during treatment:",
   "drug.workupShort": "Workup:",

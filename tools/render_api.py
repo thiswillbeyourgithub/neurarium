@@ -199,7 +199,7 @@ class Renderer:
         if key in ("from", "to", "structure") or parent in ("structures", "regions", "locations",
                                                             "location_sources", "profile"):
             return self.link("structure", value)
-        if key == "drug_id" or (key == "owner" and parent == "drug"):
+        if key in ("drug_id", "stereo_forms") or (key == "owner" and parent == "drug"):
             return self.link("drug", value)
         if key == "id" and parent == "metabolites":
             return self.link("metabolite", value)
