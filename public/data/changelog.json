@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.157.1",
+      "date": "2026-10-29",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "The pages written for AI assistants (llms.txt and every /api/ page) now open with \"Neurarium, by Olivier Cornelis\", linking the site and its author.",
+          "commits": [
+            "4839eb4"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.157.0",
       "date": "2026-10-29",
       "entries": [
