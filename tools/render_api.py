@@ -113,6 +113,19 @@ def with_uptime(text: str) -> str:
     head, _, tail = text.partition("\n")
     return f"{head}\n{UPTIME}{tail}"
 
+
+def with_byline(text: str) -> str:
+    """``text`` with the author credit (llms_txt.BYLINE) as its own paragraph under the
+    title line, so every page an LLM reads names the site and its author."""
+    head, _, tail = text.partition("\n")
+    return f"{head}\n\n{llms_txt.BYLINE}\n{tail}"
+
+
+def stamped(text: str) -> str:
+    """A page as written: the byline, then the DEV restart line, under its title."""
+    return with_uptime(with_byline(text))
+
+
 KIND_TITLES = {"drug": "Drugs", "metabolite": "Active metabolites", "receptor": "Receptors",
                "target": "Other drug targets", "structure": "Brain regions",
                "projection": "Pathways", "circuit": "Circuits", "group": "Projection groups",
@@ -660,17 +673,17 @@ def render(data_dir: Path, out: Path, version: str) -> int:
             _check_page_id(kind, ident)
             for section, text in r.page_set(kind, ident, rec).items():
                 if section is None:
-                    page_path(out / kind, ident).write_text(with_uptime(text), encoding="utf-8")
+                    page_path(out / kind, ident).write_text(stamped(text), encoding="utf-8")
                 else:  # a section page, under <id>/
                     sub = page_path(out / kind, ident).with_suffix("")
                     sub.mkdir(exist_ok=True)
-                    page_path(sub, section).write_text(with_uptime(text), encoding="utf-8")
+                    page_path(sub, section).write_text(stamped(text), encoding="utf-8")
             n += 1
-        (out / kind / "index.md").write_text(with_uptime(r.index(version, [kind])), encoding="utf-8")
-    (out / "index.md").write_text(with_uptime(r.index(version)), encoding="utf-8")
+        (out / kind / "index.md").write_text(stamped(r.index(version, [kind])), encoding="utf-8")
+    (out / "index.md").write_text(stamped(r.index(version)), encoding="utf-8")
     # Served (status 404) for any /api address with no page, so a mistyped or guessed
     # id still leads somewhere: the full list, ids shown, is the way out.
-    (out / "not_found.md").write_text(with_uptime(r.index(version, lead=NOT_FOUND)), encoding="utf-8")
+    (out / "not_found.md").write_text(stamped(r.index(version, lead=NOT_FOUND)), encoding="utf-8")
     return n
 
 

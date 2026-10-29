@@ -150,6 +150,12 @@ class UptimeLineTest(unittest.TestCase):
         out = render_api.with_uptime("# Sertraline\nKind: drug.\n")
         self.assertEqual(out, f"# Sertraline\n{render_api.UPTIME}Kind: drug.\n")
 
+    def test_every_page_credits_the_author_under_its_title(self):
+        out = render_api.stamped("# Sertraline\n\nKind: drug.\n")
+        self.assertEqual(out.replace(render_api.UPTIME, ""),
+                         f"# Sertraline\n\n{render_api.llms_txt.BYLINE}\n\nKind: drug.\n")
+        self.assertIn("Olivier Cornelis", render_api.llms_txt.BYLINE)
+
     def test_renders_to_the_built_page_when_off(self):
         # Off DEV the whole {{%if%}} block yields "", which must give back the page as built.
         page = "# Neurarium API (version 1.0.0)\n\nOne page per node.\n"

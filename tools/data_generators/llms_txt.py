@@ -15,6 +15,10 @@ from typing import Any
 
 SITE_URL = "https://neurarium.olicorne.org"
 REPO_URL = "https://github.com/thiswillbeyourgithub/neurarium"
+# The author credit opening llms.txt and every /api/ page (render_api.with_byline),
+# matching the viewer's "by Olivier Cornelis" byline (index.html common.byline).
+AUTHOR, AUTHOR_URL = "Olivier Cornelis", "https://olicorne.org/en"
+BYLINE = f"[Neurarium]({SITE_URL}), by [{AUTHOR}]({AUTHOR_URL})."
 CONTACT_URL = "https://olicorne.org/en/contact"
 
 # One line per emitted collection (in claim_walk.COLLECTIONS order): what a record is. A collection missing here raises, so a
@@ -71,7 +75,7 @@ Each effect below is one a source attributes to acting on a receptor in some mod
 """
     return f"""# Neurarium
 
-> An interactive 3D brain visualizer with an open dataset of brain regions, pathways, neurotransmitter receptors and CNS drugs (bindings, pharmacokinetics, metabolism, pharmacogenomics). Every claim is a "node" carrying its own source quote and a provenance grade. Version {version}. Not medical advice.
+> {BYLINE} An interactive 3D brain visualizer with an open dataset of brain regions, pathways, neurotransmitter receptors and CNS drugs (bindings, pharmacokinetics, metabolism, pharmacogenomics). Every claim is a "node" carrying its own source quote and a provenance grade. Version {version}. Not medical advice.
 
 ## Please do not crawl or index this site
 
