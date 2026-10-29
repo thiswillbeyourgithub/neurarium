@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.157.2",
+      "date": "2026-10-29",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "A drug's /api/ page for AI assistants now lists its other stereo forms, each linked (Methylphenidate (D) links Methylphenidate (D,L)).",
+          "commits": [
+            "9c22289"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.157.1",
       "date": "2026-10-29",
       "entries": [
