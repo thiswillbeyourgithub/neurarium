@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.157.0",
+      "date": "2026-10-29",
+      "entries": [
+        {
+          "category": "added",
+          "text": "When a drug's section is empty but another stereo form of the same molecule fills it (Methylphenidate (D) has no French label checks, Methylphenidate (D,L) does), the empty section now links that form, opening it on the same section.",
+          "commits": [
+            "8a26706"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.156.1",
       "date": "2026-10-28",
       "entries": [
