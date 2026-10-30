@@ -47,9 +47,9 @@ export function panelSectionKey(det) {
 /**
  * Append a section's plain-language subtitle (small, muted `span.section-sub`) to
  * its heading, the one way every panel heading carries one. It rides INSIDE the
- * heading, so foldSections moves it into the `<summary>` with the title and it stays
- * visible while the section is folded (it says what the folded section holds);
- * panelSectionKey ignores it. A falsy `sub` adds nothing.
+ * heading so it travels with it; a top-level section then has it lifted out as the
+ * first paragraph of its body (liftSubtitle), so a folded section shows its title
+ * alone, while an `<h4>` subsection keeps it under its title. A falsy `sub` adds nothing.
  * @param {HTMLElement} head
  * @param {?string} [sub]
  * @returns {HTMLElement} `head`
@@ -57,6 +57,19 @@ export function panelSectionKey(det) {
 export function withSubtitle(head, sub) {
   if (sub) head.appendChild(el("span", "section-sub", sub));
   return head;
+}
+
+/**
+ * Take a top-level heading's subtitle (withSubtitle) out of it, as the
+ * `p.section-lead` that opens the section's body.
+ * @param {HTMLElement} head  the heading, or the `<summary>` / `.panel-sec-head` holding its nodes
+ * @returns {?HTMLParagraphElement}
+ */
+function liftSubtitle(head) {
+  const sub = head.querySelector(":scope > .section-sub");
+  if (!sub) return null;
+  sub.remove();
+  return el("p", "section-lead", sub.textContent);
 }
 
 /**
@@ -142,7 +155,8 @@ export function emptySection(head, kind,
     top = el("div", "panel-sec-head");
     top.append(...[sectionIcon(sectionIconKey(sec))].filter(Boolean), ...head.childNodes);
   }
-  sec.append(top, el("p", "panel-sec-none", text || noDataText(title, kind)));
+  sec.append(top, ...[!sub && liftSubtitle(top)].filter(Boolean),
+    el("p", "panel-sec-none", text || noDataText(title, kind)));
   if (extra) sec.appendChild(extra);
   return sec;
 }
@@ -256,7 +270,8 @@ export function foldSections(host) {
     if (icon) summary.prepend(icon);
     const inner = document.createElement("div");
     inner.className = "panel-sec-body";
-    inner.append(...[...sec.childNodes].filter((n) => n !== summary));
+    inner.append(...[liftSubtitle(summary)].filter(Boolean),
+      ...[...sec.childNodes].filter((n) => n !== summary));
     if (!isDetails) sec.replaceWith(det);
     det.replaceChildren(summary, inner);
   }
