@@ -1,6 +1,26 @@
 {
   "versions": [
     {
+      "version": "3.158.1",
+      "date": "2026-10-30",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "A section heading now reads as its title alone: the short description under it moved to the first line of the opened section, so the folded panel is less cluttered.",
+          "commits": [
+            "a2a60c5"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "Section titles in a detail panel can be selected and copied again; a click that ends a text selection no longer opens or closes the section.",
+          "commits": [
+            "47307bb"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.158.0",
       "date": "2026-10-30",
       "entries": [
