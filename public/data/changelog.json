@@ -1,6 +1,20 @@
 {
   "versions": [
     {
+      "version": "3.159.0",
+      "date": "2026-10-30",
+      "entries": [
+        {
+          "category": "added",
+          "text": "The drugs map can now be installed as its own app (DrugsMap) from drugsmap.olicorne.org or neurarium.olicorne.org/drugs-map, and opens offline once visited.",
+          "commits": [
+            "9fcd7d7",
+            "f33146e"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.158.1",
       "date": "2026-10-30",
       "entries": [
