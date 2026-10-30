@@ -6,7 +6,9 @@
 //     (docs/drugs-map/README.md, "Hosting"), so the map is served at path `/` and every
 //     other path on that host is the same container. A relative link to the viewer
 //     would then load the 3D app under the map's domain, so the viewer is reached at
-//     its canonical address instead.
+//     its canonical address instead. The map is not always at `/` there: the
+//     installed app (drugs-map.webmanifest) launches at `/drugs-map`, so the host
+//     itself is checked too.
 // No DOM, no data: imported by the map (js/drug-map/view.js) and the viewer's Drugs
 // list (js/legend/drugs.js).
 
@@ -23,8 +25,11 @@ export const readmeUrl = (lang) =>
 /** The map page's file, relative to the site root. */
 export const MAP_PAGE = "drugs-map.html";
 
-/** True when the map is the whole site (served at `/` by the dedicated host). */
-const mapIsRoot = () => location.pathname === "/";
+/** The map's dedicated host, where the viewer is not served. */
+const DRUGSMAP_HOST = "drugsmap.olicorne.org";
+
+/** True when the map is the whole site (served at `/`, or on the dedicated host). */
+const mapIsRoot = () => location.pathname === "/" || location.hostname === DRUGSMAP_HOST;
 
 /** The 3D viewer's address, without a hash. */
 export function viewerUrl() {
