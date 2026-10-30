@@ -54,6 +54,12 @@
 }
 .info-bindings > summary:hover,
 .panel-sec > summary:hover { color: var(--text); }
+/* A section's line icon (panel/section-icons.js), between the caret and the title:
+   the one text purple in both themes, so a long panel scans by shape. */
+.sec-icon {
+  width: 14px; height: 14px; margin-right: 6px; vertical-align: -3px;
+  color: var(--accent-bright); flex: none;
+}
 /* A folded detail-panel section (js/main.js foldSections): the open body sits
    one step in under its heading. */
 .panel-sec { margin: 0 0 var(--sp-m); }

@@ -284,10 +284,12 @@ export function makeBindings(P) {
       .map(interactorsOf)
       .filter((s) => s.list.length || s.borrowed.length);
     if (!withDrugs.length) {
-      body.appendChild(emptySection(el("h3", null, t("targets.bySubtype")), "target"));
+      body.appendChild(emptySection(el("h3", null, t("targets.bySubtype")), "target",
+        { icon: "drugs" }));
       return;
     }
     const wrap = el("div", "info-bindings info-interactors info-subtype-interactors");
+    wrap.dataset.icon = "drugs";
     wrap.appendChild(el("h3", null, t("targets.bySubtype")));
     for (const { list, borrowed } of withDrugs) {
       const rows = [...list, ...borrowed];

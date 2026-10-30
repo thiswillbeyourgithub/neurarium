@@ -58,6 +58,7 @@ export function showProjectionGroup(P, group) {
         || a.name.localeCompare(b.name));
     if (acting.length) {
       const wrap = el("div", "info-bindings info-interactors");
+      wrap.dataset.icon = "drugs";
       wrap.appendChild(el(
         "h3", null, `${t("group.actingDrugs")} (${acting.length})`));
       wrap.appendChild(el("p", "legend-caption", t("group.actingDrugsHint")));
@@ -82,7 +83,8 @@ export function showProjectionGroup(P, group) {
       wrap.appendChild(ul);
       body.appendChild(wrap);
     } else {
-      body.appendChild(emptySection(el("h3", null, t("group.actingDrugs")), "group"));
+      body.appendChild(emptySection(el("h3", null, t("group.actingDrugs")), "group",
+        { icon: "drugs" }));
     }
   }
   // Headed sections start folded, like the drug panel (see foldSections).

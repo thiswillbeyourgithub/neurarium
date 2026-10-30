@@ -124,7 +124,8 @@ export function makePathways(P) {
   // `kind`: the panel's node kind ("circuit" | "group"), the empty section's wording.
   const appendPathwayList = (titleText, projs, kind, tourSec = "") => {
     if (!projs.length) {
-      body.appendChild(emptySection(el("h3", null, titleText), kind, { tourSec }));
+      body.appendChild(emptySection(el("h3", null, titleText), kind,
+        { tourSec, icon: "pathways" }));
       return;
     }
     const { ul, count } = pathwayList(projs, (proj) => {
@@ -135,6 +136,7 @@ export function makePathways(P) {
       };
     });
     const wrap = el("div", "info-connections");
+    wrap.dataset.icon = "pathways";
     if (tourSec) wrap.dataset.tourSec = tourSec; // guided-tour section anchor
     wrap.appendChild(el("h3", null, `${titleText} (${count})`));
     wrap.appendChild(ul);

@@ -42,6 +42,7 @@ export function showEnzyme(P, enzyme) {
   const made = enzyme.metabolites || [];
   if (made.length) {
     const box = el("div", "info-bindings info-metabolites");
+    box.dataset.icon = "forms";
     box.appendChild(el("h3", null, `${t("enzyme.forms")} (${made.length})`));
     const ul = el("ul");
     for (const { drug, metabolite, formedBy } of made) {
@@ -61,7 +62,8 @@ export function showEnzyme(P, enzyme) {
     box.appendChild(ul);
     body.appendChild(box);
   } else {
-    body.appendChild(emptySection(el("h3", null, t("enzyme.forms")), "enzyme"));
+    body.appendChild(emptySection(el("h3", null, t("enzyme.forms")), "enzyme",
+      { icon: "forms" }));
   }
 
   // How fast people clear a drug through this isoform, and how common each speed
@@ -72,6 +74,7 @@ export function showEnzyme(P, enzyme) {
   const variability = enzyme.variability;
   if (variability) {
     const box = el("div", "info-bindings info-variability");
+    box.dataset.icon = "variability";
     const head = el("h3", null, t("enzyme.variability"));
     head.appendChild(nodePill(variability));
     box.appendChild(head);
@@ -126,6 +129,7 @@ export function showEnzyme(P, enzyme) {
     // variable". It carries no pill because it is a statement about this dataset
     // and its corpus's scope, not a sourced claim about the enzyme.
     const box = el("div", "info-bindings info-variability");
+    box.dataset.icon = "variability";
     box.appendChild(el("h3", null, t("enzyme.variability")));
     box.appendChild(el("p", "var-caveat", t("enzyme.variabilityNone")));
     const freqRow = el("div", "info-wiki");
@@ -138,6 +142,7 @@ export function showEnzyme(P, enzyme) {
 
   const rows = enzyme.rows || [];
   const wrap = el("div", "info-bindings info-interactors");
+  wrap.dataset.icon = "drugs";
   wrap.appendChild(el("h3", null, `${t("enzyme.drugs")} (${rows.length})`));
   if (!rows.length) {
     wrap.appendChild(el("p", "info-desc", t("enzyme.noDrugs")));

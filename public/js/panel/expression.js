@@ -196,10 +196,11 @@ export function makeExpression(P) {
     // No region and not ubiquitous: a stub with no CNS role, said in its own words.
     if (!owner.ubiquitous && !owner.locationNames.length) {
       body.appendChild(emptySection(head, owner.kind === "receptor" ? "receptor" : "target",
-        { tourSec, cls: "info-locations", text: t("receptor.noRole") }));
+        { tourSec, icon: "regions", cls: "info-locations", text: t("receptor.noRole") }));
       return;
     }
     const where = el("div", "info-locations");
+    where.dataset.icon = "regions";
     if (tourSec) where.dataset.tourSec = tourSec;
     where.appendChild(head);
     if (owner.ubiquitous) {

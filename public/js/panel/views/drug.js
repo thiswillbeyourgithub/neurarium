@@ -189,6 +189,7 @@ export function showDrug(P, drug, opts = {}) {
   // approval + years since, withdrawals) and the brands, i.e. what the drug is as a
   // named, marketed product rather than as a molecule.
   const admin = el("div", "info-bindings info-admin");
+  admin.dataset.icon = "identity";
   admin.appendChild(heading("h3", t("drug.admin"), t("drug.adminSub")));
   // Classification facts: the coarse class(es) and the NbN nomenclature line.
   // Both are clickable: each runs a search (class:"..." / nbn:"...") that filters
@@ -266,9 +267,10 @@ export function showDrug(P, drug, opts = {}) {
     || hasForms(d) || hasPhyschem(d);
   if (!hasPkTiming(drug)) {
     body.appendChild(emptySection(heading("h3", t("drug.pkTiming"), t("drug.pkTimingSub")),
-      "drug", other(hasPkTiming, { cls: "info-halflife" })));
+      "drug", other(hasPkTiming, { cls: "info-halflife", icon: "pk" })));
   } else {
     const hlEl = el("div", "info-bindings info-halflife");
+    hlEl.dataset.icon = "pk";
     hlEl.appendChild(heading("h3", t("drug.pkTiming"), t("drug.pkTimingSub")));
     const chipHelpers = { el, nodePill, t,
                           lang: window.__I18N__.lang };
@@ -424,6 +426,7 @@ export function showDrug(P, drug, opts = {}) {
   const contextKinds = drug.contextKinds || [];
   if ((flowKinds.length || contextKinds.length) && groupsByKey) {
     const proj = el("div", "info-connections info-tone");
+    proj.dataset.icon = "tone";
     proj.appendChild(heading("h3", t("drug.tone"), t("drug.toneSub")));
     const warn = derivedBox("caution", t("drug.toneWarnTitle"));
     warn.appendChild(el("p", "addon-text", t("drug.toneWarn")));
@@ -499,7 +502,7 @@ export function showDrug(P, drug, opts = {}) {
   } else {
     body.appendChild(emptySection(heading("h3", t("drug.tone"), t("drug.toneSub")), "drug",
       other((d) => (d.flowKinds || []).length || (d.contextKinds || []).length,
-        { cls: "info-connections info-tone" })));
+        { cls: "info-connections info-tone", icon: "tone" })));
   }
 
   // Metabolism: pharmacokinetics has no anatomy, so it sits AFTER the sections that

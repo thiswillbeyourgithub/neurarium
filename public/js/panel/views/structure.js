@@ -52,7 +52,7 @@ export function showStructure(P, structure) {
     (p) => p.from === structure.id || p.to === structure.id);
   if (conns.length === 0) {
     body.appendChild(emptySection(heading("h3", t("info.connections"), t("info.connectionsSub")),
-      "structure"));
+      "structure", { icon: "connections" }));
   } else {
     const { ul, count } = pathwayList(conns, (proj) => {
       const outgoing = proj.from === structure.id;
@@ -63,6 +63,7 @@ export function showStructure(P, structure) {
       };
     });
     const wrap = el("div", "info-connections");
+    wrap.dataset.icon = "connections";
     wrap.appendChild(heading("h3", `${t("info.connections")} (${count})`,
       t("info.connectionsSub")));
     wrap.appendChild(ul);

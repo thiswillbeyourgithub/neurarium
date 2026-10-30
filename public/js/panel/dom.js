@@ -3,6 +3,7 @@
 // holding it).
 
 import { isWebUrl } from "../web-url.js";
+import { sectionIcon, sectionIconKey } from "./section-icons.js";
 
 /**
  * `document.createElement(tag)` with an optional class name and text. The one
@@ -121,22 +122,25 @@ export function noDataText(title, kind) {
  * combo notes and addon slots, simply stay hidden).
  * @param {HTMLElement} head  built by heading() / betaHeading()
  * @param {string} kind  the panel's node kind (see noDataText)
- * @param {{tourSec?: ?string, cls?: string, text?: ?string, extra?: ?Node}} [opts]  `text`
+ * @param {{tourSec?: ?string, icon?: ?string, cls?: string, text?: ?string, extra?: ?Node}} [opts]
+ *   `icon` names the heading's section-icons.js key where `tourSec` does not; `text`
  *   replaces the generic sentence where a section has its own (Regional distribution's
  *   "no significant role" note); `extra` follows it (other-forms.js's link to the
  *   stereo form that fills the section)
  * @returns {HTMLDivElement}
  */
-export function emptySection(head, kind, { tourSec = null, cls = "", text = null, extra = null } = {}) {
+export function emptySection(head, kind,
+  { tourSec = null, icon = null, cls = "", text = null, extra = null } = {}) {
   const title = [...head.childNodes].filter((n) => n.nodeType === 3)
     .map((n) => n.textContent).join("").trim();
   const sub = head.tagName === "H4";
   const sec = el("div", `${sub ? "panel-subsec" : "panel-sec"} panel-sec-empty ${cls}`.trim());
   if (tourSec) sec.dataset.tourSec = tourSec;
+  if (icon) sec.dataset.icon = icon;
   let top = head;
   if (!sub) {
     top = el("div", "panel-sec-head");
-    top.append(...head.childNodes);
+    top.append(...[sectionIcon(sectionIconKey(sec))].filter(Boolean), ...head.childNodes);
   }
   sec.append(top, el("p", "panel-sec-none", text || noDataText(title, kind)));
   if (extra) sec.appendChild(extra);
@@ -231,6 +235,8 @@ export function foldSections(host) {
       head.remove();
     }
     det.classList.add("disclosure", "panel-sec");
+    const icon = !summary.querySelector(":scope > .sec-icon") && sectionIcon(sectionIconKey(det));
+    if (icon) summary.prepend(icon);
     const inner = document.createElement("div");
     inner.className = "panel-sec-body";
     inner.append(...[...sec.childNodes].filter((n) => n !== summary));
