@@ -86,7 +86,9 @@ drugsmap.olicorne.org {
 
 L'image en haut et les images des préréglages (avec la section Préréglages qui les liste) sont rendues par `uv run tools/shot_drugs_map.py` (la vue du haut est le `DEFAULT_HASH` du script, les préréglages sont lus sur les boutons de la page) : la relancer dès que l'apparence de la carte ou ses préréglages changent.
 
-Les liens de la carte vers l'atlas 3D détectent ce cas (page servie sur `/`) et pointent vers `https://neurarium.olicorne.org/` au lieu d'un chemin relatif. Les visites sont comptées par le même site umami que neurarium, sous le nom d'hôte `drugsmap.olicorne.org`.
+La page s'installe comme une application à part (`drugs-map.webmanifest`, lancée sur `/drugs-map`) depuis l'un ou l'autre hôte.
+
+Les liens de la carte vers l'atlas 3D détectent ce cas (page servie sur `/`, ou sur l'hôte `drugsmap.olicorne.org`) et pointent vers `https://neurarium.olicorne.org/` au lieu d'un chemin relatif. Les visites sont comptées par le même site umami que neurarium, sous le nom d'hôte `drugsmap.olicorne.org`.
 
 </details>
 

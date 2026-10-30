@@ -24,6 +24,10 @@
     <meta property="og:image" content="https://drugsmap.olicorne.org/og-drugs-map.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="alternate" type="text/plain" title="llms.txt" href="llms.txt" />
+    <!-- Installable as its own app: drugs-map.webmanifest is neurarium's manifest
+         with the map's name, id and start_url (`drugs-map`, which the inner Caddyfile
+         rewrites to this page on both hosts), sharing the brain icons. -->
+    <link rel="manifest" href="drugs-map.webmanifest" />
     <meta name="theme-color" content="#8a5cf0" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />

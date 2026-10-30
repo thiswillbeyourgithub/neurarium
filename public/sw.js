@@ -28,7 +28,7 @@
  *
  * Bump CACHE when the caching logic itself changes; activate() prunes older caches.
  */
-const CACHE = "neurarium-v9";
+const CACHE = "neurarium-v10";
 
 // Minimal app shell precached on install so a first offline launch has a page +
 // icons even before anything else was visited. The stylesheets ride with it, since a
@@ -38,8 +38,10 @@ const SHELL = [
   ".",
   "index.html",
   // The second page (the drugs map) and its own sheet; the rest of what it loads is
-  // shared with the viewer.
+  // shared with the viewer. `drugs-map` (no extension) is its installed app's
+  // start_url, a separate cache key, so a first offline launch still finds it.
   "drugs-map.html",
+  "drugs-map",
   "css/drugs-map-page.css",
   // The UI string tables + runtime: a shell without them renders bare keys.
   "js/i18n/en.js",
@@ -64,6 +66,7 @@ const SHELL = [
   "css/loading.css",
   "css/banners.css",
   "manifest.webmanifest",
+  "drugs-map.webmanifest",
   "favicon.svg",
   "icon-192.png",
   "icon-512.png",

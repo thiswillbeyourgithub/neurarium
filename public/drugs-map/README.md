@@ -86,7 +86,9 @@ drugsmap.olicorne.org {
 
 The picture at the top and the preset pictures (with the Presets section listing them) are rendered by `uv run tools/shot_drugs_map.py` (the top view is the script's `DEFAULT_HASH`, the presets are read off the page's buttons): rerun it whenever the map's look or its presets change.
 
-Links from the map to the 3D atlas detect this case (the page served at `/`) and point at `https://neurarium.olicorne.org/` instead of a relative path. Visits are counted by the same umami site as neurarium, under the `drugsmap.olicorne.org` hostname.
+The page is installable as its own app (`drugs-map.webmanifest`, launching at `/drugs-map`) from either host.
+
+Links from the map to the 3D atlas detect this case (the page served at `/`, or on the `drugsmap.olicorne.org` host) and point at `https://neurarium.olicorne.org/` instead of a relative path. Visits are counted by the same umami site as neurarium, under the `drugsmap.olicorne.org` hostname.
 
 </details>
 
