@@ -43,10 +43,11 @@
      (sliders, active tabs/buttons, focus rings, links) is purple-themed.
      These are chrome only; the data/semantic colours (projection kinds,
      provenance-grade pills, effect dots) live in generate_data.py/meta and
-     are deliberately untouched. --accent-soft is --accent at 0.35 alpha. */
+     are deliberately untouched. --accent-soft is --accent at 0.35 alpha.
+     --accent paints grounds, borders and widgets; every purple TEXT (links,
+     clickable names, purple labels) is --accent-bright, so there is one text purple. */
   --accent: #8a5cf0;
   --accent-bright: #b48bff;
-  --accent-light: #c8a8ff;
   --accent-soft: rgba(138, 92, 240, 0.35);
   /* The bottom-left control-panel width (landscape). One source of truth so a
      tooltip can size itself just under the panel (see .help-tip). Portrait
@@ -75,7 +76,7 @@
 /* The day theme: the same purple chrome over white instead of near-black. Only the
    tokens above are redefined, never a rule, so a component added later is themed on
    the day it lands (as long as it reads the tokens). The accents darken rather than
-   lighten: --accent-bright / -light mean "more prominent than --accent", which on
+   lighten: --accent-bright means "more prominent than --accent", which on
    white is deeper, not paler, or a link would vanish.
    Set by js/theme.js on <html>, and only ever by a visitor's click on the sun/moon
    button in the panel header (persisted). Never by a media query: dark is the
@@ -96,7 +97,6 @@
   --mol-filter: none;
   --accent: #7c4ddb;
   --accent-bright: #5f2fc4;
-  --accent-light: #4d21ab;
   --accent-soft: rgba(124, 77, 219, 0.22);
   /* The same roles, darkened: each clears 5:1 over its own tint on white. */
   --sem-missing: #c1121f;

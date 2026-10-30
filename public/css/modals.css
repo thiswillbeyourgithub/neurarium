@@ -95,7 +95,7 @@
   border-radius: 6px;
   cursor: pointer;
 }
-.modal .info-close:hover { color: var(--accent-light); background: rgba(var(--ink), 0.12); }
+.modal .info-close:hover { color: var(--accent-bright); background: rgba(var(--ink), 0.12); }
 /* key -> action rows: a two-column grid (the key(s) | the action). */
 #shortcuts-list {
   margin: 0;

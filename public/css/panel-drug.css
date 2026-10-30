@@ -164,7 +164,7 @@
   gap: 2px 5px;
   font-size: 11px;
 }
-.ki-chip .ki-val { font-weight: 600; color: var(--accent-light); white-space: nowrap; }
+.ki-chip .ki-val { font-weight: 600; color: var(--accent-bright); white-space: nowrap; }
 .ki-chip .ki-detail { color: var(--muted); font-size: 10px; }
 /* A Ki with no human assay: tint the value amber so a non-human number is
    visible at a glance, not only in the tooltip. */
@@ -274,7 +274,7 @@
 }
 .info-metabolites .metab-formed.clickable { cursor: pointer; }
 .info-metabolites .metab-formed.clickable:hover .bind-target {
-  color: var(--accent-light);
+  color: var(--accent-bright);
 }
 /* A drug name that jumps to its drug (js/main.js drugNameLink): the Drugs-list
    row look (.legend-item.clickable), inline so it can sit in a sentence. */

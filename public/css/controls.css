@@ -197,7 +197,7 @@ body.no-3d #controls:has(#controls-body:not([hidden])) {
    #controls-header below); also reused in the loading overlay via the shared
    common.byline i18n key. */
 .panel-byline { margin: 0; font-size: 12px; font-weight: 400; color: var(--muted); }
-.panel-byline a { color: var(--accent-light); text-decoration: underline; }
+.panel-byline a { color: var(--accent-bright); text-decoration: underline; }
 /* Panel header row: an invisible full-size hit button (the collapse toggle,
    keyboard-focusable) sits UNDER the visible title + inline byline + chevron.
    The overlay content is pointer-events:none so a click anywhere on the row
@@ -237,7 +237,7 @@ body.no-3d #controls:has(#controls-body:not([hidden])) {
 }
 #controls-header .panel-hdr-btn svg, .dmp-title-row .panel-hdr-btn svg { width: 16px; height: 16px; display: block; }
 #controls-header .panel-hdr-btn:hover, .dmp-title-row .panel-hdr-btn:hover { color: var(--text); background: rgba(var(--ink), 0.12); }
-#controls-header .panel-hdr-btn[aria-pressed="true"] { color: var(--accent-light); }
+#controls-header .panel-hdr-btn[aria-pressed="true"] { color: var(--accent-bright); }
 #controls-header .panel-theme-btn { margin-left: auto; }
 #controls-header .panel-hdr-btn + .chevron { margin-left: 6px; }
 /* One <svg> per theme, the inactive one hidden: the button shows what a click

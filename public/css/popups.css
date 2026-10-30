@@ -297,7 +297,7 @@ a.changelog-commit { color: var(--accent-bright); text-decoration: underline; }
 .src-ex { color: var(--muted); line-height: 1.4; }
 .src-ex-lead { opacity: 0.8; }
 .src-ex-link {
-  color: var(--accent); text-decoration: none; border-bottom: 1px dotted currentColor;
+  color: var(--accent-bright); text-decoration: none; border-bottom: 1px dotted currentColor;
   cursor: pointer;
 }
 .src-ex-link:hover { color: var(--text); }

@@ -104,7 +104,7 @@
    button in the accent colour, so it reads as part of the paragraph. */
 .wiki-more {
   padding: 0; border: 0; background: none; font: inherit;
-  color: var(--accent); cursor: pointer; white-space: nowrap;
+  color: var(--accent-bright); cursor: pointer; white-space: nowrap;
 }
 .wiki-more:hover { text-decoration: underline; }
 /* "?" caveat badge next to every Source / Reference: the citations + links
@@ -174,7 +174,7 @@
    the pinned revision): legible accent on the dark bubble. The tooltip stays
    open while hovered/pinned (see attachTip), so the link is clickable. */
 .help-tip a {
-  color: var(--accent-light);
+  color: var(--accent-bright);
   text-decoration: underline;
 }
 /* The "Click for details" cue inside a provenance tooltip: a link-styled
@@ -184,7 +184,7 @@
   margin: 0;
   padding: 0;
   font: inherit;
-  color: var(--accent-light);
+  color: var(--accent-bright);
   background: none;
   border: none;
   text-decoration: underline;

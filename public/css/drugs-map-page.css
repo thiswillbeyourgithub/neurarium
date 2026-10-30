@@ -17,7 +17,7 @@ body.dmp { padding-top: var(--banners-height, 0px); }
 .dmp-byline { margin: 4px 0 10px; text-align: center; }
 .dmp-intro { margin: 0 0 8px; font-size: 14px; line-height: 1.45; color: var(--muted); }
 .dmp-links { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 14px; }
-.dmp-links a, .dmp-intro a { color: var(--accent-light); }
+.dmp-links a, .dmp-intro a { color: var(--accent-bright); }
 .dmp-main { padding: 8px 0 32px; font-size: 14px; }
 .dmp-loading { color: var(--muted); }
 @media (max-width: 560px) {

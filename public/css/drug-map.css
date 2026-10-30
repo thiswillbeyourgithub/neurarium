@@ -210,7 +210,7 @@
 .dm-jsonl { margin: 0; padding: 8px 64px 8px 8px; max-height: 320px; overflow: auto; white-space: pre;
   font: 11px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   background: rgba(var(--ink), 0.04); border: 1px solid rgba(var(--ink), 0.12); border-radius: 6px; }
-.dm-j-key { color: var(--accent-light); }
+.dm-j-key { color: var(--accent-bright); }
 .dm-j-str { color: var(--sem-verified); }
 .dm-j-num { color: var(--sem-sourced); }
 .dm-j-lit { color: var(--sem-unknown); }

@@ -97,5 +97,16 @@ class NoLiteralInkTest(unittest.TestCase):
                          "add it to LITERAL_INK_OK with the reason")
 
 
+class OneTextPurpleTest(unittest.TestCase):
+
+    def test_purple_text_is_always_accent_bright(self):
+        # --accent paints grounds and borders; text in it (the Wikipedia "Read more"
+        # once) reads as a second, dimmer purple next to every --accent-bright link.
+        offenders = [line.strip() for line in stylesheet().split("\n")
+                     for val in re.findall(r"(?<![-\w])color:\s*([^;]+);", line)
+                     if "var(--accent" in val and val.strip() != "var(--accent-bright)"]
+        self.assertEqual(offenders, [], "purple text must use var(--accent-bright)")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

@@ -85,14 +85,14 @@
   line-height: 1.45;
   color: var(--muted);
 }
-.loading-cta a { color: var(--accent-light); text-decoration: underline; }
+.loading-cta a { color: var(--accent-bright); text-decoration: underline; }
 /* Author byline, centered in the card between the title and the tagline. */
 .loading-byline {
   margin-bottom: 10px;
   font-size: 12px;
   color: var(--muted);
 }
-.loading-byline a { color: var(--accent-light); text-decoration: underline; }
+.loading-byline a { color: var(--accent-bright); text-decoration: underline; }
 /* Revealed once loading finishes (js/loading.js waitForStart): the deliberate
    "enter the app" action, so the tagline + invite can be read first. */
 .loading-start {

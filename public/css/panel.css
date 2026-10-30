@@ -103,7 +103,7 @@
   text-align: left;
 }
 .fact-link:hover,
-.conn-endpoint:hover { color: var(--accent-light); }
+.conn-endpoint:hover { text-decoration-thickness: 2px; }
 /* A muted trailing note on a fact row (e.g. flagging a non-standard
    nomenclature). `text-transform: none` overrides the row's capitalize. */
 .info-fact .fact-note {
@@ -202,7 +202,7 @@
   background: none; border: none; padding: 0; font: inherit;
   color: var(--accent-bright); cursor: pointer; text-align: left;
 }
-.info-effects .eff-chip:hover { color: var(--accent-light); }
+.info-effects .eff-chip:hover { text-decoration: underline; }
 /* The compound a derived row's binding comes from (the drug or one of its active
    metabolites), shown only when a readout mixes them: muted, after the chip text.
    Also on the Pharmacodynamics: net neurotransmission terms. */
@@ -216,7 +216,7 @@
    binding's compact Ki (the binding profile's median). */
 .info-effects .eff-lead { margin: 0 0 4px; font-size: 12px; font-style: italic; color: var(--muted); }
 .info-effects .eff-ki { font-size: 10px; color: var(--muted); white-space: nowrap; }
-.info-effects .eff-link:hover { color: var(--accent-light); text-decoration: underline; }
+.info-effects .eff-link:hover { color: var(--accent-bright); text-decoration: underline; }
 .info-effects .eff-chip:disabled { color: var(--muted); cursor: default; }
 /* receptor_release_modulation rows (BETA): the site line ("heteroreceptor on
    GABA interneurons in VTA") wraps under the claim, like the drug-panel via chips. */
@@ -224,14 +224,14 @@
 /* receptor_demographic rows (BETA): the direction chip ("↓ Age") before the sentence. */
 .info-effects .demog-chip {
   flex: none; font-size: 10px; padding: 0 5px; border-radius: 8px; white-space: nowrap;
-  border: 1px solid rgba(var(--ink), 0.2); color: var(--accent-light);
+  border: 1px solid rgba(var(--ink), 0.2); color: var(--accent-bright);
 }
 /* receptor_variant rows (ClinPGx #20): a sub-heading per variant (or per target
    on a drug panel), then "[Level 3 · low] may be associated with ..." + pill,
    and a muted phenotype / population / ClinPGx line wrapping under it. */
 .info-variants .var-name { margin: 9px 0 2px; font-size: 11px; font-weight: 600;
   text-transform: none; letter-spacing: normal; /* not the .panel-subsec > h4 title look */
-  color: var(--accent-light); overflow-wrap: anywhere; }
+  color: var(--accent-bright); overflow-wrap: anywhere; }
 .info-variants li.var-row { flex-wrap: wrap; align-items: baseline; margin-bottom: 3px; }
 .info-variants .var-level {
   flex: none; font-size: 10px; padding: 0 5px; border-radius: 8px; white-space: nowrap;
@@ -253,7 +253,7 @@
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--accent-light);
+  color: var(--accent-bright);
   margin: 9px 0 2px;
 }
 .info-locations .loc-group-label:first-child { margin-top: 0; }
