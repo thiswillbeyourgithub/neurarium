@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.157.3",
+      "date": "2026-10-30",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "Every purple link and label now uses the same purple, in both themes (the Wikipedia \"Read more\" was a dimmer shade).",
+          "commits": [
+            "4798cf9"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.157.2",
       "date": "2026-10-29",
       "entries": [
