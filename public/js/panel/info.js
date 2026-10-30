@@ -2,7 +2,7 @@
 // reference links, addon slots) and returns the show*() views, each in panel/views/.
 
 import { closeOpenTip } from "./tooltip.js";
-import { el, btn, flashRow, foldSections, withSubtitle } from "./dom.js";
+import { el, btn, flashRow, foldSections, keepSelectionOnSummaries, withSubtitle } from "./dom.js";
 import { showEffect } from "./views/effect.js";
 import { showCircuit } from "./views/circuit.js";
 import { showProjectionGroup } from "./views/projection-group.js";
@@ -40,6 +40,7 @@ export function createInfoPanel(data, sourcingModal) {
   // The pane, not #info-body, is the scrolling box (see the overflow rules in
   // index.html); every show*() rebuilds the body inside it.
   const pane = document.getElementById("details-pane");
+  if (pane) keepSelectionOnSummaries(pane);
   // Start every view at the top. Replacing the body's children leaves the pane's
   // scrollTop wherever the *previous* (possibly much taller) panel was, so a click
   // deep in a long panel would open the next one already scrolled into its middle,

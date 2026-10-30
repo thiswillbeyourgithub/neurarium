@@ -376,11 +376,12 @@
 /* Collapsed <details> section: a caret + label summary that reads as a toggle.
    One rule, every caller (a receptor_group's per-subtype drug dropdowns, the drug
    panel's derived "Drug interactions" list), so the caret lives in one place; each
-   caller adds its own typography. */
+   caller adds its own typography. The title stays selectable (it is content, worth
+   copying): panel/dom.js keepSelectionOnSummaries stops a drag-select from also
+   toggling the section. */
 .disclosure > summary {
   cursor: pointer;
   list-style: none; /* replace the default marker with our own caret below */
-  user-select: none;
 }
 .disclosure > summary::-webkit-details-marker { display: none; }
 .disclosure > summary::before {

@@ -211,6 +211,23 @@ export function flashRow(elm) {
 }
 
 /**
+ * Let a reader select (and copy) a section title without folding it: a click on a
+ * `.disclosure > summary` that ends a text selection inside it does not toggle the
+ * `<details>`. One delegated listener on the scrolling pane covers every section any
+ * view builds, now or later.
+ * @param {HTMLElement} root
+ */
+export function keepSelectionOnSummaries(root) {
+  root.addEventListener("click", (e) => {
+    const summary = e.target.closest?.(".disclosure > summary");
+    const sel = window.getSelection();
+    if (summary && sel && !sel.isCollapsed && summary.contains(sel.anchorNode)) {
+      e.preventDefault();
+    }
+  });
+}
+
+/**
  * Fold every headed section directly under `host` into a collapsed `<details>`: a
  * section whose first child is an `<h3>` becomes `details.disclosure.panel-sec` with
  * that heading as its `<summary>` and the rest in an indented `.panel-sec-body`; one
