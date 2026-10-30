@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.158.0",
+      "date": "2026-10-30",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Every section of a detail panel now opens with a small purple icon (a clock for Pharmacokinetics, a DNA strand for Pharmacogenomics, a pill for drug lists...), so a long panel is quicker to scan, in both day and night themes.",
+          "commits": [
+            "aa8c4a5"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.157.3",
       "date": "2026-10-30",
       "entries": [
