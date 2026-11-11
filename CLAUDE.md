@@ -244,7 +244,7 @@ Corpora (`SOURCE_CORPORA`):
 - #15 `cpic`: what a metabolizer phenotype implies for one prescription (implication + recommendation + strength), `page` = guideline ClinPGx id.
 - #16 `bdpm`: French RCP section 5.2 Tmax/half-life + fr brands (code read of the denomination), `page` = product CIS.
 - #17 `europepmc`: paper abstracts, plus Europe PMC's open-access full text (tables as `cell | cell` rows, licence recorded) where one exists, for what only a study measures (hand-listed `fetch_europepmc.PAPERS`, or a Wikipedia-cited paper for a missing Ki), `page` = PMID.
-- #19 `agnp_tdm`: AGNP TDM consensus guideline 2026 (Table 5 therapeutic range + alert level, Table 1 CYP/UGT substrates, ranked after the other metabolism corpora), code-read table rows, `page` = PDF page.
+- #19 `agnp_tdm`: AGNP TDM consensus guideline 2026 (Table 5 therapeutic range + alert level, Table 1 CYP/UGT substrates, ranked after the other metabolism corpora), code-read table rows quoted as labelled "Header: value | ..." lines appended to the page file (guarded against the raw text), `page` = PDF page.
 - #20 `clinpgx`: ClinPGx (PharmGKB) clinical annotations, CC BY-SA 4.0, committed export `tools/data/clinpgx/` pinned + re-derived like #15, one quote per genotype sentence (code copy, no judge), `page` = annotation id.
 - #21 `pubchem`: computed XLogP3 + TPSA (code-read property table, no judge), `page` = PubChem CID, the drug's CID read off its stored Wikipedia drugbox.
 - #22 `b3db`: B3DB blood-brain-barrier benchmark (Meng 2021), BBB+/BBB- label + logBB, one quote per row (code copy, no judge), joined by CID else exact name and always guarded by InChI formula + connectivity, `page` = CID.
