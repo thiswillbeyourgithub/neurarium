@@ -28,7 +28,11 @@ The accordion is a list of `{toggle, body}` in `wireControls`; `wireCollapse(onT
 **Pan-aside.** While expanded, the brain is pushed clear of the panel (`updatePanelPan` ->
 `focus.setScreenOffset` -> `PerspectiveCamera.setViewOffset`, eased in `focus.tick`; gated on the
 panel being visible so `?ui=0` is unaffected). Portrait: full-width bottom-half panel, brain up.
-Landscape: left sidebar, brain right.
+Landscape: left sidebar (`--panel-w`, a third of the viewport, 240-760px), brain right, zoomed out by a factor `k = max(1, 1.2 * innerHeight / freeWidth)` (the third argument of `setScreenOffset`) when the free strip is too narrow for it.
+
+**Resize handle.** `js/boot/panel-resize.js` adds an 8px `.panel-resize` grip on the expanded landscape sidebar's right edge (hidden in portrait and reading mode). Dragging writes `--panel-w-user` inline on `<html>` (`css/tokens.css` folds it into `--panel-w`; portrait redefines `--panel-w` outright so it ignores it), clamped to 240px .. min(80vw, viewport - 200px); the panel's `ResizeObserver` then re-runs the pan-aside. Persisted as `neurarium.panelWidth` via `js/prefs.js`; double-click resets.
+
+**Scrollbars.** `#controls-main` / `#details-pane` keep a thin bar whose thumb is painted only while `.scroll-active` (`js/boot/autohide-scrollbars.js`: set on scroll or when a mouse reaches the 16px gutter, dropped after 1.5s idle).
 
 **Scroll model.** The panel is an `overflow:hidden` flex column that never scrolls; its top chrome
 is pinned and exactly one inner region scrolls (`#controls-main`, or `#details-pane`). A
