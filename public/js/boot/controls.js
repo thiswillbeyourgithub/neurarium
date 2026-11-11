@@ -8,6 +8,7 @@ import { applyExplode, createArrowRetrim, createAutoSpread } from "../scene/expl
 import { openControlsBody } from "../panel/tabs.js";
 import { isWebUrl } from "../web-url.js";
 import { wirePanelResize } from "./panel-resize.js";
+import { autohideScrollbars } from "./autohide-scrollbars.js";
 
 // url-state priorities (a higher number is applied later, see js/url-state.js). The
 // default 0 carries the focus views; scene state that a focus would otherwise override
@@ -118,6 +119,7 @@ export function wireControls({ camera, controls, meshes, arrows, labels, focus, 
   portrait.addEventListener("change", updatePanelPan);
   new ResizeObserver(updatePanelPan).observe(controlsPanel);
   wirePanelResize(controlsPanel);
+  autohideScrollbars([document.getElementById("controls-main"), document.getElementById("details-pane")]);
 
   // Controls (the sliders + global scene toggles) is a collapsible section like
   // the others but deliberately NOT part of the accordion below: it toggles

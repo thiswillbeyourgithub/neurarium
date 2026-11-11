@@ -48,6 +48,16 @@
   overflow-y: auto;
   overflow-x: hidden;
 }
+/* The two panel scroll areas keep a thin bar, but its thumb is painted only
+   while in use (js/boot/autohide-scrollbars.js adds .scroll-active on scroll or
+   when the pointer reaches the gutter, and drops it after a quiet spell). */
+#controls-main, #details-pane {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+#controls-main.scroll-active, #details-pane.scroll-active {
+  scrollbar-color: rgba(var(--ink), 0.3) transparent;
+}
 #details-pane:not([hidden]) {
   flex: 1 1 auto;
   min-height: 0;
