@@ -1,6 +1,21 @@
 {
   "versions": [
     {
+      "version": "3.163.0",
+      "date": "2026-11-11",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "Sources: a quote from the AGNP TDM guideline's tables now reads as the table row with each value under its column header, one per line (\"Therapeutic reference range (TRR): 50–100 μg/mL\", \"Laboratory alert level: 120 μg/mL\"), instead of the cells glued into one run",
+          "commits": [
+            "f10c63be",
+            "b46c4b07",
+            "91b9e5a4"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.162.2",
       "date": "2026-11-11",
       "entries": [
