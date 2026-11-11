@@ -1,6 +1,20 @@
 {
   "versions": [
     {
+      "version": "3.162.2",
+      "date": "2026-11-11",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "Pharmacokinetics: each formulation now fits on one line, its release type followed by its brands (\"Delayed release: Divalcote\"), so valproate's formulations take two lines instead of four",
+          "commits": [
+            "d9c87c1c",
+            "181c4d4b"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.162.1",
       "date": "2026-11-11",
       "entries": [
