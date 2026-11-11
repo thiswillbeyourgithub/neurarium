@@ -1,6 +1,34 @@
 {
   "versions": [
     {
+      "version": "3.161.0",
+      "date": "2026-11-11",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "On a desktop screen the side panel now takes about a third of the width (it was a quarter), and the brain zooms out as needed to fit the space left beside it.",
+          "commits": [
+            "da14356"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "The panel's scrollbar only shows while you scroll (or point at it) and fades out after a moment, so it no longer catches the eye.",
+          "commits": [
+            "9ca3e94"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "On desktop, drag the panel's right edge to make it wider or narrower: the brain re-centres and shrinks to fit, the width is remembered, and a double-click on the edge restores the default.",
+          "commits": [
+            "ac6deb2",
+            "1b9dd0d"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.160.0",
       "date": "2026-11-11",
       "entries": [
