@@ -199,8 +199,8 @@
   gap: var(--sp-m) var(--sp-xl);
 }
 .info-halflife .addon { flex-basis: 100%; margin: var(--sp-s) 0 0; }
-/* Per-formulation list: one hairline-separated block each, release type + pill
-   + its Tmax / T½ chips on one wrapping line, its brands wrapping below. */
+/* Per-formulation list: one hairline-separated line each, "release + pill:",
+   its brands, then its Tmax / T½ chips, wrapping only on overflow. */
 .info-halflife .formulations { flex-basis: 100%; }
 /* A titled subsection inside a section (panel/dom.js subSection): a hairline above
    it, its h4 styled like the Formulations / Brands labels. */
@@ -232,7 +232,7 @@
 }
 .brand-chip { display: inline-flex; align-items: baseline; gap: var(--sp-xs); white-space: nowrap; }
 .brand-chip > .help-icon { margin-left: 0; }
-.form-brands { margin-top: var(--sp-xs); }
+.form-brands { display: contents; }
 .hl-chip > .help-icon { margin-left: 0; }
 .hl-chip .hl-val { font-weight: 600; color: var(--text); white-space: nowrap; }
 .hl-chip .hl-label { color: var(--muted); font-size: 11px; }

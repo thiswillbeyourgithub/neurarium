@@ -311,15 +311,18 @@ export function showDrug(P, drug, opts = {}) {
       const wrap = el("div", "formulations");
       wrap.appendChild(heading("h4", t("drug.formulations"), t("drug.formulationsSub")));
       for (const f of forms) {
-        // One block per formulation: its release type (pill: the claim that
-        // the product exists) and its Tmax / T½ on one line, its brands below.
+        // One line per formulation: "Release: Brand Brand" (the release pill is
+        // the claim that the product exists), then its Tmax / T½, wrapping only
+        // on overflow.
         const row = el("div", "form-row");
         const head = el("div", "form-head");
         // The pill rides inside the release name, so the row's wide gap
         // only separates whole items (each chip already ends in its pill).
         const release = el("span", "form-release", `${f.label} `);
         release.appendChild(nodePill({ provenance: f.releaseProvenance, sources: f.releaseSources }));
+        if (f.brands.length) release.appendChild(document.createTextNode(":"));
         head.appendChild(release);
+        if (f.brands.length) head.appendChild(brandRow(f.brands)).classList.add("form-brands");
         if (f.tmax) {
           head.appendChild(valueChip(chipHelpers, {
             label: t("drug.tmax"), tip: t("drug.tmaxTip"),
@@ -332,9 +335,6 @@ export function showDrug(P, drug, opts = {}) {
             provenance: f.halfLifeProvenance, sources: f.halfLifeSources }));
         }
         row.appendChild(head);
-        if (f.brands.length) {
-          row.appendChild(brandRow(f.brands)).classList.add("form-brands");
-        }
         wrap.appendChild(row);
       }
       hlEl.appendChild(wrap);
