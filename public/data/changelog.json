@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.163.1",
+      "date": "2026-11-11",
+      "entries": [
+        {
+          "category": "fixed",
+          "text": "A green verified pill backed only by a quote copied by code (an AGNP table row, a labelled Stahl line) no longer claims a judge confirmed it: its tooltip now says no LLM was involved, so none was needed",
+          "commits": [
+            "b6e9d238"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.163.0",
       "date": "2026-11-11",
       "entries": [
