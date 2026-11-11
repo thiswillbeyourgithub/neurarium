@@ -275,4 +275,48 @@ export function foldSections(host) {
     if (!isDetails) sec.replaceWith(det);
     det.replaceChildren(summary, inner);
   }
+  addFoldAll(host);
+}
+
+// Hosts already listening for their sections' toggles (one capture listener per
+// host for its lifetime: #info-body outlives every view rendered into it).
+const foldAllHosts = new WeakSet();
+
+/** The folded sections directly under `host` (see foldSections). */
+const panelSecs = (host) => [...host.querySelectorAll(":scope > details.panel-sec")];
+
+/**
+ * Relabel `host`'s fold-all button from its sections' state: "Fold all" once every
+ * section is open, else "Unfold all".
+ * @param {HTMLElement} host
+ */
+function syncFoldAll(host) {
+  const b = host.querySelector(":scope > .sec-fold-all");
+  if (!b) return;
+  const allOpen = panelSecs(host).every((d) => d.open);
+  b.textContent = window.__I18N__.t(allOpen ? "info.foldAll" : "info.unfoldAll");
+  b.setAttribute("aria-expanded", String(allOpen));
+}
+
+/**
+ * Put a fold-all / unfold-all button above `host`'s first folded section, when it
+ * has at least two (idempotent: a view folding twice keeps one button). Its label
+ * follows every toggle, whoever made it (a click, a tour step, a tab restore).
+ * @param {HTMLElement} host
+ */
+function addFoldAll(host) {
+  const secs = panelSecs(host);
+  if (secs.length < 2 || host.querySelector(":scope > .sec-fold-all")) return;
+  const b = btn("sec-fold-all");
+  b.addEventListener("click", () => {
+    const open = !panelSecs(host).every((d) => d.open);
+    for (const d of panelSecs(host)) d.open = open;
+  });
+  host.insertBefore(b, secs[0]);
+  // `toggle` does not bubble, so listen in the capture phase.
+  if (!foldAllHosts.has(host)) {
+    foldAllHosts.add(host);
+    host.addEventListener("toggle", () => syncFoldAll(host), true);
+  }
+  syncFoldAll(host);
 }

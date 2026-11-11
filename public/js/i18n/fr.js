@@ -374,6 +374,8 @@ window.__I18N_MESSAGES__.fr = {
   "info.kiRow": "Ligne PDSP n° {id} : Ki {value} nM ({species}, {radioligand} ; {reference})",
   "info.sourceLicence": "Licence du texte : {licence}",
   "info.citeAs": "Cette source demande à être citée ainsi :",
+  "info.foldAll": "Tout replier",
+  "info.unfoldAll": "Tout déplier",
   "info.noData": "Pas encore d'information sur « {what} » pour {kind}.",
   "info.kindThis.drug": "ce médicament",
   "info.kindThis.receptor": "ce récepteur",

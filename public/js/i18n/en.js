@@ -376,6 +376,8 @@ window.__I18N_MESSAGES__.en = {
   "info.kiRow": "PDSP row #{id}: Ki {value} nM ({species}, {radioligand}; {reference})",
   "info.sourceLicence": "Text licence: {licence}",
   "info.citeAs": "This source asks to be cited as:",
+  "info.foldAll": "Fold all",
+  "info.unfoldAll": "Unfold all",
   "info.noData": "No information about {what} for {kind} yet.",
   "info.kindThis.drug": "this drug",
   "info.kindThis.receptor": "this receptor",
