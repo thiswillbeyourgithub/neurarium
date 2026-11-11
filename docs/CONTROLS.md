@@ -309,7 +309,7 @@ Every source shows a **provenance pill** (`makeProvenancePill`, see `docs/PROVEN
 hover/tap tooltip via `withTip(trigger, text)` (a present Wikipedia reference *link* is the
 exception: no pill). The bubble is appended to `document.body` (escaping the panel's overflow +
 dimming), `position: fixed`, re-placed on scroll/resize (`place()` / `fixedContainingBlock`).
-Hover/focus reveals; clicking pins it (selectable); only one open at a time (`openTip`). Touch runs
+A hover reveals only after the mouse rests `HOVER_OPEN_MS` (500ms, re-checked against `:hover` so a scroll or a sweep across pills shows nothing), focus at once; clicking pins it (selectable); only one open at a time (`openTip`). Touch runs
 the click-toggle path only. Text shows the concrete source first, the grade explainer under. Pill
 tooltips are `info.provNone/provLlm/provSourced/provVerified`.
 
