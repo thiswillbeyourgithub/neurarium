@@ -1,6 +1,20 @@
 {
   "versions": [
     {
+      "version": "3.162.1",
+      "date": "2026-11-11",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "Source-grade tooltips now open on hover only after the mouse rests on the pill for half a second, so scrolling the panel or sweeping across a row of pills no longer flashes citations; a click or tap still opens one at once",
+          "commits": [
+            "1ff97da1",
+            "7c056ca5"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.162.0",
       "date": "2026-11-11",
       "entries": [
