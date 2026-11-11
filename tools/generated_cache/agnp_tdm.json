@@ -13,7 +13,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 20,
-     "quote": "Acamprosate 12 h 250–700 ng/mL Alcohol dependence (relapse prevention) 15–165 h 1,000 ng/mL 3",
+     "quote": "Drugs and active metabolites: Acamprosate | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 250–700 ng/mL | Therapeutic indication for which the TRR is valid: Alcohol dependence (relapse prevention) | Time to steady state: 15–165 h | Laboratory alert level: 1,000 ng/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 8.68",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -32,7 +32,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 20,
-     "quote": "Agomelatine 1 h 0.1–10 ng/mL Depression 5–10 h 600 ng/mL 4",
+     "quote": "Drugs and active metabolites: Agomelatine | Time between blood withdrawal and last dose: 1 h | Therapeutic reference range (TRR): 0.1–10 ng/mL | Therapeutic indication for which the TRR is valid: Depression | Time to steady state: 5–10 h | Laboratory alert level: 600 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 4.11",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -51,7 +51,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 20,
-     "quote": "Alprazolam 10 h 5–44 ng/mL Anxiety and panic disorders 3 d 100 ng/mL 3",
+     "quote": "Drugs and active metabolites: Alprazolam | Time between blood withdrawal and last dose: 10 h | Therapeutic reference range (TRR): 5–44 ng/mL | Therapeutic indication for which the TRR is valid: Anxiety and panic disorders | Time to steady state: 3 d | Laboratory alert level: 100 ng/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 3.22",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -70,7 +70,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 20,
-     "quote": "Amantadine 2 h 600–1,700 ng/mL Parkinson’s disease 3 d 3,000 ng/mL 3",
+     "quote": "Drugs and active metabolites: Amantadine | Time between blood withdrawal and last dose: 2 h | Therapeutic reference range (TRR): 600–1,700 ng/mL | Therapeutic indication for which the TRR is valid: Parkinson’s disease | Time to steady state: 3 d | Laboratory alert level: 3,000 ng/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 5.98",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -89,7 +89,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 20,
-     "quote": "Amisulpride 24 h 200–550 ng/ mL Schizophrenia 3 d 1,100 ng/mL 1",
+     "quote": "Drugs and active metabolites: Amisulpride | Time between blood withdrawal and last dose: 24 h | Therapeutic reference range (TRR): 200–550 ng/mL | Therapeutic indication for which the TRR is valid: Schizophrenia | Time to steady state: 3 d | Laboratory alert level: 1,100 ng/mL | Level of recommendation to use TDM: 1 | Conversion factor (CF): 2.71",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -109,7 +109,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 21,
-     "quote": "Amitriptyline 12 h 80–200 ng/mL (amitriptyline plus nortriptyline) Depression 4–9 d 300 ng/mL 1",
+     "quote": "Drugs and active metabolites: Amitriptyline | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 80–200 ng/mL (amitriptyline plus nortriptyline) | Therapeutic indication for which the TRR is valid: Depression | Time to steady state: 4–9 d | Laboratory alert level: 300 ng/mL | Level of recommendation to use TDM: 1 | Conversion factor (CF): 3.80 (amitriptyline) 3.60 (nortriptyline)",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -129,7 +129,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 22,
-     "quote": "Aripiprazole 12–24 h 120–270 ng/mL (aripiprazole) Schizophrenia 13–17 d 540 ng/mL 2",
+     "quote": "Drugs and active metabolites: Aripiprazole | Time between blood withdrawal and last dose: 12–24 h | Therapeutic reference range (TRR): 120–270 ng/mL (aripiprazole) | Therapeutic indication for which the TRR is valid: Schizophrenia | Time to steady state: 13–17 d | Laboratory alert level: 540 ng/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 2.23",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -148,7 +148,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 22,
-     "quote": "Asenapine 24 h 1–7 ng/mL Schizophrenia 3–8 d 14 ng/mL 4",
+     "quote": "Drugs and active metabolites: Asenapine | Time between blood withdrawal and last dose: 24 h | Therapeutic reference range (TRR): 1–7 ng/mL | Therapeutic indication for which the TRR is valid: Schizophrenia | Time to steady state: 3–8 d | Laboratory alert level: 14 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 3.50",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -167,7 +167,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 22,
-     "quote": "Atomoxetine 1 h 40–400 ng/mL Attention deficit hyperactivity syndrome 10–50 h 660 ng/mL 3",
+     "quote": "Drugs and active metabolites: Atomoxetine | Time between blood withdrawal and last dose: 1 h | Therapeutic reference range (TRR): 40–400 ng/mL | Therapeutic indication for which the TRR is valid: Attention deficit hyperactivity syndrome | Time to steady state: 10–50 h | Laboratory alert level: 660 ng/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 3.91",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -186,7 +186,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 22,
-     "quote": "Benperidol 10 h 0.3–3.6 ng/ml Schizophrenia 20–40 h 20 ng/mL 3",
+     "quote": "Drugs and active metabolites: Benperidol | Time between blood withdrawal and last dose: 10 h | Therapeutic reference range (TRR): 0.3–3.6 ng/ml | Therapeutic indication for which the TRR is valid: Schizophrenia | Time to steady state: 20–40 h | Laboratory alert level: 20 ng/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 2.62",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -205,7 +205,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 22,
-     "quote": "Brexanolone Immediately after 60-h infusion 10–50 ng/mL Postpartum depression 55 h 100 ng/mL 4",
+     "quote": "Drugs and active metabolites: Brexanolone | Time between blood withdrawal and last dose: Immediately after 60-h infusion | Therapeutic reference range (TRR): 10–50 ng/mL | Therapeutic indication for which the TRR is valid: Postpartum depression | Time to steady state: 55 h | Laboratory alert level: 100 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 3.14",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -224,7 +224,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 22,
-     "quote": "Brexpiprazole 24 h 30–300 ng/mL Schizophrenia 10 d 600 ng/mL 3",
+     "quote": "Drugs and active metabolites: Brexpiprazole | Time between blood withdrawal and last dose: 24 h | Therapeutic reference range (TRR): 30–300 ng/mL | Therapeutic indication for which the TRR is valid: Schizophrenia | Time to steady state: 10 d | Laboratory alert level: 600 ng/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 2.31",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -243,7 +243,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 23,
-     "quote": "Brivaracetam 12 h 0.2–2.0 µg/mL Epilepsy 2 d 4 µg/mL 3",
+     "quote": "Drugs and active metabolites: Brivaracetam | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 0.2–2.0 µg/mL | Therapeutic indication for which the TRR is valid: Epilepsy | Time to steady state: 2 d | Laboratory alert level: 4 µg/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 4.72",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -262,7 +262,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 23,
-     "quote": "Bromazepam 12 h 30–230 ng/mL Anxiety disorders 3–7 d 460 ng/mL 4",
+     "quote": "Drugs and active metabolites: Bromazepam | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 30–230 ng/mL | Therapeutic indication for which the TRR is valid: Anxiety disorders | Time to steady state: 3–7 d | Laboratory alert level: 460 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 3.16",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -281,7 +281,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 23,
-     "quote": "Bromperidol 12 h 5–12 ng/mL Schizophrenia 4–8 d 30 ng/mL 2",
+     "quote": "Drugs and active metabolites: Bromperidol | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 5–12 ng/mL | Therapeutic indication for which the TRR is valid: Schizophrenia | Time to steady state: 4–8 d | Laboratory alert level: 30 ng/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 4.38",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -300,7 +300,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 23,
-     "quote": "Brotizolam 0.8 h 1–4 ng/mL Sleep disorders N/A 10 ng/mL 4",
+     "quote": "Drugs and active metabolites: Brotizolam | Time between blood withdrawal and last dose: 0.8 h | Therapeutic reference range (TRR): 1–4 ng/mL | Therapeutic indication for which the TRR is valid: Sleep disorders | Time to steady state: N/A | Laboratory alert level: 10 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 2.53",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -319,7 +319,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 23,
-     "quote": "Buprenorphine 24 h 0.5–2.5 ng/mL Opioid agonists therapy (substitution) of opioid dependence 10–20 h 4 ng/mL 2",
+     "quote": "Drugs and active metabolites: Buprenorphine | Time between blood withdrawal and last dose: 24 h | Therapeutic reference range (TRR): 0.5–2.5 ng/mL | Therapeutic indication for which the TRR is valid: Opioid agonists therapy (substitution) of opioid dependence | Time to steady state: 10–20 h | Laboratory alert level: 4 ng/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 2.38",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -339,7 +339,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 24,
-     "quote": "Bupropion 24 h 850–1,500 ng/mL (hydroxybupropion) Depression, ADHD/ADH, and smoking cessation 4–10 d 1,500 ng/mL 2",
+     "quote": "Drugs and active metabolites: Bupropion | Time between blood withdrawal and last dose: 24 h | Therapeutic reference range (TRR): 850–1,500 ng/mL (hydroxybupropion) | Therapeutic indication for which the TRR is valid: Depression, ADHD/ADH, and smoking cessation | Time to steady state: 4–10 d | Laboratory alert level: 1,500 ng/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 4.17 (bupropion)",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -360,7 +360,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 24,
-     "quote": "Buspirone 1 h 1–4 ng/mL (buspirone) Anxiety disorders 20–35 h 8 ng/mL (buspirone) 3",
+     "quote": "Drugs and active metabolites: Buspirone | Time between blood withdrawal and last dose: 1 h | Therapeutic reference range (TRR): 1–4 ng/mL (buspirone) | Therapeutic indication for which the TRR is valid: Anxiety disorders | Time to steady state: 20–35 h | Laboratory alert level: 8 ng/mL (buspirone) | Level of recommendation to use TDM: 3 | Conversion factor (CF): 2.59 (buspirone)",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -381,7 +381,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 24,
-     "quote": "Cannabidiol 12 h 50–150 ng/mL (CBD) Epilepsy 12–13 d 300 ng/mL (CBD) 3",
+     "quote": "Drugs and active metabolites: Cannabidiol | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 50–150 ng/mL (CBD) | Therapeutic indication for which the TRR is valid: Epilepsy | Time to steady state: 12–13 d | Laboratory alert level: 300 ng/mL (CBD) | Level of recommendation to use TDM: 3 | Conversion factor (CF): 3.18 (CBD)",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -400,7 +400,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 25,
-     "quote": "Carbamazepine 12 h 4–12 µg/mL Epilepsy Mania 2–4 d 20 µg/mL 2",
+     "quote": "Drugs and active metabolites: Carbamazepine | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 4–12 µg/mL | Therapeutic indication for which the TRR is valid: Epilepsy Mania | Time to steady state: 2–4 d | Laboratory alert level: 20 µg/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 4.23",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -419,7 +419,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 25,
-     "quote": "Cariprazine 24 h 4–14 ng/mL Schizophrenia 10 d 28 ng/mL 3",
+     "quote": "Drugs and active metabolites: Cariprazine | Time between blood withdrawal and last dose: 24 h | Therapeutic reference range (TRR): 4–14 ng/mL | Therapeutic indication for which the TRR is valid: Schizophrenia | Time to steady state: 10 d | Laboratory alert level: 28 ng/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 2.34",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -440,7 +440,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 26,
-     "quote": "Chloral Hydrate N/A 1.5–15 µg/mL (trichloroethanol) Sleep disorders N/A 30 µg/mL (trichloroethanol) 4",
+     "quote": "Drugs and active metabolites: Chloral Hydrate | Time between blood withdrawal and last dose: N/A | Therapeutic reference range (TRR): 1.5–15 µg/mL (trichloroethanol) | Therapeutic indication for which the TRR is valid: Sleep disorders | Time to steady state: N/A | Laboratory alert level: 30 µg/mL (trichloroethanol) | Level of recommendation to use TDM: 4 | Conversion factor (CF): 6.69 (trichloroethanol)",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -459,7 +459,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 26,
-     "quote": "Chlordiazepoxide 12 h 300–2,000 ng/mL Anxiety disorders 1–6 d 3,000 ng/mL 4",
+     "quote": "Drugs and active metabolites: Chlordiazepoxide | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 300–2,000 ng/mL | Therapeutic indication for which the TRR is valid: Anxiety disorders | Time to steady state: 1–6 d | Laboratory alert level: 3,000 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 3.48",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -478,7 +478,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 26,
-     "quote": "Chlorpromazine 24 h 30–300 ng/mL Schizophrenia 3–6 d 600 ng/mL 3",
+     "quote": "Drugs and active metabolites: Chlorpromazine | Time between blood withdrawal and last dose: 24 h | Therapeutic reference range (TRR): 30–300 ng/mL | Therapeutic indication for which the TRR is valid: Schizophrenia | Time to steady state: 3–6 d | Laboratory alert level: 600 ng/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 3.14",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -497,7 +497,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 26,
-     "quote": "Chlorprothixene 12 h 15–140 ng/mL Schizophrenia 2–3 d 400 ng/mL 3",
+     "quote": "Drugs and active metabolites: Chlorprothixene | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 15–140 ng/mL | Therapeutic indication for which the TRR is valid: Schizophrenia | Time to steady state: 2–3 d | Laboratory alert level: 400 ng/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 3.17",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -516,7 +516,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 26,
-     "quote": "Citalopram 24 h 50–110 ng/mL Depression 8–10 d 220 ng/mL 1",
+     "quote": "Drugs and active metabolites: Citalopram | Time between blood withdrawal and last dose: 24 h | Therapeutic reference range (TRR): 50–110 ng/mL | Therapeutic indication for which the TRR is valid: Depression | Time to steady state: 8–10 d | Laboratory alert level: 220 ng/mL | Level of recommendation to use TDM: 1 | Conversion factor (CF): 3.08",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -536,7 +536,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 27,
-     "quote": "Clobazam 12 h 30–300 ng/mL (clobazam) Epilepsy 15–17 d (metabolite) 500 ng/mL 3",
+     "quote": "Drugs and active metabolites: Clobazam | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 30–300 ng/mL (clobazam) | Therapeutic indication for which the TRR is valid: Epilepsy | Time to steady state: 15–17 d (metabolite) | Laboratory alert level: 500 ng/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 3.33",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -555,7 +555,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 27,
-     "quote": "Clomethiazole 4–8 h 100–5,000 ng/mL Alcohol dependence 10–20 h 8,000 ng/mL 4",
+     "quote": "Drugs and active metabolites: Clomethiazole | Time between blood withdrawal and last dose: 4–8 h | Therapeutic reference range (TRR): 100–5,000 ng/mL | Therapeutic indication for which the TRR is valid: Alcohol dependence | Time to steady state: 10–20 h | Laboratory alert level: 8,000 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 6.19",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -575,7 +575,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 27,
-     "quote": "Clomipramine 12 h 230–570 ng/ mL (clomipramine plus N-desmethylclomipramine) depression, obsessive-compulsive disorder (OCD) 8–9 d 650 ng/mL 1",
+     "quote": "Drugs and active metabolites: Clomipramine | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 230–570 ng/mL (clomipramine plus N-desmethylclomipramine) | Therapeutic indication for which the TRR is valid: depression, obsessive-compulsive disorder (OCD) | Time to steady state: 8–9 d | Laboratory alert level: 650 ng/mL | Level of recommendation to use TDM: 1 | Conversion factor (CF): 3.18 (clomipramine) 3.32 (N-desmethyl-clomipramine)",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -594,7 +594,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 27,
-     "quote": "Clonazepam 10 h 15–80 ng/mL epilepsy 3–6 days 100 ng/mL 4",
+     "quote": "Drugs and active metabolites: Clonazepam | Time between blood withdrawal and last dose: 10 h | Therapeutic reference range (TRR): 15–80 ng/mL | Therapeutic indication for which the TRR is valid: epilepsy | Time to steady state: 3–6 days | Laboratory alert level: 100 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 3.17",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -614,7 +614,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 27,
-     "quote": "Clorazepate 12 h 100–500 ng/ mL (clorazepate plus N-desmethy ldiazepam) Anxiety disorders 11 d 1,000 ng/mL 4",
+     "quote": "Drugs and active metabolites: Clorazepate | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 100–500 ng/mL (clorazepate plus N-desmethy ldiazepam) | Therapeutic indication for which the TRR is valid: Anxiety disorders | Time to steady state: 11 d | Laboratory alert level: 1,000 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 3.18 (clorazepate)",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -633,7 +633,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 28,
-     "quote": "Clozapine 12 h 350–600 ng/mL Schizophrenia 3–4 d 1,000 ng/mL 1",
+     "quote": "Drugs and active metabolites: Clozapine | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 350–600 ng/mL | Therapeutic indication for which the TRR is valid: Schizophrenia | Time to steady state: 3–4 d | Laboratory alert level: 1,000 ng/mL | Level of recommendation to use TDM: 1 | Conversion factor (CF): 3.06",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -652,7 +652,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 28,
-     "quote": "Daridorexant 8 h 100–800 ng/ mL Sleep disorders 30–50 h 1,600 ng/mL 4",
+     "quote": "Drugs and active metabolites: Daridorexant | Time between blood withdrawal and last dose: 8 h | Therapeutic reference range (TRR): 100–800 ng/mL | Therapeutic indication for which the TRR is valid: Sleep disorders | Time to steady state: 30–50 h | Laboratory alert level: 1,600 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): N/A",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -671,7 +671,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 28,
-     "quote": "Desvenlafaxine 24 h 85–380 ng/mL Depression 2–4 d 450 ng/mL 2",
+     "quote": "Drugs and active metabolites: Desvenlafaxine | Time between blood withdrawal and last dose: 24 h | Therapeutic reference range (TRR): 85–380 ng/mL | Therapeutic indication for which the TRR is valid: Depression | Time to steady state: 2–4 d | Laboratory alert level: 450 ng/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 3.80",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -691,7 +691,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 29,
-     "quote": "Diazepam 1 h 100–1,500 ng/mL (diazep am plus N-desmet hyldiazepam) Anxiety disorders 5–10 d/ 17–22 d 3,000 ng/mL 4",
+     "quote": "Drugs and active metabolites: Diazepam | Time between blood withdrawal and last dose: 1 h | Therapeutic reference range (TRR): 100–1,500 ng/mL (diazep am plus N-desmet hyldiazepam) | Therapeutic indication for which the TRR is valid: Anxiety disorders | Time to steady state: 5–10 d/17–22 d | Laboratory alert level: 3,000 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 3.51 (diazepam)",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -710,7 +710,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 29,
-     "quote": "Diphenhydramine 10 h 10–60 ng/mL Sleep disorders 35–60 h 200 ng/mL 3",
+     "quote": "Drugs and active metabolites: Diphenhydramine | Time between blood withdrawal and last dose: 10 h | Therapeutic reference range (TRR): 10–60 ng/mL | Therapeutic indication for which the TRR is valid: Sleep disorders | Time to steady state: 35–60 h | Laboratory alert level: 200 ng/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 3.92",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -729,7 +729,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 29,
-     "quote": "Donepezil 12 h 50–160 ng/mL Dementia 15–17 d 200 ng/mL 2",
+     "quote": "Drugs and active metabolites: Donepezil | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 50–160 ng/mL | Therapeutic indication for which the TRR is valid: Dementia | Time to steady state: 15–17 d | Laboratory alert level: 200 ng/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 2.64",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -748,7 +748,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 29,
-     "quote": "Dothiepin/ Dosulepin 24 h 20–70 ng/mL Depression 4 d 140 ng/mL 2",
+     "quote": "Drugs and active metabolites: Dothiepin/Dosulepin | Time between blood withdrawal and last dose: 24 h | Therapeutic reference range (TRR): 20–70 ng/mL | Therapeutic indication for which the TRR is valid: Depression | Time to steady state: 4 d | Laboratory alert level: 140 ng/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 3.39",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -768,7 +768,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 29,
-     "quote": "Doxepin 12 h 50–200 ng/mL (doxepin plus N-desmethlydoxepin) Depression 3–4 d 300 ng/mL 3",
+     "quote": "Drugs and active metabolites: Doxepin | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 50–200 ng/mL (doxepin plus N-desmethlydoxepin) | Therapeutic indication for which the TRR is valid: Depression | Time to steady state: 3–4 d | Laboratory alert level: 300 ng/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 3.58 (doxepin) 3.77 (N-desmethlydoxepin)",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -787,7 +787,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 30,
-     "quote": "Duloxetine 24 h 20–120 ng/mL Depression 2–4 d 240 ng/mL 2",
+     "quote": "Drugs and active metabolites: Duloxetine | Time between blood withdrawal and last dose: 24 h | Therapeutic reference range (TRR): 20–120 ng/mL | Therapeutic indication for which the TRR is valid: Depression | Time to steady state: 2–4 d | Laboratory alert level: 240 ng/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 3.36",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -806,7 +806,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 30,
-     "quote": "Escitalopram 24 h 20–40 ng/mL Depression 6–7 d 160 ng/mL 2",
+     "quote": "Drugs and active metabolites: Escitalopram | Time between blood withdrawal and last dose: 24 h | Therapeutic reference range (TRR): 20–40 ng/mL | Therapeutic indication for which the TRR is valid: Depression | Time to steady state: 6–7 d | Laboratory alert level: 160 ng/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 3.08",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -826,7 +826,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 33,
-     "quote": "Ketamine/ esketamine Immediately after infusion 60–410 ng/mL Depression N/A 820 ng/mL (ketamine) 3",
+     "quote": "Drugs and active metabolites: Ketamine/esketamine | Time between blood withdrawal and last dose: Immediately after infusion | Therapeutic reference range (TRR): 60–410 ng/mL | Therapeutic indication for which the TRR is valid: Depression | Time to steady state: N/A | Laboratory alert level: 820 ng/mL (ketamine) | Level of recommendation to use TDM: 3 | Conversion factor (CF): 4.21 (ketamine)",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -845,7 +845,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 30,
-     "quote": "Estazolam 1–2 h 20–150 ng/mL Anxiety disorders N/A 300 ng/mL 4",
+     "quote": "Drugs and active metabolites: Estazolam | Time between blood withdrawal and last dose: 1–2 h | Therapeutic reference range (TRR): 20–150 ng/mL | Therapeutic indication for which the TRR is valid: Anxiety disorders | Time to steady state: N/A | Laboratory alert level: 300 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 3.39",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -864,7 +864,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 30,
-     "quote": "Eszopiclone 1 h 20–40 ng/mL Sleep disorders N/A 80 ng/mL 4",
+     "quote": "Drugs and active metabolites: Eszopiclone | Time between blood withdrawal and last dose: 1 h | Therapeutic reference range (TRR): 20–40 ng/mL | Therapeutic indication for which the TRR is valid: Sleep disorders | Time to steady state: N/A | Laboratory alert level: 80 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 2.57",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -883,7 +883,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 30,
-     "quote": "Flunitrazepam 1–2 h 2–5 ng/mL Sleep disorders N/A 30 ng/mL 4",
+     "quote": "Drugs and active metabolites: Flunitrazepam | Time between blood withdrawal and last dose: 1–2 h | Therapeutic reference range (TRR): 2–5 ng/mL | Therapeutic indication for which the TRR is valid: Sleep disorders | Time to steady state: N/A | Laboratory alert level: 30 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 3.20",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -903,7 +903,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 31,
-     "quote": "Fluoxetine 24 h 150–300 ng/ mL (fluoxetine plus N-desmethylfluoxetine) Depression > 20 d 1,000 ng/mL 3",
+     "quote": "Drugs and active metabolites: Fluoxetine | Time between blood withdrawal and last dose: 24 h | Therapeutic reference range (TRR): 150–300 ng/mL (fluoxetine plus N-desmethylfluoxetine) | Therapeutic indication for which the TRR is valid: Depression | Time to steady state: > 20 d | Laboratory alert level: 1,000 ng/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 3.32 (fluoxetine) 3.39 (N -desmethylfluoxetine)",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -923,7 +923,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 31,
-     "quote": "Flupentixol 12 h 0.5–10 ng/mL (cis-Isomer) Schizophrenia 4–8 d 15 ng/mL 2",
+     "quote": "Drugs and active metabolites: Flupentixol | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 0.5–10 ng/mL (cis-Isomer) | Therapeutic indication for which the TRR is valid: Schizophrenia | Time to steady state: 4–8 d | Laboratory alert level: 15 ng/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 2.30",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -942,7 +942,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 31,
-     "quote": "Fluphenazine 12 h 1–5 ng/mL Schizophrenia 3 d 15 ng/mL 2",
+     "quote": "Drugs and active metabolites: Fluphenazine | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 1–5 ng/mL | Therapeutic indication for which the TRR is valid: Schizophrenia | Time to steady state: 3 d | Laboratory alert level: 15 ng/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 2.29",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -963,7 +963,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 31,
-     "quote": "Flurazepam 6–24 h, day 1 10–22 ng/mL (NF) Sleep disorders N/A 330 ng/mL (NF) 4",
+     "quote": "Drugs and active metabolites: Flurazepam | Time between blood withdrawal and last dose: 6–24 h, day 1 | Therapeutic reference range (TRR): 10–22 ng/mL (NF) | Therapeutic indication for which the TRR is valid: Sleep disorders | Time to steady state: N/A | Laboratory alert level: 330 ng/mL (NF) | Level of recommendation to use TDM: 4 | Conversion factor (CF): 2.58 (flurazepam)",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -982,7 +982,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 31,
-     "quote": "Fluvoxamine 24 h 60–210 ng/mL Depression 4 d 500 ng/mL 3",
+     "quote": "Drugs and active metabolites: Fluvoxamine | Time between blood withdrawal and last dose: 24 h | Therapeutic reference range (TRR): 60–210 ng/mL | Therapeutic indication for which the TRR is valid: Depression | Time to steady state: 4 d | Laboratory alert level: 500 ng/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 3.14",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1001,7 +1001,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 32,
-     "quote": "Gabapentin 12 h 2–20 µg/mL Epilepsy, neuropathic pain 25–35 h 25 µg/mL 3",
+     "quote": "Drugs and active metabolites: Gabapentin | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 2–20 µg/mL | Therapeutic indication for which the TRR is valid: Epilepsy, neuropathic pain | Time to steady state: 25–35 h | Laboratory alert level: 25 µg/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 5.84",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1020,7 +1020,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 32,
-     "quote": "Galantamine 24 h 10–25 ng/mL Dementia 1–2 d 50 ng/mL 3",
+     "quote": "Drugs and active metabolites: Galantamine | Time between blood withdrawal and last dose: 24 h | Therapeutic reference range (TRR): 10–25 ng/mL | Therapeutic indication for which the TRR is valid: Dementia | Time to steady state: 1–2 d | Laboratory alert level: 50 ng/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 3.48",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1039,7 +1039,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 32,
-     "quote": "Haloperidol 12 h 1–5 ng/mL Schizophrenia 3–8 d 12 ng/mL 1",
+     "quote": "Drugs and active metabolites: Haloperidol | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 1–5 ng/mL | Therapeutic indication for which the TRR is valid: Schizophrenia | Time to steady state: 3–8 d | Laboratory alert level: 12 ng/mL | Level of recommendation to use TDM: 1 | Conversion factor (CF): 2.66",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1055,7 +1055,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 28,
-     "quote": "Diacetylmorphine (heroin) 1 h 70–350 ng/mL (diacetylmorphine) Substance-related disorders N/A None 4",
+     "quote": "Drugs and active metabolites: Diacetylmorphine (heroin) | Time between blood withdrawal and last dose: 1 h | Therapeutic reference range (TRR): 70–350 ng/mL (diacetylmorphine) | Therapeutic indication for which the TRR is valid: Substance-related disorders | Time to steady state: N/A | Laboratory alert level: None | Level of recommendation to use TDM: 4 | Conversion factor (CF): 2.71 (diacetylmorphine)",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1074,7 +1074,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 32,
-     "quote": "Hydroxyzine 10 h 35–115 ng/mL Anxiolytic 2–5 days 230 ng/mL 4",
+     "quote": "Drugs and active metabolites: Hydroxyzine | Time between blood withdrawal and last dose: 10 h | Therapeutic reference range (TRR): 35–115 ng/mL | Therapeutic indication for which the TRR is valid: Anxiolytic | Time to steady state: 2–5 days | Laboratory alert level: 230 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 2.67",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1093,7 +1093,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 33,
-     "quote": "Iloperidone 12 h 5–10 ng/mL Schizophrenia 4 d 30 ng/mL 3",
+     "quote": "Drugs and active metabolites: Iloperidone | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 5–10 ng/mL | Therapeutic indication for which the TRR is valid: Schizophrenia | Time to steady state: 4 d | Laboratory alert level: 30 ng/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 2.34",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1113,7 +1113,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 33,
-     "quote": "Ketamine/ esketamine Immediately after infusion 60–410 ng/mL Depression N/A 820 ng/mL (ketamine) 3",
+     "quote": "Drugs and active metabolites: Ketamine/esketamine | Time between blood withdrawal and last dose: Immediately after infusion | Therapeutic reference range (TRR): 60–410 ng/mL | Therapeutic indication for which the TRR is valid: Depression | Time to steady state: N/A | Laboratory alert level: 820 ng/mL (ketamine) | Level of recommendation to use TDM: 3 | Conversion factor (CF): 4.21 (ketamine)",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1132,7 +1132,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 33,
-     "quote": "Lacosamide 12 h 1–12 µg/mL Anti-seizure medication 2–3 d 24 µg/mL 3",
+     "quote": "Drugs and active metabolites: Lacosamide | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 1–12 µg/mL | Therapeutic indication for which the TRR is valid: Anti-seizure medication | Time to steady state: 2–3 d | Laboratory alert level: 24 µg/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 2.66",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1151,7 +1151,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 33,
-     "quote": "Lamotrigine 12 h 3–15 µg/mL Epilepsy, bipolar disorder, treatment-resistant depressive disorder 3–22 d 20 µg/mL 2",
+     "quote": "Drugs and active metabolites: Lamotrigine | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 3–15 µg/mL | Therapeutic indication for which the TRR is valid: Epilepsy, bipolar disorder, treatment-resistant depressive disorder | Time to steady state: 3–22 d | Laboratory alert level: 20 µg/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 3.9",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1170,7 +1170,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 33,
-     "quote": "Lemborexant 10.5 h 2–15 ng/mL Sleep disorders 3–4 d 30 ng/mL 4",
+     "quote": "Drugs and active metabolites: Lemborexant | Time between blood withdrawal and last dose: 10.5 h | Therapeutic reference range (TRR): 2–15 ng/mL | Therapeutic indication for which the TRR is valid: Sleep disorders | Time to steady state: 3–4 d | Laboratory alert level: 30 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 2.44",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1189,7 +1189,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 34,
-     "quote": "Levetiracetam 12 h 6–46 µg/mL Epilepsy 24–40 h 50 µg/mL 4",
+     "quote": "Drugs and active metabolites: Levetiracetam | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 6–46 µg/mL | Therapeutic indication for which the TRR is valid: Epilepsy | Time to steady state: 24–40 h | Laboratory alert level: 50 µg/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 5.88",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1208,7 +1208,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 34,
-     "quote": "Levodopa 0.5–1 h 1.0–3.5 µg/mL Parkinson’s disease N/A 5 µg/mL 2",
+     "quote": "Drugs and active metabolites: Levodopa | Time between blood withdrawal and last dose: 0.5–1 h | Therapeutic reference range (TRR): 1.0–3.5 µg/mL | Therapeutic indication for which the TRR is valid: Parkinson’s disease | Time to steady state: N/A | Laboratory alert level: 5 µg/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 5.07",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1227,7 +1227,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 34,
-     "quote": "Levomepromazine 12 h 10–160 ng/mL Hyperactivity 3–16 d 320 ng/mL 3",
+     "quote": "Drugs and active metabolites: Levomepromazine | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 10–160 ng/mL | Therapeutic indication for which the TRR is valid: Hyperactivity | Time to steady state: 3–16 d | Laboratory alert level: 320 ng/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 3.01",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1246,7 +1246,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 35,
-     "quote": "Levomilnacipran 24 h 30–90 ng/mL Depression 3 d 180 ng/mL 3",
+     "quote": "Drugs and active metabolites: Levomilnacipran | Time between blood withdrawal and last dose: 24 h | Therapeutic reference range (TRR): 30–90 ng/mL | Therapeutic indication for which the TRR is valid: Depression | Time to steady state: 3 d | Laboratory alert level: 180 ng/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 2.24",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1265,7 +1265,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 35,
-     "quote": "Lithium 12 h 0.4–0.8 mmol/L Bipolar disorder 3–6 d 1.2 mmol/L 1",
+     "quote": "Drugs and active metabolites: Lithium | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 0.4–0.8 mmol/L | Therapeutic indication for which the TRR is valid: Bipolar disorder | Time to steady state: 3–6 d | Laboratory alert level: 1.2 mmol/L | Level of recommendation to use TDM: 1 | Conversion factor (CF): 125.8",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1284,7 +1284,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 35,
-     "quote": "Lorazepam 12 h 5–100 ng/mL Anxiety disorders 3 d 200 ng/mL 4",
+     "quote": "Drugs and active metabolites: Lorazepam | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 5–100 ng/mL | Therapeutic indication for which the TRR is valid: Anxiety disorders | Time to steady state: 3 d | Laboratory alert level: 200 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 3.2",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1303,7 +1303,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 35,
-     "quote": "Lormetazepam 10 h 2–10 ng/mL Sleep disorders N/A 20 ng/mL 4",
+     "quote": "Drugs and active metabolites: Lormetazepam | Time between blood withdrawal and last dose: 10 h | Therapeutic reference range (TRR): 2–10 ng/mL | Therapeutic indication for which the TRR is valid: Sleep disorders | Time to steady state: N/A | Laboratory alert level: 20 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 2.98",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1322,7 +1322,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 35,
-     "quote": "Loxapine 4 h after aerosol exposure 11–16 ng/mL Acute agitation 1–2 d 20 ng/mL 4",
+     "quote": "Drugs and active metabolites: Loxapine | Time between blood withdrawal and last dose: 4 h after aerosol exposure | Therapeutic reference range (TRR): 11–16 ng/mL | Therapeutic indication for which the TRR is valid: Acute agitation | Time to steady state: 1–2 d | Laboratory alert level: 20 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 3.05",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1341,7 +1341,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 35,
-     "quote": "Lumateperone 3 h 10–30 ng/mL Schizophrenia 3–4 d 60 ng/mL 4",
+     "quote": "Drugs and active metabolites: Lumateperone | Time between blood withdrawal and last dose: 3 h | Therapeutic reference range (TRR): 10–30 ng/mL | Therapeutic indication for which the TRR is valid: Schizophrenia | Time to steady state: 3–4 d | Laboratory alert level: 60 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 2.54",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1360,7 +1360,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 36,
-     "quote": "Lurasidone 24 h 10–25 ng/mL Schizophrenia 4–8 d 50 ng/mL 3",
+     "quote": "Drugs and active metabolites: Lurasidone | Time between blood withdrawal and last dose: 24 h | Therapeutic reference range (TRR): 10–25 ng/mL | Therapeutic indication for which the TRR is valid: Schizophrenia | Time to steady state: 4–8 d | Laboratory alert level: 50 ng/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 2.03",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1379,7 +1379,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 36,
-     "quote": "Maprotiline 12 h 75–130 ng/mL Depression 4–12 d 220 ng/mL 3",
+     "quote": "Drugs and active metabolites: Maprotiline | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 75–130 ng/mL | Therapeutic indication for which the TRR is valid: Depression | Time to steady state: 4–12 d | Laboratory alert level: 220 ng/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 3.60",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1398,7 +1398,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 37,
-     "quote": "Melatonin 3 h 1,000–2,500 pg/mL Sleep disorders N/A 3,300 pg/mL 3",
+     "quote": "Drugs and active metabolites: Melatonin | Time between blood withdrawal and last dose: 3 h | Therapeutic reference range (TRR): 1,000–2,500 pg/mL | Therapeutic indication for which the TRR is valid: Sleep disorders | Time to steady state: N/A | Laboratory alert level: 3,300 pg/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 4.31",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1417,7 +1417,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 37,
-     "quote": "Melperone 12 h 30–100 ng/mL Agitation N/A 200 ng/mL 4",
+     "quote": "Drugs and active metabolites: Melperone | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 30–100 ng/mL | Therapeutic indication for which the TRR is valid: Agitation | Time to steady state: N/A | Laboratory alert level: 200 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 3.8",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1436,7 +1436,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 37,
-     "quote": "Memantine 3–10 h 70–150 ng/mL Dementia 10–20 d 300 ng/mL 3",
+     "quote": "Drugs and active metabolites: Memantine | Time between blood withdrawal and last dose: 3–10 h | Therapeutic reference range (TRR): 70–150 ng/mL | Therapeutic indication for which the TRR is valid: Dementia | Time to steady state: 10–20 d | Laboratory alert level: 300 ng/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 5.58",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1451,7 +1451,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 38,
-     "quote": "Methadone 24 h 90–620 ng/mL Opioid agonists therapy (substitution) of opioid dependence 3–7 d N/A 2",
+     "quote": "Drugs and active metabolites: Methadone | Time between blood withdrawal and last dose: 24 h | Therapeutic reference range (TRR): 90–620 ng/mL | Therapeutic indication for which the TRR is valid: Opioid agonists therapy (substitution) of opioid dependence | Time to steady state: 3–7 d | Laboratory alert level: N/A | Level of recommendation to use TDM: 2 | Conversion factor (CF): 3.23",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1470,7 +1470,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 38,
-     "quote": "Mianserin 12 h 15–70 ng/mL Depression 3–6 d 140 ng/mL 3",
+     "quote": "Drugs and active metabolites: Mianserin | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 15–70 ng/mL | Therapeutic indication for which the TRR is valid: Depression | Time to steady state: 3–6 d | Laboratory alert level: 140 ng/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 3.78",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1489,7 +1489,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 39,
-     "quote": "Midazolam 1–2 h 50–150 ng/mL sedation 5–15 h 1,000 ng/mL 4",
+     "quote": "Drugs and active metabolites: Midazolam | Time between blood withdrawal and last dose: 1–2 h | Therapeutic reference range (TRR): 50–150 ng/mL | Therapeutic indication for which the TRR is valid: sedation | Time to steady state: 5–15 h | Laboratory alert level: 1,000 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 3.07",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1508,7 +1508,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 39,
-     "quote": "Milnacipran 12 h 50–120 ng/mL Depression 1–2 d 200 ng/mL 2",
+     "quote": "Drugs and active metabolites: Milnacipran | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 50–120 ng/mL | Therapeutic indication for which the TRR is valid: Depression | Time to steady state: 1–2 d | Laboratory alert level: 200 ng/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 2.24",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1527,7 +1527,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 39,
-     "quote": "Mirtazapine 12 h 30–80 ng/mL Depression 4–8 d 160 ng/mL 2",
+     "quote": "Drugs and active metabolites: Mirtazapine | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 30–80 ng/mL | Therapeutic indication for which the TRR is valid: Depression | Time to steady state: 4–8 d | Laboratory alert level: 160 ng/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 3.77",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1546,7 +1546,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 39,
-     "quote": "Moclobemide 12 h 300–1,000 ng/mL Depression 15 h 2,000 ng/mL 4",
+     "quote": "Drugs and active metabolites: Moclobemide | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 300–1,000 ng/mL | Therapeutic indication for which the TRR is valid: Depression | Time to steady state: 15 h | Laboratory alert level: 2,000 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 3.72",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1561,7 +1561,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 40,
-     "quote": "Morphine sulfate 1 h 5–400 ng/mL Pain 2–4 d None 4",
+     "quote": "Drugs and active metabolites: Morphine sulfate | Time between blood withdrawal and last dose: 1 h | Therapeutic reference range (TRR): 5–400 ng/mL | Therapeutic indication for which the TRR is valid: Pain | Time to steady state: 2–4 d | Laboratory alert level: None | Level of recommendation to use TDM: 4 | Conversion factor (CF): 1.50",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1576,7 +1576,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 40,
-     "quote": "Nabilone (fully synthetic derivative of Δ THC) 2 h 1–5 ng/mL See comment 10 h None 4",
+     "quote": "Drugs and active metabolites: Nabilone (fully synthetic derivative of Δ THC) | Time between blood withdrawal and last dose: 2 h | Therapeutic reference range (TRR): 1–5 ng/mL | Therapeutic indication for which the TRR is valid: See comment | Time to steady state: 10 h | Laboratory alert level: None | Level of recommendation to use TDM: 4 | Conversion factor (CF): 2.68",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1595,7 +1595,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 40,
-     "quote": "Nalmefene 1.5 h (for oral application) 10–20 ng/mL Opioid overdose, alcohol use disorder 1–2 d 200 ng/mL 4",
+     "quote": "Drugs and active metabolites: Nalmefene | Time between blood withdrawal and last dose: 1.5 h (for oral application) | Therapeutic reference range (TRR): 10–20 ng/mL | Therapeutic indication for which the TRR is valid: Opioid overdose, alcohol use disorder | Time to steady state: 1–2 d | Laboratory alert level: 200 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 3.26",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1615,7 +1615,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 40,
-     "quote": "Naltrexone 24 h 15–30 ng/mL (naltrexone plus 6β-naltrexol) Relapse prevention of alcohol-and/or opioid dependence 4 d 100 ng/mL 2",
+     "quote": "Drugs and active metabolites: Naltrexone | Time between blood withdrawal and last dose: 24 h | Therapeutic reference range (TRR): 15–30 ng/mL (naltrexone plus 6β-naltrexol) | Therapeutic indication for which the TRR is valid: Relapse prevention of alcohol-and/or opioid dependence | Time to steady state: 4 d | Laboratory alert level: 100 ng/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 3.06",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1634,7 +1634,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 40,
-     "quote": "Nicotine 4–5 h (after application of patch) 5–20 ng/mL Nicotine dependence 1–2 d 400 ng/mL 4",
+     "quote": "Drugs and active metabolites: Nicotine | Time between blood withdrawal and last dose: 4–5 h (after application of patch) | Therapeutic reference range (TRR): 5–20 ng/mL | Therapeutic indication for which the TRR is valid: Nicotine dependence | Time to steady state: 1–2 d | Laboratory alert level: 400 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 6.16",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1653,7 +1653,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 41,
-     "quote": "Nitrazepam 10 h 20–180 ng/mL Sleep disorders 4–6 d 360 ng/mL 4",
+     "quote": "Drugs and active metabolites: Nitrazepam | Time between blood withdrawal and last dose: 10 h | Therapeutic reference range (TRR): 20–180 ng/mL | Therapeutic indication for which the TRR is valid: Sleep disorders | Time to steady state: 4–6 d | Laboratory alert level: 360 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 3.56",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1672,7 +1672,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 41,
-     "quote": "Nortriptyline 12 h 70–170 ng/mL Depression 4–9 d 300 ng/mL 1",
+     "quote": "Drugs and active metabolites: Nortriptyline | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 70–170 ng/mL | Therapeutic indication for which the TRR is valid: Depression | Time to steady state: 4–9 d | Laboratory alert level: 300 ng/mL | Level of recommendation to use TDM: 1 | Conversion factor (CF): 3.8",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1691,7 +1691,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 41,
-     "quote": "Olanzapine 12–15 h 20–40 ng/mL Schizophrenia, schizophrenia spectrum disorders 7 d 80 ng/mL 1",
+     "quote": "Drugs and active metabolites: Olanzapine | Time between blood withdrawal and last dose: 12–15 h | Therapeutic reference range (TRR): 20–40 ng/mL | Therapeutic indication for which the TRR is valid: Schizophrenia, schizophrenia spectrum disorders | Time to steady state: 7 d | Laboratory alert level: 80 ng/mL | Level of recommendation to use TDM: 1 | Conversion factor (CF): 3.2",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1710,7 +1710,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 41,
-     "quote": "Opipramol 12 h 10–75 ng/mL Anxiety disorders 2 d 500 ng/mL 4",
+     "quote": "Drugs and active metabolites: Opipramol | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 10–75 ng/mL | Therapeutic indication for which the TRR is valid: Anxiety disorders | Time to steady state: 2 d | Laboratory alert level: 500 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 2.87",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1729,7 +1729,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 41,
-     "quote": "Oxazepam 36 h 200–1,200 ng/mL Anxiety disorders 2 d 2,000 ng/mL 4",
+     "quote": "Drugs and active metabolites: Oxazepam | Time between blood withdrawal and last dose: 36 h | Therapeutic reference range (TRR): 200–1,200 ng/mL | Therapeutic indication for which the TRR is valid: Anxiety disorders | Time to steady state: 2 d | Laboratory alert level: 2,000 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 3.49",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1749,7 +1749,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 41,
-     "quote": "Oxcarbazepine 12 h 3–35 μg/mL (MHD) epilepsy 2–4 d (MHD) 40 μg/mL 2",
+     "quote": "Drugs and active metabolites: Oxcarbazepine | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 3–35 μg/mL (MHD) | Therapeutic indication for which the TRR is valid: epilepsy | Time to steady state: 2–4 d (MHD) | Laboratory alert level: 40 μg/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 3.96 (oxcarbazepine) 3.73 MHD",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1768,7 +1768,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 42,
-     "quote": "Oxycodone 12 h 5–100 ng/mL Pain N/A 200 ng/mL 4",
+     "quote": "Drugs and active metabolites: Oxycodone | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 5–100 ng/mL | Therapeutic indication for which the TRR is valid: Pain | Time to steady state: N/A | Laboratory alert level: 200 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 3.17",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1787,7 +1787,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 42,
-     "quote": "Paliperidone (hydroxyrisperidone) 24 h 20–60 ng/mL Schizophrenia 2–4 days 80 ng/mL 2",
+     "quote": "Drugs and active metabolites: Paliperidone (hydroxyrisperidone) | Time between blood withdrawal and last dose: 24 h | Therapeutic reference range (TRR): 20–60 ng/mL | Therapeutic indication for which the TRR is valid: Schizophrenia | Time to steady state: 2–4 days | Laboratory alert level: 80 ng/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 2.35",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1806,7 +1806,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 42,
-     "quote": "Paroxetine 24 h 30–80 ng/mL Depression 3–9 d 120 ng/mL 2",
+     "quote": "Drugs and active metabolites: Paroxetine | Time between blood withdrawal and last dose: 24 h | Therapeutic reference range (TRR): 30–80 ng/mL | Therapeutic indication for which the TRR is valid: Depression | Time to steady state: 3–9 d | Laboratory alert level: 120 ng/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 3.04",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1825,7 +1825,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 43,
-     "quote": "Perampanel 12–24 h 180–980 ng/ mL Epilepsy 10–22 d 1960 ng/mL 3",
+     "quote": "Drugs and active metabolites: Perampanel | Time between blood withdrawal and last dose: 12–24 h | Therapeutic reference range (TRR): 180–980 ng/mL | Therapeutic indication for which the TRR is valid: Epilepsy | Time to steady state: 10–22 d | Laboratory alert level: 1960 ng/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 2.86",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1844,7 +1844,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 43,
-     "quote": "Perazine 12 h 100–230 ng/ mL Schizophrenia 2–4 d 460 ng/mL 1",
+     "quote": "Drugs and active metabolites: Perazine | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 100–230 ng/mL | Therapeutic indication for which the TRR is valid: Schizophrenia | Time to steady state: 2–4 d | Laboratory alert level: 460 ng/mL | Level of recommendation to use TDM: 1 | Conversion factor (CF): 2.95",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1863,7 +1863,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 43,
-     "quote": "Perphenazine 12 h 0.7–3.6 ng/mL Schizophrenia 2–3 d 7 ng/mL 2",
+     "quote": "Drugs and active metabolites: Perphenazine | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 0.7–3.6 ng/mL | Therapeutic indication for which the TRR is valid: Schizophrenia | Time to steady state: 2–3 d | Laboratory alert level: 7 ng/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 2.48",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1882,7 +1882,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 43,
-     "quote": "Phenytoin 8–12 h 10–20 µg/mL Epilepsy 4–13 d 50 µg/mL 1",
+     "quote": "Drugs and active metabolites: Phenytoin | Time between blood withdrawal and last dose: 8–12 h | Therapeutic reference range (TRR): 10–20 µg/mL | Therapeutic indication for which the TRR is valid: Epilepsy | Time to steady state: 4–13 d | Laboratory alert level: 50 µg/mL | Level of recommendation to use TDM: 1 | Conversion factor (CF): 3.96",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1901,7 +1901,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 44,
-     "quote": "Pimavanserin 24 h 40–85 ng/mL Schizophrenia 12 d 150 ng/mL 4",
+     "quote": "Drugs and active metabolites: Pimavanserin | Time between blood withdrawal and last dose: 24 h | Therapeutic reference range (TRR): 40–85 ng/mL | Therapeutic indication for which the TRR is valid: Schizophrenia | Time to steady state: 12 d | Laboratory alert level: 150 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 2.34",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1920,7 +1920,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 44,
-     "quote": "Pimozide 12 h 1–10 ng/mL Schizophrenia 1–2 d 20 ng/mL 3",
+     "quote": "Drugs and active metabolites: Pimozide | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 1–10 ng/mL | Therapeutic indication for which the TRR is valid: Schizophrenia | Time to steady state: 1–2 d | Laboratory alert level: 20 ng/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 2.17",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1939,7 +1939,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 44,
-     "quote": "Pitolisant 3 h 20–40 ng/mL Narcolepsy 2–3 d 80 ng/mL 3",
+     "quote": "Drugs and active metabolites: Pitolisant | Time between blood withdrawal and last dose: 3 h | Therapeutic reference range (TRR): 20–40 ng/mL | Therapeutic indication for which the TRR is valid: Narcolepsy | Time to steady state: 2–3 d | Laboratory alert level: 80 ng/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 3.38",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1959,7 +1959,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 44,
-     "quote": "Prazepam 12–24 h 40–400 ng/mL (N-desmethyldiazepam) Anxiety disorders 14 d (Ndesmethyldiazepam) 800 ng/mL 4",
+     "quote": "Drugs and active metabolites: Prazepam | Time between blood withdrawal and last dose: 12–24 h | Therapeutic reference range (TRR): 40–400 ng/mL (N-desmethyldiazepam) | Therapeutic indication for which the TRR is valid: Anxiety disorders | Time to steady state: 14 d (Ndesmethyldiazepam) | Laboratory alert level: 800 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 3.69 (N-desmethyldiazepam)",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1978,7 +1978,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 45,
-     "quote": "Promethazine 1.5–3 h 2–18 ng/mL Sleep disorders 2–3 d 100 ng/mL 4",
+     "quote": "Drugs and active metabolites: Promethazine | Time between blood withdrawal and last dose: 1.5–3 h | Therapeutic reference range (TRR): 2–18 ng/mL | Therapeutic indication for which the TRR is valid: Sleep disorders | Time to steady state: 2–3 d | Laboratory alert level: 100 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 3.47",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -1997,7 +1997,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 45,
-     "quote": "Quetiapine 24 h 100–500 ng/ mL Schizophrenia, bipolar disorder 3 d 1,000 ng/mL 2",
+     "quote": "Drugs and active metabolites: Quetiapine | Time between blood withdrawal and last dose: 24 h | Therapeutic reference range (TRR): 100–500 ng/mL | Therapeutic indication for which the TRR is valid: Schizophrenia, bipolar disorder | Time to steady state: 3 d | Laboratory alert level: 1,000 ng/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 2.61",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2016,7 +2016,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 46,
-     "quote": "Reboxetine 12 h 130–320 ng/ mL Depression 2–3 d 500 ng/mL 4",
+     "quote": "Drugs and active metabolites: Reboxetine | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 130–320 ng/mL | Therapeutic indication for which the TRR is valid: Depression | Time to steady state: 2–3 d | Laboratory alert level: 500 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 3.04",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2036,7 +2036,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 46,
-     "quote": "Risperidone 12 h 20–60 ng/mL (risperidone plus 9-hydroxyrisperidone) Schizophrenia 2–4 d 80 ng/mL 2",
+     "quote": "Drugs and active metabolites: Risperidone | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 20–60 ng/mL (risperidone plus 9-hydroxyrisperidone) | Therapeutic indication for which the TRR is valid: Schizophrenia | Time to steady state: 2–4 d | Laboratory alert level: 80 ng/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 2.44 (risperidone) 2.35 (9-hydroxyrisperidone)",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2055,7 +2055,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 46,
-     "quote": "Sertindole 12–24 h 20–90 ng/mL Schizophrenia 12–19 d 180 ng/mL 3",
+     "quote": "Drugs and active metabolites: Sertindole | Time between blood withdrawal and last dose: 12–24 h | Therapeutic reference range (TRR): 20–90 ng/mL | Therapeutic indication for which the TRR is valid: Schizophrenia | Time to steady state: 12–19 d | Laboratory alert level: 180 ng/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 2.27",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2074,7 +2074,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 47,
-     "quote": "Sertraline 24 h 10–50 ng/mL Depression 5–8 d 150 ng/mL 2",
+     "quote": "Drugs and active metabolites: Sertraline | Time between blood withdrawal and last dose: 24 h | Therapeutic reference range (TRR): 10–50 ng/mL | Therapeutic indication for which the TRR is valid: Depression | Time to steady state: 5–8 d | Laboratory alert level: 150 ng/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 3.27",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2094,7 +2094,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 47,
-     "quote": "Sulpiride 12 h 250–500 ng/ mL (racemate) Schizophrenia 2–3 d 1,000 ng/mL 2",
+     "quote": "Drugs and active metabolites: Sulpiride | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 250–500 ng/mL (racemate) | Therapeutic indication for which the TRR is valid: Schizophrenia | Time to steady state: 2–3 d | Laboratory alert level: 1,000 ng/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 2.93",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2113,7 +2113,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 48,
-     "quote": "Suvorexant 8–12 h 90–450 ng/mL Sleep disorders 3–5 d 900 ng/mL 4",
+     "quote": "Drugs and active metabolites: Suvorexant | Time between blood withdrawal and last dose: 8–12 h | Therapeutic reference range (TRR): 90–450 ng/mL | Therapeutic indication for which the TRR is valid: Sleep disorders | Time to steady state: 3–5 d | Laboratory alert level: 900 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 2.22",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2132,7 +2132,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 48,
-     "quote": "Tasimelteon 0.5–3 h 100–600 ng/ mL Sleep induction in non-24hsleep-wake disorder N/A 1,200 ng/mL 4",
+     "quote": "Drugs and active metabolites: Tasimelteon | Time between blood withdrawal and last dose: 0.5–3 h | Therapeutic reference range (TRR): 100–600 ng/mL | Therapeutic indication for which the TRR is valid: Sleep induction in non-24hsleep-wake disorder | Time to steady state: N/A | Laboratory alert level: 1,200 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 4.08",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2151,7 +2151,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 48,
-     "quote": "Temazepam 1–2 h 200–750 ng/ mL Sleep disorders N/A 1,500 ng/mL 4",
+     "quote": "Drugs and active metabolites: Temazepam | Time between blood withdrawal and last dose: 1–2 h | Therapeutic reference range (TRR): 200–750 ng/mL | Therapeutic indication for which the TRR is valid: Sleep disorders | Time to steady state: N/A | Laboratory alert level: 1,500 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 3.19",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2166,7 +2166,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 48,
-     "quote": "Δ9-trans-tetrahydrocannabinol (THC) / Medical Cannabis See comments 15–30 ng/mL See comment T1/2: initial 102 min, terminal 20–30 h none 4",
+     "quote": "Drugs and active metabolites: Δ9-trans-tetrahydrocannabinol (THC)/Medical Cannabis | Time between blood withdrawal and last dose: See comments | Therapeutic reference range (TRR): 15–30 ng/mL | Therapeutic indication for which the TRR is valid: See comment | Time to steady state: T1/2: initial 102 min, terminal 20–30 h | Laboratory alert level: none | Level of recommendation to use TDM: 4 | Conversion factor (CF): 3.18",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2185,7 +2185,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 49,
-     "quote": "Tiagabine 6 h 20–200 ng/mL Epilepsy 1–2 d 400 ng/mL 2",
+     "quote": "Drugs and active metabolites: Tiagabine | Time between blood withdrawal and last dose: 6 h | Therapeutic reference range (TRR): 20–200 ng/mL | Therapeutic indication for which the TRR is valid: Epilepsy | Time to steady state: 1–2 d | Laboratory alert level: 400 ng/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 2.66",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2204,7 +2204,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 49,
-     "quote": "Tianeptine 6–8 h 15–50 ng/mL Depression 15 h 160 ng/mL 3",
+     "quote": "Drugs and active metabolites: Tianeptine | Time between blood withdrawal and last dose: 6–8 h | Therapeutic reference range (TRR): 15–50 ng/mL | Therapeutic indication for which the TRR is valid: Depression | Time to steady state: 15 h | Laboratory alert level: 160 ng/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 2.89",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2223,7 +2223,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 49,
-     "quote": "Topiramate 12 h 5–20 μg/mL Epilepsy 4–5 d 30 μg/mL 3",
+     "quote": "Drugs and active metabolites: Topiramate | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 5–20 μg/mL | Therapeutic indication for which the TRR is valid: Epilepsy | Time to steady state: 4–5 d | Laboratory alert level: 30 μg/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 2.95",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2238,7 +2238,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 49,
-     "quote": "Tranylcypromine 2–3 h 60–400 ng/mL Depression 12.5 h (continuous treatment) 168 h (onset of treatment) > 800 ng/mL 4",
+     "quote": "Drugs and active metabolites: Tranylcypromine | Time between blood withdrawal and last dose: 2–3 h | Therapeutic reference range (TRR): 60–400 ng/mL | Therapeutic indication for which the TRR is valid: Depression | Time to steady state: 12.5 h (continuous treatment) 168 h (onset of treatment) | Laboratory alert level: > 800 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 7.51",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2257,7 +2257,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 49,
-     "quote": "Trazodone 12 h 650–1,500 ng/ml Depression 1–2 d 3,000 ng/mL 2",
+     "quote": "Drugs and active metabolites: Trazodone | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 650–1,500 ng/ml | Therapeutic indication for which the TRR is valid: Depression | Time to steady state: 1–2 d | Laboratory alert level: 3,000 ng/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 3.39",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2276,7 +2276,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 50,
-     "quote": "Triazolam 1.5 h 1–10 ng/mL Sleep disorders N/A 20 ng/mL 4",
+     "quote": "Drugs and active metabolites: Triazolam | Time between blood withdrawal and last dose: 1.5 h | Therapeutic reference range (TRR): 1–10 ng/mL | Therapeutic indication for which the TRR is valid: Sleep disorders | Time to steady state: N/A | Laboratory alert level: 20 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 2.91",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2295,7 +2295,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 50,
-     "quote": "Trimipramine 12 h 50–500 ng/mL Depression 5 d 600 ng/mL 3",
+     "quote": "Drugs and active metabolites: Trimipramine | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 50–500 ng/mL | Therapeutic indication for which the TRR is valid: Depression | Time to steady state: 5 d | Laboratory alert level: 600 ng/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 3.4",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2314,7 +2314,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 50,
-     "quote": "Valproic acid 12 h 50–100 μg/mL Epilepsy, manic-depressive disorders 2–4 d 120 μg/mL 1",
+     "quote": "Drugs and active metabolites: Valproic acid | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 50–100 μg/mL | Therapeutic indication for which the TRR is valid: Epilepsy, manic-depressive disorders | Time to steady state: 2–4 d | Laboratory alert level: 120 μg/mL | Level of recommendation to use TDM: 1 | Conversion factor (CF): 6.93",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2335,7 +2335,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 50,
-     "quote": "Varenicline 12 or 24 h 4–5 ng/mL (disulfiram) Substance-related disorders 5–8 d 10 ng/mL (disulfiram) 3",
+     "quote": "Drugs and active metabolites: Varenicline | Time between blood withdrawal and last dose: 12 or 24 h | Therapeutic reference range (TRR): 4–5 ng/mL (disulfiram) | Therapeutic indication for which the TRR is valid: Substance-related disorders | Time to steady state: 5–8 d | Laboratory alert level: 10 ng/mL (disulfiram) | Level of recommendation to use TDM: 3 | Conversion factor (CF): 4.73",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2356,7 +2356,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 50,
-     "quote": "Venlafaxine 24 h 140–600 ng/ mL (venlafaxine plus O-desmethyl-venlafaxine) Depression 2–4 d (metabolite) 1,200 ng/mL (Venlafaxine plus O-desmethyl-venlafaxine) 2",
+     "quote": "Drugs and active metabolites: Venlafaxine | Time between blood withdrawal and last dose: 24 h | Therapeutic reference range (TRR): 140–600 ng/mL (venlafaxine plus O-desmethyl-venlafaxine) | Therapeutic indication for which the TRR is valid: Depression | Time to steady state: 2–4 d (metabolite) | Laboratory alert level: 1,200 ng/mL (Venlafaxine plus O-desmethyl-venlafaxine) | Level of recommendation to use TDM: 2 | Conversion factor (CF): 3.61 3.80",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2375,7 +2375,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 50,
-     "quote": "Vigabatrin 24 h 2–36 µg/mL Epilepsy 20–40 h 70 µg/mL 4",
+     "quote": "Drugs and active metabolites: Vigabatrin | Time between blood withdrawal and last dose: 24 h | Therapeutic reference range (TRR): 2–36 µg/mL | Therapeutic indication for which the TRR is valid: Epilepsy | Time to steady state: 20–40 h | Laboratory alert level: 70 µg/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 7.74",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2394,7 +2394,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 51,
-     "quote": "Vilazodone 24 h 15–45 ng/mL Depression 7 d 90 ng/mL 3",
+     "quote": "Drugs and active metabolites: Vilazodone | Time between blood withdrawal and last dose: 24 h | Therapeutic reference range (TRR): 15–45 ng/mL | Therapeutic indication for which the TRR is valid: Depression | Time to steady state: 7 d | Laboratory alert level: 90 ng/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 2.26",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2413,7 +2413,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 51,
-     "quote": "Vortioxetine 24 h 10–40 ng/mL Depression and anxiety disorder 2 wk 80 ng/mL 2",
+     "quote": "Drugs and active metabolites: Vortioxetine | Time between blood withdrawal and last dose: 24 h | Therapeutic reference range (TRR): 10–40 ng/mL | Therapeutic indication for which the TRR is valid: Depression and anxiety disorder | Time to steady state: 2 wk | Laboratory alert level: 80 ng/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 3.35",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2434,7 +2434,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 51,
-     "quote": "Xanomeline and trospium chloride 12 h 1.6–5.0 ng/mL (xanomeline) Schizophrenia 2 d 8.0 ng/mL (xanomeline) 4",
+     "quote": "Drugs and active metabolites: Xanomeline and trospium chloride | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 1.6–5.0 ng/mL (xanomeline) | Therapeutic indication for which the TRR is valid: Schizophrenia | Time to steady state: 2 d | Laboratory alert level: 8.0 ng/mL (xanomeline) | Level of recommendation to use TDM: 4 | Conversion factor (CF): 3.55 (xanomeline)2.55 (trospium)",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2453,7 +2453,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 51,
-     "quote": "Zaleplon 1–2 h 20–40 ng/mL Sleep disorders N/A 100 ng/mL 4",
+     "quote": "Drugs and active metabolites: Zaleplon | Time between blood withdrawal and last dose: 1–2 h | Therapeutic reference range (TRR): 20–40 ng/mL | Therapeutic indication for which the TRR is valid: Sleep disorders | Time to steady state: N/A | Laboratory alert level: 100 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 3.28",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2472,7 +2472,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 51,
-     "quote": "Ziprasidone 12 h 50–160 ng/mL Schizophrenia 1–2 d 320 ng/mL 2",
+     "quote": "Drugs and active metabolites: Ziprasidone | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 50–160 ng/mL | Therapeutic indication for which the TRR is valid: Schizophrenia | Time to steady state: 1–2 d | Laboratory alert level: 320 ng/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 2.55",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2491,7 +2491,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 51,
-     "quote": "Zolpidem 1–3 h 80–200 ng/mL Sleep disorders N/A 400 ng/mL 4",
+     "quote": "Drugs and active metabolites: Zolpidem | Time between blood withdrawal and last dose: 1–3 h | Therapeutic reference range (TRR): 80–200 ng/mL | Therapeutic indication for which the TRR is valid: Sleep disorders | Time to steady state: N/A | Laboratory alert level: 400 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 3.25",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2510,7 +2510,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 52,
-     "quote": "Zonisamide 24 h 10–40 µg/mL Epilepsy 10–16 d 80 µg/mL 2",
+     "quote": "Drugs and active metabolites: Zonisamide | Time between blood withdrawal and last dose: 24 h | Therapeutic reference range (TRR): 10–40 µg/mL | Therapeutic indication for which the TRR is valid: Epilepsy | Time to steady state: 10–16 d | Laboratory alert level: 80 µg/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 4.71",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2529,7 +2529,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 52,
-     "quote": "Zopiclone 1–2 h 55–80 ng/mL Sleep disorders N/A 160 ng/mL 4",
+     "quote": "Drugs and active metabolites: Zopiclone | Time between blood withdrawal and last dose: 1–2 h | Therapeutic reference range (TRR): 55–80 ng/mL | Therapeutic indication for which the TRR is valid: Sleep disorders | Time to steady state: N/A | Laboratory alert level: 160 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 2.57",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2548,7 +2548,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 52,
-     "quote": "Zotepine 12 h 10–50 ng/mL Schizophrenia 3 d 100 ng/mL 3",
+     "quote": "Drugs and active metabolites: Zotepine | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 10–50 ng/mL | Therapeutic indication for which the TRR is valid: Schizophrenia | Time to steady state: 3 d | Laboratory alert level: 100 ng/mL | Level of recommendation to use TDM: 3 | Conversion factor (CF): 3.01",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2567,7 +2567,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 52,
-     "quote": "Zuclopenthixol 12 h 3–25 ng/mL Schizophrenia 3–5 d 50 ng/mL 2",
+     "quote": "Drugs and active metabolites: Zuclopenthixol | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 3–25 ng/mL | Therapeutic indication for which the TRR is valid: Schizophrenia | Time to steady state: 3–5 d | Laboratory alert level: 50 ng/mL | Level of recommendation to use TDM: 2 | Conversion factor (CF): 2.49",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2586,7 +2586,7 @@
     {
      "corpus": "agnp_tdm",
      "page": 52,
-     "quote": "Zuranolone 12 h 10–50 ng/mL Postpartum depression 3–5 d 100 ng/mL 4",
+     "quote": "Drugs and active metabolites: Zuranolone | Time between blood withdrawal and last dose: 12 h | Therapeutic reference range (TRR): 10–50 ng/mL | Therapeutic indication for which the TRR is valid: Postpartum depression | Time to steady state: 3–5 d | Laboratory alert level: 100 ng/mL | Level of recommendation to use TDM: 4 | Conversion factor (CF): 2.44",
      "provenance": "verified",
      "extraction": "code"
     }
@@ -2602,7 +2602,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Agomelatine CYP1A2, CYP2C19",
+      "quote": "Drugs: Agomelatine | Enzymes and transporters: CYP1A2, CYP2C19",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -2615,7 +2615,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Agomelatine CYP1A2, CYP2C19",
+      "quote": "Drugs: Agomelatine | Enzymes and transporters: CYP1A2, CYP2C19",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -2630,7 +2630,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Alprazolam CYP3A4",
+      "quote": "Drugs: Alprazolam | Enzymes and transporters: CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -2645,7 +2645,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Amitriptyline CYP1A2, CYP2C9, CYP2C19, CYP2D6, CYP3A4, UGT1A3, UGT1A4, UGT2B10, P-gp (ABCB1)",
+      "quote": "Drugs: Amitriptyline | Enzymes and transporters: CYP1A2, CYP2C9, CYP2C19, CYP2D6, CYP3A4, UGT1A3, UGT1A4, UGT2B10, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (A), CYP2D6 (A)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -2658,7 +2658,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Amitriptyline CYP1A2, CYP2C9, CYP2C19, CYP2D6, CYP3A4, UGT1A3, UGT1A4, UGT2B10, P-gp (ABCB1)",
+      "quote": "Drugs: Amitriptyline | Enzymes and transporters: CYP1A2, CYP2C9, CYP2C19, CYP2D6, CYP3A4, UGT1A3, UGT1A4, UGT2B10, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (A), CYP2D6 (A)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -2671,7 +2671,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Amitriptyline CYP1A2, CYP2C9, CYP2C19, CYP2D6, CYP3A4, UGT1A3, UGT1A4, UGT2B10, P-gp (ABCB1)",
+      "quote": "Drugs: Amitriptyline | Enzymes and transporters: CYP1A2, CYP2C9, CYP2C19, CYP2D6, CYP3A4, UGT1A3, UGT1A4, UGT2B10, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (A), CYP2D6 (A)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -2684,7 +2684,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Amitriptyline CYP1A2, CYP2C9, CYP2C19, CYP2D6, CYP3A4, UGT1A3, UGT1A4, UGT2B10, P-gp (ABCB1)",
+      "quote": "Drugs: Amitriptyline | Enzymes and transporters: CYP1A2, CYP2C9, CYP2C19, CYP2D6, CYP3A4, UGT1A3, UGT1A4, UGT2B10, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (A), CYP2D6 (A)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -2697,7 +2697,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Amitriptyline CYP1A2, CYP2C9, CYP2C19, CYP2D6, CYP3A4, UGT1A3, UGT1A4, UGT2B10, P-gp (ABCB1)",
+      "quote": "Drugs: Amitriptyline | Enzymes and transporters: CYP1A2, CYP2C9, CYP2C19, CYP2D6, CYP3A4, UGT1A3, UGT1A4, UGT2B10, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (A), CYP2D6 (A)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -2710,7 +2710,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Amitriptyline CYP1A2, CYP2C9, CYP2C19, CYP2D6, CYP3A4, UGT1A3, UGT1A4, UGT2B10, P-gp (ABCB1)",
+      "quote": "Drugs: Amitriptyline | Enzymes and transporters: CYP1A2, CYP2C9, CYP2C19, CYP2D6, CYP3A4, UGT1A3, UGT1A4, UGT2B10, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (A), CYP2D6 (A)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -2723,7 +2723,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Amitriptyline CYP1A2, CYP2C9, CYP2C19, CYP2D6, CYP3A4, UGT1A3, UGT1A4, UGT2B10, P-gp (ABCB1)",
+      "quote": "Drugs: Amitriptyline | Enzymes and transporters: CYP1A2, CYP2C9, CYP2C19, CYP2D6, CYP3A4, UGT1A3, UGT1A4, UGT2B10, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (A), CYP2D6 (A)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -2736,7 +2736,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Amitriptyline CYP1A2, CYP2C9, CYP2C19, CYP2D6, CYP3A4, UGT1A3, UGT1A4, UGT2B10, P-gp (ABCB1)",
+      "quote": "Drugs: Amitriptyline | Enzymes and transporters: CYP1A2, CYP2C9, CYP2C19, CYP2D6, CYP3A4, UGT1A3, UGT1A4, UGT2B10, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (A), CYP2D6 (A)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -2751,7 +2751,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Amfetamine (dexamfetamine and lisdexamfetamine) CYP2D6",
+      "quote": "Drugs: Amfetamine (dexamfetamine and lisdexamfetamine) | Enzymes and transporters: CYP2D6 | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6 provisional (B/C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -2766,7 +2766,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Aripiprazole CYP2D6, CYP3A4, P-gp (ABCB1)",
+      "quote": "Drugs: Aripiprazole | Enzymes and transporters: CYP2D6, CYP3A4, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6 provisional (B))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -2779,7 +2779,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Aripiprazole CYP2D6, CYP3A4, P-gp (ABCB1)",
+      "quote": "Drugs: Aripiprazole | Enzymes and transporters: CYP2D6, CYP3A4, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6 provisional (B))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -2794,7 +2794,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Asenapine CYP1A2, UGT1A4",
+      "quote": "Drugs: Asenapine | Enzymes and transporters: CYP1A2, UGT1A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -2807,7 +2807,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Asenapine CYP1A2, UGT1A4",
+      "quote": "Drugs: Asenapine | Enzymes and transporters: CYP1A2, UGT1A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -2822,7 +2822,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Atomoxetine CYP2C19, CYP2D6, P-gp (ABCB1)",
+      "quote": "Drugs: Atomoxetine | Enzymes and transporters: CYP2C19, CYP2D6, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2D6 (A)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -2835,7 +2835,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Atomoxetine CYP2C19, CYP2D6, P-gp (ABCB1)",
+      "quote": "Drugs: Atomoxetine | Enzymes and transporters: CYP2C19, CYP2D6, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2D6 (A)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -2850,7 +2850,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Brexanolone AKR, UGT, SULT",
+      "quote": "Drugs: Brexanolone | Enzymes and transporters: AKR, UGT, SULT",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -2865,7 +2865,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Brexpiprazole CYP3A4, CYP2D6",
+      "quote": "Drugs: Brexpiprazole | Enzymes and transporters: CYP3A4, CYP2D6 | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6 provisional (B/C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -2878,7 +2878,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Brexpiprazole CYP3A4, CYP2D6",
+      "quote": "Drugs: Brexpiprazole | Enzymes and transporters: CYP3A4, CYP2D6 | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6 provisional (B/C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -2893,7 +2893,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Bromazepam CYP2C19, CYP3A4",
+      "quote": "Drugs: Bromazepam | Enzymes and transporters: CYP2C19, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -2906,7 +2906,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Bromazepam CYP2C19, CYP3A4",
+      "quote": "Drugs: Bromazepam | Enzymes and transporters: CYP2C19, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -2921,7 +2921,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Bromocriptine CYP3A4",
+      "quote": "Drugs: Bromocriptine | Enzymes and transporters: CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -2936,7 +2936,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Bromperidol CYP3A4",
+      "quote": "Drugs: Bromperidol | Enzymes and transporters: CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -2951,7 +2951,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Brotizolam CYP3A4",
+      "quote": "Drugs: Brotizolam | Enzymes and transporters: CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -2966,7 +2966,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Buprenorphine CYP2C8, CYP3A4, UGT1A3, UGT2B7",
+      "quote": "Drugs: Buprenorphine | Enzymes and transporters: CYP2C8, CYP3A4, UGT1A3, UGT2B7 | CPIC pharmacogenetic gene recommendations (CPIC level): (COMT and OPRM1: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -2979,7 +2979,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Buprenorphine CYP2C8, CYP3A4, UGT1A3, UGT2B7",
+      "quote": "Drugs: Buprenorphine | Enzymes and transporters: CYP2C8, CYP3A4, UGT1A3, UGT2B7 | CPIC pharmacogenetic gene recommendations (CPIC level): (COMT and OPRM1: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -2992,7 +2992,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Buprenorphine CYP2C8, CYP3A4, UGT1A3, UGT2B7",
+      "quote": "Drugs: Buprenorphine | Enzymes and transporters: CYP2C8, CYP3A4, UGT1A3, UGT2B7 | CPIC pharmacogenetic gene recommendations (CPIC level): (COMT and OPRM1: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3005,7 +3005,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Buprenorphine CYP2C8, CYP3A4, UGT1A3, UGT2B7",
+      "quote": "Drugs: Buprenorphine | Enzymes and transporters: CYP2C8, CYP3A4, UGT1A3, UGT2B7 | CPIC pharmacogenetic gene recommendations (CPIC level): (COMT and OPRM1: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3020,7 +3020,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Bupropion CYP2C19, CYP2B6, CR",
+      "quote": "Drugs: Bupropion | Enzymes and transporters: CYP2C19, CYP2B6, CR | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2B6: provisional; B/C)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3033,7 +3033,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Bupropion CYP2C19, CYP2B6, CR",
+      "quote": "Drugs: Bupropion | Enzymes and transporters: CYP2C19, CYP2B6, CR | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2B6: provisional; B/C)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3048,7 +3048,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Buspirone CYP3A4",
+      "quote": "Drugs: Buspirone | Enzymes and transporters: CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3063,7 +3063,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Cabergoline Unknown, CYP3A4, P-gp (ABCB1)",
+      "quote": "Drugs: Cabergoline | Enzymes and transporters: Unknown, CYP3A4, P-gp (ABCB1)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3078,7 +3078,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Caffeine CYP1A2, CYP2A6, xanthine oxidase, NAT",
+      "quote": "Drugs: Caffeine | Enzymes and transporters: CYP1A2, CYP2A6, xanthine oxidase, NAT",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3091,7 +3091,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Caffeine CYP1A2, CYP2A6, xanthine oxidase, NAT",
+      "quote": "Drugs: Caffeine | Enzymes and transporters: CYP1A2, CYP2A6, xanthine oxidase, NAT",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3106,7 +3106,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Cannabidiol CYP3A4, CYP2C19, CYP2C9",
+      "quote": "Drugs: Cannabidiol | Enzymes and transporters: CYP3A4, CYP2C19,CYP2C9",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3119,7 +3119,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Cannabidiol CYP3A4, CYP2C19, CYP2C9",
+      "quote": "Drugs: Cannabidiol | Enzymes and transporters: CYP3A4, CYP2C19,CYP2C9",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3132,7 +3132,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Cannabidiol CYP3A4, CYP2C19, CYP2C9",
+      "quote": "Drugs: Cannabidiol | Enzymes and transporters: CYP3A4, CYP2C19,CYP2C9",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3147,7 +3147,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Carbamazepine CYP1A2, CYP2C8, CYP3A4, UGT2B7, P-gp (ABCB1), BCRP, (ABCG2), epoxide hydrolase",
+      "quote": "Drugs: Carbamazepine | Enzymes and transporters: CYP1A2, CYP2C8, CYP3A4, UGT2B7, P-gp (ABCB1), BCRP, (ABCG2), epoxide hydrolase | CPIC pharmacogenetic gene recommendations (CPIC level): HLA-A (A), HLA-B (A)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3160,7 +3160,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Carbamazepine CYP1A2, CYP2C8, CYP3A4, UGT2B7, P-gp (ABCB1), BCRP, (ABCG2), epoxide hydrolase",
+      "quote": "Drugs: Carbamazepine | Enzymes and transporters: CYP1A2, CYP2C8, CYP3A4, UGT2B7, P-gp (ABCB1), BCRP, (ABCG2), epoxide hydrolase | CPIC pharmacogenetic gene recommendations (CPIC level): HLA-A (A), HLA-B (A)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3173,7 +3173,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Carbamazepine CYP1A2, CYP2C8, CYP3A4, UGT2B7, P-gp (ABCB1), BCRP, (ABCG2), epoxide hydrolase",
+      "quote": "Drugs: Carbamazepine | Enzymes and transporters: CYP1A2, CYP2C8, CYP3A4, UGT2B7, P-gp (ABCB1), BCRP, (ABCG2), epoxide hydrolase | CPIC pharmacogenetic gene recommendations (CPIC level): HLA-A (A), HLA-B (A)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3186,7 +3186,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Carbamazepine CYP1A2, CYP2C8, CYP3A4, UGT2B7, P-gp (ABCB1), BCRP, (ABCG2), epoxide hydrolase",
+      "quote": "Drugs: Carbamazepine | Enzymes and transporters: CYP1A2, CYP2C8, CYP3A4, UGT2B7, P-gp (ABCB1), BCRP, (ABCG2), epoxide hydrolase | CPIC pharmacogenetic gene recommendations (CPIC level): HLA-A (A), HLA-B (A)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3201,7 +3201,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Cariprazine CYP2D6, CYP3A4",
+      "quote": "Drugs: Cariprazine | Enzymes and transporters: CYP2D6, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3214,7 +3214,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Cariprazine CYP2D6, CYP3A4",
+      "quote": "Drugs: Cariprazine | Enzymes and transporters: CYP2D6, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3229,7 +3229,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Chloralhydrate UGT",
+      "quote": "Drugs: Chloralhydrate | Enzymes and transporters: UGT",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3244,7 +3244,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Chlordiazepoxide CYP3A4, UGT",
+      "quote": "Drugs: Chlordiazepoxide | Enzymes and transporters: CYP3A4, UGT",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3257,7 +3257,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Chlordiazepoxide CYP3A4, UGT",
+      "quote": "Drugs: Chlordiazepoxide | Enzymes and transporters: CYP3A4, UGT",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3272,7 +3272,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Chlorpromazine CYP1A2, CYP2D6, P-gp (ABCB1)",
+      "quote": "Drugs: Chlorpromazine | Enzymes and transporters: CYP1A2, CYP2D6, P-gp (ABCB1)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3285,7 +3285,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Chlorpromazine CYP1A2, CYP2D6, P-gp (ABCB1)",
+      "quote": "Drugs: Chlorpromazine | Enzymes and transporters: CYP1A2, CYP2D6, P-gp (ABCB1)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3300,7 +3300,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Citalopram CYP2C19, CYP2D6, CYP3A4, P-gp (ABCB1)",
+      "quote": "Drugs: Citalopram | Enzymes and transporters: CYP2C19, CYP2D6, CYP3A4, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (A)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3313,7 +3313,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Citalopram CYP2C19, CYP2D6, CYP3A4, P-gp (ABCB1)",
+      "quote": "Drugs: Citalopram | Enzymes and transporters: CYP2C19, CYP2D6, CYP3A4, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (A)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3326,7 +3326,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Citalopram CYP2C19, CYP2D6, CYP3A4, P-gp (ABCB1)",
+      "quote": "Drugs: Citalopram | Enzymes and transporters: CYP2C19, CYP2D6, CYP3A4, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (A)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3341,7 +3341,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Clobazam (norclobazam) CYP2C19, CYP3A4",
+      "quote": "Drugs: Clobazam (norclobazam) | Enzymes and transporters: CYP2C19, CYP3A4 | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2C19 provisional (B/C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3354,7 +3354,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Clobazam (norclobazam) CYP2C19, CYP3A4",
+      "quote": "Drugs: Clobazam (norclobazam) | Enzymes and transporters: CYP2C19, CYP3A4 | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2C19 provisional (B/C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3369,7 +3369,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Clomethiazole CYP2A6, CYP3A4",
+      "quote": "Drugs: Clomethiazole | Enzymes and transporters: CYP2A6, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3382,7 +3382,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Clomethiazole CYP2A6, CYP3A4",
+      "quote": "Drugs: Clomethiazole | Enzymes and transporters: CYP2A6, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3397,7 +3397,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Clomipramine CYP1A2, CYP2C19, CYP2D6, CYP3A4, UGT2B10",
+      "quote": "Drugs: Clomipramine | Enzymes and transporters: CYP1A2, CYP2C19, CYP2D6, CYP3A4, UGT2B10 | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (A), CYP2D6 (A)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3410,7 +3410,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Clomipramine CYP1A2, CYP2C19, CYP2D6, CYP3A4, UGT2B10",
+      "quote": "Drugs: Clomipramine | Enzymes and transporters: CYP1A2, CYP2C19, CYP2D6, CYP3A4, UGT2B10 | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (A), CYP2D6 (A)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3423,7 +3423,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Clomipramine CYP1A2, CYP2C19, CYP2D6, CYP3A4, UGT2B10",
+      "quote": "Drugs: Clomipramine | Enzymes and transporters: CYP1A2, CYP2C19, CYP2D6, CYP3A4, UGT2B10 | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (A), CYP2D6 (A)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3436,7 +3436,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Clomipramine CYP1A2, CYP2C19, CYP2D6, CYP3A4, UGT2B10",
+      "quote": "Drugs: Clomipramine | Enzymes and transporters: CYP1A2, CYP2C19, CYP2D6, CYP3A4, UGT2B10 | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (A), CYP2D6 (A)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3449,7 +3449,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Clomipramine CYP1A2, CYP2C19, CYP2D6, CYP3A4, UGT2B10",
+      "quote": "Drugs: Clomipramine | Enzymes and transporters: CYP1A2, CYP2C19, CYP2D6, CYP3A4, UGT2B10 | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (A), CYP2D6 (A)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3464,7 +3464,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Clonazepam CYP3A4",
+      "quote": "Drugs: Clonazepam | Enzymes and transporters: CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3479,7 +3479,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Clorazepate Decarboxylase, CYP3A4, UGT",
+      "quote": "Drugs: Clorazepate | Enzymes and transporters: Decarboxylase, CYP3A4, UGT",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3492,7 +3492,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Clorazepate Decarboxylase, CYP3A4, UGT",
+      "quote": "Drugs: Clorazepate | Enzymes and transporters: Decarboxylase, CYP3A4, UGT",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3507,7 +3507,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Clozapine CYP1A2, CYP2C19, CYP3A4, P-gp (ABCB1)",
+      "quote": "Drugs: Clozapine | Enzymes and transporters: CYP1A2, CYP2C19, CYP3A4, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6 provisional (B/C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3520,7 +3520,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Clozapine CYP1A2, CYP2C19, CYP3A4, P-gp (ABCB1)",
+      "quote": "Drugs: Clozapine | Enzymes and transporters: CYP1A2, CYP2C19, CYP3A4, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6 provisional (B/C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3533,7 +3533,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Clozapine CYP1A2, CYP2C19, CYP3A4, P-gp (ABCB1)",
+      "quote": "Drugs: Clozapine | Enzymes and transporters: CYP1A2, CYP2C19, CYP3A4, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6 provisional (B/C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3548,7 +3548,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 7,
-      "quote": "Cocain Carboxylesterases 1 and 2, pseudocholinesterase, CYP3A4",
+      "quote": "Drugs: Cocain | Enzymes and transporters: Carboxylesterases 1 and 2, pseudocholinesterase, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3563,7 +3563,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Codeine CYP2D6, CYP3A4, UGT2B4, UGT2B7",
+      "quote": "Drugs: Codeine | Enzymes and transporters: CYP2D6, CYP3A4, UGT2B4, UGT2B7 | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2D6 (A), (COMT and OPRM1: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3576,7 +3576,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Codeine CYP2D6, CYP3A4, UGT2B4, UGT2B7",
+      "quote": "Drugs: Codeine | Enzymes and transporters: CYP2D6, CYP3A4, UGT2B4, UGT2B7 | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2D6 (A), (COMT and OPRM1: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3589,7 +3589,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Codeine CYP2D6, CYP3A4, UGT2B4, UGT2B7",
+      "quote": "Drugs: Codeine | Enzymes and transporters: CYP2D6, CYP3A4, UGT2B4, UGT2B7 | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2D6 (A), (COMT and OPRM1: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3602,7 +3602,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Codeine CYP2D6, CYP3A4, UGT2B4, UGT2B7",
+      "quote": "Drugs: Codeine | Enzymes and transporters: CYP2D6, CYP3A4, UGT2B4, UGT2B7 | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2D6 (A), (COMT and OPRM1: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3617,7 +3617,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Cyamemazine CYP1A2, CYP2C8, CYP2C9, CYP2C19, CYP3A4",
+      "quote": "Drugs: Cyamemazine | Enzymes and transporters: CYP1A2, CYP2C8, CYP2C9, CYP2C19, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3630,7 +3630,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Cyamemazine CYP1A2, CYP2C8, CYP2C9, CYP2C19, CYP3A4",
+      "quote": "Drugs: Cyamemazine | Enzymes and transporters: CYP1A2, CYP2C8, CYP2C9, CYP2C19, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3643,7 +3643,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Cyamemazine CYP1A2, CYP2C8, CYP2C9, CYP2C19, CYP3A4",
+      "quote": "Drugs: Cyamemazine | Enzymes and transporters: CYP1A2, CYP2C8, CYP2C9, CYP2C19, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3656,7 +3656,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Cyamemazine CYP1A2, CYP2C8, CYP2C9, CYP2C19, CYP3A4",
+      "quote": "Drugs: Cyamemazine | Enzymes and transporters: CYP1A2, CYP2C8, CYP2C9, CYP2C19, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3669,7 +3669,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Cyamemazine CYP1A2, CYP2C8, CYP2C9, CYP2C19, CYP3A4",
+      "quote": "Drugs: Cyamemazine | Enzymes and transporters: CYP1A2, CYP2C8, CYP2C9, CYP2C19, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3684,7 +3684,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Daridorexant CYP3A4",
+      "quote": "Drugs: Daridorexant | Enzymes and transporters: CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3699,7 +3699,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Desipramine CYP2D6",
+      "quote": "Drugs: Desipramine | Enzymes and transporters: CYP2D6 | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2D6 (B)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3714,7 +3714,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Desvenlafaxine Renal clearance, UGT, CYP3A4",
+      "quote": "Drugs: Desvenlafaxine | Enzymes and transporters: Renal clearance, UGT, CYP3A4 | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2C19 not assigned)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3727,7 +3727,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Desvenlafaxine Renal clearance, UGT, CYP3A4",
+      "quote": "Drugs: Desvenlafaxine | Enzymes and transporters: Renal clearance, UGT, CYP3A4 | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2C19 not assigned)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3742,7 +3742,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Diazepam CYP2B6, CYP2C19, CYP3A4, UGT2B7, P-gp (ABCB1)",
+      "quote": "Drugs: Diazepam | Enzymes and transporters: CYP2B6, CYP2C19, CYP3A4, UGT2B7, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2C19 provisional (B/C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3755,7 +3755,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Diazepam CYP2B6, CYP2C19, CYP3A4, UGT2B7, P-gp (ABCB1)",
+      "quote": "Drugs: Diazepam | Enzymes and transporters: CYP2B6, CYP2C19, CYP3A4, UGT2B7, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2C19 provisional (B/C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3768,7 +3768,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Diazepam CYP2B6, CYP2C19, CYP3A4, UGT2B7, P-gp (ABCB1)",
+      "quote": "Drugs: Diazepam | Enzymes and transporters: CYP2B6, CYP2C19, CYP3A4, UGT2B7, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2C19 provisional (B/C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3781,7 +3781,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Diazepam CYP2B6, CYP2C19, CYP3A4, UGT2B7, P-gp (ABCB1)",
+      "quote": "Drugs: Diazepam | Enzymes and transporters: CYP2B6, CYP2C19, CYP3A4, UGT2B7, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2C19 provisional (B/C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3796,7 +3796,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Diphenhydramine CYP2D6, UGT1A4, UGT2B10, P-gp (ABCB1)",
+      "quote": "Drugs: Diphenhydramine | Enzymes and transporters: CYP2D6, UGT1A4, UGT2B10, P-gp (ABCB1)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3809,7 +3809,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Diphenhydramine CYP2D6, UGT1A4, UGT2B10, P-gp (ABCB1)",
+      "quote": "Drugs: Diphenhydramine | Enzymes and transporters: CYP2D6, UGT1A4, UGT2B10, P-gp (ABCB1)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3822,7 +3822,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Diphenhydramine CYP2D6, UGT1A4, UGT2B10, P-gp (ABCB1)",
+      "quote": "Drugs: Diphenhydramine | Enzymes and transporters: CYP2D6, UGT1A4, UGT2B10, P-gp (ABCB1)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3837,7 +3837,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Disulfiram CYP1A2, CYP2A6, CYP2B6, CYP2E1, CYP3A4",
+      "quote": "Drugs: Disulfiram | Enzymes and transporters: CYP1A2, CYP2A6, CYP2B6, CYP2E1, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3850,7 +3850,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Disulfiram CYP1A2, CYP2A6, CYP2B6, CYP2E1, CYP3A4",
+      "quote": "Drugs: Disulfiram | Enzymes and transporters: CYP1A2, CYP2A6, CYP2B6, CYP2E1, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3863,7 +3863,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Disulfiram CYP1A2, CYP2A6, CYP2B6, CYP2E1, CYP3A4",
+      "quote": "Drugs: Disulfiram | Enzymes and transporters: CYP1A2, CYP2A6, CYP2B6, CYP2E1, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3876,7 +3876,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Disulfiram CYP1A2, CYP2A6, CYP2B6, CYP2E1, CYP3A4",
+      "quote": "Drugs: Disulfiram | Enzymes and transporters: CYP1A2, CYP2A6, CYP2B6, CYP2E1, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3889,7 +3889,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Disulfiram CYP1A2, CYP2A6, CYP2B6, CYP2E1, CYP3A4",
+      "quote": "Drugs: Disulfiram | Enzymes and transporters: CYP1A2, CYP2A6, CYP2B6, CYP2E1, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3904,7 +3904,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Donepezil CYP2D6, CYP3A4, P-gp (ABCB1)",
+      "quote": "Drugs: Donepezil | Enzymes and transporters: CYP2D6, CYP3A4, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6 provisional (B/C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3917,7 +3917,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Donepezil CYP2D6, CYP3A4, P-gp (ABCB1)",
+      "quote": "Drugs: Donepezil | Enzymes and transporters: CYP2D6, CYP3A4, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6 provisional (B/C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3932,7 +3932,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Dothiepin (dosulepin) CYP2C19, CYP2D6",
+      "quote": "Drugs: Dothiepin (dosulepin) | Enzymes and transporters: CYP2C19, CYP2D6",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3945,7 +3945,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Dothiepin (dosulepin) CYP2C19, CYP2D6",
+      "quote": "Drugs: Dothiepin (dosulepin) | Enzymes and transporters: CYP2C19, CYP2D6",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3960,7 +3960,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Doxepin CYP2C9, CYP2C19, CYP2D6",
+      "quote": "Drugs: Doxepin | Enzymes and transporters: CYP2C9, CYP2C19, CYP2D6 | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (B), CYP2D6 (B)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3973,7 +3973,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Doxepin CYP2C9, CYP2C19, CYP2D6",
+      "quote": "Drugs: Doxepin | Enzymes and transporters: CYP2C9, CYP2C19, CYP2D6 | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (B), CYP2D6 (B)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -3986,7 +3986,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Doxepin CYP2C9, CYP2C19, CYP2D6",
+      "quote": "Drugs: Doxepin | Enzymes and transporters: CYP2C9, CYP2C19, CYP2D6 | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (B), CYP2D6 (B)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4001,7 +4001,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Duloxetine CYP1A2, CYP2D6, P-gp (ABCB1)",
+      "quote": "Drugs: Duloxetine | Enzymes and transporters: CYP1A2, CYP2D6, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4014,7 +4014,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Duloxetine CYP1A2, CYP2D6, P-gp (ABCB1)",
+      "quote": "Drugs: Duloxetine | Enzymes and transporters: CYP1A2, CYP2D6, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4029,7 +4029,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Entacapone UGT1A9",
+      "quote": "Drugs: Entacapone | Enzymes and transporters: UGT1A9",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4044,7 +4044,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Escitalopram CYP2C19, CYP2D6, CYP3A4, P-gp (ABCB1)",
+      "quote": "Drugs: Escitalopram | Enzymes and transporters: CYP2C19, CYP2D6, CYP3A4, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (A); (CYP2D6: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4057,7 +4057,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Escitalopram CYP2C19, CYP2D6, CYP3A4, P-gp (ABCB1)",
+      "quote": "Drugs: Escitalopram | Enzymes and transporters: CYP2C19, CYP2D6, CYP3A4, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (A); (CYP2D6: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4070,7 +4070,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Escitalopram CYP2C19, CYP2D6, CYP3A4, P-gp (ABCB1)",
+      "quote": "Drugs: Escitalopram | Enzymes and transporters: CYP2C19, CYP2D6, CYP3A4, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (A); (CYP2D6: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4085,7 +4085,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Esketamine CYP2B6, CYP2C9, CYP3A4",
+      "quote": "Drugs: Esketamine | Enzymes and transporters: CYP2B6, CYP2C9, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4098,7 +4098,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Esketamine CYP2B6, CYP2C9, CYP3A4",
+      "quote": "Drugs: Esketamine | Enzymes and transporters: CYP2B6, CYP2C9, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4111,7 +4111,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Esketamine CYP2B6, CYP2C9, CYP3A4",
+      "quote": "Drugs: Esketamine | Enzymes and transporters: CYP2B6, CYP2C9, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4126,7 +4126,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Estazolam CYP3A4",
+      "quote": "Drugs: Estazolam | Enzymes and transporters: CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4141,7 +4141,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Eszopiclon CYP2E1, CYP3A4",
+      "quote": "Drugs: Eszopiclon | Enzymes and transporters: CYP2E1, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4154,7 +4154,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Eszopiclon CYP2E1, CYP3A4",
+      "quote": "Drugs: Eszopiclon | Enzymes and transporters: CYP2E1, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4169,7 +4169,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Ethanol Alcohol dehydrogenase, CYP2E1",
+      "quote": "Drugs: Ethanol | Enzymes and transporters: Alcohol dehydrogenase, CYP2E1",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4184,7 +4184,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Ethosuximide CYP2B, CYP2E1, CYP3A4",
+      "quote": "Drugs: Ethosuximide | Enzymes and transporters: CYP2B, CYP2E1, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4197,7 +4197,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Ethosuximide CYP2B, CYP2E1, CYP3A4",
+      "quote": "Drugs: Ethosuximide | Enzymes and transporters: CYP2B, CYP2E1, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4212,7 +4212,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Fenfluramine CYP1A2, CYP2B6, CYP2D6",
+      "quote": "Drugs: Fenfluramine | Enzymes and transporters: CYP1A2, CYP2B6, CYP2D6",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4225,7 +4225,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Fenfluramine CYP1A2, CYP2B6, CYP2D6",
+      "quote": "Drugs: Fenfluramine | Enzymes and transporters: CYP1A2, CYP2B6, CYP2D6",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4238,7 +4238,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Fenfluramine CYP1A2, CYP2B6, CYP2D6",
+      "quote": "Drugs: Fenfluramine | Enzymes and transporters: CYP1A2, CYP2B6, CYP2D6",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4253,7 +4253,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Flunarizine CYP2D6",
+      "quote": "Drugs: Flunarizine | Enzymes and transporters: CYP2D6",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4268,7 +4268,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Flunitrazepam CYP2C19, CYP3A4",
+      "quote": "Drugs: Flunitrazepam | Enzymes and transporters: CYP2C19, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4281,7 +4281,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Flunitrazepam CYP2C19, CYP3A4",
+      "quote": "Drugs: Flunitrazepam | Enzymes and transporters: CYP2C19, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4296,7 +4296,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Fluoxetine CYP2B6, CYP2C9, CYP2C19, CYP2D6, P-gp (ABCB1)",
+      "quote": "Drugs: Fluoxetine | Enzymes and transporters: CYP2B6, CYP2C9, CYP2C19, CYP2D6, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2C19 and CYP2D6: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4309,7 +4309,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Fluoxetine CYP2B6, CYP2C9, CYP2C19, CYP2D6, P-gp (ABCB1)",
+      "quote": "Drugs: Fluoxetine | Enzymes and transporters: CYP2B6, CYP2C9, CYP2C19, CYP2D6, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2C19 and CYP2D6: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4322,7 +4322,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Fluoxetine CYP2B6, CYP2C9, CYP2C19, CYP2D6, P-gp (ABCB1)",
+      "quote": "Drugs: Fluoxetine | Enzymes and transporters: CYP2B6, CYP2C9, CYP2C19, CYP2D6, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2C19 and CYP2D6: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4335,7 +4335,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Fluoxetine CYP2B6, CYP2C9, CYP2C19, CYP2D6, P-gp (ABCB1)",
+      "quote": "Drugs: Fluoxetine | Enzymes and transporters: CYP2B6, CYP2C9, CYP2C19, CYP2D6, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2C19 and CYP2D6: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4350,7 +4350,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Flupenthixol CYP2D6",
+      "quote": "Drugs: Flupenthixol | Enzymes and transporters: CYP2D6",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4365,7 +4365,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Fluphenazine CYP2D6, P-gp (ABCB1)",
+      "quote": "Drugs: Fluphenazine | Enzymes and transporters: CYP2D6, P-gp (ABCB1)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4380,7 +4380,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Flurazepam CYP2C19, CYP3A4",
+      "quote": "Drugs: Flurazepam | Enzymes and transporters: CYP2C19, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4393,7 +4393,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Flurazepam CYP2C19, CYP3A4",
+      "quote": "Drugs: Flurazepam | Enzymes and transporters: CYP2C19, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4408,7 +4408,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Fluspirilene Renal clearance, CYP3A4",
+      "quote": "Drugs: Fluspirilene | Enzymes and transporters: Renal clearance, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4423,7 +4423,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Fluvoxamine CYP2D6, CYP1A2, P-gp (ABCB1)",
+      "quote": "Drugs: Fluvoxamine | Enzymes and transporters: CYP2D6, CYP1A2, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2D6 (B); (CYP2C19: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4436,7 +4436,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Fluvoxamine CYP2D6, CYP1A2, P-gp (ABCB1)",
+      "quote": "Drugs: Fluvoxamine | Enzymes and transporters: CYP2D6, CYP1A2, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2D6 (B); (CYP2C19: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4451,7 +4451,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Galantamine CYP2D6, CYP3A4",
+      "quote": "Drugs: Galantamine | Enzymes and transporters: CYP2D6, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4464,7 +4464,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Galantamine CYP2D6, CYP3A4",
+      "quote": "Drugs: Galantamine | Enzymes and transporters: CYP2D6, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4479,7 +4479,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Guanfacine CYP3A4, epoxide hydratase, UGT",
+      "quote": "Drugs: Guanfacine | Enzymes and transporters: CYP3A4, epoxide hydratase, UGT",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4492,7 +4492,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Guanfacine CYP3A4, epoxide hydratase, UGT",
+      "quote": "Drugs: Guanfacine | Enzymes and transporters: CYP3A4, epoxide hydratase, UGT",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4507,7 +4507,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Haloperidol CYP2D6, CYP3A4, AKR, UGT, P-gp (ABCB1)",
+      "quote": "Drugs: Haloperidol | Enzymes and transporters: CYP2D6, CYP3A4, AKR, UGT, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6 provisional (B/C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4520,7 +4520,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Haloperidol CYP2D6, CYP3A4, AKR, UGT, P-gp (ABCB1)",
+      "quote": "Drugs: Haloperidol | Enzymes and transporters: CYP2D6, CYP3A4, AKR, UGT, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6 provisional (B/C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4533,7 +4533,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Haloperidol CYP2D6, CYP3A4, AKR, UGT, P-gp (ABCB1)",
+      "quote": "Drugs: Haloperidol | Enzymes and transporters: CYP2D6, CYP3A4, AKR, UGT, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6 provisional (B/C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4548,7 +4548,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 8,
-      "quote": "Diacetylmorphine (heroin) Carboxylesterases 2 and 1, UGT",
+      "quote": "Drugs: Diacetylmorphine (heroin) | Enzymes and transporters: Carboxylesterases 2 and 1, UGT",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4563,7 +4563,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Hydroxyzine CYP3A4, alcohol dehydrogenase",
+      "quote": "Drugs: Hydroxyzine | Enzymes and transporters: CYP3A4, alcohol dehydrogenase",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4578,7 +4578,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Iloperidone CYP2D6, CYP3A4",
+      "quote": "Drugs: Iloperidone | Enzymes and transporters: CYP2D6, CYP3A4 | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6 provisional (B/C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4591,7 +4591,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Iloperidone CYP2D6, CYP3A4",
+      "quote": "Drugs: Iloperidone | Enzymes and transporters: CYP2D6, CYP3A4 | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6 provisional (B/C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4606,7 +4606,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Imipramine CYP1A2, CYP2C19, CYP2D6, CYP3A4, UGT1A4, UGT2B10",
+      "quote": "Drugs: Imipramine | Enzymes and transporters: CYP1A2, CYP2C19, CYP2D6, CYP3A4, UGT1A4, UGT2B10 | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (B); CYP2D6 (B)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4619,7 +4619,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Imipramine CYP1A2, CYP2C19, CYP2D6, CYP3A4, UGT1A4, UGT2B10",
+      "quote": "Drugs: Imipramine | Enzymes and transporters: CYP1A2, CYP2C19, CYP2D6, CYP3A4, UGT1A4, UGT2B10 | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (B); CYP2D6 (B)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4632,7 +4632,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Imipramine CYP1A2, CYP2C19, CYP2D6, CYP3A4, UGT1A4, UGT2B10",
+      "quote": "Drugs: Imipramine | Enzymes and transporters: CYP1A2, CYP2C19, CYP2D6, CYP3A4, UGT1A4, UGT2B10 | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (B); CYP2D6 (B)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4645,7 +4645,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Imipramine CYP1A2, CYP2C19, CYP2D6, CYP3A4, UGT1A4, UGT2B10",
+      "quote": "Drugs: Imipramine | Enzymes and transporters: CYP1A2, CYP2C19, CYP2D6, CYP3A4, UGT1A4, UGT2B10 | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (B); CYP2D6 (B)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4658,7 +4658,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Imipramine CYP1A2, CYP2C19, CYP2D6, CYP3A4, UGT1A4, UGT2B10",
+      "quote": "Drugs: Imipramine | Enzymes and transporters: CYP1A2, CYP2C19, CYP2D6, CYP3A4, UGT1A4, UGT2B10 | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (B); CYP2D6 (B)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4671,7 +4671,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Imipramine CYP1A2, CYP2C19, CYP2D6, CYP3A4, UGT1A4, UGT2B10",
+      "quote": "Drugs: Imipramine | Enzymes and transporters: CYP1A2, CYP2C19, CYP2D6, CYP3A4, UGT1A4, UGT2B10 | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (B); CYP2D6 (B)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4686,7 +4686,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Ketamine CYP2B6, CYP2C9, CYP3A4",
+      "quote": "Drugs: Ketamine | Enzymes and transporters: CYP2B6, CYP2C9, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4699,7 +4699,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Ketamine CYP2B6, CYP2C9, CYP3A4",
+      "quote": "Drugs: Ketamine | Enzymes and transporters: CYP2B6, CYP2C9, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4712,7 +4712,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Ketamine CYP2B6, CYP2C9, CYP3A4",
+      "quote": "Drugs: Ketamine | Enzymes and transporters: CYP2B6, CYP2C9, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4727,7 +4727,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Lacosamide Renal clearance, CYP2C19",
+      "quote": "Drugs: Lacosamide | Enzymes and transporters: Renal clearance, CYP2C19",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4742,7 +4742,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Lamotrigine UGT1A4, UGT3B7, P-gp (ABCB1), BCRP (ABCG2)",
+      "quote": "Drugs: Lamotrigine | Enzymes and transporters: UGT1A4, UGT3B7, P-gp (ABCB1), BCRP (ABCG2)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4755,7 +4755,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Lamotrigine UGT1A4, UGT3B7, P-gp (ABCB1), BCRP (ABCG2)",
+      "quote": "Drugs: Lamotrigine | Enzymes and transporters: UGT1A4, UGT3B7, P-gp (ABCB1), BCRP (ABCG2)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4770,7 +4770,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Lemborexant CYP3A4",
+      "quote": "Drugs: Lemborexant | Enzymes and transporters: CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4785,7 +4785,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Levomilnacipran CYP3A4, P-gp (ABCB1)",
+      "quote": "Drugs: Levomilnacipran | Enzymes and transporters: CYP3A4, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): (not assigned)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4800,7 +4800,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Lisdexamfetamine Erythrocyte peptidase, CYP2D6",
+      "quote": "Drugs: Lisdexamfetamine | Enzymes and transporters: Erythrocyte peptidase, CYP2D6",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4815,7 +4815,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Lorazepam UGT2B15",
+      "quote": "Drugs: Lorazepam | Enzymes and transporters: UGT2B15",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4830,7 +4830,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Loxapine CYP3A4, CYP2D6, CYP1A2, CYP2C8, CYP2C19, FMO",
+      "quote": "Drugs: Loxapine | Enzymes and transporters: CYP3A4, CYP2D6, CYP1A2, CYP2C8, CYP2C19, FMO",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4843,7 +4843,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Loxapine CYP3A4, CYP2D6, CYP1A2, CYP2C8, CYP2C19, FMO",
+      "quote": "Drugs: Loxapine | Enzymes and transporters: CYP3A4, CYP2D6, CYP1A2, CYP2C8, CYP2C19, FMO",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4856,7 +4856,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Loxapine CYP3A4, CYP2D6, CYP1A2, CYP2C8, CYP2C19, FMO",
+      "quote": "Drugs: Loxapine | Enzymes and transporters: CYP3A4, CYP2D6, CYP1A2, CYP2C8, CYP2C19, FMO",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4869,7 +4869,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Loxapine CYP3A4, CYP2D6, CYP1A2, CYP2C8, CYP2C19, FMO",
+      "quote": "Drugs: Loxapine | Enzymes and transporters: CYP3A4, CYP2D6, CYP1A2, CYP2C8, CYP2C19, FMO",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4882,7 +4882,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Loxapine CYP3A4, CYP2D6, CYP1A2, CYP2C8, CYP2C19, FMO",
+      "quote": "Drugs: Loxapine | Enzymes and transporters: CYP3A4, CYP2D6, CYP1A2, CYP2C8, CYP2C19, FMO",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4897,7 +4897,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Lumateperone CYP1A2, CYP2C8, CYP3A4, UGT",
+      "quote": "Drugs: Lumateperone | Enzymes and transporters: CYP1A2, CYP2C8, CYP3A4, UGT",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4910,7 +4910,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Lumateperone CYP1A2, CYP2C8, CYP3A4, UGT",
+      "quote": "Drugs: Lumateperone | Enzymes and transporters: CYP1A2, CYP2C8, CYP3A4, UGT",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4923,7 +4923,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Lumateperone CYP1A2, CYP2C8, CYP3A4, UGT",
+      "quote": "Drugs: Lumateperone | Enzymes and transporters: CYP1A2, CYP2C8, CYP3A4, UGT",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4936,7 +4936,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Lumateperone CYP1A2, CYP2C8, CYP3A4, UGT",
+      "quote": "Drugs: Lumateperone | Enzymes and transporters: CYP1A2, CYP2C8, CYP3A4, UGT",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4951,7 +4951,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Lurasidone CYP3A4",
+      "quote": "Drugs: Lurasidone | Enzymes and transporters: CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4966,7 +4966,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Maprotiline CYP2D6, CYP1A2",
+      "quote": "Drugs: Maprotiline | Enzymes and transporters: CYP2D6, CYP1A2",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4979,7 +4979,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Maprotiline CYP2D6, CYP1A2",
+      "quote": "Drugs: Maprotiline | Enzymes and transporters: CYP2D6, CYP1A2",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -4994,7 +4994,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "MDMA (3,4-methylendioxy-N-methylamphetamin) COMT, CYP1A2, CYP3A4, CYP2C19, CYP2D6",
+      "quote": "Drugs: MDMA (3,4-methylendioxy-N-methylamphetamin) | Enzymes and transporters: COMT, CYP1A2, CYP3A4, CYP2C19, CYP2D6",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5007,7 +5007,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "MDMA (3,4-methylendioxy-N-methylamphetamin) COMT, CYP1A2, CYP3A4, CYP2C19, CYP2D6",
+      "quote": "Drugs: MDMA (3,4-methylendioxy-N-methylamphetamin) | Enzymes and transporters: COMT, CYP1A2, CYP3A4, CYP2C19, CYP2D6",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5020,7 +5020,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "MDMA (3,4-methylendioxy-N-methylamphetamin) COMT, CYP1A2, CYP3A4, CYP2C19, CYP2D6",
+      "quote": "Drugs: MDMA (3,4-methylendioxy-N-methylamphetamin) | Enzymes and transporters: COMT, CYP1A2, CYP3A4, CYP2C19, CYP2D6",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5033,7 +5033,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "MDMA (3,4-methylendioxy-N-methylamphetamin) COMT, CYP1A2, CYP3A4, CYP2C19, CYP2D6",
+      "quote": "Drugs: MDMA (3,4-methylendioxy-N-methylamphetamin) | Enzymes and transporters: COMT, CYP1A2, CYP3A4, CYP2C19, CYP2D6",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5048,7 +5048,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Melatonin CYP1A2",
+      "quote": "Drugs: Melatonin | Enzymes and transporters: CYP1A2",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5063,7 +5063,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Methadone CYP2B6, CYP3A4, CYP2D6, P-gp (ABCB1)",
+      "quote": "Drugs: Methadone | Enzymes and transporters: CYP2B6, CYP3A4, CYP2D6, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): (COMT and OPRM1 and CYP2D6: no recommendation (C), CYP2B6 provisional (B))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5076,7 +5076,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Methadone CYP2B6, CYP3A4, CYP2D6, P-gp (ABCB1)",
+      "quote": "Drugs: Methadone | Enzymes and transporters: CYP2B6, CYP3A4, CYP2D6, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): (COMT and OPRM1 and CYP2D6: no recommendation (C), CYP2B6 provisional (B))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5089,7 +5089,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Methadone CYP2B6, CYP3A4, CYP2D6, P-gp (ABCB1)",
+      "quote": "Drugs: Methadone | Enzymes and transporters: CYP2B6, CYP3A4, CYP2D6, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): (COMT and OPRM1 and CYP2D6: no recommendation (C), CYP2B6 provisional (B))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5104,7 +5104,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Mianserin CYP2D6, CYP1A2, CYP3A4",
+      "quote": "Drugs: Mianserin | Enzymes and transporters: CYP2D6, CYP1A2, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5117,7 +5117,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Mianserin CYP2D6, CYP1A2, CYP3A4",
+      "quote": "Drugs: Mianserin | Enzymes and transporters: CYP2D6, CYP1A2, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5130,7 +5130,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Mianserin CYP2D6, CYP1A2, CYP3A4",
+      "quote": "Drugs: Mianserin | Enzymes and transporters: CYP2D6, CYP1A2, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5145,7 +5145,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Midazolam CYP3A4, UGT1A4",
+      "quote": "Drugs: Midazolam | Enzymes and transporters: CYP3A4, UGT1A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5158,7 +5158,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Midazolam CYP3A4, UGT1A4",
+      "quote": "Drugs: Midazolam | Enzymes and transporters: CYP3A4, UGT1A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5173,7 +5173,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Mirtazapine CYP3A4, CYP1A2, CYP2D6",
+      "quote": "Drugs: Mirtazapine | Enzymes and transporters: CYP3A4, CYP1A2, CYP2D6 | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6: provisional; B/C)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5186,7 +5186,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Mirtazapine CYP3A4, CYP1A2, CYP2D6",
+      "quote": "Drugs: Mirtazapine | Enzymes and transporters: CYP3A4, CYP1A2, CYP2D6 | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6: provisional; B/C)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5199,7 +5199,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Mirtazapine CYP3A4, CYP1A2, CYP2D6",
+      "quote": "Drugs: Mirtazapine | Enzymes and transporters: CYP3A4, CYP1A2, CYP2D6 | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6: provisional; B/C)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5214,7 +5214,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Moclobemide CYP2C19, CYP2D6",
+      "quote": "Drugs: Moclobemide | Enzymes and transporters: CYP2C19, CYP2D6",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5227,7 +5227,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Moclobemide CYP2C19, CYP2D6",
+      "quote": "Drugs: Moclobemide | Enzymes and transporters: CYP2C19, CYP2D6",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5242,7 +5242,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Modafinil Amide hydrolase, CYP3A4",
+      "quote": "Drugs: Modafinil | Enzymes and transporters: Amide hydrolase, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5257,7 +5257,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Morphine CYP2C8, CYP3A4, UGT2B7",
+      "quote": "Drugs: Morphine | Enzymes and transporters: CYP2C8, CYP3A4, UGT2B7 | CPIC pharmacogenetic gene recommendations (CPIC level): (OPRM1 and COMT: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5270,7 +5270,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Morphine CYP2C8, CYP3A4, UGT2B7",
+      "quote": "Drugs: Morphine | Enzymes and transporters: CYP2C8, CYP3A4, UGT2B7 | CPIC pharmacogenetic gene recommendations (CPIC level): (OPRM1 and COMT: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5283,7 +5283,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Morphine CYP2C8, CYP3A4, UGT2B7",
+      "quote": "Drugs: Morphine | Enzymes and transporters: CYP2C8, CYP3A4, UGT2B7 | CPIC pharmacogenetic gene recommendations (CPIC level): (OPRM1 and COMT: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5298,7 +5298,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Nabilone CYP2C9, unspecified metabolism",
+      "quote": "Drugs: Nabilone | Enzymes and transporters: CYP2C9, unspecified metabolism",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5313,7 +5313,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Nalmefene UGT",
+      "quote": "Drugs: Nalmefene | Enzymes and transporters: UGT",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5328,7 +5328,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 9,
-      "quote": "Naloxone UGT2B7, AKR1C",
+      "quote": "Drugs: Naloxone | Enzymes and transporters: UGT2B7, AKR1C",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5343,7 +5343,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Nicotine CYP2A6, UGT1A1, UGT1A2, UGT2B10",
+      "quote": "Drugs: Nicotine | Enzymes and transporters: CYP2A6, UGT1A1, UGT1A2, UGT2B10",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5356,7 +5356,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Nicotine CYP2A6, UGT1A1, UGT1A2, UGT2B10",
+      "quote": "Drugs: Nicotine | Enzymes and transporters: CYP2A6, UGT1A1, UGT1A2, UGT2B10",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5369,7 +5369,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Nicotine CYP2A6, UGT1A1, UGT1A2, UGT2B10",
+      "quote": "Drugs: Nicotine | Enzymes and transporters: CYP2A6, UGT1A1, UGT1A2, UGT2B10",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5382,7 +5382,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Nicotine CYP2A6, UGT1A1, UGT1A2, UGT2B10",
+      "quote": "Drugs: Nicotine | Enzymes and transporters: CYP2A6, UGT1A1, UGT1A2, UGT2B10",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5397,7 +5397,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Nitrazepam CYP3A4",
+      "quote": "Drugs: Nitrazepam | Enzymes and transporters: CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5412,7 +5412,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Nortriptyline CYP2D6, P-gp (ABCB1)",
+      "quote": "Drugs: Nortriptyline | Enzymes and transporters: CYP2D6, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2D6 (A)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5427,7 +5427,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Olanzapine UGT1A4, UGT2B10, FMO, CYP1A2, CYP2D6, P-gp (ABCB1)",
+      "quote": "Drugs: Olanzapine | Enzymes and transporters: UGT1A4, UGT2B10, FMO, CYP1A2, CYP2D6, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): (HTR2C and MC4R provisional (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5440,7 +5440,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Olanzapine UGT1A4, UGT2B10, FMO, CYP1A2, CYP2D6, P-gp (ABCB1)",
+      "quote": "Drugs: Olanzapine | Enzymes and transporters: UGT1A4, UGT2B10, FMO, CYP1A2, CYP2D6, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): (HTR2C and MC4R provisional (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5453,7 +5453,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Olanzapine UGT1A4, UGT2B10, FMO, CYP1A2, CYP2D6, P-gp (ABCB1)",
+      "quote": "Drugs: Olanzapine | Enzymes and transporters: UGT1A4, UGT2B10, FMO, CYP1A2, CYP2D6, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): (HTR2C and MC4R provisional (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5466,7 +5466,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Olanzapine UGT1A4, UGT2B10, FMO, CYP1A2, CYP2D6, P-gp (ABCB1)",
+      "quote": "Drugs: Olanzapine | Enzymes and transporters: UGT1A4, UGT2B10, FMO, CYP1A2, CYP2D6, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): (HTR2C and MC4R provisional (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5481,7 +5481,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Opipramol CYP2D6",
+      "quote": "Drugs: Opipramol | Enzymes and transporters: CYP2D6",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5496,7 +5496,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Oxazepam UGT1A9, UGT2B7, UGT2B15",
+      "quote": "Drugs: Oxazepam | Enzymes and transporters: UGT1A9, UGT2B7, UGT2B15",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5509,7 +5509,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Oxazepam UGT1A9, UGT2B7, UGT2B15",
+      "quote": "Drugs: Oxazepam | Enzymes and transporters: UGT1A9, UGT2B7, UGT2B15",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5522,7 +5522,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Oxazepam UGT1A9, UGT2B7, UGT2B15",
+      "quote": "Drugs: Oxazepam | Enzymes and transporters: UGT1A9, UGT2B7, UGT2B15",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5537,7 +5537,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Oxcarbazepine AKR, UGT2B15, P-gp (ABCB1)",
+      "quote": "Drugs: Oxcarbazepine | Enzymes and transporters: AKR, UGT2B15, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): (HLA-B (A), HLA-A: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5552,7 +5552,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Oxycodone CYP2D6, CYP3A4",
+      "quote": "Drugs: Oxycodone | Enzymes and transporters: CYP2D6, CYP3A4 | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2D6: no recommendation (C), COMT: no recommendation (C), OPRM1: no recommendation (C)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5565,7 +5565,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Oxycodone CYP2D6, CYP3A4",
+      "quote": "Drugs: Oxycodone | Enzymes and transporters: CYP2D6, CYP3A4 | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2D6: no recommendation (C), COMT: no recommendation (C), OPRM1: no recommendation (C)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5580,7 +5580,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Paliperidone (9-hydroxyrisperidone) Renal clearance, CYP3A4, UGT, P-gp (ABCB1), BCRP (ABCG2)",
+      "quote": "Drugs: Paliperidone (9-hydroxyrisperidone) | Enzymes and transporters: Renal clearance, CYP3A4, UGT, P-gp (ABCB1), BCRP (ABCG2)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5593,7 +5593,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Paliperidone (9-hydroxyrisperidone) Renal clearance, CYP3A4, UGT, P-gp (ABCB1), BCRP (ABCG2)",
+      "quote": "Drugs: Paliperidone (9-hydroxyrisperidone) | Enzymes and transporters: Renal clearance, CYP3A4, UGT, P-gp (ABCB1), BCRP (ABCG2)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5608,7 +5608,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Paroxetine CYP2D6, CYP3A4, P-gp (ABCB1)",
+      "quote": "Drugs: Paroxetine | Enzymes and transporters: CYP2D6, CYP3A4, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2D6 (A); (CYP2C19: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5621,7 +5621,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Paroxetine CYP2D6, CYP3A4, P-gp (ABCB1)",
+      "quote": "Drugs: Paroxetine | Enzymes and transporters: CYP2D6, CYP3A4, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2D6 (A); (CYP2C19: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5636,7 +5636,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Perampanel CYP3A4, CYP2B6, UGT1A1, UGT1A4",
+      "quote": "Drugs: Perampanel | Enzymes and transporters: CYP3A4, CYP2B6, UGT1A1, UGT1A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5649,7 +5649,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Perampanel CYP3A4, CYP2B6, UGT1A1, UGT1A4",
+      "quote": "Drugs: Perampanel | Enzymes and transporters: CYP3A4, CYP2B6, UGT1A1, UGT1A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5662,7 +5662,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Perampanel CYP3A4, CYP2B6, UGT1A1, UGT1A4",
+      "quote": "Drugs: Perampanel | Enzymes and transporters: CYP3A4, CYP2B6, UGT1A1, UGT1A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5675,7 +5675,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Perampanel CYP3A4, CYP2B6, UGT1A1, UGT1A4",
+      "quote": "Drugs: Perampanel | Enzymes and transporters: CYP3A4, CYP2B6, UGT1A1, UGT1A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5690,7 +5690,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Perazine CYP1A2, CYP2C9, CYP2C19, CYP3A4, FMO",
+      "quote": "Drugs: Perazine | Enzymes and transporters: CYP1A2, CYP2C9, CYP2C19, CYP3A4, FMO",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5703,7 +5703,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Perazine CYP1A2, CYP2C9, CYP2C19, CYP3A4, FMO",
+      "quote": "Drugs: Perazine | Enzymes and transporters: CYP1A2, CYP2C9, CYP2C19, CYP3A4, FMO",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5716,7 +5716,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Perazine CYP1A2, CYP2C9, CYP2C19, CYP3A4, FMO",
+      "quote": "Drugs: Perazine | Enzymes and transporters: CYP1A2, CYP2C9, CYP2C19, CYP3A4, FMO",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5729,7 +5729,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Perazine CYP1A2, CYP2C9, CYP2C19, CYP3A4, FMO",
+      "quote": "Drugs: Perazine | Enzymes and transporters: CYP1A2, CYP2C9, CYP2C19, CYP3A4, FMO",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5744,7 +5744,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Perphenazine CYP1A2, CYP2C19, CYP2D6, CYP3A4",
+      "quote": "Drugs: Perphenazine | Enzymes and transporters: CYP1A2, CYP2C19, CYP2D6, CYP3A4 | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6 provisional (B/C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5757,7 +5757,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Perphenazine CYP1A2, CYP2C19, CYP2D6, CYP3A4",
+      "quote": "Drugs: Perphenazine | Enzymes and transporters: CYP1A2, CYP2C19, CYP2D6, CYP3A4 | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6 provisional (B/C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5770,7 +5770,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Perphenazine CYP1A2, CYP2C19, CYP2D6, CYP3A4",
+      "quote": "Drugs: Perphenazine | Enzymes and transporters: CYP1A2, CYP2C19, CYP2D6, CYP3A4 | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6 provisional (B/C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5783,7 +5783,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Perphenazine CYP1A2, CYP2C19, CYP2D6, CYP3A4",
+      "quote": "Drugs: Perphenazine | Enzymes and transporters: CYP1A2, CYP2C19, CYP2D6, CYP3A4 | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6 provisional (B/C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5798,7 +5798,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Phenobarbital CYP2C19, UGT1A4, CYP2C9, CYP2E1",
+      "quote": "Drugs: Phenobarbital | Enzymes and transporters: CYP2C19, UGT1A4, CYP2C9, CYP2E1",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5811,7 +5811,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Phenobarbital CYP2C19, UGT1A4, CYP2C9, CYP2E1",
+      "quote": "Drugs: Phenobarbital | Enzymes and transporters: CYP2C19, UGT1A4, CYP2C9, CYP2E1",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5824,7 +5824,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Phenobarbital CYP2C19, UGT1A4, CYP2C9, CYP2E1",
+      "quote": "Drugs: Phenobarbital | Enzymes and transporters: CYP2C19, UGT1A4, CYP2C9, CYP2E1",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5837,7 +5837,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Phenobarbital CYP2C19, UGT1A4, CYP2C9, CYP2E1",
+      "quote": "Drugs: Phenobarbital | Enzymes and transporters: CYP2C19, UGT1A4, CYP2C9, CYP2E1",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5852,7 +5852,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Phenytoin CYP2C9, CYP2C19, UGT2B15",
+      "quote": "Drugs: Phenytoin | Enzymes and transporters: CYP2C9, CYP2C19, UGT2B15 | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C9 (A)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5865,7 +5865,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Phenytoin CYP2C9, CYP2C19, UGT2B15",
+      "quote": "Drugs: Phenytoin | Enzymes and transporters: CYP2C9, CYP2C19, UGT2B15 | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C9 (A)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5878,7 +5878,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Phenytoin CYP2C9, CYP2C19, UGT2B15",
+      "quote": "Drugs: Phenytoin | Enzymes and transporters: CYP2C9, CYP2C19, UGT2B15 | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C9 (A)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5893,7 +5893,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Pimavanserin CYP3A4",
+      "quote": "Drugs: Pimavanserin | Enzymes and transporters: CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5908,7 +5908,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Pimozide CYP1A2, CYP2D6, CYP3A4",
+      "quote": "Drugs: Pimozide | Enzymes and transporters: CYP1A2, CYP2D6, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5921,7 +5921,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Pimozide CYP1A2, CYP2D6, CYP3A4",
+      "quote": "Drugs: Pimozide | Enzymes and transporters: CYP1A2, CYP2D6, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5934,7 +5934,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Pimozide CYP1A2, CYP2D6, CYP3A4",
+      "quote": "Drugs: Pimozide | Enzymes and transporters: CYP1A2, CYP2D6, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5949,7 +5949,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Pitolisant CYP2D6, CYP3A4",
+      "quote": "Drugs: Pitolisant | Enzymes and transporters: CYP2D6, CYP3A4 | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6 provisional (A))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5962,7 +5962,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Pitolisant CYP2D6, CYP3A4",
+      "quote": "Drugs: Pitolisant | Enzymes and transporters: CYP2D6, CYP3A4 | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6 provisional (A))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5977,7 +5977,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Prazepam CYP3A4, UGT, unknown",
+      "quote": "Drugs: Prazepam | Enzymes and transporters: CYP3A4, UGT, unknown",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -5990,7 +5990,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Prazepam CYP3A4, UGT, unknown",
+      "quote": "Drugs: Prazepam | Enzymes and transporters: CYP3A4, UGT, unknown",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6005,7 +6005,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Primidone CYP2C9, CYP2C19, CYP2E1",
+      "quote": "Drugs: Primidone | Enzymes and transporters: CYP2C9, CYP2C19, CYP2E1",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6018,7 +6018,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Primidone CYP2C9, CYP2C19, CYP2E1",
+      "quote": "Drugs: Primidone | Enzymes and transporters: CYP2C9, CYP2C19, CYP2E1",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6031,7 +6031,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Primidone CYP2C9, CYP2C19, CYP2E1",
+      "quote": "Drugs: Primidone | Enzymes and transporters: CYP2C9, CYP2C19, CYP2E1",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6046,7 +6046,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Promethazine CYP2D6",
+      "quote": "Drugs: Promethazine | Enzymes and transporters: CYP2D6",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6061,7 +6061,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Quetiapine CYP3A4, CYP2D6, P-gp (ABCB1)",
+      "quote": "Drugs: Quetiapine | Enzymes and transporters: CYP3A4, CYP2D6, P-gp (ABCB1)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6074,7 +6074,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Quetiapine CYP3A4, CYP2D6, P-gp (ABCB1)",
+      "quote": "Drugs: Quetiapine | Enzymes and transporters: CYP3A4, CYP2D6, P-gp (ABCB1)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6089,7 +6089,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Ramelteon CYP1A2, CYP2C19, CYP3A4",
+      "quote": "Drugs: Ramelteon | Enzymes and transporters: CYP1A2, CYP2C19, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6102,7 +6102,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Ramelteon CYP1A2, CYP2C19, CYP3A4",
+      "quote": "Drugs: Ramelteon | Enzymes and transporters: CYP1A2, CYP2C19, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6115,7 +6115,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Ramelteon CYP1A2, CYP2C19, CYP3A4",
+      "quote": "Drugs: Ramelteon | Enzymes and transporters: CYP1A2, CYP2C19, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6130,7 +6130,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Rasagiline CYP1A2",
+      "quote": "Drugs: Rasagiline | Enzymes and transporters: CYP1A2",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6145,7 +6145,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Reboxetine CYP3A4",
+      "quote": "Drugs: Reboxetine | Enzymes and transporters: CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6160,7 +6160,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Risperidone CYP2D6, CYP3A4, P-gp (ABCB1), BCRP (ABCG2)",
+      "quote": "Drugs: Risperidone | Enzymes and transporters: CYP2D6, CYP3A4, P-gp (ABCB1), BCRP (ABCG2) | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6 provisional (B))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6173,7 +6173,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Risperidone CYP2D6, CYP3A4, P-gp (ABCB1), BCRP (ABCG2)",
+      "quote": "Drugs: Risperidone | Enzymes and transporters: CYP2D6, CYP3A4, P-gp (ABCB1), BCRP (ABCG2) | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6 provisional (B))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6188,7 +6188,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Ropinirole CYP1A2",
+      "quote": "Drugs: Ropinirole | Enzymes and transporters: CYP1A2",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6203,7 +6203,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Rotigotine CYP2C19, CYP1A1, CYP1A2, CYP2D6, CYP3A4, SULT1A1, SULT1A2, SULT1A3, SULT1B1, SULT1C4, SULT1E1, UGT",
+      "quote": "Drugs: Rotigotine | Enzymes and transporters: CYP2C19, CYP1A1, CYP1A2, CYP2D6, CYP3A4, SULT1A1, SULT1A2, SULT1A3, SULT1B1, SULT1C4, SULT1E1, UGT",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6216,7 +6216,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Rotigotine CYP2C19, CYP1A1, CYP1A2, CYP2D6, CYP3A4, SULT1A1, SULT1A2, SULT1A3, SULT1B1, SULT1C4, SULT1E1, UGT",
+      "quote": "Drugs: Rotigotine | Enzymes and transporters: CYP2C19, CYP1A1, CYP1A2, CYP2D6, CYP3A4, SULT1A1, SULT1A2, SULT1A3, SULT1B1, SULT1C4, SULT1E1, UGT",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6229,7 +6229,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Rotigotine CYP2C19, CYP1A1, CYP1A2, CYP2D6, CYP3A4, SULT1A1, SULT1A2, SULT1A3, SULT1B1, SULT1C4, SULT1E1, UGT",
+      "quote": "Drugs: Rotigotine | Enzymes and transporters: CYP2C19, CYP1A1, CYP1A2, CYP2D6, CYP3A4, SULT1A1, SULT1A2, SULT1A3, SULT1B1, SULT1C4, SULT1E1, UGT",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6242,7 +6242,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Rotigotine CYP2C19, CYP1A1, CYP1A2, CYP2D6, CYP3A4, SULT1A1, SULT1A2, SULT1A3, SULT1B1, SULT1C4, SULT1E1, UGT",
+      "quote": "Drugs: Rotigotine | Enzymes and transporters: CYP2C19, CYP1A1, CYP1A2, CYP2D6, CYP3A4, SULT1A1, SULT1A2, SULT1A3, SULT1B1, SULT1C4, SULT1E1, UGT",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6255,7 +6255,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Rotigotine CYP2C19, CYP1A1, CYP1A2, CYP2D6, CYP3A4, SULT1A1, SULT1A2, SULT1A3, SULT1B1, SULT1C4, SULT1E1, UGT",
+      "quote": "Drugs: Rotigotine | Enzymes and transporters: CYP2C19, CYP1A1, CYP1A2, CYP2D6, CYP3A4, SULT1A1, SULT1A2, SULT1A3, SULT1B1, SULT1C4, SULT1E1, UGT",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6268,7 +6268,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Rotigotine CYP2C19, CYP1A1, CYP1A2, CYP2D6, CYP3A4, SULT1A1, SULT1A2, SULT1A3, SULT1B1, SULT1C4, SULT1E1, UGT",
+      "quote": "Drugs: Rotigotine | Enzymes and transporters: CYP2C19, CYP1A1, CYP1A2, CYP2D6, CYP3A4, SULT1A1, SULT1A2, SULT1A3, SULT1B1, SULT1C4, SULT1E1, UGT",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6283,7 +6283,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Safinamid Renal clearance, UGT",
+      "quote": "Drugs: Safinamid | Enzymes and transporters: Renal clearance, UGT",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6298,7 +6298,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Selegiline CYP2B6",
+      "quote": "Drugs: Selegiline | Enzymes and transporters: CYP2B6",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6313,7 +6313,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Sertindole CYP2D6, CYP3A4",
+      "quote": "Drugs: Sertindole | Enzymes and transporters: CYP2D6, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6326,7 +6326,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 10,
-      "quote": "Sertindole CYP2D6, CYP3A4",
+      "quote": "Drugs: Sertindole | Enzymes and transporters: CYP2D6, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6341,7 +6341,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Sertraline CYP2B6, CYP2C19, CYP2C9, CYP2D6, CYP3A4, UGT1A1, P-gp (ABCB1)",
+      "quote": "Drugs: Sertraline | Enzymes and transporters: CYP2B6, CYP2C19, CYP2C9, CYP2D6, CYP3A4, UGT1A1, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (A); CYP2B6 (B); (CYP2D6: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6354,7 +6354,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Sertraline CYP2B6, CYP2C19, CYP2C9, CYP2D6, CYP3A4, UGT1A1, P-gp (ABCB1)",
+      "quote": "Drugs: Sertraline | Enzymes and transporters: CYP2B6, CYP2C19, CYP2C9, CYP2D6, CYP3A4, UGT1A1, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (A); CYP2B6 (B); (CYP2D6: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6367,7 +6367,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Sertraline CYP2B6, CYP2C19, CYP2C9, CYP2D6, CYP3A4, UGT1A1, P-gp (ABCB1)",
+      "quote": "Drugs: Sertraline | Enzymes and transporters: CYP2B6, CYP2C19, CYP2C9, CYP2D6, CYP3A4, UGT1A1, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (A); CYP2B6 (B); (CYP2D6: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6380,7 +6380,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Sertraline CYP2B6, CYP2C19, CYP2C9, CYP2D6, CYP3A4, UGT1A1, P-gp (ABCB1)",
+      "quote": "Drugs: Sertraline | Enzymes and transporters: CYP2B6, CYP2C19, CYP2C9, CYP2D6, CYP3A4, UGT1A1, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (A); CYP2B6 (B); (CYP2D6: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6393,7 +6393,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Sertraline CYP2B6, CYP2C19, CYP2C9, CYP2D6, CYP3A4, UGT1A1, P-gp (ABCB1)",
+      "quote": "Drugs: Sertraline | Enzymes and transporters: CYP2B6, CYP2C19, CYP2C9, CYP2D6, CYP3A4, UGT1A1, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (A); CYP2B6 (B); (CYP2D6: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6406,7 +6406,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Sertraline CYP2B6, CYP2C19, CYP2C9, CYP2D6, CYP3A4, UGT1A1, P-gp (ABCB1)",
+      "quote": "Drugs: Sertraline | Enzymes and transporters: CYP2B6, CYP2C19, CYP2C9, CYP2D6, CYP3A4, UGT1A1, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (A); CYP2B6 (B); (CYP2D6: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6421,7 +6421,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Solriamfetol Renal clearance, CYP3A4",
+      "quote": "Drugs: Solriamfetol | Enzymes and transporters: Renal clearance, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6436,7 +6436,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Suvorexant CYP3A4",
+      "quote": "Drugs: Suvorexant | Enzymes and transporters: CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6451,7 +6451,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Tasimelteon CYP1A2, CYP3A4",
+      "quote": "Drugs: Tasimelteon | Enzymes and transporters: CYP1A2, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6464,7 +6464,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Tasimelteon CYP1A2, CYP3A4",
+      "quote": "Drugs: Tasimelteon | Enzymes and transporters: CYP1A2, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6479,7 +6479,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Temazepam CYP219, UGT2B7",
+      "quote": "Drugs: Temazepam | Enzymes and transporters: CYP219, UGT2B7",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6494,7 +6494,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Tetrahydrocannabinol (THC) CYP2C9, CYP2C19, CYP3A4",
+      "quote": "Drugs: Tetrahydrocannabinol (THC) | Enzymes and transporters: CYP2C9, CYP2C19, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6507,7 +6507,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Tetrahydrocannabinol (THC) CYP2C9, CYP2C19, CYP3A4",
+      "quote": "Drugs: Tetrahydrocannabinol (THC) | Enzymes and transporters: CYP2C9, CYP2C19, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6520,7 +6520,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Tetrahydrocannabinol (THC) CYP2C9, CYP2C19, CYP3A4",
+      "quote": "Drugs: Tetrahydrocannabinol (THC) | Enzymes and transporters: CYP2C9, CYP2C19, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6535,7 +6535,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Thioridazine CYP1A2, CYP2D6, CYP3A4",
+      "quote": "Drugs: Thioridazine | Enzymes and transporters: CYP1A2, CYP2D6, CYP3A4 | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6 provisional (B/C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6548,7 +6548,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Thioridazine CYP1A2, CYP2D6, CYP3A4",
+      "quote": "Drugs: Thioridazine | Enzymes and transporters: CYP1A2, CYP2D6, CYP3A4 | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6 provisional (B/C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6561,7 +6561,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Thioridazine CYP1A2, CYP2D6, CYP3A4",
+      "quote": "Drugs: Thioridazine | Enzymes and transporters: CYP1A2, CYP2D6, CYP3A4 | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6 provisional (B/C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6576,7 +6576,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Tiagabine CYP3A4",
+      "quote": "Drugs: Tiagabine | Enzymes and transporters: CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6591,7 +6591,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Tolcapone COMT, CYP2A6, CYP3A4, UGT",
+      "quote": "Drugs: Tolcapone | Enzymes and transporters: COMT, CYP2A6, CYP3A4, UGT",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6604,7 +6604,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Tolcapone COMT, CYP2A6, CYP3A4, UGT",
+      "quote": "Drugs: Tolcapone | Enzymes and transporters: COMT, CYP2A6, CYP3A4, UGT",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6617,7 +6617,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Tolcapone COMT, CYP2A6, CYP3A4, UGT",
+      "quote": "Drugs: Tolcapone | Enzymes and transporters: COMT, CYP2A6, CYP3A4, UGT",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6632,7 +6632,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Topiramate UGT, P-gp (ABCB1)",
+      "quote": "Drugs: Topiramate | Enzymes and transporters: UGT, P-gp (ABCB1)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6647,7 +6647,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Trazodone CYP3A4, CYP2D6",
+      "quote": "Drugs: Trazodone | Enzymes and transporters: CYP3A4, CYP2D6",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6660,7 +6660,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Trazodone CYP3A4, CYP2D6",
+      "quote": "Drugs: Trazodone | Enzymes and transporters: CYP3A4, CYP2D6",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6675,7 +6675,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Triazolam CYP3A4",
+      "quote": "Drugs: Triazolam | Enzymes and transporters: CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6690,7 +6690,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Trifluoperazine UGT1A4",
+      "quote": "Drugs: Trifluoperazine | Enzymes and transporters: UGT1A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6705,7 +6705,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Trimipramine CYP2C19, CYP2D6, CYP2C9, CYP3A4, UGT2B10",
+      "quote": "Drugs: Trimipramine | Enzymes and transporters: CYP2C19, CYP2D6, CYP2C9, CYP3A4, UGT2B10 | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (B); CYP2D6 (B)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6718,7 +6718,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Trimipramine CYP2C19, CYP2D6, CYP2C9, CYP3A4, UGT2B10",
+      "quote": "Drugs: Trimipramine | Enzymes and transporters: CYP2C19, CYP2D6, CYP2C9, CYP3A4, UGT2B10 | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (B); CYP2D6 (B)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6731,7 +6731,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Trimipramine CYP2C19, CYP2D6, CYP2C9, CYP3A4, UGT2B10",
+      "quote": "Drugs: Trimipramine | Enzymes and transporters: CYP2C19, CYP2D6, CYP2C9, CYP3A4, UGT2B10 | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (B); CYP2D6 (B)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6744,7 +6744,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Trimipramine CYP2C19, CYP2D6, CYP2C9, CYP3A4, UGT2B10",
+      "quote": "Drugs: Trimipramine | Enzymes and transporters: CYP2C19, CYP2D6, CYP2C9, CYP3A4, UGT2B10 | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (B); CYP2D6 (B)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6757,7 +6757,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Trimipramine CYP2C19, CYP2D6, CYP2C9, CYP3A4, UGT2B10",
+      "quote": "Drugs: Trimipramine | Enzymes and transporters: CYP2C19, CYP2D6, CYP2C9, CYP3A4, UGT2B10 | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2C19 (B); CYP2D6 (B)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6772,7 +6772,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Valproic acid UGT1A3, UGT1A6, UGT2B7, CYP2A6, CYP2B6, CYP2C9, CYP219, beta-oxidation",
+      "quote": "Drugs: Valproic acid | Enzymes and transporters: UGT1A3, UGT1A6, UGT2B7, CYP2A6, CYP2B6, CYP2C9, CYP219, beta-oxidation",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6785,7 +6785,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Valproic acid UGT1A3, UGT1A6, UGT2B7, CYP2A6, CYP2B6, CYP2C9, CYP219, beta-oxidation",
+      "quote": "Drugs: Valproic acid | Enzymes and transporters: UGT1A3, UGT1A6, UGT2B7, CYP2A6, CYP2B6, CYP2C9, CYP219, beta-oxidation",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6798,7 +6798,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Valproic acid UGT1A3, UGT1A6, UGT2B7, CYP2A6, CYP2B6, CYP2C9, CYP219, beta-oxidation",
+      "quote": "Drugs: Valproic acid | Enzymes and transporters: UGT1A3, UGT1A6, UGT2B7, CYP2A6, CYP2B6, CYP2C9, CYP219, beta-oxidation",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6811,7 +6811,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Valproic acid UGT1A3, UGT1A6, UGT2B7, CYP2A6, CYP2B6, CYP2C9, CYP219, beta-oxidation",
+      "quote": "Drugs: Valproic acid | Enzymes and transporters: UGT1A3, UGT1A6, UGT2B7, CYP2A6, CYP2B6, CYP2C9, CYP219, beta-oxidation",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6824,7 +6824,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Valproic acid UGT1A3, UGT1A6, UGT2B7, CYP2A6, CYP2B6, CYP2C9, CYP219, beta-oxidation",
+      "quote": "Drugs: Valproic acid | Enzymes and transporters: UGT1A3, UGT1A6, UGT2B7, CYP2A6, CYP2B6, CYP2C9, CYP219, beta-oxidation",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6837,7 +6837,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Valproic acid UGT1A3, UGT1A6, UGT2B7, CYP2A6, CYP2B6, CYP2C9, CYP219, beta-oxidation",
+      "quote": "Drugs: Valproic acid | Enzymes and transporters: UGT1A3, UGT1A6, UGT2B7, CYP2A6, CYP2B6, CYP2C9, CYP219, beta-oxidation",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6852,7 +6852,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Venlafaxine CYP2C19, CYP2D6, CYP2C9, CYP3A4, P-gp (ABCB1)",
+      "quote": "Drugs: Venlafaxine | Enzymes and transporters: CYP2C19, CYP2D6, CYP2C9, CYP3A4, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2D6 (B); (CYP2C19: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6865,7 +6865,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Venlafaxine CYP2C19, CYP2D6, CYP2C9, CYP3A4, P-gp (ABCB1)",
+      "quote": "Drugs: Venlafaxine | Enzymes and transporters: CYP2C19, CYP2D6, CYP2C9, CYP3A4, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2D6 (B); (CYP2C19: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6878,7 +6878,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Venlafaxine CYP2C19, CYP2D6, CYP2C9, CYP3A4, P-gp (ABCB1)",
+      "quote": "Drugs: Venlafaxine | Enzymes and transporters: CYP2C19, CYP2D6, CYP2C9, CYP3A4, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2D6 (B); (CYP2C19: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6891,7 +6891,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Venlafaxine CYP2C19, CYP2D6, CYP2C9, CYP3A4, P-gp (ABCB1)",
+      "quote": "Drugs: Venlafaxine | Enzymes and transporters: CYP2C19, CYP2D6, CYP2C9, CYP3A4, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2D6 (B); (CYP2C19: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6906,7 +6906,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Vilazodone CYP3A4, P-gp (ABCB1)",
+      "quote": "Drugs: Vilazodone | Enzymes and transporters: CYP3A4, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): (Not assigned)",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6921,7 +6921,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Vortioxetine CYP2D6, CYP3A4, CYP2A6, CYP2C9, P-gp (ABCB1)",
+      "quote": "Drugs: Vortioxetine | Enzymes and transporters: CYP2D6, CYP3A4, CYP2A6, CYP2C9, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2D6 (A), (CYP2C19: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6934,7 +6934,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Vortioxetine CYP2D6, CYP3A4, CYP2A6, CYP2C9, P-gp (ABCB1)",
+      "quote": "Drugs: Vortioxetine | Enzymes and transporters: CYP2D6, CYP3A4, CYP2A6, CYP2C9, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2D6 (A), (CYP2C19: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6947,7 +6947,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Vortioxetine CYP2D6, CYP3A4, CYP2A6, CYP2C9, P-gp (ABCB1)",
+      "quote": "Drugs: Vortioxetine | Enzymes and transporters: CYP2D6, CYP3A4, CYP2A6, CYP2C9, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2D6 (A), (CYP2C19: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6960,7 +6960,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Vortioxetine CYP2D6, CYP3A4, CYP2A6, CYP2C9, P-gp (ABCB1)",
+      "quote": "Drugs: Vortioxetine | Enzymes and transporters: CYP2D6, CYP3A4, CYP2A6, CYP2C9, P-gp (ABCB1) | CPIC pharmacogenetic gene recommendations (CPIC level): CYP2D6 (A), (CYP2C19: no recommendation (C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6975,7 +6975,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Xanomeline and trospium chloride CYP2D6",
+      "quote": "Drugs: Xanomeline and trospium chloride | Enzymes and transporters: CYP2D6",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -6990,7 +6990,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Zaleplone Aldehyde oxidase, CYP3A4",
+      "quote": "Drugs: Zaleplone | Enzymes and transporters: Aldehyde oxidase, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -7005,7 +7005,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Ziprasidone CYP3A4, aldehyde oxidase",
+      "quote": "Drugs: Ziprasidone | Enzymes and transporters: CYP3A4, aldehyde oxidase",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -7020,7 +7020,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Zolpidem CYP1A2, CYP2C9, CYP3A4",
+      "quote": "Drugs: Zolpidem | Enzymes and transporters: CYP1A2, CYP2C9, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -7033,7 +7033,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Zolpidem CYP1A2, CYP2C9, CYP3A4",
+      "quote": "Drugs: Zolpidem | Enzymes and transporters: CYP1A2, CYP2C9, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -7046,7 +7046,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Zolpidem CYP1A2, CYP2C9, CYP3A4",
+      "quote": "Drugs: Zolpidem | Enzymes and transporters: CYP1A2, CYP2C9, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -7061,7 +7061,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Zonisamide CYP3A4",
+      "quote": "Drugs: Zonisamide | Enzymes and transporters: CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -7076,7 +7076,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Zopiclone CYP2C8, CYP3A4",
+      "quote": "Drugs: Zopiclone | Enzymes and transporters: CYP2C8, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -7089,7 +7089,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Zopiclone CYP2C8, CYP3A4",
+      "quote": "Drugs: Zopiclone | Enzymes and transporters: CYP2C8, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -7104,7 +7104,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Zotepine CYP1A2, CYP2D6, CYP3A4",
+      "quote": "Drugs: Zotepine | Enzymes and transporters: CYP1A2, CYP2D6, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -7117,7 +7117,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Zotepine CYP1A2, CYP2D6, CYP3A4",
+      "quote": "Drugs: Zotepine | Enzymes and transporters: CYP1A2, CYP2D6, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -7130,7 +7130,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Zotepine CYP1A2, CYP2D6, CYP3A4",
+      "quote": "Drugs: Zotepine | Enzymes and transporters: CYP1A2, CYP2D6, CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -7145,7 +7145,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Zuclopenthixol CYP2D6",
+      "quote": "Drugs: Zuclopenthixol | Enzymes and transporters: CYP2D6 | CPIC pharmacogenetic gene recommendations (CPIC level): (CYP2D6 provisional (B/C))",
       "provenance": "verified",
       "extraction": "code"
      }
@@ -7160,7 +7160,7 @@
      {
       "corpus": "agnp_tdm",
       "page": 11,
-      "quote": "Zuranolone CYP3A4",
+      "quote": "Drugs: Zuranolone | Enzymes and transporters: CYP3A4",
       "provenance": "verified",
       "extraction": "code"
      }

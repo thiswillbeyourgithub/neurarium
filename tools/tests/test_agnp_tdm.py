@@ -50,6 +50,42 @@ class CellParserTest(unittest.TestCase):
         self.assertEqual(F.drug_ids("Ginkgo", idx), [])
 
 
+class ParsedRowTest(unittest.TestCase):
+    """The labelled parsed row the quote cites, and the guard that a cell landing
+    in the wrong column never reaches a page file."""
+
+    LABELS = {f: f.upper() for f in F.LABEL_FIELDS}
+
+    def row(self, **cells):
+        base = {f: "" for f in F.LABEL_FIELDS}
+        return {**base, **cells, "page": 1, "labels": self.LABELS}
+
+    @staticmethod
+    def gate(text):
+        return F.PageGate(read=lambda _c, _p: F.normalize_for_match(text))
+
+    def test_labelled_line_skips_empty_and_rejoins_units(self):
+        self.assertEqual(F.table5_line(self.row(drug="Lithium", trr="0.5–0.8 mmol/ L")),
+                         "DRUG: Lithium | TRR: 0.5–0.8 mmol/L")
+
+    def test_misaligned_row_is_refused(self):
+        page = "Valproic acid 12 h 50–100 μg/mL Epilepsy 2–4 d 120 μg/mL 1 6.93"
+        ok = self.row(drug="Valproic acid", time="12 h", trr="50–100 μg/mL",
+                      indication="Epilepsy", tss="2–4 d", alert="120 μg/mL",
+                      level="1", cf="6.93")
+        self.assertTrue(F.table5_aligned(ok, self.gate(page)))
+        swapped = {**ok, "tss": "120 μg/mL", "alert": "2–4 d"}
+        self.assertFalse(F.table5_aligned(swapped, self.gate(page)))
+
+    def test_parsed_section_is_replaced_not_stacked(self):
+        once = F.with_parsed("raw text\n", {"Table 1": ["Drugs: A"]})
+        twice = F.with_parsed(once, {"Table 1": ["Drugs: B"]})
+        self.assertEqual(twice.count(F.PARSED_MARKER), 1)
+        self.assertIn("Drugs: B", twice)
+        self.assertNotIn("Drugs: A", twice)
+        self.assertEqual(F.with_parsed(twice, {}), "raw text\n")
+
+
 class MidWordMarkupTest(unittest.TestCase):
     """Table 1's paliperidone row prints ``9-hydroxyrisperi<u>done)</u>`` (an underline
     starting mid-word). The shared fold dropped the tag as a space, splitting the word,
@@ -65,11 +101,19 @@ class MidWordMarkupTest(unittest.TestCase):
     def test_table1_row_is_confirmed(self):
         import tempfile
         with tempfile.TemporaryDirectory() as d:
-            (Path(d) / "10.md").write_text(self.PAGE, encoding="utf-8")
+            row = {"page": 10, "drug": "Paliperidone (9-hydroxyrisperidone)",
+                   "enzymes": "Renal clearance, CYP3A4, UGT", "cpic": "",
+                   "labels": ["Drugs", "Enzymes and transporters", "CPIC"]}
+            page = Path(d) / "10.md"
+            page.write_text(self.PAGE, encoding="utf-8")
+            self.assertTrue(F.table1_aligned(row, F.raw_gate(Path(d))))
+            page.write_text(F.with_parsed(self.PAGE, {"Table 1": [F.table1_line(row)]}),
+                            encoding="utf-8")
             idx = F.roster_index([{"id": "paliperidone", "name": "Paliperidone"}])
-            rows = [{"page": 10, "drug": "Paliperidone (9-hydroxyrisperidone)",
-                     "enzymes": "Renal clearance, CYP3A4, UGT"}]
-            got = F.enzyme_confirmations(rows, idx, F.PageGate({F.CORPUS: Path(d)}))
+            got = F.enzyme_confirmations([row], idx, F.PageGate({F.CORPUS: Path(d)}))
+        self.assertEqual(got["paliperidone"][0]["sources"][0]["quote"],
+                         "Drugs: Paliperidone (9-hydroxyrisperidone) | "
+                         "Enzymes and transporters: Renal clearance, CYP3A4, UGT")
         self.assertEqual([r["enzyme"] for r in got["paliperidone"]], ["cyp3a4", "ugt"])
 
 
