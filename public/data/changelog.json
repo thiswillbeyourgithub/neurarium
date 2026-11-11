@@ -1,6 +1,27 @@
 {
   "versions": [
     {
+      "version": "3.160.0",
+      "date": "2026-11-11",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "Detail panel section headers (Pharmacokinetics, Identification, ...) are easier to spot: bigger bold text on a tinted bar that brightens on hover and while open, an icon chip, and a thin line between sections. An open section's header now stays pinned at the top while you scroll through it, and a large phone font enlarges the headers too.",
+          "commits": [
+            "1c9cc8b",
+            "6f9aa7f"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "A \"Fold all\" / \"Unfold all\" button above a panel's sections.",
+          "commits": [
+            "21638dd"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.159.0",
       "date": "2026-10-30",
       "entries": [
