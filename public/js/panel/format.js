@@ -26,6 +26,18 @@ export function quoteLines(quote) {
   return cells.length > 1 && cells.every((c) => LABELLED_CELL.test(c)) ? cells.join("\n") : quote;
 }
 
+// True when every source behind a pill was copied by code and no model ever touched it
+// (its pipeline extracts by code and has no judge step), so its verified pill must not
+// claim a judge confirmed it: the quote gate alone verifies a code copy. `pipelines` is
+// meta.quotePipelines ({key: [step, ...]}); a source with no known pipeline counts as
+// not code-read, so the default wording is kept whenever the data cannot tell.
+export function allCodeRead(sources, pipelines) {
+  return Array.isArray(sources) && sources.length > 0 && sources.every((s) => {
+    const steps = (pipelines || {})[s && s.pipeline];
+    return Array.isArray(steps) && steps.includes("extract_code") && !steps.includes("judge_llm");
+  });
+}
+
 // Format an elimination half-life ({hours, hours_max?}) into a compact human string,
 // choosing ONE unit (minutes / hours / days) from the largest bound so a range reads
 // in a single unit ("2–3 days", "6–8 h", "45 min"). The data stores canonical hours

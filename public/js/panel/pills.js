@@ -2,7 +2,7 @@
 // tooltip listing its citations (corpus, page, heading trail, species, licence), and the
 // uncertainty bullets. A factory over the panel kit P (see panel/info.js).
 
-import { NOSOURCE_GLYPH, quoteLines } from "./format.js";
+import { NOSOURCE_GLYPH, allCodeRead, quoteLines } from "./format.js";
 import { isWebUrl } from "../web-url.js";
 import { extLink, btn } from "./dom.js";
 import { attachTip, closeTip, linkifiedText } from "./tooltip.js";
@@ -88,13 +88,16 @@ export function makePills(P) {
   // cue opening the Sources & provenance popup (the one place the grades are
   // explained). `base` (the full grade text) stays as the pill's aria-label.
   // (.help-tip is white-space:pre-line so the newlines show.)
-  const makeProvenancePill = (level, extra) => {
+  // `codeRead` (a verified pill whose every quote a parser copied, see allCodeRead)
+  // swaps the wording for one that names the gate as the only check, since no judge ran.
+  const makeProvenancePill = (level, extra, { codeRead = false } = {}) => {
     const spec = PROVENANCE_PILLS[level];
-    const base = spec ? t(spec.tip) : t("info.provNone");
+    const code = codeRead && level === "verified";
+    const base = code ? t("info.provVerifiedCode") : spec ? t(spec.tip) : t("info.provNone");
     const tip = document.createDocumentFragment();
     // The grade in words always leads, so even a pill with nothing else to show (a
     // bare ✕) says what it is; the closing cue then names what its click opens.
-    tip.append(el("strong", "src-grade-name", t(`prov.name.${spec ? level : "none"}`)),
+    tip.append(el("strong", "src-grade-name", t(`prov.name.${code ? "verifiedCode" : spec ? level : "none"}`)),
       document.createTextNode("\n\n"));
     if (extra instanceof Node) {
       tip.append(extra, document.createTextNode("\n\n"));
@@ -284,7 +287,8 @@ export function makePills(P) {
     const shown = shownGrade(grade, doubt);
     const sources = node && node.sources;
     if (sources && sources.length)
-      return makeProvenancePill(shown, labelled(withUncertainty(doubt, sourcesTip(sources))));
+      return makeProvenancePill(shown, labelled(withUncertainty(doubt, sourcesTip(sources))),
+        { codeRead: allCodeRead(sources, data.meta && data.meta.quotePipelines) });
     if (node && node.ki)
       return makeProvenancePill(shown,
         labelled(withUncertainty(doubt, kiCorpusRefNode(node.ki, { dash: true }))));
