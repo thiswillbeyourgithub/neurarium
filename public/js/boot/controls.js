@@ -7,6 +7,7 @@ import { animSettings } from "../anim-settings.js";
 import { applyExplode, createArrowRetrim, createAutoSpread } from "../scene/explode.js";
 import { openControlsBody } from "../panel/tabs.js";
 import { isWebUrl } from "../web-url.js";
+import { wirePanelResize } from "./panel-resize.js";
 
 // url-state priorities (a higher number is applied later, see js/url-state.js). The
 // default 0 carries the focus views; scene state that a focus would otherwise override
@@ -94,9 +95,10 @@ export function wireControls({ camera, controls, meshes, arrows, labels, focus, 
       const frac = right / window.innerWidth;
       // A wide (or dragged-wide) sidebar leaves a free strip narrower than the
       // brain's framing, so zoom the render out until it fits: e.g. 1280x800
-      // with a 435px panel leaves 845px, k = 1.1 * 800 / 845 = 1.04.
+      // with a 435px panel leaves 845px, k = 1.2 * 800 / 845 = 1.14 (the extra
+      // margin covers the brain sitting a little off its orbit target).
       const free = Math.max(1, window.innerWidth - right);
-      const k = Math.min(2.5, Math.max(1, (1.1 * window.innerHeight) / free));
+      const k = Math.min(2.5, Math.max(1, (1.2 * window.innerHeight) / free));
       focus.setScreenOffset(Math.min(0.45, frac / 2), 0, k);
     }
   };
@@ -115,6 +117,7 @@ export function wireControls({ camera, controls, meshes, arrows, labels, focus, 
   // observe, so the initial expanded panel is handled on load.
   portrait.addEventListener("change", updatePanelPan);
   new ResizeObserver(updatePanelPan).observe(controlsPanel);
+  wirePanelResize(controlsPanel);
 
   // Controls (the sliders + global scene toggles) is a collapsible section like
   // the others but deliberately NOT part of the accordion below: it toggles
