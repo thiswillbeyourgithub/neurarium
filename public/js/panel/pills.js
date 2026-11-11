@@ -2,7 +2,7 @@
 // tooltip listing its citations (corpus, page, heading trail, species, licence), and the
 // uncertainty bullets. A factory over the panel kit P (see panel/info.js).
 
-import { NOSOURCE_GLYPH } from "./format.js";
+import { NOSOURCE_GLYPH, quoteLines } from "./format.js";
 import { isWebUrl } from "../web-url.js";
 import { extLink, btn } from "./dom.js";
 import { attachTip, closeTip, linkifiedText } from "./tooltip.js";
@@ -150,7 +150,7 @@ export function makePills(P) {
     const trail = headingTrail(s.heading);
     const k = s.kiRow;
     const line = s.quote
-      ? `${trail}“${s.quote}”\n— ${ref}`
+      ? `${trail}“${quoteLines(s.quote)}”\n— ${ref}`
       : k ? `${t("info.kiRow", {
         id: k.id, value: `${k.note === ">" || k.note === "<" ? k.note + " " : ""}${k.valueNm}`,
         species: k.species ? speciesLabel(k.species) : "?", radioligand: k.radioligand || "?",

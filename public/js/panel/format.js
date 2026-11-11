@@ -17,6 +17,15 @@ export const EFFECT_GLYPHS = { boost: "+", block: "−", modulate: "≈" };
 // the two never drift.
 export const NOSOURCE_GLYPH = "✕";
 
+// A quote that is a parsed table row, "Header: value | Header: value" (the AGNP
+// tables, tools/fetch/fetch_agnp_tdm.py), one field per line; any other quote as is,
+// so a Wikipedia "cell | cell" row without headers keeps its single line.
+const LABELLED_CELL = /^[^:|]+: \S/;
+export function quoteLines(quote) {
+  const cells = quote.split(" | ");
+  return cells.length > 1 && cells.every((c) => LABELLED_CELL.test(c)) ? cells.join("\n") : quote;
+}
+
 // Format an elimination half-life ({hours, hours_max?}) into a compact human string,
 // choosing ONE unit (minutes / hours / days) from the largest bound so a range reads
 // in a single unit ("2–3 days", "6–8 h", "45 min"). The data stores canonical hours
