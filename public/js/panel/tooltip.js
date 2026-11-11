@@ -57,12 +57,18 @@ export function linkifiedText(text) {
   return frag;
 }
 
+// A mouse must rest on a trigger this long before its tooltip opens, so sweeping
+// across a row of grade pills (or scrolling the panel under a still pointer) does
+// not flash citations; a click / tap / keyboard focus still opens at once.
+const HOVER_OPEN_MS = 500;
+
 /**
  * Attach a hover/tap tooltip to `trigger`. The bubble is position:fixed just above
  * the trigger, clamped to the viewport, and lives on <body> while shown (so a dimmed
  * ancestor row can't bleed opacity into it, an overflow can't clip it, and you can
  * move onto the bubble to read/select its text). Shows on hover/focus (pointer +
- * keyboard) and is pinned on click/tap: on a touch screen `:hover` never fires, so
+ * keyboard; a hover only after HOVER_OPEN_MS of rest) and is pinned on click/tap:
+ * on a touch screen `:hover` never fires, so
  * the click-toggle is the sole path (one tap shows, tap again or tap elsewhere
  * dismisses); on a pointer device a click pins it so its text stays selectable.
  *
@@ -95,7 +101,7 @@ export function attachTip(trigger, tipText, { wrap = false, zIndex = null } = {}
   };
   if (zIndex != null) tip.style.zIndex = String(zIndex);
   if (!wrap) trigger.style.cursor = "help";
-  let pinned = false, hideTimer = 0;
+  let pinned = false, hideTimer = 0, openTimer = 0;
   const place = () => {
     const r = trigger.getBoundingClientRect();
     const m = 6, gap = 4;
@@ -148,6 +154,7 @@ export function attachTip(trigger, tipText, { wrap = false, zIndex = null } = {}
   };
   const open = () => {
     clearTimeout(hideTimer);
+    clearTimeout(openTimer);
     if (_openTip && _openTip !== close) _openTip(); // close any other open tip
     _openTip = close;
     fill();
@@ -163,6 +170,7 @@ export function attachTip(trigger, tipText, { wrap = false, zIndex = null } = {}
   };
   const close = () => {
     clearTimeout(hideTimer);
+    clearTimeout(openTimer);
     pinned = false;
     if (_openTip === close) _openTip = null;
     tip.classList.remove("show");
@@ -188,8 +196,14 @@ export function attachTip(trigger, tipText, { wrap = false, zIndex = null } = {}
   const canHover = !window.matchMedia ||
     window.matchMedia("(hover: hover)").matches;
   if (canHover) {
-    trigger.addEventListener("mouseenter", open);
-    trigger.addEventListener("mouseleave", scheduleHide);
+    // Delayed hover open, re-checked against :hover when it fires: a scroll that
+    // carries the trigger away under the pointer sends no mouseleave until the
+    // mouse moves, so the timer must not trust the mouseenter alone.
+    trigger.addEventListener("mouseenter", () => {
+      clearTimeout(openTimer);
+      openTimer = setTimeout(() => { if (trigger.matches(":hover")) open(); }, HOVER_OPEN_MS);
+    });
+    trigger.addEventListener("mouseleave", () => { clearTimeout(openTimer); scheduleHide(); });
     trigger.addEventListener("focus", open);
     trigger.addEventListener("blur", scheduleHide);
     tip.addEventListener("mouseenter", () => clearTimeout(hideTimer));
