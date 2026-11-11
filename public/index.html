@@ -614,6 +614,14 @@
              js/main.js (createInfoPanel) into #info-body. Shown when the Details
              tab is active, hidden otherwise. Replaces the old separate bottom-
              right info panel. -->
+        <!-- Shift+F find box over the details pane (js/panel/find-in-panel.js):
+             outside the scroll box so it stays put, its result list overlaying
+             the pane. Ships hidden. -->
+        <div id="panel-find" hidden>
+          <input id="panel-find-input" type="search" autocomplete="off" spellcheck="false"
+                 data-i18n-attr="placeholder:find.placeholder,aria-label:shortcuts.findInPanel">
+          <ul id="panel-find-results" role="listbox"></ul>
+        </div>
         <div id="details-pane" hidden>
           <div id="info-body"></div>
         </div>

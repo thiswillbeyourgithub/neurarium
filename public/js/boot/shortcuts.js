@@ -1,4 +1,5 @@
 // Keyboard shortcuts (the ? help overlay lists them).
+import { wireFindInPanel } from "../panel/find-in-panel.js";
 
 /**
  * Global single-key shortcuts (no modifier), ignored while typing in a field.
@@ -7,6 +8,8 @@
  *   n  toggle all names            l  collapse / expand the Legend section
  *   s  spread fully / collapse     c  toggle "See inside"
  *   r  open Receptors & targets    m  open the Drugs (meds) section
+ *   Shift+F  find inside the open detail panel (js/panel/find-in-panel.js),
+ *            else the plain search
  *   f  open search (bare-key Ctrl/Cmd+F)   Tab  cycle the detail tabs
  *   ?  open the shortcuts popup
  *   Esc  close popup, else close search + collapse any open Legend/Receptors/About
@@ -22,6 +25,7 @@
  */
 export function wireShortcuts(help, tabs, selection, lightbox, aboutModal, legendModal, sourcingModal, changelog) {
   const click = (id) => document.getElementById(id)?.click();
+  const panelFind = wireFindInPanel();
   const isTyping = (el) =>
     !!el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA"
       || el.tagName === "SELECT" || el.isContentEditable);
@@ -190,7 +194,7 @@ export function wireShortcuts(help, tabs, selection, lightbox, aboutModal, legen
       case "c": case "C": click("see-inside"); break;
       case "r": case "R": sectionNav.reset(); click("receptors-toggle"); break;
       case "m": case "M": sectionNav.reset(); click("drugs-toggle"); break;
-      case "f": case "F": openSearch(); break;
+      case "f": case "F": if (!(event.shiftKey && panelFind.open())) openSearch(); break;
       // Esc peels one layer at a time, prioritizing a return to the plain brain:
       // (1) close the active detail tab (which clears its dim when it is the last
       // tab), else (2) clear any active focus/isolate/circuit so the brain is

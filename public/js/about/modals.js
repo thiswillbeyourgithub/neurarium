@@ -29,6 +29,7 @@ export function wireShortcutsHelp() {
     { keys: ["R"], desc: "shortcuts.receptors" },
     { keys: ["M"], desc: "shortcuts.drugs" },
     { keys: ["F"], desc: "shortcuts.search" },
+    { keys: ["Shift", "F"], desc: "shortcuts.findInPanel" },
     { keys: ["Tab"], desc: "shortcuts.tabs" },
     { keys: ["Esc"], desc: "shortcuts.close" },
   ];

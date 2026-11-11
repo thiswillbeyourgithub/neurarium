@@ -157,6 +157,9 @@ window.__I18N_MESSAGES__.fr = {
   "shortcuts.receptors": "Ouvrir Récepteurs et cibles",
   "shortcuts.drugs": "Ouvrir la section Substances",
   "shortcuts.search": "Ouvrir la recherche",
+  "shortcuts.findInPanel": "Chercher dans le panneau ouvert",
+  "find.placeholder": "Chercher dans ce panneau (ex. demi-vie, laboratoire)",
+  "find.none": "Rien dans ce panneau ne correspond",
   "shortcuts.tabs": "Naviguer entre les onglets",
   "shortcuts.close": "Fermer la recherche / replier les sections",
 

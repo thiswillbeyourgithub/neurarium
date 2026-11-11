@@ -476,6 +476,42 @@ input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--accent);
 }
 .detail-tab-close:hover { color: var(--text); background: rgba(var(--ink), 0.14); }
 #details-pane { user-select: text; }
+/* Shift+F find box (js/panel/find-in-panel.js): a row above the details pane,
+   its hits overlaying the pane below. */
+#panel-find { position: relative; flex: 0 0 auto; padding: 6px 8px; }
+#panel-find[hidden] { display: none; }
+#panel-find-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 6px 10px;
+  font: inherit;
+  color: var(--text);
+  background: rgba(var(--ink), 0.06);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  outline: none;
+}
+#panel-find-results {
+  position: absolute;
+  z-index: 20;
+  left: 8px;
+  right: 8px;
+  top: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-height: 50vh;
+  overflow-y: auto;
+  background: var(--page-bg);
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+#panel-find-results li { padding: 6px 10px; cursor: pointer; display: flex; flex-wrap: wrap; gap: 2px 8px; align-items: baseline; }
+#panel-find-results li.active, #panel-find-results li:hover { background: rgba(var(--ink), 0.1); }
+.panel-find-label { color: var(--text); }
+.panel-find-detail { color: var(--muted); font-size: 0.9em; }
+.panel-find-section { margin-left: auto; color: var(--accent-bright); font-size: 0.8em; }
+#panel-find-results li.panel-find-empty { color: var(--muted); cursor: default; }
 .tool-btn {
   display: grid;
   place-items: center;

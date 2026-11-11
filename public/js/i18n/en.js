@@ -159,6 +159,9 @@ window.__I18N_MESSAGES__.en = {
   "shortcuts.receptors": "Toggle Receptors & targets",
   "shortcuts.drugs": "Toggle the Drugs section",
   "shortcuts.search": "Open search",
+  "shortcuts.findInPanel": "Find in the open panel",
+  "find.placeholder": "Find in this panel (e.g. half-life, lab)",
+  "find.none": "Nothing in this panel matches",
   "shortcuts.tabs": "Switch between tabs",
   "shortcuts.close": "Close search / collapse sections",
 
