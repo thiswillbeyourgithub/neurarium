@@ -79,8 +79,8 @@
   }
 }
 /* Landscape / horizontal screens: make the panel a left sidebar that grows
-   toward 25% of the viewport (a 240px floor so it is never too thin, a 420px
-   cap so it is never absurd on a wide desktop), and when it is EXPANDED let it
+   toward a third of the viewport (a 240px floor so it is never too thin, a 760px
+   cap so it is never absurd on a wide desktop; the edge handle overrides it), and when it is EXPANDED let it
    take the FULL vertical height so a long legend has room. js/main.js
    (updatePanelPan) then pushes the rendered brain RIGHT, into the clear space
    beside the sidebar, so the panel never hides it. The full-height stretch is

@@ -69,9 +69,10 @@ export function wireControls({ camera, controls, meshes, arrows, labels, focus, 
   //     the @media rule in css/controls.css), so push the brain straight UP into the
   //     clear top section. The shove is half the panel's height fraction, so the
   //     brain ends up centered in the space above the panel whatever its height.
-  //   - landscape: the panel is a full-height left sidebar (up to 25% wide), so
-  //     push the brain RIGHT by half the panel's width fraction, so it centres in
-  //     the clear space beside the sidebar whatever the sidebar's width.
+  //   - landscape: the panel is a full-height left sidebar (about a third wide,
+  //     resizable by its edge handle), so push the brain RIGHT by half the panel's
+  //     width fraction, so it centres in the clear space beside the sidebar, and
+  //     zoom it out when that space is too narrow for it.
   const controlsPanel = document.getElementById("controls");
   const portrait = window.matchMedia("(orientation: portrait)");
   const updatePanelPan = () => {
@@ -89,9 +90,14 @@ export function wireControls({ camera, controls, meshes, arrows, labels, focus, 
       focus.setScreenOffset(0, Math.min(0.4, frac / 2));
     } else {
       // To the panel's right edge, so its left margin counts as covered too.
-      const frac =
-        controlsPanel.getBoundingClientRect().right / window.innerWidth;
-      focus.setScreenOffset(Math.min(0.3, frac / 2), 0);
+      const right = controlsPanel.getBoundingClientRect().right;
+      const frac = right / window.innerWidth;
+      // A wide (or dragged-wide) sidebar leaves a free strip narrower than the
+      // brain's framing, so zoom the render out until it fits: e.g. 1280x800
+      // with a 435px panel leaves 845px, k = 1.1 * 800 / 845 = 1.04.
+      const free = Math.max(1, window.innerWidth - right);
+      const k = Math.min(2.5, Math.max(1, (1.1 * window.innerHeight) / free));
+      focus.setScreenOffset(Math.min(0.45, frac / 2), 0, k);
     }
   };
   wireCollapse(controlsToggle, controlsBody, updatePanelPan);

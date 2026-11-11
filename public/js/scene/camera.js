@@ -127,23 +127,28 @@ export function createCameraFocus({ camera, controls, meshes, getFocusMeshes }) 
   // camera as a view offset. It is a projection shift, not a move of the orbit
   // target, so it survives rotation / zoom / framing and reverts cleanly. Used to
   // slide the brain out from under the expanded panel on a phone (see
-  // setScreenOffset wiring in wireControls).
-  const offset = { x: 0, y: 0 };
-  const offsetTarget = { x: 0, y: 0 };
+  // setScreenOffset wiring in wireControls). `k` (>= 1) zooms the render out by
+  // that factor, so the brain still fits beside a wide panel instead of cropping.
+  const offset = { x: 0, y: 0, k: 1 };
+  const offsetTarget = { x: 0, y: 0, k: 1 };
   const OFFSET_EPS = 0.0005;
   // Bake the current offset into the camera's view offset (or clear it). Reads
   // the live viewport size every call so a resize self-heals without extra
   // bookkeeping.
   const applyOffset = () => {
-    if (Math.abs(offset.x) < OFFSET_EPS && Math.abs(offset.y) < OFFSET_EPS) {
+    if (Math.abs(offset.x) < OFFSET_EPS && Math.abs(offset.y) < OFFSET_EPS &&
+        Math.abs(offset.k - 1) < OFFSET_EPS) {
       if (camera.view && camera.view.enabled) camera.clearViewOffset();
       return;
     }
     const w = window.innerWidth;
     const h = window.innerHeight;
-    // offsetX < 0 slides content right; offsetY > 0 slides content up (see the
-    // updateProjectionMatrix math in three's PerspectiveCamera).
-    camera.setViewOffset(w, h, -offset.x * w, offset.y * h, w, h);
+    // A k-times larger window onto the full frustum, placed so the frustum's
+    // centre lands at screen fraction (0.5 + x, 0.5 - y) (see the
+    // updateProjectionMatrix math in three's PerspectiveCamera); k = 1 reduces to
+    // the plain shift (-x * w, y * h).
+    const k = offset.k;
+    camera.setViewOffset(w, h, w / 2 - w * k * (0.5 + offset.x), h / 2 - h * k * (0.5 - offset.y), w * k, h * k);
   };
 
   // Distance at which a bounding sphere of `radius` fits the vertical FOV,
@@ -357,10 +362,12 @@ export function createCameraFocus({ camera, controls, meshes, getFocusMeshes }) 
      * Set the desired render-time screen offset (fractions of the viewport:
      * +x slides the brain right, +y up). Eased in/out by tick(). Pass 0,0 to
      * recenter. Survives rotation / zoom / framing (it's a projection shift).
+     * `k` (>= 1, default 1) also zooms the render out by that factor.
      */
-    setScreenOffset(x, y) {
+    setScreenOffset(x, y, k = 1) {
       offsetTarget.x = x;
       offsetTarget.y = y;
+      offsetTarget.k = k;
     },
     /** Abort any running tween (used when the user starts interacting). */
     cancel() {
@@ -405,14 +412,17 @@ export function createCameraFocus({ camera, controls, meshes, getFocusMeshes }) 
       // own and a resize keeps the offset correctly scaled.
       if (
         Math.abs(offset.x - offsetTarget.x) > OFFSET_EPS ||
-        Math.abs(offset.y - offsetTarget.y) > OFFSET_EPS
+        Math.abs(offset.y - offsetTarget.y) > OFFSET_EPS ||
+        Math.abs(offset.k - offsetTarget.k) > OFFSET_EPS
       ) {
         offset.x += (offsetTarget.x - offset.x) * 0.18;
         offset.y += (offsetTarget.y - offset.y) * 0.18;
+        offset.k += (offsetTarget.k - offset.k) * 0.18;
         active = true;
-      } else if (offset.x !== offsetTarget.x || offset.y !== offsetTarget.y) {
+      } else if (offset.x !== offsetTarget.x || offset.y !== offsetTarget.y || offset.k !== offsetTarget.k) {
         offset.x = offsetTarget.x;
         offset.y = offsetTarget.y;
+        offset.k = offsetTarget.k;
         active = true; // one last frame to apply the snap to target
       }
       applyOffset();

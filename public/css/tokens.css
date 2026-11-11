@@ -59,7 +59,7 @@
   /* The bottom-left control-panel width (landscape). One source of truth so a
      tooltip can size itself just under the panel (see .help-tip). Portrait
      overrides the panel to full-width; the tooltip's vw cap covers that case. */
-  --panel-w: clamp(240px, 25vw, 420px);
+  --panel-w: clamp(240px, 33.33vw, 760px);
   /* Semantic ink for the graded chips, flag tags and callouts. Split out of the
      rules that use it so the day theme can darken it in ONE place: every one of
      these was picked to glow on a dark panel, and the very same value on a white
