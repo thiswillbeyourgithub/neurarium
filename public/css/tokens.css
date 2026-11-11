@@ -20,6 +20,13 @@
   --dm-plot-bg: #262a31;
   --dm-grid: rgba(255, 255, 255, 0.07);
   --panel-bg: rgba(20, 24, 31, 0.82);
+  /* Detail-panel section headers (css/panel.css .panel-sec > summary): the bar's
+     accent tint at rest / hovered / open, and the opaque ground a stuck (sticky)
+     header paints first so the body scrolling under it never shows through. */
+  --sec-bg: rgba(138, 92, 240, 0.09);
+  --sec-bg-hover: rgba(138, 92, 240, 0.2);
+  --sec-bg-open: rgba(138, 92, 240, 0.14);
+  --sec-ground: #171b22;
   --text: #e7ecf2;
   --muted: #9aa6b3;
   /* Emphasis text, one step past --text (a selected legend row, a hovered
@@ -88,6 +95,10 @@
   --dm-plot-bg: #e4e5ea;
   --dm-grid: rgba(0, 0, 0, 0.08);
   --panel-bg: rgba(255, 255, 255, 0.88);
+  --sec-bg: rgba(124, 77, 219, 0.07);
+  --sec-bg-hover: rgba(124, 77, 219, 0.16);
+  --sec-bg-open: rgba(124, 77, 219, 0.11);
+  --sec-ground: #fcfbff;
   --text: #1b1f27;
   --muted: #5d6673;
   --text-strong: #0a0d12;

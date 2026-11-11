@@ -30,9 +30,6 @@
 }
 .info-connections h3,
 .info-bindings h3,
-.info-bindings > summary, /* a collapsed section's summary IS its heading */
-.panel-sec > summary,
-.panel-sec-empty > .panel-sec-head, /* an empty section: a summary look, no fold */
 .info-locations h3 {
   font-size: 11px;
   text-transform: uppercase;
@@ -40,6 +37,61 @@
   color: var(--muted);
   margin: 0 0 var(--sp-m);
 }
+/* A detail-panel section header (a folded section's summary IS its heading): a
+   tinted bar with an accent stripe on its left, both deepening on hover and while
+   open. Sticky, so an open section's header stays pinned at the top of the pane
+   while its body scrolls under it (it lets go at the section's end). Sized in em
+   and never given a fixed height, so a phone's large-font setting grows the bar
+   with its text and a long title wraps instead of clipping. */
+.panel-sec > summary,
+.panel-sec-empty > .panel-sec-head { /* an empty section: the bar look, no fold */
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  overflow-wrap: anywhere;
+  color: var(--text);
+  margin: 0;
+  padding: 0.45em 0.6em;
+  border-left: 3px solid var(--accent-soft);
+  border-radius: 6px;
+  background-color: var(--sec-bg);
+  transition: background-color 0.12s ease, border-color 0.12s ease;
+}
+.panel-sec > summary {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  /* the tint over an opaque ground: a stuck header must hide the rows under it */
+  background: linear-gradient(var(--sec-bg), var(--sec-bg)), var(--sec-ground);
+}
+.panel-sec[open] > summary {
+  background: linear-gradient(var(--sec-bg-open), var(--sec-bg-open)), var(--sec-ground);
+  border-left-color: var(--accent);
+  border-bottom-left-radius: 0; /* flows into the open body's rule */
+}
+.panel-sec > summary:hover {
+  background: linear-gradient(var(--sec-bg-hover), var(--sec-bg-hover)), var(--sec-ground);
+  border-left-color: var(--accent-bright);
+}
+.panel-sec > summary:focus-visible { outline: 2px solid var(--accent-bright); outline-offset: 1px; }
+/* Nothing to unfold: the stripe goes neutral, the title muted. */
+.panel-sec-empty > .panel-sec-head { border-left-color: rgba(var(--ink), 0.15); color: var(--muted); }
+/* The fold-all / unfold-all toggle above the first section (panel/dom.js addFoldAll). */
+.sec-fold-all {
+  display: block;
+  margin: 0 0 var(--sp-l) auto;
+  padding: 0.3em 0.8em;
+  font: inherit;
+  font-size: 12px;
+  color: var(--muted);
+  background: rgba(var(--ink), 0.06);
+  border: 1px solid rgba(var(--ink), 0.12);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.sec-fold-all:hover { color: var(--text); background: rgba(var(--ink), 0.12); }
 /* A subsection heading's plain-language subtitle (panel/dom.js withSubtitle): its
    own line under the <h4> title, sentence case. A top-level section's is lifted
    into its body instead (.section-lead). */
@@ -53,18 +105,30 @@
   color: var(--muted);
   opacity: 0.85;
 }
-.info-bindings > summary:hover,
-.panel-sec > summary:hover { color: var(--text); }
-/* A section's line icon (panel/section-icons.js), between the caret and the title:
-   the one text purple in both themes, so a long panel scans by shape. */
+/* A section's line icon (panel/section-icons.js), between the caret and the title,
+   in a round tinted chip: the one text purple in both themes, so a long panel scans
+   by shape. In em, so it grows with the title under a large-font setting. */
 .sec-icon {
-  width: 14px; height: 14px; margin-right: 6px; vertical-align: -3px;
+  box-sizing: border-box;
+  width: 1.6em; height: 1.6em; padding: 0.25em; margin-right: 0.45em;
+  vertical-align: middle; border-radius: 50%;
+  background: var(--sec-bg-hover);
   color: var(--accent-bright); flex: none;
 }
-/* A folded detail-panel section (js/main.js foldSections): the open body sits
-   one step in under its heading. */
-.panel-sec { margin: 0 0 var(--sp-m); }
+/* A folded detail-panel section (panel/dom.js foldSections): a hairline and room
+   above each, so sections read as separate even folded; the open body sits one
+   step in, behind a faint rule continuing the header's stripe down to its end. */
+.panel-sec {
+  margin: 0 0 var(--sp-l);
+  padding-top: var(--sp-l);
+  border-top: 1px solid rgba(var(--ink), 0.08);
+}
 .panel-sec > .panel-sec-body { padding-left: var(--sp-indent); }
+.panel-sec[open] > .panel-sec-body {
+  border-left: 3px solid var(--sec-bg-hover);
+  padding-top: var(--sp-m);
+  padding-bottom: var(--sp-m);
+}
 /* An empty section (panel/dom.js emptySection): its heading stays unfolded, the
    caret's room kept blank so it lines up with the folded ones, then one muted line. */
 .panel-sec-empty > .panel-sec-head::before {
