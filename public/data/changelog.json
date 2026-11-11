@@ -1,6 +1,20 @@
 {
   "versions": [
     {
+      "version": "3.162.0",
+      "date": "2026-11-11",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Press Shift+F while a detail panel is open to find something inside it: type a few letters (e.g. \"lab\" for the originator, \"half\" for the half-life, in English or French), pick a result, and its section unfolds and the row flashes.",
+          "commits": [
+            "2136843",
+            "b0431fc"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.161.0",
       "date": "2026-11-11",
       "entries": [
