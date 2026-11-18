@@ -6,6 +6,7 @@ import { applyExplode } from "../scene/explode.js";
 import { createIntroAnimation } from "../scene/intro.js";
 import { createViewerTour } from "./tour-steps.js";
 import { AUTOMATED_VIEW, HAS_EXPLODE, TOUR_FORCED } from "./query.js";
+import { showDevNotice } from "../dev-notice.js";
 
 /**
  * @param {object} deps the scene (arrows, camera, controls, meshes, meshById, focus,
@@ -49,7 +50,7 @@ export function launchScene({
   let sceneSettled = false;
   let introCompleted = false;
   let tourForcedStarted = false; // one-shot guard for the ?tour=1 forced start
-  const tourGateEls = ["sourcing-modal", "changelog-modal"].map(tourEl).filter(Boolean);
+  const tourGateEls = ["sourcing-modal", "dev-modal", "changelog-modal"].map(tourEl).filter(Boolean);
   const tourGateOpen = () => tourGateEls.some((el) => !el.hidden);
   const tryAutoTour = () => {
     if (!sceneSettled || tourGateOpen()) return;
@@ -106,7 +107,7 @@ export function launchScene({
     if (!HAS_EXPLODE) {
       // Seat the resting pose on the exact framing the reset button produces, so a
       // fresh load already appears centered (not a hardcoded distance that only
-      // roughly matched). Done first, so the DEV-banner nudge + intro capture build
+      // roughly matched). Done first, so the intro capture builds
       // on the centered pose.
       focus.frameAllNow();
       // The assemble intro is a decorative animation, so honor the Animations toggle:
@@ -139,7 +140,8 @@ export function launchScene({
   } else {
     loading.waitForStart().then(() => {
       beginScene();
-      showChangelogOnce();
+      // The WIP popup (DEV=1 only) first, "What's new" once it is closed.
+      showDevNotice().then(showChangelogOnce);
     });
   }
 

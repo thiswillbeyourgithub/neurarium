@@ -187,7 +187,7 @@ the `main.js` entry point.
                              │ (script tags, in order)
    ┌─────────────────────────┼───────────────────────────────────┐
    │                         │                                    │
- app-config.js          error-banner.js / dev-banner.js      main.js  (module entry)
+ app-config.js          error-banner.js                      main.js  (module entry)
  (window.__APP_CONFIG__)  (classic; #banners stack)              │
    │                                                             │ imports
  app-init.js                                                     ▼
@@ -225,8 +225,8 @@ could be reused headless.
 1. `index.html` parses. The classic scripts run first, in order:
    `app-config.js` (sets `window.__APP_CONFIG__`), `app-init.js` (injects the
    umami tag if configured), `version.js` (sets `window.__APP_VERSION__`), then
-   `error-banner.js` and `dev-banner.js` (install the `#banners` machinery before
-   anything that might fail).
+   `error-banner.js` (installs the `#banners` machinery before anything that
+   might fail).
 2. A small inline gate injects the vendored eruda debug console only on `?debug=1`.
 3. The import map points `three` / `three/addons/` at the vendored copy.
 4. `js/main.js` (module) runs: sets up scene/camera/renderer/lights/OrbitControls,
@@ -497,7 +497,7 @@ Viewer (`public/`):
   "analytics-*") so content filters don't 404 it. Carries `ANALYTICS_*`, `DEV`,
   `STARTED_AT`, `sourceUrl`.
 - Single-purpose modules, each detailed in its own section below: `js/i18n.js` (I18n, string tables in `js/i18n/en.js` + `fr.js`),
-  `js/app-init.js` (Analytics), `js/dev-banner.js` (Dev banner), `js/error-banner.js` (Error
+  `js/app-init.js` (Analytics), `js/dev-notice.js` (Dev popup), `js/error-banner.js` (Error
   banners), `js/theme.js` (Theme), `js/loading.js` `createLoadingScreen()` (Loading overlay), `version.js`
   `window.__APP_VERSION__` (Versioning), `js/render-order.js` `DECOR_RENDER_ORDER`
   (Rendering / decoration draw order).

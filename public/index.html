@@ -87,7 +87,7 @@
     <script src="js/app-init.js"></script>
 
     <!-- Internationalization (en / fr): a classic script so the later module
-         (js/main.js) AND classic scripts (js/error-banner.js, js/dev-banner.js)
+         (js/main.js) AND classic scripts (js/error-banner.js)
          can read window.__I18N__. Owns the UI message catalogue + the language
          choice; loaded early so static markup is filled at DOMContentLoaded. The
          per-language string tables load first (it reads them off a global). -->
@@ -97,7 +97,7 @@
 
     <!-- App version (single source). Read by js/main.js (which fills every
          [data-app-version] slot: the panel header + the loading overlay) and
-         js/dev-banner.js (WIP banner). -->
+         js/dev-notice.js (WIP popup). -->
     <script src="version.js"></script>
     <!-- Reloads onto the latest deploy when this tab shows an older build (a restored
          tab, or an offline-fallback launch); see js/update-check.js. -->
@@ -211,12 +211,9 @@
       </div>
     </div>
 
-    <!-- Top banner stack: the optional WIP banner (js/dev-banner.js, hidden
-         unless DEV=1) plus any error banners (js/error-banner.js) pile up here
-         in a column instead of overlapping. -->
-    <div id="banners">
-      <div id="dev-banner" role="status" aria-live="polite" hidden></div>
-    </div>
+    <!-- Top banner stack: error banners (js/error-banner.js) pile up here in a
+         column instead of overlapping. -->
+    <div id="banners"></div>
 
     <div id="status"></div>
 
@@ -785,6 +782,16 @@
       </div>
     </div>
 
+    <!-- "Work in progress" popup (js/dev-notice.js, only when DEV=1): when the server
+         last restarted. Shown after the loading screen, before "What's new". -->
+    <div id="dev-modal" class="modal-overlay" hidden>
+      <div class="modal panel" role="dialog" aria-modal="true" aria-labelledby="dev-title">
+        <button type="button" id="dev-close" class="info-close" aria-label="Close" data-i18n-attr="aria-label:image.close">&times;</button>
+        <h2 id="dev-title"></h2>
+        <div id="dev-body"></div>
+      </div>
+    </div>
+
     <!-- "What's new" popup: the release notes for every version since the visitor's
          last one. Auto-opens once after an update (js/changelog.js showIfUnseen) and
          from the About popup's link. The body is built at open time from
@@ -811,9 +818,8 @@
     <!-- Banner scripts: plain (need document.body + #banners to exist), so
          loaded at the end of the body. error-banner.js installs the global error
          handlers + the stacking container first (so later scripts' failures are
-         caught and surfaced), then dev-banner.js fills the WIP banner. -->
+         caught and surfaced). -->
     <script src="js/error-banner.js"></script>
-    <script src="js/dev-banner.js"></script>
     <script type="module" src="js/main.js"></script>
   </body>
 </html>

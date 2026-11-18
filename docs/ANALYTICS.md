@@ -1,4 +1,4 @@
-# Analytics & dev banner
+# Analytics & dev popup
 
 > Reference detail moved out of [`CLAUDE.md`](../CLAUDE.md) to keep that file a terse map. This is the full text for this subsystem.
 
@@ -29,15 +29,11 @@ the tracker *script* URL (used as a `<script src>`); the container validates at
 startup that it is reachable and serves JavaScript, else it crashes (so a
 misconfiguration is loud, not silently tracking nothing).
 
-## Dev / WIP banner
+## Dev / WIP popup
 
-Optional "work in progress" top banner, same runtime-injection plumbing as
+Optional "work in progress" popup, same runtime-injection plumbing as
 analytics. `DEV` in `docker/.env` (default 0); `entrypoint.sh` stamps
 `STARTED_AT=$(date +%s)` and renders both into `/gen/app-config.js`.
 The same two variables (inherited by Caddy, which `entrypoint.sh` execs) drive the agents' twin: every `/api/` page carries a Caddy template under its title (`tools/render_api.py` `UPTIME`, `{{% %}}` delimiters, run by `templates` on `/api/*`) saying "this server restarted about N hours ago" when `DEV=1`, and nothing otherwise.
-`js/dev-banner.js` reveals `#dev-banner` (amber, in `#banners`) when `dev === "1"`
-and computes "X ago" from `startedAt` (refreshed per minute). Clicking dismisses it
-for the current view only (not persisted, so a reload brings it back). It ends with
-a **Source** link to `cfg.sourceUrl` (`SOURCE_URL` env, default the public site;
-only `http(s)`; clicking the link navigates instead of dismissing). The repo URL is
+`js/dev-notice.js` `showDevNotice()` opens `#dev-modal` when `dev === "1"`, saying "restarted X ago" from `startedAt`, and resolves once it is closed: the viewer shows it after the loading screen and only then "What's new" (`js/boot/launch.js`), the drugs map page on boot. The dismissal is not persisted, so a reload brings it back. It ends with a **Source** link to `cfg.sourceUrl` (`SOURCE_URL` env, default the public site; only `http(s)`). The repo URL is
 not hardcoded in committed source.

@@ -3,7 +3,7 @@
 // progress" banner.
 //
 // A plain global (like app-config.js) rather than an ES module, so both the
-// module code (js/main.js) and the classic scripts (js/dev-banner.js) can read
+// module code (js/main.js) and the classic scripts can read
 // it with no build step. Loaded early in index.html's <head>.
 //
 // Bump this on a release. Semantic versioning: MAJOR.MINOR.PATCH.

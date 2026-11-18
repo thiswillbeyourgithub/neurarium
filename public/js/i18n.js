@@ -2,7 +2,7 @@
 //
 // This is a CLASSIC script (like app-config.js / version.js), loaded early so
 // every later script - the ES module viewer (js/main.js) AND the classic banner
-// scripts (js/error-banner.js, js/dev-banner.js) - can read `window.__I18N__`.
+// script (js/error-banner.js) - can read `window.__I18N__`.
 //
 // It owns ONE message catalogue (the single source of every UI string, in both
 // languages; each language's table lives in js/i18n/<lang>.js, loaded just before

@@ -1092,7 +1092,6 @@ window.__I18N_MESSAGES__.en = {
   "dev.activelyDeveloped": "This site is actively being developed. ",
   "dev.stayTuned": "If anything looks broken, come back later.",
   "dev.source": "Source",
-  "dev.clickHide": "Click to hide (shows again on reload)",
   "time.lessThanMinute": "less than a minute ago",
   "time.minutes": "{n} minute{s} ago",
   "time.hours": "{n} hour{s} ago",

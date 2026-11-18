@@ -11,6 +11,7 @@ import { stampVersion } from "./boot/version-stamp.js";
 import { wireThemeButton } from "./boot/header-toggles.js";
 import { createDrugMap } from "./drug-map/view.js";
 import { viewerUrl, readmeUrl } from "./drug-map/site.js";
+import { showDevNotice } from "./dev-notice.js";
 
 const { t, tHtml, lang } = window.__I18N__;
 
@@ -22,6 +23,7 @@ async function main() {
   document.getElementById("dmp-intro").innerHTML = tHtml("drugmap.page.intro", { url: viewerUrl() });
   document.getElementById("dmp-viewer").href = viewerUrl();
   document.getElementById("dmp-readme").href = readmeUrl(lang);
+  showDevNotice();
 
   let data;
   try {

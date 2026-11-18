@@ -1,10 +1,10 @@
 // Runtime app configuration: the optional umami metrics tag plus the optional
-// "work in progress" dev banner.
+// "work in progress" dev popup.
 //
 // Named generically on purpose: a file/path containing "analytics" (or "track",
 // "stats", ...) gets blocked by many content filters and forward proxies (e.g.
 // Squid blocklists), which would 404 it before it reaches the browser. Keeping
-// the URL neutral lets the request through; js/app-init.js + js/dev-banner.js
+// the URL neutral lets the request through; js/app-init.js + js/dev-notice.js
 // consume it.
 //
 // This committed copy is the LOCAL-DEV fallback. tools/serve.py / `python -m

@@ -41,7 +41,7 @@
       }
     </script>
 
-    <!-- umami + dev banner config, then the loader (see index.html for why the names
+    <!-- umami + dev popup config, then the loader (see index.html for why the names
          are generic). A visit is recorded under whichever host served it, so
          drugsmap.olicorne.org shows up as its own hostname in the same umami site. -->
     <script src="app-config.js"></script>
@@ -59,12 +59,19 @@
     <link rel="stylesheet" href="css/drug-map.css" />
     <link rel="stylesheet" href="css/drugs-map-page.css" />
     <link rel="stylesheet" href="css/banners.css" />
+    <link rel="stylesheet" href="css/modals.css" />
   </head>
   <body class="dmp">
-    <!-- Top banner stack, as in index.html: the optional WIP banner (js/dev-banner.js,
-         hidden unless DEV=1) and the error banners (js/error-banner.js) write here. -->
-    <div id="banners">
-      <div id="dev-banner" role="status" aria-live="polite" hidden></div>
+    <!-- Top banner stack, as in index.html: the error banners (js/error-banner.js) write here. -->
+    <div id="banners"></div>
+    <!-- "Work in progress" popup (js/dev-notice.js, only when DEV=1): when the server
+         last restarted. Shown on boot by js/drugs-map-main.js. -->
+    <div id="dev-modal" class="modal-overlay" hidden>
+      <div class="modal panel" role="dialog" aria-modal="true" aria-labelledby="dev-title">
+        <button type="button" id="dev-close" class="info-close" aria-label="Close" data-i18n-attr="aria-label:image.close">&times;</button>
+        <h2 id="dev-title"></h2>
+        <div id="dev-body"></div>
+      </div>
     </div>
     <header class="dmp-header">
       <div class="dmp-title-row">
@@ -100,7 +107,6 @@
     </main>
 
     <script src="js/error-banner.js"></script>
-    <script src="js/dev-banner.js"></script>
     <script type="module" src="js/drugs-map-main.js"></script>
   </body>
 </html>

@@ -60,8 +60,11 @@ class ChangelogLaunchTest(unittest.TestCase):
         # waitForStart() resolves on the "Start exploring" click, so a trigger inside
         # its `.then` is what "right away" means; anything further down the launch is
         # gated on an animation.
+        # The DEV=1 work-in-progress popup comes first and the notes follow its close,
+        # so the call is the continuation of showDevNotice() (which resolves at once
+        # when DEV is off).
         body = _function_body(self.js, "loading.waitForStart().then(() => {")
-        self.assertIn("showChangelogOnce()", body)
+        self.assertIn("showDevNotice().then(showChangelogOnce)", body)
 
     def test_the_notes_do_not_ride_the_scene_settle_gate(self):
         # tryAutoTour only runs once the assemble intro has settled, which is precisely
@@ -73,7 +76,8 @@ class ChangelogLaunchTest(unittest.TestCase):
         # Call sites only: the definitions (`function showIfUnseen()`) are not calls.
         calls = lambda name: re.findall(r"(?<!function )\b" + name + r"\(\)", self.js)
         self.assertEqual(len(calls("showIfUnseen")), 1)
-        self.assertEqual(len(calls("showChangelogOnce")), 1)
+        # Passed as the continuation, not called: one reference outside its definition.
+        self.assertEqual(len(re.findall(r"(?<!const )\bshowChangelogOnce\b", self.js)), 1)
 
     def test_the_tour_gates_on_the_notes_popup(self):
         # The two open from different events now, so the tour must decline to stack on
@@ -82,6 +86,7 @@ class ChangelogLaunchTest(unittest.TestCase):
         self.assertIsNotNone(gates, "tourGateEls is gone: has the gate been rewritten?")
         self.assertIn('"changelog-modal"', gates.group(1))
         self.assertIn('"sourcing-modal"', gates.group(1))
+        self.assertIn('"dev-modal"', gates.group(1))
 
 
 if __name__ == "__main__":

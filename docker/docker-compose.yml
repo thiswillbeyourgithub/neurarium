@@ -89,12 +89,12 @@ services:
       - ANALYTICS_WEBSITE_ID=${ANALYTICS_WEBSITE_ID:-}
       - ANALYTICS_SRI=${ANALYTICS_SRI:-}
       - ANALYTICS_DNT=${ANALYTICS_DNT:-true}
-      # DEV=1 shows a top "work in progress / restarted X ago" banner (see
-      # js/dev-banner.js) and a rough restart age atop every /api/ page (the
+      # DEV=1 shows a "work in progress / restarted X ago" popup (see
+      # js/dev-notice.js) and a rough restart age atop every /api/ page (the
       # Caddyfile's `templates`); defaults to 0 (off). STARTED_AT is set by the
       # entrypoint above, not here.
       - DEV=${DEV:-0}
-      # SOURCE_URL backs the "source" link (e.g. in the dev banner). Defaults to
+      # SOURCE_URL backs the "source" link (e.g. in the dev popup). Defaults to
       # the public site; point it at the code repository in docker/.env if you
       # want the link to go there. ANALYTICS_ORIGIN is derived by the entrypoint
       # (not set here).

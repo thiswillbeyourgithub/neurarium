@@ -2,7 +2,7 @@
 //
 // Instead of hiding failures in the eruda console (which a visitor would never
 // open), anything that goes wrong is shown as an explicit red banner in the
-// shared #banners stack (alongside the optional dev banner): the real error
+// shared #banners stack: the real error
 // message, and where it came from, so it is actionable rather than a vague
 // "something went wrong". Multiple errors pile up as separate banners (they do
 // not overwrite each other); each has a × button to dismiss it. Identical errors
@@ -57,7 +57,7 @@
     });
 
     banner.append(text, countEl, close);
-    container.appendChild(banner); // newest stacks below the dev banner / earlier errors
+    container.appendChild(banner); // newest stacks below the earlier errors
     active.set(message, { banner, count: 1, countEl });
   }
 
@@ -88,8 +88,7 @@
 
   // Keep the top-anchored #status pill below however many banners are stacked,
   // by republishing the stack's height as a CSS variable (consumed in the
-  // #status rule). One observer covers the dev banner appearing and every error
-  // banner added/removed.
+  // #status rule). One observer covers every error banner added/removed.
   if (container && "ResizeObserver" in window) {
     new ResizeObserver(() => {
       document.body.style.setProperty("--banners-height", `${container.offsetHeight}px`);

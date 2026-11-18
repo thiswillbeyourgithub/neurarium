@@ -1095,7 +1095,6 @@ window.__I18N_MESSAGES__.fr = {
   "dev.activelyDeveloped": "Ce site est activement développé. ",
   "dev.stayTuned": "En cas de problème, revenez plus tard.",
   "dev.source": "Source",
-  "dev.clickHide": "Cliquer pour masquer (réapparaît au rechargement)",
   "time.lessThanMinute": "il y a moins d’une minute",
   "time.minutes": "il y a {n} minute{s}",
   "time.hours": "il y a {n} heure{s}",

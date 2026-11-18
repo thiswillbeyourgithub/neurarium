@@ -4,7 +4,7 @@
 # off to Caddy:
 #
 #   1. Stamp the container start time into STARTED_AT (epoch seconds) so the
-#      optional DEV banner can show "restarted X ago" (js/dev-banner.js).
+#      optional DEV popup can show "restarted X ago" (js/dev-notice.js).
 #      Compose env is static, so we stamp it here at run time.
 #
 #   2. Fail fast on a half-configured ANALYTICS_URL. If it is set it MUST be
@@ -77,7 +77,7 @@ fi
 
 # Render the app config from the environment into the /gen tmpfs. An unset var
 # becomes an empty string (features stay off); the consumers (js/app-init.js,
-# js/dev-banner.js) treat empty values as "disabled". Keep these keys in sync
+# js/dev-notice.js) treat empty values as "disabled". Keep these keys in sync
 # with the local-dev fallback in app-config.js.
 cat > /gen/app-config.js <<CONFIG
 // Generated from the container environment by docker/entrypoint.sh at startup.
