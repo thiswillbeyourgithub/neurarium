@@ -89,6 +89,11 @@ def workup_key(row: dict) -> str:
     return f"{row.get('test')}:{row.get('timing')}"
 
 
+def excretion_key(row: dict) -> str:
+    """An excretion row's key: aspect AND value (``route:renal`` and ``route:fecal`` are two)."""
+    return f"{row.get('aspect')}:{row.get('value')}"
+
+
 # ---------------------------------------------------------------------------
 # The authoring side: (file root, path) -> site.
 #
@@ -178,6 +183,13 @@ def _workup_site(path: list) -> str | None:
     return site("drug", path[1], f"workup[{path[2]}]")
 
 
+def _excretion_site(path: list) -> str | None:
+    """``excretion.json``: ``drugs/<drug>/<aspect:value>/sources``."""
+    if len(path) < 3 or path[0] != "drugs":
+        return None
+    return site("drug", path[1], f"excretion[{path[2]}]")
+
+
 def _owner_kind(bucket: str) -> str:
     """``receptors``/``targets``, the two keys the owner-keyed caches split on."""
     return {"receptors": "receptor", "targets": "target"}.get(bucket, bucket)
@@ -239,6 +251,7 @@ RESOLVERS = {
     "drug_enzymes.json": _drug_enzymes_site,
     "drug_enzymes_wikipedia.json": _drug_enzymes_site,
     "workup.json": _workup_site,
+    "excretion.json": _excretion_site,
     "receptor_effects.json": _owner_keyed("effects"),
     "receptor_demographics.json": _owner_keyed("demographics"),
     # ``release_modulation.json``: ``<receptor>/<node key>`` (one node per key).
@@ -320,6 +333,8 @@ def node_index(*, drugs=(), metabolites=(), receptors=(), targets=None,
             put(site("drug", did, f"withdrawals[{withdrawal_key(w)}]"), w)
         for w in d.get("workup") or []:
             put(site("drug", did, f"workup[{workup_key(w)}]"), w)
+        for x in d.get("excretion") or []:
+            put(site("drug", did, f"excretion[{excretion_key(x)}]"), x)
         for h in d.get("holders") or []:
             put(site("drug", did, f"holders[{h['market']}]"), h)
     for m in metabolites:
@@ -366,6 +381,8 @@ def member_label(obj, index: int) -> str:
             return withdrawal_key(obj)
         if "test" in obj and "timing" in obj:
             return workup_key(obj)
+        if "aspect" in obj and "value" in obj:
+            return excretion_key(obj)
         for k in ("target", "name", "id", "enzyme", "region", "brand", "release", "market"):
             if isinstance(obj.get(k), str):
                 return obj[k]

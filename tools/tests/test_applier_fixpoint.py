@@ -56,6 +56,7 @@ STRICT = [
     ("apply_drug_history", []),
     ("apply_drug_holders", []),
     ("apply_drugsfda", []),
+    ("apply_excretion", []),
     ("apply_expression_density", []),
     ("apply_gtopdb_ki", []),
     ("apply_ki_prose", []),

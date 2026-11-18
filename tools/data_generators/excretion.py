@@ -87,8 +87,13 @@ def named(text: str) -> list[str]:
 
 
 def meta_labels() -> dict[str, dict[str, Any]]:
-    """The ``excretion_aspects`` meta map (patterns stay author-side)."""
-    return {a: {"en": e["en"], "fr": e["fr"], "values": labels(e["values"])}
+    """The ``excretion_aspects`` meta map (patterns stay author-side).
+
+    The aspect label is nested under ``label`` rather than spread beside ``values``:
+    the serialization-time ``externalize`` pass only collapses a dict that is exactly
+    ``{en, fr}``, so ``{en, fr, values}`` would ship as an object the viewer's
+    ``pick`` cannot localize."""
+    return {a: {"label": {"en": e["en"], "fr": e["fr"]}, "values": labels(e["values"])}
             for a, e in ASPECTS.items()}
 
 

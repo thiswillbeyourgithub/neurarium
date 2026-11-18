@@ -184,6 +184,7 @@ from data_generators import cpic  # noqa: E402
 from data_generators import tdm  # noqa: E402 (AGNP TDM ranges, corpus #19)
 from data_generators import physchem  # noqa: E402 (PubChem #21 + B3DB #22)
 from data_generators import workup  # noqa: E402 (RCP 4.2-4.4 workup, BDPM #24)
+from data_generators import excretion  # noqa: E402 (route, unchanged share, kidney, urine pH)
 from data_generators import page_links as PAGE_LINKS  # noqa: E402 (per-page source urls)
 from data_generators.unknown import apply_unknown  # noqa: E402
 
@@ -1316,6 +1317,9 @@ def _drug_record(drug: dict[str, Any], valid_targets: set[str],
     # Pre-prescription workup (kind drug_workup, BETA): one node per (test, timing) the
     # French RCP asks for. See data_generators/workup.py.
     out.update(workup.drug_workup(drug["id"], _quote_sources))
+    # Excretion (kind drug_excretion, BETA): one node per (aspect, value). See
+    # data_generators/excretion.py.
+    out.update(excretion.drug_excretion(drug["id"], _quote_sources))
     # Active metabolites named in the source (one graded node each, kind
     # `drug_metabolites`): references into the one-per-molecule store, see
     # _drug_metabolites + _metabolite_records.

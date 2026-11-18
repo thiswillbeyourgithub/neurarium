@@ -107,6 +107,7 @@ FIELDS: dict[str, dict[str, Label]] = {
         "enzymes": Label("drug.metabEnzymes", "drug.metabEnzymesSub", parent=_METAB),
         "pgx": Label("drug.pgx", "drug.pgxSub", parent="drug.pharmacogenomics"),
         "workup": Label("drug.workup", "drug.workupSub"),
+        "excretion": Label("drug.excretion", "drug.excretionSub"),
         "wikipedia": _REFERENCE,
         "aliases": _ALIASES,
         "name_qualifier": Label(None, why="folded into the panel title"),
@@ -297,6 +298,7 @@ ALWAYS: dict[str, dict[str, Section]] = {
         "pharmacogenomics": Section("drug.pharmacogenomics"),
         "pgx": Section("drug.pgx"),
         "workup": Section("drug.workup"),
+        "excretion": Section("drug.excretion"),
     },
     **{kind: {
         regions: Section("receptor.foundIn", none="receptor.noRole"),

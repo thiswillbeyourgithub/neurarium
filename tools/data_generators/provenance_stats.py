@@ -244,6 +244,8 @@ def _provenance_stats(structures: list[dict[str, Any]],
     # Pre-prescription workup (data_generators/workup.py, BETA): ONE node per (drug,
     # test, timing) row the French RCP asks for.
     workup_grades = [_node_grade(r) for d in drugs for r in d.get("workup", []) or []]
+    # Excretion (data_generators/excretion.py, BETA): ONE node per (drug, aspect, value).
+    excretion_grades = [_node_grade(r) for d in drugs for r in d.get("excretion", []) or []]
     # Drug-metabolism nodes ("<drug> is a substrate of / inhibits / induces <enzyme>"),
     # one per (drug, enzyme, role) row. A pharmacokinetic claim, independent of the
     # drug's receptor bindings: it is what the derived drug -> drug interaction edges
@@ -461,6 +463,7 @@ def _provenance_stats(structures: list[dict[str, Any]],
         "drug_polar_surface": tally(physchem_grades["tpsa"]),
         "drug_bbb": tally(physchem_grades["bbb"]),
         "drug_workup": tally(workup_grades),
+        "drug_excretion": tally(excretion_grades),
         "drug_enzymes": tally(enzyme_grades),
         "drug_enzyme_strength": tally(enzyme_strength_grades),
         "drug_pgx": tally(pgx_grades),

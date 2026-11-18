@@ -60,6 +60,7 @@ export const KINDS = [
   { kind: "drug_polar_surface", label: "about.kindDrugPolarSurface", example: "citalopram" },
   { kind: "drug_bbb", label: "about.kindDrugBbb", example: "olanzapine" },
   { kind: "drug_workup", label: "about.kindDrugWorkup", example: "olanzapine" },
+  { kind: "drug_excretion", label: "about.kindDrugExcretion", example: "lithium" },
   { kind: "drug_enzymes", label: "about.kindDrugEnzymes", example: "olanzapine" },
   { kind: "drug_enzyme_strength", label: "about.kindDrugEnzymeStrength", example: "olanzapine" },
   { kind: "enzyme_variability", label: "about.kindEnzymeVariability" },

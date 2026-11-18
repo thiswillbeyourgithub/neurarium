@@ -9,6 +9,7 @@ import {
 import { formatAlert, formatRange } from "../tdm.js";
 import { formatBbb, formatLogP, formatTpsa } from "../physchem.js";
 import { formatWorkup } from "../workup.js";
+import { formatExcretion } from "../excretion.js";
 import { transmitterVars } from "../release-modulation.js";
 import { stripSide } from "../util.js";
 import { shownGrade } from "../grades.js";
@@ -348,6 +349,10 @@ export function collectNodes(data, deps, opts = {}) {
     }
     for (const n of d.workup || []) {
       push("drug_workup", d.name, `${t("drug.workupShort")} ${formatWorkup(n, t("drug.workupOnlyIf"))}`,
+        n.provenance, go, n);
+    }
+    for (const n of d.excretion || []) {
+      push("drug_excretion", d.name, `${t("drug.excretionShort")} ${formatExcretion(n)}`,
         n.provenance, go, n);
     }
     if (d.originator) {

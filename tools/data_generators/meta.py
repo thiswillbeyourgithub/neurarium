@@ -13,7 +13,7 @@ from typing import Any
 
 from data_generators import clinpgx as CLINPGX
 from data_generators import demographics as DEMOG
-from data_generators import formulations, history, provenance, workup
+from data_generators import excretion, formulations, history, provenance, workup
 from data_generators import receptor_effects as REFFECTS
 from data_generators import release_modulation as RELMOD
 from data_generators.addons import (
@@ -119,6 +119,8 @@ def build_meta(*, structures, projections, circuits, projection_groups, receptor
         # Pre-prescription workup vocabularies (BETA, data_generators/workup.py).
         "workup_tests": workup.labels(workup.TESTS),
         "workup_timings": workup.labels(workup.TIMINGS),
+        # Excretion aspects + value labels (BETA, data_generators/excretion.py).
+        "excretion_aspects": excretion.meta_labels(),
         # Merged binding-target map (DRUG_TARGETS + every receptor id), plus the
         # non-receptor target type -> {en,fr} tag and type -> swatch colour the
         # merged "Receptors & targets" legend reads (receptors keep their sign

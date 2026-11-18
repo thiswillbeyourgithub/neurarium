@@ -17,7 +17,7 @@ const { t } = window.__I18N__;
 export function showDrug(P, drug, opts = {}) {
   const {
     addFactRow, appendAddons, appendLookupLink,
-    appendPossibleEffects, appendReference, appendReleaseChanges, appendWorkup,
+    appendPossibleEffects, appendReference, appendReleaseChanges, appendWorkup, appendExcretion,
     bindingRow, body, clearBody, clinpgxSearchUrl, data, derivedActiveMetabolites,
     derivedAutoModulation, derivedBox, directionArrow, drugById, drugNameLink,
     drugVariantsSubsection, el,
@@ -623,6 +623,7 @@ export function showDrug(P, drug, opts = {}) {
   appendPossibleEffects(drug);
   appendReleaseChanges(drug);
   appendWorkup(drug);
+  appendExcretion(drug);
   // Every headed section starts collapsed (a drug panel is long): the heading
   // opens it, its content indented under it.
   foldBody();

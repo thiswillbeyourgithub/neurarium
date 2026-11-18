@@ -6,6 +6,7 @@ import { isWebUrl } from "../web-url.js";
 import { extLink, btn, emptySection, heading, withSubtitle } from "./dom.js";
 import { deriveReleaseChanges, transmitterVars } from "../release-modulation.js";
 import { formatConditions, groupWorkup } from "../workup.js";
+import { formatValue, groupExcretion } from "../excretion.js";
 import { groupByVariant, variantsForDrug } from "../receptor-variants.js";
 import { groupByMode } from "../receptor-effects.js";
 import { EFFECT_GROUPINGS, groupPossibleEffects, loadEffectGrouping, saveEffectGrouping }
@@ -393,8 +394,29 @@ export function makeSections(P) {
     close();
   };
 
+  // A drug panel's "Excretion" section (BETA): one row per drug_excretion node, grouped
+  // by aspect (route, unchanged share, kidney handling, urine pH), each with its pill.
+  const appendExcretion = (drug) => {
+    const hasExcretion = (d) => !!(d.excretion && d.excretion.length);
+    const has = hasExcretion(drug);
+    const { group, close } = betaSection("excretion", "drug.excretion", "drug.excretionHint",
+      { grouped: true, subKey: "drug.excretionSub", empty: has ? null : "drug",
+        extra: otherFormsExtra(drug, "excretion", hasExcretion) });
+    if (!has) return close();
+    for (const g of groupExcretion(drug.excretion, data.meta.excretionAspects)) {
+      const list = group(g.label);
+      for (const n of g.rows) {
+        const li = el("li", "eff-row");
+        li.appendChild(el("span", "loc-name", formatValue(n)));
+        li.appendChild(nodePill(n));
+        list.appendChild(li);
+      }
+    }
+    close();
+  };
+
   return {
-    appendDemographics, appendDownstream, drugVariantsSubsection, appendEffects,
+    appendDemographics, appendExcretion, appendDownstream, drugVariantsSubsection, appendEffects,
     appendPossibleEffects, appendReleaseChanges, appendVariants, appendWorkup,
     betaHeading, betaSection, derivedRow, effectLink, inStructure, linkName,
     variantRow, viaChip,

@@ -1,6 +1,7 @@
 // The presentation maps + vocabularies meta.json carries, localized once.
 
-import { localizeMap } from "./localize.js";
+import { localize, localizeMap } from "./localize.js";
+import { localizeAspects } from "../excretion.js";
 
 /**
  * Read meta.json's presentation maps into the viewer's shape (label maps localized,
@@ -51,6 +52,8 @@ export function readVocab(metaRecord) {
   // Pre-prescription workup vocabularies (BDPM RCP #24): test / timing id -> label.
   const workupTests = localizeMap(metaRecord.workup_tests);
   const workupTimings = localizeMap(metaRecord.workup_timings);
+  // Excretion aspects (BETA): aspect -> {label, values: {value -> label}}.
+  const excretionAspects = localizeAspects(metaRecord.excretion_aspects, localize);
   // Formulation release types (closed vocabulary, display order): id -> label.
   const releaseLabels = localizeMap(metaRecord.drug_releases);
   const drugTargets = metaRecord.drug_targets || {};
@@ -116,6 +119,7 @@ export function readVocab(metaRecord) {
     withdrawalReasons,
     workupTests,
     workupTimings,
+    excretionAspects,
     releaseLabels,
     drugTargets,
     drugActions,
