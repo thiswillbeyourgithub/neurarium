@@ -6,6 +6,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {
   kindsFor, metaboliteOwners, runFilters, sortRows, filterTouchesDrugs,
+  serializeFilters, parseFilters, SORTS, DEFAULT_SORT,
 } from "../../public/js/node-browser/query.js";
 
 const LABELS = { drug_categories: "Drug classes", drug_half_life: "Drug half-life",
@@ -82,4 +83,22 @@ test("value sort groups by kind, unvalued rows last", () => {
   assert.ok(rows.slice(5).every((r) => r.value == null));
   assert.deepEqual(sortRows(ROWS.slice(), "valueAsc").slice(0, 4).map((r) => r.value),
     [8, 11, 26, 48]);
+});
+
+test("the filter stack round-trips through its URL form, null at default", () => {
+  assert.equal(serializeFilters([{ kind: "", text: "", op: "and" }]), null);
+  const stack = [
+    { op: "and", kind: "Drug classes", text: "a,b|c", metabolites: true },
+    { op: "xor", kind: "Drug half-life", text: "", metabolites: false },
+  ];
+  const v = serializeFilters(stack);
+  assert.equal(v, "|Drug classes|a%2Cb%7Cc|m,xor|Drug half-life");
+  assert.equal(parseFilters(serializeFilters([{ kind: "", text: "100%" }]))[0].text, "100%");
+  assert.deepEqual(parseFilters(v), stack);
+  assert.equal(parseFilters("bogus|x")[0].op, "and");
+});
+
+test("the default sort is smallest value first, and is a menu entry", () => {
+  assert.equal(DEFAULT_SORT, "valueAsc");
+  assert.equal(SORTS[0], DEFAULT_SORT);
 });

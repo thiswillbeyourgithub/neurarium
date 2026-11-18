@@ -48,6 +48,19 @@ export function metaboliteOwners(drugs) {
   return out;
 }
 
+// A row's folded "name notion", computed once per row: folding thousands of strings on
+// every keystroke is what made typing in a filter lag. Keyed by row object, so a
+// re-collect (the twins checkbox) starts fresh without any invalidation.
+const HAYSTACKS = new WeakMap();
+function haystack(r, ctx) {
+  let h = HAYSTACKS.get(r);
+  if (h === undefined) {
+    h = ctx.fold(`${r.name} ${r.notion}`);
+    HAYSTACKS.set(r, h);
+  }
+  return h;
+}
+
 /**
  * One filter's rows. With `metabolites`, the matched drugs' metabolite drugs join the
  * owners (transitively: a metabolite of a metabolite counts), contributing their rows
@@ -58,8 +71,7 @@ function filterRows(rows, f, ctx) {
   const kinds = kindsFor(f.kind, ctx.kinds, ctx.kindLabel, ctx.fold);
   const q = ctx.fold((f.text || "").trim());
   const ofKind = (r) => !kinds || kinds.has(r.kind);
-  const hit = rows.filter((r) => ofKind(r)
-    && (!q || ctx.fold(`${r.name} ${r.notion}`).includes(q)));
+  const hit = rows.filter((r) => ofKind(r) && (!q || haystack(r, ctx).includes(q)));
   if (!f.metabolites || !ctx.metabolites) return hit;
   const owners = new Set(hit.map((r) => r.owner));
   const added = new Set();
@@ -114,7 +126,10 @@ export function runFilters(rows, filters, ctx) {
 }
 
 /** The sorting choices, in menu order (labels are `nodes.sort<Capitalized>`). */
-export const SORTS = ["weakest", "strongest", "valueAsc", "valueDesc", "name", "kind"];
+export const SORTS = ["valueAsc", "valueDesc", "weakest", "strongest", "name", "kind"];
+
+/** The sort a fresh browser (and a link without `nsort`) uses: smallest value first. */
+export const DEFAULT_SORT = "valueAsc";
 
 /**
  * Sort rows in place. "value" sorts read `row.value` (a T½ in hours, a Ki in nM...):
@@ -139,4 +154,39 @@ export function sortRows(rows, mode) {
   const dir = mode === "strongest" ? -1 : 1;
   return rows.sort((a, b) =>
     dir * (DISPLAY_GRADE_ORDER[a.grade] - DISPLAY_GRADE_ORDER[b.grade]) || byName(a, b));
+}
+
+// URL form of the filter stack (the `nf` key): filters joined by ",", each one's fields
+// (op, kind, text, "m" when it includes metabolites) joined by "|". Only "%", "|" and
+// "," are escaped here, so a typed separator cannot break the split; url-state.js
+// escapes the rest, which keeps "Drug class" readable as Drug%20class in the address
+// bar. Trailing empty fields are dropped, and the first filter's op is always empty:
+//   [{kind: "Drug class", text: "benzo"}, {op: "and", kind: "half"}]
+//   -> "|Drug class|benzo,and|half"
+const FIELD_SEP = "|";
+const FILTER_SEP = ",";
+const escField = (s) => s.replace(/[%|,]/g, (c) => `%${c.charCodeAt(0).toString(16).toUpperCase()}`);
+
+/**
+ * @param {Array<{kind: string, text: string, op?: string, metabolites?: boolean}>} filters
+ * @returns {string|null} null when the stack is one empty filter (the default)
+ */
+export function serializeFilters(filters) {
+  const live = filters.filter((f) => f.kind || f.text || f.metabolites);
+  if (!live.length) return null;
+  return filters.map((f, i) => {
+    const fields = [i === 0 ? "" : f.op || "and", f.kind || "", f.text || "",
+      f.metabolites ? "m" : ""].map(escField);
+    while (fields.length && fields[fields.length - 1] === "") fields.pop();
+    return fields.join(FIELD_SEP);
+  }).join(FILTER_SEP);
+}
+
+/** Inverse of serializeFilters; an unknown op reads as "and". */
+export function parseFilters(value) {
+  return String(value || "").split(FILTER_SEP).map((part) => {
+    const [op, kind, text, m] = Array.from({ length: 4 },
+      (_, i) => decodeURIComponent(part.split(FIELD_SEP)[i] || ""));
+    return { op: OPS.includes(op) ? op : "and", kind, text, metabolites: m === "m" };
+  });
 }
