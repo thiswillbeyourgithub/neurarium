@@ -11088,7 +11088,6 @@
         "perampanel": "https://en.wikipedia.org/w/index.php?oldid=1373296477",
         "perazine": "https://en.wikipedia.org/w/index.php?oldid=1371988023",
         "perospirone": "https://en.wikipedia.org/w/index.php?oldid=1324495944",
-        "perphenazine": "https://en.wikipedia.org/w/index.php?oldid=1315044627",
         "pethidine": "https://en.wikipedia.org/w/index.php?oldid=1373295642",
         "pfizer": "https://en.wikipedia.org/w/index.php?oldid=1378286412",
         "phenazepam": "https://en.wikipedia.org/w/index.php?oldid=1375678391",
@@ -11883,9 +11882,9 @@
         "unknown": 0
       },
       "drug_bindings": {
-        "total": 1971,
-        "verified": 1734,
-        "uncertain": 219,
+        "total": 1976,
+        "verified": 1716,
+        "uncertain": 242,
         "sourced": 0,
         "llm": 0,
         "nosource": 18,
@@ -11893,13 +11892,13 @@
         "unknown": 0
       },
       "drug_binding_action": {
-        "total": 1520,
-        "verified": 1177,
-        "uncertain": 117,
+        "total": 1525,
+        "verified": 1174,
+        "uncertain": 120,
         "sourced": 0,
         "llm": 132,
-        "nosource": 94,
-        "missing": 226,
+        "nosource": 99,
+        "missing": 231,
         "unknown": 656
       },
       "drug_nbn": {
@@ -12374,20 +12373,20 @@
       }
     },
     "nodes": {
-      "total": 10841,
-      "verified": 10044,
-      "uncertain": 447,
+      "total": 10851,
+      "verified": 10023,
+      "uncertain": 473,
       "sourced": 0,
       "llm": 230,
-      "nosource": 120,
-      "missing": 350,
+      "nosource": 125,
+      "missing": 355,
       "unknown": 667,
-      "backed": 10491,
+      "backed": 10496,
       "pct_backed": 97
     },
     "ki_coverage": {
-      "bindings_total": 1952,
-      "bindings_with_ki": 1660,
+      "bindings_total": 1957,
+      "bindings_with_ki": 1666,
       "pct_bindings_with_ki": 85,
       "drugs_total": 275,
       "drugs_without_ki": 88,
