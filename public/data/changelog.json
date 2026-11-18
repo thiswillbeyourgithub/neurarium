@@ -1,6 +1,36 @@
 {
   "versions": [
     {
+      "version": "3.164.0",
+      "date": "2026-11-18",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Data browser: stack filters with \"Add filter\". Each filter has a free-text kind box and a text box, and each one after the first is joined by AND, OR or XOR. For example \"Drug classes: benzo\" AND \"Drug half-life\" lists the half-lives of every benzodiazepine. Drag the handle to reorder filters (long press on a phone). A filter that lists drugs can also include their metabolites",
+          "commits": [
+            "768f61b3",
+            "e132be79"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Data browser: the \"Sorting\" menu sits on its own line next to the sourcing filter and can now sort by value (half-life, Ki, year...), smallest or largest first",
+          "commits": [
+            "768f61b3",
+            "e132be79"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "Data browser: the \"show both hemispheres\" checkbox only appears when a region is listed. More generally, a hidden control can no longer stay on screen",
+          "commits": [
+            "8dfb75cd",
+            "e132be79"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.163.1",
       "date": "2026-11-11",
       "entries": [
