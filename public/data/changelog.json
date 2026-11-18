@@ -1,6 +1,42 @@
 {
   "versions": [
     {
+      "version": "3.167.0",
+      "date": "2026-11-18",
+      "entries": [
+        {
+          "category": "added",
+          "text": "New Excretion section (beta) on drug panels: the excretion route (kidneys or faeces), the share excreted unchanged in urine, the kidney process (filtration, tubular secretion or reabsorption) and the effect of urine pH, each quoted from its source with the source's own figure",
+          "commits": [
+            "225f8b73",
+            "ee994a01",
+            "b6647450"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "The development notice is now a popup shown after the loading screen and before \"What's new\", instead of a top banner",
+          "commits": [
+            "46cb27a8"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "The kind picker in the data browser has an opaque background and scrolls smoothly",
+          "commits": [
+            "2b343af6"
+          ]
+        },
+        {
+          "category": "docs",
+          "text": "Excretion pipeline and coverage documented",
+          "commits": [
+            "4a020881"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.166.0",
       "date": "2026-11-18",
       "entries": [
