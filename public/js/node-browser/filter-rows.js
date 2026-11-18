@@ -5,6 +5,7 @@
 
 import { el, btn } from "../panel/dom.js";
 import { OPS } from "./query.js";
+import { wrapKindPicker } from "./kind-picker.js";
 
 // A touch drag starts only after a long press, so a tap on the handle stays a tap.
 const LONG_PRESS_MS = 400;
@@ -13,24 +14,17 @@ const LONG_PRESS_MS = 400;
  * @param {object} opts
  * @param {Function} opts.t i18n lookup
  * @param {Array<[string, string]>} opts.kindOptions [kind, label] pairs for the kind box
+ * @param {(s: string) => string} opts.fold case + accent fold, for the kind suggestions
  * @param {() => void} opts.onChange called after any edit (typing is debounced by caller)
  * @returns {{root: HTMLElement, filters: object[], setFilters: (list: object[]) => void,
  *            showMetabolites: (fn: Function) => void}}
  */
-export function createFilterStack({ t, kindOptions, onChange }) {
+export function createFilterStack({ t, kindOptions, fold, onChange }) {
   const filters = [];
   const rowEls = [];
   const root = el("div", "node-filter-stack");
   const listEl = el("div", "node-filters");
-  // One shared datalist: the kind box is free text, so a reader types "half" and the
-  // browser offers "Drug half-life" (query.kindsFor also accepts any label substring).
-  const datalist = document.createElement("datalist");
-  datalist.id = "nodes-kind-list";
-  for (const [, label] of kindOptions) {
-    const o = document.createElement("option");
-    o.value = label;
-    datalist.appendChild(o);
-  }
+  const kindLabels = kindOptions.map(([, label]) => label);
   const addBtn = btn("node-add-filter", t("nodes.addFilter"));
 
   // Ids, operator and remove visibility follow position: the first row has no operator
@@ -70,8 +64,11 @@ export function createFilterStack({ t, kindOptions, onChange }) {
     }
     op.value = f.op;
     const kind = makeInput("node-filter-kind", t("nodes.kindPlaceholder"));
-    kind.setAttribute("list", datalist.id);
     kind.value = f.kind;
+    const kindBox = wrapKindPicker({
+      input: kind, labels: kindLabels, fold,
+      onPick: (label) => { f.kind = label; onChange(true); },
+    });
     const text = makeInput("drugs-filter node-filter-text", t("nodes.filter"));
     text.value = f.text;
     const metab = el("label", "list-toggle node-filter-metab");
@@ -107,7 +104,7 @@ export function createFilterStack({ t, kindOptions, onChange }) {
     }
     row.addEventListener("click", (e) => { if (e.target === row) text.focus(); });
 
-    for (const n of [handle, op, kind, text, metab, remove]) row.appendChild(n);
+    for (const n of [handle, op, kindBox, text, metab, remove]) row.appendChild(n);
     filters.push(f);
     rowEls.push({ row, op, text, remove, metab, f });
     listEl.appendChild(row);
@@ -157,7 +154,6 @@ export function createFilterStack({ t, kindOptions, onChange }) {
     onChange(true);
   });
   addRow();
-  root.appendChild(datalist);
   root.appendChild(listEl);
   root.appendChild(addBtn);
 

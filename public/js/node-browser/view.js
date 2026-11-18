@@ -235,7 +235,7 @@ export function createNodeBrowser({ body, data, deps, ui }) {
     // A structural edit (operator, checkbox, add/remove/reorder) applies at once;
     // typing is debounced.
     stack = createFilterStack({
-      t, kindOptions: kinds.map((k) => [k, kindLabel(k)]),
+      t, kindOptions: kinds.map((k) => [k, kindLabel(k)]), fold,
       onChange: (now) => (now ? apply() : applySoon()),
     });
     const presentGrades = new Set(rows.map((r) => r.grade));
