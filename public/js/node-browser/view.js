@@ -1,12 +1,14 @@
-// Data browser UI: the filter box, kind / grade / sort selects, mirrored-twins
+// Data browser UI: the filter stack (node-browser/filter-rows.js), the final sourcing
+// + sorting line, mirrored-twins
 // checkbox, count line and chunked row list over collectNodes' rows (see
 // js/node-browser.js for the section's purpose).
 
 import { loadFlag, saveFlag } from "../prefs.js";
 import { el, btn } from "../panel/dom.js";
 import { KIND_ORDER } from "../kinds.js";
-import { DISPLAY_GRADE_ORDER } from "../grades.js";
 import { collectNodes } from "./collect.js";
+import { createFilterStack } from "./filter-rows.js";
+import { SORTS, filterTouchesDrugs, metaboliteOwners, runFilters, sortRows } from "./query.js";
 
 
 // How many rows render at once. The full list is several thousand nodes, so the
@@ -34,8 +36,8 @@ const COLUMNS = [
 ];
 
 /**
- * Build the Data browser into a section body: a filter box, kind / grade / sort
- * selects, a mirrored-twins checkbox, a count line and the chunked row list.
+ * Build the Data browser into a section body: a stack of filters, a final sourcing +
+ * sorting line, a mirrored-twins checkbox, a count line and the chunked row list.
  *
  * The node list is collected LAZILY, on the first `open()`, because enumerating
  * every node walks the whole dataset and a visitor who never opens the section
@@ -60,16 +62,11 @@ export function createNodeBrowser({ body, data, deps, ui }) {
   let rows = null;
   let matches = [];
   let limit = PAGE_FIRST;
+  let stack = null;
+  let ctx = null;
 
-
-  const filterInput = document.createElement("input");
-  filterInput.type = "text";
-  filterInput.id = "nodes-filter";
-  filterInput.className = "drugs-filter";
-  filterInput.autocomplete = "off";
-  filterInput.placeholder = t("nodes.filter");
-
-  const controls = el("div", "node-filters");
+  // The final line: sourcing (applied after every filter) and sorting, alone on it.
+  const controls = el("div", "node-final");
   const makeSelect = (label, options) => {
     const sel = document.createElement("select");
     sel.className = "node-select";
@@ -81,7 +78,10 @@ export function createNodeBrowser({ body, data, deps, ui }) {
       o.textContent = text;
       sel.appendChild(o);
     }
-    controls.appendChild(sel);
+    const wrap = el("label", "node-select-wrap");
+    wrap.appendChild(el("span", "node-select-label", label));
+    wrap.appendChild(sel);
+    controls.appendChild(wrap);
     return sel;
   };
 
@@ -158,7 +158,6 @@ export function createNodeBrowser({ body, data, deps, ui }) {
     return wrap;
   };
 
-  let kindSel = null;
   let gradeSel = null;
   let sortSel = null;
 
@@ -176,31 +175,18 @@ export function createNodeBrowser({ body, data, deps, ui }) {
   };
 
   const apply = () => {
-    const q = fold((filterInput.value || "").trim());
-    const kind = kindSel.value;
     const grade = gradeSel.value;
-    matches = rows.filter((r) => {
-      if (kind && r.kind !== kind) return false;
-      if (grade && r.grade !== grade) return false;
-      if (!q) return true;
-      return fold(`${r.name} ${r.notion}`).includes(q);
-    });
-    const mode = sortSel.value;
-    const byName = (a, b) => a.name.localeCompare(b.name, undefined, { numeric: true })
-      || a.notion.localeCompare(b.notion, undefined, { numeric: true });
-    if (mode === "name") matches.sort(byName);
-    else if (mode === "kind") {
-      matches.sort((a, b) =>
-        KIND_ORDER.indexOf(a.kind) - KIND_ORDER.indexOf(b.kind) || byName(a, b));
-    } else {
-      const dir = mode === "strongest" ? -1 : 1;
-      matches.sort((a, b) =>
-        dir * (DISPLAY_GRADE_ORDER[a.grade] - DISPLAY_GRADE_ORDER[b.grade]) || byName(a, b));
-    }
+    matches = runFilters(rows, stack.filters, ctx)
+      .filter((r) => !grade || r.grade === grade);
+    sortRows(matches, sortSel.value);
+    stack.showMetabolites((f) => filterTouchesDrugs(rows, f, ctx));
+    // A single kind across the whole result is "the selected kind" for the columns.
+    const shownKinds = new Set(matches.map((r) => r.kind));
+    const kind = shownKinds.size === 1 ? [...shownKinds][0] : "";
     // The twins choice only ever splits or collapses `structures` rows, so offer it
     // only while the current result contains some (both readings keep the kind, so
     // the control does not hide itself the moment it is used).
-    twinsLabel.hidden = !matches.some((r) => r.kind === "structures");
+    twinsLabel.hidden = !matches.some((r) => r.kind === "structures" && /_[LR]$/.test(r.owner));
     // With one kind selected, every row would repeat the kind chosen right above the
     // list, so the column is dropped and its width goes to name + notion. Kept only
     // in the "all kinds" reading, where it is what tells the rows apart. The kind then
@@ -226,32 +212,32 @@ export function createNodeBrowser({ body, data, deps, ui }) {
     debounce = setTimeout(apply, 120);
   };
 
-  const collect = () => { rows = collectNodes(data, deps, { twins: twinsBox.checked }); };
+  const collect = () => {
+    rows = collectNodes(data, deps, { twins: twinsBox.checked });
+    if (ctx) ctx.kinds = [...new Set(rows.map((r) => r.kind))];
+  };
 
   const build = () => {
     if (rows) return;
     collect();
 
-    const presentKinds = new Set(rows.map((r) => r.kind));
-    kindSel = makeSelect(t("nodes.kindLabel"), [
-      ["", t("nodes.allKinds")],
-      ...KIND_ORDER.filter((k) => presentKinds.has(k)).map((k) => [k, kindLabel(k)]),
-    ]);
+    const kinds = KIND_ORDER.filter((k) => rows.some((r) => r.kind === k));
+    ctx = { kinds, kindLabel, fold, metabolites: metaboliteOwners(data.drugs) };
+    // A structural edit (operator, checkbox, add/remove/reorder) applies at once;
+    // typing is debounced.
+    stack = createFilterStack({
+      t, kindOptions: kinds.map((k) => [k, kindLabel(k)]),
+      onChange: (now) => (now ? apply() : applySoon()),
+    });
     const presentGrades = new Set(rows.map((r) => r.grade));
     gradeSel = makeSelect(t("nodes.gradeLabel"), [
       ["", t("nodes.allGrades")],
       ...["verified", "uncertain", "sourced", "llm", "unknown", "nosource"]
         .filter((g) => presentGrades.has(g)).map((g) => [g, gradeLabel(g)]),
     ]);
-    sortSel = makeSelect(t("nodes.sortLabel"), [
-      ["weakest", t("nodes.sortWeakest")],
-      ["strongest", t("nodes.sortStrongest")],
-      ["name", t("nodes.sortName")],
-      ["kind", t("nodes.sortKind")],
-    ]);
+    sortSel = makeSelect(t("nodes.sortLabel"),
+      SORTS.map((k) => [k, t(`nodes.sort${k[0].toUpperCase()}${k.slice(1)}`)]));
 
-    filterInput.addEventListener("input", applySoon);
-    kindSel.addEventListener("change", apply);
     gradeSel.addEventListener("change", apply);
     sortSel.addEventListener("change", apply);
     twinsBox.addEventListener("change", () => {
@@ -265,7 +251,7 @@ export function createNodeBrowser({ body, data, deps, ui }) {
     });
 
     body.appendChild(intro);
-    body.appendChild(filterInput);
+    body.appendChild(stack.root);
     body.appendChild(controls);
     body.appendChild(twinsLabel);
     body.appendChild(countEl);

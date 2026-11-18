@@ -109,7 +109,42 @@
     grid-template-columns: minmax(95px, 1fr);
   }
 }
-.node-filters { display: flex; gap: 4px; margin-bottom: 6px; }
+/* The filter stack: one wrapping row per filter (handle, operator, kind, text,
+   metabolites, remove), then "Add filter", then the final sourcing + sorting line. */
+.node-filters { display: flex; flex-direction: column; gap: 4px; }
+.node-filter {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 4px;
+  padding: 3px; border-radius: 8px; background: rgba(var(--ink), 0.03);
+}
+.node-filter.dragging { outline: 1px dashed var(--accent); opacity: 0.85; }
+.node-filter-handle {
+  cursor: grab; touch-action: none; user-select: none;
+  color: var(--muted); padding: 0 2px; font-size: 14px;
+}
+.node-filter.dragging .node-filter-handle { cursor: grabbing; }
+.node-filter .node-select.node-filter-op { flex: 0 0 auto; }
+.node-filter .node-filter-kind, .node-filter .node-filter-text {
+  flex: 1 1 120px; min-width: 0; margin: 0; width: auto;
+}
+.node-filter-kind {
+  padding: 7px 9px; font: inherit; font-size: 13px; color: var(--text);
+  background: rgba(var(--ink), 0.06); border: 1px solid rgba(var(--ink), 0.12);
+  border-radius: 8px; outline: none;
+}
+.node-filter-kind:focus { border-color: var(--accent); }
+.node-filter .list-toggle { margin: 0 2px; }
+.node-filter-remove, .node-add-filter {
+  font: inherit; font-size: 12px; color: var(--muted); cursor: pointer;
+  background: none; border: 1px solid rgba(var(--ink), 0.12); border-radius: 6px;
+  padding: 3px 7px;
+}
+.node-filter-remove:hover, .node-add-filter:hover { color: var(--text); border-color: var(--accent); }
+.node-add-filter { margin: 4px 0 6px; }
+.node-final { display: flex; gap: 6px; margin-bottom: 6px; }
+.node-select-wrap {
+  flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 2px;
+  font-size: 11px; color: var(--muted);
+}
 .node-select {
   flex: 1 1 0;
   min-width: 0;

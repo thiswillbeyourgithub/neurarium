@@ -133,8 +133,8 @@ const inMarkup = (ps) => TAGS.some((t) => ps.every((p) => tagHas(t, p)));
 // Each entry's `token` must occur literally in `module`. Add one when a tour step
 // starts pointing at a new runtime-built element.
 const DYNAMIC = {
-  "#nodes-filter": { module: "js/node-browser/view.js", token: '"nodes-filter"' },
-  ".node-filters": { module: "js/node-browser/view.js", token: '"node-filters"' },
+  "#nodes-filter": { module: "js/node-browser/filter-rows.js", token: '"nodes-filter"' },
+  ".node-filters": { module: "js/node-browser/filter-rows.js", token: '"node-filters"' },
   ".detail-tab": { module: "js/panel/tabs.js", token: '"detail-tab"' },
   ".active": { module: "js/panel/tabs.js", token: '" active"' },
   ".detail-tab-close": { module: "js/panel/tabs.js", token: '"detail-tab-close"' },
