@@ -530,8 +530,7 @@ def _wiki_ki_obj(w: dict, slug: str, permalink: str) -> dict:
     }
 
 
-def _is_wiki_ki(binding: dict) -> bool:
-    return binding.get("ki", {}).get("source", {}).get("corpus") == "wikipedia_pharm"
+_is_wiki_ki = fetch_ki._is_wiki_ki
 
 
 # A (drug, target) whose Wikipedia Ki is the very PDSP assay fetch_ki.KI_ROW_BLOCKLIST
@@ -550,8 +549,11 @@ def apply_all(only: str | None = None) -> None:
     onto a binding that has NONE, never over a PDSP (or any existing) Ki; then every
     remaining unmatched target the table lists a genuine Ki for is auto-added as
     `affinity_only` (the whole curated table is kept, not just the strongest rows).
+    Such an add whose Ki fetch_ki later took over carries ``listed_by``
+    (``fetch_ki.LISTED_BY_WIKI``): it is kept while the table still lists the target,
+    dropped once it does not, and handed back (marker removed) if it lost its Ki.
     Idempotent: strips its own prior output (wiki Ki annotations + wiki affinity_only
-    adds) first, so re-running just refreshes."""
+    adds) first, so re-running just refreshes, in either order with fetch_ki."""
     valid_ids = load_valid_ids()
     data = fetch_ki.drugs_io.load_drugs()
     n_drugs = n_ann = n_add = 0
@@ -571,7 +573,8 @@ def apply_all(only: str | None = None) -> None:
         # Idempotency: drop our prior affinity_only adds + Ki annotations, keeping any
         # PDSP/other Ki and any hand-authored binding untouched.
         d["bindings"] = [b for b in d["bindings"]
-                         if not (b.get("affinity_only") and _is_wiki_ki(b))]
+                         if not (b.get("affinity_only") and _is_wiki_ki(b))
+                         and not (fetch_ki._listed_by_wiki(b) and b["target"] not in wiki)]
         for b in d["bindings"]:
             if _is_wiki_ki(b):
                 b.pop("ki", None)
@@ -585,6 +588,7 @@ def apply_all(only: str | None = None) -> None:
             w = wiki.get(b["target"])
             if w:                                # fill a binding PDSP left without a Ki
                 b["ki"] = _wiki_ki_obj(w, slug, permalink)
+                b.pop("listed_by", None)         # its Ki is ours again
                 n_ann += 1
                 touched = True
         # Add every remaining unmatched target the table gives a genuine Ki for as

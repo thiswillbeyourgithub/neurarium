@@ -6,15 +6,19 @@ Stdlib ``unittest`` only (no deps), matching test_generate.py. Runnable directly
     python tools/tests/test_fetch_ki.py
 
 pytest-discoverable. These lock the ``--apply`` idempotency contract: the pass may
-only write into a Ki slot it *owns* (empty, or its own prior non-curated PDSP Ki). A
-``wikipedia_pharm`` fallback Ki (corpus #9) or a hand-curated Ki belongs to another
-tool and must be left untouched, else annotate would flip its corpus to ``pdsp_ki``
-and the next --apply's strip would delete the binding (the destructive oscillation
-this guard fixes). No CSV needed: ``_ki_owned_by_pdsp`` is a pure predicate.
+only write into a Ki slot it *owns* (empty, its own prior non-curated PDSP Ki, or a
+``wikipedia_pharm`` Ki, since PDSP wins where both have a value). A hand-curated Ki
+belongs to another tool and is left untouched. A Wikipedia-listed affinity_only binding
+PDSP takes over is marked ``listed_by`` so neither applier deletes the other's work
+(``TwoApplierFixpointTest`` runs both in both orders). No CSV needed: the row table is
+monkeypatched.
 
 Built with the help of Claude Code.
 """
 
+import copy
+import json
+import importlib.util
 import unittest
 from pathlib import Path
 import sys
@@ -47,10 +51,10 @@ class KiOwnershipTest(unittest.TestCase):
         # Hand-attached weak binder (source.curated): never overwritten/stripped.
         self.assertFalse(fetch_ki._ki_owned_by_pdsp(_binding(corpus="pdsp_ki", curated=True)))
 
-    def test_wikipedia_fallback_is_not_ownable(self):
-        # The regression this test exists for: a wikipedia_pharm Ki must be left
-        # alone, or annotate flips it to pdsp_ki and the next strip deletes it.
-        self.assertFalse(fetch_ki._ki_owned_by_pdsp(_binding(corpus="wikipedia_pharm")))
+    def test_wikipedia_ki_is_ownable(self):
+        # PDSP is the primary measured source: it replaces a Wikipedia Ki where it has
+        # a row (the listed_by marker keeps that from oscillating, see below).
+        self.assertTrue(fetch_ki._ki_owned_by_pdsp(_binding(corpus="wikipedia_pharm")))
 
     def test_unknown_corpus_is_not_ownable(self):
         # Any non-PDSP corpus is another tool's slot; only PDSP is owned.
@@ -219,6 +223,79 @@ class ProdrugSkipTest(unittest.TestCase):
         del self.drugs[0]["prodrug"]
         fetch_ki.apply_all()
         self.assertIn("ki", self.saved[0]["bindings"][0])
+
+
+@unittest.skipUnless(importlib.util.find_spec("bs4"), "beautifulsoup4 not installed")
+class TwoApplierFixpointTest(unittest.TestCase):
+    """PDSP wins over a Wikipedia Ki, and running fetch_ki + the Wikipedia applier in
+    either order, any number of times, lands on the same bindings. Fixture: PDSP has
+    DRD2 (10 nM) and HTR2A (20 nM); the article lists d2 (5 nM, bound), 5ht2a (50 nM,
+    unbound, so Wikipedia lists it) and h1 (7 nM, PDSP has nothing)."""
+
+    WIKI = {t: {"ki": {"median": v, "min": v, "max": v}, "quote": f"{t} | {v}"}
+            for t, v in (("d2", 5.0), ("5ht2a", 50.0), ("h1", 7.0))}
+
+    def setUp(self):
+        import fetch_wikipedia_pharmacology as W
+        self.W = W
+        self.wiki = copy.deepcopy(self.WIKI)    # a test may edit its own table
+        row = IdentityAliasPoolingTest._row
+        self._saved = (fetch_ki._ALL_ROWS, fetch_ki.drugs_io.load_drugs,
+                       fetch_ki.drugs_io.save_drugs, W.load_valid_ids, W.drug_title,
+                       W.extract_stored)
+        # Two assays per target, so neither is a median-stronger auto-add on its own:
+        # fetch_ki only ever annotates here.
+        fetch_ki._ALL_ROWS = [row(1, "Testdrug", "DRD2", "10"),
+                              row(2, "Testdrug", "HTR2A", "20")]
+        self.drugs = [{"id": "testdrug", "name": "Testdrug",
+                       "bindings": [{"target": "d2", "action": "antagonist"}]}]
+        fetch_ki.drugs_io.load_drugs = lambda: self.drugs
+        fetch_ki.drugs_io.save_drugs = lambda d: None
+        W.load_valid_ids = lambda: set()
+        W.drug_title = lambda did: "Testdrug"
+        W.extract_stored = lambda slug, ids: ({"bindings": copy.deepcopy(self.wiki)},
+                                              "https://en.wikipedia.org/?oldid=1")
+
+    def tearDown(self):
+        W = self.W
+        (fetch_ki._ALL_ROWS, fetch_ki.drugs_io.load_drugs, fetch_ki.drugs_io.save_drugs,
+         W.load_valid_ids, W.drug_title, W.extract_stored) = self._saved
+
+    def _ki(self):
+        return {b["target"]: (b["ki"]["source"]["corpus"], b.get("listed_by"))
+                for b in self.drugs[0]["bindings"]}
+
+    def test_pdsp_wins_and_both_orders_converge(self):
+        pdsp, wiki = fetch_ki.apply_all, self.W.apply_all
+        want = {"d2": ("pdsp_ki", None), "5ht2a": ("pdsp_ki", "wikipedia_pharm"),
+                "h1": ("wikipedia_pharm", None)}
+        for order in ((wiki, pdsp), (pdsp, wiki)):
+            self.drugs[0]["bindings"] = [{"target": "d2", "action": "antagonist"}]
+            for _ in range(3):
+                for step in order:
+                    step()
+                    snapshot = copy.deepcopy(self.drugs)
+                    step()
+                    # json, not ==: the file is diffed byte-wise, so key order counts
+                    self.assertEqual(json.dumps(self.drugs), json.dumps(snapshot),
+                                     f"{step.__module__} not idempotent")
+            # A fresh drug converges after one round in either order, then holds.
+            self.assertEqual(self._ki(), want)
+
+    def test_listed_binding_dropped_when_the_table_drops_it(self):
+        self.W.apply_all()
+        fetch_ki.apply_all()
+        del self.wiki["5ht2a"]
+        self.W.apply_all()
+        self.assertNotIn("5ht2a", self._ki())
+
+    def test_listed_binding_handed_back_when_pdsp_loses_the_row(self):
+        self.W.apply_all()
+        fetch_ki.apply_all()
+        fetch_ki._ALL_ROWS = fetch_ki._ALL_ROWS[:1]
+        fetch_ki.apply_all()
+        self.W.apply_all()
+        self.assertEqual(self._ki()["5ht2a"], ("wikipedia_pharm", None))
 
 
 class NonKiRowFilterTest(unittest.TestCase):

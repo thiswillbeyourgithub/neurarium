@@ -232,7 +232,10 @@ fixed Stahl list.
   constituent lends nothing. A measured Ki backs `_binding_grade`, lifting the binding to `verified`.
   `fetch_ki.py --apply` drops every PDSP assay >=10 uM as "inactive", so a genuine but weak binder
   (caffeine at A2a) can only be recorded by hand; such a `ki.source` carries `"curated": true` so the
-  idempotent `--apply` refresh never strips it (`_is_curated_ki`). Where PDSP has no assay at all,
+  idempotent `--apply` refresh never strips it (`_is_curated_ki`). PDSP outranks a Wikipedia table Ki
+  (#9): `--apply` overwrites one wherever PDSP has a row, marking a Wikipedia-listed `affinity_only`
+  binding `listed_by: "wikipedia_pharm"` (authoring-only, not emitted) so the Wikipedia applier keeps
+  it while its table still lists the target. Where PDSP has no assay at all,
   GtoPdb's curated interactions (corpus #11) fill in: a Ki for a Ki-less binding, and a
   direction for an `affinity_only` one (see `apply_gtopdb_ki.py`). Such a binding is a binding
   like any other: it animates, and its source pill names the corpus. The authored

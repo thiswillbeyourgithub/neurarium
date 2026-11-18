@@ -215,7 +215,9 @@ The corpora (`SOURCE_CORPORA`), each quote-gated author-side as above unless not
   microarray = mRNA in cell bodies, so a transporter confirms at its source nucleus (SERT->raphe,
   NET->LC) and its terminal-region claims honestly stay `llm`.
 - **#9 Wikipedia pharm** (`wikipedia_pharm`, `page` = the article slug) backs a binding **Ki** where PDSP
-  (#5) has none (a *fallback*, never overriding a measured assay). `fetch_wikipedia_pharmacology.py` stores
+  (#5) has none (a *fallback*, never overriding a measured assay: `fetch_ki.py --apply` replaces a Wikipedia Ki
+  wherever PDSP has a row, and a table-listed `affinity_only` binding it takes over keeps `listed_by:
+  "wikipedia_pharm"` so the two appliers stay a fixpoint in either order). `fetch_wikipedia_pharmacology.py` stores
   the whole English article author-side (pinned to a revision id) and mines its pharmacodynamics binding
   table; a Ki source's `quote` is the verbatim table row, gated exactly like a book page. A tertiary
   source citing the primary literature: the grade attests quote-presence, the corpus label conveys tier.

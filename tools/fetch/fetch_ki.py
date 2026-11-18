@@ -593,22 +593,35 @@ def _is_curated_ki(binding):
     return bool(binding.get("ki", {}).get("source", {}).get("curated"))
 
 
-def _ki_owned_by_pdsp(binding):
-    """True iff --apply may write/refresh this binding's ``ki``: it has no Ki yet, or
-    the Ki it has is fetch_ki's own prior (non-curated PDSP) output.
+# Marker on an affinity_only binding the Wikipedia Ki table listed (corpus #9) whose Ki
+# PDSP took over: the binding is the Wikipedia applier's, the Ki is ours.
+LISTED_BY_WIKI = "wikipedia_pharm"
 
-    A ``wikipedia_pharm`` fallback Ki (corpus #9, written only where PDSP had none) and
-    a hand-curated Ki both belong to another tool. Annotating over them would flip the
-    source corpus to ``pdsp_ki``; the NEXT --apply's strip then deletes the (now
-    pdsp-looking) affinity-only binding, so the pass oscillates and loses data. Leaving
-    a non-owned slot alone keeps --apply an idempotent fixpoint (its documented
-    contract: it "only owns pdsp_ki Ki")."""
+
+def _is_wiki_ki(binding):
+    return binding.get("ki", {}).get("source", {}).get("corpus") == "wikipedia_pharm"
+
+
+def _listed_by_wiki(binding):
+    return binding.get("listed_by") == LISTED_BY_WIKI
+
+
+def _ki_owned_by_pdsp(binding):
+    """True iff --apply may write/refresh this binding's ``ki``: it has no Ki yet, its
+    Ki is fetch_ki's own prior (non-curated PDSP) output, or it is a ``wikipedia_pharm``
+    Ki (corpus #9). PDSP is the primary measured source, so a Wikipedia Ki only stands
+    where PDSP has no row for that (drug, target); where both exist PDSP wins.
+
+    Only a hand-curated Ki belongs to another tool. A Wikipedia-listed ``affinity_only``
+    binding PDSP takes over is marked ``listed_by: "wikipedia_pharm"`` (see
+    :data:`LISTED_BY_WIKI`), so the next strip keeps it instead of deleting it as a
+    PDSP auto-add: without the marker the two appliers would oscillate."""
     ki = binding.get("ki")
     if not ki:
         return True
     if _is_curated_ki(binding):
         return False
-    return _is_pdsp_ki(binding)
+    return _is_pdsp_ki(binding) or _is_wiki_ki(binding)
 
 
 def apply_all(only=None):
@@ -630,7 +643,7 @@ def apply_all(only=None):
         # reproduce, see _is_curated_ki).
         d["bindings"] = [b for b in d.get("bindings", [])
                          if not (b.get("affinity_only") and _is_pdsp_ki(b)
-                                 and not _is_curated_ki(b))]
+                                 and not _is_curated_ki(b) and not _listed_by_wiki(b))]
         for b in d["bindings"]:
             if _is_pdsp_ki(b) and not _is_curated_ki(b):
                 b.pop("ki", None)
@@ -648,10 +661,15 @@ def apply_all(only=None):
             _stamp_mapping(s, mapping)
         touched = False
         for b in d["bindings"]:
-            if not _ki_owned_by_pdsp(b):   # curated or wikipedia_pharm fallback: leave alone
+            if not _ki_owned_by_pdsp(b):   # hand-curated: leave alone
                 continue
             s = res["annotated"].get(b["target"])
             if s and s.get("ki_nm"):
+                if b.get("affinity_only") and _is_wiki_ki(b):
+                    # pop first: key order then matches the stripped re-run's
+                    # (listed_by before ki), so the file is byte-stable
+                    b.pop("ki")
+                    b["listed_by"] = LISTED_BY_WIKI
                 b["ki"] = _ki_from_summary(s)
                 n_ann += 1
                 touched = True
