@@ -336,12 +336,12 @@ def reconstruct_claims(quotes, data=None, on_cite=None, site_kinds=None):
             for q in _qids(h.get("half_life_sources", [])):
                 add(q, f"Drug {nm}{of} has an elimination half-life of "
                        f"{_hours(h.get('half_life'))}.",
-                    CS.site("drug", d["id"], f"{fac}half_life"))
+                    CS.site("drug", d["id"], f"{fac}half_life"), h.get("half_life"))
             kind["now"] = "drug_tmax"
             for q in _qids(h.get("tmax_sources", [])):
                 add(q, f"Drug {nm}{of} reaches its peak plasma concentration "
                        f"{_hours(h.get('tmax'))} after a dose.",
-                    CS.site("drug", d["id"], f"{fac}tmax"))
+                    CS.site("drug", d["id"], f"{fac}tmax"), h.get("tmax"))
         kind["now"] = "drug_first_approval"
         fa = d.get("first_approval") or {}
         for q in _qids(d.get("first_approval_sources", [])):

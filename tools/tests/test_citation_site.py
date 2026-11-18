@@ -36,7 +36,11 @@ UNJUDGED_CORPORA = {"allen_ahba"}
 # site matched nothing, which is the outcome we want, not a silent no-op.
 # An enzyme row's `/strength` sub-claim is the same: its sources are derived by code from
 # the row's own (quotes/attestation.py), so demoting the row's quote is what removes it.
-HAND_AUTHORED = ("/formed_by[", "]/strength")
+# An uncertainty bullet's own citation (a `contradicted` source, hand-curated in
+# quotes/contradictions.py) is the same: it can also be another node's machine-written
+# source (dimenhydrinate's T½ quote doubts diphenhydramine's), yet at the bullet site
+# only a hand edit of the CONTRADICTIONS table removes it.
+HAND_AUTHORED = ("/formed_by[", "]/strength", "/uncertainty[")
 
 
 class GrammarTest(unittest.TestCase):
