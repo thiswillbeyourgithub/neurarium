@@ -12,12 +12,14 @@ import { formatWorkup } from "../workup.js";
 import { transmitterVars } from "../release-modulation.js";
 import { stripSide } from "../util.js";
 import { shownGrade } from "../grades.js";
+import { bindingKi } from "../panel/format.js";
 
 
 /**
  * Enumerate every graded knowledge node in the dataset as a flat row list.
  *
- * A row is `{kind, name, notion, grade, uncertain, go, sources, uncertainty, ki}`:
+ * A row is `{kind, owner, name, notion, grade, uncertain, go, sources, uncertainty, ki,
+ * value}`:
  * `kind` is the provenance-tally key (so it labels through the very i18n strings the
  * Sources popup's bars use), `name` names the node's owner, `notion` states the claim,
  * and `grade` is the DISPLAY grade a pill would show ("verified" / "sourced" / "llm" /
@@ -28,7 +30,9 @@ import { shownGrade } from "../grades.js";
  * BACKING (its quote-level sources, its reasons to doubt, its measured Ki) so the
  * row's pill shows the concrete source rather than the grade alone: the row's shape
  * is deliberately the one `ui.pill` (the panel's own source-backed pill) consumes,
- * so a row is handed straight to it.
+ * so a row is handed straight to it. `value` is the claim's number when it has one
+ * (a T½ in hours, a Ki in nM, an approval year, ...), else null: the Data browser's
+ * "by value" sorting reads it.
  *
  * Wikipedia references are deliberately absent: a reference points *at* a node, it
  * is not itself one (same rule as the popup's bars). The per-kind counts otherwise
@@ -56,7 +60,7 @@ export function collectNodes(data, deps, opts = {}) {
   // `owner` is the id of the record whose rows are being pushed (set by each loop
   // below), so a caller can pick a row by owner (kinds.js exampleRow).
   let owner = null;
-  const push = (kind, name, notion, grade, go, src) => {
+  const push = (kind, name, notion, grade, go, src, value = null) => {
     const uncertainty = (src && src.uncertainty) || [];
     rows.push({
       kind,
@@ -69,6 +73,7 @@ export function collectNodes(data, deps, opts = {}) {
       sources: (src && src.sources) || [],
       uncertainty,
       ki: (src && src.ki) || null,
+      value: Number.isFinite(value) ? value : null,
     });
   };
 
@@ -86,6 +91,7 @@ export function collectNodes(data, deps, opts = {}) {
   // descending order) AND how far above this gene's brain-wide average it sits. The
   // region alone would name the claim without stating it. Signed to two decimals, the
   // same way a panel's "Regional distribution" row writes the z beside its bar.
+  const topZ = (info) => (info && info.profile ? Object.values(info.profile)[0] : null);
   const topRegion = (info) => {
     const entries = info && info.profile ? Object.entries(info.profile) : [];
     if (!entries.length) return "";
@@ -201,7 +207,7 @@ export function collectNodes(data, deps, opts = {}) {
     // it ranks highest (a bare receptor name would not state the claim).
     if (r.densityInfo) {
       push("receptor_density", r.name, topRegion(r.densityInfo),
-        r.densityInfo.provenance || "llm", go, r.densityInfo);
+        r.densityInfo.provenance || "llm", go, r.densityInfo, topZ(r.densityInfo));
     }
   }
 
@@ -221,7 +227,7 @@ export function collectNodes(data, deps, opts = {}) {
     }
     if (tg.densityInfo) {
       push("target_density", tg.name, topRegion(tg.densityInfo),
-        tg.densityInfo.provenance || "llm", go, tg.densityInfo);
+        tg.densityInfo.provenance || "llm", go, tg.densityInfo, topZ(tg.densityInfo));
     }
   }
   // The per-target node kinds, receptors and non-receptor targets alike (data.js
@@ -264,7 +270,7 @@ export function collectNodes(data, deps, opts = {}) {
     const go = d.focusable ? () => nav.drug(d) : null;
     for (const b of d.bindings || []) {
       if (b.viaMetabolite) continue;  // a prodrug's borrowed binding: the metabolite's node
-      push("drug_bindings", d.name, bindingNotion(b), b.provenance, go, b);
+      push("drug_bindings", d.name, bindingNotion(b), b.provenance, go, b, bindingKi(b));
       push("drug_binding_action", d.name, actionNotion(b), b.actionProvenance, go,
         actionBacking(b));
     }
@@ -280,11 +286,11 @@ export function collectNodes(data, deps, opts = {}) {
     }
     if (d.halfLife) {
       push("drug_half_life", d.name, `T½ ${formatHalfLife(d.halfLife)}`,
-        d.halfLifeProvenance, go, { sources: d.halfLifeSources });
+        d.halfLifeProvenance, go, { sources: d.halfLifeSources }, d.halfLife.hours);
     }
     if (d.tmax) {
       push("drug_tmax", d.name, `${t("drug.tmax")} ${formatHalfLife(d.tmax)}`,
-        d.tmaxProvenance, go, { sources: d.tmaxSources });
+        d.tmaxProvenance, go, { sources: d.tmaxSources }, d.tmax.hours);
     }
     // Each formulation is its own node (the release type), and its T½ / Tmax are
     // counted under the same kinds as the molecule's (its brands already ride
@@ -295,18 +301,19 @@ export function collectNodes(data, deps, opts = {}) {
       if (f.halfLife) {
         push("drug_half_life", `${d.name} (${f.label})`,
           `T½ ${formatHalfLife(f.halfLife)}`, f.halfLifeProvenance, go,
-          { sources: f.halfLifeSources });
+          { sources: f.halfLifeSources }, f.halfLife.hours);
       }
       if (f.tmax) {
         push("drug_tmax", `${d.name} (${f.label})`,
           `${t("drug.tmax")} ${formatHalfLife(f.tmax)}`, f.tmaxProvenance, go,
-          { sources: f.tmaxSources });
+          { sources: f.tmaxSources }, f.tmax.hours);
       }
     }
     if (d.firstApproval) {
       push("drug_first_approval", d.name,
         `${approvalLabel(d.firstApproval, t)} ${formatApproval(d.firstApproval)}`,
-        d.firstApproval.provenance, go, { sources: d.firstApproval.sources });
+        d.firstApproval.provenance, go, { sources: d.firstApproval.sources },
+        d.firstApproval.year);
     }
     if (d.prodrug) {
       push("drug_prodrug", d.name, t("drug.prodrug"), d.prodrug.provenance, go,
@@ -320,21 +327,22 @@ export function collectNodes(data, deps, opts = {}) {
     if (d.therapeuticRange) {
       push("drug_therapeutic_range", d.name, `${t("drug.therapeuticRange")} `
         + formatRange(d.therapeuticRange, window.__I18N__.lang),
-        d.therapeuticRange.provenance, go, { sources: d.therapeuticRange.sources });
+        d.therapeuticRange.provenance, go, { sources: d.therapeuticRange.sources },
+        d.therapeuticRange.low);
     }
     if (d.alertLevel) {
       push("drug_alert_level", d.name, `${t("drug.alertLevel")} `
         + formatAlert(d.alertLevel, window.__I18N__.lang),
-        d.alertLevel.provenance, go, { sources: d.alertLevel.sources });
+        d.alertLevel.provenance, go, { sources: d.alertLevel.sources }, d.alertLevel.value);
     }
     const lang = window.__I18N__.lang;
-    for (const [kind, node, key, text] of [
-      ["drug_lipophilicity", d.xlogp, "drug.xlogp", (n) => formatLogP(n.value, lang)],
-      ["drug_polar_surface", d.tpsa, "drug.tpsa", (n) => formatTpsa(n.value, lang)],
-      ["drug_bbb", d.bbb, "drug.bbb", (n) => formatBbb(n, t, lang)],
+    for (const [kind, node, key, text, num] of [
+      ["drug_lipophilicity", d.xlogp, "drug.xlogp", (n) => formatLogP(n.value, lang), (n) => n.value],
+      ["drug_polar_surface", d.tpsa, "drug.tpsa", (n) => formatTpsa(n.value, lang), (n) => n.value],
+      ["drug_bbb", d.bbb, "drug.bbb", (n) => formatBbb(n, t, lang), (n) => n.logbb],
     ]) {
       if (node) push(kind, d.name, `${t(key)} ${text(node)}`, node.provenance, go,
-        { sources: node.sources });
+        { sources: node.sources }, num(node));
     }
     for (const n of d.workup || []) {
       push("drug_workup", d.name, `${t("drug.workupShort")} ${formatWorkup(n, t("drug.workupOnlyIf"))}`,
@@ -392,7 +400,7 @@ export function collectNodes(data, deps, opts = {}) {
         if (seenMetaboliteBinding.has(bKey)) continue;
         seenMetaboliteBinding.add(bKey);
         push("drug_metabolite_bindings", d.name, `${m.name}: ${bindingNotion(b)}`,
-          b.provenance, goMetab, b);
+          b.provenance, goMetab, b, bindingKi(b));
         push("drug_binding_action", d.name, `${m.name}: ${actionNotion(b)}`,
           b.actionProvenance, goMetab, actionBacking(b));
       }
