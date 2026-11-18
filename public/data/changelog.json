@@ -1,6 +1,33 @@
 {
   "versions": [
     {
+      "version": "3.169.0",
+      "date": "2026-11-18",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "The data browser waits for a Search button (or Enter) instead of re-listing on every keystroke, which keeps it responsive on a phone; the button lights up when the filters changed since the last search",
+          "commits": [
+            "c6ab4ad5"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "An added AND filter only offers the kinds that can still match: after \"Drug class: benzo\", region kinds are no longer suggested",
+          "commits": [
+            "c6ab4ad5"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "On a touchscreen, swiping the data browser's kind list now scrolls it instead of picking the item under the finger",
+          "commits": [
+            "c6ab4ad5"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.168.0",
       "date": "2026-11-18",
       "entries": [
