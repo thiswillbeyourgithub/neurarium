@@ -1,6 +1,49 @@
 {
   "versions": [
     {
+      "version": "3.166.0",
+      "date": "2026-11-18",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Three new receptor effects: hypersalivation, mydriasis (pupil dilation) and miosis (pupil constriction); mu opioid agonism is now sourced as causing miosis",
+          "commits": [
+            "3621bc23"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "A drug's half-life or time to peak can now be flagged as contradicted by another source: methylphenidate's conflicting half-lives and diphenhydramine's Stahl half-life (8 h) against dimenhydrinate's (5 to 6 h) are flagged",
+          "commits": [
+            "41fd4244",
+            "539b71c2",
+            "5ed57c10"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "AGNP drug-monitoring rows split across a line break are read correctly, and a misattributed varenicline row is dropped",
+          "commits": [
+            "9cb46280"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "A blood-brain barrier row named after another drug of the roster is refused",
+          "commits": [
+            "c337cd80"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Internal cleanup: the AGNP fetcher reads its page files through the shared helper",
+          "commits": [
+            "2d71666a"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.165.0",
       "date": "2026-11-18",
       "entries": [
