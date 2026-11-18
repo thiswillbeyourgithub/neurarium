@@ -1,5 +1,9 @@
 :root[data-theme="light"] .combo-warning { --addon-ink: var(--text-strong); }
 * { box-sizing: border-box; }
+/* The `hidden` attribute must always win: a class rule setting `display` (e.g.
+   `.list-toggle { display: flex }`) otherwise silently keeps a hidden control on
+   screen. Guarded by tools/tests/test_hidden_attr.py. */
+[hidden] { display: none !important; }
 html, body {
   margin: 0;
   height: 100%;
