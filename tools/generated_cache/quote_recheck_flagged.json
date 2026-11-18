@@ -1,5 +1,18 @@
 [
  {
+  "qid": "q_918fa2dd251b",
+  "corpus": "bdpm",
+  "page": "60149276",
+  "heading": null,
+  "present": true,
+  "supports": false,
+  "quote": "de 73 à 99% (moyenne : 88%) dans l'urine acide,",
+  "claims": [
+   "drug:ephedrine/excretion[urine_ph:acidic_faster] | Excretion of drug Ephedrine, urine pH: faster in acidic urine. [cited here alongside 1 other quote(s): judge whether THIS one carries its share of the claim, not whether it carries the whole claim alone]"
+  ],
+  "note": "line gives a recovery range in acidic urine, not that acidity speeds excretion"
+ },
+ {
   "qid": "q_21c6860df3bf",
   "corpus": "europepmc",
   "page": "11016537",
@@ -14,6 +27,42 @@
   "note": "[11C]FLB 457 is D2/3-nonselective; cortical signal reasonably read as D2 (13%/decade ACC), but the sentence cannot attribute a decline to D3 specifically (D3 sparse in cortex)",
   "sites": [
    "receptor:d3/demographics[age:decrease:cingulate]"
+  ]
+ },
+ {
+  "qid": "q_3b9a7fe452a2",
+  "corpus": "wikipedia_pharm",
+  "page": "amphetamine",
+  "heading": null,
+  "present": true,
+  "supports": true,
+  "quote": "Amphetamine is eliminated via the kidneys , with 30–40% of the drug being excreted unchanged at normal urinary pH.",
+  "claims": [
+   "drug:amphetamine_dl/excretion[route:renal] | Excretion of drug Amphetamine (D,L), route: urine (kidneys). [cited here alongside 1 other quote(s): judge whether THIS one carries its share of the claim, not whether it carries the whole claim alone]",
+   "drug:amphetamine_dl/excretion[unchanged:urine] | Excretion of drug Amphetamine (D,L), excreted unchanged: in urine (30–40%). [cited here alongside 1 other quote(s): judge whether THIS one carries its share of the claim, not whether it carries the whole claim alone]",
+   "drug:amphetamine_dl/excretion[urine_ph:dependent] | Excretion of drug Amphetamine (D,L), urine pH: excretion depends on it. [cited here alongside 1 other quote(s): judge whether THIS one carries its share of the claim, not whether it carries the whole claim alone]"
+  ],
+  "note": "line states renal unchanged excretion but no pH dependence",
+  "sites": [
+   "drug:amphetamine_dl/excretion[urine_ph:dependent]"
+  ]
+ },
+ {
+  "qid": "q_cb8bb1ec664e",
+  "corpus": "wikipedia_pharm",
+  "page": "dextroamphetamine",
+  "heading": null,
+  "present": true,
+  "supports": true,
+  "quote": "Amphetamine is eliminated via the kidneys , with 30–40% of the drug being excreted unchanged at normal urinary pH.",
+  "claims": [
+   "drug:amphetamine_d/excretion[route:renal] | Excretion of drug Amphetamine (D), route: urine (kidneys). [cited here alongside 1 other quote(s): judge whether THIS one carries its share of the claim, not whether it carries the whole claim alone]",
+   "drug:amphetamine_d/excretion[unchanged:urine] | Excretion of drug Amphetamine (D), excreted unchanged: in urine (30–40%). [cited here alongside 1 other quote(s): judge whether THIS one carries its share of the claim, not whether it carries the whole claim alone]",
+   "drug:amphetamine_d/excretion[urine_ph:dependent] | Excretion of drug Amphetamine (D), urine pH: excretion depends on it. [cited here alongside 2 other quote(s): judge whether THIS one carries its share of the claim, not whether it carries the whole claim alone]"
+  ],
+  "note": "line states renal unchanged excretion but no pH dependence",
+  "sites": [
+   "drug:amphetamine_d/excretion[urine_ph:dependent]"
   ]
  }
 ]

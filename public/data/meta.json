@@ -373,6 +373,37 @@
     "before": "before starting",
     "during": "during treatment"
   },
+  "excretion_aspects": {
+    "route": {
+      "label": "route",
+      "values": {
+        "renal": "urine (kidneys)",
+        "fecal": "faeces (bile)"
+      }
+    },
+    "unchanged": {
+      "label": "excreted unchanged",
+      "values": {
+        "urine": "in urine"
+      }
+    },
+    "renal_process": {
+      "label": "kidney handling",
+      "values": {
+        "filtration": "glomerular filtration",
+        "tubular_secretion": "tubular secretion",
+        "tubular_reabsorption": "tubular reabsorption"
+      }
+    },
+    "urine_ph": {
+      "label": "urine pH",
+      "values": {
+        "dependent": "excretion depends on it",
+        "acidic_faster": "faster in acidic urine",
+        "alkaline_faster": "faster in alkaline urine"
+      }
+    }
+  },
   "drug_targets": {
     "sert": {
       "name": "Serotonin transporter (SERT)",
@@ -10870,6 +10901,7 @@
         "cocaine": "https://en.wikipedia.org/w/index.php?oldid=1379710672",
         "codeine": "https://en.wikipedia.org/w/index.php?oldid=1379710957",
         "cyamemazine": "https://en.wikipedia.org/w/index.php?oldid=1329180046",
+        "cyclobarbital": "https://en.wikipedia.org/w/index.php?oldid=1366296651",
         "cyproheptadine": "https://en.wikipedia.org/w/index.php?oldid=1378859316",
         "cytisine": "https://en.wikipedia.org/w/index.php?oldid=1378692391",
         "daridorexant": "https://en.wikipedia.org/w/index.php?oldid=1368786208",
@@ -10930,6 +10962,7 @@
         "gabaa_receptor": "https://en.wikipedia.org/w/index.php?oldid=1378366460",
         "gabab_receptor": "https://en.wikipedia.org/w/index.php?oldid=1379126032",
         "gabapentin": "https://en.wikipedia.org/w/index.php?oldid=1379577616",
+        "galantamine": "https://en.wikipedia.org/w/index.php?oldid=1354799288",
         "glutethimide": "https://en.wikipedia.org/w/index.php?oldid=1373201068",
         "glycine_receptor": "https://en.wikipedia.org/w/index.php?oldid=1378371600",
         "gr_nenthal": "https://en.wikipedia.org/w/index.php?oldid=1376472340",
@@ -10965,11 +10998,13 @@
         "levetiracetam": "https://en.wikipedia.org/w/index.php?oldid=1378189184",
         "levoamphetamine": "https://en.wikipedia.org/w/index.php?oldid=1369899842",
         "levodopa": "https://en.wikipedia.org/w/index.php?oldid=1377082052",
+        "levomefolic_acid": "https://en.wikipedia.org/w/index.php?oldid=1356273305",
         "levomepromazine": "https://en.wikipedia.org/w/index.php?oldid=1360365557",
         "levomethamphetamine": "https://en.wikipedia.org/w/index.php?oldid=1362033547",
         "levomilnacipran": "https://en.wikipedia.org/w/index.php?oldid=1373241809",
         "licarbazepine": "https://en.wikipedia.org/w/index.php?oldid=1357686767",
         "lisdexamfetamine": "https://en.wikipedia.org/w/index.php?oldid=1378219195",
+        "lithium_medication": "https://en.wikipedia.org/w/index.php?oldid=1374717012",
         "lofepramine": "https://en.wikipedia.org/w/index.php?oldid=1328704092",
         "lofexidine": "https://en.wikipedia.org/w/index.php?oldid=1378524419",
         "loprazolam": "https://en.wikipedia.org/w/index.php?oldid=1372554810",
@@ -11123,6 +11158,8 @@
         "sumatriptan": "https://en.wikipedia.org/w/index.php?oldid=1368799875",
         "suvorexant": "https://en.wikipedia.org/w/index.php?oldid=1368799943",
         "tapentadol": "https://en.wikipedia.org/w/index.php?oldid=1378730489",
+        "tasimelteon": "https://en.wikipedia.org/w/index.php?oldid=1329184391",
+        "temazepam": "https://en.wikipedia.org/w/index.php?oldid=1373802947",
         "tetrabenazine": "https://en.wikipedia.org/w/index.php?oldid=1372155211",
         "tetrahydrocannabinol": "https://en.wikipedia.org/w/index.php?oldid=1377727370",
         "thioridazine": "https://en.wikipedia.org/w/index.php?oldid=1358955507",
@@ -11137,6 +11174,7 @@
         "tramadol": "https://en.wikipedia.org/w/index.php?oldid=1378694722",
         "tranylcypromine": "https://en.wikipedia.org/w/index.php?oldid=1374868074",
         "trazodone": "https://en.wikipedia.org/w/index.php?oldid=1377081496",
+        "triazolam": "https://en.wikipedia.org/w/index.php?oldid=1373297910",
         "trifluoperazine": "https://en.wikipedia.org/w/index.php?oldid=1325077324",
         "trihexyphenidyl": "https://en.wikipedia.org/w/index.php?oldid=1378370024",
         "trimipramine": "https://en.wikipedia.org/w/index.php?oldid=1365883663",
@@ -12054,6 +12092,16 @@
         "missing": 0,
         "unknown": 0
       },
+      "drug_excretion": {
+        "total": 523,
+        "verified": 523,
+        "uncertain": 0,
+        "sourced": 0,
+        "llm": 0,
+        "nosource": 0,
+        "missing": 0,
+        "unknown": 0
+      },
       "drug_enzymes": {
         "total": 573,
         "verified": 570,
@@ -12326,15 +12374,15 @@
       }
     },
     "nodes": {
-      "total": 10318,
-      "verified": 9521,
+      "total": 10841,
+      "verified": 10044,
       "uncertain": 447,
       "sourced": 0,
       "llm": 230,
       "nosource": 120,
       "missing": 350,
       "unknown": 667,
-      "backed": 9968,
+      "backed": 10491,
       "pct_backed": 97
     },
     "ki_coverage": {

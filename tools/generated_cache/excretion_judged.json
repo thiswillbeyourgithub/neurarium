@@ -1,0 +1,5770 @@
+{
+ "2cb": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "febe001d",
+   "value": "renal"
+  }
+ ],
+ "acamprosate": [
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "82e5435e",
+   "value": "renal"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 2,
+   "qid": "82e5435e",
+   "value": "urine"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 3,
+   "qid": "65ec7b32",
+   "value": "urine"
+  }
+ ],
+ "agomelatine": [
+  {
+   "amount": "80%",
+   "aspect": "route",
+   "index": 4,
+   "qid": "3463a2f7",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "7d8f6e98",
+   "value": "renal"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 5,
+   "qid": "64db4fb9",
+   "value": "urine"
+  }
+ ],
+ "alpidem": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "37f4f2ad",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "69817456",
+   "value": "fecal"
+  },
+  {
+   "amount": "less than 0.1%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "69817456",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 3,
+   "qid": "84bb6492",
+   "value": "fecal"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 2,
+   "qid": "43970439",
+   "value": "urine"
+  }
+ ],
+ "alprazolam": [
+  {
+   "aspect": "route",
+   "index": 4,
+   "qid": "15c84819",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "78e49ebd",
+   "value": "renal"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 2,
+   "qid": "78e49ebd",
+   "value": "urine"
+  }
+ ],
+ "amantadine": [
+  {
+   "amount": "90%",
+   "aspect": "route",
+   "index": 3,
+   "qid": "a51563e1",
+   "value": "renal"
+  },
+  {
+   "amount": "90%",
+   "aspect": "unchanged",
+   "index": 3,
+   "qid": "a51563e1",
+   "value": "urine"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 5,
+   "qid": "f1089759",
+   "value": "urine"
+  },
+  {
+   "aspect": "renal_process",
+   "index": 5,
+   "qid": "f1089759",
+   "value": "filtration"
+  },
+  {
+   "aspect": "renal_process",
+   "index": 5,
+   "qid": "f1089759",
+   "value": "tubular_secretion"
+  },
+  {
+   "aspect": "route",
+   "index": 13,
+   "qid": "077a1aa2",
+   "value": "renal"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 13,
+   "qid": "077a1aa2",
+   "value": "urine"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 11,
+   "qid": "13d3fdfd",
+   "value": "dependent"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 12,
+   "qid": "3b9e81e0",
+   "value": "acidic_faster"
+  }
+ ],
+ "amisulpride": [
+  {
+   "amount": "23–46%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "52d822f0",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "52d822f0",
+   "value": "fecal"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 2,
+   "qid": "f484ef5a",
+   "value": "urine"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 5,
+   "qid": "86c8f2f1",
+   "value": "urine"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 3,
+   "qid": "78d8faeb",
+   "value": "urine"
+  }
+ ],
+ "amitriptyline": [
+  {
+   "amount": "12−80%",
+   "aspect": "route",
+   "index": 4,
+   "qid": "4cbc79c8",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "1ebb57bd",
+   "value": "renal"
+  },
+  {
+   "amount": "2%",
+   "aspect": "unchanged",
+   "index": 5,
+   "qid": "bd515052",
+   "value": "urine"
+  }
+ ],
+ "amobarbital": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "aab9a100",
+   "value": "renal"
+  }
+ ],
+ "amoxapine": [
+  {
+   "amount": "60%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "c2233556",
+   "value": "renal"
+  },
+  {
+   "amount": "18%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "c2233556",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 8,
+   "qid": "d3512560",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 9,
+   "qid": "5402cead",
+   "value": "renal"
+  }
+ ],
+ "amphetamine_d": [
+  {
+   "aspect": "route",
+   "index": 16,
+   "qid": "76fbbaf4",
+   "value": "renal"
+  },
+  {
+   "amount": "30–40%",
+   "aspect": "unchanged",
+   "index": 16,
+   "qid": "76fbbaf4",
+   "value": "urine"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 12,
+   "qid": "3ff42248",
+   "value": "dependent"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 14,
+   "qid": "50196ec3",
+   "value": "acidic_faster"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 23,
+   "qid": "07210ba4",
+   "value": "acidic_faster"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 21,
+   "qid": "83588290",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 36,
+   "qid": "19ec3e97",
+   "value": "renal"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 37,
+   "qid": "a2cc8d87",
+   "value": "dependent"
+  }
+ ],
+ "amphetamine_dl": [
+  {
+   "aspect": "route",
+   "index": 21,
+   "qid": "76fbbaf4",
+   "value": "renal"
+  },
+  {
+   "amount": "30–40%",
+   "aspect": "unchanged",
+   "index": 21,
+   "qid": "76fbbaf4",
+   "value": "urine"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 17,
+   "qid": "3ff42248",
+   "value": "dependent"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 9,
+   "qid": "a89c50d7",
+   "value": "acidic_faster"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 19,
+   "qid": "50196ec3",
+   "value": "acidic_faster"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 33,
+   "qid": "07210ba4",
+   "value": "acidic_faster"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "05b76898",
+   "value": "renal"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 27,
+   "qid": "83588290",
+   "value": "urine"
+  }
+ ],
+ "apomorphine": [
+  {
+   "amount": "3–4%",
+   "aspect": "unchanged",
+   "index": 0,
+   "qid": "9c33119a",
+   "value": "urine"
+  }
+ ],
+ "aripiprazole": [
+  {
+   "amount": "27%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "d0fe2e24",
+   "value": "renal"
+  },
+  {
+   "amount": "60%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "af7836a9",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "e18da031",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "e18da031",
+   "value": "fecal"
+  }
+ ],
+ "armodafinil": [],
+ "asenapine": [
+  {
+   "amount": "50%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "06629b67",
+   "value": "renal"
+  },
+  {
+   "amount": "40%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "06629b67",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "42abbbb9",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "42abbbb9",
+   "value": "fecal"
+  }
+ ],
+ "atomoxetine": [
+  {
+   "amount": "more than 96%",
+   "aspect": "route",
+   "index": 5,
+   "qid": "c81dbf58",
+   "value": "renal"
+  },
+  {
+   "amount": "1 to 2%",
+   "aspect": "route",
+   "index": 5,
+   "qid": "c81dbf58",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 3,
+   "qid": "1a473217",
+   "value": "renal"
+  },
+  {
+   "amount": "Less than 3%",
+   "aspect": "unchanged",
+   "index": 4,
+   "qid": "edda2669",
+   "value": "urine"
+  }
+ ],
+ "atropine": [
+  {
+   "amount": "About 60%",
+   "aspect": "unchanged",
+   "index": 2,
+   "qid": "99581b6a",
+   "value": "urine"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 0,
+   "qid": "53bc00be",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "99581b6a",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 5,
+   "qid": "7b94935a",
+   "value": "renal"
+  }
+ ],
+ "baclofen": [
+  {
+   "amount": "70–80%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "8a7dc392",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 3,
+   "qid": "443b2ec5",
+   "value": "renal"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 3,
+   "qid": "443b2ec5",
+   "value": "urine"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 9,
+   "qid": "3d8c3ad0",
+   "value": "urine"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 6,
+   "qid": "51a5427a",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 7,
+   "qid": "d0415694",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 8,
+   "qid": "7f4f1192",
+   "value": "fecal"
+  }
+ ],
+ "benperidol": [
+  {
+   "amount": "One percent",
+   "aspect": "route",
+   "index": 0,
+   "qid": "3f126a15",
+   "value": "renal"
+  }
+ ],
+ "benztropine": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  }
+ ],
+ "betahistine": [
+  {
+   "amount": "91%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "7a68010c",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "5d30bd3b",
+   "value": "renal"
+  }
+ ],
+ "biperiden": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  }
+ ],
+ "blonanserin": [
+  {
+   "amount": "59%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "c85a2a0a",
+   "value": "renal"
+  },
+  {
+   "amount": "30%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "c85a2a0a",
+   "value": "fecal"
+  }
+ ],
+ "bremelanotide": [
+  {
+   "amount": "64.8%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "fe364050",
+   "value": "renal"
+  },
+  {
+   "amount": "22.8%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "fe364050",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "aba8a5ac",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "aba8a5ac",
+   "value": "fecal"
+  }
+ ],
+ "brexanolone": [
+  {
+   "amount": "47%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "cc4783f0",
+   "value": "fecal"
+  },
+  {
+   "amount": "42%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "cc4783f0",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "8750cfb5",
+   "value": "fecal"
+  },
+  {
+   "amount": "Less than 1%",
+   "aspect": "unchanged",
+   "index": 2,
+   "qid": "3e10c74d",
+   "value": "urine"
+  }
+ ],
+ "brexpiprazole": [
+  {
+   "amount": "46%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "f2bf3e64",
+   "value": "fecal"
+  },
+  {
+   "amount": "25%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "f2bf3e64",
+   "value": "renal"
+  }
+ ],
+ "brivaracetam": [
+  {
+   "amount": "More than 95%",
+   "aspect": "route",
+   "index": 3,
+   "qid": "6a67bdc4",
+   "value": "renal"
+  },
+  {
+   "amount": "less than 1%",
+   "aspect": "route",
+   "index": 4,
+   "qid": "31f7ce14",
+   "value": "fecal"
+  },
+  {
+   "amount": "8.6%",
+   "aspect": "unchanged",
+   "index": 1,
+   "qid": "23052f97",
+   "value": "urine"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 5,
+   "qid": "38efb151",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "23052f97",
+   "value": "renal"
+  }
+ ],
+ "bromazepam": [
+  {
+   "amount": "69%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "f42fb53d",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "c84b1b14",
+   "value": "renal"
+  },
+  {
+   "amount": "2 %",
+   "aspect": "unchanged",
+   "index": 3,
+   "qid": "d7b795fe",
+   "value": "urine"
+  },
+  {
+   "amount": "1 à 3 %",
+   "aspect": "unchanged",
+   "index": 1,
+   "qid": "4fb60da0",
+   "value": "urine"
+  }
+ ],
+ "bromocriptine": [
+  {
+   "amount": "About 82%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "6fdde34e",
+   "value": "fecal"
+  },
+  {
+   "amount": "6%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "6fdde34e",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "fed0f036",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "fed0f036",
+   "value": "renal"
+  }
+ ],
+ "brotizolam": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "aab9a100",
+   "value": "renal"
+  }
+ ],
+ "bumetanide": [
+  {
+   "amount": "65 %",
+   "aspect": "unchanged",
+   "index": 2,
+   "qid": "660fbf1a",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "660fbf1a",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "bdc34332",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  }
+ ],
+ "buprenorphine": [
+  {
+   "amount": "70 %",
+   "aspect": "route",
+   "index": 7,
+   "qid": "415a6b97",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 7,
+   "qid": "415a6b97",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "dea23b12",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "b8652567",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "b8652567",
+   "value": "renal"
+  }
+ ],
+ "bupropion": [
+  {
+   "amount": "87%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "5dc52609",
+   "value": "renal"
+  },
+  {
+   "amount": "10%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "5dc52609",
+   "value": "fecal"
+  },
+  {
+   "amount": "0.5%",
+   "aspect": "unchanged",
+   "index": 0,
+   "qid": "5dc52609",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "a76da802",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "7cd225c0",
+   "value": "fecal"
+  }
+ ],
+ "buspirone": [
+  {
+   "amount": "29–63%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "53c2f617",
+   "value": "renal"
+  },
+  {
+   "amount": "18–38%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "53c2f617",
+   "value": "fecal"
+  }
+ ],
+ "butobarbital": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  }
+ ],
+ "cabergoline": [
+  {
+   "amount": "environ 18 %",
+   "aspect": "route",
+   "index": 5,
+   "qid": "4194247a",
+   "value": "renal"
+  },
+  {
+   "amount": "60%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "cd43668b",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "3e875849",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "3e875849",
+   "value": "renal"
+  },
+  {
+   "amount": "2 à 3 %",
+   "aspect": "unchanged",
+   "index": 6,
+   "qid": "f8d174b2",
+   "value": "urine"
+  }
+ ],
+ "caffeine": [
+  {
+   "amount": "100%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "9a0266f3",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 5,
+   "qid": "33bb9427",
+   "value": "renal"
+  }
+ ],
+ "cannabidiol": [
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "b3a4d165",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "b3a4d165",
+   "value": "renal"
+  }
+ ],
+ "cannabinol": [],
+ "caprylidene": [],
+ "carbamazepine": [
+  {
+   "amount": "72%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "6fd55622",
+   "value": "renal"
+  },
+  {
+   "amount": "28%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "6fd55622",
+   "value": "fecal"
+  },
+  {
+   "amount": "About 70%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "22c3b750",
+   "value": "renal"
+  },
+  {
+   "amount": "30%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "22c3b750",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 5,
+   "qid": "da8bb78d",
+   "value": "renal"
+  },
+  {
+   "amount": "only 3%",
+   "aspect": "unchanged",
+   "index": 6,
+   "qid": "74b95497",
+   "value": "urine"
+  },
+  {
+   "amount": "2 %",
+   "aspect": "unchanged",
+   "index": 7,
+   "qid": "691f35c7",
+   "value": "urine"
+  }
+ ],
+ "carbidopa": [
+  {
+   "aspect": "unchanged",
+   "index": 1,
+   "qid": "d72b0b46",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "d72b0b46",
+   "value": "renal"
+  }
+ ],
+ "cariprazine": [
+  {
+   "amount": "21%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "6fbcdb30",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "6fbcdb30",
+   "value": "fecal"
+  }
+ ],
+ "chloral_hydrate": [
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "d33e4a8a",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "2a8b65c8",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "2a8b65c8",
+   "value": "fecal"
+  }
+ ],
+ "chlordiazepoxide": [
+  {
+   "aspect": "route",
+   "index": 3,
+   "qid": "8d4aaa1c",
+   "value": "renal"
+  },
+  {
+   "amount": "1% to 2%",
+   "aspect": "unchanged",
+   "index": 3,
+   "qid": "8d4aaa1c",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  }
+ ],
+ "chlorpromazine": [
+  {
+   "amount": "43–65%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "c8acff6a",
+   "value": "renal"
+  },
+  {
+   "amount": "Less than 1%",
+   "aspect": "unchanged",
+   "index": 3,
+   "qid": "2dc122cb",
+   "value": "urine"
+  },
+  {
+   "amount": "5–6%",
+   "aspect": "route",
+   "index": 3,
+   "qid": "2dc122cb",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 7,
+   "qid": "224fd66e",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 7,
+   "qid": "224fd66e",
+   "value": "fecal"
+  }
+ ],
+ "chlorprothixene": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "bbd5bafc",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "bbd5bafc",
+   "value": "renal"
+  }
+ ],
+ "citalopram": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "3a7906ca",
+   "value": "renal"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 0,
+   "qid": "3a7906ca",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 3,
+   "qid": "2f6671ca",
+   "value": "renal"
+  }
+ ],
+ "clobazam": [
+  {
+   "amount": "82%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "7ec2e1d7",
+   "value": "renal"
+  },
+  {
+   "amount": "11%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "7ec2e1d7",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 5,
+   "qid": "933e490e",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 5,
+   "qid": "933e490e",
+   "value": "fecal"
+  },
+  {
+   "amount": "approximately 2%",
+   "aspect": "unchanged",
+   "index": 3,
+   "qid": "c7036cd6",
+   "value": "urine"
+  }
+ ],
+ "clomipramine": [
+  {
+   "amount": "51–60%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "2f190bde",
+   "value": "renal"
+  },
+  {
+   "amount": "24–32%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "2f190bde",
+   "value": "fecal"
+  },
+  {
+   "amount": "60%",
+   "aspect": "route",
+   "index": 7,
+   "qid": "ba20807f",
+   "value": "renal"
+  },
+  {
+   "amount": "32%",
+   "aspect": "route",
+   "index": 7,
+   "qid": "ba20807f",
+   "value": "fecal"
+  }
+ ],
+ "clonazepam": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "f7ec94d9",
+   "value": "renal"
+  },
+  {
+   "amount": "only 2%",
+   "aspect": "unchanged",
+   "index": 1,
+   "qid": "471e1b7e",
+   "value": "urine"
+  }
+ ],
+ "clonidine": [
+  {
+   "amount": "72%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "e0aa173a",
+   "value": "renal"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 3,
+   "qid": "8926cadb",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 3,
+   "qid": "8926cadb",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 4,
+   "qid": "0179fffa",
+   "value": "fecal"
+  }
+ ],
+ "clorazepate": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "aab9a100",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "30b573e5",
+   "value": "renal"
+  }
+ ],
+ "clotiazepam": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "aab9a100",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "27c216ee",
+   "value": "renal"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 1,
+   "qid": "2f149b73",
+   "value": "urine"
+  }
+ ],
+ "clozapine": [
+  {
+   "amount": "50%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "990e5156",
+   "value": "renal"
+  },
+  {
+   "amount": "30%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "990e5156",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 4,
+   "qid": "a3d8f565",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 4,
+   "qid": "a3d8f565",
+   "value": "fecal"
+  }
+ ],
+ "cocaine": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 10,
+   "qid": "e9284328",
+   "value": "renal"
+  },
+  {
+   "amount": "about 1%",
+   "aspect": "unchanged",
+   "index": 2,
+   "qid": "55b97e2d",
+   "value": "urine"
+  },
+  {
+   "amount": "<5%",
+   "aspect": "unchanged",
+   "index": 11,
+   "qid": "4ebbea14",
+   "value": "urine"
+  }
+ ],
+ "codeine": [],
+ "cyamemazine": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "febe001d",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 3,
+   "qid": "cb3aa808",
+   "value": "renal"
+  }
+ ],
+ "cyclobarbital": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "aab9a100",
+   "value": "renal"
+  }
+ ],
+ "cyproheptadine": [
+  {
+   "amount": "2–20%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "325d37f0",
+   "value": "fecal"
+  }
+ ],
+ "daridorexant": [
+  {
+   "amount": "57%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "103c03f3",
+   "value": "fecal"
+  },
+  {
+   "amount": "28%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "103c03f3",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "035e54ec",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "035e54ec",
+   "value": "renal"
+  }
+ ],
+ "desipramine": [
+  {
+   "amount": "70%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "56d1eadb",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "56d1eadb",
+   "value": "fecal"
+  }
+ ],
+ "desvenlafaxine": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "e6bf7926",
+   "value": "renal"
+  },
+  {
+   "amount": "45%",
+   "aspect": "unchanged",
+   "index": 0,
+   "qid": "e6bf7926",
+   "value": "urine"
+  }
+ ],
+ "deutetrabenazine": [
+  {
+   "amount": "75% to 86%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "3af05935",
+   "value": "renal"
+  },
+  {
+   "amount": "8% to 11%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "3af05935",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "e8be6119",
+   "value": "renal"
+  }
+ ],
+ "dexmedetomidine": [
+  {
+   "amount": "95%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "a4d5bcbb",
+   "value": "renal"
+  },
+  {
+   "amount": "4%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "a4d5bcbb",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "5907aaaf",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 4,
+   "qid": "2c7f9fe1",
+   "value": "renal"
+  },
+  {
+   "amount": "Moins de 1 %",
+   "aspect": "unchanged",
+   "index": 6,
+   "qid": "aaf78028",
+   "value": "urine"
+  }
+ ],
+ "dextromethorphanbupropion": [],
+ "dextromethorphanquinidine": [],
+ "diazepam": [
+  {
+   "aspect": "route",
+   "index": 4,
+   "qid": "8624f5eb",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 5,
+   "qid": "d6c9253d",
+   "value": "urine"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 2,
+   "qid": "423db4b8",
+   "value": "acidic_faster"
+  }
+ ],
+ "dimenhydrinate": [],
+ "diphenhydramine": [
+  {
+   "amount": "94%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "784629ad",
+   "value": "renal"
+  },
+  {
+   "amount": "6%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "784629ad",
+   "value": "fecal"
+  }
+ ],
+ "dmt": [
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "81a3c762",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "febe001d",
+   "value": "renal"
+  },
+  {
+   "amount": "Less than 0.1%",
+   "aspect": "unchanged",
+   "index": 3,
+   "qid": "468f2f29",
+   "value": "urine"
+  }
+ ],
+ "domperidone": [
+  {
+   "amount": "31%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "d4e2cb33",
+   "value": "renal"
+  },
+  {
+   "amount": "66%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "d4e2cb33",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "90ac5e43",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "90ac5e43",
+   "value": "fecal"
+  },
+  {
+   "amount": "1% in urine",
+   "aspect": "unchanged",
+   "index": 2,
+   "qid": "edc53260",
+   "value": "urine"
+  }
+ ],
+ "donepezil": [
+  {
+   "amount": "57%",
+   "aspect": "route",
+   "index": 6,
+   "qid": "3e4c0e87",
+   "value": "renal"
+  },
+  {
+   "amount": "15%",
+   "aspect": "route",
+   "index": 6,
+   "qid": "3e4c0e87",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "39e918cd",
+   "value": "renal"
+  },
+  {
+   "amount": "15% to 20%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "596378cc",
+   "value": "fecal"
+  },
+  {
+   "amount": "about 17%",
+   "aspect": "unchanged",
+   "index": 6,
+   "qid": "3e4c0e87",
+   "value": "urine"
+  },
+  {
+   "amount": "Around 17%",
+   "aspect": "unchanged",
+   "index": 1,
+   "qid": "b4ffdc1e",
+   "value": "urine"
+  }
+ ],
+ "dothiepin": [
+  {
+   "amount": "56%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "3e0f1ea3",
+   "value": "renal"
+  },
+  {
+   "amount": "15%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "3e0f1ea3",
+   "value": "fecal"
+  }
+ ],
+ "doxepin": [
+  {
+   "amount": "~50%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "237f37b3",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "237f37b3",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 6,
+   "qid": "e676454f",
+   "value": "renal"
+  },
+  {
+   "amount": "less than 3%",
+   "aspect": "unchanged",
+   "index": 6,
+   "qid": "e676454f",
+   "value": "urine"
+  }
+ ],
+ "doxylamine": [
+  {
+   "amount": "60%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "77ef5eb7",
+   "value": "renal"
+  },
+  {
+   "amount": "40%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "77ef5eb7",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "f8b8f2df",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "f8b8f2df",
+   "value": "fecal"
+  }
+ ],
+ "duloxetine": [
+  {
+   "amount": "70%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "5695f24b",
+   "value": "renal"
+  },
+  {
+   "amount": "20%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "5695f24b",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 7,
+   "qid": "3e719bfb",
+   "value": "renal"
+  },
+  {
+   "amount": "about 20%",
+   "aspect": "route",
+   "index": 7,
+   "qid": "3e719bfb",
+   "value": "fecal"
+  },
+  {
+   "amount": "<1%",
+   "aspect": "unchanged",
+   "index": 6,
+   "qid": "5a0913a8",
+   "value": "urine"
+  }
+ ],
+ "entacapone": [
+  {
+   "amount": "90%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "220fd4d8",
+   "value": "fecal"
+  },
+  {
+   "amount": "10%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "220fd4d8",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 11,
+   "qid": "367ad3e9",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 11,
+   "qid": "367ad3e9",
+   "value": "renal"
+  },
+  {
+   "amount": "0.2%",
+   "aspect": "unchanged",
+   "index": 8,
+   "qid": "e19569a7",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "edd335c5",
+   "value": "fecal"
+  }
+ ],
+ "ephedrine": [
+  {
+   "amount": "60%",
+   "aspect": "unchanged",
+   "index": 3,
+   "qid": "a78f1fe6",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 3,
+   "qid": "a78f1fe6",
+   "value": "renal"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 4,
+   "qid": "7fa89212",
+   "value": "dependent"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 8,
+   "qid": "563eb05e",
+   "value": "dependent"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 13,
+   "qid": "2d45c5f5",
+   "value": "acidic_faster"
+  }
+ ],
+ "escitalopram": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "08e58011",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 3,
+   "qid": "94378e97",
+   "value": "renal"
+  },
+  {
+   "amount": "8–10%",
+   "aspect": "unchanged",
+   "index": 1,
+   "qid": "12c8130f",
+   "value": "urine"
+  }
+ ],
+ "esketamine": [],
+ "estazolam": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  }
+ ],
+ "eszopiclone": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 4,
+   "qid": "2ac26715",
+   "value": "renal"
+  },
+  {
+   "amount": "Less than 10%",
+   "aspect": "unchanged",
+   "index": 4,
+   "qid": "2ac26715",
+   "value": "urine"
+  }
+ ],
+ "ethanol": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "4f842af7",
+   "value": "renal"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 2,
+   "qid": "5b994d8a",
+   "value": "urine"
+  }
+ ],
+ "ethosuximide": [
+  {
+   "amount": "20%",
+   "aspect": "unchanged",
+   "index": 3,
+   "qid": "3e17d9e2",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 3,
+   "qid": "3e17d9e2",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "29c834da",
+   "value": "renal"
+  }
+ ],
+ "etomidate": [
+  {
+   "amount": "85%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "5f738f47",
+   "value": "renal"
+  },
+  {
+   "amount": "2 %",
+   "aspect": "unchanged",
+   "index": 2,
+   "qid": "d46cf679",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "f6dc0ccb",
+   "value": "renal"
+  }
+ ],
+ "fenfluramine": [],
+ "fentanyl": [
+  {
+   "amount": "environ 75 %",
+   "aspect": "route",
+   "index": 7,
+   "qid": "a910e277",
+   "value": "renal"
+  },
+  {
+   "amount": "Environ 9 %",
+   "aspect": "route",
+   "index": 9,
+   "qid": "5644284d",
+   "value": "fecal"
+  },
+  {
+   "amount": "< 10%",
+   "aspect": "unchanged",
+   "index": 0,
+   "qid": "d3fdb30c",
+   "value": "urine"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 8,
+   "qid": "897433a7",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d3fdb30c",
+   "value": "renal"
+  }
+ ],
+ "flibanserin": [
+  {
+   "amount": "44%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "745e96d1",
+   "value": "renal"
+  },
+  {
+   "amount": "51%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "745e96d1",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "e2b56830",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "e2b56830",
+   "value": "fecal"
+  }
+ ],
+ "flumazenil": [
+  {
+   "amount": "90% to 95%",
+   "aspect": "route",
+   "index": 3,
+   "qid": "cb866b2b",
+   "value": "renal"
+  },
+  {
+   "amount": "5% to 10%",
+   "aspect": "route",
+   "index": 3,
+   "qid": "cb866b2b",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "473277a6",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "473277a6",
+   "value": "fecal"
+  },
+  {
+   "amount": "<1%",
+   "aspect": "unchanged",
+   "index": 1,
+   "qid": "a0f9f077",
+   "value": "urine"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 8,
+   "qid": "eb9d6289",
+   "value": "urine"
+  }
+ ],
+ "flunarizine": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "9657cd44",
+   "value": "fecal"
+  },
+  {
+   "amount": "<1%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "9657cd44",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "9d7ad879",
+   "value": "fecal"
+  }
+ ],
+ "flunitrazepam": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  }
+ ],
+ "fluoxetine": [
+  {
+   "amount": "80%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "d5c3b256",
+   "value": "renal"
+  },
+  {
+   "amount": "15%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "d5c3b256",
+   "value": "fecal"
+  }
+ ],
+ "flupenthixol": [],
+ "fluphenazine": [
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "fb90f50b",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "fb90f50b",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "50228092",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "50228092",
+   "value": "fecal"
+  }
+ ],
+ "flurazepam": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  }
+ ],
+ "fluvoxamine": [
+  {
+   "amount": "98%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "5e64847d",
+   "value": "renal"
+  },
+  {
+   "amount": "94%",
+   "aspect": "route",
+   "index": 6,
+   "qid": "9a8e0c6b",
+   "value": "renal"
+  },
+  {
+   "amount": "Approximately 2%",
+   "aspect": "unchanged",
+   "index": 5,
+   "qid": "4f1b55fc",
+   "value": "urine"
+  }
+ ],
+ "furosemide": [
+  {
+   "amount": "66%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "fbb7e733",
+   "value": "renal"
+  },
+  {
+   "amount": "33%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "fbb7e733",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "b5713f4c",
+   "value": "renal"
+  },
+  {
+   "aspect": "renal_process",
+   "index": 1,
+   "qid": "b5713f4c",
+   "value": "tubular_secretion"
+  },
+  {
+   "amount": "53.1 – 58.8 %",
+   "aspect": "unchanged",
+   "index": 4,
+   "qid": "694f9f3d",
+   "value": "urine"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 16,
+   "qid": "4048d54f",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 7,
+   "qid": "b2b40479",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 19,
+   "qid": "fe69838a",
+   "value": "renal"
+  }
+ ],
+ "gabapentin": [
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "139c41de",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 3,
+   "qid": "4c5f4e35",
+   "value": "urine"
+  }
+ ],
+ "galantamine": [
+  {
+   "amount": "95%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "2f40a63f",
+   "value": "renal"
+  },
+  {
+   "amount": "5%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "2f40a63f",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 6,
+   "qid": "8de427df",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 6,
+   "qid": "8de427df",
+   "value": "fecal"
+  },
+  {
+   "amount": "32%",
+   "aspect": "unchanged",
+   "index": 7,
+   "qid": "4150f8ee",
+   "value": "urine"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 5,
+   "qid": "cbe242da",
+   "value": "urine"
+  }
+ ],
+ "glutethimide": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "aab9a100",
+   "value": "renal"
+  }
+ ],
+ "granisetron": [
+  {
+   "amount": "38%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "94359e9d",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "94359e9d",
+   "value": "renal"
+  },
+  {
+   "amount": "12 %",
+   "aspect": "unchanged",
+   "index": 1,
+   "qid": "0c289866",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "0c289866",
+   "value": "renal"
+  }
+ ],
+ "guanfacine": [
+  {
+   "amount": "80%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "3331fb09",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 9,
+   "qid": "5e221596",
+   "value": "renal"
+  },
+  {
+   "amount": "Approximately 50 %",
+   "aspect": "unchanged",
+   "index": 10,
+   "qid": "5bce5e7a",
+   "value": "urine"
+  },
+  {
+   "aspect": "renal_process",
+   "index": 11,
+   "qid": "dd315838",
+   "value": "tubular_secretion"
+  }
+ ],
+ "haloperidol": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "84602d4d",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "84602d4d",
+   "value": "renal"
+  },
+  {
+   "amount": "about 1%",
+   "aspect": "unchanged",
+   "index": 3,
+   "qid": "fd759ab9",
+   "value": "urine"
+  }
+ ],
+ "heroin": [
+  {
+   "amount": "90%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "38f65001",
+   "value": "renal"
+  }
+ ],
+ "hydromorphone": [
+  {
+   "aspect": "unchanged",
+   "index": 2,
+   "qid": "6ccd9eb5",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "6ccd9eb5",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  }
+ ],
+ "hydroxyzine": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "9c5f2086",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "9c5f2086",
+   "value": "fecal"
+  }
+ ],
+ "iloperidone": [
+  {
+   "amount": "45.1–58.2%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "4c995b38",
+   "value": "renal"
+  },
+  {
+   "amount": "19.9–22.1%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "4c995b38",
+   "value": "fecal"
+  }
+ ],
+ "imipramine": [
+  {
+   "amount": "80%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "c38692bf",
+   "value": "renal"
+  },
+  {
+   "amount": "20%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "c38692bf",
+   "value": "fecal"
+  },
+  {
+   "amount": "80 %",
+   "aspect": "route",
+   "index": 11,
+   "qid": "41c13981",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 10,
+   "qid": "9c98efcc",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 10,
+   "qid": "9c98efcc",
+   "value": "fecal"
+  }
+ ],
+ "isocarboxazid": [
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "99b6c580",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "febe001d",
+   "value": "renal"
+  }
+ ],
+ "istradefylline": [
+  {
+   "amount": "68%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "1e5c69ce",
+   "value": "fecal"
+  },
+  {
+   "amount": "18%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "1e5c69ce",
+   "value": "renal"
+  }
+ ],
+ "ketamine": [
+  {
+   "amount": "91%",
+   "aspect": "route",
+   "index": 5,
+   "qid": "b106ecfd",
+   "value": "renal"
+  },
+  {
+   "amount": "3%",
+   "aspect": "route",
+   "index": 5,
+   "qid": "b106ecfd",
+   "value": "fecal"
+  },
+  {
+   "amount": "91%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "cb4d6eb4",
+   "value": "renal"
+  },
+  {
+   "amount": "3%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "cb4d6eb4",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 13,
+   "qid": "df0d2763",
+   "value": "renal"
+  }
+ ],
+ "ketanserin": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "9fc7b077",
+   "value": "renal"
+  }
+ ],
+ "lacosamide": [
+  {
+   "amount": "approximately 95%",
+   "aspect": "route",
+   "index": 6,
+   "qid": "2246dce4",
+   "value": "renal"
+  },
+  {
+   "amount": "less than 0.5%",
+   "aspect": "route",
+   "index": 6,
+   "qid": "2246dce4",
+   "value": "fecal"
+  },
+  {
+   "amount": "approximativement 40 %",
+   "aspect": "unchanged",
+   "index": 12,
+   "qid": "7b3e4370",
+   "value": "urine"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 7,
+   "qid": "5a02adfa",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "7b4cbcbb",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 3,
+   "qid": "126faea1",
+   "value": "fecal"
+  }
+ ],
+ "lamotrigine": [
+  {
+   "amount": "65%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "e786888d",
+   "value": "renal"
+  },
+  {
+   "amount": "2%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "e786888d",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "baa6478b",
+   "value": "renal"
+  }
+ ],
+ "lemborexant": [
+  {
+   "amount": "57%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "a2d6ceee",
+   "value": "fecal"
+  },
+  {
+   "amount": "29%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "a2d6ceee",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "aefca80d",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "aefca80d",
+   "value": "renal"
+  }
+ ],
+ "levetiracetam": [
+  {
+   "amount": "environ 95 %",
+   "aspect": "route",
+   "index": 16,
+   "qid": "c2e01a90",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "9b96e71d",
+   "value": "renal"
+  },
+  {
+   "amount": "about 66 percent",
+   "aspect": "unchanged",
+   "index": 2,
+   "qid": "9b96e71d",
+   "value": "urine"
+  },
+  {
+   "amount": "66%",
+   "aspect": "unchanged",
+   "index": 4,
+   "qid": "27332d71",
+   "value": "urine"
+  },
+  {
+   "amount": "0,3 %",
+   "aspect": "route",
+   "index": 17,
+   "qid": "f8b143da",
+   "value": "fecal"
+  },
+  {
+   "aspect": "renal_process",
+   "index": 6,
+   "qid": "bc2cdd8d",
+   "value": "filtration"
+  },
+  {
+   "aspect": "renal_process",
+   "index": 6,
+   "qid": "bc2cdd8d",
+   "value": "tubular_reabsorption"
+  },
+  {
+   "aspect": "renal_process",
+   "index": 19,
+   "qid": "d063bcb5",
+   "value": "filtration"
+  },
+  {
+   "aspect": "renal_process",
+   "index": 19,
+   "qid": "d063bcb5",
+   "value": "tubular_reabsorption"
+  }
+ ],
+ "levodopa": [
+  {
+   "amount": "70–80%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "ac22eb71",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "8e9d1567",
+   "value": "renal"
+  }
+ ],
+ "levomepromazine": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "c32d3cb8",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "c32d3cb8",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "c073c1ba",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "c073c1ba",
+   "value": "fecal"
+  }
+ ],
+ "levomilnacipran": [
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "2478da5b",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  }
+ ],
+ "lisdexamfetamine": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "b5e84fc6",
+   "value": "renal"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 8,
+   "qid": "3ff42248",
+   "value": "dependent"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 1,
+   "qid": "a7c36932",
+   "value": "acidic_faster"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 10,
+   "qid": "50196ec3",
+   "value": "acidic_faster"
+  }
+ ],
+ "lithium": [
+  {
+   "amount": ">95%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "dc939186",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 17,
+   "qid": "97b0fe74",
+   "value": "renal"
+  }
+ ],
+ "lofepramine": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "79884f3f",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "79884f3f",
+   "value": "fecal"
+  }
+ ],
+ "lofexidine": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  }
+ ],
+ "loflazepate": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "aab9a100",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "dee395a3",
+   "value": "renal"
+  }
+ ],
+ "loprazolam": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "aab9a100",
+   "value": "renal"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 4,
+   "qid": "986bf7e2",
+   "value": "urine"
+  }
+ ],
+ "lorazepam": [
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "e70b3b65",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  }
+ ],
+ "lormetazepam": [
+  {
+   "amount": "86 %",
+   "aspect": "route",
+   "index": 5,
+   "qid": "d37879a5",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 3,
+   "qid": "41737b3f",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "aab9a100",
+   "value": "renal"
+  }
+ ],
+ "loxapine": [
+  {
+   "amount": "70 %",
+   "aspect": "route",
+   "index": 4,
+   "qid": "60f12225",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "24bd1d19",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "24bd1d19",
+   "value": "fecal"
+  }
+ ],
+ "lsd": [
+  {
+   "aspect": "route",
+   "index": 3,
+   "qid": "314323e6",
+   "value": "renal"
+  },
+  {
+   "amount": "Only 1%",
+   "aspect": "unchanged",
+   "index": 3,
+   "qid": "314323e6",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "22d3d18e",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "32c6d559",
+   "value": "renal"
+  }
+ ],
+ "lumateperone": [
+  {
+   "amount": "<1%",
+   "aspect": "unchanged",
+   "index": 0,
+   "qid": "11b49032",
+   "value": "urine"
+  }
+ ],
+ "lurasidone": [
+  {
+   "amount": "67–80%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "7afe22c8",
+   "value": "fecal"
+  },
+  {
+   "amount": "9–19%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "7afe22c8",
+   "value": "renal"
+  },
+  {
+   "amount": "about 80%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "47499b39",
+   "value": "fecal"
+  },
+  {
+   "amount": "9%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "47499b39",
+   "value": "renal"
+  }
+ ],
+ "maprotiline": [
+  {
+   "amount": "57%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "50bb3c54",
+   "value": "renal"
+  },
+  {
+   "amount": "30%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "50bb3c54",
+   "value": "fecal"
+  },
+  {
+   "amount": "3–4%",
+   "aspect": "unchanged",
+   "index": 0,
+   "qid": "50bb3c54",
+   "value": "urine"
+  }
+ ],
+ "mdma": [
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "a443e61b",
+   "value": "renal"
+  },
+  {
+   "amount": "about 20%",
+   "aspect": "unchanged",
+   "index": 2,
+   "qid": "a443e61b",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  }
+ ],
+ "meclizine": [],
+ "melatonin": [
+  {
+   "amount": "environ 90 %",
+   "aspect": "route",
+   "index": 4,
+   "qid": "b6239b5b",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "f7f33bbc",
+   "value": "renal"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 5,
+   "qid": "395d11b2",
+   "value": "urine"
+  },
+  {
+   "amount": "moins de 1 %",
+   "aspect": "unchanged",
+   "index": 6,
+   "qid": "42fa1574",
+   "value": "urine"
+  }
+ ],
+ "melperone": [
+  {
+   "amount": "70%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "dcba3da7",
+   "value": "renal"
+  },
+  {
+   "amount": "5.5–10.4%",
+   "aspect": "unchanged",
+   "index": 0,
+   "qid": "dcba3da7",
+   "value": "urine"
+  }
+ ],
+ "memantine": [
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "d69d703f",
+   "value": "renal"
+  },
+  {
+   "amount": "57 to 82%",
+   "aspect": "unchanged",
+   "index": 1,
+   "qid": "d69d703f",
+   "value": "urine"
+  },
+  {
+   "amount": "57–82%",
+   "aspect": "unchanged",
+   "index": 0,
+   "qid": "aaaf95c4",
+   "value": "urine"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 2,
+   "qid": "2481a080",
+   "value": "dependent"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 3,
+   "qid": "bb8d845d",
+   "value": "acidic_faster"
+  }
+ ],
+ "meprobamate": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "aab9a100",
+   "value": "renal"
+  }
+ ],
+ "mescaline": [
+  {
+   "amount": "92%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "92db77b3",
+   "value": "renal"
+  },
+  {
+   "amount": "53%",
+   "aspect": "unchanged",
+   "index": 6,
+   "qid": "2232f6ee",
+   "value": "urine"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 1,
+   "qid": "ad2b3c96",
+   "value": "urine"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 5,
+   "qid": "3edf5f2a",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "3a5c2e24",
+   "value": "renal"
+  }
+ ],
+ "mesoridazine": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "48d4e89f",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "48d4e89f",
+   "value": "fecal"
+  }
+ ],
+ "methadone": [
+  {
+   "aspect": "route",
+   "index": 10,
+   "qid": "0d88ce16",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 10,
+   "qid": "0d88ce16",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "0526e028",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "0526e028",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 9,
+   "qid": "ab304386",
+   "value": "renal"
+  }
+ ],
+ "methamphetamine": [
+  {
+   "aspect": "route",
+   "index": 7,
+   "qid": "a5384ffd",
+   "value": "renal"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 7,
+   "qid": "a5384ffd",
+   "value": "dependent"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 4,
+   "qid": "177018a6",
+   "value": "dependent"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 5,
+   "qid": "72cb99c0",
+   "value": "acidic_faster"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 3,
+   "qid": "d11a3c9c",
+   "value": "acidic_faster"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "19bee07b",
+   "value": "renal"
+  }
+ ],
+ "methylfolate_l": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "1e2021b4",
+   "value": "renal"
+  }
+ ],
+ "methylphenidate_d": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  }
+ ],
+ "methylphenidate_dl": [
+  {
+   "amount": "90%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "0d30cece",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "8ecacf14",
+   "value": "renal"
+  },
+  {
+   "amount": "between 1 and 3%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "e37982af",
+   "value": "fecal"
+  },
+  {
+   "amount": "less than 1%",
+   "aspect": "unchanged",
+   "index": 3,
+   "qid": "0fbc888a",
+   "value": "urine"
+  }
+ ],
+ "metoclopramide": [
+  {
+   "amount": "Approximately 85%",
+   "aspect": "route",
+   "index": 3,
+   "qid": "69a8baa9",
+   "value": "renal"
+  },
+  {
+   "amount": "2%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "8d7402f9",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "8d7402f9",
+   "value": "renal"
+  }
+ ],
+ "mianserin": [
+  {
+   "amount": "70 %",
+   "aspect": "route",
+   "index": 2,
+   "qid": "5153f079",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "45fded8c",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "45fded8c",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "8c24e2a4",
+   "value": "fecal"
+  }
+ ],
+ "midazolam": [
+  {
+   "aspect": "route",
+   "index": 5,
+   "qid": "c33aa739",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  },
+  {
+   "amount": "Moins de 1 %",
+   "aspect": "unchanged",
+   "index": 6,
+   "qid": "83fc36f7",
+   "value": "urine"
+  }
+ ],
+ "milnacipran": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "aab9a100",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 4,
+   "qid": "d9f40543",
+   "value": "renal"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 4,
+   "qid": "d9f40543",
+   "value": "urine"
+  }
+ ],
+ "mirtazapine": [
+  {
+   "amount": "75%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "2a1ee409",
+   "value": "renal"
+  },
+  {
+   "amount": "15%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "2a1ee409",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 5,
+   "qid": "b3fd9e57",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 5,
+   "qid": "b3fd9e57",
+   "value": "fecal"
+  }
+ ],
+ "moclobemide": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "950f676f",
+   "value": "renal"
+  },
+  {
+   "amount": "<5%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "950f676f",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 5,
+   "qid": "f8697eb7",
+   "value": "renal"
+  },
+  {
+   "amount": "less than 1%",
+   "aspect": "unchanged",
+   "index": 5,
+   "qid": "f8697eb7",
+   "value": "urine"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 4,
+   "qid": "8bb97df1",
+   "value": "urine"
+  }
+ ],
+ "modafinil": [
+  {
+   "amount": "80%",
+   "aspect": "route",
+   "index": 4,
+   "qid": "b2fd040f",
+   "value": "renal"
+  },
+  {
+   "amount": "1%",
+   "aspect": "route",
+   "index": 4,
+   "qid": "b2fd040f",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "79859b29",
+   "value": "renal"
+  },
+  {
+   "amount": "Less than 10%",
+   "aspect": "unchanged",
+   "index": 6,
+   "qid": "4b494fa8",
+   "value": "urine"
+  }
+ ],
+ "molindone": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "642f8838",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "642f8838",
+   "value": "fecal"
+  },
+  {
+   "amount": "less than 2 to 3%",
+   "aspect": "unchanged",
+   "index": 4,
+   "qid": "65f6e5a5",
+   "value": "urine"
+  }
+ ],
+ "morphine": [
+  {
+   "amount": "approximately 87%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "3ff316c7",
+   "value": "renal"
+  },
+  {
+   "amount": "Approximately 10%",
+   "aspect": "unchanged",
+   "index": 10,
+   "qid": "49b658d8",
+   "value": "urine"
+  },
+  {
+   "amount": "Seven to 10%",
+   "aspect": "route",
+   "index": 12,
+   "qid": "a49112ae",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "692531a5",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "692531a5",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 9,
+   "qid": "917ad8b7",
+   "value": "renal"
+  }
+ ],
+ "nabilone": [
+  {
+   "amount": "about 60%",
+   "aspect": "route",
+   "index": 3,
+   "qid": "4c7447eb",
+   "value": "fecal"
+  },
+  {
+   "amount": "about 24%",
+   "aspect": "route",
+   "index": 3,
+   "qid": "4c7447eb",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "f27c1d35",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "f27c1d35",
+   "value": "renal"
+  }
+ ],
+ "nalmefene": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  }
+ ],
+ "naloxone": [
+  {
+   "amount": "70 %",
+   "aspect": "route",
+   "index": 4,
+   "qid": "84f69946",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "33584c6a",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "ccd7be8c",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "ccd7be8c",
+   "value": "fecal"
+  }
+ ],
+ "naltrexone": [
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "94da96ac",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "febe001d",
+   "value": "renal"
+  }
+ ],
+ "naltrexonebupropion": [],
+ "nefazodone": [
+  {
+   "amount": "55%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "5b81d2fd",
+   "value": "renal"
+  },
+  {
+   "amount": "20–30%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "5b81d2fd",
+   "value": "fecal"
+  },
+  {
+   "amount": "less than 1%",
+   "aspect": "unchanged",
+   "index": 3,
+   "qid": "5878db1e",
+   "value": "urine"
+  }
+ ],
+ "nicotine": [
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "d054d7ca",
+   "value": "renal"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 2,
+   "qid": "d054d7ca",
+   "value": "dependent"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "ed79c6cf",
+   "value": "renal"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 0,
+   "qid": "ed79c6cf",
+   "value": "dependent"
+  },
+  {
+   "amount": "Environ 10 %",
+   "aspect": "unchanged",
+   "index": 11,
+   "qid": "bfaeda66",
+   "value": "urine"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 12,
+   "qid": "0c2cea76",
+   "value": "acidic_faster"
+  }
+ ],
+ "nimetazepam": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  }
+ ],
+ "nitrazepam": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "aab9a100",
+   "value": "renal"
+  }
+ ],
+ "nortriptyline": [
+  {
+   "amount": "40%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "b1189d00",
+   "value": "renal"
+  }
+ ],
+ "olanzapine": [
+  {
+   "amount": "57%",
+   "aspect": "route",
+   "index": 4,
+   "qid": "82ac01f3",
+   "value": "renal"
+  },
+  {
+   "amount": "30%",
+   "aspect": "route",
+   "index": 4,
+   "qid": "82ac01f3",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "4c817477",
+   "value": "renal"
+  },
+  {
+   "amount": "7%",
+   "aspect": "unchanged",
+   "index": 3,
+   "qid": "21af87a9",
+   "value": "urine"
+  }
+ ],
+ "olanzapinesamidorphan": [],
+ "ondansetron": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  }
+ ],
+ "opipramol": [
+  {
+   "amount": "About 70%",
+   "aspect": "route",
+   "index": 3,
+   "qid": "8ee1e776",
+   "value": "renal"
+  },
+  {
+   "amount": "10%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "6727ade8",
+   "value": "fecal"
+  },
+  {
+   "amount": "10%",
+   "aspect": "unchanged",
+   "index": 3,
+   "qid": "8ee1e776",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 4,
+   "qid": "aebd62e2",
+   "value": "fecal"
+  }
+ ],
+ "oxazepam": [
+  {
+   "aspect": "route",
+   "index": 3,
+   "qid": "256ea6c5",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "aab9a100",
+   "value": "renal"
+  }
+ ],
+ "oxcarbazepine": [
+  {
+   "amount": "Plus de 95 %",
+   "aspect": "route",
+   "index": 6,
+   "qid": "ffbcd350",
+   "value": "renal"
+  },
+  {
+   "amount": "moins de 1 %",
+   "aspect": "unchanged",
+   "index": 6,
+   "qid": "ffbcd350",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "a4885a4d",
+   "value": "renal"
+  },
+  {
+   "amount": "less than 4%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "a4885a4d",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 7,
+   "qid": "0fc16935",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 5,
+   "qid": "cf7a0c19",
+   "value": "renal"
+  }
+ ],
+ "oxycodone": [
+  {
+   "amount": "83%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "7dec71ed",
+   "value": "renal"
+  },
+  {
+   "amount": "10%",
+   "aspect": "unchanged",
+   "index": 6,
+   "qid": "0ec6fd10",
+   "value": "urine"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 3,
+   "qid": "abc5ecba",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 5,
+   "qid": "3887bc9a",
+   "value": "renal"
+  }
+ ],
+ "paliperidone": [
+  {
+   "amount": "Approximately 80%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "a9038fab",
+   "value": "renal"
+  },
+  {
+   "amount": "11%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "a9038fab",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "26da627b",
+   "value": "renal"
+  },
+  {
+   "amount": "59%",
+   "aspect": "unchanged",
+   "index": 1,
+   "qid": "26da627b",
+   "value": "urine"
+  }
+ ],
+ "pargyline": [],
+ "paroxetine": [
+  {
+   "amount": "64%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "3d5cf528",
+   "value": "renal"
+  },
+  {
+   "amount": "Less than 2%",
+   "aspect": "unchanged",
+   "index": 1,
+   "qid": "a8f6940a",
+   "value": "urine"
+  }
+ ],
+ "pentazocine": [
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "e4402757",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "aab9a100",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "e73c9192",
+   "value": "renal"
+  }
+ ],
+ "pentobarbital": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  }
+ ],
+ "perampanel": [
+  {
+   "amount": "About 70%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "606a4453",
+   "value": "fecal"
+  },
+  {
+   "amount": "30%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "606a4453",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "fed556fa",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "fed556fa",
+   "value": "renal"
+  },
+  {
+   "amount": "less than 2%",
+   "aspect": "unchanged",
+   "index": 2,
+   "qid": "2f3f665c",
+   "value": "urine"
+  }
+ ],
+ "perospirone": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "4b8af1a5",
+   "value": "renal"
+  },
+  {
+   "amount": "0.4%",
+   "aspect": "unchanged",
+   "index": 0,
+   "qid": "4b8af1a5",
+   "value": "urine"
+  }
+ ],
+ "perphenazine": [],
+ "pethidine": [
+  {
+   "aspect": "route",
+   "index": 3,
+   "qid": "8e8e3f28",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "aab9a100",
+   "value": "renal"
+  }
+ ],
+ "phenazepam": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "aab9a100",
+   "value": "renal"
+  }
+ ],
+ "phencyclidine": [
+  {
+   "amount": "around 10%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "c4c3e1c5",
+   "value": "renal"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 1,
+   "qid": "aecc1150",
+   "value": "acidic_faster"
+  },
+  {
+   "aspect": "route",
+   "index": 4,
+   "qid": "b65a54d3",
+   "value": "renal"
+  }
+ ],
+ "phenelzine": [
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "c0c5bf71",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "febe001d",
+   "value": "renal"
+  }
+ ],
+ "phenobarbital": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "b45eadbc",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "b45eadbc",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "09382950",
+   "value": "renal"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 4,
+   "qid": "2c37f9df",
+   "value": "urine"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 4,
+   "qid": "2c37f9df",
+   "value": "alkaline_faster"
+  }
+ ],
+ "phentermine": [
+  {
+   "amount": "62 to 85%",
+   "aspect": "unchanged",
+   "index": 5,
+   "qid": "4c1a560a",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 5,
+   "qid": "4c1a560a",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 4,
+   "qid": "f03f4cbf",
+   "value": "renal"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 6,
+   "qid": "58ce86dc",
+   "value": "dependent"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 0,
+   "qid": "5ce61034",
+   "value": "dependent"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 7,
+   "qid": "94611f3f",
+   "value": "acidic_faster"
+  }
+ ],
+ "phenytoin": [
+  {
+   "amount": "23–70%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "f454ea3b",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 3,
+   "qid": "6d7c28b0",
+   "value": "renal"
+  },
+  {
+   "aspect": "renal_process",
+   "index": 3,
+   "qid": "6d7c28b0",
+   "value": "filtration"
+  },
+  {
+   "aspect": "renal_process",
+   "index": 3,
+   "qid": "6d7c28b0",
+   "value": "tubular_secretion"
+  }
+ ],
+ "pimozide": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "febe001d",
+   "value": "renal"
+  }
+ ],
+ "pipamperone": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "6da45221",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "6da45221",
+   "value": "fecal"
+  }
+ ],
+ "pipothiazine": [
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "c003c0e0",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "c003c0e0",
+   "value": "fecal"
+  }
+ ],
+ "pizotifen": [
+  {
+   "amount": "55%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "cd1bcdf9",
+   "value": "renal"
+  },
+  {
+   "amount": "18%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "cd1bcdf9",
+   "value": "fecal"
+  }
+ ],
+ "pramipexole": [
+  {
+   "amount": "90%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "82f0849e",
+   "value": "renal"
+  },
+  {
+   "amount": "2%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "82f0849e",
+   "value": "fecal"
+  },
+  {
+   "amount": ">90%",
+   "aspect": "unchanged",
+   "index": 2,
+   "qid": "24d28e89",
+   "value": "urine"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 1,
+   "qid": "789bf3f5",
+   "value": "urine"
+  }
+ ],
+ "prazepam": [
+  {
+   "amount": "1 à 3 %",
+   "aspect": "unchanged",
+   "index": 1,
+   "qid": "574cd948",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "aab9a100",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "30b573e5",
+   "value": "renal"
+  }
+ ],
+ "prazosin": [],
+ "pregabalin": [
+  {
+   "aspect": "route",
+   "index": 3,
+   "qid": "3c8fbf66",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 7,
+   "qid": "d46bc59b",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 3,
+   "qid": "3c8fbf66",
+   "value": "urine"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 7,
+   "qid": "d46bc59b",
+   "value": "urine"
+  }
+ ],
+ "primidone": [
+  {
+   "aspect": "route",
+   "index": 4,
+   "qid": "6ffc4259",
+   "value": "renal"
+  },
+  {
+   "amount": "environ 40%",
+   "aspect": "unchanged",
+   "index": 4,
+   "qid": "6ffc4259",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  }
+ ],
+ "prochlorperazine": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "be07a362",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "be07a362",
+   "value": "fecal"
+  }
+ ],
+ "promethazine": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "4f30a632",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "4f30a632",
+   "value": "fecal"
+  },
+  {
+   "amount": "environ 1%",
+   "aspect": "unchanged",
+   "index": 2,
+   "qid": "90596639",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 3,
+   "qid": "53fac093",
+   "value": "renal"
+  }
+ ],
+ "propofol": [
+  {
+   "amount": "Environ 88 %",
+   "aspect": "route",
+   "index": 5,
+   "qid": "a7d2ff03",
+   "value": "renal"
+  },
+  {
+   "amount": "0,3 %",
+   "aspect": "unchanged",
+   "index": 6,
+   "qid": "f5883a84",
+   "value": "urine"
+  }
+ ],
+ "propranolol": [
+  {
+   "amount": "91%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "7a68010c",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "2287d3ec",
+   "value": "renal"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 3,
+   "qid": "7fa39279",
+   "value": "urine"
+  }
+ ],
+ "protriptyline": [
+  {
+   "amount": "approximately 50%",
+   "aspect": "route",
+   "index": 12,
+   "qid": "92549916",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "6daf7c9e",
+   "value": "renal"
+  }
+ ],
+ "pseudoephedrine": [
+  {
+   "amount": "43–96%",
+   "aspect": "unchanged",
+   "index": 1,
+   "qid": "38dabdd9",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "38dabdd9",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 5,
+   "qid": "46615d9f",
+   "value": "renal"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 11,
+   "qid": "05e38994",
+   "value": "urine"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 6,
+   "qid": "b2135bae",
+   "value": "dependent"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 7,
+   "qid": "5509c527",
+   "value": "dependent"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 6,
+   "qid": "b2135bae",
+   "value": "acidic_faster"
+  },
+  {
+   "aspect": "urine_ph",
+   "index": 9,
+   "qid": "05bf2b25",
+   "value": "acidic_faster"
+  }
+ ],
+ "psilocybin": [
+  {
+   "amount": "80% to 85%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "afefd9c8",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 3,
+   "qid": "8c2c6004",
+   "value": "renal"
+  }
+ ],
+ "quazepam": [
+  {
+   "amount": "31%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "f55cc14b",
+   "value": "renal"
+  },
+  {
+   "amount": "23%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "f55cc14b",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "665dab24",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "665dab24",
+   "value": "fecal"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 3,
+   "qid": "59f67e49",
+   "value": "urine"
+  }
+ ],
+ "quetiapine": [
+  {
+   "amount": "73%",
+   "aspect": "route",
+   "index": 3,
+   "qid": "90771fe6",
+   "value": "renal"
+  },
+  {
+   "amount": "20%",
+   "aspect": "route",
+   "index": 3,
+   "qid": "90771fe6",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "cdf03bef",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "cdf03bef",
+   "value": "fecal"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 3,
+   "qid": "90771fe6",
+   "value": "urine"
+  }
+ ],
+ "ramelteon": [
+  {
+   "amount": "84%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "369a7f20",
+   "value": "renal"
+  },
+  {
+   "amount": "4%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "369a7f20",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "f310c51b",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "f310c51b",
+   "value": "fecal"
+  },
+  {
+   "amount": "Less than 0.1%",
+   "aspect": "unchanged",
+   "index": 2,
+   "qid": "1431f53b",
+   "value": "urine"
+  }
+ ],
+ "rasagiline": [
+  {
+   "amount": "62%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "897a93ea",
+   "value": "renal"
+  },
+  {
+   "amount": "7%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "897a93ea",
+   "value": "fecal"
+  },
+  {
+   "amount": "less than 1%",
+   "aspect": "unchanged",
+   "index": 2,
+   "qid": "6d8921d2",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "416c05af",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "416c05af",
+   "value": "fecal"
+  }
+ ],
+ "reboxetine": [
+  {
+   "amount": "78%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "f7a92c2e",
+   "value": "renal"
+  }
+ ],
+ "reserpine": [
+  {
+   "amount": "62%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "00831c22",
+   "value": "fecal"
+  },
+  {
+   "amount": "8%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "00831c22",
+   "value": "renal"
+  }
+ ],
+ "rimonabant": [
+  {
+   "amount": "86%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "aca72145",
+   "value": "fecal"
+  },
+  {
+   "amount": "3%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "aca72145",
+   "value": "renal"
+  }
+ ],
+ "risperidone": [
+  {
+   "amount": "70%",
+   "aspect": "route",
+   "index": 3,
+   "qid": "ada7bdde",
+   "value": "renal"
+  },
+  {
+   "amount": "14%",
+   "aspect": "route",
+   "index": 3,
+   "qid": "ada7bdde",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "03d25318",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "03d25318",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "faea95e5",
+   "value": "renal"
+  }
+ ],
+ "rivastigmine": [
+  {
+   "amount": "97%",
+   "aspect": "route",
+   "index": 7,
+   "qid": "f0cad3b9",
+   "value": "renal"
+  },
+  {
+   "amount": "0.4%",
+   "aspect": "route",
+   "index": 7,
+   "qid": "f0cad3b9",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "e3f1b2f3",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 6,
+   "qid": "2bef82bc",
+   "value": "renal"
+  }
+ ],
+ "rizatriptan": [
+  {
+   "amount": "82%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "d30b8461",
+   "value": "renal"
+  },
+  {
+   "amount": "12%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "33c421de",
+   "value": "fecal"
+  }
+ ],
+ "ropinirole": [
+  {
+   "amount": "more than 88%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "4cdeca22",
+   "value": "renal"
+  },
+  {
+   "amount": "Less than 10%",
+   "aspect": "unchanged",
+   "index": 3,
+   "qid": "fc9ed5e9",
+   "value": "urine"
+  }
+ ],
+ "rotigotine": [
+  {
+   "amount": "71%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "85db1eba",
+   "value": "renal"
+  },
+  {
+   "amount": "23%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "85db1eba",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "4da88628",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 3,
+   "qid": "c4d33711",
+   "value": "fecal"
+  }
+ ],
+ "safinamide": [
+  {
+   "amount": "76%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "bebf67d2",
+   "value": "renal"
+  },
+  {
+   "amount": "1.5%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "bebf67d2",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "7c17b604",
+   "value": "renal"
+  }
+ ],
+ "salvinorin_a": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "ccd7be8c",
+   "value": "renal"
+  }
+ ],
+ "scopolamine": [
+  {
+   "amount": "about 2.6%",
+   "aspect": "unchanged",
+   "index": 2,
+   "qid": "ada1a741",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  }
+ ],
+ "secobarbital": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "aab9a100",
+   "value": "renal"
+  }
+ ],
+ "selegiline": [
+  {
+   "amount": "87%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "0b926dda",
+   "value": "renal"
+  },
+  {
+   "amount": "15%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "0b926dda",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "3ff4f6bd",
+   "value": "renal"
+  }
+ ],
+ "sertindole": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "66a38f47",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "66a38f47",
+   "value": "renal"
+  }
+ ],
+ "sertraline": [
+  {
+   "amount": "About 40 to 45%",
+   "aspect": "route",
+   "index": 6,
+   "qid": "286ec9c3",
+   "value": "renal"
+  },
+  {
+   "amount": "about 40 to 45%",
+   "aspect": "route",
+   "index": 8,
+   "qid": "187e298e",
+   "value": "fecal"
+  },
+  {
+   "amount": "moins de 0,2 %",
+   "aspect": "unchanged",
+   "index": 13,
+   "qid": "003b69f2",
+   "value": "urine"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 9,
+   "qid": "15ce416b",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "5f5f027e",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "5f5f027e",
+   "value": "fecal"
+  }
+ ],
+ "sevoflurane": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  }
+ ],
+ "sibutramine": [
+  {
+   "amount": "77%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "fae752a3",
+   "value": "renal"
+  },
+  {
+   "amount": "8%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "fae752a3",
+   "value": "fecal"
+  }
+ ],
+ "sildenafil": [
+  {
+   "amount": "about 80%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "2ad2ae2c",
+   "value": "fecal"
+  },
+  {
+   "amount": "around 13%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "2ad2ae2c",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "97d1db2a",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "97d1db2a",
+   "value": "fecal"
+  }
+ ],
+ "sodium_oxybate": [
+  {
+   "amount": "1–5%",
+   "aspect": "unchanged",
+   "index": 0,
+   "qid": "077f8c19",
+   "value": "urine"
+  }
+ ],
+ "solriamfetol": [
+  {
+   "amount": "Approximately 95%",
+   "aspect": "unchanged",
+   "index": 1,
+   "qid": "1f158443",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "1f158443",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "62d96a3c",
+   "value": "renal"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 0,
+   "qid": "62d96a3c",
+   "value": "urine"
+  }
+ ],
+ "sulpiride": [
+  {
+   "amount": "70–90%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "f7cc030f",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "f7cc030f",
+   "value": "fecal"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 3,
+   "qid": "78d8faeb",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 5,
+   "qid": "550369e9",
+   "value": "renal"
+  },
+  {
+   "aspect": "renal_process",
+   "index": 6,
+   "qid": "1669e37f",
+   "value": "filtration"
+  }
+ ],
+ "sumatriptan": [
+  {
+   "amount": "60%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "263e5834",
+   "value": "renal"
+  },
+  {
+   "amount": "40%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "75c5ce26",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "9fd437a0",
+   "value": "renal"
+  }
+ ],
+ "suvorexant": [
+  {
+   "amount": "66%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "b8228dd5",
+   "value": "fecal"
+  },
+  {
+   "amount": "23%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "b8228dd5",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "20841886",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "20841886",
+   "value": "renal"
+  }
+ ],
+ "tapentadol": [
+  {
+   "amount": "99%",
+   "aspect": "route",
+   "index": 4,
+   "qid": "6c7363f2",
+   "value": "renal"
+  },
+  {
+   "amount": "3%",
+   "aspect": "unchanged",
+   "index": 3,
+   "qid": "e7553d5e",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "d2130bba",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "66ad2366",
+   "value": "renal"
+  }
+ ],
+ "tasimelteon": [
+  {
+   "amount": "80%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "ffd1b8b1",
+   "value": "renal"
+  },
+  {
+   "amount": "approximately 4%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "ffd1b8b1",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "1adb8346",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "1adb8346",
+   "value": "fecal"
+  },
+  {
+   "amount": "Less than 1%",
+   "aspect": "unchanged",
+   "index": 3,
+   "qid": "0dd24428",
+   "value": "urine"
+  }
+ ],
+ "temazepam": [
+  {
+   "amount": "80% to 90%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "c20852b3",
+   "value": "renal"
+  },
+  {
+   "amount": "about 20%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "95b79788",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "95b79788",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  }
+ ],
+ "tetrabenazine": [
+  {
+   "amount": "Environ 75%",
+   "aspect": "route",
+   "index": 3,
+   "qid": "2ea2d978",
+   "value": "renal"
+  },
+  {
+   "amount": "7–16%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "7cfca2a5",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "7cfca2a5",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "b38c6563",
+   "value": "renal"
+  }
+ ],
+ "thc": [
+  {
+   "amount": "65–80%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "ecf938ad",
+   "value": "fecal"
+  },
+  {
+   "amount": "20–35%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "ecf938ad",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 4,
+   "qid": "b66be746",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 4,
+   "qid": "b66be746",
+   "value": "renal"
+  }
+ ],
+ "thioridazine": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "5d664f37",
+   "value": "fecal"
+  }
+ ],
+ "thiothixene": [
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "e93fae59",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "c536e525",
+   "value": "fecal"
+  }
+ ],
+ "tiagabine": [
+  {
+   "amount": "About 25%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "61b3238a",
+   "value": "renal"
+  },
+  {
+   "amount": "63%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "61b3238a",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d67e0570",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d67e0570",
+   "value": "fecal"
+  },
+  {
+   "amount": "<3%",
+   "aspect": "unchanged",
+   "index": 0,
+   "qid": "d67e0570",
+   "value": "urine"
+  }
+ ],
+ "tianeptine": [
+  {
+   "amount": "65%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "1af9fc70",
+   "value": "renal"
+  },
+  {
+   "amount": "15%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "1af9fc70",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "67c986b5",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "67c986b5",
+   "value": "fecal"
+  }
+ ],
+ "tiapride": [
+  {
+   "amount": "70%",
+   "aspect": "unchanged",
+   "index": 0,
+   "qid": "9179ce9c",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "9179ce9c",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "47d08a1b",
+   "value": "renal"
+  }
+ ],
+ "tizanidine": [
+  {
+   "amount": "60%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "2a4306f2",
+   "value": "renal"
+  },
+  {
+   "amount": "20%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "2a4306f2",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "d686bf27",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "d686bf27",
+   "value": "fecal"
+  }
+ ],
+ "tofisopam": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "aab9a100",
+   "value": "renal"
+  }
+ ],
+ "tolcapone": [
+  {
+   "amount": "60%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "a87c000a",
+   "value": "renal"
+  },
+  {
+   "amount": "40%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "a87c000a",
+   "value": "fecal"
+  },
+  {
+   "amount": "0.5%",
+   "aspect": "unchanged",
+   "index": 3,
+   "qid": "f07ed60e",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "1fac6373",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "1fac6373",
+   "value": "fecal"
+  }
+ ],
+ "topiramate": [
+  {
+   "aspect": "route",
+   "index": 4,
+   "qid": "d8bcbfa0",
+   "value": "renal"
+  },
+  {
+   "amount": "approximately 70%",
+   "aspect": "unchanged",
+   "index": 4,
+   "qid": "d8bcbfa0",
+   "value": "urine"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 1,
+   "qid": "82f25ca9",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "ceae5345",
+   "value": "renal"
+  }
+ ],
+ "tramadol": [
+  {
+   "amount": "95%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "181cc481",
+   "value": "renal"
+  },
+  {
+   "amount": "Approximately 30%",
+   "aspect": "unchanged",
+   "index": 5,
+   "qid": "45c23941",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 4,
+   "qid": "ff4a786b",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 8,
+   "qid": "e6c2fdc8",
+   "value": "renal"
+  }
+ ],
+ "tranylcypromine": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "8fb4ff7b",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "8fb4ff7b",
+   "value": "fecal"
+  }
+ ],
+ "trazodone": [
+  {
+   "amount": "around 70 to 75%",
+   "aspect": "route",
+   "index": 3,
+   "qid": "89f181aa",
+   "value": "renal"
+  },
+  {
+   "amount": "21%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "030ce3db",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 4,
+   "qid": "fb665946",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "030ce3db",
+   "value": "renal"
+  }
+ ],
+ "triazolam": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  }
+ ],
+ "trifluoperazine": [],
+ "trihexyphenidyl": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "7d2c6055",
+   "value": "renal"
+  }
+ ],
+ "triiodothyronine": [],
+ "trimipramine": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "aab9a100",
+   "value": "renal"
+  }
+ ],
+ "valbenazine": [
+  {
+   "amount": "60%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "9a1867b4",
+   "value": "renal"
+  },
+  {
+   "amount": "30%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "9a1867b4",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "112973cc",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "112973cc",
+   "value": "fecal"
+  }
+ ],
+ "valproate": [
+  {
+   "amount": "30–50%",
+   "aspect": "route",
+   "index": 3,
+   "qid": "07a484af",
+   "value": "renal"
+  },
+  {
+   "amount": "Less than 3%",
+   "aspect": "unchanged",
+   "index": 4,
+   "qid": "c2675657",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 5,
+   "qid": "5c0c476b",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 4,
+   "qid": "c2675657",
+   "value": "renal"
+  }
+ ],
+ "varenicline": [
+  {
+   "amount": "92%",
+   "aspect": "unchanged",
+   "index": 2,
+   "qid": "d9fee130",
+   "value": "urine"
+  },
+  {
+   "amount": "81–92%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "e6592899",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "dd5e0bed",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "d9fee130",
+   "value": "renal"
+  },
+  {
+   "aspect": "renal_process",
+   "index": 3,
+   "qid": "ea53e06b",
+   "value": "filtration"
+  },
+  {
+   "aspect": "renal_process",
+   "index": 3,
+   "qid": "ea53e06b",
+   "value": "tubular_secretion"
+  }
+ ],
+ "venlafaxine": [
+  {
+   "amount": "Environ 87 %",
+   "aspect": "route",
+   "index": 7,
+   "qid": "1fb5a672",
+   "value": "renal"
+  },
+  {
+   "amount": "5 %",
+   "aspect": "unchanged",
+   "index": 7,
+   "qid": "1fb5a672",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "aba57408",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "00354077",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 6,
+   "qid": "ce127bac",
+   "value": "renal"
+  }
+ ],
+ "vigabatrin": [
+  {
+   "amount": "about 95%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "7f3a714e",
+   "value": "renal"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 2,
+   "qid": "7f3a714e",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "ee4da847",
+   "value": "renal"
+  }
+ ],
+ "vilazodone": [
+  {
+   "amount": "only 1%",
+   "aspect": "unchanged",
+   "index": 1,
+   "qid": "99cbaaed",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "ff56ccfa",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "ff56ccfa",
+   "value": "fecal"
+  }
+ ],
+ "viloxazine": [
+  {
+   "amount": "Approximately 90%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "ad53c627",
+   "value": "renal"
+  },
+  {
+   "amount": "less than 1%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "ad53c627",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "f9c6873c",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "f9c6873c",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "2d4a5697",
+   "value": "renal"
+  }
+ ],
+ "vortioxetine": [
+  {
+   "amount": "59%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "3b30360c",
+   "value": "renal"
+  },
+  {
+   "amount": "26%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "3b30360c",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "9b2e4f59",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "9b2e4f59",
+   "value": "fecal"
+  }
+ ],
+ "xanomeline": [],
+ "yohimbine": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "fda4c2df",
+   "value": "renal"
+  }
+ ],
+ "zaleplon": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  }
+ ],
+ "zimelidine": [],
+ "ziprasidone": [
+  {
+   "amount": "Approximately 20%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "19dad72d",
+   "value": "renal"
+  },
+  {
+   "amount": "approximately 66%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "19dad72d",
+   "value": "fecal"
+  },
+  {
+   "amount": "<1%",
+   "aspect": "unchanged",
+   "index": 1,
+   "qid": "17e7eae0",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "da83b33f",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "da83b33f",
+   "value": "fecal"
+  }
+ ],
+ "zolpidem": [
+  {
+   "amount": "56%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "d7d75120",
+   "value": "renal"
+  },
+  {
+   "amount": "34%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "d7d75120",
+   "value": "fecal"
+  },
+  {
+   "amount": "Less than 1%",
+   "aspect": "unchanged",
+   "index": 1,
+   "qid": "3ad061a3",
+   "value": "urine"
+  },
+  {
+   "aspect": "route",
+   "index": 3,
+   "qid": "9e42fe9c",
+   "value": "renal"
+  }
+ ],
+ "zonisamide": [
+  {
+   "amount": "62%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "19cf7b46",
+   "value": "renal"
+  },
+  {
+   "amount": "3%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "b0adbd6d",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 3,
+   "qid": "b7e16686",
+   "value": "renal"
+  }
+ ],
+ "zopiclone": [
+  {
+   "amount": "80%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "82870793",
+   "value": "renal"
+  }
+ ],
+ "zotepine": [
+  {
+   "amount": "17%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "3de768ef",
+   "value": "renal"
+  }
+ ],
+ "zuclopenthixol": [
+  {
+   "aspect": "route",
+   "index": 3,
+   "qid": "b2c7c3ce",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "5d664f37",
+   "value": "fecal"
+  }
+ ],
+ "zuranolone": []
+}

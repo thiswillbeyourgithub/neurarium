@@ -3,8 +3,15 @@
 "drug:citalopram/first_approval": "opus",
 "drug:citalopram/originator": "opus"
 },
+"q_000a8d69cdce": {
+"drug:phentermine/excretion[urine_ph:acidic_faster]": "opus"
+},
 "q_0019a11cebbc": {
 "drug:brexanolone/categories": "sonnet"
+},
+"q_003f119188cd": {
+"drug:paliperidone/excretion[route:renal]": "opus",
+"drug:paliperidone/excretion[unchanged:urine]": "opus"
 },
 "q_0046f0b3a048": {
 "drug:ziprasidone/categories": "sonnet"
@@ -24,6 +31,9 @@
 "q_0056279d3e6b": {
 "drug:vigabatrin/workup[eye_exam:before]": "opus",
 "drug:vigabatrin/workup[eye_exam:during]": "opus"
+},
+"q_005f056deff7": {
+"drug:donepezil/excretion[unchanged:urine]": "opus"
 },
 "q_00649b729dde": {
 "drug:biperiden/formulations[ir]/release": "opus",
@@ -45,6 +55,9 @@
 },
 "q_00ee55e9b092": {
 "drug:reboxetine/bindings[sert:reuptake_inhibitor]": "sonnet"
+},
+"q_0127b6712aef": {
+"drug:caffeine/excretion[route:renal]": "opus"
 },
 "q_014bfef03924": {
 "drug:clobazam/first_approval": "opus"
@@ -75,6 +88,12 @@
 "q_01e3fba4cfdf": {
 "drug:atomoxetine/categories": "sonnet"
 },
+"q_01ea9d2add13": {
+"drug:salvinorin_a/excretion[route:renal]": "opus"
+},
+"q_0201bdd98f06": {
+"drug:acamprosate/excretion[unchanged:urine]": "opus"
+},
 "q_0206ed962b90": {
 "drug:promethazine/bindings[5ht2a:antagonist]": "sonnet",
 "drug:promethazine/bindings[5ht2c:antagonist]": "sonnet",
@@ -89,8 +108,18 @@
 "drug:promethazine/bindings[m4:antagonist]": "sonnet",
 "drug:promethazine/bindings[m5:antagonist]": "sonnet"
 },
+"q_02078f01d2b4": {
+"drug:viloxazine/excretion[route:fecal]": "opus",
+"drug:viloxazine/excretion[route:renal]": "opus"
+},
 "q_0217a6450583": {
 "drug:rivastigmine/bindings[ache:enzyme_inhibitor]": "sonnet"
+},
+"q_024ab5327613": {
+"drug:clonazepam/excretion[route:renal]": "opus"
+},
+"q_0252fd675858": {
+"drug:triazolam/excretion[route:renal]": "opus"
 },
 "q_0269031767fc": {
 "drug:isocarboxazid/bindings[mao_a:enzyme_inhibitor]": "sonnet"
@@ -100,6 +129,10 @@
 "drug:solriamfetol/workup[blood_pressure:during]": "opus",
 "drug:solriamfetol/workup[heart_rate:before]": "opus",
 "drug:solriamfetol/workup[heart_rate:during]": "opus"
+},
+"q_0273b3f2e645": {
+"drug:thc/excretion[route:fecal]": "opus",
+"drug:thc/excretion[route:renal]": "opus"
 },
 "q_027f6be6855d": {
 "drug:lofepramine/metabolites[desipramine]": "sonnet"
@@ -119,6 +152,9 @@
 "q_02f037e294e1": {
 "drug:granisetron/originator/now": "opus"
 },
+"q_0302e75c03ae": {
+"drug:lorazepam/excretion[route:renal]": "opus"
+},
 "q_03110b6650fd": {
 "receptor:5ht2a/classification[synaptic]": "opus"
 },
@@ -128,6 +164,9 @@
 "q_03304e7a6d58": {
 "drug:agomelatine/formulations[ir]/tmax": "opus",
 "drug:agomelatine/tmax": "opus"
+},
+"q_033d849b7d0b": {
+"drug:reboxetine/excretion[route:renal]": "opus"
 },
 "q_034f25fbd839": {
 "metabolite:o_desmethyltramadol/bindings[5ht2c:antagonist]": "opus"
@@ -145,8 +184,22 @@
 "q_03b6771f2e90": {
 "drug:tiapride/half_life": "sonnet"
 },
+"q_03d5977d5b51": {
+"drug:bumetanide/excretion[route:renal]": "opus"
+},
+"q_03df73b1ffe1": {
+"drug:amoxapine/excretion[route:fecal]": "opus",
+"drug:amoxapine/excretion[route:renal]": "opus"
+},
+"q_03e29d919e6d": {
+"drug:methadone/excretion[route:fecal]": "opus",
+"drug:methadone/excretion[route:renal]": "opus"
+},
 "q_03e8580343fc": {
 "drug:phenytoin/workup[ecg:during]": "opus"
+},
+"q_03ef8155c409": {
+"drug:trihexyphenidyl/excretion[route:renal]": "opus"
 },
 "q_0439d1a62162": {
 "metabolite:nordoxepin/half_life": "opus"
@@ -166,6 +219,9 @@
 "q_04a080271883": {
 "drug:ibogaine/bindings[mu:antagonist]": "opus"
 },
+"q_04b1545b5b34": {
+"drug:amisulpride/excretion[unchanged:urine]": "opus"
+},
 "q_04bd2c684a20": {
 "drug:memantine/brands[Ebixa]": "sonnet"
 },
@@ -175,8 +231,14 @@
 "q_04d2bd7dd3f3": {
 "drug:quetiapine/tmax": "sonnet"
 },
+"q_04daf2e46805": {
+"drug:mescaline/excretion[route:renal]": "opus"
+},
 "q_04ed9ad86b44": {
 "receptor:5ht1d/effects[agonism:vasoconstriction]": "opus"
+},
+"q_04fb3ce43639": {
+"drug:buprenorphine/excretion[route:fecal]": "opus"
 },
 "q_050c181be67a": {
 "receptor:h2/effects[agonism:gastric_acid_increase]": "opus",
@@ -190,6 +252,10 @@
 "receptor:delta/locations[olfactory_bulb]": "sonnet",
 "receptor:delta/locations[putamen]": "sonnet"
 },
+"q_053b0373eb8a": {
+"drug:mirtazapine/excretion[route:fecal]": "opus",
+"drug:mirtazapine/excretion[route:renal]": "opus"
+},
 "q_054f0b33f7e1": {
 "receptor:nachr_a7/release_modulation[autoreceptor:-:presynaptic_terminal:acetylcholine:increase]": "opus"
 },
@@ -199,6 +265,9 @@
 "drug:lofexidine/enzymes[cyp2c19:substrate]": "opus",
 "drug:lofexidine/enzymes[cyp2c19:substrate]/strength": "opus",
 "drug:lofexidine/enzymes[cyp2d6:substrate]": "opus"
+},
+"q_0570bda2d992": {
+"drug:sulpiride/excretion[renal_process:filtration]": "opus"
 },
 "q_058417e5da43": {
 "drug:citalopram/brands[Celexa]": "sonnet"
@@ -216,11 +285,17 @@
 "q_05e7ce36f2f5": {
 "drug:escitalopram/brands[Sipralexa]": "sonnet"
 },
+"q_05f92148bb59": {
+"drug:guanfacine/excretion[route:renal]": "opus"
+},
 "q_0604c2ff534c": {
 "drug:buspirone/brands[BuSpar]": "sonnet"
 },
 "q_0607f2de8792": {
 "target:mao_b/effects[inhibition:antiparkinsonian]": "opus"
+},
+"q_060f03bd5387": {
+"drug:zuclopenthixol/excretion[route:fecal]": "opus"
 },
 "q_0623595d57e0": {
 "drug:chlorpromazine/workup[ecg:before]": "opus"
@@ -233,6 +308,9 @@
 },
 "q_066666bc7f7b": {
 "drug:donepezil/brands[Aricept]": "sonnet"
+},
+"q_068f922c8dd1": {
+"drug:loflazepate/excretion[route:renal]": "opus"
 },
 "q_06962e550039": {
 "drug:sertindole/nbn": "sonnet"
@@ -251,6 +329,7 @@
 "drug:methaqualone/brands[Quaalude]": "sonnet"
 },
 "q_06b5e593d92b": {
+"drug:safinamide/excretion[route:renal]": "opus",
 "drug:safinamide/half_life": "opus"
 },
 "q_06db981eec65": {
@@ -260,11 +339,17 @@
 "drug:cyamemazine/bindings[m4:antagonist]": "sonnet",
 "drug:cyamemazine/bindings[m5:antagonist]": "sonnet"
 },
+"q_06e9efdd9af3": {
+"drug:mescaline/excretion[unchanged:urine]": "opus"
+},
 "q_06f220c374e7": {
 "drug:maprotiline/nbn": "sonnet"
 },
 "q_06f2fa31fdab": {
 "drug:duloxetine/nbn": "sonnet"
+},
+"q_070295a90b40": {
+"drug:clobazam/excretion[unchanged:urine]": "opus"
 },
 "q_07048706745c": {
 "drug:agomelatine/brands[Thymanax]": "sonnet"
@@ -294,11 +379,17 @@
 "drug:modafinil/workup[blood_pressure:during]": "opus",
 "drug:modafinil/workup[heart_rate:during]": "opus"
 },
+"q_0784e5a7b513": {
+"drug:carbamazepine/excretion[unchanged:urine]": "opus"
+},
 "q_078ac294e2e3": {
 "drug:rimegepant/bindings[cgrp:antagonist]": "sonnet"
 },
 "q_07a10248b755": {
 "drug:mirtazapine/nbn": "sonnet"
+},
+"q_07a5a0d2c816": {
+"drug:levetiracetam/excretion[unchanged:urine]": "opus"
 },
 "q_07a8778349c9": {
 "drug:lurasidone/brands[Latuda]": "sonnet"
@@ -337,8 +428,14 @@
 "q_080f80b6ebd2": {
 "drug:clonidine/brands[Catapressan]": "sonnet"
 },
+"q_081765937740": {
+"drug:morphine/excretion[unchanged:urine]": "opus"
+},
 "q_082861f67cca": {
 "drug:selegiline/originator": "opus"
+},
+"q_0854d7cfb067": {
+"drug:brexanolone/excretion[route:fecal]": "opus"
 },
 "q_0860d1740b9a": {
 "drug:deutetrabenazine/bindings[vmat2:vesicular_inhibitor]": "sonnet"
@@ -379,6 +476,9 @@
 "q_0985ce684872": {
 "drug:opipramol/tmax": "sonnet"
 },
+"q_0986885f9c92": {
+"drug:amobarbital/excretion[route:renal]": "opus"
+},
 "q_098b929e124b": {
 "receptor:alpha2a/release_modulation[autoreceptor:-:cell_body:norepinephrine:decrease]": "opus",
 "receptor:alpha2b/release_modulation[autoreceptor:-:cell_body:norepinephrine:decrease]": "opus",
@@ -416,6 +516,10 @@
 "q_09dfb3de6826": {
 "drug:thc/brands[Sativex]": "sonnet"
 },
+"q_09ef46f037d1": {
+"drug:levetiracetam/excretion[route:renal]": "opus",
+"drug:levetiracetam/excretion[unchanged:urine]": "opus"
+},
 "q_09fa3505a0d7": {
 "receptor:h1/effects[agonism:wakefulness]": "opus"
 },
@@ -431,11 +535,18 @@
 "q_0a15658d4fe4": {
 "drug:tranylcypromine/first_approval": "opus"
 },
+"q_0a2e86255ef9": {
+"drug:bremelanotide/excretion[route:fecal]": "opus",
+"drug:bremelanotide/excretion[route:renal]": "opus"
+},
 "q_0a30e29d56f1": {
 "drug:selegiline/brands[Eldepryl]": "sonnet"
 },
 "q_0a3ae48c5f97": {
 "drug:ephedrine/half_life": "sonnet"
+},
+"q_0a5217b8530d": {
+"drug:naloxone/excretion[route:renal]": "opus"
 },
 "q_0a5934ee3f11": {
 "drug:valbenazine/brands[Ingrezza]": "sonnet"
@@ -453,6 +564,9 @@
 },
 "q_0a94883d2b35": {
 "drug:ketamine/brands[Ketalar]": "sonnet"
+},
+"q_0abff3e5ee60": {
+"drug:phenelzine/excretion[route:renal]": "opus"
 },
 "q_0ac26164ee6c": {
 "drug:valproate/workup[pregnancy_test:before]": "opus",
@@ -481,6 +595,9 @@
 "q_0b5b31a9b631": {
 "drug:meprobamate/bindings[gaba_a:pam]": "opus"
 },
+"q_0b5d97af3ec2": {
+"drug:diazepam/excretion[route:renal]": "opus"
+},
 "q_0b7c71a698ac": {
 "drug:levomilnacipran/nbn": "sonnet"
 },
@@ -488,6 +605,10 @@
 "receptor:5ht2c/locations[amygdala]": "sonnet",
 "receptor:5ht2c/locations[hippocampus]": "sonnet",
 "receptor:5ht2c/locations[substantia_nigra]": "sonnet"
+},
+"q_0b81f1e1e881": {
+"drug:carbamazepine/excretion[route:fecal]": "opus",
+"drug:carbamazepine/excretion[route:renal]": "opus"
 },
 "q_0b8eb0b43330": {
 "drug:nortriptyline/bindings[m1:antagonist]": "sonnet",
@@ -498,6 +619,10 @@
 },
 "q_0b9972a4b647": {
 "target:dat/classification": "sonnet"
+},
+"q_0bb707c76e65": {
+"drug:ethosuximide/excretion[route:renal]": "opus",
+"drug:ethosuximide/excretion[unchanged:urine]": "opus"
 },
 "q_0bc6eded21d3": {
 "drug:lumateperone/first_approval": "opus"
@@ -537,6 +662,10 @@
 "q_0c50ab0f8f1a": {
 "drug:lurasidone/bindings[d2:antagonist]": "sonnet"
 },
+"q_0c64cb334ae8": {
+"drug:alpidem/excretion[route:fecal]": "opus",
+"drug:alpidem/excretion[route:renal]": "opus"
+},
 "q_0c6b09869365": {
 "drug:nortriptyline/brands[Allegron]": "sonnet"
 },
@@ -555,11 +684,32 @@
 "q_0c98e164ecbc": {
 "drug:flibanserin/first_approval": "opus"
 },
+"q_0ca4e5a2e51a": {
+"drug:amphetamine_d/excretion[route:renal]": "opus"
+},
+"q_0cbe48596811": {
+"drug:lisdexamfetamine/excretion[urine_ph:acidic_faster]": "opus"
+},
+"q_0cdb81ad1254": {
+"drug:rivastigmine/excretion[route:renal]": "opus"
+},
+"q_0ce53637f188": {
+"drug:sulpiride/excretion[route:fecal]": "opus",
+"drug:sulpiride/excretion[route:renal]": "opus"
+},
 "q_0cf3dc925a70": {
 "drug:tizanidine/first_approval": "opus"
 },
+"q_0d09117b47da": {
+"drug:zolpidem/excretion[route:fecal]": "opus",
+"drug:zolpidem/excretion[route:renal]": "opus"
+},
 "q_0d0d4f9eab2c": {
 "drug:dexmedetomidine/formulations[injection]/release": "opus"
+},
+"q_0d194cfc110b": {
+"drug:nefazodone/excretion[route:fecal]": "opus",
+"drug:nefazodone/excretion[route:renal]": "opus"
 },
 "q_0d1c51079e90": {
 "drug:quetiapine/bindings[5ht2a:antagonist]": "sonnet"
@@ -573,12 +723,19 @@
 "q_0d4b95ffd431": {
 "drug:ketamine/workup[liver_function:during]": "opus"
 },
+"q_0d56e8cb6d40": {
+"drug:oxycodone/excretion[route:renal]": "opus"
+},
 "q_0d5ed17f0018": {
 "drug:cyamemazine/brands[Tercian]": "sonnet"
 },
 "q_0d627d448604": {
 "receptor:5ht1a/effects[agonism:antidepressant]": "opus",
 "receptor:5ht1a/effects[agonism:anxiolytic]": "opus"
+},
+"q_0d68ac71170b": {
+"drug:oxcarbazepine/excretion[route:fecal]": "opus",
+"drug:oxcarbazepine/excretion[route:renal]": "opus"
 },
 "q_0d8428afda0f": {
 "projection:hippocampus_R->fornix_R": "opus",
@@ -601,11 +758,22 @@
 "q_0dd56a488dbc": {
 "drug:granisetron/originator_country": "opus"
 },
+"q_0ddc7ef60038": {
+"drug:aripiprazole/excretion[route:fecal]": "opus",
+"drug:aripiprazole/excretion[route:renal]": "opus"
+},
 "q_0e03f0a51bf4": {
 "drug:hydroxyzine/half_life": "sonnet"
 },
 "q_0e2439812d64": {
 "drug:entacapone/bindings[comt:enzyme_inhibitor]": "sonnet"
+},
+"q_0e2d9fb860cb": {
+"drug:ziprasidone/excretion[unchanged:urine]": "opus"
+},
+"q_0e2f760c1d5d": {
+"drug:ketamine/excretion[route:fecal]": "opus",
+"drug:ketamine/excretion[route:renal]": "opus"
 },
 "q_0e7e4b34be09": {
 "drug:pentobarbital/originator_country": "opus"
@@ -620,11 +788,18 @@
 "drug:protriptyline/bindings[m4:antagonist]": "sonnet",
 "drug:protriptyline/bindings[m5:antagonist]": "sonnet"
 },
+"q_0ea62851f20c": {
+"drug:olanzapine/excretion[unchanged:urine]": "opus"
+},
 "q_0ef328ab65f6": {
 "drug:sertindole/half_life": "sonnet"
 },
 "q_0f092dca8467": {
 "receptor:5ht7/release_modulation[heteroreceptor:raphe:gaba_interneuron:serotonin:decrease]": "opus"
+},
+"q_0f0dcb1d9d88": {
+"drug:valproate/excretion[route:renal]": "opus",
+"drug:valproate/excretion[unchanged:urine]": "opus"
 },
 "q_0f14f5ddef17": {
 "drug:pethidine/bindings[dat:reuptake_inhibitor]": "opus",
@@ -662,6 +837,9 @@
 "q_0fa3dda91bc2": {
 "drug:bromazepam/first_approval": "opus"
 },
+"q_0fadbfd5dd20": {
+"drug:lisdexamfetamine/excretion[route:renal]": "opus"
+},
 "q_0fe7fef58145": {
 "drug:melatonin/brands[Circadin]": "sonnet",
 "drug:melatonin/formulations[xr]/brands[Circadin]": "opus"
@@ -681,8 +859,16 @@
 "q_10389c0a737b": {
 "group:sign:modulatory": "sonnet"
 },
+"q_103b13c2cd7c": {
+"drug:pregabalin/excretion[route:renal]": "opus",
+"drug:pregabalin/excretion[unchanged:urine]": "opus"
+},
 "q_103e0d1b9f04": {
 "drug:asenapine/bindings[5ht2a:antagonist]": "sonnet"
+},
+"q_103f92a92ad7": {
+"drug:tranylcypromine/excretion[route:fecal]": "opus",
+"drug:tranylcypromine/excretion[route:renal]": "opus"
 },
 "q_1048c1d21924": {
 "target:gat/classification": "sonnet"
@@ -787,6 +973,9 @@
 "q_119da77dcbc3": {
 "drug:milnacipran/categories": "sonnet"
 },
+"q_11a8f196ff2a": {
+"drug:donepezil/excretion[route:fecal]": "opus"
+},
 "q_11c26bf6b07c": {
 "drug:citalopram/brands[Celapram]": "sonnet"
 },
@@ -802,6 +991,10 @@
 },
 "q_1207c796e314": {
 "drug:asenapine/nbn": "sonnet"
+},
+"q_121195607d14": {
+"drug:ketamine/excretion[route:fecal]": "opus",
+"drug:ketamine/excretion[route:renal]": "opus"
 },
 "q_121f38dfa404": {
 "drug:bupropion/brands[Zyban]": "sonnet"
@@ -823,6 +1016,10 @@
 "q_1262f75b363e": {
 "drug:valproate/categories": "sonnet"
 },
+"q_128bba25c366": {
+"drug:fluoxetine/excretion[route:fecal]": "opus",
+"drug:fluoxetine/excretion[route:renal]": "opus"
+},
 "q_1298aee4735a": {
 "drug:rimonabant/withdrawals[eu:2008]": "opus"
 },
@@ -838,8 +1035,16 @@
 "q_12e8387e8f64": {
 "drug:paliperidone/formulations[xr]/release": "opus"
 },
+"q_1315ebac74f2": {
+"drug:phenytoin/excretion[renal_process:filtration]": "opus",
+"drug:phenytoin/excretion[renal_process:tubular_secretion]": "opus",
+"drug:phenytoin/excretion[route:renal]": "opus"
+},
 "q_1318fe8493db": {
 "drug:midazolam/formulations[injection]/release": "opus"
+},
+"q_132941e455c7": {
+"drug:phencyclidine/excretion[route:renal]": "opus"
 },
 "q_132d9cc7a2dc": {
 "drug:oxycodone/formulations[ir]/release": "opus"
@@ -853,6 +1058,9 @@
 "q_1392de56a87f": {
 "receptor:m1/effects[agonism:bronchoconstriction]": "opus"
 },
+"q_1397133652bc": {
+"drug:fluvoxamine/excretion[route:renal]": "opus"
+},
 "q_13975d12fb63": {
 "drug:pimozide/workup[ecg:before]": "opus",
 "drug:pimozide/workup[ecg:during]": "opus"
@@ -860,6 +1068,12 @@
 "q_139967085d73": {
 "drug:paliperidone/brands[Trevicta]": "sonnet",
 "drug:paliperidone/formulations[depot]/brands[Trevicta]": "opus"
+},
+"q_139c87a328f0": {
+"drug:lacosamide/excretion[route:fecal]": "opus"
+},
+"q_139fe227d5dd": {
+"drug:nicotine/excretion[urine_ph:acidic_faster]": "opus"
 },
 "q_13a0caf558ec": {
 "drug:alpidem/brands[Ananxyl]": "sonnet"
@@ -931,6 +1145,9 @@
 "metabolite:noribogaine/bindings[kappa:agonist]": "opus",
 "metabolite:noribogaine/bindings[mu:agonist]": "opus"
 },
+"q_151d708e62fc": {
+"drug:clorazepate/excretion[route:renal]": "opus"
+},
 "q_15682f6bd8cc": {
 "drug:vilazodone/first_approval": "opus"
 },
@@ -966,6 +1183,9 @@
 "receptor:h1/effects[antagonism:sedation]": "opus",
 "receptor:h1/effects[antagonism:weight_gain]": "opus"
 },
+"q_15e6026a9956": {
+"drug:venlafaxine/excretion[route:renal]": "opus"
+},
 "q_15e771debc77": {
 "drug:nefazodone/bindings[net:reuptake_inhibitor]": "sonnet"
 },
@@ -974,6 +1194,9 @@
 },
 "q_15f6c1170e05": {
 "drug:haloperidol/categories": "sonnet"
+},
+"q_1600589e62e7": {
+"drug:atomoxetine/excretion[route:renal]": "opus"
 },
 "q_160afca7bece": {
 "drug:methylphenidate_d/nbn": "sonnet"
@@ -1010,6 +1233,9 @@
 "structure:mammillary_L": "sonnet",
 "structure:mammillary_R": "sonnet"
 },
+"q_17036a7722a9": {
+"drug:promethazine/excretion[route:renal]": "opus"
+},
 "q_170bed4db53d": {
 "drug:rotigotine/first_approval": "opus"
 },
@@ -1035,6 +1261,9 @@
 },
 "q_17907a37530d": {
 "group:kind:serotonergic": "sonnet"
+},
+"q_17c92ff4237a": {
+"drug:phentermine/excretion[urine_ph:dependent]": "opus"
 },
 "q_17f653e3793d": {
 "drug:rivastigmine/originator": "opus"
@@ -1090,6 +1319,10 @@
 "drug:cabergoline/workup[echocardiography:before]": "opus",
 "drug:cabergoline/workup[renal_function:before]": "opus"
 },
+"q_18fcd153b013": {
+"drug:topiramate/excretion[route:renal]": "opus",
+"drug:topiramate/excretion[unchanged:urine]": "opus"
+},
 "q_1906f9ed062a": {
 "drug:nitrazepam/categories": "sonnet"
 },
@@ -1098,6 +1331,12 @@
 },
 "q_1913b368da83": {
 "drug:clorazepate/brands[Tranxene]": "sonnet"
+},
+"q_1940df1dbffb": {
+"drug:sulpiride/excretion[unchanged:urine]": "opus"
+},
+"q_194fc374a9ad": {
+"drug:lsd/excretion[route:renal]": "opus"
 },
 "q_195c0aa3c901": {
 "drug:bupropion/brands[Wellbutrin]": "sonnet"
@@ -1118,11 +1357,17 @@
 "q_19767ebf390f": {
 "drug:ibogaine/bindings[dat:reuptake_inhibitor]": "opus"
 },
+"q_198542f3c47d": {
+"drug:risperidone/excretion[route:renal]": "opus"
+},
 "q_19939de00555": {
 "receptor:5ht4/locations[accumbens]": "sonnet",
 "receptor:5ht4/locations[caudate]": "sonnet",
 "receptor:5ht4/locations[hippocampus]": "sonnet",
 "receptor:5ht4/locations[putamen]": "sonnet"
+},
+"q_19a8b3f6530c": {
+"drug:bupropion/excretion[route:renal]": "opus"
 },
 "q_19af300b9e15": {
 "drug:disulfiram/brands[Espéral]": "sonnet"
@@ -1153,6 +1398,12 @@
 },
 "q_1a008928d522": {
 "drug:moclobemide/first_approval": "opus"
+},
+"q_1a1df5856915": {
+"drug:brotizolam/excretion[route:renal]": "opus"
+},
+"q_1a41245c66c3": {
+"drug:guanfacine/excretion[renal_process:tubular_secretion]": "opus"
 },
 "q_1a453a155dfa": {
 "drug:quetiapine/bindings[h1:antagonist]": "sonnet"
@@ -1217,6 +1468,9 @@
 "q_1b550bd5816d": {
 "drug:pipothiazine/bindings[d2:antagonist]": "sonnet"
 },
+"q_1b5e49f19267": {
+"drug:midazolam/excretion[route:renal]": "opus"
+},
 "q_1b698b02f028": {
 "drug:tizanidine/tmax": "sonnet"
 },
@@ -1243,6 +1497,9 @@
 "drug:pimavanserin/half_life": "sonnet",
 "drug:pimavanserin/metabolites[n_desmethylpimavanserin]": "sonnet",
 "metabolite:n_desmethylpimavanserin/half_life": "sonnet"
+},
+"q_1c09c4b592a8": {
+"drug:flunitrazepam/excretion[route:renal]": "opus"
 },
 "q_1c14f3f649c0": {
 "drug:nortriptyline/bindings[net:reuptake_inhibitor]": "sonnet"
@@ -1274,6 +1531,12 @@
 "q_1c8a17299056": {
 "drug:thioridazine/nbn": "sonnet"
 },
+"q_1c92ea601515": {
+"drug:levodopa/excretion[route:renal]": "opus"
+},
+"q_1c96191e9c32": {
+"drug:fentanyl/excretion[unchanged:urine]": "opus"
+},
 "q_1c977d9f1435": {
 "drug:buprenorphine/bindings[mu:partial_agonist]": "sonnet",
 "drug:buprenorphine/categories": "sonnet",
@@ -1284,6 +1547,10 @@
 },
 "q_1ccfe81baa05": {
 "drug:acamprosate/categories": "sonnet"
+},
+"q_1cd033291f45": {
+"drug:rasagiline/excretion[route:fecal]": "opus",
+"drug:rasagiline/excretion[route:renal]": "opus"
 },
 "q_1cd7b5ec923b": {
 "drug:safinamide/categories": "opus"
@@ -1301,6 +1568,10 @@
 "q_1d41df897411": {
 "drug:tofisopam/half_life": "sonnet"
 },
+"q_1d4827b3c600": {
+"drug:pregabalin/excretion[route:renal]": "opus",
+"drug:pregabalin/excretion[unchanged:urine]": "opus"
+},
 "q_1d4dd426eb63": {
 "receptor:d2/effects[antagonism:prolactin_elevation]": "opus"
 },
@@ -1309,6 +1580,9 @@
 },
 "q_1d52ce08d86b": {
 "drug:ketamine/metabolites[hydroxynorketamine]": "opus"
+},
+"q_1d6319c9cf6b": {
+"drug:cyclobarbital/excretion[route:renal]": "opus"
 },
 "q_1dadd94d5735": {
 "drug:benperidol/categories": "sonnet"
@@ -1329,6 +1603,10 @@
 },
 "q_1e0524deff70": {
 "drug:suvorexant/bindings[orexin:antagonist]": "sonnet"
+},
+"q_1e49978bd2c6": {
+"drug:eszopiclone/excretion[route:renal]": "opus",
+"drug:eszopiclone/excretion[unchanged:urine]": "opus"
 },
 "q_1e512ca167c6": {
 "drug:zonisamide/brands[Excegran]": "sonnet"
@@ -1359,6 +1637,9 @@
 "q_1ece788e5b37": {
 "drug:glutethimide/originator": "opus"
 },
+"q_1ed14ce985d4": {
+"drug:loxapine/excretion[route:renal]": "opus"
+},
 "q_1edf30183c4f": {
 "drug:alimemazine/categories": "sonnet"
 },
@@ -1370,6 +1651,17 @@
 },
 "q_1ef41eb574c3": {
 "drug:lisdexamfetamine/workup[weight:during]": "opus"
+},
+"q_1ef6928c7c63": {
+"drug:bumetanide/excretion[route:renal]": "opus"
+},
+"q_1f0bffd655a1": {
+"drug:buprenorphine/excretion[route:fecal]": "opus",
+"drug:buprenorphine/excretion[route:renal]": "opus"
+},
+"q_1f19400bc6db": {
+"drug:nabilone/excretion[route:fecal]": "opus",
+"drug:nabilone/excretion[route:renal]": "opus"
 },
 "q_1f2527938eb3": {
 "receptor:5ht7/release_modulation[heteroreceptor:-:gaba_interneuron:glutamate:decrease]": "opus"
@@ -1390,6 +1682,14 @@
 "q_1f4e0311bcd0": {
 "drug:salvinorin_a/bindings[kappa:agonist]": "sonnet"
 },
+"q_1f7585f40630": {
+"drug:carbamazepine/excretion[route:fecal]": "opus",
+"drug:carbamazepine/excretion[route:renal]": "opus"
+},
+"q_1f8bb327ae85": {
+"drug:doxepin/excretion[route:fecal]": "opus",
+"drug:doxepin/excretion[route:renal]": "opus"
+},
 "q_1f96761b69c7": {
 "drug:reboxetine/half_life": "sonnet"
 },
@@ -1401,8 +1701,14 @@
 "projection:septal_nuclei_R->hippocampus_R": "opus",
 "projection:septal_nuclei_R->hippocampus_R/transmitter": "opus"
 },
+"q_1fcee5971632": {
+"drug:cyamemazine/excretion[route:renal]": "opus"
+},
 "q_1fe2db4363a6": {
 "drug:methylphenidate_dl/brands[Concerta]": "sonnet"
+},
+"q_1feacd4f5405": {
+"drug:ketamine/excretion[route:renal]": "opus"
 },
 "q_1febf2762cd2": {
 "drug:agomelatine/bindings[5ht2c:antagonist]": "sonnet",
@@ -1429,6 +1735,9 @@
 "q_2040709b4f06": {
 "drug:melperone/bindings[5ht2a:antagonist]": "opus"
 },
+"q_20610319ec7a": {
+"drug:prazepam/excretion[unchanged:urine]": "opus"
+},
 "q_20616948256d": {
 "receptor:d1/classification[synaptic]": "opus"
 },
@@ -1437,6 +1746,9 @@
 },
 "q_206c8ee08e73": {
 "drug:thioridazine/originator": "opus"
+},
+"q_2071a0adb44d": {
+"drug:rasagiline/excretion[unchanged:urine]": "opus"
 },
 "q_2077fe8dbb75": {
 "drug:melatonin/formulations[xr]/release": "opus"
@@ -1506,11 +1818,22 @@
 "q_2121763f225e": {
 "receptor:d2/effects[antagonism:extrapyramidal_symptoms]": "opus"
 },
+"q_212bb2e4bb00": {
+"drug:lacosamide/excretion[unchanged:urine]": "opus"
+},
 "q_21352763c4a6": {
 "drug:desipramine/bindings[net:reuptake_inhibitor]": "sonnet"
 },
+"q_21462424dd5b": {
+"drug:estazolam/excretion[route:renal]": "opus"
+},
 "q_215457549d3a": {
 "drug:blonanserin/bindings[d3:antagonist]": "sonnet"
+},
+"q_215ac28b9af9": {
+"drug:amantadine/excretion[renal_process:filtration]": "opus",
+"drug:amantadine/excretion[renal_process:tubular_secretion]": "opus",
+"drug:amantadine/excretion[unchanged:urine]": "opus"
 },
 "q_21652616ffd7": {
 "receptor:nachr_a7/release_modulation[heteroreceptor:vta:presynaptic_terminal:glutamate:increase]": "opus"
@@ -1535,6 +1858,9 @@
 },
 "q_2220921e8cc3": {
 "drug:entacapone/categories": "sonnet"
+},
+"q_222ce5772845": {
+"drug:pseudoephedrine/excretion[route:renal]": "opus"
 },
 "q_22357a0b997d": {
 "drug:clozapine/half_life": "sonnet"
@@ -1595,6 +1921,12 @@
 "drug:protriptyline/originator_country": "opus",
 "drug:suvorexant/originator_country": "opus"
 },
+"q_2311fcd955b9": {
+"drug:varenicline/excretion[route:renal]": "opus"
+},
+"q_231267227524": {
+"drug:sulpiride/excretion[route:renal]": "opus"
+},
 "q_231b5065993d": {
 "drug:phenterminetopiramate/formulations[xr]/release": "opus"
 },
@@ -1644,6 +1976,10 @@
 },
 "q_240fcf160318": {
 "drug:propranolol/bindings[beta2:antagonist]": "sonnet"
+},
+"q_241f5cb6b651": {
+"drug:prochlorperazine/excretion[route:fecal]": "opus",
+"drug:prochlorperazine/excretion[route:renal]": "opus"
 },
 "q_24235c8995ce": {
 "drug:sibutramine/withdrawals[au:2010]": "opus",
@@ -1709,6 +2045,12 @@
 "q_25260352b0a3": {
 "drug:doxepin/bindings[net:reuptake_inhibitor]": "sonnet"
 },
+"q_254944f167e1": {
+"drug:fluvoxamine/excretion[route:renal]": "opus"
+},
+"q_255287c1b271": {
+"drug:lithium/excretion[route:renal]": "opus"
+},
 "q_25604aa22aa0": {
 "drug:methylphenidate_dl/enzymes[ces1:substrate]": "opus",
 "drug:methylphenidate_dl/enzymes[ces1:substrate]/strength": "opus"
@@ -1718,6 +2060,9 @@
 },
 "q_258eed36da6d": {
 "target:dat/demographics[sex:higher_in_female:-]": "opus"
+},
+"q_259599e6429c": {
+"drug:oxazepam/excretion[route:renal]": "opus"
 },
 "q_25c2035f2ef3": {
 "drug:vigabatrin/workup[eye_exam:before]": "opus",
@@ -1741,14 +2086,24 @@
 "q_260ba673161c": {
 "drug:phenterminetopiramate/bindings[carbonic_anhydrase:enzyme_inhibitor]": "sonnet"
 },
+"q_261b9bdf31ef": {
+"drug:viloxazine/excretion[route:fecal]": "opus",
+"drug:viloxazine/excretion[route:renal]": "opus"
+},
 "q_26334c345233": {
 "drug:carbamazepine/workup[hla_genotype:before]": "opus"
+},
+"q_26429d4b9884": {
+"drug:ropinirole/excretion[route:renal]": "opus"
 },
 "q_2659142c7dc6": {
 "drug:methylphenidate_dl/formulations[transdermal]/release": "opus"
 },
 "q_26595dbfbf67": {
 "drug:pregabalin/brands[Lyrica]": "sonnet"
+},
+"q_2681d65a87e9": {
+"drug:alpidem/excretion[unchanged:urine]": "opus"
 },
 "q_26d7c0336fed": {
 "drug:maprotiline/brands[Ludiomil]": "sonnet"
@@ -1768,6 +2123,9 @@
 "drug:guanfacine/workup[heart_rate:before]": "opus",
 "drug:guanfacine/workup[weight:before]": "opus"
 },
+"q_26fa03d2f7ba": {
+"drug:baclofen/excretion[route:renal]": "opus"
+},
 "q_27073f05497f": {
 "drug:nimetazepam/originator": "opus"
 },
@@ -1780,8 +2138,15 @@
 "q_272f0211c33f": {
 "drug:clozapine/workup[blood_count:during]": "opus"
 },
+"q_273236bc5427": {
+"drug:aripiprazole/excretion[route:fecal]": "opus"
+},
 "q_27479caa0e79": {
 "drug:lurasidone/nbn": "sonnet"
+},
+"q_274e71e7c745": {
+"drug:phentermine/excretion[route:renal]": "opus",
+"drug:phentermine/excretion[unchanged:urine]": "opus"
 },
 "q_275a68d5014d": {
 "metabolite:3_4_methylenedioxyamphetamine/bindings[5ht2a:agonist]": "opus"
@@ -1810,6 +2175,9 @@
 "q_27f9948c2ac2": {
 "drug:sildenafil/brands[Revatio]": "sonnet"
 },
+"q_2802704430a6": {
+"drug:lormetazepam/excretion[route:renal]": "opus"
+},
 "q_280e6a79c7e3": {
 "structure:hippocampus_L": "sonnet",
 "structure:hippocampus_R": "sonnet"
@@ -1823,8 +2191,25 @@
 "q_285f0921b439": {
 "drug:bupropion/brands[Wellbutrin SR]": "sonnet"
 },
+"q_286ef3eec6e1": {
+"drug:mesoridazine/excretion[route:fecal]": "opus",
+"drug:mesoridazine/excretion[route:renal]": "opus"
+},
+"q_2874391c4082": {
+"drug:moclobemide/excretion[route:renal]": "opus",
+"drug:moclobemide/excretion[unchanged:urine]": "opus"
+},
+"q_2890cd4eeebe": {
+"drug:scopolamine/excretion[unchanged:urine]": "opus"
+},
 "q_28997565286f": {
 "drug:moclobemide/half_life": "sonnet"
+},
+"q_28afdbbbda9d": {
+"drug:tapentadol/excretion[unchanged:urine]": "opus"
+},
+"q_28b1a83a8e3b": {
+"drug:tramadol/excretion[route:renal]": "opus"
 },
 "q_28bd04c815d8": {
 "drug:xenon/categories": "sonnet"
@@ -1837,6 +2222,9 @@
 "drug:clonidine/formulations[ir]/release": "opus",
 "drug:clonidine/formulations[ir]/tmax": "opus",
 "drug:clonidine/tmax": "sonnet"
+},
+"q_28d2c41cb0ee": {
+"drug:haloperidol/excretion[unchanged:urine]": "opus"
 },
 "q_28f81aa98fc8": {
 "drug:phentermine/tmax": "sonnet"
@@ -1867,13 +2255,27 @@
 "q_291282293aba": {
 "drug:milnacipran/brands[Ixel]": "sonnet"
 },
+"q_2912bd5e6955": {
+"drug:iloperidone/excretion[route:fecal]": "opus",
+"drug:iloperidone/excretion[route:renal]": "opus"
+},
 "q_2929c5341558": {
 "drug:cariprazine/half_life": "sonnet",
 "drug:cariprazine/metabolites[didesmethyl_cariprazine]": "sonnet",
 "metabolite:didesmethyl_cariprazine/half_life": "sonnet"
 },
+"q_2946e7cb7bd7": {
+"drug:clonidine/excretion[route:renal]": "opus"
+},
+"q_295a3509450b": {
+"drug:clonazepam/excretion[route:renal]": "opus"
+},
 "q_295b29df497c": {
 "drug:paroxetine/categories": "sonnet"
+},
+"q_295d42ed8612": {
+"drug:lacosamide/excretion[route:fecal]": "opus",
+"drug:lacosamide/excretion[route:renal]": "opus"
 },
 "q_296bf58e3046": {
 "drug:chlorpromazine/bindings[alpha1a:antagonist]": "sonnet",
@@ -1943,6 +2345,15 @@
 "q_2acefaa59dd3": {
 "drug:disulfiram/metabolites[diethyldithiocarbamate]": "opus"
 },
+"q_2ae21591da75": {
+"drug:entacapone/excretion[unchanged:urine]": "opus"
+},
+"q_2ae5ec01096e": {
+"drug:glutethimide/excretion[route:renal]": "opus"
+},
+"q_2b0042e99fe5": {
+"drug:zolpidem/excretion[unchanged:urine]": "opus"
+},
 "q_2b143bad1675": {
 "drug:mirtazapine/bindings[alpha2:antagonist]": "sonnet"
 },
@@ -1966,6 +2377,16 @@
 },
 "q_2b353a51208c": {
 "drug:pipothiazine/nbn": "sonnet"
+},
+"q_2b3f285df567": {
+"drug:aripiprazole/excretion[route:renal]": "opus"
+},
+"q_2b4ddf7e3e32": {
+"drug:thiothixene/excretion[route:fecal]": "opus"
+},
+"q_2b5b11a44585": {
+"drug:clozapine/excretion[route:fecal]": "opus",
+"drug:clozapine/excretion[route:renal]": "opus"
 },
 "q_2b5c26f12f49": {
 "drug:sodium_oxybate/tmax": "sonnet"
@@ -2075,6 +2496,9 @@
 "q_2eaaa375fad8": {
 "drug:buspirone/bindings[5ht1a:partial_agonist]": "sonnet"
 },
+"q_2ec2c7151681": {
+"drug:dexmedetomidine/excretion[route:renal]": "opus"
+},
 "q_2f0036926d0f": {
 "drug:phentermine/bindings[dat:releaser]": "sonnet",
 "drug:phentermine/bindings[net:releaser]": "sonnet"
@@ -2085,6 +2509,9 @@
 "q_2f12294e7766": {
 "drug:sumatriptan/formulations[ir]/tmax": "opus",
 "drug:sumatriptan/tmax": "opus"
+},
+"q_2f1820a496cf": {
+"drug:flunarizine/excretion[route:fecal]": "opus"
 },
 "q_2f4664fb4b0e": {
 "drug:sildenafil/bindings[pde5:enzyme_inhibitor]": "sonnet"
@@ -2143,6 +2570,9 @@
 "q_311afedeb7a3": {
 "drug:levomilnacipran/bindings[sert:reuptake_inhibitor]": "sonnet"
 },
+"q_31252ee14668": {
+"drug:clonazepam/excretion[unchanged:urine]": "opus"
+},
 "q_312b380d9594": {
 "drug:lofexidine/brands[Lucemyra]": "sonnet"
 },
@@ -2158,6 +2588,10 @@
 "drug:benztropine/bindings[m3:antagonist]": "sonnet",
 "drug:benztropine/bindings[m4:antagonist]": "sonnet",
 "drug:benztropine/bindings[m5:antagonist]": "sonnet"
+},
+"q_314856f821d0": {
+"drug:cabergoline/excretion[route:fecal]": "opus",
+"drug:cabergoline/excretion[route:renal]": "opus"
 },
 "q_31587603e843": {
 "drug:venlafaxine/workup[blood_pressure:before]": "opus",
@@ -2208,11 +2642,25 @@
 "drug:zuclopenthixol/bindings[m4:antagonist]": "sonnet",
 "drug:zuclopenthixol/bindings[m5:antagonist]": "sonnet"
 },
+"q_32374364ed77": {
+"drug:desipramine/excretion[route:fecal]": "opus",
+"drug:desipramine/excretion[route:renal]": "opus"
+},
 "q_325f6464a948": {
 "drug:betahistine/half_life": "sonnet"
 },
+"q_325faf5afafb": {
+"drug:lofexidine/excretion[route:renal]": "opus"
+},
 "q_32645aa40ad3": {
 "receptor:nachr_a4b2/release_modulation[heteroreceptor:vta:cell_body:dopamine:increase]": "opus"
+},
+"q_327a0ac77e65": {
+"drug:amphetamine_d/excretion[urine_ph:acidic_faster]": "opus"
+},
+"q_3284d3a6611f": {
+"drug:vortioxetine/excretion[route:fecal]": "opus",
+"drug:vortioxetine/excretion[route:renal]": "opus"
 },
 "q_3286883b8706": {
 "drug:clonidine/brands[Duraclon (injection)]": "sonnet"
@@ -2223,17 +2671,26 @@
 "q_32d2acb489ed": {
 "receptor:kappa/effects[agonism:analgesia]": "opus"
 },
+"q_32d6eb5efe4f": {
+"drug:propranolol/excretion[route:renal]": "opus"
+},
 "q_32dd11eab163": {
 "receptor:h2/locations[caudate]": "sonnet",
 "receptor:h2/locations[cerebellum]": "sonnet",
 "receptor:h2/locations[hippocampus]": "sonnet",
 "receptor:h2/locations[putamen]": "sonnet"
 },
+"q_32e46cdedb24": {
+"drug:methamphetamine/excretion[urine_ph:dependent]": "opus"
+},
 "q_32e6d4d77682": {
 "drug:viloxazine/brands[Qelbree]": "sonnet"
 },
 "q_32ebeff235be": {
 "drug:fenfluramine/workup[echocardiography:during]": "opus"
+},
+"q_330b96302d26": {
+"drug:perampanel/excretion[unchanged:urine]": "opus"
 },
 "q_33178c00457d": {
 "drug:biperiden/brands[Akinophyl]": "sonnet"
@@ -2246,6 +2703,9 @@
 },
 "q_332d2975d807": {
 "drug:buspirone/nbn": "sonnet"
+},
+"q_333738f2c0d6": {
+"drug:nalmefene/excretion[route:renal]": "opus"
 },
 "q_333790620574": {
 "drug:protriptyline/bindings[sert:reuptake_inhibitor]": "sonnet"
@@ -2299,11 +2759,17 @@
 "q_3416570d87a3": {
 "drug:melatonin/half_life": "opus"
 },
+"q_3425e70ab15a": {
+"drug:zonisamide/excretion[route:fecal]": "opus"
+},
 "q_3434e05d5651": {
 "drug:perampanel/first_approval": "opus"
 },
 "q_344b6245e61a": {
 "projection:frontal_R->putamen_R": "opus"
+},
+"q_3452dff5418d": {
+"drug:zonisamide/excretion[route:renal]": "opus"
 },
 "q_346dfd9495ac": {
 "drug:amphetamine_d/workup[blood_pressure:before]": "opus",
@@ -2313,9 +2779,20 @@
 "q_346e1b3d4b93": {
 "drug:armodafinil/tmax": "sonnet"
 },
+"q_346f205978ac": {
+"drug:chlorpromazine/excretion[route:fecal]": "opus",
+"drug:chlorpromazine/excretion[unchanged:urine]": "opus"
+},
 "q_347087a441fc": {
 "drug:nalmefene/bindings[delta:antagonist]": "sonnet",
 "drug:nalmefene/bindings[mu:antagonist]": "sonnet"
+},
+"q_34884823dc94": {
+"drug:memantine/excretion[unchanged:urine]": "opus"
+},
+"q_34886d492ec1": {
+"drug:istradefylline/excretion[route:fecal]": "opus",
+"drug:istradefylline/excretion[route:renal]": "opus"
 },
 "q_348c63b58c80": {
 "drug:zuclopenthixol/categories": "sonnet"
@@ -2325,6 +2802,10 @@
 },
 "q_34c43c0d4f9e": {
 "drug:aripiprazole/metabolites[dehydroaripiprazole]": "opus"
+},
+"q_34d512edc3bb": {
+"drug:safinamide/excretion[route:fecal]": "opus",
+"drug:safinamide/excretion[route:renal]": "opus"
 },
 "q_34e1b80721ef": {
 "metabolite:6_hydroxybupropion/bindings[dat:reuptake_inhibitor]": "sonnet"
@@ -2358,6 +2839,10 @@
 "q_354a2aee1678": {
 "drug:galantamine/categories": "sonnet"
 },
+"q_355727ac1f94": {
+"drug:chlorpromazine/excretion[route:fecal]": "opus",
+"drug:chlorpromazine/excretion[route:renal]": "opus"
+},
 "q_35580f77f0b1": {
 "drug:valbenazine/categories": "sonnet"
 },
@@ -2375,6 +2860,9 @@
 },
 "q_35f4a685b1f1": {
 "drug:mesoridazine/categories": "opus"
+},
+"q_35f8f14b5fe2": {
+"drug:galantamine/excretion[unchanged:urine]": "opus"
 },
 "q_35fd88d64175": {
 "drug:lumateperone/bindings[5ht2a:antagonist]": "sonnet"
@@ -2398,8 +2886,14 @@
 "q_3664c282c3ff": {
 "drug:diazepam/brands[Valium]": "sonnet"
 },
+"q_3681a760c75e": {
+"drug:methamphetamine/excretion[urine_ph:acidic_faster]": "opus"
+},
 "q_3681d16d4351": {
 "drug:meclizine/half_life": "sonnet"
+},
+"q_36893f1787e8": {
+"drug:valproate/excretion[route:fecal]": "opus"
 },
 "q_368968eda24c": {
 "receptor:m1/effects[antagonism:anticholinergic_cognitive]": "opus",
@@ -2429,6 +2923,9 @@
 "q_3707a5a56179": {
 "drug:oxycodone/metabolites[oxymorphone]": "opus"
 },
+"q_3713205efe6d": {
+"drug:amphetamine_d/excretion[urine_ph:dependent]": "opus"
+},
 "q_371d45d98eff": {
 "receptor:5ht1a/demographics[age:decrease:raphe]": "opus"
 },
@@ -2441,6 +2938,9 @@
 },
 "q_3775dc8afdfc": {
 "drug:nortriptyline/nbn": "sonnet"
+},
+"q_377a7cfd98c3": {
+"drug:amphetamine_dl/excretion[urine_ph:dependent]": "opus"
 },
 "q_37b3ec7d35c2": {
 "drug:lofepramine/bindings[sert:reuptake_inhibitor]": "sonnet"
@@ -2463,11 +2963,18 @@
 "q_387df1d25601": {
 "receptor:beta2/effects[agonism:vasodilation]": "opus"
 },
+"q_3885cd23e21f": {
+"drug:eszopiclone/excretion[route:renal]": "opus"
+},
 "q_388d5b189778": {
 "drug:reboxetine/brands[Norebox]": "sonnet"
 },
 "q_388ed2393134": {
 "drug:domperidone/originator": "opus"
+},
+"q_3895c923e1a1": {
+"drug:sildenafil/excretion[route:fecal]": "opus",
+"drug:sildenafil/excretion[route:renal]": "opus"
 },
 "q_3899252add6f": {
 "drug:flunitrazepam/originator": "opus"
@@ -2487,6 +2994,15 @@
 },
 "q_39097506a125": {
 "drug:olanzapine/bindings[h1:antagonist]": "sonnet"
+},
+"q_390e55c2f845": {
+"drug:baclofen/excretion[route:renal]": "opus",
+"drug:baclofen/excretion[unchanged:urine]": "opus"
+},
+"q_3910bcd65121": {
+"drug:quetiapine/excretion[route:fecal]": "opus",
+"drug:quetiapine/excretion[route:renal]": "opus",
+"drug:quetiapine/excretion[unchanged:urine]": "opus"
 },
 "q_392771ceee51": {
 "metabolite:meta_chlorophenylpiperazine/bindings[5ht2a:partial_agonist]": "sonnet",
@@ -2549,6 +3065,10 @@
 "q_3a9ec195dbeb": {
 "drug:zaleplon/originator_country": "opus"
 },
+"q_3ab22ce33d83": {
+"drug:doxylamine/excretion[route:fecal]": "opus",
+"drug:doxylamine/excretion[route:renal]": "opus"
+},
 "q_3ab39664ba7e": {
 "drug:midazolam/brands[Dormicum]": "sonnet"
 },
@@ -2608,6 +3128,14 @@
 "q_3b8f24f85587": {
 "drug:iloperidone/tmax": "sonnet"
 },
+"q_3b9a7fe452a2": {
+"drug:amphetamine_dl/excretion[route:renal]": "opus",
+"drug:amphetamine_dl/excretion[unchanged:urine]": "opus"
+},
+"q_3b9b464ccb93": {
+"drug:tasimelteon/excretion[route:fecal]": "opus",
+"drug:tasimelteon/excretion[route:renal]": "opus"
+},
 "q_3ba606ce03bf": {
 "drug:nefazodone/metabolites[meta_chlorophenylpiperazine]": "sonnet"
 },
@@ -2638,6 +3166,10 @@
 "q_3c146f6fcfd0": {
 "drug:deutetrabenazine/tmax": "sonnet"
 },
+"q_3c1596240d38": {
+"drug:pipamperone/excretion[route:fecal]": "opus",
+"drug:pipamperone/excretion[route:renal]": "opus"
+},
 "q_3c27ed2c0530": {
 "drug:topiramate/brands[Topimax]": "sonnet"
 },
@@ -2660,6 +3192,13 @@
 },
 "q_3c7ced40abbc": {
 "drug:amphetamine_dl/formulations[xr]/release": "opus"
+},
+"q_3c866644fa24": {
+"drug:doxylamine/excretion[route:fecal]": "opus",
+"drug:doxylamine/excretion[route:renal]": "opus"
+},
+"q_3c894cc1c4fd": {
+"drug:secobarbital/excretion[route:renal]": "opus"
 },
 "q_3c940660f790": {
 "drug:isocarboxazid/half_life": "opus",
@@ -2699,6 +3238,10 @@
 "q_3d6cb2fb3b75": {
 "drug:trimipramine/nbn": "sonnet"
 },
+"q_3d73f21d7dc7": {
+"drug:perampanel/excretion[route:fecal]": "opus",
+"drug:perampanel/excretion[route:renal]": "opus"
+},
 "q_3d9cd5b51c3a": {
 "projection:tuberomammillary_R->amygdala_R": "opus",
 "projection:tuberomammillary_R->amygdala_R/transmitter": "opus",
@@ -2712,6 +3255,10 @@
 "projection:tuberomammillary_R->parietal_R/transmitter": "opus",
 "projection:tuberomammillary_R->temporal_R": "opus",
 "projection:tuberomammillary_R->temporal_R/transmitter": "opus"
+},
+"q_3d9df5bb5f50": {
+"drug:methamphetamine/excretion[route:renal]": "opus",
+"drug:methamphetamine/excretion[urine_ph:dependent]": "opus"
 },
 "q_3daf061713e3": {
 "drug:duloxetine/brands[Cymbalta]": "sonnet"
@@ -2750,11 +3297,18 @@
 "q_3e43114d9f91": {
 "drug:venlafaxine/bindings[net:reuptake_inhibitor]": "sonnet"
 },
+"q_3e564995fa1d": {
+"drug:mescaline/excretion[route:renal]": "opus"
+},
 "q_3e5a237a4cad": {
 "drug:fenfluramine/withdrawals[fr:1997]": "opus"
 },
 "q_3e5baa2899b5": {
 "drug:chlorpromazine/brands[Thorazine]": "sonnet"
+},
+"q_3e6a9fbce8ad": {
+"drug:brivaracetam/excretion[route:renal]": "opus",
+"drug:brivaracetam/excretion[unchanged:urine]": "opus"
 },
 "q_3e8b4f96393f": {
 "drug:buprenorphine/brands[Brixadi (subcutaneous injection)]": "sonnet"
@@ -2771,11 +3325,22 @@
 "q_3efacd5c963c": {
 "metabolite:o_desmethyltramadol/half_life": "opus"
 },
+"q_3efb434338a8": {
+"drug:rotigotine/excretion[route:renal]": "opus"
+},
 "q_3efcea0c3a47": {
 "drug:thioridazine/brands[Mellaril]": "sonnet"
 },
+"q_3f049bdd1e17": {
+"drug:nicotine/excretion[route:renal]": "opus",
+"drug:nicotine/excretion[urine_ph:dependent]": "opus"
+},
 "q_3f0edfeaf3dd": {
 "drug:prazosin/categories": "sonnet"
+},
+"q_3f2e98db23ad": {
+"drug:vortioxetine/excretion[route:fecal]": "opus",
+"drug:vortioxetine/excretion[route:renal]": "opus"
 },
 "q_3f4a8db41551": {
 "receptor:alpha2c/effects[agonism:vasoconstriction]": "opus"
@@ -2800,6 +3365,12 @@
 },
 "q_3fbc3ce85e37": {
 "drug:amantadine/first_approval": "opus"
+},
+"q_3fbf56444e49": {
+"drug:gabapentin/excretion[route:renal]": "opus"
+},
+"q_3fe3fe851eed": {
+"drug:morphine/excretion[route:renal]": "opus"
 },
 "q_4003c57e8c1c": {
 "target:dat/demographics[age:decrease:-]": "opus"
@@ -2869,11 +3440,18 @@
 "drug:nortriptyline/originator_country": "opus",
 "drug:opipramol/originator_country": "opus"
 },
+"q_40ec21f6bb63": {
+"drug:pipothiazine/excretion[route:fecal]": "opus",
+"drug:pipothiazine/excretion[route:renal]": "opus"
+},
 "q_40fe49a57fc0": {
 "drug:molindone/first_approval": "opus"
 },
 "q_4109689d730c": {
 "drug:brotizolam/brands[Dormex]": "sonnet"
+},
+"q_411c1f3e6b9c": {
+"drug:etomidate/excretion[route:renal]": "opus"
 },
 "q_412320aca988": {
 "metabolite:meta_chlorophenylpiperazine/bindings[sert:releaser]": "opus"
@@ -2913,6 +3491,12 @@
 },
 "q_41d91f520302": {
 "drug:methylphenidate_dl/brands[Metadate CD]": "sonnet"
+},
+"q_41dc0b46d88c": {
+"drug:amitriptyline/excretion[unchanged:urine]": "opus"
+},
+"q_41f55742b963": {
+"drug:brivaracetam/excretion[route:fecal]": "opus"
 },
 "q_41fbb60e465e": {
 "drug:scopolamine/bindings[m1:antagonist]": "sonnet",
@@ -2995,6 +3579,9 @@
 "q_4383e394cf8f": {
 "drug:iloperidone/bindings[h1:antagonist]": "opus"
 },
+"q_438aa1a73ad6": {
+"drug:imipramine/excretion[route:renal]": "opus"
+},
 "q_438b884b1b38": {
 "drug:naloxone/bindings[delta:antagonist]": "sonnet",
 "drug:naloxone/bindings[kappa:antagonist]": "sonnet",
@@ -3021,6 +3608,9 @@
 },
 "q_43ed53b25948": {
 "drug:clonidine/first_approval": "opus"
+},
+"q_43fba66ca370": {
+"drug:furosemide/excretion[unchanged:urine]": "opus"
 },
 "q_43ff5a182036": {
 "drug:granisetron/first_approval": "opus"
@@ -3100,6 +3690,12 @@
 "q_4565630c3553": {
 "drug:loflazepate/half_life": "sonnet"
 },
+"q_4565d17524d3": {
+"drug:butobarbital/excretion[route:renal]": "opus"
+},
+"q_4584e9f60d3d": {
+"drug:amoxapine/excretion[route:renal]": "opus"
+},
 "q_458be6d43d1c": {
 "drug:guanfacine/formulations[ir]/tmax": "opus",
 "drug:guanfacine/tmax": "sonnet"
@@ -3154,8 +3750,15 @@
 "drug:amisulpride/bindings[5ht2b:antagonist]": "sonnet",
 "drug:amisulpride/bindings[5ht7:antagonist]": "sonnet"
 },
+"q_46a1e2cb53c9": {
+"drug:memantine/excretion[urine_ph:acidic_faster]": "opus"
+},
 "q_46d082c1ab03": {
 "drug:lorazepam/brands[Témesta]": "sonnet"
+},
+"q_46dfdb9c2b8d": {
+"drug:entacapone/excretion[route:fecal]": "opus",
+"drug:entacapone/excretion[route:renal]": "opus"
 },
 "q_46f6940a8c8c": {
 "metabolite:desmethylsibutramine/bindings[net:reuptake_inhibitor]": "opus",
@@ -3172,6 +3775,10 @@
 "q_47176256a93a": {
 "drug:doxepin/half_life": "sonnet"
 },
+"q_471cee2edbf4": {
+"drug:dexmedetomidine/excretion[route:fecal]": "opus",
+"drug:dexmedetomidine/excretion[route:renal]": "opus"
+},
 "q_4726a498c1a5": {
 "drug:flibanserin/enzymes[cyp2c19:substrate]": "opus",
 "drug:flibanserin/enzymes[cyp2c19:substrate]/strength": "opus",
@@ -3180,6 +3787,13 @@
 },
 "q_47488c9b74ef": {
 "drug:flupenthixol/brands[Depixol]": "sonnet"
+},
+"q_4756bbefbb2c": {
+"drug:methylphenidate_dl/excretion[route:renal]": "opus"
+},
+"q_475896ccfefc": {
+"drug:vigabatrin/excretion[route:renal]": "opus",
+"drug:vigabatrin/excretion[unchanged:urine]": "opus"
 },
 "q_475a2f984682": {
 "drug:quetiapine/bindings[d1:antagonist]": "opus",
@@ -3199,6 +3813,10 @@
 "q_477836fbe51b": {
 "drug:amphetamine_dl/brands[Dexedrine]": "sonnet"
 },
+"q_478571ca2fb1": {
+"drug:clomipramine/excretion[route:fecal]": "opus",
+"drug:clomipramine/excretion[route:renal]": "opus"
+},
 "q_478af8796f93": {
 "drug:molindone/bindings[mao_a:enzyme_inhibitor]": "opus"
 },
@@ -3215,6 +3833,13 @@
 "q_4808dd4a48f5": {
 "receptor:5ht2a/effects[agonism:hallucinations]": "opus",
 "receptor:5ht2a/effects[agonism:psychosis]": "opus"
+},
+"q_48170eabe4fc": {
+"drug:levetiracetam/excretion[route:renal]": "opus"
+},
+"q_482cc7153cc1": {
+"drug:amantadine/excretion[route:renal]": "opus",
+"drug:amantadine/excretion[unchanged:urine]": "opus"
 },
 "q_487deca3f9e8": {
 "drug:dextromethorphanquinidine/brands[Nuedexta (in combination with quinidine)]": "sonnet"
@@ -3280,6 +3905,9 @@
 "q_49a54fcc5f93": {
 "drug:escitalopram/brands[Seroplex]": "sonnet"
 },
+"q_49aa87a3ba06": {
+"drug:methamphetamine/excretion[route:renal]": "opus"
+},
 "q_49ba33f6d4be": {
 "receptor:alpha1a/effects[antagonism:dizziness]": "opus",
 "receptor:alpha1a/effects[antagonism:sedation]": "opus",
@@ -3290,6 +3918,10 @@
 },
 "q_49d219722d69": {
 "drug:asenapine/brands[Secuado (transdermal)]": "sonnet"
+},
+"q_49d4ce76385e": {
+"drug:oxcarbazepine/excretion[route:renal]": "opus",
+"drug:oxcarbazepine/excretion[unchanged:urine]": "opus"
 },
 "q_49d7073f2e94": {
 "drug:eszopiclone/brands[Lunesta]": "sonnet"
@@ -3308,6 +3940,9 @@
 "receptor:nachr_a4b2/locations[thalamus]": "sonnet",
 "receptor:nachr_a4b2/locations[vta]": "sonnet"
 },
+"q_49e9fb9d8c79": {
+"drug:propranolol/excretion[unchanged:urine]": "opus"
+},
 "q_4a21e3dd4e95": {
 "drug:paliperidone/bindings[alpha2:antagonist]": "sonnet",
 "drug:paliperidone/bindings[h1:antagonist]": "sonnet"
@@ -3315,12 +3950,18 @@
 "q_4a26a6c7ed4f": {
 "drug:sulpiride/bindings[5ht2a:antagonist]": "sonnet"
 },
+"q_4a4607cbc853": {
+"drug:chlordiazepoxide/excretion[route:renal]": "opus"
+},
 "q_4a5944f63278": {
 "drug:thiothixene/bindings[m1:antagonist]": "sonnet",
 "drug:thiothixene/bindings[m2:antagonist]": "sonnet",
 "drug:thiothixene/bindings[m3:antagonist]": "sonnet",
 "drug:thiothixene/bindings[m4:antagonist]": "sonnet",
 "drug:thiothixene/bindings[m5:antagonist]": "sonnet"
+},
+"q_4a5fe9aa05ae": {
+"drug:ethanol/excretion[route:renal]": "opus"
 },
 "q_4a6dc865f306": {
 "drug:paliperidone/formulations[depot]/release": "opus"
@@ -3336,11 +3977,18 @@
 "drug:acamprosate/formulations[dr]/release": "opus"
 },
 "q_4a93b2a7db01": {
+"drug:phentermine/excretion[urine_ph:dependent]": "opus",
 "drug:phentermine/half_life": "sonnet"
+},
+"q_4a9ad98d4857": {
+"drug:tetrabenazine/excretion[route:renal]": "opus"
 },
 "q_4ab15851571d": {
 "drug:flibanserin/bindings[5ht2b:antagonist]": "opus",
 "drug:flibanserin/bindings[5ht2c:antagonist]": "opus"
+},
+"q_4acaa451c494": {
+"drug:methylphenidate_dl/excretion[unchanged:urine]": "opus"
 },
 "q_4ad464fcfab1": {
 "drug:naltrexone/workup[liver_function:before]": "opus",
@@ -3369,6 +4017,9 @@
 "q_4b4a9bd75928": {
 "drug:milnacipran/tmax": "sonnet"
 },
+"q_4b4b66139d49": {
+"drug:baclofen/excretion[unchanged:urine]": "opus"
+},
 "q_4b9ed6571d81": {
 "projection:thalamus_R->frontal_R": "opus",
 "projection:thalamus_R->frontal_R/transmitter": "opus"
@@ -3389,6 +4040,9 @@
 "drug:modafinil/enzymes[cyp2b6:inducer]": "opus",
 "drug:modafinil/enzymes[cyp2b6:inducer]/strength": "opus",
 "drug:modafinil/enzymes[cyp3a4:inducer]": "opus"
+},
+"q_4bfc43273892": {
+"drug:tapentadol/excretion[route:renal]": "opus"
 },
 "q_4c167648c941": {
 "drug:amphetamine_d/brands[Attentin]": "sonnet"
@@ -3416,6 +4070,12 @@
 },
 "q_4ca41a5ece4a": {
 "drug:cariprazine/metabolites[didesmethyl_cariprazine]/formed_by[cyp3a4]": "sonnet"
+},
+"q_4ca865185f07": {
+"drug:levomilnacipran/excretion[route:renal]": "opus"
+},
+"q_4cc4c34ca2c9": {
+"drug:levomilnacipran/excretion[route:renal]": "opus"
 },
 "q_4cda169ba9a2": {
 "drug:risperidone/bindings[d1:antagonist]": "opus",
@@ -3460,6 +4120,10 @@
 "q_4d94ad4d8dac": {
 "drug:glutethimide/tmax": "sonnet"
 },
+"q_4d9695ebd49c": {
+"drug:memantine/excretion[route:renal]": "opus",
+"drug:memantine/excretion[unchanged:urine]": "opus"
+},
 "q_4db7ffbe7575": {
 "drug:carbamazepine/metabolites[carbamazepine_10_11_epoxide]/formed_by[cyp3a4]": "sonnet"
 },
@@ -3478,11 +4142,17 @@
 "q_4e52adc971f6": {
 "drug:buprenorphine/brands[Zubsolv (with naloxone)]": "sonnet"
 },
+"q_4e71d0e567a5": {
+"drug:mescaline/excretion[unchanged:urine]": "opus"
+},
 "q_4e7276a586e3": {
 "drug:naltrexone/tmax": "sonnet"
 },
 "q_4e7ee8fd9984": {
 "drug:loflazepate/brands[Victan]": "sonnet"
+},
+"q_4e82c5180a67": {
+"drug:thiothixene/excretion[route:fecal]": "opus"
 },
 "q_4e88accb0432": {
 "drug:ketamine/brands[Spravato]": "sonnet"
@@ -3499,6 +4169,13 @@
 },
 "q_4eae338ea9a6": {
 "drug:thiothixene/bindings[d2:antagonist]": "sonnet"
+},
+"q_4ebe5fdeda18": {
+"drug:bromazepam/excretion[route:renal]": "opus"
+},
+"q_4ed435d22bfa": {
+"drug:quazepam/excretion[route:fecal]": "opus",
+"drug:quazepam/excretion[route:renal]": "opus"
 },
 "q_4ee424edf168": {
 "drug:granisetron/half_life": "sonnet"
@@ -3517,6 +4194,10 @@
 },
 "q_4f594b8b25eb": {
 "metabolite:oxymorphone/bindings[mu:agonist]": "opus"
+},
+"q_4f74cca1d2c1": {
+"drug:lsd/excretion[route:renal]": "opus",
+"drug:lsd/excretion[unchanged:urine]": "opus"
 },
 "q_4f9945b7f381": {
 "drug:solriamfetol/bindings[dat:reuptake_inhibitor]": "sonnet"
@@ -3539,6 +4220,9 @@
 },
 "q_5000399d66c5": {
 "receptor:beta2/effects[agonism:bronchodilation]": "opus"
+},
+"q_501627412a14": {
+"drug:tiapride/excretion[route:renal]": "opus"
 },
 "q_501c5dbbcc2b": {
 "drug:phenobarbital/bindings[gaba_a:pam]": "sonnet"
@@ -3576,6 +4260,10 @@
 "q_50b143424356": {
 "drug:thiopental/bindings[gaba_a:pam]": "sonnet"
 },
+"q_50b36c2cdda6": {
+"drug:paliperidone/excretion[route:fecal]": "opus",
+"drug:paliperidone/excretion[route:renal]": "opus"
+},
 "q_50c5ba4adfe3": {
 "drug:tiagabine/half_life": "sonnet"
 },
@@ -3591,6 +4279,9 @@
 },
 "q_50f31a69f353": {
 "circuit:bg_direct": "sonnet"
+},
+"q_51007343ec9b": {
+"drug:lisdexamfetamine/excretion[urine_ph:acidic_faster]": "opus"
 },
 "q_510263167136": {
 "drug:clotiazepam/brands[Clozan]": "sonnet"
@@ -3629,6 +4320,10 @@
 "q_51b8e96aeebd": {
 "drug:thc/tmax": "sonnet"
 },
+"q_51c172bd0b1b": {
+"drug:metoclopramide/excretion[route:fecal]": "opus",
+"drug:metoclopramide/excretion[route:renal]": "opus"
+},
 "q_51c1e3245cd5": {
 "receptor:d2/effects[agonism:antiparkinsonian]": "opus"
 },
@@ -3655,6 +4350,9 @@
 },
 "q_525197f898ad": {
 "drug:tolcapone/half_life": "sonnet"
+},
+"q_5258d704562f": {
+"drug:vigabatrin/excretion[route:renal]": "opus"
 },
 "q_5296bde20c86": {
 "drug:fluoxetine/tmax": "sonnet"
@@ -3720,6 +4418,9 @@
 "q_540253f396b8": {
 "drug:phenobarbital/half_life": "sonnet"
 },
+"q_540f0687abdd": {
+"drug:diazepam/excretion[route:renal]": "opus"
+},
 "q_541c68c5a9b7": {
 "drug:etomidate/first_approval": "opus",
 "drug:etomidate/originator": "opus"
@@ -3758,8 +4459,15 @@
 "drug:doxepin/bindings[m1:antagonist]": "sonnet",
 "drug:doxepin/bindings[m5:antagonist]": "sonnet"
 },
+"q_54f037e1822e": {
+"drug:trazodone/excretion[route:fecal]": "opus",
+"drug:trazodone/excretion[route:renal]": "opus"
+},
 "q_5504c811b647": {
 "drug:bromperidol/categories": "sonnet"
+},
+"q_550661569a5a": {
+"drug:deutetrabenazine/excretion[route:renal]": "opus"
 },
 "q_550da0401f36": {
 "drug:imipramine/workup[blood_pressure:before]": "opus"
@@ -3775,6 +4483,9 @@
 },
 "q_5525e5603d0e": {
 "drug:dextromethorphanquinidine/bindings[sert:modulator]": "sonnet"
+},
+"q_55268ab90564": {
+"drug:alpidem/excretion[route:fecal]": "opus"
 },
 "q_552c546e2e35": {
 "drug:viloxazine/nbn": "sonnet"
@@ -3807,8 +4518,17 @@
 "q_55bc450b8384": {
 "drug:clonidine/half_life": "sonnet"
 },
+"q_55c6a25bdccc": {
+"drug:bromazepam/excretion[unchanged:urine]": "opus"
+},
 "q_55c9a7dc1eac": {
 "receptor:delta/classification[family]": "sonnet"
+},
+"q_55d34f8727c3": {
+"drug:alpidem/excretion[route:fecal]": "opus"
+},
+"q_55e5ea52b9e5": {
+"drug:gabapentin/excretion[route:renal]": "opus"
 },
 "q_55f51677e025": {
 "drug:chlordiazepoxide/metabolites[demoxepam]": "opus"
@@ -3822,15 +4542,30 @@
 "q_560dc0cd0461": {
 "drug:lithium/workup[drug_level:during]": "opus"
 },
+"q_5632ce8225d4": {
+"drug:cabergoline/excretion[route:fecal]": "opus"
+},
 "q_5658d50fbab7": {
 "drug:tramadol/metabolites[o_desmethyltramadol]": "opus"
+},
+"q_565cd6ec95ca": {
+"drug:benperidol/excretion[route:renal]": "opus"
 },
 "q_565e6c07c513": {
 "drug:vortioxetine/bindings[5ht3:antagonist]": "sonnet"
 },
+"q_5662aef74c9e": {
+"drug:naloxone/excretion[route:fecal]": "opus",
+"drug:naloxone/excretion[route:renal]": "opus"
+},
 "q_567689f4a407": {
 "drug:ethanol/bindings[gaba_a:pam]": "sonnet",
 "drug:ethanol/bindings[gaba_b:pam]": "sonnet"
+},
+"q_56fc8e37ecca": {
+"drug:tiagabine/excretion[route:fecal]": "opus",
+"drug:tiagabine/excretion[route:renal]": "opus",
+"drug:tiagabine/excretion[unchanged:urine]": "opus"
 },
 "q_57004abe6d70": {
 "drug:ramelteon/half_life": "sonnet"
@@ -3850,6 +4585,9 @@
 "drug:iloperidone/bindings[alpha1c:antagonist]": "sonnet",
 "drug:iloperidone/bindings[alpha1d:antagonist]": "sonnet"
 },
+"q_57890d140831": {
+"drug:vilazodone/excretion[unchanged:urine]": "opus"
+},
 "q_57c9b30fed01": {
 "drug:daridorexant/originator": "opus"
 },
@@ -3864,14 +4602,26 @@
 "q_57cf88fbc29a": {
 "drug:pentazocine/half_life": "sonnet"
 },
+"q_57e25801e557": {
+"drug:sertraline/excretion[unchanged:urine]": "opus"
+},
+"q_57e895fd6e9f": {
+"drug:milnacipran/excretion[route:renal]": "opus"
+},
 "q_57e9abd561b3": {
 "drug:cyamemazine/bindings[5ht3:antagonist]": "opus"
+},
+"q_58234f7655e9": {
+"drug:escitalopram/excretion[unchanged:urine]": "opus"
 },
 "q_582ed97d15f4": {
 "receptor:cb1/demographics[sex:higher_in_male:-]": "opus"
 },
 "q_5890f0eb9d34": {
 "drug:aripiprazole/originator_country": "opus"
+},
+"q_5894b5d838c0": {
+"drug:melatonin/excretion[unchanged:urine]": "opus"
 },
 "q_58a043f17645": {
 "drug:lisdexamfetamine/brands[Samexid]": "sonnet"
@@ -3896,6 +4646,9 @@
 "q_5917dc04b662": {
 "group:kind:inhibitory": "sonnet",
 "group:sign:inhibitory": "sonnet"
+},
+"q_5927db6de65f": {
+"drug:olanzapine/excretion[route:renal]": "opus"
 },
 "q_59555415c621": {
 "projection:frontal_L->frontal_R": "opus",
@@ -3929,8 +4682,19 @@
 "q_59ed3181f324": {
 "drug:pregabalin/bindings[cav:blocker]": "sonnet"
 },
+"q_5a00d6b6b3b9": {
+"drug:diazepam/excretion[unchanged:urine]": "opus"
+},
+"q_5a225cac6128": {
+"drug:lemborexant/excretion[route:fecal]": "opus",
+"drug:lemborexant/excretion[route:renal]": "opus"
+},
 "q_5a58b8cb0325": {
 "drug:olanzapine/brands[Zyprexa]": "sonnet"
+},
+"q_5a5a357d2751": {
+"drug:clobazam/excretion[route:fecal]": "opus",
+"drug:clobazam/excretion[route:renal]": "opus"
 },
 "q_5a5f695d95aa": {
 "drug:valproate/half_life": "sonnet"
@@ -3953,11 +4717,22 @@
 "q_5a902770c114": {
 "drug:tapentadol/originator_country": "opus"
 },
+"q_5ab1f1c5eb74": {
+"drug:pramipexole/excretion[route:fecal]": "opus",
+"drug:pramipexole/excretion[route:renal]": "opus"
+},
+"q_5ac9f0452cb8": {
+"drug:amoxapine/excretion[route:renal]": "opus"
+},
 "q_5ade5a557f3b": {
 "drug:amoxapine/half_life": "sonnet"
 },
 "q_5b10c7c1104c": {
 "drug:selegiline/bindings[mao_b:enzyme_inhibitor]": "sonnet"
+},
+"q_5b1b7f187f97": {
+"drug:atomoxetine/excretion[route:fecal]": "opus",
+"drug:atomoxetine/excretion[route:renal]": "opus"
 },
 "q_5b29fc2a8ccb": {
 "drug:levomepromazine/workup[ecg:before]": "opus"
@@ -3976,6 +4751,10 @@
 },
 "q_5b75ccb28d2b": {
 "drug:amitriptyline/first_approval": "opus"
+},
+"q_5b824699b880": {
+"drug:brexanolone/excretion[route:fecal]": "opus",
+"drug:brexanolone/excretion[route:renal]": "opus"
 },
 "q_5bacc6fd9015": {
 "drug:cariprazine/categories": "sonnet"
@@ -4081,6 +4860,9 @@
 "q_5e23d6b2b14f": {
 "drug:dextromethorphanbupropion/brands[Auvelity]": "sonnet"
 },
+"q_5e282628390e": {
+"drug:gabapentin/excretion[unchanged:urine]": "opus"
+},
 "q_5e2834cb061e": {
 "drug:domperidone/enzymes[cyp1a2:substrate]": "opus",
 "drug:domperidone/enzymes[cyp1a2:substrate]/strength": "opus",
@@ -4096,6 +4878,10 @@
 "q_5e3d3a222cb0": {
 "drug:tizanidine/categories": "opus"
 },
+"q_5e5f3cc768cf": {
+"drug:lamotrigine/excretion[route:fecal]": "opus",
+"drug:lamotrigine/excretion[route:renal]": "opus"
+},
 "q_5e86cc855c22": {
 "drug:naltrexone/bindings[delta:antagonist]": "opus",
 "drug:naltrexone/bindings[kappa:antagonist]": "opus"
@@ -4108,6 +4894,14 @@
 "q_5e996aee8162": {
 "drug:cabergoline/workup[pregnancy_test:during]": "opus"
 },
+"q_5e9e54bd0697": {
+"drug:amisulpride/excretion[route:fecal]": "opus",
+"drug:amisulpride/excretion[route:renal]": "opus"
+},
+"q_5eaeb3abd662": {
+"drug:sertindole/excretion[route:fecal]": "opus",
+"drug:sertindole/excretion[route:renal]": "opus"
+},
 "q_5eb0bf280aff": {
 "drug:paroxetine/brands[Deroxat]": "sonnet"
 },
@@ -4119,6 +4913,9 @@
 },
 "q_5ee1255859ae": {
 "drug:methamphetamine/bindings[sigma1:agonist]": "sonnet"
+},
+"q_5ee7687d991e": {
+"drug:amantadine/excretion[urine_ph:acidic_faster]": "opus"
 },
 "q_5ee810a64beb": {
 "drug:olanzapine/bindings[alpha1a:antagonist]": "sonnet",
@@ -4176,6 +4973,21 @@
 "receptor:alpha1b/effects[antagonism:orthostatic_hypotension]": "opus",
 "receptor:alpha1d/effects[antagonism:orthostatic_hypotension]": "opus"
 },
+"q_5fc9770dfcc1": {
+"drug:selegiline/excretion[route:fecal]": "opus",
+"drug:selegiline/excretion[route:renal]": "opus"
+},
+"q_5fc9dc146ec8": {
+"drug:lurasidone/excretion[route:fecal]": "opus",
+"drug:lurasidone/excretion[route:renal]": "opus"
+},
+"q_60076062fc9d": {
+"drug:milnacipran/excretion[route:renal]": "opus",
+"drug:milnacipran/excretion[unchanged:urine]": "opus"
+},
+"q_600e1ce55a4f": {
+"drug:pentobarbital/excretion[route:renal]": "opus"
+},
 "q_6018739b7089": {
 "drug:zonisamide/half_life": "sonnet"
 },
@@ -4184,6 +4996,10 @@
 },
 "q_603766443e9f": {
 "target:cav_t/classification": "opus"
+},
+"q_604c4957db26": {
+"drug:galantamine/excretion[route:fecal]": "opus",
+"drug:galantamine/excretion[route:renal]": "opus"
 },
 "q_6051ecb730b3": {
 "drug:rivastigmine/workup[weight:during]": "opus"
@@ -4204,8 +5020,18 @@
 "q_6089f4cf8723": {
 "drug:clozapine/first_approval": "opus"
 },
+"q_60aba0020636": {
+"drug:ephedrine/excretion[urine_ph:acidic_faster]": "opus"
+},
+"q_60b3aaa1c9ae": {
+"drug:vilazodone/excretion[route:fecal]": "opus",
+"drug:vilazodone/excretion[route:renal]": "opus"
+},
 "q_60ba66b862e3": {
 "drug:loxapine/metabolites[amoxapine]": "sonnet"
+},
+"q_60c9592f95da": {
+"drug:citalopram/excretion[route:renal]": "opus"
 },
 "q_60ccd6462cdc": {
 "drug:sulpiride/bindings[d3:antagonist]": "sonnet",
@@ -4229,6 +5055,9 @@
 "q_610b84399851": {
 "drug:ondansetron/bindings[5ht3:antagonist]": "sonnet"
 },
+"q_6129ee43ea2a": {
+"drug:selegiline/excretion[route:renal]": "opus"
+},
 "q_6144e61338f5": {
 "drug:perphenazine/bindings[d1:antagonist]": "opus"
 },
@@ -4238,11 +5067,24 @@
 "q_615651f68cb7": {
 "drug:olanzapine/bindings[5ht2c:antagonist]": "sonnet"
 },
+"q_615e3a72b193": {
+"drug:phenytoin/excretion[route:renal]": "opus"
+},
+"q_616297fe9b82": {
+"drug:lofepramine/excretion[route:fecal]": "opus",
+"drug:lofepramine/excretion[route:renal]": "opus"
+},
+"q_61750b0fd5b2": {
+"drug:sertraline/excretion[route:renal]": "opus"
+},
 "q_6184e96143f3": {
 "drug:rivastigmine/half_life": "sonnet"
 },
 "q_6195fcc44330": {
 "drug:pethidine/half_life": "sonnet"
+},
+"q_6199fc48e040": {
+"drug:flumazenil/excretion[unchanged:urine]": "opus"
 },
 "q_619d66a7249d": {
 "receptor:d5/locations[caudate]": "sonnet",
@@ -4256,6 +5098,9 @@
 "receptor:nmda/effects[antagonism:psychosis]": "opus",
 "receptor:nmda/release_modulation[heteroreceptor:-:gaba_interneuron:gaba:increase]": "opus",
 "receptor:nmda/release_modulation[heteroreceptor:-:gaba_interneuron:glutamate:decrease]": "opus"
+},
+"q_61d861fdb708": {
+"drug:2cb/excretion[route:renal]": "opus"
 },
 "q_61e45a5e82a5": {
 "drug:clomipramine/bindings[m1:antagonist]": "sonnet",
@@ -4279,6 +5124,9 @@
 },
 "q_621e76908745": {
 "receptor:sigma1/effects[agonism:anxiolytic]": "opus"
+},
+"q_6231136d30bc": {
+"drug:dmt/excretion[unchanged:urine]": "opus"
 },
 "q_6231ae21f25c": {
 "drug:zotepine/bindings[5ht2a:antagonist]": "sonnet"
@@ -4327,6 +5175,9 @@
 "q_62f79aba0860": {
 "drug:vortioxetine/first_approval": "opus"
 },
+"q_6323580aa74c": {
+"drug:tofisopam/excretion[route:renal]": "opus"
+},
 "q_63559b4e983f": {
 "drug:tianeptine/brands[Stablon]": "sonnet"
 },
@@ -4338,6 +5189,10 @@
 },
 "q_635d51ef03bf": {
 "drug:chlorprothixene/half_life": "sonnet"
+},
+"q_6363a43c7b15": {
+"drug:granisetron/excretion[route:fecal]": "opus",
+"drug:granisetron/excretion[route:renal]": "opus"
 },
 "q_636eeefa3831": {
 "receptor:kappa/effects[agonism:dysphoria]": "opus",
@@ -4377,12 +5232,19 @@
 "drug:brexpiprazole/bindings[alpha1a:antagonist]": "sonnet",
 "drug:brexpiprazole/bindings[alpha1d:antagonist]": "sonnet"
 },
+"q_6429628127e3": {
+"drug:modafinil/excretion[route:fecal]": "opus",
+"drug:modafinil/excretion[route:renal]": "opus"
+},
 "q_6433224da4c8": {
 "drug:pimavanserin/tmax": "sonnet"
 },
 "q_643b9f3c29b9": {
 "projection:olfactory_bulb_R->insula_R": "opus",
 "projection:olfactory_bulb_R->insula_R/sign": "opus"
+},
+"q_644c93b8ccfd": {
+"drug:fentanyl/excretion[route:fecal]": "opus"
 },
 "q_644f3ee5cf76": {
 "metabolite:norfluoxetine/bindings[5ht2a:antagonist]": "sonnet",
@@ -4405,6 +5267,10 @@
 "q_6487b1919acb": {
 "drug:heroin/metabolites[morphine]": "opus",
 "drug:heroin/prodrug": "opus"
+},
+"q_64967a0bcb2a": {
+"drug:atropine/excretion[route:renal]": "opus",
+"drug:atropine/excretion[unchanged:urine]": "opus"
 },
 "q_649ab0211da9": {
 "drug:phenytoin/first_approval": "opus"
@@ -4433,6 +5299,9 @@
 "drug:fluoxetine/metabolites[norfluoxetine]": "sonnet",
 "metabolite:norfluoxetine/half_life": "sonnet"
 },
+"q_64d3323fa518": {
+"drug:mescaline/excretion[unchanged:urine]": "opus"
+},
 "q_64d7a041afff": {
 "drug:trazodone/first_approval": "opus"
 },
@@ -4453,6 +5322,13 @@
 },
 "q_651cce6ac18e": {
 "drug:prazepam/originator": "opus"
+},
+"q_6523e5c2ee58": {
+"drug:bupropion/excretion[route:fecal]": "opus"
+},
+"q_6542e6157ed0": {
+"drug:entacapone/excretion[route:fecal]": "opus",
+"drug:entacapone/excretion[route:renal]": "opus"
 },
 "q_65493c35e5df": {
 "receptor:beta2/effects[agonism:cardiovascular]": "opus"
@@ -4484,6 +5360,9 @@
 "q_65da152389a1": {
 "drug:deutetrabenazine/categories": "sonnet"
 },
+"q_65db15de50ad": {
+"drug:phentermine/excretion[route:renal]": "opus"
+},
 "q_65e8d2a1497d": {
 "drug:memantine/brands[Namenda XR]": "sonnet"
 },
@@ -4501,6 +5380,9 @@
 },
 "q_6666512dce50": {
 "drug:risperidone/nbn": "sonnet"
+},
+"q_66741c7503e7": {
+"drug:pentazocine/excretion[route:renal]": "opus"
 },
 "q_66774ecb3e54": {
 "drug:domperidone/categories": "opus"
@@ -4526,6 +5408,10 @@
 "q_66e20391e73a": {
 "drug:prothipendyl/bindings[d2:antagonist]": "sonnet"
 },
+"q_66e97d102ade": {
+"drug:clobazam/excretion[route:fecal]": "opus",
+"drug:clobazam/excretion[route:renal]": "opus"
+},
 "q_66f926968db0": {
 "drug:methamphetamine/categories": "opus"
 },
@@ -4548,6 +5434,10 @@
 "q_677be5fcbc94": {
 "receptor:d5/locations[hypothalamus]": "sonnet",
 "receptor:d5/locations[thalamus]": "sonnet"
+},
+"q_677d5ea14601": {
+"drug:tizanidine/excretion[route:fecal]": "opus",
+"drug:tizanidine/excretion[route:renal]": "opus"
 },
 "q_678328c0f8cc": {
 "drug:duloxetine/bindings[net:reuptake_inhibitor]": "sonnet"
@@ -4584,6 +5474,9 @@
 },
 "q_6860c44d949a": {
 "drug:midazolam/half_life": "sonnet"
+},
+"q_68814896698b": {
+"drug:lorazepam/excretion[route:renal]": "opus"
 },
 "q_689ed55441ba": {
 "receptor:d2/locations[pituitary]": "sonnet",
@@ -4653,6 +5546,9 @@
 "drug:risperidone/workup[weight:before]": "opus",
 "drug:risperidone/workup[weight:during]": "opus"
 },
+"q_6999b3f96c6b": {
+"drug:morphine/excretion[route:fecal]": "opus"
+},
 "q_69a0aa9ab2c4": {
 "metabolite:psilocin/bindings[5ht2c:agonist]": "opus"
 },
@@ -4664,6 +5560,13 @@
 },
 "q_69de8808372d": {
 "drug:pizotifen/half_life": "sonnet"
+},
+"q_6a1a81fc73f7": {
+"drug:daridorexant/excretion[route:fecal]": "opus",
+"drug:daridorexant/excretion[route:renal]": "opus"
+},
+"q_6a1a97e3ba9c": {
+"drug:tramadol/excretion[route:renal]": "opus"
 },
 "q_6a22966817a0": {
 "drug:asenapine/first_approval": "opus"
@@ -4682,6 +5585,9 @@
 "q_6a8601e27733": {
 "receptor:h2/effects[agonism:gastric_acid_increase]": "opus"
 },
+"q_6a8cd86b0f4b": {
+"drug:rizatriptan/excretion[route:fecal]": "opus"
+},
 "q_6a9560f1623c": {
 "structure:midbrain": "sonnet"
 },
@@ -4694,8 +5600,15 @@
 "q_6aaa4cf2f4ff": {
 "drug:paroxetine/tmax": "sonnet"
 },
+"q_6aae6e106733": {
+"drug:valbenazine/excretion[route:fecal]": "opus",
+"drug:valbenazine/excretion[route:renal]": "opus"
+},
 "q_6ac12e453071": {
 "drug:desvenlafaxine/bindings[net:reuptake_inhibitor]": "sonnet"
+},
+"q_6ac14e313170": {
+"drug:brexanolone/excretion[unchanged:urine]": "opus"
 },
 "q_6add534b5585": {
 "drug:olanzapine/bindings[d2:antagonist]": "sonnet"
@@ -4708,6 +5621,9 @@
 },
 "q_6b0f1b519ecb": {
 "drug:rasagiline/first_approval": "opus"
+},
+"q_6b35c271c012": {
+"drug:propofol/excretion[unchanged:urine]": "opus"
 },
 "q_6b5520af9edd": {
 "drug:lofexidine/bindings[alpha2:agonist]": "sonnet"
@@ -4766,8 +5682,21 @@
 "q_6c684d7ca220": {
 "drug:cabergoline/originator": "opus"
 },
+"q_6c6b0c7355c2": {
+"drug:naloxone/excretion[route:renal]": "opus"
+},
 "q_6c6ee6773b6c": {
 "drug:paroxetine/bindings[net:reuptake_inhibitor]": "sonnet"
+},
+"q_6c73ba1a74cc": {
+"drug:chloral_hydrate/excretion[route:fecal]": "opus",
+"drug:chloral_hydrate/excretion[route:renal]": "opus"
+},
+"q_6c7e081b6203": {
+"drug:carbamazepine/excretion[unchanged:urine]": "opus"
+},
+"q_6c83ace8c7ff": {
+"drug:moclobemide/excretion[unchanged:urine]": "opus"
 },
 "q_6c8da9379de9": {
 "drug:amoxapine/bindings[d2:antagonist]": "sonnet"
@@ -4801,8 +5730,19 @@
 "projection:substantia_nigra_R->putamen_R": "opus",
 "projection:substantia_nigra_R->putamen_R/transmitter": "opus"
 },
+"q_6d51beafc6c6": {
+"drug:topiramate/excretion[route:renal]": "opus"
+},
 "q_6d759ebd2392": {
 "drug:lithium/brands[Eskalith CR]": "sonnet"
+},
+"q_6d977b7e928f": {
+"drug:molindone/excretion[route:fecal]": "opus",
+"drug:molindone/excretion[route:renal]": "opus"
+},
+"q_6d9e134accc6": {
+"drug:rivastigmine/excretion[route:fecal]": "opus",
+"drug:rivastigmine/excretion[route:renal]": "opus"
 },
 "q_6db71b083a2a": {
 "drug:oxcarbazepine/first_approval": "opus"
@@ -4851,6 +5791,9 @@
 "q_6e7e587e37c0": {
 "drug:dextromethorphanquinidine/bindings[nmda:antagonist]": "sonnet"
 },
+"q_6ea1066cb922": {
+"drug:ramelteon/excretion[unchanged:urine]": "opus"
+},
 "q_6ea565336ed0": {
 "drug:diazepam/bindings[gaba_a:pam]": "sonnet"
 },
@@ -4866,11 +5809,29 @@
 "q_6edf162b039a": {
 "drug:zaleplon/bindings[gaba_a:pam]": "sonnet"
 },
+"q_6edfbc702658": {
+"drug:paroxetine/excretion[unchanged:urine]": "opus"
+},
+"q_6ee16c05c200": {
+"drug:duloxetine/excretion[route:fecal]": "opus",
+"drug:duloxetine/excretion[route:renal]": "opus"
+},
+"q_6eed038d3cc4": {
+"drug:ramelteon/excretion[route:fecal]": "opus",
+"drug:ramelteon/excretion[route:renal]": "opus"
+},
+"q_6eeeb3a48082": {
+"drug:venlafaxine/excretion[route:renal]": "opus",
+"drug:venlafaxine/excretion[unchanged:urine]": "opus"
+},
 "q_6f0ff7ed8785": {
 "drug:caffeine/bindings[glycine:antagonist]": "opus"
 },
 "q_6f174fe24ba3": {
 "drug:hydroxyzine/brands[Marax]": "sonnet"
+},
+"q_6f299a6004f7": {
+"drug:sertraline/excretion[unchanged:urine]": "opus"
 },
 "q_6f327775f9de": {
 "receptor:alpha1a/locations[midbrain]": "sonnet"
@@ -4915,6 +5876,9 @@
 "q_6fb3589c9723": {
 "drug:protriptyline/categories": "sonnet"
 },
+"q_6fe9a62a3e2d": {
+"drug:psilocybin/excretion[route:renal]": "opus"
+},
 "q_6fee0b38d526": {
 "projection:thalamus_R->cingulate_R": "opus",
 "projection:thalamus_R->cingulate_R/sign": "opus",
@@ -4952,6 +5916,9 @@
 "q_70b3f239d2ae": {
 "drug:aripiprazole/bindings[5ht3:antagonist]": "opus"
 },
+"q_70cac254235d": {
+"drug:amphetamine_dl/excretion[urine_ph:acidic_faster]": "opus"
+},
 "q_70cd1599023f": {
 "drug:levetiracetam/first_approval": "opus"
 },
@@ -4961,6 +5928,10 @@
 "q_70ee3e88ccf9": {
 "drug:methamphetamine/tmax": "sonnet"
 },
+"q_70f083d70f54": {
+"drug:lemborexant/excretion[route:fecal]": "opus",
+"drug:lemborexant/excretion[route:renal]": "opus"
+},
 "q_7104d3b1e6b6": {
 "receptor:5ht1a/demographics[age:no_difference:-]": "opus"
 },
@@ -4969,6 +5940,9 @@
 },
 "q_710fb524c37c": {
 "drug:modafinil/brands[Alertec]": "sonnet"
+},
+"q_711e4aa47a4c": {
+"drug:lormetazepam/excretion[route:renal]": "opus"
 },
 "q_711e8c1201ad": {
 "drug:apomorphine/tmax": "sonnet"
@@ -5011,6 +5985,9 @@
 },
 "q_719a6230c6e3": {
 "drug:citalopram/brands[Citabax]": "sonnet"
+},
+"q_719ddca166a7": {
+"drug:baclofen/excretion[unchanged:urine]": "opus"
 },
 "q_71a3e7532144": {
 "receptor:kappa/classification[synaptic]": "opus"
@@ -5075,6 +6052,9 @@
 "q_728bc2eb2116": {
 "drug:cyamemazine/workup[ecg:before]": "opus"
 },
+"q_72e34bba6ba7": {
+"drug:benztropine/excretion[route:renal]": "opus"
+},
 "q_72fc8a9363e0": {
 "receptor:5ht3/effects[antagonism:antiemetic]": "opus"
 },
@@ -5118,6 +6098,12 @@
 "q_7366c06d5039": {
 "projection:claustrum_R->frontal_R": "opus"
 },
+"q_737847481e13": {
+"drug:ethanol/excretion[unchanged:urine]": "opus"
+},
+"q_7378d390d957": {
+"drug:caffeine/excretion[route:renal]": "opus"
+},
 "q_7391ffde1e80": {
 "drug:lamotrigine/bindings[nav:blocker]": "sonnet"
 },
@@ -5141,11 +6127,18 @@
 "q_73c734d285a4": {
 "receptor:kappa/classification[family]": "sonnet"
 },
+"q_73d869bcba3b": {
+"drug:meprobamate/excretion[route:renal]": "opus"
+},
 "q_73f9cfaeb6ae": {
 "drug:valbenazine/half_life": "opus"
 },
 "q_7412108bdeb0": {
 "drug:clomipramine/workup[blood_count:during]": "opus"
+},
+"q_742927f55f89": {
+"drug:imipramine/excretion[route:fecal]": "opus",
+"drug:imipramine/excretion[route:renal]": "opus"
 },
 "q_74465a972706": {
 "drug:paliperidone/nbn": "sonnet"
@@ -5156,6 +6149,9 @@
 "q_749bc1959d45": {
 "drug:loxapine/workup[lipids:before]": "opus",
 "drug:loxapine/workup[lipids:during]": "opus"
+},
+"q_74c3a5e5e6d5": {
+"drug:prazepam/excretion[route:renal]": "opus"
 },
 "q_74ce44060557": {
 "drug:paliperidone/formulations[depot]/release": "opus"
@@ -5168,6 +6164,9 @@
 },
 "q_74d4f6e9e6df": {
 "receptor:gaba_a/effects[agonism:anxiolytic]": "opus"
+},
+"q_74d5561127d9": {
+"drug:chlorpromazine/excretion[route:renal]": "opus"
 },
 "q_74e028e9b5c7": {
 "metabolite:6_hydroxybupropion/bindings[nachr_a4b2:antagonist]": "sonnet"
@@ -5206,6 +6205,13 @@
 "q_756bea28a599": {
 "drug:cabergoline/bindings[5ht7:antagonist]": "sonnet"
 },
+"q_758497dbc04b": {
+"drug:phenobarbital/excretion[unchanged:urine]": "opus",
+"drug:phenobarbital/excretion[urine_ph:alkaline_faster]": "opus"
+},
+"q_758b188f0ee7": {
+"drug:loprazolam/excretion[unchanged:urine]": "opus"
+},
 "q_75b92f67eb03": {
 "drug:clomipramine/originator": "opus"
 },
@@ -5235,6 +6241,9 @@
 },
 "q_76476f1412c8": {
 "drug:dothiepin/tmax": "sonnet"
+},
+"q_7648786f93aa": {
+"drug:amphetamine_dl/excretion[urine_ph:acidic_faster]": "opus"
 },
 "q_7649c8037949": {
 "drug:clozapine/workup[lipids:before]": "opus",
@@ -5269,14 +6278,24 @@
 "q_76e6dc1e7e8a": {
 "drug:safinamide/originator": "opus"
 },
+"q_76f086bd2fb3": {
+"drug:donepezil/excretion[route:renal]": "opus"
+},
 "q_76f854fe2b6a": {
 "drug:levodopa/half_life": "sonnet"
+},
+"q_76fd3450e468": {
+"drug:levetiracetam/excretion[renal_process:filtration]": "opus",
+"drug:levetiracetam/excretion[renal_process:tubular_reabsorption]": "opus"
 },
 "q_770572419c69": {
 "receptor:sigma1/effects[agonism:antidepressant]": "opus"
 },
 "q_7713fb7bcb92": {
 "drug:selegiline/formulations[transdermal]/release": "opus"
+},
+"q_771822f54e4c": {
+"drug:mianserin/excretion[route:renal]": "opus"
 },
 "q_7730f7f2466f": {
 "drug:cariprazine/brands[Vraylar]": "sonnet"
@@ -5286,6 +6305,9 @@
 },
 "q_77612b330d5d": {
 "receptor:kainate/classification[synaptic]": "opus"
+},
+"q_77684107909e": {
+"drug:pseudoephedrine/excretion[urine_ph:acidic_faster]": "opus"
 },
 "q_777f68b758e0": {
 "drug:clomipramine/bindings[alpha1a:antagonist]": "sonnet",
@@ -5311,6 +6333,10 @@
 "q_77c307a68efd": {
 "structure:insula_L": "sonnet",
 "structure:insula_R": "sonnet"
+},
+"q_77c31a3a4121": {
+"drug:solriamfetol/excretion[route:renal]": "opus",
+"drug:solriamfetol/excretion[unchanged:urine]": "opus"
 },
 "q_77ca9b423667": {
 "drug:bromazepam/bindings[gaba_a:pam]": "sonnet"
@@ -5369,9 +6395,16 @@
 "q_792adeb5f468": {
 "drug:nicotine/workup[glycaemia:during]": "opus"
 },
+"q_7935a91b57c7": {
+"drug:buprenorphine/excretion[route:fecal]": "opus",
+"drug:buprenorphine/excretion[route:renal]": "opus"
+},
 "q_793b691e7fb5": {
 "drug:lamotrigine/workup[drug_level:before]": "opus",
 "drug:lamotrigine/workup[drug_level:during]": "opus"
+},
+"q_793e5ba62b8f": {
+"drug:dmt/excretion[route:renal]": "opus"
 },
 "q_7940a8e66a89": {
 "target:vmat2/classification": "sonnet",
@@ -5417,6 +6450,15 @@
 },
 "q_7a71d8a4f884": {
 "drug:methylphenidate_d/categories": "sonnet"
+},
+"q_7a789f57b6ae": {
+"drug:nimetazepam/excretion[route:renal]": "opus"
+},
+"q_7a7c11c7e42f": {
+"drug:phencyclidine/excretion[route:renal]": "opus"
+},
+"q_7a802cc99585": {
+"drug:apomorphine/excretion[unchanged:urine]": "opus"
 },
 "q_7a8c91cf2ec4": {
 "drug:amitriptyline/brands[Elavil]": "sonnet"
@@ -5508,6 +6550,9 @@
 "q_7d27145e516e": {
 "drug:clobazam/originator": "opus"
 },
+"q_7d3cb12fc339": {
+"drug:bromazepam/excretion[route:renal]": "opus"
+},
 "q_7d83b2b6f38d": {
 "drug:acamprosate/bindings[glutamate:antagonist]": "sonnet",
 "drug:acamprosate/bindings[mglur1:antagonist]": "sonnet"
@@ -5518,6 +6563,10 @@
 "q_7db171d18557": {
 "drug:tranylcypromine/brands[Parnate]": "sonnet"
 },
+"q_7db41329c061": {
+"drug:rasagiline/excretion[route:fecal]": "opus",
+"drug:rasagiline/excretion[route:renal]": "opus"
+},
 "q_7db677290de3": {
 "receptor:mt1/effects[agonism:sleep_promotion]": "opus",
 "receptor:mt2/effects[agonism:sleep_promotion]": "opus"
@@ -5525,6 +6574,10 @@
 "q_7db85a8f54e3": {
 "drug:clorazepate/metabolites[desmethyldiazepam]": "opus",
 "drug:clorazepate/prodrug": "opus"
+},
+"q_7db9cc72312d": {
+"drug:mianserin/excretion[route:fecal]": "opus",
+"drug:mianserin/excretion[route:renal]": "opus"
 },
 "q_7dbff024aaf3": {
 "drug:daridorexant/bindings[orexin:antagonist]": "sonnet"
@@ -5593,6 +6646,9 @@
 "q_7f1f1ba48f79": {
 "drug:carbamazepine/workup[thyroid_function:during]": "opus"
 },
+"q_7f24d4449238": {
+"drug:cyproheptadine/excretion[route:fecal]": "opus"
+},
 "q_7f4ed916ae5e": {
 "drug:sertraline/enzymes[cyp2c19:substrate]": "opus",
 "drug:sertraline/enzymes[cyp2c19:substrate]/strength": "opus"
@@ -5657,6 +6713,9 @@
 "structure:tuberomammillary_L": "opus",
 "structure:tuberomammillary_R": "opus"
 },
+"q_7fe34f8049d2": {
+"drug:lacosamide/excretion[route:renal]": "opus"
+},
 "q_7ffedfa00dd1": {
 "receptor:d2/locations[caudate]": "sonnet",
 "receptor:d2/locations[putamen]": "sonnet"
@@ -5708,11 +6767,18 @@
 "q_8159f09c11a0": {
 "drug:doxepin/categories": "sonnet"
 },
+"q_815c3c548924": {
+"drug:alprazolam/excretion[route:renal]": "opus",
+"drug:alprazolam/excretion[unchanged:urine]": "opus"
+},
 "q_81608d82b90c": {
 "receptor:kainate/classification[sign]": "opus"
 },
 "q_81698c63b79f": {
 "drug:temazepam/brands[Normison]": "sonnet"
+},
+"q_8187c2112471": {
+"drug:protriptyline/excretion[route:renal]": "opus"
 },
 "q_81a9ab279162": {
 "drug:tiagabine/brands[Gabitril]": "sonnet"
@@ -5729,9 +6795,16 @@
 "q_81faac35d40f": {
 "drug:levodopa/bindings[aadc:precursor]": "sonnet"
 },
+"q_820cd4278f91": {
+"drug:melperone/excretion[route:renal]": "opus",
+"drug:melperone/excretion[unchanged:urine]": "opus"
+},
 "q_821716041eba": {
 "drug:thiothixene/bindings[5ht7:antagonist]": "sonnet",
 "drug:thiothixene/bindings[d3:antagonist]": "sonnet"
+},
+"q_82362f02126a": {
+"drug:lithium/excretion[route:renal]": "opus"
 },
 "q_8238eb8404e4": {
 "drug:doxepin/metabolites[nordoxepin]": "opus",
@@ -5739,8 +6812,15 @@
 "drug:doxepin/metabolites[nordoxepin]/formed_by[cyp2c19]": "opus",
 "drug:doxepin/metabolites[nordoxepin]/formed_by[cyp2c9]": "opus"
 },
+"q_823db2c6eb42": {
+"drug:nefazodone/excretion[unchanged:urine]": "opus"
+},
 "q_824129e44761": {
 "drug:brotizolam/bindings[gaba_a:pam]": "opus"
+},
+"q_8245dd5953c2": {
+"drug:solriamfetol/excretion[route:renal]": "opus",
+"drug:solriamfetol/excretion[unchanged:urine]": "opus"
 },
 "q_824bcd1cd606": {
 "drug:olanzapine/categories": "sonnet"
@@ -5766,8 +6846,16 @@
 "q_82ee7f05d1df": {
 "drug:methylphenidate_dl/brands[Ritalin LA]": "sonnet"
 },
+"q_82ef4d37be02": {
+"drug:suvorexant/excretion[route:fecal]": "opus",
+"drug:suvorexant/excretion[route:renal]": "opus"
+},
 "q_82fac951c633": {
 "receptor:h3/effects[agonism:analgesia]": "opus"
+},
+"q_83044ad20865": {
+"drug:galantamine/excretion[route:fecal]": "opus",
+"drug:galantamine/excretion[route:renal]": "opus"
 },
 "q_830b4ee728db": {
 "drug:duloxetine/brands[Yentreve]": "sonnet"
@@ -5810,11 +6898,17 @@
 "q_83c5b9c60906": {
 "drug:pregabalin/bindings[cav_a2d:blocker]": "sonnet"
 },
+"q_83cc0d4b4405": {
+"drug:baclofen/excretion[route:fecal]": "opus"
+},
 "q_83ea895c3778": {
 "drug:olanzapinesamidorphan/first_approval": "opus"
 },
 "q_83f2a49ee95b": {
 "drug:mesoridazine/withdrawals[us:2004]": "opus"
+},
+"q_83f680316af7": {
+"drug:promethazine/excretion[unchanged:urine]": "opus"
 },
 "q_84353582ac55": {
 "drug:buspirone/originator_country": "opus"
@@ -5842,6 +6936,12 @@
 "q_84eccead07d2": {
 "drug:buspirone/half_life": "sonnet"
 },
+"q_84fb73339a5a": {
+"drug:scopolamine/excretion[route:renal]": "opus"
+},
+"q_852609cd7727": {
+"drug:propranolol/excretion[route:renal]": "opus"
+},
 "q_852f25a46fcb": {
 "drug:phenobarbital/categories": "opus"
 },
@@ -5853,6 +6953,10 @@
 },
 "q_8548193975bb": {
 "drug:tranylcypromine/bindings[mao_a:enzyme_inhibitor]": "sonnet"
+},
+"q_854a2a02df01": {
+"drug:perampanel/excretion[route:fecal]": "opus",
+"drug:perampanel/excretion[route:renal]": "opus"
 },
 "q_855b003189e7": {
 "drug:paroxetine/half_life": "sonnet"
@@ -5874,8 +6978,14 @@
 "drug:flunarizine/bindings[d2:antagonist]": "sonnet",
 "drug:flunarizine/bindings[h1:antagonist]": "sonnet"
 },
+"q_85a29b795ff3": {
+"drug:furosemide/excretion[route:fecal]": "opus"
+},
 "q_85af503b24fd": {
 "target:net/effects[inhibition:antidepressant]": "opus"
+},
+"q_85c912a6ddbd": {
+"drug:sumatriptan/excretion[route:renal]": "opus"
 },
 "q_85da709820b3": {
 "receptor:mu/classification[synaptic]": "opus"
@@ -5892,6 +7002,9 @@
 "q_85e7acd2c154": {
 "drug:isoflurane/bindings[gaba_a:pam]": "opus"
 },
+"q_85e8c82f3e53": {
+"drug:amisulpride/excretion[unchanged:urine]": "opus"
+},
 "q_860ad3848b35": {
 "drug:reboxetine/first_approval": "opus"
 },
@@ -5902,6 +7015,9 @@
 "drug:chlorprothixene/bindings[alpha1a:antagonist]": "sonnet",
 "drug:chlorprothixene/bindings[alpha1b:antagonist]": "sonnet",
 "drug:chlorprothixene/bindings[alpha1d:antagonist]": "sonnet"
+},
+"q_86266c48009c": {
+"drug:levetiracetam/excretion[route:fecal]": "opus"
 },
 "q_8626ada33f1c": {
 "receptor:gaba_a/effects[antagonism:seizures]": "opus"
@@ -5914,6 +7030,10 @@
 },
 "q_868c9b7cd4b7": {
 "drug:amisulpride/bindings[d2:partial_agonist]": "opus"
+},
+"q_869e114b6dd6": {
+"drug:blonanserin/excretion[route:fecal]": "opus",
+"drug:blonanserin/excretion[route:renal]": "opus"
 },
 "q_86aae065d6c9": {
 "drug:amoxapine/formulations[ir]/tmax": "opus",
@@ -5977,11 +7097,21 @@
 "receptor:alpha2b/release_modulation[heteroreceptor:-:presynaptic_terminal:serotonin:decrease]": "opus",
 "receptor:alpha2c/release_modulation[heteroreceptor:-:presynaptic_terminal:serotonin:decrease]": "opus"
 },
+"q_87c0c9eefc44": {
+"drug:hydromorphone/excretion[route:renal]": "opus",
+"drug:hydromorphone/excretion[unchanged:urine]": "opus"
+},
+"q_87e563c103ef": {
+"drug:fentanyl/excretion[route:renal]": "opus"
+},
 "q_87e90956014b": {
 "drug:methamphetamine/brands[Isophan]": "sonnet"
 },
 "q_87e924eb3312": {
 "drug:fluoxetine/brands[Prozac weekly]": "sonnet"
+},
+"q_87e9cfbdf9fe": {
+"drug:protriptyline/excretion[route:renal]": "opus"
 },
 "q_8802194f3178": {
 "drug:brexpiprazole/bindings[alpha1b:antagonist]": "sonnet"
@@ -5989,12 +7119,19 @@
 "q_880ca97413c6": {
 "drug:flumazenil/brands[Romazicon]": "sonnet"
 },
+"q_882394168701": {
+"drug:phencyclidine/excretion[urine_ph:acidic_faster]": "opus"
+},
 "q_882ca28eacbb": {
 "structure:fornix_L": "sonnet",
 "structure:fornix_R": "sonnet"
 },
 "q_886073ea133a": {
 "drug:clozapine/metabolites[norclozapine]": "opus"
+},
+"q_886c64bed770": {
+"drug:tianeptine/excretion[route:fecal]": "opus",
+"drug:tianeptine/excretion[route:renal]": "opus"
 },
 "q_888a0bf496f1": {
 "drug:trihexyphenidyl/bindings[m1:antagonist]": "sonnet",
@@ -6021,9 +7158,15 @@
 "q_890635ba9f67": {
 "drug:paliperidone/bindings[5ht2a:antagonist]": "sonnet"
 },
+"q_892992de6c04": {
+"drug:guanfacine/excretion[unchanged:urine]": "opus"
+},
 "q_893a4ddff15e": {
 "receptor:5ht2c/release_modulation[heteroreceptor:-:gaba_interneuron:dopamine:decrease]": "opus",
 "receptor:5ht2c/release_modulation[heteroreceptor:-:gaba_interneuron:norepinephrine:decrease]": "opus"
+},
+"q_893b82b3dd0a": {
+"drug:carbamazepine/excretion[route:renal]": "opus"
 },
 "q_8966e15518d1": {
 "drug:istradefylline/enzymes[cyp3a4:substrate]": "opus",
@@ -6078,6 +7221,9 @@
 "q_8a3c469f5593": {
 "drug:opipramol/first_approval": "opus"
 },
+"q_8a3db22ceb4a": {
+"drug:oxycodone/excretion[route:renal]": "opus"
+},
 "q_8a3efe8ac7b0": {
 "receptor:5ht3/classification[sign]": "opus"
 },
@@ -6100,6 +7246,9 @@
 },
 "q_8aace6b47e86": {
 "drug:lormetazepam/categories": "sonnet"
+},
+"q_8ab601f918e0": {
+"drug:amantadine/excretion[urine_ph:dependent]": "opus"
 },
 "q_8ac2e84b300e": {
 "receptor:mglur1/effects[antagonism:ataxia]": "opus"
@@ -6158,6 +7307,9 @@
 "drug:metoclopramide/bindings[5ht4:agonist]": "sonnet",
 "drug:metoclopramide/bindings[d2:antagonist]": "sonnet"
 },
+"q_8ba21c3f8504": {
+"drug:bromazepam/excretion[unchanged:urine]": "opus"
+},
 "q_8ba9e3da91fa": {
 "drug:chlordiazepoxide/brands[Limbitrol]": "sonnet"
 },
@@ -6179,6 +7331,9 @@
 "q_8bf6ebeeb0dc": {
 "drug:agomelatine/originator": "opus"
 },
+"q_8c0018b27b80": {
+"drug:amphetamine_d/excretion[urine_ph:dependent]": "opus"
+},
 "q_8c0125808cbf": {
 "drug:perphenazine/brands[Trilafon]": "sonnet"
 },
@@ -6197,6 +7352,10 @@
 "q_8c3a52ce0655": {
 "drug:levomepromazine/first_approval": "opus"
 },
+"q_8c424c1f0a9c": {
+"drug:imipramine/excretion[route:fecal]": "opus",
+"drug:imipramine/excretion[route:renal]": "opus"
+},
 "q_8c439fd24c23": {
 "drug:asenapine/bindings[5ht2b:antagonist]": "sonnet",
 "drug:asenapine/bindings[5ht5a:antagonist]": "sonnet",
@@ -6212,6 +7371,9 @@
 "q_8c8dbdf40de6": {
 "receptor:5ht3/locations[amygdala]": "sonnet",
 "receptor:5ht3/locations[hippocampus]": "sonnet"
+},
+"q_8ca8cf560694": {
+"drug:prazepam/excretion[route:renal]": "opus"
 },
 "q_8cba128e10f4": {
 "drug:meclizine/categories": "sonnet"
@@ -6246,6 +7408,9 @@
 },
 "q_8d548d1bace4": {
 "drug:fluphenazine/half_life": "sonnet"
+},
+"q_8d58423f89cc": {
+"drug:duloxetine/excretion[unchanged:urine]": "opus"
 },
 "q_8d6bda1b754b": {
 "drug:varenicline/nbn": "sonnet"
@@ -6316,6 +7481,12 @@
 "q_8e9403afe43a": {
 "drug:cabergoline/first_approval": "opus"
 },
+"q_8e9ab1acf71d": {
+"drug:morphine/excretion[route:renal]": "opus"
+},
+"q_8ea4b27f632a": {
+"drug:ketanserin/excretion[route:renal]": "opus"
+},
 "q_8eb82d2cf40c": {
 "drug:ramelteon/brands[Rozerem]": "sonnet"
 },
@@ -6324,6 +7495,9 @@
 },
 "q_8ecb467995a4": {
 "drug:flumazenil/half_life": "sonnet"
+},
+"q_8ed1b9dd84e4": {
+"drug:agomelatine/excretion[unchanged:urine]": "opus"
 },
 "q_8ed4e7b91846": {
 "drug:clonazepam/tmax": "sonnet"
@@ -6334,6 +7508,10 @@
 "q_8f259dcf55f3": {
 "drug:solriamfetol/bindings[net:reuptake_inhibitor]": "sonnet"
 },
+"q_8f33495e1601": {
+"drug:carbidopa/excretion[route:renal]": "opus",
+"drug:carbidopa/excretion[unchanged:urine]": "opus"
+},
 "q_8f44e5c94abb": {
 "drug:protriptyline/brands[Triptil]": "sonnet"
 },
@@ -6342,6 +7520,14 @@
 },
 "q_8f591213c629": {
 "drug:carbamazepine/categories": "sonnet"
+},
+"q_8f592ce62bb0": {
+"drug:cannabidiol/excretion[route:fecal]": "opus",
+"drug:cannabidiol/excretion[route:renal]": "opus"
+},
+"q_8f5e9a440cbf": {
+"drug:reserpine/excretion[route:fecal]": "opus",
+"drug:reserpine/excretion[route:renal]": "opus"
 },
 "q_8f6941df1c6b": {
 "drug:quetiapine/brands[Sequase]": "sonnet"
@@ -6352,9 +7538,17 @@
 "q_8f9c9d9be69b": {
 "drug:oxcarbazepine/brands[Trileptal]": "sonnet"
 },
+"q_8fb67757546f": {
+"drug:levomepromazine/excretion[route:fecal]": "opus",
+"drug:levomepromazine/excretion[route:renal]": "opus"
+},
 "q_8fe20788712b": {
 "drug:brexpiprazole/workup[glycaemia:before]": "opus",
 "drug:brexpiprazole/workup[glycaemia:during]": "opus"
+},
+"q_90001ac3b8b5": {
+"drug:nicotine/excretion[route:renal]": "opus",
+"drug:nicotine/excretion[urine_ph:dependent]": "opus"
 },
 "q_90005fb673de": {
 "drug:clozapine/brands[Clozaril]": "sonnet"
@@ -6445,6 +7639,9 @@
 "q_91dde698ebb6": {
 "drug:olanzapinesamidorphan/half_life": "sonnet"
 },
+"q_91f94eb5cf8f": {
+"drug:cocaine/excretion[unchanged:urine]": "opus"
+},
 "q_91ffc8862948": {
 "drug:clozapine/bindings[h1:antagonist]": "sonnet"
 },
@@ -6453,6 +7650,10 @@
 },
 "q_92104f7f53b5": {
 "drug:guanfacine/categories": "sonnet"
+},
+"q_92354a256c1c": {
+"drug:hydroxyzine/excretion[route:fecal]": "opus",
+"drug:hydroxyzine/excretion[route:renal]": "opus"
 },
 "q_924582e0d59a": {
 "drug:desvenlafaxine/enzymes[cyp3a4:substrate]": "opus",
@@ -6477,11 +7678,18 @@
 "q_9279d6a1823d": {
 "drug:phenytoin/workup[pregnancy_test:before]": "opus"
 },
+"q_92a17397cff0": {
+"drug:psilocybin/excretion[route:renal]": "opus"
+},
 "q_92a828d4ee2f": {
 "drug:zonisamide/bindings[cav_t:modulator]": "sonnet"
 },
 "q_92b26a556646": {
 "drug:nabilone/first_approval": "opus"
+},
+"q_92bd19625cc1": {
+"drug:fluphenazine/excretion[route:fecal]": "opus",
+"drug:fluphenazine/excretion[route:renal]": "opus"
 },
 "q_92d1cf2303d2": {
 "drug:caffeine/categories": "opus"
@@ -6492,6 +7700,9 @@
 },
 "q_92fd8df5333d": {
 "drug:methylphenidate_dl/formulations[ir]/release": "opus"
+},
+"q_9310628694fd": {
+"drug:oxazepam/excretion[route:renal]": "opus"
 },
 "q_9324b9cef106": {
 "drug:buprenorphine/formulations[sublingual]/half_life": "opus",
@@ -6507,9 +7718,15 @@
 "q_936a43f62aef": {
 "drug:fluspirilene/originator": "opus"
 },
+"q_9380ab096870": {
+"drug:pentazocine/excretion[route:renal]": "opus"
+},
 "q_938d835b7c1d": {
 "receptor:kappa/effects[agonism:dysphoria]": "opus",
 "receptor:kappa/effects[agonism:hallucinations]": "opus"
+},
+"q_93913fad8024": {
+"drug:betahistine/excretion[route:renal]": "opus"
 },
 "q_93ca70f343a6": {
 "drug:lsd/first_approval": "opus"
@@ -6534,6 +7751,10 @@
 },
 "q_9447609b3d80": {
 "drug:pargyline/first_approval": "opus"
+},
+"q_945c56d8ce0d": {
+"drug:furosemide/excretion[route:fecal]": "opus",
+"drug:furosemide/excretion[route:renal]": "opus"
 },
 "q_9466bcc20933": {
 "drug:guanfacine/bindings[5ht2b:agonist]": "opus"
@@ -6587,6 +7808,11 @@
 "q_952a42076feb": {
 "drug:mianserin/bindings[kappa:partial_agonist]": "opus"
 },
+"q_9532f678a0cf": {
+"drug:maprotiline/excretion[route:fecal]": "opus",
+"drug:maprotiline/excretion[route:renal]": "opus",
+"drug:maprotiline/excretion[unchanged:urine]": "opus"
+},
 "q_9533d7e20bb0": {
 "drug:trimipramine/bindings[sert:reuptake_inhibitor]": "sonnet"
 },
@@ -6596,9 +7822,15 @@
 "q_954af7fff09e": {
 "drug:amisulpride/bindings[d2:antagonist]": "sonnet"
 },
+"q_9554560ddabc": {
+"drug:viloxazine/excretion[route:renal]": "opus"
+},
 "q_957dc6b09aa4": {
 "projection:raphe->olfactory_bulb_R": "opus",
 "projection:raphe->olfactory_bulb_R/transmitter": "opus"
+},
+"q_958ec8b9a860": {
+"drug:lumateperone/excretion[unchanged:urine]": "opus"
 },
 "q_95956dd7fe11": {
 "drug:codeine/categories": "sonnet"
@@ -6624,11 +7856,20 @@
 "q_96168d74dabf": {
 "receptor:gaba_a/classification[synaptic]": "opus"
 },
+"q_964689919c3b": {
+"drug:diazepam/excretion[urine_ph:acidic_faster]": "opus"
+},
+"q_964f2e0923a7": {
+"drug:trazodone/excretion[route:renal]": "opus"
+},
 "q_9654a40bfb4b": {
 "drug:isoflurane/bindings[nmda:antagonist]": "opus"
 },
 "q_96685000b46e": {
 "drug:brexanolone/bindings[gaba_a:pam]": "sonnet"
+},
+"q_966a8878818c": {
+"drug:cabergoline/excretion[route:renal]": "opus"
 },
 "q_966f9114b284": {
 "drug:bupropion/half_life": "sonnet"
@@ -6672,6 +7913,9 @@
 "q_96eb1e1df83d": {
 "drug:codeine/half_life": "sonnet"
 },
+"q_96f957e36849": {
+"drug:modafinil/excretion[unchanged:urine]": "opus"
+},
 "q_9713d7bfa522": {
 "drug:trifluoperazine/nbn": "sonnet"
 },
@@ -6689,6 +7933,10 @@
 },
 "q_975add60c1b6": {
 "projection:raphe->substantia_nigra_R": "opus"
+},
+"q_9765fc9bdc4c": {
+"drug:levetiracetam/excretion[renal_process:filtration]": "opus",
+"drug:levetiracetam/excretion[renal_process:tubular_reabsorption]": "opus"
 },
 "q_9778defa6e9b": {
 "receptor:h2/effects[agonism:gastric_acid_increase]": "opus"
@@ -6733,6 +7981,9 @@
 "q_98797e6f4fd5": {
 "drug:trimipramine/tmax": "sonnet"
 },
+"q_98842f2c05ab": {
+"drug:zuclopenthixol/excretion[route:fecal]": "opus"
+},
 "q_9889230eda92": {
 "drug:eszopiclone/half_life": "sonnet"
 },
@@ -6744,6 +7995,10 @@
 },
 "q_98ae15c619fa": {
 "drug:fentanyl/half_life": "opus"
+},
+"q_98bf00175fa1": {
+"drug:pseudoephedrine/excretion[route:renal]": "opus",
+"drug:pseudoephedrine/excretion[unchanged:urine]": "opus"
 },
 "q_98c1165394cb": {
 "receptor:5ht3/locations[midbrain]": "sonnet"
@@ -6762,6 +8017,10 @@
 },
 "q_990a2388e7f9": {
 "drug:vilazodone/originator": "opus"
+},
+"q_9911b585462d": {
+"drug:domperidone/excretion[route:fecal]": "opus",
+"drug:domperidone/excretion[route:renal]": "opus"
 },
 "q_9924e877c92e": {
 "drug:topiramate/bindings[carbonic_anhydrase:enzyme_inhibitor]": "sonnet"
@@ -6851,6 +8110,9 @@
 "q_99ee7233aca3": {
 "drug:rasagiline/bindings[mao_a:enzyme_inhibitor]": "opus"
 },
+"q_99f044edfcb0": {
+"drug:opipramol/excretion[route:fecal]": "opus"
+},
 "q_9a18311cb1e2": {
 "drug:psilocybin/first_approval": "opus"
 },
@@ -6859,6 +8121,9 @@
 },
 "q_9a1b90d85108": {
 "drug:aripiprazole/brands[Aristada]": "sonnet"
+},
+"q_9a3b34fd9196": {
+"drug:cocaine/excretion[route:renal]": "opus"
 },
 "q_9a3e1cbf7be7": {
 "receptor:nachr_a4b2/release_modulation[heteroreceptor:vta:gaba_interneuron:dopamine:decrease]": "opus"
@@ -6887,6 +8152,9 @@
 "q_9aab3e532cb8": {
 "drug:tranylcypromine/half_life": "opus"
 },
+"q_9abfa53241ec": {
+"drug:methamphetamine/excretion[urine_ph:acidic_faster]": "opus"
+},
 "q_9ae312b1590b": {
 "receptor:nachr_a4b2/classification[family]": "sonnet",
 "receptor:nachr_a4b2/classification[receptor_class]": "sonnet",
@@ -6898,6 +8166,10 @@
 "q_9ae829c690d0": {
 "drug:fentanyl/formulations[sublingual]/half_life": "opus",
 "drug:fentanyl/half_life": "opus"
+},
+"q_9ae95cc84db7": {
+"drug:domperidone/excretion[route:fecal]": "opus",
+"drug:domperidone/excretion[route:renal]": "opus"
 },
 "q_9aeb06346d43": {
 "drug:venlafaxine/brands[Effexor XR]": "sonnet"
@@ -6948,6 +8220,10 @@
 "q_9ba5539ebf9c": {
 "drug:hydroxyzine/brands[Atarax]": "sonnet"
 },
+"q_9ba564582933": {
+"drug:loxapine/excretion[route:fecal]": "opus",
+"drug:loxapine/excretion[route:renal]": "opus"
+},
 "q_9bacd4eb53ec": {
 "target:sv2a/classification": "sonnet"
 },
@@ -6973,8 +8249,19 @@
 "q_9bea7f8b74af": {
 "drug:carbamazepine/workup[pregnancy_test:before]": "opus"
 },
+"q_9bfee90e80cb": {
+"drug:zolpidem/excretion[route:renal]": "opus"
+},
+"q_9c124920d6c8": {
+"drug:brivaracetam/excretion[unchanged:urine]": "opus"
+},
 "q_9c245329d5c8": {
 "receptor:5ht7/release_modulation[heteroreceptor:frontal:gaba_interneuron:gaba:increase]": "opus"
+},
+"q_9c2532cd306b": {
+"drug:donepezil/excretion[route:fecal]": "opus",
+"drug:donepezil/excretion[route:renal]": "opus",
+"drug:donepezil/excretion[unchanged:urine]": "opus"
 },
 "q_9c38cbcf566f": {
 "drug:perphenazine/formulations[ir]/tmax": "opus",
@@ -7116,6 +8403,12 @@
 "drug:nortriptyline/bindings[alpha1c:antagonist]": "sonnet",
 "drug:nortriptyline/bindings[alpha1d:antagonist]": "sonnet"
 },
+"q_9ea6e77f8ccf": {
+"drug:phenelzine/excretion[route:renal]": "opus"
+},
+"q_9ea98befe2a4": {
+"drug:varenicline/excretion[route:renal]": "opus"
+},
 "q_9ead945c21cd": {
 "drug:rimonabant/originator_country": "opus"
 },
@@ -7131,6 +8424,9 @@
 "q_9f08b708d209": {
 "drug:levetiracetam/bindings[cav:blocker]": "sonnet"
 },
+"q_9f151ec765b8": {
+"drug:valproate/excretion[route:renal]": "opus"
+},
 "q_9f15bdca6554": {
 "drug:flunitrazepam/nbn": "sonnet"
 },
@@ -7142,6 +8438,10 @@
 },
 "q_9f2c5ddae70a": {
 "drug:clonidine/categories": "sonnet"
+},
+"q_9f33cf7ad4f5": {
+"drug:risperidone/excretion[route:fecal]": "opus",
+"drug:risperidone/excretion[route:renal]": "opus"
 },
 "q_9f35265f14bd": {
 "drug:alpidem/originator": "opus"
@@ -7157,6 +8457,13 @@
 },
 "q_9f6857c65b21": {
 "drug:brivaracetam/first_approval": "opus"
+},
+"q_9f72affb95c8": {
+"drug:bromocriptine/excretion[route:fecal]": "opus",
+"drug:bromocriptine/excretion[route:renal]": "opus"
+},
+"q_9f74c6c0363f": {
+"drug:nortriptyline/excretion[route:renal]": "opus"
 },
 "q_9f7fc06f0b30": {
 "receptor:kappa/release_modulation[heteroreceptor:frontal:presynaptic_terminal:gaba:decrease]": "opus"
@@ -7227,6 +8534,9 @@
 "projection:vta_R->hippocampus_R": "opus",
 "projection:vta_R->hippocampus_R/transmitter": "opus"
 },
+"q_a0c95fa77b9d": {
+"drug:propofol/excretion[route:renal]": "opus"
+},
 "q_a0d096b14f52": {
 "drug:risperidone/workup[glycaemia:during]": "opus"
 },
@@ -7282,6 +8592,12 @@
 "q_a1ee4a875668": {
 "receptor:kappa/effects[agonism:analgesia]": "opus"
 },
+"q_a1f0aba823e6": {
+"drug:nicotine/excretion[unchanged:urine]": "opus"
+},
+"q_a1f53f1e88fa": {
+"drug:sodium_oxybate/excretion[unchanged:urine]": "opus"
+},
 "q_a2013005e481": {
 "drug:triiodothyronine/categories": "sonnet"
 },
@@ -7317,6 +8633,9 @@
 },
 "q_a298df5fafef": {
 "drug:venlafaxine/nbn": "sonnet"
+},
+"q_a2ba0f69d96a": {
+"drug:lisdexamfetamine/excretion[urine_ph:dependent]": "opus"
 },
 "q_a2d9433377cc": {
 "drug:amphetamine_d/brands[ProCentra]": "sonnet"
@@ -7367,8 +8686,25 @@
 "drug:reboxetine/originator/now": "opus",
 "drug:safinamide/originator/now": "opus"
 },
+"q_a391a1d555cd": {
+"drug:ondansetron/excretion[route:renal]": "opus"
+},
+"q_a3a18ecd7d5c": {
+"drug:quetiapine/excretion[route:fecal]": "opus",
+"drug:quetiapine/excretion[route:renal]": "opus"
+},
+"q_a3d2ce1b787d": {
+"drug:agomelatine/excretion[route:renal]": "opus"
+},
 "q_a3e6fff9a83f": {
 "drug:perampanel/bindings[ampa:nam]": "sonnet"
+},
+"q_a41230617b0e": {
+"drug:temazepam/excretion[route:renal]": "opus"
+},
+"q_a4173750d324": {
+"drug:doxepin/excretion[route:renal]": "opus",
+"drug:doxepin/excretion[unchanged:urine]": "opus"
 },
 "q_a4197153b4d1": {
 "drug:zotepine/brands[Lodopin]": "sonnet"
@@ -7414,6 +8750,9 @@
 },
 "q_a4dcc5d8abcd": {
 "drug:maprotiline/first_approval": "opus"
+},
+"q_a4f623d8668b": {
+"drug:oxcarbazepine/excretion[route:fecal]": "opus"
 },
 "q_a503fd1e480e": {
 "projection:hippocampus_R->fornix_R": "sonnet"
@@ -7463,6 +8802,10 @@
 },
 "q_a635a5d98797": {
 "drug:furosemide/workup[blood_pressure:during]": "opus"
+},
+"q_a64591ecaf40": {
+"drug:fentanyl/excretion[route:renal]": "opus",
+"drug:fentanyl/excretion[unchanged:urine]": "opus"
 },
 "q_a649e8b2ab0f": {
 "drug:tetrabenazine/brands[Xentra]": "sonnet"
@@ -7534,6 +8877,13 @@
 "q_a702809812c3": {
 "drug:methamphetamine/brands[Pervitin]": "sonnet"
 },
+"q_a7108fe17303": {
+"drug:galantamine/excretion[unchanged:urine]": "opus"
+},
+"q_a7129c5049aa": {
+"drug:ramelteon/excretion[route:fecal]": "opus",
+"drug:ramelteon/excretion[route:renal]": "opus"
+},
 "q_a71bfd780ff9": {
 "receptor:5ht1b/effects[agonism:vasoconstriction]": "opus"
 },
@@ -7542,6 +8892,12 @@
 },
 "q_a7825540e699": {
 "drug:cannabidiol/half_life": "opus"
+},
+"q_a79ccf2f98d0": {
+"drug:ephedrine/excretion[urine_ph:dependent]": "opus"
+},
+"q_a7a207bb870f": {
+"drug:etomidate/excretion[route:renal]": "opus"
 },
 "q_a7a551dce646": {
 "projection:raphe->accumbens_R": "opus",
@@ -7584,6 +8940,10 @@
 "q_a867e4302e5b": {
 "drug:cariprazine/workup[weight:during]": "opus"
 },
+"q_a8769de1b0fd": {
+"drug:flibanserin/excretion[route:fecal]": "opus",
+"drug:flibanserin/excretion[route:renal]": "opus"
+},
 "q_a8773659304c": {
 "drug:methylphenidate_dl/brands[QuilliChew ER]": "sonnet"
 },
@@ -7621,6 +8981,9 @@
 "q_a9874fc5fa52": {
 "receptor:a2a/effects[agonism:vasodilation]": "opus"
 },
+"q_a98eec6e715b": {
+"drug:lormetazepam/excretion[route:renal]": "opus"
+},
 "q_a9a7864af80e": {
 "drug:clorazepate/brands[Tranxilium]": "sonnet"
 },
@@ -7642,6 +9005,13 @@
 "q_a9e924f3da5e": {
 "drug:xenon/bindings[5ht3:antagonist]": "sonnet"
 },
+"q_aa188545b66e": {
+"drug:daridorexant/excretion[route:fecal]": "opus",
+"drug:daridorexant/excretion[route:renal]": "opus"
+},
+"q_aa3130abea00": {
+"drug:modafinil/excretion[route:renal]": "opus"
+},
 "q_aa36d6fcc759": {
 "drug:buprenorphine/formulations[sublingual]/release": "opus"
 },
@@ -7651,11 +9021,20 @@
 "q_aa5ac57d16b3": {
 "drug:tolcapone/categories": "sonnet"
 },
+"q_aa6303efe3d2": {
+"drug:oxcarbazepine/excretion[route:renal]": "opus"
+},
 "q_aa66934577a1": {
 "drug:lsd/tmax": "sonnet"
 },
+"q_aa8df26c0350": {
+"drug:clotiazepam/excretion[route:renal]": "opus"
+},
 "q_aab0c9fb00ed": {
 "drug:fluoxetine/workup[ecg:before]": "opus"
+},
+"q_aac2e4f25a97": {
+"drug:naltrexone/excretion[route:renal]": "opus"
 },
 "q_aace0df6264c": {
 "drug:levomepromazine/categories": "sonnet"
@@ -7684,6 +9063,9 @@
 },
 "q_ab304f4860ce": {
 "drug:nefazodone/nbn": "sonnet"
+},
+"q_ab415c4973e5": {
+"drug:etomidate/excretion[unchanged:urine]": "opus"
 },
 "q_ab6e72d36289": {
 "drug:valproate/first_approval": "opus"
@@ -7735,6 +9117,9 @@
 "drug:flunarizine/enzymes[cyp2d6:substrate]": "opus",
 "drug:flunarizine/enzymes[cyp2d6:substrate]/strength": "opus"
 },
+"q_accee03f229b": {
+"drug:betahistine/excretion[route:renal]": "opus"
+},
 "q_acd76e69c1b9": {
 "drug:azacyclonol/categories": "opus"
 },
@@ -7752,6 +9137,9 @@
 },
 "q_ad3a52870813": {
 "drug:cytisine/half_life": "opus"
+},
+"q_ad448711866a": {
+"drug:metoclopramide/excretion[route:renal]": "opus"
 },
 "q_ad4d2baa0ce2": {
 "drug:carbamazepine/brands[Carbatrol]": "sonnet"
@@ -7778,14 +9166,24 @@
 "q_adebd769abc2": {
 "drug:viloxazine/half_life": "sonnet"
 },
+"q_ae0110f7d7a4": {
+"drug:ropinirole/excretion[unchanged:urine]": "opus"
+},
 "q_ae018a33a59a": {
 "drug:donepezil/nbn": "sonnet"
+},
+"q_ae0a179184c1": {
+"drug:amantadine/excretion[route:renal]": "opus",
+"drug:amantadine/excretion[unchanged:urine]": "opus"
 },
 "q_ae0df1c8c76a": {
 "drug:alpidem/tmax": "sonnet"
 },
 "q_ae4a132fc202": {
 "drug:amphetamine_dl/brands[Adzenys XR-ODT]": "sonnet"
+},
+"q_ae54c251ebe7": {
+"drug:tramadol/excretion[route:renal]": "opus"
 },
 "q_ae57341eb1d7": {
 "drug:brexpiprazole/bindings[5ht1a:partial_agonist]": "sonnet"
@@ -7795,6 +9193,14 @@
 },
 "q_ae6b20e581b2": {
 "receptor:kainate/classification[synaptic]": "opus"
+},
+"q_ae7217978c6e": {
+"drug:tiapride/excretion[route:renal]": "opus",
+"drug:tiapride/excretion[unchanged:urine]": "opus"
+},
+"q_ae7824315480": {
+"drug:sildenafil/excretion[route:fecal]": "opus",
+"drug:sildenafil/excretion[route:renal]": "opus"
 },
 "q_ae7eed596654": {
 "receptor:5ht1a/demographics[age:no_difference:-]": "opus"
@@ -7829,6 +9235,9 @@
 "q_af3360ee299c": {
 "drug:buprenorphine/brands[Suboxone (with naloxone)]": "sonnet"
 },
+"q_af5354a83a8a": {
+"drug:clotiazepam/excretion[route:renal]": "opus"
+},
 "q_af5e27e00a51": {
 "drug:nalmefene/half_life": "sonnet"
 },
@@ -7847,6 +9256,10 @@
 },
 "q_af93795ac814": {
 "receptor:beta2/effects[agonism:bronchodilation]": "opus"
+},
+"q_af9f033e5dba": {
+"drug:desvenlafaxine/excretion[route:renal]": "opus",
+"drug:desvenlafaxine/excretion[unchanged:urine]": "opus"
 },
 "q_afa70b68a32a": {
 "receptor:5ht1d/locations[frontal]": "sonnet",
@@ -7893,6 +9306,10 @@
 },
 "q_b079d09d689b": {
 "drug:lumateperone/bindings[d2:antagonist]": "sonnet"
+},
+"q_b07ac1650527": {
+"drug:varenicline/excretion[renal_process:filtration]": "opus",
+"drug:varenicline/excretion[renal_process:tubular_secretion]": "opus"
 },
 "q_b07f0514791f": {
 "drug:trazodone/formulations[xr]/release": "opus"
@@ -7952,6 +9369,10 @@
 "q_b21eda3c3caa": {
 "drug:lofexidine/tmax": "sonnet"
 },
+"q_b2204f7e3409": {
+"drug:tetrabenazine/excretion[route:fecal]": "opus",
+"drug:tetrabenazine/excretion[route:renal]": "opus"
+},
 "q_b2230a842932": {
 "receptor:alpha1a/locations[cerebellum]": "sonnet"
 },
@@ -7999,6 +9420,10 @@
 "q_b2841fd4be8f": {
 "receptor:5ht4/locations[frontal]": "sonnet"
 },
+"q_b2871ecdb519": {
+"drug:temazepam/excretion[route:fecal]": "opus",
+"drug:temazepam/excretion[route:renal]": "opus"
+},
 "q_b2a6528e2a97": {
 "drug:nefazodone/metabolites[meta_chlorophenylpiperazine]/formed_by[cyp2d6]": "sonnet"
 },
@@ -8026,6 +9451,13 @@
 },
 "q_b350583e58ad": {
 "drug:cyamemazine/bindings[5ht2c:antagonist]": "sonnet"
+},
+"q_b3591a66f819": {
+"drug:paroxetine/excretion[route:renal]": "opus"
+},
+"q_b35d3eebfe61": {
+"drug:ziprasidone/excretion[route:fecal]": "opus",
+"drug:ziprasidone/excretion[route:renal]": "opus"
 },
 "q_b3af927ccddf": {
 "drug:naltrexone/brands[Vivitrol]": "sonnet",
@@ -8090,6 +9522,10 @@
 "q_b4bf3a82f8ba": {
 "receptor:beta2/locations[frontal]": "sonnet"
 },
+"q_b4c15ec1a3e3": {
+"drug:clozapine/excretion[route:fecal]": "opus",
+"drug:clozapine/excretion[route:renal]": "opus"
+},
 "q_b4e11fa02edf": {
 "metabolite:meta_chlorophenylpiperazine/bindings[5ht1a:partial_agonist]": "opus"
 },
@@ -8111,8 +9547,17 @@
 "q_b5110f60650a": {
 "target:dat/effects[inhibition:appetite_decrease]": "opus"
 },
+"q_b524f6c6a176": {
+"drug:baclofen/excretion[route:renal]": "opus"
+},
+"q_b5593ed9c372": {
+"drug:flumazenil/excretion[unchanged:urine]": "opus"
+},
 "q_b55f83be8132": {
 "receptor:gaba_b/release_modulation[autoreceptor:-:presynaptic_terminal:gaba:decrease]": "opus"
+},
+"q_b568e55c47c8": {
+"drug:agomelatine/excretion[route:renal]": "opus"
 },
 "q_b56c4ffba9d7": {
 "drug:chlorpromazine/brands[Largactil]": "sonnet"
@@ -8120,6 +9565,10 @@
 "q_b587ef6e6f49": {
 "projection:locus_coeruleus_R->cerebellum": "opus",
 "projection:locus_coeruleus_R->cerebellum/transmitter": "opus"
+},
+"q_b58cd89af37d": {
+"drug:granisetron/excretion[route:renal]": "opus",
+"drug:granisetron/excretion[unchanged:urine]": "opus"
 },
 "q_b592841154f0": {
 "drug:etomidate/bindings[gaba_a:modulator]": "opus"
@@ -8129,6 +9578,12 @@
 },
 "q_b59999cb5589": {
 "target:sert/demographics[age:decrease:-]": "opus"
+},
+"q_b5ab069c4768": {
+"drug:clorazepate/excretion[route:renal]": "opus"
+},
+"q_b5b40f04e75b": {
+"drug:pramipexole/excretion[unchanged:urine]": "opus"
 },
 "q_b5eedac721fc": {
 "drug:mdma/bindings[5ht1b:partial_agonist]": "opus",
@@ -8159,11 +9614,19 @@
 "q_b623a20347b4": {
 "drug:alprazolam/half_life": "sonnet"
 },
+"q_b630b1382027": {
+"drug:valbenazine/excretion[route:fecal]": "opus",
+"drug:valbenazine/excretion[route:renal]": "opus"
+},
 "q_b639ce1d4fc7": {
 "drug:fluvoxamine/categories": "sonnet"
 },
 "q_b64c60fb07a6": {
 "drug:zuclopenthixol/bindings[h1:antagonist]": "sonnet"
+},
+"q_b65906b22bbe": {
+"drug:deutetrabenazine/excretion[route:fecal]": "opus",
+"drug:deutetrabenazine/excretion[route:renal]": "opus"
 },
 "q_b66718093e37": {
 "drug:loprazolam/categories": "sonnet"
@@ -8178,11 +9641,26 @@
 "q_b6912df44aa4": {
 "drug:vortioxetine/originator": "opus"
 },
+"q_b6947fad3f50": {
+"drug:biperiden/excretion[route:renal]": "opus"
+},
 "q_b6a39291c9b8": {
 "drug:cariprazine/first_approval": "opus"
 },
+"q_b6b69e989e36": {
+"drug:furosemide/excretion[route:renal]": "opus"
+},
+"q_b6d0c96c3615": {
+"drug:venlafaxine/excretion[route:renal]": "opus"
+},
+"q_b70dad10fa61": {
+"drug:lamotrigine/excretion[route:renal]": "opus"
+},
 "q_b715b923e711": {
 "drug:trazodone/bindings[sert:reuptake_inhibitor]": "sonnet"
+},
+"q_b724ccec6242": {
+"drug:brivaracetam/excretion[route:renal]": "opus"
 },
 "q_b72df66a1ea3": {
 "drug:ropinirole/half_life": "opus"
@@ -8264,6 +9742,13 @@
 "q_b82b4e2f5f81": {
 "drug:lisdexamfetamine/nbn": "sonnet"
 },
+"q_b82cfc7e64b0": {
+"drug:tolcapone/excretion[unchanged:urine]": "opus"
+},
+"q_b84e7c440527": {
+"drug:mirtazapine/excretion[route:fecal]": "opus",
+"drug:mirtazapine/excretion[route:renal]": "opus"
+},
 "q_b86b175d6129": {
 "drug:memantine/first_approval": "opus"
 },
@@ -8294,6 +9779,10 @@
 "q_b96cabe92c3e": {
 "receptor:m5/effects[agonism:vasodilation]": "opus"
 },
+"q_b9768e8079c5": {
+"drug:haloperidol/excretion[route:fecal]": "opus",
+"drug:haloperidol/excretion[route:renal]": "opus"
+},
 "q_b979034a91c5": {
 "receptor:nmda/classification[sign]": "opus"
 },
@@ -8321,6 +9810,10 @@
 "q_b9ce4e9d36d6": {
 "target:mao_a/effects[inhibition:cardiovascular]": "opus"
 },
+"q_b9db00de176d": {
+"drug:varenicline/excretion[route:renal]": "opus",
+"drug:varenicline/excretion[unchanged:urine]": "opus"
+},
 "q_b9dbfe73d79d": {
 "drug:clomipramine/metabolites[desmethylclomipramine]": "sonnet",
 "drug:clomipramine/metabolites[desmethylclomipramine]/formed_by[cyp1a2]": "sonnet"
@@ -8329,11 +9822,18 @@
 "projection:raphe->olfactory_bulb_R": "opus",
 "projection:raphe->olfactory_bulb_R/transmitter": "opus"
 },
+"q_b9fde1eb34fc": {
+"drug:promethazine/excretion[route:fecal]": "opus",
+"drug:promethazine/excretion[route:renal]": "opus"
+},
 "q_ba23cf159b77": {
 "target:dat/demographics[age:decrease:-]": "opus"
 },
 "q_ba526828ccc5": {
 "receptor:d3/effects[agonism:antiparkinsonian]": "opus"
+},
+"q_ba646ae9f2d9": {
+"drug:rotigotine/excretion[route:fecal]": "opus"
 },
 "q_ba64d1cd8aa3": {
 "drug:lithium/workup[pregnancy_test:before]": "opus"
@@ -8343,6 +9843,10 @@
 },
 "q_ba72ab6537d3": {
 "drug:tranylcypromine/tmax": "sonnet"
+},
+"q_ba79a5e5127f": {
+"drug:diphenhydramine/excretion[route:fecal]": "opus",
+"drug:diphenhydramine/excretion[route:renal]": "opus"
 },
 "q_ba8badfd3364": {
 "receptor:5ht1b/release_modulation[autoreceptor:-:presynaptic_terminal:serotonin:decrease]": "opus"
@@ -8398,8 +9902,18 @@
 "q_bb7b150c0415": {
 "drug:ondansetron/first_approval": "opus"
 },
+"q_bb7e2ad34772": {
+"drug:chlorprothixene/excretion[route:fecal]": "opus",
+"drug:chlorprothixene/excretion[route:renal]": "opus"
+},
 "q_bb8cbe58dc41": {
 "drug:protriptyline/brands[Vivactil]": "sonnet"
+},
+"q_bb8cd26be67c": {
+"drug:nitrazepam/excretion[route:renal]": "opus"
+},
+"q_bb8ed21f1663": {
+"drug:midazolam/excretion[route:renal]": "opus"
 },
 "q_bb9f853361d5": {
 "drug:citalopram/brands[Zentius]": "sonnet"
@@ -8414,14 +9928,27 @@
 "q_bbe2a935bb6c": {
 "receptor:kappa/effects[agonism:antipruritic]": "opus"
 },
+"q_bbea674d8573": {
+"drug:quazepam/excretion[route:fecal]": "opus",
+"drug:quazepam/excretion[route:renal]": "opus"
+},
 "q_bbf05ef20867": {
 "metabolite:noribogaine/bindings[sert:reuptake_inhibitor]": "opus"
+},
+"q_bc0f0dab2fa6": {
+"drug:dexmedetomidine/excretion[unchanged:urine]": "opus"
 },
 "q_bc128dd5160e": {
 "receptor:kappa/effects[agonism:analgesia]": "opus"
 },
 "q_bc14178c094d": {
 "receptor:5ht3/effects[antagonism:antiemetic]": "opus"
+},
+"q_bc1552046d72": {
+"drug:loprazolam/excretion[route:renal]": "opus"
+},
+"q_bc5dbe642b90": {
+"drug:heroin/excretion[route:renal]": "opus"
 },
 "q_bc73090b3e15": {
 "drug:scopolamine/tmax": "sonnet"
@@ -8440,6 +9967,9 @@
 },
 "q_bca6dd4a69a9": {
 "drug:fenfluramine/bindings[sigma1:pam]": "opus"
+},
+"q_bcaf9b8ea271": {
+"drug:temazepam/excretion[route:renal]": "opus"
 },
 "q_bcc02e4f3aab": {
 "projection:raphe->cerebellum": "opus",
@@ -8467,6 +9997,9 @@
 },
 "q_bd71448efdf1": {
 "drug:quazepam/half_life": "sonnet"
+},
+"q_bd771a065549": {
+"drug:furosemide/excretion[unchanged:urine]": "opus"
 },
 "q_bd8459bd40af": {
 "drug:clozapine/workup[blood_count:before]": "opus",
@@ -8530,6 +10063,10 @@
 "q_beb989eb57e9": {
 "drug:viloxazine/categories": "sonnet"
 },
+"q_bec71c9e897b": {
+"drug:thc/excretion[route:fecal]": "opus",
+"drug:thc/excretion[route:renal]": "opus"
+},
 "q_bed5e983bbd0": {
 "drug:cabergoline/half_life": "opus"
 },
@@ -8539,9 +10076,16 @@
 "q_beec271b49a2": {
 "drug:amitriptyline/brands[Elatrol]": "sonnet"
 },
+"q_bef112c08bbc": {
+"drug:methadone/excretion[route:renal]": "opus"
+},
 "q_bf10baf0c6df": {
 "drug:tasimelteon/bindings[mt1:agonist]": "sonnet",
 "drug:tasimelteon/bindings[mt2:agonist]": "sonnet"
+},
+"q_bf2f18c4bae5": {
+"drug:asenapine/excretion[route:fecal]": "opus",
+"drug:asenapine/excretion[route:renal]": "opus"
 },
 "q_bf38ba0191ee": {
 "target:ache/classification": "sonnet",
@@ -8553,11 +10097,18 @@
 "q_bf41a81855c1": {
 "receptor:d2/release_modulation[autoreceptor:-:presynaptic_terminal:dopamine:decrease]": "opus"
 },
+"q_bf4f8dd8c118": {
+"drug:suvorexant/excretion[route:fecal]": "opus",
+"drug:suvorexant/excretion[route:renal]": "opus"
+},
 "q_bf60f5f2d224": {
 "drug:quetiapine/bindings[5ht1a:partial_agonist]": "sonnet",
 "drug:quetiapine/bindings[5ht2c:antagonist]": "sonnet",
 "drug:quetiapine/bindings[5ht7:antagonist]": "sonnet",
 "drug:quetiapine/bindings[net:reuptake_inhibitor]": "sonnet"
+},
+"q_bf7abf9d1c6c": {
+"drug:hydromorphone/excretion[route:renal]": "opus"
 },
 "q_bf83aeef6931": {
 "receptor:nachr_a7/release_modulation[autoreceptor:-:presynaptic_terminal:acetylcholine:increase]": "opus"
@@ -8572,6 +10123,13 @@
 "metabolite:o_desmethylvenlafaxine/bindings[net:reuptake_inhibitor]": "sonnet",
 "metabolite:o_desmethylvenlafaxine/bindings[sert:reuptake_inhibitor]": "sonnet"
 },
+"q_bfb0d684f1f3": {
+"drug:sibutramine/excretion[route:fecal]": "opus",
+"drug:sibutramine/excretion[route:renal]": "opus"
+},
+"q_bfb9e9f3f16d": {
+"drug:atropine/excretion[unchanged:urine]": "opus"
+},
 "q_bfeedd2dc66e": {
 "receptor:5ht1a/demographics[age:decrease:-]": "opus"
 },
@@ -8581,6 +10139,9 @@
 },
 "q_bffe9db1f1be": {
 "drug:aripiprazole/bindings[d2:partial_agonist]": "sonnet"
+},
+"q_c00593d65adb": {
+"drug:amphetamine_dl/excretion[urine_ph:acidic_faster]": "opus"
 },
 "q_c00fee5fb850": {
 "receptor:d2/effects[antagonism:prolactin_elevation]": "opus"
@@ -8592,9 +10153,16 @@
 "q_c0129d0bf30f": {
 "drug:haloperidol/bindings[sigma1:antagonist]": "sonnet"
 },
+"q_c01872324f8d": {
+"drug:bumetanide/excretion[route:renal]": "opus",
+"drug:bumetanide/excretion[unchanged:urine]": "opus"
+},
 "q_c01b1cb243bf": {
 "receptor:mglur2/effects[agonism:anxiolytic]": "opus",
 "receptor:mglur3/effects[agonism:anxiolytic]": "opus"
+},
+"q_c035129643a4": {
+"drug:ephedrine/excretion[urine_ph:dependent]": "opus"
 },
 "q_c03b9f0e3ddb": {
 "drug:fenfluramine/withdrawals[us:1997]": "opus"
@@ -8605,12 +10173,18 @@
 "q_c05b7ad2b67c": {
 "drug:clozapine/tmax": "sonnet"
 },
+"q_c064d73750d2": {
+"drug:trazodone/excretion[route:fecal]": "opus"
+},
 "q_c07db89596db": {
 "drug:aripiprazole/workup[glycaemia:during]": "opus"
 },
 "q_c0a034678372": {
 "drug:clomethiazole/categories": "opus",
 "drug:clomethiazole/originator": "opus"
+},
+"q_c0a25d2241e4": {
+"drug:tapentadol/excretion[route:renal]": "opus"
 },
 "q_c0b7aae8fc71": {
 "receptor:5ht3/locations[pons]": "sonnet"
@@ -8620,6 +10194,9 @@
 },
 "q_c0e60a6553a8": {
 "drug:lithium/brands[Lithostat tablets]": "sonnet"
+},
+"q_c0e816573a6d": {
+"drug:chloral_hydrate/excretion[route:renal]": "opus"
 },
 "q_c0f81056a2ee": {
 "projection:locus_coeruleus_R->caudate_R": "opus",
@@ -8634,17 +10211,29 @@
 "q_c137db7dacad": {
 "drug:levomilnacipran/bindings[net:reuptake_inhibitor]": "sonnet"
 },
+"q_c14425db1133": {
+"drug:opipramol/excretion[route:fecal]": "opus"
+},
 "q_c145051f8c5c": {
 "receptor:kappa/effects[agonism:analgesia]": "opus"
 },
+"q_c14bc2c37f97": {
+"drug:yohimbine/excretion[route:renal]": "opus"
+},
 "q_c1694bec90d6": {
 "drug:methadone/half_life": "opus"
+},
+"q_c1799991598f": {
+"drug:pethidine/excretion[route:renal]": "opus"
 },
 "q_c186b669c38f": {
 "receptor:m1/effects[agonism:gastric_acid_increase]": "opus"
 },
 "q_c1b136b12b7e": {
 "receptor:ampa/effects[agonism:seizures]": "opus"
+},
+"q_c1e3af5e5303": {
+"drug:naltrexone/excretion[route:renal]": "opus"
 },
 "q_c1e732ae458d": {
 "drug:flunitrazepam/first_approval": "opus"
@@ -8675,6 +10264,13 @@
 "drug:pizotifen/bindings[5ht2a:antagonist]": "sonnet",
 "drug:pizotifen/bindings[5ht2b:antagonist]": "sonnet",
 "drug:pizotifen/bindings[5ht2c:antagonist]": "sonnet"
+},
+"q_c2674d6a38f9": {
+"drug:flumazenil/excretion[route:fecal]": "opus",
+"drug:flumazenil/excretion[route:renal]": "opus"
+},
+"q_c26efd27db03": {
+"drug:sumatriptan/excretion[route:fecal]": "opus"
 },
 "q_c282c2e4e417": {
 "drug:sertraline/brands[Apo-Sertral]": "sonnet"
@@ -8742,6 +10338,10 @@
 "q_c2e6293e733c": {
 "receptor:nmda/release_modulation[heteroreceptor:-:gaba_interneuron:glutamate:decrease]": "opus"
 },
+"q_c2f308ed7be9": {
+"drug:cariprazine/excretion[route:fecal]": "opus",
+"drug:cariprazine/excretion[route:renal]": "opus"
+},
 "q_c2f5bc11620e": {
 "drug:rizatriptan/bindings[5ht1e:agonist]": "sonnet",
 "drug:rizatriptan/bindings[5ht1f:agonist]": "sonnet",
@@ -8787,6 +10387,10 @@
 "q_c3cafb4b366e": {
 "drug:zolpidem/brands[Ambien]": "sonnet"
 },
+"q_c3cfa8b97fd5": {
+"drug:ziprasidone/excretion[route:fecal]": "opus",
+"drug:ziprasidone/excretion[route:renal]": "opus"
+},
 "q_c3e1216b96f3": {
 "drug:fenfluramine/withdrawals[in:1998]": "opus"
 },
@@ -8800,8 +10404,19 @@
 "q_c3f60a660a2a": {
 "receptor:d2/effects[antagonism:antipsychotic]": "opus"
 },
+"q_c3faefe6400e": {
+"drug:moclobemide/excretion[route:fecal]": "opus",
+"drug:moclobemide/excretion[route:renal]": "opus"
+},
+"q_c40059d706b0": {
+"drug:loflazepate/excretion[route:renal]": "opus"
+},
 "q_c41f5f4fdd87": {
 "drug:butobarbital/originator": "opus"
+},
+"q_c43f41d1f1bd": {
+"drug:phenobarbital/excretion[route:fecal]": "opus",
+"drug:phenobarbital/excretion[route:renal]": "opus"
 },
 "q_c4457017d97a": {
 "drug:suvorexant/brands[Belsomra]": "sonnet"
@@ -8823,6 +10438,9 @@
 "q_c476383a4e4c": {
 "drug:methylphenidate_dl/bindings[dat:reuptake_inhibitor]": "sonnet",
 "drug:methylphenidate_dl/bindings[net:reuptake_inhibitor]": "sonnet"
+},
+"q_c47bcab71f06": {
+"drug:sevoflurane/excretion[route:renal]": "opus"
 },
 "q_c49380798a56": {
 "receptor:beta2/locations[cerebellum]": "sonnet",
@@ -8857,8 +10475,14 @@
 "q_c544e5fd8632": {
 "receptor:nmda/release_modulation[heteroreceptor:hippocampus:gaba_interneuron:glutamate:decrease]": "opus"
 },
+"q_c54ae4b5545d": {
+"drug:amitriptyline/excretion[route:renal]": "opus"
+},
 "q_c550419882f9": {
 "drug:2cb/bindings[5ht1a:agonist]": "opus"
+},
+"q_c56b44b0510c": {
+"drug:amphetamine_d/excretion[urine_ph:acidic_faster]": "opus"
 },
 "q_c5793d379fcf": {
 "drug:primidone/bindings[gaba_a:pam]": "sonnet"
@@ -8874,6 +10498,9 @@
 "q_c5beef88280a": {
 "drug:topiramate/first_approval": "opus"
 },
+"q_c5bf1e68493e": {
+"drug:zotepine/excretion[route:renal]": "opus"
+},
 "q_c5cc081a3699": {
 "drug:prazepam/metabolites[desmethyldiazepam]": "opus",
 "drug:prazepam/prodrug": "opus"
@@ -8881,6 +10508,10 @@
 "q_c5d8d36b8848": {
 "metabolite:oxymorphone/bindings[delta:agonist]": "opus",
 "metabolite:oxymorphone/bindings[kappa:agonist]": "opus"
+},
+"q_c5e452b15143": {
+"drug:tasimelteon/excretion[route:fecal]": "opus",
+"drug:tasimelteon/excretion[route:renal]": "opus"
 },
 "q_c60508371af8": {
 "drug:lofexidine/half_life": "sonnet"
@@ -8913,6 +10544,9 @@
 "projection:accumbens_R->globus_pallidus_R": "opus",
 "projection:accumbens_R->globus_pallidus_R/sign": "opus",
 "projection:accumbens_R->globus_pallidus_R/transmitter": "opus"
+},
+"q_c68ea6677e3f": {
+"drug:flurazepam/excretion[route:renal]": "opus"
 },
 "q_c6945d8c4e61": {
 "drug:clomethiazole/half_life": "sonnet"
@@ -8965,6 +10599,9 @@
 "q_c792005be9e8": {
 "drug:loxapine/brands[Loxapac]": "sonnet"
 },
+"q_c79246775184": {
+"drug:atropine/excretion[route:renal]": "opus"
+},
 "q_c7ade881d563": {
 "drug:zonisamide/bindings[nav:modulator]": "sonnet"
 },
@@ -8975,6 +10612,10 @@
 "q_c7d020cada63": {
 "projection:globus_pallidus_R->subthalamic_nucleus_R": "opus",
 "projection:globus_pallidus_R->subthalamic_nucleus_R/sign": "opus"
+},
+"q_c7de0ea4b1e7": {
+"drug:lurasidone/excretion[route:fecal]": "opus",
+"drug:lurasidone/excretion[route:renal]": "opus"
 },
 "q_c7e6167987c9": {
 "drug:baclofen/originator/now": "opus",
@@ -9011,6 +10652,19 @@
 "drug:mesoridazine/bindings[alpha1d:antagonist]": "sonnet",
 "drug:mesoridazine/bindings[d2:antagonist]": "sonnet",
 "drug:mesoridazine/bindings[m1:antagonist]": "sonnet"
+},
+"q_c86b903d7c40": {
+"drug:pseudoephedrine/excretion[urine_ph:acidic_faster]": "opus",
+"drug:pseudoephedrine/excretion[urine_ph:dependent]": "opus"
+},
+"q_c86f6ad60912": {
+"drug:midazolam/excretion[unchanged:urine]": "opus"
+},
+"q_c87863a1a276": {
+"drug:trimipramine/excretion[route:renal]": "opus"
+},
+"q_c8bf52e7f3e1": {
+"drug:sumatriptan/excretion[route:renal]": "opus"
 },
 "q_c8ee3dde6808": {
 "drug:imipramine/bindings[sert:reuptake_inhibitor]": "sonnet"
@@ -9056,6 +10710,14 @@
 "metabolite:8_hydroxyamoxapine/bindings[net:reuptake_inhibitor]": "sonnet",
 "metabolite:8_hydroxyamoxapine/bindings[sert:reuptake_inhibitor]": "sonnet"
 },
+"q_ca0a6fe5b2ae": {
+"drug:levomepromazine/excretion[route:fecal]": "opus",
+"drug:levomepromazine/excretion[route:renal]": "opus"
+},
+"q_ca0d7e9bf305": {
+"drug:tizanidine/excretion[route:fecal]": "opus",
+"drug:tizanidine/excretion[route:renal]": "opus"
+},
 "q_ca12676a56ac": {
 "drug:iloperidone/nbn": "sonnet"
 },
@@ -9070,6 +10732,13 @@
 "q_ca3234c60320": {
 "target:aadc/classification": "opus"
 },
+"q_ca44b5fc2b83": {
+"drug:primidone/excretion[route:renal]": "opus",
+"drug:primidone/excretion[unchanged:urine]": "opus"
+},
+"q_ca74619bb86e": {
+"drug:amphetamine_d/excretion[unchanged:urine]": "opus"
+},
 "q_ca75d53ff5b8": {
 "receptor:5ht7/release_modulation[heteroreceptor:-:gaba_interneuron:glutamate:decrease]": "opus"
 },
@@ -9079,6 +10748,9 @@
 "q_ca8fec6c103d": {
 "drug:nefazodone/bindings[5ht2a:antagonist]": "sonnet"
 },
+"q_caab2e35a58a": {
+"drug:dmt/excretion[route:renal]": "opus"
+},
 "q_cab1c8a0bbed": {
 "drug:lamotrigine/half_life": "sonnet"
 },
@@ -9087,6 +10759,9 @@
 },
 "q_cacfc9e5ec23": {
 "receptor:5ht2a/effects[antagonism:antipsychotic]": "opus"
+},
+"q_cad154e8b582": {
+"drug:oxycodone/excretion[unchanged:urine]": "opus"
 },
 "q_cadcc4dc8a27": {
 "drug:hydroxyzine/bindings[5ht2a:antagonist]": "opus",
@@ -9105,6 +10780,9 @@
 "q_cb35bba80fd6": {
 "drug:chloral_hydrate/half_life": "opus"
 },
+"q_cb3e88d97cc1": {
+"drug:tapentadol/excretion[route:renal]": "opus"
+},
 "q_cb5883425fe1": {
 "drug:diphenhydramine/brands[Sominex]": "sonnet"
 },
@@ -9113,6 +10791,10 @@
 },
 "q_cb8746ef880d": {
 "drug:paliperidone/workup[blood_count:during]": "opus"
+},
+"q_cb8bb1ec664e": {
+"drug:amphetamine_d/excretion[route:renal]": "opus",
+"drug:amphetamine_d/excretion[unchanged:urine]": "opus"
 },
 "q_cba30dfb30d2": {
 "drug:sulpiride/bindings[m1:antagonist]": "sonnet",
@@ -9144,6 +10826,9 @@
 },
 "q_cc32f8caa7bd": {
 "drug:lsd/originator": "opus"
+},
+"q_cc4ed25074e1": {
+"drug:pregabalin/excretion[route:renal]": "opus"
 },
 "q_cc564c343651": {
 "drug:zuranolone/bindings[gaba_a:modulator]": "sonnet",
@@ -9199,6 +10884,10 @@
 "q_cd79aa6b8eb0": {
 "drug:topiramate/half_life": "sonnet"
 },
+"q_cd95a7a408b9": {
+"drug:bremelanotide/excretion[route:fecal]": "opus",
+"drug:bremelanotide/excretion[route:renal]": "opus"
+},
 "q_cd96fa5d5cfd": {
 "drug:clobazam/workup[liver_function:during]": "opus",
 "drug:clobazam/workup[renal_function:during]": "opus"
@@ -9211,6 +10900,10 @@
 "drug:flumazenil/workup[blood_pressure:during]": "opus",
 "drug:flumazenil/workup[ecg:during]": "opus",
 "drug:flumazenil/workup[heart_rate:during]": "opus"
+},
+"q_cdc29396c045": {
+"drug:clomipramine/excretion[route:fecal]": "opus",
+"drug:clomipramine/excretion[route:renal]": "opus"
 },
 "q_cdc47d3d8fbb": {
 "drug:memantine/tmax": "sonnet"
@@ -9225,6 +10918,9 @@
 },
 "q_cdf448697dc6": {
 "receptor:m1/locations[accumbens]": "sonnet"
+},
+"q_cdf5242e1694": {
+"drug:methylphenidate_d/excretion[route:renal]": "opus"
 },
 "q_cdfcfc012822": {
 "drug:brexanolone/first_approval": "opus",
@@ -9241,6 +10937,12 @@
 },
 "q_ce697262a2e9": {
 "drug:nortriptyline/brands[Norpress]": "sonnet"
+},
+"q_ce7d373f6576": {
+"drug:mdma/excretion[route:renal]": "opus"
+},
+"q_ce80e86e7fe7": {
+"drug:clotiazepam/excretion[unchanged:urine]": "opus"
 },
 "q_ce81983c2b4b": {
 "drug:haloperidol/nbn": "sonnet"
@@ -9335,6 +11037,9 @@
 "q_cf8fa6dc5e18": {
 "drug:imipramine/brands[Tofranil]": "sonnet"
 },
+"q_cf90e77ca57e": {
+"drug:phenazepam/excretion[route:renal]": "opus"
+},
 "q_cf91652b4136": {
 "drug:temazepam/half_life": "sonnet"
 },
@@ -9348,11 +11053,17 @@
 "receptor:alpha1b/locations[cerebellum]": "sonnet",
 "receptor:alpha1b/locations[pons]": "sonnet"
 },
+"q_d00399fd2733": {
+"drug:domperidone/excretion[unchanged:urine]": "opus"
+},
 "q_d020cbd5ebbe": {
 "drug:lormetazepam/brands[Noctamide]": "sonnet"
 },
 "q_d02c92c54387": {
 "drug:methylphenidate_dl/brands[Rilatine]": "sonnet"
+},
+"q_d03a795b99a8": {
+"drug:pentazocine/excretion[route:renal]": "opus"
 },
 "q_d05ffd9d6dd7": {
 "receptor:ampa/classification[family]": "sonnet",
@@ -9372,11 +11083,17 @@
 "q_d0d35aef12f1": {
 "drug:caffeine/bindings[ache:enzyme_inhibitor]": "opus"
 },
+"q_d0e4a0fcbe5d": {
+"drug:phenobarbital/excretion[route:renal]": "opus"
+},
 "q_d12639d5147c": {
 "drug:mirtazapine/categories": "sonnet"
 },
 "q_d12914e69266": {
 "drug:thioridazine/half_life": "opus"
+},
+"q_d138f6e690fe": {
+"drug:guanfacine/excretion[route:renal]": "opus"
 },
 "q_d14883fae658": {
 "receptor:5ht2a/demographics[age:decrease:-]": "opus"
@@ -9403,6 +11120,9 @@
 "q_d1e8d8f05699": {
 "drug:varenicline/brands[Chantix]": "sonnet"
 },
+"q_d1e9e2143342": {
+"drug:isocarboxazid/excretion[route:renal]": "opus"
+},
 "q_d2031cc59ec4": {
 "drug:guanfacine/nbn": "sonnet"
 },
@@ -9425,6 +11145,9 @@
 "q_d258806361f8": {
 "drug:nortriptyline/bindings[h1:antagonist]": "sonnet"
 },
+"q_d262176ba8ca": {
+"drug:escitalopram/excretion[route:renal]": "opus"
+},
 "q_d26276d3c392": {
 "receptor:kappa/locations[claustrum]": "sonnet"
 },
@@ -9445,6 +11168,10 @@
 },
 "q_d31b0f5ab3b6": {
 "drug:agomelatine/workup[liver_function:before]": "opus"
+},
+"q_d31fe5549a7e": {
+"drug:duloxetine/excretion[route:fecal]": "opus",
+"drug:duloxetine/excretion[route:renal]": "opus"
 },
 "q_d3392fdbb282": {
 "drug:quetiapine/bindings[alpha2:antagonist]": "opus"
@@ -9477,6 +11204,10 @@
 "receptor:alpha1b/locations[hippocampus]": "sonnet",
 "receptor:alpha1b/locations[midbrain]": "sonnet",
 "receptor:alpha1b/locations[thalamus]": "sonnet"
+},
+"q_d3fd20a7b689": {
+"drug:opipramol/excretion[route:renal]": "opus",
+"drug:opipramol/excretion[unchanged:urine]": "opus"
 },
 "q_d41b9d0830db": {
 "drug:amphetamine_d/brands[Zenzedi]": "sonnet"
@@ -9514,6 +11245,9 @@
 "q_d4a662cc1eeb": {
 "drug:nefazodone/metabolites[meta_chlorophenylpiperazine]": "opus"
 },
+"q_d4b58318163f": {
+"drug:sertraline/excretion[route:fecal]": "opus"
+},
 "q_d4c93eed8ccc": {
 "drug:tiapride/tmax": "sonnet"
 },
@@ -9529,6 +11263,10 @@
 "q_d4fe43c45cf5": {
 "receptor:5ht3/release_modulation[heteroreceptor:frontal:gaba_interneuron:acetylcholine:decrease]": "opus",
 "receptor:5ht3/release_modulation[heteroreceptor:frontal:gaba_interneuron:norepinephrine:decrease]": "opus"
+},
+"q_d50a5e2fc4cd": {
+"drug:bromocriptine/excretion[route:fecal]": "opus",
+"drug:bromocriptine/excretion[route:renal]": "opus"
 },
 "q_d51193c89a5f": {
 "receptor:d2/demographics[age:decrease:-]": "opus"
@@ -9561,6 +11299,12 @@
 },
 "q_d596b8a88e8f": {
 "drug:paliperidone/brands[Invega Sustenna]": "sonnet"
+},
+"q_d59a66d0d430": {
+"drug:escitalopram/excretion[route:renal]": "opus"
+},
+"q_d5aa85dc5ec4": {
+"drug:cyamemazine/excretion[route:renal]": "opus"
 },
 "q_d5cebbb3638e": {
 "receptor:mu/locations[vta]": "sonnet"
@@ -9630,6 +11374,9 @@
 "q_d6f61c5c815a": {
 "receptor:alpha2c/locations[hippocampus]": "sonnet"
 },
+"q_d6f9fdb02727": {
+"drug:quazepam/excretion[unchanged:urine]": "opus"
+},
 "q_d702b6b68e45": {
 "receptor:5ht1a/locations[amygdala]": "sonnet"
 },
@@ -9648,6 +11395,9 @@
 },
 "q_d7c2e5988666": {
 "drug:esketamine/formulations[nasal]/release": "opus"
+},
+"q_d7cf77586be0": {
+"drug:pseudoephedrine/excretion[urine_ph:dependent]": "opus"
 },
 "q_d7d4098977f6": {
 "receptor:nachr_muscle/effects[antagonism:muscle_weakness]": "opus"
@@ -9711,6 +11461,9 @@
 "q_d905ed3a16cc": {
 "receptor:5ht2b/release_modulation[autoreceptor:-:cell_body:serotonin:increase]": "opus"
 },
+"q_d928c3d3dee8": {
+"drug:alprazolam/excretion[route:renal]": "opus"
+},
 "q_d939e924b4b0": {
 "drug:zuranolone/first_approval": "opus"
 },
@@ -9737,6 +11490,9 @@
 "drug:buprenorphine/brands[Temgésic]": "sonnet",
 "drug:buprenorphine/formulations[sublingual]/brands[Temgésic]": "opus"
 },
+"q_d9b73706436f": {
+"drug:pimozide/excretion[route:renal]": "opus"
+},
 "q_d9b918d52292": {
 "drug:thiopental/half_life": "sonnet"
 },
@@ -9748,6 +11504,9 @@
 },
 "q_d9d72b04ec47": {
 "drug:glutethimide/half_life": "sonnet"
+},
+"q_d9f1d046ca0f": {
+"drug:zaleplon/excretion[route:renal]": "opus"
 },
 "q_da047d2fe0ec": {
 "drug:dothiepin/nbn": "sonnet"
@@ -9798,6 +11557,9 @@
 "receptor:alpha2b/release_modulation[autoreceptor:-:presynaptic_terminal:norepinephrine:decrease]": "opus",
 "receptor:alpha2c/release_modulation[autoreceptor:-:presynaptic_terminal:norepinephrine:decrease]": "opus"
 },
+"q_dae61ef685d1": {
+"drug:oxycodone/excretion[unchanged:urine]": "opus"
+},
 "q_daf0d09f4db1": {
 "drug:methamphetamine/bindings[alpha2a:agonist]": "opus"
 },
@@ -9809,6 +11571,10 @@
 },
 "q_db1001a0bf1d": {
 "drug:bupropion/formulations[xr]/release": "opus"
+},
+"q_db2d287f5bc3": {
+"drug:fluphenazine/excretion[route:fecal]": "opus",
+"drug:fluphenazine/excretion[route:renal]": "opus"
 },
 "q_db42113ac31c": {
 "drug:agomelatine/workup[liver_function:before]": "opus"
@@ -9839,6 +11605,9 @@
 "q_dba21c64ade6": {
 "drug:oxcarbazepine/workup[thyroid_function:during]": "opus"
 },
+"q_dba83981089b": {
+"drug:dexmedetomidine/excretion[route:renal]": "opus"
+},
 "q_dbc2037fb57a": {
 "drug:lithium/brands[Eskalith]": "sonnet"
 },
@@ -9857,8 +11626,14 @@
 "drug:methamphetamine/bindings[net:releaser]": "opus",
 "drug:methamphetamine/bindings[sert:releaser]": "opus"
 },
+"q_dcbbdd6e9bba": {
+"drug:mianserin/excretion[route:fecal]": "opus"
+},
 "q_dcc6d85969c8": {
 "receptor:mt2/effects[agonism:circadian_shift]": "opus"
+},
+"q_dcc6f4303e58": {
+"drug:pethidine/excretion[route:renal]": "opus"
 },
 "q_dccd35839a5b": {
 "receptor:mglur1/effects[antagonism:ataxia]": "opus"
@@ -9875,6 +11650,16 @@
 "q_dd1ab7f23769": {
 "drug:isocarboxazid/brands[Marplan]": "sonnet"
 },
+"q_dd2a0f8c988c": {
+"drug:rivastigmine/excretion[route:renal]": "opus"
+},
+"q_dd409e5fe15d": {
+"drug:methadone/excretion[route:fecal]": "opus",
+"drug:methadone/excretion[route:renal]": "opus"
+},
+"q_dd44ea065634": {
+"drug:topiramate/excretion[unchanged:urine]": "opus"
+},
 "q_dd480c6276a1": {
 "drug:pentobarbital/categories": "opus"
 },
@@ -9883,6 +11668,9 @@
 },
 "q_dd5bd9f6e4e8": {
 "drug:clozapine/brands[Leponex]": "sonnet"
+},
+"q_dd6d3ec3a1a0": {
+"drug:cocaine/excretion[route:renal]": "opus"
 },
 "q_dd72521ac999": {
 "drug:quazepam/nbn": "sonnet"
@@ -9932,6 +11720,9 @@
 "q_de2e3caf571e": {
 "drug:baclofen/categories": "opus"
 },
+"q_de301f06b6ab": {
+"drug:amphetamine_dl/excretion[unchanged:urine]": "opus"
+},
 "q_de342a0ecb5b": {
 "drug:nitrazepam/tmax": "sonnet"
 },
@@ -9978,8 +11769,15 @@
 "q_df0066d1bde0": {
 "drug:tianeptine/categories": "sonnet"
 },
+"q_df0458cc64b2": {
+"drug:flunarizine/excretion[route:fecal]": "opus",
+"drug:flunarizine/excretion[route:renal]": "opus"
+},
 "q_df0e1469cfe0": {
 "drug:mescaline/half_life": "sonnet"
+},
+"q_df16922282ac": {
+"drug:amitriptyline/excretion[route:renal]": "opus"
 },
 "q_df52b5091f52": {
 "receptor:kappa/effects[agonism:prolactin_elevation]": "opus"
@@ -10043,6 +11841,9 @@
 "q_e0d5d48495ea": {
 "drug:trazodone/bindings[5ht2a:antagonist]": "sonnet"
 },
+"q_e0d995dad9f7": {
+"drug:venlafaxine/excretion[route:renal]": "opus"
+},
 "q_e1066292f575": {
 "drug:lisdexamfetamine/brands[Vyvanse]": "sonnet"
 },
@@ -10077,6 +11878,9 @@
 },
 "q_e1c945c0a565": {
 "receptor:5ht7/effects[antagonism:sleep_promotion]": "opus"
+},
+"q_e1d60c321adc": {
+"drug:ethosuximide/excretion[route:renal]": "opus"
 },
 "q_e1eb0eff0da9": {
 "drug:methaqualone/brands[Malsed]": "sonnet"
@@ -10164,6 +11968,9 @@
 "receptor:gaba_b/classification[family]": "sonnet",
 "receptor:gaba_b/classification[receptor_class]": "sonnet"
 },
+"q_e36e45cdaa18": {
+"drug:methylphenidate_dl/excretion[route:fecal]": "opus"
+},
 "q_e3749e7dd845": {
 "drug:nefazodone/withdrawals[ca:2003]": "opus"
 },
@@ -10173,6 +11980,7 @@
 "drug:mirtazapine/bindings[5ht3:antagonist]": "sonnet"
 },
 "q_e3931ec47c64": {
+"drug:cocaine/excretion[unchanged:urine]": "opus",
 "drug:cocaine/half_life": "opus"
 },
 "q_e3a1b1ac191c": {
@@ -10206,6 +12014,9 @@
 },
 "q_e415ba57eb0e": {
 "receptor:h3/effects[antagonism:wakefulness]": "opus"
+},
+"q_e43c88af7abd": {
+"drug:isocarboxazid/excretion[route:renal]": "opus"
 },
 "q_e44c9490891f": {
 "receptor:5ht3/effects[antagonism:antidepressant]": "opus"
@@ -10259,11 +12070,18 @@
 "q_e4e3252cdb00": {
 "drug:guanfacine/brands[Tenex]": "sonnet"
 },
+"q_e50051c65639": {
+"drug:perospirone/excretion[route:renal]": "opus",
+"drug:perospirone/excretion[unchanged:urine]": "opus"
+},
 "q_e50710cfa7c6": {
 "drug:trazodone/categories": "sonnet"
 },
 "q_e50f0518072e": {
 "drug:dothiepin/bindings[sert:reuptake_inhibitor]": "sonnet"
+},
+"q_e5132f173e29": {
+"drug:pseudoephedrine/excretion[unchanged:urine]": "opus"
 },
 "q_e52014920fa6": {
 "drug:clonazepam/bindings[gaba_a:pam]": "sonnet"
@@ -10271,6 +12089,12 @@
 "q_e5323e9e6e06": {
 "receptor:5ht1a/effects[agonism:hypothermia]": "opus",
 "receptor:5ht1a/effects[agonism:vasodilation]": "opus"
+},
+"q_e53496d73506": {
+"drug:molindone/excretion[unchanged:urine]": "opus"
+},
+"q_e539103476d3": {
+"drug:tetrabenazine/excretion[route:renal]": "opus"
 },
 "q_e53fadbc2add": {
 "drug:naltrexonebupropion/bindings[mu:antagonist]": "sonnet"
@@ -10280,6 +12104,10 @@
 },
 "q_e547e8eedaa9": {
 "drug:istradefylline/half_life": "sonnet"
+},
+"q_e54c45d4751b": {
+"drug:morphine/excretion[route:fecal]": "opus",
+"drug:morphine/excretion[route:renal]": "opus"
 },
 "q_e5640c205618": {
 "drug:naltrexonebupropion/nbn": "sonnet"
@@ -10296,6 +12124,9 @@
 "q_e58a50568d07": {
 "drug:trihexyphenidyl/brands[Artane]": "sonnet"
 },
+"q_e5c33e2e86f3": {
+"drug:entacapone/excretion[route:fecal]": "opus"
+},
 "q_e5d95cf4d52d": {
 "drug:topiramate/brands[Qsymia]": "sonnet"
 },
@@ -10308,6 +12139,10 @@
 },
 "q_e60e7a6186b0": {
 "drug:prazepam/metabolites[desmethyldiazepam]": "sonnet"
+},
+"q_e6241bd755c5": {
+"drug:flumazenil/excretion[route:fecal]": "opus",
+"drug:flumazenil/excretion[route:renal]": "opus"
 },
 "q_e62f1f3b8c3c": {
 "drug:pimozide/bindings[alpha1a:antagonist]": "sonnet",
@@ -10362,6 +12197,9 @@
 "q_e6ad37ea123d": {
 "drug:vigabatrin/bindings[gaba_t:enzyme_inhibitor]": "sonnet"
 },
+"q_e6c9daedf73f": {
+"drug:atomoxetine/excretion[unchanged:urine]": "opus"
+},
 "q_e6cc45c414fd": {
 "drug:sibutramine/originator_country": "opus"
 },
@@ -10389,6 +12227,9 @@
 },
 "q_e735e1feeb03": {
 "drug:sumatriptan/half_life": "sonnet"
+},
+"q_e737faa7835e": {
+"drug:zopiclone/excretion[route:renal]": "opus"
 },
 "q_e74c1c4da72c": {
 "receptor:d4/locations[amygdala]": "sonnet",
@@ -10426,6 +12267,9 @@
 "q_e7db4dc686a1": {
 "receptor:beta1/classification[synaptic]": "opus"
 },
+"q_e7ddb72fdfec": {
+"drug:primidone/excretion[route:renal]": "opus"
+},
 "q_e8533f788019": {
 "drug:perampanel/categories": "opus"
 },
@@ -10445,6 +12289,13 @@
 "q_e8881f1f65d6": {
 "drug:zolpidem/brands[Sublinox]": "sonnet"
 },
+"q_e8884da417cf": {
+"drug:methylphenidate_dl/excretion[route:renal]": "opus"
+},
+"q_e89194105e0c": {
+"drug:ephedrine/excretion[route:renal]": "opus",
+"drug:ephedrine/excretion[unchanged:urine]": "opus"
+},
 "q_e89391fdfb21": {
 "drug:zopiclone/tmax": "sonnet"
 },
@@ -10453,6 +12304,10 @@
 },
 "q_e8cdeaa7c7f9": {
 "drug:lithium/brands[Lithium citrate syrup]": "sonnet"
+},
+"q_e8cf5fd05571": {
+"drug:rimonabant/excretion[route:fecal]": "opus",
+"drug:rimonabant/excretion[route:renal]": "opus"
 },
 "q_e8d1ff2708e3": {
 "drug:thiopental/brands[Nesdonal]": "sonnet",
@@ -10474,11 +12329,18 @@
 "q_e92d77b7f09e": {
 "drug:prazosin/brands[Minipress]": "sonnet"
 },
+"q_e944ae5e2eda": {
+"drug:thioridazine/excretion[route:fecal]": "opus"
+},
 "q_e95195a24433": {
 "drug:erenumab/first_approval": "opus"
 },
 "q_e9550123b59e": {
 "drug:bremelanotide/categories": "sonnet"
+},
+"q_e96707fb671a": {
+"drug:sertraline/excretion[route:fecal]": "opus",
+"drug:sertraline/excretion[route:renal]": "opus"
 },
 "q_e96fdf1d9906": {
 "drug:cabergoline/workup[echocardiography:during]": "opus"
@@ -10488,6 +12350,10 @@
 },
 "q_e979f7df8218": {
 "drug:agomelatine/first_approval": "opus"
+},
+"q_e97e8a1c9726": {
+"drug:nabilone/excretion[route:fecal]": "opus",
+"drug:nabilone/excretion[route:renal]": "opus"
 },
 "q_e992255a0513": {
 "drug:cytisine/categories": "sonnet"
@@ -10507,6 +12373,14 @@
 },
 "q_e9f72bd500ab": {
 "drug:eszopiclone/categories": "sonnet"
+},
+"q_e9fdce0dedfe": {
+"drug:melatonin/excretion[unchanged:urine]": "opus"
+},
+"q_ea1603a8677a": {
+"drug:bupropion/excretion[route:fecal]": "opus",
+"drug:bupropion/excretion[route:renal]": "opus",
+"drug:bupropion/excretion[unchanged:urine]": "opus"
 },
 "q_ea27ba612d3d": {
 "drug:brexanolone/brands[Zulresso]": "sonnet"
@@ -10530,6 +12404,10 @@
 "receptor:alpha2a/classification[synaptic]": "opus",
 "receptor:alpha2b/classification[synaptic]": "opus"
 },
+"q_eaa7ec1a6780": {
+"drug:dothiepin/excretion[route:fecal]": "opus",
+"drug:dothiepin/excretion[route:renal]": "opus"
+},
 "q_eaa9bb2e4270": {
 "drug:methylphenidate_dl/workup[blood_pressure:before]": "opus",
 "drug:methylphenidate_dl/workup[heart_rate:before]": "opus"
@@ -10552,6 +12430,9 @@
 "q_eb2ddb90628f": {
 "drug:zolpidem/bindings[gaba_a:pam]": "sonnet"
 },
+"q_eb2ee5c786c8": {
+"drug:melatonin/excretion[route:renal]": "opus"
+},
 "q_eb398b367d48": {
 "drug:esketamine/brands[Spravato]": "sonnet"
 },
@@ -10570,6 +12451,10 @@
 "q_eb600933b500": {
 "receptor:d2/effects[antagonism:tardive_dyskinesia]": "opus"
 },
+"q_eb787df8cce2": {
+"drug:asenapine/excretion[route:fecal]": "opus",
+"drug:asenapine/excretion[route:renal]": "opus"
+},
 "q_eb8bec3e9e3a": {
 "drug:donepezil/bindings[ache:enzyme_inhibitor]": "sonnet"
 },
@@ -10584,8 +12469,16 @@
 "q_ec035a186673": {
 "receptor:gaba_b/classification[sign]": "opus"
 },
+"q_ec5b4c80773d": {
+"drug:mdma/excretion[route:renal]": "opus",
+"drug:mdma/excretion[unchanged:urine]": "opus"
+},
 "q_ec5b557b1df0": {
 "drug:ramelteon/first_approval": "opus"
+},
+"q_ec6ae45f8704": {
+"drug:tolcapone/excretion[route:fecal]": "opus",
+"drug:tolcapone/excretion[route:renal]": "opus"
 },
 "q_ecb67164bdb9": {
 "drug:trifluoperazine/first_approval": "opus"
@@ -10614,12 +12507,23 @@
 "q_ed18b1b9c7db": {
 "drug:moclobemide/categories": "sonnet"
 },
+"q_ed45076a1885": {
+"drug:pizotifen/excretion[route:fecal]": "opus",
+"drug:pizotifen/excretion[route:renal]": "opus"
+},
 "q_ed9339ca14b5": {
 "drug:mianserin/first_approval": "opus"
+},
+"q_ed992c4ca497": {
+"drug:methylfolate_l/excretion[route:renal]": "opus"
 },
 "q_edacd7b199a0": {
 "drug:naltrexone/workup[liver_function:before]": "opus",
 "drug:naltrexone/workup[liver_function:during]": "opus"
+},
+"q_edb453a4d606": {
+"drug:buspirone/excretion[route:fecal]": "opus",
+"drug:buspirone/excretion[route:renal]": "opus"
 },
 "q_edd1f55f5a19": {
 "drug:olanzapine/workup[lipids:before]": "opus",
@@ -10653,6 +12557,9 @@
 "q_ee101b8043ec": {
 "drug:imipramine/categories": "sonnet"
 },
+"q_ee13547bdc1b": {
+"drug:cabergoline/excretion[unchanged:urine]": "opus"
+},
 "q_ee175484645c": {
 "drug:naloxone/categories": "opus"
 },
@@ -10672,6 +12579,9 @@
 },
 "q_ee8465e6aec7": {
 "receptor:d3/effects[antagonism:antidepressant]": "opus"
+},
+"q_eea4b7edb01f": {
+"drug:pramipexole/excretion[unchanged:urine]": "opus"
 },
 "q_eeb98b483b25": {
 "drug:nefazodone/brands[Dutonin]": "sonnet"
@@ -10698,6 +12608,10 @@
 },
 "q_eeedcf270ddb": {
 "drug:methylphenidate_dl/formulations[xr]/release": "opus"
+},
+"q_eef2fde21bf7": {
+"drug:chlordiazepoxide/excretion[route:renal]": "opus",
+"drug:chlordiazepoxide/excretion[unchanged:urine]": "opus"
 },
 "q_ef24b8c91d3b": {
 "receptor:h3/locations[caudate]": "sonnet",
@@ -10750,6 +12664,10 @@
 "q_efcd2896996e": {
 "drug:carbamazepine/brands[Equetro]": "sonnet"
 },
+"q_eff2bb330b42": {
+"drug:furosemide/excretion[renal_process:tubular_secretion]": "opus",
+"drug:furosemide/excretion[route:renal]": "opus"
+},
 "q_f02329429198": {
 "drug:agomelatine/brands[Melitor]": "sonnet"
 },
@@ -10762,11 +12680,17 @@
 "drug:duloxetine/enzymes[cyp2d6:substrate]": "opus",
 "drug:duloxetine/enzymes[cyp2d6:substrate]/strength": "opus"
 },
+"q_f04a0136ebb1": {
+"drug:levodopa/excretion[route:renal]": "opus"
+},
 "q_f06153ef4fc8": {
 "drug:citalopram/brands[Talam]": "sonnet"
 },
 "q_f062dc59ffbb": {
 "drug:paliperidone/bindings[d2:antagonist]": "sonnet"
+},
+"q_f0659ce6ad16": {
+"drug:clonidine/excretion[route:fecal]": "opus"
 },
 "q_f08cc23e7b57": {
 "drug:buspirone/tmax": "sonnet"
@@ -10803,6 +12727,13 @@
 "q_f16c0ae00bdb": {
 "drug:agomelatine/bindings[mt1:agonist]": "sonnet",
 "drug:agomelatine/bindings[mt2:agonist]": "sonnet"
+},
+"q_f1783f99eb9c": {
+"drug:olanzapine/excretion[route:fecal]": "opus",
+"drug:olanzapine/excretion[route:renal]": "opus"
+},
+"q_f18ef77ffe40": {
+"drug:memantine/excretion[urine_ph:dependent]": "opus"
 },
 "q_f1955921b297": {
 "drug:bromperidol/originator": "opus"
@@ -10903,6 +12834,9 @@
 "q_f38d36f84dc1": {
 "drug:yohimbine/categories": "sonnet"
 },
+"q_f3af8c9274c4": {
+"drug:tramadol/excretion[unchanged:urine]": "opus"
+},
 "q_f3b1eea42657": {
 "drug:viloxazine/bindings[5ht7:antagonist]": "opus",
 "drug:viloxazine/bindings[alpha1b:antagonist]": "opus",
@@ -10919,6 +12853,9 @@
 },
 "q_f3f3e81862dc": {
 "drug:zuclopenthixol/workup[ecg:before]": "opus"
+},
+"q_f404d886df0b": {
+"drug:lsd/excretion[route:renal]": "opus"
 },
 "q_f404da34c1a2": {
 "drug:biperiden/bindings[m1:antagonist]": "sonnet",
@@ -10945,6 +12882,9 @@
 "q_f44aed55af06": {
 "projection:mammillary_R->thalamus_R": "opus",
 "projection:mammillary_R->thalamus_R/transmitter": "opus"
+},
+"q_f45813057a5c": {
+"drug:melatonin/excretion[route:renal]": "opus"
 },
 "q_f4658e18f1cf": {
 "drug:meprobamate/withdrawals[ca:2013]": "opus",
@@ -11010,6 +12950,18 @@
 "q_f54568569b35": {
 "drug:zuranolone/half_life": "opus"
 },
+"q_f54aeabab1c0": {
+"drug:flibanserin/excretion[route:fecal]": "opus",
+"drug:flibanserin/excretion[route:renal]": "opus"
+},
+"q_f54b8362c4fc": {
+"drug:clonidine/excretion[route:renal]": "opus",
+"drug:clonidine/excretion[unchanged:urine]": "opus"
+},
+"q_f55169f3547f": {
+"drug:rotigotine/excretion[route:fecal]": "opus",
+"drug:rotigotine/excretion[route:renal]": "opus"
+},
 "q_f55bc246b289": {
 "receptor:glycine/locations[cerebellum]": "sonnet",
 "receptor:glycine/locations[hippocampus]": "sonnet"
@@ -11043,6 +12995,14 @@
 },
 "q_f617d09de9c1": {
 "target:dat/effects[inhibition:euphoria]": "opus"
+},
+"q_f62f3673a899": {
+"drug:tiagabine/excretion[route:fecal]": "opus",
+"drug:tiagabine/excretion[route:renal]": "opus"
+},
+"q_f63b0d4e1f8e": {
+"drug:tianeptine/excretion[route:fecal]": "opus",
+"drug:tianeptine/excretion[route:renal]": "opus"
 },
 "q_f649968fd547": {
 "drug:selegiline/half_life": "sonnet"
@@ -11154,6 +13114,9 @@
 "q_f81f202b1265": {
 "drug:furosemide/categories": "opus"
 },
+"q_f828cb2237c1": {
+"drug:fluvoxamine/excretion[unchanged:urine]": "opus"
+},
 "q_f82ff4f6d729": {
 "drug:temazepam/brands[Planum]": "sonnet"
 },
@@ -11168,6 +13131,10 @@
 },
 "q_f869a311a4e5": {
 "drug:flupenthixol/nbn": "sonnet"
+},
+"q_f88cdf651d3a": {
+"drug:acamprosate/excretion[route:renal]": "opus",
+"drug:acamprosate/excretion[unchanged:urine]": "opus"
 },
 "q_f8973c14bc97": {
 "drug:propranolol/categories": "sonnet"
@@ -11230,6 +13197,9 @@
 "q_f9d8483fee26": {
 "drug:donepezil/categories": "sonnet"
 },
+"q_f9d976933a6a": {
+"drug:rizatriptan/excretion[route:renal]": "opus"
+},
 "q_f9e7eab58cae": {
 "drug:nabilone/originator": "opus"
 },
@@ -11242,6 +13212,10 @@
 "q_fa233092bb72": {
 "drug:levetiracetam/formulations[ir]/tmax": "opus",
 "drug:levetiracetam/tmax": "opus"
+},
+"q_fa23b9348e3e": {
+"drug:brexpiprazole/excretion[route:fecal]": "opus",
+"drug:brexpiprazole/excretion[route:renal]": "opus"
 },
 "q_fa3939ce257b": {
 "drug:acamprosate/first_approval": "opus"
@@ -11262,6 +13236,10 @@
 },
 "q_fad30cc028d0": {
 "drug:melperone/categories": "sonnet"
+},
+"q_fad7a9a021da": {
+"drug:tolcapone/excretion[route:fecal]": "opus",
+"drug:tolcapone/excretion[route:renal]": "opus"
 },
 "q_fad8e5ca1225": {
 "drug:vilazodone/bindings[sert:reuptake_inhibitor]": "sonnet"
@@ -11293,6 +13271,9 @@
 "projection:locus_coeruleus_R->globus_pallidus_R": "opus",
 "projection:raphe->globus_pallidus_R": "opus"
 },
+"q_fb6eb6ef503c": {
+"drug:zonisamide/excretion[route:renal]": "opus"
+},
 "q_fba4e5de7037": {
 "drug:furosemide/formulations[ir]/half_life": "opus",
 "drug:furosemide/half_life": "opus"
@@ -11309,6 +13290,10 @@
 "q_fbd2223aba80": {
 "drug:donepezil/first_approval": "opus",
 "drug:donepezil/originator": "opus"
+},
+"q_fbda7e105aa1": {
+"drug:citalopram/excretion[route:renal]": "opus",
+"drug:citalopram/excretion[unchanged:urine]": "opus"
 },
 "q_fbe185762a17": {
 "drug:phencyclidine/bindings[nmda:antagonist]": "sonnet"
@@ -11364,6 +13349,9 @@
 "drug:clozapine/bindings[5ht1a:antagonist]": "sonnet",
 "drug:clozapine/bindings[5ht2c:antagonist]": "sonnet"
 },
+"q_fca19889661b": {
+"drug:tasimelteon/excretion[unchanged:urine]": "opus"
+},
 "q_fca68e94e10b": {
 "drug:furosemide/first_approval": "opus"
 },
@@ -11379,6 +13367,10 @@
 },
 "q_fcf754e9065c": {
 "drug:fentanyl/originator": "opus"
+},
+"q_fd026d4dc9e3": {
+"drug:risperidone/excretion[route:fecal]": "opus",
+"drug:risperidone/excretion[route:renal]": "opus"
 },
 "q_fd07438aa9c4": {
 "drug:amphetamine_dl/brands[Adzenys ER]": "sonnet"
@@ -11407,6 +13399,9 @@
 },
 "q_fda224a28c60": {
 "drug:quetiapine/nbn": "sonnet"
+},
+"q_fdac828b14f7": {
+"drug:amisulpride/excretion[unchanged:urine]": "opus"
 },
 "q_fdad34a4176e": {
 "receptor:5ht2c/effects[antagonism:weight_gain]": "opus"
@@ -11512,6 +13507,9 @@
 "q_ff27fe65ceae": {
 "drug:meclizine/tmax": "sonnet"
 },
+"q_ff44983f661f": {
+"drug:lacosamide/excretion[unchanged:urine]": "opus"
+},
 "q_ff4da96697ed": {
 "drug:cyamemazine/bindings[5ht2a:antagonist]": "sonnet"
 },
@@ -11555,5 +13553,8 @@
 },
 "q_ffe7d14c370f": {
 "drug:sertindole/categories": "sonnet"
+},
+"q_fff5704feca2": {
+"drug:amphetamine_dl/excretion[route:renal]": "opus"
 }
 }
