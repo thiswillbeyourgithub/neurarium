@@ -1,6 +1,28 @@
 {
   "versions": [
     {
+      "version": "3.165.0",
+      "date": "2026-11-18",
+      "entries": [
+        {
+          "category": "added",
+          "text": "The Data browser's filters, sourcing filter and sorting are kept in the address, so a link reopens the same combination",
+          "commits": [
+            "91fa1bae",
+            "ed89ce43"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Typing in a Data browser filter no longer lags, a tap on a filter box selects its text and brings up the phone keyboard, and rows sort by smallest value first by default",
+          "commits": [
+            "91fa1bae",
+            "ed89ce43"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.164.0",
       "date": "2026-11-18",
       "entries": [
