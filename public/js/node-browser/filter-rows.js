@@ -13,18 +13,19 @@ const LONG_PRESS_MS = 400;
 /**
  * @param {object} opts
  * @param {Function} opts.t i18n lookup
- * @param {Array<[string, string]>} opts.kindOptions [kind, label] pairs for the kind box
+ * @param {(i: number) => string[]} opts.kindLabelsFor the kind labels filter `i`'s box
+ *   offers (asked each time it opens, see query.compatibleKinds)
  * @param {(s: string) => string} opts.fold case + accent fold, for the kind suggestions
- * @param {() => void} opts.onChange called after any edit (typing is debounced by caller)
+ * @param {() => void} opts.onChange called after any edit (the query is now stale)
+ * @param {() => void} opts.onSubmit Enter in a text or kind box: run the query
  * @returns {{root: HTMLElement, filters: object[], setFilters: (list: object[]) => void,
  *            showMetabolites: (fn: Function) => void}}
  */
-export function createFilterStack({ t, kindOptions, fold, onChange }) {
+export function createFilterStack({ t, kindLabelsFor, fold, onChange, onSubmit }) {
   const filters = [];
   const rowEls = [];
   const root = el("div", "node-filter-stack");
   const listEl = el("div", "node-filters");
-  const kindLabels = kindOptions.map(([, label]) => label);
   const addBtn = btn("node-add-filter", t("nodes.addFilter"));
 
   // Ids, operator and remove visibility follow position: the first row has no operator
@@ -66,8 +67,8 @@ export function createFilterStack({ t, kindOptions, fold, onChange }) {
     const kind = makeInput("node-filter-kind", t("nodes.kindPlaceholder"));
     kind.value = f.kind;
     const kindBox = wrapKindPicker({
-      input: kind, labels: kindLabels, fold,
-      onPick: (label) => { f.kind = label; onChange(true); },
+      input: kind, labels: () => kindLabelsFor(filters.indexOf(f)), fold,
+      onPick: (label) => { f.kind = label; onChange(); },
     });
     const text = makeInput("drugs-filter node-filter-text", t("nodes.filter"));
     text.value = f.text;
@@ -83,17 +84,24 @@ export function createFilterStack({ t, kindOptions, fold, onChange }) {
     remove.title = t("nodes.removeFilter");
     remove.setAttribute("aria-label", t("nodes.removeFilter"));
 
-    op.addEventListener("change", () => { f.op = op.value; onChange(true); });
+    op.addEventListener("change", () => { f.op = op.value; onChange(); });
     kind.addEventListener("input", () => { f.kind = kind.value; onChange(); });
     text.addEventListener("input", () => { f.text = text.value; onChange(); });
-    metabBox.addEventListener("change", () => { f.metabolites = metabBox.checked; onChange(true); });
+    metabBox.addEventListener("change", () => { f.metabolites = metabBox.checked; onChange(); });
+    // Enter runs the query. The kind box's own keydown (registered first, in
+    // wrapKindPicker) already took an Enter that picked a highlighted suggestion.
+    for (const box of [kind, text]) {
+      box.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !e.defaultPrevented) { e.preventDefault(); box.blur(); onSubmit(); }
+      });
+    }
     remove.addEventListener("click", () => {
       const i = filters.indexOf(f);
       filters.splice(i, 1);
       rowEls.splice(i, 1);
       row.remove();
       relabel();
-      onChange(true);
+      onChange();
     });
     wireDrag(handle, row, f);
     // On a phone a tap must land the caret and raise the keyboard: a tap on a box
@@ -143,7 +151,7 @@ export function createFilterStack({ t, kindOptions, fold, onChange }) {
       if (!dragging) return;
       dragging = false;
       row.classList.remove("dragging");
-      if (moved) onChange(true);
+      if (moved) onChange();
     };
     handle.addEventListener("pointerup", end);
     handle.addEventListener("pointercancel", end);
@@ -151,7 +159,7 @@ export function createFilterStack({ t, kindOptions, fold, onChange }) {
 
   addBtn.addEventListener("click", () => {
     addRow().focus();
-    onChange(true);
+    onChange();
   });
   addRow();
   root.appendChild(listEl);

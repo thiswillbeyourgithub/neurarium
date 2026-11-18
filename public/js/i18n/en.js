@@ -42,6 +42,8 @@ window.__I18N_MESSAGES__.en = {
   "nodes.sortValueAsc": "Value, smallest first",
   "nodes.sortValueDesc": "Value, largest first",
   "nodes.addFilter": "+ Add filter",
+  "nodes.search": "Search",
+  "nodes.searchHint": "Set the filters, then press Search (or Enter).",
   "nodes.removeFilter": "Remove this filter",
   "nodes.dragHint": "Drag to reorder the filters (long press on touch)",
   "nodes.opLabel": "How this filter combines with the ones above it, on what the facts are about (the last filter picks which facts are listed)",
@@ -208,7 +210,7 @@ window.__I18N_MESSAGES__.en = {
     "Each of those graded facts is a row you can read. Click <b>Data browser</b> to open the list.",
   "tour.nodesLook.title": "The Data browser",
   "tour.nodesLook.body":
-    "Every fact in the dataset, in one list: stack filters (AND / OR / XOR), sort it by grade or value, keep only one grade. Each row opens the thing it describes. It is a wide table, so it borrows the whole window and the 3D view steps aside.",
+    "Every fact in the dataset, in one list: stack filters (AND / OR / XOR), sort it by grade or value, keep only one grade, then press Search. Each row opens the thing it describes. It is a wide table, so it borrows the whole window and the 3D view steps aside.",
   "tour.show3d.title": "Show or hide the brain",
   "tour.show3d.body":
     "This button hides the 3D view so the panel can fill the screen, for reading. The brain is hidden right now: click it to bring it back.",

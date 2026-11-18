@@ -5,7 +5,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
-  kindsFor, metaboliteOwners, runFilters, sortRows, filterTouchesDrugs,
+  kindsFor, metaboliteOwners, compatibleKinds, runFilters, sortRows, filterTouchesDrugs,
   serializeFilters, parseFilters, SORTS, DEFAULT_SORT,
 } from "../../public/js/node-browser/query.js";
 
@@ -43,6 +43,16 @@ test("kind box: empty = all, exact label = one kind, else label substring", () =
     ["drug_half_life"]);
   assert.deepEqual([...kindsFor("drug", ctx.kinds, ctx.kindLabel, ctx.fold)],
     ["drug_categories", "drug_half_life", "drug_tmax"]);
+});
+
+test("compatible kinds: an AND filter offers only kinds the earlier owners carry", () => {
+  const fs = [{ kind: "Drug classes", text: "benzo" }, { kind: "", text: "", op: "and" }];
+  assert.deepEqual([...compatibleKinds(ROWS, fs, 1, ctx)].sort(),
+    ["drug_categories", "drug_half_life", "drug_tmax"]);
+  assert.equal(compatibleKinds(ROWS, fs, 0, ctx), null);
+  assert.equal(compatibleKinds(ROWS, [fs[0], { ...fs[1], op: "or" }], 1, ctx), null);
+  // Filters above matching nothing narrow nothing, rather than offering an empty list.
+  assert.equal(compatibleKinds(ROWS, [{ ...fs[0], text: "zzz" }, fs[1]], 1, ctx), null);
 });
 
 test("AND narrows owners, the last filter picks the rows: benzo half-lives", () => {

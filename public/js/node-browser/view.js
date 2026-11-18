@@ -9,8 +9,8 @@ import { KIND_ORDER } from "../kinds.js";
 import { collectNodes } from "./collect.js";
 import { createFilterStack } from "./filter-rows.js";
 import {
-  DEFAULT_SORT, SORTS, filterTouchesDrugs, metaboliteOwners, parseFilters, runFilters,
-  serializeFilters, sortRows,
+  DEFAULT_SORT, SORTS, compatibleKinds, filterTouchesDrugs, metaboliteOwners, parseFilters,
+  runFilters, serializeFilters, sortRows,
 } from "./query.js";
 
 
@@ -19,9 +19,6 @@ import {
 // reader has decided the filter is the one they want).
 const PAGE_FIRST = 150;
 const PAGE_MORE = 300;
-// How long typing must pause before the list re-filters: each pass re-filters and
-// re-renders thousands of rows, so it waits for a word rather than chasing each key.
-const TYPING_MS = 250;
 // localStorage key for the browser's "show mirrored twins" checkbox. Default OFF:
 // a left/right pair says one thing twice, so reading each region once is the useful
 // default; ticking it restores the reading that matches the coverage tally (which
@@ -107,6 +104,13 @@ export function createNodeBrowser({ body, data, deps, ui }) {
   twinsLabel.appendChild(el("span", null, t("nodes.twins")));
   twinsLabel.title = t("nodes.twinsHint");
 
+  // The query runs only on this button (or Enter in a filter box): re-filtering and
+  // re-rendering thousands of rows on every edit is what made the browser feel slow on
+  // a phone. An edit after a search marks the shown rows stale by lighting the button.
+  const searchBtn = btn("node-search", t("nodes.search"));
+  const markStale = () => searchBtn.classList.add("stale");
+  let searched = false;
+
   const countEl = el("div", "node-count");
   const list = el("div", "node-list");
   // Header + rows share one horizontal scroller so the four columns keep a readable
@@ -183,6 +187,8 @@ export function createNodeBrowser({ body, data, deps, ui }) {
   };
 
   const apply = () => {
+    searched = true;
+    searchBtn.classList.remove("stale");
     const grade = gradeSel.value;
     matches = runFilters(rows, stack.filters, ctx)
       .filter((r) => !grade || r.grade === grade);
@@ -215,12 +221,6 @@ export function createNodeBrowser({ body, data, deps, ui }) {
     onChange();
   };
 
-  let debounce = 0;
-  const applySoon = () => {
-    clearTimeout(debounce);
-    debounce = setTimeout(apply, TYPING_MS);
-  };
-
   const collect = () => {
     rows = collectNodes(data, deps, { twins: twinsBox.checked });
     if (ctx) ctx.kinds = [...new Set(rows.map((r) => r.kind))];
@@ -232,11 +232,12 @@ export function createNodeBrowser({ body, data, deps, ui }) {
 
     const kinds = KIND_ORDER.filter((k) => rows.some((r) => r.kind === k));
     ctx = { kinds, kindLabel, fold, metabolites: metaboliteOwners(data.drugs) };
-    // A structural edit (operator, checkbox, add/remove/reorder) applies at once;
-    // typing is debounced.
     stack = createFilterStack({
-      t, kindOptions: kinds.map((k) => [k, kindLabel(k)]), fold,
-      onChange: (now) => (now ? apply() : applySoon()),
+      t, fold, onChange: markStale, onSubmit: apply,
+      kindLabelsFor: (i) => {
+        const ok = compatibleKinds(rows, stack.filters, i, ctx);
+        return kinds.filter((k) => !ok || ok.has(k)).map(kindLabel);
+      },
     });
     const presentGrades = new Set(rows.map((r) => r.grade));
     gradeSel = makeSelect(t("nodes.gradeLabel"), [
@@ -248,12 +249,13 @@ export function createNodeBrowser({ body, data, deps, ui }) {
       SORTS.map((k) => [k, t(`nodes.sort${k[0].toUpperCase()}${k.slice(1)}`)]));
     sortSel.value = DEFAULT_SORT;
 
-    gradeSel.addEventListener("change", apply);
-    sortSel.addEventListener("change", apply);
+    gradeSel.addEventListener("change", markStale);
+    sortSel.addEventListener("change", markStale);
+    searchBtn.addEventListener("click", apply);
     twinsBox.addEventListener("change", () => {
       saveFlag(TWINS_KEY, twinsBox.checked);
       collect(); // the structure rows themselves change, so re-enumerate before filtering
-      apply();
+      markStale();
     });
     moreBtn.addEventListener("click", () => {
       limit += PAGE_MORE;
@@ -263,13 +265,17 @@ export function createNodeBrowser({ body, data, deps, ui }) {
     body.appendChild(intro);
     body.appendChild(stack.root);
     body.appendChild(controls);
+    body.appendChild(searchBtn);
     body.appendChild(twinsLabel);
     body.appendChild(countEl);
     grid.appendChild(head);
     grid.appendChild(list);
     body.appendChild(grid);
     body.appendChild(moreBtn);
-    apply();
+    // Nothing listed until the first search; a shared link runs its query (see url).
+    head.hidden = true;
+    twinsLabel.hidden = true;
+    countEl.textContent = t("nodes.searchHint");
   };
 
   // The query as URL keys (registered by js/boot/views.js): `nf` the filter stack
@@ -279,7 +285,8 @@ export function createNodeBrowser({ body, data, deps, ui }) {
   const urlKey = (read, write, reset) => ({
     read: () => (rows ? read() : null),
     write: (v) => { build(); write(v); apply(); },
-    reset: () => { if (rows) { reset(); apply(); } },
+    // A reset before any search has nothing listed to refresh, so it stays unsearched.
+    reset: () => { if (rows) { reset(); if (searched) apply(); } },
   });
   const url = {
     nf: urlKey(() => serializeFilters(stack.filters),

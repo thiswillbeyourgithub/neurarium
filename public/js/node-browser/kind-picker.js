@@ -8,7 +8,8 @@ import { el } from "../panel/dom.js";
 /**
  * @param {object} opts
  * @param {HTMLInputElement} opts.input the kind text box (already built by the caller)
- * @param {string[]} opts.labels every kind label, in menu order
+ * @param {() => string[]} opts.labels the kind labels to offer now, in menu order (asked
+ *   on every open, so the caller can drop kinds the filters above make useless)
  * @param {(s: string) => string} opts.fold case + accent fold, as the filter uses
  * @param {(label: string) => void} opts.onPick a suggestion was chosen
  * @returns {HTMLElement} the wrapper to place in the row (holds input + list)
@@ -23,7 +24,6 @@ export function wrapKindPicker({ input, labels, fold, onPick }) {
   input.setAttribute("aria-expanded", "false");
   wrap.appendChild(input);
   wrap.appendChild(list);
-  const folded = labels.map((l) => [l, fold(l)]);
   let active = -1;
 
   const items = () => [...list.children];
@@ -43,13 +43,17 @@ export function wrapKindPicker({ input, labels, fold, onPick }) {
     // every kind then, and filter only once they type.
     const q = input.selectionStart === 0 && input.selectionEnd === input.value.length
       ? "" : fold(input.value.trim());
-    const hits = folded.filter(([, f]) => !q || f.includes(q));
+    const hits = labels().filter((l) => !q || fold(l).includes(q));
     list.textContent = "";
-    for (const [label] of hits) {
+    for (const label of hits) {
       const li = el("li", null, label);
       li.setAttribute("role", "option");
-      // pointerdown, not click: it fires before the input's blur closes the list.
-      li.addEventListener("pointerdown", (e) => { e.preventDefault(); pick(label); });
+      // Picked on click, which a touch scroll never fires, so a finger can scroll a long
+      // list without choosing what it lands on. mousedown (also synthesized by a tap) is
+      // cancelled so the input keeps focus and its blur does not close the list before
+      // the click arrives.
+      li.addEventListener("mousedown", (e) => e.preventDefault());
+      li.addEventListener("click", () => pick(label));
       list.appendChild(li);
     }
     list.hidden = hits.length === 0;

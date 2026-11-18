@@ -205,3 +205,13 @@
   cursor: pointer;
 }
 .node-more:hover { color: var(--text); background: rgba(var(--ink), 0.12); }
+/* The Search button (js/node-browser/view.js): the query runs only on it. `.stale`
+   = the filters changed since the rows below were listed. */
+.node-search {
+  display: block; width: 100%; margin: 0 0 6px; padding: 7px 9px;
+  font: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
+  color: var(--text); background: rgba(var(--ink), 0.08);
+  border: 1px solid rgba(var(--ink), 0.18); border-radius: 8px;
+}
+.node-search:hover { border-color: var(--accent); }
+.node-search.stale { color: #fff; background: var(--accent); border-color: var(--accent); }

@@ -125,6 +125,28 @@ export function runFilters(rows, filters, ctx) {
   return rows.filter((r) => acc.rows.has(r));
 }
 
+/**
+ * The kinds worth offering in filter `i`'s kind box. Only an AND narrows to the owners
+ * the filters above it kept, so only then can a kind be useless: after
+ * "Drug classes = benzo", an AND on "Regions" matches no owner (a benzodiazepine has no
+ * region rows), so it is not offered. OR / XOR add owners, so every kind stays. Filters
+ * above that match nothing (still being typed, or a typo) narrow nothing either: an
+ * empty list would read as a broken box, so every kind stays then too.
+ * @param {object[]} rows collectNodes' rows
+ * @param {object[]} filters the whole stack
+ * @param {number} i the filter whose kind box is opening
+ * @param {object} ctx as runFilters
+ * @returns {Set<string>|null} the kinds to offer, null = every kind
+ */
+export function compatibleKinds(rows, filters, i, ctx) {
+  if (i <= 0 || (filters[i].op || "and") !== "and") return null;
+  const owners = new Set(runFilters(rows, filters.slice(0, i), ctx).map((r) => r.owner));
+  if (!owners.size) return null;
+  const out = new Set();
+  for (const r of rows) if (owners.has(r.owner)) out.add(r.kind);
+  return out;
+}
+
 /** The sorting choices, in menu order (labels are `nodes.sort<Capitalized>`). */
 export const SORTS = ["valueAsc", "valueDesc", "weakest", "strongest", "name", "kind"];
 
