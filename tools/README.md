@@ -576,6 +576,9 @@ python tools/sourcing/recheck_quotes.py build --out <dir> --unstamped   # indepe
   `MAX_TMAX_HOURS` = 24 h oral plausibility, quote verbatim on its page). Idempotent, sole writer of
   `tmax`/`tmax_sources`; writes no `llm` stamp, so `recheck_quotes.py` must run after it.
 
+- `tools/fetch/fetch_excretion.py`: stdlib, offline. Offers, per drug, every line of the same pages `fetch_tmax.py` scans (it reuses that scan through its `values=` hook) that is about elimination (`EXCRETION_RE`) and names at least one `excretion.ASPECTS` value, stamped with the `named` values, into `generated_cache/excretion_worklist.json`. One LLM pass answers `[{index, qid, aspect, value, amount?}]` per drug into `excretion_judged.json` (`[]` = judged, nothing usable).
+- `tools/sourcing/apply_excretion.py`: stdlib. Sole writer of `generated_cache/excretion.json` behind five gates (drug in the dataset and offered, index + qid resolve, value in the vocabulary and named by the line's own `attests` pattern, quote verbatim on its page, `amount` a verbatim span of the line). Writes no `llm` stamp, so follow with `recheck_quotes.py build --kinds drug_excretion --unjudged` + judge + `apply`, then `generate_data.py`. See docs/DRUGS.md (Excretion).
+
 ### Drug history, origin and approvals (Drugs@FDA #18)
 
 - `tools/fetch/fetch_drug_history.py` — stdlib, offline. Offers, per drug, every sentence of the lead and
