@@ -258,4 +258,13 @@ CONTRADICTIONS: dict[str, dict[str, Any] | list[dict[str, Any]]] = {
     ],
     "drug:methylphenidate_dl/half_life": _D_MPH_HALF_LIFE,
     "drug:serdexmethylphenidate/half_life": _D_MPH_HALF_LIFE,
+    # Dimenhydrinate's T½ is its diphenhydramine component's, 5-6 h per its article;
+    # Stahl gives diphenhydramine itself about 8 h (p.264). One molecule, two values.
+    "drug:diphenhydramine/half_life": _wiki(
+        "dimenhydrinate", "The diphenhydramine component requires about 2 hours to reach "
+        "peak concentration after either oral or sublingual administration of "
+        "dimen\u00adhydrinate, and has a half-life of 5 \u2013 6 hours in healthy adults."),
+    "drug:dimenhydrinate/half_life": _book(
+        "stahl", 264, "Plasma half-life approximately 8 hours; may be longer in children "
+        "and in the elderly"),
 }
