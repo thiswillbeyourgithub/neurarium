@@ -157,12 +157,19 @@ def _unit(s: str) -> str:
 
 
 def _analyte(s: str | None) -> str | None:
-    """A parenthesised analyte, language-neutral: "plus" becomes "+"."""
+    """A parenthesised analyte, language-neutral: "plus" becomes "+".
+
+    Each "+" part is one chemical name, which never holds a space, so any space left
+    inside one is a narrow cell's hyphenless line break and is closed up:
+
+    >>> _analyte("diazep am plus N-desmet hyldiazepam")
+    'diazepam + N-desmethyldiazepam'
+    """
     if not s:
         return None
-    s = " ".join(s.split())
-    s = ANALYTE_ABBREVIATIONS.get(s, s)
-    return re.sub(r"\s+plus\s+", " + ", s)
+    parts = re.split(r"\s+plus\s+|\s*\+\s*", " ".join(s.split()))
+    s = " + ".join("".join(p.split()) for p in parts)
+    return ANALYTE_ABBREVIATIONS.get(s, s)
 
 
 def parse_range(cell: str) -> dict | None:
@@ -288,6 +295,18 @@ def drug_ids(name: str, index: dict[str, list[str]]) -> list[str]:
     return []
 
 
+def foreign_analyte(analyte: str | None, ids: list[str],
+                    index: dict[str, list[str]]) -> bool:
+    """True when the analyte is another roster drug entirely: a copy slip in the table.
+
+    The 2026 guideline prints varenicline's range and alert level "(disulfiram)", the
+    row above's analyte; publishing it would say a varenicline level is measured as
+    disulfiram. A metabolite or the drug itself never resolves to a different id.
+    """
+    named = drug_ids(analyte, index) if analyte else []
+    return bool(named) and not set(named) & set(ids)
+
+
 def _source(page: int, quote: str) -> dict:
     return {"corpus": CORPUS, "page": page, "quote": quote,
             "provenance": "verified", "extraction": "code"}
@@ -324,6 +343,11 @@ def therapeutic_ranges(rows: list[dict], index: dict[str, list[str]],
         alert = parse_value(row["alert"])
         if alert:
             rec["alert"] = alert
+        for cell, value in ((row["trr"], rec), (row["alert"], rec.get("alert") or {})):
+            if foreign_analyte(value.get("analyte"), ids, index):
+                skipped += [{"drug": i, "page": row["page"], "why": "analyte names "
+                             "another drug, dropped", "cell": cell} for i in ids]
+                del value["analyte"]
         level = parse_level(row["level"])
         if level:
             rec["tdm_level"] = level

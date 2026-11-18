@@ -4,6 +4,7 @@ Table 1 enzyme merge (confirm an existing substrate row, else add one)."""
 
 import sys
 import unittest
+from unittest import mock
 from pathlib import Path
 
 TOOLS = Path(__file__).resolve().parent.parent
@@ -25,6 +26,30 @@ class CellParserTest(unittest.TestCase):
             F.parse_range("80–200 ng/mL (amitriptyline plus nortriptyline)"),
             {"low": 80, "high": 200, "unit": "ng/mL",
              "analyte": "amitriptyline + nortriptyline"})
+
+    def test_hyphenless_cell_breaks_inside_an_analyte_are_closed(self):
+        # A narrow cell broke "diazepam" without a hyphen; the panel showed "diazep am".
+        self.assertEqual(
+            F.parse_range("100–1,500 ng/mL (diazep am plus N-desmet hyldiazepam)")["analyte"],
+            "diazepam + N-desmethyldiazepam")
+
+    def test_an_analyte_naming_another_drug_is_dropped(self):
+        # The guideline prints varenicline's levels "(disulfiram)", a copy slip.
+        idx = F.roster_index([{"id": "varenicline", "name": "Varenicline"},
+                              {"id": "disulfiram", "name": "Disulfiram"},
+                              {"id": "ketamine", "name": "Ketamine"},
+                              {"id": "esketamine", "name": "Esketamine"}])
+        row = {"drug": "Varenicline", "page": 50, "trr": "4–5 ng/mL (disulfiram)",
+               "alert": "10 ng/mL (disulfiram)", "level": "3"}
+        gate = mock.Mock(on_page=lambda *_: True)
+        with mock.patch.object(F, "table5_line", lambda r: "row"):
+            ranges, skipped = F.therapeutic_ranges([row], idx, gate)
+        self.assertEqual(ranges["varenicline"]["low"], 4)
+        self.assertNotIn("analyte", ranges["varenicline"])
+        self.assertNotIn("analyte", ranges["varenicline"]["alert"])
+        self.assertEqual(len(skipped), 2)
+        self.assertFalse(F.foreign_analyte("ketamine", ["ketamine", "esketamine"], idx))
+        self.assertFalse(F.foreign_analyte("hydroxybupropion", ["varenicline"], idx))
 
     def test_thousands_and_decimal_and_units(self):
         self.assertEqual(F.parse_range("0.4–0.8 mmol/L"),

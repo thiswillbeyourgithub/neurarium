@@ -604,7 +604,7 @@
    "low": 100,
    "high": 500,
    "unit": "ng/mL",
-   "analyte": "clorazepate + N-desmethy ldiazepam",
+   "analyte": "clorazepate + N-desmethyldiazepam",
    "alert": {
     "value": 1000,
     "unit": "ng/mL"
@@ -681,7 +681,7 @@
    "low": 100,
    "high": 1500,
    "unit": "ng/mL",
-   "analyte": "diazep am + N-desmet hyldiazepam",
+   "analyte": "diazepam + N-desmethyldiazepam",
    "alert": {
     "value": 3000,
     "unit": "ng/mL"
@@ -2324,11 +2324,9 @@
    "low": 4,
    "high": 5,
    "unit": "ng/mL",
-   "analyte": "disulfiram",
    "alert": {
     "value": 10,
-    "unit": "ng/mL",
-    "analyte": "disulfiram"
+    "unit": "ng/mL"
    },
    "tdm_level": 3,
    "sources": [
@@ -7923,6 +7921,18 @@
    "page": 48,
    "why": "range",
    "cell": "N/A"
+  },
+  {
+   "drug": "varenicline",
+   "page": 50,
+   "why": "analyte names another drug, dropped",
+   "cell": "4–5 ng/mL (disulfiram)"
+  },
+  {
+   "drug": "varenicline",
+   "page": 50,
+   "why": "analyte names another drug, dropped",
+   "cell": "10 ng/mL (disulfiram)"
   }
  ]
 }
