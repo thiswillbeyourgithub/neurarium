@@ -89,36 +89,40 @@ MAX_LINE = 400
 
 
 def candidates_in(text: str, corpus: str, page, pattern=PEAK_RE,
-                  durations=durations_in) -> list[dict]:
+                  durations=durations_in, values=None) -> list[dict]:
     """Every ``pattern``-naming, duration-carrying candidate of one page, deduplicated.
 
     ``pattern`` names the fact the line must be about (a peak here, a half-life for
     ``fetch_half_life.py``, which reuses this whole scan); ``durations`` parses the
-    page's language (``durations_in_fr`` for a French RCP).
+    page's language (``durations_in_fr`` for a French RCP). ``values`` (a line ->
+    list callable) replaces the duration filter for a fact that is not a duration
+    (``fetch_excretion.py``: the vocabulary values a line names), stored as ``named``.
     """
     out: list[dict] = []
     seen: set[str] = set()
     for s in sentences(text):
         if len(s) > MAX_LINE or s in seen or not pattern.search(s):
             continue
-        durs = durations(s)
-        if not durs:
+        found = (values or durations)(s)
+        if not found:
             continue
         seen.add(s)
-        out.append({"corpus": corpus, "page": page, "line": s, "durations": durs})
+        out.append({"corpus": corpus, "page": page, "line": s,
+                    "named" if values else "durations": found})
     return out
 
 
-def wikipedia_candidates(drug: dict, pattern=PEAK_RE) -> list[dict]:
+def wikipedia_candidates(drug: dict, pattern=PEAK_RE, values=None) -> list[dict]:
     """Candidates from the drug's own stored English article (corpus #9)."""
     path = wikistore.page_for(drug)
     if not path or not os.path.exists(path):
         return []
     slug = os.path.splitext(os.path.basename(path))[0]
-    return candidates_in(read_page_file(path), "wikipedia_pharm", slug, pattern)
+    return candidates_in(read_page_file(path), "wikipedia_pharm", slug, pattern,
+                         values=values)
 
 
-def stahl_candidates(drug: dict, spans: dict, pattern=PEAK_RE) -> list[dict]:
+def stahl_candidates(drug: dict, spans: dict, pattern=PEAK_RE, values=None) -> list[dict]:
     """Candidates from the drug's Stahl monograph span (corpus #1)."""
     span = spans.get(pk._norm_name(drug.get("name") or ""))
     if not span:
@@ -128,12 +132,13 @@ def stahl_candidates(drug: dict, spans: dict, pattern=PEAK_RE) -> list[dict]:
         path = page_path(stahl_index.PAGES, page)
         if path.exists():
             out += candidates_in(read_page_file(path),
-                                 "stahl", page, pattern)
+                                 "stahl", page, pattern, values=values)
     return out
 
 
 def _label_candidates(drug: dict, labels_path: Path, key: str, pages: Path,
-                      corpus: str, pattern, durations=durations_in) -> list[dict]:
+                      corpus: str, pattern, durations=durations_in, values=None
+                      ) -> list[dict]:
     """Candidates from the one label page a corpus fetcher chose for this drug.
 
     The choice is whichever entry the fetcher recorded in its ``*_labels.json``
@@ -148,25 +153,27 @@ def _label_candidates(drug: dict, labels_path: Path, key: str, pages: Path,
     if not path or not path.exists():
         return []
     return candidates_in(read_page_file(path),
-                         corpus, page, pattern, durations)
+                         corpus, page, pattern, durations, values)
 
 
-def bdpm_candidates(drug: dict, pattern=PEAK_RE) -> list[dict]:
+def bdpm_candidates(drug: dict, pattern=PEAK_RE, values=None) -> list[dict]:
     """Candidates from the drug's stored French RCP section 5.2 (corpus #16)."""
     return _label_candidates(drug, BDPM_LABELS, "cis", BDPM_PAGES, "bdpm", pattern,
-                             durations_in_fr)
+                             durations_in_fr, values)
 
 
-def dailymed_candidates(drug: dict, pattern=PEAK_RE) -> list[dict]:
+def dailymed_candidates(drug: dict, pattern=PEAK_RE, values=None) -> list[dict]:
     """Candidates from the drug's stored US prescribing label (corpus #14)."""
     return _label_candidates(drug, DAILYMED_LABELS, "setid", DAILYMED_PAGES, "dailymed",
-                             pattern)
+                             pattern, values=values)
 
 
-def build(only: set[str] | None = None, pattern=PEAK_RE, skip=None) -> dict[str, dict]:
+def build(only: set[str] | None = None, pattern=PEAK_RE, skip=None, values=None
+          ) -> dict[str, dict]:
     """The worklist: ``drug id -> {name, candidates[]}``, drugs with none omitted.
 
-    ``skip(drug)`` true leaves a drug out (a fact another pass already owns).
+    ``skip(drug)`` true leaves a drug out (a fact another pass already owns);
+    ``values`` is passed to :func:`candidates_in`.
     """
     spans = pk.load_index() if stahl_index.INDEX.exists() else {}
     worklist: dict[str, dict] = {}
@@ -180,10 +187,10 @@ def build(only: set[str] | None = None, pattern=PEAK_RE, skip=None) -> dict[str,
         # The label comes last for the same reason and not because it is weaker: it is
         # the primary source, but it is also the verbose one (a whole 12.3 section),
         # and putting it first would push the one-sentence answers down the list.
-        cands = (wikipedia_candidates(drug, pattern)
-                 + stahl_candidates(drug, spans, pattern)
-                 + dailymed_candidates(drug, pattern)
-                 + bdpm_candidates(drug, pattern))
+        cands = (wikipedia_candidates(drug, pattern, values)
+                 + stahl_candidates(drug, spans, pattern, values)
+                 + dailymed_candidates(drug, pattern, values)
+                 + bdpm_candidates(drug, pattern, values))
         if cands:
             worklist[drug["id"]] = {"name": drug.get("name") or drug["id"],
                                     "candidates": cands}
