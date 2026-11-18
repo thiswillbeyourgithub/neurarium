@@ -57,7 +57,7 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 from lib import drugs_io  # noqa: E402
 from lib import cache_io  # noqa: E402
-from lib.page_file import read_page_file  # noqa: E402
+from lib.page_file import read_page, read_page_file  # noqa: E402
 from lib.quote_match import normalize_for_match  # noqa: E402  (the gate's own normalizer)
 from lib.text_fold import alnum_key  # noqa: E402
 from pipeline.gate import PageGate  # noqa: E402 (the one quote gate)
@@ -256,10 +256,8 @@ def raw_gate(pages_dir: Path = PAGES_DIR) -> PageGate:
     """The quote gate over each page's raw PDF text only, the parsed section cut off,
     so a parsed row can never vouch for itself."""
     def read(_corpus, page):
-        p = pages_dir / f"{page}.md"
-        if not p.exists():
-            return None
-        return normalize_for_match(read_page_file(p).split(PARSED_MARKER)[0])
+        text = read_page(pages_dir, page)
+        return None if text is None else normalize_for_match(text.split(PARSED_MARKER)[0])
     return PageGate(read=read)
 
 
@@ -530,7 +528,7 @@ def write_parsed(t5: list[dict], t1: list[dict], pages_dir: Path = PAGES_DIR) ->
         for r in rows:
             per_page.setdefault(r["page"], {}).setdefault(table, []).append(line(r))
     for p in sorted(pages_dir.glob("*.md")):
-        text = p.read_text("utf-8")
+        text = read_page_file(p)
         new = with_parsed(text, per_page.get(int(p.stem), {}))
         if new != text:
             p.write_text(new, encoding="utf-8")
