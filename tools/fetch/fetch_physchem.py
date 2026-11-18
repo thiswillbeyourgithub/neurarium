@@ -160,11 +160,27 @@ def name_matches(row_name: str, drug: dict) -> bool:
             and chirality.tag_allowed(tag, drug["id"]))
 
 
-def match_rows(drug: dict, cid: int, inchi: str | None, rows: list[dict]):
+def roster_names(drugs: list[dict]) -> dict[str, str]:
+    """Normalized English name -> drug id, for :func:`match_rows`' foreign-name guard."""
+    return {_norm(d["name"]): d["id"] for d in drugs if isinstance(d.get("name"), str)}
+
+
+def names_other_drug(row: dict, drug: dict, names: dict[str, str]) -> bool:
+    """True when the row is named after a different roster drug: B3DB files a
+    ``"sertraline"`` row under chlordiazepoxide's CID and InChI, so which molecule its
+    label was measured on is unknowable and the row backs neither."""
+    stem, _ = chirality.split_stereo(row.get("compound_name") or "")
+    other = names.get(_norm(stem))
+    return other is not None and other != drug["id"]
+
+
+def match_rows(drug: dict, cid: int, inchi: str | None, rows: list[dict],
+               names: dict[str, str] | None = None):
     """``(how, kept, refused)``: the B3DB rows standing for ``drug``.
 
     ``how`` is ``"cid"`` or ``"name"`` (the rule that found candidates) or None; ``kept``
-    the candidates whose InChI core equals the drug's; ``refused`` the others.
+    the candidates whose InChI core equals the drug's and whose name is not another
+    roster drug's (``names``, :func:`roster_names`); ``refused`` the others.
     """
     how = "cid"
     cands = [r for r in rows if cid in row_cids(r.get("CID"))]
@@ -174,7 +190,8 @@ def match_rows(drug: dict, cid: int, inchi: str | None, rows: list[dict]):
     if not cands:
         return None, [], []
     core = inchi_core(inchi or "")
-    kept = [r for r in cands if core and inchi_core(r.get("Inchi") or "") == core]
+    kept = [r for r in cands if core and inchi_core(r.get("Inchi") or "") == core
+            and not names_other_drug(r, drug, names or {})]
     return how, kept, [r for r in cands if r not in kept]
 
 
@@ -312,6 +329,7 @@ def build(drugs: list[dict], rows: list[dict], fetched: str):
     """``(entries, skipped, cited)``: cache entry per drug id, why each other drug got
     nothing, and the B3DB rows each page must hold."""
     entries, skipped, cited = {}, {}, {}
+    names = roster_names(drugs)
     for drug in drugs:
         did = drug["id"]
         if is_combination(drug):
@@ -332,7 +350,7 @@ def build(drugs: list[dict], rows: list[dict], fetched: str):
             skipped[did] = f"PubChem CID {cid}: {why}"
             continue
         entry = {"cid": cid, **pubchem_claims(cid, text)}
-        how, kept, refused = match_rows(drug, cid, inchi, rows)
+        how, kept, refused = match_rows(drug, cid, inchi, rows, names)
         if refused:
             entry["b3db_refused"] = [int(r["NO."]) for r in refused]
         if kept:

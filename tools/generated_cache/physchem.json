@@ -1810,17 +1810,13 @@
    }
   },
   "chlordiazepoxide": {
+   "b3db_refused": [
+    1895
+   ],
    "bbb": {
     "label": "BBB+",
     "match": "cid",
     "sources": [
-     {
-      "corpus": "b3db",
-      "extraction": "code",
-      "page": "2712",
-      "provenance": "verified",
-      "quote": "B3DB row 1895: sertraline | CID 2712 | logBB - | BBB+ | group B | references R1, R7, R6, R14, R14, R15, R23, R26, R27, R27, R29, R30, R30, R36, R50"
-     },
      {
       "corpus": "b3db",
       "extraction": "code",
@@ -3453,19 +3449,9 @@
    }
   },
   "etomidate": {
-   "bbb": {
-    "label": "BBB+",
-    "match": "cid",
-    "sources": [
-     {
-      "corpus": "b3db",
-      "extraction": "code",
-      "page": "36339",
-      "provenance": "verified",
-      "quote": "B3DB row 1651: pimozide | CID 36339 | logBB - | BBB+ | group B | references R1, R19, R6, R27, R27, R30, R36"
-     }
-    ]
-   },
+   "b3db_refused": [
+    1651
+   ],
    "cid": 36339,
    "tpsa": {
     "sources": [
@@ -5761,19 +5747,9 @@
    }
   },
   "methaqualone": {
-   "bbb": {
-    "label": "BBB+",
-    "match": "cid",
-    "sources": [
-     {
-      "corpus": "b3db",
-      "extraction": "code",
-      "page": "6292",
-      "provenance": "verified",
-      "quote": "B3DB row 2205: morphine | CID 6292 | logBB - | BBB+ | group B | references R1, R13, R19, R6, R24, R27, R27, R27, R30, R30, R36"
-     }
-    ]
-   },
+   "b3db_refused": [
+    2205
+   ],
    "cid": 6292,
    "tpsa": {
     "sources": [
@@ -7584,19 +7560,9 @@
    }
   },
   "pimozide": {
-   "bbb": {
-    "label": "BBB+",
-    "match": "cid",
-    "sources": [
-     {
-      "corpus": "b3db",
-      "extraction": "code",
-      "page": "16362",
-      "provenance": "verified",
-      "quote": "B3DB row 2504: maprotiline | CID 16362 | logBB - | BBB+ | group B | references R1, R13, R19, R6, R14, R23, R24, R27, R27, R27, R30, R30, R36"
-     }
-    ]
-   },
+   "b3db_refused": [
+    2504
+   ],
    "cid": 16362,
    "tpsa": {
     "sources": [
@@ -7973,19 +7939,9 @@
    }
   },
   "prochlorperazine": {
-   "bbb": {
-    "label": "BBB+",
-    "match": "cid",
-    "sources": [
-     {
-      "corpus": "b3db",
-      "extraction": "code",
-      "page": "4917",
-      "provenance": "verified",
-      "quote": "B3DB row 1856: phenobarbital | CID 4917 | logBB - | BBB+ | group B | references R1, R13, R19, R6, R14, R24, R26, R27, R27, R27, R30, R30, R36"
-     }
-    ]
-   },
+   "b3db_refused": [
+    1856
+   ],
    "cid": 4917,
    "tpsa": {
     "sources": [

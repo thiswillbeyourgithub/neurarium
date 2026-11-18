@@ -111,6 +111,16 @@ class MatchTest(unittest.TestCase):
         self.assertTrue(F.name_matches("(-)-cocaine", coc))
         self.assertFalse(F.name_matches("(+)-cocaine", coc))
 
+    def test_a_row_named_after_another_roster_drug_is_refused(self):
+        # B3DB files a "sertraline" row under chlordiazepoxide's CID + InChI.
+        rows = [row(7, "sertraline", "4585", "BBB+", OLZ_DRUGBOX),
+                row(8, "(-)-sertraline", "4585", "BBB+", OLZ_DRUGBOX),
+                row(9, "olanzapine", "4585", "BBB+", OLZ_DRUGBOX)]
+        names = F.roster_names([self.OLANZAPINE, {"id": "sertraline", "name": "Sertraline"}])
+        how, kept, refused = F.match_rows(self.OLANZAPINE, 4585, OLZ_DRUGBOX, rows, names)
+        self.assertEqual([r["NO."] for r in kept], ["9"])
+        self.assertEqual([r["NO."] for r in refused], ["7", "8"])
+
     def test_no_row(self):
         self.assertEqual(F.match_rows(self.OLANZAPINE, 1, OLZ_DRUGBOX, []), (None, [], []))
 
