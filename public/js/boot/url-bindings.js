@@ -119,6 +119,18 @@ export function wireUrlBindings({
       if (key) tabs.activate(key);
     },
   });
+  // `open=<section>,...`: which sections of the active detail are unfolded, by their
+  // language-independent key (panel/dom.js panelSectionKey); `*` = all of them.
+  // Omitted when every section is folded, how a panel first renders. Registered after
+  // `tabs` / `tab`, so it applies to the tab they just opened.
+  urlState.register("open", {
+    read: () => {
+      const open = tabs.openSections();
+      if (!open.length) return null;
+      return open.length === tabs.allSections().length ? "*" : open.join(LIST_SEP);
+    },
+    write: (v) => tabs.setOpenSections(v === "*" ? tabs.allSections() : v.split(LIST_SEP)),
+  });
   // `sim=<id>[:<ratio>],...`: the Simulation tab's picked drugs, in list order, each
   // with its relative dose (omitted at the default 1, which is the common case). The
   // rest of the tab (the threshold, the solver's wish list) is a reading aid rather

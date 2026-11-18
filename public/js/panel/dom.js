@@ -29,19 +29,23 @@ export function el(tag, cls, text) {
  */
 /**
  * A stable key for one folded panel section (a `details.panel-sec`), the same on
- * every render of that panel: its tour anchor, else its heading text with the counts
- * stripped ("Pharmacokinetic interactions (12)" -> "Pharmacokinetic interactions").
+ * every render of that panel and in either language, since it also rides the URL
+ * (`open=`, see boot/url-bindings.js): its tour anchor, else its icon key, else its
+ * heading text slugged with the counts stripped ("Pharmacokinetic interactions (12)"
+ * -> "pharmacokinetic-interactions"). Never contains the URL list separator ",".
  * @param {HTMLDetailsElement} det
  * @returns {string}
  */
 export function panelSectionKey(det) {
   if (det.dataset.tourSec) return det.dataset.tourSec;
+  if (det.dataset.icon) return det.dataset.icon;
   const summary = det.querySelector(":scope > summary");
   // The subtitle (see withSubtitle) is not part of the key: only the heading's own text.
   const own = summary ? [...summary.childNodes]
     .filter((n) => !n.classList?.contains("section-sub"))
     .map((n) => n.textContent).join("") : "";
-  return own.replace(/[\d()]/g, "").trim();
+  return own.replace(/[\d()]/g, "").trim().toLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu, "-").replace(/^-|-$/g, "");
 }
 
 /**

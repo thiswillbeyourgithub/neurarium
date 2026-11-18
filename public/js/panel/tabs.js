@@ -43,7 +43,9 @@ export function openControlsBody(toggle, body) {
  * back to its neighbour (re-applying that one's focus) or, if it was the last
  * detail, to Settings + `onEmpty()` (which clears the 3D selection).
  * @returns {{openDetail:Function, showSettings:()=>void, setOnEmpty:Function,
- *            setOnChange:Function, keys:()=>string[], activate:(key:string)=>void}}
+ *            setOnChange:Function, keys:()=>string[], activate:(key:string)=>void,
+ *            openSections:()=>string[], allSections:()=>string[],
+ *            setOpenSections:(keys:Iterable<string>)=>void}}
  */
 export function createPanelTabs() {
   const bar = document.getElementById("panel-tabs");
@@ -88,6 +90,7 @@ export function createPanelTabs() {
   detailsPane.addEventListener("toggle", (e) => {
     if (activeKey === null || !e.target.classList?.contains("panel-sec")) return;
     sectionsByKey.set(activeKey, openSectionKeys());
+    onChange(); // the open sections ride the URL (`open=`, boot/url-bindings.js)
   }, true);
   let pendingRestore = null; // single-shot offset, set by activate(), used by openDetail()
   // Record the live offset while a detail is shown: one hook covers every leave path
@@ -420,6 +423,24 @@ export function createPanelTabs() {
     /** Set the callback run after ANY strip change (open / close / activate /
      *  reorder), so the URL can mirror the whole strip, not just the active tab. */
     setOnChange(fn) { onChange = fn; },
+    /** Keys (panel/dom.js panelSectionKey) of the active detail's open sections, in
+     *  panel order; [] on the Settings tab. */
+    openSections: () => (activeKey === null ? [] : openSectionKeys()),
+    /** Every section key of the active detail, open or not. */
+    allSections: () => (activeKey === null ? []
+      : [...detailsPane.querySelectorAll("details.panel-sec")].map(panelSectionKey)),
+    /**
+     * Open exactly the active detail's sections whose key is in `keys`, folding the
+     * rest (a deep link reproducing the fold state). No-op on the Settings tab.
+     * @param {Iterable<string>} keys
+     */
+    setOpenSections(keys) {
+      if (activeKey === null) return;
+      const want = new Set(keys);
+      for (const d of detailsPane.querySelectorAll("details.panel-sec"))
+        d.open = want.has(panelSectionKey(d));
+      sectionsByKey.set(activeKey, openSectionKeys());
+    },
     /** The active detail tab's key (`<kind>:<id>`), or null when Settings is shown.
      *  Used to build the shareable deep link that mirrors the focus into the URL. */
     activeKey() { return activeKey; },
