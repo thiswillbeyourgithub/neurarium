@@ -4,6 +4,7 @@
 // popup's coverage tally.
 
 import { createNodeBrowser } from "../node-browser.js";
+import { TYPING_SETTLE_MS } from "./toolbar.js";
 import { createSimulation } from "../simulation.js";
 import { KIND_LABELS } from "../kinds.js";
 import { foldText } from "../search/query.js";
@@ -94,6 +95,11 @@ export function wireViews({
         openDataFiles,
       },
     });
+    // The browser's query rides the URL (`nf` / `ngrade` / `nsort`), so a link can
+    // share one combination of filters. Above the `tabs` key, so it applies after
+    // the tab is open.
+    for (const [key, view] of Object.entries(nodeBrowser.url)) urlState.register(key, view, 1);
+    nodeBrowser.setOnChange(() => urlState.sync(TYPING_SETTLE_MS));
     // Lazy: collecting every node walks the whole dataset, so building waits for the
     // first open rather than running at boot; reopening is then just a re-host.
     showNodeBrowser = () => {

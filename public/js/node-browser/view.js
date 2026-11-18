@@ -8,7 +8,10 @@ import { el, btn } from "../panel/dom.js";
 import { KIND_ORDER } from "../kinds.js";
 import { collectNodes } from "./collect.js";
 import { createFilterStack } from "./filter-rows.js";
-import { SORTS, filterTouchesDrugs, metaboliteOwners, runFilters, sortRows } from "./query.js";
+import {
+  DEFAULT_SORT, SORTS, filterTouchesDrugs, metaboliteOwners, parseFilters, runFilters,
+  serializeFilters, sortRows,
+} from "./query.js";
 
 
 // How many rows render at once. The full list is several thousand nodes, so the
@@ -16,6 +19,9 @@ import { SORTS, filterTouchesDrugs, metaboliteOwners, runFilters, sortRows } fro
 // reader has decided the filter is the one they want).
 const PAGE_FIRST = 150;
 const PAGE_MORE = 300;
+// How long typing must pause before the list re-filters: each pass re-filters and
+// re-renders thousands of rows, so it waits for a word rather than chasing each key.
+const TYPING_MS = 250;
 // localStorage key for the browser's "show mirrored twins" checkbox. Default OFF:
 // a left/right pair says one thing twice, so reading each region once is the useful
 // default; ticking it restores the reading that matches the coverage tally (which
@@ -53,7 +59,7 @@ const COLUMNS = [
  *   accent/Greek folding, the Sources popup's own kind + grade labels so the two
  *   views can't name things differently, and the About popup's data-file list so
  *   "the same nodes as files" is one list, not a copy of it)
- * @returns {{open: () => void}}
+ * @returns {{open: () => void, url: object, setOnChange: (fn: Function) => void}}
  */
 export function createNodeBrowser({ body, data, deps, ui }) {
   const { t } = deps;
@@ -64,6 +70,8 @@ export function createNodeBrowser({ body, data, deps, ui }) {
   let limit = PAGE_FIRST;
   let stack = null;
   let ctx = null;
+  // Told after every re-filter, so the page can mirror the query into the URL.
+  let onChange = () => {};
 
   // The final line: sourcing (applied after every filter) and sorting, alone on it.
   const controls = el("div", "node-final");
@@ -204,12 +212,13 @@ export function createNodeBrowser({ body, data, deps, ui }) {
     headCells.notion.textContent = kind === "" ? notionDefault : kindLabel(kind);
     limit = PAGE_FIRST;
     render();
+    onChange();
   };
 
   let debounce = 0;
   const applySoon = () => {
     clearTimeout(debounce);
-    debounce = setTimeout(apply, 120);
+    debounce = setTimeout(apply, TYPING_MS);
   };
 
   const collect = () => {
@@ -237,6 +246,7 @@ export function createNodeBrowser({ body, data, deps, ui }) {
     ]);
     sortSel = makeSelect(t("nodes.sortLabel"),
       SORTS.map((k) => [k, t(`nodes.sort${k[0].toUpperCase()}${k.slice(1)}`)]));
+    sortSel.value = DEFAULT_SORT;
 
     gradeSel.addEventListener("change", apply);
     sortSel.addEventListener("change", apply);
@@ -262,8 +272,29 @@ export function createNodeBrowser({ body, data, deps, ui }) {
     apply();
   };
 
+  // The query as URL keys (registered by js/boot/views.js): `nf` the filter stack
+  // (query.serializeFilters), `ngrade` the sourcing filter, `nsort` the sorting. Each
+  // reads null at its default. Writing one builds the browser first, since a shared
+  // link may name the query before the tab is opened.
+  const urlKey = (read, write, reset) => ({
+    read: () => (rows ? read() : null),
+    write: (v) => { build(); write(v); apply(); },
+    reset: () => { if (rows) { reset(); apply(); } },
+  });
+  const url = {
+    nf: urlKey(() => serializeFilters(stack.filters),
+      (v) => stack.setFilters(parseFilters(v)), () => stack.setFilters([])),
+    ngrade: urlKey(() => gradeSel.value || null,
+      (v) => { gradeSel.value = v; }, () => { gradeSel.value = ""; }),
+    nsort: urlKey(() => (sortSel.value === DEFAULT_SORT ? null : sortSel.value),
+      (v) => { sortSel.value = SORTS.includes(v) ? v : DEFAULT_SORT; },
+      () => { sortSel.value = DEFAULT_SORT; }),
+  };
+
   return {
     /** Collect + render on first use; a no-op on every reopen. */
     open() { build(); },
+    url,
+    setOnChange(fn) { onChange = fn; },
   };
 }

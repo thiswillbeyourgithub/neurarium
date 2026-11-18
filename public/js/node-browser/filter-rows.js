@@ -14,7 +14,8 @@ const LONG_PRESS_MS = 400;
  * @param {Function} opts.t i18n lookup
  * @param {Array<[string, string]>} opts.kindOptions [kind, label] pairs for the kind box
  * @param {() => void} opts.onChange called after any edit (typing is debounced by caller)
- * @returns {{root: HTMLElement, filters: object[], showMetabolites: (fn: Function) => void}}
+ * @returns {{root: HTMLElement, filters: object[], setFilters: (list: object[]) => void,
+ *            showMetabolites: (fn: Function) => void}}
  */
 export function createFilterStack({ t, kindOptions, onChange }) {
   const filters = [];
@@ -52,8 +53,8 @@ export function createFilterStack({ t, kindOptions, onChange }) {
     return input;
   };
 
-  const addRow = () => {
-    const f = { kind: "", text: "", op: "and", metabolites: false };
+  const addRow = (init = {}) => {
+    const f = { kind: "", text: "", op: "and", metabolites: false, ...init };
     const row = el("div", "node-filter");
     const handle = el("span", "node-filter-handle", "⠿");
     handle.title = t("nodes.dragHint");
@@ -67,12 +68,16 @@ export function createFilterStack({ t, kindOptions, onChange }) {
       opt.textContent = t(`nodes.op_${o}`);
       op.appendChild(opt);
     }
+    op.value = f.op;
     const kind = makeInput("node-filter-kind", t("nodes.kindPlaceholder"));
     kind.setAttribute("list", datalist.id);
+    kind.value = f.kind;
     const text = makeInput("drugs-filter node-filter-text", t("nodes.filter"));
+    text.value = f.text;
     const metab = el("label", "list-toggle node-filter-metab");
     const metabBox = document.createElement("input");
     metabBox.type = "checkbox";
+    metabBox.checked = f.metabolites;
     metab.appendChild(metabBox);
     metab.appendChild(el("span", null, t("nodes.metabolites")));
     metab.title = t("nodes.metabolitesHint");
@@ -94,13 +99,20 @@ export function createFilterStack({ t, kindOptions, onChange }) {
       onChange(true);
     });
     wireDrag(handle, row, f);
+    // On a phone a tap must land the caret and raise the keyboard: a tap on a box
+    // selects what it holds (retyping a kind replaces it), and a tap on the row's bare
+    // background focuses its text box rather than doing nothing.
+    for (const box of [kind, text]) {
+      box.addEventListener("focus", () => { if (box.value) box.select(); });
+    }
+    row.addEventListener("click", (e) => { if (e.target === row) text.focus(); });
 
     for (const n of [handle, op, kind, text, metab, remove]) row.appendChild(n);
     filters.push(f);
     rowEls.push({ row, op, text, remove, metab, f });
     listEl.appendChild(row);
     relabel();
-    return text;
+    return kind;
   };
 
   // Drag to reorder: pointer events cover mouse and touch alike. The row under the
@@ -152,6 +164,13 @@ export function createFilterStack({ t, kindOptions, onChange }) {
   return {
     root,
     filters,
+    /** Replace the whole stack (a shared link); fires no onChange. */
+    setFilters(list) {
+      filters.length = 0;
+      rowEls.length = 0;
+      listEl.textContent = "";
+      for (const f of list.length ? list : [{}]) addRow(f);
+    },
     /** Show each row's "include metabolites" box only where `touches(f)` says it matters. */
     showMetabolites(touches) {
       for (const r of rowEls) r.metab.hidden = !r.f.metabolites && !touches(r.f);
