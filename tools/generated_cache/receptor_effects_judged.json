@@ -10,13 +10,13 @@
       "qid": "e47bb18a"
      },
      {
-      "index": 61,
+      "index": 62,
       "qid": "c6e8cd07"
      }
     ],
     "evidence": {
      "49": "in_vivo",
-     "61": "in_vivo"
+     "62": "in_vivo"
     }
    },
    {
@@ -32,14 +32,14 @@
       "qid": "34c6a816"
      },
      {
-      "index": 61,
+      "index": 62,
       "qid": "c6e8cd07"
      }
     ],
     "evidence": {
      "12": "in_vivo",
      "40": "in_vivo",
-     "61": "in_vivo"
+     "62": "in_vivo"
     }
    },
    {
@@ -77,13 +77,13 @@
       "qid": "c77ebd3c"
      },
      {
-      "index": 70,
+      "index": 71,
       "qid": "4cc5b123"
      }
     ],
     "evidence": {
      "20": "in_vivo",
-     "70": "in_vivo"
+     "71": "in_vivo"
     }
    },
    {
@@ -91,12 +91,12 @@
     "mode": "agonism",
     "picks": [
      {
-      "index": 67,
+      "index": 68,
       "qid": "cf4cd850"
      }
     ],
     "evidence": {
-     "67": "in_vivo"
+     "68": "in_vivo"
     }
    },
    {
@@ -2714,6 +2714,24 @@
     ],
     "evidence": {
      "15": "in_vivo"
+    }
+   },
+   {
+    "effect": "miosis",
+    "mode": "agonism",
+    "picks": [
+     {
+      "index": 15,
+      "qid": "3052395a"
+     },
+     {
+      "index": 27,
+      "qid": "150bc3bb"
+     }
+    ],
+    "evidence": {
+     "15": "in_vivo",
+     "27": "in_vivo"
     }
    }
   ],

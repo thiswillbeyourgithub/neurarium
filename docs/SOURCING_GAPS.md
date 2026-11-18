@@ -17,13 +17,13 @@ Every node is graded (see `docs/PROVENANCE.md`); a bare `llm` grade and NOSOURCE
 | `drug_enzyme_strength` | 148 | 135 | 3 | 0 | 10 | 0 | 0 |
 | `projection_sign` | 38 | 17 | 13 | 0 | 8 | 0 | 0 |
 | `drug_categories` | 301 | 295 | 0 | 0 | 6 | 0 | 0 |
-| `drug_half_life` | 275 | 270 | 0 | 0 | 0 | 5 | 0 |
+| `drug_half_life` | 275 | 265 | 5 | 0 | 0 | 5 | 0 |
 | `receptor_sign` | 56 | 51 | 0 | 0 | 5 | 0 | 0 |
 | `drug_brands` | 577 | 575 | 0 | 0 | 0 | 2 | 0 |
 | `projections` | 116 | 78 | 37 | 0 | 0 | 1 | 0 |
 | `references` | 445 | 0 | 0 | 445 | 0 | 0 | 0 |
 | `drug_metabolite_bindings` | 205 | 191 | 14 | 0 | 0 | 0 | 0 |
-| `receptor_effect` | 178 | 173 | 5 | 0 | 0 | 0 | 11 |
+| `receptor_effect` | 179 | 174 | 5 | 0 | 0 | 0 | 11 |
 | `drug_enzymes` | 573 | 570 | 3 | 0 | 0 | 0 | 0 |
 | `drug_metabolites` | 71 | 69 | 2 | 0 | 0 | 0 | 0 |
 

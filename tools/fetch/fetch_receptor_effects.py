@@ -75,9 +75,12 @@ EFFECT_KEYWORDS: dict[str, re.Pattern[str]] = {k: re.compile(v, re.I) for k, v i
     "anticholinergic_cognitive": (r"memory (?:impair|problem|disturb|loss|deficit)|"
                                   r"cognitive (?:impair|dysfunction|side effect|blunting|deficit)|"
                                   r"confusion|delirium"),
-    "dry_mouth": r"dry mouth|xerostomia",
+    "dry_mouth": r"dry mouth|xerostomia|hyposaliv",
+    "hypersalivation": r"hypersaliv|sialorrh|drool|ptyalism|salivation",
     "constipation": r"constipat",
     "blurred_vision": r"blurred vision|blurr",
+    "mydriasis": r"mydriasis|mydriatic|pupil(?:lary)? dilat|dilat\w* (?:of )?(?:the )?pupil",
+    "miosis": r"\bmiosis|miotic|pupil(?:lary)? constrict|constrict\w* (?:of )?(?:the )?pupil|pinpoint pupil",
     "urinary_retention": r"urinary retention",
     "nausea": r"nausea|vomit|emesis",
     "sexual_dysfunction": r"sexual",

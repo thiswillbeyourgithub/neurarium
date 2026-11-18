@@ -2113,7 +2113,8 @@
 "metabolite:norzimelidine/bindings[sert:reuptake_inhibitor]": "opus"
 },
 "q_2fe158c82e68": {
-"drug:dimenhydrinate/half_life": "opus"
+"drug:dimenhydrinate/half_life": "opus",
+"drug:diphenhydramine/half_life/uncertainty[contradicted]": "opus"
 },
 "q_2fed2a669d7a": {
 "drug:methylphenidate_dl/workup[weight:during]": "opus"
@@ -4810,6 +4811,7 @@
 "drug:amitriptyline/categories": "sonnet"
 },
 "q_6dbdb6d6613a": {
+"drug:methylphenidate_d/half_life/uncertainty[contradicted]": "opus",
 "drug:methylphenidate_dl/half_life": "sonnet"
 },
 "q_6dc071c94b9a": {
@@ -5450,7 +5452,9 @@
 "drug:pethidine/categories": "sonnet"
 },
 "q_7bef6373cde6": {
-"drug:methylphenidate_d/half_life": "sonnet"
+"drug:methylphenidate_d/half_life": "sonnet",
+"drug:methylphenidate_dl/half_life/uncertainty[contradicted]": "opus",
+"drug:serdexmethylphenidate/half_life/uncertainty[contradicted]": "opus"
 },
 "q_7bf377e7d21a": {
 "drug:propofol/originator_country": "opus",
@@ -7010,6 +7014,9 @@
 },
 "q_9cdb13805f22": {
 "drug:phenelzine/nbn": "sonnet"
+},
+"q_9d0b005623d2": {
+"receptor:mu/effects[agonism:miosis]": "opus"
 },
 "q_9d17f76cc190": {
 "projection:pons->vta_R": "opus",
@@ -8673,6 +8680,7 @@
 "drug:sertraline/brands[Apo-Sertral]": "sonnet"
 },
 "q_c28f986b4485": {
+"drug:dimenhydrinate/half_life/uncertainty[contradicted]": "opus",
 "drug:diphenhydramine/half_life": "sonnet"
 },
 "q_c292a3134040": {
@@ -10174,6 +10182,7 @@
 "drug:isoflurane/first_approval": "opus"
 },
 "q_e3bcda89b089": {
+"drug:methylphenidate_d/half_life/uncertainty[contradicted]": "opus",
 "drug:serdexmethylphenidate/half_life": "sonnet"
 },
 "q_e3c307b16db8": {
@@ -11533,6 +11542,7 @@
 "receptor:mu/effects[agonism:constipation]": "opus",
 "receptor:mu/effects[agonism:euphoria]": "opus",
 "receptor:mu/effects[agonism:itch]": "opus",
+"receptor:mu/effects[agonism:miosis]": "opus",
 "receptor:mu/effects[agonism:nausea]": "opus",
 "receptor:mu/effects[agonism:respiratory_depression]": "opus",
 "receptor:mu/effects[agonism:sedation]": "opus"

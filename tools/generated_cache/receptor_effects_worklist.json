@@ -9782,6 +9782,7 @@
      "effects": [
       "sedation",
       "constipation",
+      "miosis",
       "nausea",
       "euphoria",
       "respiratory_depression",
@@ -9806,6 +9807,15 @@
       "antipruritic"
      ],
      "qid": "6e06035c"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "mu_opioid_receptor",
+     "line": "Miosis and reduced bowel motility tend to persist; little tolerance develops to these effects.",
+     "effects": [
+      "miosis"
+     ],
+     "qid": "3759df43"
     },
     {
      "corpus": "wikipedia_pharm",
@@ -9896,6 +9906,16 @@
       "analgesia"
      ],
      "qid": "df63aaca"
+    },
+    {
+     "corpus": "gtopdb_function",
+     "page": 319,
+     "line": "μ receptor (OPRM1), GtoPdb target 319 | physiological function (Human): Constriction of the pupil. | tissue: Pupil.",
+     "effects": [
+      "miosis"
+     ],
+     "species": "Human",
+     "qid": "150bc3bb"
     }
    ]
   },
@@ -11729,6 +11749,16 @@
       "vasodilation"
      ],
      "qid": "a2932110"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "5_ht1a_receptor",
+     "line": "Activation of central 5-HT 1A receptors triggers the release or inhibition of norepinephrine depending on species, presumably from the locus coeruleus , which then reduces or increases neuronal tone to the iris sphincter muscle by modulation of postsynaptic α 2 -adrenergic receptors within the Edinger-Westphal nucleus , resulting in pupil dilation in rodents , and pupil constriction in primates including humans .",
+     "effects": [
+      "mydriasis",
+      "miosis"
+     ],
+     "qid": "e36c4510"
     },
     {
      "corpus": "wikipedia_pharm",

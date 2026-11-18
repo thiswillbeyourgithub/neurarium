@@ -2281,6 +2281,23 @@
     "quote": "Activation of the μ-opioid receptor by an agonist such as morphine causes analgesia , sedation , slightly reduced blood pressure , itching , nausea , euphoria , decreased respiration , miosis (constricted pupils), and decreased bowel motility often leading to constipation ."
    }
   ],
+  "agonism:miosis": [
+   {
+    "corpus": "wikipedia_pharm",
+    "evidence": "in_vivo",
+    "page": "mu_opioid_receptor",
+    "provenance": "verified",
+    "quote": "Activation of the μ-opioid receptor by an agonist such as morphine causes analgesia , sedation , slightly reduced blood pressure , itching , nausea , euphoria , decreased respiration , miosis (constricted pupils), and decreased bowel motility often leading to constipation ."
+   },
+   {
+    "corpus": "gtopdb_function",
+    "evidence": "in_vivo",
+    "page": 319,
+    "provenance": "verified",
+    "quote": "μ receptor (OPRM1), GtoPdb target 319 | physiological function (Human): Constriction of the pupil. | tissue: Pupil.",
+    "species": "Human"
+   }
+  ],
   "agonism:nausea": [
    {
     "corpus": "wikipedia_pharm",

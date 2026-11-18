@@ -10547,8 +10547,11 @@
     "akathisia": "Akathisia",
     "anticholinergic_cognitive": "Memory / cognitive impairment",
     "dry_mouth": "Dry mouth",
+    "hypersalivation": "Hypersalivation (sialorrhea)",
     "constipation": "Constipation",
     "blurred_vision": "Blurred vision",
+    "mydriasis": "Mydriasis (pupil dilation)",
+    "miosis": "Miosis (pupil constriction)",
     "urinary_retention": "Urinary retention",
     "nausea": "Nausea / vomiting",
     "sexual_dysfunction": "Sexual dysfunction",
@@ -12262,8 +12265,8 @@
         "unknown": 0
       },
       "receptor_effect": {
-        "total": 178,
-        "verified": 173,
+        "total": 179,
+        "verified": 174,
         "uncertain": 5,
         "sourced": 0,
         "llm": 0,
@@ -12323,15 +12326,15 @@
       }
     },
     "nodes": {
-      "total": 10317,
-      "verified": 9520,
+      "total": 10318,
+      "verified": 9521,
       "uncertain": 447,
       "sourced": 0,
       "llm": 230,
       "nosource": 120,
       "missing": 350,
       "unknown": 667,
-      "backed": 9967,
+      "backed": 9968,
       "pct_backed": 97
     },
     "ki_coverage": {
