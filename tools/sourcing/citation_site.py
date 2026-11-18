@@ -312,6 +312,10 @@ def node_index(*, drugs=(), metabolites=(), receptors=(), targets=None,
             fac = f"formulations[{holder['release']}]/" if holder.get("release") else ""
             for br in holder.get("brands") or []:
                 put(site("drug", did, f"{fac}brands[{br['name']}]"), br)
+            # The duration value dict ({hours, hours_max?}) stands for its node, so a
+            # curated contradiction can doubt one T½ / Tmax like any other claim.
+            for field in ("half_life", "tmax"):
+                put(site("drug", did, f"{fac}{field}"), holder.get(field))
         for w in d.get("withdrawals") or []:
             put(site("drug", did, f"withdrawals[{withdrawal_key(w)}]"), w)
         for w in d.get("workup") or []:

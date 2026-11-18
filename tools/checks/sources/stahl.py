@@ -45,6 +45,10 @@ def quote_pages(node, corpus, out):
     """Collect every page a ``corpus`` quote in this subtree cites (sources are
     rehydrated in place, so a plain recursive walk sees them all)."""
     if isinstance(node, dict):
+        # A ``contradicted`` bullet cites ANOTHER entry on purpose (another drug's
+        # monograph denying this one's value, quotes/contradictions.py).
+        if node.get("kind") == "contradicted":
+            return out
         if node.get("corpus") == corpus and node.get("page") is not None:
             out.add(node["page"])
         for value in node.values():

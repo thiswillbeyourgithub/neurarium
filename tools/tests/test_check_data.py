@@ -392,6 +392,13 @@ class StahlMonographRangeTest(unittest.TestCase):
         self.assertEqual(pages, [788, 789, 4242])
         self.assertEqual(stray, [4242])
 
+    def test_a_contradicting_quote_may_cite_another_monograph(self):
+        # Another drug's entry denying this one's value is the point of the bullet.
+        drug = self._drug("Sulpiride", [788])
+        drug["half_life"] = {"hours": 2, "uncertainty": [{"kind": "contradicted", "sources": [
+            {"corpus": "stahl", "page": 771, "quote": "x"}]}]}
+        self.assertEqual(stahl_monograph_check(drug, self.RANGES)[2], [])
+
     def test_combo_matches_either_half(self):
         """A combo is indexed under its own name here; when it is not, either
         constituent's monograph is the honest span."""

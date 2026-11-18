@@ -39,8 +39,10 @@ with a data-only edit, at the precision the site gives: the metabolism row
 receptor classification attribute (``receptor:<id>/classification[<attr>]``), one binding
 of several on a target (``drug:<id>/bindings[<target>:<action>]``), a per-parent metabolite
 link (``drug:<id>/metabolites[<metabolite>]``), a receptor effect, a workup row, and so on.
-A flat facet stored as ``*_sources`` on its owner (``half_life``, ``tmax``) is not a node
-dict and cannot be named (``citation_site.node_index``).
+A drug's ``half_life`` / ``tmax`` (``drug:<id>/half_life``, ``.../formulations[<release>]/tmax``)
+can be named too: the value dict stands for the node and carries the bullet. Any other flat
+facet stored as ``*_sources`` on its owner is not a node dict and cannot be named
+(``citation_site.node_index``).
 
 ``generate_data.py`` raises if a site names no emitted node (or two), and ``check_data.py``
 fails on the same, so a re-run of a fetcher cannot silently strip the flag and leave the
@@ -102,6 +104,10 @@ def _europepmc(pmid: str, quote: str) -> dict[str, Any]:
 # Each value is one denying source, or a list of them (one denial may need two sentences,
 # or two corpora deny the same claim): one bullet either way, citing them all. Grouped by
 # doubted node kind for the reader only; the site says it all.
+# Stahl's d-methylphenidate T½ line (p.513), the denial of two other values below.
+_D_MPH_HALF_LIFE = _book("stahl", 513, "Mean plasma elimination half-life approximately "
+                         "2.2 hours (same as d,lmethylphenidate)")
+
 CONTRADICTIONS: dict[str, dict[str, Any] | list[dict[str, Any]]] = {
     # --- metabolism rows (the isoform touches the drug at all) ---
     # Stahl's fluoxetine monograph (p.331) prints a bare "Inhibits CYP3A4". Wikipedia
@@ -238,4 +244,18 @@ CONTRADICTIONS: dict[str, dict[str, Any] | list[dict[str, Any]]] = {
         _pdsp(50641, "3H-GR-125743", "Setola V, et al., 2003"),
         _pdsp(78930, "3H-5-CT", "Ray TS 2010"),
     ],
+    # --- pharmacokinetic durations (the value dict is the node) ---
+    # Stahl prints d-methylphenidate's mean T½ as 2.2 h "same as d,l-methylphenidate"
+    # (p.513), yet its own d,l monograph gives 3.5 h (p.521); and the serdexmethylphenidate
+    # monograph (p.757) gives d-methylphenidate 11.7 h (formed slowly from the prodrug,
+    # so its apparent T½ tracks the conversion, which the bullet cannot say). Three
+    # numbers for one molecule in one book: each value is flagged with the others quoted.
+    "drug:methylphenidate_d/half_life": [
+        _book("stahl", 521, "Average half-life of methylphenidate in adults is 3.5 hours "
+              "(1.3–7.7 hours)"),
+        _book("stahl", 757, "Mean plasma elimination halflife approximately 5.7 hours "
+              "(serdexmethylphenidate) and 11.7 hours (d-methylphenidate)"),
+    ],
+    "drug:methylphenidate_dl/half_life": _D_MPH_HALF_LIFE,
+    "drug:serdexmethylphenidate/half_life": _D_MPH_HALF_LIFE,
 }

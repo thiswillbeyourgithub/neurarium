@@ -278,12 +278,14 @@ export function showDrug(P, drug, opts = {}) {
       hlEl.appendChild(valueChip(chipHelpers, {
         label: t("drug.tmax"), tip: t("drug.tmaxTip"),
         value: formatHalfLife(drug.tmax),
-        provenance: drug.tmaxProvenance, sources: drug.tmaxSources }));
+        provenance: drug.tmaxProvenance, sources: drug.tmaxSources,
+        uncertainty: drug.tmax.uncertainty }));
     }
     if (drug.halfLife) {
       const chip = valueChip(chipHelpers, {
         label: t("drug.halfLife"), value: formatHalfLife(drug.halfLife),
-        provenance: drug.halfLifeProvenance, sources: drug.halfLifeSources });
+        provenance: drug.halfLifeProvenance, sources: drug.halfLifeSources,
+        uncertainty: drug.halfLife.uncertainty });
       if (nonLinearPk) {
         const warn = el("button", "hl-warn",
           (data.meta.addonTones || {}).caution || "⚠");
@@ -327,12 +329,14 @@ export function showDrug(P, drug, opts = {}) {
           head.appendChild(valueChip(chipHelpers, {
             label: t("drug.tmax"), tip: t("drug.tmaxTip"),
             value: formatHalfLife(f.tmax),
-            provenance: f.tmaxProvenance, sources: f.tmaxSources }));
+            provenance: f.tmaxProvenance, sources: f.tmaxSources,
+            uncertainty: f.tmax.uncertainty }));
         }
         if (f.halfLife) {
           head.appendChild(valueChip(chipHelpers, {
             label: t("drug.halfLife"), value: formatHalfLife(f.halfLife),
-            provenance: f.halfLifeProvenance, sources: f.halfLifeSources }));
+            provenance: f.halfLifeProvenance, sources: f.halfLifeSources,
+            uncertainty: f.halfLife.uncertainty }));
         }
         row.appendChild(head);
         wrap.appendChild(row);

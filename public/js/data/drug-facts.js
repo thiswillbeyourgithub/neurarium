@@ -5,6 +5,10 @@ import { localize } from "./localize.js";
 import { strongestGrade } from "../grades.js";
 import { mapSources, mapUncertainty } from "./sources.js";
 
+// A T½ / Tmax value {hours, hours_max?, uncertainty?}: the dict is the node, so a
+// curated `contradicted` bullet rides on it (quotes/contradictions.py).
+const pkValue = (v) => (v ? { ...v, uncertainty: mapUncertainty(v.uncertainty) } : null);
+
 /** Resolve one drug's fact fields in place. */
 export function resolveDrugFacts(d, v) {
   const { drugCategoryLabels, releaseLabels, historyCountries, historyAgencies,
@@ -36,14 +40,14 @@ export function resolveDrugFacts(d, v) {
   // Elimination half-life (T½): {hours, hours_max?} passed through raw; the panel
   // formats it via formatHalfLife (js/main.js). Its own sourced node, so carry the
   // strongest grade + sources for the pill next to it.
-  d.halfLife = d.half_life || null;
+  d.halfLife = pkValue(d.half_life);
   d.halfLifeSources = mapSources(d.half_life_sources);
   d.halfLifeProvenance = strongestGrade(d.half_life_sources);
   // Time to peak plasma concentration (Tmax), same shape and same treatment: its
   // own sourced node, and the other end of the curve js/sim-model.js draws (the T½
   // sets the fall, this sets the rise). Null on the ~70% of drugs no corpus states
   // a peak for; the simulation then uses its single assumed peak.
-  d.tmax = d.tmax || null;
+  d.tmax = pkValue(d.tmax);
   d.tmaxSources = mapSources(d.tmax_sources);
   d.tmaxProvenance = strongestGrade(d.tmax_sources);
   // Formulations: one per release type a source names, each its own graded node
@@ -56,10 +60,10 @@ export function resolveDrugFacts(d, v) {
     releaseSources: mapSources(f.release_sources),
     releaseProvenance: strongestGrade(f.release_sources),
     brands: (f.brands || []).map((b) => ({ ...b, release: f.release })),
-    tmax: f.tmax || null,
+    tmax: pkValue(f.tmax),
     tmaxSources: mapSources(f.tmax_sources),
     tmaxProvenance: strongestGrade(f.tmax_sources),
-    halfLife: f.half_life || null,
+    halfLife: pkValue(f.half_life),
     halfLifeSources: mapSources(f.half_life_sources),
     halfLifeProvenance: strongestGrade(f.half_life_sources),
   }));

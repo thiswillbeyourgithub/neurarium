@@ -208,7 +208,10 @@ def _provenance_stats(structures: list[dict[str, Any]],
     }
     # The one-claim-per-drug scalar kinds (see DRUG_SCALAR_KINDS), keyed by kind.
     holders = [h for d in drugs for h in product_holders(d)]
-    scalar = {kind: tally([_strongest_grade(d.get(f"{field}_sources"))
+    # A value dict (a T½ / Tmax) may carry a curated ``contradicted`` bullet
+    # (quotes/contradictions.py), bucketing ``uncertain`` like any other node.
+    scalar = {kind: tally([(_strongest_grade(d.get(f"{field}_sources")),
+                            isinstance(d[field], dict) and bool(d[field].get("uncertainty")))
                            for d in (holders if per_product else drugs) if d.get(field)])
               for kind, field, per_product in DRUG_SCALAR_KINDS}
     # Commercial-brand nodes ("this drug is marketed as <brand>"), one per authored

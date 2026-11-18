@@ -286,11 +286,13 @@ export function collectNodes(data, deps, opts = {}) {
     }
     if (d.halfLife) {
       push("drug_half_life", d.name, `T½ ${formatHalfLife(d.halfLife)}`,
-        d.halfLifeProvenance, go, { sources: d.halfLifeSources }, d.halfLife.hours);
+        d.halfLifeProvenance, go,
+        { sources: d.halfLifeSources, uncertainty: d.halfLife.uncertainty }, d.halfLife.hours);
     }
     if (d.tmax) {
       push("drug_tmax", d.name, `${t("drug.tmax")} ${formatHalfLife(d.tmax)}`,
-        d.tmaxProvenance, go, { sources: d.tmaxSources }, d.tmax.hours);
+        d.tmaxProvenance, go,
+        { sources: d.tmaxSources, uncertainty: d.tmax.uncertainty }, d.tmax.hours);
     }
     // Each formulation is its own node (the release type), and its T½ / Tmax are
     // counted under the same kinds as the molecule's (its brands already ride
@@ -301,12 +303,12 @@ export function collectNodes(data, deps, opts = {}) {
       if (f.halfLife) {
         push("drug_half_life", `${d.name} (${f.label})`,
           `T½ ${formatHalfLife(f.halfLife)}`, f.halfLifeProvenance, go,
-          { sources: f.halfLifeSources }, f.halfLife.hours);
+          { sources: f.halfLifeSources, uncertainty: f.halfLife.uncertainty }, f.halfLife.hours);
       }
       if (f.tmax) {
         push("drug_tmax", `${d.name} (${f.label})`,
           `${t("drug.tmax")} ${formatHalfLife(f.tmax)}`, f.tmaxProvenance, go,
-          { sources: f.tmaxSources }, f.tmax.hours);
+          { sources: f.tmaxSources, uncertainty: f.tmax.uncertainty }, f.tmax.hours);
       }
     }
     if (d.firstApproval) {

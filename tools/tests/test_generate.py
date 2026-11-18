@@ -898,9 +898,9 @@ class ContradictionTest(unittest.TestCase):
             # the node is gone (a fetcher re-run dropped the row)
             ({"drug:fluoxetine/enzymes[cyp3a4:inhibitor]": src},
              {"drugs": [{"id": "fluoxetine", "enzymes": []}]}),
-            # a flat *_sources facet has no node dict to carry the bullet
+            # a flat *_sources facet with no value dict has nothing to carry the bullet
             ({"drug:x/half_life": src},
-             {"drugs": [{"id": "x", "half_life": {"hours": 3}, "half_life_sources": []}]}),
+             {"drugs": [{"id": "x", "half_life_sources": []}]}),
             # two rows at one site: the bullet would land on an arbitrary one
             ({"drug:x/bindings[d2:antagonist]": src},
              {"drugs": [{"id": "x", "bindings": [{"target": "d2", "action": "antagonist"},

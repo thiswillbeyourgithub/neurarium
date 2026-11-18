@@ -199,6 +199,13 @@ class NodeIndexTest(unittest.TestCase):
         self.assertIsNot(self.nodes["drug:amisulpride/bindings[d2:partial_agonist]"],
                          self.nodes["drug:amisulpride/bindings[d2:antagonist]"])
 
+    def test_a_drug_duration_value_is_a_node(self):
+        # A T½ / Tmax value dict must be addressable, so a contradicted entry can doubt
+        # it (methylphenidate's three conflicting Stahl half-lives).
+        self.assertIn("drug:methylphenidate_d/half_life", self.nodes)
+        self.assertIn("hours", self.nodes["drug:methylphenidate_d/half_life"])
+        self.assertTrue(any(s.endswith("/tmax") for s in self.nodes))
+
     def test_every_sourced_node_site_is_one_the_claim_walk_names(self):
         walked = set().union(*self.emitted.values())
         stray = [s for s, node in self.nodes.items()
