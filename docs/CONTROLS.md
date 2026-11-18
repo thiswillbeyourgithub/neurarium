@@ -186,12 +186,14 @@ hosts it (`info.showNodeBrowser`). Clicking that row also enters the panel-only 
 name the `panel` view itself. Header + rows share one two-level grid template (`grade`, then
 `name`/`notion`/`kind` inside the clickable button), which is why the header is built with a row's
 exact structure and an empty `notion` cell is still emitted. The **kind** column shows only in the
-"All kinds" reading: with one kind selected every row would repeat the select above the list, so
+"All kinds" reading: when the listed rows are all one kind every row would repeat it, so
 `apply()` puts `.no-kind` on the grid and the CSS drops the column and reflows the other two. The
 kind then heads the **notion** column instead of the word "notion", naming what the cells under it
 actually hold; and when no matching row carries a notion at all (a circuit, a projection group: the
 name *is* the claim) that column goes too, `.no-notion`, and the kind heads the **name** column
 instead.
+
+The **filter stack** (`js/node-browser/filter-rows.js` UI, `js/node-browser/query.js` pure logic): each "Add filter" row has a free-text kind box (a datalist of kind labels; an exact label picks one kind, otherwise every kind whose label contains the text) and a text box. Rows after the first carry AND / OR / XOR and combine on the row's **owner**: AND narrows the owners and lists the last filter's rows ("Drug classes: benzo" AND "Drug half-life" = benzo half-lives), OR unions rows, XOR keeps the owners matched by exactly one side. A filter listing drugs offers "include metabolites" (adds its metabolite drugs, transitively). Rows reorder by dragging the handle (long press on touch). The sourcing filter and **Sorting** (grade, value via `row.value`, name, kind) sit on one final line; the hemisphere checkbox shows only when a lateral region row is listed.
 
 `collectNodes(data, deps)` enumerates every graded knowledge node (references excluded, like the
 bars) as `{kind, name, notion, grade, uncertain, go, sources, uncertainty, ki}`, where `grade` is

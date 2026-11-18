@@ -206,7 +206,7 @@ window.__I18N_MESSAGES__.fr = {
     "Chacun de ces faits notés est une ligne que vous pouvez lire. Cliquez sur <b>Explorateur de données</b> pour ouvrir la liste.",
   "tour.nodesLook.title": "L'explorateur de données",
   "tour.nodesLook.body":
-    "Tous les faits du jeu de données en une liste : filtrez, triez, ne gardez qu'un type ou qu'une note. Chaque ligne ouvre la chose qu'elle décrit. C'est un tableau large : il emprunte toute la fenêtre et la vue 3D s'efface.",
+    "Tous les faits du jeu de données en une liste : empilez des filtres (ET / OU / OU excl.), triez par note ou par valeur, ne gardez qu'une note. Chaque ligne ouvre la chose qu'elle décrit. C'est un tableau large : il emprunte toute la fenêtre et la vue 3D s'efface.",
   "tour.show3d.title": "Afficher ou masquer le cerveau",
   "tour.show3d.body":
     "Ce bouton masque la vue 3D pour que le panneau occupe tout l'écran, pour lire. Le cerveau est masqué en ce moment : cliquez pour le faire revenir.",

@@ -208,7 +208,7 @@ window.__I18N_MESSAGES__.en = {
     "Each of those graded facts is a row you can read. Click <b>Data browser</b> to open the list.",
   "tour.nodesLook.title": "The Data browser",
   "tour.nodesLook.body":
-    "Every fact in the dataset, in one list: filter it, sort it, keep only one kind or one grade. Each row opens the thing it describes. It is a wide table, so it borrows the whole window and the 3D view steps aside.",
+    "Every fact in the dataset, in one list: stack filters (AND / OR / XOR), sort it by grade or value, keep only one grade. Each row opens the thing it describes. It is a wide table, so it borrows the whole window and the 3D view steps aside.",
   "tour.show3d.title": "Show or hide the brain",
   "tour.show3d.body":
     "This button hides the 3D view so the panel can fill the screen, for reading. The brain is hidden right now: click it to bring it back.",
