@@ -1,6 +1,27 @@
 {
   "versions": [
     {
+      "version": "3.168.0",
+      "date": "2026-11-18",
+      "entries": [
+        {
+          "category": "added",
+          "text": "A panel link now remembers which sections are unfolded, so sharing the address reproduces the same open sections",
+          "commits": [
+            "7eab4973"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "438 binding affinities taken from Wikipedia tables now cite the PDSP measurement database instead, which outranks them, plus 5 new PDSP bindings (ropinirole, xanomeline)",
+          "commits": [
+            "050b0bb8",
+            "979e6a39"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.167.0",
       "date": "2026-11-18",
       "entries": [
