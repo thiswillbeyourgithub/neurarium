@@ -304,6 +304,17 @@ def density_for_gene(gene: str, donor_data: list[tuple]) -> dict | None:
             "reliability": round(statistics.median(rs), 2) if rs else 0.0}
 
 
+def scoped_owners(owners: dict[str, tuple], keep: set[str]) -> dict[str, tuple]:
+    """The ``--only`` owners plus every owner sharing a gene with one of them.
+
+    A gene page is written from all of this run's owners of that gene, so scoping
+    to the ``muscarinic`` group alone rewrote ``CHRM1.md`` without the regions only
+    ``m1`` claims, breaking m1's stored quotes. Pulling the gene's other owners in
+    keeps every page whole."""
+    genes = {g for o in keep if o in owners for g in owners[o][1]}
+    return {k: v for k, v in owners.items() if k in keep or genes & set(v[1])}
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--only", help="comma-separated owner ids (targets/receptors) to limit")
@@ -324,10 +335,10 @@ def main() -> int:
         owners[rid] = ("receptor", [gene] if isinstance(gene, str) else list(gene))
     if args.only:
         keep = set(args.only.split(","))
-        owners = {k: v for k, v in owners.items() if k in keep}
         missing = keep - set(owners)
         if missing:
             log(f"warning: --only ids not in gene maps: {sorted(missing)}")
+        owners = scoped_owners(owners, keep)
 
     donors = [int(d) for d in args.donors.split(",")] if args.donors else list(DONORS)
     if args.refresh:

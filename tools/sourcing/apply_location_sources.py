@@ -154,6 +154,31 @@ def prune_unclaimed(buckets: dict, rec_regions: dict, tgt_regions: dict) -> list
     return dropped
 
 
+def prune_refuted(buckets: dict, refuted=quote_refuted) -> list[str]:
+    """Drop, in place, every cached source whose quote its stored page no longer holds.
+
+    A fetcher rewrites its pages on every run (Allen's PACall lines carry the donor
+    set and sample counts), and the merge above dedups by quote only, so a rerun
+    once left the previous run's citations behind, each now failing check_data's
+    quote gate. The page is the truth: a refuted citation is stale. Lenient on a
+    clone (``refuted`` is False when the whole page tree is absent)."""
+    dropped = []
+    for kind, bucket in buckets.items():
+        for owner in sorted(bucket):
+            for base in sorted(bucket[owner]):
+                keep = [s for s in bucket[owner][base]
+                        if not refuted(s["corpus"], s["page"], s["quote"])]
+                dropped += [f"{kind} {owner}/{base}: stale {s['corpus']} quote (pruned)"
+                            for s in bucket[owner][base] if s not in keep]
+                if keep:
+                    bucket[owner][base] = keep
+                else:
+                    del bucket[owner][base]
+            if not bucket[owner]:
+                del bucket[owner]
+    return dropped
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--corpus", choices=["gtopdb", "allen"], default="gtopdb",
@@ -187,6 +212,7 @@ def main() -> int:
         n_applied += 1
 
     warnings += prune_unclaimed(buckets, *owner_regions())
+    warnings += prune_refuted(buckets)
     payload = {}
     if buckets["receptor"]:
         payload["receptors"] = buckets["receptor"]

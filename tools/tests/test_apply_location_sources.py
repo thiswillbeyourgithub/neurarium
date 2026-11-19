@@ -32,6 +32,32 @@ class PruneTest(unittest.TestCase):
         self.assertEqual(A.prune_unclaimed(buckets, *A.owner_regions()), [])
 
 
+class StaleQuoteTest(unittest.TestCase):
+    """A rerun rewrites a page (Allen's lines carry donors + sample counts), so the
+    previous run's citation is refuted and must not linger beside the new one."""
+
+    def test_drops_a_quote_its_page_no_longer_holds(self):
+        old = {"corpus": "allen_ahba", "page": "DDC", "quote": "DDC 81/82 (5 donors)"}
+        new = {"corpus": "allen_ahba", "page": "DDC", "quote": "DDC 90/91 (6 donors)"}
+        gone = {"corpus": "allen_ahba", "page": "DDC", "quote": "DDC pons 3/3"}
+        buckets = {"target": {"aadc": {"caudate": [old, new], "pons": [gone]}}}
+        dropped = A.prune_refuted(buckets, lambda c, p, q: q != new["quote"])
+        self.assertEqual(buckets, {"target": {"aadc": {"caudate": [new]}}})
+        self.assertEqual(len(dropped), 2)
+
+
+class ScopedOwnersTest(unittest.TestCase):
+    def test_only_pulls_in_every_owner_of_a_shared_gene(self):
+        sys.path.insert(0, str(TOOLS / "fetch"))
+        import fetch_allen as F
+        owners = {"muscarinic": ("target", ["CHRM1", "CHRM2"]),
+                  "m1": ("receptor", ["CHRM1"]), "m2": ("receptor", ["CHRM2"]),
+                  "d1": ("receptor", ["DRD1"])}
+        self.assertEqual(set(F.scoped_owners(owners, {"muscarinic"})),
+                         {"muscarinic", "m1", "m2"})
+        self.assertEqual(set(F.scoped_owners(owners, {"d1"})), {"d1"})
+
+
 class RefutedTest(unittest.TestCase):
     """The applier gate agrees with check_data's: lenient only on an absent tree."""
 
