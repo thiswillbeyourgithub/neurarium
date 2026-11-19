@@ -275,6 +275,27 @@ ALIAS = {
 SYNONYMS = {
     "phencyclidine": ["PCP"],
     "norquetiapine": ["N-Desalkylquetiapine"],
+    # Former INN / US name of the same molecule.
+    "alimemazine": ["Trimeprazine"],
+    "clorgiline": ["Clorgyline"],
+    "pizotifen": ["Pizotyline"],
+    "desipramine": ["Desmethylimipramine"],
+    "desvenlafaxine": ["O-Desmethylvenlafaxine"],
+    "levodopa": ["L-DOPA"],
+    "cannabidiol": ["CBD"],
+    # The INN "tomoxetine" named the (R)-enantiomer, renamed atomoxetine in 2003. Its
+    # racemate LY135252 is deliberately absent.
+    "atomoxetine": ["Tomoxetine"],
+    # Developer code names (company serial numbers) of the same molecule.
+    "agomelatine": ["S 20098"],
+    "aripiprazole": ["OPC-14597"],
+    "asenapine": ["ORG-5222"],
+    "flibanserin": ["BIMT 17"],
+    "flumazenil": ["Ro15-1788"],
+    "ketanserin": ["R-41-468"],
+    "lurasidone": ["SM 13496"],
+    "mirtazapine": ["Org3770", "ORG-3770"],
+    "pimavanserin": ["ACP-103"],
 }
 
 _ALL_ROWS = None

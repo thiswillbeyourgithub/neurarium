@@ -399,6 +399,7 @@ class MetaboliteNamesTest(unittest.TestCase):
                | {m["id"] for m in drugs_io.load_metabolites()})
         self.assertEqual(set(fetch_ki.ALIAS) - ids, set())
         self.assertEqual(set(fetch_ki.SYNONYMS) - ids, set())
+        self.assertEqual(set(fetch_ki.SYNONYMS) - ids, set())
 
 
 if __name__ == "__main__":
