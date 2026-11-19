@@ -1,6 +1,33 @@
 {
   "versions": [
     {
+      "version": "3.170.1",
+      "date": "2026-11-19",
+      "entries": [
+        {
+          "category": "data",
+          "text": "Measured binding affinities (PDSP) are now found for drugs the database files under a former name or code name: alimemazine (trimeprazine), atomoxetine (tomoxetine), desipramine, desvenlafaxine, levodopa, cannabidiol, clorgiline, pizotifen and the code names of aripiprazole, asenapine, agomelatine, lurasidone, mirtazapine, pimavanserin, flibanserin, flumazenil and ketanserin",
+          "commits": [
+            "9480bb19"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "Benzodiazepines and Z-drugs get a measured GABA-A affinity, and D1, D5, D4, MAO, melatonin, opioid, orexin and PDE5 assays filed under a free-text name now count",
+          "commits": [
+            "4a5e2833"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "GABA-A subunit assays were read as nicotinic receptor ones (alprazolam showed a 1 nM nicotinic affinity), and 71 \"bindings\" resting only on null results or a 1000 nM screening ceiling are removed, such as venlafaxine at opioid receptors",
+          "commits": [
+            "4a5e2833"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.170.0",
       "date": "2026-11-19",
       "entries": [
