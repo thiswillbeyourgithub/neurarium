@@ -7,7 +7,10 @@
 // keeps the owners both match (the benzodiazepines) and lists the LAST filter's rows
 // (their half-lives), so earlier filters narrow and the last one picks what is shown.
 // OR unions both sides' rows; XOR keeps the rows of owners matched by exactly one side;
-// NOT ("and not") keeps the left side's rows whose owner the right side does NOT match.
+// NOT ("and not") keeps the owners the right side does NOT match. A text-less NOT lists
+// the left side's rows (the gap finder: "benzo AND NOT half-life" = benzos lacking one);
+// a NOT with text lists the right kind's rows missing that text, like AND lists its last
+// filter's, and drops owners holding no row of that kind (no data is not a "not").
 //
 // Parentheses ride the same flat list as marker entries, so the stack stays one array
 // (drag, URL and UI unchanged): `{group: "open", op}` begins a group that combines with
@@ -151,6 +154,10 @@ function evalItems(rows, items, ctx) {
     } else {
       const hit = filterRows(rows, it.f, ctx);
       res = { rows: new Set(hit), owners: new Set(hit.map((r) => r.owner)) };
+      // A texted NOT shows its own kind's rows that miss the text (see combine).
+      if (it.f.op === "not" && (it.f.text || "").trim()) {
+        res.pool = filterRows(rows, { ...it.f, text: "" }, ctx);
+      }
     }
     acc = acc ? combine(acc, res, it.f.op) : res;
   }
@@ -165,6 +172,12 @@ function combine(acc, res, op) {
     const keep = new Set([...acc.owners, ...res.owners]
       .filter((o) => acc.owners.has(o) !== res.owners.has(o)));
     return { rows: new Set([...acc.rows, ...res.rows].filter((r) => keep.has(r.owner))), owners: keep };
+  }
+  if (op === "not" && res.pool) {
+    // "benzo AND NOT excretion = urine": the benzos' excretion rows that do not say
+    // urine. An owner with no row of that kind drops out: missing data is no "not".
+    const pool = res.pool.filter((r) => acc.owners.has(r.owner) && !res.owners.has(r.owner));
+    return { rows: new Set(pool), owners: new Set(pool.map((r) => r.owner)) };
   }
   if (op === "not") {
     const keep = new Set([...acc.owners].filter((o) => !res.owners.has(o)));

@@ -119,6 +119,16 @@ test("AND NOT keeps the left side's rows whose owner the right side misses", () 
   assert.deepEqual(owners(out), ["drug_categories:alprazolam"]);
 });
 
+test("AND NOT with text lists the right kind's non-matching rows, never a no-data owner", () => {
+  // benzo AND NOT half-life "day": alprazolam's 11 h half-life (its own kind's row, not
+  // its class row); diazepam (2 days) is excluded, and a benzo with no half-life at all
+  // is no answer, since missing data does not say "not in days".
+  const rows = ROWS.concat([row("drug_categories", "nordazepam", "benzodiazepine")]);
+  const out = runFilters(rows, [CLASSES("benzo"),
+    { kind: "Drug half-life", text: "day", op: "not" }], ctx);
+  assert.deepEqual(owners(out), ["drug_half_life:alprazolam"]);
+});
+
 test("a group is evaluated first, then combined through its own operator", () => {
   // Left to right, benzo OR ssri AND half-life = (benzo OR ssri) AND half-life.
   const flat = runFilters(ROWS, [CLASSES("benzo"), CLASSES("ssri", "or"), HALF("and")], ctx);
