@@ -1,6 +1,20 @@
 {
   "versions": [
     {
+      "version": "3.172.1",
+      "date": "2026-11-19",
+      "entries": [
+        {
+          "category": "data",
+          "text": "Brain expression now draws on all six Allen Human Brain Atlas donors instead of five: two more receptor regions confirmed (delta in the caudate, mu in the occipital lobe), relative-amount profiles added for 5-HT6 and D1, and mGluR2's profile withdrawn because the six donors no longer agree on it",
+          "commits": [
+            "4f5461ae",
+            "5d681236"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.172.0",
       "date": "2026-11-19",
       "entries": [
