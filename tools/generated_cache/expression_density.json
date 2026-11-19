@@ -422,7 +422,7 @@
      "corpus": "allen_ahba",
      "page": "OPRD1",
      "provenance": "verified",
-     "quote": "OPRD1 relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1028943, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.51: occipital +0.80 (5d), parietal +0.54 (5d), temporal +0.44 (5d), frontal +0.35 (5d), putamen +0.12 (5d), caudate -0.12 (5d), hippocampus -0.12 (5d), amygdala -0.14 (5d), accumbens -0.34 (5d)",
+     "quote": "OPRD1 relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1028943, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.51: occipital +0.80 (5d), parietal +0.54 (5d), temporal +0.44 (5d), frontal +0.35 (5d), putamen +0.12 (5d), hippocampus -0.12 (5d), caudate -0.12 (5d), amygdala -0.14 (5d), accumbens -0.34 (5d)",
      "species": "Human"
     }
    ]
@@ -512,7 +512,7 @@
      "corpus": "allen_ahba",
      "page": "GRIK1",
      "provenance": "verified",
-     "quote": "GRIK1 relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1026815, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.72: temporal +0.23 (5d), hippocampus +0.20 (5d), parietal +0.15 (5d), frontal +0.15 (5d), occipital +0.09 (5d), amygdala -0.06 (5d), cerebellum -1.11 (5d)",
+     "quote": "GRIK1 relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1026815, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.72: temporal +0.23 (5d), hippocampus +0.20 (5d), frontal +0.15 (5d), parietal +0.15 (5d), occipital +0.09 (5d), amygdala -0.06 (5d), cerebellum -1.11 (5d)",
      "species": "Human"
     }
    ]
@@ -558,7 +558,7 @@
      "corpus": "allen_ahba",
      "page": "CHRM1",
      "provenance": "verified",
-     "quote": "CHRM1 relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1058221, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.97: temporal +0.81 (5d), occipital +0.80 (5d), frontal +0.79 (5d), parietal +0.77 (5d), hippocampus +0.73 (5d), accumbens +0.66 (5d), cingulate +0.66 (5d)",
+     "quote": "CHRM1 relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1058221, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.97: temporal +0.81 (5d), occipital +0.80 (5d), frontal +0.79 (5d), parietal +0.77 (5d), hippocampus +0.73 (5d), cingulate +0.66 (5d), accumbens +0.66 (5d)",
      "species": "Human"
     }
    ]
@@ -761,7 +761,7 @@
      "corpus": "allen_ahba",
      "page": "OPRM1",
      "provenance": "verified",
-     "quote": "OPRM1 relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1017111, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.74: accumbens +1.15 (5d), thalamus +1.12 (5d), hypothalamus +0.82 (5d), amygdala +0.82 (5d), vta +0.17 (5d), medulla +0.17 (5d), caudate +0.03 (5d), pons -0.14 (5d), frontal -0.20 (5d), temporal -0.22 (5d), putamen -0.22 (5d), midbrain -0.23 (5d), parietal -0.45 (5d), occipital -0.86 (5d), hippocampus -0.86 (5d)",
+     "quote": "OPRM1 relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1017111, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.74: accumbens +1.15 (5d), thalamus +1.12 (5d), hypothalamus +0.82 (5d), amygdala +0.82 (5d), vta +0.17 (5d), medulla +0.17 (5d), caudate +0.03 (5d), pons -0.14 (5d), frontal -0.20 (5d), temporal -0.22 (5d), putamen -0.22 (5d), midbrain -0.23 (5d), parietal -0.45 (5d), hippocampus -0.86 (5d), occipital -0.86 (5d)",
      "species": "Human"
     }
    ]
@@ -816,22 +816,22 @@
  },
  "targets": {
   "aadc": {
-   "donors": 6,
+   "donors": 5,
    "profile": {
-    "caudate": 1.01,
-    "locus_coeruleus": 3.88,
-    "putamen": 1.1,
-    "raphe": 3.87,
+    "caudate": 1.02,
+    "locus_coeruleus": 3.9,
+    "putamen": 1.12,
+    "raphe": 3.94,
     "substantia_nigra": 3.33,
-    "vta": 3.06
+    "vta": 3.07
    },
-   "reliability": 0.98,
+   "reliability": 0.97,
    "sources": [
     {
      "corpus": "allen_ahba",
      "page": "DDC",
      "provenance": "verified",
-     "quote": "DDC relative expression across 6 donors (9861,10021,12876,14380,15496,15697), probe 1011160, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.98: locus_coeruleus +3.88 (4d), raphe +3.87 (6d), substantia_nigra +3.33 (6d), vta +3.06 (6d), putamen +1.10 (6d), caudate +1.01 (6d)",
+     "quote": "DDC relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1011160, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.97: raphe +3.94 (5d), locus_coeruleus +3.90 (3d), substantia_nigra +3.33 (5d), vta +3.07 (5d), putamen +1.12 (5d), caudate +1.02 (5d)",
      "species": "Human"
     }
    ]
@@ -852,6 +852,31 @@
      "page": "ACHE",
      "provenance": "verified",
      "quote": "ACHE relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1022702, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.96: septal_nuclei +0.79 (5d), thalamus +0.54 (5d), hippocampus -0.42 (5d), frontal -0.70 (5d), temporal -0.81 (5d)",
+     "species": "Human"
+    }
+   ]
+  },
+  "alpha1": {
+   "donors": 5,
+   "profile": {
+    "frontal": 0.7,
+    "hippocampus": -0.33,
+    "hypothalamus": -0.38,
+    "medulla": -0.58,
+    "midbrain": -0.72,
+    "occipital": 0.15,
+    "parietal": 0.52,
+    "pons": -0.34,
+    "temporal": 0.69,
+    "thalamus": 0.63
+   },
+   "reliability": 0.93,
+   "sources": [
+    {
+     "corpus": "allen_ahba",
+     "page": "ADRA1B",
+     "provenance": "verified",
+     "quote": "ADRA1B relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1023485, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.93: frontal +0.70 (5d), temporal +0.69 (5d), thalamus +0.63 (5d), parietal +0.52 (5d), occipital +0.15 (5d), hippocampus -0.33 (5d), pons -0.34 (5d), hypothalamus -0.38 (5d), medulla -0.58 (5d), midbrain -0.72 (5d)",
      "species": "Human"
     }
    ]
@@ -954,22 +979,22 @@
    ]
   },
   "cgrp": {
-   "donors": 6,
+   "donors": 5,
    "profile": {
-    "amygdala": 0.86,
-    "cerebellum": -0.6,
-    "hypothalamus": 0.12,
-    "medulla": -0.24,
-    "pons": -0.45,
-    "thalamus": 0.07
+    "amygdala": 0.87,
+    "cerebellum": 0.03,
+    "hypothalamus": -0.34,
+    "medulla": 1.64,
+    "pons": 0.74,
+    "thalamus": -0.4
    },
    "reliability": 0.71,
    "sources": [
     {
      "corpus": "allen_ahba",
-     "page": "RAMP1",
+     "page": "CALCRL",
      "provenance": "verified",
-     "quote": "RAMP1 relative expression across 6 donors (9861,10021,12876,14380,15496,15697), probe 1047617, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.71: amygdala +0.86 (6d), hypothalamus +0.12 (6d), thalamus +0.07 (6d), medulla -0.24 (6d), pons -0.45 (6d), cerebellum -0.60 (6d)",
+     "quote": "CALCRL relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1047703, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.71: medulla +1.64 (5d), amygdala +0.87 (5d), pons +0.74 (5d), cerebellum +0.03 (5d), hypothalamus -0.34 (5d), thalamus -0.40 (5d)",
      "species": "Human"
     }
    ]
@@ -995,22 +1020,45 @@
     }
    ]
   },
-  "gaba_t": {
-   "donors": 6,
+  "dopamine": {
+   "donors": 5,
    "profile": {
-    "cerebellum": -0.69,
-    "frontal": 0.22,
-    "hippocampus": -1.25,
-    "temporal": 0.27,
-    "thalamus": -0.06
+    "accumbens": 2.31,
+    "amygdala": 0.4,
+    "caudate": 2.61,
+    "frontal": -0.59,
+    "hypothalamus": 1.02,
+    "putamen": 2.9,
+    "substantia_nigra": 2.44,
+    "vta": 2.12
    },
-   "reliability": 0.74,
+   "reliability": 0.97,
+   "sources": [
+    {
+     "corpus": "allen_ahba",
+     "page": "DRD2",
+     "provenance": "verified",
+     "quote": "DRD2 relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1030267, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.97: putamen +2.90 (5d), caudate +2.61 (5d), substantia_nigra +2.44 (5d), accumbens +2.31 (5d), vta +2.12 (5d), hypothalamus +1.02 (5d), amygdala +0.40 (5d), frontal -0.59 (5d)",
+     "species": "Human"
+    }
+   ]
+  },
+  "gaba_t": {
+   "donors": 5,
+   "profile": {
+    "cerebellum": -0.68,
+    "frontal": 0.17,
+    "hippocampus": -1.21,
+    "temporal": 0.22,
+    "thalamus": 0.05
+   },
+   "reliability": 0.68,
    "sources": [
     {
      "corpus": "allen_ahba",
      "page": "ABAT",
      "provenance": "verified",
-     "quote": "ABAT relative expression across 6 donors (9861,10021,12876,14380,15496,15697), probe 1010530, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.74: temporal +0.27 (6d), frontal +0.22 (6d), thalamus -0.06 (6d), cerebellum -0.69 (6d), hippocampus -1.25 (6d)",
+     "quote": "ABAT relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1010530, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.68: temporal +0.22 (5d), frontal +0.17 (5d), thalamus +0.05 (5d), cerebellum -0.68 (5d), hippocampus -1.21 (5d)",
      "species": "Human"
     }
    ]
@@ -1100,6 +1148,31 @@
     }
    ]
   },
+  "muscarinic": {
+   "donors": 5,
+   "profile": {
+    "accumbens": 0.66,
+    "caudate": 0.61,
+    "cingulate": 0.66,
+    "frontal": 0.79,
+    "hippocampus": 0.73,
+    "occipital": 0.8,
+    "parietal": 0.77,
+    "putamen": 0.64,
+    "temporal": 0.81,
+    "thalamus": -1.05
+   },
+   "reliability": 0.97,
+   "sources": [
+    {
+     "corpus": "allen_ahba",
+     "page": "CHRM1",
+     "provenance": "verified",
+     "quote": "CHRM1 relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1058221, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.97: temporal +0.81 (5d), occipital +0.80 (5d), frontal +0.79 (5d), parietal +0.77 (5d), hippocampus +0.73 (5d), cingulate +0.66 (5d), accumbens +0.66 (5d), putamen +0.64 (5d), caudate +0.61 (5d), thalamus -1.05 (5d)",
+     "species": "Human"
+    }
+   ]
+  },
   "nav": {
    "donors": 5,
    "profile": {
@@ -1144,27 +1217,27 @@
    ]
   },
   "nkcc1": {
-   "donors": 6,
+   "donors": 5,
    "profile": {
-    "amygdala": -0.42,
-    "caudate": 0.09,
-    "cerebellum": -0.96,
-    "frontal": -0.26,
-    "hippocampus": -0.88,
-    "hypothalamus": -0.23,
-    "occipital": -0.15,
-    "parietal": -0.19,
-    "putamen": 0.67,
-    "temporal": -0.34,
-    "thalamus": 0.98
+    "amygdala": -0.31,
+    "caudate": 0.1,
+    "cerebellum": -0.93,
+    "frontal": -0.3,
+    "hippocampus": -0.8,
+    "hypothalamus": -0.27,
+    "occipital": -0.1,
+    "parietal": -0.21,
+    "putamen": 0.7,
+    "temporal": -0.41,
+    "thalamus": 0.91
    },
-   "reliability": 0.87,
+   "reliability": 0.88,
    "sources": [
     {
      "corpus": "allen_ahba",
      "page": "SLC12A2",
      "provenance": "verified",
-     "quote": "SLC12A2 relative expression across 6 donors (9861,10021,12876,14380,15496,15697), probe 1051414, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.87: thalamus +0.98 (6d), putamen +0.67 (6d), caudate +0.09 (6d), occipital -0.15 (6d), parietal -0.19 (6d), hypothalamus -0.23 (6d), frontal -0.26 (6d), temporal -0.34 (6d), amygdala -0.42 (6d), hippocampus -0.88 (6d), cerebellum -0.96 (6d)",
+     "quote": "SLC12A2 relative expression across 5 donors (9861,10021,12876,14380,15697), probe 1051414, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.88: thalamus +0.91 (5d), putamen +0.70 (5d), caudate +0.10 (5d), occipital -0.10 (5d), parietal -0.21 (5d), hypothalamus -0.27 (5d), frontal -0.30 (5d), amygdala -0.31 (5d), temporal -0.41 (5d), hippocampus -0.80 (5d), cerebellum -0.93 (5d)",
      "species": "Human"
     }
    ]

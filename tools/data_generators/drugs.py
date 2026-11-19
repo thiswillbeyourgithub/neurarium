@@ -713,7 +713,11 @@ DRUG_TARGETS: dict[str, dict[str, Any]] = {
     # authored directly against the individual subtype receptors (m1..m5, alpha1a..d,
     # beta1..3, nachr_a4b2/a7) in drugs_data.jsonl, so each subtype carries its own
     # measured per-subtype Ki (fetch_ki, CHRM1..5 / ADRA1A.. etc.) instead of an
-    # aggregate, and the drug shows up when browsing that receptor.
+    # aggregate, and the drug shows up when browsing that receptor. Their coarse
+    # groups (muscarinic, alpha1, dopamine) exist only as the honest target for a
+    # source that names the class and no subtype (a French RCP 5.1 "propriétés
+    # anticholinergiques", "antidopaminergiques", "adrénolytiques"): binding such a
+    # claim to m1..m5 would invent a subtype split the label never states.
     #
     # `subtypes` links a group to its modeled subtype receptor ids: a self-evident
     # taxonomy (α2 -> α2A/B/C/D), so it carries NO source (see CLAUDE.md "Nodes":
@@ -742,6 +746,31 @@ DRUG_TARGETS: dict[str, dict[str, Any]] = {
                    "https://en.wikipedia.org/wiki/Alpha-2_adrenergic_receptor",
                "regions": ["locus_coeruleus", "frontal", "hippocampus", "thalamus",
                            "hypothalamus", "midbrain", "pons", "medulla"]},
+    "muscarinic": {"name": {"en": "Muscarinic acetylcholine receptors",
+                            "fr": "Récepteurs muscariniques de l'acétylcholine"},
+                   "type": "receptor_group", "system": "cholinergic",
+                   "subtypes": ["m1", "m2", "m3", "m4", "m5"],
+                   "wikipedia":
+                       "https://en.wikipedia.org/wiki/Muscarinic_acetylcholine_receptor",
+                   "regions": ["frontal", "parietal", "temporal", "occipital",
+                               "cingulate", "hippocampus", "caudate", "putamen",
+                               "accumbens", "thalamus"]},
+    "alpha1": {"name": {"en": "α1 adrenergic receptors",
+                        "fr": "Récepteurs α1 adrénergiques"},
+               "type": "receptor_group", "system": "adrenergic",
+               "subtypes": ["alpha1a", "alpha1b", "alpha1d"],
+               "wikipedia": "https://en.wikipedia.org/wiki/Alpha-1_adrenergic_receptor",
+               "regions": ["frontal", "parietal", "temporal", "occipital",
+                           "hippocampus", "thalamus", "hypothalamus", "midbrain",
+                           "pons", "medulla"]},
+    "dopamine": {"name": {"en": "Dopamine receptors",
+                          "fr": "Récepteurs de la dopamine"},
+                 "type": "receptor_group", "system": "dopaminergic",
+                 "subtypes": ["d1", "d2", "d3", "d4", "d5"],
+                 "wikipedia": "https://en.wikipedia.org/wiki/Dopamine_receptor",
+                 "regions": ["caudate", "putamen", "accumbens", "olfactory_bulb",
+                             "substantia_nigra", "vta", "frontal", "amygdala",
+                             "hypothalamus"]},
     "glutamate": {"name": {"en": "Glutamate receptors",
                            "fr": "Récepteurs du glutamate"},
                   "type": "receptor_group", "system": "glutamatergic",

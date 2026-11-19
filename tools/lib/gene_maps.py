@@ -95,6 +95,7 @@ TARGET_GENES = {
     "muscarinic": ["CHRM1", "CHRM2", "CHRM3", "CHRM4", "CHRM5"],
     "nicotinic": ["CHRNA4", "CHRNB2", "CHRNA7"],
     "alpha1": ["ADRA1A", "ADRA1B", "ADRA1D"],
+    "dopamine": ["DRD1", "DRD2", "DRD3", "DRD4", "DRD5"],
     "alpha2": ["ADRA2A", "ADRA2B", "ADRA2C"],
     "beta": ["ADRB1", "ADRB2", "ADRB3"],
     "glutamate": ["GRIN1", "GRIA1", "GRIA2"],

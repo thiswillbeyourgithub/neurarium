@@ -345,6 +345,7 @@
   "Direct-pathway striatal output to the substantia nigra pars reticulata.": "Sortie striatale de la voie directe vers la substance noire pars reticulata.",
   "Dizziness": "Vertiges",
   "Documented source freshness and how to refetch an online corpus.": "Documentation de la fraîcheur des sources et de la façon de retélécharger un corpus en ligne.",
+  "Dopamine receptors": "Récepteurs de la dopamine",
   "Dopamine transporter (DAT)": "Transporteur de la dopamine (DAT)",
   "Dopaminergic": "Dopaminergique",
   "Dopaminergic (locus coeruleus)": "Dopaminergique (locus coeruleus)",
@@ -704,6 +705,7 @@
   "Most abundant dopamine receptor; Gs-coupled, excitatory; drives the striatal direct pathway.": "Récepteur dopaminergique le plus abondant ; couplé à Gs, excitateur ; active la voie directe striatale.",
   "Motor thalamus excites frontal cortex, closing the cortico-basal-ganglia-thalamo-cortical loop.": "Le thalamus moteur excite le cortex frontal, fermant la boucle cortico-ganglions de la base-thalamo-corticale.",
   "Moving the mouse over the brain no longer slows its rotation: the structure under the cursor is looked up at most 20 times a second instead of on every mouse move": "Déplacer la souris sur le cerveau ne ralentit plus sa rotation : la structure sous le curseur est recherchée au plus 20 fois par seconde au lieu de chaque mouvement de souris",
+  "Muscarinic acetylcholine receptors": "Récepteurs muscariniques de l'acétylcholine",
   "Muscle weakness / paralysis": "Faiblesse musculaire / paralysie",
   "Mydriasis (pupil dilation)": "Mydriase (pupille dilatée)",
   "N and P/Q types": "types N et P/Q",
@@ -1433,5 +1435,6 @@
   "weaker, high dose": "plus faible, forte dose",
   "weight": "poids",
   "worldwide": "dans le monde entier",
+  "α1 adrenergic receptors": "Récepteurs α1 adrénergiques",
   "α2 adrenergic receptors": "Récepteurs α2 adrénergiques"
 }

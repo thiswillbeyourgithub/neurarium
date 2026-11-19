@@ -272,6 +272,29 @@
     "type": "gpcr",
     "type_quote": "A2A receptor (ADORA2A), GtoPdb target 19 | type: gpcr | family: Adenosine receptors"
   },
+  "alpha1": {
+    "family": "Adrenoceptors",
+    "gene": "ADRA1A",
+    "kind": "target",
+    "target_id": 22,
+    "target_name": "\u03b11A-adrenoceptor",
+    "transduction": [
+      {
+        "effectors": "Phospholipase C stimulation, Calcium channel, Other - See Comments",
+        "quote": "\u03b11A-adrenoceptor (ADRA1A), GtoPdb target 22 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation, Calcium channel, Other - See Comments",
+        "secondary": false,
+        "transducers": "Gq/G11 family"
+      },
+      {
+        "effectors": "Phospholipase A2 stimulation, Phospholipase D stimulation, Other - See Comments",
+        "quote": "\u03b11A-adrenoceptor (ADRA1A), GtoPdb target 22 | transduction: G12/G13 family | effectors: Phospholipase A2 stimulation, Phospholipase D stimulation, Other - See Comments | secondary mechanism",
+        "secondary": true,
+        "transducers": "G12/G13 family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "\u03b11A-adrenoceptor (ADRA1A), GtoPdb target 22 | type: gpcr | family: Adrenoceptors"
+  },
   "alpha1a": {
     "family": "Adrenoceptors",
     "gene": "ADRA1A",
@@ -639,6 +662,29 @@
     ],
     "type": "gpcr",
     "type_quote": "\u03b4 receptor (OPRD1), GtoPdb target 317 | type: gpcr | family: Opioid receptors"
+  },
+  "dopamine": {
+    "family": "Dopamine receptors",
+    "gene": "DRD1",
+    "kind": "target",
+    "target_id": 214,
+    "target_name": "D1 receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase stimulation",
+        "quote": "D1 receptor (DRD1), GtoPdb target 214 | transduction: Gs family | effectors: Adenylyl cyclase stimulation",
+        "secondary": false,
+        "transducers": "Gs family"
+      },
+      {
+        "effectors": "Calcium channel, Other - See Comments",
+        "quote": "D1 receptor (DRD1), GtoPdb target 214 | transduction: Gs family | effectors: Calcium channel, Other - See Comments | secondary mechanism",
+        "secondary": true,
+        "transducers": "Gs family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "D1 receptor (DRD1), GtoPdb target 214 | type: gpcr | family: Dopamine receptors"
   },
   "gaba_a": {
     "family": "GABAA receptors",
@@ -1118,6 +1164,23 @@
     ],
     "type": "gpcr",
     "type_quote": "\u03bc receptor (OPRM1), GtoPdb target 319 | type: gpcr | family: Opioid receptors"
+  },
+  "muscarinic": {
+    "family": "Acetylcholine receptors (muscarinic)",
+    "gene": "CHRM1",
+    "kind": "target",
+    "target_id": 13,
+    "target_name": "M1 receptor",
+    "transduction": [
+      {
+        "effectors": "Phospholipase C stimulation",
+        "quote": "M1 receptor (CHRM1), GtoPdb target 13 | transduction: Gq/G11 family | effectors: Phospholipase C stimulation",
+        "secondary": false,
+        "transducers": "Gq/G11 family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "M1 receptor (CHRM1), GtoPdb target 13 | type: gpcr | family: Acetylcholine receptors (muscarinic)"
   },
   "nachr_a4b2": {
     "family": "Nicotinic acetylcholine receptors (nACh)",

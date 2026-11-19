@@ -117,6 +117,7 @@
 "Descending serotonergic (medullary)": "Sérotoninergique descendante (bulbaire)",
 "Direct pathway (motor)": "Voie directe (motrice)",
 "Dizziness": "Vertiges",
+"Dopamine receptors": "Récepteurs de la dopamine",
 "Dopamine transporter (DAT)": "Transporteur de la dopamine (DAT)",
 "Dopaminergic (locus coeruleus)": "Dopaminergique (locus coeruleus)",
 "Dopaminergic (raphe)": "Dopaminergique (raphé)",
@@ -173,6 +174,7 @@
 "Monoamine oxidase A (MAO-A)": "Monoamine oxydase A (MAO-A)",
 "Monoamine oxidase B (MAO-B)": "Monoamine oxydase B (MAO-B)",
 "Mood stabilizer / anticonvulsant": "Thymorégulateur / anticonvulsivant",
+"Muscarinic acetylcholine receptors": "Récepteurs muscariniques de l'acétylcholine",
 "Muscle weakness / paralysis": "Faiblesse musculaire / paralysie",
 "Mydriasis (pupil dilation)": "Mydriase (pupille dilatée)",
 "Na-K-2Cl cotransporter (NKCC1)": "Cotransporteur Na-K-2Cl (NKCC1)",
@@ -257,5 +259,6 @@
 "Voltage-gated sodium channel": "Canal sodique voltage-dépendant",
 "Wakefulness / alertness": "Éveil / vigilance",
 "Weight gain": "Prise de poids",
+"α1 adrenergic receptors": "Récepteurs α1 adrénergiques",
 "α2 adrenergic receptors": "Récepteurs α2 adrénergiques"
 }

@@ -4490,7 +4490,7 @@
      "corpus": "allen_ahba",
      "page": "DDC",
      "provenance": "verified",
-     "quote": "DDC detected in caudate: probe 1011160 PACall present in 90/91 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "DDC detected in caudate: probe 1011160 PACall present in 81/82 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ],
@@ -4499,7 +4499,7 @@
      "corpus": "allen_ahba",
      "page": "DDC",
      "provenance": "verified",
-     "quote": "DDC detected in locus_coeruleus: probe 1011160 PACall present in 13/13 samples (donors 9861,10021,15496,15697)",
+     "quote": "DDC detected in locus_coeruleus: probe 1011160 PACall present in 10/10 samples (donors 9861,10021,15697)",
      "species": "Human"
     }
    ],
@@ -4508,7 +4508,7 @@
      "corpus": "allen_ahba",
      "page": "DDC",
      "provenance": "verified",
-     "quote": "DDC detected in putamen: probe 1011160 PACall present in 62/62 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "DDC detected in putamen: probe 1011160 PACall present in 55/55 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ],
@@ -4517,7 +4517,7 @@
      "corpus": "allen_ahba",
      "page": "DDC",
      "provenance": "verified",
-     "quote": "DDC detected in raphe: probe 1011160 PACall present in 35/35 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "DDC detected in raphe: probe 1011160 PACall present in 29/29 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ],
@@ -4526,7 +4526,7 @@
      "corpus": "allen_ahba",
      "page": "DDC",
      "provenance": "verified",
-     "quote": "DDC detected in substantia_nigra: probe 1011160 PACall present in 51/52 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "DDC detected in substantia_nigra: probe 1011160 PACall present in 43/44 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ],
@@ -4535,7 +4535,7 @@
      "corpus": "allen_ahba",
      "page": "DDC",
      "provenance": "verified",
-     "quote": "DDC detected in vta: probe 1011160 PACall present in 15/16 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "DDC detected in vta: probe 1011160 PACall present in 13/14 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ]
@@ -4583,6 +4583,98 @@
      "page": "ACHE",
      "provenance": "verified",
      "quote": "ACHE detected in thalamus: probe 1022702 PACall present in 187/188 samples (donors 9861,10021,12876,14380,15697)",
+     "species": "Human"
+    }
+   ]
+  },
+  "alpha1": {
+   "frontal": [
+    {
+     "corpus": "allen_ahba",
+     "page": "ADRA1A",
+     "provenance": "verified",
+     "quote": "ADRA1A detected in frontal: probe 1027138 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)",
+     "species": "Human"
+    }
+   ],
+   "hippocampus": [
+    {
+     "corpus": "allen_ahba",
+     "page": "ADRA1A",
+     "provenance": "verified",
+     "quote": "ADRA1A detected in hippocampus: probe 1027138 PACall present in 171/171 samples (donors 9861,10021,12876,14380,15697)",
+     "species": "Human"
+    }
+   ],
+   "hypothalamus": [
+    {
+     "corpus": "allen_ahba",
+     "page": "ADRA1A",
+     "provenance": "verified",
+     "quote": "ADRA1A detected in hypothalamus: probe 1027138 PACall present in 86/86 samples (donors 9861,10021,12876,14380,15697)",
+     "species": "Human"
+    }
+   ],
+   "medulla": [
+    {
+     "corpus": "allen_ahba",
+     "page": "ADRA1A",
+     "provenance": "verified",
+     "quote": "ADRA1A detected in medulla: probe 1027138 PACall present in 244/244 samples (donors 9861,10021,12876,14380,15697)",
+     "species": "Human"
+    }
+   ],
+   "midbrain": [
+    {
+     "corpus": "allen_ahba",
+     "page": "ADRA1A",
+     "provenance": "verified",
+     "quote": "ADRA1A detected in midbrain: probe 1027138 PACall present in 158/158 samples (donors 9861,10021,12876,14380,15697)",
+     "species": "Human"
+    }
+   ],
+   "occipital": [
+    {
+     "corpus": "allen_ahba",
+     "page": "ADRA1A",
+     "provenance": "verified",
+     "quote": "ADRA1A detected in occipital: probe 1027138 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)",
+     "species": "Human"
+    }
+   ],
+   "parietal": [
+    {
+     "corpus": "allen_ahba",
+     "page": "ADRA1A",
+     "provenance": "verified",
+     "quote": "ADRA1A detected in parietal: probe 1027138 PACall present in 258/258 samples (donors 9861,10021,12876,14380,15697)",
+     "species": "Human"
+    }
+   ],
+   "pons": [
+    {
+     "corpus": "allen_ahba",
+     "page": "ADRA1A",
+     "provenance": "verified",
+     "quote": "ADRA1A detected in pons: probe 1027138 PACall present in 160/160 samples (donors 9861,10021,12876,14380,15697)",
+     "species": "Human"
+    }
+   ],
+   "temporal": [
+    {
+     "corpus": "allen_ahba",
+     "page": "ADRA1A",
+     "provenance": "verified",
+     "quote": "ADRA1A detected in temporal: probe 1027138 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)",
+     "species": "Human"
+    }
+   ],
+   "thalamus": [
+    {
+     "corpus": "allen_ahba",
+     "page": "ADRA1A",
+     "provenance": "verified",
+     "quote": "ADRA1A detected in thalamus: probe 1027138 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ]
@@ -4801,7 +4893,7 @@
      "corpus": "allen_ahba",
      "page": "RAMP1",
      "provenance": "verified",
-     "quote": "RAMP1 detected in amygdala: probe 1047617 PACall present in 67/67 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "RAMP1 detected in amygdala: probe 1047617 PACall present in 60/60 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ],
@@ -4810,7 +4902,7 @@
      "corpus": "allen_ahba",
      "page": "RAMP1",
      "provenance": "verified",
-     "quote": "RAMP1 detected in cerebellum: probe 1047617 PACall present in 368/368 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "RAMP1 detected in cerebellum: probe 1047617 PACall present in 306/306 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ],
@@ -4819,7 +4911,7 @@
      "corpus": "allen_ahba",
      "page": "RAMP1",
      "provenance": "verified",
-     "quote": "RAMP1 detected in hypothalamus: probe 1047617 PACall present in 102/102 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "RAMP1 detected in hypothalamus: probe 1047617 PACall present in 86/86 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ],
@@ -4828,7 +4920,7 @@
      "corpus": "allen_ahba",
      "page": "RAMP1",
      "provenance": "verified",
-     "quote": "RAMP1 detected in medulla: probe 1047617 PACall present in 279/279 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "RAMP1 detected in medulla: probe 1047617 PACall present in 244/244 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ],
@@ -4837,7 +4929,7 @@
      "corpus": "allen_ahba",
      "page": "RAMP1",
      "provenance": "verified",
-     "quote": "RAMP1 detected in pons: probe 1047617 PACall present in 189/189 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "RAMP1 detected in pons: probe 1047617 PACall present in 160/160 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ],
@@ -4846,7 +4938,7 @@
      "corpus": "allen_ahba",
      "page": "RAMP1",
      "provenance": "verified",
-     "quote": "RAMP1 detected in thalamus: probe 1047617 PACall present in 209/209 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "RAMP1 detected in thalamus: probe 1047617 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ]
@@ -4857,7 +4949,7 @@
      "corpus": "allen_ahba",
      "page": "COMT",
      "provenance": "verified",
-     "quote": "COMT detected in caudate: probe 1028970 PACall present in 91/91 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "COMT detected in caudate: probe 1028970 PACall present in 82/82 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ],
@@ -4866,7 +4958,7 @@
      "corpus": "allen_ahba",
      "page": "COMT",
      "provenance": "verified",
-     "quote": "COMT detected in frontal: probe 1028970 PACall present in 537/537 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "COMT detected in frontal: probe 1028970 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ],
@@ -4875,7 +4967,7 @@
      "corpus": "allen_ahba",
      "page": "COMT",
      "provenance": "verified",
-     "quote": "COMT detected in hippocampus: probe 1028970 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "COMT detected in hippocampus: probe 1028970 PACall present in 171/171 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ],
@@ -4884,7 +4976,7 @@
      "corpus": "allen_ahba",
      "page": "COMT",
      "provenance": "verified",
-     "quote": "COMT detected in putamen: probe 1028970 PACall present in 62/62 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "COMT detected in putamen: probe 1028970 PACall present in 55/55 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ],
@@ -4893,7 +4985,7 @@
      "corpus": "allen_ahba",
      "page": "COMT",
      "provenance": "verified",
-     "quote": "COMT detected in temporal: probe 1028970 PACall present in 470/470 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "COMT detected in temporal: probe 1028970 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ]
@@ -4954,13 +5046,87 @@
     }
    ]
   },
+  "dopamine": {
+   "accumbens": [
+    {
+     "corpus": "allen_ahba",
+     "page": "DRD1",
+     "provenance": "verified",
+     "quote": "DRD1 detected in accumbens: probe 1022773 PACall present in 15/15 samples (donors 9861,10021,12876,14380,15697)",
+     "species": "Human"
+    }
+   ],
+   "amygdala": [
+    {
+     "corpus": "allen_ahba",
+     "page": "DRD1",
+     "provenance": "verified",
+     "quote": "DRD1 detected in amygdala: probe 1022773 PACall present in 60/60 samples (donors 9861,10021,12876,14380,15697)",
+     "species": "Human"
+    }
+   ],
+   "caudate": [
+    {
+     "corpus": "allen_ahba",
+     "page": "DRD1",
+     "provenance": "verified",
+     "quote": "DRD1 detected in caudate: probe 1022773 PACall present in 82/82 samples (donors 9861,10021,12876,14380,15697)",
+     "species": "Human"
+    }
+   ],
+   "frontal": [
+    {
+     "corpus": "allen_ahba",
+     "page": "DRD1",
+     "provenance": "verified",
+     "quote": "DRD1 detected in frontal: probe 1022773 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)",
+     "species": "Human"
+    }
+   ],
+   "hypothalamus": [
+    {
+     "corpus": "allen_ahba",
+     "page": "DRD1",
+     "provenance": "verified",
+     "quote": "DRD1 detected in hypothalamus: probe 1022773 PACall present in 86/86 samples (donors 9861,10021,12876,14380,15697)",
+     "species": "Human"
+    }
+   ],
+   "putamen": [
+    {
+     "corpus": "allen_ahba",
+     "page": "DRD1",
+     "provenance": "verified",
+     "quote": "DRD1 detected in putamen: probe 1022773 PACall present in 55/55 samples (donors 9861,10021,12876,14380,15697)",
+     "species": "Human"
+    }
+   ],
+   "substantia_nigra": [
+    {
+     "corpus": "allen_ahba",
+     "page": "DRD1",
+     "provenance": "verified",
+     "quote": "DRD1 detected in substantia_nigra: probe 1022773 PACall present in 44/44 samples (donors 9861,10021,12876,14380,15697)",
+     "species": "Human"
+    }
+   ],
+   "vta": [
+    {
+     "corpus": "allen_ahba",
+     "page": "DRD1",
+     "provenance": "verified",
+     "quote": "DRD1 detected in vta: probe 1022773 PACall present in 14/14 samples (donors 9861,10021,12876,14380,15697)",
+     "species": "Human"
+    }
+   ]
+  },
   "gaba_t": {
    "cerebellum": [
     {
      "corpus": "allen_ahba",
      "page": "ABAT",
      "provenance": "verified",
-     "quote": "ABAT detected in cerebellum: probe 1010530 PACall present in 368/368 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "ABAT detected in cerebellum: probe 1010530 PACall present in 306/306 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ],
@@ -4969,7 +5135,7 @@
      "corpus": "allen_ahba",
      "page": "ABAT",
      "provenance": "verified",
-     "quote": "ABAT detected in frontal: probe 1010530 PACall present in 537/537 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "ABAT detected in frontal: probe 1010530 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ],
@@ -4978,7 +5144,7 @@
      "corpus": "allen_ahba",
      "page": "ABAT",
      "provenance": "verified",
-     "quote": "ABAT detected in hippocampus: probe 1010530 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "ABAT detected in hippocampus: probe 1010530 PACall present in 171/171 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ],
@@ -4987,7 +5153,7 @@
      "corpus": "allen_ahba",
      "page": "ABAT",
      "provenance": "verified",
-     "quote": "ABAT detected in temporal: probe 1010530 PACall present in 470/470 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "ABAT detected in temporal: probe 1010530 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ],
@@ -4996,7 +5162,7 @@
      "corpus": "allen_ahba",
      "page": "ABAT",
      "provenance": "verified",
-     "quote": "ABAT detected in thalamus: probe 1010530 PACall present in 209/209 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "ABAT detected in thalamus: probe 1010530 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ]
@@ -5245,6 +5411,98 @@
     }
    ]
   },
+  "muscarinic": {
+   "accumbens": [
+    {
+     "corpus": "allen_ahba",
+     "page": "CHRM1",
+     "provenance": "verified",
+     "quote": "CHRM1 detected in accumbens: probe 1058221 PACall present in 15/15 samples (donors 9861,10021,12876,14380,15697)",
+     "species": "Human"
+    }
+   ],
+   "caudate": [
+    {
+     "corpus": "allen_ahba",
+     "page": "CHRM1",
+     "provenance": "verified",
+     "quote": "CHRM1 detected in caudate: probe 1058221 PACall present in 82/82 samples (donors 9861,10021,12876,14380,15697)",
+     "species": "Human"
+    }
+   ],
+   "cingulate": [
+    {
+     "corpus": "allen_ahba",
+     "page": "CHRM1",
+     "provenance": "verified",
+     "quote": "CHRM1 detected in cingulate: probe 1058221 PACall present in 123/123 samples (donors 9861,10021,12876,14380,15697)",
+     "species": "Human"
+    }
+   ],
+   "frontal": [
+    {
+     "corpus": "allen_ahba",
+     "page": "CHRM1",
+     "provenance": "verified",
+     "quote": "CHRM1 detected in frontal: probe 1058221 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)",
+     "species": "Human"
+    }
+   ],
+   "hippocampus": [
+    {
+     "corpus": "allen_ahba",
+     "page": "CHRM1",
+     "provenance": "verified",
+     "quote": "CHRM1 detected in hippocampus: probe 1058221 PACall present in 171/171 samples (donors 9861,10021,12876,14380,15697)",
+     "species": "Human"
+    }
+   ],
+   "occipital": [
+    {
+     "corpus": "allen_ahba",
+     "page": "CHRM1",
+     "provenance": "verified",
+     "quote": "CHRM1 detected in occipital: probe 1058221 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)",
+     "species": "Human"
+    }
+   ],
+   "parietal": [
+    {
+     "corpus": "allen_ahba",
+     "page": "CHRM1",
+     "provenance": "verified",
+     "quote": "CHRM1 detected in parietal: probe 1058221 PACall present in 258/258 samples (donors 9861,10021,12876,14380,15697)",
+     "species": "Human"
+    }
+   ],
+   "putamen": [
+    {
+     "corpus": "allen_ahba",
+     "page": "CHRM1",
+     "provenance": "verified",
+     "quote": "CHRM1 detected in putamen: probe 1058221 PACall present in 55/55 samples (donors 9861,10021,12876,14380,15697)",
+     "species": "Human"
+    }
+   ],
+   "temporal": [
+    {
+     "corpus": "allen_ahba",
+     "page": "CHRM1",
+     "provenance": "verified",
+     "quote": "CHRM1 detected in temporal: probe 1058221 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)",
+     "species": "Human"
+    }
+   ],
+   "thalamus": [
+    {
+     "corpus": "allen_ahba",
+     "page": "CHRM3",
+     "provenance": "verified",
+     "quote": "CHRM3 detected in thalamus: probe 1023697 PACall present in 187/188 samples (donors 9861,10021,12876,14380,15697)",
+     "species": "Human"
+    }
+   ]
+  },
   "nav": {
    "frontal": [
     {
@@ -5318,7 +5576,7 @@
      "corpus": "allen_ahba",
      "page": "SLC12A2",
      "provenance": "verified",
-     "quote": "SLC12A2 detected in amygdala: probe 1051414 PACall present in 67/67 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "SLC12A2 detected in amygdala: probe 1051414 PACall present in 60/60 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ],
@@ -5327,7 +5585,7 @@
      "corpus": "allen_ahba",
      "page": "SLC12A2",
      "provenance": "verified",
-     "quote": "SLC12A2 detected in caudate: probe 1051414 PACall present in 90/91 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "SLC12A2 detected in caudate: probe 1051414 PACall present in 81/82 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ],
@@ -5336,7 +5594,7 @@
      "corpus": "allen_ahba",
      "page": "SLC12A2",
      "provenance": "verified",
-     "quote": "SLC12A2 detected in cerebellum: probe 1051414 PACall present in 366/368 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "SLC12A2 detected in cerebellum: probe 1051414 PACall present in 304/306 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ],
@@ -5345,7 +5603,7 @@
      "corpus": "allen_ahba",
      "page": "SLC12A2",
      "provenance": "verified",
-     "quote": "SLC12A2 detected in frontal: probe 1051414 PACall present in 537/537 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "SLC12A2 detected in frontal: probe 1051414 PACall present in 473/473 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ],
@@ -5354,7 +5612,7 @@
      "corpus": "allen_ahba",
      "page": "SLC12A2",
      "provenance": "verified",
-     "quote": "SLC12A2 detected in hippocampus: probe 1051414 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "SLC12A2 detected in hippocampus: probe 1051414 PACall present in 171/171 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ],
@@ -5363,7 +5621,7 @@
      "corpus": "allen_ahba",
      "page": "SLC12A2",
      "provenance": "verified",
-     "quote": "SLC12A2 detected in hypothalamus: probe 1051414 PACall present in 102/102 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "SLC12A2 detected in hypothalamus: probe 1051414 PACall present in 86/86 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ],
@@ -5372,7 +5630,7 @@
      "corpus": "allen_ahba",
      "page": "SLC12A2",
      "provenance": "verified",
-     "quote": "SLC12A2 detected in occipital: probe 1051414 PACall present in 212/212 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "SLC12A2 detected in occipital: probe 1051414 PACall present in 177/177 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ],
@@ -5381,7 +5639,7 @@
      "corpus": "allen_ahba",
      "page": "SLC12A2",
      "provenance": "verified",
-     "quote": "SLC12A2 detected in parietal: probe 1051414 PACall present in 290/290 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "SLC12A2 detected in parietal: probe 1051414 PACall present in 258/258 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ],
@@ -5390,7 +5648,7 @@
      "corpus": "allen_ahba",
      "page": "SLC12A2",
      "provenance": "verified",
-     "quote": "SLC12A2 detected in putamen: probe 1051414 PACall present in 62/62 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "SLC12A2 detected in putamen: probe 1051414 PACall present in 55/55 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ],
@@ -5399,7 +5657,7 @@
      "corpus": "allen_ahba",
      "page": "SLC12A2",
      "provenance": "verified",
-     "quote": "SLC12A2 detected in temporal: probe 1051414 PACall present in 470/470 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "SLC12A2 detected in temporal: probe 1051414 PACall present in 419/419 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ],
@@ -5408,7 +5666,7 @@
      "corpus": "allen_ahba",
      "page": "SLC12A2",
      "provenance": "verified",
-     "quote": "SLC12A2 detected in thalamus: probe 1051414 PACall present in 209/209 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "quote": "SLC12A2 detected in thalamus: probe 1051414 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15697)",
      "species": "Human"
     }
    ]
