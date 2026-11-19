@@ -1,6 +1,26 @@
 {
   "versions": [
     {
+      "version": "3.172.2",
+      "date": "2026-11-20",
+      "entries": [
+        {
+          "category": "fixed",
+          "text": "Data browser: an AND NOT filter with text now lists its own kind's rows that miss the text (\"benzodiazepine AND NOT excretion: urine\" lists the excretion rows of benzodiazepines never excreted in urine, instead of a class row), and a drug with no data of that kind is no longer counted as a match; an AND NOT with no text still finds what is missing",
+          "commits": [
+            "95f14140"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "Excretion sourced for seven of the newly added French CNS drugs (periciazine, etifoxine, nefopam, nordazepam, piribedil, eslicarbazepine acetate, oxetorone), from their Wikipedia articles and French SmPCs",
+          "commits": [
+            "2681cac6"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.172.1",
       "date": "2026-11-19",
       "entries": [
