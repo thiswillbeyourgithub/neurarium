@@ -607,58 +607,6 @@
    }
   ]
  },
- "clorazepate": {
-  "name": "Clorazepate",
-  "candidates": [
-   {
-    "corpus": "wikipedia_pharm",
-    "page": "clorazepate",
-    "line": "Elimination half-life | 48 hours",
-    "durations": [
-     {
-      "hours": 48.0
-     }
-    ],
-    "qid": "741c83c0"
-   },
-   {
-    "corpus": "wikipedia_pharm",
-    "page": "clorazepate",
-    "line": "Clorazepate produces the active metabolite desmethyl-diazepam , which is a partial agonist of the GABA A receptor and has a half-life of 20–179 hours;",
-    "durations": [
-     {
-      "hours": 20.0,
-      "hours_max": 179.0
-     }
-    ],
-    "qid": "14bcbf9d"
-   },
-   {
-    "corpus": "stahl",
-    "page": 201,
-    "line": "Elimination half-life 40–50 hours",
-    "durations": [
-     {
-      "hours": 40.0,
-      "hours_max": 50.0
-     }
-    ],
-    "qid": "c966f88b"
-   },
-   {
-    "corpus": "bdpm",
-    "page": "67956742",
-    "line": "Le métabolite principal du clorazépate est le desméthyldiazépam, également actif, dont la demi-vie est plus importante que celle de la molécule-mère (entre 30 et 150 heures).",
-    "durations": [
-     {
-      "hours": 30.0,
-      "hours_max": 150.0
-     }
-    ],
-    "qid": "4c4cd937"
-   }
-  ]
- },
  "clotiazepam": {
   "name": "Clotiazepam",
   "candidates": [
