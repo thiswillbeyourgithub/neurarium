@@ -41,6 +41,7 @@ REPO = os.path.dirname(os.path.dirname(HERE))   # repo root (script in tools/fet
 sys.path.insert(0, os.path.dirname(HERE))        # tools/ for the shared drugs_io module
 from lib import chirality  # noqa: E402
 from lib import drugs_io  # noqa: E402
+from lib.drug_synonyms import SYNONYMS  # noqa: E402
 CSV_PATH = os.path.join(REPO, "data_sources", "books", "pdsp_ki", "KiDatabase.csv")
 DOWNLOAD_URL = "https://pdspdb.unc.edu/databases/kiDownload/download.php"
 # pdspdb.unc.edu chains to a root missing from the Mozilla store; this cross-cert
@@ -290,38 +291,6 @@ ALIAS = {
     "l_amphetamine": (["Amphetamine,(-)", "(-)-Amphetamine"], "identity",
                       "(-)-amphetamine"),
     "l_methamphetamine": (["METHAMPHETAMINE (-)"], "identity", "(-)-methamphetamine"),
-}
-
-# Pure name synonyms: the SAME molecule filed under a second label, usually an
-# abbreviation the submitting lab used ("PCP"). Unlike ALIAS these are merged INTO the
-# direct match rather than being a fallback, and carry no "measured as" warning,
-# because there is no other compound involved: dropping them would just silently throw
-# away assays (PCP's 18 rows against phencyclidine's 7). Only add a label that names
-# the identical substance; anything with a different structure belongs in ALIAS.
-SYNONYMS = {
-    "phencyclidine": ["PCP"],
-    "norquetiapine": ["N-Desalkylquetiapine"],
-    # Former INN / US name of the same molecule.
-    "alimemazine": ["Trimeprazine"],
-    "clorgiline": ["Clorgyline"],
-    "pizotifen": ["Pizotyline"],
-    "desipramine": ["Desmethylimipramine"],
-    "desvenlafaxine": ["O-Desmethylvenlafaxine"],
-    "levodopa": ["L-DOPA"],
-    "cannabidiol": ["CBD"],
-    # The INN "tomoxetine" named the (R)-enantiomer, renamed atomoxetine in 2003. Its
-    # racemate LY135252 is deliberately absent.
-    "atomoxetine": ["Tomoxetine"],
-    # Developer code names (company serial numbers) of the same molecule.
-    "agomelatine": ["S 20098"],
-    "aripiprazole": ["OPC-14597"],
-    "asenapine": ["ORG-5222"],
-    "flibanserin": ["BIMT 17"],
-    "flumazenil": ["Ro15-1788"],
-    "ketanserin": ["R-41-468"],
-    "lurasidone": ["SM 13496"],
-    "mirtazapine": ["Org3770", "ORG-3770"],
-    "pimavanserin": ["ACP-103"],
 }
 
 _ALL_ROWS = None

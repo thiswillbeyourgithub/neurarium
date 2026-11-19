@@ -175,6 +175,7 @@ import citation_site as CS  # noqa: E402
 from data_generators.changelog import load_changelog  # noqa: E402
 from lib.page_file import page_path  # noqa: E402 (refuses a path-like id)
 from lib.io_atomic import atomic_write_json, atomic_write_text  # noqa: E402
+from lib.drug_synonyms import SYNONYMS as DRUG_SYNONYMS  # noqa: E402
 from data_generators import llms_txt  # noqa: E402 (public/llms.txt for LLM agents)
 from data_generators import effect_index as EFFECT_INDEX  # noqa: E402 (llms.txt effects, BETA)
 
@@ -1349,10 +1350,13 @@ def _drug_record(drug: dict[str, Any], valid_targets: set[str],
     # live lead fails to load simply shows no description.
     # Search-only alternate names (street names, chemical synonyms, INN/USAN
     # variants). Not a node: an alias says what people CALL the molecule, not
-    # anything about the brain, so it carries no grade and is never displayed.
-    aliases = DRUG_ALIASES.get(drug["id"])
+    # anything about the brain, so it carries no grade and is never displayed. The
+    # PDSP join's same-molecule synonyms (former INNs, code names) are searchable too.
+    aliases = list(DRUG_ALIASES.get(drug["id"], ()))
+    seen = {a.casefold() for a in aliases}
+    aliases += [s for s in DRUG_SYNONYMS.get(drug["id"], ()) if s.casefold() not in seen]
     if aliases:
-        out["aliases"] = list(aliases)
+        out["aliases"] = aliases
     # Display-only chemical synonym shown beside the name (see DRUG_NAME_QUALIFIERS).
     if drug["id"] in DRUG_NAME_QUALIFIERS:
         out["name_qualifier"] = DRUG_NAME_QUALIFIERS[drug["id"]]
