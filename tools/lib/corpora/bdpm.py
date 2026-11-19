@@ -62,6 +62,8 @@ FR_ALIASES: dict[str, tuple[str, ...]] = {
     # Divalproate is valproate's own salt complex (Depakote); valpromide (Depamide) is a
     # different molecule and stays out.
     "valproate": ("VALPROATE", "ACIDE VALPROIQUE", "DIVALPROATE"),
+    "periciazine": ("PROPERICIAZINE",),     # the French INN keeps the "pro" prefix
+    "opium": ("POUDRE OPIUM",),             # "POUDRE D'OPIUM" (Lamaline)
 }
 
 

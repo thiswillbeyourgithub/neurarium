@@ -771,6 +771,19 @@
    "5.1"
   ]
  },
+ "eslicarbazepine_acetate": {
+  "cis": "63927729",
+  "date_source": "file mtime",
+  "denomination": "ESLICARBAZEPINE ARROW 800 mg, comprimé sécable",
+  "fetched": "2026-11-19",
+  "page": "63927729",
+  "sections": [
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
  "estazolam": {
   "cis": "69888457",
   "date_source": "justelesRCP scrape manifest last_fetch",
@@ -790,6 +803,19 @@
   "denomination": "ZARONTIN 250 mg/5 ml, sirop",
   "fetched": "2026-10-10",
   "page": "68481191",
+  "sections": [
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
+ "etifoxine": {
+  "cis": "63136857",
+  "date_source": "file mtime",
+  "denomination": "STRESAM, gélule",
+  "fetched": "2026-11-19",
+  "page": "63136857",
   "sections": [
    "4.2",
    "4.3",
@@ -1009,6 +1035,19 @@
   "denomination": "TOFRANIL 25 mg, comprimé enrobé",
   "fetched": "2026-10-10",
   "page": "67117128",
+  "sections": [
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
+ "iproniazid": {
+  "cis": "61561635",
+  "date_source": "file mtime",
+  "denomination": "MARSILID 50 mg, comprimé sécable",
+  "fetched": "2026-11-19",
+  "page": "61561635",
   "sections": [
    "4.2",
    "4.3",
@@ -1443,6 +1482,19 @@
    "5.1"
   ]
  },
+ "nefopam": {
+  "cis": "62580656",
+  "date_source": "justelesRCP scrape manifest last_fetch",
+  "denomination": "ACUPAN 20 mg/2 mL, solution injectable",
+  "fetched": "2026-07-16",
+  "page": "62580656",
+  "sections": [
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
  "nicotine": {
   "cis": "60052222",
   "date_source": "file mtime",
@@ -1521,6 +1573,19 @@
    "5.1"
   ]
  },
+ "oxetorone": {
+  "cis": "69768949",
+  "date_source": "file mtime",
+  "denomination": "NOCERTONE 60 mg, comprimé pelliculé sécable",
+  "fetched": "2026-11-19",
+  "page": "69768949",
+  "sections": [
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
  "oxycodone": {
   "cis": "60629186",
   "date_source": "justelesRCP scrape manifest last_fetch",
@@ -1566,6 +1631,19 @@
   "denomination": "FYCOMPA 12 mg, comprimé pelliculé",
   "fetched": "2026-09-30",
   "page": "61849146",
+  "sections": [
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
+ "periciazine": {
+  "cis": "64676824",
+  "date_source": "file mtime",
+  "denomination": "NEULEPTIL 10 mg, gélule",
+  "fetched": "2026-11-19",
+  "page": "64676824",
   "sections": [
    "4.2",
    "4.3",
@@ -1631,6 +1709,19 @@
   "denomination": "PIPORTIL L4 25 mg/ml, solution injectable en ampoule (I.M.)",
   "fetched": "2026-10-10",
   "page": "62000861",
+  "sections": [
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
+ "piribedil": {
+  "cis": "61598530",
+  "date_source": "justelesRCP scrape manifest last_fetch",
+  "denomination": "TRIVASTAL 50 mg L.P., comprimé enrobé à libération prolongée",
+  "fetched": "2026-07-28",
+  "page": "61598530",
   "sections": [
    "4.2",
    "4.3",
@@ -1963,6 +2054,19 @@
    "5.1"
   ]
  },
+ "stiripentol": {
+  "cis": "61501691",
+  "date_source": "justelesRCP EMA scrape manifest last_fetch",
+  "denomination": "DIACOMIT 250 mg, poudre pour suspension buvable en sachet",
+  "fetched": "2026-09-30",
+  "page": "61501691",
+  "sections": [
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
  "sulpiride": {
   "cis": "62344129",
   "date_source": "file mtime",
@@ -2149,6 +2253,19 @@
   "denomination": "DEPAKINE 500 mg, comprimé gastro-résistant",
   "fetched": "2026-10-15",
   "page": "60184188",
+  "sections": [
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
+ "valpromide": {
+  "cis": "63737879",
+  "date_source": "justelesRCP scrape manifest last_fetch",
+  "denomination": "DEPAMIDE 300 mg, comprimé pelliculé gastro-résistant",
+  "fetched": "2026-10-15",
+  "page": "63737879",
   "sections": [
    "4.2",
    "4.3",

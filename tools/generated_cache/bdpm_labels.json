@@ -536,6 +536,18 @@
    }
   ]
  },
+ "eslicarbazepine_acetate": {
+  "brands": [
+   {
+    "cis": "68829121",
+    "name": "Zebinix",
+    "quote": "ZEBINIX"
+   }
+  ],
+  "cis": "63927729",
+  "denomination": "ESLICARBAZEPINE ARROW 800 mg, comprimé sécable",
+  "why": "plain oral"
+ },
  "estazolam": {
   "brands": [
    {
@@ -559,6 +571,15 @@
   "cis": "68481191",
   "denomination": "ZARONTIN 250 mg/5 ml, sirop",
   "why": "plain oral, brand-name product"
+ },
+ "etifoxine": {
+  "brands": [
+   {
+    "cis": "63136857",
+    "name": "Stresam",
+    "quote": "STRESAM"
+   }
+  ]
  },
  "etomidate": {
   "brands": [
@@ -732,6 +753,15 @@
   "cis": "67117128",
   "denomination": "TOFRANIL 25 mg, comprimé enrobé",
   "why": "plain oral, brand-name product"
+ },
+ "iproniazid": {
+  "brands": [
+   {
+    "cis": "61561635",
+    "name": "Marsilid",
+    "quote": "MARSILID"
+   }
+  ]
  },
  "isoflurane": {
   "brands": [
@@ -1072,6 +1102,18 @@
  "naltrexone": {
   "brands": []
  },
+ "nefopam": {
+  "brands": [
+   {
+    "cis": "62580656",
+    "name": "Acupan",
+    "quote": "ACUPAN"
+   }
+  ],
+  "cis": "68943687",
+  "denomination": "ACUPAN, comprimé",
+  "why": "plain oral, brand-name product"
+ },
  "nicotine": {
   "brands": [
    {
@@ -1175,6 +1217,18 @@
   "denomination": "TRILEPTAL 300 mg, comprimé pelliculé",
   "why": "plain oral, brand-name product"
  },
+ "oxetorone": {
+  "brands": [
+   {
+    "cis": "69768949",
+    "name": "Nocertone",
+    "quote": "NOCERTONE"
+   }
+  ],
+  "cis": "69768949",
+  "denomination": "NOCERTONE 60 mg, comprimé pelliculé sécable",
+  "why": "plain oral, brand-name product"
+ },
  "oxycodone": {
   "brands": [
    {
@@ -1209,6 +1263,15 @@
     "cis": "61849146",
     "name": "Fycompa",
     "quote": "FYCOMPA"
+   }
+  ]
+ },
+ "periciazine": {
+  "brands": [
+   {
+    "cis": "64676824",
+    "name": "Neuleptil",
+    "quote": "NEULEPTIL"
    }
   ]
  },
@@ -1270,6 +1333,15 @@
   "cis": "62000861",
   "denomination": "PIPORTIL L4 25 mg/ml, solution injectable en ampoule (I.M.)",
   "why": "no plain-oral product; non-modified-release intramusculaire, brand-name product"
+ },
+ "piribedil": {
+  "brands": [
+   {
+    "cis": "61598530",
+    "name": "Trivastal",
+    "quote": "TRIVASTAL"
+   }
+  ]
  },
  "pitolisant": {
   "brands": [
@@ -1551,6 +1623,15 @@
    }
   ]
  },
+ "stiripentol": {
+  "brands": [
+   {
+    "cis": "61501691",
+    "name": "Diacomit",
+    "quote": "DIACOMIT"
+   }
+  ]
+ },
  "sulpiride": {
   "brands": [
    {
@@ -1737,6 +1818,15 @@
     "cis": "63413610",
     "name": "Divalcote",
     "quote": "DIVALCOTE"
+   }
+  ]
+ },
+ "valpromide": {
+  "brands": [
+   {
+    "cis": "63737879",
+    "name": "Depamide",
+    "quote": "DEPAMIDE"
    }
   ]
  },
