@@ -1757,5 +1757,138 @@
    "pick": false,
    "reason": "m2 is a unit"
   }
+ ],
+ "etifoxine": [
+  {
+   "index": 0,
+   "target": "gaba_a",
+   "qid": "63721cad",
+   "pick": false,
+   "reason": "about allopregnanolone, not etifoxine"
+  },
+  {
+   "index": 1,
+   "target": "alpha2",
+   "qid": "80222e95",
+   "pick": false,
+   "reason": "GABA-A alpha2 subunit, not the alpha2 adrenoceptor"
+  },
+  {
+   "index": 2,
+   "target": "beta3",
+   "qid": "80222e95",
+   "pick": false,
+   "reason": "GABA-A beta3 subunit, not the beta3 adrenoceptor"
+  },
+  {
+   "index": 3,
+   "target": "gaba_a",
+   "qid": "80222e95",
+   "pick": true,
+   "action": "pam"
+  },
+  {
+   "index": 4,
+   "target": "gaba_a",
+   "qid": "a117048e",
+   "pick": false,
+   "reason": "same target already picked"
+  },
+  {
+   "index": 5,
+   "target": "gaba_a",
+   "qid": "bfef23e5",
+   "pick": false,
+   "reason": "rat and mouse studies"
+  }
+ ],
+ "nefopam": [
+  {
+   "index": 0,
+   "target": "muscarinic",
+   "qid": "648c2aca",
+   "pick": true,
+   "action": "antagonist"
+  }
+ ],
+ "nordazepam": [
+  {
+   "index": 0,
+   "target": "gaba_a",
+   "qid": "4248248e",
+   "pick": true,
+   "action": "partial_agonist"
+  }
+ ],
+ "opium": [
+  {
+   "index": 0,
+   "target": "mu",
+   "qid": "00436ff9",
+   "pick": false,
+   "reason": "morphine's action, opium borrows it as a constituent"
+  }
+ ],
+ "oxetorone": [
+  {
+   "index": 0,
+   "target": "h1",
+   "qid": "b1fd2d69",
+   "pick": true,
+   "action": "antagonist"
+  }
+ ],
+ "periciazine": [
+  {
+   "index": 0,
+   "target": "dopamine",
+   "qid": "51381f20",
+   "pick": false,
+   "reason": "class-wide"
+  },
+  {
+   "index": 1,
+   "target": "dopamine",
+   "qid": "2733d95f",
+   "pick": true,
+   "action": "antagonist"
+  }
+ ],
+ "piribedil": [
+  {
+   "index": 0,
+   "target": "d2",
+   "qid": "c8866b28",
+   "pick": true,
+   "action": "agonist"
+  },
+  {
+   "index": 1,
+   "target": "d3",
+   "qid": "c8866b28",
+   "pick": true,
+   "action": "agonist"
+  },
+  {
+   "index": 2,
+   "target": "alpha2",
+   "qid": "ec665563",
+   "pick": true,
+   "action": "antagonist"
+  },
+  {
+   "index": 3,
+   "target": "dopamine",
+   "qid": "5b178283",
+   "pick": false,
+   "reason": "covered by d2 / d3"
+  },
+  {
+   "index": 4,
+   "target": "dopamine",
+   "qid": "1633280f",
+   "pick": false,
+   "reason": "peripheral vascular bed"
+  }
  ]
 }

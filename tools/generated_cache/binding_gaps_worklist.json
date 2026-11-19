@@ -564,6 +564,58 @@
   ]
  },
  {
+  "drug": "etifoxine",
+  "name": "Etifoxine",
+  "slug": "etifoxine",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "gaba_a",
+    "target_name": "GABA-A",
+    "origin": "prose",
+    "line": "This results in stimulation of the biosynthesis of endogenous neurosteroids , for instance allopregnanolone , a highly potent GABA A receptor positive allosteric modulator.",
+    "qid": "63721cad"
+   },
+   {
+    "target": "alpha2",
+    "target_name": "α2 adrenergic receptors",
+    "origin": "prose",
+    "line": "At GABA A receptors etifoxine binds at the α+β− interface and preferentially potentiates α 2 β 3 γ 2 and α 3 β 3 γ 2 receptor types.",
+    "qid": "80222e95"
+   },
+   {
+    "target": "beta3",
+    "target_name": "β3",
+    "origin": "prose",
+    "line": "At GABA A receptors etifoxine binds at the α+β− interface and preferentially potentiates α 2 β 3 γ 2 and α 3 β 3 γ 2 receptor types.",
+    "qid": "80222e95"
+   },
+   {
+    "target": "gaba_a",
+    "target_name": "GABA-A",
+    "origin": "prose",
+    "line": "At GABA A receptors etifoxine binds at the α+β− interface and preferentially potentiates α 2 β 3 γ 2 and α 3 β 3 γ 2 receptor types.",
+    "qid": "80222e95"
+   },
+   {
+    "target": "gaba_a",
+    "target_name": "GABA-A",
+    "origin": "prose",
+    "line": "Etifoxine is a nonbenzodiazepine —that is, it is similarly a GABA A receptor positive allosteric modulator but its chemical structure is distinct from that of benzodiazepines .",
+    "qid": "a117048e"
+   },
+   {
+    "target": "gaba_a",
+    "target_name": "GABA-A",
+    "origin": "rcp_5.1",
+    "line": "Des études in vitro et in vivo effectuées chez le rat et la souris ont montré que L’activité anxiolytique de l’étifoxine s’exerce principalement par un double mécanisme d’action (direct et indirect) sur le récepteur GABAA visant à renforcer la transmission GABAergique : - une action directe sur le récepteur GABAA par une modulation allostérique positive en se liant préférentiellement aux sous-unités b2 ou b3 ; les études montrent que le site de liaison de l’étifoxine sur le récepteur GABAA est différent de celui des benzodiazépines. - une action indirecte par l’augmentation de la production cérébrale de neurostéroïdes (via l’activation de la protéine de translocation mitochondriale) dont l’alloprégnanolone, ces neurostéroïdes étant des modulateurs allostériques positifs du récepteur GABAA.",
+    "corpus": "bdpm_rcp",
+    "page": "63136857",
+    "qid": "bfef23e5"
+   }
+  ]
+ },
+ {
   "drug": "fentanyl",
   "name": "Fentanyl",
   "slug": "fentanyl",
@@ -1218,6 +1270,23 @@
   ]
  },
  {
+  "drug": "nefopam",
+  "name": "Nefopam",
+  "slug": "nefopam",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "muscarinic",
+    "target_name": "Muscarinic acetylcholine receptors",
+    "origin": "rcp_5.1",
+    "line": "Le néfopam possède une activité anticholinergique.",
+    "corpus": "bdpm_rcp",
+    "page": "62580656",
+    "qid": "648c2aca"
+   }
+  ]
+ },
+ {
   "drug": "nitrous_oxide",
   "name": "Nitrous oxide",
   "slug": "nitrous_oxide_medication",
@@ -1229,6 +1298,21 @@
     "origin": "prose",
     "line": "It moderately blocks NMDAR and β 2 -subunit -containing nACh channels , weakly inhibits AMPA , kainate , GABA C and 5-HT 3 receptors , and slightly potentiates GABA A and glycine receptors .",
     "qid": "015de4fa"
+   }
+  ]
+ },
+ {
+  "drug": "nordazepam",
+  "name": "Nordazepam",
+  "slug": "nordazepam",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "gaba_a",
+    "target_name": "GABA-A",
+    "origin": "prose",
+    "line": "Nordazepam is a partial agonist at the GABA A receptor , which makes it less potent than other benzodiazepines, particularly in its amnesic and muscle-relaxing effects.",
+    "qid": "4248248e"
    }
   ]
  },
@@ -1275,6 +1359,38 @@
   ]
  },
  {
+  "drug": "opium",
+  "name": "Opium",
+  "slug": "opium",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "mu",
+    "target_name": "μ (MOR)",
+    "origin": "prose",
+    "line": "Morphine binds to and activates mu opioid receptors in the brain, spinal cord, stomach and intestine.",
+    "qid": "00436ff9"
+   }
+  ]
+ },
+ {
+  "drug": "oxetorone",
+  "name": "Oxetorone",
+  "slug": "oxetorone",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "h1",
+    "target_name": "H1",
+    "origin": "rcp_5.1",
+    "line": "En pharmacologie, le fumarate d’oxétorone est un antihistaminique H1 qui possède aussi des propriétés antagonistes de la sérotonine et la dopamine. Il possède également des propriétés antalgiques et antiémétiques.",
+    "corpus": "bdpm_rcp",
+    "page": "69768949",
+    "qid": "b1fd2d69"
+   }
+  ]
+ },
+ {
   "drug": "perampanel",
   "name": "Perampanel",
   "slug": "perampanel",
@@ -1286,6 +1402,32 @@
     "origin": "prose",
     "line": "The rates of block and unblock of AMPA receptor currents were 1.5×10 5 M −1 s −1 and 0.58 s −1 , respectively.",
     "qid": "a1e83055"
+   }
+  ]
+ },
+ {
+  "drug": "periciazine",
+  "name": "Periciazine",
+  "slug": "periciazine",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "dopamine",
+    "target_name": "Dopamine receptors",
+    "origin": "rcp_5.1",
+    "line": "Les antipsychotiques possèdent des propriétés antidopaminergiques qui sont responsables : - De l'effet antipsychotique recherché en thérapeutique. - D'effets secondaires (syndrome extrapyramidal, dyskinésies, hyperprolactinémie).",
+    "corpus": "bdpm_rcp",
+    "page": "64676824",
+    "qid": "51381f20"
+   },
+   {
+    "target": "dopamine",
+    "target_name": "Dopamine receptors",
+    "origin": "rcp_5.1",
+    "line": "Dans le cas de la propériciazine, cette activité antidopaminergique est d'importance moyenne : l'activité antipsychotique est modérée et les effets extrapyramidaux sont modérés.",
+    "corpus": "bdpm_rcp",
+    "page": "64676824",
+    "qid": "2733d95f"
    }
   ]
  },
@@ -1409,6 +1551,53 @@
     "origin": "prose",
     "line": "It is also contraindicated in individuals being cotreated with selective serotonin reuptake inhibitors (SSRI) or in those with a known hypersensitivity to pimozide or other diphenylbutyl-piperidine derivatives.",
     "qid": "8094718f"
+   }
+  ]
+ },
+ {
+  "drug": "piribedil",
+  "name": "Piribedil",
+  "slug": "piribedil",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "d2",
+    "target_name": "D2",
+    "origin": "prose",
+    "line": "Piribedil is an antiparkinsonian agent and piperazine derivative which acts as a D 2 and D 3 receptor agonist .",
+    "qid": "c8866b28"
+   },
+   {
+    "target": "d3",
+    "target_name": "D3",
+    "origin": "prose",
+    "line": "Piribedil is an antiparkinsonian agent and piperazine derivative which acts as a D 2 and D 3 receptor agonist .",
+    "qid": "c8866b28"
+   },
+   {
+    "target": "alpha2",
+    "target_name": "α2 adrenergic receptors",
+    "origin": "prose",
+    "line": "It also has α 2 -adrenergic antagonist properties.",
+    "qid": "ec665563"
+   },
+   {
+    "target": "dopamine",
+    "target_name": "Dopamine receptors",
+    "origin": "rcp_5.1",
+    "line": "Piribédil : agoniste dopaminergique (stimule les récepteurs de la dopamine et les voies dopaminergiques cérébrales).",
+    "corpus": "bdpm_rcp",
+    "page": "61598530",
+    "qid": "5b178283"
+   },
+   {
+    "target": "dopamine",
+    "target_name": "Dopamine receptors",
+    "origin": "rcp_5.1",
+    "line": "Par ailleurs, le piribédil entraîne une augmentation du débit fémoral (l'existence de récepteurs dopaminergiques dans le lit vasculaire fémoral permet d'expliquer l'action du piribédil sur la circulation périphérique).",
+    "corpus": "bdpm_rcp",
+    "page": "61598530",
+    "qid": "1633280f"
    }
   ]
  },

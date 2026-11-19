@@ -2235,6 +2235,10 @@
 "q_28d2c41cb0ee": {
 "drug:haloperidol/excretion[unchanged:urine]": "opus"
 },
+"q_28e2dfdd0fa6": {
+"drug:piribedil/bindings[d2:agonist]": "opus",
+"drug:piribedil/bindings[d3:agonist]": "opus"
+},
 "q_28f81aa98fc8": {
 "drug:phentermine/tmax": "sonnet"
 },
@@ -2527,6 +2531,10 @@
 },
 "q_2f4c84049c66": {
 "drug:sildenafil/originator": "opus"
+},
+"q_2f5686082029": {
+"drug:iproniazid/bindings[mao_a:enzyme_inhibitor]": "opus",
+"drug:iproniazid/bindings[mao_b:enzyme_inhibitor]": "opus"
 },
 "q_2f5c44262e66": {
 "drug:methamphetamine/bindings[mao_a:enzyme_inhibitor]": "opus",
@@ -4445,6 +4453,9 @@
 },
 "q_542ebba3e11b": {
 "drug:amphetamine_d/nbn": "sonnet"
+},
+"q_543058a6beab": {
+"drug:nefopam/bindings[muscarinic:antagonist]": "opus"
 },
 "q_5445b435ef97": {
 "drug:estazolam/categories": "sonnet"
@@ -6560,6 +6571,7 @@
 "drug:phenobarbital/categories": "opus"
 },
 "q_7cfae96f60de": {
+"drug:nordazepam/half_life": "opus",
 "metabolite:desmethyldiazepam/half_life": "opus"
 },
 "q_7d242c3e7c5f": {
@@ -7605,6 +7617,9 @@
 "structure:substantia_nigra_L": "sonnet",
 "structure:substantia_nigra_R": "sonnet"
 },
+"q_909dc7c26aed": {
+"drug:stiripentol/bindings[gaba_a:pam]": "opus"
+},
 "q_90c0a3380d7e": {
 "drug:zuclopenthixol/brands[Clopixol-Acuphase]": "sonnet"
 },
@@ -7812,6 +7827,9 @@
 "q_94d38ed81ef0": {
 "receptor:5ht1a/effects[agonism:bradycardia]": "opus"
 },
+"q_94f0d5d49b76": {
+"drug:etifoxine/bindings[gaba_a:pam]": "opus"
+},
 "q_950bbd47ac90": {
 "drug:topiramate/brands[Topamac]": "sonnet"
 },
@@ -7979,6 +7997,9 @@
 },
 "q_97b5f6304f38": {
 "drug:armodafinil/bindings[dat:reuptake_inhibitor]": "sonnet"
+},
+"q_97f42d8e24b2": {
+"drug:eslicarbazepine_acetate/metabolites[eslicarbazepine]": "opus"
 },
 "q_9801dadc7e37": {
 "drug:pipamperone/categories": "sonnet"
@@ -9406,6 +9427,9 @@
 "drug:mianserin/bindings[5ht2c:antagonist]": "sonnet",
 "drug:mianserin/bindings[5ht3:antagonist]": "sonnet"
 },
+"q_b227a5d40988": {
+"drug:oxetorone/bindings[h1:antagonist]": "opus"
+},
 "q_b228bb375ec0": {
 "drug:asenapine/bindings[alpha1a:antagonist]": "sonnet",
 "drug:asenapine/bindings[alpha1b:antagonist]": "sonnet",
@@ -10616,6 +10640,9 @@
 "drug:dexmedetomidine/formulations[sublingual]/release": "opus",
 "drug:dexmedetomidine/half_life": "sonnet"
 },
+"q_c709ed9c5e7e": {
+"metabolite:eslicarbazepine/bindings[nav:blocker]": "opus"
+},
 "q_c736690b2ba9": {
 "drug:diazepam/metabolites[oxazepam]": "opus",
 "drug:diazepam/metabolites[temazepam]": "opus"
@@ -10871,6 +10898,9 @@
 },
 "q_cc7d1c164518": {
 "drug:clomipramine/categories": "sonnet"
+},
+"q_cc84c9b7cb6f": {
+"drug:piribedil/bindings[alpha2:antagonist]": "opus"
 },
 "q_ccab5e775589": {
 "receptor:h3/effects[agonism:vasoconstriction]": "opus"
@@ -11428,6 +11458,9 @@
 "q_d798befd745c": {
 "drug:ziprasidone/nbn": "sonnet"
 },
+"q_d7c299200f88": {
+"drug:valpromide/metabolites[valproic_acid]": "opus"
+},
 "q_d7c2e5988666": {
 "drug:esketamine/formulations[nasal]/release": "opus"
 },
@@ -11726,6 +11759,9 @@
 },
 "q_dda3ccb4482d": {
 "drug:lofepramine/bindings[h1:antagonist]": "sonnet"
+},
+"q_ddb121606d08": {
+"drug:opium/constituents": "opus"
 },
 "q_ddb3d7178a93": {
 "target:nkcc1/classification": "opus"
@@ -12154,6 +12190,7 @@
 "drug:naltrexonebupropion/nbn": "sonnet"
 },
 "q_e57e11379c1e": {
+"drug:nordazepam/bindings[gaba_a:partial_agonist]": "opus",
 "metabolite:desmethyldiazepam/bindings[gaba_a:partial_agonist]": "opus"
 },
 "q_e57e4fd692f3": {
@@ -12589,6 +12626,9 @@
 "q_ededd95dac12": {
 "drug:clozapine/brands[Fazaclo ODT (oral disintegrating tablet)]": "sonnet"
 },
+"q_edf80c552cba": {
+"drug:periciazine/bindings[dopamine:antagonist]": "opus"
+},
 "q_edff7c20b123": {
 "drug:duloxetine/bindings[dat:reuptake_inhibitor]": "sonnet"
 },
@@ -12607,6 +12647,9 @@
 "q_ee1b1b278349": {
 "drug:cyproheptadine/bindings[h1:antagonist]": "sonnet",
 "drug:cyproheptadine/categories": "sonnet"
+},
+"q_ee52bb78ad8c": {
+"drug:eslicarbazepine_acetate/half_life": "opus"
 },
 "q_ee679b2237e5": {
 "drug:perampanel/half_life": "sonnet"
@@ -12926,6 +12969,9 @@
 },
 "q_f45813057a5c": {
 "drug:melatonin/excretion[route:renal]": "opus"
+},
+"q_f464e5205d2f": {
+"drug:eslicarbazepine_acetate/prodrug": "opus"
 },
 "q_f4658e18f1cf": {
 "drug:meprobamate/withdrawals[ca:2013]": "opus",
