@@ -212,7 +212,7 @@ Pathway sign (excit./inhib.)                                     █████
 Receptor pre/postsynaptic site                                   ████████████████████░░░░░░   75%      42/56
 ```
 
-Separately, **measured binding affinity (PDSP Ki) covers 85% of the 1896 drug bindings**; 76 of 275 drugs carry no Ki on any binding (sourced by book quote only, or not yet sourced). A Ki is a measured value, not a grade: this tracks where one was never looked up, complementing the sourcing figure above.
+Separately, **measured binding affinity (PDSP Ki) covers 85% of the 1896 drug bindings**; 73 of 275 drugs carry no Ki on any binding (sourced by book quote only, or not yet sourced). A Ki is a measured value, not a grade: this tracks where one was never looked up, complementing the sourcing figure above.
 
 Of those, **420 carry an `uncertain` badge**: the quote is confirmed present in the source, but the sentence states something broader than the claim (a rule that never names the drug, a sweep that never names the region), so pinning it to that node is an inference. The badge's tooltip lists the reasons to doubt it, each with its own source.
 

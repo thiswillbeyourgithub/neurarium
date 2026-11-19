@@ -19,6 +19,39 @@
     "note": "The Table 3 title is taken: the paper's Results prose lists the two values in the other order (3900 nM at 5-HT2C, 6400 nM at 5-HT2B), but Table 3's own occupancies (5-HT2B always above 5-HT2C at the same concentration) need the lower Ki at 5-HT2B. The paper does not say how or in which species the Ki values were obtained.",
     "qid": "92a29ac1"
    }
+  ],
+  "nitrazepam": [
+   {
+    "target": "gaba_a",
+    "candidate": 0,
+    "quote": "nitrazepam (5.3 nM)",
+    "value_nm": 5.3,
+    "param": "Ki",
+    "note": "Displacement of [3H]flunitrazepam binding in vitro (mouse brain), i.e. the benzodiazepine site of GABA-A.",
+    "qid": "2faf3a2c"
+   }
+  ],
+  "chlordiazepoxide": [
+   {
+    "target": "gaba_a",
+    "candidate": 0,
+    "quote": "the least potent, chlordiazepoxide (Kd = 684 nM)",
+    "value_nm": 684,
+    "param": "Kd",
+    "note": "Benzodiazepine-site binding in human frontal cortex, preferred over the mouse Ki of 234 nM vs [3H]flunitrazepam (PMID 6148044).",
+    "qid": "43975847"
+   }
+  ],
+  "lormetazepam": [
+   {
+    "target": "gaba_a",
+    "candidate": 0,
+    "quote": "lormetazepam bound with a higher affinity to omega 1 receptor (Ki = 10 nM)",
+    "value_nm": 10,
+    "param": "Ki",
+    "note": "Displacement of [3H]flumazenil (benzodiazepine site of GABA-A) in cerebellar membranes, omega 1 (BZ1) subtype; omega 2 Ki is 29 nM in the same sentence.",
+    "qid": "d3df36a5"
+   }
   ]
  },
  "metabolites": {

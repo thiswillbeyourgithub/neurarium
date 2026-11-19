@@ -390,6 +390,75 @@
      "qid": "6698fd2f"
     }
    ]
+  },
+  "chlordiazepoxide": {
+   "name": "Chlordiazepoxide",
+   "missing": {
+    "gaba_a": "GABA-A"
+   },
+   "context": [],
+   "candidates": [
+    {
+     "corpus": "europepmc",
+     "page": "1848631",
+     "line": "The most potent compound was triazolam (Kd = 0.54 nM); the least potent, chlordiazepoxide (Kd = 684 nM).",
+     "qid": "43975847"
+    },
+    {
+     "corpus": "europepmc",
+     "page": "6148044",
+     "line": "The Ki values for [3H]flunitrazepam binding in vitro were as follows: flutoprazepam (13.0 nM), diazepam (2.7 nM), nitrazepam (5.3 nM), prazepam (68.5 nM) and chlordiazepoxide (234 nM).",
+     "qid": "2faf3a2c"
+    },
+    {
+     "corpus": "europepmc",
+     "page": "6148044",
+     "line": "Two metabolites of flutoprazepam, N-desalkyl-flutoprazepam (Ki = 3.1 nM) also inhibited [3H]flunitrazepam binding in vitro with higher potencies than that of flutoprazepam.",
+     "qid": "f06baa4e"
+    }
+   ]
+  },
+  "lormetazepam": {
+   "name": "Lormetazepam",
+   "missing": {
+    "gaba_a": "GABA-A"
+   },
+   "context": [],
+   "candidates": [
+    {
+     "corpus": "europepmc",
+     "page": "1687574",
+     "line": "In the displacement study on [3H]flumazenil binding to cerebellar and spinal cord membranes, lormetazepam bound with a higher affinity to omega 1 receptor (Ki = 10 nM) than to omega 2 receptor (Ki = 29 nM).",
+     "qid": "d3df36a5"
+    },
+    {
+     "corpus": "europepmc",
+     "page": "1687574",
+     "line": "In the displacement study on [3H] Ro5-4864 binding to kidney membranes, lormetazepam bound with a lower affinity to the omega 3 receptor (Ki = 213 nM) than flunitrazepam.",
+     "qid": "286a9658"
+    }
+   ]
+  },
+  "nitrazepam": {
+   "name": "Nitrazepam",
+   "missing": {
+    "gaba_a": "GABA-A"
+   },
+   "context": [],
+   "candidates": [
+    {
+     "corpus": "europepmc",
+     "page": "6148044",
+     "line": "The Ki values for [3H]flunitrazepam binding in vitro were as follows: flutoprazepam (13.0 nM), diazepam (2.7 nM), nitrazepam (5.3 nM), prazepam (68.5 nM) and chlordiazepoxide (234 nM).",
+     "qid": "2faf3a2c"
+    },
+    {
+     "corpus": "europepmc",
+     "page": "6148044",
+     "line": "Two metabolites of flutoprazepam, N-desalkyl-flutoprazepam (Ki = 3.1 nM) also inhibited [3H]flunitrazepam binding in vitro with higher potencies than that of flutoprazepam.",
+     "qid": "f06baa4e"
+    }
+   ]
   }
  },
  "metabolites": {

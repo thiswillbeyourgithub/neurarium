@@ -34,7 +34,7 @@ Facts no stored source states yet (absent, so outside the tally), over the 301 r
 - 72 carry no first approval (`first_approval`).
 - 54 of 71 drug -> active-metabolite links name no forming enzyme.
 - 19 of 24 modeled enzymes carry no metabolizer-phenotype profile.
-- 76 of 275 drugs with bindings carry no measured Ki; 1618 of 1896 bindings (85%) carry one.
+- 73 of 275 drugs with bindings carry no measured Ki; 1621 of 1896 bindings (85%) carry one.
 <!-- SOURCING_GAPS:END -->
 
 ## Receptors

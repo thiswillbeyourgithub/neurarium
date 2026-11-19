@@ -4366,6 +4366,9 @@
 "q_52bc098cfcf5": {
 "receptor:5ht1a/release_modulation[heteroreceptor:-:glutamatergic_neuron:glutamate:decrease]": "opus"
 },
+"q_52c90c087991": {
+"drug:nitrazepam/bindings[gaba_a:pam]/ki": "opus"
+},
 "q_52da72db5bb0": {
 "drug:paliperidone/workup[weight:during]": "opus"
 },
@@ -6638,6 +6641,9 @@
 },
 "q_7efc4b3baeea": {
 "drug:atomoxetine/half_life": "sonnet"
+},
+"q_7f0421ce8c01": {
+"drug:lormetazepam/bindings[gaba_a:pam]/ki": "opus"
 },
 "q_7f0cd795fbc7": {
 "drug:ropinirole/categories": "opus"
@@ -11075,6 +11081,9 @@
 "receptor:kainate/classification[receptor_class]": "sonnet",
 "receptor:nmda/classification[family]": "sonnet",
 "receptor:nmda/classification[receptor_class]": "sonnet"
+},
+"q_d062a8a2977a": {
+"drug:chlordiazepoxide/bindings[gaba_a:pam]/ki": "opus"
 },
 "q_d076d6c592b6": {
 "drug:loxapine/brands[Loxitane]": "sonnet"
