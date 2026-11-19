@@ -918,5 +918,17 @@
   "index": 0,
   "hours": 2.0,
   "qid": "f3446448"
+ },
+ "etifoxine": {
+  "index": 0,
+  "hours": 2.0,
+  "hours_max": 3.0,
+  "qid": "4cb73b8e"
+ },
+ "eslicarbazepine_acetate": {
+  "index": 1,
+  "hours": 2.0,
+  "hours_max": 3.0,
+  "qid": "4bab2bfc"
  }
 }

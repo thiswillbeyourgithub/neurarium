@@ -158,6 +158,9 @@
 "q_0302e75c03ae": {
 "drug:lorazepam/excretion[route:renal]": "opus"
 },
+"q_030b6fea3c12": {
+"drug:etifoxine/originator": "opus"
+},
 "q_03110b6650fd": {
 "receptor:5ht2a/classification[synaptic]": "opus"
 },
@@ -348,6 +351,9 @@
 "q_06f220c374e7": {
 "drug:maprotiline/nbn": "sonnet"
 },
+"q_06f25be71f8f": {
+"drug:etifoxine/categories": "opus"
+},
 "q_06f2fa31fdab": {
 "drug:duloxetine/nbn": "sonnet"
 },
@@ -531,6 +537,9 @@
 "drug:brexpiprazole/workup[lipids:during]": "opus",
 "drug:brexpiprazole/workup[weight:before]": "opus",
 "drug:brexpiprazole/workup[weight:during]": "opus"
+},
+"q_0a07fff5c812": {
+"drug:nordazepam/categories": "opus"
 },
 "q_0a0e09bd476c": {
 "drug:safinamide/first_approval": "opus"
@@ -837,6 +846,9 @@
 "q_0f8d6ffdf514": {
 "drug:methylphenidate_d/first_approval": "opus"
 },
+"q_0f9f105c615b": {
+"drug:etifoxine/tmax": "opus"
+},
 "q_0fa3dda91bc2": {
 "drug:bromazepam/first_approval": "opus"
 },
@@ -979,6 +991,9 @@
 "q_11a8f196ff2a": {
 "drug:donepezil/excretion[route:fecal]": "opus"
 },
+"q_11be299567a3": {
+"drug:nefopam/half_life": "opus"
+},
 "q_11c26bf6b07c": {
 "drug:citalopram/brands[Celapram]": "sonnet"
 },
@@ -1012,6 +1027,9 @@
 },
 "q_12411b7fa618": {
 "drug:pimozide/categories": "sonnet"
+},
+"q_12571e7e457a": {
+"drug:etifoxine/first_approval": "opus"
 },
 "q_126189a5dac0": {
 "drug:triiodothyronine/brands[Cytomel]": "sonnet"
@@ -1212,6 +1230,9 @@
 },
 "q_161df51f022a": {
 "drug:methaqualone/half_life": "sonnet"
+},
+"q_1685b804fbbd": {
+"drug:stiripentol/first_approval": "opus"
 },
 "q_16c8732270c3": {
 "drug:loxapine/bindings[h1:antagonist]": "sonnet"
@@ -1471,6 +1492,9 @@
 "q_1b3bf84da2eb": {
 "drug:perospirone/first_approval": "opus"
 },
+"q_1b3cc6adf194": {
+"drug:iproniazid/workup[liver_function:during]": "opus"
+},
 "q_1b3f820a456d": {
 "drug:perospirone/categories": "sonnet"
 },
@@ -1536,6 +1560,9 @@
 },
 "q_1c6cd400a901": {
 "drug:lisdexamfetamine/tmax": "sonnet"
+},
+"q_1c7aa8242c0d": {
+"drug:penfluridol/categories": "opus"
 },
 "q_1c8a17299056": {
 "drug:thioridazine/nbn": "sonnet"
@@ -2237,7 +2264,8 @@
 },
 "q_28e2dfdd0fa6": {
 "drug:piribedil/bindings[d2:agonist]": "opus",
-"drug:piribedil/bindings[d3:agonist]": "opus"
+"drug:piribedil/bindings[d3:agonist]": "opus",
+"drug:piribedil/categories": "opus"
 },
 "q_28f81aa98fc8": {
 "drug:phentermine/tmax": "sonnet"
@@ -2444,6 +2472,9 @@
 "q_2c7985760623": {
 "drug:prazepam/bindings[gaba_a:pam]": "sonnet"
 },
+"q_2c8a2818f1b1": {
+"drug:iproniazid/first_approval": "opus"
+},
 "q_2ce360d1cd23": {
 "drug:methaqualone/brands[Mandrax]": "sonnet"
 },
@@ -2534,7 +2565,8 @@
 },
 "q_2f5686082029": {
 "drug:iproniazid/bindings[mao_a:enzyme_inhibitor]": "opus",
-"drug:iproniazid/bindings[mao_b:enzyme_inhibitor]": "opus"
+"drug:iproniazid/bindings[mao_b:enzyme_inhibitor]": "opus",
+"drug:iproniazid/categories": "opus"
 },
 "q_2f5c44262e66": {
 "drug:methamphetamine/bindings[mao_a:enzyme_inhibitor]": "opus",
@@ -2565,6 +2597,9 @@
 },
 "q_300f1a261196": {
 "drug:selegiline/brands[Emsam]": "sonnet"
+},
+"q_30a827237c42": {
+"drug:eslicarbazepine_acetate/tmax": "opus"
 },
 "q_30ad1829f2a3": {
 "drug:estazolam/half_life": "sonnet"
@@ -3192,6 +3227,11 @@
 },
 "q_3c27ed2c0530": {
 "drug:topiramate/brands[Topimax]": "sonnet"
+},
+"q_3c3f5b58fc7d": {
+"drug:nefopam/bindings[dat:reuptake_inhibitor]": "opus",
+"drug:nefopam/bindings[net:reuptake_inhibitor]": "opus",
+"drug:nefopam/bindings[sert:reuptake_inhibitor]": "opus"
 },
 "q_3c40e3477251": {
 "drug:loflazepate/metabolites[n_desalkylflurazepam]": "opus",
@@ -3910,6 +3950,7 @@
 "drug:fluspirilene/originator/now": "opus",
 "drug:haloperidol/originator/now": "opus",
 "drug:ketanserin/originator/now": "opus",
+"drug:penfluridol/originator/now": "opus",
 "drug:pimozide/originator/now": "opus",
 "drug:pipamperone/originator/now": "opus"
 },
@@ -4164,6 +4205,9 @@
 },
 "q_4e52adc971f6": {
 "drug:buprenorphine/brands[Zubsolv (with naloxone)]": "sonnet"
+},
+"q_4e7094fe934c": {
+"drug:periciazine/categories": "opus"
 },
 "q_4e71d0e567a5": {
 "drug:mescaline/excretion[unchanged:urine]": "opus"
@@ -4985,6 +5029,10 @@
 "q_5f70f1cabfa0": {
 "drug:lithium/brands[Lithium carbonate tablets]": "sonnet"
 },
+"q_5f95e880a6b2": {
+"drug:stiripentol/workup[blood_count:before]": "opus",
+"drug:stiripentol/workup[blood_count:during]": "opus"
+},
 "q_5f978d74e211": {
 "projection:amygdala_R->hypothalamus_R": "opus"
 },
@@ -5009,6 +5057,9 @@
 "q_5fc9dc146ec8": {
 "drug:lurasidone/excretion[route:fecal]": "opus",
 "drug:lurasidone/excretion[route:renal]": "opus"
+},
+"q_6004af5dd8ef": {
+"drug:piribedil/workup[blood_pressure:during]": "opus"
 },
 "q_60076062fc9d": {
 "drug:milnacipran/excretion[route:renal]": "opus",
@@ -5464,6 +5515,9 @@
 "receptor:d5/locations[hypothalamus]": "sonnet",
 "receptor:d5/locations[thalamus]": "sonnet"
 },
+"q_677cace8b2d0": {
+"drug:valpromide/categories": "opus"
+},
 "q_677d5ea14601": {
 "drug:tizanidine/excretion[route:fecal]": "opus",
 "drug:tizanidine/excretion[route:renal]": "opus"
@@ -5575,6 +5629,9 @@
 "drug:risperidone/workup[weight:before]": "opus",
 "drug:risperidone/workup[weight:during]": "opus"
 },
+"q_6990e0f2d691": {
+"drug:carpipramine/categories": "opus"
+},
 "q_6999b3f96c6b": {
 "drug:morphine/excretion[route:fecal]": "opus"
 },
@@ -5653,6 +5710,9 @@
 },
 "q_6b35c271c012": {
 "drug:propofol/excretion[unchanged:urine]": "opus"
+},
+"q_6b4ca8f8fd88": {
+"drug:carpipramine/categories": "opus"
 },
 "q_6b5520af9edd": {
 "drug:lofexidine/bindings[alpha2:agonist]": "sonnet"
@@ -5961,6 +6021,9 @@
 "drug:lemborexant/excretion[route:fecal]": "opus",
 "drug:lemborexant/excretion[route:renal]": "opus"
 },
+"q_70fa28ae90ef": {
+"drug:stiripentol/categories": "opus"
+},
 "q_7104d3b1e6b6": {
 "receptor:5ht1a/demographics[age:no_difference:-]": "opus"
 },
@@ -5978,6 +6041,9 @@
 },
 "q_7127be47fb4f": {
 "receptor:a2a/locations[caudate]": "sonnet"
+},
+"q_71287a023c0f": {
+"drug:eslicarbazepine_acetate/originator": "opus"
 },
 "q_7130eac6d510": {
 "drug:atropine/half_life": "sonnet"
@@ -6474,6 +6540,10 @@
 "drug:molindone/formulations[ir]/tmax": "opus",
 "drug:molindone/tmax": "sonnet"
 },
+"q_7a53f5d5233f": {
+"drug:valpromide/workup[liver_function:before]": "opus",
+"drug:valpromide/workup[liver_function:during]": "opus"
+},
 "q_7a69dd90c53c": {
 "drug:quazepam/brands[Doral]": "sonnet"
 },
@@ -6643,6 +6713,9 @@
 "q_7e831a41a89c": {
 "drug:flurazepam/brands[Dalmadorm]": "sonnet"
 },
+"q_7e98a7df8196": {
+"drug:etifoxine/half_life": "opus"
+},
 "q_7eb6b1b6bfbd": {
 "receptor:h4/classification[family]": "sonnet"
 },
@@ -6797,6 +6870,10 @@
 "q_80fd13bd2fd0": {
 "drug:promethazine/first_approval": "opus"
 },
+"q_81065a97bff9": {
+"drug:etifoxine/workup[liver_function:before]": "opus",
+"drug:etifoxine/workup[liver_function:during]": "opus"
+},
 "q_8159f09c11a0": {
 "drug:doxepin/categories": "sonnet"
 },
@@ -6906,6 +6983,9 @@
 },
 "q_837fe808cd4e": {
 "receptor:5ht2a/release_modulation[heteroreceptor:-:glutamatergic_neuron:dopamine:decrease]": "opus"
+},
+"q_83810bb80859": {
+"drug:oxetorone/categories": "opus"
 },
 "q_838f6ef24310": {
 "drug:levodopa/first_approval": "opus"
@@ -7179,6 +7259,9 @@
 "q_8896a13ceda9": {
 "drug:lithium/workup[eeg:before]": "opus"
 },
+"q_88a3d3daadb6": {
+"drug:periciazine/workup[blood_count:during]": "opus"
+},
 "q_88aa9c785a59": {
 "drug:loxapine/brands[Adasuve]": "sonnet"
 },
@@ -7207,6 +7290,10 @@
 "drug:istradefylline/enzymes[cyp3a5:substrate]": "opus",
 "drug:istradefylline/enzymes[cyp3a5:substrate]/strength": "opus"
 },
+"q_89688a4c242e": {
+"drug:stiripentol/workup[liver_function:before]": "opus",
+"drug:stiripentol/workup[liver_function:during]": "opus"
+},
 "q_896ab8ef06cc": {
 "receptor:d2/effects[antagonism:tardive_dyskinesia]": "opus"
 },
@@ -7220,6 +7307,9 @@
 "q_89878b67c9e1": {
 "drug:baclofen/brands[Liorésal]": "sonnet"
 },
+"q_8988601751f9": {
+"drug:periciazine/workup[ecg:before]": "opus"
+},
 "q_899397433898": {
 "drug:clotiazepam/formulations[ir]/tmax": "opus",
 "drug:clotiazepam/tmax": "opus"
@@ -7232,6 +7322,9 @@
 },
 "q_89b015a2708e": {
 "projection:locus_coeruleus_R->substantia_nigra_R": "opus"
+},
+"q_89c59fcade33": {
+"drug:eslicarbazepine_acetate/first_approval": "opus"
 },
 "q_89dbf3d26490": {
 "drug:sibutramine/categories": "sonnet"
@@ -8386,6 +8479,9 @@
 "q_9dcbfdfe9c3f": {
 "target:sert/demographics[age:decrease:-]": "opus"
 },
+"q_9de1c8541919": {
+"drug:eslicarbazepine_acetate/categories": "opus"
+},
 "q_9de78726faad": {
 "drug:clozapine/bindings[d2:antagonist]": "sonnet"
 },
@@ -9315,6 +9411,9 @@
 "q_afb856904102": {
 "receptor:alpha1b/locations[parietal]": "sonnet"
 },
+"q_afd59ce85ff3": {
+"drug:piribedil/half_life": "opus"
+},
 "q_afeb1ea8f69b": {
 "drug:methylphenidate_dl/brands[Cotempla XR-ODT]": "sonnet"
 },
@@ -10222,6 +10321,10 @@
 "q_c03b9f0e3ddb": {
 "drug:fenfluramine/withdrawals[us:1997]": "opus"
 },
+"q_c04671010d75": {
+"drug:eslicarbazepine_acetate/workup[electrolytes:before]": "opus",
+"drug:eslicarbazepine_acetate/workup[electrolytes:during]": "opus"
+},
 "q_c050f83e86df": {
 "metabolite:hydroxynorketamine/bindings[nachr_a7:nam]": "opus"
 },
@@ -11064,6 +11167,7 @@
 "drug:fluspirilene/originator_country": "opus",
 "drug:haloperidol/originator_country": "opus",
 "drug:ketanserin/originator_country": "opus",
+"drug:penfluridol/originator_country": "opus",
 "drug:pimozide/originator_country": "opus",
 "drug:pipamperone/originator_country": "opus"
 },
@@ -12147,6 +12251,9 @@
 "q_e4e3252cdb00": {
 "drug:guanfacine/brands[Tenex]": "sonnet"
 },
+"q_e5000efe24b1": {
+"drug:nordazepam/categories": "opus"
+},
 "q_e50051c65639": {
 "drug:perospirone/excretion[route:renal]": "opus",
 "drug:perospirone/excretion[unchanged:urine]": "opus"
@@ -12289,6 +12396,9 @@
 },
 "q_e6eb88a292cc": {
 "drug:brexpiprazole/brands[Rexulti]": "sonnet"
+},
+"q_e6fa8d6e057f": {
+"drug:iproniazid/workup[blood_pressure:during]": "opus"
 },
 "q_e701465803ab": {
 "drug:2cb/categories": "sonnet"
@@ -12471,6 +12581,9 @@
 },
 "q_ea32c15e5d74": {
 "metabolite:desmethylselegiline/bindings[mao_b:enzyme_inhibitor]": "sonnet"
+},
+"q_ea461dfa2a65": {
+"drug:oxetorone/half_life": "opus"
 },
 "q_ea4d6fba3563": {
 "drug:hydroxyzine/nbn": "sonnet"
@@ -13243,6 +13356,12 @@
 "q_f8e5c0dad584": {
 "drug:citalopram/brands[Cipramil]": "sonnet"
 },
+"q_f8e8c712c2e0": {
+"drug:stiripentol/originator": "opus"
+},
+"q_f8ec1a0e4798": {
+"drug:opium/categories": "opus"
+},
 "q_f8f7e6af4b73": {
 "drug:varenicline/bindings[nachr_a4b2:partial_agonist]": "sonnet"
 },
@@ -13311,6 +13430,9 @@
 },
 "q_fa3939ce257b": {
 "drug:acamprosate/first_approval": "opus"
+},
+"q_fa4fa19b192d": {
+"drug:penfluridol/originator": "opus"
 },
 "q_fa552ad01e22": {
 "drug:buprenorphine/enzymes[cyp2c8:substrate]": "opus",
@@ -13645,6 +13767,10 @@
 },
 "q_ffc0394fa8a1": {
 "drug:suvorexant/half_life": "sonnet"
+},
+"q_ffd728afc9a8": {
+"drug:valpromide/workup[blood_count:before]": "opus",
+"drug:valpromide/workup[blood_count:during]": "opus"
 },
 "q_ffe7d14c370f": {
 "drug:sertindole/categories": "sonnet"

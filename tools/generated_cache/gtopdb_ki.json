@@ -182,6 +182,25 @@
      "quote": "amisulpride at D3 receptor (Drd3, Rat): Antagonist / Antagonist, pKi 7.4 [PMID 1975644]",
      "species": "Rat"
     }
+   },
+   "dopamine": {
+    "action": "antagonist",
+    "ki": {
+     "max": 12.5893,
+     "median": 11.2946,
+     "min": 10.0,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "1354163",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "amisulpride",
+     "provenance": "verified",
+     "quote": "amisulpride at D2 receptor (DRD2, Human): Antagonist / Antagonist, pKi 7.9-8 [PMID 1354163]",
+     "species": "Human"
+    }
    }
   },
   "amitriptyline": {
@@ -259,6 +278,25 @@
      "provenance": "verified",
      "quote": "amitriptyline at 5-HT7 receptor (Htr7, Rat): Antagonist / Antagonist, pKi 6.9-7 [PMID 8394362]",
      "species": "Rat"
+    }
+   },
+   "alpha1": {
+    "action": "antagonist",
+    "ki": {
+     "max": 6.3096,
+     "median": 6.3096,
+     "min": 6.3096,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "32608144",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "amitriptyline",
+     "provenance": "verified",
+     "quote": "amitriptyline at α1A-adrenoceptor (ADRA1A, Human): Antagonist / Antagonist, pKi 8.2 [PMID 32608144]",
+     "species": "Human"
     }
    },
    "alpha1a": {
@@ -391,6 +429,25 @@
      "page": "amitriptyline",
      "provenance": "verified",
      "quote": "amitriptyline at M5 receptor (CHRM5, Human): Antagonist / Antagonist, pKi 7.8 [PMID 8100134]",
+     "species": "Human"
+    }
+   },
+   "muscarinic": {
+    "action": "antagonist",
+    "ki": {
+     "max": 7.2444,
+     "median": 7.2444,
+     "min": 7.2444,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8100134",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "amitriptyline",
+     "provenance": "verified",
+     "quote": "amitriptyline at M4 receptor (CHRM4, Human): Antagonist / Antagonist, pKi 8.14 [PMID 8100134]",
      "species": "Human"
     }
    },
@@ -855,6 +912,25 @@
      "quote": "apomorphine at D5 receptor (DRD5, Human): Agonist / Partial agonist, pKi 6.4-7.8 [PMID 12388666]",
      "species": "Human"
     }
+   },
+   "dopamine": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 3.9811,
+     "median": 3.9811,
+     "min": 3.9811,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "apomorphine",
+     "provenance": "verified",
+     "quote": "apomorphine at D4 receptor (DRD4, Human): Agonist / Partial agonist, pKi 8.4 [PMID 12388666]",
+     "species": "Human"
+    }
    }
   },
   "aripiprazole": {
@@ -1029,6 +1105,25 @@
      "species": "Rat"
     }
    },
+   "dopamine": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 0.7943,
+     "median": 0.7943,
+     "min": 0.7943,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "23279866",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "aripiprazole",
+     "provenance": "verified",
+     "quote": "aripiprazole at D2 receptor (DRD2, Human): Agonist / Partial agonist, pKi 9.1 [PMID 23279866]",
+     "species": "Human"
+    }
+   },
    "h1": {
     "action": "antagonist",
     "ki": {
@@ -1146,6 +1241,25 @@
     }
    },
    "d2": {
+    "action": "antagonist",
+    "ki": {
+     "max": 1.2023,
+     "median": 1.2023,
+     "min": 1.2023,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "18308814",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "asenapine",
+     "provenance": "verified",
+     "quote": "asenapine at D2 receptor (DRD2, Human): Antagonist / Antagonist, pKi 8.92 [PMID 18308814]",
+     "species": "Human"
+    }
+   },
+   "dopamine": {
     "action": "antagonist",
     "ki": {
      "max": 1.2023,
@@ -1371,6 +1485,25 @@
      "quote": "atropine at M5 receptor (CHRM5, Human): Antagonist / Antagonist, pKi 8.3-9.3 [PMID 11303071]",
      "species": "Human"
     }
+   },
+   "muscarinic": {
+    "action": "antagonist",
+    "ki": {
+     "max": 3.1623,
+     "median": 1.6604,
+     "min": 0.1585,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "3443095",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "atropine",
+     "provenance": "verified",
+     "quote": "atropine at M3 receptor (CHRM3, Human): Antagonist / Antagonist, pKi 8.5-9.8 [PMID 3443095]",
+     "species": "Human"
+    }
    }
   },
   "benperidol": {
@@ -1409,6 +1542,25 @@
      "page": "benperidol",
      "provenance": "verified",
      "quote": "benperidol at D4 receptor (DRD4, Human): Antagonist / Antagonist, pKi 10.18 [PMID 9577836]",
+     "species": "Human"
+    }
+   },
+   "dopamine": {
+    "action": "antagonist",
+    "ki": {
+     "max": 0.0269,
+     "median": 0.0269,
+     "min": 0.0269,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9577836",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "benperidol",
+     "provenance": "verified",
+     "quote": "benperidol at D2 receptor (DRD2, Human): Antagonist / Antagonist, pKi 10.57 [PMID 9577836]",
      "species": "Human"
     }
    }
@@ -1481,6 +1633,25 @@
      "page": "benzatropine",
      "provenance": "verified",
      "quote": "benzatropine at M2 receptor (Chrm2, Rat): Antagonist / Antagonist, pKi 8.59 [PMID 7562926]",
+     "species": "Rat"
+    }
+   },
+   "muscarinic": {
+    "action": "antagonist",
+    "ki": {
+     "max": 0.955,
+     "median": 0.955,
+     "min": 0.955,
+     "n_human": 0,
+     "n_nonhuman": 1,
+     "param": "pKi"
+    },
+    "pmid": "7562926",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "benzatropine",
+     "provenance": "verified",
+     "quote": "benzatropine at M1 receptor (Chrm1, Rat): Antagonist / Antagonist, pKi 9.02 [PMID 7562926]",
      "species": "Rat"
     }
    }
@@ -1580,6 +1751,25 @@
      "quote": "biperiden at M5 receptor (CHRM5, Human): Antagonist / Antagonist, pKd 8.2 [PMID 1346637]",
      "species": "Human"
     }
+   },
+   "muscarinic": {
+    "action": "antagonist",
+    "ki": {
+     "max": 0.4786,
+     "median": 0.4786,
+     "min": 0.4786,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKd"
+    },
+    "pmid": "1346637",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "biperiden",
+     "provenance": "verified",
+     "quote": "biperiden at M1 receptor (CHRM1, Human): Antagonist / Antagonist, pKd 9.32 [PMID 1346637]",
+     "species": "Human"
+    }
    }
   },
   "blonanserin": {
@@ -1603,6 +1793,25 @@
     }
    },
    "d2": {
+    "action": "antagonist",
+    "ki": {
+     "max": 0.1413,
+     "median": 0.1413,
+     "min": 0.1413,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "15686911",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "blonanserin",
+     "provenance": "verified",
+     "quote": "blonanserin at D2 receptor (DRD2, Human): Antagonist / Antagonist, pKi 9.85 [PMID 15686911]",
+     "species": "Human"
+    }
+   },
+   "dopamine": {
     "action": "antagonist",
     "ki": {
      "max": 0.1413,
@@ -1645,6 +1854,25 @@
   },
   "brexpiprazole": {
    "d2": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 0.302,
+     "median": 0.302,
+     "min": 0.302,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "24947465",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "brexpiprazole",
+     "provenance": "verified",
+     "quote": "brexpiprazole at D2 receptor (DRD2, Human): Agonist / Partial agonist, pKi 9.52 [PMID 24947465]",
+     "species": "Human"
+    }
+   },
+   "dopamine": {
     "action": "partial_agonist",
     "ki": {
      "max": 0.302,
@@ -2019,6 +2247,25 @@
      "quote": "bromocriptine at D5 receptor (DRD5, Human): Agonist / Full agonist, pKi 6.3 [PMID 12388666]",
      "species": "Human"
     }
+   },
+   "dopamine": {
+    "action": "agonist",
+    "ki": {
+     "max": 50.1187,
+     "median": 27.5653,
+     "min": 5.0119,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "bromocriptine",
+     "provenance": "verified",
+     "quote": "bromocriptine at D2 receptor (DRD2, Human): Agonist / Full agonist, pKi 7.3-8.3 [PMID 12388666]",
+     "species": "Human"
+    }
    }
   },
   "bumetanide": {
@@ -2261,6 +2508,25 @@
      "species": "Human"
     }
    },
+   "alpha1": {
+    "action": "antagonist",
+    "ki": {
+     "max": 316.2278,
+     "median": 316.2278,
+     "min": 316.2278,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "cabergoline",
+     "provenance": "verified",
+     "quote": "cabergoline at α1A-adrenoceptor (ADRA1A, Human): Antagonist / Antagonist, pKi 6.5 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
    "alpha1a": {
     "action": "antagonist",
     "ki": {
@@ -2469,6 +2735,25 @@
      "quote": "cabergoline at D5 receptor (DRD5, Human): Agonist / Full agonist, pKi 7.7 [PMID 12388666]",
      "species": "Human"
     }
+   },
+   "dopamine": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 0.7943,
+     "median": 0.7943,
+     "min": 0.7943,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "cabergoline",
+     "provenance": "verified",
+     "quote": "cabergoline at D3 receptor (DRD3, Human): Agonist / Partial agonist, pKi 9.1 [PMID 12388666]",
+     "species": "Human"
+    }
    }
   },
   "caffeine": {
@@ -2563,6 +2848,25 @@
     }
    },
    "d3": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 0.0891,
+     "median": 0.0891,
+     "min": 0.0891,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "20093397",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "cariprazine",
+     "provenance": "verified",
+     "quote": "cariprazine at D3 receptor (DRD3, Human): Agonist / Partial agonist, pKi 10.05 [PMID 20093397]",
+     "species": "Human"
+    }
+   },
+   "dopamine": {
     "action": "partial_agonist",
     "ki": {
      "max": 0.0891,
@@ -2868,6 +3172,25 @@
      "species": "Human"
     }
    },
+   "dopamine": {
+    "action": "antagonist",
+    "ki": {
+     "max": 15.8489,
+     "median": 15.8489,
+     "min": 15.8489,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8102973",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "chlorpromazine",
+     "provenance": "verified",
+     "quote": "chlorpromazine at D4 receptor (DRD4, Human): Antagonist / Antagonist, pKi 7.8 [PMID 8102973]",
+     "species": "Human"
+    }
+   },
    "h1": {
     "action": "antagonist",
     "ki": {
@@ -2927,6 +3250,25 @@
      "species": "Human"
     }
    },
+   "dopamine": {
+    "action": "antagonist",
+    "ki": {
+     "max": 2.9512,
+     "median": 2.9512,
+     "min": 2.9512,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "19091563",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "chlorprothixene",
+     "provenance": "verified",
+     "quote": "chlorprothixene at D2 receptor (DRD2, Human): Antagonist / Antagonist, pKi 8.53 [PMID 19091563]",
+     "species": "Human"
+    }
+   },
    "h1": {
     "action": "antagonist",
     "ki": {
@@ -2980,6 +3322,25 @@
    }
   },
   "clomipramine": {
+   "alpha1": {
+    "action": "antagonist",
+    "ki": {
+     "max": 7.9433,
+     "median": 7.9433,
+     "min": 7.9433,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "32608144",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "clomipramine",
+     "provenance": "verified",
+     "quote": "clomipramine at α1A-adrenoceptor (ADRA1A, Human): Antagonist / Antagonist, pKi 8.1 [PMID 32608144]",
+     "species": "Human"
+    }
+   },
    "alpha1a": {
     "action": "antagonist",
     "ki": {
@@ -3079,6 +3440,25 @@
    }
   },
   "clonidine": {
+   "alpha1": {
+    "action": "agonist",
+    "ki": {
+     "max": 2511.887,
+     "median": 2511.887,
+     "min": 2511.887,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "34355529",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "clonidine",
+     "provenance": "verified",
+     "quote": "clonidine at α1D-adrenoceptor (ADRA1D, Human): Agonist / Agonist, pKi 5.6 [PMID 34355529]",
+     "species": "Human"
+    }
+   },
    "alpha1d": {
     "action": "agonist",
     "ki": {
@@ -3417,6 +3797,25 @@
      "species": "Human"
     }
    },
+   "alpha1": {
+    "action": "antagonist",
+    "ki": {
+     "max": 7.9433,
+     "median": 6.4776,
+     "min": 5.0119,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "11459121",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "clozapine",
+     "provenance": "verified",
+     "quote": "clozapine at α1A-adrenoceptor (ADRA1A, Human): Antagonist / Antagonist, pKi 8.1-8.3 [PMID 11459121]",
+     "species": "Human"
+    }
+   },
    "alpha1a": {
     "action": "antagonist",
     "ki": {
@@ -3569,6 +3968,25 @@
      "species": "Human"
     }
    },
+   "dopamine": {
+    "action": "antagonist",
+    "ki": {
+     "max": 31.6228,
+     "median": 31.6228,
+     "min": 31.6228,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8102973",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "clozapine",
+     "provenance": "verified",
+     "quote": "clozapine at D4 receptor (DRD4, Human): Antagonist / Antagonist, pKi 7.5 [PMID 8102973]",
+     "species": "Human"
+    }
+   },
    "h1": {
     "action": "antagonist",
     "ki": {
@@ -3627,6 +4045,17 @@
     }
    },
    "m1": {
+    "action": "pam",
+    "pmid": "14595031",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "clozapine",
+     "provenance": "verified",
+     "quote": "clozapine at M1 receptor (CHRM1, Human): Allosteric modulator / Positive, pIC50 7.9 [PMID 14595031]",
+     "species": "Human"
+    }
+   },
+   "muscarinic": {
     "action": "pam",
     "pmid": "14595031",
     "source": {
@@ -3805,6 +4234,25 @@
      "page": "cyproheptadine",
      "provenance": "verified",
      "quote": "cyproheptadine at 5-HT7 receptor (HTR7, Human): Antagonist / Antagonist, pKi 6.9 [PMID 8226867]",
+     "species": "Human"
+    }
+   },
+   "alpha1": {
+    "action": "antagonist",
+    "ki": {
+     "max": 25.1189,
+     "median": 25.1189,
+     "min": 25.1189,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "11459121",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "cyproheptadine",
+     "provenance": "verified",
+     "quote": "cyproheptadine at α1B-adrenoceptor (ADRA1B, Human): Antagonist / Antagonist, pKi 7.6 [PMID 11459121]",
      "species": "Human"
     }
    },
@@ -4235,6 +4683,25 @@
      "quote": "domperidone at D3 receptor (DRD3, Human): Antagonist / Antagonist, pKi 7.1-7.6 [PMID 8301582]",
      "species": "Human"
     }
+   },
+   "dopamine": {
+    "action": "antagonist",
+    "ki": {
+     "max": 12.5893,
+     "median": 8.2852,
+     "min": 3.9811,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8301582",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "domperidone",
+     "provenance": "verified",
+     "quote": "domperidone at D2 receptor (DRD2, Human): Antagonist / Antagonist, pKi 7.9-8.4 [PMID 8301582]",
+     "species": "Human"
+    }
    }
   },
   "donepezil": {
@@ -4362,6 +4829,25 @@
      "page": "dosulepin",
      "provenance": "verified",
      "quote": "dosulepin at M5 receptor (CHRM5, Human): Antagonist / Antagonist, pKi 7.04 [PMID 8100134]",
+     "species": "Human"
+    }
+   },
+   "muscarinic": {
+    "action": "antagonist",
+    "ki": {
+     "max": 18.197,
+     "median": 18.197,
+     "min": 18.197,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8100134",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "dosulepin",
+     "provenance": "verified",
+     "quote": "dosulepin at M1 receptor (CHRM1, Human): Antagonist / Antagonist, pKi 7.74 [PMID 8100134]",
      "species": "Human"
     }
    },
@@ -4764,6 +5250,25 @@
      "quote": "flunarizine at D2 receptor (Drd2, Rat): Antagonist / Antagonist, pKi 6.95-8.4 [PMID 7503767]",
      "species": "Rat"
     }
+   },
+   "dopamine": {
+    "action": "antagonist",
+    "ki": {
+     "max": 112.2019,
+     "median": 58.0915,
+     "min": 3.9811,
+     "n_human": 0,
+     "n_nonhuman": 1,
+     "param": "pKi"
+    },
+    "pmid": "7503767",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "flunarizine",
+     "provenance": "verified",
+     "quote": "flunarizine at D2 receptor (Drd2, Rat): Antagonist / Antagonist, pKi 6.95-8.4 [PMID 7503767]",
+     "species": "Rat"
+    }
    }
   },
   "flunitrazepam": {
@@ -4960,6 +5465,25 @@
      "quote": "flupentixol at D5 receptor (DRD5, Human): Antagonist / Antagonist, pKi 8.1 [PMID 1826762]",
      "species": "Human"
     }
+   },
+   "dopamine": {
+    "action": "antagonist",
+    "ki": {
+     "max": 1.0965,
+     "median": 1.0965,
+     "min": 1.0965,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8301582",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "flupentixol",
+     "provenance": "verified",
+     "quote": "flupentixol at D3 receptor (DRD3, Human): Antagonist / Antagonist, pKi 8.96 [PMID 8301582]",
+     "species": "Human"
+    }
    }
   },
   "fluphenazine": {
@@ -5074,6 +5598,25 @@
      "page": "fluphenazine",
      "provenance": "verified",
      "quote": "fluphenazine at D5 receptor (DRD5, Human): Antagonist / Antagonist, pKi 7.9 [PMID 1826762]",
+     "species": "Human"
+    }
+   },
+   "dopamine": {
+    "action": "antagonist",
+    "ki": {
+     "max": 1.4454,
+     "median": 1.4454,
+     "min": 1.4454,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "17826096",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "fluphenazine",
+     "provenance": "verified",
+     "quote": "fluphenazine at D2 receptor (DRD2, Human): Antagonist / Antagonist, pKi 8.84 [PMID 17826096]",
      "species": "Human"
     }
    },
@@ -5579,6 +6122,25 @@
      "species": "Human"
     }
    },
+   "dopamine": {
+    "action": "antagonist",
+    "ki": {
+     "max": 1.9953,
+     "median": 1.7901,
+     "min": 1.5849,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8102973",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "haloperidol",
+     "provenance": "verified",
+     "quote": "haloperidol at D4 receptor (DRD4, Human): Antagonist / Antagonist, pKi 8.7-8.8 [PMID 8102973]",
+     "species": "Human"
+    }
+   },
    "h1": {
     "action": "antagonist",
     "ki": {
@@ -5760,10 +6322,40 @@
      "quote": "iloperidone at D2 receptor (Drd2, Rat): Antagonist / Antagonist, pIC50 6.96 [PMID 7707315]",
      "species": "Rat"
     }
+   },
+   "dopamine": {
+    "action": "antagonist",
+    "pmid": "7707315",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "iloperidone",
+     "provenance": "verified",
+     "quote": "iloperidone at D2 receptor (Drd2, Rat): Antagonist / Antagonist, pIC50 6.96 [PMID 7707315]",
+     "species": "Rat"
+    }
    }
   },
   "imipramine": {
    "m2": {
+    "action": "antagonist",
+    "ki": {
+     "max": 125.8925,
+     "median": 125.8925,
+     "min": 125.8925,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9454790",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "imipramine",
+     "provenance": "verified",
+     "quote": "imipramine at M2 receptor (CHRM2, Human): Antagonist / Antagonist, pKi 6.9 [PMID 9454790]",
+     "species": "Human"
+    }
+   },
+   "muscarinic": {
     "action": "antagonist",
     "ki": {
      "max": 125.8925,
@@ -5984,6 +6576,25 @@
      "species": "Human"
     }
    },
+   "alpha1": {
+    "action": "antagonist",
+    "ki": {
+     "max": 6.3096,
+     "median": 6.3096,
+     "min": 6.3096,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "11459121",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "ketanserin",
+     "provenance": "verified",
+     "quote": "ketanserin at α1A-adrenoceptor (ADRA1A, Human): Antagonist / Antagonist, pKi 8.2 [PMID 11459121]",
+     "species": "Human"
+    }
+   },
    "alpha1a": {
     "action": "antagonist",
     "ki": {
@@ -6076,6 +6687,25 @@
      "page": "ketanserin",
      "provenance": "verified",
      "quote": "ketanserin at D5 receptor (DRD5, Human): Antagonist / Antagonist, pKi 5.6 [PMID 1826762]",
+     "species": "Human"
+    }
+   },
+   "dopamine": {
+    "action": "antagonist",
+    "ki": {
+     "max": 199.5262,
+     "median": 199.5262,
+     "min": 199.5262,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "1826762",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "ketanserin",
+     "provenance": "verified",
+     "quote": "ketanserin at D1 receptor (DRD1, Human): Antagonist / Antagonist, pKi 6.7 [PMID 1826762]",
      "species": "Human"
     }
    },
@@ -6340,6 +6970,17 @@
    }
   },
   "lorazepam": {
+   "alpha1": {
+    "action": "pam",
+    "pmid": "10565838",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "lorazepam",
+     "provenance": "verified",
+     "quote": "lorazepam at α1B-adrenoceptor (Adra1b, Rat): Allosteric modulator / Positive, pKi 3.8 [PMID 10565838]",
+     "species": "Rat"
+    }
+   },
    "alpha1b": {
     "action": "pam",
     "pmid": "10565838",
@@ -6486,6 +7127,25 @@
      "species": "Human"
     }
    },
+   "dopamine": {
+    "action": "antagonist",
+    "ki": {
+     "max": 12.0226,
+     "median": 8.5173,
+     "min": 5.0119,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12629531",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "loxapine",
+     "provenance": "verified",
+     "quote": "loxapine at D2 receptor (DRD2, Human): Antagonist / Antagonist, pKi 7.92-8.3 [PMID 12629531]",
+     "species": "Human"
+    }
+   },
    "h1": {
     "action": "antagonist",
     "ki": {
@@ -6624,6 +7284,25 @@
     }
    },
    "d2": {
+    "action": "antagonist",
+    "ki": {
+     "max": 32.3594,
+     "median": 32.3594,
+     "min": 32.3594,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "25120104",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "lumateperone",
+     "provenance": "verified",
+     "quote": "lumateperone at D2 receptor (DRD2, Human): Antagonist / Antagonist, pKi 7.49 [PMID 25120104]",
+     "species": "Human"
+    }
+   },
+   "dopamine": {
     "action": "antagonist",
     "ki": {
      "max": 32.3594,
@@ -6797,6 +7476,25 @@
     }
    },
    "d2": {
+    "action": "antagonist",
+    "ki": {
+     "max": 1.6982,
+     "median": 1.6982,
+     "min": 1.6982,
+     "n_human": 0,
+     "n_nonhuman": 1,
+     "param": "pKi"
+    },
+    "pmid": "20404009",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "lurasidone",
+     "provenance": "verified",
+     "quote": "lurasidone at D2 receptor (Drd2, Rat): Antagonist / Antagonist, pKi 8.77 [PMID 20404009]",
+     "species": "Rat"
+    }
+   },
+   "dopamine": {
     "action": "antagonist",
     "ki": {
      "max": 1.6982,
@@ -7044,6 +7742,25 @@
      "quote": "mesoridazine at D3 receptor (DRD3, Human): Antagonist / Antagonist, pKi 7.64 [PMID 15357957]",
      "species": "Human"
     }
+   },
+   "dopamine": {
+    "action": "antagonist",
+    "ki": {
+     "max": 2.1878,
+     "median": 2.1878,
+     "min": 2.1878,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "15357957",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "mesoridazine",
+     "provenance": "verified",
+     "quote": "mesoridazine at D2 receptor (DRD2, Human): Antagonist / Antagonist, pKi 8.66 [PMID 15357957]",
+     "species": "Human"
+    }
    }
   },
   "methadone": {
@@ -7180,6 +7897,25 @@
      "quote": "metoclopramide at D2 receptor (Drd2, Mouse): Antagonist / Antagonist, pKi 7.54 [PMID 9808703]",
      "species": "Mouse"
     }
+   },
+   "dopamine": {
+    "action": "antagonist",
+    "ki": {
+     "max": 28.8403,
+     "median": 28.8403,
+     "min": 28.8403,
+     "n_human": 0,
+     "n_nonhuman": 1,
+     "param": "pKi"
+    },
+    "pmid": "9808703",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "metoclopramide",
+     "provenance": "verified",
+     "quote": "metoclopramide at D2 receptor (Drd2, Mouse): Antagonist / Antagonist, pKi 7.54 [PMID 9808703]",
+     "species": "Mouse"
+    }
    }
   },
   "mianserin": {
@@ -7297,6 +8033,25 @@
      "species": "Human"
     }
    },
+   "alpha1": {
+    "action": "antagonist",
+    "ki": {
+     "max": 25.1189,
+     "median": 25.1189,
+     "min": 25.1189,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "11459121",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "mianserin",
+     "provenance": "verified",
+     "quote": "mianserin at α1A-adrenoceptor (ADRA1A, Human): Antagonist / Antagonist, pKi 7.6 [PMID 11459121]",
+     "species": "Human"
+    }
+   },
    "alpha1a": {
     "action": "antagonist",
     "ki": {
@@ -7375,6 +8130,17 @@
    }
   },
   "midazolam": {
+   "alpha1": {
+    "action": "pam",
+    "pmid": "10565838",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "midazolam",
+     "provenance": "verified",
+     "quote": "midazolam at α1B-adrenoceptor (Adra1b, Rat): Allosteric modulator / Positive, pKi 3.7 [PMID 10565838]",
+     "species": "Rat"
+    }
+   },
    "alpha1b": {
     "action": "pam",
     "pmid": "10565838",
@@ -7985,6 +8751,25 @@
    }
   },
   "nortriptyline": {
+   "alpha1": {
+    "action": "antagonist",
+    "ki": {
+     "max": 6.3096,
+     "median": 6.3096,
+     "min": 6.3096,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "32608144",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "nortriptyline",
+     "provenance": "verified",
+     "quote": "nortriptyline at α1A-adrenoceptor (ADRA1A, Human): Antagonist / Antagonist, pKi 8.2 [PMID 32608144]",
+     "species": "Human"
+    }
+   },
    "alpha1a": {
     "action": "antagonist",
     "ki": {
@@ -8215,6 +9000,17 @@
      "species": "Human"
     }
    },
+   "alpha1": {
+    "action": "antagonist",
+    "pmid": "18542932",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "olanzapine",
+     "provenance": "verified",
+     "quote": "olanzapine at α1A-adrenoceptor (Adra1a, Rat): Antagonist / Antagonist, pA2 7.4 [PMID 18542932]",
+     "species": "Rat"
+    }
+   },
    "alpha1a": {
     "action": "antagonist",
     "pmid": "18542932",
@@ -8238,6 +9034,25 @@
     }
    },
    "d2": {
+    "action": "antagonist",
+    "ki": {
+     "max": 2.0893,
+     "median": 2.0893,
+     "min": 2.0893,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9430133",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "olanzapine",
+     "provenance": "verified",
+     "quote": "olanzapine at D2 receptor (DRD2, Human): Antagonist / Antagonist, pKi 8.68 [PMID 9430133]",
+     "species": "Human"
+    }
+   },
+   "dopamine": {
     "action": "antagonist",
     "ki": {
      "max": 2.0893,
@@ -8331,6 +9146,46 @@
     }
    }
   },
+  "periciazine": {
+   "d1": {
+    "action": "antagonist",
+    "ki": {
+     "max": 10.0,
+     "median": 10.0,
+     "min": 10.0,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "7918347",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "periciazine",
+     "provenance": "verified",
+     "quote": "periciazine at D1 receptor (DRD1, Human): Antagonist / Antagonist, pKi 8 [PMID 7918347]",
+     "species": "Human"
+    }
+   },
+   "dopamine": {
+    "action": "antagonist",
+    "ki": {
+     "max": 10.0,
+     "median": 10.0,
+     "min": 10.0,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "7918347",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "periciazine",
+     "provenance": "verified",
+     "quote": "periciazine at D1 receptor (DRD1, Human): Antagonist / Antagonist, pKi 8 [PMID 7918347]",
+     "species": "Human"
+    }
+   }
+  },
   "perospirone": {
    "5ht2a": {
     "action": "antagonist",
@@ -8382,6 +9237,25 @@
     }
    },
    "d4": {
+    "action": "antagonist",
+    "ki": {
+     "max": 0.0891,
+     "median": 0.0891,
+     "min": 0.0891,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9577836",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "perospirone",
+     "provenance": "verified",
+     "quote": "perospirone at D4 receptor (DRD4, Human): Antagonist / Antagonist, pKi 10.05 [PMID 9577836]",
+     "species": "Human"
+    }
+   },
+   "dopamine": {
     "action": "antagonist",
     "ki": {
      "max": 0.0891,
@@ -8479,6 +9353,25 @@
     }
    },
    "d2": {
+    "action": "antagonist",
+    "ki": {
+     "max": 1.4125,
+     "median": 0.8348,
+     "min": 0.257,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12629531",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "perphenazine",
+     "provenance": "verified",
+     "quote": "perphenazine at D2 receptor (DRD2, Human): Antagonist / Antagonist, pKi 8.85-9.59 [PMID 12629531]",
+     "species": "Human"
+    }
+   },
+   "dopamine": {
     "action": "antagonist",
     "ki": {
      "max": 1.4125,
@@ -8806,6 +9699,25 @@
      "species": "Human"
     }
    },
+   "dopamine": {
+    "action": "antagonist",
+    "ki": {
+     "max": 100.0,
+     "median": 50.7924,
+     "min": 1.5849,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8301582",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "pimozide",
+     "provenance": "verified",
+     "quote": "pimozide at D2 receptor (DRD2, Human): Antagonist / Antagonist, pKi 7-8.8 [PMID 8301582]",
+     "species": "Human"
+    }
+   },
    "h1": {
     "action": "antagonist",
     "ki": {
@@ -8942,6 +9854,255 @@
      "quote": "pipotiazine at D2 receptor (DRD2, Human): Antagonist / Antagonist, pKi 9.7 [PMID 1586393]",
      "species": "Human"
     }
+   },
+   "dopamine": {
+    "action": "antagonist",
+    "ki": {
+     "max": 0.1995,
+     "median": 0.1995,
+     "min": 0.1995,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "1586393",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "pipotiazine",
+     "provenance": "verified",
+     "quote": "pipotiazine at D2 receptor (DRD2, Human): Antagonist / Antagonist, pKi 9.7 [PMID 1586393]",
+     "species": "Human"
+    }
+   }
+  },
+  "piribedil": {
+   "5ht1a": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 398.1072,
+     "median": 398.1072,
+     "min": 398.1072,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "piribedil",
+     "provenance": "verified",
+     "quote": "piribedil at 5-HT1A receptor (HTR1A, Human): Agonist / Partial agonist, pKi 6.4 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "5ht2b": {
+    "action": "antagonist",
+    "ki": {
+     "max": 1258.9254,
+     "median": 1258.9254,
+     "min": 1258.9254,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "piribedil",
+     "provenance": "verified",
+     "quote": "piribedil at 5-HT2B receptor (HTR2B, Human): Antagonist / Antagonist, pKi 5.9 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "alpha1": {
+    "action": "antagonist",
+    "ki": {
+     "max": 794.3282,
+     "median": 794.3282,
+     "min": 794.3282,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "piribedil",
+     "provenance": "verified",
+     "quote": "piribedil at α1A-adrenoceptor (ADRA1A, Human): Antagonist / Antagonist, pKi 6.1 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "alpha1a": {
+    "action": "antagonist",
+    "ki": {
+     "max": 794.3282,
+     "median": 794.3282,
+     "min": 794.3282,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "piribedil",
+     "provenance": "verified",
+     "quote": "piribedil at α1A-adrenoceptor (ADRA1A, Human): Antagonist / Antagonist, pKi 6.1 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "alpha2": {
+    "action": "antagonist",
+    "ki": {
+     "max": 63.0957,
+     "median": 63.0957,
+     "min": 63.0957,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "piribedil",
+     "provenance": "verified",
+     "quote": "piribedil at α2C-adrenoceptor (ADRA2C, Human): Antagonist / Antagonist, pKi 7.2 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "alpha2a": {
+    "action": "antagonist",
+    "ki": {
+     "max": 79.4328,
+     "median": 79.4328,
+     "min": 79.4328,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "piribedil",
+     "provenance": "verified",
+     "quote": "piribedil at α2A-adrenoceptor (ADRA2A, Human): Antagonist / Antagonist, pKi 7.1 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "alpha2c": {
+    "action": "antagonist",
+    "ki": {
+     "max": 63.0957,
+     "median": 63.0957,
+     "min": 63.0957,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "piribedil",
+     "provenance": "verified",
+     "quote": "piribedil at α2C-adrenoceptor (ADRA2C, Human): Antagonist / Antagonist, pKi 7.2 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "alpha2d": {
+    "action": "antagonist",
+    "ki": {
+     "max": 79.4328,
+     "median": 79.4328,
+     "min": 79.4328,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "piribedil",
+     "provenance": "verified",
+     "quote": "piribedil at α2A-adrenoceptor (ADRA2A, Human): Antagonist / Antagonist, pKi 7.1 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "d2": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 158.4893,
+     "median": 142.1909,
+     "min": 125.8925,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "piribedil",
+     "provenance": "verified",
+     "quote": "piribedil at D2 receptor (DRD2, Human): Agonist / Partial agonist, pKi 6.8-6.9 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "d3": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 251.1886,
+     "median": 251.1886,
+     "min": 251.1886,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "piribedil",
+     "provenance": "verified",
+     "quote": "piribedil at D3 receptor (DRD3, Human): Agonist / Partial agonist, pKi 6.6 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "d4": {
+    "action": "antagonist",
+    "ki": {
+     "max": 316.2278,
+     "median": 316.2278,
+     "min": 316.2278,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "piribedil",
+     "provenance": "verified",
+     "quote": "piribedil at D4 receptor (DRD4, Human): Antagonist / Antagonist, pKi 6.5 [PMID 12388666]",
+     "species": "Human"
+    }
+   },
+   "dopamine": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 158.4893,
+     "median": 142.1909,
+     "min": 125.8925,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12388666",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "piribedil",
+     "provenance": "verified",
+     "quote": "piribedil at D2 receptor (DRD2, Human): Agonist / Partial agonist, pKi 6.8-6.9 [PMID 12388666]",
+     "species": "Human"
+    }
    }
   },
   "pitolisant": {
@@ -9065,9 +10226,47 @@
      "quote": "pramipexole at D3 receptor (DRD3, Human): Agonist / Full agonist, pKi 8.4-8.7 [PMID 7756621]",
      "species": "Human"
     }
+   },
+   "dopamine": {
+    "action": "agonist",
+    "ki": {
+     "max": 3.9811,
+     "median": 2.9882,
+     "min": 1.9953,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "7756621",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "pramipexole",
+     "provenance": "verified",
+     "quote": "pramipexole at D3 receptor (DRD3, Human): Agonist / Full agonist, pKi 8.4-8.7 [PMID 7756621]",
+     "species": "Human"
+    }
    }
   },
   "prazosin": {
+   "alpha1": {
+    "action": "inverse_agonist",
+    "ki": {
+     "max": 0.7943,
+     "median": 0.4287,
+     "min": 0.0631,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9249248",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "prazosin",
+     "provenance": "verified",
+     "quote": "prazosin at α1D-adrenoceptor (ADRA1D, Human): Antagonist / Inverse agonist, pKi 9.1-10.2 [PMID 9249248]",
+     "species": "Human"
+    }
+   },
    "alpha1a": {
     "action": "inverse_agonist",
     "ki": {
@@ -9297,6 +10496,25 @@
      "quote": "prochlorperazine at D4 receptor (DRD4, Human): Antagonist / Antagonist, pKi 6.09",
      "species": "Human"
     }
+   },
+   "dopamine": {
+    "action": "antagonist",
+    "ki": {
+     "max": 3.6308,
+     "median": 3.6308,
+     "min": 3.6308,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": null,
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "prochlorperazine",
+     "provenance": "verified",
+     "quote": "prochlorperazine at D2 receptor (DRD2, Human): Antagonist / Antagonist, pKi 8.44",
+     "species": "Human"
+    }
    }
   },
   "promethazine": {
@@ -9510,6 +10728,25 @@
     }
    },
    "d2": {
+    "action": "antagonist",
+    "ki": {
+     "max": 63.0958,
+     "median": 63.0958,
+     "min": 63.0958,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9430133",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "quetiapine",
+     "provenance": "verified",
+     "quote": "quetiapine at D2 receptor (DRD2, Human): Antagonist / Antagonist, pKi 7.2 [PMID 9430133]",
+     "species": "Human"
+    }
+   },
+   "dopamine": {
     "action": "antagonist",
     "ki": {
      "max": 63.0958,
@@ -9855,6 +11092,25 @@
      "species": "Human"
     }
    },
+   "alpha1": {
+    "action": "antagonist",
+    "ki": {
+     "max": 3.9811,
+     "median": 2.9882,
+     "min": 1.9953,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "11459121",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "risperidone",
+     "provenance": "verified",
+     "quote": "risperidone at α1A-adrenoceptor (ADRA1A, Human): Antagonist / Antagonist, pKi 8.4-8.7 [PMID 11459121]",
+     "species": "Human"
+    }
+   },
    "alpha1a": {
     "action": "antagonist",
     "ki": {
@@ -10004,6 +11260,25 @@
      "page": "risperidone",
      "provenance": "verified",
      "quote": "risperidone at D3 receptor (DRD3, Human): Antagonist / Antagonist, pKi 7 [PMID 7473180]",
+     "species": "Human"
+    }
+   },
+   "dopamine": {
+    "action": "antagonist",
+    "ki": {
+     "max": 0.4365,
+     "median": 0.4365,
+     "min": 0.4365,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9430133",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "risperidone",
+     "provenance": "verified",
+     "quote": "risperidone at D2 receptor (DRD2, Human): Antagonist / Antagonist, pKi 9.36 [PMID 9430133]",
      "species": "Human"
     }
    },
@@ -10186,6 +11461,25 @@
      "quote": "ropinirole at D3 receptor (DRD3, Human): Agonist / Agonist, pKi 7.72 [PMID 9057850]",
      "species": "Human"
     }
+   },
+   "dopamine": {
+    "action": "agonist",
+    "ki": {
+     "max": 7.2444,
+     "median": 7.2444,
+     "min": 7.2444,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9057850",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "ropinirole",
+     "provenance": "verified",
+     "quote": "ropinirole at D2 receptor (DRD2, Human): Agonist / Agonist, pKi 8.14 [PMID 9057850]",
+     "species": "Human"
+    }
    }
   },
   "rotigotine": {
@@ -10281,6 +11575,25 @@
      "page": "rotigotine",
      "provenance": "verified",
      "quote": "rotigotine at D5 receptor (DRD5, Human): Agonist / Full agonist, pKi 6 [PMID 1826762]",
+     "species": "Human"
+    }
+   },
+   "dopamine": {
+    "action": "agonist",
+    "ki": {
+     "max": 0.0603,
+     "median": 0.0603,
+     "min": 0.0603,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12086487",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "rotigotine",
+     "provenance": "verified",
+     "quote": "rotigotine at D2 receptor (DRD2, Human): Agonist / Agonist, pKi 10.22 [PMID 12086487]",
      "species": "Human"
     }
    }
@@ -10420,6 +11733,25 @@
      "page": "scopolamine",
      "provenance": "verified",
      "quote": "scopolamine at M5 receptor (CHRM5, Human): Antagonist / Antagonist, pKi 8.7 [PMID 1346637]",
+     "species": "Human"
+    }
+   },
+   "muscarinic": {
+    "action": "antagonist",
+    "ki": {
+     "max": 0.3981,
+     "median": 0.3981,
+     "min": 0.3981,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12049493",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "scopolamine",
+     "provenance": "verified",
+     "quote": "scopolamine at M3 receptor (CHRM3, Human): Antagonist / Antagonist, pKi 9.4 [PMID 12049493]",
      "species": "Human"
     }
    }
@@ -10647,6 +11979,25 @@
      "species": "Human"
     }
    },
+   "dopamine": {
+    "action": "antagonist",
+    "ki": {
+     "max": 9.1201,
+     "median": 5.1612,
+     "min": 1.2023,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12629531",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "sertindole",
+     "provenance": "verified",
+     "quote": "sertindole at D2 receptor (DRD2, Human): Antagonist / Antagonist, pKi 8.04-8.92 [PMID 12629531]",
+     "species": "Human"
+    }
+   },
    "h1": {
     "action": "antagonist",
     "ki": {
@@ -10828,6 +12179,25 @@
      "page": "sulpiride",
      "provenance": "verified",
      "quote": "sulpiride at D3 receptor (DRD3, Human): Antagonist / Antagonist, pKi 6.85-7.85 [PMID 7576010]",
+     "species": "Human"
+    }
+   },
+   "dopamine": {
+    "action": "antagonist",
+    "ki": {
+     "max": 60.256,
+     "median": 36.1393,
+     "min": 12.0226,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "7576010",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "sulpiride",
+     "provenance": "verified",
+     "quote": "sulpiride at D2 receptor (DRD2, Human): Antagonist / Antagonist, pKi 7.22-7.92 [PMID 7576010]",
      "species": "Human"
     }
    }
@@ -11273,6 +12643,25 @@
      "species": "Human"
     }
    },
+   "dopamine": {
+    "action": "antagonist",
+    "ki": {
+     "max": 100.0,
+     "median": 100.0,
+     "min": 100.0,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "1826762",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "thioridazine",
+     "provenance": "verified",
+     "quote": "thioridazine at D1 receptor (DRD1, Human): Antagonist / Antagonist, pKi 7 [PMID 1826762]",
+     "species": "Human"
+    }
+   },
    "h1": {
     "action": "antagonist",
     "ki": {
@@ -11685,6 +13074,25 @@
      "species": "Human"
     }
    },
+   "dopamine": {
+    "action": "antagonist",
+    "ki": {
+     "max": 1.2882,
+     "median": 1.1216,
+     "min": 0.955,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "12629531",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "trifluoperazine",
+     "provenance": "verified",
+     "quote": "trifluoperazine at D2 receptor (DRD2, Human): Antagonist / Antagonist, pKi 8.89-9.02 [PMID 12629531]",
+     "species": "Human"
+    }
+   },
    "h1": {
     "action": "antagonist",
     "ki": {
@@ -11707,6 +13115,25 @@
   },
   "trihexyphenidyl": {
    "m1": {
+    "action": "antagonist",
+    "ki": {
+     "max": 1.349,
+     "median": 1.349,
+     "min": 1.349,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": null,
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "trihexyphenidyl",
+     "provenance": "verified",
+     "quote": "trihexyphenidyl at M1 receptor (CHRM1, Human): Antagonist / Antagonist, pKi 8.87",
+     "species": "Human"
+    }
+   },
+   "muscarinic": {
     "action": "antagonist",
     "ki": {
      "max": 1.349,
@@ -11907,6 +13334,17 @@
     }
    },
    "d3": {
+    "action": "agonist",
+    "pmid": "15341484",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "vilazodone",
+     "provenance": "verified",
+     "quote": "vilazodone at D3 receptor (DRD3, Human): Agonist / Agonist, pIC50 7.15 [PMID 15341484]",
+     "species": "Human"
+    }
+   },
+   "dopamine": {
     "action": "agonist",
     "pmid": "15341484",
     "source": {
@@ -12352,6 +13790,25 @@
      "quote": "xanomeline at M5 receptor (CHRM5, Human): Agonist / Partial agonist, pKi 6.7-7.4 [PMID 9884068]",
      "species": "Human"
     }
+   },
+   "muscarinic": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 39.8107,
+     "median": 29.8817,
+     "min": 19.9526,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9884068",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "xanomeline",
+     "provenance": "verified",
+     "quote": "xanomeline at M4 receptor (CHRM4, Human): Agonist / Partial agonist, pKi 7.4-7.7 [PMID 9884068]",
+     "species": "Human"
+    }
    }
   },
   "yohimbine": {
@@ -12756,6 +14213,25 @@
      "species": "Human"
     }
    },
+   "dopamine": {
+    "action": "antagonist",
+    "ki": {
+     "max": 2.8184,
+     "median": 2.8184,
+     "min": 2.8184,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9430133",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "ziprasidone",
+     "provenance": "verified",
+     "quote": "ziprasidone at D2 receptor (DRD2, Human): Antagonist / Antagonist, pKi 8.55 [PMID 9430133]",
+     "species": "Human"
+    }
+   },
    "h1": {
     "action": "antagonist",
     "ki": {
@@ -13083,6 +14559,25 @@
      "species": "Human"
     }
    },
+   "dopamine": {
+    "action": "antagonist",
+    "ki": {
+     "max": 6.4565,
+     "median": 6.4565,
+     "min": 6.4565,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8935801",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "zotepine",
+     "provenance": "verified",
+     "quote": "zotepine at D3 receptor (DRD3, Human): Antagonist / Antagonist, pKi 8.19 [PMID 8935801]",
+     "species": "Human"
+    }
+   },
    "h1": {
     "action": "antagonist",
     "ki": {
@@ -13127,6 +14622,140 @@
   }
  },
  "metabolites": {
+  "Dextrorphan": {
+   "nmda": {
+    "action": "blocker",
+    "pmid": "17303642",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "dextrorphan",
+     "provenance": "verified",
+     "quote": "dextrorphan at GluN2C (GRIN2C, Human): Channel blocker / None, pIC50 6.94 [PMID 17303642]",
+     "species": "Human"
+    }
+   }
+  },
+  "Dopamine": {
+   "d1": {
+    "action": "agonist",
+    "pmid": "1826762",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "dopamine",
+     "provenance": "verified",
+     "quote": "dopamine at D1 receptor (DRD1, Human): Agonist / Full agonist, pKi 4.3-5.6 [PMID 1826762]",
+     "species": "Human"
+    }
+   },
+   "d2": {
+    "action": "agonist",
+    "pmid": "8301582",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "dopamine",
+     "provenance": "verified",
+     "quote": "dopamine at D2 receptor (DRD2, Human): Agonist / Full agonist, pKi 4.7-7.2 [PMID 8301582]",
+     "species": "Human"
+    }
+   },
+   "d3": {
+    "action": "agonist",
+    "ki": {
+     "max": 398.1071,
+     "median": 224.1129,
+     "min": 50.1187,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8301582",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "dopamine",
+     "provenance": "verified",
+     "quote": "dopamine at D3 receptor (DRD3, Human): Agonist / Full agonist, pKi 6.4-7.3 [PMID 8301582]",
+     "species": "Human"
+    }
+   },
+   "d4": {
+    "action": "agonist",
+    "ki": {
+     "max": 25.1189,
+     "median": 25.1189,
+     "min": 25.1189,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "1840645",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "dopamine",
+     "provenance": "verified",
+     "quote": "dopamine at D4 receptor (DRD4, Human): Agonist / Full agonist, pKi 7.6 [PMID 1840645]",
+     "species": "Human"
+    }
+   },
+   "d5": {
+    "action": "agonist",
+    "ki": {
+     "max": 251.1887,
+     "median": 251.1887,
+     "min": 251.1887,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "1826762",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "dopamine",
+     "provenance": "verified",
+     "quote": "dopamine at D5 receptor (DRD5, Human): Agonist / Full agonist, pKi 6.6 [PMID 1826762]",
+     "species": "Human"
+    }
+   },
+   "dopamine": {
+    "action": "agonist",
+    "ki": {
+     "max": 25.1189,
+     "median": 25.1189,
+     "min": 25.1189,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "1840645",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "dopamine",
+     "provenance": "verified",
+     "quote": "dopamine at D4 receptor (DRD4, Human): Agonist / Full agonist, pKi 7.6 [PMID 1840645]",
+     "species": "Human"
+    }
+   }
+  },
+  "Norfenfluramine": {
+   "5ht2b": {
+    "action": "agonist",
+    "ki": {
+     "max": 50.1187,
+     "median": 50.1187,
+     "min": 50.1187,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "11104741",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "norfenfluramine",
+     "provenance": "verified",
+     "quote": "norfenfluramine at 5-HT2B receptor (HTR2B, Human): Agonist / Full agonist, pKi 7.3 [PMID 11104741]",
+     "species": "Human"
+    }
+   }
+  },
   "Norfluoxetine": {
    "5ht2a": {
     "action": "antagonist",

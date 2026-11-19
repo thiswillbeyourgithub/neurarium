@@ -386,5 +386,85 @@
    "index": 1,
    "qid": "3f300b46"
   }
+ ],
+ "periciazine": [
+  {
+   "index": 0,
+   "qid": "e647e62a"
+  }
+ ],
+ "penfluridol": [
+  {
+   "index": 1,
+   "qid": "34897703"
+  }
+ ],
+ "carpipramine": [
+  {
+   "index": 1,
+   "qid": "79c6e226"
+  },
+  {
+   "index": 2,
+   "qid": "0cb0ec0f"
+  }
+ ],
+ "iproniazid": [
+  {
+   "index": 1,
+   "qid": "66f1e92d"
+  }
+ ],
+ "etifoxine": [
+  {
+   "index": 1,
+   "qid": "8a412f06"
+  }
+ ],
+ "nordazepam": [
+  {
+   "index": 1,
+   "qid": "ed2dbd68"
+  },
+  {
+   "index": 3,
+   "qid": "91989ad3"
+  }
+ ],
+ "piribedil": [
+  {
+   "index": 5,
+   "qid": "c8866b28"
+  }
+ ],
+ "eslicarbazepine_acetate": [
+  {
+   "index": 1,
+   "qid": "d86a27b0"
+  }
+ ],
+ "valpromide": [
+  {
+   "index": 5,
+   "qid": "3d58ebf4"
+  }
+ ],
+ "oxetorone": [
+  {
+   "index": 1,
+   "qid": "44ad68a4"
+  }
+ ],
+ "stiripentol": [
+  {
+   "index": 1,
+   "qid": "f92650e9"
+  }
+ ],
+ "opium": [
+  {
+   "index": 3,
+   "qid": "655f0549"
+  }
  ]
 }

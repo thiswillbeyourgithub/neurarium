@@ -2411,5 +2411,49 @@
    "qid": "c7d99bf6"
   },
   "withdrawals": []
+ },
+ "iproniazid": {
+  "approval": {
+   "agency": null,
+   "country": null,
+   "index": 1,
+   "year": 1958,
+   "qid": "6fd18004"
+  },
+  "withdrawals": []
+ },
+ "etifoxine": {
+  "approval": {
+   "agency": null,
+   "country": "fr",
+   "index": 1,
+   "year": 1979,
+   "qid": "57753159"
+  },
+  "withdrawals": []
+ },
+ "eslicarbazepine_acetate": {
+  "approval": {
+   "agency": null,
+   "country": "eu",
+   "index": 0,
+   "year": 2009,
+   "qid": "115b725c"
+  },
+  "withdrawals": []
+ },
+ "stiripentol": {
+  "approval": {
+   "agency": "ema",
+   "country": "eu",
+   "index": 0,
+   "year": 2007,
+   "qid": "ea2c5e10"
+  },
+  "withdrawals": []
+ },
+ "opium": {
+  "approval": null,
+  "withdrawals": []
  }
 }

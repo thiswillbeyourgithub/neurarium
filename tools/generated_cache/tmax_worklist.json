@@ -4096,6 +4096,37 @@
    }
   ]
  },
+ "viloxazine": {
+  "name": "Viloxazine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "viloxazine",
+    "line": "The time to peak levels is 5 hours with a range of 3 to 9 hours after a single 200 mg dose.",
+    "durations": [
+     {
+      "hours": 5.0
+     },
+     {
+      "hours": 3.0,
+      "hours_max": 9.0
+     }
+    ],
+    "qid": "af5033dc"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "viloxazine",
+    "line": "A high-fat meal modestly decreases levels of viloxazine and delays the time to peak by about 2 hours.",
+    "durations": [
+     {
+      "hours": 2.0
+     }
+    ],
+    "qid": "e97856ff"
+   }
+  ]
+ },
  "vortioxetine": {
   "name": "Vortioxetine",
   "candidates": [
@@ -5229,6 +5260,68 @@
      }
     ],
     "qid": "9936f7dd"
+   }
+  ]
+ },
+ "etifoxine": {
+  "name": "Etifoxine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "etifoxine",
+    "line": "The time to peak levels of etifoxine is 2 to 3 hours.",
+    "durations": [
+     {
+      "hours": 2.0,
+      "hours_max": 3.0
+     }
+    ],
+    "qid": "4cb73b8e"
+   }
+  ]
+ },
+ "nefopam": {
+  "name": "Nefopam",
+  "candidates": [
+   {
+    "corpus": "bdpm",
+    "page": "68943687",
+    "line": "Après administration d'une dose de 20 mg par voie IM, le pic plasmatique (Tmax) est situé entre 0,5 et 1 heure et les concentrations maximales (Cmax) sont en moyenne de 25 ng/ml.",
+    "durations": [
+     {
+      "hours": 0.5,
+      "hours_max": 1.0
+     }
+    ],
+    "qid": "8f000e27"
+   }
+  ]
+ },
+ "eslicarbazepine_acetate": {
+  "name": "Eslicarbazepine acetate",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "eslicarbazepine_acetate",
+    "line": "Oxcarbazepine, for comparison, is also nearly completely absorbed from the gut, and peak plasma concentrations of licarbazepine are reached after 4.5 hours on average after oxcarbazepine intake.",
+    "durations": [
+     {
+      "hours": 4.5
+     }
+    ],
+    "qid": "33b1fcfb"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "63927729",
+    "line": "La Cmax de l’eslicarbazépine est atteinte en 2 à 3 heures après administration de la dose (tmax).",
+    "durations": [
+     {
+      "hours": 2.0,
+      "hours_max": 3.0
+     }
+    ],
+    "qid": "4bab2bfc"
    }
   ]
  }

@@ -298,5 +298,27 @@
   "hours_max": 150.0,
   "index": 2,
   "qid": "aa158293"
+ },
+ "etifoxine": {
+  "hours": 6.0,
+  "index": 1,
+  "qid": "95ecd7b0"
+ },
+ "nefopam": {
+  "hours": 3.0,
+  "hours_max": 8.0,
+  "index": 1,
+  "qid": "c30eca38"
+ },
+ "piribedil": {
+  "hours": 1.7,
+  "hours_max": 6.9,
+  "index": 0,
+  "qid": "f770d8a5"
+ },
+ "oxetorone": {
+  "hours": 24.0,
+  "index": 0,
+  "qid": "2e8cc713"
  }
 }

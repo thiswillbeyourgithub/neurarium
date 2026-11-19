@@ -677,7 +677,34 @@
    "name": "SK Group",
    "company": null,
    "qid": "6f44a70f"
-  }
+  },
+  "penfluridol": {
+   "index": 0,
+   "name": "Janssen Pharmaceutica",
+   "company": "janssen_pharmaceuticals",
+   "qid": "f694b03d"
+  },
+  "etifoxine": {
+   "index": 1,
+   "name": "Hoechst",
+   "company": null,
+   "qid": "9d5b464c"
+  },
+  "eslicarbazepine_acetate": {
+   "index": 0,
+   "name": "Bial",
+   "company": null,
+   "qid": "0efeab89"
+  },
+  "stiripentol": {
+   "index": 0,
+   "name": "Biocodex",
+   "company": null,
+   "qid": "200daa60"
+  },
+  "iproniazid": null,
+  "nefopam": null,
+  "opium": null
  },
  "companies": {
   "novartis": {

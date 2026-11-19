@@ -115,6 +115,12 @@
      "page": "alpidem",
      "line": "All development in other countries was discontinued by 1999.",
      "qid": "7161ce97"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "alpidem",
+     "line": "The developmental code name of alpidem was SL 80.0342 .",
+     "qid": "601d19bd"
     }
    ]
   },
@@ -846,6 +852,12 @@
      "page": "dexmedetomidine",
      "line": "Dexmedetomidine was developed by Orion Pharma and is marketed under the names dexdor and Precedex;",
      "qid": "56d55b17"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "dexmedetomidine",
+     "line": "It is also known by its developmental code names MPV-1440 and BXCL-501 and by its major brand names Precedex and Igalmi among others.",
+     "qid": "6201c328"
     }
    ]
   },
@@ -1115,6 +1127,12 @@
      "page": "esketamine",
      "line": "In the form of racemic ketamine, esketamine was first synthesized in 1962 and introduced for medical use as an anesthetic in 1970.",
      "qid": "5dbf90b4"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "esketamine",
+     "line": "It is also known as S(+)-ketamine , ( S )-ketamine , or (–)-ketamine ( (-) ketamine ), as well as by its developmental code name JNJ-54135419 .",
+     "qid": "883c7e4e"
     }
    ]
   },
@@ -1487,6 +1505,12 @@
      "page": "indalpine",
      "line": "In line with indalpine's fate, research and development was halted relating to the two other 4-alkylpiperidine derivatives developed by Pharmuka, viqualine (a serotonin releasing agent ) and pipequaline (a GABA A receptor positive allosteric modulator ), both in different stages of development at the time.",
      "qid": "9a5b19c0"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "indalpine",
+     "line": "It was also known by its developmental code name LM-5008 .",
+     "qid": "e1d55d3c"
     }
    ]
   },
@@ -1557,6 +1581,23 @@
      "page": "ketanserin",
      "line": "Ketanserin was first described in the scientific literature by 1980.",
      "qid": "2d8411ab"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "ketanserin",
+     "line": "It is also known by its major brand names Sufrexal and Serefrex and by its former developmental code names R-41468 , KJK-945 , and R-49945 .",
+     "qid": "bf722718"
+    }
+   ]
+  },
+  "lemborexant": {
+   "name": "Lemborexant",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "lemborexant",
+     "line": "Lemborexant is the generic name of the drug and its INN while E-2006 was its developmental code name.",
+     "qid": "1e0df504"
     }
    ]
   },
@@ -2453,6 +2494,12 @@
      "page": "pargyline",
      "line": "Pargyline was first described in the scientific literature in 1960.",
      "qid": "22bf40fb"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "pargyline",
+     "line": "The drug is also known by the developmental code name MO-911 .",
+     "qid": "cb413a80"
     }
    ]
   },
@@ -3199,6 +3246,12 @@
      "page": "suvorexant",
      "line": "Development of almorexant (ACT-078573) and filorexant (MK-6096) was discontinued, while seltorexant (MIN-202, JNJ-42847922) and vornorexant (ORN-0829, TS-142) are still in clinical trials.",
      "qid": "56b4f08c"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "suvorexant",
+     "line": "The medication was developed by Merck under the code name MK-4305 and is marketed under the brand name Belsomra.",
+     "qid": "3c6493de"
     }
    ]
   },
@@ -3306,6 +3359,17 @@
      "page": "tianeptine",
      "line": "In October 2023, Tonix Pharmaceuticals announced that it had discontinued its development of tianeptine as a monotherapy for major depressive disorder after disappointing phase-2 clinical trial results.",
      "qid": "14846a26"
+    }
+   ]
+  },
+  "tizanidine": {
+   "name": "Tizanidine",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "tizanidine",
+     "line": "Developmental code names of tizanidine include AN-021 and DS 103-282 and its major brand names include Zanaflex and Sirdalud .",
+     "qid": "5b119698"
     }
    ]
   },
@@ -3681,6 +3745,12 @@
      "page": "rasagiline",
      "line": "In 2003, Teva partnered with Eisai , giving Eisai the right to jointly market the drug for Parkinson's in the US, and to co-develop and co-market the drug for Alzheimer's disease and other neurological diseases.",
      "qid": "f08803f5"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "rasagiline",
+     "line": "It is also known by its former developmental code name TVP-1012 .",
+     "qid": "009a98d6"
     }
    ]
   },
@@ -4841,6 +4911,131 @@
      "page": "atropine",
      "line": "The substance was first synthesized by German chemist Richard Willstätter in 1901.",
      "qid": "be7b9394"
+    }
+   ]
+  },
+  "penfluridol": {
+   "name": "Penfluridol",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "penfluridol",
+     "line": "It was discovered at Janssen Pharmaceutica in 1968.",
+     "qid": "f694b03d"
+    }
+   ]
+  },
+  "iproniazid": {
+   "name": "Iproniazid",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "iproniazid",
+     "line": "Iproniazid was originally developed for the treatment of tuberculosis , but in 1952, the compounds's antidepressant properties were discovered when researchers noted that patients became inappropriately happy when given isoniazid , a related antibiotic .",
+     "qid": "50bbcb84"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "iproniazid",
+     "line": "Subsequently, adding an isopropyl chain onto isoniazid led to the development of iproniazid as an antidepressant and it was approved for use in 1958.",
+     "qid": "6fd18004"
+    }
+   ]
+  },
+  "etifoxine": {
+   "name": "Etifoxine",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "etifoxine",
+     "line": "Etifoxine was developed in the 1960s and was introduced for medical use in France in 1979.",
+     "qid": "86f1a44a"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "etifoxine",
+     "line": "Etifoxine was developed by Hoechst in the 1960s.",
+     "qid": "9d5b464c"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "etifoxine",
+     "line": "It is also known by the older and much-lesser-used synonym etafenoxine and by its developmental code name Hoe 36801 .",
+     "qid": "aa38143d"
+    }
+   ]
+  },
+  "nefopam": {
+   "name": "Nefopam",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "nefopam",
+     "line": "It was developed in the 1960s and marketed under the name fenazocine.",
+     "qid": "5fd2aa91"
+    }
+   ]
+  },
+  "eslicarbazepine_acetate": {
+   "name": "Eslicarbazepine acetate",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "eslicarbazepine_acetate",
+     "line": "Eslicarbazepine acetate was developed by the Portuguese pharmaceutical company Bial .",
+     "qid": "0efeab89"
+    }
+   ]
+  },
+  "stiripentol": {
+   "name": "Stiripentol",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "stiripentol",
+     "line": "Stiripentol was discovered in 1978 by scientists at Biocodex and clinical trials started over the next few years.",
+     "qid": "200daa60"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "stiripentol",
+     "line": "It was originally developed for adults with focal seizures, but failed a Phase III trial.",
+     "qid": "414442d8"
+    }
+   ]
+  },
+  "opium": {
+   "name": "Opium",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opium",
+     "line": "In modern times, much of the thebaine, which often serves as the raw material for the synthesis for oxycodone , hydrocodone , hydromorphone , and other semisynthetic opiates, originates from extracting Papaver orientale or Papaver bracteatum .",
+     "qid": "8aa9eb9e"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opium",
+     "line": "Its invention is credited to Thoth, and it was said to have been given by Isis to Ra as treatment for a headache.",
+     "qid": "322fd44f"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opium",
+     "line": "Laudanum was originally the 16th-century term for a medicine associated with a particular physician that was widely well-regarded, but became standardized as \" tincture of opium\", a solution of opium in ethanol , which Paracelsus has been credited with developing.",
+     "qid": "f3c95c6e"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opium",
+     "line": "Coleridge began using opium in 1791 after developing jaundice and rheumatic fever , and became a full addict after a severe attack of the disease in 1801, requiring 80–100 drops of laudanum daily.",
+     "qid": "b7605c4f"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opium",
+     "line": "Heroin , the first semi-synthetic opioid, was first synthesized in 1874, but was not pursued until its rediscovery in 1897 by Felix Hoffmann at the Bayer pharmaceutical company in Elberfeld , Germany .",
+     "qid": "81e364df"
     }
    ]
   }

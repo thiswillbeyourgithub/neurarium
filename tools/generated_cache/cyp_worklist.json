@@ -518,8 +518,24 @@
     },
     {
      "corpus": "wikipedia_pharm",
-     "heading": "Interactions",
+     "heading": "Side effects",
      "n": 4,
+     "page": "atomoxetine",
+     "qid": "e3510404",
+     "quote": "No substantial QTc interval changes were observed in a clinical study of atomoxetine in CYP2D6 poor metabolizers ."
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Side effects",
+     "n": 5,
+     "page": "atomoxetine",
+     "qid": "21f39a67",
+     "quote": "QT prolongation has been reported with atomoxetine at therapeutic doses and in overdose ; it is suggested that atomoxetine not be used with other medications that may prolong the QT interval , concomitantly with CYP2D6 inhibitors, and caution to be used in poor metabolizers."
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Interactions",
+     "n": 6,
      "page": "atomoxetine",
      "qid": "fb400753",
      "quote": "Atomoxetine is a substrate for CYP2D6 ."
@@ -527,7 +543,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Interactions",
-     "n": 5,
+     "n": 7,
      "page": "atomoxetine",
      "qid": "48cb342b",
      "quote": "Concurrent treatment with strong CYP2D6 inhibitors such as bupropion , fluoxetine , paroxetine , and quinidine has been shown to substantially increase atomoxetine exposure, as well as increase N -desmethylatomoxetine levels and decrease 4-hydroxyatomoxetine levels."
@@ -535,7 +551,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Interactions",
-     "n": 6,
+     "n": 8,
      "page": "atomoxetine",
      "qid": "dc01f7b8",
      "quote": "CYP2D6 inhibitors do not appear to affect atomoxetine metabolism in CYP2D6 poor metabolizers ."
@@ -543,7 +559,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Interactions",
-     "n": 7,
+     "n": 9,
      "page": "atomoxetine",
      "qid": "3234144c",
      "quote": "Dosage adjustment of atomoxetine may be necessary in people taking strong CYP2D6 inhibitors."
@@ -551,7 +567,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Interactions",
-     "n": 8,
+     "n": 10,
      "page": "atomoxetine",
      "qid": "1206f36f",
      "quote": "Atomoxetine does not show clinically important inhibition or induction of cytochrome P450 (CYP450) enzymes including CYP1A2 , CYP3A , CYP2D6, and CYP2C9 ."
@@ -559,7 +575,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Interactions",
-     "n": 9,
+     "n": 11,
      "page": "atomoxetine",
      "qid": "64c2b6d9",
      "quote": "It did not affect the pharmacokinetics of the CYP2D6 substrate desipramine , whereas it increased exposure to the CYP3A4 substrate midazolam by only 15%."
@@ -567,7 +583,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Pharmacodynamics",
-     "n": 10,
+     "n": 12,
      "page": "atomoxetine",
      "qid": "f924f71e",
      "quote": "Therapeutic concentrations of atomoxetine are within range of interacting with GIRKs, especially in CYP2D6 poor metabolizers ."
@@ -575,7 +591,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Pharmacodynamics",
-     "n": 11,
+     "n": 13,
      "page": "atomoxetine",
      "qid": "3a9194dc",
      "quote": "4-Hydroxyatomoxetine, the major active metabolite of atomoxetine in CYP2D6 extensive metabolizers, has been found to have sub-micromolar affinity for opioid receptors , acting as an antagonist at the μ-opioid receptor (MOR) and as a partial agonist at the κ-opioid receptor (KOR)."
@@ -583,7 +599,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Absorption",
-     "n": 12,
+     "n": 14,
      "page": "atomoxetine",
      "qid": "69196edf",
      "quote": "This is moderated by first-pass metabolism and CYP2D6 status, with poor metabolizers having a bioavailability of 94% and extensive metabolizers having a bioavailability of 63%."
@@ -591,7 +607,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Absorption",
-     "n": 13,
+     "n": 15,
      "page": "atomoxetine",
      "qid": "c008c932",
      "quote": "Extensive metabolizers are considered to have normal CYP2D6 activity and constitute >90% of people, while poor metabolizers constitute a small minority of up to 7%."
@@ -599,7 +615,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Absorption",
-     "n": 14,
+     "n": 16,
      "page": "atomoxetine",
      "qid": "ce285218",
      "quote": "It has been reported that the time to peak levels was 1.0 hours in CYP2D6 extensive metabolizers and 2.5 hours in CYP2D6 poor metabolizers."
@@ -607,7 +623,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Absorption",
-     "n": 15,
+     "n": 17,
      "page": "atomoxetine",
      "qid": "ecc74f1b",
      "quote": "In CYP2D6 poor metabolizers, atomoxetine peak levels are 5- to 6-fold higher and total exposure is 8- to 10-fold higher than in CYP2D6 extensive metabolizers."
@@ -615,7 +631,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Absorption",
-     "n": 16,
+     "n": 18,
      "page": "atomoxetine",
      "qid": "e7d995d6",
      "quote": "Similarly, in Asian adults homozygous for the hypoactive CYP2D6*10 allele , atomoxetine peak levels were about 1.5-fold higher and total exposure 2-fold higher compared to extensive metabolizers."
@@ -623,7 +639,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Absorption",
-     "n": 17,
+     "n": 19,
      "page": "atomoxetine",
      "qid": "420b0ca1",
      "quote": "There is little accumulation of atomoxetine with repeated administration in CYP2D6 extensive metabolizers, but significant accumulation in CYP2D6 poor metabolizers."
@@ -631,7 +647,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Distribution",
-     "n": 18,
+     "n": 20,
      "page": "atomoxetine",
      "qid": "4f08d0cd",
      "quote": "Atomoxetine is well- distributed and its volume of distribution is 0.85 to 1.02 L/kg in CYP2D6 extensive metabolizers and 2.25 L/kg in CYP2D6 poor metabolizers , with its distribution being equivalent to total body water."
@@ -639,7 +655,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Metabolism",
-     "n": 19,
+     "n": 21,
      "page": "atomoxetine",
      "qid": "0296cc9a",
      "quote": "The three major metabolic pathways include aromatic ring hydroxylation mainly by CYP2D6 but also other cytochrome P450 enzymes into 4-hydroxyatomoxetine, benzylic hydroxylation by an unspecified enzyme into 2-hydroxymethylatomoxetine, and N - demethylation by CYP2C19 into N -desmethylatomoxetine."
@@ -647,7 +663,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Metabolism",
-     "n": 20,
+     "n": 22,
      "page": "atomoxetine",
      "qid": "f68227ad",
      "quote": "In addition, N -desmethylatomoxetine undergoes hydroxylation by CYP2D6 into N -desmethyl-4-hydroxyatomoxetine."
@@ -655,7 +671,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Metabolism",
-     "n": 21,
+     "n": 23,
      "page": "atomoxetine",
      "qid": "6f953ea9",
      "quote": "The hydroxylated metabolites of atomoxetine undergo glucuronidation via UDP-glucuronyltransferase (UGT) enzymes to form glucuronide conjugates ."
@@ -663,7 +679,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Metabolism",
-     "n": 22,
+     "n": 24,
      "page": "atomoxetine",
      "qid": "ad20261c",
      "quote": "As previously described, first-pass metabolism of atomoxetine is substantially greater, bioavailability is lower, peak levels and total exposure are much greater, and elimination half-life is much longer in CYP2D6 poor metabolizers than in extensive metabolizers ."
@@ -671,7 +687,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Metabolism",
-     "n": 23,
+     "n": 25,
      "page": "atomoxetine",
      "qid": "6eadcae5",
      "quote": "The overall metabolism of atomoxetine is similar regardless of CYP2D6 status."
@@ -679,7 +695,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Metabolism",
-     "n": 24,
+     "n": 26,
      "page": "atomoxetine",
      "qid": "10ca6ad9",
      "quote": "In addition, 4-hydroxyatomoxetine remains the major metabolite of atomoxetine independently of CYP2D6 status."
@@ -687,7 +703,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Metabolism",
-     "n": 25,
+     "n": 27,
      "page": "atomoxetine",
      "qid": "d4f2d4d1",
      "quote": "But the quantitative amounts of formed atomoxetine metabolites and their rates of formation are substantially different depending on CYP2D6 status."
@@ -695,7 +711,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Metabolism",
-     "n": 26,
+     "n": 28,
      "page": "atomoxetine",
      "qid": "64fc402c",
      "quote": "Studies with radiolabeled atomoxetine have shown that peak levels of radioactivity are essentially the same between CYP2D6 extensive metabolizers and CYP2D6 poor metabolizers."
@@ -703,7 +719,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Metabolism",
-     "n": 27,
+     "n": 29,
      "page": "atomoxetine",
      "qid": "cedf7caf",
      "quote": "18 hours) in CYP2D6 poor metabolizers versus CYP2D6 extensive metabolizers."
@@ -711,7 +727,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Metabolism",
-     "n": 28,
+     "n": 30,
      "page": "atomoxetine",
      "qid": "b1b6ee1d",
      "quote": "Circulating 4-hydroxyatomoxetine levels are about 1% of those of circulating atomoxetine levels in CYP2D6 extensive metabolizers and about 0.1% of those of circulating atomoxetine levels in CYP2D6 poor metabolizers."
@@ -719,7 +735,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Metabolism",
-     "n": 29,
+     "n": 31,
      "page": "atomoxetine",
      "qid": "1432b49f",
      "quote": "Similarly, N -desmethylatomoxetine circulates at much lower levels than atomoxetine, about 5% of those of atomoxetine in CYP2D6 extensive metabolizers and 45% of those of atomoxetine in CYP2D6 poor metabolizers."
@@ -727,7 +743,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Metabolism",
-     "n": 30,
+     "n": 32,
      "page": "atomoxetine",
      "qid": "05f14a8c",
      "quote": "Despite differences in atomoxetine metabolism, CYP2D6 status has been said in literature reviews to not affect the overall tolerability and safety of atomoxetine."
@@ -735,7 +751,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Metabolism",
-     "n": 31,
+     "n": 33,
      "page": "atomoxetine",
      "qid": "af8e25c2",
      "quote": "In terms of dosage adjustment for CYP2D6 poor metabolizers or those taking strong CYP2D6 inhibitors , the Food and Drug Administration (FDA) label says that this may be necessary and provides directions for this, whereas literature reviews state that it is not considered necessary based on clinical trial experience."
@@ -743,7 +759,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Elimination",
-     "n": 32,
+     "n": 34,
      "page": "atomoxetine",
      "qid": "edda2669",
      "quote": "Less than 3% of atomoxetine is excreted unchanged in urine regardless of CYP2D6 status, indicating extensive metabolism ."
@@ -751,7 +767,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Elimination",
-     "n": 33,
+     "n": 35,
      "page": "atomoxetine",
      "qid": "c81dbf58",
      "quote": "In CYP2D6 extensive metabolizers , who are considered to have normal CYP2D6 activity, more than 96% of a dose of radiolabeled atomoxetine is excreted in urine within 24 hours and 1 to 2% is excreted in feces ."
@@ -759,7 +775,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Elimination",
-     "n": 34,
+     "n": 36,
      "page": "atomoxetine",
      "qid": "4f037c16",
      "quote": "Conversely, in CYP2D6 poor metabolizers , excretion is slower, with only 27% excreted after 24 hours, a majority of radioactivity excreted within 72 hours, and ~144 hours required for full excretion."
@@ -767,7 +783,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Elimination",
-     "n": 35,
+     "n": 37,
      "page": "atomoxetine",
      "qid": "b9f8885f",
      "quote": "In addition, only 80% of radioactivity is excreted in urine while 13 to 22% is excreted in feces in CYP2D6 poor metabolizers."
@@ -775,7 +791,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Elimination",
-     "n": 36,
+     "n": 38,
      "page": "atomoxetine",
      "qid": "58d0ca39",
      "quote": "The fractions excreted in urine as 4-hydroxyatomoxetine and 4-hydroxyatomoxetine glucuronide account for 86% of a dose in CYP2D6 extensive metabolizers, but only 40% in CYP2D6 poor metabolizers."
@@ -783,7 +799,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Elimination",
-     "n": 37,
+     "n": 39,
      "page": "atomoxetine",
      "qid": "f2094ccb",
      "quote": "CYP2D6 poor metabolizers excrete greater amounts of minor atomoxetine metabolites, namely N -desmethylatomoxetine and 2-hydroxymethylatomoxetine and their conjugates , than extensive metabolizers."
@@ -791,7 +807,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Elimination",
-     "n": 38,
+     "n": 40,
      "page": "atomoxetine",
      "qid": "fb3ff397",
      "quote": "The elimination half-life of atomoxetine is 4.5 to 5.3 hours in CYP2D6 extensive metabolizers."
@@ -799,7 +815,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Elimination",
-     "n": 39,
+     "n": 41,
      "page": "atomoxetine",
      "qid": "7fdb1d07",
      "quote": "However, in CYP2D6 poor metabolizers, the half-life of atomoxetine is 19 to 21.6 hours, or about 4-fold longer in comparison."
@@ -807,7 +823,7 @@
     {
      "corpus": "wikipedia_pharm",
      "heading": "Elimination",
-     "n": 40,
+     "n": 42,
      "page": "atomoxetine",
      "qid": "3e01bf79",
      "quote": "In CYP2D6 extensive metabolizers, the half-lives of 4-hydroxyatomoxetine and N -desmethylatomoxetine are similar at around 6 to 8 hours, whereas in CYP2D6 poor metabolizers, the half-life of N -desmethylatomoxetine is much longer at around 33 to 40 hours."
@@ -2599,6 +2615,43 @@
     }
    ],
    "name": "Esketamine"
+  },
+  "eslicarbazepine_acetate": {
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "(lead)",
+     "n": 0,
+     "page": "eslicarbazepine_acetate",
+     "qid": "f8d50bad",
+     "quote": "Metabolism | UGT (?)"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Interactions",
+     "n": 1,
+     "page": "eslicarbazepine_acetate",
+     "qid": "228f4ab1",
+     "quote": "Like oxcarbazepine, eslicarbazepine can reduce plasma levels of drugs that are metabolized by the liver enzymes CYP3A4 (verified in studies for simvastatin and the oral contraceptive levonorgestrel / ethinylestradiol ) and UDP-glucuronosyltransferase , and increase plasma levels of drugs metabolized by CYP2C19 ."
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Interactions",
+     "n": 2,
+     "page": "eslicarbazepine_acetate",
+     "qid": "90605074",
+     "quote": "Carbamazepine reduces blood plasma concentrations of eslicarbazepine, probably because it induces glucuronidation ."
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Interactions",
+     "n": 3,
+     "page": "eslicarbazepine_acetate",
+     "qid": "1a19a294",
+     "quote": "Phenytoin also reduces eslicarbazepine plasma concentrations, which may be due to increased glucuronidation of eslicarbazepine; and concomitant administration results in an increase in phenytoin serum concentrations, which is probably due to inhibition of CYP2C19."
+    }
+   ],
+   "name": "Eslicarbazepine acetate"
   },
   "eszopiclone": {
    "candidates": [

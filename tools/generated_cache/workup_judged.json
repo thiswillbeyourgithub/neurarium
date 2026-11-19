@@ -2053,5 +2053,125 @@
    "qid": "cf753917"
   }
  ],
- "zuranolone": []
+ "zuranolone": [],
+ "periciazine": [
+  {
+   "index": 0,
+   "test": "blood_count",
+   "timing": "during",
+   "condition": "l'apparition de fièvre, d'angine ou d'une autre infection",
+   "qid": "7af9c4cc"
+  },
+  {
+   "index": 3,
+   "test": "ecg",
+   "timing": "before",
+   "qid": "76b4aa2f"
+  }
+ ],
+ "iproniazid": [
+  {
+   "index": 1,
+   "test": "blood_pressure",
+   "timing": "during",
+   "qid": "8f6e7d7a"
+  },
+  {
+   "index": 2,
+   "test": "liver_function",
+   "timing": "during",
+   "qid": "1fb433dc"
+  }
+ ],
+ "etifoxine": [
+  {
+   "index": 0,
+   "test": "liver_function",
+   "timing": "before",
+   "condition": "Chez les patients présentant des facteurs de risque",
+   "qid": "4788fe14"
+  },
+  {
+   "index": 0,
+   "test": "liver_function",
+   "timing": "during",
+   "condition": "Chez les patients présentant des facteurs de risque",
+   "qid": "4788fe14"
+  }
+ ],
+ "piribedil": [
+  {
+   "index": 0,
+   "test": "blood_pressure",
+   "timing": "during",
+   "qid": "5b3b7b77"
+  }
+ ],
+ "eslicarbazepine_acetate": [
+  {
+   "index": 4,
+   "test": "electrolytes",
+   "timing": "during",
+   "qid": "e62ed011"
+  },
+  {
+   "index": 4,
+   "test": "electrolytes",
+   "timing": "before",
+   "condition": "Chez les patients atteints d’une affection rénale préexistante entraînant une hyponatrémie",
+   "qid": "e62ed011"
+  }
+ ],
+ "valpromide": [
+  {
+   "index": 14,
+   "test": "liver_function",
+   "timing": "before",
+   "qid": "c95087c2"
+  },
+  {
+   "index": 14,
+   "test": "liver_function",
+   "timing": "during",
+   "qid": "c95087c2"
+  },
+  {
+   "index": 18,
+   "test": "blood_count",
+   "timing": "before",
+   "qid": "a2186188"
+  },
+  {
+   "index": 18,
+   "test": "blood_count",
+   "timing": "during",
+   "qid": "a2186188"
+  }
+ ],
+ "stiripentol": [
+  {
+   "index": 4,
+   "test": "blood_count",
+   "timing": "before",
+   "qid": "2caf01a8"
+  },
+  {
+   "index": 4,
+   "test": "blood_count",
+   "timing": "during",
+   "qid": "2caf01a8"
+  },
+  {
+   "index": 5,
+   "test": "liver_function",
+   "timing": "before",
+   "qid": "34281a0e"
+  },
+  {
+   "index": 5,
+   "test": "liver_function",
+   "timing": "during",
+   "qid": "34281a0e"
+  }
+ ]
 }

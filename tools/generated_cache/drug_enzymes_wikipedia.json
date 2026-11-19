@@ -1666,6 +1666,34 @@
    ]
   }
  ],
+ "eslicarbazepine_acetate": [
+  {
+   "enzyme": "cyp2c19",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "eslicarbazepine_acetate",
+     "provenance": "verified",
+     "quote": "Like oxcarbazepine, eslicarbazepine can reduce plasma levels of drugs that are metabolized by the liver enzymes CYP3A4 (verified in studies for simvastatin and the oral contraceptive levonorgestrel / ethinylestradiol ) and UDP-glucuronosyltransferase , and increase plasma levels of drugs metabolized by CYP2C19 ."
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "inducer",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "eslicarbazepine_acetate",
+     "provenance": "verified",
+     "quote": "Like oxcarbazepine, eslicarbazepine can reduce plasma levels of drugs that are metabolized by the liver enzymes CYP3A4 (verified in studies for simvastatin and the oral contraceptive levonorgestrel / ethinylestradiol ) and UDP-glucuronosyltransferase , and increase plasma levels of drugs metabolized by CYP2C19 ."
+    }
+   ]
+  }
+ ],
  "eszopiclone": [
   {
    "enzyme": "cyp2e1",

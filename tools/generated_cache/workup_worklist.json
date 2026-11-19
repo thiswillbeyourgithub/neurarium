@@ -3052,6 +3052,72 @@
    }
   ]
  },
+ "eslicarbazepine_acetate": {
+  "page": "63927729",
+  "denomination": "ESLICARBAZEPINE ARROW 800 mg, comprimé sécable",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.2",
+    "under": "Sujets âgés (âgés de plus de 65 ans)",
+    "quote": "Il n’est pas nécessaire d’ajuster les doses chez les personnes âgées dont la fonction rénale n’est pas affectée. En raison des données très limitées sur la dose de 1 600 mg en monothérapie chez les personnes âgées, cette dose n’est pas recommandée chez cette population.",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "f81635a8"
+   },
+   {
+    "index": 1,
+    "section": "4.2",
+    "under": "Insuffisance rénale",
+    "quote": "Le traitement sera instauré avec prudence chez les adultes et enfants de plus de 6 ans présentant une insuffisance rénale et la posologie sera ajustée en fonction de la clairance de la créatinine (CLCR) de la manière suivante :",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "186df300"
+   },
+   {
+    "index": 2,
+    "section": "4.2",
+    "under": "Population pédiatrique",
+    "quote": "Les enfants avec un poids de 60 kg ou plus doivent recevoir la même dose que les adultes.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "6fffa120"
+   },
+   {
+    "index": 3,
+    "section": "4.4",
+    "under": "Allèle HLA-B* 1502 - chez les sujets d'origine chinoise (Han) ou Thaïlandaise et chez d'autres populations asiatiques",
+    "quote": "Les porteurs de l’allèle HLA-B*1502 d’origine chinoise (Han) et thaïlandaise ont montré un risque élevé d’apparition du syndrome de Stevens-Johnson (SSJ) au cours d’un traitement par carbamazépine.",
+    "tests": [
+     "hla_genotype"
+    ],
+    "qid": "9f475ec7"
+   },
+   {
+    "index": 4,
+    "section": "4.4",
+    "under": "Hyponatrémie",
+    "quote": "Une hyponatrémie a été rapportée chez 1,5 % des patients traités par acétate d’eslicarbazépine. Celle-ci était asymptomatique dans la plupart des cas, mais pouvait également être accompagnée de symptômes cliniques comme une aggravation des crises, une confusion ou une diminution de la conscience. La fréquence de l’hyponatrémie augmentait avec la dose d’acétate d’eslicarbazépine. Chez les patients atteints d’une affection rénale préexistante entraînant une hyponatrémie ou chez les patients recevant un traitement concomitant susceptible d’entraîner une hyponatrémie (ex. diurétiques, desmopressine, carbamazépine), il est recommandé de contrôler le sodium sérique des patients avant et pendant le traitement par acétate d’eslicarbazépine. De plus, le sodium sérique sera surveillé en cas d’apparition de signes d’hyponatrémie. Le sodium sérique sera également surveillé de manière régulière tout au long du traitement. En cas d’hyponatrémie cliniquement significative, le traitement par acétate d’eslicarbazépine devra être interrompu.",
+    "tests": [
+     "electrolytes"
+    ],
+    "qid": "e62ed011"
+   },
+   {
+    "index": 5,
+    "section": "4.4",
+    "under": "Insuffisance rénale",
+    "quote": "Une attention particulière sera recommandée chez l’insuffisant rénal et un ajustement posologique sera effectué en fonction de la clairance de la créatinine (voir rubrique 4.2). Chez les patients présentant une CLCR Insuffisance hépatique",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "d64b3bb0"
+   }
+  ]
+ },
  "ethosuximide": {
   "page": "68481191",
   "denomination": "ZARONTIN 250 mg/5 ml, sirop",
@@ -3097,6 +3163,22 @@
      "liver_function"
     ],
     "qid": "1e89c009"
+   }
+  ]
+ },
+ "etifoxine": {
+  "page": "63136857",
+  "denomination": "STRESAM, gélule",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.4",
+    "under": "Mise en garde",
+    "quote": "Depuis la mise sur le marché, des cas graves de cytolyse hépatique ont été rapportés lors de traitements avec de l’étifoxine, à une fréquence très rare. D’après les données collectées depuis la mise sur le marché du produit, les réactions hépatiques liées à l’étifoxine surviennent généralement 2 à 4 semaines après l’initiation du traitement. Des précautions doivent être prises avec les patients présentant des facteurs de risque de troubles hépatiques, tels que la population âgée, les patients ayant des antécédents médicaux d’hépatite virale ou de toute autre pathologie identifiée individuellement par le médecin. Les troubles hépatiques peuvent être asymptomatiques et uniquement détectés lors d’analyses biologiques. Chez les patients présentant des facteurs de risque, des analyses biologiques de la fonction hépatique doivent être effectuées avant l’introduction d’un traitement à base d’étifoxine et environ un mois après le début du traitement. En cas de survenue de troubles hépatiques sous étifoxine, le traitement doit être immédiatement interrompu et ne doit jamais être réintroduit.",
+    "tests": [
+     "liver_function"
+    ],
+    "qid": "4788fe14"
    }
   ]
  },
@@ -4005,6 +4087,42 @@
      "blood_count"
     ],
     "qid": "127c6ac7"
+   }
+  ]
+ },
+ "iproniazid": {
+  "page": "61561635",
+  "denomination": "MARSILID 50 mg, comprimé sécable",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.4",
+    "under": "Mises en garde spéciales",
+    "quote": "L'utilisation d'iproniazide est déconseillée pendant la grossesse quel qu'en soit le terme et chez la femme en âge de procréer n'utilisant pas de mesure contraceptive (voir rubrique 4.6).",
+    "tests": [
+     "pregnancy_test"
+    ],
+    "qid": "e381d36c"
+   },
+   {
+    "index": 1,
+    "section": "4.4",
+    "under": "Précautions d'emploi",
+    "quote": "Contrôler régulièrement la tension artérielle.",
+    "tests": [
+     "blood_pressure"
+    ],
+    "qid": "8f6e7d7a"
+   },
+   {
+    "index": 2,
+    "section": "4.4",
+    "under": "Précautions d'emploi",
+    "quote": "Contrôler régulièrement les fonctions hépatique, rénale et adapter la posologie en cas d'insuffisance rénale.",
+    "tests": [
+     "liver_function"
+    ],
+    "qid": "1fb433dc"
    }
   ]
  },
@@ -6691,6 +6809,52 @@
    }
   ]
  },
+ "periciazine": {
+  "page": "64676824",
+  "denomination": "NEULEPTIL 10 mg, gélule",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.4",
+    "under": "Mises en garde spéciales",
+    "quote": "Tout patient doit être informé que l'apparition de fièvre, d'angine ou d'une autre infection impose d'avertir tout de suite le médecin traitant et de contrôler immédiatement l'hémogramme. En cas de modification franche de ce dernier (hyperleucocytose, granulopénie), l'administration de ce traitement sera interrompue.",
+    "tests": [
+     "blood_count"
+    ],
+    "qid": "7af9c4cc"
+   },
+   {
+    "index": 1,
+    "section": "4.4",
+    "under": "Allongement de l'intervalle QT : les neuroleptiques de la classe des phénothiazines prolongent de façon dose-dépendante l'intervalle QT. Cet effet connu pour potentialiser le risque de survenue de troubles du rythme ventriculaire graves, notamment à type de torsades de pointe, est majoré par l'existence d'une bradycardie, d'une hypokaliémie, d'un QT long congénital ou acquis (association à un médicament augmentant l'intervalle QT) (voir rubrique 4.8). Il convient donc lorsque la situation clinique le permet, de s'assurer avant toute administration, de l'absence de facteurs pouvant favoriser la survenue de ce trouble du rythme :",
+    "quote": "Hypokaliémie.",
+    "tests": [
+     "electrolytes"
+    ],
+    "qid": "ccfc0e20"
+   },
+   {
+    "index": 2,
+    "section": "4.4",
+    "under": "Allongement de l'intervalle QT : les neuroleptiques de la classe des phénothiazines prolongent de façon dose-dépendante l'intervalle QT. Cet effet connu pour potentialiser le risque de survenue de troubles du rythme ventriculaire graves, notamment à type de torsades de pointe, est majoré par l'existence d'une bradycardie, d'une hypokaliémie, d'un QT long congénital ou acquis (association à un médicament augmentant l'intervalle QT) (voir rubrique 4.8). Il convient donc lorsque la situation clinique le permet, de s'assurer avant toute administration, de l'absence de facteurs pouvant favoriser la survenue de ce trouble du rythme :",
+    "quote": "Allongement congénital de l'intervalle QT.",
+    "tests": [
+     "ecg"
+    ],
+    "qid": "8ca38781"
+   },
+   {
+    "index": 3,
+    "section": "4.4",
+    "under": "Allongement de l'intervalle QT : les neuroleptiques de la classe des phénothiazines prolongent de façon dose-dépendante l'intervalle QT. Cet effet connu pour potentialiser le risque de survenue de troubles du rythme ventriculaire graves, notamment à type de torsades de pointe, est majoré par l'existence d'une bradycardie, d'une hypokaliémie, d'un QT long congénital ou acquis (association à un médicament augmentant l'intervalle QT) (voir rubrique 4.8). Il convient donc lorsque la situation clinique le permet, de s'assurer avant toute administration, de l'absence de facteurs pouvant favoriser la survenue de ce trouble du rythme :",
+    "quote": "Traitement en cours par un médicament susceptible d'entraîner une bradycardie marquée (Hormis les situations d'urgence, il est recommandé d'effectuer un ECG dans le bilan initial des patients devant être traités par un neuroleptique.",
+    "tests": [
+     "ecg"
+    ],
+    "qid": "76b4aa2f"
+   }
+  ]
+ },
  "phenobarbital": {
   "page": "61475588",
   "denomination": "GARDENAL 100 mg, comprimé",
@@ -7063,6 +7227,22 @@
      "ecg"
     ],
     "qid": "2440152e"
+   }
+  ]
+ },
+ "piribedil": {
+  "page": "61598530",
+  "denomination": "TRIVASTAL 50 mg L.P., comprimé enrobé à libération prolongée",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.4",
+    "under": "Hypotension orthostatique :",
+    "quote": "Il est recommandé de surveiller la pression artérielle, en particulier au début du traitement, étant donné le risque d’hypotension orthostatique associé à un traitement dopaminergique.",
+    "tests": [
+     "blood_pressure"
+    ],
+    "qid": "5b3b7b77"
    }
   ]
  },
@@ -8381,6 +8561,82 @@
    }
   ]
  },
+ "stiripentol": {
+  "page": "61501691",
+  "denomination": "DIACOMIT 250 mg, poudre pour suspension buvable en sachet",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.2",
+    "under": "",
+    "quote": "Clobazam Lors des études pivots, la dose de clobazam au moment de l'instauration du stiripentol était de 0,5 mg/kg/jour administrée habituellement en deux prises par jour. Cette dose quotidienne a été réduite de 25 % par semaine en cas de signes cliniques d’effets indésirables ou de surdosage en clobazam (somnolence, hypotonie et irritabilité chez les jeunes enfants). L’administration conjointe du stiripentol chez des enfants atteints d’un syndrome de Dravet a augmenté d’environ deux ou trois la concentration plasmatique du clobazam et d’environ cinq celle du norclobazam.",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "bb78ab3e"
+   },
+   {
+    "index": 1,
+    "section": "4.2",
+    "under": "",
+    "quote": "Valproate de sodium Le potentiel d’interaction médicamenteuse entre le stiripentol et le valproate de sodium est considéré comme modéré. De ce fait, aucune modification de la posologie du valproate de sodium n’est nécessaire en cas d’association au stiripentol, sauf pour des raisons de tolérance clinique. Lors des études pivots, la dose quotidienne de valproate de sodium a été réduite d'environ 30% par semaine en cas d'effets indésirables digestifs tels qu'une anorexie et une perte de poids.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "f4540504"
+   },
+   {
+    "index": 2,
+    "section": "4.2",
+    "under": "",
+    "quote": "Anomalies des examens biologiques En cas d’anomalies de la numération-formule sanguine ou de paramètres fonctionnels hépatiques, la décision clinique de poursuivre l’administration du stiripentol ou d’en adapter la dose en même temps que celle du clobazam et du valproate de sodium doit être prise au cas par cas en prenant en compte les bénéfices et risques cliniques éventuels (voir rubrique 4.4).",
+    "tests": [
+     "blood_count"
+    ],
+    "qid": "78fd24d0"
+   },
+   {
+    "index": 3,
+    "section": "4.2",
+    "under": "",
+    "quote": "Insuffisant hépatique ou rénal Le stiripentol n’est pas recommandé chez les patients présentant une altération de la fonction hépatique et/ou rénale (voir rubrique 4.4).",
+    "tests": [
+     "liver_function"
+    ],
+    "qid": "1f581564"
+   },
+   {
+    "index": 4,
+    "section": "4.4",
+    "under": "",
+    "quote": "Une neutropénie peut être associée à l’administration de stiripentol, clobazam et valproate de sodium. La numération-formule sanguine doit être vérifiée avant l’instauration du traitement par le stiripentol. Sauf si la situation clinique l’indique autrement, la numération-formule doit être vérifiée tous les six mois.",
+    "tests": [
+     "blood_count"
+    ],
+    "qid": "2caf01a8"
+   },
+   {
+    "index": 5,
+    "section": "4.4",
+    "under": "",
+    "quote": "Elle doit être vérifiée avant l’instauration du traitement par stiripentol. Sauf si la situation clinique l’indique autrement, la fonction hépatique doit être vérifiée tous les six mois.",
+    "tests": [
+     "liver_function"
+    ],
+    "qid": "34281a0e"
+   },
+   {
+    "index": 6,
+    "section": "4.4",
+    "under": "",
+    "quote": "Le stiripentol n'est pas recommandé chez les patients présentant une altération de la fonction rénale et/ou hépatique en raison de l’absence de données cliniques spécifiquement obtenues chez ces patients (voir section 4.2).",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "dd42e1bb"
+   }
+  ]
+ },
  "sulpiride": {
   "page": "62344129",
   "denomination": "DOGMATIL 50 mg, gélule",
@@ -9272,6 +9528,245 @@
      "ammonia"
     ],
     "qid": "9f2d994d"
+   }
+  ]
+ },
+ "valpromide": {
+  "page": "63737879",
+  "denomination": "DEPAMIDE 300 mg, comprimé pelliculé gastro-résistant",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.2",
+    "under": "",
+    "quote": "Le valproate ne doit pas être utilisé chez les femmes en âge de procréer sauf en cas d’inefficacité ou d’intolérance aux autres traitements. Dans ce cas, le valproate doit être prescrit et dispensé conformément au programme de prévention de la grossesse du valproate (voir rubriques 4.3 et 4.4).",
+    "tests": [
+     "pregnancy_test"
+    ],
+    "qid": "efacbd24"
+   },
+   {
+    "index": 1,
+    "section": "4.3",
+    "under": "",
+    "quote": "Femmes en âge de procréer, sauf si toutes les conditions du programme de prévention de la grossesse sont remplies (voir rubriques 4.4 et 4.6).",
+    "tests": [
+     "pregnancy_test"
+    ],
+    "qid": "09686223"
+   },
+   {
+    "index": 2,
+    "section": "4.4",
+    "under": "Programme de prévention de la grossesse",
+    "quote": "Le valproate est un tératogène puissant entraînant un risque élevé de malformations congénitales et de troubles neuro-développementaux chez les enfants exposés in utero au valproate (voir rubrique 4.6). Le valproate ne doit pas être utilisé chez les femmes en âge de procréer sauf en cas d’inefficacité ou d’intolérance aux autres traitements. Si aucune autre thérapeutique alternative (médicamenteuse ou non) n’est possible, se conformer au programme de prévention de la grossesse ci-après.",
+    "tests": [
+     "pregnancy_test"
+    ],
+    "qid": "b56dc698"
+   },
+   {
+    "index": 3,
+    "section": "4.4",
+    "under": "Programme de prévention de la grossesse",
+    "quote": "Chez les femmes en âge de procréer, sauf si toutes les conditions du programme de prévention de la grossesse sont remplies (voir rubriques 4.3 et 4.6).",
+    "tests": [
+     "pregnancy_test"
+    ],
+    "qid": "6a3dac8b"
+   },
+   {
+    "index": 4,
+    "section": "4.4",
+    "under": "Conditions du programme de prévention de la grossesse",
+    "quote": "le risque de survenue de grossesse est évalué chez toutes les patientes de sexe féminin ;",
+    "tests": [
+     "pregnancy_test"
+    ],
+    "qid": "937ded4b"
+   },
+   {
+    "index": 5,
+    "section": "4.4",
+    "under": "Conditions du programme de prévention de la grossesse",
+    "quote": "la patiente comprend la nécessité d’effectuer un test de grossesse avant le début du traitement et pendant le traitement, en tant que de besoin ;",
+    "tests": [
+     "pregnancy_test"
+    ],
+    "qid": "846f0bf7"
+   },
+   {
+    "index": 6,
+    "section": "4.4",
+    "under": "Conditions du programme de prévention de la grossesse",
+    "quote": "la patiente comprend la nécessité de consulter son médecin dès qu’elle envisage une grossesse afin d’en discuter en temps voulu et de recourir à des options thérapeutiques alternatives avant la conception, et ceci avant d’arrêter la contraception ;",
+    "tests": [
+     "pregnancy_test"
+    ],
+    "qid": "ce580c35"
+   },
+   {
+    "index": 7,
+    "section": "4.4",
+    "under": "Test de grossesse",
+    "quote": "Une grossesse doit être exclue avant l’instauration du traitement par valproate. Le traitement par valproate ne doit pas être instauré chez les femmes en âge de procréer sans l’obtention d’un test de grossesse négatif (test de grossesse plasmatique d’une sensibilité d’au moins 25 mUI/mL), confirmé par un professionnel de santé, afin d’éliminer toute possibilité d’utilisation involontaire du produit pendant la grossesse. Ce test de grossesse doit être répété à intervalles réguliers pendant le traitement.",
+    "tests": [
+     "pregnancy_test"
+    ],
+    "qid": "fb2a99ef"
+   },
+   {
+    "index": 8,
+    "section": "4.4",
+    "under": "Contraception",
+    "quote": "Les femmes en âge de procréer qui reçoivent du valproate doivent utiliser une contraception efficace, sans interruption et pendant toute la durée du traitement par valproate. Ces patientes doivent recevoir une information complète sur la prévention de la grossesse, ainsi que des conseils en matière de contraception si elles n’utilisent pas de contraception efficace. Au moins une méthode de contraception efficace (de préférence une méthode dont l’efficacité ne dépend pas de l’utilisateur, telle qu’un dispositif intra-utérin ou un implant), ou deux méthodes de contraception complémentaires incluant une méthode barrière, doivent être utilisées.",
+    "tests": [
+     "pregnancy_test"
+    ],
+    "qid": "8af999a9"
+   },
+   {
+    "index": 9,
+    "section": "4.4",
+    "under": "Planification de grossesse",
+    "quote": "Chez les femmes envisageant une grossesse, un médecin spécialiste expérimenté dans la prise en charge du trouble bipolaire doit être consulté, le traitement par valproate doit être arrêté et, si nécessaire, remplacé par une thérapeutique alternative (médicamenteuse ou non) avant la conception et avant que la contraception ne soit arrêtée.",
+    "tests": [
+     "pregnancy_test"
+    ],
+    "qid": "4bf71a2b"
+   },
+   {
+    "index": 10,
+    "section": "4.4",
+    "under": "En cas de grossesse",
+    "quote": "Le traitement par DEPAMIDE est contre-indiqué pendant la grossesse, il doit donc impérativement être interrompu en cas de découverte d’une grossesse. En cas de grossesse chez une femme utilisant du valproate, celle-ci doit être immédiatement orientée vers un médecin spécialiste expérimenté dans la prise en charge du trouble bipolaire afin d’arrêter le traitement par valproate et d’envisager des options alternatives. Les patientes dont la grossesse aurait été exposée au valproate ainsi que leurs partenaires doivent être orientés vers un médecin spécialisé ou expérimenté en tératologie pour évaluation et conseil (voir rubrique 4.6).",
+    "tests": [
+     "pregnancy_test"
+    ],
+    "qid": "a4c6ae12"
+   },
+   {
+    "index": 11,
+    "section": "4.4",
+    "under": "Le pharmacien doit s’assurer que :",
+    "quote": "les patientes sont informées de contacter immédiatement un médecin spécialiste si elles envisagent ou suspectent une grossesse.",
+    "tests": [
+     "pregnancy_test"
+    ],
+    "qid": "910da387"
+   },
+   {
+    "index": 12,
+    "section": "4.4",
+    "under": "Documents d’information",
+    "quote": "Afin d’aider les professionnels de santé et les patientes à éviter toute exposition fœtale au valproate, le titulaire de l’autorisation de mise sur le marché leur fournit des documents d’information visant à renforcer les mises en garde relatives à la tératogénicité (malformations congénitales) et fœtotoxicité (effets neuro-développementaux) du valproate et de délivrer des recommandations aux femmes en âge de procréer concernant l’utilisation de valproate, ainsi que des détails sur le programme de prévention de la grossesse. Une carte patiente et une brochure d’information patiente doivent être fournies à toutes les patientes qui utilisent du valproate.",
+    "tests": [
+     "pregnancy_test"
+    ],
+    "qid": "7fb82973"
+   },
+   {
+    "index": 13,
+    "section": "4.4",
+    "under": "Documents d’information",
+    "quote": "Il est recommandé d'informer le patient que l'apparition d'un tel tableau doit motiver aussitôt une consultation. Celle-ci comportera, outre l'examen clinique, la pratique immédiate d'un contrôle biologique des fonctions hépatiques.",
+    "tests": [
+     "liver_function"
+    ],
+    "qid": "ccc60577"
+   },
+   {
+    "index": 14,
+    "section": "4.4",
+    "under": "Documents d’information",
+    "quote": "Une surveillance des fonctions hépatiques doit être effectuée avant le début du traitement et régulièrement pendant les 6 premiers mois du traitement, en particulier chez les patients à risque.",
+    "tests": [
+     "liver_function"
+    ],
+    "qid": "c95087c2"
+   },
+   {
+    "index": 15,
+    "section": "4.4",
+    "under": "Documents d’information",
+    "quote": "En cas de modification des traitements associés connus pour leur toxicité hépatique (augmentation de la dose ou nouveau traitement), la surveillance hépatique biologique doit être mise en place de nouveau (voir également la rubrique 4.5 sur le risque d'atteinte hépatique avec les dérivés salicylés, les autres anticonvulsivants incluant le cannabidiol).",
+    "tests": [
+     "liver_function"
+    ],
+    "qid": "408b42f3"
+   },
+   {
+    "index": 16,
+    "section": "4.4",
+    "under": "Documents d’information",
+    "quote": "Parmi les examens classiques, les tests reflétant la synthèse protéique et notamment le TP (taux de prothrombine) sont les plus pertinents. La confirmation d'un taux de prothrombine anormalement bas, surtout s'il s'accompagne d'autres anomalies biologiques (diminution significative du fibrinogène et des facteurs de coagulation, augmentation de la bilirubine, élévation des transaminases - voir rubrique « Précautions d’emploi »), doit conduire à arrêter le traitement par ce médicament (ainsi que par prudence et s'ils sont co-prescrits, les dérivés salicylés, puisqu'ils utilisent la même voie métabolique).",
+    "tests": [
+     "liver_function",
+     "coagulation"
+    ],
+    "qid": "325887b5"
+   },
+   {
+    "index": 17,
+    "section": "4.4",
+    "under": "Précautions d’emploi",
+    "quote": "Pratiquer un contrôle biologique des fonctions hépatiques avant le début du traitement (cf. rubrique 4.3) puis une surveillance périodique pendant les 6 premiers mois, tout spécialement chez les patients à risque (cf. rubrique 4.4 « Atteintes hépatiques graves - Détection »).",
+    "tests": [
+     "liver_function"
+    ],
+    "qid": "e65f7f33"
+   },
+   {
+    "index": 18,
+    "section": "4.4",
+    "under": "Précautions d’emploi",
+    "quote": "Un examen hématologique (NFS incluant les plaquettes, temps de saignement et bilan de coagulation) est recommandé préalablement au traitement, à 15 jours de traitement, puis des contrôles réguliers sont recommandés et à l’arrêt du traitement, ainsi qu’avant une intervention chirurgicale et en cas d’hématomes ou de saignements spontanés (cf. rubrique 4.8).",
+    "tests": [
+     "blood_count",
+     "coagulation"
+    ],
+    "qid": "a2186188"
+   },
+   {
+    "index": 19,
+    "section": "4.4",
+    "under": "Précautions d’emploi",
+    "quote": "Chez l’insuffisant rénal, il convient de tenir compte de l’augmentation des concentrations sériques libres en acide valproïque et de diminuer la posologie en conséquence.",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "c1734785"
+   },
+   {
+    "index": 20,
+    "section": "4.4",
+    "under": "Précautions d’emploi",
+    "quote": "Ce médicament est contre-indiqué chez les patients porteurs d’un déficit enzymatique du cycle de l’urée. Lorsqu'un déficit enzymatique du cycle de l'urée est suspecté, des examens métaboliques doivent être effectués avant le traitement en raison du risque d'hyperammoniémie avec le valproate. Quelques cas d’hyperammoniémie associée à un état stuporeux ou à un coma ont été décrits chez ces patients (voir rubrique 4.3 et 4.4 « Patients à risque d’hypocarnitinémie et Atteinte sévère du foie »).",
+    "tests": [
+     "renal_function",
+     "ammonia"
+    ],
+    "qid": "67008381"
+   },
+   {
+    "index": 21,
+    "section": "4.4",
+    "under": "Précautions d’emploi",
+    "quote": "Les patients doivent être avertis qu’ils doivent signaler immédiatement tout signe d’hyperammoniémie, tel qu’une ataxie, une altération de la conscience, des vomissements. Une supplémentation en carnitine doit être envisagée lorsque des symptômes d’hypocarnitinémie sont observés.",
+    "tests": [
+     "ammonia"
+    ],
+    "qid": "cedb3edb"
+   },
+   {
+    "index": 22,
+    "section": "4.4",
+    "under": "Précautions d’emploi",
+    "quote": "A l’instauration du traitement, les patients doivent être informés du risque de prise de poids et des mesures appropriées, essentiellement diététiques, qui doivent être adoptées pour minimiser celle-ci.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "d5de1aad"
    }
   ]
  },

@@ -11261,6 +11261,7 @@
         "carbamazepine": "https://en.wikipedia.org/w/index.php?oldid=1369634918",
         "carbidopa": "https://en.wikipedia.org/w/index.php?oldid=1377347584",
         "cariprazine": "https://en.wikipedia.org/w/index.php?oldid=1375757853",
+        "carpipramine": "https://en.wikipedia.org/w/index.php?oldid=1384050186",
         "chloral_hydrate": "https://en.wikipedia.org/w/index.php?oldid=1379710538",
         "chlordiazepoxide": "https://en.wikipedia.org/w/index.php?oldid=1379525406",
         "chlorpromazine": "https://en.wikipedia.org/w/index.php?oldid=1368875372",
@@ -11433,6 +11434,7 @@
         "naltrexone": "https://en.wikipedia.org/w/index.php?oldid=1370715111",
         "naltrexone_bupropion": "https://en.wikipedia.org/w/index.php?oldid=1378104893",
         "nefazodone": "https://en.wikipedia.org/w/index.php?oldid=1358676122",
+        "nefopam": "https://en.wikipedia.org/w/index.php?oldid=1380365017",
         "niaprazine": "https://en.wikipedia.org/w/index.php?oldid=1372813227",
         "nicotine": "https://en.wikipedia.org/w/index.php?oldid=1379714983",
         "nicotinic_acetylcholine_receptor": "https://en.wikipedia.org/w/index.php?oldid=1378375695",
@@ -11459,15 +11461,18 @@
         "otsuka_pharmaceutical": "https://en.wikipedia.org/w/index.php?oldid=1363731143",
         "oxazepam": "https://en.wikipedia.org/w/index.php?oldid=1369619112",
         "oxcarbazepine": "https://en.wikipedia.org/w/index.php?oldid=1356507495",
+        "oxetorone": "https://en.wikipedia.org/w/index.php?oldid=1329517830",
         "oxycodone": "https://en.wikipedia.org/w/index.php?oldid=1377718330",
         "oxymorphone": "https://en.wikipedia.org/w/index.php?oldid=1368817590",
         "paliperidone": "https://en.wikipedia.org/w/index.php?oldid=1369113631",
         "pargyline": "https://en.wikipedia.org/w/index.php?oldid=1373332120",
         "paroxetine": "https://en.wikipedia.org/w/index.php?oldid=1377999512",
+        "penfluridol": "https://en.wikipedia.org/w/index.php?oldid=1378841399",
         "pentazocine": "https://en.wikipedia.org/w/index.php?oldid=1362511808",
         "pentobarbital": "https://en.wikipedia.org/w/index.php?oldid=1379295539",
         "perampanel": "https://en.wikipedia.org/w/index.php?oldid=1373296477",
         "perazine": "https://en.wikipedia.org/w/index.php?oldid=1371988023",
+        "periciazine": "https://en.wikipedia.org/w/index.php?oldid=1385796609",
         "perospirone": "https://en.wikipedia.org/w/index.php?oldid=1324495944",
         "pethidine": "https://en.wikipedia.org/w/index.php?oldid=1373295642",
         "pfizer": "https://en.wikipedia.org/w/index.php?oldid=1378286412",
@@ -11778,6 +11783,7 @@
       "page_kind": "product",
       "page_url": "https://base-donnees-publique.medicaments.gouv.fr/medicament/{page}/extrait",
       "page_urls": {
+        "61501691": "https://www.ema.europa.eu/fr/documents/product-information/diacomit-epar-product-information_fr.pdf",
         "61680130": "https://www.ema.europa.eu/fr/documents/product-information/epidyolex-epar-product-information_fr.pdf",
         "62154820": "https://www.ema.europa.eu/fr/documents/product-information/fintepla-epar-product-information_fr.pdf",
         "64617815": "https://www.ema.europa.eu/fr/documents/product-information/sunosi-epar-product-information_fr.pdf",
@@ -12269,8 +12275,8 @@
         "unknown": 0
       },
       "drug_bindings": {
-        "total": 1941,
-        "verified": 1735,
+        "total": 1948,
+        "verified": 1742,
         "uncertain": 189,
         "sourced": 0,
         "llm": 0,
@@ -12279,13 +12285,13 @@
         "unknown": 0
       },
       "drug_binding_action": {
-        "total": 1561,
-        "verified": 1201,
+        "total": 1568,
+        "verified": 1204,
         "uncertain": 119,
         "sourced": 0,
         "llm": 132,
-        "nosource": 109,
-        "missing": 241,
+        "nosource": 113,
+        "missing": 245,
         "unknown": 585
       },
       "drug_nbn": {
@@ -12299,8 +12305,8 @@
         "unknown": 0
       },
       "drug_brands": {
-        "total": 577,
-        "verified": 575,
+        "total": 586,
+        "verified": 584,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -12310,17 +12316,17 @@
       },
       "drug_categories": {
         "total": 314,
-        "verified": 295,
+        "verified": 307,
         "uncertain": 0,
         "sourced": 0,
-        "llm": 19,
+        "llm": 7,
         "nosource": 0,
-        "missing": 19,
+        "missing": 7,
         "unknown": 0
       },
       "drug_half_life": {
-        "total": 279,
-        "verified": 268,
+        "total": 283,
+        "verified": 272,
         "uncertain": 6,
         "sourced": 0,
         "llm": 0,
@@ -12329,8 +12335,8 @@
         "unknown": 0
       },
       "drug_tmax": {
-        "total": 170,
-        "verified": 170,
+        "total": 172,
+        "verified": 172,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -12349,8 +12355,8 @@
         "unknown": 0
       },
       "drug_first_approval": {
-        "total": 229,
-        "verified": 229,
+        "total": 233,
+        "verified": 233,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -12379,8 +12385,8 @@
         "unknown": 0
       },
       "drug_originator": {
-        "total": 113,
-        "verified": 113,
+        "total": 117,
+        "verified": 117,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -12389,8 +12395,8 @@
         "unknown": 0
       },
       "drug_originator_country": {
-        "total": 81,
-        "verified": 81,
+        "total": 82,
+        "verified": 82,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -12469,8 +12475,8 @@
         "unknown": 0
       },
       "drug_workup": {
-        "total": 246,
-        "verified": 246,
+        "total": 263,
+        "verified": 263,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -12489,8 +12495,8 @@
         "unknown": 0
       },
       "drug_enzymes": {
-        "total": 573,
-        "verified": 570,
+        "total": 575,
+        "verified": 572,
         "uncertain": 3,
         "sourced": 0,
         "llm": 0,
@@ -12760,23 +12766,23 @@
       }
     },
     "nodes": {
-      "total": 10908,
-      "verified": 10110,
+      "total": 10965,
+      "verified": 10175,
       "uncertain": 420,
       "sourced": 0,
-      "llm": 244,
-      "nosource": 134,
-      "missing": 378,
+      "llm": 232,
+      "nosource": 138,
+      "missing": 370,
       "unknown": 596,
-      "backed": 10530,
+      "backed": 10595,
       "pct_backed": 97
     },
     "ki_coverage": {
-      "bindings_total": 1922,
-      "bindings_with_ki": 1621,
-      "pct_bindings_with_ki": 84,
+      "bindings_total": 1929,
+      "bindings_with_ki": 1632,
+      "pct_bindings_with_ki": 85,
       "drugs_total": 283,
-      "drugs_without_ki": 81,
+      "drugs_without_ki": 78,
       "drugs_without_ki_ids": [
         "acamprosate",
         "amantadine",
@@ -12820,7 +12826,6 @@
         "lorazepam",
         "meprobamate",
         "methaqualone",
-        "nefopam",
         "niaprazine",
         "nimetazepam",
         "nitrous_oxide",
@@ -12830,11 +12835,9 @@
         "pentobarbital",
         "perampanel",
         "perazine",
-        "periciazine",
         "phenazepam",
         "phenobarbital",
         "phenytoin",
-        "piribedil",
         "pregabalin",
         "primidone",
         "propofol",

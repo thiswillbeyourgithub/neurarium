@@ -5877,5 +5877,219 @@
     "qid": "5418a8e9"
    }
   ]
+ },
+ "etifoxine": {
+  "name": "Etifoxine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "etifoxine",
+    "line": "Elimination half-life | Etifoxine: 6 hours Diethyletifoxine: 20 hours",
+    "durations": [
+     {
+      "hours": 6.0
+     },
+     {
+      "hours": 20.0
+     }
+    ],
+    "qid": "35c28f9a"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "etifoxine",
+    "line": "The elimination half-life of etifoxine is 6 hours and of diethyletifoxine is almost 20 hours.",
+    "durations": [
+     {
+      "hours": 6.0
+     },
+     {
+      "hours": 20.0
+     }
+    ],
+    "qid": "95ecd7b0"
+   }
+  ]
+ },
+ "nefopam": {
+  "name": "Nefopam",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "nefopam",
+    "line": "Elimination half-life | Nefopam: 3–8 hours Desmethylnefopam: 10–15 hours",
+    "durations": [
+     {
+      "hours": 3.0,
+      "hours_max": 8.0
+     },
+     {
+      "hours": 10.0,
+      "hours_max": 15.0
+     }
+    ],
+    "qid": "4b57ad56"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "nefopam",
+    "line": "Its terminal half-life is 3 to 8 hours, while that of its active metabolite , desmethylnefopam, is 10 to 15 hours.",
+    "durations": [
+     {
+      "hours": 3.0,
+      "hours_max": 8.0
+     },
+     {
+      "hours": 10.0,
+      "hours_max": 15.0
+     }
+    ],
+    "qid": "c30eca38"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "68943687",
+    "line": "La demi-vie plasmatique moyenne est de 5 heures.",
+    "durations": [
+     {
+      "hours": 5.0
+     }
+    ],
+    "qid": "5eb67edf"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "68943687",
+    "line": "Lors d'une administration par voie IV d'une même dose, la demi-vie plasmatique moyenne est de 4 heures.",
+    "durations": [
+     {
+      "hours": 4.0
+     }
+    ],
+    "qid": "0f8b784b"
+   }
+  ]
+ },
+ "nordazepam": {
+  "name": "Nordazepam",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "nordazepam",
+    "line": "Elimination half-life | 36–200 hours",
+    "durations": [
+     {
+      "hours": 36.0,
+      "hours_max": 200.0
+     }
+    ],
+    "qid": "40009649"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "nordazepam",
+    "line": "Its elimination half-life is between 36 and 200 hours , with wide variation among individuals;",
+    "durations": [
+     {
+      "hours": 200.0
+     }
+    ],
+    "qid": "35798b27"
+   }
+  ]
+ },
+ "piribedil": {
+  "name": "Piribedil",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "piribedil",
+    "line": "Elimination half-life | 1.7–6.9 hours",
+    "durations": [
+     {
+      "hours": 1.7,
+      "hours_max": 6.9
+     }
+    ],
+    "qid": "f770d8a5"
+   }
+  ]
+ },
+ "eslicarbazepine_acetate": {
+  "name": "Eslicarbazepine acetate",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "eslicarbazepine_acetate",
+    "line": "Elimination half-life | 10–20 hours",
+    "durations": [
+     {
+      "hours": 10.0,
+      "hours_max": 20.0
+     }
+    ],
+    "qid": "866d29c3"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "eslicarbazepine_acetate",
+    "line": "Biological half-life is 10 to 20 hours, and steady-state concentrations are reached after four to five days after start of the treatment.",
+    "durations": [
+     {
+      "hours": 10.0,
+      "hours_max": 20.0
+     }
+    ],
+    "qid": "d1cf4212"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "63927729",
+    "line": "L'état d'équilibre plasmatique est obtenu après 4 à 5 jours de doses uniques quotidiennes, ce qui corrèle avec une demi-vie effective de l’ordre de 20 à 24 heures.",
+    "durations": [
+     {
+      "hours": 96.0,
+      "hours_max": 120.0
+     },
+     {
+      "hours": 20.0,
+      "hours_max": 24.0
+     }
+    ],
+    "qid": "537122cf"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "63927729",
+    "line": "Les études portant sur des sujets sains et des patients épileptiques adultes ont montré une demi-vie apparente de l'eslicarbazépine de 10 à 20 heures et de 13 à 20 heures, respectivement.",
+    "durations": [
+     {
+      "hours": 10.0,
+      "hours_max": 20.0
+     },
+     {
+      "hours": 13.0,
+      "hours_max": 20.0
+     }
+    ],
+    "qid": "105aea2a"
+   }
+  ]
+ },
+ "oxetorone": {
+  "name": "Oxetorone",
+  "candidates": [
+   {
+    "corpus": "bdpm",
+    "page": "69768949",
+    "line": "La demi-vie d'élimination est d'environ 24h.",
+    "durations": [
+     {
+      "hours": 24.0
+     }
+    ],
+    "qid": "2e8cc713"
+   }
+  ]
  }
 }

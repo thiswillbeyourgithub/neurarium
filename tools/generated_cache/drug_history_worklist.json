@@ -2028,6 +2028,27 @@
      "qid": "bb4b14b7"
     },
     {
+     "corpus": "wikipedia_pharm",
+     "page": "esketamine",
+     "line": "Johnson & Johnson filed a Food and Drug Administration (FDA) New Drug Application (NDA) for approval on 4 September 2018;",
+     "context": "In November 2017, it completed phase III clinical trials for treatment-resistant depression in the United States.",
+     "qid": "f092e772"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "esketamine",
+     "line": "the application was endorsed by an FDA advisory panel on 12 February 2019, and on 5 March 2019, the FDA approved esketamine, in conjunction with an oral antidepressant, for the treatment of depression in adults.",
+     "context": "Johnson & Johnson filed a Food and Drug Administration (FDA) New Drug Application (NDA) for approval on 4 September 2018;",
+     "qid": "a6d4b249"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "esketamine",
+     "line": "In August 2020, it was approved by the U.S.",
+     "context": "the application was endorsed by an FDA advisory panel on 12 February 2019, and on 5 March 2019, the FDA approved esketamine, in conjunction with an oral antidepressant, for the treatment of depression in adults.",
+     "qid": "15b7b68b"
+    },
+    {
      "corpus": "wikipedia_fr",
      "page": "esk_tamine",
      "line": "L'eskétamine a été introduite pour un usage médical en 1997 .",
@@ -3490,6 +3511,13 @@
      "line": "the first patents were issued in The Netherlands in 1967, and it was launched in West Germany in 1975 , in France in 1979 under the brand name Athymil, and in the UK as Norval.",
      "context": "It was developed but not discovered by Organon International ;",
      "qid": "38bc2e42"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "mianserin",
+     "line": "A mianserin generic drug received TGA approval in May 1996 and is available in Australia .",
+     "context": "Mianserin is not approved for use in the United States , but is available in the United Kingdom and other European countries.",
+     "qid": "90f7d63a"
     }
    ]
   },
@@ -6208,7 +6236,7 @@
      "corpus": "wikipedia_pharm",
      "page": "cannabidiol",
      "line": "Food and beverage products containing cannabidiol were widely marketed in the United States as early as 2017.",
-     "context": "Cannabidiol is the generic name of the drug and its INN",
+     "context": "Cannabidiol is the generic name of the drug and its INN .",
      "qid": "e2ef5778"
     },
     {
@@ -7623,7 +7651,7 @@
      "corpus": "wikipedia_pharm",
      "page": "pseudoephedrine",
      "line": "Pseudoephedrine was on the International Olympic Committee 's (IOC) banned substances list until 2004 when the World Anti-Doping Agency (WADA) list replaced the IOC list.",
-     "context": "A subsequent 2018 meta-analysis , which included seven additional studies, found that pseudoephedrine had a small positive effect on heart rate ( SMD",
+     "context": "It is relevant in this regard that caffeine is a permitted stimulant in competitive sports.",
      "qid": "eeb5e60d"
     },
     {
@@ -7806,6 +7834,178 @@
      "line": "Subsequent review of the data revealed inadequacies, leading the FDA to issue a notice of intent to withdraw approval in 1968.",
      "context": "This prompted an FDA investigation, culminating in the agency obtaining Elia's original study data in April 1967.",
      "qid": "ce2a06b5"
+    }
+   ]
+  },
+  "iproniazid": {
+   "name": "Iproniazid",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "iproniazid",
+     "line": "The medical use of iproniazid was discontinued in most of the world in the 1960s, but remained in use in France until 2015.",
+     "context": "However, it was withdrawn from the market because of its hepatotoxicity .",
+     "qid": "6bf59385"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "iproniazid",
+     "line": "Subsequently, adding an isopropyl chain onto isoniazid led to the development of iproniazid as an antidepressant and it was approved for use in 1958.",
+     "context": "Iproniazid was originally developed for the treatment of tuberculosis , but in 1952, the compounds's antidepressant properties were discovered when researchers noted that patients became inappropriately happy when given isoniazid , a related antibiotic .",
+     "qid": "6fd18004"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "iproniazid",
+     "line": "It was withdrawn in most of the world a few years later in 1961 due to a high incidence of hepatitis , and was replaced by less hepatotoxic drugs such as phenelzine and isocarboxazid .",
+     "context": "Subsequently, adding an isopropyl chain onto isoniazid led to the development of iproniazid as an antidepressant and it was approved for use in 1958.",
+     "qid": "41d8aedd"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "iproniazid",
+     "line": "Canada withdrew iproniazid in July 1964 due to interactions with food products containing tyramine.",
+     "context": "It was withdrawn in most of the world a few years later in 1961 due to a high incidence of hepatitis , and was replaced by less hepatotoxic drugs such as phenelzine and isocarboxazid .",
+     "qid": "0d23a3f6"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "iproniazid",
+     "line": "Although iproniazid was one of the first antidepressants ever marketed, dextroamphetamine (marketed as Benzedrine from 1935, for \"mild depression\", amid other indications) predates it;",
+     "context": "Despite its being swiftly withdrawn, iproniazid helped establish the relationship between psychiatric disorders and the metabolism of neurotransmitters.",
+     "qid": "38d88b60"
+    }
+   ]
+  },
+  "etifoxine": {
+   "name": "Etifoxine",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "etifoxine",
+     "line": "Etifoxine was developed in the 1960s and was introduced for medical use in France in 1979.",
+     "context": "Etifoxine acts as a ligand for translocator proteins .",
+     "qid": "86f1a44a"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "etifoxine",
+     "line": "It was introduced for medical use in France in 1979.",
+     "context": "Etifoxine was developed by Hoechst in the 1960s.",
+     "qid": "57753159"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "etifoxine",
+     "line": "Since at least 2000, etifoxine has been marketed by the French pharmaceutical company Biocodex.",
+     "context": "It was introduced for medical use in France in 1979.",
+     "qid": "64137c89"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "etifoxine",
+     "line": "Etifoxine has been marketed in 53 countries as of 2022.",
+     "context": "It has also been marketed under the brand name Strezam .",
+     "qid": "ce041752"
+    }
+   ]
+  },
+  "eslicarbazepine_acetate": {
+   "name": "Eslicarbazepine acetate",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "eslicarbazepine_acetate",
+     "line": "The drug was approved in the European Union in April 2009 under the trade names Zebinix and Exalief , but was marketed only under the first name.",
+     "context": "In early 2009, Bial sold the marketing rights in Europe to the Japanese company Eisai .",
+     "qid": "115b725c"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "eslicarbazepine_acetate",
+     "line": "In the US it is marketed by Sunovion (formerly Sepracor) and was approved in November 2013.",
+     "context": "The drug was approved in the European Union in April 2009 under the trade names Zebinix and Exalief , but was marketed only under the first name.",
+     "qid": "184e066f"
+    }
+   ]
+  },
+  "stiripentol": {
+   "name": "Stiripentol",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "stiripentol",
+     "line": "In December 2001, the European Medicines Agency (EMA) granted stiripentol orphan drug status (designation number EU/3/01/071) for the treatment of Dravet syndrome in children and in January 2007, the EMA granted the drug a marketing authorisation for use of the drug as an add-on to other anti-seizure drugs.",
+     "context": "It was originally developed for adults with focal seizures, but failed a Phase III trial.",
+     "qid": "ea2c5e10"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "stiripentol",
+     "line": "It was approved in Canada for this use in May 2013.",
+     "context": "In December 2001, the European Medicines Agency (EMA) granted stiripentol orphan drug status (designation number EU/3/01/071) for the treatment of Dravet syndrome in children and in January 2007, the EMA granted the drug a marketing authorisation for use of the drug as an add-on to other anti-seizure drugs.",
+     "qid": "baea3aec"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "stiripentol",
+     "line": "As of 2017, it was also approved for this use in Japan.",
+     "context": "It was approved in Canada for this use in May 2013.",
+     "qid": "291d5998"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "stiripentol",
+     "line": "In August 2018, stiripentol was approved by the US Food and Drug Administration (FDA) as an adjunctive therapy for Dravet Syndrome.",
+     "context": "As of 2017, it was also approved for this use in Japan.",
+     "qid": "c9bd0f6b"
+    }
+   ]
+  },
+  "opium": {
+   "name": "Opium",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opium",
+     "line": "Opium was banned completely in 1799, and this prohibition continued until 1860.",
+     "context": "The ban punished sellers and opium den keepers, but not users of the drug.",
+     "qid": "f5eff9dc"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opium",
+     "line": "based on a study of opiate use in soldiers returning to the United States in 1971, 20 percent of participants were dependent enough to experience withdrawal symptoms.",
+     "context": "The remnant opium trade primarily served Southeast Asia, but spread to American soldiers during the Vietnam War ;",
+     "qid": "9063c7eb"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opium",
+     "line": "There were no legal restrictions on the importation or use of opium in the United States until the San Francisco Opium Den Ordinance, which banned dens for public smoking of opium in 1875, a measure fueled by anti-Chinese sentiment and the perception that whites were starting to frequent the dens.",
+     "context": "based on a study of opiate use in soldiers returning to the United States in 1971, 20 percent of participants were dependent enough to experience withdrawal symptoms.",
+     "qid": "9c499a95"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opium",
+     "line": "From 1898 to 1910 heroin was marketed as a non-addictive morphine substitute and cough medicine for children.",
+     "context": "Heroin , the first semi-synthetic opioid, was first synthesized in 1874, but was not pursued until its rediscovery in 1897 by Felix Hoffmann at the Bayer pharmaceutical company in Elberfeld , Germany .",
+     "qid": "b88113ab"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opium",
+     "line": "Oxycodone , a thebaine derivative similar to codeine , was introduced by Bayer in 1916 and promoted as a less-addictive analgesic.",
+     "context": "By 1902, sales made up 5 percent of the company's profits, and \"heroinism\" had attracted media attention.",
+     "qid": "1663e8e5"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opium",
+     "line": "A range of synthetic opioids such as methadone (1937), pethidine (1939), fentanyl (late 1950s), and derivatives thereof have been introduced, and each is preferred for certain specialized applications.",
+     "context": "Preparations of the drug such as oxycodone with paracetamol and extended release oxycodone remain popular to this day.",
+     "qid": "3d50b8be"
     }
    ]
   }

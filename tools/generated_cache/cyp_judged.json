@@ -233,20 +233,20 @@
   },
   {
    "enzyme": "cyp2d6",
-   "n": 4,
+   "n": 6,
    "role": "substrate",
    "qid": "fb400753"
   },
   {
    "enzyme": "cyp2d6",
-   "n": 19,
+   "n": 21,
    "role": "substrate",
    "strength": "major",
    "qid": "0296cc9a"
   },
   {
    "enzyme": "cyp2c19",
-   "n": 19,
+   "n": 21,
    "role": "substrate",
    "qid": "0296cc9a"
   }
@@ -3926,6 +3926,20 @@
    "n": 0,
    "role": "substrate",
    "qid": "dbafe4a0"
+  }
+ ],
+ "eslicarbazepine_acetate": [
+  {
+   "enzyme": "cyp3a4",
+   "n": 1,
+   "role": "inducer",
+   "qid": "228f4ab1"
+  },
+  {
+   "enzyme": "cyp2c19",
+   "n": 1,
+   "role": "inhibitor",
+   "qid": "228f4ab1"
   }
  ]
 }

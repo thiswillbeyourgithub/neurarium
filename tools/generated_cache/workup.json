@@ -1117,6 +1117,35 @@
     "timing": "before"
    }
   ],
+  "eslicarbazepine_acetate": [
+   {
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "63927729",
+      "provenance": "verified",
+      "quote": "Une hyponatrémie a été rapportée chez 1,5 % des patients traités par acétate d’eslicarbazépine. Celle-ci était asymptomatique dans la plupart des cas, mais pouvait également être accompagnée de symptômes cliniques comme une aggravation des crises, une confusion ou une diminution de la conscience. La fréquence de l’hyponatrémie augmentait avec la dose d’acétate d’eslicarbazépine. Chez les patients atteints d’une affection rénale préexistante entraînant une hyponatrémie ou chez les patients recevant un traitement concomitant susceptible d’entraîner une hyponatrémie (ex. diurétiques, desmopressine, carbamazépine), il est recommandé de contrôler le sodium sérique des patients avant et pendant le traitement par acétate d’eslicarbazépine. De plus, le sodium sérique sera surveillé en cas d’apparition de signes d’hyponatrémie. Le sodium sérique sera également surveillé de manière régulière tout au long du traitement. En cas d’hyponatrémie cliniquement significative, le traitement par acétate d’eslicarbazépine devra être interrompu."
+     }
+    ],
+    "test": "electrolytes",
+    "timing": "during"
+   },
+   {
+    "conditions": [
+     "Chez les patients atteints d’une affection rénale préexistante entraînant une hyponatrémie"
+    ],
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "63927729",
+      "provenance": "verified",
+      "quote": "Une hyponatrémie a été rapportée chez 1,5 % des patients traités par acétate d’eslicarbazépine. Celle-ci était asymptomatique dans la plupart des cas, mais pouvait également être accompagnée de symptômes cliniques comme une aggravation des crises, une confusion ou une diminution de la conscience. La fréquence de l’hyponatrémie augmentait avec la dose d’acétate d’eslicarbazépine. Chez les patients atteints d’une affection rénale préexistante entraînant une hyponatrémie ou chez les patients recevant un traitement concomitant susceptible d’entraîner une hyponatrémie (ex. diurétiques, desmopressine, carbamazépine), il est recommandé de contrôler le sodium sérique des patients avant et pendant le traitement par acétate d’eslicarbazépine. De plus, le sodium sérique sera surveillé en cas d’apparition de signes d’hyponatrémie. Le sodium sérique sera également surveillé de manière régulière tout au long du traitement. En cas d’hyponatrémie cliniquement significative, le traitement par acétate d’eslicarbazépine devra être interrompu."
+     }
+    ],
+    "test": "electrolytes",
+    "timing": "before"
+   }
+  ],
   "ethosuximide": [
    {
     "sources": [
@@ -1140,6 +1169,38 @@
       "page": "68481191",
       "provenance": "verified",
       "quote": "En cas d'affection rénale, ou hépatique, l'éthosuximide doit être utilisé avec prudence puisque des altérations des fonctions rénales et hépatiques ont été rapportées ; des bilans urinaires et des tests hépatiques devront être pratiqués régulièrement."
+     }
+    ],
+    "test": "liver_function",
+    "timing": "during"
+   }
+  ],
+  "etifoxine": [
+   {
+    "conditions": [
+     "Chez les patients présentant des facteurs de risque"
+    ],
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "63136857",
+      "provenance": "verified",
+      "quote": "Depuis la mise sur le marché, des cas graves de cytolyse hépatique ont été rapportés lors de traitements avec de l’étifoxine, à une fréquence très rare. D’après les données collectées depuis la mise sur le marché du produit, les réactions hépatiques liées à l’étifoxine surviennent généralement 2 à 4 semaines après l’initiation du traitement. Des précautions doivent être prises avec les patients présentant des facteurs de risque de troubles hépatiques, tels que la population âgée, les patients ayant des antécédents médicaux d’hépatite virale ou de toute autre pathologie identifiée individuellement par le médecin. Les troubles hépatiques peuvent être asymptomatiques et uniquement détectés lors d’analyses biologiques. Chez les patients présentant des facteurs de risque, des analyses biologiques de la fonction hépatique doivent être effectuées avant l’introduction d’un traitement à base d’étifoxine et environ un mois après le début du traitement. En cas de survenue de troubles hépatiques sous étifoxine, le traitement doit être immédiatement interrompu et ne doit jamais être réintroduit."
+     }
+    ],
+    "test": "liver_function",
+    "timing": "before"
+   },
+   {
+    "conditions": [
+     "Chez les patients présentant des facteurs de risque"
+    ],
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "63136857",
+      "provenance": "verified",
+      "quote": "Depuis la mise sur le marché, des cas graves de cytolyse hépatique ont été rapportés lors de traitements avec de l’étifoxine, à une fréquence très rare. D’après les données collectées depuis la mise sur le marché du produit, les réactions hépatiques liées à l’étifoxine surviennent généralement 2 à 4 semaines après l’initiation du traitement. Des précautions doivent être prises avec les patients présentant des facteurs de risque de troubles hépatiques, tels que la population âgée, les patients ayant des antécédents médicaux d’hépatite virale ou de toute autre pathologie identifiée individuellement par le médecin. Les troubles hépatiques peuvent être asymptomatiques et uniquement détectés lors d’analyses biologiques. Chez les patients présentant des facteurs de risque, des analyses biologiques de la fonction hépatique doivent être effectuées avant l’introduction d’un traitement à base d’étifoxine et environ un mois après le début du traitement. En cas de survenue de troubles hépatiques sous étifoxine, le traitement doit être immédiatement interrompu et ne doit jamais être réintroduit."
      }
     ],
     "test": "liver_function",
@@ -1503,6 +1564,32 @@
       "page": "67117128",
       "provenance": "verified",
       "quote": "Une surveillance périodique des enzymes hépatiques est recommandée chez les patients souffrant de troubles hépatiques."
+     }
+    ],
+    "test": "liver_function",
+    "timing": "during"
+   }
+  ],
+  "iproniazid": [
+   {
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61561635",
+      "provenance": "verified",
+      "quote": "Contrôler régulièrement la tension artérielle."
+     }
+    ],
+    "test": "blood_pressure",
+    "timing": "during"
+   },
+   {
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61561635",
+      "provenance": "verified",
+      "quote": "Contrôler régulièrement les fonctions hépatique, rénale et adapter la posologie en cas d'insuffisance rénale."
      }
     ],
     "test": "liver_function",
@@ -2629,6 +2716,35 @@
     "timing": "during"
    }
   ],
+  "periciazine": [
+   {
+    "conditions": [
+     "l'apparition de fièvre, d'angine ou d'une autre infection"
+    ],
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "64676824",
+      "provenance": "verified",
+      "quote": "Tout patient doit être informé que l'apparition de fièvre, d'angine ou d'une autre infection impose d'avertir tout de suite le médecin traitant et de contrôler immédiatement l'hémogramme. En cas de modification franche de ce dernier (hyperleucocytose, granulopénie), l'administration de ce traitement sera interrompue."
+     }
+    ],
+    "test": "blood_count",
+    "timing": "during"
+   },
+   {
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "64676824",
+      "provenance": "verified",
+      "quote": "Traitement en cours par un médicament susceptible d'entraîner une bradycardie marquée (Hormis les situations d'urgence, il est recommandé d'effectuer un ECG dans le bilan initial des patients devant être traités par un neuroleptique."
+     }
+    ],
+    "test": "ecg",
+    "timing": "before"
+   }
+  ],
   "phenobarbital": [
    {
     "conditions": [
@@ -2781,6 +2897,20 @@
     ],
     "test": "ecg",
     "timing": "before"
+   }
+  ],
+  "piribedil": [
+   {
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61598530",
+      "provenance": "verified",
+      "quote": "Il est recommandé de surveiller la pression artérielle, en particulier au début du traitement, étant donné le risque d’hypotension orthostatique associé à un traitement dopaminergique."
+     }
+    ],
+    "test": "blood_pressure",
+    "timing": "during"
    }
   ],
   "pramipexole": [
@@ -3180,6 +3310,56 @@
     "timing": "during"
    }
   ],
+  "stiripentol": [
+   {
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61501691",
+      "provenance": "verified",
+      "quote": "Une neutropénie peut être associée à l’administration de stiripentol, clobazam et valproate de sodium. La numération-formule sanguine doit être vérifiée avant l’instauration du traitement par le stiripentol. Sauf si la situation clinique l’indique autrement, la numération-formule doit être vérifiée tous les six mois."
+     }
+    ],
+    "test": "blood_count",
+    "timing": "before"
+   },
+   {
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61501691",
+      "provenance": "verified",
+      "quote": "Une neutropénie peut être associée à l’administration de stiripentol, clobazam et valproate de sodium. La numération-formule sanguine doit être vérifiée avant l’instauration du traitement par le stiripentol. Sauf si la situation clinique l’indique autrement, la numération-formule doit être vérifiée tous les six mois."
+     }
+    ],
+    "test": "blood_count",
+    "timing": "during"
+   },
+   {
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61501691",
+      "provenance": "verified",
+      "quote": "Elle doit être vérifiée avant l’instauration du traitement par stiripentol. Sauf si la situation clinique l’indique autrement, la fonction hépatique doit être vérifiée tous les six mois."
+     }
+    ],
+    "test": "liver_function",
+    "timing": "before"
+   },
+   {
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61501691",
+      "provenance": "verified",
+      "quote": "Elle doit être vérifiée avant l’instauration du traitement par stiripentol. Sauf si la situation clinique l’indique autrement, la fonction hépatique doit être vérifiée tous les six mois."
+     }
+    ],
+    "test": "liver_function",
+    "timing": "during"
+   }
+  ],
   "sulpiride": [
    {
     "sources": [
@@ -3446,6 +3626,56 @@
      }
     ],
     "test": "coagulation",
+    "timing": "during"
+   }
+  ],
+  "valpromide": [
+   {
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "63737879",
+      "provenance": "verified",
+      "quote": "Une surveillance des fonctions hépatiques doit être effectuée avant le début du traitement et régulièrement pendant les 6 premiers mois du traitement, en particulier chez les patients à risque."
+     }
+    ],
+    "test": "liver_function",
+    "timing": "before"
+   },
+   {
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "63737879",
+      "provenance": "verified",
+      "quote": "Une surveillance des fonctions hépatiques doit être effectuée avant le début du traitement et régulièrement pendant les 6 premiers mois du traitement, en particulier chez les patients à risque."
+     }
+    ],
+    "test": "liver_function",
+    "timing": "during"
+   },
+   {
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "63737879",
+      "provenance": "verified",
+      "quote": "Un examen hématologique (NFS incluant les plaquettes, temps de saignement et bilan de coagulation) est recommandé préalablement au traitement, à 15 jours de traitement, puis des contrôles réguliers sont recommandés et à l’arrêt du traitement, ainsi qu’avant une intervention chirurgicale et en cas d’hématomes ou de saignements spontanés (cf. rubrique 4.8)."
+     }
+    ],
+    "test": "blood_count",
+    "timing": "before"
+   },
+   {
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "63737879",
+      "provenance": "verified",
+      "quote": "Un examen hématologique (NFS incluant les plaquettes, temps de saignement et bilan de coagulation) est recommandé préalablement au traitement, à 15 jours de traitement, puis des contrôles réguliers sont recommandés et à l’arrêt du traitement, ainsi qu’avant une intervention chirurgicale et en cas d’hématomes ou de saignements spontanés (cf. rubrique 4.8)."
+     }
+    ],
+    "test": "blood_count",
     "timing": "during"
    }
   ],
