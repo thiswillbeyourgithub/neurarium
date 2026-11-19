@@ -1769,6 +1769,46 @@
     "value": 4.3
    }
   },
+  "carpipramine": {
+   "bbb": {
+    "label": "BBB+",
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "2580",
+      "provenance": "verified",
+      "quote": "B3DB row 2282: carpipramine | CID 2580 | logBB - | BBB+ | group B | references R1, R13, R19, R6, R14, R23, R24, R27, R27, R27, R30, R30"
+     }
+    ]
+   },
+   "cid": 2580,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "2580",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 52.8 Å²"
+     }
+    ],
+    "value": 52.8
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "2580",
+      "provenance": "verified",
+      "quote": "XLogP3: 4.5"
+     }
+    ],
+    "value": 4.5
+   }
+  },
   "chloral_hydrate": {
    "bbb": {
     "label": "BBB+",
@@ -3286,6 +3326,33 @@
     "value": 2.2
    }
   },
+  "eslicarbazepine_acetate": {
+   "cid": 179344,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "179344",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 72.6 Å²"
+     }
+    ],
+    "value": 72.6
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "179344",
+      "provenance": "verified",
+      "quote": "XLogP3: 2"
+     }
+    ],
+    "value": 2.0
+   }
+  },
   "estazolam": {
    "bbb": {
     "label": "BBB+",
@@ -3446,6 +3513,46 @@
      }
     ],
     "value": 0.4
+   }
+  },
+  "etifoxine": {
+   "bbb": {
+    "label": "BBB+",
+    "match": "name",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "135413553",
+      "provenance": "verified",
+      "quote": "B3DB row 1623: etifoxine | CID 135413553 | logBB - | BBB+ | group B | references R1, R13, R19, R6, R27, R27, R30"
+     }
+    ]
+   },
+   "cid": 30768,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "30768",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 33.6 Å²"
+     }
+    ],
+    "value": 33.6
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "30768",
+      "provenance": "verified",
+      "quote": "XLogP3: 4"
+     }
+    ],
+    "value": 4.0
    }
   },
   "etomidate": {
@@ -4489,6 +4596,46 @@
      }
     ],
     "value": 3.3
+   }
+  },
+  "iproniazid": {
+   "bbb": {
+    "label": "BBB+",
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "3748",
+      "provenance": "verified",
+      "quote": "B3DB row 1267: iproniazid | CID 3748 | logBB - | BBB+ | group B | references R1, R13, R19, R6, R24, R26, R27, R27, R27, R30, R30"
+     }
+    ]
+   },
+   "cid": 3748,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "3748",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 54 Å²"
+     }
+    ],
+    "value": 54.0
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "3748",
+      "provenance": "verified",
+      "quote": "XLogP3: 0.4"
+     }
+    ],
+    "value": 0.4
    }
   },
   "isocarboxazid": {
@@ -6452,6 +6599,46 @@
     "value": 4.3
    }
   },
+  "nefopam": {
+   "bbb": {
+    "label": "BBB+",
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "4450",
+      "provenance": "verified",
+      "quote": "B3DB row 1867: nefopam | CID 4450 | logBB - | BBB+ | group B | references R1, R19, R6, R14, R23, R27, R27, R30"
+     }
+    ]
+   },
+   "cid": 4450,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "4450",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 12.5 Å²"
+     }
+    ],
+    "value": 12.5
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "4450",
+      "provenance": "verified",
+      "quote": "XLogP3: 2.9"
+     }
+    ],
+    "value": 2.9
+   }
+  },
   "niaprazine": {
    "bbb": {
     "label": "BBB+",
@@ -6612,6 +6799,47 @@
      }
     ],
     "value": 2.2
+   }
+  },
+  "nordazepam": {
+   "bbb": {
+    "label": "BBB+",
+    "logbb": 0.5,
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "2997",
+      "provenance": "verified",
+      "quote": "B3DB row 825: 1088-11-5 | CID 2997 | logBB 0.5 | BBB+ | group A | references R3, R5, R11, R12, R18, R25, R26, R27, R31, R35, R36, R38, R39, R41, R43, R47, R2, R2, R8, R27, R21, R27, R40, R4"
+     }
+    ]
+   },
+   "cid": 2997,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "2997",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 41.5 Å²"
+     }
+    ],
+    "value": 41.5
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "2997",
+      "provenance": "verified",
+      "quote": "XLogP3: 2.9"
+     }
+    ],
+    "value": 2.9
    }
   },
   "nortriptyline": {
@@ -6869,6 +7097,33 @@
     "value": 1.7
    }
   },
+  "oxetorone": {
+   "cid": 6436540,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "6436540",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 25.6 Å²"
+     }
+    ],
+    "value": 25.6
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "6436540",
+      "provenance": "verified",
+      "quote": "XLogP3: 4.1"
+     }
+    ],
+    "value": 4.1
+   }
+  },
   "oxycodone": {
    "bbb": {
     "label": "BBB+",
@@ -7031,6 +7286,46 @@
     "value": 3.5
    }
   },
+  "penfluridol": {
+   "bbb": {
+    "label": "BBB+",
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "33630",
+      "provenance": "verified",
+      "quote": "B3DB row 2524: penfluridol | CID 33630 | logBB - | BBB+ | group B | references R1, R13, R19, R6, R14, R23, R24, R27, R27, R27, R30, R30"
+     }
+    ]
+   },
+   "cid": 33630,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "33630",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 23.5 Å²"
+     }
+    ],
+    "value": 23.5
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "33630",
+      "provenance": "verified",
+      "quote": "XLogP3: 7.3"
+     }
+    ],
+    "value": 7.3
+   }
+  },
   "pentazocine": {
    "bbb": {
     "label": "BBB+",
@@ -7177,6 +7472,46 @@
      }
     ],
     "value": 4.1
+   }
+  },
+  "periciazine": {
+   "bbb": {
+    "label": "BBB+",
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "4747",
+      "provenance": "verified",
+      "quote": "B3DB row 2276: pericyazine | CID 4747 | logBB - | BBB+ | group B | references R1, R13, R19, R6, R14, R23, R24, R27, R27, R27, R30, R30"
+     }
+    ]
+   },
+   "cid": 4747,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "4747",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 75.8 Å²"
+     }
+    ],
+    "value": 75.8
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "4747",
+      "provenance": "verified",
+      "quote": "XLogP3: 3.5"
+     }
+    ],
+    "value": 3.5
    }
   },
   "perospirone": {
@@ -7667,6 +8002,46 @@
      }
     ],
     "value": 3.5
+   }
+  },
+  "piribedil": {
+   "bbb": {
+    "label": "BBB+",
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "4850",
+      "provenance": "verified",
+      "quote": "B3DB row 2580: piribedil | CID 4850 | logBB - | BBB+ | group B | references R1, R13, R19, R6, R24, R27, R27, R27, R30, R30"
+     }
+    ]
+   },
+   "cid": 4850,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "4850",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 50.7 Å²"
+     }
+    ],
+    "value": 50.7
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "4850",
+      "provenance": "verified",
+      "quote": "XLogP3: 1.8"
+     }
+    ],
+    "value": 1.8
    }
   },
   "pitolisant": {
@@ -9200,6 +9575,46 @@
     "value": 0.6
    }
   },
+  "stiripentol": {
+   "bbb": {
+    "label": "BBB+",
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "5311454",
+      "provenance": "verified",
+      "quote": "B3DB row 1227: stiripentol | CID 5311454 | logBB - | BBB+ | group B | references R1, R7, R6, R14, R23, R27, R29, R30"
+     }
+    ]
+   },
+   "cid": 5311454,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "5311454",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 38.7 Å²"
+     }
+    ],
+    "value": 38.7
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "5311454",
+      "provenance": "verified",
+      "quote": "XLogP3: 3.6"
+     }
+    ],
+    "value": 3.6
+   }
+  },
   "sulfonmethane": {
    "bbb": {
     "label": "BBB+",
@@ -10294,6 +10709,46 @@
     "value": 2.8
    }
   },
+  "valpromide": {
+   "bbb": {
+    "label": "BBB+",
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "71113",
+      "provenance": "verified",
+      "quote": "B3DB row 1504: valpromide | CID 71113 | logBB - | BBB+ | group B | references R1, R13, R19, R6, R24, R27, R27, R27, R30, R30"
+     }
+    ]
+   },
+   "cid": 71113,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "71113",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 43.1 Å²"
+     }
+    ],
+    "value": 43.1
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "71113",
+      "provenance": "verified",
+      "quote": "XLogP3: 2.1"
+     }
+    ],
+    "value": 2.1
+   }
+  },
   "varenicline": {
    "bbb": {
     "label": "BBB+",
@@ -10962,6 +11417,7 @@
   "naltrexonebupropion": "combination",
   "nitrous_oxide": "no PubChem CID in the drugbox",
   "olanzapinesamidorphan": "combination",
+  "opium": "combination",
   "phenterminetopiramate": "combination",
   "rubidium_chloride": "PubChem CID 62683: a salt or mixture",
   "sodium_oxybate": "PubChem CID 23663870: a salt or mixture",
