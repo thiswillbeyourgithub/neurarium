@@ -75,16 +75,16 @@ API = "http://api.brain-map.org/api/v2/data/query.json"
 DOWNLOAD = "http://human.brain-map.org/api/v2/well_known_file_download/{fid}"
 
 # The 6 AHBA donors -> the well_known_file id of their NormalizedMicroarrayDataAsCSV zip
-# (id verified against the file's own metadata ``path``, which names the donor). Donor
-# 15496's zip (file 178238266) currently 404s on the Allen download server, so a run
-# yields 5 donors; ``download_donor`` skips an unreachable one with a warning rather than
-# aborting (5 human donors is ample sample coverage for a presence call).
+# (id verified against the file's own metadata ``path``, which names the donor). All six
+# download (donor 15496's zip 404ed for a while in 2026); ``download_donor`` still skips
+# an unreachable one with a warning rather than aborting, so an outage costs a donor, not
+# the run.
 DONORS = {
     9861: 178238387,   # H0351.2001
     10021: 178238373,  # H0351.2002
     12876: 178238359,  # H0351.1009
     14380: 178238316,  # H0351.1012
-    15496: 178238266,  # H0351.1015  (Allen server 404s this file; skipped with a warning)
+    15496: 178238266,  # H0351.1015
     15697: 178236545,  # H0351.1016
 }
 
@@ -161,7 +161,7 @@ def build_structure_bases(structs: list[dict]) -> dict[int, list[str]]:
 
 def download_donor(donor: int) -> Path | None:
     """Download a donor's normalized microarray zip if absent (~426 MB). Returns None
-    (with a warning) if the file is unreachable, e.g. Allen 404s donor 15496's zip, so the
+    (with a warning) if the file is unreachable (an HTTP error from Allen's server), so the
     run continues on the donors that are available rather than aborting."""
     RAW.mkdir(parents=True, exist_ok=True)
     dest = RAW / f"normalized_microarray_donor{donor}.zip"
