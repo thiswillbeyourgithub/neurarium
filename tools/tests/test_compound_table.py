@@ -69,5 +69,23 @@ class CompoundTableTest(unittest.TestCase):
         self.assertEqual(joined, ["Desmethylsibutramine"])
 
 
+@unittest.skipUnless(HAS_BS4, "bs4 not installed")
+class ProseTooltipTest(unittest.TestCase):
+    """An <abbr> tooltip mid-paragraph must not cut the rest of the sentence (oxetorone's
+    lead was stored as "Oxetorone ( INN"), while a table cell still drops its tail."""
+
+    SR = '<span class="sr-only">Tooltip {}</span>'
+
+    def test_prose_keeps_the_sentence_after_a_tooltip(self):
+        html = ('<div class="mw-parser-output"><p><b>Oxetorone</b> (<abbr>INN</abbr>'
+                + self.SR.format("International Nonproprietary Name")
+                + ') is a serotonin antagonist.</p><table><tr><th>Site</th><th>Ki</th></tr>'
+                '<tr><td>SERT' + self.SR.format("Serotonin transporter")
+                + '</td><td>29</td></tr></table></div>')
+        page = W.render_page_text(BeautifulSoup(html, "html.parser"))
+        self.assertIn("Oxetorone ( INN ) is a serotonin antagonist.", page)
+        self.assertIn("SERT | 29", page)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -270,6 +270,12 @@ def render_page_text(soup: BeautifulSoup) -> str:
     This is the quote-gate page: a Ki source quote is one of the emitted table rows,
     so it is guaranteed to appear here verbatim (check_data confirms substring)."""
     body = soup.find("div", class_="mw-parser-output") or soup
+    # An <abbr>'s screen-reader tail ("INN Tooltip International Nonproprietary Name")
+    # sits mid-sentence in prose, where clean_cell's cell-shaped TOOLTIP_RE would cut
+    # the rest of the paragraph. Tables keep it: their rows are quoted as cleaned.
+    for span in body.select("span.sr-only"):
+        if span.find_parent("table") is None and span.get_text().startswith("Tooltip"):
+            span.decompose()
     out: list[str] = []
     for el in body.find_all(["h2", "h3", "h4", "p", "table", "li"], recursive=True):
         if el.name in ("h2", "h3", "h4"):
