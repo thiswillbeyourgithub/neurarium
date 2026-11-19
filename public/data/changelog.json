@@ -1,6 +1,26 @@
 {
   "versions": [
     {
+      "version": "3.171.0",
+      "date": "2026-11-19",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Drugs are found in search by their former name or code name, such as trimeprazine for alimemazine, tomoxetine for atomoxetine or ORG-3770 for mirtazapine",
+          "commits": [
+            "c68e5121"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "Half-lives for clorazepate (40 to 50 h, Stahl) and prazepam (30 to 150 h, French SmPC), both really that of their shared active metabolite nordazepam; clorazepate's is flagged as contradicted by a study measuring about 2 h for the parent itself",
+          "commits": [
+            "11e1c39b"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.170.1",
       "date": "2026-11-19",
       "entries": [
