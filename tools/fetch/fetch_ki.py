@@ -92,12 +92,23 @@ COARSE_MEMBERS = {
 # Name and match a pattern -> our subtype/coarse id. `norm` lowercases + drops
 # every non-alphanumeric, so "adrenergic Alpha1A" -> "adrenergicalpha1a".
 NAME_PATTERNS = [
+    # GABA-A first: subunit-combination names ("GABA A Alpha1Beta3Gamma2") would
+    # otherwise be read as nicotinic (alpha1beta3) or adrenergic (alpha2). The
+    # benzodiazepine site, the GABA site and every subunit assay are the one `gaba_a`
+    # target. A bare "GABA" row stays unmapped: it may be GABA-B or uptake.
+    # A gamma2 subunit is GABA-A only, so a bare "alpha1beta3gamma2" is one too.
+    (re.compile(r"^gabaa|^gabareceptoralpha\dsubunit$|^alpha\dbeta\dgamma2$|"
+                r"^gabachloride|^gabapicrotoxin$"), "gaba_a"),
+    # "GABA B rho 1" is PDSP's label for the rho1 (GABA-C) subunit.
+    (re.compile(r"^gabac$|^gababrho1$"), "gaba_a_rho"),
+    (re.compile(r"^gabab(1[ab])?$"), "gaba_b"),
     # Nicotinic ACh receptors: PDSP lists these subtypes with a blank Unigene, so the
     # gene join misses them. Route the high-affinity a4b2 to `nachr_a4b2` and every
     # other neuronal subtype to `nachr_a7` as the "other nicotinic" bucket. These MUST
     # precede the adrenergic alpha patterns below, else a name like "Nicotinic
     # Alpha2Beta2" would be mis-read as adrenergic alpha2 (its substring "alpha2").
-    (re.compile(r"alpha4beta2|nicotinicalpha4beta2|^a4b2"), "nachr_a4b2"),
+    (re.compile(r"alpha4beta2|nicotinicalpha4beta2|^a4b2|"
+                r"^neuronalacetylcholinereceptorproteinalpha4subunit$"), "nachr_a4b2"),
     (re.compile(r"nicotinic|nachr|alpha\dbeta\d|alpha7|^a\db\d"), "nachr_a7"),
     # Transporters / ion channels / sigma PDSP also frequently lists with a blank
     # Unigene (the gene join covers the SLC*-labelled rows; these catch the rest).
@@ -127,6 +138,21 @@ NAME_PATTERNS = [
     (re.compile(r"alpha2"), "alpha2"),
     (re.compile(r"(^|[^0-9])h1($|[^0-9])|histamineh1"), "h1"),
     (re.compile(r"muscarinicm1"), "m1"),
+    # Dopamine names the patterns above miss: a bare "D1" / "D5", the D1 high/low
+    # affinity states, and the D4.2 / D4.4 repeat variants of the one DRD4 gene.
+    (re.compile(r"^d1$|^dopamined1(high|low)?$"), "d1"),
+    (re.compile(r"^d5$|^dopamined5$"), "d5"),
+    (re.compile(r"^dopamined4\d$"), "d4"),
+    (re.compile(r"^monoamineoxidasea$"), "mao_a"),
+    (re.compile(r"^monoamineoxidaseb$"), "mao_b"),
+    # Mel1a / Mel1b are the old names of MT1 / MT2; "Melatonin 1C" is a non-mammalian
+    # receptor and a bare "Melatonin" row names no subtype, so both stay unmapped.
+    (re.compile(r"^melatonin1a$|^mt1r?$"), "mt1"),
+    (re.compile(r"^melatonin1b$|^mt2r?$"), "mt2"),
+    # "OPIATE Mu 1" and its 1B4 splice variant are the one OPRM1 gene.
+    (re.compile(r"^opiatemu1"), "mu"),
+    (re.compile(r"^hypocretinreceptor[12]$"), "orexin"),
+    (re.compile(r"^phosphodiesterase5$"), "pde5"),
 ]
 
 
@@ -578,7 +604,15 @@ def analyze(rows, bound):
         if not s or not s.get("ki_nm"):
             continue
         med, mn = s["ki_nm"]["median"], s["ki_nm"]["min"]
-        if threshold is None or med >= threshold:
+        # Most assays found no binding (haloperidol at GABA-A: seven ">10000" rows,
+        # one bare 1000 screening value): the target is not a binding to add.
+        # Every row sitting exactly on a round screening ceiling (venlafaxine at
+        # GABA-A: three bare "1000" rows from a ">1000 nM" panel) is a null too.
+        ceiling_only = mn == s["ki_nm"]["max"] and mn in (1000, 10000)
+        if ceiling_only or (s["inactive"] + s["qualified_excluded"]
+                            > s["n_human"] + s["n_nonhuman"]):
+            weaker[tgt] = s
+        elif threshold is None or med >= threshold:
             (flagged_min_only if (threshold is not None and mn < threshold)
              else weaker)[tgt] = s
         else:

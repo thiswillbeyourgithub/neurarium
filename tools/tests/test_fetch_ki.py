@@ -330,6 +330,34 @@ class NonKiRowFilterTest(unittest.TestCase):
         self.assertEqual(s["qualified_excluded"], 1)
 
 
+class NullMajorityAutoAddTest(unittest.TestCase):
+    """An omitted target is not auto-added when its assays are mostly null results.
+    Regression: haloperidol, olanzapine, ... gained a GABA-A binding from one bare
+    1000 nM screening row next to seven ">10000" rows, venlafaxine from three rows
+    all sitting on a 1000 nM panel ceiling."""
+
+    row = staticmethod(NonKiRowFilterTest._row)
+
+    def _analyze(self, dat_rows):
+        bound = [self.row(1, "3H-X", "5000")]
+        bound[0][fetch_ki.COL_GENE] = "SLC6A4"  # an existing weak binding sets the threshold
+        rows = bound + dat_rows
+        res = fetch_ki.analyze(rows, [fetch_ki.resolve_target(bound[0])])
+        return res["auto_add"]
+
+    def test_mostly_censored_target_not_added(self):
+        rows = [self.row(10 + i, "3H-X", "10000", note=">") for i in range(3)]
+        self.assertEqual(self._analyze(rows + [self.row(20, "3H-X", "1000")]), {})
+
+    def test_ceiling_only_target_not_added(self):
+        rows = [self.row(10 + i, "3H-X", "1000") for i in range(3)]
+        self.assertEqual(self._analyze(rows), {})
+
+    def test_real_affinity_still_added(self):
+        rows = [self.row(10, "3H-X", "40"), self.row(11, "3H-X", "10000", note=">")]
+        self.assertIn("dat", self._analyze(rows))
+
+
 class RowsByNameTest(unittest.TestCase):
     """``rows_by_name`` folds ONLY a missing CSV into None. The metabolite pass used
     to wrap the lookup in ``except Exception``, so a bug in the join read exactly
@@ -399,7 +427,32 @@ class MetaboliteNamesTest(unittest.TestCase):
                | {m["id"] for m in drugs_io.load_metabolites()})
         self.assertEqual(set(fetch_ki.ALIAS) - ids, set())
         self.assertEqual(set(fetch_ki.SYNONYMS) - ids, set())
-        self.assertEqual(set(fetch_ki.SYNONYMS) - ids, set())
+
+
+class TargetNameTest(unittest.TestCase):
+    """Free-text PDSP target names (blank gene column) resolve to the right target.
+    A GABA-A subunit combination used to read as nicotinic ("alpha1beta3") or as
+    adrenergic alpha2, giving alprazolam a 1 nM nicotinic Ki."""
+
+    CASES = {
+        "GABA A Alpha1Beta3Gamma2": "gaba_a", "GABA A Alpha2Beta3Gamma2": "gaba_a",
+        "alpha2beta3gamma2": "gaba_a", "GABA A Benzodiazepine": "gaba_a",
+        "GABA B": "gaba_b", "GABA C": "gaba_a_rho", "GABA B rho 1": "gaba_a_rho",
+        "GABA": None,
+        "Cholinergic, Nicotinic Alpha4Beta2": "nachr_a4b2",
+        "Cholinergic, Nicotinic Alpha3Beta4": "nachr_a7",
+        "Neuronal acetylcholine receptor protein alpha-4 subunit": "nachr_a4b2",
+        "D1": "d1", "D5": "d5", "DOPAMINE D4.4": "d4",
+        "Monoamine Oxidase A": "mao_a", "Monoamine Oxidase B": "mao_b",
+        "Melatonin 1A": "mt1", "Melatonin 1B": "mt2", "Melatonin 1C": None,
+        "OPIATE Mu 1B4": "mu", "Hypocretin receptor 2": "orexin",
+        "Phosphodiesterase 5": "pde5",
+    }
+
+    def test_names(self):
+        got = {n: fetch_ki.resolve_target({fetch_ki.COL_GENE: "", fetch_ki.COL_NAME: n})
+               for n in self.CASES}
+        self.assertEqual(got, self.CASES)
 
 
 if __name__ == "__main__":
