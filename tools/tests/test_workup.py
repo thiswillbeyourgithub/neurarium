@@ -176,6 +176,11 @@ class VocabularyTest(unittest.TestCase):
         self.assertTrue(FW.offered({"line": "Un ECG doit être réalisé avant le traitement.",
                                     "section": "4.4", "under": ""}))
 
+    def test_pharmacodynamics_section_is_not_offered(self):
+        """5.1 shares the page (binding evidence), but a workup ask lives in 4.x only."""
+        self.assertFalse(FW.offered({"line": "Un ECG doit être réalisé avant le traitement.",
+                                     "section": "5.1", "under": ""}))
+
 
 class ApplierGateTest(unittest.TestCase):
     OFFERED = {"lithium": {"page": "62124478", "candidates": [

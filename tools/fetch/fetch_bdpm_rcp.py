@@ -1,12 +1,12 @@
 #!/usr/bin/env python
-"""Store the French RCP sections 4.2 / 4.3 / 4.4 per drug: corpus #24 (``bdpm_rcp``).
+"""Store the French RCP sections 4.2 / 4.3 / 4.4 / 5.1 per drug: corpus #24 (``bdpm_rcp``).
 
 The same official text as corpus #16 (``bdpm``, ANSM's public drug database, Licence
 Ouverte), read for a different question: what the label asks a prescriber to check
 BEFORE starting the drug (the "bilan pre-therapeutique") and while it is taken. Those
 asks live in 4.3 (contre-indications), 4.4 (mises en garde speciales et precautions
-d'emploi) and sometimes 4.2 (posologie), never in 5.2, so the #16 pages (5.2 only) do
-not hold them.
+d'emploi) and sometimes 4.2 (posologie), never in 5.x, so the #16 pages (5.2 only) do
+not hold them. Section 5.1 (pharmacodynamics) rides the same page as binding evidence.
 
 A **corpus fetcher, offline for every drug with a French product**: the RCP HTML is
 already on disk in three places, and the freshest copy of each product wins:
@@ -87,13 +87,15 @@ COMBO_PARTNERS = {"levodopa": ("CARBIDOPA", "BENSERAZIDE")}
 
 # The sections read, in page order: (number, anchor name the RCP HTML carries).
 SECTIONS = (("4.2", "RcpPosoAdmin"), ("4.3", "RcpContreindications"),
-            ("4.4", "RcpMisesEnGarde"))
+            ("4.4", "RcpMisesEnGarde"), ("5.1", "RcpPropPharmacodynamiques"))
 SECTION_TITLES = {"4.2": "4.2. Posologie et mode d'administration",
                   "4.3": "4.3. Contre-indications",
-                  "4.4": "4.4. Mises en garde spéciales et précautions d'emploi"}
+                  "4.4": "4.4. Mises en garde spéciales et précautions d'emploi",
+                  "5.1": "5.1. Propriétés pharmacodynamiques"}
 SECTION_TITLES_EN = {"4.2": "4.2. Posology and method of administration",
                      "4.3": "4.3. Contraindications",
-                     "4.4": "4.4. Special warnings and precautions for use"}
+                     "4.4": "4.4. Special warnings and precautions for use",
+                     "5.1": "5.1. Pharmacodynamic properties"}
 
 _HEAD_MARK, _ITEM_MARK = "\x01", "\x02"
 _SUBHEAD_P = re.compile(r"<p[^>]*class=\"?AmmAnnexeTitre[3-9]\"?[^>]*>", re.I)

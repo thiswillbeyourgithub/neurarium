@@ -80,6 +80,8 @@ def page_lines(text: str) -> list[dict]:
 def offered(ln: dict) -> bool:
     """Whether a page line is offered: it names a test, and it or its sub-heading
     reads as an ask or carries a timing word."""
+    if not ln["section"].startswith("4"):  # 5.1 shares the page, for binding evidence
+        return False
     if not W.tests_named(ln["line"]) or EXCIPIENT_RE.search(ln["line"]):
         return False
     ctx = f"{ln['line']} {ln['under']}"
