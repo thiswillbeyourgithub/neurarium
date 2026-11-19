@@ -125,7 +125,7 @@
 }
 .node-filter-group:empty { min-height: 14px; }
 .node-filter-marker { background: none; padding: 1px 3px; }
-.node-filter-paren { font-size: 18px; font-weight: 600; line-height: 1; color: var(--accent); padding: 0 4px; }
+.node-filter-paren { font-size: 18px; font-weight: 600; line-height: 1; color: var(--accent-bright); padding: 0 4px; }
 .node-filter-marker .node-filter-remove { margin-left: auto; }
 .node-filter-marker.stray .node-filter-paren { color: var(--muted); text-decoration: line-through; }
 .node-filter.dragging { outline: 1px dashed var(--accent); opacity: 0.85; }
