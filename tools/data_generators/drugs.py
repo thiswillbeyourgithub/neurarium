@@ -543,6 +543,10 @@ DRUG_ALIASES: dict[str, list[str]] = {
     "furosemide": ["frusemide", "loop diuretic"],
     "bumetanide": ["loop diuretic"],
     "reserpine": ["rauwolfia", "Rauwolfia serpentina"],
+    # The INN spelling the French label uses, where the roster id keeps the older BAN.
+    "flupenthixol": ["flupentixol"],
+    "dothiepin": ["dosulepin"],
+    "loflazepate": ["ethyl loflazepate"],
 }
 
 
