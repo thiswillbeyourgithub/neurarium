@@ -215,7 +215,7 @@ fixed Stahl list.
   naming its enantiomer is another molecule), and the verbatim quote; `recheck_quotes.py` stamps the
   judge. The predicates fetcher and applier share live in `tools/lib/binding_gaps.py`. A Stahl drug takes a gap too:
   its dump-sourced bindings are never overwritten (a gap only adds a target it does not list), and an unjudged index is reported, so a
-  partial pass cannot read as complete.
+  partial pass cannot read as complete. A second input is the French RCP section 5.1 (corpus #24 `bdpm_rcp`, `rcp_candidates`): a lead line ending in ":" is joined with its list items, French class words count as targets (`binding_gaps.FR_ALIASES`: "anticholinergique" -> muscarinic, "antidopaminergique" -> dopamine, "adrénolytique" -> alpha1 only beside an alpha / orthostatic cue), negation and hedges use French cues (`FR_NEGATION_RE`, no ";" clause break since a label runs one denial over a ";" list), and a receptor group counts as covered there only by a subtype with a measured Ki. A candidate carries its own `corpus` + `page` (the CIS), which the applier cites.
 - **Binding affinity (PDSP Ki).** A binding's `ki` (from `fetch_ki.py`) renders as a `kiChip`: the
   median + `[min-max]` + human/non-human counts + a **verified** badge (tooltip = the representative
   assay). Non-human-only is amber; an alias-borrowed value (`ki.mapped`) carries a "⚠ measured as

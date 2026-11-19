@@ -52,15 +52,16 @@ EXCIPIENT_RE = re.compile(r"excipient|mmol \(?\d|contient moins de|lactose|galac
 
 
 def page_lines(text: str) -> list[dict]:
-    """A stored page's body as ``[{line, section, under}]``: each text line with the
+    """A stored page's body as ``[{line, item, section, under}]``: each text line with the
     ``## `` section and the nearest ``### `` sub-heading (within that section) above
     it. Header and heading lines themselves are not lines. A list item keeps its text
-    without the ``- `` marker (the quote is the item's words, not the Markdown).
+    without the ``- `` marker (the quote is the item's words, not the Markdown), ``item``
+    saying it was one.
 
     >>> page_lines("# T\\ncis: 1\\n\\n## 4.4. Mises\\n### Avant :\\n- ECG.\\nTexte.")
     ... # doctest: +NORMALIZE_WHITESPACE
-    [{'line': 'ECG.', 'section': '4.4', 'under': 'Avant :'},
-     {'line': 'Texte.', 'section': '4.4', 'under': 'Avant :'}]
+    [{'line': 'ECG.', 'item': True, 'section': '4.4', 'under': 'Avant :'},
+     {'line': 'Texte.', 'item': False, 'section': '4.4', 'under': 'Avant :'}]
     """
     out, section, under = [], None, ""
     for raw in text.splitlines():
@@ -72,7 +73,8 @@ def page_lines(text: str) -> list[dict]:
             continue
         if section is None or not raw.strip():
             continue
-        out.append({"line": raw[2:] if raw.startswith("- ") else raw,
+        item = raw.startswith("- ")
+        out.append({"line": raw[2:] if item else raw, "item": item,
                     "section": section, "under": under})
     return out
 

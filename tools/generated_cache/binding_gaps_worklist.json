@@ -97,6 +97,15 @@
     "origin": "prose",
     "line": "These include dopaminergic actions like indirect enhancement of dopamine release , dopamine reuptake inhibition , and D 2 receptor interactions, noradrenergic actions, glutamatergic actions such as NMDA receptor antagonism , and immunomodulation , among many others.",
     "qid": "d1324fc7"
+   },
+   {
+    "target": "muscarinic",
+    "target_name": "Muscarinic acetylcholine receptors",
+    "origin": "rcp_5.1",
+    "line": "L'action rapide de Mantadix se manifeste dans les 48 premières heures de traitement. L'efficacité porte sur la triade caractéristique de la maladie de Parkinson, mais c'est surtout l'akinésie qui est améliorée. Dans les complications extra-pyramidales dues aux neuroleptiques Mantadix est aussi efficace que les anticholinergiques de synthèse.",
+    "corpus": "bdpm_rcp",
+    "page": "67703803",
+    "qid": "a4630957"
    }
   ]
  },
@@ -265,21 +274,6 @@
   ]
  },
  {
-  "drug": "blonanserin",
-  "name": "Blonanserin",
-  "slug": "blonanserin",
-  "stahl": true,
-  "candidates": [
-   {
-    "target": "alpha1",
-    "target_name": "α1 adrenergic receptors",
-    "origin": "prose",
-    "line": "Blonanserin acts as a mixed 5-HT 2A (K i = 0.812 nM) and D 2 receptor (K i = 0.142 nM) antagonist and also exerts some blockade of α 1 -adrenergic receptors (K i = 26.7 nM).",
-    "qid": "2e245767"
-   }
-  ]
- },
- {
   "drug": "brexanolone",
   "name": "Brexanolone",
   "slug": "allopregnanolone",
@@ -305,6 +299,23 @@
     "origin": "prose",
     "line": "Similarly to many other GABA A receptor positive allosteric modulators, allopregnanolone has been found to act as an inhibitor of L-type voltage-gated calcium channels (L-VGCCs), including α 1 subtypes Ca v 1.2 and Ca v 1.3 .",
     "qid": "e5ae6927"
+   }
+  ]
+ },
+ {
+  "drug": "brivaracetam",
+  "name": "Brivaracetam",
+  "slug": "brivaracetam",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "d1",
+    "target_name": "D1",
+    "origin": "rcp_5.1",
+    "line": "Dans les études poolées de sécurité et de pharmacocinétique menées en ouvert, en association, 186 enfants présentant des crises partielles dans la tranche d’âge d’1 mois à < 16 ans, ont reçu du brivaracétam, parmi lesquels 149 ont été traités pendant ≥ 3 mois, 138 pendant ≥ 6 mois, 123 pendant ≥ 12 mois, 107 pendant ≥ 24 mois, et 90 pendant ≥ 36 mois.",
+    "corpus": "bdpm_rcp",
+    "page": "60579228",
+    "qid": "7fa36be5"
    }
   ]
  },
@@ -385,21 +396,6 @@
     "origin": "prose",
     "line": "They are enhanced and inhibited by σ 1 receptor agonists and antagonists, respectively.",
     "qid": "21f62c4b"
-   }
-  ]
- },
- {
-  "drug": "buspirone",
-  "name": "Buspirone",
-  "slug": "buspirone",
-  "stahl": true,
-  "candidates": [
-   {
-    "target": "alpha1",
-    "target_name": "α1 adrenergic receptors",
-    "origin": "prose",
-    "line": "Buspirone also has weak antagonistic effects at dopamine D 2 , D 3 , and D 4 receptors and α 1 - and α 2 -adrenergic receptors .",
-    "qid": "0072a21c"
    }
   ]
  },
@@ -532,6 +528,23 @@
     "origin": "prose",
     "line": "DMT inhibited SERT-mediated serotonin uptake into platelets at an average concentration of 4.00 ± 0.70 μmol/L and VMAT2-mediated serotonin uptake at an average concentration of 93 ± 6.8 μmol/L.",
     "qid": "9812ece8"
+   }
+  ]
+ },
+ {
+  "drug": "donepezil",
+  "name": "Donepezil",
+  "slug": "donepezil",
+  "stahl": true,
+  "candidates": [
+   {
+    "target": "bche",
+    "target_name": "Butyrylcholinesterase",
+    "origin": "rcp_5.1",
+    "line": "Le donépézil est un inhibiteur spécifique et réversible de l'acétylcholinestérase, cholinestérase prédominante dans le cerveau. Il présente, in vitro, une activité inhibitrice sur l'acétylcholinestérase 1000 fois supérieure à celle qu'il a sur la butyrylcholinestérase, cholinestérase prédominante hors du système nerveux central.",
+    "corpus": "bdpm_rcp",
+    "page": "62262995",
+    "qid": "7b348c46"
    }
   ]
  },
@@ -671,21 +684,6 @@
     "origin": "prose",
     "line": "In the peripheral nervous system, acetylcholine accumulation can cause an overstimulation of muscarinic receptors followed by a desensitization of nicotinic receptors.",
     "qid": "2b49c425"
-   }
-  ]
- },
- {
-  "drug": "hydroxyzine",
-  "name": "Hydroxyzine",
-  "slug": "hydroxyzine",
-  "stahl": true,
-  "candidates": [
-   {
-    "target": "alpha1",
-    "target_name": "α1 adrenergic receptors",
-    "origin": "prose",
-    "line": "In addition to its antihistamine activity, hydroxyzine has also been shown to act more weakly as an antagonist of the serotonin 5-HT 2A receptor , the dopamine D 2 receptor , and the α 1 -adrenergic receptor .",
-    "qid": "0b843e30"
    }
   ]
  },
@@ -946,6 +944,23 @@
   ]
  },
  {
+  "drug": "memantine",
+  "name": "Memantine",
+  "slug": "memantine",
+  "stahl": true,
+  "candidates": [
+   {
+    "target": "ache",
+    "target_name": "Acetylcholinesterase",
+    "origin": "rcp_5.1",
+    "line": "Une méta-analyse des patients atteints d’une maladie d’Alzheimer au stade modéré à sévère (score total MMSE < 20) issue de 6 études de phase III versus placebo sur une durée de 6 mois (incluant les études en monothérapie et les études chez des patients traités par inhibiteurs de l’acétylcholinestérase à posologie stable) a montré un effet statistiquement significatif en faveur de la mémantine pour les domaines cognitif, global et fonctionnel. Chez les patients pour lesquels une aggravation concomitante sur les trois domaines était identifiée, les résultats ont montré un effet statistiquement significatif de la mémantine sur la prévention de l’aggravation, puisque 2 fois plus de patients sous placebo ont montré une aggravation dans les trois domaines par rapport à ceux traités par la mémantine (21 % vs 11 %, p < 0,0001).",
+    "corpus": "bdpm_rcp",
+    "page": "60151124",
+    "qid": "ac3b5d17"
+   }
+  ]
+ },
+ {
   "drug": "mescaline",
   "name": "Mescaline",
   "slug": "mescaline",
@@ -1147,6 +1162,32 @@
   ]
  },
  {
+  "drug": "modafinil",
+  "name": "Modafinil",
+  "slug": "modafinil",
+  "stahl": true,
+  "candidates": [
+   {
+    "target": "d1",
+    "target_name": "D1",
+    "origin": "rcp_5.1",
+    "line": "Dans des modèles non cliniques, le modafinil a peu ou pas d'interaction avec les récepteurs impliqués dans la régulation des états de sommeil et de veille (par exemple, adénosine, benzodiazépine, dopamine, GABA, histamine, mélatonine, noradrénaline, orexine et sérotonine). Par ailleurs, le modafinil n'inhibe pas les activités des enzymes suivantes : adénylyl cyclase, catéchol-O-méthyltransférase, acide glutamique décarboxylase MAO-A ou B, monoxyde d'azote synthétase, phosphodiestérases II-VI, ou tyrosine hydroxylase. Le modafinil n'est pas un agoniste direct des récepteurs de la dopamine, mais les données in vitro et in vivo montrent que le modafinil se lie au transporteur de la dopamine et inhibe la recapture de ce neurotransmetteur. L'effet éveillant du modafinil est inhibé par les antagonistes des récepteurs D1/D2, suggérant ainsi l'existence d'une activité agoniste indirecte.",
+    "corpus": "bdpm_rcp",
+    "page": "66805883",
+    "qid": "4b215966"
+   },
+   {
+    "target": "d2",
+    "target_name": "D2",
+    "origin": "rcp_5.1",
+    "line": "Dans des modèles non cliniques, le modafinil a peu ou pas d'interaction avec les récepteurs impliqués dans la régulation des états de sommeil et de veille (par exemple, adénosine, benzodiazépine, dopamine, GABA, histamine, mélatonine, noradrénaline, orexine et sérotonine). Par ailleurs, le modafinil n'inhibe pas les activités des enzymes suivantes : adénylyl cyclase, catéchol-O-méthyltransférase, acide glutamique décarboxylase MAO-A ou B, monoxyde d'azote synthétase, phosphodiestérases II-VI, ou tyrosine hydroxylase. Le modafinil n'est pas un agoniste direct des récepteurs de la dopamine, mais les données in vitro et in vivo montrent que le modafinil se lie au transporteur de la dopamine et inhibe la recapture de ce neurotransmetteur. L'effet éveillant du modafinil est inhibé par les antagonistes des récepteurs D1/D2, suggérant ainsi l'existence d'une activité agoniste indirecte.",
+    "corpus": "bdpm_rcp",
+    "page": "66805883",
+    "qid": "4b215966"
+   }
+  ]
+ },
+ {
   "drug": "morphine",
   "name": "Morphine",
   "slug": "morphine",
@@ -1203,6 +1244,33 @@
     "origin": "prose",
     "line": "Ondansetron is a highly selective serotonin 5-HT 3 receptor antagonist , with low affinity for dopamine receptors .",
     "qid": "bb39ce06"
+   },
+   {
+    "target": "m2",
+    "target_name": "M2",
+    "origin": "rcp_5.1",
+    "line": "L’efficacité de l’ondansétron dans le contrôle des épisodes émétiques et des nausées induits par une chimiothérapie anticancéreuse a été évaluée dans un essai randomisé en double-aveugle chez 415 patients âgés de 1 à 18 ans (S3AB3006). Les jours de chimiothérapie, les patients recevaient soit 5 mg/m2 d’ondansétron intraveineux + 4 mg d’ondansétron oral après 8-12 h ou 0,45 mg/kg d’ondansétron intraveineux + placebo oral après 8-12 h.",
+    "corpus": "bdpm_rcp",
+    "page": "60530882",
+    "qid": "e0efaf4f"
+   },
+   {
+    "target": "m2",
+    "target_name": "M2",
+    "origin": "rcp_5.1",
+    "line": "Après chimiothérapie, les deux groupes ont reçu 4 mg d’ondansétron sirop deux fois par jour pendant 3 jours. Le taux de contrôle complet des épisodes émétiques était au minimum de 49 % (5 mg/m2 intraveineux + 4 mg d’ondansétron oral) et 41 % (0,45 mg/kg intraveineux + placebo oral).",
+    "corpus": "bdpm_rcp",
+    "page": "60530882",
+    "qid": "c4730a42"
+   },
+   {
+    "target": "m2",
+    "target_name": "M2",
+    "origin": "rcp_5.1",
+    "line": "Un essai randomisé en double-aveugle avec contrôle placebo (S3AB4003) chez 438 patients âgés de 1 à 17 ans a démontré un contrôle complet des épisodes émétiques chez : - 73 % des patients lorsque l’ondansétron était administré par voie intraveineuse à une dose de 5 mg/m2 associé à 2-4 mg de dexamethasone par voie orale, - 71 % des patients lorsque l’ondansétron était administré en sirop à une dose de 8 mg + 2-4 mg de dexamethasone par voie orale les jours de chimiothérapie.",
+    "corpus": "bdpm_rcp",
+    "page": "60530882",
+    "qid": "886622c3"
    }
   ]
  },
@@ -1399,6 +1467,24 @@
     "origin": "prose",
     "line": "It has been found that this binding inhibits several actions of α 2 δ-1 and also inhibits the release of excitatory neurotransmitters .",
     "qid": "c34d115c"
+   },
+   {
+    "target": "alpha2",
+    "target_name": "α2 adrenergic receptors",
+    "origin": "rcp_5.1",
+    "line": "La prégabaline se lie à une sous-unité auxiliaire (protéine α2-δ) des canaux calciques voltage-dépendants dans le système nerveux central.",
+    "corpus": "bdpm_rcp",
+    "page": "60061602",
+    "qid": "2502a8f3"
+   },
+   {
+    "target": "delta",
+    "target_name": "δ (DOR)",
+    "origin": "rcp_5.1",
+    "line": "La prégabaline se lie à une sous-unité auxiliaire (protéine α2-δ) des canaux calciques voltage-dépendants dans le système nerveux central.",
+    "corpus": "bdpm_rcp",
+    "page": "60061602",
+    "qid": "2502a8f3"
    }
   ]
  },
@@ -1500,6 +1586,15 @@
     "origin": "prose",
     "line": "TV-3326), was developed from structural modification of rasagiline and additionally acts as an acetylcholinesterase inhibitor due to its carbamate moiety.",
     "qid": "5f8f4588"
+   },
+   {
+    "target": "comt",
+    "target_name": "Catechol-O-methyltransferase (COMT)",
+    "origin": "rcp_5.1",
+    "line": "Dans l'étude II, les patients ont été randomisés pour recevoir soit un placebo (229 patients), soit de la rasagiline à la dose de 1 mg/jour (231 patients), soit un inhibiteur de la catéchol-O-métyl transférase (COMT), l'entacapone, à la dose de 200 mg, administrés en association à des posologies programmées de lévodopa / inhibiteur de la décarboxylase (227 patients), et ont été traités pendant 18 semaines.",
+    "corpus": "bdpm_rcp",
+    "page": "60203418",
+    "qid": "3dfdbc83"
    }
   ]
  },
@@ -1613,6 +1708,23 @@
   ]
  },
  {
+  "drug": "sodium_oxybate",
+  "name": "Sodium Oxybate",
+  "slug": "sodium_oxybate",
+  "stahl": true,
+  "candidates": [
+   {
+    "target": "delta",
+    "target_name": "δ (DOR)",
+    "origin": "rcp_5.1",
+    "line": "L’oxybate de sodium est un dépresseur du système nerveux central qui réduit la somnolence diurne excessive et la cataplexie chez les patients narcoleptiques et modifie l’architecture du sommeil en réduisant le sommeil de nuit fragmenté. Le mécanisme d’action précis de l’oxybate de sodium n’est pas connu, cependant l’oxybate de sodium agirait en favorisant le sommeil à ondes lentes (delta) et en consolidant la durée du sommeil nocturne.",
+    "corpus": "bdpm_rcp",
+    "page": "67300599",
+    "qid": "a82506c5"
+   }
+  ]
+ },
+ {
   "drug": "sumatriptan",
   "name": "Sumatriptan",
   "slug": "sumatriptan",
@@ -1718,6 +1830,15 @@
     "origin": "prose",
     "line": "Through GAT-1 blockade, tiagabine increases levels of GABA, the major inhibitory neurotransmitter in the central nervous system , and consequently increases GABA receptor activation and GABAergic signaling , including of both GABA A and GABA B receptors .",
     "qid": "45c952f3"
+   },
+   {
+    "target": "gaba_a",
+    "target_name": "GABA-A",
+    "origin": "rcp_5.1",
+    "line": "La tiagabine est un inhibiteur puissant et sélectif du captage du GABA, à la fois neuronal et glial. L'administration de tiagabine entraîne une augmentation de la concentration de GABA intra-cérébral, principal neurotransmetteur inhibiteur.",
+    "corpus": "bdpm_rcp",
+    "page": "60058517",
+    "qid": "6f2f622e"
    }
   ]
  },
@@ -1775,6 +1896,15 @@
     "origin": "prose",
     "line": "Tianeptine modestly enhances the mesolimbic release of dopamine and potentiates CNS D 2 and D 3 receptors .",
     "qid": "05bbfec8"
+   },
+   {
+    "target": "sert",
+    "target_name": "Serotonin transporter (SERT)",
+    "origin": "rcp_5.1",
+    "line": "Chez l'animal, la tianeptine possède les caractéristiques suivantes : - la tianeptine augmente l'activité spontanée des cellules pyramidales de l'hippocampe et en accélère la récupération après leur inhibition fonctionnelle, - la tianeptine augmente le taux de recapture de la sérotonine par les neurones du cortex et de l'hippocampe.",
+    "corpus": "bdpm_rcp",
+    "page": "65411280",
+    "qid": "18f46ee5"
    }
   ]
  },
@@ -1833,6 +1963,24 @@
     "origin": "prose",
     "line": "A related type of theoretical interactions is with drugs that increase catecholamine concentrations, such as monoamine oxidase (MAO) inhibitors and norepinephrine reuptake inhibitors ; these also showed only slight effects in practice.",
     "qid": "9f8571aa"
+   },
+   {
+    "target": "aadc",
+    "target_name": "Aromatic L-amino acid decarboxylase (AADC)",
+    "origin": "rcp_5.1",
+    "line": "Mécanisme d’action : La tolcapone est un inhibiteur, sélectif et réversible, de la catéchol-O-méthyltransférase (COMT), actif par voie orale. Administré en même temps que la lévodopa et qu'un inhibiteur de la décarboxylase d'un acide aminé aromatique (AADC-I), il stabilise les concentrations plasmatiques de lévodopa en réduisant sa transformation métabolique en 3-méthoxy-4-hydroxy-L-phénylalanine (3-OMD).",
+    "corpus": "bdpm_rcp",
+    "page": "67077388",
+    "qid": "98c92b2f"
+   },
+   {
+    "target": "aadc",
+    "target_name": "Aromatic L-amino acid decarboxylase (AADC)",
+    "origin": "rcp_5.1",
+    "line": "L'effet de la tolcapone sur la pharmacocinétique de la lévodopa est similaire, quelle que soit la forme pharmaceutique de la lévodopa/bensérazide ou de la lévodopa/carbidopa ; il est indépendant de la dose de lévodopa, du rapport quantitatif entre lévodopa et AADC-I (bensérazide ou carbidopa) et de l'utilisation de formes à libération prolongée.",
+    "corpus": "bdpm_rcp",
+    "page": "67077388",
+    "qid": "2fc82677"
    }
   ]
  },
@@ -1993,6 +2141,42 @@
     "origin": "prose",
     "line": "This α 4 β 2 competitive binding reduces the ability of nicotine to bind and stimulate the mesolimbic dopamine system—similar to the method of action of buprenorphine in the treatment of opioid addiction.",
     "qid": "3b58dbe7"
+   },
+   {
+    "target": "5ht3",
+    "target_name": "5-HT3",
+    "origin": "rcp_5.1",
+    "line": "Les études électrophysiologiques in vitro et neurochimiques in vivo ont montré que la varénicline se lie aux récepteurs nicotiniques neuronaux à l'acétylcholine α4β2 et stimule l'activité médiée par ces récepteurs, mais à un niveau significativement plus faible que la nicotine. La nicotine est en compétition pour le même site de liaison humain α4β2 nAChR pour lequel la varénicline a une plus grande affinité. Par conséquent, la varénicline peut bloquer efficacement la capacité de la nicotine à activer complètement les récepteurs α4β2 et la voie dopaminergique mésolimbique, qui est le mécanisme neuronal sous-jacent au renforcement et à la récompense ressentis lors du tabagisme. La varénicline est hautement sélective et se lie de manière plus puissante au sous-type de récepteurs α4β2 (Ki = 0,15 nM) qu'aux autres récepteurs nicotiniques courants (α3β4 Ki = 84 nM, α7 Ki = 620 nM, α1βγδ Ki = 3400 nM) ou qu’aux récepteurs et transporteurs non nicotiniques (Ki > 1 µM, excepté pour les récepteurs 5-HT3 : Ki = 350 nM).",
+    "corpus": "bdpm_rcp",
+    "page": "60442838",
+    "qid": "8894c357"
+   },
+   {
+    "target": "d1",
+    "target_name": "D1",
+    "origin": "rcp_5.1",
+    "line": "L'efficacité de CHAMPIX dans le sevrage tabagique a été démontrée dans 3 essais cliniques impliquant des fumeurs chroniques (10 cigarettes par jour). Deux mille six cent dix-neuf (2619) patients ont reçu CHAMPIX à la dose d’1 mg deux fois par jour (avec une phase d’augmentation posologique durant la première semaine), 669 patients ont reçu du bupropion à la dose de 150 mg deux fois par jour (également avec une phase d’augmentation posologique) et 684 patients ont reçu un placebo.",
+    "corpus": "bdpm_rcp",
+    "page": "60442838",
+    "qid": "9258acdd"
+   },
+   {
+    "target": "d1",
+    "target_name": "D1",
+    "origin": "rcp_5.1",
+    "line": "Etude sur le maintien de l'abstinence La troisième étude a évalué le bénéfice d'un traitement supplémentaire de 12 semaines par CHAMPIX sur le maintien de l'abstinence. Les patients de cette étude (n = 1927) ont reçu CHAMPIX à la dose d’1 mg deux fois par jour en ouvert pendant 12 semaines. Les patients qui avaient arrêté de fumer à la Semaine 12 ont ensuite été randomisés pour recevoir soit CHAMPIX (1 mg deux fois par jour) soit un placebo pendant 12 semaines supplémentaires pour une durée totale de l'étude de 52 semaines.",
+    "corpus": "bdpm_rcp",
+    "page": "60442838",
+    "qid": "f25a7e0c"
+   },
+   {
+    "target": "d1",
+    "target_name": "D1",
+    "origin": "rcp_5.1",
+    "line": "Cette étude a démontré le bénéfice d'un traitement supplémentaire de 12 semaines par CHAMPIX à la dose d’1 mg deux fois par jour pour le maintien du sevrage tabagique par rapport au placebo. La supériorité par rapport au placebo en ce qui concerne le taux d’AC s'est maintenue jusqu'à la Semaine 52. Les principaux résultats sont résumés dans le tableau suivant :",
+    "corpus": "bdpm_rcp",
+    "page": "60442838",
+    "qid": "876a6d05"
    }
   ]
  },
@@ -2055,18 +2239,39 @@
   "stahl": true,
   "candidates": [
    {
-    "target": "alpha1",
-    "target_name": "α1 adrenergic receptors",
-    "origin": "prose",
-    "line": "Zuclopenthixol is a D 1 and D 2 antagonist, α 1 -adrenergic and 5-HT 2 antagonist.",
-    "qid": "c5a9b7a8"
+    "target": "dopamine",
+    "target_name": "Dopamine receptors",
+    "origin": "rcp_5.1",
+    "line": "Il agit en bloquant les récepteurs dopaminergiques D1 et D2. Il possède en outre des effets atropiniques et sympatholytiques alpha.",
+    "corpus": "bdpm_rcp",
+    "page": "60209937",
+    "qid": "9811db08"
    },
    {
-    "target": "alpha1",
-    "target_name": "α1 adrenergic receptors",
-    "origin": "prose",
-    "line": "Zuclopenthixol antagonises both dopamine D 1 and D 2 receptors, α 1 -adrenoceptors and 5-HT 2 receptors with a high affinity, but has no affinity for muscarinic acetylcholine receptors .",
-    "qid": "cda13bef"
+    "target": "muscarinic",
+    "target_name": "Muscarinic acetylcholine receptors",
+    "origin": "rcp_5.1",
+    "line": "Il agit en bloquant les récepteurs dopaminergiques D1 et D2. Il possède en outre des effets atropiniques et sympatholytiques alpha.",
+    "corpus": "bdpm_rcp",
+    "page": "60209937",
+    "qid": "9811db08"
+   }
+  ]
+ },
+ {
+  "drug": "zuranolone",
+  "name": "Zuranolone",
+  "slug": "zuranolone",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "m2",
+    "target_name": "M2",
+    "origin": "rcp_5.1",
+    "line": "Indice de masse corporelle (kg/m²) – moyenne (min, max)",
+    "corpus": "bdpm_rcp",
+    "page": "EMEA-H-C-006488",
+    "qid": "367b8289"
    }
   ]
  }

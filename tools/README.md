@@ -682,7 +682,7 @@ python tools/sourcing/recheck_quotes.py build --out <dir> --unstamped   # indepe
 - The binding-gap pass (a **new** binding a drug's EN Wikipedia article states, corpus #9), end to end:
   `uv run tools/fetch/fetch_binding_gaps.py` (offline, `--only <ids>`; writes
   `tools/generated_cache/binding_gaps_worklist.json`, drugbox target cells + direction-stating prose
-  sentences naming an uncovered target) -> one LLM pass deciding every candidate by index into
+  sentences naming an uncovered target, plus French RCP section 5.1 lines (corpus #24) tagged with their own `corpus` + `page`) -> one LLM pass deciding every candidate by index into
   `binding_gaps_judged.json` (`{drug: [{index, target, pick, action | reason}]}`, `_`-prefixed keys are
   metadata) -> `python tools/sourcing/apply_binding_gaps.py --dry-run --verbose` then without
   `--dry-run` (stdlib, sole writer, `--verbose` lists the additions on Stahl drugs, whose own bindings stay untouched) ->

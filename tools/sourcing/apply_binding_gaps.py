@@ -24,7 +24,12 @@ counted and reported rather than silently dropped:
 6. the quote names the target under the shared matcher (``tools/target_aliases.py``);
 7. the clause naming it is not negated or hedged (``binding_gaps.negated``);
 8. it names no stereo relative and carries no stereo tag (``binding_gaps.stereo_mixed``);
-9. the quote is verbatim on ``data_sources/wikipedia/pages/<slug>.md``;
+9. the quote is verbatim on its page: ``data_sources/wikipedia/pages/<slug>.md``, or for
+   an RCP candidate (``corpus: bdpm_rcp``) ``data_sources/bdpm/pages_rcp4/<page>.md``.
+
+Gates 5-7 read an RCP candidate in French (``binding_gaps.claims_target``: the
+``FR_ALIASES`` class words, French negation), and there a receptor group counts as
+covered only by a measured subtype (``binding_gaps.covered``).
 
 A Stahl drug takes a gap too: its Stahl (dump-sourced) bindings are never overwritten,
 since gate 5 only lets a Wikipedia binding add a target the drug does not list yet.
@@ -62,7 +67,7 @@ from lib import binding_gaps as bg  # noqa: E402  (the predicates the fetcher of
 from lib import worklist_io  # noqa: E402 (the one judged / worklist reader)
 from lib import drugs_io  # noqa: E402
 from lib import target_aliases as ta  # noqa: E402
-from apply_binding_directions import CORPUS, PAGES, BindingGate, page_text  # noqa: E402
+from apply_binding_directions import CORPUS, PAGES, BindingGate, page_text, read_other  # noqa: E402
 from pipeline.judged import resolve  # noqa: E402
 from data_generators.drugs import DRUG_ACTIONS  # noqa: E402
 
@@ -74,15 +79,16 @@ JUDGED = os.path.join(CACHE, "binding_gaps_judged.json")
 class GapGate(BindingGate):
     """The direction pass's tally / rejection log / page cache, with an ``add`` write."""
 
-    def __init__(self, read_page) -> None:
-        super().__init__(read_page)
+    def __init__(self, read_page, read_other=None) -> None:
+        super().__init__(read_page, read_other=read_other)
         self.stahl: list[str] = []
 
     def add(self, drug: dict, roster: list[dict], cand: dict, action: str, slug: str,
             label: str) -> bool:
         target, quote = cand["target"], cand["line"]
+        corpus, page = cand.get("corpus", CORPUS), cand.get("page", slug)
         aliases = ta.aliases_by_target().get(target, [])
-        if any(src.get("corpus") == CORPUS and src.get("quote") == quote
+        if any(src.get("corpus") == corpus and src.get("quote") == quote
                for b in drug.get("bindings", []) if b.get("target") == target
                for src in b.get("sources", [])):
             self.stats["skipped: already applied"] += 1
@@ -90,9 +96,10 @@ class GapGate(BindingGate):
         checks = (
             (action in DRUG_ACTIONS, "unknown action"),
             (bg.offerable(drug), "combo or prodrug carries no own binding"),
-            (target not in bg.bound_targets(drug), "target already bound"),
-            (ta.mentions(quote, aliases), "quote does not name the target"),
-            (not bg.negated(quote, aliases), "negated or hedged clause"),
+            (target not in bg.covered(drug, corpus), "target already bound"),
+            (ta.mentions(quote, bg.line_aliases(target, aliases, quote, corpus)),
+             "quote does not name the target"),
+            (bg.claims_target(quote, target, aliases, corpus), "negated or hedged clause"),
             (not bg.stereo_mixed(quote, bg.stereo_siblings(drug, roster)),
              "names a stereo relative"),
         )
@@ -100,27 +107,29 @@ class GapGate(BindingGate):
             if not ok:
                 self.reject(why, f"{label}: {quote[:80]}")
                 return False
-        if not self.quote_on_page(CORPUS, slug, quote, label):
+        if not self.quote_on_page(corpus, page, quote, label):
             return False
         if bg.is_stahl(drug):
             self.stats["added: on a Stahl drug"] += 1
             self.stahl.append(f"{label}: {quote}")
         drug.setdefault("bindings", []).append({
             "target": target, "action": action,
-            "sources": [{"corpus": CORPUS, "page": slug, "quote": quote,
+            "sources": [{"corpus": corpus, "page": page, "quote": quote,
                          "provenance": "verified"}]})
         self.stats[f"node: {action}"] += 1
         return True
 
 
-def apply(worklist: list[dict], judged: dict, drugs: list[dict], read_page) -> GapGate:
+def apply(worklist: list[dict], judged: dict, drugs: list[dict], read_page,
+          read_other=None) -> GapGate:
     """Run every gate over a judged file, adding the survivors to ``drugs`` in place.
 
-    Pure apart from ``read_page`` (``slug -> normalized page text or None``), so the
-    gates are testable without the gitignored corpus.
+    Pure apart from ``read_page`` (``slug -> normalized page text or None``) and
+    ``read_other`` (``(corpus, page) ->`` the same, for the RCP input), so the gates are
+    testable without the gitignored corpora.
     """
     by_drug = {d["id"]: d for d in drugs}
-    gate = GapGate(read_page)
+    gate = GapGate(read_page, read_other)
     for rec in worklist:
         rows = judged.get(rec["drug"], [])
         seen = {r.get("index") for r in rows}
@@ -164,7 +173,7 @@ def main() -> int:
     worklist = worklist_io.read(WORKLIST)
     judged = worklist_io.read(JUDGED)
     drugs = drugs_io.load_drugs()
-    gate = apply(worklist, judged, drugs, page_text)
+    gate = apply(worklist, judged, drugs, page_text, read_other)
 
     written = sum(n for key, n in gate.stats.items() if key.startswith("node: "))
     print(f"{written} new binding(s) written")

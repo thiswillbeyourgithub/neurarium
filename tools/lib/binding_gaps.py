@@ -55,19 +55,92 @@ STEREO_TAG_RE = re.compile(
     r"(?:" + chirality.TAG + r"|\(\s*(?:[RS]|R\s*,\s*S|S\s*,\s*R)\s*\))\s*-?\s*[A-Za-z]")
 
 
-def clauses(line: str) -> list[str]:
+# The French RCP section 5.1 input (corpus #24 ``bdpm_rcp``): the same two cues, read
+# on ``target_aliases.fold``-ed text (accents gone, so "négligeable" is "negligeable").
+# "faible" (weak) is deliberately not a cue: a weak activity is still a stated one. A bare
+# "non" is no cue either ("agoniste non sélectif des récepteurs µ, δ et κ" is a claim),
+# only "non anti..." ("neuroleptique non anticholinergique").
+FR_NEGATION_RE = re.compile(
+    r"(?<![a-z])(?:n['\u2019]|ne|pas|aucune?|sans|absence|nulle?|negligeables?|non[ -]anti\w*|"
+    r"pourrai\w*|semble\w*|probablement|hypothes\w*|contrairement)(?![a-z])")
+# No ";" here, unlike `CLAUSE_SPLIT_RE`: a label runs one denial over a ";" list ("peu ou
+# pas d'effet sur les récepteurs 5-HT2 ; sur les récepteurs alpha1, alpha2 ...").
+FR_CLAUSE_SPLIT_RE = re.compile(
+    r"(?<![a-z])(?:mais|alors que|tandis que|cependant|toutefois|en revanche)(?![a-z])")
+
+# The class words a French label names a receptor family by. Most name no subtype
+# ("antidopaminergique", "anticholinergique (atropinique)"), hence the receptor-group
+# targets (`GROUP_MEMBERS`); the English aliases still apply on top ("D2", "5-HT2A").
+# Kept explicit like ``target_aliases.EXTRA_ALIASES``: a missing word costs a candidate,
+# an invented one lets a sentence about something else through.
+FR_ALIASES: dict[str, list[str]] = {
+    "dopamine": ["antidopaminergique", "antidopaminergiques", "récepteurs dopaminergiques",
+                 "récepteurs de la dopamine"],
+    "muscarinic": ["anticholinergique", "anticholinergiques", "atropinique", "atropiniques",
+                   "antimuscarinique", "antimuscariniques", "récepteurs muscariniques",
+                   "parasympatholytique", "parasympatholytiques"],
+    "alpha1": ["alpha-1 adrénergique", "alpha-1 anti-adrénergique", "adrénolytique",
+               "adrénolytiques"],
+    "h1": ["antihistaminique", "antihistaminiques", "anti-histaminergique",
+           "récepteurs histaminiques H1"],
+    "sert": ["recapture de la sérotonine"],
+    "net": ["recapture de la noradrénaline"],
+    "dat": ["recapture de la dopamine"],
+}
+# "adrénolytique" names the adrenoceptors at large; a label means α1 by it only when it
+# says so, or names the orthostatic hypotension α1 blockade causes.
+_ALPHA1_CUE = re.compile(r"alpha|orthostati")
+_ADRENOLYTIC = ["adrénolytique", "adrénolytiques"]
+
+
+WIKI_CORPUS = "wikipedia_pharm"  # the English input (corpus #9)
+RCP_CORPUS = "bdpm_rcp"         # the French input (corpus #24, RCP section 5.1)
+
+
+def line_aliases(target: str, english: list[str], line: str, corpus: str) -> list[str]:
+    """The aliases ``target`` goes by in ``line``: the English ones, plus on the French
+    input its class words (`FR_ALIASES`; a subtype is written the same in both languages),
+    "adrénolytique" counting for α1 only beside an `_ALPHA1_CUE`."""
+    if corpus != RCP_CORPUS:
+        return english
+    aliases = FR_ALIASES.get(target, []) + english
+    if target == "alpha1" and not _ALPHA1_CUE.search(ta.fold(line)):
+        aliases = [a for a in aliases if a not in _ADRENOLYTIC]
+    return aliases
+
+
+def claims_target(line: str, target: str, english: list[str], corpus: str) -> bool:
+    """Whether ``line`` names ``target`` in a clause neither negated nor hedged: the one
+    test the fetcher offers with and the applier gates with, per input language."""
+    aliases = line_aliases(target, english, line, corpus)
+    return ta.mentions(line, aliases) and not negated(line, aliases, corpus == RCP_CORPUS)
+
+
+def covered(drug: dict, corpus: str) -> set[str]:
+    """`bound_targets` for one input. On the RCP a class word may add its receptor group
+    over subtypes that only rest on a Ki-less (vague) source, so there a group counts as
+    covered only by a measured subtype."""
+    return bound_targets(drug, group_needs_ki=corpus == RCP_CORPUS)
+
+
+def clauses(line: str, french: bool = False) -> list[str]:
     """The clauses of one sentence, in order (empty pieces dropped)."""
-    return [c for c in CLAUSE_SPLIT_RE.split(line) if c and c.strip()]
+    if french:
+        line = ta.fold(line)
+    return [c for c in (FR_CLAUSE_SPLIT_RE if french else CLAUSE_SPLIT_RE).split(line)
+            if c and c.strip()]
 
 
-def negated(line: str, aliases: list[str]) -> bool:
+def negated(line: str, aliases: list[str], french: bool = False) -> bool:
     """Whether every clause naming the target carries a negation / hedge cue.
 
     True also when no clause names it (the alias straddled a clause break): then no
     clause can be read as a positive claim about the target, so it is not offered.
+    ``french`` reads the cues of the RCP input (`FR_NEGATION_RE`).
     """
-    naming = [c for c in clauses(line) if ta.mentions(c, aliases)]
-    return not naming or all(NEGATION_RE.search(c) for c in naming)
+    naming = [c for c in clauses(line, french) if ta.mentions(c, aliases)]
+    cue = FR_NEGATION_RE if french else NEGATION_RE
+    return not naming or all(cue.search(c) for c in naming)
 
 
 def _names(drug: dict) -> tuple[set[str], set[str]]:

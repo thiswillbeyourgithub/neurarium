@@ -137,6 +137,49 @@ class PredicateTest(unittest.TestCase):
         self.assertTrue(bg.offerable(drugs()[0]))
 
 
+RCP = bg.RCP_CORPUS
+ALIM = ("L'alimémazine possède des propriétés : - neuroleptiques et sédatives aux doses usuelles, "
+        "- antidopaminergiques - anticholinergiques (atropiniques) centrales et périphériques "
+        "- adrénolytiques (risque d'hypotension orthostatique).")
+
+
+def fr_claims(line, target):
+    return bg.claims_target(line, target, AL.get(target, []), RCP)
+
+
+class FrenchPredicateTest(unittest.TestCase):
+    """The RCP section 5.1 input (corpus #24) reads French class words as targets."""
+
+    def test_class_words_name_the_receptor_groups(self):
+        for target in ("dopamine", "muscarinic", "alpha1"):
+            self.assertTrue(fr_claims(ALIM, target), target)
+
+    def test_french_words_count_on_the_rcp_input_only(self):
+        self.assertFalse(bg.claims_target(ALIM, "muscarinic", AL["muscarinic"], bg.WIKI_CORPUS))
+
+    def test_adrenolytic_needs_an_alpha_cue(self):
+        line = "La molécule possède des propriétés adrénolytiques marquées."
+        self.assertFalse(fr_claims(line, "alpha1"))
+        self.assertTrue(fr_claims(line.replace("marquées", "alpha"), "alpha1"))
+
+    def test_a_french_denial_or_hedge_is_negated(self):
+        self.assertFalse(fr_claims("Il n'a aucune activité anticholinergique.", "muscarinic"))
+        self.assertFalse(fr_claims("C'est un neuroleptique non anticholinergique.", "muscarinic"))
+        self.assertFalse(fr_claims("Il semble avoir des effets anticholinergiques.", "muscarinic"))
+
+    def test_a_semicolon_list_shares_its_denial(self):
+        """A label runs one denial over a ";" list, so ";" is no clause break."""
+        line = ("Il n'a pas d'affinité pour les récepteurs 5-HT2 ; récepteurs muscariniques ; "
+                "récepteurs dopaminergiques.")
+        self.assertFalse(fr_claims(line, "muscarinic"))
+        self.assertFalse(fr_claims(line, "dopamine"))
+
+    def test_a_denial_in_another_clause_does_not_cancel_the_claim(self):
+        line = "Il est antihistaminique, mais il n'a pas d'effet antidopaminergique."
+        self.assertTrue(fr_claims(line, "h1"))
+        self.assertFalse(fr_claims(line, "dopamine"))
+
+
 class GateTest(unittest.TestCase):
     def test_a_good_pick_adds_a_cited_binding(self):
         drug, rejected, _ = run([cand("sigma1", GOOD)], [pick(0, "sigma1")])
@@ -203,6 +246,19 @@ class GateTest(unittest.TestCase):
         self.assertEqual((data, rejected), (before, []))
         self.assertEqual(gate.stats["skipped: already applied"], 1)
 
+    def test_an_rcp_pick_cites_the_french_page(self):
+        line = "Testdrug présente des propriétés anticholinergiques centrales."
+        c = dict(cand("muscarinic", line), corpus=RCP, page="123", origin="rcp_5.1")
+        data, work = drugs(), worklist(c)
+        pages = {(RCP, "123"): normalize_for_match(f"## 5.1. Propriétés\n{line}\n")}
+        gate = G.apply(work, {"testdrug": fill([pick(0, "muscarinic", "antagonist")],
+                                               work[0]["candidates"])},
+                       data, read_page, lambda corpus, page: pages.get((corpus, page)))
+        self.assertEqual(gate.rejected, [])
+        new = next(b for b in data[0]["bindings"] if b["target"] == "muscarinic")
+        self.assertEqual(new["sources"][0]["corpus"], RCP)
+        self.assertEqual(new["sources"][0]["page"], "123")
+
     def test_metadata_keys_are_ignored(self):
         data = drugs()
         work = worklist(cand("sigma1", GOOD))
@@ -241,6 +297,13 @@ class CandidateTest(unittest.TestCase):
         out = F.scoped(existing, [rec("b", 9), rec("d", 4)], {"b", "c", "d"})
         self.assertEqual(out, [rec("a", 1), rec("b", 9), rec("d", 4)])
         self.assertEqual(F.scoped(existing, [rec("b", 9)], None), [rec("b", 9)])
+
+    def test_rcp_units_join_a_lead_with_its_items(self):
+        page = ("# T\n## 4.4. Mises\nAutre.\n## 5.1. Propriétés\nIl possède :\n"
+                "- antihistaminiques H1,\n- anticholinergiques.\nTexte seul.\n- puce isolée\n")
+        self.assertEqual(F.rcp_units(page), [
+            "Il possède : - antihistaminiques H1, - anticholinergiques.",
+            "Texte seul.", "puce isolée"])
 
 
 if __name__ == "__main__":

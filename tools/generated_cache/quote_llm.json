@@ -56,6 +56,9 @@
 "q_00ee55e9b092": {
 "drug:reboxetine/bindings[sert:reuptake_inhibitor]": "sonnet"
 },
+"q_00fa6f7110b3": {
+"drug:trimipramine/bindings[muscarinic:antagonist]": "opus"
+},
 "q_0127b6712aef": {
 "drug:caffeine/excretion[route:renal]": "opus"
 },
@@ -1238,6 +1241,9 @@
 },
 "q_170bed4db53d": {
 "drug:rotigotine/first_approval": "opus"
+},
+"q_17165472f16f": {
+"drug:maprotiline/bindings[muscarinic:antagonist]": "opus"
 },
 "q_171b11e3397e": {
 "receptor:alpha1d/locations[medulla]": "sonnet",
@@ -2954,6 +2960,9 @@
 "q_37fd752667b4": {
 "drug:lorazepam/half_life": "sonnet"
 },
+"q_38016f17c41c": {
+"drug:flupenthixol/bindings[muscarinic:antagonist]": "opus"
+},
 "q_383b1769f75b": {
 "drug:risperidone/first_approval": "opus"
 },
@@ -3965,6 +3974,9 @@
 },
 "q_4a5fe9aa05ae": {
 "drug:ethanol/excretion[route:renal]": "opus"
+},
+"q_4a66e72c887c": {
+"drug:tramadol/bindings[delta:agonist]": "opus"
 },
 "q_4a6dc865f306": {
 "drug:paliperidone/formulations[depot]/release": "opus"
@@ -9326,6 +9338,9 @@
 "q_b081e3d9e04f": {
 "drug:flurazepam/brands[Dalmane]": "sonnet"
 },
+"q_b0831b33f955": {
+"drug:blonanserin/bindings[alpha1:antagonist]": "opus"
+},
 "q_b0a0c61dd392": {
 "drug:iloperidone/half_life": "sonnet"
 },
@@ -9354,6 +9369,7 @@
 "drug:trimipramine/categories": "sonnet"
 },
 "q_b18daaae2d3e": {
+"drug:zuclopenthixol/bindings[alpha1:antagonist]": "opus",
 "drug:zuclopenthixol/bindings[d1:antagonist]": "opus"
 },
 "q_b1a4cffb90e9": {
@@ -9956,6 +9972,9 @@
 "q_bc1552046d72": {
 "drug:loprazolam/excretion[route:renal]": "opus"
 },
+"q_bc19966586a6": {
+"drug:levomepromazine/bindings[muscarinic:antagonist]": "opus"
+},
 "q_bc5dbe642b90": {
 "drug:heroin/excretion[route:renal]": "opus"
 },
@@ -10056,6 +10075,9 @@
 },
 "q_be66aa77de92": {
 "drug:prazepam/categories": "sonnet"
+},
+"q_be6b478e7aa1": {
+"drug:tropatepine/bindings[muscarinic:antagonist]": "opus"
 },
 "q_be6cfa0d5064": {
 "drug:quazepam/originator/now": "opus"
@@ -10774,6 +10796,7 @@
 },
 "q_cadcc4dc8a27": {
 "drug:hydroxyzine/bindings[5ht2a:antagonist]": "opus",
+"drug:hydroxyzine/bindings[alpha1:antagonist]": "opus",
 "drug:hydroxyzine/bindings[d2:antagonist]": "opus"
 },
 "q_cb0c96449c66": {
@@ -11839,6 +11862,9 @@
 "q_e02eca7c5e6c": {
 "drug:amobarbital/bindings[gaba_a:pam]": "sonnet"
 },
+"q_e048baf86529": {
+"drug:buspirone/bindings[alpha1:antagonist]": "opus"
+},
 "q_e0ab1dc434a9": {
 "drug:nabilone/categories": "opus"
 },
@@ -11990,6 +12016,9 @@
 "drug:mirtazapine/bindings[5ht2a:antagonist]": "sonnet",
 "drug:mirtazapine/bindings[5ht2c:antagonist]": "sonnet",
 "drug:mirtazapine/bindings[5ht3:antagonist]": "sonnet"
+},
+"q_e37bac7319b6": {
+"drug:hydroxyzine/bindings[muscarinic:antagonist]": "opus"
 },
 "q_e3931ec47c64": {
 "drug:cocaine/excretion[unchanged:urine]": "opus",
@@ -13096,6 +13125,11 @@
 "drug:guanfacine/workup[weight:before]": "opus",
 "drug:guanfacine/workup[weight:during]": "opus"
 },
+"q_f7872b952070": {
+"drug:alimemazine/bindings[alpha1:antagonist]": "opus",
+"drug:alimemazine/bindings[dopamine:antagonist]": "opus",
+"drug:alimemazine/bindings[muscarinic:antagonist]": "opus"
+},
 "q_f7913f635975": {
 "receptor:alpha1a/effects[antagonism:sleep_promotion]": "opus",
 "receptor:alpha1b/effects[antagonism:sleep_promotion]": "opus",
@@ -13426,6 +13460,9 @@
 },
 "q_fdd0c002acaf": {
 "drug:sertraline/originator": "opus"
+},
+"q_fddef5989e15": {
+"drug:promethazine/bindings[muscarinic:antagonist]": "opus"
 },
 "q_fde54394fa82": {
 "drug:pimavanserin/categories": "sonnet"

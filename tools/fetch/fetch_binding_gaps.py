@@ -17,7 +17,7 @@ author-side, see ``CLAUDE.local.md``) often says it ("tetrabenazine is a reversi
 inhibitor"). The drugbox's "Biomolecular targets" row would be the structured answer, but
 almost no stored article carries one, so prose is what closes the class.
 
-Two inputs per drug, both minus every target it already covers
+Three inputs per drug, both minus every target it already covers
 (``binding_gaps.bound_targets``):
 
 * **drugbox**: a ``Biomolecular targets`` / ``Inhibited transporters`` / ``Target`` cell
@@ -26,7 +26,11 @@ Two inputs per drug, both minus every target it already covers
 * **prose**: the article's action-verb paragraphs (``fetch_metabolite_bindings.action_lines``,
   the same extractor the direction pass uses) cut into sentences
   (``lib.corpora.wikipedia.SENTENCE_SPLIT``), each carrying a direction word and naming a
-  modeled target under the shared matcher ``tools/target_aliases.py``.
+  modeled target under the shared matcher ``tools/target_aliases.py``;
+* **rcp**: the drug's French RCP section 5.1 (corpus #24 ``bdpm_rcp``, pages built by
+  ``fetch_bdpm_rcp.py``), a lead line ending in ":" joined with its list items
+  (:func:`rcp_units`), French class words read through ``binding_gaps.FR_ALIASES``. Each
+  such candidate carries its own ``corpus`` + ``page`` (the CIS) for the applier to cite.
 
 A candidate is one (sentence, target) pair. Pairs are **dropped** here when the clause
 naming the target is negated or hedged (``binding_gaps.negated``) or the sentence is
@@ -79,10 +83,17 @@ import fetch_metabolite_bindings as mb  # noqa: E402  (prose action-line extract
 from lib import target_aliases as ta  # noqa: E402
 from lib import worklist_io  # noqa: E402
 from lib.worklist_io import merge_scoped_list  # noqa: E402
+from data_generators.provenance import corpus_page_path  # noqa: E402
+import fetch_workup as wu  # noqa: E402 (the corpus #24 page reader)
 
 WORKLIST = os.path.join(REPO, "tools", "generated_cache", "binding_gaps_worklist.json")
 
+# drug id -> its corpus #24 RCP page entry (``fetch_bdpm_rcp.py``).
+RCP_LABELS = (json.loads(open(wu.LABELS, encoding="utf-8").read())
+              if os.path.exists(wu.LABELS) else {})
+
 # The infobox headers whose next cell lists a drug's molecular targets.
+
 DRUGBOX_HEADERS = ("Biomolecular targets", "Inhibited transporters", "Target")
 
 
@@ -131,19 +142,58 @@ def candidates_for(drug: dict, page_text: str, aliases: dict[str, list[str]],
     siblings : list of str
         Its stereo relatives' names (``binding_gaps.stereo_siblings``).
     """
-    covered = bg.bound_targets(drug)
-    wanted = {t: a for t, a in aliases.items() if t not in covered}
-    lines = [("drugbox", ln) for ln in drugbox_cells(page_text)]
-    lines += [("prose", ln) for ln in prose_sentences(page_text)]
     out = []
-    for origin, line in lines:
-        if bg.stereo_mixed(line, siblings):
-            continue
-        for target in sorted(wanted):
-            if ta.mentions(line, wanted[target]) and not bg.negated(line, wanted[target]):
-                out.append({"target": target, "target_name": names[target],
-                            "origin": origin, "line": line})
+    for origin, line in [("drugbox", ln) for ln in drugbox_cells(page_text)] + \
+            [("prose", ln) for ln in prose_sentences(page_text)]:
+        out += line_candidates(drug, origin, line, aliases, names, siblings, bg.WIKI_CORPUS)
     return out
+
+
+def line_candidates(drug: dict, origin: str, line: str, aliases: dict[str, list[str]],
+                    names: dict[str, str], siblings: list[str], corpus: str) -> list[dict]:
+    """One candidate per target ``line`` claims that ``drug`` does not cover yet."""
+    if bg.stereo_mixed(line, siblings):
+        return []
+    covered = bg.covered(drug, corpus)
+    return [{"target": t, "target_name": names[t], "origin": origin, "line": line}
+            for t in sorted(aliases) if t not in covered
+            and bg.claims_target(line, t, aliases[t], corpus)]
+
+
+def rcp_units(page_text: str) -> list[str]:
+    """The RCP section 5.1 lines of a corpus #24 page, a lead line ending in ":" joined
+    with the list items under it ("possède des propriétés : - antihistaminiques H1, -
+    antidopaminergiques"), since an item alone does not say whose property it is.
+
+    The joined unit still passes the quote gate: ``normalize_for_match`` drops the
+    "- " markers and line breaks both texts differ by."""
+    out: list[str] = []
+    lead = None
+    for ln in wu.page_lines(page_text):
+        if ln["section"] != "5.1":
+            continue
+        line = ln["line"].strip()
+        if lead is not None and ln["item"]:
+            out[-1] += f" - {line}"
+            continue
+        lead = line if line.endswith(":") else None
+        out.append(line)
+    return out
+
+
+def rcp_candidates(drug: dict, roster: list[dict], aliases, names) -> tuple[str | None, list[dict]]:
+    """``(page, candidates)`` from the drug's French RCP section 5.1 (corpus #24),
+    each candidate tagged with its corpus + page; ``(None, [])`` without a stored page."""
+    entry = RCP_LABELS.get(drug["id"])
+    text = entry and read_page_file(corpus_page_path(bg.RCP_CORPUS, entry["page"]))
+    if not text:
+        return None, []
+    siblings = bg.stereo_siblings(drug, roster)
+    cands = []
+    for unit in rcp_units(text):
+        for c in line_candidates(drug, "rcp_5.1", unit, aliases, names, siblings, bg.RCP_CORPUS):
+            cands.append({**c, "corpus": bg.RCP_CORPUS, "page": entry["page"]})
+    return entry["page"], cands
 
 
 def build(drugs: list[dict], only: set[str] | None = None) -> tuple[list[dict], list[str]]:
@@ -154,15 +204,16 @@ def build(drugs: list[dict], only: set[str] | None = None) -> tuple[list[dict], 
         if (only is not None and drug["id"] not in only) or not bg.offerable(drug):
             continue
         path = wikistore.page_for(drug)
-        if not path:
-            warnings.append(f"{drug['id']}: no stored Wikipedia article - skipped")
-            continue
-        text = read_page_file(path)
-        cands = candidates_for(drug, text, aliases, names, bg.stereo_siblings(drug, drugs))
-        if cands:
+        cands = candidates_for(drug, read_page_file(path), aliases, names,
+                               bg.stereo_siblings(drug, drugs)) if path else []
+        # The RCP candidates go last, so a Wikipedia candidate keeps its judged index.
+        _, rcp = rcp_candidates(drug, drugs, aliases, names)
+        if not path and not rcp:
+            warnings.append(f"{drug['id']}: no stored Wikipedia article nor RCP 5.1 - skipped")
+        if cands or rcp:
             records.append({"drug": drug["id"], "name": drug.get("name") or drug["id"],
-                            "slug": os.path.splitext(os.path.basename(path))[0],
-                            "stahl": bg.is_stahl(drug), "candidates": cands})
+                            "slug": os.path.splitext(os.path.basename(path))[0] if path else None,
+                            "stahl": bg.is_stahl(drug), "candidates": cands + rcp})
     return records, warnings
 
 
