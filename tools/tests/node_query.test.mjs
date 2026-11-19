@@ -6,7 +6,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {
   kindsFor, metaboliteOwners, compatibleKinds, runFilters, sortRows, filterTouchesDrugs,
-  serializeFilters, parseFilters, SORTS, DEFAULT_SORT,
+  serializeFilters, parseFilters, SORTS, DEFAULT_SORT, firstInScope,
 } from "../../public/js/node-browser/query.js";
 
 const LABELS = { drug_categories: "Drug classes", drug_half_life: "Drug half-life",
@@ -106,6 +106,64 @@ test("the filter stack round-trips through its URL form, null at default", () =>
   assert.equal(parseFilters(serializeFilters([{ kind: "", text: "100%" }]))[0].text, "100%");
   assert.deepEqual(parseFilters(v), stack);
   assert.equal(parseFilters("bogus|x")[0].op, "and");
+});
+
+const OPEN = (op) => ({ group: "open", op });
+const CLOSE = { group: "close" };
+const CLASSES = (text, op) => ({ kind: "Drug classes", text, op });
+const HALF = (op) => ({ kind: "Drug half-life", text: "", op });
+
+test("AND NOT keeps the left side's rows whose owner the right side misses", () => {
+  const out = runFilters(ROWS, [CLASSES("benzo"),
+    { kind: "Drug time to peak", text: "", op: "not" }], ctx);
+  assert.deepEqual(owners(out), ["drug_categories:alprazolam"]);
+});
+
+test("a group is evaluated first, then combined through its own operator", () => {
+  // Left to right, benzo OR ssri AND half-life = (benzo OR ssri) AND half-life.
+  const flat = runFilters(ROWS, [CLASSES("benzo"), CLASSES("ssri", "or"), HALF("and")], ctx);
+  assert.deepEqual(owners(flat), ["drug_half_life:diazepam", "drug_half_life:alprazolam",
+    "drug_half_life:sertraline"]);
+  // benzo OR (ssri AND half-life): the benzo classes plus the SSRI's half-life.
+  const grouped = runFilters(ROWS, [CLASSES("benzo"), OPEN("or"), CLASSES("ssri"),
+    HALF("and"), CLOSE], ctx);
+  assert.deepEqual(owners(grouped), ["drug_categories:diazepam", "drug_categories:alprazolam",
+    "drug_half_life:sertraline"]);
+  // A AND NOT (B OR C): every classed drug but the benzos and the SSRI.
+  const not = runFilters(ROWS, [CLASSES(""), OPEN("not"), CLASSES("benzo"),
+    CLASSES("ssri", "or"), CLOSE], ctx);
+  assert.deepEqual(owners(not), ["drug_categories:oxazepam"]);
+});
+
+test("empty groups are skipped, an unclosed group ends the stack, a stray close is ignored", () => {
+  const plain = owners(runFilters(ROWS, [CLASSES("benzo"), HALF("and")], ctx));
+  assert.deepEqual(owners(runFilters(ROWS, [CLASSES("benzo"), OPEN("or"), CLOSE,
+    HALF("and")], ctx)), plain);
+  assert.deepEqual(owners(runFilters(ROWS, [CLASSES("benzo"), OPEN("and"), HALF()], ctx)), plain);
+  assert.deepEqual(owners(runFilters(ROWS, [CLOSE, CLASSES("benzo"), CLOSE, HALF("and")], ctx)),
+    plain);
+  assert.deepEqual(firstInScope([CLASSES("a"), OPEN("and"), HALF(), HALF("or"), CLOSE,
+    HALF("and")]), [true, false, true, false, false, false]);
+});
+
+test("compatible kinds restrict only through an unbroken AND chain into the group", () => {
+  const under = (op) => [CLASSES("ssri"), OPEN(op), { kind: "", text: "" }, CLOSE];
+  assert.deepEqual([...compatibleKinds(ROWS, under("and"), 2, ctx)].sort(),
+    ["drug_categories", "drug_half_life"]);
+  assert.equal(compatibleKinds(ROWS, under("not"), 2, ctx), null);
+  assert.equal(compatibleKinds(ROWS, [OPEN("and"), { kind: "", text: "" }], 1, ctx), null);
+});
+
+test("groups round-trip through the URL form", () => {
+  const stack = [CLASSES("benzo", "and"), OPEN("not"), HALF("and"), CLOSE];
+  const v = serializeFilters(stack);
+  assert.equal(v, "|Drug classes|benzo,(|not,|Drug half-life,)");
+  assert.deepEqual(parseFilters(v), [
+    { op: "and", kind: "Drug classes", text: "benzo", metabolites: false },
+    OPEN("not"),
+    { op: "and", kind: "Drug half-life", text: "", metabolites: false },
+    CLOSE,
+  ]);
 });
 
 test("the default sort is smallest value first, and is a menu entry", () => {

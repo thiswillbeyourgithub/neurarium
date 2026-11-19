@@ -1,14 +1,21 @@
-// Data browser filter stack UI: one row per filter (drag handle, AND/OR/XOR operator,
-// kind box, text box, "include metabolites", remove) plus the "Add filter" button.
+// Data browser filter stack UI: one row per filter (drag handle, operator menu, kind box,
+// text box, "include metabolites", remove) plus the "Add filter" button. The operator
+// menu also offers BEGIN GROUP / END GROUP, which insert a "(" / ")" marker row before
+// the row (see node-browser/query.js for the flat-list grouping): the rows between the
+// markers render indented behind a parenthesis, and "Add filter" lands inside a group
+// still open at the end of the stack.
 // Pure state lives in the `filters` array handed to node-browser/query.js runFilters;
 // this file only edits it. Rows reorder by dragging the handle (a long press on touch).
 
 import { el, btn } from "../panel/dom.js";
-import { OPS } from "./query.js";
+import { OPS, firstInScope, isGroupOpen, isGroupClose } from "./query.js";
 import { wrapKindPicker } from "./kind-picker.js";
 
 // A touch drag starts only after a long press, so a tap on the handle stays a tap.
 const LONG_PRESS_MS = 400;
+// The operator menu's two group actions: picking one edits the stack, never stays picked.
+const BEGIN = "begin";
+const END = "end";
 
 /**
  * @param {object} opts
@@ -28,13 +35,53 @@ export function createFilterStack({ t, kindLabelsFor, fold, onChange, onSubmit }
   const listEl = el("div", "node-filters");
   const addBtn = btn("node-add-filter", t("nodes.addFilter"));
 
-  // Ids, operator and remove visibility follow position: the first row has no operator
-  // (nothing on its left) and keeps the `#nodes-filter` id the tour anchors on.
+  const option = (sel, value, label) => {
+    const opt = document.createElement("option");
+    opt.value = value;
+    opt.textContent = label;
+    sel.appendChild(opt);
+  };
+
+  // The menu follows position: a scope's first entry has no operator (nothing on its
+  // left) so it offers only the group actions, and END GROUP needs an open group.
+  const fillOps = (r, first, inGroup) => {
+    r.op.textContent = "";
+    if (first) option(r.op, "", "·");
+    else for (const o of OPS) option(r.op, o, t(`nodes.op_${o}`));
+    option(r.op, BEGIN, t("nodes.op_begin"));
+    if (inGroup && !first && !isGroupOpen(r.f)) option(r.op, END, t("nodes.op_end"));
+    r.op.value = first ? "" : r.f.op || "and";
+  };
+
+  // Rebuild the nesting from the flat list: an open marker's row, then a group box
+  // (the parenthesis) holding what follows up to its close marker's row. Also redoes
+  // each menu, the `#nodes-filter` id the tour anchors on (first real filter's text)
+  // and the remove buttons (never on the last filter).
   const relabel = () => {
+    const first = firstInScope(filters);
+    const realCount = filters.filter((f) => !f.group).length;
+    const stack = [listEl];
+    let anchored = false;
+    listEl.textContent = "";
     rowEls.forEach((r, i) => {
-      r.op.hidden = i === 0;
-      r.text.id = i === 0 ? "nodes-filter" : "";
-      r.remove.hidden = rowEls.length === 1;
+      const host = stack[stack.length - 1];
+      if (isGroupClose(r.f)) {
+        r.row.classList.toggle("stray", stack.length === 1);
+        if (stack.length > 1) stack.pop();
+        stack[stack.length - 1].appendChild(r.row);
+        return;
+      }
+      if (r.op) fillOps(r, first[i], stack.length > 1);
+      host.appendChild(r.row);
+      if (isGroupOpen(r.f)) {
+        const box = el("div", "node-filter-group");
+        host.appendChild(box);
+        stack.push(box);
+        return;
+      }
+      r.text.id = !anchored ? "nodes-filter" : "";
+      anchored = true;
+      r.remove.hidden = realCount === 1;
     });
   };
 
@@ -48,22 +95,90 @@ export function createFilterStack({ t, kindLabelsFor, fold, onChange, onSubmit }
     return input;
   };
 
-  const addRow = (init = {}) => {
-    const f = { kind: "", text: "", op: "and", metabolites: false, ...init };
-    const row = el("div", "node-filter");
-    const handle = el("span", "node-filter-handle", "⠿");
-    handle.title = t("nodes.dragHint");
+  const makeRemove = (titleKey) => {
+    const remove = btn("node-filter-remove", "✕");
+    remove.title = t(titleKey);
+    remove.setAttribute("aria-label", t(titleKey));
+    return remove;
+  };
+
+  const insertAt = (i, entry) => {
+    filters.splice(i, 0, entry.f);
+    rowEls.splice(i, 0, entry);
+  };
+  const removeAt = (i) => {
+    filters.splice(i, 1);
+    rowEls.splice(i, 1);
+  };
+
+  // The operator menu: an operator edits this entry, a group action inserts a marker
+  // before it. BEGIN hands the entry's operator to the new group (which now sits where
+  // the entry did) and makes the entry the group's first.
+  const makeOpSelect = (f) => {
     const op = document.createElement("select");
     op.className = "node-select node-filter-op";
     op.title = t("nodes.opLabel");
     op.setAttribute("aria-label", t("nodes.opLabel"));
-    for (const o of OPS) {
-      const opt = document.createElement("option");
-      opt.value = o;
-      opt.textContent = t(`nodes.op_${o}`);
-      op.appendChild(opt);
+    op.addEventListener("change", () => {
+      const i = filters.indexOf(f);
+      if (op.value === BEGIN) {
+        insertAt(i, makeMarker({ group: "open", op: firstInScope(filters)[i] ? "and" : f.op }));
+      } else if (op.value === END) {
+        insertAt(i, makeMarker({ group: "close" }));
+      } else {
+        f.op = op.value;
+      }
+      relabel();
+      onChange();
+    });
+    return op;
+  };
+
+  // A "(" or ")" row: handle, the operator menu (an open marker only: how the group
+  // combines with what precedes it), the parenthesis, and ✕ to ungroup (drops both
+  // markers, keeps the filters inside).
+  function makeMarker(init) {
+    const f = init.group === "open" ? { group: "open", op: init.op || "and" } : { group: "close" };
+    const row = el("div", `node-filter node-filter-marker ${f.group}`);
+    const handle = el("span", "node-filter-handle", "⠿");
+    handle.title = t("nodes.dragHint");
+    const op = isGroupOpen(f) ? makeOpSelect(f) : null;
+    const paren = el("span", "node-filter-paren", isGroupOpen(f) ? "(" : ")");
+    const remove = makeRemove("nodes.ungroup");
+    const entry = { row, op, f };
+    remove.addEventListener("click", () => {
+      const pair = matchingMarker(filters.indexOf(f));
+      removeAt(filters.indexOf(f));
+      if (pair) removeAt(filters.indexOf(pair));
+      relabel();
+      onChange();
+    });
+    wireDrag(handle, row, f);
+    for (const n of [handle, op, paren, remove]) if (n) row.appendChild(n);
+    return entry;
+  }
+
+  // The marker paired with the one at `i` (null for an unclosed open or a stray close).
+  const matchingMarker = (i) => {
+    const dir = isGroupOpen(filters[i]) ? 1 : -1;
+    let depth = 0;
+    for (let j = i + dir; j >= 0 && j < filters.length; j += dir) {
+      const f = filters[j];
+      if ((dir > 0 ? isGroupOpen : isGroupClose)(f)) depth++;
+      else if ((dir > 0 ? isGroupClose : isGroupOpen)(f)) {
+        if (!depth) return f;
+        depth--;
+      }
     }
-    op.value = f.op;
+    return null;
+  };
+
+  function makeFilter(init) {
+    const f = { kind: "", text: "", op: "and", metabolites: false, ...init };
+    const row = el("div", "node-filter");
+    const handle = el("span", "node-filter-handle", "⠿");
+    handle.title = t("nodes.dragHint");
+    const op = makeOpSelect(f);
     const kind = makeInput("node-filter-kind", t("nodes.kindPlaceholder"));
     kind.value = f.kind;
     const kindBox = wrapKindPicker({
@@ -80,11 +195,8 @@ export function createFilterStack({ t, kindLabelsFor, fold, onChange, onSubmit }
     metab.appendChild(el("span", null, t("nodes.metabolites")));
     metab.title = t("nodes.metabolitesHint");
     metab.hidden = true;
-    const remove = btn("node-filter-remove", "✕");
-    remove.title = t("nodes.removeFilter");
-    remove.setAttribute("aria-label", t("nodes.removeFilter"));
+    const remove = makeRemove("nodes.removeFilter");
 
-    op.addEventListener("change", () => { f.op = op.value; onChange(); });
     kind.addEventListener("input", () => { f.kind = kind.value; onChange(); });
     text.addEventListener("input", () => { f.text = text.value; onChange(); });
     metabBox.addEventListener("change", () => { f.metabolites = metabBox.checked; onChange(); });
@@ -96,10 +208,7 @@ export function createFilterStack({ t, kindLabelsFor, fold, onChange, onSubmit }
       });
     }
     remove.addEventListener("click", () => {
-      const i = filters.indexOf(f);
-      filters.splice(i, 1);
-      rowEls.splice(i, 1);
-      row.remove();
+      removeAt(filters.indexOf(f));
       relabel();
       onChange();
     });
@@ -113,15 +222,18 @@ export function createFilterStack({ t, kindLabelsFor, fold, onChange, onSubmit }
     row.addEventListener("click", (e) => { if (e.target === row) text.focus(); });
 
     for (const n of [handle, op, kindBox, text, metab, remove]) row.appendChild(n);
-    filters.push(f);
-    rowEls.push({ row, op, text, remove, metab, f });
-    listEl.appendChild(row);
-    relabel();
-    return kind;
+    return { row, op, text, remove, metab, f, kind };
+  }
+
+  const append = (init = {}) => {
+    const entry = init.group ? makeMarker(init) : makeFilter(init);
+    insertAt(filters.length, entry);
+    return entry;
   };
 
   // Drag to reorder: pointer events cover mouse and touch alike. The row under the
-  // pointer swaps places live, so the reader sees the order they are building.
+  // pointer swaps places live, so the reader sees the order they are building; moving
+  // a marker re-draws which rows its parenthesis encloses.
   function wireDrag(handle, row, f) {
     let timer = 0;
     let dragging = false;
@@ -135,14 +247,12 @@ export function createFilterStack({ t, kindLabelsFor, fold, onChange, onSubmit }
     handle.addEventListener("pointermove", (e) => {
       if (!dragging) return;
       const over = document.elementFromPoint(e.clientX, e.clientY)?.closest(".node-filter");
-      if (!over || over === row || over.parentNode !== listEl) return;
+      if (!over || over === row || !listEl.contains(over)) return;
       const from = filters.indexOf(f);
       const to = rowEls.findIndex((r) => r.row === over);
-      const [rf] = filters.splice(from, 1);
-      filters.splice(to, 0, rf);
       const [re] = rowEls.splice(from, 1);
-      rowEls.splice(to, 0, re);
-      listEl.insertBefore(row, to > from ? over.nextSibling : over);
+      filters.splice(from, 1);
+      insertAt(to, re);
       moved = true;
       relabel();
     });
@@ -158,10 +268,13 @@ export function createFilterStack({ t, kindLabelsFor, fold, onChange, onSubmit }
   }
 
   addBtn.addEventListener("click", () => {
-    addRow().focus();
+    const { kind } = append();
+    relabel();
+    kind.focus();
     onChange();
   });
-  addRow();
+  append();
+  relabel();
   root.appendChild(listEl);
   root.appendChild(addBtn);
 
@@ -172,12 +285,12 @@ export function createFilterStack({ t, kindLabelsFor, fold, onChange, onSubmit }
     setFilters(list) {
       filters.length = 0;
       rowEls.length = 0;
-      listEl.textContent = "";
-      for (const f of list.length ? list : [{}]) addRow(f);
+      for (const f of list.some((x) => !x.group) ? list : [...list, {}]) append(f);
+      relabel();
     },
     /** Show each row's "include metabolites" box only where `touches(f)` says it matters. */
     showMetabolites(touches) {
-      for (const r of rowEls) r.metab.hidden = !r.f.metabolites && !touches(r.f);
+      for (const r of rowEls) if (r.metab) r.metab.hidden = !r.f.metabolites && !touches(r.f);
     },
   };
 }
