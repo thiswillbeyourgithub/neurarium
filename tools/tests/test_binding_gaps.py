@@ -111,6 +111,22 @@ class PredicateTest(unittest.TestCase):
         self.assertIn("alpha2", bg.bound_targets({"bindings": [{"target": "alpha2a"}]}))
         self.assertIn("alpha2c", bg.bound_targets({"bindings": [{"target": "alpha2"}]}))
 
+    def test_a_subtype_binding_covers_its_receptor_group(self):
+        """The muscarinic / alpha1 / dopamine groups once counted as unbound on a drug
+        binding m1 / alpha1a / d2, flooding the worklist with every class-word line."""
+        self.assertIn("dopamine", bg.bound_targets({"bindings": [{"target": "d2"}]}))
+        self.assertIn("m3", bg.bound_targets({"bindings": [{"target": "muscarinic"}]}))
+        unmeasured = {"bindings": [{"target": "alpha1a"}]}
+        self.assertIn("alpha1", bg.bound_targets(unmeasured))
+        # The RCP input wants a measured subtype before a class word counts as covered.
+        self.assertNotIn("alpha1", bg.bound_targets(unmeasured, group_needs_ki=True))
+        measured = {"bindings": [{"target": "alpha1a", "ki": {"value": 5}}]}
+        self.assertIn("alpha1", bg.bound_targets(measured, group_needs_ki=True))
+
+    def test_the_transmitter_word_names_no_receptor_group(self):
+        self.assertFalse(ta.mentions("It inhibits dopamine reuptake .", AL["dopamine"]))
+        self.assertTrue(ta.mentions("It blocks dopamine receptors .", AL["dopamine"]))
+
     def test_a_stahl_citation_anywhere_marks_the_drug(self):
         self.assertTrue(bg.is_stahl({"half_life": {"sources": [{"corpus": "stahl"}]}}))
         self.assertFalse(bg.is_stahl(drugs()[0]))

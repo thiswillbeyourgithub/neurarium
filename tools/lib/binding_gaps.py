@@ -27,6 +27,7 @@ from lib import chirality  # noqa: E402  (the optical-rotation tag grammar, read
 from lib import target_aliases as ta  # noqa: E402
 from lib.corpora import wikipedia as wikistore  # noqa: E402  (stored-page lookup, stdlib)
 from lib.drugs_io import is_combination  # noqa: E402
+from data_generators.drugs import DRUG_TARGETS  # noqa: E402  (the receptor groups)
 from fetch_ki import COARSE_MEMBERS  # noqa: E402  (stdlib module)
 
 # A cue that the clause holding the target mention denies the action rather than
@@ -118,20 +119,41 @@ def stereo_mixed(line: str, siblings: list[str]) -> bool:
                for s in siblings)
 
 
-def bound_targets(drug: dict) -> set[str]:
-    """Every target the drug already covers: its bindings plus their coarse relatives.
+def _group_members() -> dict[str, set[str]]:
+    """``{group target: its subtypes}``: `fetch_ki.COARSE_MEMBERS` plus every authored
+    ``receptor_group`` (muscarinic, alpha1, dopamine, ...)."""
+    out = {k: set(v) for k, v in COARSE_MEMBERS.items()}
+    for tid, rec in DRUG_TARGETS.items():
+        if rec.get("type") == "receptor_group" and rec.get("subtypes"):
+            out.setdefault(tid, set()).update(rec["subtypes"])
+    return out
+
+
+GROUP_MEMBERS = _group_members()
+
+
+def bound_targets(drug: dict, group_needs_ki: bool = False) -> set[str]:
+    """Every target the drug already covers: its bindings plus their group relatives.
 
     A drug binding the coarse ``alpha2`` already says what an ``alpha2a`` sentence would
     add, and one binding ``alpha2a`` makes a coarse ``alpha2`` row redundant, so both
-    directions of `fetch_ki.COARSE_MEMBERS` count as covered.
+    directions of :data:`GROUP_MEMBERS` count as covered.
+
+    ``group_needs_ki`` (the French RCP input, whose class words name a group, never a
+    subtype): a group counts as covered by its subtypes only when one of them carries a
+    measured Ki. Tropatepine's m1-m5 rest on one vague "anticholinergic" sentence, so
+    the RCP's "anticholinergique" is still a claim worth adding as ``muscarinic``, while
+    a drug with an M1 Ki already says it.
     """
-    bound = {b["target"] for b in drug.get("bindings", []) if b.get("target")}
+    rows = [b for b in drug.get("bindings", []) if b.get("target")]
+    bound = {b["target"] for b in rows}
+    measured = {b["target"] for b in rows if b.get("ki")}
     out = set(bound)
-    for coarse, members in COARSE_MEMBERS.items():
-        if coarse in bound:
+    for group, members in GROUP_MEMBERS.items():
+        if group in bound:
             out |= members
-        if bound & members:
-            out.add(coarse)
+        if (measured if group_needs_ki else bound) & members:
+            out.add(group)
     return out
 
 

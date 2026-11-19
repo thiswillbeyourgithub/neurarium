@@ -142,6 +142,12 @@ EXTRA_ALIASES: dict[str, list[str]] = {
 }
 
 
+# Ids that are a plain word naming something wider than the target: the ``dopamine``
+# receptor group's id is the transmitter itself, so as an alias it would pair every
+# "dopamine reuptake" or "dopamine release" sentence with the receptors.
+ID_NOT_A_NAME = {"dopamine"}
+
+
 def target_names() -> dict[str, str]:
     """Every modeled drug target id -> its English display name.
 
@@ -184,7 +190,7 @@ def target_aliases(target_id: str, display_name: str) -> list[str]:
     # The id doubles as the flat spelling a table or a terse sentence uses ("5ht2c",
     # "alpha2a", "d4"). Skipped when it carries an underscore, which is our own
     # punctuation and names nothing on a page.
-    if "_" not in target_id:
+    if "_" not in target_id and target_id not in ID_NOT_A_NAME:
         out.append(target_id)
     # A serotonin receptor is routinely named by transmitter + subtype rather than by
     # the 5-HT shorthand ("serotonin 2C receptor"), which no other family does.
