@@ -122,6 +122,8 @@ PAPERS: dict[str, str] = {
                "(addon lithium_brain_half_life)",
     "10360127": "haloperidol: brain-tissue elimination half-life (post-mortem HPLC) far "
                 "longer than the serum one (addon haloperidol_brain_half_life)",
+    "37089": "clorazepate: the parent's own elimination half-life (about 2 h), beside "
+             "nordazepam's long one (contradicts the 40-50 h drug:clorazepate/half_life)",
     # Primate tract-tracing for the monoamine pathways the books never name (check_data
     # family 10, docs/SOURCING_GAPS.md "Innervation coverage"). Species in each line.
     "27028222": "raphe -> globus pallidus, serotonergic (primate review)",

@@ -267,4 +267,12 @@ CONTRADICTIONS: dict[str, dict[str, Any] | list[dict[str, Any]]] = {
     "drug:dimenhydrinate/half_life": _book(
         "stahl", 264, "Plasma half-life approximately 8 hours; may be longer in children "
         "and in the elderly"),
+    # Stahl's clorazepate monograph (p.201) prints 40-50 h, which is the duration of its
+    # active metabolite nordazepam; Rey 1979 measured the prodrug itself and found it
+    # gone within hours. Same shape as the prodrug note on serdexmethylphenidate above.
+    "drug:clorazepate/half_life": _europepmc(
+        "37089",
+        "Mean pharmacokinetic parameters for clorazepate were absorption half life 0.77 h "
+        "in pregnant women and 0.56 h in non-pregnant women; elimination half life 1.3 h "
+        "in pregnant women and 2.0 h in non-pregnant women"),
 }

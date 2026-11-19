@@ -286,5 +286,17 @@
   "hours": 2.0,
   "hours_max": 3.0,
   "qid": "1800a711"
+ },
+ "clorazepate": {
+  "hours": 40.0,
+  "hours_max": 50.0,
+  "index": 2,
+  "qid": "c966f88b"
+ },
+ "prazepam": {
+  "hours": 30.0,
+  "hours_max": 150.0,
+  "index": 2,
+  "qid": "aa158293"
  }
 }
