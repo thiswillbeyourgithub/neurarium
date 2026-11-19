@@ -12386,13 +12386,12 @@
     },
     "ki_coverage": {
       "bindings_total": 1896,
-      "bindings_with_ki": 1617,
+      "bindings_with_ki": 1618,
       "pct_bindings_with_ki": 85,
       "drugs_total": 275,
-      "drugs_without_ki": 77,
+      "drugs_without_ki": 76,
       "drugs_without_ki_ids": [
         "acamprosate",
-        "alpidem",
         "amantadine",
         "amobarbital",
         "armodafinil",

@@ -96,7 +96,8 @@ NAME_PATTERNS = [
     # GABA-A first: subunit-combination names ("GABA A Alpha1Beta3Gamma2") would
     # otherwise be read as nicotinic (alpha1beta3) or adrenergic (alpha2). The
     # benzodiazepine site, the GABA site and every subunit assay are the one `gaba_a`
-    # target. A bare "GABA" row stays unmapped: it may be GABA-B or uptake.
+    # target. A bare "GABA" row stays unmapped (it may be GABA-B or uptake) unless its
+    # radioligand pins the benzodiazepine site (see BZ_SITE_HOT).
     # A gamma2 subunit is GABA-A only, so a bare "alpha1beta3gamma2" is one too.
     (re.compile(r"^gabaa|^gabareceptoralpha\dsubunit$|^alpha\dbeta\dgamma2$|"
                 r"^gabachloride|^gabapicrotoxin$"), "gaba_a"),
@@ -223,6 +224,11 @@ def download(dest=CSV_PATH):
 
 norm = drugs_io.ascii_key
 
+# Radioligands that label only the GABA-A benzodiazepine site ("FNZ" is PDSP's
+# shorthand for [3H]flunitrazepam), so a bare "GABA" row displacing one is a GABA-A
+# assay. [3H]GABA and [3H]muscimol are left out: GABA also labels GABA-B and uptake.
+BZ_SITE_HOT = {"fnz", "3hflunitrazepam", "3hclonazepam", "3hro151788", "3hflumazenil"}
+
 
 def resolve_target(row):
     """Map one CSV row to our subtype-level target id, or None if unmapped."""
@@ -230,6 +236,8 @@ def resolve_target(row):
     if gene in GENE_TO_ID:
         return GENE_TO_ID[gene]
     n = norm(row.get(COL_NAME))
+    if n == "gaba" and norm(row.get(COL_RADIO)) in BZ_SITE_HOT:
+        return "gaba_a"
     for pat, tid in NAME_PATTERNS:
         if pat.search(n):
             return tid

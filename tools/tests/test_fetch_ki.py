@@ -454,6 +454,17 @@ class TargetNameTest(unittest.TestCase):
                for n in self.CASES}
         self.assertEqual(got, self.CASES)
 
+    def test_bare_gaba_by_radioligand(self):
+        """A bare "GABA" row is GABA-A only when its radioligand labels the
+        benzodiazepine site: alpidem's three rows ([3H]flunitrazepam "FNZ",
+        [3H]clonazepam) were dropped, while [3H]GABA could be GABA-B or uptake."""
+        def at(hot):
+            return fetch_ki.resolve_target({fetch_ki.COL_GENE: "", fetch_ki.COL_NAME: "GABA",
+                                            fetch_ki.COL_RADIO: hot})
+        self.assertEqual({h: at(h) for h in ("FNZ", "3H-Clonazepam", "3H-GABA", "3H-MUSCIMOL")},
+                         {"FNZ": "gaba_a", "3H-Clonazepam": "gaba_a",
+                          "3H-GABA": None, "3H-MUSCIMOL": None})
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
