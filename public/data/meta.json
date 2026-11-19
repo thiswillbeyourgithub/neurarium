@@ -425,7 +425,7 @@
       "location_sources": {
         "raphe": [
           {
-            "quote_id": "q_3b6726f6d947",
+            "quote_id": "q_e87006047f1b",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -433,22 +433,22 @@
       },
       "density": {
         "reliability": 0.95,
-        "donors": 5,
+        "donors": 6,
         "profile": {
-          "raphe": 5.78,
+          "raphe": 5.67,
           "accumbens": -0.14,
-          "frontal": -0.19,
-          "cingulate": -0.23,
-          "temporal": -0.24,
-          "hippocampus": -0.29,
+          "cingulate": -0.2,
+          "frontal": -0.2,
+          "temporal": -0.23,
+          "hippocampus": -0.3,
           "amygdala": -0.31,
-          "thalamus": -0.31,
-          "hypothalamus": -0.34
+          "thalamus": -0.34,
+          "hypothalamus": -0.37
         },
         "grade": "verified",
         "sources": [
           {
-            "quote_id": "q_e526fa958128",
+            "quote_id": "q_9cc8ea947ee9",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -1417,28 +1417,28 @@
       "location_sources": {
         "locus_coeruleus": [
           {
-            "quote_id": "q_96c9f296fd16",
+            "quote_id": "q_0ceee3255470",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ]
       },
       "density": {
-        "reliability": 0.82,
-        "donors": 5,
+        "reliability": 0.85,
+        "donors": 6,
         "profile": {
-          "locus_coeruleus": 9.34,
-          "amygdala": 0.16,
-          "hypothalamus": 0.0,
-          "thalamus": -0.09,
-          "cerebellum": -0.11,
-          "hippocampus": -0.15,
-          "frontal": -0.21
+          "locus_coeruleus": 9.43,
+          "amygdala": 0.14,
+          "hypothalamus": -0.02,
+          "thalamus": -0.08,
+          "cerebellum": -0.13,
+          "hippocampus": -0.17,
+          "frontal": -0.2
         },
         "grade": "verified",
         "sources": [
           {
-            "quote_id": "q_ea06838d1722",
+            "quote_id": "q_fe710f51e035",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -1843,42 +1843,42 @@
       "location_sources": {
         "accumbens": [
           {
-            "quote_id": "q_6e9aa522923e",
+            "quote_id": "q_038911011dfb",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "caudate": [
           {
-            "quote_id": "q_7f3d02f575bc",
+            "quote_id": "q_b6c057c93d29",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "frontal": [
           {
-            "quote_id": "q_5ab5b09e6b03",
+            "quote_id": "q_f82c3abe4ac8",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "putamen": [
           {
-            "quote_id": "q_1ba7007c5e26",
+            "quote_id": "q_6530653d4c27",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "substantia_nigra": [
           {
-            "quote_id": "q_1286dcd53376",
+            "quote_id": "q_bce46478b129",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "vta": [
           {
-            "quote_id": "q_19c3102c3b49",
+            "quote_id": "q_4b07d71b1960",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -1886,19 +1886,19 @@
       },
       "density": {
         "reliability": 0.9,
-        "donors": 5,
+        "donors": 6,
         "profile": {
-          "substantia_nigra": 4.72,
-          "vta": 4.07,
-          "accumbens": 0.05,
-          "putamen": -0.08,
-          "caudate": -0.28,
-          "frontal": -0.42
+          "substantia_nigra": 4.76,
+          "vta": 4.14,
+          "accumbens": -0.1,
+          "putamen": -0.18,
+          "caudate": -0.27,
+          "frontal": -0.37
         },
         "grade": "verified",
         "sources": [
           {
-            "quote_id": "q_eb9c67a0ff89",
+            "quote_id": "q_52aada5e7005",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -2305,54 +2305,54 @@
       "location_sources": {
         "cerebellum": [
           {
-            "quote_id": "q_b06accfc5062",
+            "quote_id": "q_f01d37916312",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "frontal": [
           {
-            "quote_id": "q_49267cfb4ae4",
+            "quote_id": "q_d711f309208b",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "hippocampus": [
           {
-            "quote_id": "q_84164fde696d",
+            "quote_id": "q_e1da93409c20",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "temporal": [
           {
-            "quote_id": "q_8e0c401d07fb",
+            "quote_id": "q_fd32cac78eb3",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "thalamus": [
           {
-            "quote_id": "q_67bc8bfc5c42",
+            "quote_id": "q_b73c7ca19345",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ]
       },
       "density": {
-        "reliability": 0.74,
-        "donors": 5,
+        "reliability": 0.68,
+        "donors": 6,
         "profile": {
-          "thalamus": 0.71,
-          "temporal": 0.21,
-          "frontal": 0.19,
-          "cerebellum": -0.79,
-          "hippocampus": -1.28
+          "thalamus": 0.62,
+          "temporal": 0.27,
+          "frontal": 0.21,
+          "cerebellum": -0.8,
+          "hippocampus": -1.29
         },
         "grade": "verified",
         "sources": [
           {
-            "quote_id": "q_2e7e94e84fef",
+            "quote_id": "q_ade96c02016a",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -2391,102 +2391,102 @@
       "location_sources": {
         "amygdala": [
           {
-            "quote_id": "q_faf054637347",
+            "quote_id": "q_f0feb36c8a8b",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "caudate": [
           {
-            "quote_id": "q_79f878a503ed",
+            "quote_id": "q_9b3a12f6911d",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "cerebellum": [
           {
-            "quote_id": "q_fe7e87bd018f",
+            "quote_id": "q_41ae16d38c86",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "frontal": [
           {
-            "quote_id": "q_439dfe42740e",
+            "quote_id": "q_e493feeb1b96",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "hippocampus": [
           {
-            "quote_id": "q_a756cfe5176d",
+            "quote_id": "q_a239a827f244",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "hypothalamus": [
           {
-            "quote_id": "q_bfe388954f40",
+            "quote_id": "q_7896203292c1",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "occipital": [
           {
-            "quote_id": "q_bb5e963fa882",
+            "quote_id": "q_304038645f3f",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "parietal": [
           {
-            "quote_id": "q_0c0ffaac2797",
+            "quote_id": "q_fd2883ffa7ca",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "putamen": [
           {
-            "quote_id": "q_abff5c2b3fba",
+            "quote_id": "q_8c293862b4c7",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "temporal": [
           {
-            "quote_id": "q_44f9448a62c1",
+            "quote_id": "q_905e5ba9dcbf",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "thalamus": [
           {
-            "quote_id": "q_51b5f6cdc07f",
+            "quote_id": "q_55cba261151b",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ]
       },
       "density": {
-        "reliability": 0.88,
-        "donors": 5,
+        "reliability": 0.87,
+        "donors": 6,
         "profile": {
-          "thalamus": 0.91,
-          "putamen": 0.7,
-          "caudate": 0.1,
-          "occipital": -0.1,
-          "parietal": -0.21,
-          "hypothalamus": -0.27,
-          "frontal": -0.3,
-          "amygdala": -0.31,
-          "temporal": -0.41,
-          "hippocampus": -0.8,
-          "cerebellum": -0.93
+          "thalamus": 0.98,
+          "putamen": 0.67,
+          "caudate": 0.09,
+          "occipital": -0.15,
+          "parietal": -0.19,
+          "hypothalamus": -0.23,
+          "frontal": -0.26,
+          "temporal": -0.34,
+          "amygdala": -0.42,
+          "hippocampus": -0.88,
+          "cerebellum": -0.96
         },
         "grade": "verified",
         "sources": [
           {
-            "quote_id": "q_a28dc9376660",
+            "quote_id": "q_3563d3d2a194",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -2529,62 +2529,62 @@
       "location_sources": {
         "caudate": [
           {
-            "quote_id": "q_b41625995fc2",
+            "quote_id": "q_6b55673416b9",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "locus_coeruleus": [
           {
-            "quote_id": "q_2f6c637b6d3f",
+            "quote_id": "q_8d76f7f91693",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "putamen": [
           {
-            "quote_id": "q_7998a53cac2c",
+            "quote_id": "q_e1cc2aa39e0f",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "raphe": [
           {
-            "quote_id": "q_b194a1664cdb",
+            "quote_id": "q_c53e2e899a9d",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "substantia_nigra": [
           {
-            "quote_id": "q_a8b395a1c044",
+            "quote_id": "q_1ab9e76127d2",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "vta": [
           {
-            "quote_id": "q_7f643b001190",
+            "quote_id": "q_367ccc849a1f",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ]
       },
       "density": {
-        "reliability": 0.95,
-        "donors": 5,
+        "reliability": 0.96,
+        "donors": 6,
         "profile": {
-          "locus_coeruleus": 4.45,
-          "substantia_nigra": 3.8,
-          "vta": 3.3,
-          "raphe": 2.8,
-          "putamen": -0.1,
-          "caudate": -0.21
+          "locus_coeruleus": 4.49,
+          "substantia_nigra": 3.79,
+          "vta": 3.25,
+          "raphe": 2.82,
+          "putamen": -0.16,
+          "caudate": -0.22
         },
         "grade": "verified",
         "sources": [
           {
-            "quote_id": "q_228a079ef83f",
+            "quote_id": "q_d887022c903f",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -2748,70 +2748,70 @@
       "location_sources": {
         "locus_coeruleus": [
           {
-            "quote_id": "q_d5b844b4f711",
+            "quote_id": "q_fdecc93e0f4e",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "medulla": [
           {
-            "quote_id": "q_51c08c9fc856",
+            "quote_id": "q_a39d0563a720",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "midbrain": [
           {
-            "quote_id": "q_f954f614c0ee",
+            "quote_id": "q_62f05f9053b8",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "pons": [
           {
-            "quote_id": "q_4c626ece393e",
+            "quote_id": "q_5c93dca583c2",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "raphe": [
           {
-            "quote_id": "q_2be52cadce44",
+            "quote_id": "q_06794dddf45b",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "substantia_nigra": [
           {
-            "quote_id": "q_bbadc3f48ad7",
+            "quote_id": "q_4bcfea806ca0",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "vta": [
           {
-            "quote_id": "q_58b3416358c0",
+            "quote_id": "q_8aee5bdcd48f",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ]
       },
       "density": {
-        "reliability": 0.9,
-        "donors": 5,
+        "reliability": 0.91,
+        "donors": 6,
         "profile": {
-          "locus_coeruleus": 4.4,
-          "substantia_nigra": 1.17,
-          "midbrain": 1.14,
-          "vta": 1.07,
-          "pons": 0.71,
-          "raphe": 0.49,
-          "medulla": 0.31
+          "locus_coeruleus": 4.32,
+          "substantia_nigra": 1.1,
+          "midbrain": 1.09,
+          "vta": 1.04,
+          "pons": 0.82,
+          "raphe": 0.57,
+          "medulla": 0.44
         },
         "grade": "verified",
         "sources": [
           {
-            "quote_id": "q_616bf02b31f6",
+            "quote_id": "q_b268e0efd9ac",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -2871,62 +2871,62 @@
       "location_sources": {
         "medulla": [
           {
-            "quote_id": "q_44820b5d924d",
+            "quote_id": "q_51ddf05974c4",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "midbrain": [
           {
-            "quote_id": "q_72454fcb10c8",
+            "quote_id": "q_3e03177067d4",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "pons": [
           {
-            "quote_id": "q_17d8aef3bd04",
+            "quote_id": "q_dab37353ea87",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "raphe": [
           {
-            "quote_id": "q_6420e4458f86",
+            "quote_id": "q_a0da1992ba99",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "substantia_nigra": [
           {
-            "quote_id": "q_9c0565ec4361",
+            "quote_id": "q_f7a17294bc57",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "vta": [
           {
-            "quote_id": "q_8fcfeb86ab65",
+            "quote_id": "q_36918e084a1a",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ]
       },
       "density": {
-        "reliability": 0.87,
-        "donors": 5,
+        "reliability": 0.9,
+        "donors": 6,
         "profile": {
-          "raphe": 2.13,
-          "medulla": 0.91,
-          "vta": 0.88,
-          "midbrain": 0.75,
-          "substantia_nigra": 0.54,
-          "pons": 0.53
+          "raphe": 2.15,
+          "vta": 0.93,
+          "medulla": 0.92,
+          "midbrain": 0.78,
+          "substantia_nigra": 0.56,
+          "pons": 0.54
         },
         "grade": "verified",
         "sources": [
           {
-            "quote_id": "q_b650c768a7b7",
+            "quote_id": "q_00e27b369cd1",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -2993,14 +2993,14 @@
       "location_sources": {
         "frontal": [
           {
-            "quote_id": "q_5f627de57e84",
+            "quote_id": "q_34ac70b2f8e7",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "hippocampus": [
           {
-            "quote_id": "q_1be62e891e85",
+            "quote_id": "q_34a1f1f55e7e",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -3014,14 +3014,14 @@
         ],
         "temporal": [
           {
-            "quote_id": "q_e88e00665e13",
+            "quote_id": "q_9291ee8ce620",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "thalamus": [
           {
-            "quote_id": "q_07a4b24be98d",
+            "quote_id": "q_4722ee1b9918",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -3029,18 +3029,18 @@
       },
       "density": {
         "reliability": 0.96,
-        "donors": 5,
+        "donors": 6,
         "profile": {
           "septal_nuclei": 0.79,
-          "thalamus": 0.54,
-          "hippocampus": -0.42,
-          "frontal": -0.7,
+          "thalamus": 0.52,
+          "hippocampus": -0.47,
+          "frontal": -0.69,
           "temporal": -0.81
         },
         "grade": "verified",
         "sources": [
           {
-            "quote_id": "q_b9e33c25a3c8",
+            "quote_id": "q_da6f0462857b",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -3129,38 +3129,38 @@
       "location_sources": {
         "frontal": [
           {
-            "quote_id": "q_613797a6763d",
+            "quote_id": "q_a4b72e32aad4",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "hippocampus": [
           {
-            "quote_id": "q_5c4ce7e9ada7",
+            "quote_id": "q_014fff5f4ae1",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "temporal": [
           {
-            "quote_id": "q_3c90aaddcfa3",
+            "quote_id": "q_ee1ca9493d82",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ]
       },
       "density": {
-        "reliability": 0.78,
-        "donors": 5,
+        "reliability": 0.76,
+        "donors": 6,
         "profile": {
-          "temporal": -0.3,
-          "frontal": -0.37,
-          "hippocampus": -0.6
+          "temporal": -0.31,
+          "frontal": -0.34,
+          "hippocampus": -0.57
         },
         "grade": "verified",
         "sources": [
           {
-            "quote_id": "q_05b3c2dbce79",
+            "quote_id": "q_fa535d8739c4",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -3832,62 +3832,62 @@
       "location_sources": {
         "frontal": [
           {
-            "quote_id": "q_b3a7cd444f80",
+            "quote_id": "q_4a17bcd89c41",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "hippocampus": [
           {
-            "quote_id": "q_077bdbd32285",
+            "quote_id": "q_67103f23d996",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "occipital": [
           {
-            "quote_id": "q_ccdb3f43fe7b",
+            "quote_id": "q_fbce40e1747e",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "parietal": [
           {
-            "quote_id": "q_b9b34bc4c891",
+            "quote_id": "q_65fde9a8095c",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "temporal": [
           {
-            "quote_id": "q_e786e90398f1",
+            "quote_id": "q_299bf81a605a",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "thalamus": [
           {
-            "quote_id": "q_a77f256e0fc2",
+            "quote_id": "q_12cb5ed425fb",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ]
       },
       "density": {
-        "reliability": 0.9,
-        "donors": 5,
+        "reliability": 0.91,
+        "donors": 6,
         "profile": {
-          "hippocampus": 0.79,
-          "temporal": 0.4,
-          "frontal": 0.35,
-          "parietal": 0.27,
-          "occipital": 0.24,
-          "thalamus": -0.76
+          "hippocampus": 0.75,
+          "temporal": 0.41,
+          "frontal": 0.37,
+          "parietal": 0.28,
+          "occipital": 0.22,
+          "thalamus": -0.8
         },
         "grade": "verified",
         "sources": [
           {
-            "quote_id": "q_6caa6cae746e",
+            "quote_id": "q_07e14d5708c4",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -4300,46 +4300,46 @@
       "location_sources": {
         "frontal": [
           {
-            "quote_id": "q_bfa4c5f86463",
+            "quote_id": "q_11e0c1f9013e",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "hippocampus": [
           {
-            "quote_id": "q_9222aeeef40a",
+            "quote_id": "q_643508a014cd",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "temporal": [
           {
-            "quote_id": "q_40baafa2ca6d",
+            "quote_id": "q_dd2a6a6b3604",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "thalamus": [
           {
-            "quote_id": "q_7f1a6bed1b33",
+            "quote_id": "q_e0878d559938",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ]
       },
       "density": {
-        "reliability": 0.85,
-        "donors": 5,
+        "reliability": 0.86,
+        "donors": 6,
         "profile": {
-          "temporal": 0.34,
-          "hippocampus": 0.26,
-          "frontal": 0.22,
-          "thalamus": 0.18
+          "temporal": 0.36,
+          "frontal": 0.25,
+          "hippocampus": 0.24,
+          "thalamus": 0.08
         },
         "grade": "verified",
         "sources": [
           {
-            "quote_id": "q_56b1474d31e4",
+            "quote_id": "q_01c221db626f",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -4843,46 +4843,46 @@
       "location_sources": {
         "frontal": [
           {
-            "quote_id": "q_44a3e9bce8f5",
+            "quote_id": "q_29777ea506bc",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "hippocampus": [
           {
-            "quote_id": "q_0b189a373c58",
+            "quote_id": "q_cbc786bf42a8",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "temporal": [
           {
-            "quote_id": "q_f7e9ce856623",
+            "quote_id": "q_a51ed7e361df",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "thalamus": [
           {
-            "quote_id": "q_38b197e5eec9",
+            "quote_id": "q_8da39de21faa",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ]
       },
       "density": {
-        "reliability": 0.91,
-        "donors": 5,
+        "reliability": 0.92,
+        "donors": 6,
         "profile": {
-          "thalamus": -0.29,
-          "frontal": -0.34,
-          "temporal": -0.47,
-          "hippocampus": -1.93
+          "thalamus": -0.32,
+          "frontal": -0.37,
+          "temporal": -0.48,
+          "hippocampus": -1.97
         },
         "grade": "verified",
         "sources": [
           {
-            "quote_id": "q_5b3e6d8db2b5",
+            "quote_id": "q_9098c84f9d81",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -4913,21 +4913,21 @@
       "location_sources": {
         "frontal": [
           {
-            "quote_id": "q_a33bf4332cb2",
+            "quote_id": "q_5f2e45743572",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "temporal": [
           {
-            "quote_id": "q_d8e415e91ea4",
+            "quote_id": "q_772aef57e810",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "thalamus": [
           {
-            "quote_id": "q_1d3d55cfbf95",
+            "quote_id": "q_58e954dabe56",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -4935,16 +4935,16 @@
       },
       "density": {
         "reliability": 0.89,
-        "donors": 5,
+        "donors": 6,
         "profile": {
-          "thalamus": 1.43,
-          "temporal": 0.3,
-          "frontal": 0.23
+          "thalamus": 1.42,
+          "temporal": 0.28,
+          "frontal": 0.22
         },
         "grade": "verified",
         "sources": [
           {
-            "quote_id": "q_3c85fa04b95b",
+            "quote_id": "q_27f1fc157137",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -4978,62 +4978,62 @@
       "location_sources": {
         "caudate": [
           {
-            "quote_id": "q_41beab7ade7b",
+            "quote_id": "q_5c7c53f95897",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "locus_coeruleus": [
           {
-            "quote_id": "q_d51e86bbc42b",
+            "quote_id": "q_c1d418c91af2",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "putamen": [
           {
-            "quote_id": "q_aff92ecf58b7",
+            "quote_id": "q_26019982c1c4",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "raphe": [
           {
-            "quote_id": "q_5db44c37de7c",
+            "quote_id": "q_9dc38bc53e9f",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "substantia_nigra": [
           {
-            "quote_id": "q_a0791043f243",
+            "quote_id": "q_55b024091614",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "vta": [
           {
-            "quote_id": "q_4ef26a06f1a4",
+            "quote_id": "q_bf5ff4b7b031",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ]
       },
       "density": {
-        "reliability": 0.97,
-        "donors": 5,
+        "reliability": 0.98,
+        "donors": 6,
         "profile": {
-          "raphe": 3.94,
-          "locus_coeruleus": 3.9,
+          "locus_coeruleus": 3.88,
+          "raphe": 3.87,
           "substantia_nigra": 3.33,
-          "vta": 3.07,
-          "putamen": 1.12,
-          "caudate": 1.02
+          "vta": 3.06,
+          "putamen": 1.1,
+          "caudate": 1.01
         },
         "grade": "verified",
         "sources": [
           {
-            "quote_id": "q_c0fc3e950b4f",
+            "quote_id": "q_7f2929b79721",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -5110,35 +5110,35 @@
       "location_sources": {
         "caudate": [
           {
-            "quote_id": "q_e1b913cde0db",
+            "quote_id": "q_b1cc8f85c946",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "frontal": [
           {
-            "quote_id": "q_2d0bba8416c7",
+            "quote_id": "q_f078a743ddc3",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "hippocampus": [
           {
-            "quote_id": "q_44b5815d46fd",
+            "quote_id": "q_08f4087656d7",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "putamen": [
           {
-            "quote_id": "q_798de23beffb",
+            "quote_id": "q_45e36fba595d",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "temporal": [
           {
-            "quote_id": "q_cb4abb08c3b9",
+            "quote_id": "q_dfafb122b389",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -7830,54 +7830,54 @@
       "location_sources": {
         "cerebellum": [
           {
-            "quote_id": "q_1d69e06edc41",
+            "quote_id": "q_841d46d5c821",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "frontal": [
           {
-            "quote_id": "q_21b5f68bfaff",
+            "quote_id": "q_52f1c08055d4",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "hippocampus": [
           {
-            "quote_id": "q_e1fe33cd5cab",
+            "quote_id": "q_e6b36e2825e7",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "temporal": [
           {
-            "quote_id": "q_b78f36097b12",
+            "quote_id": "q_ba0549cb19d5",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "thalamus": [
           {
-            "quote_id": "q_8a7ba907fd0b",
+            "quote_id": "q_904db39a7947",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ]
       },
       "density": {
-        "reliability": 0.68,
-        "donors": 5,
+        "reliability": 0.74,
+        "donors": 6,
         "profile": {
-          "temporal": 0.22,
-          "frontal": 0.17,
-          "thalamus": 0.05,
-          "cerebellum": -0.68,
-          "hippocampus": -1.21
+          "temporal": 0.27,
+          "frontal": 0.22,
+          "thalamus": -0.06,
+          "cerebellum": -0.69,
+          "hippocampus": -1.25
         },
         "grade": "verified",
         "sources": [
           {
-            "quote_id": "q_c5819f80592b",
+            "quote_id": "q_c6b3dc73c1a0",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -7909,46 +7909,46 @@
       "location_sources": {
         "frontal": [
           {
-            "quote_id": "q_a779d1bf4648",
+            "quote_id": "q_a1e45194bd2b",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "hippocampus": [
           {
-            "quote_id": "q_ef853daa995f",
+            "quote_id": "q_3b8d9d5654e6",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "temporal": [
           {
-            "quote_id": "q_8284b17be367",
+            "quote_id": "q_231cdbe75eb5",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "thalamus": [
           {
-            "quote_id": "q_26312bfc2076",
+            "quote_id": "q_f5c2970fa7a3",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ]
       },
       "density": {
-        "reliability": 0.63,
-        "donors": 5,
+        "reliability": 0.61,
+        "donors": 6,
         "profile": {
-          "thalamus": 0.77,
-          "hippocampus": 0.22,
-          "temporal": 0.17,
-          "frontal": 0.15
+          "thalamus": 0.68,
+          "temporal": 0.22,
+          "frontal": 0.19,
+          "hippocampus": 0.14
         },
         "grade": "verified",
         "sources": [
           {
-            "quote_id": "q_2cea1a8b81f5",
+            "quote_id": "q_d044aaedfca3",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -8000,56 +8000,56 @@
       "location_sources": {
         "frontal": [
           {
-            "quote_id": "q_56b1e3705ae7",
+            "quote_id": "q_d14275be0005",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "hippocampus": [
           {
-            "quote_id": "q_9af60a04b2ae",
+            "quote_id": "q_3a644e01137d",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "hypothalamus": [
           {
-            "quote_id": "q_e36df9a4bc8b",
+            "quote_id": "q_40e10f5e5ddc",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "locus_coeruleus": [
           {
-            "quote_id": "q_a3bdb2d1bfdc",
+            "quote_id": "q_c1e0d9f4bc4e",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "medulla": [
           {
-            "quote_id": "q_a52359aa2ba1",
+            "quote_id": "q_ca510c0eccb0",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "midbrain": [
           {
-            "quote_id": "q_3271a3f11d12",
+            "quote_id": "q_2b4883aeb5da",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "pons": [
           {
-            "quote_id": "q_5cfc73af6dea",
+            "quote_id": "q_c40e57ae7c1c",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "thalamus": [
           {
-            "quote_id": "q_8cb8ef4b3e24",
+            "quote_id": "q_0e5ba21ebea3",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -8057,21 +8057,21 @@
       },
       "density": {
         "reliability": 0.96,
-        "donors": 5,
+        "donors": 6,
         "profile": {
-          "locus_coeruleus": 1.02,
-          "frontal": 0.09,
-          "medulla": -0.16,
-          "hippocampus": -0.27,
-          "midbrain": -0.28,
-          "pons": -0.31,
-          "hypothalamus": -0.39,
-          "thalamus": -0.87
+          "locus_coeruleus": 1.15,
+          "frontal": 0.13,
+          "medulla": -0.15,
+          "hippocampus": -0.29,
+          "midbrain": -0.3,
+          "pons": -0.3,
+          "hypothalamus": -0.33,
+          "thalamus": -0.89
         },
         "grade": "verified",
         "sources": [
           {
-            "quote_id": "q_888810ba215f",
+            "quote_id": "q_021f9e391ebf",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -8130,94 +8130,94 @@
       "location_sources": {
         "accumbens": [
           {
-            "quote_id": "q_3a3c6f022a64",
+            "quote_id": "q_faf2fa66a6ac",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "caudate": [
           {
-            "quote_id": "q_ab5366b356bb",
+            "quote_id": "q_969ee92435e5",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "cingulate": [
           {
-            "quote_id": "q_d9a62bb95edf",
+            "quote_id": "q_91d0edaf1876",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "frontal": [
           {
-            "quote_id": "q_a9888cbe16d4",
+            "quote_id": "q_8d170fba2937",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "hippocampus": [
           {
-            "quote_id": "q_bcfe6da0518e",
+            "quote_id": "q_1dad0a29bf66",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "occipital": [
           {
-            "quote_id": "q_a9b4cf5155f1",
+            "quote_id": "q_29490be174a8",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "parietal": [
           {
-            "quote_id": "q_dcd37cf95904",
+            "quote_id": "q_4f5977b8acf2",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "putamen": [
           {
-            "quote_id": "q_0855d30dde82",
+            "quote_id": "q_3c9c388eb030",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "temporal": [
           {
-            "quote_id": "q_86d241fff2ad",
+            "quote_id": "q_2872031492bf",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "thalamus": [
           {
-            "quote_id": "q_e7d7cd3dddcd",
+            "quote_id": "q_1a9a21aee54c",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ]
       },
       "density": {
-        "reliability": 0.97,
-        "donors": 5,
+        "reliability": 0.98,
+        "donors": 6,
         "profile": {
+          "occipital": 0.81,
           "temporal": 0.81,
-          "occipital": 0.8,
           "frontal": 0.79,
-          "parietal": 0.77,
-          "hippocampus": 0.73,
-          "accumbens": 0.66,
-          "cingulate": 0.66,
-          "putamen": 0.64,
-          "caudate": 0.61,
+          "parietal": 0.78,
+          "hippocampus": 0.76,
+          "accumbens": 0.7,
+          "cingulate": 0.68,
+          "putamen": 0.67,
+          "caudate": 0.63,
           "thalamus": -1.05
         },
         "grade": "verified",
         "sources": [
           {
-            "quote_id": "q_784b045f7ed6",
+            "quote_id": "q_1331b21a565a",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -8260,94 +8260,94 @@
       "location_sources": {
         "frontal": [
           {
-            "quote_id": "q_16319ad16d61",
+            "quote_id": "q_bbd30d0e3661",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "hippocampus": [
           {
-            "quote_id": "q_d1c64b91afd8",
+            "quote_id": "q_bbc401d6d791",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "hypothalamus": [
           {
-            "quote_id": "q_1d11fffea773",
+            "quote_id": "q_06bce59635cf",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "medulla": [
           {
-            "quote_id": "q_6cc38bd96379",
+            "quote_id": "q_27fea49fdc10",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "midbrain": [
           {
-            "quote_id": "q_ed2c0437245b",
+            "quote_id": "q_d3b2aa251ce9",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "occipital": [
           {
-            "quote_id": "q_0c06b856256d",
+            "quote_id": "q_b33a4b7697d8",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "parietal": [
           {
-            "quote_id": "q_3b0b68d63a42",
+            "quote_id": "q_d7f952a18d23",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "pons": [
           {
-            "quote_id": "q_8b44744af7eb",
+            "quote_id": "q_cd5f9acc678f",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "temporal": [
           {
-            "quote_id": "q_a8d8f3e8abab",
+            "quote_id": "q_82e9fce18b7c",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "thalamus": [
           {
-            "quote_id": "q_617aaab55c39",
+            "quote_id": "q_6ebbd85e9f22",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ]
       },
       "density": {
-        "reliability": 0.93,
-        "donors": 5,
+        "reliability": 0.94,
+        "donors": 6,
         "profile": {
-          "frontal": 0.7,
-          "temporal": 0.69,
-          "thalamus": 0.63,
-          "parietal": 0.52,
-          "occipital": 0.15,
-          "hippocampus": -0.33,
-          "pons": -0.34,
+          "frontal": 0.71,
+          "temporal": 0.71,
+          "thalamus": 0.64,
+          "parietal": 0.53,
+          "occipital": 0.16,
+          "hippocampus": -0.32,
+          "pons": -0.33,
           "hypothalamus": -0.38,
           "medulla": -0.58,
-          "midbrain": -0.72
+          "midbrain": -0.77
         },
         "grade": "verified",
         "sources": [
           {
-            "quote_id": "q_b9bb75c8c66e",
+            "quote_id": "q_885cd7ba01df",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -8391,56 +8391,56 @@
       "location_sources": {
         "accumbens": [
           {
-            "quote_id": "q_621879abe1aa",
+            "quote_id": "q_ecab42ae3d1c",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "amygdala": [
           {
-            "quote_id": "q_0a969b206991",
+            "quote_id": "q_81de711fe8ed",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "caudate": [
           {
-            "quote_id": "q_a30a697ff176",
+            "quote_id": "q_c1a8f7ea67f6",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "frontal": [
           {
-            "quote_id": "q_bb0b326c7933",
+            "quote_id": "q_f95ee70c361d",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "hypothalamus": [
           {
-            "quote_id": "q_497513d21c7c",
+            "quote_id": "q_f2fe4ac0101c",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "putamen": [
           {
-            "quote_id": "q_d222b1d526e7",
+            "quote_id": "q_39e81e108d6b",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "substantia_nigra": [
           {
-            "quote_id": "q_ec2937675c3f",
+            "quote_id": "q_26e73e043b17",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "vta": [
           {
-            "quote_id": "q_f1b2f332376a",
+            "quote_id": "q_2ca6235fae86",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -8448,21 +8448,21 @@
       },
       "density": {
         "reliability": 0.97,
-        "donors": 5,
+        "donors": 6,
         "profile": {
           "putamen": 2.9,
-          "caudate": 2.61,
+          "caudate": 2.63,
           "substantia_nigra": 2.44,
-          "accumbens": 2.31,
+          "accumbens": 2.32,
           "vta": 2.12,
-          "hypothalamus": 1.02,
-          "amygdala": 0.4,
-          "frontal": -0.59
+          "hypothalamus": 1.04,
+          "amygdala": 0.48,
+          "frontal": -0.57
         },
         "grade": "verified",
         "sources": [
           {
-            "quote_id": "q_7f456a0ac02f",
+            "quote_id": "q_5f6cc6522bd1",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -8509,70 +8509,70 @@
       "location_sources": {
         "caudate": [
           {
-            "quote_id": "q_969a7e2fe489",
+            "quote_id": "q_b549dcf157e6",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "cerebellum": [
           {
-            "quote_id": "q_35e1d84841bd",
+            "quote_id": "q_1a9a0515c147",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "frontal": [
           {
-            "quote_id": "q_f5e2cb343692",
+            "quote_id": "q_2814a3ecfd94",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "hippocampus": [
           {
-            "quote_id": "q_29435f2ad3a6",
+            "quote_id": "q_b21a0c1c7f74",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "putamen": [
           {
-            "quote_id": "q_12a48554a8de",
+            "quote_id": "q_6926f7310b44",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "temporal": [
           {
-            "quote_id": "q_4dbcc2a0a2b5",
+            "quote_id": "q_c525309b436d",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "thalamus": [
           {
-            "quote_id": "q_2386ef402721",
+            "quote_id": "q_b2a60ec42df2",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ]
       },
       "density": {
-        "reliability": 0.94,
-        "donors": 5,
+        "reliability": 0.95,
+        "donors": 6,
         "profile": {
-          "hippocampus": 1.19,
-          "temporal": 0.6,
-          "frontal": 0.56,
-          "caudate": 0.26,
-          "putamen": 0.24,
-          "cerebellum": -0.46,
-          "thalamus": -1.12
+          "hippocampus": 1.21,
+          "temporal": 0.62,
+          "frontal": 0.59,
+          "caudate": 0.28,
+          "putamen": 0.25,
+          "cerebellum": -0.44,
+          "thalamus": -1.16
         },
         "grade": "verified",
         "sources": [
           {
-            "quote_id": "q_e0a453071918",
+            "quote_id": "q_be4f917b5b92",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -8605,54 +8605,54 @@
       "location_sources": {
         "hypothalamus": [
           {
-            "quote_id": "q_140b5540535f",
+            "quote_id": "q_95f77c6dcb1c",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "locus_coeruleus": [
           {
-            "quote_id": "q_a127de8a0c19",
+            "quote_id": "q_2e25f492b79d",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "raphe": [
           {
-            "quote_id": "q_e1b1d41c20e2",
+            "quote_id": "q_9d49781e9add",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "thalamus": [
           {
-            "quote_id": "q_3633aa7f2232",
+            "quote_id": "q_332ea154c316",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "vta": [
           {
-            "quote_id": "q_1ce243b72b75",
+            "quote_id": "q_3590393167ec",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ]
       },
       "density": {
-        "reliability": 0.73,
-        "donors": 5,
+        "reliability": 0.71,
+        "donors": 6,
         "profile": {
-          "raphe": 2.2,
-          "hypothalamus": 0.69,
-          "vta": 0.45,
-          "thalamus": 0.05,
-          "locus_coeruleus": -0.33
+          "raphe": 2.06,
+          "hypothalamus": 0.76,
+          "vta": 0.66,
+          "thalamus": -0.02,
+          "locus_coeruleus": -0.48
         },
         "grade": "verified",
         "sources": [
           {
-            "quote_id": "q_17c42dae4547",
+            "quote_id": "q_9edf1313ed47",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -8700,7 +8700,7 @@
       "location_sources": {
         "hypothalamus": [
           {
-            "quote_id": "q_b4b205d31c0a",
+            "quote_id": "q_ad257936153d",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -9340,42 +9340,42 @@
       "location_sources": {
         "amygdala": [
           {
-            "quote_id": "q_24a8e6a0341d",
+            "quote_id": "q_468d0d9e6789",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "cerebellum": [
           {
-            "quote_id": "q_98806ccc7a0d",
+            "quote_id": "q_86b6ba355f4f",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "hypothalamus": [
           {
-            "quote_id": "q_30c96c7c0320",
+            "quote_id": "q_e9287050abee",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "medulla": [
           {
-            "quote_id": "q_8b459e377ed3",
+            "quote_id": "q_060d6545eedd",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "pons": [
           {
-            "quote_id": "q_c39f73ea2418",
+            "quote_id": "q_aedbddb450bc",
             "pipeline": "machine",
             "provenance": "verified"
           }
         ],
         "thalamus": [
           {
-            "quote_id": "q_107e0ff0c00c",
+            "quote_id": "q_2a04d879346b",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -9383,19 +9383,19 @@
       },
       "density": {
         "reliability": 0.71,
-        "donors": 5,
+        "donors": 6,
         "profile": {
-          "medulla": 1.64,
-          "amygdala": 0.87,
-          "pons": 0.74,
-          "cerebellum": 0.03,
-          "hypothalamus": -0.34,
-          "thalamus": -0.4
+          "amygdala": 0.86,
+          "hypothalamus": 0.12,
+          "thalamus": 0.07,
+          "medulla": -0.24,
+          "pons": -0.45,
+          "cerebellum": -0.6
         },
         "grade": "verified",
         "sources": [
           {
-            "quote_id": "q_bf89d5b2f296",
+            "quote_id": "q_a13691948391",
             "pipeline": "machine",
             "provenance": "verified"
           }
@@ -12646,17 +12646,17 @@
       },
       "receptor_locations": {
         "total": 383,
-        "verified": 342,
-        "uncertain": 18,
+        "verified": 344,
+        "uncertain": 17,
         "sourced": 0,
-        "llm": 23,
+        "llm": 22,
         "nosource": 0,
-        "missing": 23,
+        "missing": 22,
         "unknown": 0
       },
       "receptor_density": {
-        "total": 36,
-        "verified": 36,
+        "total": 37,
+        "verified": 37,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -12766,15 +12766,15 @@
       }
     },
     "nodes": {
-      "total": 10999,
-      "verified": 10209,
-      "uncertain": 420,
+      "total": 11000,
+      "verified": 10212,
+      "uncertain": 419,
       "sourced": 0,
-      "llm": 232,
+      "llm": 231,
       "nosource": 138,
-      "missing": 370,
+      "missing": 369,
       "unknown": 596,
-      "backed": 10629,
+      "backed": 10631,
       "pct_backed": 97
     },
     "ki_coverage": {
