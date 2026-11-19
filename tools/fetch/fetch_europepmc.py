@@ -185,6 +185,20 @@ PAPERS: dict[str, str] = {
     # Second source against a Wikipedia binding (CONTRADICTIONS).
     "12192085": "salvinorin A: selective kappa agonist, inactive at a receptor screen incl. D2 "
                 "(Roth 2002, against the Wikipedia D2 partial agonism)",
+    # Hand-found Ki papers for --ki-prose (see KI_PAPERS).
+    "6148044": "benzodiazepine-site Ki vs [3H]flunitrazepam: nitrazepam, chlordiazepoxide (mouse)",
+    "1848631": "benzodiazepine-site Kd of 22 benzodiazepines in human frontal cortex",
+    "1687574": "lormetazepam Ki at the omega 1 / omega 2 benzodiazepine sites",
+}
+
+# Owner id -> PubMed ids --ki-prose reads beside the papers its Wikipedia article cites:
+# a measured affinity found by search where neither PDSP, GtoPdb nor the article has one
+# (the classic benzodiazepine-site binding papers predate those databases). Every id
+# must also be in PAPERS, with the claim it backs.
+KI_PAPERS: dict[str, tuple[str, ...]] = {
+    "nitrazepam": ("6148044",),
+    "chlordiazepoxide": ("1848631", "6148044"),
+    "lormetazepam": ("1687574",),
 }
 
 SEARCH_LEDGER = ROOT / "tools" / "generated_cache" / "europepmc_binding_search.json"
@@ -532,13 +546,14 @@ def metabolite_articles() -> dict[str, str]:
             if e.get("own_article") and e.get("slug")}
 
 
-def _ki_prose_entry(name: str, missing: list[str], raw: Path, names: dict,
-                    refresh: bool) -> tuple[dict | None, int]:
+def _ki_prose_entry(name: str, missing: list[str], raw: Path | None, names: dict,
+                    refresh: bool, extra: tuple[str, ...] = ()) -> tuple[dict | None, int]:
     """``(worklist entry or None, failed requests)`` for one owner (a drug or an active
-    metabolite) whose stored article is ``raw``."""
-    paragraphs = cited_affinity_pmids(raw.read_text("utf-8"))
+    metabolite) whose stored article is ``raw``, plus its hand-found ``extra`` papers
+    (``KI_PAPERS``)."""
+    paragraphs = cited_affinity_pmids(raw.read_text("utf-8")) if raw else []
     cands, failed = [], 0
-    for pmid in sorted({pm for _, pms in paragraphs for pm in pms}):
+    for pmid in sorted({pm for _, pms in paragraphs for pm in pms} | set(extra)):
         page = page_path(PAGES_DIR, pmid)
         raw_rec = page_path(RAW_DIR, pmid, ".json")
         # The full text is what a table row lives in: an abstract-only page whose
@@ -580,10 +595,14 @@ def ki_prose(only: set | None, refresh: bool) -> int:
         if only is not None and owner["id"] not in only:
             continue
         missing = ki_less(owner.get("bindings", []))
-        raw = page_path(WIKI_RAW, slug, ".html") if missing and slug else None
-        if not raw or not raw.exists():
+        if not missing:
             continue
-        entry, n = _ki_prose_entry(owner["name"], missing, raw, names, refresh)
+        raw = page_path(WIKI_RAW, slug, ".html") if slug else None
+        raw = raw if raw and raw.exists() else None
+        extra = KI_PAPERS.get(owner["id"], ())
+        if not raw and not extra:
+            continue
+        entry, n = _ki_prose_entry(owner["name"], missing, raw, names, refresh, extra)
         failed += n
         if entry:
             built[section][owner["id"]] = entry

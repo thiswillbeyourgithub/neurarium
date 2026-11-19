@@ -181,5 +181,12 @@ class PageOfTest(unittest.TestCase):
                 A.PAGES_DIR = old
 
 
+class KiPapersTest(unittest.TestCase):
+    def test_every_hand_found_paper_is_listed(self):
+        """A KI_PAPERS id must name its claim in PAPERS, like every other fetched paper."""
+        stray = {pm for pms in E.KI_PAPERS.values() for pm in pms} - set(E.PAPERS)
+        self.assertEqual(stray, set())
+
+
 if __name__ == "__main__":
     unittest.main()
