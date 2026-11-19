@@ -78,6 +78,9 @@
 "q_01c48956cfa3": {
 "drug:alprazolam/bindings[gaba_a:pam]": "sonnet"
 },
+"q_01ca4e2193a6": {
+"drug:etifoxine/excretion[route:renal]": "opus"
+},
 "q_01d0d49cbb07": {
 "drug:rimegepant/first_approval": "opus",
 "drug:rimegepant/originator": "opus"
@@ -206,6 +209,9 @@
 },
 "q_03ef8155c409": {
 "drug:trihexyphenidyl/excretion[route:renal]": "opus"
+},
+"q_0403a0ba9cc7": {
+"drug:nefopam/excretion[unchanged:urine]": "opus"
 },
 "q_0439d1a62162": {
 "metabolite:nordoxepin/half_life": "opus"
@@ -1309,6 +1315,9 @@
 "drug:triazolam/formulations[ir]/tmax": "opus",
 "drug:triazolam/tmax": "sonnet"
 },
+"q_18408afb87ba": {
+"drug:eslicarbazepine_acetate/excretion[route:renal]": "opus"
+},
 "q_184d40fe32fa": {
 "drug:olanzapinesamidorphan/bindings[5ht2a:antagonist]": "sonnet"
 },
@@ -1509,6 +1518,10 @@
 },
 "q_1b7a60dddcb2": {
 "drug:heroin/withdrawals[us:1924]": "opus"
+},
+"q_1b81115029a4": {
+"drug:etifoxine/excretion[route:fecal]": "opus",
+"drug:etifoxine/excretion[route:renal]": "opus"
 },
 "q_1b9b1d83354f": {
 "drug:tiagabine/first_approval": "opus"
@@ -2681,6 +2694,9 @@
 },
 "q_31ed606e8dfc": {
 "drug:methylphenidate_dl/brands[Jornay PM]": "sonnet"
+},
+"q_32092fe5707b": {
+"drug:eslicarbazepine_acetate/excretion[route:renal]": "opus"
 },
 "q_320f45aeec74": {
 "receptor:h1/classification[family]": "sonnet",
@@ -5593,6 +5609,9 @@
 "projection:tuberomammillary_R->putamen_R": "opus",
 "projection:tuberomammillary_R->putamen_R/transmitter": "opus"
 },
+"q_68bb8948133f": {
+"drug:nefopam/excretion[route:renal]": "opus"
+},
 "q_68c69b139a69": {
 "drug:cyamemazine/half_life": "sonnet"
 },
@@ -6588,6 +6607,9 @@
 },
 "q_7bcbf1cb0154": {
 "drug:flumazenil/bindings[gaba_a:antagonist]": "sonnet"
+},
+"q_7bcf33b9d8df": {
+"drug:etifoxine/excretion[route:fecal]": "opus"
 },
 "q_7be22d037ef3": {
 "drug:pethidine/categories": "sonnet"
@@ -7651,6 +7673,10 @@
 "drug:cannabidiol/excretion[route:fecal]": "opus",
 "drug:cannabidiol/excretion[route:renal]": "opus"
 },
+"q_8f5e580c2a66": {
+"drug:nefopam/excretion[route:fecal]": "opus",
+"drug:nefopam/excretion[route:renal]": "opus"
+},
 "q_8f5e9a440cbf": {
 "drug:reserpine/excretion[route:fecal]": "opus",
 "drug:reserpine/excretion[route:renal]": "opus"
@@ -7957,6 +7983,10 @@
 "q_9554560ddabc": {
 "drug:viloxazine/excretion[route:renal]": "opus"
 },
+"q_95675ae0c9f8": {
+"drug:nefopam/excretion[route:fecal]": "opus",
+"drug:nefopam/excretion[route:renal]": "opus"
+},
 "q_957dc6b09aa4": {
 "projection:raphe->olfactory_bulb_R": "opus",
 "projection:raphe->olfactory_bulb_R/transmitter": "opus"
@@ -8103,6 +8133,9 @@
 "q_98192919f086": {
 "drug:donepezil/formulations[odt]/tmax": "opus",
 "drug:donepezil/tmax": "opus"
+},
+"q_982a7b0157c9": {
+"drug:oxetorone/excretion[route:renal]": "opus"
 },
 "q_9836c0353811": {
 "drug:esketamine/first_approval": "opus"
@@ -9103,6 +9136,9 @@
 "q_a8e4385fc350": {
 "drug:lumateperone/bindings[sert:reuptake_inhibitor]": "sonnet"
 },
+"q_a8f272402a1e": {
+"drug:periciazine/excretion[route:renal]": "opus"
+},
 "q_a9126395a7a9": {
 "drug:risperidone/brands[Risperdal Consta]": "sonnet"
 },
@@ -9463,6 +9499,9 @@
 },
 "q_b0a0c61dd392": {
 "drug:iloperidone/half_life": "sonnet"
+},
+"q_b0f25d81d5a3": {
+"drug:nordazepam/excretion[route:renal]": "opus"
 },
 "q_b1272fa6af79": {
 "drug:doxylamine/categories": "opus"
@@ -10196,6 +10235,9 @@
 "drug:buspirone/bindings[d3:antagonist]": "sonnet",
 "drug:buspirone/bindings[d4:antagonist]": "sonnet"
 },
+"q_be504ea913df": {
+"drug:eslicarbazepine_acetate/excretion[route:renal]": "opus"
+},
 "q_be66aa77de92": {
 "drug:prazepam/categories": "sonnet"
 },
@@ -10510,6 +10552,10 @@
 },
 "q_c30c1f82c4a4": {
 "drug:fenfluramine/first_approval": "opus"
+},
+"q_c334d1674954": {
+"drug:piribedil/excretion[route:fecal]": "opus",
+"drug:piribedil/excretion[route:renal]": "opus"
 },
 "q_c33aab525dba": {
 "drug:clozapine/bindings[m3:antagonist]": "sonnet"
@@ -12232,6 +12278,9 @@
 "receptor:5ht1d/classification[sign]": "sonnet",
 "receptor:5ht1d/classification[synaptic]": "sonnet"
 },
+"q_e4a022177f6b": {
+"drug:oxetorone/excretion[route:renal]": "opus"
+},
 "q_e4c28a257c28": {
 "drug:diazepam/formulations[ir]/tmax": "opus",
 "drug:diazepam/tmax": "sonnet"
@@ -13333,6 +13382,9 @@
 },
 "q_f8481918badb": {
 "drug:cyamemazine/bindings[d2:antagonist]": "sonnet"
+},
+"q_f852461d25c6": {
+"drug:nordazepam/excretion[route:renal]": "opus"
 },
 "q_f869a311a4e5": {
 "drug:flupenthixol/nbn": "sonnet"

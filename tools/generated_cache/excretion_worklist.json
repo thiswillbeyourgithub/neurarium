@@ -17167,5 +17167,390 @@
     "qid": "c482a8fa"
    }
   ]
+ },
+ "periciazine": {
+  "name": "Periciazine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "periciazine",
+    "line": "Excretion | Renal",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "aab9a100"
+   }
+  ]
+ },
+ "iproniazid": {
+  "name": "Iproniazid",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "iproniazid",
+    "line": "Inhibition of MAOs by iproniazid is competitive and sensitive to changes in pH and temperature, similar to oxidation of the monoamine substrate.",
+    "named": [
+     "urine_ph:dependent"
+    ],
+    "qid": "6b087306"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "iproniazid",
+    "line": "Excretion can occur via different routes: via the lungs , the urine , bile and sometimes via the skin or breast milk .",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "c1d96ab4"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "iproniazid",
+    "line": "These two properties together indicate that iproniazid is likely to be excreted in the urine via the kidneys.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "d5d8fb50"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "iproniazid",
+    "line": "Isoniazid is therefore expected to be excreted via the urine, if it is not further metabolized in the body.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "b0778c6f"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "iproniazid",
+    "line": "\"Identification and quantitative GLC determination of iproniazid in human urine\".",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "219b6dc5"
+   }
+  ]
+ },
+ "etifoxine": {
+  "name": "Etifoxine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "etifoxine",
+    "line": "Excretion | Mainly urine , also bile",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "45dab16a"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "etifoxine",
+    "line": "The drug is excreted mainly in urine in the form of metabolites.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "63790ba1"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "etifoxine",
+    "line": "It is also excreted in bile .",
+    "named": [
+     "route:fecal"
+    ],
+    "qid": "859332aa"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "etifoxine",
+    "line": "Only small amounts are excreted unchanged.",
+    "named": [
+     "unchanged:urine"
+    ],
+    "qid": "b46a821d"
+   }
+  ]
+ },
+ "nefopam": {
+  "name": "Nefopam",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "nefopam",
+    "line": "Excretion | Urine : 79.3% Feces : 13.4%",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "e3408768"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "nefopam",
+    "line": "Nefopam is effective for prevention of shivering during surgery or recovery from surgery.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "48af89f0"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "nefopam",
+    "line": "Common side effects include nausea, nervousness, dry mouth, light-headedness and urinary retention .",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "ffc4bffb"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "nefopam",
+    "line": "It is eliminated mostly in urine , and to a lesser extent in feces .",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "cb5fdc09"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "68943687",
+    "line": "L'élimination est essentiellement urinaire : 87 % de la dose administrée sont retrouvés dans les urines.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "88138b43"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "68943687",
+    "line": "Moins de 5 % de la dose sont excrétés sous forme inchangée;",
+    "named": [
+     "unchanged:urine"
+    ],
+    "qid": "5c461f38"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "68943687",
+    "line": "les métabolites identifiés dans les urines représentent respectivement 6 %, 3 %, et 36 % de la dose administrée par voie IV.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "3b376adc"
+   }
+  ]
+ },
+ "nordazepam": {
+  "name": "Nordazepam",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "nordazepam",
+    "line": "Excretion | Renal",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "aab9a100"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "nordazepam",
+    "line": "The variation of reported half-lives are attributed to differences in nordazepam metabolism and that of its metabolites as nordazepam is hydroxylated to active metabolites such as oxazepam, before finally being glucuronidated and excreted in the urine.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "2d9773f3"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "nordazepam",
+    "line": "\"The urinary elimination profiles of diazepam and its metabolites, nordiazepam, temazepam, and oxazepam, in the equine after a 10-mg intramuscular dose\" .",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "5c601c0c"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "nordazepam",
+    "line": "\"Excretion of diazepam and its metabolites in human milk during withdrawal from combination high dose diazepam and oxazepam\" .",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "30818e31"
+   }
+  ]
+ },
+ "piribedil": {
+  "name": "Piribedil",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "piribedil",
+    "line": "Excretion | Kidney (68%) and bile duct (25%)",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "4813c24c"
+   }
+  ]
+ },
+ "eslicarbazepine_acetate": {
+  "name": "Eslicarbazepine acetate",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "eslicarbazepine_acetate",
+    "line": "Excretion | ~90% renal",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "766d46a7"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "eslicarbazepine_acetate",
+    "line": "The drug is excreted mainly via the urine, of which two thirds are in the form of eslicarbazepine and one third in the form of eslicarbazepine glucuronide.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "5a55e720"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "63927729",
+    "line": "On présume une biodisponibilité élevée, car la quantité de métabolites récupérés dans les urines correspondait à plus de 90 % d’une dose d’acétate d’eslicarbazépine.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "b265ecf4"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "63927729",
+    "line": "Les métabolites de l’acétate d’eslicarbazépine sont principalement éliminés de la circulation systématique par excrétion rénale à la fois sous forme inchangée et sous forme d’un conjugué glucuronide.",
+    "named": [
+     "route:renal",
+     "unchanged:urine"
+    ],
+    "qid": "3618f490"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "63927729",
+    "line": "Au total, l’eslicarbazépine et son glucuronide représentent plus de 90 % des métabolites totaux excrétés par voie urinaire, avec environ deux tiers sous forme inchangée et un tiers sous forme du conjugué glucuronide.",
+    "named": [
+     "route:renal",
+     "unchanged:urine"
+    ],
+    "qid": "1b7ab1dd"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "63927729",
+    "line": "Le profil pharmacocinétique de l’acétate d’eslicarbazépine reste inchangé chez le sujet âgé, avec une clairance de la créatinine > 60 ml/min (voir rubrique 4.2).",
+    "named": [
+     "unchanged:urine"
+    ],
+    "qid": "7fd9560d"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "63927729",
+    "line": "Les métabolites de l’acétate d’eslicarbazépine sont principalement éliminés de la circulation systémique par excrétion rénale.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "f5e7cbd8"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "63927729",
+    "line": "Une étude incluant des patients adultes atteints d’une insuffisance rénale légère à sévère a montré que la clairance est dépendante de la fonction rénale.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "2bcad0a2"
+   }
+  ]
+ },
+ "oxetorone": {
+  "name": "Oxetorone",
+  "candidates": [
+   {
+    "corpus": "bdpm",
+    "page": "69768949",
+    "line": "L'élimination se fait par moitié par voie rénale et par voie intestinale.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "ed0e6590"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "69768949",
+    "line": "Après une dose unique, 40% de la dose administrée est retrouvée dans les urines et 46% dans les fèces.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "92cfb6d6"
+   }
+  ]
+ },
+ "opium": {
+  "name": "Opium",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "opium",
+    "line": "One gram of poppy seeds contains up to 33 micrograms of morphine and 14 micrograms of codeine, and the Substance Abuse and Mental Health Services Administration in the United States formerly mandated that all drug screening laboratories use a standard cutoff of 300 nanograms per milliliter in urine samples.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "81882c4e"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "opium",
+    "line": "The alkaloids are then recovered via acid-base extraction and purified.",
+    "named": [
+     "urine_ph:acidic_faster"
+    ],
+    "qid": "125d8320"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "opium",
+    "line": "In 2021, the International Agency for Research on Cancer concluded that opium is a Group 1 (sufficient evidence) human carcinogen, causing cancers of the larynx, lung, and urinary bladder.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "451485b4"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "opium",
+    "line": "\"The significance of putative urinary markers of illicit heroin use after consumption of poppy seed products\".",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "e0b75131"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "opium",
+    "line": "\"Experience with a Urine Opiate Screening and Confirmation Cutoff of 2000 mg/ml\" .",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "595c5a62"
+   }
+  ]
  }
 }

@@ -12485,8 +12485,8 @@
         "unknown": 0
       },
       "drug_excretion": {
-        "total": 523,
-        "verified": 523,
+        "total": 534,
+        "verified": 534,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -12766,15 +12766,15 @@
       }
     },
     "nodes": {
-      "total": 11000,
-      "verified": 10212,
+      "total": 11011,
+      "verified": 10223,
       "uncertain": 419,
       "sourced": 0,
       "llm": 231,
       "nosource": 138,
       "missing": 369,
       "unknown": 596,
-      "backed": 10631,
+      "backed": 10642,
       "pct_backed": 97
     },
     "ki_coverage": {

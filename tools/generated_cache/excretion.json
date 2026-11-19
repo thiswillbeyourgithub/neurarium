@@ -2781,6 +2781,33 @@
     "value": "urine"
    }
   ],
+  "eslicarbazepine_acetate": [
+   {
+    "amount": "~90%",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "eslicarbazepine_acetate",
+      "provenance": "verified",
+      "quote": "Excretion | ~90% renal"
+     },
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "eslicarbazepine_acetate",
+      "provenance": "verified",
+      "quote": "The drug is excreted mainly via the urine, of which two thirds are in the form of eslicarbazepine and one third in the form of eslicarbazepine glucuronide."
+     },
+     {
+      "corpus": "bdpm",
+      "page": "63927729",
+      "provenance": "verified",
+      "quote": "Les métabolites de l’acétate d’eslicarbazépine sont principalement éliminés de la circulation systémique par excrétion rénale."
+     }
+    ],
+    "value": "renal"
+   }
+  ],
   "estazolam": [
    {
     "aspect": "route",
@@ -2885,6 +2912,44 @@
      }
     ],
     "value": "renal"
+   }
+  ],
+  "etifoxine": [
+   {
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "etifoxine",
+      "provenance": "verified",
+      "quote": "Excretion | Mainly urine , also bile"
+     },
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "etifoxine",
+      "provenance": "verified",
+      "quote": "The drug is excreted mainly in urine in the form of metabolites."
+     }
+    ],
+    "value": "renal"
+   },
+   {
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "etifoxine",
+      "provenance": "verified",
+      "quote": "Excretion | Mainly urine , also bile"
+     },
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "etifoxine",
+      "provenance": "verified",
+      "quote": "It is also excreted in bile ."
+     }
+    ],
+    "value": "fecal"
    }
   ],
   "etomidate": [
@@ -5417,6 +5482,65 @@
     "value": "urine"
    }
   ],
+  "nefopam": [
+   {
+    "amount": "79.3%",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "nefopam",
+      "provenance": "verified",
+      "quote": "Excretion | Urine : 79.3% Feces : 13.4%"
+     },
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "nefopam",
+      "provenance": "verified",
+      "quote": "It is eliminated mostly in urine , and to a lesser extent in feces ."
+     },
+     {
+      "corpus": "bdpm",
+      "page": "68943687",
+      "provenance": "verified",
+      "quote": "L'élimination est essentiellement urinaire : 87 % de la dose administrée sont retrouvés dans les urines."
+     }
+    ],
+    "value": "renal"
+   },
+   {
+    "amount": "13.4%",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "nefopam",
+      "provenance": "verified",
+      "quote": "Excretion | Urine : 79.3% Feces : 13.4%"
+     },
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "nefopam",
+      "provenance": "verified",
+      "quote": "It is eliminated mostly in urine , and to a lesser extent in feces ."
+     }
+    ],
+    "value": "fecal"
+   },
+   {
+    "amount": "Moins de 5 %",
+    "aspect": "unchanged",
+    "sources": [
+     {
+      "corpus": "bdpm",
+      "page": "68943687",
+      "provenance": "verified",
+      "quote": "Moins de 5 % de la dose sont excrétés sous forme inchangée;"
+     }
+    ],
+    "value": "urine"
+   }
+  ],
   "nicotine": [
    {
     "aspect": "route",
@@ -5503,6 +5627,26 @@
       "page": "nitrazepam",
       "provenance": "verified",
       "quote": "Excretion | Renal"
+     }
+    ],
+    "value": "renal"
+   }
+  ],
+  "nordazepam": [
+   {
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "nordazepam",
+      "provenance": "verified",
+      "quote": "Excretion | Renal"
+     },
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "nordazepam",
+      "provenance": "verified",
+      "quote": "The variation of reported half-lives are attributed to differences in nordazepam metabolism and that of its metabolites as nordazepam is hydroxylated to active metabolites such as oxazepam, before finally being glucuronidated and excreted in the urine."
      }
     ],
     "value": "renal"
@@ -5708,6 +5852,27 @@
      }
     ],
     "value": "fecal"
+   }
+  ],
+  "oxetorone": [
+   {
+    "amount": "40%",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "bdpm",
+      "page": "69768949",
+      "provenance": "verified",
+      "quote": "L'élimination se fait par moitié par voie rénale et par voie intestinale."
+     },
+     {
+      "corpus": "bdpm",
+      "page": "69768949",
+      "provenance": "verified",
+      "quote": "Après une dose unique, 40% de la dose administrée est retrouvée dans les urines et 46% dans les fèces."
+     }
+    ],
+    "value": "renal"
    }
   ],
   "oxycodone": [
@@ -5916,6 +6081,20 @@
      }
     ],
     "value": "urine"
+   }
+  ],
+  "periciazine": [
+   {
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "periciazine",
+      "provenance": "verified",
+      "quote": "Excretion | Renal"
+     }
+    ],
+    "value": "renal"
    }
   ],
   "perospirone": [
@@ -6257,6 +6436,34 @@
       "page": "62000861",
       "provenance": "verified",
       "quote": "La pipotiazine est éliminée dans les urines et surtout dans les fèces par l'intermédiaire de l'excrétion biliaire."
+     }
+    ],
+    "value": "fecal"
+   }
+  ],
+  "piribedil": [
+   {
+    "amount": "68%",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "piribedil",
+      "provenance": "verified",
+      "quote": "Excretion | Kidney (68%) and bile duct (25%)"
+     }
+    ],
+    "value": "renal"
+   },
+   {
+    "amount": "25%",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "piribedil",
+      "provenance": "verified",
+      "quote": "Excretion | Kidney (68%) and bile duct (25%)"
      }
     ],
     "value": "fecal"

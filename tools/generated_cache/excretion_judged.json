@@ -5766,5 +5766,149 @@
    "value": "fecal"
   }
  ],
- "zuranolone": []
+ "zuranolone": [],
+ "periciazine": [
+  {
+   "index": 0,
+   "qid": "aab9a100",
+   "aspect": "route",
+   "value": "renal"
+  }
+ ],
+ "iproniazid": [],
+ "etifoxine": [
+  {
+   "index": 0,
+   "qid": "45dab16a",
+   "aspect": "route",
+   "value": "renal"
+  },
+  {
+   "index": 0,
+   "qid": "45dab16a",
+   "aspect": "route",
+   "value": "fecal"
+  },
+  {
+   "index": 1,
+   "qid": "63790ba1",
+   "aspect": "route",
+   "value": "renal"
+  },
+  {
+   "index": 2,
+   "qid": "859332aa",
+   "aspect": "route",
+   "value": "fecal"
+  }
+ ],
+ "nefopam": [
+  {
+   "index": 0,
+   "qid": "e3408768",
+   "aspect": "route",
+   "value": "renal",
+   "amount": "79.3%"
+  },
+  {
+   "index": 0,
+   "qid": "e3408768",
+   "aspect": "route",
+   "value": "fecal",
+   "amount": "13.4%"
+  },
+  {
+   "index": 3,
+   "qid": "cb5fdc09",
+   "aspect": "route",
+   "value": "renal"
+  },
+  {
+   "index": 3,
+   "qid": "cb5fdc09",
+   "aspect": "route",
+   "value": "fecal"
+  },
+  {
+   "index": 4,
+   "qid": "88138b43",
+   "aspect": "route",
+   "value": "renal",
+   "amount": "87 %"
+  },
+  {
+   "index": 5,
+   "qid": "5c461f38",
+   "aspect": "unchanged",
+   "value": "urine",
+   "amount": "Moins de 5 %"
+  }
+ ],
+ "nordazepam": [
+  {
+   "index": 0,
+   "qid": "aab9a100",
+   "aspect": "route",
+   "value": "renal"
+  },
+  {
+   "index": 1,
+   "qid": "2d9773f3",
+   "aspect": "route",
+   "value": "renal"
+  }
+ ],
+ "piribedil": [
+  {
+   "index": 0,
+   "qid": "4813c24c",
+   "aspect": "route",
+   "value": "renal",
+   "amount": "68%"
+  },
+  {
+   "index": 0,
+   "qid": "4813c24c",
+   "aspect": "route",
+   "value": "fecal",
+   "amount": "25%"
+  }
+ ],
+ "eslicarbazepine_acetate": [
+  {
+   "index": 0,
+   "qid": "766d46a7",
+   "aspect": "route",
+   "value": "renal",
+   "amount": "~90%"
+  },
+  {
+   "index": 1,
+   "qid": "5a55e720",
+   "aspect": "route",
+   "value": "renal"
+  },
+  {
+   "index": 6,
+   "qid": "f5e7cbd8",
+   "aspect": "route",
+   "value": "renal"
+  }
+ ],
+ "oxetorone": [
+  {
+   "index": 0,
+   "qid": "ed0e6590",
+   "aspect": "route",
+   "value": "renal"
+  },
+  {
+   "index": 1,
+   "qid": "92cfb6d6",
+   "aspect": "route",
+   "value": "renal",
+   "amount": "40%"
+  }
+ ],
+ "opium": []
 }
