@@ -95,6 +95,15 @@ test("value sort groups by kind, unvalued rows last", () => {
     [8, 11, 26, 48]);
 });
 
+test("value sort orders unvalued rows by their claim text, per kind", () => {
+  const rows = sortRows(ROWS.slice(), "valueAsc").filter((r) => r.value == null);
+  const classes = rows.filter((r) => r.kind === "drug_categories").map((r) => r.notion);
+  assert.deepEqual(classes, ["anxiolytic", "benzodiazepine", "benzodiazepine", "SSRI"]);
+  const desc = sortRows(ROWS.slice(), "valueDesc")
+    .filter((r) => r.kind === "drug_categories").map((r) => r.notion);
+  assert.deepEqual(desc, ["SSRI", "benzodiazepine", "benzodiazepine", "anxiolytic"]);
+});
+
 test("the filter stack round-trips through its URL form, null at default", () => {
   assert.equal(serializeFilters([{ kind: "", text: "", op: "and" }]), null);
   const stack = [

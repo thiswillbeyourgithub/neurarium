@@ -251,7 +251,8 @@ export const DEFAULT_SORT = "valueAsc";
 /**
  * Sort rows in place. "value" sorts read `row.value` (a T½ in hours, a Ki in nM...):
  * rows are grouped by kind first, since a half-life and a Ki are not comparable, and a
- * row without a value goes after every valued one.
+ * row without a value goes after every valued one, sorted by its claim text instead
+ * (numeric-aware, so "route: faeces" < "route: urine", reversed for largest first).
  */
 export function sortRows(rows, mode) {
   const byName = (a, b) => a.name.localeCompare(b.name, undefined, { numeric: true })
@@ -264,7 +265,11 @@ export function sortRows(rows, mode) {
     return rows.sort((a, b) => {
       const va = a.value != null, vb = b.value != null;
       if (va !== vb) return va ? -1 : 1;
-      if (!va) return byName(a, b);
+      if (!va) {
+        return byKind(a, b)
+          || dir * a.notion.localeCompare(b.notion, undefined, { numeric: true })
+          || byName(a, b);
+      }
       return byKind(a, b) || dir * (a.value - b.value) || byName(a, b);
     });
   }
