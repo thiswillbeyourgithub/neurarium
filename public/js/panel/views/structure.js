@@ -16,7 +16,7 @@ const { t } = window.__I18N__;
 export function showStructure(P, structure) {
   const {
     appendAddons, appendExpressedTargets, appendReference, appendSourcedHeading,
-    appendWikiImages, baseNameOf, body, clearBody, data, el, foldBody, pathwayList,
+    appendWikiImages, baseNameOf, body, clearBody, data, el, finishBody, pathwayList,
   } = P;
   clearBody("structure");
   body.appendChild(el("h2", "info-title", structure.name));
@@ -75,5 +75,5 @@ export function showStructure(P, structure) {
   // them, so this section is outside the branch above.
   appendExpressedTargets(stripSide(structure.id));
   // Headed sections start folded, like the drug panel (see foldSections).
-  foldBody();
+  finishBody();
 }

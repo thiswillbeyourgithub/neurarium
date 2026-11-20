@@ -16,7 +16,7 @@ export function showReceptor(P, receptor) {
   const {
     PDSP_KIDB_URL, addFactRow, appendAddons, appendDemographics, appendDownstream,
     appendEffects, appendFoundIn, appendInteractingDrugs, appendLookupLink, appendReference,
-    appendVariants, body, clearBody, clinpgxSearchUrl, el, foldBody, gtopdbSearchUrl,
+    appendVariants, body, clearBody, clinpgxSearchUrl, el, finishBody, gtopdbSearchUrl,
     sourceBackedPill, uniprotSearchUrl,
   } = P;
   clearBody("receptor");
@@ -72,5 +72,5 @@ export function showReceptor(P, receptor) {
   appendEffects(receptor.effectInfo, receptor.effectsUnknown, "receptor");
   appendDownstream(receptor.modulationInfo, "receptor");
   // Headed sections start folded, like the drug panel (see foldSections).
-  foldBody();
+  finishBody();
 }

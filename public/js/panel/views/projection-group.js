@@ -16,7 +16,7 @@ const { t } = window.__I18N__;
 export function showProjectionGroup(P, group) {
   const {
     appendPathwayList, appendReference, appendSourcedHeading, body, clearBody, data,
-    el, fmtTone, foldBody, netTone, nodePill, onDrugPick, strongestBindingForKind,
+    el, fmtTone, finishBody, netTone, nodePill, onDrugPick, strongestBindingForKind,
   } = P;
   clearBody("group");
   body.appendChild(el("h2", "info-title", group.name));
@@ -88,5 +88,5 @@ export function showProjectionGroup(P, group) {
     }
   }
   // Headed sections start folded, like the drug panel (see foldSections).
-  foldBody();
+  finishBody();
 }

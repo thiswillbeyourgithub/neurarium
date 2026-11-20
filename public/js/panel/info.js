@@ -21,6 +21,7 @@ import { makeOtherForms } from "./other-forms.js";
 import { makePathways } from "./pathways.js";
 import { makeSections } from "./sections.js";
 import { makeExpression } from "./expression.js";
+import { feedbackFooter } from "./feedback.js";
 
 const { ofNoun, t } = window.__I18N__;
 
@@ -57,7 +58,11 @@ export function createInfoPanel(data, sourcingModal) {
   // Every headed section folded (panel/dom.js foldSections): a freshly opened panel
   // starts collapsed, and a tab the reader comes BACK to gets the sections they had
   // open in it re-opened by panel/tabs.js, per tab.
-  const foldBody = () => foldSections(body);
+  // ...then the feature-request footer (panel/feedback.js) closes every panel.
+  const finishBody = () => {
+    foldSections(body);
+    body.appendChild(feedbackFooter());
+  };
   const nameOf = (id) => data.byId.get(id)?.name || id;
   // Hemisphere-stripped name ("Frontal lobe", not "Right frontal lobe"): used by
   // every pathway list so left/right twins collapse to one row (see pathwayList).
@@ -189,7 +194,7 @@ export function createInfoPanel(data, sourcingModal) {
   // provides (keep the call order below dependency-first).
   const P = {
     addFactRow, appendSourcedHeading, baseNameOf, baseResolves, body, clearBody, data,
-    drugById, effectById, el, enzymeById, foldBody, groupOfBase, nameOf,
+    drugById, effectById, el, enzymeById, finishBody, groupOfBase, nameOf,
     onConnectionPick, onDrugPick, onEffectPick, onEnzymePick, onImagePick,
     onProjectionGroupPick, onStructurePick, onTargetPick, resolveBase, sourcingModal,
     targetById,

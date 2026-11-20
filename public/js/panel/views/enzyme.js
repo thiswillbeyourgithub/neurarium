@@ -21,7 +21,7 @@ const { t } = window.__I18N__;
 export function showEnzyme(P, enzyme) {
   const {
     PHARMFREQ_URL, appendLookupLink, appendReference, body, clearBody,
-    clinpgxSearchUrl, el, enzymeRow, foldBody, nodePill, onDrugPick,
+    clinpgxSearchUrl, el, enzymeRow, finishBody, nodePill, onDrugPick,
   } = P;
   clearBody("enzyme");
   body.appendChild(el("h2", "info-title", enzyme.label));
@@ -147,7 +147,7 @@ export function showEnzyme(P, enzyme) {
   if (!rows.length) {
     wrap.appendChild(el("p", "info-desc", t("enzyme.noDrugs")));
     body.appendChild(wrap);
-    foldBody();
+    finishBody();
     return;
   }
   // Group by role in the vocabulary's own order (substrate, inhibitor, inducer)
@@ -171,5 +171,5 @@ export function showEnzyme(P, enzyme) {
   }
   body.appendChild(wrap);
   // Headed sections start folded, like the drug panel (see foldSections).
-  foldBody();
+  finishBody();
 }

@@ -939,6 +939,11 @@ window.__I18N_MESSAGES__.en = {
   "loading.reducedQuality":
     "This device is meshing slowly, so the remaining structures were built at reduced detail to keep the load time reasonable. The data is unaffected: only the 3D shapes are a little softer.",
   "loading.tagline": "a (mostly) sourced atlas of psychiatric neuroscience",
+  "panel.feedback": "Have an idea of useful info to add here? I'd happily build it:",
+  "panel.feedbackIssue": "open a GitHub issue",
+  "panel.feedbackOr": "or",
+  "panel.feedbackEmail": "email me",
+  "panel.contactUrl": "https://olicorne.org/en/contact",
   "loading.cta":
     'Have an idea for a feature? I\'d happily build it, ' +
     '<a href="https://olicorne.org/en/contact" target="_blank" ' +

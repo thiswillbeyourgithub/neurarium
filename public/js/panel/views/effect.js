@@ -14,7 +14,7 @@ const { t } = window.__I18N__;
  */
 export function showEffect(P, effect) {
   const {
-    betaSection, body, clearBody, data, derivedRow, el, foldBody, linkName, nodePill,
+    betaSection, body, clearBody, data, derivedRow, el, finishBody, linkName, nodePill,
     onDrugPick, onTargetPick,
   } = P;
   clearBody("effect");
@@ -48,5 +48,5 @@ export function showEffect(P, effect) {
     drugs.ul.appendChild(derivedRow(linkName(drug.displayName, () => onDrugPick(drug)), via));
   }
   drugs.close();
-  foldBody();
+  finishBody();
 }

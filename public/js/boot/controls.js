@@ -6,7 +6,7 @@ import { LIST_SEP } from "../url-state.js";
 import { animSettings } from "../anim-settings.js";
 import { applyExplode, createArrowRetrim, createAutoSpread } from "../scene/explode.js";
 import { openControlsBody } from "../panel/tabs.js";
-import { isWebUrl } from "../web-url.js";
+import { isWebUrl, issuesUrl } from "../web-url.js";
 import { wirePanelResize } from "./panel-resize.js";
 import { autohideScrollbars } from "./autohide-scrollbars.js";
 
@@ -185,25 +185,13 @@ export function wireControls({ camera, controls, meshes, arrows, labels, focus, 
     else document.getElementById("about-source2-row")?.remove();
   }
 
-  // "open an issue" link (embedded in the about.issues paragraph by i18n): point
-  // it at the source repo's issues page (sourceUrl + "/issues"), deriving it from
-  // the same env-configured sourceUrl so no repo/username is hardcoded. Only do
-  // this when sourceUrl points *into* a repository (has a path beyond the host):
-  // the committed default is the bare public-site domain, where "/issues" would
-  // 404, so there we drop the whole row instead of shipping a dead link. The repo
-  // URL is set via the SOURCE_URL env var in the container (see app-config.js).
+  // "open an issue" link (embedded in the about.issues paragraph by i18n): the
+  // repo's issues page, or the whole row dropped when sourceUrl is not a repo
+  // (web-url.js issuesUrl).
   const aboutIssues = document.getElementById("about-issues");
   if (aboutIssues) {
-    let issuesUrl = "";
-    if (sourceIsUrl) {
-      try {
-        const u = new URL(sourceUrl);
-        if (u.pathname.replace(/\/+$/, "") !== "") { // a repo path, not a bare domain
-          issuesUrl = `${sourceUrl.replace(/\/+$/, "")}/issues`;
-        }
-      } catch { /* malformed url: leave the row removed below */ }
-    }
-    if (issuesUrl) aboutIssues.href = issuesUrl;
+    const url = issuesUrl(sourceUrl);
+    if (url) aboutIssues.href = url;
     else document.getElementById("about-issues-row")?.remove();
   }
 

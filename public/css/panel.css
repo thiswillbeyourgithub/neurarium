@@ -28,6 +28,17 @@
   color: var(--text);
   margin: 0 0 12px;
 }
+/* The feature-request footer closing every panel (panel/feedback.js), set apart
+   from the last section by a hairline, muted like the loading screen's invite. */
+.info-feedback {
+  margin: 18px 0 4px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(var(--ink), 0.12);
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+.info-feedback a { color: var(--accent-bright); text-decoration: underline; }
 .info-connections h3,
 .info-bindings h3,
 .info-locations h3 {

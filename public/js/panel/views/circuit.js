@@ -17,7 +17,7 @@ const { t } = window.__I18N__;
 export function showCircuit(P, circuit) {
   const {
     appendPathwayList, appendReference, appendSourcedHeading, appendWikiImages, body,
-    clearBody, data, el, foldBody, locationList,
+    clearBody, data, el, finishBody, locationList,
   } = P;
   clearBody("circuit");
   body.appendChild(el("h2", "info-title", circuit.name));
@@ -80,5 +80,5 @@ export function showCircuit(P, circuit) {
     (p) => idSet.has(p.from) && idSet.has(p.to));
   appendPathwayList(t("circuit.pathways"), members, "circuit", "pathways");
   // Headed sections start folded, like the drug panel (see foldSections).
-  foldBody();
+  finishBody();
 }

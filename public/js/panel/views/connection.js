@@ -5,7 +5,7 @@ const { t } = window.__I18N__;
 
 export function show(P, proj) {
   const {
-    body, clearBody, colourMeaningOf, data, el, endpointEl, nodePill, sourceBackedPill,
+    body, clearBody, colourMeaningOf, finishBody, data, el, endpointEl, nodePill, sourceBackedPill,
   } = P;
   clearBody("connection");
   body.appendChild(el("h2", "info-title", proj.label || t("info.connection")));
@@ -72,4 +72,5 @@ export function show(P, proj) {
     p.appendChild(provPill());
     body.appendChild(p);
   }
+  finishBody(); // no headed section to fold, but the footer still closes it
 }

@@ -122,8 +122,10 @@ def with_byline(text: str) -> str:
 
 
 def stamped(text: str) -> str:
-    """A page as written: the byline, then the DEV restart line, under its title."""
-    return with_uptime(with_byline(text))
+    """A page as written: the byline, then the DEV restart line, under its title, and the
+    panels' feature-request footer (llms_txt.FEEDBACK, the twin of js/panel/feedback.js)
+    closing it."""
+    return f"{with_uptime(with_byline(text)).rstrip()}\n\n---\n\n{llms_txt.FEEDBACK}\n"
 
 
 KIND_TITLES = {"drug": "Drugs", "metabolite": "Active metabolites", "receptor": "Receptors",
@@ -588,9 +590,6 @@ class Renderer:
         return lines
 
     def page_set(self, kind: str, ident: str, rec: dict[str, Any]) -> dict[str | None, str]:
-        """``{page: Markdown}``: the full page under ``None``, plus one page per section slug
-        (and an ``index`` listing them), served under ``<id>/`` so a reader can fetch only
-        the part it needs."""
         if kind == "effect":
             self.cited = {}
             return {None: self.effect_page(ident)}

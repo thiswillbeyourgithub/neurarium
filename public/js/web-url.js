@@ -9,3 +9,21 @@
 export function isWebUrl(url) {
   return typeof url === "string" && /^https?:\/\//i.test(url);
 }
+
+/** The configured repo's issue tracker (`sourceUrl` + "/issues"), or "" when
+ *  `sourceUrl` is not an http(s) link INTO a repository: the committed default is the
+ *  bare public-site domain, where "/issues" would 404, so a caller drops its link then.
+ *  The repo URL comes from the SOURCE_URL env var (see app-config.js), so no
+ *  repo/username is hardcoded. */
+export function issuesUrl(sourceUrl) {
+  if (!isWebUrl(sourceUrl)) return "";
+  try {
+    if (new URL(sourceUrl).pathname.replace(/\/+$/, "") === "") return "";
+  } catch { return ""; }
+  return `${sourceUrl.replace(/\/+$/, "")}/issues`;
+}
+
+/** The deployed config's issues URL (window.__APP_CONFIG__.sourceUrl), or "". */
+export function configIssuesUrl() {
+  return issuesUrl(String((globalThis.__APP_CONFIG__ || {}).sourceUrl || "").trim());
+}

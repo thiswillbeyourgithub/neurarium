@@ -16,7 +16,7 @@ export function showTarget(P, target) {
     PDSP_KIDB_URL, addFactRow, appendAddons, appendDemographics, appendEffects,
     appendFoundIn, appendInteractingDrugs, appendLookupLink, appendReference,
     appendSubtypeInteractors, appendVariants, body, clearBody, clinpgxSearchUrl, el,
-    foldBody, nodePill,
+    finishBody, nodePill,
   } = P;
   clearBody("target");
   body.appendChild(el("h2", "info-title", target.name));
@@ -77,5 +77,5 @@ export function showTarget(P, target) {
   appendDemographics(target.demographicInfo, "target");
   appendEffects(target.effectInfo, target.effectsUnknown, "target");
   // Headed sections start folded, like the drug panel (see foldSections).
-  foldBody();
+  finishBody();
 }

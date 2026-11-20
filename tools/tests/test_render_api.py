@@ -64,6 +64,11 @@ class RenderApiTest(unittest.TestCase):
             self.assertEqual(len(listed), len(set(listed)), f"{name}: a quote listed twice")
             self.assertEqual(set(MARKER.findall(text)), set(listed), name)
 
+    def test_every_page_ends_with_the_feedback_footer(self):
+        """Every written page closes on the panels' feature-request line."""
+        for name, text in self.pages.items():
+            self.assertTrue(text.rstrip().endswith(render_api.llms_txt.FEEDBACK), name)
+
     def test_not_found_lists_every_page(self):
         text = self.pages["not_found.md"]
         self.assertIn("No page at this address", text)
@@ -158,7 +163,8 @@ class UptimeLineTest(unittest.TestCase):
     def test_every_page_credits_the_author_under_its_title(self):
         out = render_api.stamped("# Sertraline\n\nKind: drug.\n")
         self.assertEqual(out.replace(render_api.UPTIME, ""),
-                         f"# Sertraline\n\n{render_api.llms_txt.BYLINE}\n\nKind: drug.\n")
+                         f"# Sertraline\n\n{render_api.llms_txt.BYLINE}\n\nKind: drug.\n\n"
+                         f"---\n\n{render_api.llms_txt.FEEDBACK}\n")
         self.assertIn("Olivier Cornelis", render_api.llms_txt.BYLINE)
 
     def test_renders_to_the_built_page_when_off(self):

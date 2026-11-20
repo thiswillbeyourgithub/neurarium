@@ -20,6 +20,10 @@ REPO_URL = "https://github.com/thiswillbeyourgithub/neurarium"
 AUTHOR, AUTHOR_URL = "Olivier Cornelis", "https://olicorne.org/en"
 BYLINE = f"[Neurarium]({SITE_URL}), by [{AUTHOR}]({AUTHOR_URL})."
 CONTACT_URL = "https://olicorne.org/en/contact"
+# The feature-request footer closing every /api/ page, the twin of the viewer's panel
+# footer (public/js/panel/feedback.js, i18n "panel.feedback*"): keep the wording in step.
+FEEDBACK = (f"Have an idea of useful info to add here? I'd happily build it: "
+            f"[open a GitHub issue]({REPO_URL}/issues) or [email me]({CONTACT_URL}).")
 
 # One line per emitted collection (in claim_walk.COLLECTIONS order): what a record is. A collection missing here raises, so a
 # new one cannot ship undescribed.

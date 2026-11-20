@@ -21,7 +21,7 @@ export function showDrug(P, drug, opts = {}) {
     bindingRow, body, clearBody, clinpgxSearchUrl, data, derivedActiveMetabolites,
     derivedAutoModulation, derivedBox, directionArrow, drugById, drugNameLink,
     drugVariantsSubsection, el,
-    enzymeById, enzymeRow, fmtTone, foldBody, metaboliteContributors, netTone,
+    enzymeById, enzymeRow, fmtTone, finishBody, metaboliteContributors, netTone,
     nodePill, onDrugPick,
     onEnzymePick, onImagePick, onProjectionGroupPick, onTargetPick, pgxSection,
     targetById, withOtherForms,
@@ -626,7 +626,7 @@ export function showDrug(P, drug, opts = {}) {
   appendExcretion(drug);
   // Every headed section starts collapsed (a drug panel is long): the heading
   // opens it, its content indented under it.
-  foldBody();
+  finishBody();
   // Arrived from another stereo form's empty section (panel/other-forms.js): open
   // and flash the section that answers it.
   if (opts.highlightSection) flashRow(body.querySelector(opts.highlightSection));

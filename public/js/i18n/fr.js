@@ -938,6 +938,11 @@ window.__I18N_MESSAGES__.fr = {
   "loading.reducedQuality":
     "Cet appareil construit les maillages lentement : les structures restantes ont donc été générées avec moins de détail pour garder un temps de chargement raisonnable. Les données ne sont pas affectées, seules les formes 3D sont un peu plus lisses.",
   "loading.tagline": "un atlas (en grande partie) sourcé des neurosciences psychiatriques",
+  "panel.feedback": "Une idée d'information utile à ajouter ici ? Je l'ajouterai volontiers :",
+  "panel.feedbackIssue": "ouvrez une issue GitHub",
+  "panel.feedbackOr": "ou",
+  "panel.feedbackEmail": "écrivez-moi",
+  "panel.contactUrl": "https://olicorne.org/fr/contact",
   "loading.cta":
     'Une idée de fonctionnalité ? Je la réaliserais volontiers, ' +
     '<a href="https://olicorne.org/fr/contact" target="_blank" ' +
