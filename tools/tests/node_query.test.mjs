@@ -6,8 +6,10 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {
   kindsFor, metaboliteOwners, compatibleKinds, runFilters, sortRows, filterTouchesDrugs,
-  serializeFilters, parseFilters, SORTS, DEFAULT_SORT, firstInScope,
+  serializeFilters, parseFilters, SORTS, DEFAULT_SORT, firstInScope, BY_NAME,
 } from "../../public/js/node-browser/query.js";
+import { KIND_GROUPS, kindChoices } from "../../public/js/node-browser/kind-groups.js";
+import { KIND_ORDER } from "../../public/js/kinds.js";
 
 const LABELS = { drug_categories: "Drug classes", drug_half_life: "Drug half-life",
                  drug_tmax: "Drug time to peak", structures: "Regions" };
@@ -38,11 +40,9 @@ const ctx = {
 const owners = (rows) => rows.map((r) => `${r.kind}:${r.owner}`);
 
 test("kind box: empty = all, exact label = one kind, else label substring", () => {
-  assert.equal(kindsFor("", ctx.kinds, ctx.kindLabel, ctx.fold), null);
-  assert.deepEqual([...kindsFor("drug half-life", ctx.kinds, ctx.kindLabel, ctx.fold)],
-    ["drug_half_life"]);
-  assert.deepEqual([...kindsFor("drug", ctx.kinds, ctx.kindLabel, ctx.fold)],
-    ["drug_categories", "drug_half_life", "drug_tmax"]);
+  assert.equal(kindsFor("", ctx), null);
+  assert.deepEqual([...kindsFor("drug half-life", ctx)], ["drug_half_life"]);
+  assert.deepEqual([...kindsFor("drug", ctx)], ["drug_categories", "drug_half_life", "drug_tmax"]);
 });
 
 test("compatible kinds: an AND filter offers only kinds the earlier owners carry", () => {
@@ -111,7 +111,10 @@ test("the filter stack round-trips through its URL form, null at default", () =>
     { op: "xor", kind: "Drug half-life", text: "", metabolites: false },
   ];
   const v = serializeFilters(stack);
-  assert.equal(v, "|Drug classes|a%2Cb%7Cc|m,xor|Drug half-life");
+  // Metabolites are included by default, so only an opt-out ("x") is written.
+  assert.equal(v, "|Drug classes|a%2Cb%7Cc,xor|Drug half-life||x");
+  assert.equal(serializeFilters([{ kind: "", text: "", metabolites: true }]), null);
+  assert.equal(parseFilters("|Drug classes|benzo|m")[0].metabolites, true); // legacy opt-in
   assert.equal(parseFilters(serializeFilters([{ kind: "", text: "100%" }]))[0].text, "100%");
   assert.deepEqual(parseFilters(v), stack);
   assert.equal(parseFilters("bogus|x")[0].op, "and");
@@ -178,9 +181,9 @@ test("groups round-trip through the URL form", () => {
   const v = serializeFilters(stack);
   assert.equal(v, "|Drug classes|benzo,(|not,|Drug half-life,)");
   assert.deepEqual(parseFilters(v), [
-    { op: "and", kind: "Drug classes", text: "benzo", metabolites: false },
+    { op: "and", kind: "Drug classes", text: "benzo", metabolites: true },
     OPEN("not"),
-    { op: "and", kind: "Drug half-life", text: "", metabolites: false },
+    { op: "and", kind: "Drug half-life", text: "", metabolites: true },
     CLOSE,
   ]);
 });
@@ -188,4 +191,51 @@ test("groups round-trip through the URL form", () => {
 test("the default sort is smallest value first, and is a menu entry", () => {
   assert.equal(DEFAULT_SORT, "valueAsc");
   assert.equal(SORTS[0], DEFAULT_SORT);
+});
+
+// The grouped picker: owner > section > kind, a header meaning every kind under it.
+const T = (k) => ({ "nodes.kindName": "Name", "nodes.ownerDrug": "Drug",
+  "drug.admin": "Identification", "drug.pkTiming": "Pharmacokinetics",
+  "nodes.k.drug_categories": "Class", "nodes.k.drug_half_life": "Half-life",
+  "nodes.k.drug_tmax": "Time to peak", "nodes.ownerRegion": "Region",
+  "nodes.k.structures": "Anatomy" })[k] || k;
+const gctx = { ...ctx, choices: kindChoices(ctx.kinds, T) };
+
+test("the picker groups present kinds by owner then section, Name first", () => {
+  assert.deepEqual(gctx.choices.map((c) => `${c.depth}:${c.label}`), [
+    "0:Name", "0:Drug", "1:Identification", "1:Pharmacokinetics", "2:Time to peak",
+    "2:Half-life", "0:Region"]);
+  // A one-kind section or owner shows alone: Identification picks the class.
+  assert.deepEqual([...gctx.choices[2].kinds], ["drug_categories"]);
+  assert.deepEqual([...gctx.choices[1].kinds].sort(),
+    ["drug_categories", "drug_half_life", "drug_tmax"]);
+});
+
+test("a header kind covers its kinds, a short label resolves, old labels still do", () => {
+  assert.deepEqual([...kindsFor("pharmacokinetics", gctx)].sort(), ["drug_half_life", "drug_tmax"]);
+  assert.deepEqual([...kindsFor("Half-life", gctx)], ["drug_half_life"]);
+  assert.deepEqual([...kindsFor("Drug half-life", gctx)], ["drug_half_life"]);
+  assert.deepEqual([...kindsFor("peak", gctx)], ["drug_tmax"]);
+  assert.equal(kindsFor("name", gctx), BY_NAME);
+  // benzo AND NOT Pharmacokinetics "day": the benzos' timing rows not in days.
+  const out = runFilters(ROWS, [CLASSES("benzo"),
+    { kind: "Pharmacokinetics", text: "day", op: "not" }], gctx);
+  assert.deepEqual(owners(out), ["drug_half_life:alprazolam"]);
+});
+
+test("Name lists every row of the named owner, and narrows when earlier", () => {
+  assert.deepEqual(owners(runFilters(ROWS, [{ kind: "Name", text: "diaz" }], gctx)),
+    ["drug_categories:diazepam", "drug_half_life:diazepam", "drug_tmax:diazepam"]);
+  assert.deepEqual(owners(runFilters(ROWS, [{ kind: "Name", text: "diaz" },
+    HALF("and")], gctx)), ["drug_half_life:diazepam"]);
+  assert.deepEqual(owners(runFilters(ROWS, [{ kind: "Name", text: "diaz", metabolites: true },
+    HALF("and")], gctx)), ["drug_half_life:diazepam", "drug_half_life:oxazepam"]);
+});
+
+test("every kind with browser rows sits in the picker groups exactly once", () => {
+  const leaves = KIND_GROUPS.flatMap((o) => (o.sections ? o.sections.flatMap((s) => s.kinds)
+    : o.kinds)).map(([k]) => k);
+  assert.equal(new Set(leaves).size, leaves.length);
+  assert.deepEqual(leaves.slice().sort(),
+    KIND_ORDER.filter((k) => k !== "enzyme_variability").sort());
 });

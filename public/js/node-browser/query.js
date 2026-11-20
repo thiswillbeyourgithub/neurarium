@@ -27,21 +27,34 @@ export const OPS = ["and", "or", "xor", "not"];
 export const isGroupOpen = (f) => f.group === "open";
 export const isGroupClose = (f) => f.group === "close";
 
+/** kindsFor's answer for the "Name" entry: the filter matches owners by name. */
+export const BY_NAME = Symbol("name");
+
 /**
- * The kinds a typed kind query means: empty = every kind (null), an exact label (case
- * and accent folded) = that kind alone, else every kind whose label contains the text.
+ * The kinds a typed kind query means: empty = every kind (null); a picker entry's label
+ * (case and accent folded) = its kinds (a header: every kind under it), or BY_NAME for
+ * "Name"; an exact registry label = that kind alone; else every kind whose registry or
+ * short label contains the text. Registry labels ("Drug class") still resolve, so links
+ * written before the short labels keep working.
  * @param {string} query what the reader typed in a filter's kind box
- * @param {string[]} kinds the kinds present in the rows
- * @param {(k: string) => string} kindLabel
- * @param {(s: string) => string} fold
- * @returns {Set<string>|null}
+ * @param {{kinds: string[], kindLabel: (k: string) => string, fold: (s: string) => string,
+ *          choices?: Array<{label: string, kinds: Set<string>|null, name?: boolean}>}} ctx
+ * @returns {Set<string>|null|symbol}
  */
-export function kindsFor(query, kinds, kindLabel, fold) {
+export function kindsFor(query, ctx) {
+  const { kinds, kindLabel, fold, choices = [] } = ctx;
   const q = fold((query || "").trim());
   if (!q) return null;
+  const picked = choices.filter((c) => fold(c.label) === q);
+  if (picked.some((c) => c.name)) return BY_NAME;
+  if (picked.length) {
+    return new Set(picked.flatMap((c) => [...c.kinds]).filter((k) => kinds.includes(k)));
+  }
   const exact = kinds.filter((k) => fold(kindLabel(k)) === q || k === q);
   if (exact.length) return new Set(exact);
-  return new Set(kinds.filter((k) => fold(kindLabel(k)).includes(q)));
+  const leaf = choices.filter((c) => c.kinds && c.kinds.size === 1 && fold(c.label).includes(q));
+  const short = new Set(leaf.map((c) => [...c.kinds][0]));
+  return new Set(kinds.filter((k) => short.has(k) || fold(kindLabel(k)).includes(q)));
 }
 
 /**
@@ -81,10 +94,18 @@ function haystack(r, ctx) {
  * (nordazepam is no "benzo" by name, yet is the half-life a benzo reader wants).
  */
 function filterRows(rows, f, ctx) {
-  const kinds = kindsFor(f.kind, ctx.kinds, ctx.kindLabel, ctx.fold);
+  const kinds = kindsFor(f.kind, ctx);
   const q = ctx.fold((f.text || "").trim());
-  const ofKind = (r) => !kinds || kinds.has(r.kind);
-  const hit = rows.filter((r) => ofKind(r) && (!q || haystack(r, ctx).includes(q)));
+  const ofKind = (r) => !kinds || kinds === BY_NAME || kinds.has(r.kind);
+  let hit;
+  if (kinds === BY_NAME) {
+    // "Name": every row of the owners whose name holds the text, so as the last filter
+    // it lists all a drug knows, and earlier in the stack it narrows to that owner.
+    const named = new Set(rows.filter((r) => !q || ctx.fold(r.name).includes(q)).map((r) => r.owner));
+    hit = rows.filter((r) => named.has(r.owner));
+  } else {
+    hit = rows.filter((r) => ofKind(r) && (!q || haystack(r, ctx).includes(q)));
+  }
   if (!f.metabolites || !ctx.metabolites) return hit;
   const owners = new Set(hit.map((r) => r.owner));
   const added = new Set();
@@ -113,8 +134,8 @@ export function filterTouchesDrugs(rows, f, ctx) {
  * @param {object[]} rows collectNodes' rows
  * @param {Array<{kind: string, text: string, op?: string, metabolites?: boolean}>} filters
  *   in order; the first one's `op` is ignored
- * @param {{kinds: string[], kindLabel: Function, fold: Function,
- *          metabolites?: Map<string, string[]>}} ctx
+ * @param {{kinds: string[], kindLabel: Function, fold: Function, choices?: object[],
+ *          metabolites?: Map<string, string[]>}} ctx (choices: kind-groups.kindChoices)
  * @returns {object[]} rows in their collected order
  */
 export function runFilters(rows, filters, ctx) {
@@ -279,7 +300,8 @@ export function sortRows(rows, mode) {
 }
 
 // URL form of the filter stack (the `nf` key): filters joined by ",", each one's fields
-// (op, kind, text, "m" when it includes metabolites) joined by "|". Only "%", "|" and
+// (op, kind, text, "x" when it EXCLUDES metabolites, the default being to include them)
+// joined by "|". A legacy "m" (the old opt-in) reads as included too. Only "%", "|" and
 // "," are escaped here, so a typed separator cannot break the split; url-state.js
 // escapes the rest, which keeps "Drug class" readable as Drug%20class in the address
 // bar. Trailing empty fields are dropped, and a scope's first entry has an empty op.
@@ -296,13 +318,13 @@ const escField = (s) => s.replace(/[%|,]/g, (c) => `%${c.charCodeAt(0).toString(
  * @returns {string|null} null when the stack is one empty filter (the default)
  */
 export function serializeFilters(filters) {
-  const live = filters.filter((f) => f.kind || f.text || f.metabolites);
+  const live = filters.filter((f) => f.kind || f.text || f.metabolites === false);
   if (!live.length) return null;
   const first = firstInScope(filters);
   return filters.map((f, i) => {
     const op = first[i] ? "" : f.op || "and";
     const fields = (isGroupClose(f) ? [")"] : isGroupOpen(f) ? ["(", op]
-      : [op, f.kind || "", f.text || "", f.metabolites ? "m" : ""]).map(escField);
+      : [op, f.kind || "", f.text || "", f.metabolites === false ? "x" : ""]).map(escField);
     while (fields.length && fields[fields.length - 1] === "") fields.pop();
     return fields.join(FIELD_SEP);
   }).join(FILTER_SEP);
@@ -316,6 +338,6 @@ export function parseFilters(value) {
       (_, i) => decodeURIComponent(part.split(FIELD_SEP)[i] || ""));
     if (op === ")") return { group: "close" };
     if (op === "(") return { group: "open", op: opOf(kind) };
-    return { op: opOf(op), kind, text, metabolites: m === "m" };
+    return { op: opOf(op), kind, text, metabolites: m !== "x" };
   });
 }
