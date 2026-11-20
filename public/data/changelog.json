@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.174.1",
+      "date": "2026-11-20",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "The feature-request footer now also closes the Settings pane, the About and Sources popups, the Data browser and the Simulation",
+          "commits": [
+            "048da7fb"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.174.0",
       "date": "2026-11-20",
       "entries": [
