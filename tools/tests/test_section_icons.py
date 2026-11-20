@@ -30,9 +30,11 @@ NOT_A_SECTION = {
 KEY_PATTERNS = [
     r'tourSec = "([^"]+)"', r'tourSec: "([^"]+)"', r'betaSection\("([^"]+)"',
     r'dataset\.icon = "([^"]+)"', r'icon: "([^"]+)"',
-    # helpers taking the tour anchor positionally (pathways.js, expression.js)
-    r'appendPathwayList\([^,]+, [^,]+, [^,]+, "([^"]+)"\);',
-    r'appendFoundIn\([^,]+, [^,]+, "([^"]+)"\);',
+    # helpers taking the tour anchor positionally (pathways.js, expression.js); an
+    # argument never spans a `;` or a line, or a 2-arg call would borrow the next
+    # statement's string ("appendFoundIn(t, x);\n appendVariants(v, "target");")
+    r'appendPathwayList\([^,;\n]+, [^,;\n]+, [^,;\n]+, "([^"]+)"\);',
+    r'appendFoundIn\([^,;\n]+, [^,;\n]+, "([^"]+)"\);',
 ]
 
 
