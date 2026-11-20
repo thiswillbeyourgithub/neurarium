@@ -78,6 +78,8 @@ RECEPTOR_EFFECTS: dict[str, dict[str, str]] = {
                                "fr": "Dépression respiratoire"},
     "seizures": {"en": "Seizures", "fr": "Convulsions"},
     "psychosis": {"en": "Psychosis", "fr": "Psychose"},
+    "delusional_parasitosis": {"en": "Delusional parasitosis (Ekbom syndrome)",
+                               "fr": "Délire de parasitose (syndrome d'Ekbom)"},
     "cardiovascular": {"en": "Raised heart rate / blood pressure",
                        "fr": "Hausse de la fréquence cardiaque / tension"},
     "cardiac_valvulopathy": {"en": "Cardiac valvulopathy", "fr": "Valvulopathie cardiaque"},

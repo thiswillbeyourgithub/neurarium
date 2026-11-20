@@ -16,7 +16,8 @@ indexed, every sentence that names the owner AND hits an effect keyword
   shifts an index the judged file already answers by;
 * the abstracts the owner's Europe PMC effect search read (corpus #17 ``europepmc``,
   ``fetch_europepmc.py --effect-search``, only for an owner with no effect node yet):
-  each sentence naming the owner and hitting a keyword. Appended after GtoPdb.
+  each sentence naming the owner and hitting a keyword. Appended after GtoPdb, then
+  the hand-found papers :data:`EFFECT_PAPERS` routes to the owner, read the same way.
 
 Each candidate carries the effect ids its keywords hit, so the LLM pass (answering by
 index into ``tools/generated_cache/receptor_effects_judged.json``) and the applier
@@ -91,6 +92,8 @@ EFFECT_KEYWORDS: dict[str, re.Pattern[str]] = {k: re.compile(v, re.I) for k, v i
     "respiratory_depression": r"respiratory depression|respiration",
     "seizures": r"seizure|convuls",
     "psychosis": r"psychosis|psychotic",
+    # Abstracts abbreviate it once defined: a case-sensitive "DP" (judge drops a stray hit).
+    "delusional_parasitosis": r"delusional parasitosis|delusional infestation|ekbom|(?-i:\bDP\b)",
     "cardiovascular": (r"tachycardia|heart rate|blood pressure|hypertension|"
                        r"positive(?:ly)? (?:inotropic, )?chronotrop"),
     "cardiac_valvulopathy": r"valvulopath|valvular|heart valve|fibros",
@@ -137,6 +140,16 @@ FAMILY_ALIASES: dict[str, list[str]] = {
 # Owners whose only aliases are a bare transmitter name ("glutamate"): every sentence
 # about the transmitter would be offered as one about the receptor group.
 SKIP_OWNERS = {"glutamate"}
+
+# owner id -> hand-found Europe PMC papers (each in fetch_europepmc.PAPERS, with the claim
+# it was added for) whose abstract states an effect of that owner, read whether or not the
+# owner already has an effect node (unlike the effect-search ledger).
+EFFECT_PAPERS: dict[str, tuple[str, ...]] = {
+    "a2a": ("34308528",),
+    "dat": ("17134847",),
+}
+assert all(p in epmc.PAPERS for ps in EFFECT_PAPERS.values() for p in ps), \
+    "EFFECT_PAPERS names a PMID missing from fetch_europepmc.PAPERS"
 
 
 def effect_hits(line: str) -> list[str]:
@@ -250,6 +263,8 @@ def build(only: set[str] | None = None, hits=None, key: str = "effects",
         if (only and oid not in only) or oid in SKIP_OWNERS or owner["kind"] not in owner_kinds:
             continue
         read = (ledger.get(effects_site(owner["kind"], oid)) or {}).get("read", [])
+        if hits is None:
+            read = list(read) + [p for p in EFFECT_PAPERS.get(oid, ()) if p not in read]
         cands = candidates(oid, owner, stahl, aliases, hits or effect_hits, key, family,
                            read)
         if cands:

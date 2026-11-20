@@ -182,6 +182,10 @@ PAPERS: dict[str, str] = {
     "40992411": "5-HT1F agonism (lasmiditan) treats migraine (review)",
     "36879707": "ditans, 5-HT1F agonists, a migraine therapeutic class (review)",
     "41270648": "5-HT1F activation in the CNS mediates somnolence (dual-target design)",
+    # Hand-found receptor-effect papers (fetch_receptor_effects.EFFECT_PAPERS).
+    "34308528": "A2A agonism (regadenoson): central A2A activation behind seizures (case report)",
+    "17134847": "DAT inhibitors (cocaine, methylphenidate, amphetamines) induce delusional "
+                "parasitosis (Huber 2007, hypothesis + case reports)",
     # Second source against a Wikipedia binding (CONTRADICTIONS).
     "12192085": "salvinorin A: selective kappa agonist, inactive at a receptor screen incl. D2 "
                 "(Roth 2002, against the Wikipedia D2 partial agonism)",
