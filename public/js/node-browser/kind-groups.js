@@ -87,7 +87,7 @@ export const NAME_LABEL = "nodes.kindName";
 
 /**
  * The picker's entries, in display order, for the kinds present in the rows:
- * `{label, depth, kinds: Set<string>|null, name?: true}`, depth 0 = owner, 1 = section,
+ * `{label, depth, kinds: Set<string>|null, name?: true, head?: true}`, depth 0 = owner, 1 = section,
  * 2 = kind (an owner with no section level puts its kinds at depth 1). A header holds
  * every present kind under it; one with none is dropped. A header with a single kind
  * under it (a one-kind owner or section) shows alone, its label picking that kind.
@@ -106,7 +106,7 @@ export function kindChoices(present, t) {
     const top = children.filter((c) => c.depth === depth + 1);
     if (!top.length) return [];
     const kinds = new Set(top.flatMap((c) => [...c.kinds]));
-    const head = { label: t(label), depth, kinds };
+    const head = { label: t(label), depth, kinds, head: true };
     return top.length === 1 && kinds.size === 1 ? [head] : [head, ...children];
   };
   for (const owner of KIND_GROUPS) {

@@ -7,6 +7,7 @@ import { loadFlag, saveFlag } from "../prefs.js";
 import { el, btn } from "../panel/dom.js";
 import { KIND_ORDER } from "../kinds.js";
 import { collectNodes } from "./collect.js";
+import { kindChoices } from "./kind-groups.js";
 import { createFilterStack } from "./filter-rows.js";
 import {
   DEFAULT_SORT, SORTS, compatibleKinds, filterTouchesDrugs, metaboliteOwners, parseFilters,
@@ -231,12 +232,14 @@ export function createNodeBrowser({ body, data, deps, ui }) {
     collect();
 
     const kinds = KIND_ORDER.filter((k) => rows.some((r) => r.kind === k));
-    ctx = { kinds, kindLabel, fold, metabolites: metaboliteOwners(data.drugs) };
+    const choices = kindChoices(kinds, t);
+    ctx = { kinds, kindLabel, fold, choices, metabolites: metaboliteOwners(data.drugs) };
     stack = createFilterStack({
       t, fold, onChange: markStale, onSubmit: apply,
       kindLabelsFor: (i) => {
         const ok = compatibleKinds(rows, stack.filters, i, ctx);
-        return kinds.filter((k) => !ok || ok.has(k)).map(kindLabel);
+        // The Name entry always applies; a header stays while any kind under it does.
+        return choices.filter((c) => !ok || !c.kinds || [...c.kinds].some((k) => ok.has(k)));
       },
     });
     const presentGrades = new Set(rows.map((r) => r.grade));
