@@ -1,6 +1,27 @@
 {
   "versions": [
     {
+      "version": "3.175.0",
+      "date": "2026-11-20",
+      "entries": [
+        {
+          "category": "added",
+          "text": "New effect: delusional parasitosis (Ekbom syndrome), which dopamine transporter inhibitors such as cocaine, methylphenidate and amphetamines can trigger, from a 2007 paper",
+          "commits": [
+            "0e07dfdd",
+            "d86c991d"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Activating the adenosine A2A receptor (regadenoson) is now linked to seizures, from a case report",
+          "commits": [
+            "d86c991d"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.174.1",
       "date": "2026-11-20",
       "entries": [
