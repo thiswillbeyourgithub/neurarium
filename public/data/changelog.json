@@ -1,6 +1,35 @@
 {
   "versions": [
     {
+      "version": "3.173.0",
+      "date": "2026-11-20",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Data browser: the kind picker opens on \"Name\", which filters by a drug's, receptor's or region's name (as the last filter it lists every row of what it matched), then groups every kind under its owner and its panel section, in the panel's own order, with short labels (\"Originator\" under Drug > Identification, not \"Drug originator\")",
+          "commits": [
+            "1b672f05",
+            "d047b3a0"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Data browser: a section or owner header can be picked as the kind and covers every kind under it, so \"Excretion\" AND NOT \"fec\" on the benzodiazepines lists those never excreted in faeces",
+          "commits": [
+            "1b672f05",
+            "d047b3a0"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Data browser: each filter has a ⋮ menu (Delete, Duplicate, Include metabolites) in place of the ✕ button, metabolites are now included by default, and the AND / OR selector is narrower so a filter fits on one line",
+          "commits": [
+            "8e0e7a54"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.172.2",
       "date": "2026-11-20",
       "entries": [
