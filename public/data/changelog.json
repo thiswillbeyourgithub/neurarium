@@ -1,6 +1,26 @@
 {
   "versions": [
     {
+      "version": "3.174.0",
+      "date": "2026-11-20",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Every detail panel, and every page of the Markdown API for AI agents, now ends with a short invitation to suggest information worth adding, with a link to open a GitHub issue or to email me",
+          "commits": [
+            "86f2c2d1"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Receptor and target panels open on the drugs that act on them (Ligands), then the regional distribution, pharmacogenomics, age and sex differences, and the BETA sections last; the Markdown API pages follow the same order",
+          "commits": [
+            "53468328"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.173.0",
       "date": "2026-11-20",
       "entries": [
