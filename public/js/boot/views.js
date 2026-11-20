@@ -10,6 +10,7 @@ import { KIND_LABELS } from "../kinds.js";
 import { foldText } from "../search/query.js";
 import { formatHalfLife } from "../panel/format.js";
 import { buildAboutSourcing, GRADE_LABELS } from "../about/sourcing.js";
+import { feedbackFooter } from "../panel/feedback.js";
 
 const { t } = window.__I18N__;
 
@@ -59,6 +60,13 @@ export function wireViews({
     browser: () => { sourcingModal.close(); showNodeBrowser(); },
   };
   buildAboutSourcing(data.meta, { data, nav: sourcingNav });
+  // The feature-request footer closing every detail panel (panel/feedback.js) closes
+  // the static panes too: Settings, About and Sources. Built once: a language switch
+  // reloads the page. The Data browser and Simulation append theirs when they build.
+  for (const host of [document.getElementById("settings-pane"),
+    document.querySelector("#about-modal .modal"), document.querySelector("#sourcing-modal .modal")]) {
+    host?.appendChild(feedbackFooter());
+  }
 
   // The Data browser: the same nodes the tally counts, listed one by one. It opens
   // as a **detail tab** rather than expanding in the accordion, because thousands of

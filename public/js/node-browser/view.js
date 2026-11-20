@@ -5,6 +5,7 @@
 
 import { loadFlag, saveFlag } from "../prefs.js";
 import { el, btn } from "../panel/dom.js";
+import { feedbackFooter } from "../panel/feedback.js";
 import { KIND_ORDER } from "../kinds.js";
 import { collectNodes } from "./collect.js";
 import { kindChoices } from "./kind-groups.js";
@@ -275,6 +276,7 @@ export function createNodeBrowser({ body, data, deps, ui }) {
     grid.appendChild(list);
     body.appendChild(grid);
     body.appendChild(moreBtn);
+    body.appendChild(feedbackFooter()); // like every panel (panel/feedback.js)
     // Nothing listed until the first search; a shared link runs its query (see url).
     head.hidden = true;
     twinsLabel.hidden = true;

@@ -20,6 +20,7 @@
 
 import { loadFlag, saveFlag } from "./prefs.js";
 import { el, btn } from "./panel/dom.js";
+import { feedbackFooter } from "./panel/feedback.js";
 import {
   receptorProfile, ligandsOf, pkFlags, solveCombination,
   toAxis, fromAxis, TMAX_HOURS, P_FLOOR, ASSUMED_PKI, parseRatio,
@@ -804,6 +805,7 @@ export function createSimulation({ body, data, deps, ui }) {
     body.appendChild(pkSec);
     body.appendChild(rxSec);
     body.appendChild(solveSec);
+    body.appendChild(feedbackFooter()); // like every panel (panel/feedback.js)
     renderWanted();
     renderAll();
   };
