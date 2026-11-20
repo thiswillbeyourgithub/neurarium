@@ -1,5 +1,6 @@
 // Data browser filter stack UI: one row per filter (drag handle, operator menu, kind box,
-// text box, "include metabolites", remove) plus the "Add filter" button. The operator
+// text box, a kebab menu: delete, duplicate, "include metabolites") plus the "Add filter"
+// button. The operator
 // menu also offers BEGIN GROUP / END GROUP, which insert a "(" / ")" marker row before
 // the row (see node-browser/query.js for the flat-list grouping): the rows between the
 // markers render indented behind a parenthesis, and "Add filter" lands inside a group
@@ -10,6 +11,7 @@
 import { el, btn } from "../panel/dom.js";
 import { OPS, firstInScope, isGroupOpen, isGroupClose } from "./query.js";
 import { wrapKindPicker } from "./kind-picker.js";
+import { makeKebab } from "./filter-menu.js";
 
 // A touch drag starts only after a long press, so a tap on the handle stays a tap.
 const LONG_PRESS_MS = 400;
@@ -20,7 +22,7 @@ const END = "end";
 /**
  * @param {object} opts
  * @param {Function} opts.t i18n lookup
- * @param {(i: number) => string[]} opts.kindLabelsFor the kind labels filter `i`'s box
+ * @param {(i: number) => object[]} opts.kindLabelsFor the picker entries filter `i`'s box
  *   offers (asked each time it opens, see query.compatibleKinds)
  * @param {(s: string) => string} opts.fold case + accent fold, for the kind suggestions
  * @param {() => void} opts.onChange called after any edit (the query is now stale)
@@ -56,7 +58,7 @@ export function createFilterStack({ t, kindLabelsFor, fold, onChange, onSubmit }
   // Rebuild the nesting from the flat list: an open marker's row, then a group box
   // (the parenthesis) holding what follows up to its close marker's row. Also redoes
   // each menu, the `#nodes-filter` id the tour anchors on (first real filter's text)
-  // and the remove buttons (never on the last filter).
+  // and the delete actions (disabled on the last filter).
   const relabel = () => {
     const first = firstInScope(filters);
     const realCount = filters.filter((f) => !f.group).length;
@@ -81,7 +83,7 @@ export function createFilterStack({ t, kindLabelsFor, fold, onChange, onSubmit }
       }
       r.text.id = !anchored ? "nodes-filter" : "";
       anchored = true;
-      r.remove.hidden = realCount === 1;
+      r.del.disabled = realCount === 1;
     });
   };
 
@@ -174,7 +176,9 @@ export function createFilterStack({ t, kindLabelsFor, fold, onChange, onSubmit }
   };
 
   function makeFilter(init) {
-    const f = { kind: "", text: "", op: "and", metabolites: false, ...init };
+    // Metabolites are in by default: a drug filter then also finds a drug through the
+    // metabolite it forms (see query.js), which is what a reader expects.
+    const f = { kind: "", text: "", op: "and", metabolites: true, ...init };
     const row = el("div", "node-filter");
     const handle = el("span", "node-filter-handle", "⠿");
     handle.title = t("nodes.dragHint");
@@ -195,7 +199,22 @@ export function createFilterStack({ t, kindLabelsFor, fold, onChange, onSubmit }
     metab.appendChild(el("span", null, t("nodes.metabolites")));
     metab.title = t("nodes.metabolitesHint");
     metab.hidden = true;
-    const remove = makeRemove("nodes.removeFilter");
+    const menu = makeKebab({
+      title: t("nodes.filterMenu"),
+      actions: [
+        { label: t("nodes.delete"), run: () => { removeAt(filters.indexOf(f)); relabel(); onChange(); } },
+        { label: t("nodes.duplicate"), run: () => {
+          const entry = makeFilter({ ...f });
+          insertAt(filters.indexOf(f) + 1, entry);
+          relabel();
+          entry.text.focus();
+          onChange();
+        } },
+      ],
+      extras: [metab],
+    });
+    const [del] = menu.items;
+    del.title = t("nodes.removeFilter");
 
     kind.addEventListener("input", () => { f.kind = kind.value; onChange(); });
     text.addEventListener("input", () => { f.text = text.value; onChange(); });
@@ -207,11 +226,6 @@ export function createFilterStack({ t, kindLabelsFor, fold, onChange, onSubmit }
         if (e.key === "Enter" && !e.defaultPrevented) { e.preventDefault(); box.blur(); onSubmit(); }
       });
     }
-    remove.addEventListener("click", () => {
-      removeAt(filters.indexOf(f));
-      relabel();
-      onChange();
-    });
     wireDrag(handle, row, f);
     // On a phone a tap must land the caret and raise the keyboard: a tap on a box
     // selects what it holds (retyping a kind replaces it), and a tap on the row's bare
@@ -221,8 +235,8 @@ export function createFilterStack({ t, kindLabelsFor, fold, onChange, onSubmit }
     }
     row.addEventListener("click", (e) => { if (e.target === row) text.focus(); });
 
-    for (const n of [handle, op, kindBox, text, metab, remove]) row.appendChild(n);
-    return { row, op, text, remove, metab, f, kind };
+    for (const n of [handle, op, kindBox, text, menu.root]) row.appendChild(n);
+    return { row, op, text, del, metab, f, kind };
   }
 
   const append = (init = {}) => {
@@ -288,9 +302,10 @@ export function createFilterStack({ t, kindLabelsFor, fold, onChange, onSubmit }
       for (const f of list.some((x) => !x.group) ? list : [...list, {}]) append(f);
       relabel();
     },
-    /** Show each row's "include metabolites" box only where `touches(f)` says it matters. */
+    /** Show each menu's "include metabolites" box where `touches(f)` says it matters,
+     * and always while unticked (so a reader can tick it back). */
     showMetabolites(touches) {
-      for (const r of rowEls) if (r.metab) r.metab.hidden = !r.f.metabolites && !touches(r.f);
+      for (const r of rowEls) if (r.metab) r.metab.hidden = r.f.metabolites && !touches(r.f);
     },
   };
 }

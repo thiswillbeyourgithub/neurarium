@@ -109,8 +109,8 @@
     grid-template-columns: minmax(95px, 1fr);
   }
 }
-/* The filter stack: one wrapping row per filter (handle, operator, kind, text,
-   metabolites, remove), then "Add filter", then the final sourcing + sorting line. */
+/* The filter stack: one wrapping row per filter (handle, operator, kind, text, kebab
+   menu), then "Add filter", then the final sourcing + sorting line. */
 .node-filters { display: flex; flex-direction: column; gap: 4px; }
 .node-filter {
   display: flex; flex-wrap: wrap; align-items: center; gap: 4px;
@@ -134,7 +134,9 @@
   color: var(--muted); padding: 0 2px; font-size: 14px;
 }
 .node-filter.dragging .node-filter-handle { cursor: grabbing; }
-.node-filter .node-select.node-filter-op { flex: 0 0 auto; }
+/* Sized for the short operators (AND, OR, ET NON); the group actions are longer, but
+   they never stay picked, so the closed select clips nothing a reader needs. */
+.node-filter .node-select.node-filter-op { flex: 0 0 auto; width: 6.9em; padding-left: 4px; padding-right: 4px; }
 .node-filter .node-kind-wrap, .node-filter .node-filter-text {
   flex: 1 1 120px; min-width: 0; margin: 0; width: auto;
 }
@@ -157,13 +159,39 @@
 }
 .node-kind-suggest li { padding: 7px 9px; border-radius: 6px; font-size: 13px; cursor: pointer; }
 .node-kind-suggest li:hover, .node-kind-suggest li.active { background: rgba(var(--ink), 0.12); }
+/* Owner + section headers (kind-groups.js) are pickable too: bold, kinds indented under. */
+.node-kind-suggest li.head { font-weight: 700; }
+.node-kind-suggest li.depth-1 { padding-left: 20px; }
+.node-kind-suggest li.depth-1.head { font-weight: 600; color: var(--muted); }
+.node-kind-suggest li.depth-2 { padding-left: 32px; }
 .node-filter .list-toggle { margin: 0 2px; }
 .node-filter-remove, .node-add-filter {
   font: inherit; font-size: 12px; color: var(--muted); cursor: pointer;
   background: none; border: 1px solid rgba(var(--ink), 0.12); border-radius: 6px;
   padding: 3px 7px;
 }
-.node-filter-remove:hover, .node-add-filter:hover { color: var(--text); border-color: var(--accent); }
+.node-filter-remove:hover, .node-add-filter:hover, .node-filter-kebab-btn:hover { color: var(--text); border-color: var(--accent); }
+/* The row's kebab (filter-menu.js): delete, duplicate, include metabolites. */
+.node-filter-kebab { position: relative; margin-left: auto; }
+.node-filter-kebab-btn {
+  font: inherit; font-size: 15px; line-height: 1; color: var(--muted); cursor: pointer;
+  background: none; border: 1px solid rgba(var(--ink), 0.12); border-radius: 6px; padding: 3px 6px;
+}
+.node-filter-menu {
+  position: absolute; z-index: 31; top: calc(100% + 2px); right: 0;
+  display: flex; flex-direction: column; min-width: 12em; padding: 3px;
+  background: var(--page-bg); border: 1px solid rgba(var(--ink), 0.18); border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+.node-filter-menu[hidden] { display: none; }
+.node-filter-menu-item {
+  font: inherit; font-size: 13px; text-align: left; color: var(--text); cursor: pointer;
+  background: none; border: 0; border-radius: 6px; padding: 7px 9px;
+}
+.node-filter-menu-item:hover:not(:disabled) { background: rgba(var(--ink), 0.12); }
+.node-filter-menu-item:disabled { color: var(--muted); cursor: default; }
+.node-filter-menu .node-filter-metab { padding: 7px 9px; font-size: 13px; white-space: nowrap; }
+.node-filter-menu .node-filter-metab[hidden] { display: none; }
 .node-add-filter { margin: 4px 0 6px; }
 .node-final { display: flex; gap: 6px; margin-bottom: 6px; }
 .node-select-wrap {
