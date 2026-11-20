@@ -634,6 +634,19 @@
     "evidence": {
      "0": "in_vivo"
     }
+   },
+   {
+    "effect": "seizures",
+    "mode": "agonism",
+    "picks": [
+     {
+      "index": 6,
+      "qid": "b78b0099"
+     }
+    ],
+    "evidence": {
+     "6": "in_vivo"
+    }
    }
   ],
   "ache": [
@@ -1602,6 +1615,19 @@
     ],
     "evidence": {
      "28": "in_vivo"
+    }
+   },
+   {
+    "effect": "delusional_parasitosis",
+    "mode": "inhibition",
+    "picks": [
+     {
+      "index": 37,
+      "qid": "0161d200"
+     }
+    ],
+    "evidence": {
+     "37": "in_vivo"
     }
    }
   ],

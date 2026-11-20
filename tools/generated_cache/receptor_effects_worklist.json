@@ -7721,12 +7721,20 @@
     {
      "corpus": "wikipedia_pharm",
      "page": "nmda_receptor",
-     "line": "Research also suggests that tianeptine produces antidepressant effects, through indirect alteration and inhibition of glutamate receptor activity and release of BDNF NMDAR-targeting compounds may also be useful for treating schizophrenia.",
+     "line": "Research also suggests that tianeptine produces antidepressant effects, through indirect alteration and inhibition of glutamate receptor activity and release of BDNF , in turn affecting neural plasticity .",
      "effects": [
-      "antidepressant",
+      "antidepressant"
+     ],
+     "qid": "a939458c"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "nmda_receptor",
+     "line": "NMDAR-targeting compounds may also be useful for treating schizophrenia.",
+     "effects": [
       "antipsychotic"
      ],
-     "qid": "33568035"
+     "qid": "a58cc3a6"
     },
     {
      "corpus": "wikipedia_pharm",
@@ -16683,6 +16691,34 @@
       "pro_cognitive"
      ],
      "qid": "a38e64a2"
+    },
+    {
+     "corpus": "europepmc",
+     "page": "34308528",
+     "line": "Regadenoson (a selective A 2A adenosine receptor agonist) is a commonly used vasodilator agent for stress MPI because of its safety profile and ease of use.",
+     "effects": [
+      "vasodilation"
+     ],
+     "qid": "6912461b"
+    },
+    {
+     "corpus": "europepmc",
+     "page": "34308528",
+     "line": "Activation of central nervous system A 2A adenosine receptors is thought to be responsible for seizure episodes in patients with or without known histories of seizure.",
+     "effects": [
+      "seizures",
+      "anticonvulsant"
+     ],
+     "qid": "b78b0099"
+    },
+    {
+     "corpus": "europepmc",
+     "page": "34308528",
+     "line": "A 2A adenosine receptors activation is also believed to play a role in headaches and migraine.",
+     "effects": [
+      "antimigraine"
+     ],
+     "qid": "e66cf4df"
     }
    ]
   },
@@ -18290,6 +18326,72 @@
       "euphoria"
      ],
      "qid": "5e450bb0"
+    },
+    {
+     "corpus": "europepmc",
+     "page": "17134847",
+     "line": "In the present paper we hypothesize for the first time a decreased striatal dopamine transporter (DAT)-functioning (corresponding with an increased extracellular dopamine-level) as etiologic condition for DP (primary and secondary groups).",
+     "effects": [
+      "delusional_parasitosis"
+     ],
+     "qid": "b045f2cf"
+    },
+    {
+     "corpus": "europepmc",
+     "page": "17134847",
+     "line": "The hypothesis of a decreased DAT-functioning as etiologic condition by DP is revealed in case reports which show that DAT-inhibitors, such as cocaine, pemoline, methylphenidate and other amphetamine-derivatives can induce the clinical expression of DP.",
+     "effects": [
+      "delusional_parasitosis"
+     ],
+     "qid": "0161d200"
+    },
+    {
+     "corpus": "europepmc",
+     "page": "17134847",
+     "line": "Several other associated causes of secondary DP-groups (medications, parkinson, chorea huntington, multiple system atrophy, diabetes, cerebrovascular diseases, alcoholism, traumatic brain injury, hyperuricemia, human immunodeficiency virus, iron deficiency, schizophrenia, depression) suggest that the clinical expression of DP may be related to a decreased striatal DAT-functioning (blocking, reduced ligand binding, reduced density, reduced activity).",
+     "effects": [
+      "delusional_parasitosis",
+      "antidepressant",
+      "antipsychotic",
+      "antiparkinsonian"
+     ],
+     "qid": "62b486b9"
+    },
+    {
+     "corpus": "europepmc",
+     "page": "17134847",
+     "line": "Furthermore, we presume that by the primary DP-group, the physiologically age-related decline of the DAT-density is pathologically elevated.",
+     "effects": [
+      "delusional_parasitosis"
+     ],
+     "qid": "e5d923f0"
+    },
+    {
+     "corpus": "europepmc",
+     "page": "17134847",
+     "line": "Based on this hypothesis we show in the present paper the relation between DP and decreased striatal DAT-functioning, trying to give a new insight into the pathophysiologically mechanism involved.",
+     "effects": [
+      "delusional_parasitosis"
+     ],
+     "qid": "f2548759"
+    },
+    {
+     "corpus": "europepmc",
+     "page": "17134847",
+     "line": "The hypothesis provides supporting evidence that increased levels of extracellular dopamine in the striatum of DP-patients is likely to be the result of decreased DAT-functioning and not increased rates of release.",
+     "effects": [
+      "delusional_parasitosis"
+     ],
+     "qid": "fd820cbc"
+    },
+    {
+     "corpus": "europepmc",
+     "page": "17134847",
+     "line": "The hypothesis can be investigated simply by dopamine transporter imaging in patients with DP.",
+     "effects": [
+      "delusional_parasitosis"
+     ],
+     "qid": "f65e565b"
     }
    ]
   },
@@ -19489,6 +19591,944 @@
       "antidepressant"
      ],
      "qid": "ae6f79b2"
+    }
+   ]
+  },
+  "muscarinic": {
+   "kind": "target",
+   "name": "Muscarinic acetylcholine receptors",
+   "wikipedia": "https://en.wikipedia.org/wiki/Muscarinic_acetylcholine_receptor",
+   "candidates": [
+    {
+     "corpus": "stahl_essential",
+     "page": 182,
+     "line": "Classic treatment for DIP is the use of “anticholinergics,” namely drugs that block muscarinic cholinergic receptors, especially the postsynaptic M1 receptor.",
+     "effects": [
+      "extrapyramidal_symptoms"
+     ],
+     "qid": "b7d26b25"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 183,
+     "line": "This in turn leads to more excitation of postsynaptic muscarinic cholinergic receptors on medium spiny GABAergic neurons, which hypothetically leads in part to inhibition of movements and to the symptoms of DIP (akinesia, bradykinesia, rigidity, and tremor).",
+     "effects": [
+      "extrapyramidal_symptoms"
+     ],
+     "qid": "49b824b9"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 183,
+     "line": "However, when the enhanced downstream release of acetylcholine is blocked by anticholinergics at muscarinic cholinergic receptors, this hypothetically restores in part the normal balance between dopamine and acetylcholine in the striatum, and DIP is reduced (Figure 5-7C).",
+     "effects": [
+      "extrapyramidal_symptoms"
+     ],
+     "qid": "ccef01c6"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 185,
+     "line": "Blockade of muscarinic cholinergic receptors can reduce druginduced parkinsonism, but can also induce side effects such as constipation, blurred vision, dry mouth, drowsiness, and cognitive dysfunction (problems with memory and concentration, slowed cognitive processing).",
+     "effects": [
+      "sedation",
+      "extrapyramidal_symptoms",
+      "anticholinergic_cognitive",
+      "dry_mouth",
+      "constipation",
+      "blurred_vision",
+      "antiparkinsonian",
+      "pro_cognitive"
+     ],
+     "qid": "dd4f03b4"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 197,
+     "line": "Blockade of muscarinic cholinergic receptors is associated with dry mouth, blurred vision, and risk of paralytic ileus as discussed earlier (Figure 5-8); blocking H1 histamine receptors is associated with weight gain and sedation (Figure 5-13A); and blockade of α1-adrenergic receptors is associated with sedation as well as cardiovascular side effects such as orthostatic hypotension (Figure 5-13B).",
+     "effects": [
+      "sedation",
+      "weight_gain",
+      "orthostatic_hypotension",
+      "dry_mouth",
+      "blurred_vision",
+      "muscle_weakness"
+     ],
+     "qid": "dbd20920"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 197,
+     "line": "Differing degrees of muscarinic cholinergic blockade may explain why some D2 antagonists have a lesser propensity to produce DIP than others.",
+     "effects": [
+      "extrapyramidal_symptoms"
+     ],
+     "qid": "fd398f6e"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 198,
+     "line": "In particular, antagonism of muscarinic M1, histamine H1, and α1-adrenergic receptors are all associated with sedating effects.",
+     "effects": [
+      "sedation"
+     ],
+     "qid": "47ea330d"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 218,
+     "line": "associated with sedation (muscarinic, α1, and histamine antagonism), as well as other side effects (see Figures 5-8 and 5-13).",
+     "effects": [
+      "sedation"
+     ],
+     "qid": "72f96196"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 231,
+     "line": "Shown here is a visual depiction of the binding profiles of drugs used to treat psychosis. (A) Clozapine, olanzapine, quetiapine, and zotepine all have strong potency for histamine 1 receptors; clozapine, olanzapine, and quetiapine also have strong potency for muscarinic receptors.",
+     "effects": [
+      "psychosis",
+      "antipsychotic"
+     ],
+     "qid": "9508c5ea"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 236,
+     "line": "At antipsychotic doses (i.e., up to 800 mg/day), quetiapine has a relatively wide binding profile, with actions at multiple serotonergic, muscarinic, and α-adrenergic receptors.",
+     "effects": [
+      "psychosis",
+      "antipsychotic"
+     ],
+     "qid": "cb1f2a1c"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 241,
+     "line": "Sedation is probably linked to clozapine’s potent antagonism of muscarinic M1, H1, and α1-adrenergic receptors (Figures 5-8, 5-14, and 5-43).",
+     "effects": [
+      "sedation"
+     ],
+     "qid": "04ff141e"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 241,
+     "line": "Profound muscarinic blockade can also cause excessive salivation, especially at higher doses, as well as severe constipation that can lead to bowel obstruction, especially if administered concomitantly with other anticholinergic agents, such as benztropine, or other drugs for psychosis with potent anticholinergic properties, such as chlorpromazine.",
+     "effects": [
+      "hypersalivation",
+      "constipation",
+      "psychosis",
+      "antipsychotic"
+     ],
+     "qid": "1321a072"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 254,
+     "line": "Xanomeline is being studied for its potential use in psychosis because of its agonism at central muscarinic cholinergic receptors; specifically, the M4 and M1 receptors.",
+     "effects": [
+      "psychosis",
+      "antipsychotic"
+     ],
+     "qid": "be8f2aac"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 255,
+     "line": "Aripiprazole lacks the pharmacological properties normally associated with sedation, namely, muscarinic cholinergic and H1 histamine antagonist properties (Figure 5-41), and thus is not generally sedating.",
+     "effects": [
+      "sedation"
+     ],
+     "qid": "c6f5fa4b"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 258,
+     "line": "**Cholinergic Agonists** Activation of central muscarinic cholinergic receptors, either directly or by allosteric modulation, is under investigation as a novel antipsychotic mechanism.",
+     "effects": [
+      "psychosis",
+      "antipsychotic"
+     ],
+     "qid": "8c95e1b7"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 310,
+     "line": "An SSRI with Muscarinic Anticholinergic and Norepinephrine Transporter (NET) Inhibitory Actions This SSRI tends to be more calming, even sedating, early in treatment compared to the more activating actions of both fluoxetine and sertraline discussed above.",
+     "effects": [
+      "sedation"
+     ],
+     "qid": "bd87fb07"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 343,
+     "line": "Alpha-1 antagonist actions have been discussed in Chapter 5 and illustrated in Figure 5-13B showing how α1 antagonism, particularly in the thalamus, could contribute to sedation when coupled with simultaneous blockade of muscarinic cholinergic and histamine receptors in the reticular activating arousal system (Chapter 5, Figures 5-13A and 5-8).",
+     "effects": [
+      "sedation",
+      "wakefulness"
+     ],
+     "qid": "d179f7c7"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 344,
+     "line": "without simultaneous muscarinic and histaminic antagonism, α1 antagonist action in the prefrontal cortex could hypothetically also contribute both to the reduced motor side effects and to the known antidepressant effects seen with potent α1 antagonists, particularly those with simultaneous 5HT2A antagonist properties.",
+     "effects": [
+      "antidepressant"
+     ],
+     "qid": "533bb50c"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 352,
+     "line": "All tricyclic antidepressants block reuptake of norepinephrine and are antagonists at histamine 1 (H1), α1-adrenergic, and muscarinic cholinergic receptors; they also block voltagesensitive sodium channels (A, B, and C).",
+     "effects": [
+      "antidepressant"
+     ],
+     "qid": "18519659"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 352,
+     "line": "Blockade of muscarinic cholinergic receptors, also known as anticholinergic actions, causes dry mouth, blurred vision, urinary retention, and constipation (Figure 5-8).",
+     "effects": [
+      "dry_mouth",
+      "constipation",
+      "blurred_vision",
+      "urinary_retention"
+     ],
+     "qid": "ebd3a42d"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 442,
+     "line": "Specifically, diphenhydramine is also a muscarinic 1 (M1) receptor antagonist and thus can have anticholinergic effects (blurred vision, constipation, memory problems, dry mouth).",
+     "effects": [
+      "anticholinergic_cognitive",
+      "dry_mouth",
+      "constipation",
+      "blurred_vision",
+      "pro_cognitive"
+     ],
+     "qid": "b15d1f46"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 443,
+     "line": "Doxepin is a tricyclic antidepressant (TCA) that, at antidepressant doses (150– 300 mg/day), inhibits serotonin and norepinephrine reuptake and is an antagonist at histamine 1 (H1), muscarinic 1 (M1), and α1adrenergic receptors.",
+     "effects": [
+      "antidepressant"
+     ],
+     "qid": "6a9d175a"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 600,
+     "line": "muscarinic receptor agonist xanomeline as a novel treatment approach for schizophrenia _.",
+     "effects": [
+      "antipsychotic"
+     ],
+     "qid": "d85ff6f3"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 635,
+     "line": "partial agonists, 192 mu-opioid receptors, 390, 556 multimodal monoamines, 530–2 Multiple Sleep Latency Test, 431 muscarinic receptors, 506–7",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "0de672e6"
+    }
+   ]
+  },
+  "alpha1": {
+   "kind": "target",
+   "name": "α1 adrenergic receptors",
+   "wikipedia": "https://en.wikipedia.org/wiki/Alpha-1_adrenergic_receptor",
+   "candidates": [
+    {
+     "corpus": "stahl_essential",
+     "page": 55,
+     "line": "Alpha 1 Antagonist Improved sleep (nightmares)",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "338d764c"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 87,
+     "line": "The functions of all these proteins associated with the α1 pore-forming unit of a VSCC are just beginning to be understood, but already it is known that the α2δ protein is the target of certain psychotropic drugs, such as the anticonvulsants pregabalin and gabapentin, and that this α2δ protein may be involved in regulating conformational changes of the ion channel to change the way the ion channel opens and closes.",
+     "effects": [
+      "seizures",
+      "anticonvulsant"
+     ],
+     "qid": "064413d3"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 197,
+     "line": "Blockade of muscarinic cholinergic receptors is associated with dry mouth, blurred vision, and risk of paralytic ileus as discussed earlier (Figure 5-8); blocking H1 histamine receptors is associated with weight gain and sedation (Figure 5-13A); and blockade of α1-adrenergic receptors is associated with sedation as well as cardiovascular side effects such as orthostatic hypotension (Figure 5-13B).",
+     "effects": [
+      "sedation",
+      "weight_gain",
+      "orthostatic_hypotension",
+      "dry_mouth",
+      "blurred_vision",
+      "muscle_weakness"
+     ],
+     "qid": "dbd20920"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 197,
+     "line": "As many D2 antagonists have all three actions, anticholinergic, antihistaminic, and α1 antagonist, they can combine to contribute to a great deal of sedation by simultaneously blocking several of the neurotransmitters in the arousal pathway; namely, acetylcholine, histamine, and norepinephrine (Figure 5-14).",
+     "effects": [
+      "sedation",
+      "wakefulness"
+     ],
+     "qid": "f7c1c7dd"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 198,
+     "line": "Many of the early D2 antagonists also block H1 receptors (A), which can contribute to weight gain and drowsiness, and/or α1-adrenergic receptors (B), which can contribute to dizziness, drowsiness, and decreased blood pressure.",
+     "effects": [
+      "sedation",
+      "weight_gain",
+      "dizziness",
+      "cardiovascular"
+     ],
+     "qid": "b6b2f0d9"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 198,
+     "line": "In particular, antagonism of muscarinic M1, histamine H1, and α1-adrenergic receptors are all associated with sedating effects.",
+     "effects": [
+      "sedation"
+     ],
+     "qid": "47ea330d"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 214,
+     "line": "The pharmacology of sedation is discussed above and illustrated in Figures 5-8, 5-13, and 5-14 for anticholinergic, antihistamine, and α1 antagonist actions.",
+     "effects": [
+      "sedation"
+     ],
+     "qid": "935fce91"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 218,
+     "line": "associated with sedation (muscarinic, α1, and histamine antagonism), as well as other side effects (see Figures 5-8 and 5-13).",
+     "effects": [
+      "sedation"
+     ],
+     "qid": "72f96196"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 232,
+     "line": "**Figure 5-42** Alpha-1 binding by drugs used to treat psychosis.",
+     "effects": [
+      "psychosis",
+      "antipsychotic"
+     ],
+     "qid": "f9958593"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 232,
+     "line": "Shown here is a visual depiction of the binding profiles of drugs used to treat psychosis. (A) Clozapine, quetiapine, and zotepine each have greater potency for α1 receptors than for the D2 receptor, while asenapine binds with similar potency to the α2 and the D2 receptors. (B) All of the “dones” (i.e., risperidone, paliperidone, ziprasidone, iloperidone, lurasidone) as well as lumateperone bind to the α1 receptor.",
+     "effects": [
+      "psychosis",
+      "antipsychotic"
+     ],
+     "qid": "63af9a08"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 235,
+     "line": "However, this property can also contribute to daytime sedation, especially combined with M1 antimuscarinic and α1-adrenergic antagonist properties.",
+     "effects": [
+      "sedation"
+     ],
+     "qid": "335a3070"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 238,
+     "line": "Alpha-2 antagonist properties may contribute to efficacy for depression, but this can be diminished by simultaneous α1 antagonist properties, which can also contribute to orthostatic hypotension and sedation.",
+     "effects": [
+      "sedation",
+      "orthostatic_hypotension",
+      "antidepressant"
+     ],
+     "qid": "e3268c7c"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 241,
+     "line": "Its other prominent pharmacological property is potent α1 antagonism, which may be responsible for the risk of orthostatic hypotension but also may contribute to its low risk of drug-induced parkinsonism (DIP).",
+     "effects": [
+      "orthostatic_hypotension",
+      "extrapyramidal_symptoms",
+      "antiparkinsonian"
+     ],
+     "qid": "44442fbc"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 241,
+     "line": "Sedation is probably linked to clozapine’s potent antagonism of muscarinic M1, H1, and α1-adrenergic receptors (Figures 5-8, 5-14, and 5-43).",
+     "effects": [
+      "sedation"
+     ],
+     "qid": "04ff141e"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 256,
+     "line": "it has more potent 5HT2A antagonism (Figure 5-32), 5HT1A partial agonism (Figure 5-33), and α1 antagonism (Figure 5-42) relative to its D2 partial agonism (Figure 5-57) than aripiprazole (Figure 5-56), which should theoretically reduce its propensity to cause motor side effects and akathisia.",
+     "effects": [
+      "akathisia"
+     ],
+     "qid": "f09dc17b"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 256,
+     "line": "Like other drugs in this class, cariprazine has both 5HT1A and α1 and α2 actions, suggesting antidepressant efficacy, but it is the very",
+     "effects": [
+      "antidepressant"
+     ],
+     "qid": "c394852e"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 276,
+     "line": "Benzodiazepine-sensitive GABAA receptors containing α1 subunits are involved in sleep (second from left), while those that contain α2 and/or α3 subunits are involved in anxiety (second from right).",
+     "effects": [
+      "anxiety",
+      "anxiolytic",
+      "sleep_promotion"
+     ],
+     "qid": "00a5fc44"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 277,
+     "line": "Notably, on the one hand, those benzodiazepine-sensitive GABAA receptors with α1 subunits may be most important for regulating sleep and are the presumed targets of numerous sedative hypnotic agents, including both benzodiazepine and",
+     "effects": [
+      "sedation",
+      "sleep_promotion"
+     ],
+     "qid": "5a16ec50"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 278,
+     "line": "The α1 subtype of GABAA receptors and the drugs that bind to it are discussed further in Chapter 10 on disorders of sleep.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "dd2d0684"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 327,
+     "line": "Hypnotic doses engage the receptors for which trazodone has the highest affinity and, amongst these, blockade is hypothetically linked to hypnotic actions (i.e., 5HT2A, α1 subtypes, and H1).",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "3db05724"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 327,
+     "line": "Blocking 5HT2A receptors enhances slow-wave sleep, and blocking α1 subtypes and H1 receptors interferes with monoamine arousal mechanisms (discussed in Chapter 5 and illustrated in Figures 5-13 and 5-14).",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "3af6bd25"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 331,
+     "line": "Trazodone is also an α1 and histamine 1 (H1) antagonist at these doses. (Right) At lower doses of trazodone (i.e., 25–150 mg), it does not saturate the serotonin transporter; it does, however, retain antagonist actions at 5HT2A, α1, and H1 receptors, with corresponding efficacy for insomnia.",
+     "effects": [
+      "insomnia",
+      "sleep_promotion"
+     ],
+     "qid": "3d750c13"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 343,
+     "line": "Alpha-1 antagonist actions have been discussed in Chapter 5 and illustrated in Figure 5-13B showing how α1 antagonism, particularly in the thalamus, could contribute to sedation when coupled with simultaneous blockade of muscarinic cholinergic and histamine receptors in the reticular activating arousal system (Chapter 5, Figures 5-13A and 5-8).",
+     "effects": [
+      "sedation",
+      "wakefulness"
+     ],
+     "qid": "d179f7c7"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 344,
+     "line": "without simultaneous muscarinic and histaminic antagonism, α1 antagonist action in the prefrontal cortex could hypothetically also contribute both to the reduced motor side effects and to the known antidepressant effects seen with potent α1 antagonists, particularly those with simultaneous 5HT2A antagonist properties.",
+     "effects": [
+      "antidepressant"
+     ],
+     "qid": "533bb50c"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 344,
+     "line": "Alpha-1 antagonist actions of brexpiprazole could also potentially contribute to its evidence of efficacy for agitation in Alzheimer disease and in PTSD (as augmentation of sertraline).",
+     "effects": [
+      "anxiety"
+     ],
+     "qid": "d4b3436f"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 344,
+     "line": "When this glutamatergic neuron is inhibited by an α1 antagonist, its innervation of the substantia nigra reduces GABA tone there, allowing disinhibition of dopamine release into the motor striatum and reduction of drug-induced parkinsonism (Figure 7-58A; just as shown in Chapter 5 and Figure 5-17B).",
+     "effects": [
+      "extrapyramidal_symptoms",
+      "antiparkinsonian"
+     ],
+     "qid": "2ffd9aa7"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 344,
+     "line": "Thus, drug-induced parkinsonism caused by D2 blockers will be maximally reduced by those D2 blockers that have both 5HT2A and α1 antagonist actions.",
+     "effects": [
+      "extrapyramidal_symptoms",
+      "antiparkinsonian"
+     ],
+     "qid": "9c7ea2d6"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 344,
+     "line": "Indeed, the lowest frequency and severity of drug-induced parkinsonism induced by dopamine blockers is for those that also have robust α1 and 5HT2A antagonist actions, namely, brexpiprazole, quetiapine, clozapine, and iloperidone.",
+     "effects": [
+      "extrapyramidal_symptoms",
+      "antiparkinsonian"
+     ],
+     "qid": "f4ff4a03"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 344,
+     "line": "Synergy of α1 antagonism with 5HT2A antagonism can theoretically also enhance antidepressant action, this time in the circuit of pyramidal neurons innervating the ventral tegmental area dopamine neurons that project",
+     "effects": [
+      "antidepressant"
+     ],
+     "qid": "b2a79a03"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 344,
+     "line": "What this means is that α1 antagonists would theoretically have the same effect as 5HT2A antagonists in this circuit, and the two working together would exert a more powerful control of the prefrontal cortex and its downstream projections, to further facilitate dopamine release in the prefrontal cortex and to cause antidepressant action.",
+     "effects": [
+      "antidepressant"
+     ],
+     "qid": "e29deb5e"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 344,
+     "line": "In fact, this synergy is likely to be an important component of the mechanism of antidepressant action for those agents that are both α1 and 5HT2A antagonists, including brexpiprazole, quetiapine, and trazodone.",
+     "effects": [
+      "antidepressant"
+     ],
+     "qid": "983b1326"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 344,
+     "line": "The enhancement of dopamine release in the prefrontal cortex by simultaneous α1 and 5HT2A blockade may theoretically contribute as well to improving “top-down” control of agitation in Alzheimer disease and PTSD symptoms, which are seen in ongoing studies of brexpiprazole.",
+     "effects": [
+      "anxiety"
+     ],
+     "qid": "7c884776"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 344,
+     "line": "Cariprazine Carpirazine (Chapter 5 and Figure 5-58) is a D3/D2/5HT1A partial agonist as well as a 5HT2A/α1/α2 antagonist, approved for the treatment of acute bipolar mania and bipolar depression; it also has evidence of efficacy as an adjunct to SSRI/SNRIs in unipolar depression (Table 7-1).",
+     "effects": [
+      "antidepressant"
+     ],
+     "qid": "87dd0f71"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 352,
+     "line": "All tricyclic antidepressants block reuptake of norepinephrine and are antagonists at histamine 1 (H1), α1-adrenergic, and muscarinic cholinergic receptors; they also block voltagesensitive sodium channels (A, B, and C).",
+     "effects": [
+      "antidepressant"
+     ],
+     "qid": "18519659"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 352,
+     "line": "Blockade of α1-adrenergic receptors may be therapeutic but also causes orthostatic hypotension and dizziness (Figure 5-13B).",
+     "effects": [
+      "orthostatic_hypotension",
+      "dizziness"
+     ],
+     "qid": "b21c050d"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 359,
+     "line": "Cariprazine has 5HT1A partial agonist actions as well as α1 (Figure 7-58) and α2 (Figure 7-41) antagonist actions, each with potential antidepressant mechanisms.",
+     "effects": [
+      "antidepressant"
+     ],
+     "qid": "7976a4f8"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 386,
+     "line": "Symptoms of hyperarousal like nightmares can be reduced in some patients with α1-adrenergic blockers such as prazocin (Figure 8-19B), and symptoms of fear (Figure 8-19C) and worry (Figure 8-20B) can be reduced by norepinephrine reuptake inhibitors (also called norepinephrine transporter [NET] inhibitors).",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "c2220b34"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 387,
+     "line": "Alpha-1 and β1-adrenergic receptors may be specifically involved in these reactions. (B) Noradrenergic hyperactivity may be blocked by the administration of α1-adrenergic antagonists, which can lead to the alleviation of anxiety and other stress-related symptoms. (C) Noradrenergic hyperactivity may also be blocked by the administration of a norepinephrine transporter (NET) inhibitor, which can have the downstream effect of downregulating β1-adrenergic receptors.",
+     "effects": [
+      "anxiety",
+      "anxiolytic"
+     ],
+     "qid": "952954e9"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 437,
+     "line": "Arousal can be reduced by many mechanisms with drugs from this category: namely, by blocking orexins (with dual orexin receptor antagonists or DORAs), by blocking histamine (with H1 antagonists), by blocking serotonin (with 5HT2A antagonists), and by blocking norepinephrine (with α1 antagonists).",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "0a7492dd"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 438,
+     "line": "The α1 subtype is known to be critical for producing sedation and thus is targeted by every effective GABAA PAM hypnotic, both benzodiazepines",
+     "effects": [
+      "sedation",
+      "sleep_promotion"
+     ],
+     "qid": "3200582d"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 439,
+     "line": "The α1 subtype is also linked to daytime sedation, anticonvulsant actions, and possibly to amnesia.",
+     "effects": [
+      "sedation",
+      "seizures",
+      "anticonvulsant"
+     ],
+     "qid": "f8514722"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 440,
+     "line": "**Serotonergic Hypnotics** One of the most popular hypnotics is the 5HT2A/ α1/H1 antagonist trazodone (Figure 7-46), even though this agent is not specifically approved for the treatment of",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "ee77b928"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 440,
+     "line": "Blockade of α1-adrenergic and H1 histaminergic pathways is discussed as a side effect of some drugs for psychosis in Chapter 5 and illustrated in Figures 5-13 and 5-14.",
+     "effects": [
+      "psychosis",
+      "antipsychotic"
+     ],
+     "qid": "572dcc7e"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 443,
+     "line": "Doxepin is a tricyclic antidepressant (TCA) that, at antidepressant doses (150– 300 mg/day), inhibits serotonin and norepinephrine reuptake and is an antagonist at histamine 1 (H1), muscarinic 1 (M1), and α1adrenergic receptors.",
+     "effects": [
+      "antidepressant"
+     ],
+     "qid": "6a9d175a"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 471,
+     "line": "could lead to impaired working memory when the less sensitive α1 and β1 receptors are also recruited (Figures 11-13 to 11-15).",
+     "effects": [
+      "pro_cognitive"
+     ],
+     "qid": "f19fead5"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 475,
+     "line": "Specifically, excessive noradrenergic neurotransmission can lead to impaired working memory due to stimulation of α1 (and β1) receptors.",
+     "effects": [
+      "pro_cognitive"
+     ],
+     "qid": "7e470c8f"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 497,
+     "line": "Alpha-1 receptors generally have opposing actions to α2 receptors, with α2 mechanisms predominating when NE release is low or moderate (i.e., for normal attention), but with α1 mechanisms predominating at NE synapses when NE release is high (e.g., associated with stress and comorbidity) and contributing to cognitive impairment.",
+     "effects": [
+      "anticholinergic_cognitive",
+      "pro_cognitive"
+     ],
+     "qid": "0c19a7c2"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 546,
+     "line": "This agent combines several simultaneous mechanisms to quell the excessive activity of the agitation network in AD: namely by its well-known dopamine D2 partial agonist actions combined with 5HT1A partial agonist and 5HT2A antagonist actions, as well as by its relatively unique additional actions blocking both α1- and α2adrenergic receptors (Figure 5-57 and Figure 12-47).",
+     "effects": [
+      "anxiety"
+     ],
+     "qid": "28a141b4"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 548,
+     "line": "Blocking activation by norepinephrine (NE) from locus coeruleus (LC) output at α2c and α1 postsynaptic receptors on dendrites of pyramidal neurons should reduce arousal and emotional responses.",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "f57ed705"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 549,
+     "line": "activation by norepinephrine from locus coeruleus output at α2c and α1 postsynaptic receptors on dendrites of pyramidal neurons should reduce arousal and emotional responses (Figure 12-47); blocking normal serotonin excitation by antagonist actions at 5HT2A receptors and enhancing normal serotonin inhibition by partial agonist actions at 5HT1A receptors should also combine to reduce limbic drives to motor and emotional outputs of agitation (Figure 12-47).",
+     "effects": [
+      "anxiety",
+      "wakefulness"
+     ],
+     "qid": "f8938a38"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 551,
+     "line": "Trazodone also has serotonin 2A and 2C, H1 histamine and α1-adrenergic antagonist properties (Figures 7-44 and 7-45), which can make it very sedating.",
+     "effects": [
+      "sedation"
+     ],
+     "qid": "3d62df69"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 613,
+     "line": "Differential sensitivity to psychostimulants across prefrontal cognitive tasks: differential involvement of noradrenergic α1- and α2-receptors. _Biol Psychiatry_ 71:",
+     "effects": [
+      "pro_cognitive"
+     ],
+     "qid": "d45b571b"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 631,
+     "line": "abstinence, 573 co-addictions, 553 treatment of alcoholism, 556 alcohol abuse, 378 allodynia, 380 allopregnanolone, 320, 322 allosteric modulation, 64–6, 261, 262 alogia, 142 alpha-1 antagonism, 216, 225, 236, 327–8 alpha-2 adrenergic agonists, 481–4 alpha-2 antagonism, 309 alpha-2 autoreceptors, 254, 256, 258 alpha-2-delta ligands, 366, 377, 380",
+     "effects": [
+      "euphoria"
+     ],
+     "qid": "fb7eaf1a"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 631,
+     "line": "alpha-1, 216, 225, 236, 327–8 alpha-2, 309 silent, 41, 42, 45, 192 anticholinergics, 166, 168, 215, 294 anticonvulsants",
+     "effects": [
+      "seizures",
+      "anticonvulsant"
+     ],
+     "qid": "4cedf93a"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "alpha_1_adrenergic_receptor",
+     "line": "To avoid confusion, naming was continued with the letter D.",
+     "effects": [
+      "anticholinergic_cognitive"
+     ],
+     "qid": "6dc50c6a"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "alpha_1_adrenergic_receptor",
+     "line": "In smooth muscle cells of blood vessels the principal effect of activation of these receptors is vasoconstriction .",
+     "effects": [
+      "vasoconstriction"
+     ],
+     "qid": "94595858"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "alpha_1_adrenergic_receptor",
+     "line": "During the fight-or-flight response vasoconstriction results in decreased blood flow to these organs.",
+     "effects": [
+      "vasoconstriction"
+     ],
+     "qid": "5711661a"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "alpha_1_adrenergic_receptor",
+     "line": "Other effects on smooth muscle are contraction in: - Ureter - Uterus (when pregnant): this is minor compared to the relaxing effects of the β 2 receptor, agonists of which—notably albuterol/salbutamol—were formerly used to inhibit premature labor. - Urethral sphincter - Bronchioles (although minor to the relaxing effect of β 2 receptor on bronchioles) - Iris dilator muscle - Seminal tract , resulting in ejaculation",
+     "effects": [
+      "bronchodilation"
+     ],
+     "qid": "792266dd"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "alpha_1_adrenergic_receptor",
+     "line": "Activation of α 1 -adrenergic receptors produces anorexia and partially mediates the efficacy of appetite suppressants like phenylpropanolamine and amphetamine in the treatment of obesity .",
+     "effects": [
+      "weight_gain",
+      "appetite_increase",
+      "appetite_decrease"
+     ],
+     "qid": "b5d93cdb"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "alpha_1_adrenergic_receptor",
+     "line": "During exercise, α 1 -adrenergic receptors in active muscles are attenuated in an exercise intensity-dependent manner, allowing the β 2 -adrenergic receptors which mediate vasodilation to dominate.",
+     "effects": [
+      "vasodilation"
+     ],
+     "qid": "56b5de57"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "alpha_1_adrenergic_receptor",
+     "line": "In contrast to α 2 -adrenergic receptors, α 1 -adrenergic-receptors in the arterial vasculature of skeletal muscle are more resistant to inhibition, and attenuation of α1-adrenergic-receptor-mediated vasoconstriction only occurs during heavy exercise.",
+     "effects": [
+      "vasoconstriction"
+     ],
+     "qid": "6c585c5c"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "alpha_1_adrenergic_receptor",
+     "line": "Resting muscle will not have its α 1 -adrenergic receptors blocked, and hence the overall effect will be α 1 -adrenergic-mediated vasoconstriction.",
+     "effects": [
+      "vasoconstriction"
+     ],
+     "qid": "1190f5da"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "alpha_1_adrenergic_receptor",
+     "line": "This action is generally undesirable in such agents and mediates side effects like orthostatic hypotension , and headaches due to excessive vasodilation.",
+     "effects": [
+      "orthostatic_hypotension",
+      "vasodilation"
+     ],
+     "qid": "c1e10c75"
+    }
+   ]
+  },
+  "dopamine": {
+   "kind": "target",
+   "name": "Dopamine receptors",
+   "wikipedia": "https://en.wikipedia.org/wiki/Dopamine_receptor",
+   "candidates": [
+    {
+     "corpus": "stahl_essential",
+     "page": 175,
+     "line": "This chapter explores drugs that target dopamine receptors, serotonin receptors, or both, for the treatment of psychosis, mania, and depression.",
+     "effects": [
+      "psychosis",
+      "antidepressant",
+      "antipsychotic"
+     ],
+     "qid": "704e9c24"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 178,
+     "line": "Also explained in the following sections are how targeting serotonin and dopamine receptors in various brain circuits mediates not only therapeutic effects in psychosis and other conditions, but also side effects.",
+     "effects": [
+      "psychosis",
+      "antipsychotic"
+     ],
+     "qid": "707ae6a0"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 186,
+     "line": "That is, chronic levodopa administration in Parkinson’s disease can lead to levodopa-induced dyskinesias that look very similar to TD, and may share a similar pathophysiology of aberrant striatal plasticity and abnormal neuronal “learning.” Perhaps the lesson here is not to mess with your dopamine receptors in the motor striatum or consequences may ensue!",
+     "effects": [
+      "antiparkinsonian",
+      "pro_cognitive"
+     ],
+     "qid": "b2050366"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 219,
+     "line": "Some early preclinical data suggest that it might be more selective for mesolimbic/mesostriatal dopamine receptors than for nigrostriatal dopamine receptors, and thus might have a lower propensity for motor side effects at antipsychotic doses.",
+     "effects": [
+      "psychosis",
+      "antipsychotic"
+     ],
+     "qid": "95d86068"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 542,
+     "line": "Although blocking dopamine receptors often has antipsychotic effects in patients with dementia-related psychosis, these agents increase stroke and death, so they are not approved for the treatment of dementia-related psychosis.",
+     "effects": [
+      "psychosis",
+      "antipsychotic"
+     ],
+     "qid": "0b803072"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 633,
+     "line": "regions, 84 mesolimbic pathway, 89, 542–3 nigrostriatal pathway, 87–9 thalamic pathway, 85 tuberoinfundibular pathway, 85 dopamine receptors, 81–5 dopamine theory of addiction, 542–3 dopamine transporters (DATs), 31, 80",
+     "effects": [
+      "euphoria"
+     ],
+     "qid": "967416e1"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 636,
+     "line": "psychosis, 92–3 postsynaptic dopamine receptors, 81 posttraumatic stress disorder (PTSD),",
+     "effects": [
+      "psychosis",
+      "antipsychotic"
+     ],
+     "qid": "25e3444f"
     }
    ]
   },

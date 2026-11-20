@@ -1919,6 +1919,18 @@
         },
         {
           "mode": "inhibition",
+          "effect": "delusional_parasitosis",
+          "sources": [
+            {
+              "quote_id": "q_86d5f8288193",
+              "pipeline": "page_llm_judged",
+              "provenance": "verified"
+            }
+          ],
+          "grade": "verified"
+        },
+        {
+          "mode": "inhibition",
           "effect": "euphoria",
           "sources": [
             {
@@ -10970,6 +10982,7 @@
     "respiratory_depression": "Respiratory depression",
     "seizures": "Seizures",
     "psychosis": "Psychosis",
+    "delusional_parasitosis": "Delusional parasitosis (Ekbom syndrome)",
     "cardiovascular": "Raised heart rate / blood pressure",
     "cardiac_valvulopathy": "Cardiac valvulopathy",
     "antiemetic": "Antiemetic effect",
@@ -11837,6 +11850,7 @@
         "16453246": "https://doi.org/10.1055/s-2006-931470",
         "16814817": "https://doi.org/10.1016/j.neuropharm.2006.05.012",
         "1687574": "https://doi.org/10.1254/fpj.98.5_399",
+        "17134847": "https://doi.org/10.1016/j.mehy.2006.07.061",
         "18036835": "https://doi.org/10.1016/j.neuroimage.2007.10.016",
         "18077184": "https://doi.org/10.1016/j.neuroimage.2007.10.053",
         "18383504": "https://doi.org/10.1002/cne.21685",
@@ -11872,6 +11886,7 @@
         "32975316": "https://doi.org/10.1002/cne.25043",
         "3394585": "https://doi.org/10.1007/bf02142579",
         "34204205": "https://doi.org/10.3390/pharmaceutics13060894",
+        "34308528": "https://doi.org/10.1007/s12350-021-02736-1",
         "36653189": "https://doi.org/10.1523/jneurosci.1359-22.2023",
         "36879707": "https://doi.org/10.7759/cureus.34553",
         "37089": "https://doi.org/10.1007/bf00563102",
@@ -12705,8 +12720,8 @@
         "unknown": 0
       },
       "receptor_effect": {
-        "total": 179,
-        "verified": 174,
+        "total": 181,
+        "verified": 176,
         "uncertain": 5,
         "sourced": 0,
         "llm": 0,
@@ -12766,15 +12781,15 @@
       }
     },
     "nodes": {
-      "total": 11011,
-      "verified": 10223,
+      "total": 11013,
+      "verified": 10225,
       "uncertain": 419,
       "sourced": 0,
       "llm": 231,
       "nosource": 138,
       "missing": 369,
       "unknown": 596,
-      "backed": 10642,
+      "backed": 10644,
       "pct_backed": 97
     },
     "ki_coverage": {

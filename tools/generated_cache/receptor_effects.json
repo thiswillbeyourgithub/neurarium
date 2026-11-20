@@ -515,6 +515,15 @@
   ]
  },
  "a2a": {
+  "agonism:seizures": [
+   {
+    "corpus": "europepmc",
+    "evidence": "in_vivo",
+    "page": "34308528",
+    "provenance": "verified",
+    "quote": "Activation of central nervous system A 2A adenosine receptors is thought to be responsible for seizure episodes in patients with or without known histories of seizure."
+   }
+  ],
   "agonism:vasodilation": [
    {
     "corpus": "wikipedia_pharm",
@@ -1338,6 +1347,15 @@
     "page": 501,
     "provenance": "verified",
     "quote": "The DAT inhibitor mazindol, once approved for appetite suppression, is in testing and so is a triple (5HT– NE–DA) reuptake inhibitor centanafadine."
+   }
+  ],
+  "inhibition:delusional_parasitosis": [
+   {
+    "corpus": "europepmc",
+    "evidence": "in_vivo",
+    "page": "17134847",
+    "provenance": "verified",
+    "quote": "The hypothesis of a decreased DAT-functioning as etiologic condition by DP is revealed in case reports which show that DAT-inhibitors, such as cocaine, pemoline, methylphenidate and other amphetamine-derivatives can induce the clinical expression of DP."
    }
   ],
   "inhibition:euphoria": [

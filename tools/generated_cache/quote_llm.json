@@ -913,6 +913,9 @@
 "q_108c355b714f": {
 "drug:alpidem/half_life": "opus"
 },
+"q_10a198ef7c93": {
+"receptor:a2a/effects[agonism:seizures]": "opus"
+},
 "q_10a4a47b75cb": {
 "receptor:5ht1f/effects[agonism:antimigraine]": "opus"
 },
@@ -7180,6 +7183,9 @@
 },
 "q_86bb9b8c7018": {
 "drug:estazolam/brands[ProSom]": "sonnet"
+},
+"q_86d5f8288193": {
+"target:dat/effects[inhibition:delusional_parasitosis]": "opus"
 },
 "q_86e89ea9b771": {
 "drug:mianserin/nbn": "sonnet"
