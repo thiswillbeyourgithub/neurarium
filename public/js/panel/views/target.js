@@ -65,17 +65,17 @@ export function showTarget(P, target) {
   }
   if (facts.childElementCount) body.appendChild(facts);
 
-  // Where it sits (the same "Regional distribution" list as a receptor; empty -> no footprint).
-  appendFoundIn(target, target.locationBases);
-  appendEffects(target.effectInfo, target.effectsUnknown, "target");
-  appendDemographics(target.demographicInfo, "target");
-  appendVariants(target.variantInfo, "target");
-
-  // Drugs that act on this target, grouped by category.
+  // Drugs that act on this target, grouped by category: the first section (same
+  // order as the receptor panel).
   appendInteractingDrugs(target.id, "target");
   // For a receptor_group (α2 / glutamate): drugs binding each modeled subtype
   // (α2A/B/C/D, ...) in a collapsed per-subtype dropdown below the group's own.
   appendSubtypeInteractors(target.subtypes);
+  // Where it sits (the same "Regional distribution" list as a receptor; empty -> no footprint).
+  appendFoundIn(target, target.locationBases);
+  appendVariants(target.variantInfo, "target");
+  appendDemographics(target.demographicInfo, "target");
+  appendEffects(target.effectInfo, target.effectsUnknown, "target");
   // Headed sections start folded, like the drug panel (see foldSections).
   foldBody();
 }

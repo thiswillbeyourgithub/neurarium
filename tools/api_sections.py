@@ -69,11 +69,11 @@ def _expression(regions: str) -> dict[str, Label]:
         "location_uncertainty": Label(None, why="the panel flags each doubted region in its "
                                                 "Regional distribution row"),
         "density": Label("receptor.density", parent=_FOUND),
+        "variants": Label("variant.heading", "variant.headingSub"),
+        "demographics": Label("demog.heading", "demog.headingSub"),
         "effects": Label("effects.heading", "effects.headingSub"),
         "effects_unknown": Label("effects.unknown", parent="effects.heading"),
         "release_modulation": Label("relmod.heading", "relmod.headingSub"),
-        "demographics": Label("demog.heading", "demog.headingSub"),
-        "variants": Label("variant.heading", "variant.headingSub"),
     }
 
 
@@ -302,10 +302,10 @@ ALWAYS: dict[str, dict[str, Section]] = {
     },
     **{kind: {
         regions: Section("receptor.foundIn", none="receptor.noRole"),
+        "variants": Section("variant.heading"),
+        "demographics": Section("demog.heading"),
         "effects": Section("effects.heading"),
         **({"release_modulation": Section("relmod.heading")} if kind == "receptor" else {}),
-        "demographics": Section("demog.heading"),
-        "variants": Section("variant.heading"),
     } for kind, regions in (("receptor", "locations"), ("target", "regions"))},
     "circuit": {"structures": Section("circuit.structures")},
 }

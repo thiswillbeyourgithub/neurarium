@@ -1,5 +1,6 @@
 // The Receptor view: one receptor, its classification claims, expression, effects,
-// release modulation, demographics, variants and the drugs that bind it.
+// release modulation, demographics, variants and the drugs that bind it (panel order:
+// ligands, regional distribution, pharmacogenomics, age and sex, then the BETA sections).
 
 const { t } = window.__I18N__;
 
@@ -62,15 +63,14 @@ export function showReceptor(P, receptor) {
     null, { pill: attrPill("synaptic") });
   body.appendChild(facts);
 
-  // Where it is expressed.
+  // Drugs that act on this receptor, grouped by category: the first section.
+  appendInteractingDrugs(receptor.id, "receptor");
+  // Where it is expressed, then pharmacogenomics, then the BETA sections.
   appendFoundIn(receptor, receptor.locations, "regions"); // guided-tour section anchor
+  appendVariants(receptor.variantInfo, "receptor");
+  appendDemographics(receptor.demographicInfo, "receptor");
   appendEffects(receptor.effectInfo, receptor.effectsUnknown, "receptor");
   appendDownstream(receptor.modulationInfo, "receptor");
-  appendDemographics(receptor.demographicInfo, "receptor");
-  appendVariants(receptor.variantInfo, "receptor");
-
-  // Drugs that act on this receptor, grouped by category.
-  appendInteractingDrugs(receptor.id, "receptor");
   // Headed sections start folded, like the drug panel (see foldSections).
   foldBody();
 }
