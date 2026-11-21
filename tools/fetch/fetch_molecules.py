@@ -82,6 +82,8 @@ FILE_OVERRIDES = {
     "rubidium_chloride": None,
     "calcium_carbimide": None,
     "methylfolate_l": None,
+    # Its only drawing is a PNG; the one SVG on the page is the synthesis scheme.
+    "tropatepine": None,
     # A monoclonal antibody: a protein of ~1300 residues has no skeletal formula
     # to draw, so the molecule slot stays empty rather than borrowing a cartoon.
     "erenumab": None,
@@ -124,6 +126,18 @@ def _is_chrome(name: str) -> bool:
     # rather than listing every token twice.
     low = name.lower().replace("_", " ")
     return any(tok.replace("_", " ") in low for tok in CHROME_SVG)
+
+
+# Filename words of a diagram ABOUT the molecule, never the molecule alone: a synthesis
+# route, a reaction or metabolic scheme. Refused on the lead image and in the fallback
+# scan alike (Tropatepine's page offered "Tropatepine synthesis.svg").
+NOT_A_MOLECULE = ("synthesis", "reaction", "metabolism", "metabolic", "pathway",
+                  "mechanism", "scheme", "biosynth", "degradation", "route")
+
+
+def _is_diagram(name: str) -> bool:
+    low = name.lower().replace("_", " ")
+    return any(tok in low for tok in NOT_A_MOLECULE)
 
 
 def _is_svg_url(url: str) -> bool:
@@ -170,7 +184,7 @@ def resolve_svg(title: str) -> tuple[str, str] | None:
         name = page.get("pageimage") or ""
         src = (page.get("original") or {}).get("source") or ""
         if name.lower().endswith(".svg") and _is_svg_url(src) \
-                and not _is_chrome(name):
+                and not _is_chrome(name) and not _is_diagram(name):
             return (f"File:{name}", src)
 
     # Fallback: list every image on the page and pick a structure-looking SVG.
@@ -184,7 +198,7 @@ def resolve_svg(title: str) -> tuple[str, str] | None:
         for img in page.get("images", []):
             ititle = img.get("title", "")  # e.g. "File:Citalopram racemic.svg"
             fname = ititle.split(":", 1)[-1]
-            if not fname.lower().endswith(".svg") or _is_chrome(fname):
+            if not fname.lower().endswith(".svg") or _is_chrome(fname) or _is_diagram(fname):
                 continue
             candidates.append(ititle)
     if not candidates:
