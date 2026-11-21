@@ -125,7 +125,8 @@
       el.textContent = t(el.getAttribute("data-i18n"));
     });
     scope.querySelectorAll("[data-i18n-html]").forEach(function (el) {
-      el.innerHTML = t(el.getAttribute("data-i18n-html"));
+      // {contact} is the one contact page (panel.contactUrl), so no string repeats it.
+      el.innerHTML = tHtml(el.getAttribute("data-i18n-html"), { contact: t("panel.contactUrl") });
     });
     scope.querySelectorAll("[data-i18n-attr]").forEach(function (el) {
       el.getAttribute("data-i18n-attr").split(",").forEach(function (pair) {

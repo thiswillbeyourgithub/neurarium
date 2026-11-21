@@ -954,7 +954,7 @@ window.__I18N_MESSAGES__.fr = {
   "panel.contactUrl": "https://olicorne.org/fr/contact",
   "loading.cta":
     'Une idée de fonctionnalité ? Je la réaliserais volontiers, ' +
-    '<a href="https://olicorne.org/fr/contact" target="_blank" ' +
+    '<a href="{contact}" target="_blank" ' +
     'rel="noopener noreferrer">prenez contact</a>.',
   "loading.ai":
     'Utilisable par les IA : collez une fois <a href="llms.txt" target="_blank" rel="noopener">ce lien</a> ' +

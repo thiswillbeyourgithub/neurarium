@@ -13,17 +13,24 @@ import re
 from pathlib import Path
 from typing import Any
 
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from lib.i18n_catalogue import catalogue as _catalogue  # noqa: E402
+
 SITE_URL = "https://neurarium.olicorne.org"
 REPO_URL = "https://github.com/thiswillbeyourgithub/neurarium"
 # The author credit opening llms.txt and every /api/ page (render_api.with_byline),
 # matching the viewer's "by Olivier Cornelis" byline (index.html common.byline).
 AUTHOR, AUTHOR_URL = "Olivier Cornelis", "https://olicorne.org/en"
 BYLINE = f"[Neurarium]({SITE_URL}), by [{AUTHOR}]({AUTHOR_URL})."
-CONTACT_URL = "https://olicorne.org/en/contact"
-# The feature-request footer closing every /api/ page, the twin of the viewer's panel
-# footer (public/js/panel/feedback.js, i18n "panel.feedback*"): keep the wording in step.
-FEEDBACK = (f"Have an idea of useful info to add here? I'd happily build it: "
-            f"[open a GitHub issue]({REPO_URL}/issues) or [email me]({CONTACT_URL}).")
+# The contact URL and the feature-request footer closing every /api/ page are the viewer's
+# own panel footer words (public/js/panel/feedback.js, i18n "panel.feedback*" /
+# "panel.contactUrl" in en.js), read from the catalogue so the two never drift.
+_EN = _catalogue("en")
+CONTACT_URL = _EN["panel.contactUrl"]
+FEEDBACK = (f"{_EN['panel.feedback']} [{_EN['panel.feedbackIssue']}]({REPO_URL}/issues) "
+            f"{_EN['panel.feedbackOr']} [{_EN['panel.feedbackEmail']}]({CONTACT_URL}).")
 
 # One line per emitted collection (in claim_walk.COLLECTIONS order): what a record is. A collection missing here raises, so a
 # new one cannot ship undescribed.

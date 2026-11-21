@@ -955,7 +955,7 @@ window.__I18N_MESSAGES__.en = {
   "panel.contactUrl": "https://olicorne.org/en/contact",
   "loading.cta":
     'Have an idea for a feature? I\'d happily build it, ' +
-    '<a href="https://olicorne.org/en/contact" target="_blank" ' +
+    '<a href="{contact}" target="_blank" ' +
     'rel="noopener noreferrer">get in touch</a>.',
   "loading.ai":
     'AI-ready: paste <a href="llms.txt" target="_blank" rel="noopener">this link</a> ' +
