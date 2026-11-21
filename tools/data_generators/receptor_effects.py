@@ -23,6 +23,7 @@ from typing import Any
 from . import caches
 from .provenance import _quote_sources
 from .quotes.uncertainty import _uncertainty_bullet
+from lib.species import is_primate, species_key
 
 CACHE = caches.CACHE_DIR / "receptor_effects.json"
 
@@ -99,6 +100,14 @@ RECEPTOR_EFFECTS: dict[str, dict[str, str]] = {
     "sleep_promotion": {"en": "Sleep promotion", "fr": "Induction du sommeil"},
     "circadian_shift": {"en": "Circadian rhythm shift", "fr": "Recalage du rythme circadien"},
     "wakefulness": {"en": "Wakefulness / alertness", "fr": "Éveil / vigilance"},
+    # Sleep architecture (polysomnography): what a drug acting here does to REM sleep
+    # and to slow-wave (deep, N3) sleep.
+    "rem_suppression": {"en": "Less REM sleep", "fr": "Moins de sommeil paradoxal (REM)"},
+    "rem_increase": {"en": "More REM sleep", "fr": "Plus de sommeil paradoxal (REM)"},
+    "sws_increase": {"en": "More deep (slow-wave) sleep",
+                     "fr": "Plus de sommeil profond (lent)"},
+    "sws_decrease": {"en": "Less deep (slow-wave) sleep",
+                     "fr": "Moins de sommeil profond (lent)"},
     "hypothermia": {"en": "Lowered body temperature", "fr": "Baisse de la température corporelle"},
     "bradycardia": {"en": "Slowed heart rate", "fr": "Ralentissement de la fréquence cardiaque"},
     "bronchodilation": {"en": "Bronchodilation", "fr": "Bronchodilatation"},
@@ -172,6 +181,13 @@ def effect_nodes(owner: str, cache: dict[str, dict[str, list]],
         if all(s.get("evidence") == "isolated_tissue" for s in srcs):
             node["uncertainty"] = [_uncertainty_bullet("isolated_tissue", what=what,
                                                        node=node, source=sources)]
+        # Every source names a non-primate species: the animal_evidence flag (shown as
+        # the orange warning pill), as for bindings (quotes/animal_evidence.py).
+        kinds = [species_key(s.get("species")) for s in srcs]
+        if kinds and all(k and not is_primate(k) for k in kinds):
+            node.setdefault("uncertainty", []).append(_uncertainty_bullet(
+                "animal_evidence", what=what, node=node, source=sources[0],
+                args={"species": sorted(set(kinds))}))
         out.append(node)
     return out
 
@@ -193,6 +209,10 @@ EFFECT_SEARCH_ALIASES: dict[str, tuple[str, ...]] = {
     "orthostatic_hypotension": ("blood pressure", "tension artérielle"),
     "seizures": ("epilepsy", "convulsions", "épilepsie"),
     "gi_spasm": ("cramp", "colic", "stomach", "crampe", "colique", "estomac"),
+    "rem_suppression": ("sleep", "REM", "paradoxical", "sommeil", "paradoxal", "dream"),
+    "rem_increase": ("sleep", "REM", "paradoxical", "sommeil", "paradoxal", "dream"),
+    "sws_increase": ("sleep", "slow wave", "SWS", "N3", "NREM", "sommeil", "lent", "profond"),
+    "sws_decrease": ("sleep", "slow wave", "SWS", "N3", "NREM", "sommeil", "lent", "profond"),
     "antispasmodic": ("cramp", "colic", "spasmolytic", "crampe", "colique", "spasmolytique"),
     "anticonvulsant": ("epilepsy", "convulsions", "épilepsie", "antiepileptic", "antiépileptique"),
 }
@@ -214,6 +234,8 @@ EFFECT_OPPOSITES: tuple[tuple[str, str], ...] = (
     ("itch", "antipruritic"),
     ("constipation", "gi_motility"),
     ("gi_spasm", "antispasmodic"),
+    ("rem_suppression", "rem_increase"),
+    ("sws_increase", "sws_decrease"),
     ("bradycardia", "cardiovascular"),
     ("euphoria", "dysphoria"),
     ("anticholinergic_cognitive", "pro_cognitive"),

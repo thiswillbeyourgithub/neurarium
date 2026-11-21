@@ -52,6 +52,8 @@ from lib.corpora import wikipedia as wikistore  # noqa: E402 (slug_of)
 import fetch_demographics as demog  # noqa: E402 (abstract_lines)
 import fetch_europepmc as epmc  # noqa: E402 (EFFECT_SEARCH_LEDGER)
 import fetch_gtopdb_function as gfunc  # noqa: E402 (RAW, offerable)
+import fetch_papers  # noqa: E402 (PAPERS, corpus #25)
+from lib.corpora import papers  # noqa: E402 (sentences)
 from lib import target_aliases  # noqa: E402
 from data_generators.receptor_effects import RECEPTOR_EFFECTS  # noqa: E402
 from data_generators.unknown import effects_site  # noqa: E402
@@ -109,7 +111,17 @@ EFFECT_KEYWORDS: dict[str, re.Pattern[str]] = {k: re.compile(v, re.I) for k, v i
     "pro_cognitive": r"cognit|memory|learning|attention",
     "sleep_promotion": r"sleep|hypnotic|insomnia",
     "circadian_shift": r"circadian|phase.shift|jet lag|sleep-wake",
-    "wakefulness": r"wakeful|arousal|alertness|narcolep|vigilance|awake",
+    "wakefulness": r"wakeful|arousal|alertness|narcolep|vigilance|awake|(?-i:\bW\b)",
+    # REM / slow-wave sleep: a direction word near the stage, either order ("REMS" and
+    # "SWS" are Monti 2011's abbreviations).
+    "rem_suppression": (r"(?:reduc|suppress|decreas|inhibit|abolish|delay)\w*[^.;]{0,60}"
+                        r"\bREMS?\b|\bREMS?\b[^.;]{0,40}(?:suppress|reduc|decreas)"),
+    "rem_increase": (r"(?:increas|enhanc|promot|facilitat)\w*[^.;]{0,60}\bREMS?\b|"
+                     r"\bREMS?\b[^.;]{0,40}(?:increas|rebound)"),
+    "sws_increase": (r"(?:increas|enhanc|promot)\w*[^.;]{0,60}(?:\bSWS\b|slow[- ]wave sleep|"
+                     r"deep sleep|\bN3\b|NREM)"),
+    "sws_decrease": (r"(?:reduc|decreas|suppress)\w*[^.;]{0,60}(?:\bSWS\b|slow[- ]wave sleep|"
+                     r"deep sleep|\bN3\b|NREM)"),
     "hypothermia": r"hypotherm|body temperature|thermoreg",
     "bradycardia": r"bradycard|heart rate|chronotrop",
     "bronchodilation": r"bronchodilat|bronch|asthma|airway",
@@ -215,6 +227,21 @@ def europepmc_candidates(pmids, rx, hits, key: str) -> list[dict]:
     return out
 
 
+def paper_candidates(rx, hits, key: str) -> list[dict]:
+    """The sentences of every full-text paper (corpus #25, ``fetch_papers.PAPERS``) that
+    name the owner AND hit a cue, each with its PDF page (``pdf_page``, for the picker
+    and the species reading). Appended after every other corpus, so a new paper never
+    shifts an answered index."""
+    out = []
+    for paper in fetch_papers.PAPERS if rx else ():
+        for pdf_page, line in papers.sentences(paper):
+            hit = hits(line) if rx.search(target_aliases.fold(line)) else None
+            if hit:
+                out.append({"corpus": "papers", "page": paper, "pdf_page": pdf_page,
+                            "line": line, key: hit})
+    return out
+
+
 def owner_names(oid: str, aliases: dict[str, list[str]],
                 family: dict[str, list[str]] | None = None) -> list[str]:
     """The names a prose sentence must use for it to be about ``oid``."""
@@ -249,6 +276,7 @@ def candidates(oid: str, owner: dict, stahl: list[tuple[int, str]],
                             key: hit})
     out += gtopdb_candidates(oid, hits, key)
     out += europepmc_candidates(epmc_read, rx, hits, key)
+    out += paper_candidates(rx, hits, key)
     seen: set[tuple] = set()
     return [c for c in out if not ((c["corpus"], c["line"]) in seen
                                    or seen.add((c["corpus"], c["line"])))]

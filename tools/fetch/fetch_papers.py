@@ -30,6 +30,9 @@ import sys
 import tempfile
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from lib.page_file import page_path  # noqa: E402
+
 ROOT = Path(__file__).resolve().parent.parent.parent
 PDF_DIR = ROOT / "data_sources" / "papers" / "pdf"
 PAGES_DIR = ROOT / "data_sources" / "papers" / "pages"
@@ -102,7 +105,7 @@ def main() -> int:
             continue
         fetched = datetime.date.fromtimestamp(pdf.stat().st_mtime).isoformat()
         pages = split_pdf(pdf, bool(meta.get("ocr")))
-        (PAGES_DIR / f"{key}.md").write_text(page_text(key, meta, pages, fetched),
+        page_path(PAGES_DIR, key).write_text(page_text(key, meta, pages, fetched),
                                              encoding="utf-8")
         print(f"[ok] {key}: {len(pages)} page(s)")
     return 0

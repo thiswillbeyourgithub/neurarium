@@ -67,7 +67,8 @@ from lib import cache_io  # noqa: E402
 # The two prose corpora plus GtoPdb's function pages (corpus #23) and the Europe PMC
 # abstracts the owner-level effect search read (corpus #17).
 PROSE_PAGES = {**_PROSE, "gtopdb_function": corpus_page_path("gtopdb_function", 0).parent,
-               "europepmc": corpus_page_path("europepmc", 0).parent}
+               "europepmc": corpus_page_path("europepmc", 0).parent,
+               "papers": corpus_page_path("papers", "x").parent}
 
 WORKLIST = TOOLS / "generated_cache" / "receptor_effects_worklist.json"
 JUDGED = TOOLS / "generated_cache" / "receptor_effects_judged.json"
@@ -107,6 +108,11 @@ def apply(worklist: dict, judged: dict, kinds: dict[str, str],
         return key, None
     def stamp(node, pick, src):  # each landed source carries its pick's evidence reading
         src["evidence"] = node["evidence"][str(pick["index"])]
+        # A non-human statement carries the species its sentence names ("rat"), which
+        # the generator turns into the animal_evidence flag.
+        species = (node.get("species") or {}).get(str(pick["index"]))
+        if species:
+            src["species"] = species
     return apply_picks(worklist, judged, kinds, check, pages, stamp)
 
 

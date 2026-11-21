@@ -102,6 +102,7 @@ CORPUS_DESC = {
     "bdpm":            ("French public drug database (ANSM RCPs)", "Drug Tmax, half-life, French brands"),
     "cpic":            ("Pharmacogenomic prescribing guidelines", "What a clearance speed implies for a drug"),
     "europepmc":       ("Primary literature (Europe PMC abstracts)", "Claims only a study measures (e.g. brain half-life)"),
+    "papers":          ("Full-text reviews (PDFs held by the author)", "Receptor effects on sleep stages (REM, slow-wave sleep)"),
     "drugsfda":        ("US regulator register (Drugs@FDA)", "First US approval, where no other source dates one"),
     "agnp_tdm":        ("Consensus guideline (AGNP TDM, 2026)", "Therapeutic range, alert level, CYP substrate cross-check"),
     "clinpgx":         ("Pharmacogenomic annotations (ClinPGx)", "Receptor & target gene variant associations"),
