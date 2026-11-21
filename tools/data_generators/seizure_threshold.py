@@ -32,6 +32,7 @@ import re
 from typing import Any, Callable
 
 from . import caches
+from .drug_effects import DrugEffectKind
 
 CACHE = caches.CACHE_DIR / "seizure_threshold.json"
 
@@ -65,11 +66,9 @@ EFFECTS: dict[str, dict[str, Any]] = {
 }
 
 
-def says(effect: str, *texts: str | None) -> bool:
-    """Whether one of ``texts`` matches every pattern ``effect`` requires."""
-    pats = (EFFECTS.get(effect) or {}).get("requires") or ()
-    return bool(pats) and any(
-        t and all(re.search(p, t, re.IGNORECASE) for p in pats) for t in texts)
+KIND = DrugEffectKind("drug_seizure_threshold", "seizure_threshold", "seizure threshold",
+                      CACHE, EFFECTS, exclusive=(("lowers", "possibly_lowers"),))
+says, meta_labels = KIND.says, KIND.meta_labels
 
 
 def about_seizures(text: str) -> bool:
@@ -77,34 +76,7 @@ def about_seizures(text: str) -> bool:
     return bool(re.search(SEIZURE, text or "", re.IGNORECASE))
 
 
-def meta_labels() -> dict[str, dict[str, str]]:
-    """The ``seizure_threshold_effects`` meta map: effect -> ``{en, fr}``."""
-    return {k: {"en": v["en"], "fr": v["fr"]} for k, v in EFFECTS.items()}
-
-
-_DATA = caches.load(CACHE.name, required=False)
-
-
 def drug_seizure_threshold(drug_id: str, quote_sources: Callable, data: dict | None = None
                            ) -> dict[str, Any]:
-    """The emitted ``seizure_threshold`` field of one drug: ``[{effect, sources}]`` in
-    vocabulary order, or ``{}``. ``quote_sources`` is ``provenance._quote_sources``.
-    Validates against the vocabulary so a hand edit of the cache fails the build."""
-    rows = ((data if data is not None else _DATA).get("drugs") or {}).get(drug_id) or []
-    out, seen = [], set()
-    for r in rows:
-        effect = r.get("effect")
-        what = f"Drug {drug_id!r} seizure threshold {effect!r}"
-        if effect not in EFFECTS:
-            raise KeyError(f"{what}: not in seizure_threshold.EFFECTS")
-        if effect in seen:
-            raise ValueError(f"{what}: duplicate effect node")
-        seen.add(effect)
-        if not r.get("sources"):
-            raise ValueError(f"{what}: no source")
-        out.append({"effect": effect, "sources": quote_sources(r["sources"], what)})
-    if {"lowers", "possibly_lowers"} <= seen:
-        raise ValueError(f"Drug {drug_id!r}: both lowers and possibly_lowers (keep the stronger)")
-    order = {k: i for i, k in enumerate(EFFECTS)}
-    out.sort(key=lambda r: order[r["effect"]])
-    return {"seizure_threshold": out} if out else {}
+    """The emitted ``seizure_threshold`` field of one drug (see ``DrugEffectKind``)."""
+    return KIND.drug_nodes(drug_id, quote_sources, data)
