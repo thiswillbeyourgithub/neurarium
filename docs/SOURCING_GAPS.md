@@ -23,7 +23,7 @@ Every node is graded (see `docs/PROVENANCE.md`); a bare `llm` grade and NOSOURCE
 | `projections` | 116 | 78 | 37 | 0 | 0 | 1 | 0 |
 | `references` | 461 | 0 | 0 | 461 | 0 | 0 | 0 |
 | `drug_metabolite_bindings` | 205 | 191 | 14 | 0 | 0 | 0 | 0 |
-| `receptor_effect` | 181 | 176 | 5 | 0 | 0 | 0 | 11 |
+| `receptor_effect` | 184 | 178 | 6 | 0 | 0 | 0 | 11 |
 | `drug_enzymes` | 575 | 572 | 3 | 0 | 0 | 0 | 0 |
 | `drug_metabolites` | 73 | 71 | 2 | 0 | 0 | 0 | 0 |
 

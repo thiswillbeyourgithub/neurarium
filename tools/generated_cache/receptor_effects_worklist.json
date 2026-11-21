@@ -615,7 +615,8 @@
      "page": 22,
      "line": "α1A-adrenoceptor (ADRA1A), GtoPdb target 22 | physiological function (Human): Contraction of right gastroepiploic artery. | tissue: Artery.",
      "effects": [
-      "vasoconstriction"
+      "vasoconstriction",
+      "gi_spasm"
      ],
      "species": "Human",
      "qid": "e892595e"
@@ -2005,6 +2006,15 @@
     {
      "corpus": "wikipedia_pharm",
      "page": "alpha_2_adrenergic_receptor",
+     "line": "Other nonselective agonists include dexmedetomidine , lofexidine (another antihypertensive), TDIQ (partial agonist), tizanidine (in spasms , cramping ) and xylazine .",
+     "effects": [
+      "gi_spasm"
+     ],
+     "qid": "57aab0c6"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "alpha_2_adrenergic_receptor",
      "line": "It is indicated for sedation in the ICU for patients needing mechanical ventilation.",
      "effects": [
       "sedation"
@@ -2135,6 +2145,15 @@
     {
      "corpus": "wikipedia_pharm",
      "page": "alpha_2_adrenergic_receptor",
+     "line": "Other nonselective agonists include dexmedetomidine , lofexidine (another antihypertensive), TDIQ (partial agonist), tizanidine (in spasms , cramping ) and xylazine .",
+     "effects": [
+      "gi_spasm"
+     ],
+     "qid": "57aab0c6"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "alpha_2_adrenergic_receptor",
      "line": "It is indicated for sedation in the ICU for patients needing mechanical ventilation.",
      "effects": [
       "sedation"
@@ -2239,6 +2258,15 @@
       "cardiovascular"
      ],
      "qid": "5525a8d0"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "alpha_2_adrenergic_receptor",
+     "line": "Other nonselective agonists include dexmedetomidine , lofexidine (another antihypertensive), TDIQ (partial agonist), tizanidine (in spasms , cramping ) and xylazine .",
+     "effects": [
+      "gi_spasm"
+     ],
+     "qid": "57aab0c6"
     },
     {
      "corpus": "wikipedia_pharm",
@@ -2359,6 +2387,15 @@
       "cardiovascular"
      ],
      "qid": "5525a8d0"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "alpha_2_adrenergic_receptor",
+     "line": "Other nonselective agonists include dexmedetomidine , lofexidine (another antihypertensive), TDIQ (partial agonist), tizanidine (in spasms , cramping ) and xylazine .",
+     "effects": [
+      "gi_spasm"
+     ],
+     "qid": "57aab0c6"
     },
     {
      "corpus": "wikipedia_pharm",
@@ -3055,6 +3092,15 @@
      ],
      "species": "Human",
      "qid": "4c1b3f40"
+    },
+    {
+     "corpus": "europepmc",
+     "page": "42090293",
+     "line": "Pharmacologically, hyoscine butylbromide reduces acetylcholine-induced contractions by blocking M2/M3 receptors, whereas neostigmine enhances cholinergic transmission to restore motility.",
+     "effects": [
+      "antispasmodic"
+     ],
+     "qid": "ee666dd4"
     }
    ]
   },
@@ -3121,6 +3167,34 @@
       "antipsychotic"
      ],
      "qid": "9543c29a"
+    },
+    {
+     "corpus": "gtopdb_function",
+     "page": 15,
+     "line": "M3 receptor (CHRM3), GtoPdb target 15 | physiological function (Human): Contraction. | tissue: Esophageal smooth muscle.",
+     "effects": [
+      "gi_spasm"
+     ],
+     "species": "Human",
+     "qid": "bdd014df"
+    },
+    {
+     "corpus": "europepmc",
+     "page": "42090293",
+     "line": "Pharmacologically, hyoscine butylbromide reduces acetylcholine-induced contractions by blocking M2/M3 receptors, whereas neostigmine enhances cholinergic transmission to restore motility.",
+     "effects": [
+      "antispasmodic"
+     ],
+     "qid": "ee666dd4"
+    },
+    {
+     "corpus": "europepmc",
+     "page": "38570081",
+     "line": "Conclusions This study demonstrates that HBB inhibits neural cholinergic contractions associated to muscarinic (mainly M3) receptors.",
+     "effects": [
+      "antispasmodic"
+     ],
+     "qid": "4dfaeb39"
     }
    ]
   },
@@ -6480,6 +6554,15 @@
       "cardiovascular"
      ],
      "qid": "ca3d8096"
+    },
+    {
+     "corpus": "gtopdb_function",
+     "page": 218,
+     "line": "D5 receptor (DRD5), GtoPdb target 218 | pathophysiology: Benign essential blepharospasm | comments: DRD5 repeat polymorphism associated with blepharospasm.",
+     "effects": [
+      "gi_spasm"
+     ],
+     "qid": "746f6b0b"
     },
     {
      "corpus": "gtopdb_function",
@@ -13965,6 +14048,7 @@
       "prolactin_elevation",
       "pro_cognitive",
       "sleep_promotion",
+      "gi_spasm",
       "muscle_weakness"
      ],
      "qid": "d85824de"
@@ -14169,7 +14253,8 @@
      "page": "5_ht2a_receptor",
      "line": "As the receptor is present in coronary arteries and capable of mediating vasoconstriction, 5-HT 2A has also been linked to coronary artery spasms.",
      "effects": [
-      "vasoconstriction"
+      "vasoconstriction",
+      "gi_spasm"
      ],
      "qid": "419f3aff"
     },
@@ -19573,6 +19658,15 @@
       "cardiovascular"
      ],
      "qid": "5525a8d0"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "alpha_2_adrenergic_receptor",
+     "line": "Other nonselective agonists include dexmedetomidine , lofexidine (another antihypertensive), TDIQ (partial agonist), tizanidine (in spasms , cramping ) and xylazine .",
+     "effects": [
+      "gi_spasm"
+     ],
+     "qid": "57aab0c6"
     },
     {
      "corpus": "wikipedia_pharm",

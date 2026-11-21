@@ -4498,6 +4498,10 @@
 "q_51355241a6ad": {
 "drug:dextromethorphanquinidine/bindings[sigma1:agonist]": "sonnet"
 },
+"q_5135b9d961ff": {
+"receptor:m2/effects[antagonism:antispasmodic]": "opus",
+"receptor:m3/effects[antagonism:antispasmodic]": "opus"
+},
 "q_51456d1c3bde": {
 "drug:isoflurane/half_life": "sonnet"
 },
@@ -6028,6 +6032,9 @@
 "q_6e41473ad08a": {
 "receptor:5ht1f/locations[frontal]": "sonnet",
 "receptor:5ht1f/locations[thalamus]": "sonnet"
+},
+"q_6e6881dfc3df": {
+"receptor:m3/effects[antagonism:antispasmodic]": "opus"
 },
 "q_6e69c87ff53d": {
 "drug:flupenthixol/formulations[depot]/release": "opus"
@@ -10700,6 +10707,9 @@
 },
 "q_c1e732ae458d": {
 "drug:flunitrazepam/first_approval": "opus"
+},
+"q_c1f90e6415b3": {
+"receptor:m3/effects[agonism:gi_spasm]": "opus"
 },
 "q_c1fbd3080b11": {
 "drug:desipramine/bindings[sigma1:agonist]": "opus"

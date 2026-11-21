@@ -1985,6 +1985,15 @@
     "quote": "The M 2 muscarinic receptors are located in the heart, where they act to slow the heart rate down to normal sinus rhythm after negative stimulatory actions of the parasympathetic nervous system , by slowing the speed of depolarization ."
    }
   ],
+  "antagonism:antispasmodic": [
+   {
+    "corpus": "europepmc",
+    "evidence": "in_vivo",
+    "page": "42090293",
+    "provenance": "verified",
+    "quote": "Pharmacologically, hyoscine butylbromide reduces acetylcholine-induced contractions by blocking M2/M3 receptors, whereas neostigmine enhances cholinergic transmission to restore motility."
+   }
+  ],
   "antagonism:blurred_vision": [
    {
     "corpus": "stahl_essential",
@@ -2032,6 +2041,16 @@
     "quote": "Because the M 3 receptor is G q -coupled and mediates an increase in intracellular calcium , it typically causes constriction of smooth muscle, such as that observed during bronchoconstriction ."
    }
   ],
+  "agonism:gi_spasm": [
+   {
+    "corpus": "gtopdb_function",
+    "evidence": "isolated_tissue",
+    "page": 15,
+    "provenance": "verified",
+    "quote": "M3 receptor (CHRM3), GtoPdb target 15 | physiological function (Human): Contraction. | tissue: Esophageal smooth muscle.",
+    "species": "Human"
+   }
+  ],
   "agonism:nausea": [
    {
     "corpus": "wikipedia_pharm",
@@ -2048,6 +2067,22 @@
     "page": "muscarinic_acetylcholine_receptor_m3",
     "provenance": "verified",
     "quote": "However, with respect to vasculature, activation of M 3 on vascular endothelial cells causes increased synthesis of nitric oxide , which diffuses to adjacent vascular smooth muscle cells and causes their relaxation and vasodilation , thereby explaining the paradoxical effect of parasympathomimetics on vascular tone and bronchiolar tone."
+   }
+  ],
+  "antagonism:antispasmodic": [
+   {
+    "corpus": "europepmc",
+    "evidence": "in_vivo",
+    "page": "42090293",
+    "provenance": "verified",
+    "quote": "Pharmacologically, hyoscine butylbromide reduces acetylcholine-induced contractions by blocking M2/M3 receptors, whereas neostigmine enhances cholinergic transmission to restore motility."
+   },
+   {
+    "corpus": "europepmc",
+    "evidence": "isolated_tissue",
+    "page": "38570081",
+    "provenance": "verified",
+    "quote": "Conclusions This study demonstrates that HBB inhibits neural cholinergic contractions associated to muscarinic (mainly M3) receptors."
    }
   ]
  },

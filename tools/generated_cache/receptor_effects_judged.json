@@ -1024,13 +1024,13 @@
       "qid": "f70ef2f1"
      },
      {
-      "index": 20,
+      "index": 21,
       "qid": "31dcd739"
      }
     ],
     "evidence": {
      "10": "in_vivo",
-     "20": "in_vivo"
+     "21": "in_vivo"
     }
    },
    {
@@ -1042,13 +1042,13 @@
       "qid": "f70ef2f1"
      },
      {
-      "index": 20,
+      "index": 21,
       "qid": "31dcd739"
      }
     ],
     "evidence": {
      "10": "in_vivo",
-     "20": "in_vivo"
+     "21": "in_vivo"
     }
    },
    {
@@ -1069,12 +1069,12 @@
     "mode": "agonism",
     "picks": [
      {
-      "index": 19,
+      "index": 20,
       "qid": "b09a2036"
      }
     ],
     "evidence": {
-     "19": "in_vivo"
+     "20": "in_vivo"
     }
    }
   ],
@@ -1143,12 +1143,12 @@
     "mode": "agonism",
     "picks": [
      {
-      "index": 11,
+      "index": 12,
       "qid": "7939f812"
      }
     ],
     "evidence": {
-     "11": "in_vivo"
+     "12": "in_vivo"
     }
    }
   ],
@@ -2360,6 +2360,19 @@
     "evidence": {
      "2": "in_vivo"
     }
+   },
+   {
+    "effect": "antispasmodic",
+    "mode": "antagonism",
+    "picks": [
+     {
+      "index": 9,
+      "qid": "ee666dd4"
+     }
+    ],
+    "evidence": {
+     "9": "in_vivo"
+    }
    }
   ],
   "m3": [
@@ -2400,6 +2413,37 @@
     ],
     "evidence": {
      "2": "in_vivo"
+    }
+   },
+   {
+    "effect": "gi_spasm",
+    "mode": "agonism",
+    "picks": [
+     {
+      "index": 6,
+      "qid": "bdd014df"
+     }
+    ],
+    "evidence": {
+     "6": "isolated_tissue"
+    }
+   },
+   {
+    "effect": "antispasmodic",
+    "mode": "antagonism",
+    "picks": [
+     {
+      "index": 7,
+      "qid": "ee666dd4"
+     },
+     {
+      "index": 8,
+      "qid": "4dfaeb39"
+     }
+    ],
+    "evidence": {
+     "7": "in_vivo",
+     "8": "isolated_tissue"
     }
    }
   ],
