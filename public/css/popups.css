@@ -186,9 +186,9 @@ a.changelog-commit { color: var(--accent-bright); text-decoration: underline; }
    "how fast this person clears it" -> "how common that is here" -> "what CPIC
    says follows" -> "how strongly". The phenotype reuses the variability ramp
    above as a swatch, so the same colour means the same speed in both panels. */
-.pgx-pick { margin: 2px 0 10px; font-size: 11px;
+.pgx-pick, .metab-pick { display: block; margin: 2px 0 10px; font-size: 11px;
   color: rgba(var(--ink), 0.8); }
-.pgx-pick select { font: inherit; color: var(--text);
+.pgx-pick select, .metab-pick select { font: inherit; color: var(--text);
   background: rgba(var(--ink), 0.06); border: 1px solid rgba(var(--ink), 0.18);
   border-radius: 3px; padding: 2px 4px; margin-left: 4px; max-width: 60%; }
 .pgx-level { margin-left: 6px; font-weight: 400; font-size: 10px;

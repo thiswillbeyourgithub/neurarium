@@ -10,8 +10,35 @@ import { pkInteractionsSection } from "../pk-interactions.js";
 import { activeMetabolitesSubsection } from "../active-metabolites.js";
 import { variantsForDrug } from "../../receptor-variants.js";
 import { toneWeightOf } from "../../data.js";
+import { loadFlag, saveFlag } from "../../prefs.js";
 
 const { t } = window.__I18N__;
+
+/** Whether the binding profile lists the active metabolites' own bindings too. */
+const METABOLITE_BINDINGS_KEY = "neurarium.panelMetaboliteBindings";
+
+/**
+ * The binding profile's "Include / Exclude metabolites" picker.
+ * @param {boolean} on  metabolites currently included
+ * @param {(on: boolean) => void} onChange
+ * @returns {HTMLElement}
+ */
+function metabolitePicker(on, onChange) {
+  const label = document.createElement("label");
+  label.className = "metab-pick";
+  label.append(`${t("drug.metabBindings")} `);
+  const select = document.createElement("select");
+  for (const [value, key] of [["in", "drug.metabInclude"], ["out", "drug.metabExclude"]]) {
+    const opt = document.createElement("option");
+    opt.value = value;
+    opt.textContent = t(key);
+    opt.selected = (value === "in") === on;
+    select.appendChild(opt);
+  }
+  select.addEventListener("change", () => onChange(select.value === "in"));
+  label.appendChild(select);
+  return label;
+}
 
 
 export function showDrug(P, drug, opts = {}) {
@@ -380,22 +407,35 @@ export function showDrug(P, drug, opts = {}) {
     p.appendChild(nodePill(drug.prodrug));
     acts.appendChild(p);
   }
-  // The active metabolites' own bindings are rows of this list too (allBindings, empty
-  // extra for a prodrug, which took them as its own): when one contributes, the shared
-  // "several compounds" box, and each row names its compound, like the tone terms.
-  const mix = metaboliteContributors(drug, drug.allBindings);
-  if (mix) acts.appendChild(derivedActiveMetabolites(drug, body, mix));
-  if (!drug.allBindings.length) {
-    // Only a prodrug reaches here empty (its own claim above): the shared line under it.
-    acts.appendChild(el("p", "panel-sec-none", noDataText(t("drug.actsOn"), "drug")));
-  } else {
+  // The active metabolites' own bindings are rows of this list too (metaboliteBindings,
+  // empty for a prodrug, which took them as its own), so a target both compounds bind
+  // shows once per compound. A picker on top hides them (a lasting choice, js/prefs.js);
+  // included, the shared "several compounds" box, and each row names its compound.
+  const lent = drug.metaboliteBindings.length > 0;
+  let withMetabolites = lent ? loadFlag(METABOLITE_BINDINGS_KEY, true) : false;
+  if (lent) acts.appendChild(metabolitePicker(withMetabolites, (on) => {
+    withMetabolites = on;
+    saveFlag(METABOLITE_BINDINGS_KEY, on);
+    paintBindings();
+  }));
+  const listHost = acts.appendChild(el("div", "bind-list"));
+  const paintBindings = () => {
+    listHost.replaceChildren();
+    const shown = withMetabolites ? drug.allBindings : drug.bindings;
+    const mix = metaboliteContributors(drug, shown);
+    if (mix) listHost.appendChild(derivedActiveMetabolites(drug, body, mix));
+    if (!shown.length) {
+      // Only a prodrug reaches here empty (its own claim above): the shared line under it.
+      listHost.appendChild(el("p", "panel-sec-none", noDataText(t("drug.actsOn"), "drug")));
+      return;
+    }
     const ul = el("ul");
     // Parent rows first, then each metabolite's, the order the tone terms use; within
     // each, strongest affinity first (representative Ki ascending, no measured Ki
     // last). Sorted copies, so the authored arrays stay untouched; a stable sort
     // keeps the authored order within each tier.
     const byKi = (list) => [...list].sort((a, b) => bindingKi(a) - bindingKi(b));
-    for (const b of [...byKi(drug.bindings), ...byKi(drug.metaboliteBindings)]) {
+    for (const b of [...byKi(drug.bindings), ...(withMetabolites ? byKi(drug.metaboliteBindings) : [])]) {
       // If this binding's target is browsable on its own (in the merged
       // "Receptors & targets" list and focusable), make the row jump to it.
       const tgt = targetById.get(b.target);
@@ -406,15 +446,16 @@ export function showDrug(P, drug, opts = {}) {
       if (!b.fromMetabolite) row.dataset.tourId = `ixtarget:${b.target}`;
       ul.appendChild(row);
     }
-    acts.appendChild(ul);
-  }
-  if (drug.prodrug || drug.allBindings.length) body.appendChild(acts);
+    listHost.appendChild(ul);
+  };
+  paintBindings();
 
   // No standalone drug-level "Source(s)" block: the Stahl citation that backs
   // the drug is shown per-binding (each binding's pill above), so a source
   // always refers to a specific binding node rather than "the whole drug".
 
-  // Pharmacodynamics: net neurotransmission (estimate): the ascending systems this drug's flow
+  // Net neurotransmission (estimate), the binding profile's last subsection, since it
+  // is read off the bindings above: the ascending systems this drug's flow
   // overlay lights (drug.flowKinds, from meta.system_flow_kinds). A *derived*
   // inference from the drug's *tone-setter* bindings only (a reuptake/enzyme/
   // vesicle target or a presynaptic autoreceptor, see js/data.js toneBySystem):
@@ -429,9 +470,7 @@ export function showDrug(P, drug, opts = {}) {
   const flowKinds = drug.flowKinds || [];
   const contextKinds = drug.contextKinds || [];
   if ((flowKinds.length || contextKinds.length) && groupsByKey) {
-    const proj = el("div", "info-connections info-tone");
-    proj.dataset.icon = "tone";
-    proj.appendChild(heading("h3", t("drug.tone"), t("drug.toneSub")));
+    const proj = subSection(t("drug.tone"), "info-connections info-tone", t("drug.toneSub"));
     const warn = derivedBox("caution", t("drug.toneWarnTitle"));
     warn.appendChild(el("p", "addon-text", t("drug.toneWarn")));
     proj.appendChild(warn);
@@ -502,15 +541,16 @@ export function showDrug(P, drug, opts = {}) {
       ul.appendChild(el("li", "tone-terms", t("drug.toneNoneWhy")));
     }
     proj.appendChild(ul);
-    body.appendChild(proj);
-  } else {
-    body.appendChild(emptySection(heading("h3", t("drug.tone"), t("drug.toneSub")), "drug",
+    acts.appendChild(proj);
+  } else if (drug.prodrug || drug.allBindings.length) {
+    acts.appendChild(emptySection(heading("h4", t("drug.tone"), t("drug.toneSub")), "drug",
       other((d) => (d.flowKinds || []).length || (d.contextKinds || []).length,
-        { cls: "info-connections info-tone", icon: "tone" })));
+        { cls: "info-connections info-tone" })));
   }
+  if (drug.prodrug || drug.allBindings.length) body.appendChild(acts);
 
   // Metabolism: pharmacokinetics has no anatomy, so it sits AFTER the sections that
-  // do (the two Pharmacodynamics ones); only Pharmacogenomics and the BETA sections
+  // do (Pharmacodynamics); only Pharmacogenomics and the BETA sections
   // follow it. Its active metabolites first (what the drug turns into), then the
   // enzymes that clear it or whose activity it changes, and the drug -> drug
   // interactions those roles imply.

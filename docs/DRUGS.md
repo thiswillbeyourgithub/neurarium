@@ -66,7 +66,7 @@ fixed Stahl list.
   antipsychotic reads dopaminergic-**up** (blocking the D2 *autoreceptor* disinhibits release); its
   postsynaptic blockade shows in the block-coloured dots. (This is why the dataset carries the ascending
   monoamine pathways.)
-- **Panel** (`showDrug`): every `h3`-headed section (Identification: class, NbN, history, brands; Pharmacokinetics with its CNS penetration subsection; Pharmacodynamics: binding profile; Pharmacodynamics: net neurotransmission; Metabolism, whose `h4` subsections (`panel/dom.js` `subSection`) are Active metabolites (`panel/active-metabolites.js`), Metabolic pathways and Pharmacokinetic interactions (`panel/pk-interactions.js`); Pharmacogenomics, whose `h4` subsections are Pharmacogenomic dosing (CPIC) and the BETA Pharmacogenomic associations (ClinPGx), omitted when the drug has neither; then the BETA sections, last: Predicted effects (target-based), Presynaptic modulation, Monitoring (French SmPC)); every heading carries a plain-language subtitle (`panel/dom.js` `withSubtitle`, i18n `<key>Sub`) that stays visible while folded) starts folded, like every detail panel (see
+- **Panel** (`showDrug`): every `h3`-headed section (Identification: class, NbN, history, brands; Pharmacokinetics with its CNS penetration subsection; Pharmacodynamics: binding profile, whose last `h4` subsection is Net neurotransmission; Metabolism, whose `h4` subsections (`panel/dom.js` `subSection`) are Active metabolites (`panel/active-metabolites.js`), Metabolic pathways and Pharmacokinetic interactions (`panel/pk-interactions.js`); Pharmacogenomics, whose `h4` subsections are Pharmacogenomic dosing (CPIC) and the BETA Pharmacogenomic associations (ClinPGx), omitted when the drug has neither; then the BETA sections, last: Predicted effects (target-based), Presynaptic modulation, Monitoring (French SmPC)); every heading carries a plain-language subtitle (`panel/dom.js` `withSubtitle`, i18n `<key>Sub`) that stays visible while folded) starts folded, like every detail panel (see
   `docs/VIEWER.md` "Folded panel sections"). A name shown beside the INN (`DRUG_NAME_QUALIFIERS`, display-only + searchable:
   "Paliperidone (9-OH-risperidone)") becomes `drug.label`; a metabolite that is a modeled drug shows under that
   label as a plain `drugNameLink` (the Drugs-list row look), and that drug's own panel opens with "Active
@@ -76,7 +76,7 @@ fixed Stahl list.
   list (each row: an effect glyph + target + action·note, "· speculative" when tentative, plus a
   `bindingProvenancePill` = the binding's quote source, else its Ki (verified), else `NOSOURCE`, or the
   orange ⚠ when it carries `uncertainty[]`, see Source provenance),
-  sorted strongest-affinity first. Below it a **Pharmacodynamics: net neurotransmission (estimate)** section (only when `flowKinds` or
+  sorted strongest-affinity first; a drug with active metabolites gets an "Include / Exclude metabolites" picker on top (`metabolitePicker`, persisted as `neurarium.panelMetaboliteBindings`), since a target both compounds bind otherwise shows once per compound. The section ends with a **Net neurotransmission (estimate)** subsection (only when `flowKinds` or
   `contextKinds` is non-empty), opening with a derived "indicative only" caution box and the formula caption: one row per
   ascending system whose tone the drug sets (jumps to that kind-mode group), an up/down arrow and the
   signed raw sum `flowSystems[kind].sum`, then one line per contributing binding (`toneBySystem` terms in
@@ -398,7 +398,7 @@ nothing draws.
   that carries the ethics of the section: these are frequencies across study cohorts, most groups
   contain every speed, and only a genetic test says which one a person has. `showDrug` gains a **Metabolism** list (caption, ClinPGx pathway-search link, the section caveats, then one `h4.enz-role` heading per role, "Substrate of" / "Inhibits" / ..., from `ENZYME_ROLES` `heading`, over single-line enzyme rows: enzyme, its role pill, then strength + its strength pill, clickable to the enzyme) ending in a **Pharmacokinetic interactions**
   subsection, **after** the anatomy sections
-  (pharmacokinetics lights nothing in the scene, so it does not interrupt Pharmacodynamics: binding profile -> Pharmacodynamics: net neurotransmission);
+  (pharmacokinetics lights nothing in the scene, so it does not interrupt Pharmacodynamics);
   each **Active metabolites** row gains a `.metab-formed` "formed by
   <enzyme>" line with its own pill. An **Enzymes** accordion section
   (`buildEnzymeLegend`) opens `showEnzyme`: a ClinPGx search (the variant / poor-vs-ultra-rapid
