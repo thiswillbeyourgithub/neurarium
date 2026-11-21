@@ -82,6 +82,40 @@
     "quote": "5-HT 1A activation is known to improve cognitive functions associated with the prefrontal cortex, possibly via inducing prefrontal cortex dopamine and acetylcholine release."
    }
   ],
+  "agonism:rem_suppression": [
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "watson2010",
+    "provenance": "verified",
+    "quote": "Administration of a 5HT1A 80, 82, a 5HT1B 81, or a 5HT2A/2C 83 receptor agonist decreased REM sleep in rodent and human."
+   },
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "monti2011",
+    "provenance": "verified",
+    "quote": "Thus, buspirone administration increased W, prolonged REMS latency, and reduced REMS time in insomniac patients,80,81 whereas ipsapirone prolonged REMS latency and reduced REMS and SWS in healthy subjects.82 The reduction of REMS could be related to the azapirones acting on postsynaptic 5-HT1A receptors in the LDT/PPT nuclei to inhibit REM-on neurons."
+   },
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "monti2011",
+    "provenance": "verified",
+    "quote": "Systemic injection of flesinoxan increases W and reduces SWS and REMS in the rat.74 Similar effects have been observed following the administration of 8-OH-DPAT to vehicle-treated and serotonindepleted animals.75e77 Pretreatment with the mixed b-adrenoceptor and 5-HT1A/1B receptor antagonist (�)pindolol or p-MPPI reversed the effect of 8-OH-DPAT on W and SWS.72,75",
+    "species": "rat"
+   }
+  ],
+  "agonism:sws_decrease": [
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "monti2011",
+    "provenance": "verified",
+    "quote": "Systemic injection of flesinoxan increases W and reduces SWS and REMS in the rat.74 Similar effects have been observed following the administration of 8-OH-DPAT to vehicle-treated and serotonindepleted animals.75e77 Pretreatment with the mixed b-adrenoceptor and 5-HT1A/1B receptor antagonist (�)pindolol or p-MPPI reversed the effect of 8-OH-DPAT on W and SWS.72,75",
+    "species": "rat"
+   }
+  ],
   "agonism:vasodilation": [
    {
     "corpus": "wikipedia_pharm",
@@ -90,9 +124,46 @@
     "provenance": "verified",
     "quote": "Vasodilation of the blood vessels in the skin via central 5-HT 1A activation increases heat dissipation from the organism out into the environment, causing a decrease in body temperature ."
    }
+  ],
+  "agonism:wakefulness": [
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "monti2011",
+    "provenance": "verified",
+    "quote": "Systemic injection of flesinoxan increases W and reduces SWS and REMS in the rat.74 Similar effects have been observed following the administration of 8-OH-DPAT to vehicle-treated and serotonindepleted animals.75e77 Pretreatment with the mixed b-adrenoceptor and 5-HT1A/1B receptor antagonist (�)pindolol or p-MPPI reversed the effect of 8-OH-DPAT on W and SWS.72,75",
+    "species": "rat"
+   }
   ]
  },
  "5ht1b": {
+  "agonism:rem_suppression": [
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "watson2010",
+    "provenance": "verified",
+    "quote": "Administration of a 5HT1A 80, 82, a 5HT1B 81, or a 5HT2A/2C 83 receptor agonist decreased REM sleep in rodent and human."
+   },
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "monti2011",
+    "provenance": "verified",
+    "quote": "Systemic administration of the selective 5-HT1B receptor agonists CGS 12066B and CP-94253 significantly increased W and reduced SWS and REMS in the rat.90,91 Pindolol antagonized the increase of W and reduction of SWS induced by CP-94253; however, REMS remained suppressed.",
+    "species": "rat"
+   }
+  ],
+  "agonism:sws_decrease": [
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "monti2011",
+    "provenance": "verified",
+    "quote": "Systemic administration of the selective 5-HT1B receptor agonists CGS 12066B and CP-94253 significantly increased W and reduced SWS and REMS in the rat.90,91 Pindolol antagonized the increase of W and reduction of SWS induced by CP-94253; however, REMS remained suppressed.",
+    "species": "rat"
+   }
+  ],
   "agonism:vasoconstriction": [
    {
     "corpus": "wikipedia_pharm",
@@ -108,6 +179,16 @@
     "provenance": "verified",
     "quote": "5-HT1B receptor (HTR1B), GtoPdb target 2 | physiological function (Human): Vasoconstriction. | tissue: Coronary artery.",
     "species": "Human"
+   }
+  ],
+  "agonism:wakefulness": [
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "monti2011",
+    "provenance": "verified",
+    "quote": "Systemic administration of the selective 5-HT1B receptor agonists CGS 12066B and CP-94253 significantly increased W and reduced SWS and REMS in the rat.90,91 Pindolol antagonized the increase of W and reduction of SWS induced by CP-94253; however, REMS remained suppressed.",
+    "species": "rat"
    }
   ],
   "antagonism:antidepressant": [
@@ -239,6 +320,23 @@
     "quote": "These symptoms can be blocked by 5HT2A antagonists, demonstrating that hallucinogens cause psychosis by 5HT2A stimulation."
    }
   ],
+  "agonism:rem_suppression": [
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "watson2010",
+    "provenance": "verified",
+    "quote": "Administration of a 5HT1A 80, 82, a 5HT1B 81, or a 5HT2A/2C 83 receptor agonist decreased REM sleep in rodent and human."
+   },
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "monti2011",
+    "provenance": "verified",
+    "quote": "Systemic administration of the non-selective 5-HT2 receptor agonists DOI and DOM has been shown to reduce SWS and REMS, and to augment W in the rat.95,99 Injection of the 5-HT2A/2C receptor antagonists ritanserin, ketanserin, ICI-170,809 or sertindole at the beginning of the light period induced a significant increase of SWS and a reduction of REMS in the rat.",
+    "species": "rat"
+   }
+  ],
   "agonism:sexual_dysfunction": [
    {
     "corpus": "stahl_essential",
@@ -253,6 +351,26 @@
     "page": 330,
     "provenance": "verified",
     "quote": "levels to act at all serotonin receptors, stimulating 5HT1A receptors for therapeutic actions while concomitantly stimulating 5HT2A receptors and 5HT2C receptors that theoretically cause the side effects of SSRIs including sexual dysfunction, insomnia, and activation/anxiety (Figure 7-48A)."
+   }
+  ],
+  "agonism:sws_decrease": [
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "monti2011",
+    "provenance": "verified",
+    "quote": "Systemic administration of the non-selective 5-HT2 receptor agonists DOI and DOM has been shown to reduce SWS and REMS, and to augment W in the rat.95,99 Injection of the 5-HT2A/2C receptor antagonists ritanserin, ketanserin, ICI-170,809 or sertindole at the beginning of the light period induced a significant increase of SWS and a reduction of REMS in the rat.",
+    "species": "rat"
+   }
+  ],
+  "agonism:wakefulness": [
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "monti2011",
+    "provenance": "verified",
+    "quote": "Systemic administration of the non-selective 5-HT2 receptor agonists DOI and DOM has been shown to reduce SWS and REMS, and to augment W in the rat.95,99 Injection of the 5-HT2A/2C receptor antagonists ritanserin, ketanserin, ICI-170,809 or sertindole at the beginning of the light period induced a significant increase of SWS and a reduction of REMS in the rat.",
+    "species": "rat"
    }
   ],
   "antagonism:antidepressant": [
@@ -287,6 +405,16 @@
     "quote": "In the case of psychosis in dementia or in Parkinson’s disease, where D2 antagonism can cause problematic side effects or even be dangerous, 5HT2A antagonist action alone can produce a sufficiently robust antipsychotic effect even in the absence of any D2 antagonism."
    }
   ],
+  "antagonism:rem_suppression": [
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "monti2011",
+    "provenance": "verified",
+    "quote": "Systemic administration of the non-selective 5-HT2 receptor agonists DOI and DOM has been shown to reduce SWS and REMS, and to augment W in the rat.95,99 Injection of the 5-HT2A/2C receptor antagonists ritanserin, ketanserin, ICI-170,809 or sertindole at the beginning of the light period induced a significant increase of SWS and a reduction of REMS in the rat.",
+    "species": "rat"
+   }
+  ],
   "antagonism:sleep_promotion": [
    {
     "corpus": "stahl_essential",
@@ -301,6 +429,45 @@
     "page": 327,
     "provenance": "verified",
     "quote": "Blocking 5HT2A receptors enhances slow-wave sleep, and blocking α1 subtypes and H1 receptors interferes with monoamine arousal mechanisms (discussed in Chapter 5 and illustrated in Figures 5-13 and 5-14)."
+   }
+  ],
+  "antagonism:sws_increase": [
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "monti2011",
+    "provenance": "verified",
+    "quote": "Thus, agents that act by competition for agonist binding sites (5HT2A receptor antagonists) or stabilize the receptor in its inactive conformation (5-HT2A receptor inverse agonists) consistently increase SWS in subjects with normal sleep."
+   },
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "monti2011",
+    "provenance": "verified",
+    "quote": "3) Systemic administration of non-selective 5-HT2A/2C antagonists, selective 5-HT2A antagonists or 5-HT2A inverse agonists increases SWS in laboratory animals, subjects with normal sleep and patients with primary or comorbid insomnia."
+   },
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "monti2011",
+    "provenance": "verified",
+    "quote": "The 5-HT2A receptor inverse agonist APD-125 induced also an increase of SWS in patients with chronic primary insomnia."
+   },
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "monti2011",
+    "provenance": "verified",
+    "quote": "Systemic administration of the non-selective 5-HT2 receptor agonists DOI and DOM has been shown to reduce SWS and REMS, and to augment W in the rat.95,99 Injection of the 5-HT2A/2C receptor antagonists ritanserin, ketanserin, ICI-170,809 or sertindole at the beginning of the light period induced a significant increase of SWS and a reduction of REMS in the rat.",
+    "species": "rat"
+   },
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "watson2010",
+    "provenance": "verified",
+    "quote": "Systemic administration of antagonists for the 5HT2A receptor or the 5HT6 receptor to rat decreases wakefulness, increases NREM sleep, and has no effect on REM sleep.",
+    "species": "rat"
    }
   ]
  },
@@ -373,6 +540,26 @@
     "page": 309,
     "provenance": "verified",
     "quote": "The bad news could be that 5HT2C antagonist actions of fluoxetine may contribute to this agent being sometimes less well matched to patients with agitation, insomnia, and anxiety, who may experience unwanted activation and even a panic attack if given an agent that further activates them."
+   }
+  ],
+  "antagonism:rem_suppression": [
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "monti2011",
+    "provenance": "verified",
+    "quote": "Oral administration of the selective 5-HT2C receptor antagonist SB-243213 significantly increased SWS and reduced REMS during the light period.109 However, with subcutaneous SB-243213 only a significant reduction of time spent in REMS was seen.104 On the other hand, intraperitoneal injection of the 5-HT2B antagonist SB-242084 at light onset increased W and reduced SWS in the first hour.110 Similarly, systemic administration of the 5-HT2B antagonist SB-215505 augmented W and decreased SWS and REMS in mice and rats.111",
+    "species": "rat"
+   }
+  ],
+  "antagonism:sws_increase": [
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "monti2011",
+    "provenance": "verified",
+    "quote": "Oral administration of the selective 5-HT2C receptor antagonist SB-243213 significantly increased SWS and reduced REMS during the light period.109 However, with subcutaneous SB-243213 only a significant reduction of time spent in REMS was seen.104 On the other hand, intraperitoneal injection of the 5-HT2B antagonist SB-242084 at light onset increased W and reduced SWS in the first hour.110 Similarly, systemic administration of the 5-HT2B antagonist SB-215505 augmented W and decreased SWS and REMS in mice and rats.111",
+    "species": "rat"
    }
   ],
   "antagonism:weight_gain": [
@@ -478,7 +665,69 @@
    }
   ]
  },
+ "5ht6": {
+  "antagonism:rem_suppression": [
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "monti2011",
+    "provenance": "verified",
+    "quote": "We have found that systemic administration of the selective 5-HT6 receptor antagonists SB-399885 and RO-4368554 during the light phase causes an increase of W and a reduction of SWS and REMS in the rat (Table 4).",
+    "species": "rat"
+   }
+  ],
+  "antagonism:sws_decrease": [
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "monti2011",
+    "provenance": "verified",
+    "quote": "We have found that systemic administration of the selective 5-HT6 receptor antagonists SB-399885 and RO-4368554 during the light phase causes an increase of W and a reduction of SWS and REMS in the rat (Table 4).",
+    "species": "rat"
+   }
+  ],
+  "antagonism:sws_increase": [
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "watson2010",
+    "provenance": "verified",
+    "quote": "Systemic administration of antagonists for the 5HT2A receptor or the 5HT6 receptor to rat decreases wakefulness, increases NREM sleep, and has no effect on REM sleep.",
+    "species": "rat"
+   }
+  ],
+  "antagonism:wakefulness": [
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "monti2011",
+    "provenance": "verified",
+    "quote": "We have found that systemic administration of the selective 5-HT6 receptor antagonists SB-399885 and RO-4368554 during the light phase causes an increase of W and a reduction of SWS and REMS in the rat (Table 4).",
+    "species": "rat"
+   }
+  ]
+ },
  "5ht7": {
+  "agonism:rem_suppression": [
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "monti2011",
+    "provenance": "verified",
+    "quote": "Intraperitoneal administration of the 5-HT7 receptor agonist LP211 during the light phase significantly increased W and reduced REMS and the number of REM periods in the rat.",
+    "species": "rat"
+   }
+  ],
+  "agonism:wakefulness": [
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "monti2011",
+    "provenance": "verified",
+    "quote": "Intraperitoneal administration of the 5-HT7 receptor agonist LP211 during the light phase significantly increased W and reduced REMS and the number of REM periods in the rat.",
+    "species": "rat"
+   }
+  ],
   "antagonism:antidepressant": [
    {
     "corpus": "stahl_essential",
@@ -1164,6 +1413,16 @@
     "provenance": "verified",
     "quote": "When properly “tuned,” D1 receptor stimulation will reduce the noise while α2A receptor stimulation will increase the signal, resulting in appropriate prefrontal cortical functioning, guided attention, focus on a specific task, and control of"
    }
+  ],
+  "agonism:wakefulness": [
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "watson2010",
+    "provenance": "verified",
+    "quote": "Intracerebroventricular administration of a D1 or D2 receptor agonist to rat increases wakefulness.",
+    "species": "rat"
+   }
   ]
  },
  "d2": {
@@ -1199,6 +1458,16 @@
     "page": 200,
     "provenance": "verified",
     "quote": "For dopamine 2 (D2) binding, agents with too much agonism may be psychotomimetic and thus not ideal for treating psychosis, but may be useful within Parkinson’s disease."
+   }
+  ],
+  "agonism:wakefulness": [
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "watson2010",
+    "provenance": "verified",
+    "quote": "Intracerebroventricular administration of a D1 or D2 receptor agonist to rat increases wakefulness.",
+    "species": "rat"
    }
   ],
   "antagonism:akathisia": [
@@ -1517,6 +1786,16 @@
   ]
  },
  "gaba_b": {
+  "agonism:rem_suppression": [
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "monti2011",
+    "provenance": "verified",
+    "quote": "Accordingly, microinjection of the selective GABAB receptor agonist baclofen into the pedunculopontine tegmental nucleus (PPT) reduces REMS in the rat,143 whereas the GABAA agonist muscimol induces the opposite effect through a still unknown mechanism.144,145",
+    "species": "rat"
+   }
+  ],
   "agonism:sleep_promotion": [
    {
     "corpus": "stahl_essential",
@@ -1604,6 +1883,16 @@
     "page": 442,
     "provenance": "verified",
     "quote": "Blocking one of the most important arousal neurotransmitters histamine and its actions at H1 receptors is clearly an effective way to induce sleep."
+   }
+  ],
+  "antagonism:sws_increase": [
+   {
+    "corpus": "papers",
+    "evidence": "in_vivo",
+    "page": "watson2010",
+    "provenance": "verified",
+    "quote": "97 Systemic administration of the H1 receptor antagonists mepyramine 98 and cyproheptadine 99 caused a significant increase in NREM sleep in cat and rat, respectively.",
+    "species": "rat"
    }
   ],
   "antagonism:weight_gain": [

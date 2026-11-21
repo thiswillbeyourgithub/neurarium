@@ -210,7 +210,8 @@
      "line": "Blocking 5HT2A receptors enhances slow-wave sleep, and blocking α1 subtypes and H1 receptors interferes with monoamine arousal mechanisms (discussed in Chapter 5 and illustrated in Figures 5-13 and 5-14).",
      "effects": [
       "sleep_promotion",
-      "wakefulness"
+      "wakefulness",
+      "sws_increase"
      ],
      "qid": "3af6bd25"
     },
@@ -620,6 +621,19 @@
      ],
      "species": "Human",
      "qid": "e892595e"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 6,
+     "line": "However, bilateral microinjection of an α 1-antagonist (prazosin), an α 2-agonist (clonidine), or a β-antagonist (propranolol) into the pedunculopontine tegmental nucleus increases REM sleep with little to no effect on NREM sleep or wakefulness.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness",
+      "rem_increase",
+      "sws_increase"
+     ],
+     "qid": "431308a7"
     }
    ]
   },
@@ -833,7 +847,8 @@
      "line": "Blocking 5HT2A receptors enhances slow-wave sleep, and blocking α1 subtypes and H1 receptors interferes with monoamine arousal mechanisms (discussed in Chapter 5 and illustrated in Figures 5-13 and 5-14).",
      "effects": [
       "sleep_promotion",
-      "wakefulness"
+      "wakefulness",
+      "sws_increase"
      ],
      "qid": "3af6bd25"
     },
@@ -1242,6 +1257,19 @@
      ],
      "species": "Human",
      "qid": "d4c84879"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 6,
+     "line": "However, bilateral microinjection of an α 1-antagonist (prazosin), an α 2-agonist (clonidine), or a β-antagonist (propranolol) into the pedunculopontine tegmental nucleus increases REM sleep with little to no effect on NREM sleep or wakefulness.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness",
+      "rem_increase",
+      "sws_increase"
+     ],
+     "qid": "431308a7"
     }
    ]
   },
@@ -1455,7 +1483,8 @@
      "line": "Blocking 5HT2A receptors enhances slow-wave sleep, and blocking α1 subtypes and H1 receptors interferes with monoamine arousal mechanisms (discussed in Chapter 5 and illustrated in Figures 5-13 and 5-14).",
      "effects": [
       "sleep_promotion",
-      "wakefulness"
+      "wakefulness",
+      "sws_increase"
      ],
      "qid": "3af6bd25"
     },
@@ -1844,6 +1873,19 @@
       "vasodilation"
      ],
      "qid": "c1e10c75"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 6,
+     "line": "However, bilateral microinjection of an α 1-antagonist (prazosin), an α 2-agonist (clonidine), or a β-antagonist (propranolol) into the pedunculopontine tegmental nucleus increases REM sleep with little to no effect on NREM sleep or wakefulness.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness",
+      "rem_increase",
+      "sws_increase"
+     ],
+     "qid": "431308a7"
     }
    ]
   },
@@ -2996,6 +3038,27 @@
      ],
      "species": "Human",
      "qid": "70d4837a"
+    },
+    {
+     "corpus": "papers",
+     "page": "wichniak2017",
+     "pdf_page": 5,
+     "line": "Agomelatine is a non-sedative antidepressant drug exerting agonistic action at melatonergic M1 and M2 receptors, and antagonistic action at serotonergic 5HT2c receptors [24].",
+     "effects": [
+      "sedation",
+      "antidepressant"
+     ],
+     "qid": "f0cb474f"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 3,
+     "line": "Five subtypes (M1–M5) of the muscarinic receptor have been identified, 29 and the M2 subtype plays a key role in the generation of REM sleep.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "efeab6ec"
     }
    ]
   },
@@ -3101,6 +3164,37 @@
       "antispasmodic"
      ],
      "qid": "ee666dd4"
+    },
+    {
+     "corpus": "papers",
+     "page": "wichniak2017",
+     "pdf_page": 5,
+     "line": "Agomelatine is a non-sedative antidepressant drug exerting agonistic action at melatonergic M1 and M2 receptors, and antagonistic action at serotonergic 5HT2c receptors [24].",
+     "effects": [
+      "sedation",
+      "antidepressant"
+     ],
+     "qid": "f0cb474f"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 3,
+     "line": "Five subtypes (M1–M5) of the muscarinic receptor have been identified, 29 and the M2 subtype plays a key role in the generation of REM sleep.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "efeab6ec"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 11,
+     "line": "M2 muscarinic receptor subtype in the feline medial pontine reticular formation modulates the amount of rapid eye movement sleep.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "be0b8e16"
     }
    ]
   },
@@ -3283,6 +3377,16 @@
      ],
      "species": "Human",
      "qid": "36d93a1e"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 3,
+     "line": "Five subtypes (M1–M5) of the muscarinic receptor have been identified, 29 and the M2 subtype plays a key role in the generation of REM sleep.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "efeab6ec"
     }
    ]
   },
@@ -4132,6 +4236,36 @@
      ],
      "species": "Human",
      "qid": "51d9526c"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 6,
+     "line": "109 Systemic administration of D1 receptor agonists or antagonists causes an increase or decrease, respectively, in wakefulness.",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "aaef9a69"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 6,
+     "line": "Intracerebroventricular administration of a D1 or D2 receptor agonist to rat increases wakefulness.",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "6aed4e10"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 15,
+     "line": "Sleep during acute dopamine D1 agonist SKF 38393 or D1 antagonist SCH 23390 administration in rats.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "b16f1b18"
     }
    ]
   },
@@ -6051,6 +6185,78 @@
       "antidepressant"
      ],
      "qid": "3e65425a"
+    },
+    {
+     "corpus": "papers",
+     "page": "bates2026",
+     "pdf_page": 9,
+     "line": "Dopaminergic D2 receptor agonists (e.g., apomorphine, bromocriptine, quinpirole) emerged as the only investi­ gated class with a dose-response relationship concerning sleep.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "28d152f1"
+    },
+    {
+     "corpus": "papers",
+     "page": "bates2026",
+     "pdf_page": 9,
+     "line": "Among these D2 receptor ag­ onists, apomorphine was the only agent with a demon­ strated increase in 0-30% increase in SWS time at lower concentrations.",
+     "effects": [
+      "sws_increase"
+     ],
+     "qid": "a91c9a26"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 6,
+     "line": "Intracerebroventricular administration of a D1 or D2 receptor agonist to rat increases wakefulness.",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "6aed4e10"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 6,
+     "line": "111 Systemic administration of a D2 receptor agonist causes biphasic effects with low doses decreasing wakefulness and high doses increasing wakefulness.",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "a2847208"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 15,
+     "line": "Sleep deprivation decreases binding of [ 11 C]raclopride to dopamine D2/D3 receptors in the human brain.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "9ffc447e"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 15,
+     "line": "Biphasic effects of dopamine D-2 receptor agonists on sleep and wakefulness in the rat.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "9c573615"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 15,
+     "line": "Effects of the selective dopamine D-2 receptor agonist, quinpirole on sleep and wakefulness in the rat.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "eea5cdc3"
     }
    ]
   },
@@ -6304,6 +6510,16 @@
       "antipsychotic"
      ],
      "qid": "96eda49d"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 15,
+     "line": "Sleep deprivation decreases binding of [ 11 C]raclopride to dopamine D2/D3 receptors in the human brain.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "9ffc447e"
     }
    ]
   },
@@ -6868,6 +7084,196 @@
       "seizures"
      ],
      "qid": "3ea87b5c"
+    },
+    {
+     "corpus": "papers",
+     "page": "bates2026",
+     "pdf_page": 11,
+     "line": "Role of GABAA receptors in the regulation of sleep: initial sleep responses to peripherally administered modulators and agonists.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "0d41ae99"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 2,
+     "line": "Because of their powerful inhibitory effects, GABAA receptors are the targets of most sedative/hypnotic and general anesthetic drugs.",
+     "effects": [
+      "sedation",
+      "sleep_promotion"
+     ],
+     "qid": "6aa11bae"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 2,
+     "line": "The differences in clinical effects caused by various benzodiazepine (e.g., diazepam) and nonbenzodiazepine (e.g., eszopiclone) sedative/hypnotics are attributed to the relative selectivity of these drugs for different GABAA receptor subtypes.",
+     "effects": [
+      "sedation",
+      "sleep_promotion"
+     ],
+     "qid": "da9a7e19"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 2,
+     "line": "Extrasynaptically localized GABAA receptors possess a delta subunit and have particular relevance for sleep medicine.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "41478fc8"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 2,
+     "line": "21 Inhibiting GABAergic signaling at GABAA receptors within the pontine reticular formation causes an increase in REM sleep and a decrease in wakefulness 18, 19, 23, 24 .",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness",
+      "rem_suppression",
+      "rem_increase"
+     ],
+     "qid": "adf9c243"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 2,
+     "line": "21 Furthermore, blocking GABAA receptors in the pontine reticular formation increases time needed to regain wakefulness after isoflurane anesthesia.",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "e32ee91d"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 3,
+     "line": "The different effects of GABAA receptor agonists on sleep have been attributed to brain regionspecific distributions of GABAA receptors and differences in sedative/hypnotic affinities for GABAA receptor subtypes.",
+     "effects": [
+      "sedation",
+      "sleep_promotion"
+     ],
+     "qid": "5dd94e3d"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 3,
+     "line": "40 These preclinical data can be contrasted with human psychopharmacology where there has been no study convincingly demonstrating differential GABAA subtype binding among benzodiazepine and non-benzodiazepine sleeping medications.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "406e8406"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 8,
+     "line": "The increase in wakefulness produced by microinjecting hypocretin-1 into the pontine reticular formation is prevented by blocking GABAA receptors.",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "c3e895ff"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 9,
+     "line": "GABAA receptors are drug targets that promotes a sleeplike state by unknown actions 40 when they are activated in some brain regions, yet GABAA receptors enhance wakefulness when activated selectively in the posterior hypothalamus 194",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "9c53d5de"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 10,
+     "line": "Role of GABAA receptors in the physiology and pharmacology of sleep.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "ca59f1a1"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 10,
+     "line": "Extrasynaptic GABAA receptors are critical targets for sedative-hypnotic drugs.",
+     "effects": [
+      "sedation",
+      "sleep_promotion"
+     ],
+     "qid": "30f278a8"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 10,
+     "line": "The selective extrasynaptic GABAA agonist, gaboxadol, improves traditional hypnotic efficacy measures and enhances slow wave activity in a model of transient insomnia.",
+     "effects": [
+      "insomnia",
+      "sleep_promotion"
+     ],
+     "qid": "ff042f3d"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 10,
+     "line": "GABAA receptors in the pontine reticular formation of C57BL/6J mouse modulate neurochemical, electrographic, and behavioral phenotypes of wakefulness.",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "a69888cf"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 18,
+     "line": "Wakefulness is increased by GABAA-hypocretin receptor interaction in the pontine reticular formation.",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "5fe53831"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 6,
+     "line": "Administration of the GABAA receptor agonist muscimol, which at the doses given did not significantly affect sleep variables, prevented also the effect of CP94253 on REMS.88 Activation of the 5-HT1B receptor in the DRN has been shown to inhibit the release of GABA.89 Thus, the decrease of GABA inhibitory tone on 5-HT neurons would result in an increment of 5-HT release at postsynaptic sites and the suppression of REMS.",
+     "effects": [
+      "sleep_promotion",
+      "rem_suppression"
+     ],
+     "qid": "76d6c276"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "Accordingly, microinjection of the selective GABAB receptor agonist baclofen into the pedunculopontine tegmental nucleus (PPT) reduces REMS in the rat,143 whereas the GABAA agonist muscimol induces the opposite effect through a still unknown mechanism.144,145",
+     "effects": [
+      "rem_suppression"
+     ],
+     "qid": "3ba88246"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 13,
+     "line": "GABA en pedunculopontine tegmentum regulates spontaneous rapid eye movement sleep by acting on GABAA receptors in freely moving rats.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "cdfa1374"
     }
    ]
   },
@@ -6890,7 +7296,8 @@
      "page": 462,
      "line": "It is hypothesized that sodium oxybate increases slow-wave sleep and improves cataplexy via these actions at GABAB receptors.",
      "effects": [
-      "sleep_promotion"
+      "sleep_promotion",
+      "sws_increase"
      ],
      "qid": "16144a41"
     },
@@ -6921,6 +7328,26 @@
       "anticonvulsant"
      ],
      "qid": "326fd121"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "Presently available evidence tends to indicate that the GABAB receptor is involved in the decrease of REMS.",
+     "effects": [
+      "rem_suppression"
+     ],
+     "qid": "4e6c2246"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "Accordingly, microinjection of the selective GABAB receptor agonist baclofen into the pedunculopontine tegmental nucleus (PPT) reduces REMS in the rat,143 whereas the GABAA agonist muscimol induces the opposite effect through a still unknown mechanism.144,145",
+     "effects": [
+      "rem_suppression"
+     ],
+     "qid": "3ba88246"
     }
    ]
   },
@@ -7854,6 +8281,26 @@
       "euphoria"
      ],
      "qid": "f5b341b4"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 15,
+     "line": "Excitation of the pedunculopontine tegmental NMDA receptors induces wakefulness and cortical activation in the rat.",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "5ed5fa5c"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 8,
+     "line": "We have found, in addition, that microinjection of the N-methyl-Daspartate (NMDA) receptor antagonist D-AP5 into the DRN prevents the m-CPBG-decrease of REMS in the rat (Monti and Jantos, unpublished observations).",
+     "effects": [
+      "rem_suppression"
+     ],
+     "qid": "a599dac3"
     }
    ]
   },
@@ -8153,6 +8600,36 @@
       "ataxia"
      ],
      "qid": "92e2da8b"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 15,
+     "line": "A novel role of pedunculopontine tegmental kainate receptors: a mechanism of rapid eye movement sleep generation in the rat.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "d1d0f6ce"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 15,
+     "line": "Kainate receptors: a novel mechanism in paradoxical (REM) sleep generation.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "fd37b2f7"
+    },
+    {
+     "corpus": "papers",
+     "page": "zilles2009",
+     "pdf_page": 8,
+     "line": "Distribution of kainate receptor subunit mRNAs in human hippocampus, neocortex and cerebellum, and bilateral reduction of hippocampal GluR6 and KA2 transcripts in schizophrenia.",
+     "effects": [
+      "antipsychotic"
+     ],
+     "qid": "e38292ab"
     }
    ]
   },
@@ -9003,6 +9480,16 @@
       "antidepressant"
      ],
      "qid": "ed61510b"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 20,
+     "line": "γ-aminobutyric acid; Glu – glutamate; Gly – glycine; His – histamine; Hcrt – hypocretin; NE – norepinephrine; NO – nitric oxide; Noc – nociceptin; Ser – serine; 5HT – serotonin; Tau – taurine.",
+     "effects": [
+      "analgesia"
+     ],
+     "qid": "16a43674"
     }
    ]
   },
@@ -9183,7 +9670,8 @@
      "line": "Blocking 5HT2A receptors enhances slow-wave sleep, and blocking α1 subtypes and H1 receptors interferes with monoamine arousal mechanisms (discussed in Chapter 5 and illustrated in Figures 5-13 and 5-14).",
      "effects": [
       "sleep_promotion",
-      "wakefulness"
+      "wakefulness",
+      "sws_increase"
      ],
      "qid": "3af6bd25"
     },
@@ -9433,6 +9921,70 @@
      ],
      "species": "Human",
      "qid": "6cf33f9f"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 6,
+     "line": "First generation H1 receptor antagonists, such as diphenhydramine, cause drowsiness (sedation) and impaired performance in humans 95 and rats.",
+     "effects": [
+      "sedation"
+     ],
+     "qid": "3cd73eca"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 6,
+     "line": "96 Newer antagonists that are relatively selective for the H1 histamine receptor, such as the potent antagonist doxepin, improve subjective and objective measures of sleep in insomnia patients without causing sedation or psychomotor impairments the next day.",
+     "effects": [
+      "sedation",
+      "insomnia",
+      "sleep_promotion"
+     ],
+     "qid": "ffa7ce02"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 6,
+     "line": "97 Systemic administration of the H1 receptor antagonists mepyramine 98 and cyproheptadine 99 caused a significant increase in NREM sleep in cat and rat, respectively.",
+     "effects": [
+      "sleep_promotion",
+      "sws_increase"
+     ],
+     "qid": "078c48d9"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 6,
+     "line": "98 These data suggest that histaminergic signaling via the H1 receptor promotes wakefulness.",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "0eef1b7d"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 14,
+     "line": "The mechanism responsible for the drowsiness caused by first generation H1 antagonists on the EEG pattern.",
+     "effects": [
+      "sedation"
+     ],
+     "qid": "91f93297"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 14,
+     "line": "Effects of some H1-antagonists on the sleep-wake cycle in sleep-disturbed rats.",
+     "effects": [
+      "sleep_promotion",
+      "circadian_shift"
+     ],
+     "qid": "4c0831bc"
     }
    ]
   },
@@ -9674,6 +10226,29 @@
      ],
      "species": "Human",
      "qid": "cb8b0bd3"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 6,
+     "line": "New therapies for sleep disorders and for maintaining vigilance include H3 receptor antagonists and inverse agonists.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "2999893c"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 14,
+     "line": "The brain H3-receptor as a novel therapeutic target for vigilance and sleep-wake disorders.",
+     "effects": [
+      "sleep_promotion",
+      "circadian_shift",
+      "wakefulness"
+     ],
+     "qid": "0ad64dfd"
     }
    ]
   },
@@ -10210,6 +10785,131 @@
       "analgesia"
      ],
      "qid": "df63aaca"
+    },
+    {
+     "corpus": "papers",
+     "page": "wichniak2017",
+     "pdf_page": 2,
+     "line": "Furthermore, the distribution of deep sleep scored in PSG as sleep stage N3, also called delta or slow wave sleep (SWS), is altered in depressed patients.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "e3f77cb4"
+    },
+    {
+     "corpus": "papers",
+     "page": "wichniak2017",
+     "pdf_page": 2,
+     "line": "In healthy subjects, the highest delta wave activity in EEG can be observed in the first sleep cycle, whereas in depressed patients there is a frequent shift of delta activity from the first to the second sleep cycle.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "c4f59ecd"
+    },
+    {
+     "corpus": "papers",
+     "page": "wichniak2017",
+     "pdf_page": 2,
+     "line": "It is expressed in sleep parameters as a reduced delta ratio (ratio between delta wave activity in the first and second sleep cycle).",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "56184e59"
+    },
+    {
+     "corpus": "papers",
+     "page": "wichniak2017",
+     "pdf_page": 3,
+     "line": "Delta sleep ratio The ratio of slow wave sleep in the first and second sleep cycle.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "76f3b27c"
+    },
+    {
+     "corpus": "papers",
+     "page": "bates2026",
+     "pdf_page": 2,
+     "line": "SWS, also known as delta sleep or N3 sleep of non-rapid eye movement (NREM) sleep, is critical for physical and cognitive restoration, yet remains an underexplored area in pharmacotherapy.",
+     "effects": [
+      "pro_cognitive",
+      "sleep_promotion"
+     ],
+     "qid": "85a5626e"
+    },
+    {
+     "corpus": "papers",
+     "page": "bates2026",
+     "pdf_page": 2,
+     "line": "Our team of librarians conducted the initial literature search in the Ovid MEDLINE database using the following search terms: delta sleep,_ stage 3 sleep,_ stage 4 sleep,_ REM,_ rapid eye movement,_ treatment effect,_ medications,_ and phar­_ macologic .",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "0e4d24a1"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 2,
+     "line": "Extrasynaptically localized GABAA receptors possess a delta subunit and have particular relevance for sleep medicine.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "41478fc8"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 3,
+     "line": "39 Intravenous administration of eszopiclone prevented the REM phase of sleep, increased EEG delta power, and decreased acetylcholine release in rat pontine reticular formation.",
+     "effects": [
+      "sleep_promotion",
+      "rem_increase"
+     ],
+     "qid": "573d1672"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 4,
+     "line": "Inactivating adenosine A1 receptors in the basal forebrain decreases EEG delta power and NREM sleep time, 59 and immunohistochemical studies reveal that the basal forebrain contains A1 receptors, but not A2A receptors.",
+     "effects": [
+      "sleep_promotion",
+      "sws_decrease"
+     ],
+     "qid": "72b7c32d"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 12,
+     "line": "Caffeine reduces low-frequency delta activity in the human sleep EEG.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "c628fc86"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 2,
+     "line": "Even in the studies in which insomnia followed PCPA administration, the effect was a transitory one, and SWS returned while 5-HT levels remained depleted.14 Moreover, in rats subjected to combined treatment with PCPA and sleep deprivation, delta activity reached the same high levels as after deprivation alone, which tends to indicate that SWS-",
+     "effects": [
+      "insomnia",
+      "sleep_promotion"
+     ],
+     "qid": "a7627912"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 7,
+     "line": "In addition, ritanserin discontinuation following daily administration for 8 weeks was not associated with the occurrence of withdrawal symptoms.117 On the other hand, the effects of ketanserin on sleep variables were restricted to an increase of SWS and a reduction of stage 2 sleep.118 During nighttime sleep after a nap in the evening, seganserin induced an increase in SWS and an enhancement of power density in the delta and theta frequencies during NREMS.",
+     "effects": [
+      "sleep_promotion",
+      "sws_increase"
+     ],
+     "qid": "87dbbdf3"
     }
    ]
   },
@@ -12151,6 +12851,366 @@
       "antimigraine"
      ],
      "qid": "03806ad7"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 5,
+     "line": "Systemic administration of agonists for 5HT1A, 5HT1B, 5HT2A/2C or 5HT3 receptors causes an increase in wakefulness and a decrease in sleep (reviewed in 75 ).",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "3f9ba8b0"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 5,
+     "line": "Local administration of a 5HT1A receptor agonist to the dorsal raphé nucleus increases wakefulness in rat 76 but increases REM sleep in cat.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness",
+      "rem_increase"
+     ],
+     "qid": "e08ff497"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 5,
+     "line": "Mice lacking the genes for the 5HT1A 80 or 5HT1B 81 receptor showed an increase in REM sleep.",
+     "effects": [
+      "sleep_promotion",
+      "rem_increase"
+     ],
+     "qid": "c3361200"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 5,
+     "line": "Administration of a 5HT1A 80, 82, a 5HT1B 81, or a 5HT2A/2C 83 receptor agonist decreased REM sleep in rodent and human.",
+     "effects": [
+      "sleep_promotion",
+      "rem_suppression"
+     ],
+     "qid": "ae8c98e3"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 5,
+     "line": "These data indicate that serotonin acting at 5HT1A, 5HT1B, and 5HT2A/2C receptors plays a role in suppressing REM sleep.",
+     "effects": [
+      "sleep_promotion",
+      "rem_suppression"
+     ],
+     "qid": "f1fe0d19"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 13,
+     "line": "Dose-dependent effects of the 5-HT1A receptor agonist 8-OH-DPAT on sleep and wakefulness in the rat.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "3d76019d"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 13,
+     "line": "Involvement of 5-HT1A receptors in homeostatic and stressinduced adaptive regulations of paradoxical sleep: studies in 5-HT1A knock-out mice.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "61dbae05"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 14,
+     "line": "The use of sleep measures to compare a new 5HT1A agonist with buspirone in humans.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "538bc993"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 1,
+     "line": "Mutant mice that do not express 5-HT1A or 5- HT1B receptor exhibit greater amounts of REMSthan their wild-type counterparts, which could be related to the absence of a postsynaptic inhibitory effect on REM-on neurons of the laterodorsal and pedunculopontine tegmental nuclei (LDT/PPT).",
+     "effects": [
+      "rem_suppression"
+     ],
+     "qid": "d2f9e965"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 1,
+     "line": "Direct infusion of the 5-HT1A receptor agonists 8-OH-DPAT and flesinoxan intothe DRN significantlyenhances REMS in the rat.",
+     "effects": [
+      "rem_increase"
+     ],
+     "qid": "689a467f"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 1,
+     "line": "Systemic injection of full agonists at postsynaptic 5-HT1A (8-OH-DPAT, flesinoxan), 5-HT1B (CGS 12066B, CP-94235), 5-HT2C (RO 60-0175), 5-HT2A/2C (DOI, DOM), 5-HT3 (m-chlorophenylbiguanide) and 5-HT7 (LP-211) receptors increases W and reduces SWS and REMS.",
+     "effects": [
+      "wakefulness",
+      "rem_suppression",
+      "rem_increase",
+      "sws_increase",
+      "sws_decrease"
+     ],
+     "qid": "1079aa5b"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 5,
+     "line": "Moreover, 5-HT1A, 5- HT1B, 5-HT2A, 5-HT2C, 5-HT3 and 5-HT7 receptors are part of the key determinants of 5-HT effects on sleep and W.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "91156960"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 5,
+     "line": "Flesinoxan and 8-OH-DPAT, two full agonists of the 5-HT1A receptor at pre- and post-synaptic sites, the azapirones, buspirone, gepirone and ipsapirone, which behave as full agonists at the somatodendritic autoreceptor but only as partial agonists at the postsynaptic level, and the selective high-affinity silent antagonists WAY 100635 and p-MPPI have been used to characterize the role of 5-HT1A receptor in the regulation of sleep and W.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "c15417a6"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 5,
+     "line": "Mutant mice that do not express 5-HT1A receptors exhibit greater amounts of REMS than their wild-type counterparts while W and SWS remain unchanged.",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "9f1276e2"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 5,
+     "line": "As expected, systemic 8-OH-DPAT has no effect on sleep or W in the mutant mice.69 It can be proposed that the increase of the behavioral state in the 5-HT1A receptor knock-out mice is related to the absence of a postsynaptic 5-HT1A inhibitory effect on REM-on neurons of the LDT/PPT.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness",
+      "rem_suppression"
+     ],
+     "qid": "3ac1b5a6"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 5,
+     "line": "Systemic injection of flesinoxan increases W and reduces SWS and REMS in the rat.74 Similar effects have been observed following the administration of 8-OH-DPAT to vehicle-treated and serotonindepleted animals.75e77 Pretreatment with the mixed b-adrenoceptor and 5-HT1A/1B receptor antagonist (�)pindolol or p-MPPI reversed the effect of 8-OH-DPAT on W and SWS.72,75",
+     "effects": [
+      "wakefulness",
+      "rem_suppression",
+      "rem_increase",
+      "sws_increase",
+      "sws_decrease"
+     ],
+     "qid": "e42be28d"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 5,
+     "line": "Although it remains unclear how 5-HT1A receptor agonists influence W, it is likely through both inhibition of sleep active GABAergic neurons of the VLPO, and activation of arousal systems located in the BFB (ACh), brain stem (NE, DA) and hypothalamus (HA, OX).",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "d148a130"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 5,
+     "line": "The inhibition of GABAergic cells that express the 5-HT1A receptor and make synaptic contacts with neurons of the arousal systems would result in the increase of W.",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "2b8a992f"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 5,
+     "line": "The reduction of REMS after systemic flesinoxan or 8-OH-DPAT administration would be related to the activation of postsynaptic 5-HT1A receptors on REMon neurons of the LDT/PPT, similar to the physiologic effect of 5-HT.",
+     "effects": [
+      "rem_suppression"
+     ],
+     "qid": "486d7d76"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 6,
+     "line": "The role of serotonin 5-HT1A and 5-HT1B receptors in the regulation of sleep and wakefulness in laboratory animals.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "e66f1146"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 6,
+     "line": "postsynaptic 5-HT1A receptors.79 Similar sleep-disrupting effects of buspirone and ipsapirone have been described in human subjects with normal sleep and in patients with insomnia.",
+     "effects": [
+      "insomnia",
+      "sleep_promotion"
+     ],
+     "qid": "a0bb7549"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 6,
+     "line": "Thus, buspirone administration increased W, prolonged REMS latency, and reduced REMS time in insomniac patients,80,81 whereas ipsapirone prolonged REMS latency and reduced REMS and SWS in healthy subjects.82 The reduction of REMS could be related to the azapirones acting on postsynaptic 5-HT1A receptors in the LDT/PPT nuclei to inhibit REM-on neurons.",
+     "effects": [
+      "insomnia",
+      "sleep_promotion",
+      "wakefulness",
+      "rem_suppression",
+      "rem_increase",
+      "sws_decrease"
+     ],
+     "qid": "23f30065"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "Attempts to characterize the role of serotonin receptors on sleep variables have been limited to the 5-HT1A, 5-HT1B, 5-HT2A, 5-HT2B, 5-HT2C, 5-HT3, 5-HT6 and 5-HT7 receptors.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "e1ecea77"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "Recently, results from several studies have quantified the spontaneous sleep/waking cycles in serotonin 5-HT1A, 5-HT1B, 5-HT2A, 5-HT2C or 5-HT7 receptor knock-out mice.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "fb5af4f4"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "Although the process by which activation of 5-HT receptors facilitates the state of W is still unknown, it should be mentioned that many of the GABAergic cells in the BFB, hippocampus and neocortex on which 5-HT1A and 5-HT1B receptors are expressed, are hyperpolarized by serotonin released from the DRN.146e148 Thus, activation of 5-HT1A and 5-HT1B receptors may attenuate GABAergic input and thereby indirectly increase the release of ACh and GLU at cortical and subcortical sites.",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "38f44b3a"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "Accordingly, opposite to animals treated sistemically with selective 5-HT1A or 5-HT1B receptor agonists where REMS is suppressed, knock-out mice show an increase of the behavioral state.",
+     "effects": [
+      "rem_suppression",
+      "rem_increase"
+     ],
+     "qid": "6316aad1"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 10,
+     "line": "2) Microinjection of 5-HT1A agonists into the DRN increases REMS, whereas local administration of 5- HT1B, 5-HT2A/2C, 5-HT3 and 5-HT7 agonists induces the opposite effect.",
+     "effects": [
+      "rem_increase"
+     ],
+     "qid": "8752852c"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 11,
+     "line": "Involvement of 5-HT1A receptors in homeostatic and stress-induced adaptive regulations of paradoxical sleep: studies in 5-HT1A knock-out mice.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "5c28a0e8"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 11,
+     "line": "Sleep and waking following microdialysis perfusion of the selective 5-HT1A antagonist p-MPPI into the dorsal raphe nucleus of the freely moving rat.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "e603b141"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 11,
+     "line": "Differential effects of the 5-HT1A receptor agonist flesinoxan given locally or systemically on REM sleep in the rat.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "e88058eb"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 11,
+     "line": "Dose-dependent effects of the 5-HT1A receptor agonist 8-OHDPAT on sleep and wakefulness in the rat.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "3a57564c"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 11,
+     "line": "Inhibition of REM sleep by ipsapirone, a 5-HT1A agonist, in normal volunteers.",
+     "effects": [
+      "sleep_promotion",
+      "rem_suppression"
+     ],
+     "qid": "300eac84"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 13,
+     "line": "Sleep and waking in mutant mice that do not express various proteins involved in serotonergic neurotransmission such as the serotonergic transporter, monoamine oxidase A, and 5-HT1A, 5-HT1B, 5-HT2A, 5-HT2C and 5-HT7 receptors.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "83ef47db"
     }
    ]
   },
@@ -12387,6 +13447,285 @@
      ],
      "species": "Human",
      "qid": "8abfe820"
+    },
+    {
+     "corpus": "papers",
+     "page": "wichniak2017",
+     "pdf_page": 5,
+     "line": "Effects on sleep has recently been also reported for a vortioxetine, with clinical action mediated mainly by selective blockade of serotonin reuptake and direct modulation of serotonergic receptors activity (such as 5-HT3, 5-HT7, 5-HT1D, and 5-HT1B) [27].",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "ec73104e"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 5,
+     "line": "Systemic administration of agonists for 5HT1A, 5HT1B, 5HT2A/2C or 5HT3 receptors causes an increase in wakefulness and a decrease in sleep (reviewed in 75 ).",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "3f9ba8b0"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 5,
+     "line": "Mice lacking the genes for the 5HT1A 80 or 5HT1B 81 receptor showed an increase in REM sleep.",
+     "effects": [
+      "sleep_promotion",
+      "rem_increase"
+     ],
+     "qid": "c3361200"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 5,
+     "line": "Administration of a 5HT1A 80, 82, a 5HT1B 81, or a 5HT2A/2C 83 receptor agonist decreased REM sleep in rodent and human.",
+     "effects": [
+      "sleep_promotion",
+      "rem_suppression"
+     ],
+     "qid": "ae8c98e3"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 5,
+     "line": "These data indicate that serotonin acting at 5HT1A, 5HT1B, and 5HT2A/2C receptors plays a role in suppressing REM sleep.",
+     "effects": [
+      "sleep_promotion",
+      "rem_suppression"
+     ],
+     "qid": "f1fe0d19"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 13,
+     "line": "Key role of 5-HT1B receptors in the regulation of paradoxical sleep as evidenced in 5-HT1B knock-out mice.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "ed6bfcaa"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 1,
+     "line": "Mutant mice that do not express 5-HT1A or 5- HT1B receptor exhibit greater amounts of REMSthan their wild-type counterparts, which could be related to the absence of a postsynaptic inhibitory effect on REM-on neurons of the laterodorsal and pedunculopontine tegmental nuclei (LDT/PPT).",
+     "effects": [
+      "rem_suppression"
+     ],
+     "qid": "d2f9e965"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 1,
+     "line": "In contrast, microinjection of the 5-HT1B (CP-94253), 5-HT2A/2C (DOI), 5-HT3 (m-chlorophenylbiguanide) and 5-HT7 (LP-44) receptor agonists into the DRN induces a significant reduction of REMS.",
+     "effects": [
+      "rem_suppression"
+     ],
+     "qid": "082c9ac8"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 1,
+     "line": "Systemic injection of full agonists at postsynaptic 5-HT1A (8-OH-DPAT, flesinoxan), 5-HT1B (CGS 12066B, CP-94235), 5-HT2C (RO 60-0175), 5-HT2A/2C (DOI, DOM), 5-HT3 (m-chlorophenylbiguanide) and 5-HT7 (LP-211) receptors increases W and reduces SWS and REMS.",
+     "effects": [
+      "wakefulness",
+      "rem_suppression",
+      "rem_increase",
+      "sws_increase",
+      "sws_decrease"
+     ],
+     "qid": "1079aa5b"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 5,
+     "line": "Moreover, 5-HT1A, 5- HT1B, 5-HT2A, 5-HT2C, 5-HT3 and 5-HT7 receptors are part of the key determinants of 5-HT effects on sleep and W.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "91156960"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 6,
+     "line": "The role of serotonin 5-HT1A and 5-HT1B receptors in the regulation of sleep and wakefulness in laboratory animals.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "e66f1146"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 6,
+     "line": "Mutant mice that do not express the 5-HT1B receptor exhibit greater amounts of REMS than their wild-type counterparts whereas W and SWS show no significant changes.87 The increase of REMS in 5-HT1B receptor knock-out mice could be tentatively related to the absence of a postsynaptic 5-HT1B inhibitory effect on the cholinergic neurons of the LDT/PPT nuclei.",
+     "effects": [
+      "wakefulness",
+      "rem_increase"
+     ],
+     "qid": "dcf44954"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 6,
+     "line": "Microinjection of the selective 5-HT1B receptor agonist CP94253 into the DRN during the light phase caused a reduction of REMS and of the mean duration of REM periods in the rat.",
+     "effects": [
+      "rem_suppression"
+     ],
+     "qid": "a30b0a9f"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 6,
+     "line": "Pretreatment with the 5-HT1B receptor antagonist SB-224289 antagonized the CP-94253-induced decrease of REMS and of the mean duration of REM periods.",
+     "effects": [
+      "rem_suppression"
+     ],
+     "qid": "1859e246"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 6,
+     "line": "Administration of the GABAA receptor agonist muscimol, which at the doses given did not significantly affect sleep variables, prevented also the effect of CP94253 on REMS.88 Activation of the 5-HT1B receptor in the DRN has been shown to inhibit the release of GABA.89 Thus, the decrease of GABA inhibitory tone on 5-HT neurons would result in an increment of 5-HT release at postsynaptic sites and the suppression of REMS.",
+     "effects": [
+      "sleep_promotion",
+      "rem_suppression"
+     ],
+     "qid": "76d6c276"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 6,
+     "line": "Systemic administration of the selective 5-HT1B receptor agonists CGS 12066B and CP-94253 significantly increased W and reduced SWS and REMS in the rat.90,91 Pindolol antagonized the increase of W and reduction of SWS induced by CP-94253; however, REMS remained suppressed.",
+     "effects": [
+      "wakefulness",
+      "rem_suppression",
+      "rem_increase",
+      "sws_increase",
+      "sws_decrease"
+     ],
+     "qid": "c5762aaa"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 6,
+     "line": "On the other hand, acute pharmacological blockade of the 5-HT1B receptor with GR 125939 produced an increase of REMS over 4 hours in wild-type mice.87 Thus, the limited available evidence indicates that 5-HT1B receptor activation facilitates the occurrence of W and negatively influences REMS (Table 2).",
+     "effects": [
+      "wakefulness",
+      "rem_increase"
+     ],
+     "qid": "9700a4b1"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "Attempts to characterize the role of serotonin receptors on sleep variables have been limited to the 5-HT1A, 5-HT1B, 5-HT2A, 5-HT2B, 5-HT2C, 5-HT3, 5-HT6 and 5-HT7 receptors.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "e1ecea77"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "Recently, results from several studies have quantified the spontaneous sleep/waking cycles in serotonin 5-HT1A, 5-HT1B, 5-HT2A, 5-HT2C or 5-HT7 receptor knock-out mice.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "fb5af4f4"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "Although the process by which activation of 5-HT receptors facilitates the state of W is still unknown, it should be mentioned that many of the GABAergic cells in the BFB, hippocampus and neocortex on which 5-HT1A and 5-HT1B receptors are expressed, are hyperpolarized by serotonin released from the DRN.146e148 Thus, activation of 5-HT1A and 5-HT1B receptors may attenuate GABAergic input and thereby indirectly increase the release of ACh and GLU at cortical and subcortical sites.",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "38f44b3a"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "Accordingly, opposite to animals treated sistemically with selective 5-HT1A or 5-HT1B receptor agonists where REMS is suppressed, knock-out mice show an increase of the behavioral state.",
+     "effects": [
+      "rem_suppression",
+      "rem_increase"
+     ],
+     "qid": "6316aad1"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 10,
+     "line": "2) Microinjection of 5-HT1A agonists into the DRN increases REMS, whereas local administration of 5- HT1B, 5-HT2A/2C, 5-HT3 and 5-HT7 agonists induces the opposite effect.",
+     "effects": [
+      "rem_increase"
+     ],
+     "qid": "8752852c"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 11,
+     "line": "Activation of serotonin 5-HT1B receptor in the dorsal raphe nucleus affects REM sleep in the rat.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "a68b6d04"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 11,
+     "line": "Effects of the selective 5-HT1B agonist CGS 12066B, on sleep/waking stages and EEG power spectrum in rats.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "645db848"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 12,
+     "line": "Effects of selective activation of the 5-HT1B receptor with CP-94,253 on sleep and wakefulness in the rat.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "72ba2d88"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 13,
+     "line": "Sleep and waking in mutant mice that do not express various proteins involved in serotonergic neurotransmission such as the serotonergic transporter, monoamine oxidase A, and 5-HT1A, 5-HT1B, 5-HT2A, 5-HT2C and 5-HT7 receptors.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "83ef47db"
     }
    ]
   },
@@ -12434,6 +13773,16 @@
       "antipsychotic"
      ],
      "qid": "be378349"
+    },
+    {
+     "corpus": "papers",
+     "page": "wichniak2017",
+     "pdf_page": 5,
+     "line": "Effects on sleep has recently been also reported for a vortioxetine, with clinical action mediated mainly by selective blockade of serotonin reuptake and direct modulation of serotonergic receptors activity (such as 5-HT3, 5-HT7, 5-HT1D, and 5-HT1B) [27].",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "ec73104e"
     }
    ]
   },
@@ -13517,7 +14866,8 @@
      "line": "Blocking 5HT2A receptors enhances slow-wave sleep, and blocking α1 subtypes and H1 receptors interferes with monoamine arousal mechanisms (discussed in Chapter 5 and illustrated in Figures 5-13 and 5-14).",
      "effects": [
       "sleep_promotion",
-      "wakefulness"
+      "wakefulness",
+      "sws_increase"
      ],
      "qid": "3af6bd25"
     },
@@ -13766,7 +15116,8 @@
      "page": 441,
      "line": "5HT2A antagonism (Figures 7-45 and 7-46) specifically enhances slow-wave sleep/deep",
      "effects": [
-      "sleep_promotion"
+      "sleep_promotion",
+      "sws_increase"
      ],
      "qid": "38119ee5"
     },
@@ -14522,6 +15873,576 @@
       "hallucinations"
      ],
      "qid": "17f3cfb9"
+    },
+    {
+     "corpus": "papers",
+     "page": "bates2026",
+     "pdf_page": 9,
+     "line": "ications such as cortisol and 5-HT2A antagonists (e.g., risperidone, olanzapine, and ziprasidone) enhanced SWS while suppressing REM sleep in healthy individuals.",
+     "effects": [
+      "sleep_promotion",
+      "rem_suppression",
+      "rem_increase",
+      "sws_increase"
+     ],
+     "qid": "c7e0eef0"
+    },
+    {
+     "corpus": "papers",
+     "page": "bates2026",
+     "pdf_page": 12,
+     "line": "Serotonin 5-HT(2A) receptor antagonists in the treatment of insomnia: present status and future prospects.",
+     "effects": [
+      "insomnia",
+      "sleep_promotion"
+     ],
+     "qid": "30afea94"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 5,
+     "line": "Systemic administration of agonists for 5HT1A, 5HT1B, 5HT2A/2C or 5HT3 receptors causes an increase in wakefulness and a decrease in sleep (reviewed in 75 ).",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "3f9ba8b0"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 5,
+     "line": "77 Microinjection of a 5HT2A/2C receptor agonist into rat dorsal raphé nucleus also decreases REM sleep with no significant effect on wakefulness.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness",
+      "rem_suppression"
+     ],
+     "qid": "72a261ad"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 5,
+     "line": "Systemic administration of antagonists for the 5HT2A receptor or the 5HT6 receptor to rat decreases wakefulness, increases NREM sleep, and has no effect on REM sleep.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness",
+      "rem_suppression",
+      "rem_increase",
+      "sws_increase",
+      "sws_decrease"
+     ],
+     "qid": "5f098f19"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 5,
+     "line": "Administration of a 5HT1A 80, 82, a 5HT1B 81, or a 5HT2A/2C 83 receptor agonist decreased REM sleep in rodent and human.",
+     "effects": [
+      "sleep_promotion",
+      "rem_suppression"
+     ],
+     "qid": "ae8c98e3"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 5,
+     "line": "These data indicate that serotonin acting at 5HT1A, 5HT1B, and 5HT2A/2C receptors plays a role in suppressing REM sleep.",
+     "effects": [
+      "sleep_promotion",
+      "rem_suppression"
+     ],
+     "qid": "f1fe0d19"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 13,
+     "line": "Effects of activation and blockade of 5-HT2A/2C receptors in the dorsal raphé nucleus on sleep and waking in the rat.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "c5c18350"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 13,
+     "line": "Selective 5-HT2A and 5-HT6 receptor antagonists promote sleep in rats.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "99b99ac2"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 14,
+     "line": "Effects of the serotonin 5-HT2A/2C receptor agonist DOI and of the selective 5-HT2A or 5-HT2C receptor antagonists EMD 281014 and SB-243213, respectively, on sleep and waking in the rat.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "0262391c"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 1,
+     "line": "5-HT2A and 5-HT2C receptor knock-out mice show a significant increase of W and a reduction of slow wave sleep (SWS) which has been ascribed to the increase of catecholaminergic neurotransmission involving mainly the noradrenergic and dopaminergic systems.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness",
+      "sws_increase",
+      "sws_decrease"
+     ],
+     "qid": "0e090e27"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 1,
+     "line": "In contrast, microinjection of the 5-HT1B (CP-94253), 5-HT2A/2C (DOI), 5-HT3 (m-chlorophenylbiguanide) and 5-HT7 (LP-44) receptor agonists into the DRN induces a significant reduction of REMS.",
+     "effects": [
+      "rem_suppression"
+     ],
+     "qid": "082c9ac8"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 1,
+     "line": "Systemic injection of full agonists at postsynaptic 5-HT1A (8-OH-DPAT, flesinoxan), 5-HT1B (CGS 12066B, CP-94235), 5-HT2C (RO 60-0175), 5-HT2A/2C (DOI, DOM), 5-HT3 (m-chlorophenylbiguanide) and 5-HT7 (LP-211) receptors increases W and reduces SWS and REMS.",
+     "effects": [
+      "wakefulness",
+      "rem_suppression",
+      "rem_increase",
+      "sws_increase",
+      "sws_decrease"
+     ],
+     "qid": "1079aa5b"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 1,
+     "line": "Of note, systemic administration of the 5-HT2A/2C receptor antagonists ritanserin, ketanserin, ICI-170,809 or sertindole at the beginning of the light period has been shown to induce a significant increase of SWS and a reduction of REMS in the rat.",
+     "effects": [
+      "rem_suppression",
+      "rem_increase",
+      "sws_increase"
+     ],
+     "qid": "0e941441"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 1,
+     "line": "The 5-HT2A receptor inverse agonist APD-125 induced also an increase of SWS in patients with chronic primary insomnia.",
+     "effects": [
+      "insomnia",
+      "sleep_promotion",
+      "sws_increase"
+     ],
+     "qid": "a97a7976"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 1,
+     "line": "Thus, the association of 5-HT2A antagonists or 5-HT2A inverse agonists with BZD and non-BZD hypnotics could be a valid alternative to normalize SWS in patients with primary or comorbid insomnia.",
+     "effects": [
+      "insomnia",
+      "sleep_promotion"
+     ],
+     "qid": "fb2b8a5f"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 5,
+     "line": "Moreover, 5-HT1A, 5- HT1B, 5-HT2A, 5-HT2C, 5-HT3 and 5-HT7 receptors are part of the key determinants of 5-HT effects on sleep and W.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "91156960"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 6,
+     "line": "5-HT2A and 5-HT2C receptor knock-out mice show a significant increase of W and a reduction of SWS while REMS remains unchanged.92,93 Systemic administration of non-selective 5-HT2A/2C receptor agonists or a selective 5-HT2C receptor agonist consistently increases W and reduces sleep.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness",
+      "rem_suppression",
+      "rem_increase",
+      "sws_increase",
+      "sws_decrease"
+     ],
+     "qid": "f676cf77"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 6,
+     "line": "Infusion of the 5-HT2A/2C receptor agonist DOI into the DRN induced a significant reduction of REMS and of the number of REM periods in the rat.",
+     "effects": [
+      "rem_suppression"
+     ],
+     "qid": "d3899a0e"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 6,
+     "line": "Pretreatment with the selective 5-HT2A or 5-HT2C receptor antagonists EMD 281014 (pruvanserin) or SB-243213, respectively, prevented the DOI-induced suppression of REMS, which indicates that it was mediated by the 5-HT2A and 5-HT2C receptors located in the DRN.95 The serotonin 5-HT2A and 5-HT2Creceptor containing neurons are predominantly GABAergic interneurons.",
+     "effects": [
+      "rem_suppression"
+     ],
+     "qid": "682298fb"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 7,
+     "line": "The role of serotonin 5-HT2A and 5-HT2C receptors in the regulation of sleep and wakefulness in laboratory animals.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "cd7e546b"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 7,
+     "line": "5-HT2A/2C receptors are located not on cholinergic cells but on GABAergic interneurons intermingled with mesopontine cholinergic cells which tends to explain the inhibitory effect of DOI on cholinergic LDT neurons and the reduction of REMS episodes.",
+     "effects": [
+      "rem_suppression"
+     ],
+     "qid": "555e2cce"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 7,
+     "line": "Systemic administration of the non-selective 5-HT2 receptor agonists DOI and DOM has been shown to reduce SWS and REMS, and to augment W in the rat.95,99 Injection of the 5-HT2A/2C receptor antagonists ritanserin, ketanserin, ICI-170,809 or sertindole at the beginning of the light period induced a significant increase of SWS and a reduction of REMS in the rat.",
+     "effects": [
+      "wakefulness",
+      "rem_suppression",
+      "rem_increase",
+      "sws_increase",
+      "sws_decrease"
+     ],
+     "qid": "8114586e"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 7,
+     "line": "Wakefulness was also diminished in most of these studies.76,100e103 More recently, the action of the selective 5-HT2A receptor antagonists volinanserin and pruvanserin and of the 5-HT2A inverse agonist nelotanserin on sleep variables was assessed in rats and mice.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "0fe01b56"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 7,
+     "line": "Systemic injection of the 5-HT2A antagonists or the 5-HT2A inverse agonist significantly increased SWS and reduced W and REMS.93,104e107 Furthermore, pruvanserin prevented the DOI induced increase in W and reduction in SWS.",
+     "effects": [
+      "wakefulness",
+      "rem_suppression",
+      "rem_increase",
+      "sws_increase",
+      "sws_decrease"
+     ],
+     "qid": "679f4666"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 7,
+     "line": "Thus, available evidence tends to indicate that the injection of non-selective 5-HT2A/2C or selective 5-HT2C receptor agonists induces an increase of W and a suppression of REMS in laboratory animals.",
+     "effects": [
+      "wakefulness",
+      "rem_suppression",
+      "rem_increase"
+     ],
+     "qid": "aaadbd4d"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 7,
+     "line": "Presently, there are no data on the effect of selective 5-HT2A agonists on the sleep-wake cycle.",
+     "effects": [
+      "sleep_promotion",
+      "circadian_shift"
+     ],
+     "qid": "8bcd6dd6"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 7,
+     "line": "The injection of non-selective and selective 5-HT2A antagonists or a 5-HT2A receptor inverse agonist has been shown to consistently increase SWS and to reduce REMS.",
+     "effects": [
+      "rem_suppression",
+      "rem_increase",
+      "sws_increase"
+     ],
+     "qid": "b98a0c6b"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 7,
+     "line": "The effects of the non-selective 5-HT2 receptor antagonists ritanserin, ketanserin, seganserin and ICI-169,369, the selective 5-HT2A antagonist eplivanserin and the 5-HT2A inverse agonist nelotanserin have been studied on the sleep EEG of subjects with normal sleep.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "b57d6e62"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 7,
+     "line": "The duration of SWS and of REMS latency were significantly increased by treatment with the 5-HT2A inverse agonist.",
+     "effects": [
+      "rem_increase"
+     ],
+     "qid": "b4b2d6a3"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 7,
+     "line": "Thus, agents that act by competition for agonist binding sites (5HT2A receptor antagonists) or stabilize the receptor in its inactive conformation (5-HT2A receptor inverse agonists) consistently increase SWS in subjects with normal sleep.",
+     "effects": [
+      "sleep_promotion",
+      "sws_increase"
+     ],
+     "qid": "6339d1e4"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "The effects of the selective 5-HT2A receptor antagonists volinanserin, eplivanserin and pruvanserin, and of the 5-HT2A receptor inverse agonists APD-125 and pimavanserin have been studied in patients with chronic primary insomnia.",
+     "effects": [
+      "insomnia",
+      "sleep_promotion"
+     ],
+     "qid": "f07a3632"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "Thus, the association of a 5-HT2A receptor antagonist or a 5-HT2A receptor inverse agonist with a BZD or a non-BZD hypnotic could be a valid alternative to normalize SWS in patients with primary or comorbid insomnia.141",
+     "effects": [
+      "insomnia",
+      "sleep_promotion"
+     ],
+     "qid": "8cfe1f67"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "Attempts to characterize the role of serotonin receptors on sleep variables have been limited to the 5-HT1A, 5-HT1B, 5-HT2A, 5-HT2B, 5-HT2C, 5-HT3, 5-HT6 and 5-HT7 receptors.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "e1ecea77"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "Recently, results from several studies have quantified the spontaneous sleep/waking cycles in serotonin 5-HT1A, 5-HT1B, 5-HT2A, 5-HT2C or 5-HT7 receptor knock-out mice.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "fb5af4f4"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "On the other hand, activation of the 5-HT2A, 5-HT2C and 5-HT7 receptors leads to the depolarization of GABAergic cells that innervate the structures involved in the promotion and the induction of REMS.",
+     "effects": [
+      "rem_increase"
+     ],
+     "qid": "df481bbc"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "Thus, the increased availability of DA and ACh at central sites after 5-HT2A/2C receptor activation could be responsible, at least in part, for the increased incidence of W.",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "57df176a"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "On the other hand, data obtained from 5-HT2A receptor knock-out mice do not confirm the findings generated by selective 5-HT2A receptor antagonists in as much as mutant mice show an increase of W and a reduction of SWS.",
+     "effects": [
+      "wakefulness",
+      "sws_increase",
+      "sws_decrease"
+     ],
+     "qid": "6d850b40"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "Hence, in knock-out mice the 5-HT2A receptor is absent not only in neural structures that participate in the regulation of SWS but also in brain regions involved in the regulation of W.",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "da9283d7"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "While 5-HT2A and 5-HT3 receptor antagonists increase SWS and/or REMS, opposite effects have been described",
+     "effects": [
+      "rem_increase",
+      "sws_increase"
+     ],
+     "qid": "f4a8308c"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 10,
+     "line": "2) Microinjection of 5-HT1A agonists into the DRN increases REMS, whereas local administration of 5- HT1B, 5-HT2A/2C, 5-HT3 and 5-HT7 agonists induces the opposite effect.",
+     "effects": [
+      "rem_increase"
+     ],
+     "qid": "8752852c"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 10,
+     "line": "3) Systemic administration of non-selective 5-HT2A/2C antagonists, selective 5-HT2A antagonists or 5-HT2A inverse agonists increases SWS in laboratory animals, subjects with normal sleep and patients with primary or comorbid insomnia.",
+     "effects": [
+      "insomnia",
+      "sleep_promotion",
+      "sws_increase"
+     ],
+     "qid": "63a471b6"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 12,
+     "line": "Contribution of 5-HT2 receptor subtypes to sleep-wakefulness and respiratory control, and functional adaptations in knock-out mice lacking 5-HT2A receptors.",
+     "effects": [
+      "sleep_promotion",
+      "circadian_shift",
+      "wakefulness"
+     ],
+     "qid": "d4290d95"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 12,
+     "line": "Effects of activation and blockade of 5-HT2A/2C receptors in the dorsal raphe nucleus on sleep and waking in the rat.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "7e180d9c"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 12,
+     "line": "Effects of the serotonin 5-HT2A/2C receptor agonist DOI and of the selective 5-HT2A and 5-HT2C receptor antagonists EMD 281014 and SB-243213, respectively, on sleep and waking in the rat.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "5558f280"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 12,
+     "line": "Selective 5-HT2A and 5-HT6 antagonists promote sleep in the rat.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "ae672295"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 12,
+     "line": "Effects of the 5-HT6 receptor antagonists SB-399885 and RO-4368554 and of the 5-HT2A receptor antagonist EMD 281014 on sleep and wakefulness in the rat during both phases of the lightedark cycle.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "5c1614c3"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 12,
+     "line": "Slow wave sleep in humans: role of 5-HT2A and 5-HT2C receptors.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "97765a8a"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 12,
+     "line": "APD125, a selective serotonin 5-HT(2A) receptor inverse agonist, significantly improves sleep maintenance in primary insomnia.",
+     "effects": [
+      "insomnia",
+      "sleep_promotion"
+     ],
+     "qid": "c477b6be"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 12,
+     "line": "Antagonist of serotonergic 5-HT2A/2C receptors: mutual improvement of sleep, cognition and mood.",
+     "effects": [
+      "pro_cognitive",
+      "sleep_promotion"
+     ],
+     "qid": "2595657a"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 13,
+     "line": "Sleep and waking in mutant mice that do not express various proteins involved in serotonergic neurotransmission such as the serotonergic transporter, monoamine oxidase A, and 5-HT1A, 5-HT1B, 5-HT2A, 5-HT2C and 5-HT7 receptors.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "83ef47db"
     }
    ]
   },
@@ -14731,6 +16652,40 @@
       "antimigraine"
      ],
      "qid": "03806ad7"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 7,
+     "line": "Oral administration of the selective 5-HT2C receptor antagonist SB-243213 significantly increased SWS and reduced REMS during the light period.109 However, with subcutaneous SB-243213 only a significant reduction of time spent in REMS was seen.104 On the other hand, intraperitoneal injection of the 5-HT2B antagonist SB-242084 at light onset increased W and reduced SWS in the first hour.110 Similarly, systemic administration of the 5-HT2B antagonist SB-215505 augmented W and decreased SWS and REMS in mice and rats.111",
+     "effects": [
+      "wakefulness",
+      "rem_suppression",
+      "rem_increase",
+      "sws_increase",
+      "sws_decrease"
+     ],
+     "qid": "49ccab8c"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "Attempts to characterize the role of serotonin receptors on sleep variables have been limited to the 5-HT1A, 5-HT1B, 5-HT2A, 5-HT2B, 5-HT2C, 5-HT3, 5-HT6 and 5-HT7 receptors.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "e1ecea77"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 12,
+     "line": "Increased wakefulness, motor activity and decreased theta activity after blockade of the 5-HT2B receptor by the subtype-selective antagonist SB-215505.",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "a9e5947c"
     }
    ]
   },
@@ -15359,6 +17314,228 @@
       "antidepressant"
      ],
      "qid": "5dcbac4b"
+    },
+    {
+     "corpus": "papers",
+     "page": "wichniak2017",
+     "pdf_page": 5,
+     "line": "Agomelatine is a non-sedative antidepressant drug exerting agonistic action at melatonergic M1 and M2 receptors, and antagonistic action at serotonergic 5HT2c receptors [24].",
+     "effects": [
+      "sedation",
+      "antidepressant"
+     ],
+     "qid": "f0cb474f"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 14,
+     "line": "Effects of the serotonin 5-HT2A/2C receptor agonist DOI and of the selective 5-HT2A or 5-HT2C receptor antagonists EMD 281014 and SB-243213, respectively, on sleep and waking in the rat.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "0262391c"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 1,
+     "line": "5-HT2A and 5-HT2C receptor knock-out mice show a significant increase of W and a reduction of slow wave sleep (SWS) which has been ascribed to the increase of catecholaminergic neurotransmission involving mainly the noradrenergic and dopaminergic systems.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness",
+      "sws_increase",
+      "sws_decrease"
+     ],
+     "qid": "0e090e27"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 1,
+     "line": "Systemic injection of full agonists at postsynaptic 5-HT1A (8-OH-DPAT, flesinoxan), 5-HT1B (CGS 12066B, CP-94235), 5-HT2C (RO 60-0175), 5-HT2A/2C (DOI, DOM), 5-HT3 (m-chlorophenylbiguanide) and 5-HT7 (LP-211) receptors increases W and reduces SWS and REMS.",
+     "effects": [
+      "wakefulness",
+      "rem_suppression",
+      "rem_increase",
+      "sws_increase",
+      "sws_decrease"
+     ],
+     "qid": "1079aa5b"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 5,
+     "line": "Moreover, 5-HT1A, 5- HT1B, 5-HT2A, 5-HT2C, 5-HT3 and 5-HT7 receptors are part of the key determinants of 5-HT effects on sleep and W.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "91156960"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 6,
+     "line": "5-HT2A and 5-HT2C receptor knock-out mice show a significant increase of W and a reduction of SWS while REMS remains unchanged.92,93 Systemic administration of non-selective 5-HT2A/2C receptor agonists or a selective 5-HT2C receptor agonist consistently increases W and reduces sleep.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness",
+      "rem_suppression",
+      "rem_increase",
+      "sws_increase",
+      "sws_decrease"
+     ],
+     "qid": "f676cf77"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 6,
+     "line": "Pretreatment with the selective 5-HT2A or 5-HT2C receptor antagonists EMD 281014 (pruvanserin) or SB-243213, respectively, prevented the DOI-induced suppression of REMS, which indicates that it was mediated by the 5-HT2A and 5-HT2C receptors located in the DRN.95 The serotonin 5-HT2A and 5-HT2Creceptor containing neurons are predominantly GABAergic interneurons.",
+     "effects": [
+      "rem_suppression"
+     ],
+     "qid": "682298fb"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 7,
+     "line": "The role of serotonin 5-HT2A and 5-HT2C receptors in the regulation of sleep and wakefulness in laboratory animals.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "cd7e546b"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 7,
+     "line": "The actions of the selective 5-HT2C receptor agonist RO 60-0175 on sleep-wake stages have been evaluated in the rat.",
+     "effects": [
+      "sleep_promotion",
+      "circadian_shift"
+     ],
+     "qid": "df7c94ef"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 7,
+     "line": "Oral administration of the selective 5-HT2C receptor antagonist SB-243213 significantly increased SWS and reduced REMS during the light period.109 However, with subcutaneous SB-243213 only a significant reduction of time spent in REMS was seen.104 On the other hand, intraperitoneal injection of the 5-HT2B antagonist SB-242084 at light onset increased W and reduced SWS in the first hour.110 Similarly, systemic administration of the 5-HT2B antagonist SB-215505 augmented W and decreased SWS and REMS in mice and rats.111",
+     "effects": [
+      "wakefulness",
+      "rem_suppression",
+      "rem_increase",
+      "sws_increase",
+      "sws_decrease"
+     ],
+     "qid": "49ccab8c"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 7,
+     "line": "Thus, available evidence tends to indicate that the injection of non-selective 5-HT2A/2C or selective 5-HT2C receptor agonists induces an increase of W and a suppression of REMS in laboratory animals.",
+     "effects": [
+      "wakefulness",
+      "rem_suppression",
+      "rem_increase"
+     ],
+     "qid": "aaadbd4d"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 7,
+     "line": "In contrast, the administration of selective 5-HT2C receptor antagonists induces inconsistent effects on sleep variables.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "fa279dc3"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "Attempts to characterize the role of serotonin receptors on sleep variables have been limited to the 5-HT1A, 5-HT1B, 5-HT2A, 5-HT2B, 5-HT2C, 5-HT3, 5-HT6 and 5-HT7 receptors.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "e1ecea77"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "Recently, results from several studies have quantified the spontaneous sleep/waking cycles in serotonin 5-HT1A, 5-HT1B, 5-HT2A, 5-HT2C or 5-HT7 receptor knock-out mice.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "fb5af4f4"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "On the other hand, activation of the 5-HT2A, 5-HT2C and 5-HT7 receptors leads to the depolarization of GABAergic cells that innervate the structures involved in the promotion and the induction of REMS.",
+     "effects": [
+      "rem_increase"
+     ],
+     "qid": "df481bbc"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 12,
+     "line": "Sleep and sleep homeostasis in mice lacking the 5-HT2C receptor.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "9203270d"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 12,
+     "line": "Effects of the serotonin 5-HT2A/2C receptor agonist DOI and of the selective 5-HT2A and 5-HT2C receptor antagonists EMD 281014 and SB-243213, respectively, on sleep and waking in the rat.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "5558f280"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 12,
+     "line": "Effect of SB-243213, a selective 5-HT2C receptor antagonist on the rat sleep profile: a comparison to paroxetine.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "fabe3035"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 12,
+     "line": "Slow wave sleep in humans: role of 5-HT2A and 5-HT2C receptors.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "97765a8a"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 13,
+     "line": "Sleep and waking in mutant mice that do not express various proteins involved in serotonergic neurotransmission such as the serotonergic transporter, monoamine oxidase A, and 5-HT1A, 5-HT1B, 5-HT2A, 5-HT2C and 5-HT7 receptors.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "83ef47db"
     }
    ]
   },
@@ -15646,6 +17823,201 @@
       "antimigraine"
      ],
      "qid": "03806ad7"
+    },
+    {
+     "corpus": "papers",
+     "page": "wichniak2017",
+     "pdf_page": 5,
+     "line": "Effects on sleep has recently been also reported for a vortioxetine, with clinical action mediated mainly by selective blockade of serotonin reuptake and direct modulation of serotonergic receptors activity (such as 5-HT3, 5-HT7, 5-HT1D, and 5-HT1B) [27].",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "ec73104e"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 5,
+     "line": "Systemic administration of agonists for 5HT1A, 5HT1B, 5HT2A/2C or 5HT3 receptors causes an increase in wakefulness and a decrease in sleep (reviewed in 75 ).",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "3f9ba8b0"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 1,
+     "line": "In contrast, microinjection of the 5-HT1B (CP-94253), 5-HT2A/2C (DOI), 5-HT3 (m-chlorophenylbiguanide) and 5-HT7 (LP-44) receptor agonists into the DRN induces a significant reduction of REMS.",
+     "effects": [
+      "rem_suppression"
+     ],
+     "qid": "082c9ac8"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 1,
+     "line": "Systemic injection of full agonists at postsynaptic 5-HT1A (8-OH-DPAT, flesinoxan), 5-HT1B (CGS 12066B, CP-94235), 5-HT2C (RO 60-0175), 5-HT2A/2C (DOI, DOM), 5-HT3 (m-chlorophenylbiguanide) and 5-HT7 (LP-211) receptors increases W and reduces SWS and REMS.",
+     "effects": [
+      "wakefulness",
+      "rem_suppression",
+      "rem_increase",
+      "sws_increase",
+      "sws_decrease"
+     ],
+     "qid": "1079aa5b"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 5,
+     "line": "Moreover, 5-HT1A, 5- HT1B, 5-HT2A, 5-HT2C, 5-HT3 and 5-HT7 receptors are part of the key determinants of 5-HT effects on sleep and W.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "91156960"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 7,
+     "line": "The microinjection of the 5-HT3 receptor agonist m-chlorophenylbiguanide (m-CPBG) into the DRN caused a reduction of REMS.",
+     "effects": [
+      "rem_suppression"
+     ],
+     "qid": "6a4531e4"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 7,
+     "line": "Pretreatment with the 5-HT3 antagonist ondansetron prevented the m-CPBG-induced suppression of REMS.121 Concerning the mechanism involved in the reduction of REMS by m-CPBG, it",
+     "effects": [
+      "rem_suppression"
+     ],
+     "qid": "01b5cdc0"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 8,
+     "line": "The role of serotonin 5-HT3, 5-HT6 and 5-HT7 receptors in the regulation of sleep and wakefulness in laboratory animals.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "4f8712f3"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 8,
+     "line": "has been shown that the 5-HT3 receptor agonist 2-methyl-5-HT increases the electrically-induced tritium overflow from rat midbrain slices containing the raphe nuclei loaded with [3 H] 5-HT.122 Thus, the m-CPBG-induced suppression of REMS would depend on the increase of 5-HT in areas relevant to the promotion and maintenance of the behavioral state.",
+     "effects": [
+      "rem_suppression",
+      "rem_increase"
+     ],
+     "qid": "1321f392"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 8,
+     "line": "In this respect, there is evidence in favour of a role for the glutamatergic system in the 5-HT3 receptorinduced suppression of REMS.",
+     "effects": [
+      "rem_suppression"
+     ],
+     "qid": "64aa9d80"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "Attempts to characterize the role of serotonin receptors on sleep variables have been limited to the 5-HT1A, 5-HT1B, 5-HT2A, 5-HT2B, 5-HT2C, 5-HT3, 5-HT6 and 5-HT7 receptors.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "e1ecea77"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "Not much is known about the mechanisms subserving the increase of W and reduction of REMS after activation of 5-HT3 and 5-HT7 receptors.",
+     "effects": [
+      "wakefulness",
+      "rem_suppression",
+      "rem_increase"
+     ],
+     "qid": "9a342ee8"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "The 5-HT3 receptor is well known for stimulating the release of 5-HT, NE, DA, HA, GLU, and GABA in the brain stem, the limbic system, the BFB, and the cortex, which could tentatively explain its disruption of sleep variables.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "f7738393"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "While 5-HT2A and 5-HT3 receptor antagonists increase SWS and/or REMS, opposite effects have been described",
+     "effects": [
+      "rem_increase",
+      "sws_increase"
+     ],
+     "qid": "f4a8308c"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 10,
+     "line": "2) Microinjection of 5-HT1A agonists into the DRN increases REMS, whereas local administration of 5- HT1B, 5-HT2A/2C, 5-HT3 and 5-HT7 agonists induces the opposite effect.",
+     "effects": [
+      "rem_increase"
+     ],
+     "qid": "8752852c"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 12,
+     "line": "Activation of the serotonin 5-HT3 receptor in the dorsal raphe nucleus suppresses REM sleep in the rat.",
+     "effects": [
+      "sleep_promotion",
+      "rem_suppression"
+     ],
+     "qid": "5509e2c9"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 12,
+     "line": "The effects of selective activation of the 5- HT3 receptor with m-chlorophenylbiguanide on sleep and wakefulness in the rat.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "fe008786"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 12,
+     "line": "Central action of 5-HT3 receptor ligands in the regulation of sleep-wakefulness and raphe neuronal activity in the rat.",
+     "effects": [
+      "sleep_promotion",
+      "circadian_shift",
+      "wakefulness"
+     ],
+     "qid": "b8b216f7"
     }
    ]
   },
@@ -15767,6 +18139,17 @@
      ],
      "species": "Human",
      "qid": "466cb943"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 10,
+     "line": "1) Evaluation of the effects of systemic and local administration of selective 5-HT4, 5-HT5 and 5-HT6 receptor agonists on the sleep-wake cycle.",
+     "effects": [
+      "sleep_promotion",
+      "circadian_shift"
+     ],
+     "qid": "1a258811"
     }
    ]
   },
@@ -16245,6 +18628,119 @@
       "antipsychotic"
      ],
      "qid": "b4f2ac25"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 5,
+     "line": "Systemic administration of antagonists for the 5HT2A receptor or the 5HT6 receptor to rat decreases wakefulness, increases NREM sleep, and has no effect on REM sleep.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness",
+      "rem_suppression",
+      "rem_increase",
+      "sws_increase",
+      "sws_decrease"
+     ],
+     "qid": "5f098f19"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 13,
+     "line": "Selective 5-HT2A and 5-HT6 receptor antagonists promote sleep in rats.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "99b99ac2"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 8,
+     "line": "The role of serotonin 5-HT3, 5-HT6 and 5-HT7 receptors in the regulation of sleep and wakefulness in laboratory animals.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "4f8712f3"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 8,
+     "line": "Not much is known about the role of the 5-HT6 receptor in the regulation of sleep and W.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "28956823"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 8,
+     "line": "We have found that systemic administration of the selective 5-HT6 receptor antagonists SB-399885 and RO-4368554 during the light phase causes an increase of W and a reduction of SWS and REMS in the rat (Table 4).",
+     "effects": [
+      "wakefulness",
+      "rem_suppression",
+      "rem_increase",
+      "sws_increase",
+      "sws_decrease"
+     ],
+     "qid": "6bf13913"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 8,
+     "line": "On the other hand, no significant changes of values corresponding to sleep variables were observed following the injection of RO4368554 during the dark phase.107 A series of neurochemical studies have ascertained the influence of 5-HT6 receptor blockade on various neurotransmitter systems.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "951eff36"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "Attempts to characterize the role of serotonin receptors on sleep variables have been limited to the 5-HT1A, 5-HT1B, 5-HT2A, 5-HT2B, 5-HT2C, 5-HT3, 5-HT6 and 5-HT7 receptors.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "e1ecea77"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 10,
+     "line": "1) Evaluation of the effects of systemic and local administration of selective 5-HT4, 5-HT5 and 5-HT6 receptor agonists on the sleep-wake cycle.",
+     "effects": [
+      "sleep_promotion",
+      "circadian_shift"
+     ],
+     "qid": "1a258811"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 12,
+     "line": "Selective 5-HT2A and 5-HT6 antagonists promote sleep in the rat.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "ae672295"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 12,
+     "line": "Effects of the 5-HT6 receptor antagonists SB-399885 and RO-4368554 and of the 5-HT2A receptor antagonist EMD 281014 on sleep and wakefulness in the rat during both phases of the lightedark cycle.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "5c1614c3"
     }
    ]
   },
@@ -16566,6 +19062,218 @@
       "antimigraine"
      ],
      "qid": "03806ad7"
+    },
+    {
+     "corpus": "papers",
+     "page": "wichniak2017",
+     "pdf_page": 5,
+     "line": "Effects on sleep has recently been also reported for a vortioxetine, with clinical action mediated mainly by selective blockade of serotonin reuptake and direct modulation of serotonergic receptors activity (such as 5-HT3, 5-HT7, 5-HT1D, and 5-HT1B) [27].",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "ec73104e"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 1,
+     "line": "Sleep variables have been characterized, in addition, in 5-HT7 receptor knock-out mice; the mutants spend less time in REMS that their wild-type counterparts.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "b58cfdae"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 1,
+     "line": "In contrast, microinjection of the 5-HT1B (CP-94253), 5-HT2A/2C (DOI), 5-HT3 (m-chlorophenylbiguanide) and 5-HT7 (LP-44) receptor agonists into the DRN induces a significant reduction of REMS.",
+     "effects": [
+      "rem_suppression"
+     ],
+     "qid": "082c9ac8"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 1,
+     "line": "Systemic injection of full agonists at postsynaptic 5-HT1A (8-OH-DPAT, flesinoxan), 5-HT1B (CGS 12066B, CP-94235), 5-HT2C (RO 60-0175), 5-HT2A/2C (DOI, DOM), 5-HT3 (m-chlorophenylbiguanide) and 5-HT7 (LP-211) receptors increases W and reduces SWS and REMS.",
+     "effects": [
+      "wakefulness",
+      "rem_suppression",
+      "rem_increase",
+      "sws_increase",
+      "sws_decrease"
+     ],
+     "qid": "1079aa5b"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 5,
+     "line": "Moreover, 5-HT1A, 5- HT1B, 5-HT2A, 5-HT2C, 5-HT3 and 5-HT7 receptors are part of the key determinants of 5-HT effects on sleep and W.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "91156960"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 8,
+     "line": "The role of serotonin 5-HT3, 5-HT6 and 5-HT7 receptors in the regulation of sleep and wakefulness in laboratory animals.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "4f8712f3"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 8,
+     "line": "Hedlund et al.132 have characterized sleep variables in 5-HT7 receptor knock-out mice.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "e942f7fa"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 8,
+     "line": "There were no differences between the 5-HT7 receptor knock-out mice and the wild type animals with respect to W and SWS duration.",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "fdf98c2f"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 8,
+     "line": "Pretreatment with the 5-HT7 receptor antagonist SB-269970 averted the LP-44 suppression of REMS.133 It was tentatively proposed that the activation by LP-44 of projection GABAergic neurons located in the DRN could be responsible for the inhibition of cholinergic cells in the LDT/PPT and the decrease of REMS.",
+     "effects": [
+      "rem_suppression"
+     ],
+     "qid": "f461c403"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 8,
+     "line": "Intraperitoneal administration of the 5-HT7 receptor agonist LP211 during the light phase significantly increased W and reduced REMS and the number of REM periods in the rat.",
+     "effects": [
+      "wakefulness",
+      "rem_suppression",
+      "rem_increase"
+     ],
+     "qid": "db71d4e1"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 8,
+     "line": "Thus, the LP-211 activation of 5-HT7 receptors expressed by neurons of the BFB could be partly responsible for the increase of W.",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "1ec1b084"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "Attempts to characterize the role of serotonin receptors on sleep variables have been limited to the 5-HT1A, 5-HT1B, 5-HT2A, 5-HT2B, 5-HT2C, 5-HT3, 5-HT6 and 5-HT7 receptors.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "e1ecea77"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "Recently, results from several studies have quantified the spontaneous sleep/waking cycles in serotonin 5-HT1A, 5-HT1B, 5-HT2A, 5-HT2C or 5-HT7 receptor knock-out mice.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "fb5af4f4"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "On the other hand, activation of the 5-HT2A, 5-HT2C and 5-HT7 receptors leads to the depolarization of GABAergic cells that innervate the structures involved in the promotion and the induction of REMS.",
+     "effects": [
+      "rem_increase"
+     ],
+     "qid": "df481bbc"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "Not much is known about the mechanisms subserving the increase of W and reduction of REMS after activation of 5-HT3 and 5-HT7 receptors.",
+     "effects": [
+      "wakefulness",
+      "rem_suppression",
+      "rem_increase"
+     ],
+     "qid": "9a342ee8"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 9,
+     "line": "An unexpected picture has emerged also with respect to the 5-HT7 receptor, such that REMS is suppressed in both mutant mice and animals administered a selective 5-HT7 receptor agonist.",
+     "effects": [
+      "rem_suppression"
+     ],
+     "qid": "e47c9d60"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 10,
+     "line": "2) Microinjection of 5-HT1A agonists into the DRN increases REMS, whereas local administration of 5- HT1B, 5-HT2A/2C, 5-HT3 and 5-HT7 agonists induces the opposite effect.",
+     "effects": [
+      "rem_increase"
+     ],
+     "qid": "8752852c"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 12,
+     "line": "5-HT7 inhibition and inactivation induce antidepressantlike behavior and sleep pattern.",
+     "effects": [
+      "antidepressant",
+      "sleep_promotion"
+     ],
+     "qid": "c96d9e5c"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 12,
+     "line": "The serotonin 5-HT7 agonist LP-44 microinjected into the dorsal raphe nucleus suppresses REM sleep in the rat.",
+     "effects": [
+      "sleep_promotion",
+      "rem_suppression"
+     ],
+     "qid": "7458ccea"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 13,
+     "line": "Sleep and waking in mutant mice that do not express various proteins involved in serotonergic neurotransmission such as the serotonergic transporter, monoamine oxidase A, and 5-HT1A, 5-HT1B, 5-HT2A, 5-HT2C and 5-HT7 receptors.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "83ef47db"
     }
    ]
   },
@@ -16804,6 +19512,91 @@
       "antimigraine"
      ],
      "qid": "e66cf4df"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 4,
+     "line": "Adenosine A1 and A2A receptors are antagonized by caffeine and the idea that adenosine promotes sleep is supported by the ubiquitous consumption of caffeine to maintain wakefulness and enhance alertness.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "747b5457"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 4,
+     "line": "Inactivating adenosine A1 receptors in the basal forebrain decreases EEG delta power and NREM sleep time, 59 and immunohistochemical studies reveal that the basal forebrain contains A1 receptors, but not A2A receptors.",
+     "effects": [
+      "sleep_promotion",
+      "sws_decrease"
+     ],
+     "qid": "72b7c32d"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 5,
+     "line": "Within the pontine reticular formation, activation of adenosine A2A receptors increases time needed to recover from general anesthesia, 66 increases acetylcholine release, 66, 67 and increases the amount of time spent in NREM sleep 67 and REM sleep.",
+     "effects": [
+      "sleep_promotion",
+      "rem_increase",
+      "sws_increase"
+     ],
+     "qid": "90d2b004"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 5,
+     "line": "67, 68 The increase in REM sleep may be a result of the A2A-mediated increase in acetylcholine release, because coadministration of a muscarinic receptor antagonist with the A2A agonist blocks the REM sleep increase.",
+     "effects": [
+      "sleep_promotion",
+      "rem_increase"
+     ],
+     "qid": "878da5c6"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 12,
+     "line": "Opposite changes in adenosine A1 and A2A receptor mRNA in the rat following sleep deprivation.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "c9326f8c"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 13,
+     "line": "Adenosine A1 and A2A receptors in mouse prefrontal cortex modulate acetylcholine release and behavioral arousal.",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "54f22a08"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 13,
+     "line": "Dialysis delivery of an adenosine A2A agonist into the pontine reticular formation of C57BL/6J mouse increases pontine acetylcholine release and sleep.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "a4f8b7d7"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 13,
+     "line": "Enhancement of rapid eye movement sleep in the rat by actions at A1 and A2a aednosine receptor subtypes with a differential sensitivity to atropine.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "40d33a44"
     }
    ]
   },
@@ -16952,6 +19745,24 @@
       "analgesia"
      ],
      "qid": "9b0ed88b"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "sigma_1_receptor",
+     "line": "3-Methoxydextrallorphan - 3-MeO-PCP - 4C-T-2 - 4-IBP - 4-IPBS - 4-MeO-PCP - 5-MeO-DALT - 5-MeO-DiPT - Amitriptyline - Azidopamil - Chlorpromazine - Clemastine - Clomipramine - Clorgiline - D -Deprenyl - DiPT - DPT - Ibogaine - Imipramine - KCR-12-83.1 - Nemonapride - Noribogaine - RHL-033 - RS-67,333 - RTI-55 - Saffron - Safinamide - Selegiline - Spipethiane - Trifluoperazine - W-18 - YKP10A - Agonists:",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "e7856d2a"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "sigma_1_receptor",
+     "line": "3-Methoxydextrallorphan - 3-MeO-PCE - 4-MeO-PCP - 5-MeO-DALT - 5-MeO-DiPT - Clemastine - DiPT - DPT - Ibogaine - Lu 29-252 - Nemonapride - Nepinalone - Noribogaine - Pentazocine - RS-67,333 - Safinamide - TMA - UMB-23 - UMB-82 - W-18 - Agonists:",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "a1a7c236"
     }
    ]
   },
@@ -17589,6 +20400,111 @@
       "antidepressant"
      ],
      "qid": "27359f8b"
+    },
+    {
+     "corpus": "papers",
+     "page": "wichniak2017",
+     "pdf_page": 2,
+     "line": "Among them, most prominent are serotonin and norepinephrine reuptake inhibitors (SNRI), norepinephrine reuptake inhibitors (NRI), monoamine oxidase inhibitors (MAOI), selective serotonin reuptake inhibitors (SSRI), and activating tricyclic antidepressants (TCA).",
+     "effects": [
+      "antidepressant"
+     ],
+     "qid": "a3040dbe"
+    },
+    {
+     "corpus": "papers",
+     "page": "wichniak2017",
+     "pdf_page": 4,
+     "line": "TCA tricyclic antidepressants, MAOI monoamine oxidase inhibitors, SSRI selective serotonin reuptake inhibitors, SNRI serotonin norepinephrine reuptake inhibitors, NRI norepinephrine reuptake inhibitors, ↑ increase, ↓ decrease, 0 no or minimal effect, ? unknown",
+     "effects": [
+      "antidepressant"
+     ],
+     "qid": "749a975a"
+    },
+    {
+     "corpus": "papers",
+     "page": "wichniak2017",
+     "pdf_page": 5,
+     "line": "Effects on sleep has recently been also reported for a vortioxetine, with clinical action mediated mainly by selective blockade of serotonin reuptake and direct modulation of serotonergic receptors activity (such as 5-HT3, 5-HT7, 5-HT1D, and 5-HT1B) [27].",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "ec73104e"
+    },
+    {
+     "corpus": "papers",
+     "page": "wichniak2017",
+     "pdf_page": 7,
+     "line": "Effect of mirtazapine versus selective serotonin reuptake inhibitors on benzodiazepine use in patients with major depressive disorder: a pragmatic, multicenter, open-label, randomized, activecontrolled, 24-week trial.",
+     "effects": [
+      "antidepressant"
+     ],
+     "qid": "0532d75d"
+    },
+    {
+     "corpus": "papers",
+     "page": "bates2026",
+     "pdf_page": 2,
+     "line": "Medications such as benzodiazepines, selective serotonin reuptake inhibitors (SSRIs), and novel agents like dual orexin receptor antag­ onists and melatonin receptor agonists have been studied for their effects on sleep architecture, specifically focusing on enhancing TST, SWS, and REM sleep.",
+     "effects": [
+      "sleep_promotion",
+      "rem_increase",
+      "sws_increase"
+     ],
+     "qid": "fef684b7"
+    },
+    {
+     "corpus": "papers",
+     "page": "bates2026",
+     "pdf_page": 3,
+     "line": "Several drugs, such as antipsychotics, gabapentin, and selective serotonin reuptake inhibitors (SSRIs), were studied extensively but yielded inconsistent findings.",
+     "effects": [
+      "psychosis",
+      "antipsychotic"
+     ],
+     "qid": "d3e37155"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 5,
+     "line": "The forgoing data underlie the fact that insomnia can be secondary to the use of selective serotonin reuptake inhibitors (SSRI) or serotonin, norepinephrine reuptake inhibitors (SNRI).",
+     "effects": [
+      "insomnia",
+      "sleep_promotion"
+     ],
+     "qid": "0aab22b3"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 2,
+     "line": "In this respect, most of the drugs used to treat mood disorders including the selective serotonin reuptake inhibitors (SSRIs), the tricyclic antidepressants and the monoamine oxidase inhibitors increase synaptic levels of 5-HT.",
+     "effects": [
+      "antidepressant"
+     ],
+     "qid": "66b546a5"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 6,
+     "line": "The effects of acute administration of selective serotonin reuptake inhibitors (SSRIs) on sleep have been studied in laboratory animals, healthy adults, and depressed patients.83e85 SSRIs are potent REMS suppressors, prolonging the latency to the first REM period.",
+     "effects": [
+      "sleep_promotion",
+      "rem_suppression"
+     ],
+     "qid": "e48232cc"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 11,
+     "line": "Effects of selective serotonin reuptake inhibitors on objective and subjective sleep quality.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "fe5c2479"
     }
    ]
   },
@@ -18058,6 +20974,37 @@
       "sleep_promotion"
      ],
      "qid": "c58e4b0a"
+    },
+    {
+     "corpus": "papers",
+     "page": "wichniak2017",
+     "pdf_page": 2,
+     "line": "Among them, most prominent are serotonin and norepinephrine reuptake inhibitors (SNRI), norepinephrine reuptake inhibitors (NRI), monoamine oxidase inhibitors (MAOI), selective serotonin reuptake inhibitors (SSRI), and activating tricyclic antidepressants (TCA).",
+     "effects": [
+      "antidepressant"
+     ],
+     "qid": "a3040dbe"
+    },
+    {
+     "corpus": "papers",
+     "page": "wichniak2017",
+     "pdf_page": 4,
+     "line": "TCA tricyclic antidepressants, MAOI monoamine oxidase inhibitors, SSRI selective serotonin reuptake inhibitors, SNRI serotonin norepinephrine reuptake inhibitors, NRI norepinephrine reuptake inhibitors, ↑ increase, ↓ decrease, 0 no or minimal effect, ? unknown",
+     "effects": [
+      "antidepressant"
+     ],
+     "qid": "749a975a"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 5,
+     "line": "The forgoing data underlie the fact that insomnia can be secondary to the use of selective serotonin reuptake inhibitors (SSRI) or serotonin, norepinephrine reuptake inhibitors (SNRI).",
+     "effects": [
+      "insomnia",
+      "sleep_promotion"
+     ],
+     "qid": "0aab22b3"
     }
    ]
   },
@@ -18477,6 +21424,19 @@
       "delusional_parasitosis"
      ],
      "qid": "f65e565b"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 6,
+     "line": "Dopamine does promote wakefulness and dopamine-transporter-knockout mice display increased wakefulness and decreased NREM sleep compared to controls.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness",
+      "sws_increase",
+      "sws_decrease"
+     ],
+     "qid": "313a8607"
     }
    ]
   },
@@ -18660,6 +21620,16 @@
       "circadian_shift"
      ],
      "qid": "e69b7f9d"
+    },
+    {
+     "corpus": "papers",
+     "page": "monti2011",
+     "pdf_page": 13,
+     "line": "Sleep and waking in mutant mice that do not express various proteins involved in serotonergic neurotransmission such as the serotonergic transporter, monoamine oxidase A, and 5-HT1A, 5-HT1B, 5-HT2A, 5-HT2C and 5-HT7 receptors.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "83ef47db"
     }
    ]
   },
@@ -19685,6 +22655,19 @@
       "antidepressant"
      ],
      "qid": "ae6f79b2"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 6,
+     "line": "However, bilateral microinjection of an α 1-antagonist (prazosin), an α 2-agonist (clonidine), or a β-antagonist (propranolol) into the pedunculopontine tegmental nucleus increases REM sleep with little to no effect on NREM sleep or wakefulness.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness",
+      "rem_increase",
+      "sws_increase"
+     ],
+     "qid": "431308a7"
     }
    ]
   },
@@ -19935,6 +22918,68 @@
       "sleep_promotion"
      ],
      "qid": "0de672e6"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 3,
+     "line": "Much of the research on the regulation of sleep by acetylcholine has focused on transmission mediated by muscarinic cholinergic receptors.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "ce1b0409"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 3,
+     "line": "Five subtypes (M1–M5) of the muscarinic receptor have been identified, 29 and the M2 subtype plays a key role in the generation of REM sleep.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "efeab6ec"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 5,
+     "line": "67, 68 The increase in REM sleep may be a result of the A2A-mediated increase in acetylcholine release, because coadministration of a muscarinic receptor antagonist with the A2A agonist blocks the REM sleep increase.",
+     "effects": [
+      "sleep_promotion",
+      "rem_increase"
+     ],
+     "qid": "878da5c6"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 11,
+     "line": "M2 muscarinic receptor subtype in the feline medial pontine reticular formation modulates the amount of rapid eye movement sleep.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "be0b8e16"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 11,
+     "line": "Location and quantification of muscarinic receptor subtypes in rat pons: implications for REM sleep generation.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "dfad2bb9"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 17,
+     "line": "Muscarinic-2 and orexin-2 receptors on GABAergic and other neurons in the rat mesopontine tegmentum and their potential role in sleep-wake control.",
+     "effects": [
+      "sleep_promotion",
+      "circadian_shift"
+     ],
+     "qid": "c8dc9f94"
     }
    ]
   },
@@ -20148,7 +23193,8 @@
      "line": "Blocking 5HT2A receptors enhances slow-wave sleep, and blocking α1 subtypes and H1 receptors interferes with monoamine arousal mechanisms (discussed in Chapter 5 and illustrated in Figures 5-13 and 5-14).",
      "effects": [
       "sleep_promotion",
-      "wakefulness"
+      "wakefulness",
+      "sws_increase"
      ],
      "qid": "3af6bd25"
     },
@@ -20546,6 +23592,19 @@
       "vasodilation"
      ],
      "qid": "c1e10c75"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 6,
+     "line": "However, bilateral microinjection of an α 1-antagonist (prazosin), an α 2-agonist (clonidine), or a β-antagonist (propranolol) into the pedunculopontine tegmental nucleus increases REM sleep with little to no effect on NREM sleep or wakefulness.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness",
+      "rem_increase",
+      "sws_increase"
+     ],
+     "qid": "431308a7"
     }
    ]
   },
@@ -20998,7 +24057,9 @@
      "page": 451,
      "line": "Orexin also stabilizes motor movements, allowing normal movement in the day when orexin levels are high and facilitating inhibition of motor movements at night, especially during REM sleep, when orexin levels are low.",
      "effects": [
-      "sleep_promotion"
+      "sleep_promotion",
+      "rem_suppression",
+      "rem_increase"
      ],
      "qid": "afa53cfd"
     },
@@ -21278,6 +24339,268 @@
       "wakefulness"
      ],
      "qid": "71767272"
+    },
+    {
+     "corpus": "papers",
+     "page": "bates2026",
+     "pdf_page": 2,
+     "line": "Medications such as benzodiazepines, selective serotonin reuptake inhibitors (SSRIs), and novel agents like dual orexin receptor antag­ onists and melatonin receptor agonists have been studied for their effects on sleep architecture, specifically focusing on enhancing TST, SWS, and REM sleep.",
+     "effects": [
+      "sleep_promotion",
+      "rem_increase",
+      "sws_increase"
+     ],
+     "qid": "fef684b7"
+    },
+    {
+     "corpus": "papers",
+     "page": "bates2026",
+     "pdf_page": 11,
+     "line": "Effects of orexin receptor antagonism on human sleep architecture: A systematic review.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "7b10a7c8"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 4,
+     "line": "61 Adenosine indirectly inhibits wakefulness-promoting hypocretin (orexin)-containing neurons in the lateral hypothalamus (Fig.",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "02e8d0c5"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 7,
+     "line": "The present chapter focuses on hypocretin (orexin), leptin, and ghrelin because of their relevance for sleep disorders medicine.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "b89e8640"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 7,
+     "line": "Numerous lines of evidence support a role for hypocretin-1 and -2 (also called orexin A and B) in the maintenance of wakefulness.",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "fa9a12f7"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 12,
+     "line": "Adenosine inhibits activity of hypocretin/orexin neurons by the A1 receptor in the lateral hypothalamus: a possible sleep-promoting effect.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "23a97232"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 16,
+     "line": "Discharge of identified orexin/hypocretin neurons across the sleep-waking cycle.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "771b081a"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 16,
+     "line": "Release of hypocretin (orexin) during waking and sleep states.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "0ffc1ad8"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 16,
+     "line": "The sleep disorder canine narcolepsy is caused by a mutation in the hypocretin (orexin) receptor 2 gene.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "e1271c83"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 16,
+     "line": "Symptomatic narcolepsy, cataplexy, and hypersomnia, and their implications in the hypothalamic hypocretin/orexin system.",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "c358049f"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 16,
+     "line": "Expression of a poly-glutamine-ataxin-3 transgene in orexin neurons induces narcolepsy-cataplexy in the rat.",
+     "effects": [
+      "wakefulness",
+      "ataxia"
+     ],
+     "qid": "66bba4b2"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 16,
+     "line": "Effects of hypocretin (orexin) neuronal loss on sleep and extracellular adenosine levels in the rat basal forebrain.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "5a319708"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 16,
+     "line": "Distinct narcolepsy syndromes in orexin receptor-2 and orexin null mice: molecular genetic dissection of non-REM and REM sleep regulatory processes.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "9593eee8"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 17,
+     "line": "Muscarinic-2 and orexin-2 receptors on GABAergic and other neurons in the rat mesopontine tegmentum and their potential role in sleep-wake control.",
+     "effects": [
+      "sleep_promotion",
+      "circadian_shift"
+     ],
+     "qid": "c8dc9f94"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 17,
+     "line": "Direct and indirect excitation of laterodorsal tegmental neurons by hypocretin/orexin peptides: implications for wakefulness and narcolepsy.",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "082ea099"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 17,
+     "line": "Convergent excitation of dorsal raphe serotonin neurons by multiple arousal systems (orexin/hypocretin, histamine and noradrenaline).",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "88d9bf42"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 17,
+     "line": "Orexin A activates locus coeruleus cell firing and increases arousal in the rat.",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "732f0836"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 17,
+     "line": "The novel brain neuropeptide, orexin-A, modulates the sleep-wake cycle of rats.",
+     "effects": [
+      "sleep_promotion",
+      "circadian_shift"
+     ],
+     "qid": "e5956cc9"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 17,
+     "line": "Effects of lateral preoptic area application of orexin-A on sleep-wakefulness.",
+     "effects": [
+      "sleep_promotion",
+      "circadian_shift",
+      "wakefulness"
+     ],
+     "qid": "eebbbcb9"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 17,
+     "line": "Effects on sleep and wakefulness on the injection of hypocretin-1 (orexin-A) into the laterodorsal tegmental nucleus of the cat.",
+     "effects": [
+      "sleep_promotion",
+      "wakefulness"
+     ],
+     "qid": "ae923a88"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 17,
+     "line": "Sleep-wakefulness effects after microinjections of hypocretin-1 (orexin A) in cholinoceptive areas of the cat oral pontine tegmentum.",
+     "effects": [
+      "sleep_promotion",
+      "circadian_shift",
+      "wakefulness"
+     ],
+     "qid": "6e63f143"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 17,
+     "line": "Wake-promoting and sleep-suppressing actions of hypocretin (orexin): basal forebrain sites of action.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "ee754e9c"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 17,
+     "line": "Microdialysis perfusion of orexin-A in the basal forebrain increases wakefulness in freely behaving rat.",
+     "effects": [
+      "wakefulness"
+     ],
+     "qid": "32726f2e"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 18,
+     "line": "REM sleep enhancement and behavioral cataplexy following orexin (hypocretin)-II receptor antisense perfusion in the pontine reticular formation.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "f71045df"
+    },
+    {
+     "corpus": "papers",
+     "page": "watson2010",
+     "pdf_page": 18,
+     "line": "Promotion of sleep by targeting the orexin system in rats, dogs, and humans.",
+     "effects": [
+      "sleep_promotion"
+     ],
+     "qid": "45ad0ddf"
     }
    ]
   },

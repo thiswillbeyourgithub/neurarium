@@ -111,6 +111,64 @@
     "evidence": {
      "60": "in_vivo"
     }
+   },
+   {
+    "effect": "rem_suppression",
+    "mode": "agonism",
+    "picks": [
+     {
+      "index": 95,
+      "qid": "ae8c98e3"
+     },
+     {
+      "index": 113,
+      "qid": "23f30065"
+     },
+     {
+      "index": 107,
+      "qid": "e42be28d"
+     }
+    ],
+    "evidence": {
+     "95": "in_vivo",
+     "113": "in_vivo",
+     "107": "in_vivo"
+    },
+    "species": {
+     "107": "rat"
+    }
+   },
+   {
+    "effect": "wakefulness",
+    "mode": "agonism",
+    "picks": [
+     {
+      "index": 107,
+      "qid": "e42be28d"
+     }
+    ],
+    "evidence": {
+     "107": "in_vivo"
+    },
+    "species": {
+     "107": "rat"
+    }
+   },
+   {
+    "effect": "sws_decrease",
+    "mode": "agonism",
+    "picks": [
+     {
+      "index": 107,
+      "qid": "e42be28d"
+     }
+    ],
+    "evidence": {
+     "107": "in_vivo"
+    },
+    "species": {
+     "107": "rat"
+    }
    }
   ],
   "5ht1b": [
@@ -143,6 +201,59 @@
     ],
     "evidence": {
      "0": "in_vivo"
+    }
+   },
+   {
+    "effect": "rem_suppression",
+    "mode": "agonism",
+    "picks": [
+     {
+      "index": 27,
+      "qid": "ae8c98e3"
+     },
+     {
+      "index": 39,
+      "qid": "c5762aaa"
+     }
+    ],
+    "evidence": {
+     "27": "in_vivo",
+     "39": "in_vivo"
+    },
+    "species": {
+     "39": "rat"
+    }
+   },
+   {
+    "effect": "wakefulness",
+    "mode": "agonism",
+    "picks": [
+     {
+      "index": 39,
+      "qid": "c5762aaa"
+     }
+    ],
+    "evidence": {
+     "39": "in_vivo"
+    },
+    "species": {
+     "39": "rat"
+    }
+   },
+   {
+    "effect": "sws_decrease",
+    "mode": "agonism",
+    "picks": [
+     {
+      "index": 39,
+      "qid": "c5762aaa"
+     }
+    ],
+    "evidence": {
+     "39": "in_vivo"
+    },
+    "species": {
+     "39": "rat"
     }
    }
   ],
@@ -356,6 +467,112 @@
      "86": "in_vivo",
      "88": "in_vivo"
     }
+   },
+   {
+    "effect": "sws_increase",
+    "mode": "antagonism",
+    "picks": [
+     {
+      "index": 221,
+      "qid": "6339d1e4"
+     },
+     {
+      "index": 232,
+      "qid": "63a471b6"
+     },
+     {
+      "index": 205,
+      "qid": "a97a7976"
+     },
+     {
+      "index": 213,
+      "qid": "8114586e"
+     },
+     {
+      "index": 195,
+      "qid": "5f098f19"
+     }
+    ],
+    "evidence": {
+     "221": "in_vivo",
+     "232": "in_vivo",
+     "205": "in_vivo",
+     "213": "in_vivo",
+     "195": "in_vivo"
+    },
+    "species": {
+     "213": "rat",
+     "195": "rat"
+    }
+   },
+   {
+    "effect": "rem_suppression",
+    "mode": "agonism",
+    "picks": [
+     {
+      "index": 196,
+      "qid": "ae8c98e3"
+     },
+     {
+      "index": 213,
+      "qid": "8114586e"
+     }
+    ],
+    "evidence": {
+     "196": "in_vivo",
+     "213": "in_vivo"
+    },
+    "species": {
+     "213": "rat"
+    }
+   },
+   {
+    "effect": "wakefulness",
+    "mode": "agonism",
+    "picks": [
+     {
+      "index": 213,
+      "qid": "8114586e"
+     }
+    ],
+    "evidence": {
+     "213": "in_vivo"
+    },
+    "species": {
+     "213": "rat"
+    }
+   },
+   {
+    "effect": "sws_decrease",
+    "mode": "agonism",
+    "picks": [
+     {
+      "index": 213,
+      "qid": "8114586e"
+     }
+    ],
+    "evidence": {
+     "213": "in_vivo"
+    },
+    "species": {
+     "213": "rat"
+    }
+   },
+   {
+    "effect": "rem_suppression",
+    "mode": "antagonism",
+    "picks": [
+     {
+      "index": 213,
+      "qid": "8114586e"
+     }
+    ],
+    "evidence": {
+     "213": "in_vivo"
+    },
+    "species": {
+     "213": "rat"
+    }
    }
   ],
   "5ht2b": [
@@ -470,6 +687,38 @@
     "evidence": {
      "18": "in_vivo",
      "46": "in_vivo"
+    }
+   },
+   {
+    "effect": "sws_increase",
+    "mode": "antagonism",
+    "picks": [
+     {
+      "index": 72,
+      "qid": "49ccab8c"
+     }
+    ],
+    "evidence": {
+     "72": "in_vivo"
+    },
+    "species": {
+     "72": "rat"
+    }
+   },
+   {
+    "effect": "rem_suppression",
+    "mode": "antagonism",
+    "picks": [
+     {
+      "index": 72,
+      "qid": "49ccab8c"
+     }
+    ],
+    "evidence": {
+     "72": "in_vivo"
+    },
+    "species": {
+     "72": "rat"
     }
    }
   ],
@@ -605,6 +854,38 @@
     ],
     "evidence": {
      "7": "in_vivo"
+    }
+   },
+   {
+    "effect": "wakefulness",
+    "mode": "agonism",
+    "picks": [
+     {
+      "index": 42,
+      "qid": "db71d4e1"
+     }
+    ],
+    "evidence": {
+     "42": "in_vivo"
+    },
+    "species": {
+     "42": "rat"
+    }
+   },
+   {
+    "effect": "rem_suppression",
+    "mode": "agonism",
+    "picks": [
+     {
+      "index": 42,
+      "qid": "db71d4e1"
+     }
+    ],
+    "evidence": {
+     "42": "in_vivo"
+    },
+    "species": {
+     "42": "rat"
     }
    }
   ],
@@ -1381,6 +1662,22 @@
     "evidence": {
      "2": "in_vivo"
     }
+   },
+   {
+    "effect": "wakefulness",
+    "mode": "agonism",
+    "picks": [
+     {
+      "index": 30,
+      "qid": "6aed4e10"
+     }
+    ],
+    "evidence": {
+     "30": "in_vivo"
+    },
+    "species": {
+     "30": "rat"
+    }
    }
   ],
   "d2": [
@@ -1531,6 +1828,22 @@
     "evidence": {
      "63": "in_vivo",
      "187": "in_vivo"
+    }
+   },
+   {
+    "effect": "wakefulness",
+    "mode": "agonism",
+    "picks": [
+     {
+      "index": 196,
+      "qid": "6aed4e10"
+     }
+    ],
+    "evidence": {
+     "196": "in_vivo"
+    },
+    "species": {
+     "196": "rat"
     }
    }
   ],
@@ -1800,6 +2113,22 @@
     "evidence": {
      "2": "in_vivo"
     }
+   },
+   {
+    "effect": "rem_suppression",
+    "mode": "agonism",
+    "picks": [
+     {
+      "index": 6,
+      "qid": "3ba88246"
+     }
+    ],
+    "evidence": {
+     "6": "in_vivo"
+    },
+    "species": {
+     "6": "rat"
+    }
    }
   ],
   "glycine": [
@@ -1919,6 +2248,22 @@
     ],
     "evidence": {
      "42": "in_vivo"
+    }
+   },
+   {
+    "effect": "sws_increase",
+    "mode": "antagonism",
+    "picks": [
+     {
+      "index": 45,
+      "qid": "078c48d9"
+     }
+    ],
+    "evidence": {
+     "45": "in_vivo"
+    },
+    "species": {
+     "45": "rat"
     }
    }
   ],
@@ -3059,6 +3404,72 @@
     ],
     "evidence": {
      "9": "in_vivo"
+    }
+   }
+  ],
+  "5ht6": [
+   {
+    "effect": "sws_increase",
+    "mode": "antagonism",
+    "picks": [
+     {
+      "index": 33,
+      "qid": "5f098f19"
+     }
+    ],
+    "evidence": {
+     "33": "in_vivo"
+    },
+    "species": {
+     "33": "rat"
+    }
+   },
+   {
+    "effect": "wakefulness",
+    "mode": "antagonism",
+    "picks": [
+     {
+      "index": 37,
+      "qid": "6bf13913"
+     }
+    ],
+    "evidence": {
+     "37": "in_vivo"
+    },
+    "species": {
+     "37": "rat"
+    }
+   },
+   {
+    "effect": "sws_decrease",
+    "mode": "antagonism",
+    "picks": [
+     {
+      "index": 37,
+      "qid": "6bf13913"
+     }
+    ],
+    "evidence": {
+     "37": "in_vivo"
+    },
+    "species": {
+     "37": "rat"
+    }
+   },
+   {
+    "effect": "rem_suppression",
+    "mode": "antagonism",
+    "picks": [
+     {
+      "index": 37,
+      "qid": "6bf13913"
+     }
+    ],
+    "evidence": {
+     "37": "in_vivo"
+    },
+    "species": {
+     "37": "rat"
     }
    }
   ]

@@ -11003,6 +11003,10 @@
     "sleep_promotion": "Sleep promotion",
     "circadian_shift": "Circadian rhythm shift",
     "wakefulness": "Wakefulness / alertness",
+    "rem_suppression": "Less REM sleep",
+    "rem_increase": "More REM sleep",
+    "sws_increase": "More deep (slow-wave) sleep",
+    "sws_decrease": "Less deep (slow-wave) sleep",
     "hypothermia": "Lowered body temperature",
     "bradycardia": "Slowed heart rate",
     "bronchodilation": "Bronchodilation",
@@ -11037,6 +11041,10 @@
     "orthostatic_hypotension": "blood pressure tension artérielle",
     "seizures": "epilepsy convulsions épilepsie anticonvulsant effect effet anticonvulsivant",
     "gi_spasm": "cramp colic stomach crampe colique estomac antispasmodic effect (relaxes gut spasm) effet antispasmodique (relâche les spasmes digestifs)",
+    "rem_suppression": "sleep rem paradoxical sommeil paradoxal dream more rem sleep plus de sommeil paradoxal (rem)",
+    "rem_increase": "sleep rem paradoxical sommeil paradoxal dream less rem sleep moins de sommeil paradoxal (rem)",
+    "sws_increase": "sleep slow wave sws n3 nrem sommeil lent profond less deep (slow-wave) sleep moins de sommeil profond (lent)",
+    "sws_decrease": "sleep slow wave sws n3 nrem sommeil lent profond more deep (slow-wave) sleep plus de sommeil profond (lent)",
     "antispasmodic": "cramp colic spasmolytic crampe colique spasmolytique gut spasm (smooth muscle contraction, cramps) spasme digestif (contraction des muscles lisses, crampes)",
     "anticonvulsant": "epilepsy convulsions épilepsie antiepileptic antiépileptique seizures",
     "sedation": "wakefulness / alertness éveil / vigilance",
@@ -11979,7 +11987,11 @@
       "url": "https://doi.org/",
       "pages_dir": "data_sources/papers/pages",
       "page_kind": "paper",
-      "editable": false
+      "editable": false,
+      "page_urls": {
+        "monti2011": "https://doi.org/10.1016/j.smrv.2010.11.003",
+        "watson2010": "https://doi.org/10.1016/j.jsmc.2010.08.003"
+      }
     },
     "drugsfda": {
       "ref": "Drugs@FDA (U.S. FDA), approved application history",
@@ -12796,14 +12808,14 @@
         "unknown": 0
       },
       "receptor_effect": {
-        "total": 184,
-        "verified": 178,
-        "uncertain": 6,
+        "total": 207,
+        "verified": 182,
+        "uncertain": 25,
         "sourced": 0,
         "llm": 0,
         "nosource": 0,
         "missing": 0,
-        "unknown": 11
+        "unknown": 10
       },
       "receptor_release_modulation": {
         "total": 64,
@@ -12857,15 +12869,15 @@
       }
     },
     "nodes": {
-      "total": 11127,
-      "verified": 10338,
-      "uncertain": 420,
+      "total": 11150,
+      "verified": 10342,
+      "uncertain": 439,
       "sourced": 0,
       "llm": 231,
       "nosource": 138,
       "missing": 369,
-      "unknown": 596,
-      "backed": 10758,
+      "unknown": 595,
+      "backed": 10781,
       "pct_backed": 97
     },
     "ki_coverage": {

@@ -1722,6 +1722,9 @@
 "q_1e82b599cff7": {
 "drug:pethidine/first_approval": "opus"
 },
+"q_1e83e6057bcc": {
+"receptor:5ht2a/effects[antagonism:sws_increase]": "opus"
+},
 "q_1ea82803d893": {
 "drug:pimavanserin/first_approval": "opus"
 },
@@ -2624,6 +2627,10 @@
 "q_2e6b669923ef": {
 "drug:gabapentin/categories": "sonnet"
 },
+"q_2e74afcc8339": {
+"receptor:d1/effects[agonism:wakefulness]": "opus",
+"receptor:d2/effects[agonism:wakefulness]": "opus"
+},
 "q_2e92a06b27b1": {
 "target:melanocortin/classification": "opus"
 },
@@ -2795,6 +2802,10 @@
 "drug:zuclopenthixol/bindings[m3:antagonist]": "sonnet",
 "drug:zuclopenthixol/bindings[m4:antagonist]": "sonnet",
 "drug:zuclopenthixol/bindings[m5:antagonist]": "sonnet"
+},
+"q_3225ae9cbb9c": {
+"receptor:5ht2a/effects[antagonism:sws_increase]": "opus",
+"receptor:5ht6/effects[antagonism:sws_increase]": "opus"
 },
 "q_32374364ed77": {
 "drug:desipramine/excretion[route:fecal]": "opus",
@@ -4150,6 +4161,11 @@
 "q_4a4607cbc853": {
 "drug:chlordiazepoxide/excretion[route:renal]": "opus"
 },
+"q_4a48e303dc6f": {
+"receptor:5ht1a/effects[agonism:rem_suppression]": "opus",
+"receptor:5ht1a/effects[agonism:sws_decrease]": "opus",
+"receptor:5ht1a/effects[agonism:wakefulness]": "opus"
+},
 "q_4a5944f63278": {
 "drug:thiothixene/bindings[m1:antagonist]": "sonnet",
 "drug:thiothixene/bindings[m2:antagonist]": "sonnet",
@@ -5011,6 +5027,10 @@
 "drug:brexanolone/excretion[route:fecal]": "opus",
 "drug:brexanolone/excretion[route:renal]": "opus"
 },
+"q_5ba59b5fefb9": {
+"receptor:5ht7/effects[agonism:rem_suppression]": "opus",
+"receptor:5ht7/effects[agonism:wakefulness]": "opus"
+},
 "q_5bacc6fd9015": {
 "drug:cariprazine/categories": "sonnet"
 },
@@ -5844,6 +5864,9 @@
 "q_69acbc1d1444": {
 "drug:heroin/first_approval": "opus"
 },
+"q_69b54890a7c9": {
+"receptor:5ht1a/effects[agonism:rem_suppression]": "opus"
+},
 "q_69de8808372d": {
 "drug:pizotifen/half_life": "sonnet"
 },
@@ -6088,6 +6111,9 @@
 },
 "q_6e7e587e37c0": {
 "drug:dextromethorphanquinidine/bindings[nmda:antagonist]": "sonnet"
+},
+"q_6e85bb1de8eb": {
+"receptor:5ht2a/effects[antagonism:sws_increase]": "opus"
 },
 "q_6ea1066cb922": {
 "drug:ramelteon/excretion[unchanged:urine]": "opus"
@@ -7273,6 +7299,9 @@
 },
 "q_83f680316af7": {
 "drug:promethazine/excretion[unchanged:urine]": "opus"
+},
+"q_84033b11d603": {
+"receptor:5ht2a/effects[antagonism:sws_increase]": "opus"
 },
 "q_84353582ac55": {
 "drug:buspirone/originator_country": "opus"
@@ -9322,6 +9351,11 @@
 "q_a6deaee53c32": {
 "drug:tetrabenazine/half_life": "opus"
 },
+"q_a6ebb4bd33b5": {
+"receptor:5ht1a/effects[agonism:rem_suppression]": "opus",
+"receptor:5ht1b/effects[agonism:rem_suppression]": "opus",
+"receptor:5ht2a/effects[agonism:rem_suppression]": "opus"
+},
 "q_a6f34ba78f1f": {
 "metabolite:6_hydroxybupropion/bindings[net:reuptake_inhibitor]": "sonnet"
 },
@@ -9427,6 +9461,9 @@
 },
 "q_a8f272402a1e": {
 "drug:periciazine/excretion[route:renal]": "opus"
+},
+"q_a8f6c5fa947f": {
+"receptor:gaba_b/effects[agonism:rem_suppression]": "opus"
 },
 "q_a9126395a7a9": {
 "drug:risperidone/brands[Risperdal Consta]": "sonnet"
@@ -11655,6 +11692,10 @@
 "q_d12639d5147c": {
 "drug:mirtazapine/categories": "sonnet"
 },
+"q_d127bb060ec9": {
+"receptor:5ht2c/effects[antagonism:rem_suppression]": "opus",
+"receptor:5ht2c/effects[antagonism:sws_increase]": "opus"
+},
 "q_d12914e69266": {
 "drug:thioridazine/half_life": "opus"
 },
@@ -12419,6 +12460,11 @@
 },
 "q_e048baf86529": {
 "drug:buspirone/bindings[alpha1:antagonist]": "opus"
+},
+"q_e0586317dade": {
+"receptor:5ht1b/effects[agonism:rem_suppression]": "opus",
+"receptor:5ht1b/effects[agonism:sws_decrease]": "opus",
+"receptor:5ht1b/effects[agonism:wakefulness]": "opus"
 },
 "q_e0ab1dc434a9": {
 "drug:nabilone/categories": "opus"
@@ -13203,6 +13249,9 @@
 "drug:cyproheptadine/bindings[h1:antagonist]": "sonnet",
 "drug:cyproheptadine/categories": "sonnet"
 },
+"q_ee3f10c31fdd": {
+"receptor:h1/effects[antagonism:sws_increase]": "opus"
+},
 "q_ee52bb78ad8c": {
 "drug:eslicarbazepine_acetate/half_life": "opus"
 },
@@ -13321,6 +13370,13 @@
 "drug:duloxetine/enzymes[cyp1a2:substrate]/strength": "opus",
 "drug:duloxetine/enzymes[cyp2d6:substrate]": "opus",
 "drug:duloxetine/enzymes[cyp2d6:substrate]/strength": "opus"
+},
+"q_f03e5e89ddfb": {
+"receptor:5ht2a/effects[agonism:rem_suppression]": "opus",
+"receptor:5ht2a/effects[agonism:sws_decrease]": "opus",
+"receptor:5ht2a/effects[agonism:wakefulness]": "opus",
+"receptor:5ht2a/effects[antagonism:rem_suppression]": "opus",
+"receptor:5ht2a/effects[antagonism:sws_increase]": "opus"
 },
 "q_f04a0136ebb1": {
 "drug:levodopa/excretion[route:renal]": "opus"
@@ -13631,6 +13687,11 @@
 },
 "q_f59cda2f6472": {
 "drug:rimonabant/originator": "opus"
+},
+"q_f59ebe0d6518": {
+"receptor:5ht6/effects[antagonism:rem_suppression]": "opus",
+"receptor:5ht6/effects[antagonism:sws_decrease]": "opus",
+"receptor:5ht6/effects[antagonism:wakefulness]": "opus"
 },
 "q_f5b6682a41b0": {
 "target:mao_b/demographics[age:increase:-]": "opus"
