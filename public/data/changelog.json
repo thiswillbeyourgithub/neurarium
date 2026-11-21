@@ -1,6 +1,75 @@
 {
   "versions": [
     {
+      "version": "3.176.0",
+      "date": "2026-11-21",
+      "entries": [
+        {
+          "category": "added",
+          "text": "A drug with active metabolites now has an \"Include / Exclude metabolites\" picker on its binding profile, so a receptor both compounds bind no longer has to show twice; the choice is remembered",
+          "commits": [
+            "3302d9dd"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Shift+F now also finds what a panel lists: typing \"M1\" on a drug panel jumps to its M1 binding, even inside a folded section",
+          "commits": [
+            "8f0640a9"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Searching an effect also finds it by related words and lists its opposite: \"saliva\" finds dry mouth and hypersalivation, \"mydriasis\" also shows miosis",
+          "commits": [
+            "daba09c6"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Net neurotransmission is now the last part of the binding profile it is computed from, instead of a section of its own",
+          "commits": [
+            "3302d9dd"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "On a drug's metabolism, \"strong\" and \"major route\" are now in bold",
+          "commits": [
+            "0066ae3c"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Ctrl+F (Cmd+F) is left to the browser's own find again; f and Shift+F still open neurarium's search and the in-panel find",
+          "commits": [
+            "aeb542c1"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "Thirteen bindings were marked speculative though their source states them plainly (viloxazine at 5-HT7, alpha-1B and beta-2, among others): a \"weak\" effect is about potency, not doubt",
+          "commits": [
+            "846879e8"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "Pimavanserin (5-HT2A, 5-HT2C) and pitolisant (H3) listed each receptor twice, once as antagonist and once as inverse agonist, from a single sentence",
+          "commits": [
+            "bf8a1cee"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "Tropatepine showed its synthesis scheme instead of its molecule; it now shows no image, since no vector drawing of it exists",
+          "commits": [
+            "6f2f136d"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.175.0",
       "date": "2026-11-20",
       "entries": [
