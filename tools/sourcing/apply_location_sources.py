@@ -133,6 +133,32 @@ def collect_allen() -> tuple[list[tuple], list[str], int]:
     return out, warnings, skipped
 
 
+def collect_papers(judged_path: str) -> tuple[list[tuple], list[str], int]:
+    """Yield (owner_kind, owner, base, src) from a paper-location judged file
+    ``[{owner, base, paper, sentence, qid, species?}]``: ``sentence`` indexes
+    ``lib.corpora.papers.sentences(paper)`` and ``qid`` fingerprints it (a rebuilt page
+    that shifts the list is refused). Confirm-only like every other corpus."""
+    from lib.corpora import papers
+    from pipeline.judged import qid as fingerprint
+    rec_regions, tgt_regions = owner_regions()
+    out, warnings, skipped = [], [], 0
+    for e in worklist_io.read(judged_path):
+        owner, base, paper, idx = e["owner"], e["base"], e["paper"], e["sentence"]
+        kind = "receptor" if owner in rec_regions else "target"
+        if base not in (rec_regions if kind == "receptor" else tgt_regions).get(owner, set()):
+            warnings.append(f"{owner}/{base}: not a current region (skipped)"); skipped += 1; continue
+        sents = papers.sentences(paper)
+        if not (0 <= idx < len(sents)) or fingerprint(sents[idx][1]) != e["qid"]:
+            warnings.append(f"{owner}/{base}: {paper} sentence {idx} changed (skipped)"); skipped += 1; continue
+        quote = sents[idx][1]
+        if quote_refuted("papers", paper, quote):
+            warnings.append(f"{owner}/{base}: quote not on {paper} (skipped)"); skipped += 1; continue
+        out.append((kind, owner, base, {"corpus": "papers", "page": paper, "quote": quote,
+                                        "provenance": "verified",
+                                        "species": e.get("species", "Human")}))
+    return out, warnings, skipped
+
+
 def prune_unclaimed(buckets: dict, rec_regions: dict, tgt_regions: dict) -> list[str]:
     """Drop, in place, every cached (owner, base) the emitted data no longer claims.
 
@@ -181,7 +207,7 @@ def prune_refuted(buckets: dict, refuted=quote_refuted) -> list[str]:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--corpus", choices=["gtopdb", "allen"], default="gtopdb",
+    ap.add_argument("--corpus", choices=["gtopdb", "allen", "papers"], default="gtopdb",
                     help="which pipeline's output to merge (default gtopdb)")
     ap.add_argument("--judged",
                     help="gtopdb judge results JSON [{receptor_id, matches:[{base, candidate}]}]")
@@ -196,6 +222,10 @@ def main() -> int:
         if not args.judged:
             ap.error("--judged is required with --corpus gtopdb")
         sources, warnings, skipped = collect_gtopdb(args.judged, args.llm)
+    elif args.corpus == "papers":
+        if not args.judged:
+            ap.error("--judged is required with --corpus papers")
+        sources, warnings, skipped = collect_papers(args.judged)
     else:
         sources, warnings, skipped = collect_allen()
 

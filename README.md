@@ -203,7 +203,7 @@ Neuron pathways                                                  █████
 Drug target bindings                                             ██████████████████████████   99%  1928/1945
 Drug half-life (T½)                                              ██████████████████████████   98%    278/283
 Drug class                                                       █████████████████████████░   98%    307/314
-Receptor expression regions                                      █████████████████████████░   94%    361/383
+Receptor expression regions                                      █████████████████████████░   95%    362/383
 Drug metabolism strength tier                                    ████████████████████████░░   93%    138/148
 Receptor sign (excit./inhib.)                                    ████████████████████████░░   91%      51/56
 Target expression regions                                        ████████████████████████░░   91%    143/158
@@ -215,7 +215,7 @@ Receptor pre/postsynaptic site                                   █████
 
 Separately, **measured binding affinity (PDSP Ki) covers 85% of the 1926 drug bindings**; 78 of 283 drugs carry no Ki on any binding (sourced by book quote only, or not yet sourced). A Ki is a measured value, not a grade: this tracks where one was never looked up, complementing the sourcing figure above.
 
-Of those, **439 carry an `uncertain` badge**: the quote is confirmed present in the source, but the sentence states something broader than the claim (a rule that never names the drug, a sweep that never names the region), so pinning it to that node is an inference. The badge's tooltip lists the reasons to doubt it, each with its own source.
+Of those, **438 carry an `uncertain` badge**: the quote is confirmed present in the source, but the sentence states something broader than the claim (a rule that never names the drug, a sweep that never names the region), so pinning it to that node is an inference. The badge's tooltip lists the reasons to doubt it, each with its own source.
 
 Besides those, **595 claims are `unknown` (∅)**: every source the dataset requires for that kind of claim was searched on a recorded date and none states it. That is a finding about the literature, not a gap, so they are left out of the % above; the search is redone within 12 months.
 

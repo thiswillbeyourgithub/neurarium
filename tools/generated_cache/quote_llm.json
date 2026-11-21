@@ -318,6 +318,9 @@
 "q_0623595d57e0": {
 "drug:chlorpromazine/workup[ecg:before]": "opus"
 },
+"q_0626652d4e20": {
+"receptor:m2/locations[parietal]": "opus"
+},
 "q_06409f94d6be": {
 "drug:sumatriptan/categories": "sonnet"
 },
@@ -3112,6 +3115,9 @@
 },
 "q_37b3ec7d35c2": {
 "drug:lofepramine/bindings[sert:reuptake_inhibitor]": "sonnet"
+},
+"q_37c3a43b20f5": {
+"receptor:kainate/locations[occipital]": "opus"
 },
 "q_37f9b7e85e58": {
 "receptor:5ht1a/effects[agonism:antidepressant]": "opus"
@@ -6375,6 +6381,13 @@
 "drug:serdexmethylphenidate/metabolites[dexmethylphenidate]": "opus",
 "drug:serdexmethylphenidate/prodrug": "opus"
 },
+"q_722556bf6be8": {
+"receptor:alpha2a/locations[hippocampus]": "opus",
+"receptor:alpha2b/locations[hippocampus]": "opus",
+"receptor:alpha2b/locations[thalamus]": "opus",
+"receptor:alpha2c/locations[hippocampus]": "opus",
+"receptor:alpha2c/locations[thalamus]": "opus"
+},
 "q_7229b2ce2472": {
 "drug:melatonin/enzymes[cyp1a2:substrate]": "opus",
 "drug:melatonin/enzymes[cyp1a2:substrate]/strength": "opus",
@@ -6792,6 +6805,9 @@
 "q_7a067d8e06b3": {
 "drug:bromazepam/metabolites[3_hydroxybromazepam]": "sonnet"
 },
+"q_7a24f293d611": {
+"receptor:m2/locations[occipital]": "opus"
+},
 "q_7a2db16a3eb8": {
 "receptor:5ht1a/locations[septal_nuclei]": "sonnet"
 },
@@ -6839,6 +6855,9 @@
 "q_7b7a1a9aa45c": {
 "receptor:nachr_a7/classification[synaptic]": "opus",
 "receptor:nachr_a7/effects[agonism:pro_cognitive]": "opus"
+},
+"q_7bbe5de55ee6": {
+"receptor:m2/locations[frontal]": "opus"
 },
 "q_7bbf640d4919": {
 "drug:venlafaxine/formulations[ir]/release": "opus",
@@ -8216,6 +8235,11 @@
 "metabolite:norbuprenorphine/bindings[delta:agonist]": "opus",
 "metabolite:norbuprenorphine/bindings[mu:agonist]": "opus"
 },
+"q_94a095c9cb17": {
+"receptor:alpha1a/locations[hippocampus]": "opus",
+"receptor:alpha1b/locations[hippocampus]": "opus",
+"receptor:alpha1d/locations[hippocampus]": "opus"
+},
 "q_94bc3a0f032f": {
 "drug:zotepine/bindings[h1:antagonist]": "sonnet"
 },
@@ -9104,6 +9128,9 @@
 },
 "q_a298df5fafef": {
 "drug:venlafaxine/nbn": "sonnet"
+},
+"q_a2aac0b15aed": {
+"receptor:a2a/locations[accumbens]": "opus"
 },
 "q_a2ba0f69d96a": {
 "drug:lisdexamfetamine/excretion[urine_ph:dependent]": "opus"
@@ -10188,6 +10215,10 @@
 },
 "q_b6a39291c9b8": {
 "drug:cariprazine/first_approval": "opus"
+},
+"q_b6b55a4991de": {
+"receptor:5ht1a/locations[hippocampus]": "opus",
+"receptor:5ht1a/locations[raphe]": "opus"
 },
 "q_b6b69e989e36": {
 "drug:furosemide/excretion[route:renal]": "opus"
@@ -11655,6 +11686,9 @@
 },
 "q_d00399fd2733": {
 "drug:domperidone/excretion[unchanged:urine]": "opus"
+},
+"q_d00c919180a2": {
+"receptor:m1/locations[occipital]": "opus"
 },
 "q_d020cbd5ebbe": {
 "drug:lormetazepam/brands[Noctamide]": "sonnet"

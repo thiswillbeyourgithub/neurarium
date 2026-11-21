@@ -40,6 +40,13 @@
      "provenance": "verified",
      "quote": "HTR1A detected in hippocampus: probe 1024804 PACall present in 180/188 samples (donors 9861,10021,12876,14380,15496,15697)",
      "species": "Human"
+    },
+    {
+     "corpus": "papers",
+     "page": "zilles2009",
+     "provenance": "verified",
+     "quote": "The 5-HT1A receptor and its mRNA are preferentially localized in the raphe nuclei, the hippocampus and the neocortex [38 ��,39–41].",
+     "species": "Human"
     }
    ],
    "occipital": [
@@ -73,6 +80,13 @@
      "page": "HTR1A",
      "provenance": "verified",
      "quote": "HTR1A detected in raphe: probe 1024804 PACall present in 35/35 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "species": "Human"
+    },
+    {
+     "corpus": "papers",
+     "page": "zilles2009",
+     "provenance": "verified",
+     "quote": "The 5-HT1A receptor and its mRNA are preferentially localized in the raphe nuclei, the hippocampus and the neocortex [38 ��,39–41].",
      "species": "Human"
     }
    ],
@@ -881,6 +895,13 @@
      "provenance": "verified",
      "quote": "ADRA1A detected in hippocampus: probe 1027138 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15496,15697)",
      "species": "Human"
+    },
+    {
+     "corpus": "papers",
+     "page": "zilles2009",
+     "provenance": "verified",
+     "quote": "The noradrenergic-a1 receptor occurs in highest density in the human hippocampus and the neocortex [23 ��,49].",
+     "species": "Human"
     }
    ],
    "hypothalamus": [
@@ -1017,6 +1038,13 @@
      "provenance": "verified",
      "quote": "ADRA1B detected in hippocampus: probe 1023485 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15496,15697)",
      "species": "Human"
+    },
+    {
+     "corpus": "papers",
+     "page": "zilles2009",
+     "provenance": "verified",
+     "quote": "The noradrenergic-a1 receptor occurs in highest density in the human hippocampus and the neocortex [23 ��,49].",
+     "species": "Human"
     }
    ],
    "medulla": [
@@ -1151,6 +1179,13 @@
      "provenance": "verified",
      "quote": "ADRA1D detected in hippocampus: probe 1059354 PACall present in 187/188 samples (donors 9861,10021,12876,14380,15496,15697)",
      "species": "Human"
+    },
+    {
+     "corpus": "papers",
+     "page": "zilles2009",
+     "provenance": "verified",
+     "quote": "The noradrenergic-a1 receptor occurs in highest density in the human hippocampus and the neocortex [23 ��,49].",
+     "species": "Human"
     }
    ],
    "medulla": [
@@ -1271,6 +1306,13 @@
      "provenance": "verified",
      "quote": "ADRA2A detected in hippocampus: probe 1059351 PACall present in 182/188 samples (donors 9861,10021,12876,14380,15496,15697)",
      "species": "Human"
+    },
+    {
+     "corpus": "papers",
+     "page": "zilles2009",
+     "provenance": "verified",
+     "quote": "The low density of the a1 receptor in layer VI of V1 is the criterion for the identificationoftheV1/V2border(Fig.3b).Thehighest densityof the a2 receptor is present in the neocortex (predominantly in layers I–III), the hippocampus and the thalamus",
+     "species": "Human"
     }
    ],
    "hypothalamus": [
@@ -1382,6 +1424,15 @@
    ]
   },
   "alpha2b": {
+   "hippocampus": [
+    {
+     "corpus": "papers",
+     "page": "zilles2009",
+     "provenance": "verified",
+     "quote": "The low density of the a1 receptor in layer VI of V1 is the criterion for the identificationoftheV1/V2border(Fig.3b).Thehighest densityof the a2 receptor is present in the neocortex (predominantly in layers I–III), the hippocampus and the thalamus",
+     "species": "Human"
+    }
+   ],
    "thalamus": [
     {
      "corpus": "gtopdb",
@@ -1389,6 +1440,13 @@
      "provenance": "verified",
      "quote": "α2B-AR mRNA labeling in thalamus.",
      "species": "Rat"
+    },
+    {
+     "corpus": "papers",
+     "page": "zilles2009",
+     "provenance": "verified",
+     "quote": "The low density of the a1 receptor in layer VI of V1 is the criterion for the identificationoftheV1/V2border(Fig.3b).Thehighest densityof the a2 receptor is present in the neocortex (predominantly in layers I–III), the hippocampus and the thalamus",
+     "species": "Human"
     }
    ]
   },
@@ -1449,6 +1507,13 @@
      "page": "ADRA2C",
      "provenance": "verified",
      "quote": "ADRA2C detected in hippocampus: probe 1027284 PACall present in 188/188 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "species": "Human"
+    },
+    {
+     "corpus": "papers",
+     "page": "zilles2009",
+     "provenance": "verified",
+     "quote": "The low density of the a1 receptor in layer VI of V1 is the criterion for the identificationoftheV1/V2border(Fig.3b).Thehighest densityof the a2 receptor is present in the neocortex (predominantly in layers I–III), the hippocampus and the thalamus",
      "species": "Human"
     }
    ],
@@ -1537,6 +1602,13 @@
      "page": "ADRA2C",
      "provenance": "verified",
      "quote": "ADRA2C detected in thalamus: probe 1027284 PACall present in 209/209 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "species": "Human"
+    },
+    {
+     "corpus": "papers",
+     "page": "zilles2009",
+     "provenance": "verified",
+     "quote": "The low density of the a1 receptor in layer VI of V1 is the criterion for the identificationoftheV1/V2border(Fig.3b).Thehighest densityof the a2 receptor is present in the neocortex (predominantly in layers I–III), the hippocampus and the thalamus",
      "species": "Human"
     }
    ],
@@ -2938,6 +3010,13 @@
      "provenance": "verified",
      "quote": "GRIK1 detected in occipital: probe 1026815 PACall present in 212/212 samples (donors 9861,10021,12876,14380,15496,15697)",
      "species": "Human"
+    },
+    {
+     "corpus": "papers",
+     "page": "zilles2009",
+     "provenance": "verified",
+     "quote": "[ 3 H]kainate-binding sites show the highest densities in the infragranular layers V– VI of V1 (Fig.",
+     "species": "Human"
     }
    ],
    "parietal": [
@@ -3133,6 +3212,13 @@
      "provenance": "verified",
      "quote": "CHRM1 detected in occipital: probe 1058221 PACall present in 212/212 samples (donors 9861,10021,12876,14380,15496,15697)",
      "species": "Human"
+    },
+    {
+     "corpus": "papers",
+     "page": "zilles2009",
+     "provenance": "verified",
+     "quote": "Cholinergic muscarinic M1 receptors reach highest densities in layers II–IVA of V1 (Fig.",
+     "species": "Human"
     }
    ],
    "parietal": [
@@ -3161,6 +3247,13 @@
      "page": "CHRM2",
      "provenance": "verified",
      "quote": "CHRM2 detected in frontal: probe 1029156 PACall present in 537/537 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "species": "Human"
+    },
+    {
+     "corpus": "papers",
+     "page": "zilles2009",
+     "provenance": "verified",
+     "quote": "Subdivisions of the primary motor cortex BA4 and the parietal areas BA5 and BA7 were identified by quantitative mapping of receptors: BA4 consists of a posterior (area 4p) and an anterior (area 4a) part, which differ by M2 receptor densities, connections and functional representations [10 �� ].",
      "species": "Human"
     }
    ],
@@ -3219,6 +3312,13 @@
      "provenance": "verified",
      "quote": "CHRM2 detected in occipital: probe 1029156 PACall present in 212/212 samples (donors 9861,10021,12876,14380,15496,15697)",
      "species": "Human"
+    },
+    {
+     "corpus": "papers",
+     "page": "zilles2009",
+     "provenance": "verified",
+     "quote": "Muscarinic M2 receptors occur with highest densities in layers III–IVA and IVC of V1 (Fig.",
+     "species": "Human"
     }
    ],
    "parietal": [
@@ -3227,6 +3327,13 @@
      "page": "CHRM2",
      "provenance": "verified",
      "quote": "CHRM2 detected in parietal: probe 1029156 PACall present in 290/290 samples (donors 9861,10021,12876,14380,15496,15697)",
+     "species": "Human"
+    },
+    {
+     "corpus": "papers",
+     "page": "zilles2009",
+     "provenance": "verified",
+     "quote": "Description of the very high density of muscarinic M2 receptors in the human primary somatosensory cortex (area 3b).",
      "species": "Human"
     }
    ],

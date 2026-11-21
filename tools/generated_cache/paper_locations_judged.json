@@ -1,0 +1,107 @@
+[
+ {
+  "owner": "5ht1a",
+  "base": "raphe",
+  "paper": "zilles2009",
+  "sentence": 92,
+  "qid": "c32fd334"
+ },
+ {
+  "owner": "5ht1a",
+  "base": "hippocampus",
+  "paper": "zilles2009",
+  "sentence": 92,
+  "qid": "c32fd334"
+ },
+ {
+  "owner": "alpha1a",
+  "base": "hippocampus",
+  "paper": "zilles2009",
+  "sentence": 101,
+  "qid": "c52da018"
+ },
+ {
+  "owner": "alpha1b",
+  "base": "hippocampus",
+  "paper": "zilles2009",
+  "sentence": 101,
+  "qid": "c52da018"
+ },
+ {
+  "owner": "alpha1d",
+  "base": "hippocampus",
+  "paper": "zilles2009",
+  "sentence": 101,
+  "qid": "c52da018"
+ },
+ {
+  "owner": "alpha2a",
+  "base": "hippocampus",
+  "paper": "zilles2009",
+  "sentence": 112,
+  "qid": "b5c0063c"
+ },
+ {
+  "owner": "alpha2b",
+  "base": "hippocampus",
+  "paper": "zilles2009",
+  "sentence": 112,
+  "qid": "b5c0063c"
+ },
+ {
+  "owner": "alpha2b",
+  "base": "thalamus",
+  "paper": "zilles2009",
+  "sentence": 112,
+  "qid": "b5c0063c"
+ },
+ {
+  "owner": "alpha2c",
+  "base": "hippocampus",
+  "paper": "zilles2009",
+  "sentence": 112,
+  "qid": "b5c0063c"
+ },
+ {
+  "owner": "alpha2c",
+  "base": "thalamus",
+  "paper": "zilles2009",
+  "sentence": 112,
+  "qid": "b5c0063c"
+ },
+ {
+  "owner": "m1",
+  "base": "occipital",
+  "paper": "zilles2009",
+  "sentence": 76,
+  "qid": "c50141f2"
+ },
+ {
+  "owner": "m2",
+  "base": "occipital",
+  "paper": "zilles2009",
+  "sentence": 81,
+  "qid": "01b35692"
+ },
+ {
+  "owner": "m2",
+  "base": "parietal",
+  "paper": "zilles2009",
+  "sentence": 227,
+  "qid": "907350d1"
+ },
+ {
+  "owner": "m2",
+  "base": "frontal",
+  "paper": "zilles2009",
+  "sentence": 122,
+  "qid": "4d73d4ab"
+ },
+ {
+  "owner": "kainate",
+  "base": "occipital",
+  "paper": "zilles2009",
+  "sentence": 75,
+  "qid": "45587794"
+ }
+]

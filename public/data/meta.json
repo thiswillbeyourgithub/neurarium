@@ -11990,7 +11990,8 @@
       "editable": false,
       "page_urls": {
         "monti2011": "https://doi.org/10.1016/j.smrv.2010.11.003",
-        "watson2010": "https://doi.org/10.1016/j.jsmc.2010.08.003"
+        "watson2010": "https://doi.org/10.1016/j.jsmc.2010.08.003",
+        "zilles2009": "https://doi.org/10.1097/WCO.0b013e32832d95db"
       }
     },
     "drugsfda": {
@@ -12749,12 +12750,12 @@
       },
       "receptor_locations": {
         "total": 383,
-        "verified": 344,
-        "uncertain": 17,
+        "verified": 346,
+        "uncertain": 16,
         "sourced": 0,
-        "llm": 22,
+        "llm": 21,
         "nosource": 0,
-        "missing": 22,
+        "missing": 21,
         "unknown": 0
       },
       "receptor_density": {
@@ -12870,14 +12871,14 @@
     },
     "nodes": {
       "total": 11150,
-      "verified": 10342,
-      "uncertain": 439,
+      "verified": 10344,
+      "uncertain": 438,
       "sourced": 0,
-      "llm": 231,
+      "llm": 230,
       "nosource": 138,
-      "missing": 369,
+      "missing": 368,
       "unknown": 595,
-      "backed": 10781,
+      "backed": 10782,
       "pct_backed": 97
     },
     "ki_coverage": {

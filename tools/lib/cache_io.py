@@ -146,6 +146,7 @@ FORMATS: dict[str, Format | Callable[[Any], str]] = {
     "seizure_threshold.json": SORTED,
     "seizure_threshold_judged.json": DEFAULT,
     "seizure_threshold_worklist.json": DEFAULT,
+    "paper_locations_judged.json": DEFAULT,
     "release_modulation.json": SORTED,
     "release_modulation_judged.json": DEFAULT,
     "release_modulation_worklist.json": DEFAULT,

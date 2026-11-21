@@ -9,7 +9,7 @@ Every node is graded (see `docs/PROVENANCE.md`); a bare `llm` grade and NOSOURCE
 | Node kind | Total | Verified | Uncertain | Sourced | `llm` | NOSOURCE | Unknown |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | `drug_binding_action` | 1565 | 1201 | 119 | 0 | 132 | 113 | 585 |
-| `receptor_locations` | 383 | 344 | 17 | 0 | 22 | 0 | 0 |
+| `receptor_locations` | 383 | 346 | 16 | 0 | 21 | 0 | 0 |
 | `projection_transmitter` | 116 | 87 | 11 | 0 | 18 | 0 | 0 |
 | `drug_bindings` | 1945 | 1739 | 189 | 0 | 0 | 17 | 0 |
 | `target_locations` | 158 | 143 | 0 | 0 | 15 | 0 | 0 |
