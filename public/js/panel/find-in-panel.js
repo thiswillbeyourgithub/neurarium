@@ -1,6 +1,7 @@
-// Shift+F: find a row inside the open detail panel ("lab" -> the Originator row),
+// Shift+F: find a row inside the open detail panel ("lab" -> the Originator row, "M1"
+// -> the M1 binding row), even inside a folded section,
 // open its folded section and flash it. Searches what the panel shows right now,
-// so it needs no knowledge of any view: section headings, subheadings and the
+// so it needs no knowledge of any view: section headings, subheadings, list rows and the
 // label / value fact rows are read off the DOM when the box opens.
 //
 // A label also matches in the other language and through its own tooltip text,
@@ -13,6 +14,20 @@ const MAX_RESULTS = 12;
 // Chrome inside a heading or row that is not its text: icons, subtitles, grade
 // pills, help "?" tips, beta badges.
 const NOISE = "svg, .section-sub, .src-pill, .src-details-cue, .help-icon, .help-tip, .beta-tag";
+
+// List rows: what a section lists (bindings, effects, regions, enzymes, tone terms).
+const ROWS = "li, .tone-term";
+// What already is an entry of its own, so a row holding one is not indexed twice.
+const OWN_ENTRIES = "summary, .panel-sec-head, h3, h4, .info-fact, .hl-chip";
+// The part of a row that names it (a binding's target, a region, a pathway).
+const ROW_NAME = ".bind-target, .loc-name, .conn-label, .tone-term-target, .var-key-label";
+
+/** A row's own text: chrome stripped, nested lists (their rows are entries) dropped. */
+function rowText(node) {
+  const c = node.cloneNode(true);
+  for (const n of c.querySelectorAll(`${NOISE}, ul, ol`)) n.remove();
+  return c.textContent.replace(/\s+/g, " ").trim();
+}
 
 /** Lowercase, accents folded, so "demi vie" finds "Demi-vie". */
 export const fold = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "")
@@ -72,8 +87,19 @@ export function indexPanel(root, aliases = new Map()) {
       text: fold(`${label} ${detail}`), ...(aliases.get(fold(label)) || { alt: "", tip: "" }),
     });
   };
-  for (const node of root.querySelectorAll("summary, .panel-sec-head, h3, h4, .info-fact, .hl-chip")) {
-    if (node.matches(".info-fact, .hl-chip")) {
+  for (const node of root.querySelectorAll(`summary, .panel-sec-head, h3, h4, .info-fact, .hl-chip, ${ROWS}`)) {
+    if (node.matches(ROWS)) {
+      // A list row (a binding, an effect, a region, an enzyme, a tone term): its name
+      // is the label, the rest of the row the detail. A row wrapping headings or fact
+      // rows is skipped, those are found on their own.
+      if (node.querySelector(`${OWN_ENTRIES}, .tone-term`)) continue;
+      const all = rowText(node);
+      const name = node.querySelector(ROW_NAME);
+      const own = name ? ownText(name) : all;
+      if (!own) continue;
+      const label = own.length > 80 ? `${own.slice(0, 77)}...` : own;
+      add(node, node, label, all.startsWith(own) ? all.slice(own.length).trim() : (name ? all : ""));
+    } else if (node.matches(".info-fact, .hl-chip")) {
       // A label / value row (a fact row, a half-life or Tmax chip).
       const label = node.querySelector(".fact-label, .hl-label");
       const all = ownText(node);
