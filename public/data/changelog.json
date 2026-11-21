@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.176.1",
+      "date": "2026-11-21",
+      "entries": [
+        {
+          "category": "docs",
+          "text": "The DrugsMap README pictures are redrawn on the current data",
+          "commits": [
+            "02fffb97"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.176.0",
       "date": "2026-11-21",
       "entries": [
