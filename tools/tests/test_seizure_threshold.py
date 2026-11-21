@@ -116,6 +116,12 @@ class GeneratorTest(unittest.TestCase):
         self.assertEqual([r["effect"] for r in out["seizure_threshold"]], ["lowers", "withdrawal"])
         self.assertEqual(self.emit([]), {})
 
+    def test_lowers_and_possibly_lowers_never_together(self):
+        src = [{"quote": "q"}]
+        with self.assertRaises(ValueError):
+            self.emit([{"effect": "lowers", "sources": src},
+                       {"effect": "possibly_lowers", "sources": src}])
+
     def test_refuses_a_bad_cache(self):
         with self.assertRaises(KeyError):
             self.emit([{"effect": "worsens", "sources": [{"quote": "q"}]}])

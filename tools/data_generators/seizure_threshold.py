@@ -4,9 +4,13 @@ Node kind ``drug_seizure_threshold`` (BETA): ONE node per (drug, effect), a clai
 the drug itself (not a receptor: a label or a trial says "bupropion lowers the seizure
 threshold" without naming a mechanism). Three effects, a closed vocabulary:
 
-* ``lowers``: the drug can lower the seizure threshold / provoke seizures at use
+* ``lowers``: the source states, for this drug and without hedging, that it lowers the
+  seizure threshold / provokes seizures at use
   (French RCP 4.4 "peut abaisser le seuil épileptogène", Pisani 2002's "relatively high
   seizurogenic potential", Alper 2007's higher seizure incidence than placebo);
+* ``possibly_lowers``: a hedged statement ("risque potentiel", "possibilité", isolated
+  reported cases) or one only about the drug's class (fluoxetine's "comme avec d'autres
+  antidépresseurs"); a drug with a ``lowers`` node never also carries this one;
 * ``withdrawal``: stopping it, abruptly, can cause seizures (benzodiazepines,
   anticonvulsants: "l'arrêt brutal ... peut entraîner des convulsions");
 * ``raises``: it raises the seizure threshold (an anticonvulsant effect).
@@ -42,6 +46,11 @@ STOPPING = r"sevrage|arr[êe]t|interrup|withdraw|discontinu|brutal|abrupt"
 EFFECTS: dict[str, dict[str, Any]] = {
     "lowers": {"en": "Lowers the seizure threshold", "fr": "Abaisse le seuil épileptogène",
                "requires": (SEIZURE,)},
+    # Hedged ("risque potentiel", "possibilité d'abaissement", isolated reported cases) or
+    # only a statement about the drug's class ("comme les autres antidépresseurs").
+    "possibly_lowers": {"en": "May lower the seizure threshold",
+                        "fr": "Pourrait abaisser le seuil épileptogène",
+                        "requires": (SEIZURE,)},
     "withdrawal": {"en": "Seizures when stopped abruptly",
                    "fr": "Convulsions à l'arrêt brutal",
                    "requires": (SEIZURE, STOPPING)},
@@ -94,6 +103,8 @@ def drug_seizure_threshold(drug_id: str, quote_sources: Callable, data: dict | N
         if not r.get("sources"):
             raise ValueError(f"{what}: no source")
         out.append({"effect": effect, "sources": quote_sources(r["sources"], what)})
+    if {"lowers", "possibly_lowers"} <= seen:
+        raise ValueError(f"Drug {drug_id!r}: both lowers and possibly_lowers (keep the stronger)")
     order = {k: i for i, k in enumerate(EFFECTS)}
     out.sort(key=lambda r: order[r["effect"]])
     return {"seizure_threshold": out} if out else {}
