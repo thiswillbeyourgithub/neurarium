@@ -1517,6 +1517,13 @@
   "9932714": "https://doi.org/10.1016/s0014-2999(98)00838-3",
   "9949863": "https://doi.org/10.1007/978-3-0348-8845-5_6"
  },
+ "papers": {
+  "bates2026": "https://doi.org/10.2458/001c.161875",
+  "monti2011": "https://doi.org/10.1016/j.smrv.2010.11.003",
+  "watson2010": "https://doi.org/10.1016/j.jsmc.2010.08.003",
+  "wichniak2017": "https://doi.org/10.1007/s11920-017-0816-4",
+  "zilles2009": "https://doi.org/10.1097/WCO.0b013e32832d95db"
+ },
  "wikipedia_fr": {
   "2c_b": "https://fr.wikipedia.org/w/index.php?oldid=240235783",
   "acamprosate": "https://fr.wikipedia.org/w/index.php?oldid=227860988",

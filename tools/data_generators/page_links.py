@@ -37,6 +37,7 @@ HEADER_LINKS: dict[str, tuple[re.Pattern, str]] = {
     "wikipedia_fr": (re.compile(r"\bpermalink:\s*(https?://\S+)"), "{}"),
     "drugsfda": (re.compile(r"^source:\s*(https?://\S+)"), "{}"),
     "europepmc": (re.compile(r"^doi:\s*(10\.\S+)"), "https://doi.org/{}"),
+    "papers": (re.compile(r"^doi:\s*(10\.\S+)"), "https://doi.org/{}"),
     # A centrally authorised product's RCP is EMA's SmPC PDF, not the ANSM page the
     # corpus template builds (fetch_bdpm_rcp.ema_copies); national ones keep the template.
     "bdpm_rcp": (re.compile(r"^source:\s*(https://www\.ema\.europa\.eu/\S+)"), "{}"),

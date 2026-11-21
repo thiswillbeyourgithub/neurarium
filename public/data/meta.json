@@ -11973,6 +11973,14 @@
         "9768559": "https://doi.org/10.1016/s0091-3057(98)00093-8"
       }
     },
+    "papers": {
+      "ref": "Journal article, full text (PDF held by the author)",
+      "citation": "Full text of the cited journal article, read from the author's PDF; DOI pinned per citation (doi.org).",
+      "url": "https://doi.org/",
+      "pages_dir": "data_sources/papers/pages",
+      "page_kind": "paper",
+      "editable": false
+    },
     "drugsfda": {
       "ref": "Drugs@FDA (U.S. FDA), approved application history",
       "citation": "U.S. Food and Drug Administration. Drugs@FDA: FDA-approved drugs, cited application's original approval (openFDA drug/drugsfda export, public domain; application number pinned per citation).",

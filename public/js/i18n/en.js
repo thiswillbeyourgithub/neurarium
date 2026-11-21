@@ -451,6 +451,7 @@ window.__I18N_MESSAGES__.en = {
   "info.sourcePage.product": "{corpus}, product {page}",
   "info.sourcePage.guideline": "{corpus}, guideline {page}",
   "info.sourcePage.pmid": "{corpus}, PMID {page}",
+  "info.sourcePage.paper": "{corpus}, {page}",
   "info.sourcePage.application": "{corpus}, {page}",
   "info.sourcePage.annotation": "{corpus}, annotation {page}",
   "info.sourcePage.cid": "{corpus}, CID {page}",

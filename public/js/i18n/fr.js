@@ -449,6 +449,7 @@ window.__I18N_MESSAGES__.fr = {
   "info.sourcePage.product": "{corpus}, produit {page}",
   "info.sourcePage.guideline": "{corpus}, recommandation {page}",
   "info.sourcePage.pmid": "{corpus}, PMID {page}",
+  "info.sourcePage.paper": "{corpus}, {page}",
   "info.sourcePage.application": "{corpus}, {page}",
   "info.sourcePage.annotation": "{corpus}, annotation {page}",
   "info.sourcePage.cid": "{corpus}, CID {page}",

@@ -457,6 +457,25 @@ SOURCE_CORPORA: dict[str, dict] = {
         # its pages carry no freshness deadline (see data_generators/freshness.py).
         "editable": False,
     },
+    "papers": {
+        # Full-text paper corpus #25: reviews the author holds as PDFs that Europe PMC
+        # (#17) has only as an abstract, or not at all (Bates 2026 has no PMID).
+        # tools/fetch/fetch_papers.py splits each PDF (OCR when it has no text layer) into
+        # ONE page per paper, data_sources/papers/pages/<key>.md, under a header naming its
+        # doi, and one "## PDF page N" heading per PDF page so a quote is found back in
+        # the PDF. `page` is the paper key (`monti2011`), linked at https://doi.org/<doi>
+        # through page_links. Quotes are picked by a model and judged like #17. A rodent or
+        # cat statement carries its `species`, so the animal_evidence flag shows it.
+        # Copyrighted text: author-side only, a short verbatim sentence is a citation.
+        "ref": "Journal article, full text (PDF held by the author)",
+        "citation": "Full text of the cited journal article, read from the author's PDF; "
+                    "DOI pinned per citation (doi.org).",
+        "url": "https://doi.org/",
+        "pages_dir": "data_sources/papers/pages",
+        "page_kind": "paper",
+        # Not editable: a published paper does not change under a citation.
+        "editable": False,
+    },
     "drugsfda": {
         # Regulatory register corpus #18: Drugs@FDA, the FDA's own list of approved
         # applications, read from openFDA's bulk drug/drugsfda export (www.fda.gov
