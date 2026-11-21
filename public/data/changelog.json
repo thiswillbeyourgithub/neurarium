@@ -1,6 +1,21 @@
 {
   "versions": [
     {
+      "version": "3.177.0",
+      "date": "2026-11-21",
+      "entries": [
+        {
+          "category": "added",
+          "text": "New \"Seizure threshold\" section on drug panels (beta): whether a drug can lower the seizure threshold, cause seizures when stopped abruptly, or raise the threshold, for 87 drugs, each row quoting the French label or a seizure-risk study",
+          "commits": [
+            "d907621b",
+            "3a3ecda9",
+            "e0885f0e"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.176.1",
       "date": "2026-11-21",
       "entries": [
