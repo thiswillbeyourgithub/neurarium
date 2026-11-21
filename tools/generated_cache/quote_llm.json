@@ -146,6 +146,9 @@
 "q_0280731d1f41": {
 "drug:quazepam/originator": "opus"
 },
+"q_02a804454f30": {
+"drug:clozapine/seizure_threshold[lowers]": "opus"
+},
 "q_02b71d686db3": {
 "drug:pipothiazine/workup[ecg:before]": "opus"
 },
@@ -380,6 +383,9 @@
 "q_0739866949dd": {
 "receptor:alpha2a/classification[family]": "sonnet",
 "receptor:alpha2a/classification[receptor_class]": "sonnet"
+},
+"q_07413b810e57": {
+"drug:donepezil/seizure_threshold[lowers]": "opus"
 },
 "q_07454a525b18": {
 "drug:citalopram/brands[Citaxin]": "sonnet"
@@ -809,6 +815,11 @@
 "q_0ea62851f20c": {
 "drug:olanzapine/excretion[unchanged:urine]": "opus"
 },
+"q_0eeb4377fd47": {
+"drug:clomipramine/seizure_threshold[lowers]": "opus",
+"drug:clozapine/seizure_threshold[lowers]": "opus",
+"drug:olanzapine/seizure_threshold[lowers]": "opus"
+},
 "q_0ef328ab65f6": {
 "drug:sertindole/half_life": "sonnet"
 },
@@ -1178,6 +1189,9 @@
 "q_151d708e62fc": {
 "drug:clorazepate/excretion[route:renal]": "opus"
 },
+"q_1527333eb1e4": {
+"drug:pimozide/seizure_threshold[lowers]": "opus"
+},
 "q_15682f6bd8cc": {
 "drug:vilazodone/first_approval": "opus"
 },
@@ -1246,6 +1260,9 @@
 "q_16c8732270c3": {
 "drug:loxapine/bindings[h1:antagonist]": "sonnet"
 },
+"q_16cc951502a5": {
+"drug:loxapine/seizure_threshold[lowers]": "opus"
+},
 "q_16dbb5fa800a": {
 "receptor:5ht2a/effects[agonism:anxiety]": "opus",
 "receptor:5ht2a/effects[agonism:insomnia]": "opus",
@@ -1279,6 +1296,9 @@
 "receptor:alpha1d/locations[medulla]": "sonnet",
 "receptor:alpha1d/locations[thalamus]": "sonnet"
 },
+"q_17263690566d": {
+"drug:cyamemazine/seizure_threshold[lowers]": "opus"
+},
 "q_174599076bd0": {
 "receptor:gaba_a/effects[agonism:anxiolytic]": "opus",
 "receptor:gaba_a/effects[agonism:sedation]": "opus"
@@ -1297,6 +1317,9 @@
 },
 "q_17907a37530d": {
 "group:kind:serotonergic": "sonnet"
+},
+"q_17b76f5da561": {
+"drug:eslicarbazepine_acetate/seizure_threshold[withdrawal]": "opus"
 },
 "q_17c92ff4237a": {
 "drug:phentermine/excretion[urine_ph:dependent]": "opus"
@@ -1333,6 +1356,9 @@
 "q_187d9ac4cff5": {
 "drug:zuclopenthixol/formulations[injection]/release": "opus"
 },
+"q_187f764d0292": {
+"drug:methadone/seizure_threshold[lowers]": "opus"
+},
 "q_18b2cf4c4136": {
 "drug:primidone/workup[pregnancy_test:before]": "opus"
 },
@@ -1350,6 +1376,9 @@
 },
 "q_18e2779cde70": {
 "drug:primidone/categories": "sonnet"
+},
+"q_18f0773873b3": {
+"drug:phenobarbital/seizure_threshold[withdrawal]": "opus"
 },
 "q_18f1d22740fe": {
 "drug:primidone/metabolites[phenobarbital]": "sonnet"
@@ -1519,6 +1548,9 @@
 "q_1b698b02f028": {
 "drug:tizanidine/tmax": "sonnet"
 },
+"q_1b7254ba8904": {
+"drug:oxycodone/seizure_threshold[withdrawal]": "opus"
+},
 "q_1b7a60dddcb2": {
 "drug:heroin/withdrawals[us:1924]": "opus"
 },
@@ -1528,6 +1560,9 @@
 },
 "q_1b9b1d83354f": {
 "drug:tiagabine/first_approval": "opus"
+},
+"q_1baef003f7f5": {
+"drug:sevoflurane/seizure_threshold[lowers]": "opus"
 },
 "q_1bd16a536194": {
 "drug:fluphenazine/first_approval": "opus"
@@ -1596,6 +1631,9 @@
 },
 "q_1cb5b83e9b7e": {
 "drug:flurazepam/originator": "opus"
+},
+"q_1cbc9729666a": {
+"drug:mianserin/seizure_threshold[lowers]": "opus"
 },
 "q_1ccfe81baa05": {
 "drug:acamprosate/categories": "sonnet"
@@ -1890,6 +1928,9 @@
 "q_21652616ffd7": {
 "receptor:nachr_a7/release_modulation[heteroreceptor:vta:presynaptic_terminal:glutamate:increase]": "opus"
 },
+"q_216756160969": {
+"drug:zolpidem/seizure_threshold[withdrawal]": "opus"
+},
 "q_21ae7ca9a6cf": {
 "drug:biperiden/brands[Akineton]": "sonnet"
 },
@@ -1907,6 +1948,12 @@
 },
 "q_21f5ec58551c": {
 "drug:propranolol/bindings[beta1:antagonist]": "sonnet"
+},
+"q_2201b348ba37": {
+"drug:citalopram/seizure_threshold[lowers]": "opus"
+},
+"q_22205c66a6f3": {
+"drug:propofol/seizure_threshold[lowers]": "opus"
 },
 "q_2220921e8cc3": {
 "drug:entacapone/categories": "sonnet"
@@ -1968,6 +2015,9 @@
 "projection:locus_coeruleus_R->medulla": "opus",
 "projection:locus_coeruleus_R->medulla/transmitter": "opus"
 },
+"q_2301a71d8c2d": {
+"drug:alprazolam/seizure_threshold[withdrawal]": "opus"
+},
 "q_2308a731ef36": {
 "drug:amitriptyline/originator_country": "opus",
 "drug:protriptyline/originator_country": "opus",
@@ -2022,6 +2072,9 @@
 },
 "q_23bf17908b16": {
 "drug:molindone/brands[Moban]": "sonnet"
+},
+"q_23e93807b5e4": {
+"drug:bupropion/seizure_threshold[lowers]": "opus"
 },
 "q_240f35cc0c92": {
 "receptor:5ht2c/effects[antagonism:antidepressant]": "opus"
@@ -2115,6 +2168,9 @@
 },
 "q_259599e6429c": {
 "drug:oxazepam/excretion[route:renal]": "opus"
+},
+"q_25b93c200a6c": {
+"drug:clonazepam/seizure_threshold[raises]": "opus"
 },
 "q_25c2035f2ef3": {
 "drug:vigabatrin/workup[eye_exam:before]": "opus",
@@ -2629,6 +2685,12 @@
 "q_30d252aa1b57": {
 "drug:ropinirole/bindings[5ht2b:agonist]": "opus"
 },
+"q_30d84e8d5933": {
+"drug:estazolam/seizure_threshold[withdrawal]": "opus"
+},
+"q_30e64a22fb99": {
+"drug:imipramine/seizure_threshold[lowers]": "opus"
+},
 "q_30f0067c2de5": {
 "drug:paroxetine/first_approval": "opus"
 },
@@ -2669,6 +2731,9 @@
 "receptor:alpha2a/release_modulation[heteroreceptor:-:presynaptic_terminal:serotonin:decrease]": "opus",
 "receptor:alpha2b/release_modulation[heteroreceptor:-:presynaptic_terminal:serotonin:decrease]": "opus",
 "receptor:alpha2c/release_modulation[heteroreceptor:-:presynaptic_terminal:serotonin:decrease]": "opus"
+},
+"q_3176359103b1": {
+"drug:sevoflurane/seizure_threshold[lowers]": "opus"
 },
 "q_31953c0f0002": {
 "drug:opipramol/bindings[alpha1a:antagonist]": "sonnet",
@@ -3120,6 +3185,9 @@
 "q_3a0f9f758ecd": {
 "drug:tiapride/workup[ecg:before]": "opus"
 },
+"q_3a2829f28dc3": {
+"drug:ethosuximide/seizure_threshold[withdrawal]": "opus"
+},
 "q_3a328015a573": {
 "drug:propranolol/first_approval": "opus"
 },
@@ -3230,6 +3298,9 @@
 "q_3be86bbad5ab": {
 "drug:ethosuximide/first_approval": "opus"
 },
+"q_3bf9dee02724": {
+"drug:amisulpride/seizure_threshold[lowers]": "opus"
+},
 "q_3bf9e554bfed": {
 "drug:carbamazepine/formulations[ir]/tmax": "opus",
 "drug:carbamazepine/tmax": "opus"
@@ -3291,6 +3362,9 @@
 "receptor:m2/release_modulation[autoreceptor:-:presynaptic_terminal:acetylcholine:decrease]": "opus",
 "receptor:m4/classification[synaptic]": "opus",
 "receptor:m4/release_modulation[autoreceptor:-:presynaptic_terminal:acetylcholine:decrease]": "opus"
+},
+"q_3cb6c4b627fd": {
+"drug:haloperidol/seizure_threshold[lowers]": "opus"
 },
 "q_3cfa78c2bcd0": {
 "drug:bupropion/brands[Aplenzin]": "sonnet"
@@ -3694,6 +3768,9 @@
 "q_43ff5a182036": {
 "drug:granisetron/first_approval": "opus"
 },
+"q_44159e7f69cc": {
+"drug:pregabalin/seizure_threshold[withdrawal]": "opus"
+},
 "q_44340709825a": {
 "projection:frontal_L->frontal_R": "opus",
 "projection:frontal_L->frontal_R/sign": "opus",
@@ -3810,6 +3887,9 @@
 "q_462e3e3423e4": {
 "drug:lemborexant/tmax": "sonnet"
 },
+"q_4652916e1132": {
+"drug:olanzapine/seizure_threshold[lowers]": "opus"
+},
 "q_4656920c1d91": {
 "drug:cabergoline/workup[blood_pressure:during]": "opus"
 },
@@ -3909,6 +3989,9 @@
 "drug:thiopental/brands[Pentothal]": "sonnet",
 "drug:thiopental/formulations[injection]/brands[Pentothal]": "opus"
 },
+"q_47fbc975d97f": {
+"drug:pizotifen/seizure_threshold[lowers]": "opus"
+},
 "q_4808dd4a48f5": {
 "receptor:5ht2a/effects[agonism:hallucinations]": "opus",
 "receptor:5ht2a/effects[agonism:psychosis]": "opus"
@@ -3941,6 +4024,9 @@
 "drug:viloxazine/bindings[5ht2b:antagonist]/ki": "opus",
 "drug:viloxazine/bindings[5ht2c:agonist]/ki": "opus"
 },
+"q_48dd9b59efbc": {
+"drug:fluoxetine/seizure_threshold[lowers]": "opus"
+},
 "q_48f362cbc3da": {
 "drug:pipothiazine/first_approval": "opus"
 },
@@ -3955,6 +4041,10 @@
 },
 "q_4932a7724ab9": {
 "drug:olanzapinesamidorphan/brands[Lybalvi]": "sonnet"
+},
+"q_493bff71a470": {
+"drug:baclofen/seizure_threshold[lowers]": "opus",
+"drug:baclofen/seizure_threshold[withdrawal]": "opus"
 },
 "q_49402778df3b": {
 "drug:lithium/workup[ecg:before]": "opus"
@@ -4049,6 +4139,9 @@
 "q_4a6dc865f306": {
 "drug:paliperidone/formulations[depot]/release": "opus"
 },
+"q_4a7165bbfc73": {
+"drug:clonazepam/seizure_threshold[raises]": "opus"
+},
 "q_4a71b9cdf6f4": {
 "projection:claustrum_R->frontal_R": "opus"
 },
@@ -4065,6 +4158,9 @@
 },
 "q_4a9ad98d4857": {
 "drug:tetrabenazine/excretion[route:renal]": "opus"
+},
+"q_4aa909d31b45": {
+"drug:aripiprazole/seizure_threshold[lowers]": "opus"
 },
 "q_4ab15851571d": {
 "drug:flibanserin/bindings[5ht2b:antagonist]": "opus",
@@ -4103,6 +4199,9 @@
 "q_4b4b66139d49": {
 "drug:baclofen/excretion[unchanged:urine]": "opus"
 },
+"q_4b70b304870f": {
+"drug:vortioxetine/seizure_threshold[lowers]": "opus"
+},
 "q_4b9ed6571d81": {
 "projection:thalamus_R->frontal_R": "opus",
 "projection:thalamus_R->frontal_R/transmitter": "opus"
@@ -4123,6 +4222,9 @@
 "drug:modafinil/enzymes[cyp2b6:inducer]": "opus",
 "drug:modafinil/enzymes[cyp2b6:inducer]/strength": "opus",
 "drug:modafinil/enzymes[cyp3a4:inducer]": "opus"
+},
+"q_4bfc395a2a73": {
+"drug:lorazepam/seizure_threshold[withdrawal]": "opus"
 },
 "q_4bfc43273892": {
 "drug:tapentadol/excretion[route:renal]": "opus"
@@ -4159,6 +4261,9 @@
 },
 "q_4cc4c34ca2c9": {
 "drug:levomilnacipran/excretion[route:renal]": "opus"
+},
+"q_4cd5ef829297": {
+"drug:sulpiride/seizure_threshold[lowers]": "opus"
 },
 "q_4cda169ba9a2": {
 "drug:risperidone/bindings[d1:antagonist]": "opus",
@@ -4236,6 +4341,9 @@
 },
 "q_4e7ee8fd9984": {
 "drug:loflazepate/brands[Victan]": "sonnet"
+},
+"q_4e8210026b51": {
+"drug:fenfluramine/seizure_threshold[withdrawal]": "opus"
 },
 "q_4e82c5180a67": {
 "drug:thiothixene/excretion[route:fecal]": "opus"
@@ -4343,6 +4451,9 @@
 "projection:temporal_R->hippocampus_R/sign": "opus",
 "projection:temporal_R->hippocampus_R/transmitter": "opus"
 },
+"q_50a49b38a09f": {
+"drug:clobazam/seizure_threshold[withdrawal]": "opus"
+},
 "q_50b143424356": {
 "drug:thiopental/bindings[gaba_a:pam]": "sonnet"
 },
@@ -4400,6 +4511,9 @@
 "q_51ab1ad4235b": {
 "drug:gabapentin/bindings[cav:blocker]": "sonnet"
 },
+"q_51ac4d093579": {
+"drug:cabergoline/seizure_threshold[lowers]": "opus"
+},
 "q_51ad592a334b": {
 "drug:molindone/half_life": "sonnet"
 },
@@ -4436,6 +4550,9 @@
 },
 "q_525197f898ad": {
 "drug:tolcapone/half_life": "sonnet"
+},
+"q_52545fb14cbd": {
+"drug:perampanel/seizure_threshold[withdrawal]": "opus"
 },
 "q_5258d704562f": {
 "drug:vigabatrin/excretion[route:renal]": "opus"
@@ -4813,6 +4930,12 @@
 "drug:pramipexole/excretion[route:fecal]": "opus",
 "drug:pramipexole/excretion[route:renal]": "opus"
 },
+"q_5abdd3639f59": {
+"drug:baclofen/seizure_threshold[withdrawal]": "opus"
+},
+"q_5ac2d4b252b1": {
+"drug:chlorpromazine/seizure_threshold[lowers]": "opus"
+},
 "q_5ac9f0452cb8": {
 "drug:amoxapine/excretion[route:renal]": "opus"
 },
@@ -5093,6 +5216,9 @@
 "q_601ef5eb4d44": {
 "receptor:gaba_a/effects[antagonism:seizures]": "opus"
 },
+"q_60227021ef77": {
+"drug:imipramine/seizure_threshold[lowers]": "opus"
+},
 "q_603766443e9f": {
 "target:cav_t/classification": "opus"
 },
@@ -5221,6 +5347,9 @@
 "structure:globus_pallidus_L": "sonnet",
 "structure:globus_pallidus_R": "sonnet"
 },
+"q_6218b699b99a": {
+"drug:alimemazine/seizure_threshold[lowers]": "opus"
+},
 "q_621e76908745": {
 "receptor:sigma1/effects[agonism:anxiolytic]": "opus"
 },
@@ -5330,6 +5459,9 @@
 "drug:brexpiprazole/bindings[5ht2b:antagonist]": "sonnet",
 "drug:brexpiprazole/bindings[alpha1a:antagonist]": "sonnet",
 "drug:brexpiprazole/bindings[alpha1d:antagonist]": "sonnet"
+},
+"q_6422bf9ba8ec": {
+"drug:loflazepate/seizure_threshold[withdrawal]": "opus"
 },
 "q_6429628127e3": {
 "drug:modafinil/excretion[route:fecal]": "opus",
@@ -5551,6 +5683,9 @@
 "q_67c5c4251d73": {
 "drug:lamotrigine/first_approval": "opus"
 },
+"q_67cc4c8305b9": {
+"drug:sodium_oxybate/seizure_threshold[lowers]": "opus"
+},
 "q_67d814951835": {
 "projection:locus_coeruleus_R->amygdala_R": "opus",
 "projection:locus_coeruleus_R->amygdala_R/transmitter": "opus"
@@ -5712,6 +5847,9 @@
 "drug:valbenazine/excretion[route:fecal]": "opus",
 "drug:valbenazine/excretion[route:renal]": "opus"
 },
+"q_6abf99a77f96": {
+"drug:venlafaxine/seizure_threshold[lowers]": "opus"
+},
 "q_6ac12e453071": {
 "drug:desvenlafaxine/bindings[net:reuptake_inhibitor]": "sonnet"
 },
@@ -5764,6 +5902,9 @@
 },
 "q_6b9683abec14": {
 "drug:milnacipran/bindings[sert:reuptake_inhibitor]": "sonnet"
+},
+"q_6bb5d2f7e49e": {
+"drug:zuclopenthixol/seizure_threshold[lowers]": "opus"
 },
 "q_6bce7ac14073": {
 "drug:cariprazine/bindings[d3:partial_agonist]": "sonnet"
@@ -5975,6 +6116,9 @@
 "q_6f6557b7c7d5": {
 "drug:maprotiline/originator": "opus"
 },
+"q_6f79519c4dcb": {
+"drug:amphetamine_d/seizure_threshold[lowers]": "opus"
+},
 "q_6f933e19ba70": {
 "receptor:kappa/effects[agonism:prolactin_elevation]": "opus"
 },
@@ -5998,6 +6142,9 @@
 },
 "q_6fff1c91adeb": {
 "receptor:m2/effects[agonism:bradycardia]": "opus"
+},
+"q_700a81f43015": {
+"drug:oxazepam/seizure_threshold[withdrawal]": "opus"
 },
 "q_70174ed78b63": {
 "drug:maprotiline/categories": "sonnet"
@@ -6035,6 +6182,9 @@
 },
 "q_70ce41b3f320": {
 "drug:risperidone/bindings[d2:antagonist]": "sonnet"
+},
+"q_70e2448727ef": {
+"drug:carbamazepine/seizure_threshold[withdrawal]": "opus"
 },
 "q_70ee3e88ccf9": {
 "drug:methamphetamine/tmax": "sonnet"
@@ -6142,6 +6292,9 @@
 },
 "q_71e512eed36c": {
 "drug:bromocriptine/first_approval": "opus"
+},
+"q_72036e6606f5": {
+"drug:clonazepam/seizure_threshold[withdrawal]": "opus"
 },
 "q_721be10a6803": {
 "drug:serdexmethylphenidate/metabolites[dexmethylphenidate]": "opus",
@@ -6257,6 +6410,9 @@
 "drug:imipramine/excretion[route:fecal]": "opus",
 "drug:imipramine/excretion[route:renal]": "opus"
 },
+"q_7436cb6e72a3": {
+"drug:clorazepate/seizure_threshold[withdrawal]": "opus"
+},
 "q_74465a972706": {
 "drug:paliperidone/nbn": "sonnet"
 },
@@ -6328,6 +6484,9 @@
 },
 "q_758b188f0ee7": {
 "drug:loprazolam/excretion[unchanged:urine]": "opus"
+},
+"q_75b7ba2b2145": {
+"drug:pipamperone/seizure_threshold[lowers]": "opus"
 },
 "q_75b92f67eb03": {
 "drug:clomipramine/originator": "opus"
@@ -6479,6 +6638,9 @@
 "q_7841d8fbd1c9": {
 "drug:moclobemide/brands[Manerix]": "sonnet"
 },
+"q_784d722c9fa1": {
+"drug:doxepin/seizure_threshold[lowers]": "opus"
+},
 "q_7881746da37a": {
 "drug:pramipexole/half_life": "opus"
 },
@@ -6596,6 +6758,9 @@
 "q_7b70633e5985": {
 "drug:bromocriptine/workup[echocardiography:before]": "opus"
 },
+"q_7b7269057f6a": {
+"drug:promethazine/seizure_threshold[lowers]": "opus"
+},
 "q_7b7a1a9aa45c": {
 "receptor:nachr_a7/classification[synaptic]": "opus",
 "receptor:nachr_a7/effects[agonism:pro_cognitive]": "opus"
@@ -6668,6 +6833,9 @@
 "q_7cfae96f60de": {
 "drug:nordazepam/half_life": "opus",
 "metabolite:desmethyldiazepam/half_life": "opus"
+},
+"q_7d005004981f": {
+"drug:trimipramine/seizure_threshold[lowers]": "opus"
 },
 "q_7d242c3e7c5f": {
 "drug:sodium_oxybate/nbn": "sonnet"
@@ -6886,6 +7054,9 @@
 "drug:rizatriptan/bindings[5ht1b:agonist]": "sonnet",
 "drug:rizatriptan/bindings[5ht1d:agonist]": "sonnet"
 },
+"q_80a173f0edb3": {
+"drug:vigabatrin/seizure_threshold[withdrawal]": "opus"
+},
 "q_80ea06fb63ef": {
 "drug:paliperidone/bindings[alpha1a:antagonist]": "sonnet",
 "drug:paliperidone/bindings[alpha1b:antagonist]": "sonnet",
@@ -6914,6 +7085,9 @@
 },
 "q_8187c2112471": {
 "drug:protriptyline/excretion[route:renal]": "opus"
+},
+"q_81897e19c36d": {
+"drug:zopiclone/seizure_threshold[withdrawal]": "opus"
 },
 "q_81a9ab279162": {
 "drug:tiagabine/brands[Gabitril]": "sonnet"
@@ -7067,6 +7241,9 @@
 "q_84ae20404e7a": {
 "projection:temporal_R->hippocampus_R": "opus",
 "projection:temporal_R->hippocampus_R/sign": "opus"
+},
+"q_84cd6d9621c0": {
+"drug:sertraline/seizure_threshold[lowers]": "opus"
 },
 "q_84e6d02c3da8": {
 "drug:sevoflurane/originator": "opus"
@@ -7351,6 +7528,9 @@
 "q_89b015a2708e": {
 "projection:locus_coeruleus_R->substantia_nigra_R": "opus"
 },
+"q_89ba2e8ee547": {
+"drug:lormetazepam/seizure_threshold[withdrawal]": "opus"
+},
 "q_89c59fcade33": {
 "drug:eslicarbazepine_acetate/first_approval": "opus"
 },
@@ -7417,6 +7597,9 @@
 "q_8af1d5d8d5d0": {
 "drug:oxazepam/bindings[gaba_a:pam]": "sonnet"
 },
+"q_8b08227362c0": {
+"drug:pipothiazine/seizure_threshold[lowers]": "opus"
+},
 "q_8b27c21a434c": {
 "drug:bupropion/brands[Budeprion]": "sonnet"
 },
@@ -7435,6 +7618,9 @@
 },
 "q_8b3d5b5fab8d": {
 "drug:morphine/categories": "sonnet"
+},
+"q_8b3fb46a5c22": {
+"drug:levomepromazine/seizure_threshold[lowers]": "opus"
 },
 "q_8b4813cdafd2": {
 "drug:lisdexamfetamine/brands[Tyvense]": "sonnet"
@@ -7556,6 +7742,9 @@
 },
 "q_8d14fbe19f44": {
 "drug:loxapine/bindings[5ht2a:antagonist]": "sonnet"
+},
+"q_8d2adb1a2011": {
+"drug:sumatriptan/seizure_threshold[lowers]": "opus"
 },
 "q_8d474a3cb483": {
 "drug:citalopram/brands[Ciazil]": "sonnet"
@@ -7762,6 +7951,9 @@
 "q_90d22cacf2be": {
 "drug:midazolam/nbn": "sonnet"
 },
+"q_90e16ebd3742": {
+"drug:sevoflurane/seizure_threshold[lowers]": "opus"
+},
 "q_90e6207b2c74": {
 "receptor:kappa/classification[synaptic]": "opus",
 "receptor:mu/classification[synaptic]": "opus"
@@ -7808,6 +8000,9 @@
 },
 "q_92021b107735": {
 "drug:diphenhydramine/bindings[5ht2c:antagonist]": "sonnet"
+},
+"q_920a5a964657": {
+"drug:tramadol/seizure_threshold[lowers]": "opus"
 },
 "q_92104f7f53b5": {
 "drug:guanfacine/categories": "sonnet"
@@ -7897,6 +8092,9 @@
 },
 "q_93e58cf7b0e0": {
 "drug:biperiden/categories": "sonnet"
+},
+"q_93f34b7f7ae9": {
+"drug:diazepam/seizure_threshold[withdrawal]": "opus"
 },
 "q_940ae2f8be40": {
 "receptor:5ht1a/effects[agonism:pro_cognitive]": "opus"
@@ -8023,6 +8221,9 @@
 },
 "q_96168d74dabf": {
 "receptor:gaba_a/classification[synaptic]": "opus"
+},
+"q_9628a62defba": {
+"drug:periciazine/seizure_threshold[lowers]": "opus"
 },
 "q_964689919c3b": {
 "drug:diazepam/excretion[urine_ph:acidic_faster]": "opus"
@@ -8281,6 +8482,9 @@
 "q_99e03cfab445": {
 "drug:lacosamide/categories": "opus"
 },
+"q_99e3a9d34b1c": {
+"drug:methylphenidate_dl/seizure_threshold[lowers]": "opus"
+},
 "q_99ee7233aca3": {
 "drug:rasagiline/bindings[mao_a:enzyme_inhibitor]": "opus"
 },
@@ -8328,6 +8532,9 @@
 },
 "q_9abfa53241ec": {
 "drug:methamphetamine/excretion[urine_ph:acidic_faster]": "opus"
+},
+"q_9ae0e62b342d": {
+"drug:brexpiprazole/seizure_threshold[lowers]": "opus"
 },
 "q_9ae312b1590b": {
 "receptor:nachr_a4b2/classification[family]": "sonnet",
@@ -8488,6 +8695,9 @@
 "drug:betahistine/bindings[h3:antagonist]": "sonnet",
 "drug:betahistine/categories": "sonnet"
 },
+"q_9d2080da8dad": {
+"drug:asenapine/seizure_threshold[lowers]": "opus"
+},
 "q_9d250028b64e": {
 "drug:ketanserin/tmax": "sonnet"
 },
@@ -8547,6 +8757,9 @@
 },
 "q_9e1ba51897b6": {
 "target:ache/effects[inhibition:pro_cognitive]": "opus"
+},
+"q_9e2bd4b6d861": {
+"drug:phenytoin/seizure_threshold[withdrawal]": "opus"
 },
 "q_9e2d02c03054": {
 "receptor:gaba_a/effects[agonism:anticonvulsant]": "opus",
@@ -8831,6 +9044,9 @@
 "q_a301f47d59ff": {
 "drug:ramelteon/tmax": "sonnet"
 },
+"q_a30656cc557f": {
+"drug:clotiazepam/seizure_threshold[withdrawal]": "opus"
+},
 "q_a313c771a9d5": {
 "drug:reboxetine/categories": "opus"
 },
@@ -8875,6 +9091,9 @@
 },
 "q_a3e6fff9a83f": {
 "drug:perampanel/bindings[ampa:nam]": "sonnet"
+},
+"q_a4105c7da1ae": {
+"drug:zonisamide/seizure_threshold[withdrawal]": "opus"
 },
 "q_a41230617b0e": {
 "drug:temazepam/excretion[route:renal]": "opus"
@@ -9179,6 +9398,11 @@
 "q_a9d8335d47b8": {
 "drug:lamotrigine/brands[Labileno]": "sonnet"
 },
+"q_a9daa54e90c0": {
+"drug:alprazolam/seizure_threshold[lowers]": "opus",
+"drug:bupropion/seizure_threshold[lowers]": "opus",
+"drug:quetiapine/seizure_threshold[lowers]": "opus"
+},
 "q_a9e5e1238da5": {
 "drug:clomipramine/workup[ecg:during]": "opus"
 },
@@ -9421,6 +9645,9 @@
 "q_af5e27e00a51": {
 "drug:nalmefene/half_life": "sonnet"
 },
+"q_af61bb3772de": {
+"drug:iproniazid/seizure_threshold[lowers]": "opus"
+},
 "q_af8573417903": {
 "drug:trimipramine/bindings[d2:antagonist]": "sonnet"
 },
@@ -9452,6 +9679,9 @@
 },
 "q_afb856904102": {
 "receptor:alpha1b/locations[parietal]": "sonnet"
+},
+"q_afcc93de59d2": {
+"drug:topiramate/seizure_threshold[withdrawal]": "opus"
 },
 "q_afd59ce85ff3": {
 "drug:piribedil/half_life": "opus"
@@ -9652,6 +9882,9 @@
 "drug:ziprasidone/excretion[route:fecal]": "opus",
 "drug:ziprasidone/excretion[route:renal]": "opus"
 },
+"q_b39d60694379": {
+"drug:lisdexamfetamine/seizure_threshold[lowers]": "opus"
+},
 "q_b3af927ccddf": {
 "drug:naltrexone/brands[Vivitrol]": "sonnet",
 "drug:naltrexone/formulations[depot]/brands[Vivitrol]": "opus"
@@ -9663,6 +9896,9 @@
 },
 "q_b3eabdef7040": {
 "drug:lamotrigine/tmax": "sonnet"
+},
+"q_b40b56b49785": {
+"drug:pregabalin/seizure_threshold[withdrawal]": "opus"
 },
 "q_b414a208b494": {
 "drug:sildenafil/half_life": "sonnet"
@@ -9831,6 +10067,9 @@
 "q_b67a119d5e8d": {
 "drug:fluphenazine/categories": "sonnet"
 },
+"q_b67d67ee5169": {
+"drug:primidone/seizure_threshold[withdrawal]": "opus"
+},
 "q_b6912df44aa4": {
 "drug:vortioxetine/originator": "opus"
 },
@@ -9957,6 +10196,9 @@
 "q_b8c03fdad9eb": {
 "drug:cariprazine/originator": "opus"
 },
+"q_b8ee3b1ef30c": {
+"drug:flupenthixol/seizure_threshold[lowers]": "opus"
+},
 "q_b8f176845b18": {
 "drug:amphetamine_dl/brands[Benzédrine]": "sonnet"
 },
@@ -10080,8 +10322,14 @@
 "q_bb10d95d5401": {
 "drug:sodium_oxybate/first_approval": "opus"
 },
+"q_bb1bd7f6c3a1": {
+"drug:varenicline/seizure_threshold[lowers]": "opus"
+},
 "q_bb3192b35d27": {
 "drug:lisdexamfetamine/half_life": "opus"
+},
+"q_bb33397e1d92": {
+"drug:rivastigmine/seizure_threshold[lowers]": "opus"
 },
 "q_bb41f541ab1f": {
 "drug:zuclopenthixol/half_life": "sonnet"
@@ -10098,6 +10346,9 @@
 "q_bb7e2ad34772": {
 "drug:chlorprothixene/excretion[route:fecal]": "opus",
 "drug:chlorprothixene/excretion[route:renal]": "opus"
+},
+"q_bb7e9dec21b2": {
+"drug:clozapine/seizure_threshold[lowers]": "opus"
 },
 "q_bb8cbe58dc41": {
 "drug:protriptyline/brands[Vivactil]": "sonnet"
@@ -10127,6 +10378,9 @@
 },
 "q_bbf05ef20867": {
 "metabolite:noribogaine/bindings[sert:reuptake_inhibitor]": "opus"
+},
+"q_bbf7f84f6e92": {
+"drug:bromocriptine/seizure_threshold[lowers]": "opus"
 },
 "q_bc0f0dab2fa6": {
 "drug:dexmedetomidine/excretion[unchanged:urine]": "opus"
@@ -10428,6 +10682,9 @@
 },
 "q_c1694bec90d6": {
 "drug:methadone/half_life": "opus"
+},
+"q_c1723e5e2c74": {
+"drug:clonazepam/seizure_threshold[withdrawal]": "opus"
 },
 "q_c1799991598f": {
 "drug:pethidine/excretion[route:renal]": "opus"
@@ -10976,6 +11233,9 @@
 "q_cad154e8b582": {
 "drug:oxycodone/excretion[unchanged:urine]": "opus"
 },
+"q_cadb22f3386e": {
+"drug:flumazenil/seizure_threshold[raises]": "opus"
+},
 "q_cadcc4dc8a27": {
 "drug:hydroxyzine/bindings[5ht2a:antagonist]": "opus",
 "drug:hydroxyzine/bindings[alpha1:antagonist]": "opus",
@@ -11249,6 +11509,9 @@
 "drug:trimipramine/bindings[m4:antagonist]": "sonnet",
 "drug:trimipramine/bindings[m5:antagonist]": "sonnet"
 },
+"q_cf7f3baf21c7": {
+"drug:prazepam/seizure_threshold[withdrawal]": "opus"
+},
 "q_cf8a228730b4": {
 "drug:atropine/categories": "sonnet"
 },
@@ -11334,6 +11597,12 @@
 "drug:esketamine/enzymes[cyp2c9:substrate]/strength": "opus",
 "drug:esketamine/enzymes[cyp3a4:substrate]": "opus",
 "drug:esketamine/enzymes[cyp3a4:substrate]/strength": "opus"
+},
+"q_d1c0939b4e7b": {
+"drug:chlorpromazine/seizure_threshold[lowers]": "opus",
+"drug:clomipramine/seizure_threshold[lowers]": "opus",
+"drug:clozapine/seizure_threshold[lowers]": "opus",
+"drug:maprotiline/seizure_threshold[lowers]": "opus"
 },
 "q_d1c2c88bbf85": {
 "receptor:m3/effects[agonism:nausea]": "opus"
@@ -11438,6 +11707,9 @@
 "drug:molindone/bindings[alpha1b:antagonist]": "sonnet",
 "drug:molindone/bindings[alpha1c:antagonist]": "sonnet",
 "drug:molindone/bindings[alpha1d:antagonist]": "sonnet"
+},
+"q_d42c1e3ea578": {
+"drug:tiagabine/seizure_threshold[lowers]": "opus"
 },
 "q_d44abdaf23ef": {
 "drug:zimelidine/categories": "sonnet"
@@ -11781,6 +12053,9 @@
 "receptor:alpha2b/release_modulation[autoreceptor:-:presynaptic_terminal:norepinephrine:decrease]": "opus",
 "receptor:alpha2c/release_modulation[autoreceptor:-:presynaptic_terminal:norepinephrine:decrease]": "opus"
 },
+"q_dad8283319a3": {
+"drug:maprotiline/seizure_threshold[lowers]": "opus"
+},
 "q_dae61ef685d1": {
 "drug:oxycodone/excretion[unchanged:urine]": "opus"
 },
@@ -12118,6 +12393,9 @@
 "q_e1f77e943a8e": {
 "drug:pentobarbital/originator": "opus"
 },
+"q_e20914987fb7": {
+"drug:scopolamine/seizure_threshold[lowers]": "opus"
+},
 "q_e217a059a8c4": {
 "drug:iloperidone/brands[Zomaril]": "sonnet"
 },
@@ -12248,6 +12526,9 @@
 "q_e415ba57eb0e": {
 "receptor:h3/effects[antagonism:wakefulness]": "opus"
 },
+"q_e417259e1c63": {
+"drug:donepezil/seizure_threshold[lowers]": "opus"
+},
 "q_e43c88af7abd": {
 "drug:isocarboxazid/excretion[route:renal]": "opus"
 },
@@ -12366,6 +12647,9 @@
 },
 "q_e5c33e2e86f3": {
 "drug:entacapone/excretion[route:fecal]": "opus"
+},
+"q_e5c5bb3533eb": {
+"drug:tiapride/seizure_threshold[lowers]": "opus"
 },
 "q_e5d95cf4d52d": {
 "drug:topiramate/brands[Qsymia]": "sonnet"
@@ -12513,6 +12797,9 @@
 "q_e7ddb72fdfec": {
 "drug:primidone/excretion[route:renal]": "opus"
 },
+"q_e7f5a9b943e3": {
+"drug:galantamine/seizure_threshold[lowers]": "opus"
+},
 "q_e8533f788019": {
 "drug:perampanel/categories": "opus"
 },
@@ -12597,6 +12884,9 @@
 "q_e97e8a1c9726": {
 "drug:nabilone/excretion[route:fecal]": "opus",
 "drug:nabilone/excretion[route:renal]": "opus"
+},
+"q_e98b4259f41f": {
+"drug:tiagabine/seizure_threshold[withdrawal]": "opus"
 },
 "q_e992255a0513": {
 "drug:cytisine/categories": "sonnet"
@@ -12707,6 +12997,9 @@
 "q_ebd82d442fcc": {
 "drug:citalopram/brands[Zetalo]": "sonnet"
 },
+"q_ebdd2ff8db98": {
+"drug:nitrazepam/seizure_threshold[withdrawal]": "opus"
+},
 "q_ebf47ca116db": {
 "drug:aripiprazole/half_life": "sonnet",
 "drug:aripiprazole/metabolites[dehydroaripiprazole]": "sonnet",
@@ -12762,6 +13055,9 @@
 },
 "q_ed992c4ca497": {
 "drug:methylfolate_l/excretion[route:renal]": "opus"
+},
+"q_ed9aedaf285b": {
+"drug:bromazepam/seizure_threshold[withdrawal]": "opus"
 },
 "q_edacd7b199a0": {
 "drug:naltrexone/workup[liver_function:before]": "opus",
@@ -12953,6 +13249,9 @@
 "drug:amitriptyline/bindings[alpha1c:antagonist]": "sonnet",
 "drug:amitriptyline/bindings[alpha1d:antagonist]": "sonnet"
 },
+"q_f0d3707fe8c7": {
+"drug:yohimbine/seizure_threshold[lowers]": "opus"
+},
 "q_f0df1281a669": {
 "drug:amantadine/formulations[ir]/tmax": "opus",
 "drug:amantadine/tmax": "opus"
@@ -13007,6 +13306,9 @@
 },
 "q_f2108b68b3bd": {
 "drug:escitalopram/first_approval": "opus"
+},
+"q_f2115c5e30c9": {
+"drug:clomipramine/seizure_threshold[lowers]": "opus"
 },
 "q_f2139dc49129": {
 "receptor:d2/classification[synaptic]": "opus",
@@ -13262,6 +13564,9 @@
 "q_f649968fd547": {
 "drug:selegiline/half_life": "sonnet"
 },
+"q_f65158cdd055": {
+"drug:oxcarbazepine/seizure_threshold[withdrawal]": "opus"
+},
 "q_f6598630ceb4": {
 "drug:quetiapine/bindings[alpha1a:antagonist]": "sonnet",
 "drug:quetiapine/bindings[alpha1b:antagonist]": "sonnet",
@@ -13506,6 +13811,9 @@
 "q_faa2275f45ab": {
 "drug:sulpiride/workup[ecg:before]": "opus"
 },
+"q_fab151be9cd2": {
+"drug:loxapine/seizure_threshold[lowers]": "opus"
+},
 "q_fad30cc028d0": {
 "drug:melperone/categories": "sonnet"
 },
@@ -13730,6 +14038,9 @@
 },
 "q_fe35f7e91fc6": {
 "drug:tianeptine/half_life": "sonnet"
+},
+"q_fe48a948fdd8": {
+"drug:metoclopramide/seizure_threshold[lowers]": "opus"
 },
 "q_fe4b352ddc82": {
 "drug:chloral_hydrate/metabolites[trichloroethanol]": "sonnet"

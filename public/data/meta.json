@@ -404,6 +404,11 @@
       }
     }
   },
+  "seizure_threshold_effects": {
+    "lowers": "Lowers the seizure threshold",
+    "withdrawal": "Seizures when stopped abruptly",
+    "raises": "Raises the seizure threshold (anticonvulsant)"
+  },
   "drug_targets": {
     "sert": {
       "name": "Serotonin transporter (SERT)",
@@ -11837,8 +11842,11 @@
       "page_kind": "product",
       "page_url": "https://base-donnees-publique.medicaments.gouv.fr/medicament/{page}/extrait",
       "page_urls": {
+        "60316362": "https://www.ema.europa.eu/fr/documents/product-information/brintellix-epar-product-information_fr.pdf",
+        "60442838": "https://www.ema.europa.eu/fr/documents/product-information/champix-epar-product-information_fr.pdf",
         "61501691": "https://www.ema.europa.eu/fr/documents/product-information/diacomit-epar-product-information_fr.pdf",
         "61680130": "https://www.ema.europa.eu/fr/documents/product-information/epidyolex-epar-product-information_fr.pdf",
+        "61849146": "https://www.ema.europa.eu/fr/documents/product-information/fycompa-epar-product-information_fr.pdf",
         "62154820": "https://www.ema.europa.eu/fr/documents/product-information/fintepla-epar-product-information_fr.pdf",
         "64617815": "https://www.ema.europa.eu/fr/documents/product-information/sunosi-epar-product-information_fr.pdf",
         "67077388": "https://www.ema.europa.eu/fr/documents/product-information/tasmar-epar-product-information_fr.pdf",
@@ -11878,6 +11886,7 @@
         "10952500": "https://doi.org/10.1007/s002590000279",
         "11016537": "https://doi.org/10.1016/s0197-4580(00)00149-4",
         "11282252": "https://doi.org/10.1016/s0893-133x(00)00227-x",
+        "11888352": "https://doi.org/10.2165/00002018-200225020-00004",
         "12192085": "https://doi.org/10.1073/pnas.182234399",
         "12363396": "https://doi.org/10.1016/s0920-9964(02)00205-0",
         "12414100": "https://doi.org/10.1016/s0006-8993(02)03243-2",
@@ -11892,6 +11901,7 @@
         "16814817": "https://doi.org/10.1016/j.neuropharm.2006.05.012",
         "1687574": "https://doi.org/10.1254/fpj.98.5_399",
         "17134847": "https://doi.org/10.1016/j.mehy.2006.07.061",
+        "17223086": "https://doi.org/10.1016/j.biopsych.2006.09.023",
         "18036835": "https://doi.org/10.1016/j.neuroimage.2007.10.016",
         "18077184": "https://doi.org/10.1016/j.neuroimage.2007.10.053",
         "18383504": "https://doi.org/10.1002/cne.21685",
@@ -12550,6 +12560,16 @@
         "missing": 0,
         "unknown": 0
       },
+      "drug_seizure_threshold": {
+        "total": 91,
+        "verified": 91,
+        "uncertain": 0,
+        "sourced": 0,
+        "llm": 0,
+        "nosource": 0,
+        "missing": 0,
+        "unknown": 0
+      },
       "drug_enzymes": {
         "total": 575,
         "verified": 572,
@@ -12822,15 +12842,15 @@
       }
     },
     "nodes": {
-      "total": 11007,
-      "verified": 10219,
+      "total": 11098,
+      "verified": 10310,
       "uncertain": 419,
       "sourced": 0,
       "llm": 231,
       "nosource": 138,
       "missing": 369,
       "unknown": 596,
-      "backed": 10638,
+      "backed": 10729,
       "pct_backed": 97
     },
     "ki_coverage": {

@@ -515,19 +515,6 @@
     ]
    }
   ],
-  "gabapentin": [
-   {
-    "effect": "withdrawal",
-    "sources": [
-     {
-      "corpus": "bdpm_rcp",
-      "page": "61022591",
-      "provenance": "verified",
-      "quote": "Même si aucune donnée ne montre une recrudescence des crises avec la gabapentine, l'arrêt brutal des anticonvulsivants chez les patients épileptiques peut déclencher un état de mal épileptique (voir rubrique 4.2)."
-     }
-    ]
-   }
-  ],
   "galantamine": [
    {
     "effect": "lowers",

@@ -1,18 +1,5 @@
 [
  {
-  "qid": "q_918fa2dd251b",
-  "corpus": "bdpm",
-  "page": "60149276",
-  "heading": null,
-  "present": true,
-  "supports": false,
-  "quote": "de 73 à 99% (moyenne : 88%) dans l'urine acide,",
-  "claims": [
-   "drug:ephedrine/excretion[urine_ph:acidic_faster] | Excretion of drug Ephedrine, urine pH: faster in acidic urine. [cited here alongside 1 other quote(s): judge whether THIS one carries its share of the claim, not whether it carries the whole claim alone]"
-  ],
-  "note": "line gives a recovery range in acidic urine, not that acidity speeds excretion"
- },
- {
   "qid": "q_21c6860df3bf",
   "corpus": "europepmc",
   "page": "11016537",
