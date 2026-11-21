@@ -47,7 +47,10 @@ EFFECTS: dict[str, dict[str, Any]] = {
                    "requires": (SEIZURE, STOPPING)},
     "raises": {"en": "Raises the seizure threshold (anticonvulsant)",
                "fr": "Élève le seuil épileptogène (anticonvulsivant)",
+               # An indication counts: "traitement des épilepsies partielles" (RCP 4.1).
                "requires": (r"anticonvuls|anti-?[ée]pilep|antiepilep|anticomitial|"
+                            r"(?:traitement|indiqu|treatment|indicated)\w*\b[^.]{0,80}"
+                            r"(?:[ée]pilep|convuls|crises|seizures)|"
                             r"(?:raises?|increases?|[ée]l[èe]ve|augmente)\w* (?:the |le )?"
                             r"(?:seizure )?(?:threshold|seuil)",)},
 }

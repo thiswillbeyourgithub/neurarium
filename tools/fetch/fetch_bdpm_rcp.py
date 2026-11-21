@@ -86,13 +86,15 @@ JUSTELESRCP = ROOT.parent / "justelesRCP"
 COMBO_PARTNERS = {"levodopa": ("CARBIDOPA", "BENSERAZIDE")}
 
 # The sections read, in page order: (number, anchor name the RCP HTML carries).
-SECTIONS = (("4.2", "RcpPosoAdmin"), ("4.3", "RcpContreindications"),
+SECTIONS = (("4.1", "RcpIndicTherap"), ("4.2", "RcpPosoAdmin"), ("4.3", "RcpContreindications"),
             ("4.4", "RcpMisesEnGarde"), ("5.1", "RcpPropPharmacodynamiques"))
-SECTION_TITLES = {"4.2": "4.2. Posologie et mode d'administration",
+SECTION_TITLES = {"4.1": "4.1. Indications thérapeutiques",
+                  "4.2": "4.2. Posologie et mode d'administration",
                   "4.3": "4.3. Contre-indications",
                   "4.4": "4.4. Mises en garde spéciales et précautions d'emploi",
                   "5.1": "5.1. Propriétés pharmacodynamiques"}
-SECTION_TITLES_EN = {"4.2": "4.2. Posology and method of administration",
+SECTION_TITLES_EN = {"4.1": "4.1. Therapeutic indications",
+                     "4.2": "4.2. Posology and method of administration",
                      "4.3": "4.3. Contraindications",
                      "4.4": "4.4. Special warnings and precautions for use",
                      "5.1": "5.1. Pharmacodynamic properties"}

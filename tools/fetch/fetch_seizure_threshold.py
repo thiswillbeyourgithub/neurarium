@@ -11,7 +11,7 @@ judges.
 Two inputs, each line offered only when it speaks of seizures
 (``seizure_threshold.about_seizures``, the pattern the applier gates on):
 
-* the drug's French RCP, sections 4.x (corpus #24 ``bdpm_rcp``, the page
+* the drug's French RCP, sections 4.1-4.4 and 5.1 (corpus #24 ``bdpm_rcp``, the page
   ``fetch_workup`` reads: ``bdpm_rcp_labels.json`` -> ``pages_rcp4/<page>.md``), e.g.
   "Le méthylphénidate peut abaisser le seuil épileptogène chez les patients ...";
 * the abstracts of :data:`SEIZURE_PAPERS` (corpus #17 ``europepmc``), each sentence
@@ -53,6 +53,10 @@ assert all(p in epmc.PAPERS for p in SEIZURE_PAPERS), "add the paper to fetch_eu
 
 # An excipient notice (terpene suppositories "peuvent abaisser le seuil épileptogène")
 # speaks of the product's excipient, not of the molecule.
+# 4.1 indications ("traitement de l'épilepsie": the anticonvulsants' ``raises``), 4.2-4.4
+# warnings, 5.1 pharmacodynamics ("activité anticonvulsivante").
+RCP_SECTIONS = ("4.1", "4.2", "4.3", "4.4", "5.1")
+
 # How far above a seizure line its withdrawal context may sit (see _with_stopping_context).
 STOP_LOOKBACK = 2
 # The line above that makes a seizure line a withdrawal one (narrower than S.STOPPING:
@@ -93,7 +97,7 @@ def _rcp_candidates(labels: dict) -> dict[str, list[dict]]:
         text = path.read_text(encoding="utf-8")
         lines, page = fetch_workup.page_lines(text), normalize_for_match(text)
         for i, ln in enumerate(lines):
-            if ln["section"].startswith("4") and S.about_seizures(ln["line"]) \
+            if ln["section"] in RCP_SECTIONS and S.about_seizures(ln["line"]) \
                     and not EXCIPIENT_RE.search(ln["line"]):
                 out[did].append({"corpus": fetch_workup.CORPUS, "page": entry["page"],
                                  "section": ln["section"],
