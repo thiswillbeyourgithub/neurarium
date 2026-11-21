@@ -132,6 +132,19 @@
     ]
    }
   ],
+  "brivaracetam": [
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60579228",
+      "provenance": "verified",
+      "quote": "Briviact est indiqué en association dans le traitement des crises partielles avec ou sans généralisation secondaire chez les adultes, les adolescents et les enfants à partir de 2 ans présentant une épilepsie."
+     }
+    ]
+   }
+  ],
   "bromazepam": [
    {
     "effect": "withdrawal",
@@ -190,6 +203,25 @@
     ]
    }
   ],
+  "cannabidiol": [
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61680130",
+      "provenance": "verified",
+      "quote": "Epidyolex est indiqué, en association au clobazam, dans le traitement adjuvant des crises d’épilepsie associées au syndrome de Lennox-Gastaut (SLG) ou au syndrome de Dravet (SD), chez les patients de 2 ans et plus."
+     },
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61680130",
+      "provenance": "verified",
+      "quote": "Les mécanismes précis par le biais desquels le cannabidiol exerce ses effets anticonvulsivants chez l’humain ne sont pas connus. Le cannabidiol n’exerce pas son effet anticonvulsivant par le biais de l’interaction avec les récepteurs cannabinoïdes. Le cannabidiol réduit l’hyperexcitabilité des neurones en modulant le calcium intracellulaire via les récepteurs GPR55 (G protein-coupled receptor 55) et TRPV-1 (transient receptor potential vanilloid 1) ainsi qu’en modulant la signalisation induite par l’adénosine par le biais de l’inhibition de la recapture de l’adénosine via l’ENT-1 (equilibrative nucleoside transporter 1)."
+     }
+    ]
+   }
+  ],
   "carbamazepine": [
    {
     "effect": "withdrawal",
@@ -199,6 +231,17 @@
       "page": "61009918",
       "provenance": "verified",
       "quote": "L’arrêt brutal de la carbamazépine peut précipiter les crises, par conséquent la carbamazépine doit être arrêtée progressivement sur une période de 6 mois. Selon les cas, un traitement transitoire par un antiépileptique à effet rapide peut s’avérer nécessaire."
+     }
+    ]
+   },
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61009918",
+      "provenance": "verified",
+      "quote": "traitement des épilepsies partielles avec ou sans généralisation secondaire ;"
      }
     ]
    }
@@ -246,6 +289,17 @@
       "quote": "Cet état peut entraîner à l'arrêt du traitement un phénomène de sevrage. Certains symptômes sont fréquents et d'apparence banale : insomnie, céphalées, anxiété importante, myalgies, tension musculaire, irritabilité. D'autres symptômes sont plus rares : agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions."
      }
     ]
+   },
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "62905911",
+      "provenance": "verified",
+      "quote": "Traitement des épilepsies partielles : crises partielles avec ou sans généralisation secondaire."
+     }
+    ]
    }
   ],
   "clomipramine": [
@@ -288,6 +342,12 @@
       "page": "61496251",
       "provenance": "verified",
       "quote": "L'effet antiépileptique du clonazépam peut diminuer progressivement malgré l'utilisation de la même dose en cas d'administration durant plusieurs semaines."
+     },
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61496251",
+      "provenance": "verified",
+      "quote": "traitement des épilepsies partielles : crises partielles avec ou sans généralisation secondaire."
      }
     ]
    },
@@ -390,6 +450,17 @@
       "quote": "Une fois qu’une dépendance physique s’est installée, l'arrêt brutal du traitement entrainera un phénomène de sevrage et de rebond. Certains symptômes sont fréquents et d'apparence banale: insomnie, céphalées, diarrhée, anxiété importante, myalgies, tension musculaire, irritabilité. D'autres symptômes sont plus rares: agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions."
      }
     ]
+   },
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60290800",
+      "provenance": "verified",
+      "quote": "Le diazépam appartient à la classe des 1-4 benzodiazépines et a une activité pharmacodynamique qualitativement semblable à celle des autres composés de cette classe: myorelaxante, anxiolytique, sédative, hypnotique, anticonvulsivante et amnésiante."
+     }
+    ]
    }
   ],
   "donepezil": [
@@ -435,6 +506,17 @@
       "quote": "Si le traitement par l’acétate d’eslicarbazépine doit être suspendu, cela doit se faire de manière progressive afin de limiter le risque possible de crises convulsives à l’arrêt du traitement."
      }
     ]
+   },
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "63927729",
+      "provenance": "verified",
+      "quote": "en monothérapie dans le traitement de l’épilepsie partielle avec ou sans généralisation secondaire chez des adultes avec une épilepsie récemment diagnostiquée ;"
+     }
+    ]
    }
   ],
   "estazolam": [
@@ -461,6 +543,23 @@
       "quote": "Toute augmentation ou diminution de la posologie de l'éthosuximide doit être effectuée de façon progressive. Tout arrêt brutal est susceptible d'entraîner un état de mal épileptique."
      }
     ]
+   },
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "68481191",
+      "provenance": "verified",
+      "quote": "o traitement des épilepsies généralisées: absences, crises myocloniques et atoniques."
+     },
+     {
+      "corpus": "bdpm_rcp",
+      "page": "68481191",
+      "provenance": "verified",
+      "quote": "L'éthosuximide est un antiépileptique spécifique des absences, il supprime l'activité paroxystique, pointes-ondes à 3 cycles par seconde, associée aux pertes de conscience, caractéristiques des crises des absences."
+     }
+    ]
    }
   ],
   "fenfluramine": [
@@ -472,6 +571,17 @@
       "page": "62154820",
       "provenance": "verified",
       "quote": "Interruption du traitement En cas d’interruption du traitement, la dose doit être réduite progressivement. L’arrêt brutal du traitement doit être évité, dans la mesure du possible, afin réduire les risques d’augmentation de la fréquence des crises d’épilepsie et de survenue d’un état de mal épileptique. Une échocardiographie finale doit être effectuée 3 à 6 mois après la dernière dose du traitement par fenfluramine."
+     }
+    ]
+   },
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "62154820",
+      "provenance": "verified",
+      "quote": "Fintepla est indiqué dans le traitement adjuvant des crises d’épilepsie associées au syndrome de Dravet et au syndrome de Lennox-Gastaut, en association à d’autres médicaments antiépileptiques, chez les patients âgés de 2 ans et plus."
      }
     ]
    }
@@ -511,6 +621,19 @@
       "page": "62571671",
       "provenance": "verified",
       "quote": "Une surveillance chez les patients épileptiques et les sujets présentant d’autres facteurs prédisposants (atteinte cérébrale) peut être conseillée en raison de la possibilité d’abaissement du seuil épileptogène."
+     }
+    ]
+   }
+  ],
+  "gabapentin": [
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61022591",
+      "provenance": "verified",
+      "quote": "NEURONTIN est indiqué en association dans le traitement des épilepsies partielles avec ou sans généralisation secondaire chez l'adulte et l'enfant à partir de 6 ans (voir rubrique 5.1)."
      }
     ]
    }
@@ -569,6 +692,45 @@
       "page": "61561635",
       "provenance": "verified",
       "quote": "o chez les sujets épileptiques: le nialamide a été associé à des traitements anti-épileptiques, avec des résultats variables; certains patients ont été améliorés, pour d'autres, la maladie s'est aggravée. Les IMAO sont susceptibles d'abaisser le seuil épileptogène."
+     }
+    ]
+   }
+  ],
+  "lacosamide": [
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60575525",
+      "provenance": "verified",
+      "quote": "Le lacosamide est indiqué en monothérapie et en association dans le traitement des crises partielles avec ou sans généralisation secondaire chez les adultes, les adolescents et les enfants à partir de 2 ans présentant une épilepsie."
+     }
+    ]
+   }
+  ],
+  "lamotrigine": [
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61043653",
+      "provenance": "verified",
+      "quote": "Traitement en monothérapie ou en association des épilepsies partielles et généralisées, incluant les crises tonico-cloniques."
+     }
+    ]
+   }
+  ],
+  "levetiracetam": [
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60591091",
+      "provenance": "verified",
+      "quote": "LEVIDCEN est indiqué en monothérapie dans le traitement des crises partielles avec ou sans généralisation secondaire chez l’adulte et l’adolescent à partir de 16 ans présentant une épilepsie nouvellement diagnostiquée."
      }
     ]
    }
@@ -728,6 +890,19 @@
     ]
    }
   ],
+  "midazolam": [
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "62149015",
+      "provenance": "verified",
+      "quote": "Les propriétés pharmacodynamiques du midazolam et de ses métabolites, similaires à celles des autres benzodiazépines, comprennent des effets sédatifs, anxiolytiques, amnésiques (amnésie antérograde), hypnotiques, myorelaxants et anticonvulsivants."
+     }
+    ]
+   }
+  ],
   "nitrazepam": [
    {
     "effect": "withdrawal",
@@ -784,6 +959,17 @@
       "quote": "Comme pour tous les médicaments antiépileptiques, le traitement par TRILEPTAL doit être arrêté progressivement pour diminuer le risque d’augmentation de la fréquence des crises épileptiques."
      }
     ]
+   },
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61556061",
+      "provenance": "verified",
+      "quote": "TRILEPTAL est indiqué dans le traitement des crises épileptiques partielles avec ou sans généralisation secondaire."
+     }
+    ]
    }
   ],
   "oxycodone": [
@@ -808,6 +994,17 @@
       "page": "61849146",
       "provenance": "verified",
       "quote": "Arrêt du traitement Il est recommandé d’arrêter progressivement le traitement, afin de réduire le risque de crises d’épilepsie par effet rebond. Cependant, compte tenu de sa demi-vie longue et de la diminution lente des concentrations plasmatiques qui en résulte, le pérampanel peut être arrêté brutalement en cas d’absolue nécessité."
+     }
+    ]
+   },
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61849146",
+      "provenance": "verified",
+      "quote": "Le mécanisme précis par lequel le pérampanel exerce ses effets antiépileptiques chez l’homme n’est pas complètement élucidé."
      }
     ]
    }
@@ -836,6 +1033,17 @@
       "quote": "La prise prolongée de phénobarbital (100 mg par jour pendant 3 mois) peut entraîner l'apparition d'un syndrome de dépendance. Dans le cas où le patient devrait arrêter le traitement, il est recommandé de réduire progressivement la posologie. Comme avec tout antiépileptique, l'arrêt brutal du traitement peut entraîner l'apparition des crises et un état de mal, surtout en cas d'éthylisme surajouté."
      }
     ]
+   },
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61475588",
+      "provenance": "verified",
+      "quote": "Le phénobarbital est un barbiturique. Il présente des propriétés anticonvulsivantes, sédatives et hypnotiques."
+     }
+    ]
    }
   ],
   "phenytoin": [
@@ -847,6 +1055,17 @@
       "page": "62436200",
       "provenance": "verified",
       "quote": "Les traitements par antiépileptiques ne doivent pas être brutalement interrompus à cause du risque d'augmentation de la fréquence des crises, incluant l'état épileptique."
+     }
+    ]
+   },
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "62436200",
+      "provenance": "verified",
+      "quote": "La phénytoïne est un anticonvulsivant."
      }
     ]
    }
@@ -933,6 +1152,17 @@
       "quote": "Les convulsions, notamment les états de mal épileptiques et les crises tonico-cloniques généralisées, peuvent apparaître pendant ou peu après l’arrêt du traitement par la prégabaline."
      }
     ]
+   },
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60061602",
+      "provenance": "verified",
+      "quote": "PREGABALINE TEVA SANTE est indiqué chez l'adulte en association dans le traitement des crises épileptiques partielles avec ou sans généralisation secondaire."
+     }
+    ]
    }
   ],
   "primidone": [
@@ -944,6 +1174,17 @@
       "page": "65201684",
       "provenance": "verified",
       "quote": "L'arrêt brutal d'un traitement à dose antiépileptique efficace peut entraîner des crises convulsives et un état de mal, surtout en cas d'alcoolisme surajouté."
+     }
+    ]
+   },
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "65201684",
+      "provenance": "verified",
+      "quote": "o Traitement des épilepsies partielles: crises partielles avec ou sans généralisation secondaire."
      }
     ]
    }
@@ -1064,6 +1305,19 @@
     ]
    }
   ],
+  "stiripentol": [
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61501691",
+      "provenance": "verified",
+      "quote": "Diacomit est indiqué en association au valproate de sodium et au clobazam dans le traitement des convulsions tonicocloniques généralisées chez des patients atteints d’une épilepsie myoclonique sévère du nourrisson (EMSN, syndrome de Dravet) et insuffisamment contrôlées par l’association clobazam/valproate de sodium."
+     }
+    ]
+   }
+  ],
   "sulpiride": [
    {
     "effect": "lowers",
@@ -1112,6 +1366,17 @@
       "quote": "Comme pour tout autre antiépileptique, l'arrêt brutal du traitement peut entraîner une recrudescence des crises. Il est donc recommandé de réduire progressivement la posologie sur une période allant de 2 à 3 semaines."
      }
     ]
+   },
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60058517",
+      "provenance": "verified",
+      "quote": "Traitement des épilepsies partielles avec ou sans crises secondairement généralisées en addition aux autres antiépileptiques lorsque ceux-ci sont insuffisamment efficaces."
+     }
+    ]
    }
   ],
   "tiapride": [
@@ -1138,6 +1403,17 @@
       "quote": "Chez les patients avec ou sans antécédent de convulsion ou d’épilepsie, les médicaments antiépileptiques (MAE) dont le topiramate doivent être arrêtés progressivement afin de minimiser le risque potentiel de crise convulsive ou d’augmentation de la fréquence des crises. Au cours des essais cliniques, les doses journalières ont été diminuées par paliers hebdomadaires de 50-100 mg chez l’adulte présentant une épilepsie et de 25-50 mg chez l’adulte recevant du topiramate à des doses allant jusqu’à 100 mg/jour dans le traitement prophylactique de la migraine. Au cours des essais cliniques chez l’enfant, le topiramate a été progressivement arrêté sur une période de 2 à 8 semaines."
      }
     ]
+   },
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61913385",
+      "provenance": "verified",
+      "quote": "Le topiramate est classé comme monosaccharide sulfamate-substitué. Le mécanisme précis par lequel le topiramate exerce son effet anticonvulsivant et son effet prophylactique sur la migraine n’est pas connu. Les études électrophysiologiques et biochimiques sur cultures de neurones ont identifié trois propriétés susceptibles de contribuer à l’efficacité antiépileptique du topiramate."
+     }
+    ]
    }
   ],
   "tramadol": [
@@ -1162,6 +1438,38 @@
       "page": "63344192",
       "provenance": "verified",
       "quote": "Patients épileptiques : chez les patients épileptiques ou ayant des antécédents d’épilepsie, il est prudent de renforcer la surveillance clinique et électrique, en raison de la possibilité d’abaissement du seuil épileptogène. La survenue de crises convulsives impose l’arrêt du traitement."
+     }
+    ]
+   }
+  ],
+  "valproate": [
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60184188",
+      "provenance": "verified",
+      "quote": "Traitement des épilepsies généralisées: crises cloniques, toniques, tonico-cloniques, absences, crises myocloniques, atoniques, et syndrome de Lennox-Gastaut."
+     },
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60184188",
+      "provenance": "verified",
+      "quote": "Ces propriétés anticonvulsivantes s'exercent contre des types très variés de crises convulsives chez l'animal et d'épilepsies chez l'homme."
+     }
+    ]
+   }
+  ],
+  "valpromide": [
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "63737879",
+      "provenance": "verified",
+      "quote": "Chez l'homme, le valpromide a démontré une activité anticonvulsivante modérée."
      }
     ]
    }
@@ -1201,6 +1509,17 @@
       "page": "61139833",
       "provenance": "verified",
       "quote": "Comme avec tout antiépileptique, l'arrêt brutal du traitement peut entraîner l'apparition de crises de rebond. Dans le cas où le patient devrait arrêter un traitement par la vigabatrine, il est recommandé de réduire progressivement la posologie sur une période de 2 à 4 semaines."
+     }
+    ]
+   },
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61139833",
+      "provenance": "verified",
+      "quote": "Les essais cliniques contrôlés et à long terme ont montré que la vigabatrine est un anticonvulsivant efficace lorsqu'il est administré comme traitement d'appoint chez les patients épileptiques contrôlés de manière non satisfaisante par les traitements classiques. L'efficacité de la vigabatrine est particulièrement marquée chez les patients atteints d'épilepsie partielle."
      }
     ]
    }
@@ -1253,6 +1572,17 @@
       "page": "62741554",
       "provenance": "verified",
       "quote": "Conformément à la pratique clinique usuelle, l’arrêt éventuel du zonisamide chez les patients épileptiques doit se faire de manière progressive pour limiter les risques de crises convulsives à l’arrêt du traitement. Il n’existe pas de données suffisantes concernant l’arrêt des médicaments antiépileptiques concomitants une fois les crises contrôlées avec le zonisamide administré en association pour pouvoir utiliser le zonisamide en monothérapie. Par conséquent, la prudence est recommandée lors de l’arrêt des autres médicaments antiépileptiques."
+     }
+    ]
+   },
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "62741554",
+      "provenance": "verified",
+      "quote": "en association dans le traitement de l’épilepsie partielle avec ou sans généralisation secondaire chez les adultes, adolescents et enfants âgés de 6 ans et plus."
      }
     ]
    }

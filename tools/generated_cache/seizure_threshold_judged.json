@@ -13,7 +13,7 @@
    "effect": "withdrawal"
   },
   {
-   "index": 1,
+   "index": 2,
    "qid": "bce85b20",
    "effect": "lowers"
   }
@@ -72,7 +72,13 @@
    "effect": "lowers"
   }
  ],
- "brivaracetam": [],
+ "brivaracetam": [
+  {
+   "index": 0,
+   "qid": "11624095",
+   "effect": "raises"
+  }
+ ],
  "bromazepam": [
   {
    "index": 0,
@@ -108,12 +114,28 @@
   }
  ],
  "caffeine": [],
- "cannabidiol": [],
+ "cannabidiol": [
+  {
+   "index": 0,
+   "qid": "a8c9379c",
+   "effect": "raises"
+  },
+  {
+   "index": 8,
+   "qid": "3b435523",
+   "effect": "raises"
+  }
+ ],
  "carbamazepine": [
   {
-   "index": 10,
+   "index": 13,
    "qid": "6a6e103f",
    "effect": "withdrawal"
+  },
+  {
+   "index": 2,
+   "qid": "e5de8437",
+   "effect": "raises"
   }
  ],
  "cariprazine": [],
@@ -138,9 +160,14 @@
  ],
  "clobazam": [
   {
-   "index": 3,
+   "index": 6,
    "qid": "f1ce4a41",
    "effect": "withdrawal"
+  },
+  {
+   "index": 2,
+   "qid": "c5e0ff4b",
+   "effect": "raises"
   }
  ],
  "clomipramine": [
@@ -162,24 +189,29 @@
  ],
  "clonazepam": [
   {
-   "index": 0,
+   "index": 3,
    "qid": "4c31dc80",
    "effect": "raises"
   },
   {
-   "index": 3,
+   "index": 6,
    "qid": "88508b2f",
    "effect": "raises"
   },
   {
-   "index": 5,
+   "index": 8,
    "qid": "fb344aad",
    "effect": "withdrawal"
   },
   {
-   "index": 7,
+   "index": 10,
    "qid": "84953fcc",
    "effect": "withdrawal"
+  },
+  {
+   "index": 2,
+   "qid": "e66fd8c2",
+   "effect": "raises"
   }
  ],
  "clorazepate": [
@@ -231,6 +263,11 @@
    "index": 1,
    "qid": "1d0e50cc",
    "effect": "withdrawal"
+  },
+  {
+   "index": 2,
+   "qid": "4d5bca13",
+   "effect": "raises"
   }
  ],
  "disulfiram": [],
@@ -258,9 +295,14 @@
  "esketamine": [],
  "eslicarbazepine_acetate": [
   {
-   "index": 2,
+   "index": 4,
    "qid": "47184625",
    "effect": "withdrawal"
+  },
+  {
+   "index": 0,
+   "qid": "53d7c403",
+   "effect": "raises"
   }
  ],
  "estazolam": [
@@ -272,16 +314,31 @@
  ],
  "ethosuximide": [
   {
-   "index": 0,
+   "index": 2,
    "qid": "498abd0b",
    "effect": "withdrawal"
+  },
+  {
+   "index": 1,
+   "qid": "a5794bf0",
+   "effect": "raises"
+  },
+  {
+   "index": 7,
+   "qid": "322e9128",
+   "effect": "raises"
   }
  ],
  "fenfluramine": [
   {
-   "index": 1,
+   "index": 2,
    "qid": "7721fc40",
    "effect": "withdrawal"
+  },
+  {
+   "index": 0,
+   "qid": "78158874",
+   "effect": "raises"
   }
  ],
  "flumazenil": [
@@ -307,7 +364,13 @@
  ],
  "fluphenazine": [],
  "fluvoxamine": [],
- "gabapentin": [],
+ "gabapentin": [
+  {
+   "index": 1,
+   "qid": "d3f633e5",
+   "effect": "raises"
+  }
+ ],
  "galantamine": [
   {
    "index": 0,
@@ -343,9 +406,27 @@
    "effect": "lowers"
   }
  ],
- "lacosamide": [],
- "lamotrigine": [],
- "levetiracetam": [],
+ "lacosamide": [
+  {
+   "index": 0,
+   "qid": "cc417891",
+   "effect": "raises"
+  }
+ ],
+ "lamotrigine": [
+  {
+   "index": 0,
+   "qid": "ccba8f2a",
+   "effect": "raises"
+  }
+ ],
+ "levetiracetam": [
+  {
+   "index": 0,
+   "qid": "2f8388f1",
+   "effect": "raises"
+  }
+ ],
  "levomepromazine": [
   {
    "index": 0,
@@ -473,9 +554,14 @@
  ],
  "oxcarbazepine": [
   {
-   "index": 9,
+   "index": 10,
    "qid": "84d6b44b",
    "effect": "withdrawal"
+  },
+  {
+   "index": 0,
+   "qid": "b6ec8d9a",
+   "effect": "raises"
   }
  ],
  "oxycodone": [
@@ -489,9 +575,14 @@
  "paroxetine": [],
  "perampanel": [
   {
-   "index": 3,
+   "index": 5,
    "qid": "ff560d28",
    "effect": "withdrawal"
+  },
+  {
+   "index": 17,
+   "qid": "2fa4d477",
+   "effect": "raises"
   }
  ],
  "periciazine": [
@@ -504,16 +595,26 @@
  "phenelzine": [],
  "phenobarbital": [
   {
-   "index": 1,
+   "index": 4,
    "qid": "822553bb",
    "effect": "withdrawal"
+  },
+  {
+   "index": 7,
+   "qid": "bf1921fb",
+   "effect": "raises"
   }
  ],
  "phenytoin": [
   {
-   "index": 6,
+   "index": 7,
    "qid": "85f802ec",
    "effect": "withdrawal"
+  },
+  {
+   "index": 15,
+   "qid": "eec0850b",
+   "effect": "raises"
   }
  ],
  "pimozide": [
@@ -554,21 +655,31 @@
  ],
  "pregabalin": [
   {
-   "index": 2,
+   "index": 3,
    "qid": "849e90cd",
    "effect": "withdrawal"
   },
   {
-   "index": 3,
+   "index": 4,
    "qid": "562cefa5",
    "effect": "withdrawal"
+  },
+  {
+   "index": 0,
+   "qid": "3aa15ca5",
+   "effect": "raises"
   }
  ],
  "primidone": [
   {
-   "index": 2,
+   "index": 5,
    "qid": "4a4b9aaf",
    "effect": "withdrawal"
+  },
+  {
+   "index": 2,
+   "qid": "797689e2",
+   "effect": "raises"
   }
  ],
  "promethazine": [
@@ -639,7 +750,13 @@
    "effect": "lowers"
   }
  ],
- "stiripentol": [],
+ "stiripentol": [
+  {
+   "index": 0,
+   "qid": "6548fbc8",
+   "effect": "raises"
+  }
+ ],
  "sulpiride": [
   {
    "index": 0,
@@ -656,14 +773,19 @@
  ],
  "tiagabine": [
   {
-   "index": 2,
+   "index": 3,
    "qid": "52c9f4b3",
    "effect": "lowers"
   },
   {
-   "index": 4,
+   "index": 5,
    "qid": "80da1c5f",
    "effect": "withdrawal"
+  },
+  {
+   "index": 0,
+   "qid": "8b6d8ce5",
+   "effect": "raises"
   }
  ],
  "tiapride": [
@@ -675,9 +797,14 @@
  ],
  "topiramate": [
   {
-   "index": 1,
+   "index": 3,
    "qid": "0c85f70e",
    "effect": "withdrawal"
+  },
+  {
+   "index": 14,
+   "qid": "a871e03f",
+   "effect": "raises"
   }
  ],
  "tramadol": [
@@ -696,8 +823,25 @@
    "effect": "lowers"
   }
  ],
- "valproate": [],
- "valpromide": [],
+ "valproate": [
+  {
+   "index": 1,
+   "qid": "e7a6a2e4",
+   "effect": "raises"
+  },
+  {
+   "index": 25,
+   "qid": "3c7cb34d",
+   "effect": "raises"
+  }
+ ],
+ "valpromide": [
+  {
+   "index": 7,
+   "qid": "23193761",
+   "effect": "raises"
+  }
+ ],
  "varenicline": [
   {
    "index": 1,
@@ -714,9 +858,14 @@
  ],
  "vigabatrin": [
   {
-   "index": 5,
+   "index": 6,
    "qid": "583f1a47",
    "effect": "withdrawal"
+  },
+  {
+   "index": 10,
+   "qid": "b62ec35b",
+   "effect": "raises"
   }
  ],
  "vortioxetine": [
@@ -742,9 +891,14 @@
  ],
  "zonisamide": [
   {
-   "index": 4,
+   "index": 6,
    "qid": "c934341c",
    "effect": "withdrawal"
+  },
+  {
+   "index": 1,
+   "qid": "47fd6f4f",
+   "effect": "raises"
   }
  ],
  "zopiclone": [
@@ -759,6 +913,13 @@
    "index": 0,
    "qid": "75bb2360",
    "effect": "lowers"
+  }
+ ],
+ "midazolam": [
+  {
+   "index": 0,
+   "qid": "bb5e75a8",
+   "effect": "raises"
   }
  ]
 }

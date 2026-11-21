@@ -11848,6 +11848,7 @@
       "page_urls": {
         "60316362": "https://www.ema.europa.eu/fr/documents/product-information/brintellix-epar-product-information_fr.pdf",
         "60442838": "https://www.ema.europa.eu/fr/documents/product-information/champix-epar-product-information_fr.pdf",
+        "60579228": "https://www.ema.europa.eu/fr/documents/product-information/briviact-epar-product-information_fr.pdf",
         "61501691": "https://www.ema.europa.eu/fr/documents/product-information/diacomit-epar-product-information_fr.pdf",
         "61680130": "https://www.ema.europa.eu/fr/documents/product-information/epidyolex-epar-product-information_fr.pdf",
         "61849146": "https://www.ema.europa.eu/fr/documents/product-information/fycompa-epar-product-information_fr.pdf",
@@ -12567,8 +12568,8 @@
         "unknown": 0
       },
       "drug_seizure_threshold": {
-        "total": 91,
-        "verified": 91,
+        "total": 117,
+        "verified": 117,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -12848,15 +12849,15 @@
       }
     },
     "nodes": {
-      "total": 11101,
-      "verified": 10312,
+      "total": 11127,
+      "verified": 10338,
       "uncertain": 420,
       "sourced": 0,
       "llm": 231,
       "nosource": 138,
       "missing": 369,
       "unknown": 596,
-      "backed": 10732,
+      "backed": 10758,
       "pct_backed": 97
     },
     "ki_coverage": {

@@ -23,6 +23,14 @@
    },
    {
     "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60647049",
+    "section": "5.1",
+    "quote": "anticonvulsivante,",
+    "qid": "b0d0a747"
+   },
+   {
+    "index": 2,
     "corpus": "europepmc",
     "page": "17223086",
     "quote": "Alprazolam, bupropion immediate release (IR) form, and quetiapine were also associated with higher seizure incidence.",
@@ -156,17 +164,89 @@
     "index": 0,
     "corpus": "bdpm_rcp",
     "page": "60579228",
-    "section": "4.2",
-    "quote": "Oubli de doses En cas d’oubli d’une ou plusieurs doses, le patient doit prendre une seule dose dès que possible et prendre la dose suivante à l’heure habituelle le matin ou le soir. Cela peut empêcher la concentration plasmatique de brivaracétam de diminuer en dessous de la concentration efficace et prévenir la réapparition de crises convulsives.",
-    "qid": "bdf0e9b7"
+    "section": "4.1",
+    "quote": "Briviact est indiqué en association dans le traitement des crises partielles avec ou sans généralisation secondaire chez les adultes, les adolescents et les enfants à partir de 2 ans présentant une épilepsie.",
+    "qid": "11624095"
    },
    {
     "index": 1,
     "corpus": "bdpm_rcp",
     "page": "60579228",
+    "section": "4.2",
+    "quote": "Oubli de doses En cas d’oubli d’une ou plusieurs doses, le patient doit prendre une seule dose dès que possible et prendre la dose suivante à l’heure habituelle le matin ou le soir. Cela peut empêcher la concentration plasmatique de brivaracétam de diminuer en dessous de la concentration efficace et prévenir la réapparition de crises convulsives.",
+    "qid": "bdf0e9b7"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "60579228",
     "section": "4.4",
     "quote": "Des cas d’idées et de comportements suicidaires ont été rapportés chez des patients traités par des médicaments antiépileptiques, y compris par le brivaracétam, dans plusieurs indications. Une méta- analyse d'études cliniques randomisées, contrôlées versus placebo, portant sur des antiépileptiques, a également montré une légère augmentation du risque d'idées et de comportements suicidaires. Le mécanisme de ce risque n’est pas connu et les données disponibles n’excluent pas la possibilité d’une augmentation de ce risque avec le brivaracétam. Les patients doivent être surveillés afin de détecter des signes d'idées et de comportements suicidaires et un traitement approprié devra être envisagé. Il devra être recommandé aux patients (et à leurs aidants) de consulter un médecin en cas de survenue de signes d’idées ou de comportements suicidaires. Voir également rubrique 4.8, données pédiatriques.",
     "qid": "60e28a84"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "60579228",
+    "section": "5.1",
+    "quote": "Classe pharmacothérapeutique : Antiépileptiques, autres antiépileptiques, Code ATC : N03AX23.",
+    "qid": "af16e712"
+   },
+   {
+    "index": 4,
+    "corpus": "bdpm_rcp",
+    "page": "60579228",
+    "section": "5.1",
+    "quote": "Le brivaracétam présente une affinité élevée et sélective pour la protéine 2A des vésicules synaptiques (SV2A), une glycoprotéine transmembranaire présente dans les neurones et cellules endocrines au niveau présynaptique. Bien que le rôle exact de cette protéine reste à élucider, il a été observé qu’elle module l’exocytose des neurotransmetteurs. La liaison à la protéine SV2A est considérée comme étant le principal mécanisme de l’activité anticonvulsivante du brivaracétam.",
+    "qid": "e18a1a6a"
+   },
+   {
+    "index": 5,
+    "corpus": "bdpm_rcp",
+    "page": "60579228",
+    "section": "5.1",
+    "quote": "L’efficacité du brivaracétam en association dans le traitement des crises d’épilepsie partielles a été établie dans trois études cliniques multicentriques, randomisées en double aveugle, contrôlées versus placebo, à dose fixe, menées chez des patients à partir de 16 ans. Dans ces études, la dose quotidienne de brivaracétam était de 5 à 200 mg par jour. Toutes les études comportaient une période d’observation de 8 semaines suivie d’une période de traitement de 12 semaines sans augmentation de dose. Au total, 1 558 patients ont reçu le médicament expérimental, dont 1 099 ont reçu du brivaracétam. Selon les critères d’inclusion de l’étude, les patients devaient présenter des crises partielles non contrôlées malgré un traitement par un ou deux antiépileptiques concomitants. Les patients devaient présenter au moins 8 crises partielles pendant la période d’observation. Dans les études de phase III, les critères d’évaluation principaux ont été le pourcentage de réduction de la fréquence des crises partielles par rapport au placebo et le taux de répondeurs à 50 %, défini par le pourcentage de patients ayant une réduction de la fréquence des crises d’au moins 50 % par rapport à la fréquence initiale. Les antiépileptiques les plus fréquemment utilisés au moment de l’inclusion dans les études ont été : carbamazépine (40,6 %), lamotrigine (25,2 %), valproate (20,5 %), oxcarbazépine (16,0 %), topiramate (13,5 %), phénytoïne (10,2 %) et lévétiracétam (9.8 %). La fréquence initiale médiane des crises dans les trois études était de 9 crises par période de 28 jours. La durée moyenne de l’épilepsie était d’environ 23 ans. Le tableau 2 présente une synthèse des résultats d’efficacité. Le brivaracétam aux doses de 50 mg par jour à 200 mg par jour a été efficace en association dans le traitement des crises d’épilepsie partielles chez les patients âgés de 16 ans et plus. Tableau 2 : Principaux résultats d’efficacité sur la fréquence des crises partielles, par période de 28 jours",
+    "qid": "d794f17b"
+   },
+   {
+    "index": 6,
+    "corpus": "bdpm_rcp",
+    "page": "60579228",
+    "section": "5.1",
+    "quote": "Dans une analyse poolée des trois études cliniques pivots, aucune différence d’efficacité (mesurée par le taux de répondeurs à 50 %) n’a été observée dans l’intervalle de doses compris entre 50 mg/jour et 200 mg/jour lorsque le brivaracétam était associé à des antiépileptiques inducteurs ou non inducteurs. Dans les études cliniques, 2,5 % (4/161), 5,1 % (17/332) et 4,0 % (10/249) des patients recevant respectivement du brivaracétam 50 mg/jour, 100 mg/jour et 200 mg/jour sont devenus libres de crises pendant la période de traitement de 12 semaines versus 0,5 % (2/418) des patients recevant du placebo.",
+    "qid": "56f4b0ec"
+   },
+   {
+    "index": 7,
+    "corpus": "bdpm_rcp",
+    "page": "60579228",
+    "section": "5.1",
+    "quote": "Dans deux études cliniques de phase III randomisées, contrôlées versus placebo, le lévétiracétam a été l’antiépileptique concomitant administré chez environ 20 % des patients. Bien que le nombre de patients soit limité, il n’a pas été observé de bénéfice du brivaracétam par rapport au placebo chez les patients recevant un traitement concomitant par lévétiracétam, ce qui pourrait être le reflet d’une compétition au niveau du site de liaison SV2A. Aucun problème de sécurité ou de tolérance supplémentaire n’a été observé.",
+    "qid": "605e216a"
+   },
+   {
+    "index": 8,
+    "corpus": "bdpm_rcp",
+    "page": "60579228",
+    "section": "5.1",
+    "quote": "Dans une troisième étude, une analyse prédéfinie a démontré l’efficacité des doses de 100 mg/jour et 200 mg/jour par rapport au placebo chez les patients ayant été exposés antérieurement au lévétiracétam. La plus faible efficacité observée chez ces patients par rapport aux patients naïfs en lévétiracétam a été probablement due au nombre plus élevé d’antiépileptiques pris précédemment et à la fréquence des crises plus élevée durant la période d’observation.",
+    "qid": "72cb0d80"
+   },
+   {
+    "index": 9,
+    "corpus": "bdpm_rcp",
+    "page": "60579228",
+    "section": "5.1",
+    "quote": "Chez les enfants âgés de 2 ans et plus, les crises partielles ont une physiopathologie similaire à celles observées chez les adolescents et les adultes. L’expérience acquise sur les médicaments antiépileptiques laisse supposer que les résultats des études d’efficacité menées chez les adultes peuvent être extrapolés aux enfants à partir de 2 ans, à condition que des ajustements posologiques pédiatriques soient définis et que le profil de sécurité soit établi (voir rubriques 5.2 et 4.8). Les posologies chez les patients à partir de 2 ans ont été définies par des ajustements de dose en fonction du poids, établis pour obtenir des concentrations plasmatiques similaires à celles observées chez les adultes traités par des doses efficaces (voir rubrique 5.2).",
+    "qid": "0b487047"
+   },
+   {
+    "index": 10,
+    "corpus": "bdpm_rcp",
+    "page": "60579228",
+    "section": "5.1",
+    "quote": "L’Agence européenne des médicaments a différé l’obligation de soumettre les résultats d’études réalisées avec le brivaracétam dans un ou plusieurs sous-groupes de population pédiatrique dans l’indication de crises d’épilepsie partielles (voir rubrique 4.2 pour des informations sur l’utilisation en pédiatrie).",
+    "qid": "ae3082ee"
    }
   ]
  },
@@ -179,6 +259,14 @@
     "section": "4.4",
     "quote": "Cet état peut entraîner à l'arrêt du traitement un phénomène de sevrage. Certains symptômes sont fréquents et d'apparence banale : insomnie, céphalées, diarrhée, anxiété extrême, myalgies, tension, irritabilité, nervosité, confusion. Dans les cas sévères les symptômes suivants peuvent se produire : hyperacousie, agitation voire épisode confusionnel, paresthésies des extrémités, hypersensibilité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions.",
     "qid": "3052ffb8"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "66796142",
+    "section": "5.1",
+    "quote": "anticonvulsivante,",
+    "qid": "b0d0a747"
    }
   ]
  },
@@ -317,6 +405,14 @@
     "section": "4.3",
     "quote": "Patients atteints d’épilepsie.",
     "qid": "98afe48d"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "61964472",
+    "section": "5.1",
+    "quote": "d'activité anticonvulsivante.",
+    "qid": "21f22ead"
    }
   ]
  },
@@ -350,12 +446,28 @@
     "index": 0,
     "corpus": "bdpm_rcp",
     "page": "61680130",
+    "section": "4.1",
+    "quote": "Epidyolex est indiqué, en association au clobazam, dans le traitement adjuvant des crises d’épilepsie associées au syndrome de Lennox-Gastaut (SLG) ou au syndrome de Dravet (SD), chez les patients de 2 ans et plus.",
+    "qid": "a8c9379c"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "61680130",
+    "section": "4.1",
+    "quote": "Epidyolex est indiqué dans le traitement adjuvant des crises d’épilepsie associées à une sclérose tubéreuse de Bourneville (STB) chez les patients de 2 ans et plus.",
+    "qid": "6f8b6605"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "61680130",
     "section": "4.2",
     "quote": "Le traitement par Epidyolex doit être instauré et supervisé sous la surveillance de médecins expérimentés dans le traitement de l’épilepsie.",
     "qid": "4c84800e"
    },
    {
-    "index": 1,
+    "index": 3,
     "corpus": "bdpm_rcp",
     "page": "61680130",
     "section": "4.2",
@@ -363,7 +475,7 @@
     "qid": "67844440"
    },
    {
-    "index": 2,
+    "index": 4,
     "corpus": "bdpm_rcp",
     "page": "61680130",
     "section": "4.4",
@@ -371,7 +483,7 @@
     "qid": "00fb1eb1"
    },
    {
-    "index": 3,
+    "index": 5,
     "corpus": "bdpm_rcp",
     "page": "61680130",
     "section": "4.4",
@@ -379,12 +491,180 @@
     "qid": "9d681b52"
    },
    {
-    "index": 4,
+    "index": 6,
     "corpus": "bdpm_rcp",
     "page": "61680130",
     "section": "4.4",
     "quote": "À l’instar des autres AE, une augmentation cliniquement significative de la fréquence des crises d’épilepsie peut apparaître pendant le traitement par cannabidiol ; cela peut nécessiter un ajustement de la dose de cannabidiol et/ou des AE associés, ou l’interruption du traitement par cannabidiol dans l’éventualité où le rapport bénéfice/risque serait négatif. Dans les essais cliniques de phase 3 menés dans le SLG, le SD et la STB, la fréquence observée d’états de mal épileptique était similaire entre les groupes cannabidiol et placebo.",
     "qid": "ad7aee32"
+   },
+   {
+    "index": 7,
+    "corpus": "bdpm_rcp",
+    "page": "61680130",
+    "section": "5.1",
+    "quote": "Classe pharmacothérapeutique : antiépileptiques, autres antiépileptiques ; code ATC : N03AX24",
+    "qid": "aeabd418"
+   },
+   {
+    "index": 8,
+    "corpus": "bdpm_rcp",
+    "page": "61680130",
+    "section": "5.1",
+    "quote": "Les mécanismes précis par le biais desquels le cannabidiol exerce ses effets anticonvulsivants chez l’humain ne sont pas connus. Le cannabidiol n’exerce pas son effet anticonvulsivant par le biais de l’interaction avec les récepteurs cannabinoïdes. Le cannabidiol réduit l’hyperexcitabilité des neurones en modulant le calcium intracellulaire via les récepteurs GPR55 (G protein-coupled receptor 55) et TRPV-1 (transient receptor potential vanilloid 1) ainsi qu’en modulant la signalisation induite par l’adénosine par le biais de l’inhibition de la recapture de l’adénosine via l’ENT-1 (equilibrative nucleoside transporter 1).",
+    "qid": "3b435523"
+   },
+   {
+    "index": 9,
+    "corpus": "bdpm_rcp",
+    "page": "61680130",
+    "section": "5.1",
+    "quote": "Chez les patients, il existe un potentiel d’effet anticonvulsivant additif dû à l’interaction pharmacocinétique bidirectionnelle entre le cannabidiol et le clobazam, ce qui donne lieu à des augmentations des niveaux circulants de leurs métabolites actifs respectifs, 7-OH-CBD (d’environ 1,5 fois) et N-CLB (d’environ 3 fois) (voir rubriques 4.5, 5.1 et 5.2).",
+    "qid": "5b7eabcf"
+   },
+   {
+    "index": 10,
+    "corpus": "bdpm_rcp",
+    "page": "61680130",
+    "section": "5.1",
+    "quote": "Traitement adjuvant des patients atteints d’un syndrome de Lennox-Gastaut (SLG) L’efficacité de cannabidiol dans le traitement adjuvant des crises d’épilepsie associées au SLG a été évaluée dans deux études randomisées, en double aveugle, contrôlées versus placebo, dans des groupes parallèles (GWPCARE3 et GWPCARE4). Chaque étude consistait en une période d’inclusion de 4 semaines, une période d’ajustement posologique de 2 semaines et une période d’entretien de 12 semaines. L’âge moyen de la population de l’étude était de 15 ans et 94 % des patients prenaient 2 AE concomitants (AEc) ou plus pendant l’essai. Les AEc les plus couramment utilisés (> 25 % des patients) dans les deux essais étaient le valproate, le clobazam, la lamotrigine, le lévétiracétam et le rufinamide. Environ 50 % des patients prenaient du clobazam. Parmi les patients ne prenant pas de clobazam, la plupart avaient déjà pris du clobazam mais avaient arrêté le traitement.",
+    "qid": "a92f9b0f"
+   },
+   {
+    "index": 11,
+    "corpus": "bdpm_rcp",
+    "page": "61680130",
+    "section": "5.1",
+    "quote": "Le critère d’évaluation principal était le pourcentage de variation par rapport à l’inclusion des crises avec chute sur une période de 28 jours pendant la période de traitement dans le groupe cannabidiol versus placebo. Les crises avec chute étaient définies comme des crises atoniques, toniques ou tonico-cloniques ayant entraîné ou ayant pu entraîner une chute ou des blessures. Les critères d’évaluation secondaires clés étaient la proportion de patients avec une réduction d’au moins 50 % de la fréquence des crises avec chute, le pourcentage de variation par rapport à l’inclusion de la fréquence totale des crises d’épilepsie et l’impression de changement du sujet/soignant à la dernière visite.",
+    "qid": "c7572c19"
+   },
+   {
+    "index": 12,
+    "corpus": "bdpm_rcp",
+    "page": "61680130",
+    "section": "5.1",
+    "quote": "Traitement adjuvant des patients atteints du syndrome de Dravet L’efficacité de cannabidiol dans le traitement adjuvant des crises d’épilepsie associées au SD a été évaluée dans deux études randomisées, en double aveugle, contrôlées versus placebo, dans des groupes parallèles (GWPCARE2 et GWPCARE1). Chaque étude consistait en une période d’inclusion de 4 semaines, une période d’ajustement posologique de 2 semaines et une période d’entretien de 12 semaines. L’âge moyen de la population de l’étude était de 9 ans et 94 % des patients prenaient 2 AEc ou plus pendant l’essai. Les AEc les plus couramment utilisés (> 25 % des patients) dans les deux essais étaient le valproate, le clobazam, le stiripentol et le lévétiracétam. Environ 65 % des patients prenaient concomitamment du clobazam. Parmi les patients ne prenant pas de clobazam, la plupart avaient déjà pris du clobazam mais avaient arrêté le traitement.",
+    "qid": "3d5583af"
+   },
+   {
+    "index": 13,
+    "corpus": "bdpm_rcp",
+    "page": "61680130",
+    "section": "5.1",
+    "quote": "Le critère d’évaluation principal était la variation de la fréquence des crises convulsives pendant la période de traitement (du jour 1 à la fin de la période d’évaluation) par rapport à l’inclusion (GWPCARE2), et le pourcentage de variation par rapport à l’inclusion des crises convulsives sur une période de 28 jours pendant la période de traitement (GWPCARE1) dans les groupes cannabidiol par rapport au placebo. Les crises convulsives étaient définies comme les crises atoniques, toniques, cloniques et tonico-cloniques. Les critères d’évaluation secondaires clés de GWPCARE2 étaient la proportion de patients avec une réduction d’au moins 50 % de la fréquence des crises convulsives, la variation de la fréquence totale des crises d’épilepsie et l’impression globale de changement rapportée par le soignant à la dernière visite. Le critère d’évaluation secondaire clé de GWPCARE1 était la proportion de patients avec une réduction d’au moins 50 % de la fréquence des crises convulsives.",
+    "qid": "59146165"
+   },
+   {
+    "index": 14,
+    "corpus": "bdpm_rcp",
+    "page": "61680130",
+    "section": "5.1",
+    "quote": "Le tableau 5 présente le critère d’évaluation principal, à savoir la réduction en pourcentage des crises convulsives par rapport à l’inclusion, et le critère d’évaluation secondaire, à savoir la proportion de patients avec une réduction d’au moins 50 % de la fréquence des crises convulsives ainsi que les résultats mesurés chez les patients traités concomitamment par clobazam.",
+    "qid": "39101a73"
+   },
+   {
+    "index": 15,
+    "corpus": "bdpm_rcp",
+    "page": "61680130",
+    "section": "5.1",
+    "quote": "CRISES CONVULSIVES SUR UNE PERIODE DE 28 JOURS",
+    "qid": "021c6d67"
+   },
+   {
+    "index": 16,
+    "corpus": "bdpm_rcp",
+    "page": "61680130",
+    "section": "5.1",
+    "quote": "≥ 50 % DE RÉDUCTION DES CRISES CONVULSIVES (ANALYSE DES RÉPONDEURS)",
+    "qid": "010dcb8f"
+   },
+   {
+    "index": 17,
+    "corpus": "bdpm_rcp",
+    "page": "61680130",
+    "section": "5.1",
+    "quote": "Mesures additionnelles des critères d’évaluation secondaires dans le sous-groupe de patients traités concomitamment par clobazam Le cannabidiol était associé à une augmentation du pourcentage de sujets présentant une réduction supérieure ou égale à 75 % de la fréquence des crises convulsives pendant la période de traitement de chaque essai (36 % sous 10 mg/kg/jour de cannabidiol, 25 % pour chaque groupe sous 20 mg/kg/jour de cannabidiol, 10 % à 13 % sous placebo).",
+    "qid": "48876882"
+   },
+   {
+    "index": 18,
+    "corpus": "bdpm_rcp",
+    "page": "61680130",
+    "section": "5.1",
+    "quote": "Comparativement au placebo, le cannabidiol était associé à une augmentation du nombre de jours sans crises convulsives pendant la période de traitement dans chaque essai, correspondant à 2,7 jours par période de 28 jours (10 mg/kg/jour) et 1,3 à 2,2 jours par période de 28 jours (20 mg/kg/jour).",
+    "qid": "b251e423"
+   },
+   {
+    "index": 19,
+    "corpus": "bdpm_rcp",
+    "page": "61680130",
+    "section": "5.1",
+    "quote": "Dans les deux essais randomisés sur le SD, 97,7 % des patients (N = 315) ayant terminé les études ont été incluses dans GWPCARE5. Dans le sous-groupe de patients atteints du SD traités concomitamment par du clobazam pendant 37 à 48 semaines (N = 148), le pourcentage de réduction médian, par rapport à l’inclusion, de la fréquence des crises convulsives était de 64 % au cours des semaines 1 à 12 (N = 148), une tendance maintenue au cours des semaines 37 à 48 avec un pourcentage de réduction médian, par rapport à l’inclusion, de la fréquence des crises convulsives de 58 %.",
+    "qid": "e412914d"
+   },
+   {
+    "index": 20,
+    "corpus": "bdpm_rcp",
+    "page": "61680130",
+    "section": "5.1",
+    "quote": "Traitement adjuvant des patients atteints de sclérose tubéreuse de Bourneville (STB) L’efficacité du cannabidiol (25 et 50 mg/kg/jour) dans le traitement adjuvant des crises d’épilepsie associées à la STB a été évaluée dans une étude randomisée, en double aveugle, contrôlée versus placebo, dans des groupes parallèles (GWPCARE6). L’étude consistait en une période d’inclusion de 4 semaines, une période de titration de 4 semaines et une période d’entretien de 12 semaines (période de traitement et d’évaluation principale de 16 semaines).",
+    "qid": "1e973f07"
+   },
+   {
+    "index": 21,
+    "corpus": "bdpm_rcp",
+    "page": "61680130",
+    "section": "5.1",
+    "quote": "Le critère d’évaluation principal était la variation du nombre de crises d’épilepsie associées à la STB pendant la période de traitement (entretien et adaptation posologique) par rapport à l’inclusion dans le groupe cannabidiol versus placebo. Les crises d’épilepsie associées à la STB étaient définies comme des crises d’épilepsie focales sans altération de la conscience ni perte de connaissance, des crises focales avec altération de la conscience ou perte de connaissance, des crises focales évoluant en crises d’épilepsie généralisées bilatérales et des crises généralisées (convulsions tonico-cloniques, toniques, cloniques ou atoniques). Les critères d’évaluation secondaires principaux étaient la proportion de patients avec une réduction d’au moins 50 % de la fréquence des crises d’épilepsie associées à la STB, l’impression globale de changement rapportée par le sujet/soignant à la dernière visite et le pourcentage de variation de la fréquence des crises totales par rapport à l’inclusion.",
+    "qid": "897a8ade"
+   },
+   {
+    "index": 22,
+    "corpus": "bdpm_rcp",
+    "page": "61680130",
+    "section": "5.1",
+    "quote": "La dose de 50 mg/kg/jour de cannabidiol s’est révélée avoir un niveau de réduction des crises d’épilepsie similaire à la dose de 25 mg/kg/jour. Toutefois, cette dose était associée à une incidence accrue d’effets indésirables comparée à la dose de 25 mg/kg/jour ; par conséquent, la dose maximale recommandée est de 25 mg/kg/jour.",
+    "qid": "2132983a"
+   },
+   {
+    "index": 23,
+    "corpus": "bdpm_rcp",
+    "page": "61680130",
+    "section": "5.1",
+    "quote": "Le tableau 6 résume le critère d’évaluation principal, à savoir la réduction en pourcentage des crises d’épilepsie associées à la STB par rapport à l’inclusion et le critère d’évaluation secondaire principal, à savoir la proportion de patients avec une réduction d’au moins 50 % de la fréquence des crises d’épilepsie associées à la STB avec la dose maximale recommandée de 25 mg/kg/jour.",
+    "qid": "0c1f46fc"
+   },
+   {
+    "index": 24,
+    "corpus": "bdpm_rcp",
+    "page": "61680130",
+    "section": "5.1",
+    "quote": "Dans l’étude GWPCARE6, 22,7 % des patients atteints de STB inclus dans le groupe 25 mg/kg/jour et 32,9 % inclus dans le groupe placebo prenaient du clobazam en association. Les résultats de l’analyse en sous-groupes avec le clobazam ont montré des effets anticonvulsivants additionnels du cannabidiol en présence de clobazam.",
+    "qid": "3bdd452e"
+   },
+   {
+    "index": 25,
+    "corpus": "bdpm_rcp",
+    "page": "61680130",
+    "section": "5.1",
+    "quote": "Le cannabidiol était associé à une augmentation du pourcentage de sujets (16 %) présentant une réduction supérieure ou égale à 75 % de la fréquence des crises d’épilepsie associées à la STB pendant la période de traitement comparé au groupe placebo (0 %).",
+    "qid": "618492b2"
+   },
+   {
+    "index": 26,
+    "corpus": "bdpm_rcp",
+    "page": "61680130",
+    "section": "5.1",
+    "quote": "L’effet du cannabidiol sur les spasmes infantiles/épileptiques associés à la STB n’a pas fait l’objet d’évaluations approfondies.",
+    "qid": "27a5a64e"
+   },
+   {
+    "index": 27,
+    "corpus": "bdpm_rcp",
+    "page": "61680130",
+    "section": "5.1",
+    "quote": "L’Agence européenne des médicaments a différé l’obligation de soumettre les résultats d’études réalisées avec cannabidiol dans un ou plusieurs sous-groupes de la population pédiatrique dans le traitement des crises d’épilepsie associées au SLG, au SD et à la STB (voir rubrique 4.2 pour les informations concernant l’usage pédiatrique).",
+    "qid": "ecfda578"
    }
   ]
  },
@@ -394,7 +674,7 @@
     "index": 0,
     "corpus": "bdpm_rcp",
     "page": "61009918",
-    "section": "4.2",
+    "section": "4.1",
     "quote": "Epilepsies",
     "qid": "b640f56b"
    },
@@ -402,12 +682,36 @@
     "index": 1,
     "corpus": "bdpm_rcp",
     "page": "61009918",
+    "section": "4.1",
+    "quote": "soit en association à un autre traitement antiépileptique ;",
+    "qid": "9356fb0d"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "61009918",
+    "section": "4.1",
+    "quote": "traitement des épilepsies partielles avec ou sans généralisation secondaire ;",
+    "qid": "e5de8437"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "61009918",
+    "section": "4.1",
+    "quote": "traitement des épilepsies généralisées : crises tonico-cloniques.",
+    "qid": "9dd87d2d"
+   },
+   {
+    "index": 4,
+    "corpus": "bdpm_rcp",
+    "page": "61009918",
     "section": "4.2",
     "quote": "Lorsque l’on substitue la carbamazépine à un autre antiépileptique, réduire graduellement la dose de ce dernier.",
     "qid": "1597a608"
    },
    {
-    "index": 2,
+    "index": 5,
     "corpus": "bdpm_rcp",
     "page": "61009918",
     "section": "4.2",
@@ -415,7 +719,7 @@
     "qid": "a6a5a19f"
    },
    {
-    "index": 3,
+    "index": 6,
     "corpus": "bdpm_rcp",
     "page": "61009918",
     "section": "4.2",
@@ -423,7 +727,7 @@
     "qid": "2a525c96"
    },
    {
-    "index": 4,
+    "index": 7,
     "corpus": "bdpm_rcp",
     "page": "61009918",
     "section": "4.2",
@@ -431,7 +735,7 @@
     "qid": "e4a3a4d4"
    },
    {
-    "index": 5,
+    "index": 8,
     "corpus": "bdpm_rcp",
     "page": "61009918",
     "section": "4.4",
@@ -439,7 +743,7 @@
     "qid": "489056cf"
    },
    {
-    "index": 6,
+    "index": 9,
     "corpus": "bdpm_rcp",
     "page": "61009918",
     "section": "4.4",
@@ -447,7 +751,7 @@
     "qid": "6c189ea3"
    },
    {
-    "index": 7,
+    "index": 10,
     "corpus": "bdpm_rcp",
     "page": "61009918",
     "section": "4.4",
@@ -455,7 +759,7 @@
     "qid": "ac163a5b"
    },
    {
-    "index": 8,
+    "index": 11,
     "corpus": "bdpm_rcp",
     "page": "61009918",
     "section": "4.4",
@@ -463,7 +767,7 @@
     "qid": "04eca889"
    },
    {
-    "index": 9,
+    "index": 12,
     "corpus": "bdpm_rcp",
     "page": "61009918",
     "section": "4.4",
@@ -471,12 +775,28 @@
     "qid": "be07a129"
    },
    {
-    "index": 10,
+    "index": 13,
     "corpus": "bdpm_rcp",
     "page": "61009918",
     "section": "4.4",
     "quote": "L’arrêt brutal de la carbamazépine peut précipiter les crises, par conséquent la carbamazépine doit être arrêtée progressivement sur une période de 6 mois. Selon les cas, un traitement transitoire par un antiépileptique à effet rapide peut s’avérer nécessaire.",
     "qid": "6a6e103f"
+   },
+   {
+    "index": 14,
+    "corpus": "bdpm_rcp",
+    "page": "61009918",
+    "section": "5.1",
+    "quote": "Classe pharmacothérapeutique : ANTIEPILEPTIQUE, dérivé du carboxamide, code ATC : N03AF01",
+    "qid": "ff0244c9"
+   },
+   {
+    "index": 15,
+    "corpus": "bdpm_rcp",
+    "page": "61009918",
+    "section": "5.1",
+    "quote": "Par ailleurs, la diminution de la libération du glutamate et la stabilisation des membranes neuronales peuvent essentiellement expliquer les effets antiépileptiques.",
+    "qid": "6d0fdf8c"
    }
   ]
  },
@@ -561,12 +881,36 @@
     "index": 0,
     "corpus": "bdpm_rcp",
     "page": "62905911",
+    "section": "4.1",
+    "quote": "En association à un autre traitement antiépileptique, chez l'adulte et chez l'enfant de plus de 6 ans :",
+    "qid": "a1ded2bc"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "62905911",
+    "section": "4.1",
+    "quote": "Traitement des épilepsies généralisées : crises cloniques, toniques, tonico-cloniques, absences, crises myocloniques, atoniques, spasmes infantiles et syndrome de Lennox-Gastaut,",
+    "qid": "8ab95957"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "62905911",
+    "section": "4.1",
+    "quote": "Traitement des épilepsies partielles : crises partielles avec ou sans généralisation secondaire.",
+    "qid": "c5e0ff4b"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "62905911",
     "section": "4.2",
     "quote": "Prévention et traitement du delirium tremens et des autres manifestations du sevrage alcoolique : traitement bref de l'ordre de 8 à 10 jours. Epilepsie",
     "qid": "f94ab3d1"
    },
    {
-    "index": 1,
+    "index": 4,
     "corpus": "bdpm_rcp",
     "page": "62905911",
     "section": "4.2",
@@ -574,7 +918,7 @@
     "qid": "57eec9b3"
    },
    {
-    "index": 2,
+    "index": 5,
     "corpus": "bdpm_rcp",
     "page": "62905911",
     "section": "4.4",
@@ -582,7 +926,7 @@
     "qid": "045e59a6"
    },
    {
-    "index": 3,
+    "index": 6,
     "corpus": "bdpm_rcp",
     "page": "62905911",
     "section": "4.4",
@@ -590,12 +934,20 @@
     "qid": "f1ce4a41"
    },
    {
-    "index": 4,
+    "index": 7,
     "corpus": "bdpm_rcp",
     "page": "62905911",
     "section": "4.4",
     "quote": "Des réactions cutanées sévères (dont le syndrome de Stevens-Johnson et syndrome de Lyell) ont été rapportées après commercialisation du clobazam chez les enfants et les adultes. La plupart des cas ont été rapportés lors de l’emploi concomitant du clobazam et d’autres antiépileptiques, connus pour entraîner des réactions cutanées sévères.",
     "qid": "c1371cab"
+   },
+   {
+    "index": 8,
+    "corpus": "bdpm_rcp",
+    "page": "62905911",
+    "section": "5.1",
+    "quote": "anticonvulsivante,",
+    "qid": "b0d0a747"
    }
   ]
  },
@@ -639,12 +991,36 @@
     "index": 0,
     "corpus": "bdpm_rcp",
     "page": "61496251",
+    "section": "4.1",
+    "quote": "Dans le traitement de l'épilepsie chez l'enfant, soit en monothérapie temporaire, soit en association à un autre traitement antiépileptique :",
+    "qid": "e0a75fee"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "61496251",
+    "section": "4.1",
+    "quote": "traitement des épilepsies généralisées : crises cloniques, toniques, tonico-cloniques, absences, crises myocloniques, atoniques, spasmes infantiles et syndrome de Lennox-Gastaut ;",
+    "qid": "ec200ada"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "61496251",
+    "section": "4.1",
+    "quote": "traitement des épilepsies partielles : crises partielles avec ou sans généralisation secondaire.",
+    "qid": "e66fd8c2"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "61496251",
     "section": "4.2",
     "quote": "On peut simplement considérer que l'on retrouve généralement une activité antiépileptique du clonazépam pour des concentrations plasmatiques variant de 20 ng/ml à 70 ng/ml.",
     "qid": "4c31dc80"
    },
    {
-    "index": 1,
+    "index": 4,
     "corpus": "bdpm_rcp",
     "page": "61496251",
     "section": "4.4",
@@ -652,7 +1028,7 @@
     "qid": "59236779"
    },
    {
-    "index": 2,
+    "index": 5,
     "corpus": "bdpm_rcp",
     "page": "61496251",
     "section": "4.4",
@@ -660,7 +1036,7 @@
     "qid": "4b211fd5"
    },
    {
-    "index": 3,
+    "index": 6,
     "corpus": "bdpm_rcp",
     "page": "61496251",
     "section": "4.4",
@@ -668,7 +1044,7 @@
     "qid": "88508b2f"
    },
    {
-    "index": 4,
+    "index": 7,
     "corpus": "bdpm_rcp",
     "page": "61496251",
     "section": "4.4",
@@ -676,7 +1052,7 @@
     "qid": "dd9ce3e1"
    },
    {
-    "index": 5,
+    "index": 8,
     "corpus": "bdpm_rcp",
     "page": "61496251",
     "section": "4.4",
@@ -684,7 +1060,7 @@
     "qid": "fb344aad"
    },
    {
-    "index": 6,
+    "index": 9,
     "corpus": "bdpm_rcp",
     "page": "61496251",
     "section": "4.4",
@@ -692,7 +1068,7 @@
     "qid": "6d4e82cd"
    },
    {
-    "index": 7,
+    "index": 10,
     "corpus": "bdpm_rcp",
     "page": "61496251",
     "section": "4.4",
@@ -700,12 +1076,28 @@
     "qid": "84953fcc"
    },
    {
-    "index": 8,
+    "index": 11,
     "corpus": "bdpm_rcp",
     "page": "61496251",
     "section": "4.4",
     "quote": "La posologie de clonazépam doit être ajustée aux besoins individuels des patients présentant une maladie respiratoire (ex : broncho-pneumopathie chronique obstructive), ainsi que chez les patients prenant de façon concomitante un autre dépresseur du système nerveux central ou un autre antiépileptique (voir rubrique 4.5).",
     "qid": "8da4077d"
+   },
+   {
+    "index": 12,
+    "corpus": "bdpm_rcp",
+    "page": "61496251",
+    "section": "5.1",
+    "quote": "Classe pharmacothérapeutique : ANTIEPILEPTIQUES, code ATC : N03AE01 (N: système nerveux central).",
+    "qid": "1e95f415"
+   },
+   {
+    "index": 13,
+    "corpus": "bdpm_rcp",
+    "page": "61496251",
+    "section": "5.1",
+    "quote": "anticonvulsivante,",
+    "qid": "b0d0a747"
    }
   ]
  },
@@ -718,6 +1110,14 @@
     "section": "4.4",
     "quote": "Cet état peut entraîner à l'arrêt du traitement un phénomène de sevrage. Certains symptômes sont fréquents et d'apparence banale : insomnie, céphalées, anxiété importante, myalgies, tension musculaire, irritabilité. D'autres symptômes sont plus rares : agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions.",
     "qid": "f1ce4a41"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "62416105",
+    "section": "5.1",
+    "quote": "anticonvulsivante,",
+    "qid": "b0d0a747"
    }
   ]
  },
@@ -738,6 +1138,14 @@
     "section": "4.4",
     "quote": "Le traitement doit être instauré avec prudence chez les patients épileptiques.",
     "qid": "5a9e0da2"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "65558647",
+    "section": "5.1",
+    "quote": "anticonvulsivante,",
+    "qid": "b0d0a747"
    }
   ]
  },
@@ -840,6 +1248,14 @@
     "section": "4.4",
     "quote": "Une fois qu’une dépendance physique s’est installée, l'arrêt brutal du traitement entrainera un phénomène de sevrage et de rebond. Certains symptômes sont fréquents et d'apparence banale: insomnie, céphalées, diarrhée, anxiété importante, myalgies, tension musculaire, irritabilité. D'autres symptômes sont plus rares: agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions.",
     "qid": "1d0e50cc"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "60290800",
+    "section": "5.1",
+    "quote": "Le diazépam appartient à la classe des 1-4 benzodiazépines et a une activité pharmacodynamique qualitativement semblable à celle des autres composés de cette classe: myorelaxante, anxiolytique, sédative, hypnotique, anticonvulsivante et amnésiante.",
+    "qid": "4d5bca13"
    }
   ]
  },
@@ -944,6 +1360,14 @@
     "section": "4.3",
     "quote": "en association avec des dérivés de la xanthine (par exemple aminophylline ou théophylline) (le seuil de convulsion peut être abaissé).",
     "qid": "3c84405f"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60811559",
+    "section": "5.1",
+    "quote": "Dans l’électroencéphalogramme, des signes d'atténuation de l'activité du cortex cérébral bioélectrique peuvent être observés sous anesthésie à l'eskétamine, en particulier les zones frontales, et une activation des structures sous-corticales peut être détectée. Le tonus musculaire est maintenu ou augmenté de sorte que les réflexes protecteurs ne sont généralement pas altérés. Le seuil de convulsion n'est pas abaissé. La respiration spontanée est suivie d'une élévation de la pression intracrânienne qui peut être évitée par une ventilation pulmonaire adéquate.",
+    "qid": "c20836a0"
    }
   ]
  },
@@ -953,12 +1377,28 @@
     "index": 0,
     "corpus": "bdpm_rcp",
     "page": "63927729",
+    "section": "4.1",
+    "quote": "en monothérapie dans le traitement de l’épilepsie partielle avec ou sans généralisation secondaire chez des adultes avec une épilepsie récemment diagnostiquée ;",
+    "qid": "53d7c403"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "63927729",
+    "section": "4.1",
+    "quote": "en association chez les adultes, les adolescents et les enfants de plus de 6 ans dans le traitement de l’épilepsie partielle avec ou sans généralisation secondaire.",
+    "qid": "fe2945e9"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "63927729",
     "section": "4.2",
     "quote": "L’acétate d’eslicarbazépine peut être utilisé en monothérapie ou en association à un traitement anticonvulsivant en cours. La dose initiale recommandée est de 400 mg une fois par jour avec augmentation à 800 mg une fois par jour après une ou deux semaines. En fonction de la réponse individuelle, la dose pourra être augmentée jusqu’à une dose maximum de 1 200 mg une fois par jour. En monothérapie, une dose de 1 600 mg une fois par jour pourrait être utilisée chez certains patients (voir rubrique 5.1).",
     "qid": "03cad4d2"
    },
    {
-    "index": 1,
+    "index": 3,
     "corpus": "bdpm_rcp",
     "page": "63927729",
     "section": "4.4",
@@ -966,7 +1406,7 @@
     "qid": "7dbba693"
    },
    {
-    "index": 2,
+    "index": 4,
     "corpus": "bdpm_rcp",
     "page": "63927729",
     "section": "4.4",
@@ -974,12 +1414,68 @@
     "qid": "47184625"
    },
    {
-    "index": 3,
+    "index": 5,
     "corpus": "bdpm_rcp",
     "page": "63927729",
     "section": "4.4",
     "quote": "La survenue d'une éruption cutanée (rash) a été décrite chez 1,2 % de la population totale traitée par acétate d’eslicarbazépine au cours d'études cliniques chez le patient épileptique. Des cas d’urticaire et d’angio-œdème ont été rapportés chez des patients sous acétate d’eslicarbazépine. L’angio-œdème dans un contexte d’hypersensibilité/de réaction anaphylactique associée à un œdème laryngé peut être fatal. En cas de signes ou de symptômes d’hypersensibilité, il est impératif d’interrompre immédiatement le traitement par acétate d’eslicarbazépine et l’instauration d’un traitement alternatif doit être envisagée.",
     "qid": "7500a187"
+   },
+   {
+    "index": 6,
+    "corpus": "bdpm_rcp",
+    "page": "63927729",
+    "section": "5.1",
+    "quote": "Classe pharmacothérapeutique : Antiépileptiques, Dérivés des carboxamides, code ATC : N03AF04",
+    "qid": "b2d93de8"
+   },
+   {
+    "index": 7,
+    "corpus": "bdpm_rcp",
+    "page": "63927729",
+    "section": "5.1",
+    "quote": "Il a été démontré que l’acétate d’eslicarbazépine et ses métabolites actifs ont limité l’apparition de crises chez plusieurs modèles non cliniques, ce qui constitue un élément prédictif d’une efficacité anticonvulsivante chez l'homme. Chez l’être humain, l’activité pharmacologique de l’acétate d’eslicarbazépine s’exerce principalement par le biais de son métabolite actif l’eslicarbazépine.",
+    "qid": "d9fea99b"
+   },
+   {
+    "index": 8,
+    "corpus": "bdpm_rcp",
+    "page": "63927729",
+    "section": "5.1",
+    "quote": "L’efficacité de l’acétate d’eslicarbazépine en traitement adjuvant ont été démontrées au cours de quatre études de phase III contrôlées contre placebo en double insu portant sur 1 703 patients randomisées adultes présentant une épilepsie partielle réfractaire à un traitement associant entre un et trois antiépileptiques concomitants. Dans ces études l’association à l’oxcarbazépine et au felbamate n’était pas autorisée. L’acétate d’eslicarbazépine a été testé à des doses quotidiennes uniques de 400 mg (dans l’étude -301 et 302 uniquement), 800 mg et 1 200 mg. Les doses d’acétate d’eslicarbazépine 800 mg une fois par jour et 1 200 mg une fois par jour étaient significativement plus efficaces que le placebo dans la réduction de la fréquence des crises sur une période d'entretien de 12 semaines. Le pourcentage de sujets ayant montré une réduction ≥ 50 % (1581 analysés) de la fréquence des crises dans les études de phase III était de 19,3 % pour le placebo, de 20,8 % pour l’acétate d’eslicarbazépine 400 mg, de 30,5 % pour l’acétate d’eslicarbazépine 800 mg et de 35,3 % pour l’acétate d’eslicarbazépine 1 200 mg une fois par jour.",
+    "qid": "5a35aba8"
+   },
+   {
+    "index": 9,
+    "corpus": "bdpm_rcp",
+    "page": "63927729",
+    "section": "5.1",
+    "quote": "L’efficacité de l’acétate d’eslicarbazépine en monothérapie a été démontrée dans une étude contrôlée contre un comparateur (carbamazépine à libération contrôlée), menée en double aveugle et incluant 815 patients adultes randomisés ayant un diagnostic récent d’épilepsie partielle. L’acétate d’eslicarbazépine a été testé aux doses de 800 mg, 1 200 mg et 1 600 mg administrées une fois par jour. Les doses du comparateur actif (carbamazépine à libération contrôlée) ont été de 200 mg, 400 mg et 600 mg, deux fois par jour. Tous les sujets ont été randomisés à la dose la plus faible ; la dose supérieure suivante leur a été attribuée uniquement en cas de crise épileptique. Parmi 815 patients randomisés, 401 patients ont été traités par acétate d’eslicarbazépine une fois par jour (271 patients [67,6 %] ont été maintenus à la dose de 800 mg, 70 patients [17,5 %] à la dose de 1 200 mg et 60 patients [15,0 %] ont été traités à 1 600 mg). Dans l’analyse d’efficacité primaire dans laquelle les abandons ont été considérés comme une absence de réponse, 71,1 % des sujets ont été classés comme n’ayant aucune crise épileptique dans le groupe acétate d’eslicarbazépine et 75,6 % dans le groupe libération contrôlée de carbamazépine pendant la période d’évaluation de 26 semaines (différence moyenne de risque -4,28 %, intervalle de confiance à 95 % : [-10,30 ; 1,74]). L’effet thérapeutique observé durant la période d’évaluation de 26 semaines s’est maintenu pendant 1 an de traitement chez 64,7 % des sujets du groupe acétate d’eslicarbazépine et chez 70,3 % des sujets du groupe carbamazépine à libération contrôlée classés comme n’ayant aucune crise épileptique (différence moyenne de risque -5,46 %, intervalle de confiance à 95 % : [-11,88 ; 0,97]). Dans l’analyse de l’échec thérapeutique (risque de crise épileptique) basée sur l’analyse du délai de survenue d’un événement (analyse de Kaplan-Meier et régression de Cox), l’estimateur de Kaplan-Meier du risque de crise épileptique à la fin de la période d’évaluation a été de 0,06 pour la carbamazépine et 0,12 pour l’acétate d’eslicarbazépine avec une augmentation supplémentaire du risque après un an à 0,11 pour la carbamazépine et 0,19 pour l’acétate d’eslicarbazépine (p=0,0002).",
+    "qid": "86676a2f"
+   },
+   {
+    "index": 10,
+    "corpus": "bdpm_rcp",
+    "page": "63927729",
+    "section": "5.1",
+    "quote": "L’efficacité de l’acétate d’eslicarbazépine dans le cadre de conversion à la monothérapie a été évaluée dans 2 études contrôlées, randomisées et menées en double aveugle chez 365 patients adultes souffrant d’épilepsie partielle. L’acétate d’eslicarbazépine a été testé aux doses de 1 200 mg et 1 600 mg administrées une fois par jour. Les taux d’absence de crises épileptiques durant toute la période de 10 semaines de monothérapie ont été de 7,6 % (1 600 mg) et de 8,3 % (1 200 mg) dans une étude et de 10,0 % (1 600 mg) et 7,4 % (1 200 mg) dans une autre étude.",
+    "qid": "b37ff446"
+   },
+   {
+    "index": 11,
+    "corpus": "bdpm_rcp",
+    "page": "63927729",
+    "section": "5.1",
+    "quote": "La sécurité et l’efficacité de l’acétate d’eslicarbazépine en association pour le traitement des crises partielles chez les sujets âgés ont été évaluées lors d’une étude non contrôlée, d’une durée de 26 semaines, sur 72 personnes (âgées de ≥ 65 ans). Les résultats montrent que l’incidence des effets indésirables dans cette population (65.3 %) est similaire à celle de la population générale analysée lors des études double-aveugle sur l’épilepsie (66.8%). Les effets indésirables individuels les plus fréquents ont été sensations vertigineuses (12.5% des patients), somnolence (9.7%), fatigue, convulsion et hyponatrémie (8.3%, chacun), nasopharyngite (6.9%) et infection des voies respiratoires supérieures (5.6%). Un total de 50 sur 72 individus qui ont commencé l’étude ont terminé le traitement de 26 semaines, ce qui correspond à un taux de maintien de 69,4% (voir section 4.2 pour plus d’information sur l’utilisation chez les sujets âgés). Les données disponibles chez la population âgée en monothérapie sont limitées. Seuls quelques sujets (N=27) âgés de plus de 65 ans ont été traités par acétate d’eslicarbazépine dans une étude sur la monothérapie.",
+    "qid": "a3553d84"
+   },
+   {
+    "index": 12,
+    "corpus": "bdpm_rcp",
+    "page": "63927729",
+    "section": "5.1",
+    "quote": "L’Agence Européenne des Médicaments a différé l’obligation de soumettre les résultats d’études réalisées avec la spécialité de référence contenant de l’acétate d’eslicarbazépine dans un ou plusieurs sous-groupes de la population pédiatrique dans le traitement de l’épilepsie partielle (voir rubrique 4.2 pour les informations concernant l’usage pédiatrique).",
+    "qid": "552e7d85"
    }
   ]
  },
@@ -992,6 +1488,14 @@
     "section": "4.4",
     "quote": "Cet état peut entraîner à l'arrêt du traitement un phénomène de sevrage. Certains symptômes sont fréquents et d'apparence banale : insomnie, céphalées, anxiété importante, myalgies, tension musculaire, irritabilité. D'autres symptômes sont plus rares : agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions.",
     "qid": "f1ce4a41"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "69888457",
+    "section": "5.1",
+    "quote": "anticonvulsivante,",
+    "qid": "b0d0a747"
    }
   ]
  },
@@ -1001,12 +1505,28 @@
     "index": 0,
     "corpus": "bdpm_rcp",
     "page": "68481191",
+    "section": "4.1",
+    "quote": "soit en association à un autre traitement antiépileptique:",
+    "qid": "0dbe7fdd"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "68481191",
+    "section": "4.1",
+    "quote": "o traitement des épilepsies généralisées: absences, crises myocloniques et atoniques.",
+    "qid": "a5794bf0"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "68481191",
     "section": "4.4",
     "quote": "Toute augmentation ou diminution de la posologie de l'éthosuximide doit être effectuée de façon progressive. Tout arrêt brutal est susceptible d'entraîner un état de mal épileptique.",
     "qid": "498abd0b"
    },
    {
-    "index": 1,
+    "index": 3,
     "corpus": "bdpm_rcp",
     "page": "68481191",
     "section": "4.4",
@@ -1014,7 +1534,7 @@
     "qid": "6f2d997a"
    },
    {
-    "index": 2,
+    "index": 4,
     "corpus": "bdpm_rcp",
     "page": "68481191",
     "section": "4.4",
@@ -1022,12 +1542,28 @@
     "qid": "ea66753b"
    },
    {
-    "index": 3,
+    "index": 5,
     "corpus": "bdpm_rcp",
     "page": "68481191",
     "section": "4.4",
     "quote": "En cas d'absences associée à une autre forme d'épilepsie (crises généralisées ou partielles), dont l'éthosuximide utilisé seul est susceptible d'augmenter la fréquence, il est recommandé de lui associer un autre antiépileptique.",
     "qid": "9bce33ca"
+   },
+   {
+    "index": 6,
+    "corpus": "bdpm_rcp",
+    "page": "68481191",
+    "section": "5.1",
+    "quote": "Classe pharmacothérapeutique : Antiépileptique, code ATC : N03AD01",
+    "qid": "bfcff10f"
+   },
+   {
+    "index": 7,
+    "corpus": "bdpm_rcp",
+    "page": "68481191",
+    "section": "5.1",
+    "quote": "L'éthosuximide est un antiépileptique spécifique des absences, il supprime l'activité paroxystique, pointes-ondes à 3 cycles par seconde, associée aux pertes de conscience, caractéristiques des crises des absences.",
+    "qid": "322e9128"
    }
   ]
  },
@@ -1037,12 +1573,20 @@
     "index": 0,
     "corpus": "bdpm_rcp",
     "page": "62154820",
+    "section": "4.1",
+    "quote": "Fintepla est indiqué dans le traitement adjuvant des crises d’épilepsie associées au syndrome de Dravet et au syndrome de Lennox-Gastaut, en association à d’autres médicaments antiépileptiques, chez les patients âgés de 2 ans et plus.",
+    "qid": "78158874"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "62154820",
     "section": "4.2",
     "quote": "Le traitement par Fintepla doit être instauré et supervisé par des médecins expérimentés dans le traitement de l’épilepsie.",
     "qid": "3999b8d1"
    },
    {
-    "index": 1,
+    "index": 2,
     "corpus": "bdpm_rcp",
     "page": "62154820",
     "section": "4.2",
@@ -1050,7 +1594,7 @@
     "qid": "7721fc40"
    },
    {
-    "index": 2,
+    "index": 3,
     "corpus": "bdpm_rcp",
     "page": "62154820",
     "section": "4.4",
@@ -1058,7 +1602,7 @@
     "qid": "88e34c3d"
    },
    {
-    "index": 3,
+    "index": 4,
     "corpus": "bdpm_rcp",
     "page": "62154820",
     "section": "4.4",
@@ -1066,7 +1610,7 @@
     "qid": "9c277d27"
    },
    {
-    "index": 4,
+    "index": 5,
     "corpus": "bdpm_rcp",
     "page": "62154820",
     "section": "4.4",
@@ -1074,7 +1618,7 @@
     "qid": "9d681b52"
    },
    {
-    "index": 5,
+    "index": 6,
     "corpus": "bdpm_rcp",
     "page": "62154820",
     "section": "4.4",
@@ -1082,12 +1626,156 @@
     "qid": "9e06744b"
    },
    {
-    "index": 6,
+    "index": 7,
     "corpus": "bdpm_rcp",
     "page": "62154820",
     "section": "4.4",
     "quote": "La cyproheptadine est un puissant antagoniste des récepteurs de la sérotonine et peut donc diminuer l’efficacité de la fenfluramine. En cas d’association de cyproheptadine et de fenfluramine, les patients doivent être surveillés en vue de détecter toute aggravation des crises d’épilepsie. Si un traitement par la fenfluramine est instauré chez un patient prenant de la cyproheptadine, l’efficacité de la fenfluramine peut être réduite.",
     "qid": "201c44de"
+   },
+   {
+    "index": 8,
+    "corpus": "bdpm_rcp",
+    "page": "62154820",
+    "section": "5.1",
+    "quote": "Classe pharmacothérapeutique : antiépileptiques, autres antiépileptiques, Code ATC : N03AX26",
+    "qid": "4ab30d3d"
+   },
+   {
+    "index": 9,
+    "corpus": "bdpm_rcp",
+    "page": "62154820",
+    "section": "5.1",
+    "quote": "La fenfluramine est un agent induisant la libération de sérotonine, ce qui stimule ainsi de multiples sous-types de récepteurs 5-HT grâce à la libération de sérotonine. La fenfluramine peut réduire les crises d’épilepsie en agissant comme un agoniste de certains récepteurs sérotoninergiques spécifiques dans le cerveau, dont les récepteurs 5-HT1D, 5-HT2A, et 5-HT2C, et en agissant également sur le récepteur sigma-1. Le mode d’action précis de la fenfluramine dans le syndrome de Dravet et le syndrome de Lennox-Gastaut n’est pas connu.",
+    "qid": "d1e883f8"
+   },
+   {
+    "index": 10,
+    "corpus": "bdpm_rcp",
+    "page": "62154820",
+    "section": "5.1",
+    "quote": "L'étude 1 (N = 119) et l'étude 3 (N = 143) sont les analyses prospectives et fusionnées des 119 premiers patients recrutés (étude 1) et des autres patients recrutés ultérieurement (étude 3) dans le cadre de deux études identiques en double aveugle et contrôlées versus placebo, ZX008-1501 et ZX008-1502. Les études 1501 et 1502 ont été menées en parallèle et leur design était identique : études multicentriques à 3 bras, randomisées, en double aveugle, en groupes parallèles, contrôlées versus placebo, comprenant une période d’inclusion de 6 semaines suivie d'une période d’ajustement posologique de 2 semaines et d'une période d'entretien de 12 semaines, pour un total de 14 semaines de traitement. Les patients prenant du stiripentol n’étaient pas inclus dans ces études. Les patients éligibles ont été randomisés selon un ratio de 1:1:1 pour recevoir l'une des deux doses de fenfluramine (0,7 mg/kg/jour ou 0,2 mg/kg/jour, avec une dose maximale de 26 mg/jour) ou un placebo. L'âge moyen (écart-type) des patients recrutés était de 9,0 (4,7) ans dans l'étude 1 et de 9,3 (4,7) ans dans l'étude 3, avec un âge allant de 2 à 18 ans. La majorité des patients était âgée de 6 ans ou plus (73,9 % dans l'étude 1 et 74,6 % dans l'étude 3). Tous les patients de l’étude étaient insuffisamment contrôlés par au moins un médicament antiépileptique, avec ou sans stimulation du nerf vague et/ou avec ou sans régime cétogène. Les médicaments antiépileptiques concomitants les plus fréquemment utilisés (≥25% au total) étaient le valproate, le clobazam, le topiramate et le lévétiracétam.",
+    "qid": "4f258d85"
+   },
+   {
+    "index": 11,
+    "corpus": "bdpm_rcp",
+    "page": "62154820",
+    "section": "5.1",
+    "quote": "Fréquence des crises convulsives pendant la période d’entretien",
+    "qid": "4ad6c00a"
+   },
+   {
+    "index": 12,
+    "corpus": "bdpm_rcp",
+    "page": "62154820",
+    "section": "5.1",
+    "quote": "% de réduction des crises convulsives pendant la période d’entretien",
+    "qid": "15c73e52"
+   },
+   {
+    "index": 13,
+    "corpus": "bdpm_rcp",
+    "page": "62154820",
+    "section": "5.1",
+    "quote": "Nombre (%) de patients présentant une réduction ≥ 50 % des crises convulsives mensuelles - changement par rapport à l’inclusion",
+    "qid": "7c28cbf4"
+   },
+   {
+    "index": 14,
+    "corpus": "bdpm_rcp",
+    "page": "62154820",
+    "section": "5.1",
+    "quote": "Nombre (%) de patients présentant une réduction ≥ 75 % des crises convulsives mensuelles - changement par rapport à l’inclusion",
+    "qid": "68e4f236"
+   },
+   {
+    "index": 15,
+    "corpus": "bdpm_rcp",
+    "page": "62154820",
+    "section": "5.1",
+    "quote": "Nombre (%) de patients présentant une réduction ≥ 100 % des crises convulsives mensuelles - changement par rapport à l’inclusion",
+    "qid": "69d28e88"
+   },
+   {
+    "index": 16,
+    "corpus": "bdpm_rcp",
+    "page": "62154820",
+    "section": "5.1",
+    "quote": "L’étude 2 (dénommée étude 1504) (N = 87) était une étude à 2 bras, multicentrique, randomisée, en double aveugle, en groupes parallèles, contrôlée versus placebo, comprenant une période d’inclusion de 6 semaines suivie d’une période d’ajustement posologique de 3 semaines et d’une période d’entretien de 12 semaines pour un total de 15 semaines de traitement. Les patients éligibles ont été randomisés selon un ratio de 1:1 pour recevoir 0,4 mg/kg/jour de fenfluramine (maximum 17 mg/jour) ou un placebo, en adjuvant de leur traitement standard stable de stiripentol (en association avec du clobazam et/ou du valproate) et éventuellement d’autres médicaments antiépileptiques. L’âge moyen (écart-type) des patients participant à l’étude 2 était de 9,1 ans (4,80), avec un âge allant de 2 à 19 ans. La majorité des patients avait 6 ans ou plus (72,4 %) et une minorité avait moins de 6 ans (27,6 %), était de sexe masculin (57,5 %) et, lorsque cela a été précisé, de race blanche (59,8 %). Tous les participants étaient insuffisamment contrôlés par au moins un médicament antiépileptique, incluant le stiripentol, avec ou sans stimulation du nerf vagal et/ou avec ou sans régime cétogène. La fréquence médiane initiale des crises convulsives pour 28 jours était respectivement de 10,7 et 14,0 dans le groupe placebo et le groupe traité par 0,4 mg/kg/jour de fenfluramine.",
+    "qid": "641eca14"
+   },
+   {
+    "index": 17,
+    "corpus": "bdpm_rcp",
+    "page": "62154820",
+    "section": "5.1",
+    "quote": "Réduction de la fréquence moyenne mensuelle des crises convulsives ajustée par rapport à l’inclusion par comparaison avec le placebo",
+    "qid": "d5ef95a3"
+   },
+   {
+    "index": 18,
+    "corpus": "bdpm_rcp",
+    "page": "62154820",
+    "section": "5.1",
+    "quote": "Données d’essais menés en ouvert Les patients atteints du syndrome de Dravet qui ont participé à l’étude 1, l’étude 2 et à l’étude 3 ont pu entrer dans une étude d’extension en ouvert (étude 5). L’objectif principal de l’étude d’extension en ouvert (OLE) était d’évaluer la sécurité à long terme de la fenfluramine à des doses de 0,2 à 0,7 mg/kg/jour, la dose de fenfluramine pouvant être ajustée pour optimiser le traitement. Les données concernent 374 patients qui ont participé à l’étude en ouvert et qui ont reçu de la fenfluramine pendant une période allant jusqu’à 3 ans (durée médiane du traitement :824 jours ; intervalle : 7-1 280). Une variation médiane en pourcentage par rapport à l’inclusion de la fréquence des crises convulsives (FCC) pendant la période globale de traitement OLE de -66,81 % (p < 0,001) a été observée. Sur les 375 participants de l’étude, 12,8 % sont sortis de l’étude en raison d’un manque d’efficacité, 2,9 % en raison d’événements indésirables et 5,3 % à la demande du médecin ou de la famille.",
+    "qid": "41fe7a25"
+   },
+   {
+    "index": 19,
+    "corpus": "bdpm_rcp",
+    "page": "62154820",
+    "section": "5.1",
+    "quote": "Enfants et adultes atteints du syndrome de Lennox-Gastaut L’efficacité de la fenfluramine pour le traitement des crises d’épilepsie associées au syndrome de Lennox-Gastaut chez les patients âgés de 2 à 35 ans a été évaluée dans une étude randomisée, en double insu et contrôlée versus placebo (étude 4, partie 1). La partie 1 comprenait 2 cohortes analysées indépendamment, la cohorte A et la cohorte B. La cohorte A correspondait à la cohorte de l’analyse principale et comprenait des patients d’Amérique du Nord, d’Europe et d’Australie et la cohorte B des patients japonais.",
+    "qid": "4d7a5bce"
+   },
+   {
+    "index": 20,
+    "corpus": "bdpm_rcp",
+    "page": "62154820",
+    "section": "5.1",
+    "quote": "Étude 4, partie 1, cohorte A L’étude 4, partie 1, cohorte A a comparé une dose de 0,7 mg/kg/jour (N = 87) et une dose de 0,2 mg/kg/jour (N = 89) (jusqu’à une dose maximale quotidienne de 26 mg) de fenfluramine avec un placebo (N = 87). Les patients présentaient un syndrome de Lennox-Gastaut et étaient insuffisamment contrôlés par au moins un médicament antiépileptique, avec ou sans stimulation du nerf vague et/ou régime cétogène. L’étude comprenait une période d’inclusion de 4 semaines, au cours de laquelle les patients devaient présenter au minimum 8 crises avec chute sous un traitement antiépileptique stable. Les crises avec chute comprenaient : les crises tonico-cloniques généralisées, tonico-cloniques secondaires généralisées, toniques, avec chute ou tonico-atoniques, dont il a été confirmé qu’elles entraînaient des chutes. La période d’inclusion a été suivie d’une randomisation, d’une période de titration de 2 semaines puis d’une période d’entretien de 12 semaines, pendant laquelle la dose de fenfluramine est restée stable.",
+    "qid": "95fd6357"
+   },
+   {
+    "index": 21,
+    "corpus": "bdpm_rcp",
+    "page": "62154820",
+    "section": "5.1",
+    "quote": "Dans l’étude 4, partie 1, 99 % des patients prenaient entre 1 et 4 médicaments antiépileptiques concomitants. Les médicaments antiépileptiques concomitants les plus fréquemment utilisés (chez au moins 25 % des patients) étaient le clobazam (45,2 %), la lamotrigine (33,5 %) et le valproate (55,9 %).",
+    "qid": "87b64207"
+   },
+   {
+    "index": 22,
+    "corpus": "bdpm_rcp",
+    "page": "62154820",
+    "section": "5.1",
+    "quote": "ANCOVA = analyse de la covariance ; A-P = groupe de traitement actif-groupe placebo ;CGI I = Clinical Global Impression – Improvement (Impression clinique globale - Amélioration) ; IC = intervalle de confiance ; DSF = drop seizure frequency (fréquence des crises avec chute) sur une période de 28 jours ; HL = Hodges-Lehmann ; ET : erreur type ; T+ENT = périodes de titration et d’entretien a Les valeurs à l’inclusion, T+ENT et de la variation en pourcentage par rapport à l’inclusion pour la fréquence des crises d’épilepsie pour 28 jours sont présentées dans l’échelle originale. b Les résultats sont basés sur un modèle ANCOVA non paramétrique avec un groupe de traitement (3 niveaux) et des strates de poids (< 37,5 kg, ≥ 37,5 kg) comme facteurs, l’intervalle de la fréquence des crises à l’inclusion comme covariable et l’intervalle de la variation en pourcentage par rapport à l’inclusion dans la fréquence des crises d’épilepsie pendant le traitement comme réponse c Basé sur un modèle de régression logistique qui comprenait une variable de réponse catégorielle (réduction d’un point de pourcentage obtenue, oui ou non), des strates de groupes de poids (< 37,5 kg, ≥ 37,5 kg) et la valeur initiale des DSF comme covariable. d Amélioration minime, importante ou très importante e Basée sur un test de Cochran-Mantel-Haenszel comparant un traitement actif à un placebo, après ajustement pour les strates de poids",
+    "qid": "a82604b7"
+   },
+   {
+    "index": 23,
+    "corpus": "bdpm_rcp",
+    "page": "62154820",
+    "section": "5.1",
+    "quote": "Le type de crise d’épilepsie avec le plus grand pourcentage de variation médian par rapport à l’inclusion dans le groupe fenfluramine 0,7 mg/kg/jour par rapport au groupe placebo était les crises tonico-cloniques généralisées (-45,7 % pour le groupe fenfluramine 0,7 mg/kg/jour [n = 38] contre 3,7 % pour le groupe placebo [n = 38]).",
+    "qid": "6dbf5bbb"
+   },
+   {
+    "index": 24,
+    "corpus": "bdpm_rcp",
+    "page": "62154820",
+    "section": "5.1",
+    "quote": "Les résultats de la cohorte B corroborent le bénéfice clinique de la fenfluramine rapporté pour la cohorte A pour le traitement adjuvant des crises convulsives avec chute associées au SLG chez les patients japonais.",
+    "qid": "43638c88"
+   },
+   {
+    "index": 25,
+    "corpus": "bdpm_rcp",
+    "page": "62154820",
+    "section": "5.1",
+    "quote": "ANCOVA = analyse de la covariance ; A-P = groupe de traitement actif-groupe placebo ; IC = intervalle de confiance ; DSF = drop seizure frequency (fréquence des crises avec chute) sur une période de 28 jours ; HL = Hodges-Lehmann ; ET = erreur type ; ENT = période d’entretien a Les valeurs à l’inclusion, pendant ENT et de la variation en pourcentage par rapport à l’inclusion pour la fréquence des crises d’épilepsie pour 28 jours sont présentées dans l’échelle originale.",
+    "qid": "647a6788"
    }
   ]
  },
@@ -1116,6 +1804,14 @@
     "section": "4.4",
     "quote": "Chez les patients ayant reçu un traitement prolongé avec des doses élevées de benzodiazépines, le bénéfice de l'utilisation de flumazénil doit être pesé face au risque éventuel de symptômes de sevrage aux benzodiazépines. Si, malgré un ajustement soigneux de la dose, des symptômes de sevrage aux benzodiazépines surviennent, une dose individuelle de 5 mg de diazépam ou 5 mg de midazolam peut être donnée par injection intraveineuse lente. L’utilisation de l’antagoniste n'est pas recommandée chez les malades épileptiques qui ont reçu un traitement prolongé par les benzodiazépines. Bien que le flumazénil ait des effets antiépileptiques intrinsèques, l'effet antagoniste brutal peut provoquer des convulsions chez les patients épileptiques. La prudence est recommandée pour les cas d’intoxication multiples. En particulier dans les intoxications poly médicamenteuses par benzodiazépines et antidépresseurs cycliques, certains effets toxiques tels que convulsions et arythmies cardiaques, provoqués par ces antidépresseurs mais qui apparaissent moins vite lors d’une administration concomitante de benzodiazépines, sont exacerbés par l’administration de flumazénil.",
     "qid": "029614ad"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "67248985",
+    "section": "5.1",
+    "quote": "En expérimentation animale, les effets produits par les substances ne présentant pas d'affinité pour les récepteurs des benzodiazépines (par exemple, les barbituriques, les substances GABA-mimétiques et les agonistes des récepteurs de l'adénosine) n'ont pas été modifiés par le flumazénil, mais les effets exercés par des agonistes non benzodiazépiniques des récepteurs des benzodiazépines, tels que les cyclopyrrolones (la zopiclone, par exemple) et les triazolopyridazines ont été bloqués. Les effets hypnotiques et sédatifs des benzodiazépines sont rapidement neutralisés par le flumazénil injecté par voie intraveineuse (1 à 2 minutes) et peuvent réapparaître progressivement dans les heures qui suivent selon la différence demi-vie des produits entre les agonistes et antagonistes administrés. Le flumazénil peut avoir un effet légèrement agoniste anticonvulsif. Le flumazénil a entraîné des symptômes de sevrage, y compris des convulsions chez des animaux recevant un traitement à long terme de flumazénil.",
+    "qid": "48f6c4c9"
    }
   ]
  },
@@ -1211,7 +1907,7 @@
     "index": 0,
     "corpus": "bdpm_rcp",
     "page": "61022591",
-    "section": "4.2",
+    "section": "4.1",
     "quote": "Epilepsie",
     "qid": "23b6a727"
    },
@@ -1219,12 +1915,28 @@
     "index": 1,
     "corpus": "bdpm_rcp",
     "page": "61022591",
+    "section": "4.1",
+    "quote": "NEURONTIN est indiqué en association dans le traitement des épilepsies partielles avec ou sans généralisation secondaire chez l'adulte et l'enfant à partir de 6 ans (voir rubrique 5.1).",
+    "qid": "d3f633e5"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "61022591",
+    "section": "4.1",
+    "quote": "NEURONTIN est indiqué en monothérapie dans le traitement des épilepsies partielles avec ou sans généralisation secondaire chez l'adulte et l'adolescent à partir de 12 ans.",
+    "qid": "deee2d6d"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "61022591",
     "section": "4.2",
     "quote": "L'épilepsie requiert généralement un traitement au long cours. La posologie est déterminée individuellement par le médecin traitant en fonction de la tolérance et de l'efficacité.",
     "qid": "43677e5b"
    },
    {
-    "index": 2,
+    "index": 4,
     "corpus": "bdpm_rcp",
     "page": "61022591",
     "section": "4.2",
@@ -1232,7 +1944,7 @@
     "qid": "6307c4f6"
    },
    {
-    "index": 3,
+    "index": 5,
     "corpus": "bdpm_rcp",
     "page": "61022591",
     "section": "4.2",
@@ -1240,7 +1952,7 @@
     "qid": "ed3f9839"
    },
    {
-    "index": 4,
+    "index": 6,
     "corpus": "bdpm_rcp",
     "page": "61022591",
     "section": "4.4",
@@ -1248,7 +1960,7 @@
     "qid": "360f9b13"
    },
    {
-    "index": 5,
+    "index": 7,
     "corpus": "bdpm_rcp",
     "page": "61022591",
     "section": "4.4",
@@ -1256,7 +1968,7 @@
     "qid": "6c189ea3"
    },
    {
-    "index": 6,
+    "index": 8,
     "corpus": "bdpm_rcp",
     "page": "61022591",
     "section": "4.4",
@@ -1264,7 +1976,7 @@
     "qid": "6234f818"
    },
    {
-    "index": 7,
+    "index": 9,
     "corpus": "bdpm_rcp",
     "page": "61022591",
     "section": "4.4",
@@ -1272,12 +1984,36 @@
     "qid": "41a16da5"
    },
    {
-    "index": 8,
+    "index": 10,
     "corpus": "bdpm_rcp",
     "page": "61022591",
     "section": "4.4",
     "quote": "Comme avec les autres antiépileptiques, les tentatives d'arrêt des antiépileptiques concomitants dans le traitement des patients réfractaires traités par un ou plusieurs antiépileptiques, en vue d'atteindre la monothérapie sous gabapentine, ont moins de chance de succès.",
     "qid": "95be0494"
+   },
+   {
+    "index": 11,
+    "corpus": "bdpm_rcp",
+    "page": "61022591",
+    "section": "5.1",
+    "quote": "La gabapentine pénètre facilement dans le cerveau et prévient les convulsions dans un certain nombre de modèles animaux d’épilepsie. La gabapentine ne possède aucune affinité pour les récepteurs GABAA et GABAB et n’altère pas le métabolisme du GABA. Elle ne se lie pas à d’autres récepteurs cérébraux de neurotransmetteurs et n'interagit pas avec les canaux sodiques. La gabapentine se lie avec une grande affinité à la sous-unité α2δ (alpha-2-delta) des canaux calciques voltage-dépendants et l’on suppose que la liaison à la sous-unité α2δ pourrait intervenir dans les effets anticonvulsivants de la gabapentine chez l’animal. Le criblage sur un large panel ne suggère aucune autre cible médicamenteuse que la sous-unité α2δ.",
+    "qid": "deb911ff"
+   },
+   {
+    "index": 12,
+    "corpus": "bdpm_rcp",
+    "page": "61022591",
+    "section": "5.1",
+    "quote": "Des preuves issues de plusieurs modèles pré-cliniques indiquent qu’il est possible que l’activité pharmacologique de la gabapentine soit médiée par la liaison à α2δ grâce à la diminution de la libération de neurotransmetteurs excitateurs dans certaines régions du système nerveux central. C'est peut-être cette activité qui est à la base de l'activité anticonvulsivante de la gabapentine. La pertinence de ces actions de la gabapentine sur les effets anticonvulsivants reste à établir chez l’homme.",
+    "qid": "a699513b"
+   },
+   {
+    "index": 13,
+    "corpus": "bdpm_rcp",
+    "page": "61022591",
+    "section": "5.1",
+    "quote": "Une étude clinique dans le traitement des épilepsies partielles en association à d'autres traitements, chez des enfants âgés de 3 à 12 ans, a montré une différence numérique, mais non statistiquement significative, des taux de répondeurs à 50 % en faveur du groupe gabapentine comparativement au placebo. Des analyses post-hoc supplémentaires des taux de répondeurs en fonction de l'âge n'ont pas révélé d'effet statistiquement significatif de l'âge, en tant que variable continue ou dichotomique (tranches d'âge de 3 à 5 ans et de 6 à 12 ans). Les données de cette analyse post-hoc supplémentaire sont résumées dans le tableau ci-dessous :",
+    "qid": "bb979d96"
    }
   ]
  },
@@ -1382,12 +2118,36 @@
     "index": 0,
     "corpus": "bdpm_rcp",
     "page": "60575525",
+    "section": "4.1",
+    "quote": "Le lacosamide est indiqué en monothérapie et en association dans le traitement des crises partielles avec ou sans généralisation secondaire chez les adultes, les adolescents et les enfants à partir de 2 ans présentant une épilepsie.",
+    "qid": "cc417891"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60575525",
+    "section": "4.1",
+    "quote": "dans le traitement des crises partielles avec ou sans généralisation secondaire chez les adultes, les adolescents et les enfants à partir de 2 ans présentant une épilepsie.",
+    "qid": "a3ccca5b"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "60575525",
+    "section": "4.1",
+    "quote": "dans le traitement des crises généralisées tonico-cloniques primaires chez les adultes, les adolescents et les enfants à partir de 4 ans présentant une épilepsie généralisée idiopathique",
+    "qid": "ca5ec799"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "60575525",
     "section": "4.2",
     "quote": "* Une dose de charge peut être administrée lorsque le médecin souhaite obtenir rapidement, pour un patient, la concentration plasmatique à l’état d’équilibre du lacosamide et l’effet thérapeutique. Elle doit être administrée sous surveillance médicale en tenant compte d’une possible augmentation de la survenue d’arythmies cardiaques graves et des effets indésirables affectant le système nerveux central (voir rubrique 4.8). L’administration d’une dose de charge n’a pas été étudiée en situation aiguë comme l’état de mal épileptique.",
     "qid": "e2e20e74"
    },
    {
-    "index": 1,
+    "index": 4,
     "corpus": "bdpm_rcp",
     "page": "60575525",
     "section": "4.2",
@@ -1395,7 +2155,7 @@
     "qid": "9cf59256"
    },
    {
-    "index": 2,
+    "index": 5,
     "corpus": "bdpm_rcp",
     "page": "60575525",
     "section": "4.2",
@@ -1403,7 +2163,7 @@
     "qid": "e03bbaf6"
    },
    {
-    "index": 3,
+    "index": 6,
     "corpus": "bdpm_rcp",
     "page": "60575525",
     "section": "4.2",
@@ -1411,7 +2171,7 @@
     "qid": "096921ac"
    },
    {
-    "index": 4,
+    "index": 7,
     "corpus": "bdpm_rcp",
     "page": "60575525",
     "section": "4.4",
@@ -1419,7 +2179,7 @@
     "qid": "f59dba2a"
    },
    {
-    "index": 5,
+    "index": 8,
     "corpus": "bdpm_rcp",
     "page": "60575525",
     "section": "4.4",
@@ -1427,7 +2187,7 @@
     "qid": "7a6f6711"
    },
    {
-    "index": 6,
+    "index": 9,
     "corpus": "bdpm_rcp",
     "page": "60575525",
     "section": "4.4",
@@ -1435,7 +2195,7 @@
     "qid": "0e037615"
    },
    {
-    "index": 7,
+    "index": 10,
     "corpus": "bdpm_rcp",
     "page": "60575525",
     "section": "4.4",
@@ -1443,12 +2203,92 @@
     "qid": "1dd15251"
    },
    {
-    "index": 8,
+    "index": 11,
     "corpus": "bdpm_rcp",
     "page": "60575525",
     "section": "4.4",
     "quote": "La tolérance et l’efficacité du lacosamide chez les patients pédiatriques présentant des syndromes épileptiques avec des crises partielles et généralisées coexistantes n’ont pas été déterminées.",
     "qid": "71342741"
+   },
+   {
+    "index": 12,
+    "corpus": "bdpm_rcp",
+    "page": "60575525",
+    "section": "5.1",
+    "quote": "Classe pharmacothérapeutique : antiépileptiques, autres antiépileptiques, Code ATC : N03AX18.",
+    "qid": "87272799"
+   },
+   {
+    "index": 13,
+    "corpus": "bdpm_rcp",
+    "page": "60575525",
+    "section": "5.1",
+    "quote": "Le mécanisme d’action précis grâce auquel le lacosamide exerce ses effets antiépileptiques chez l’homme n'est pas complètement élucidé.",
+    "qid": "5f210ba3"
+   },
+   {
+    "index": 14,
+    "corpus": "bdpm_rcp",
+    "page": "60575525",
+    "section": "5.1",
+    "quote": "Le lacosamide a induit dans une large variété de modèles animaux une protection contre les crises partielles et les crises généralisées primaires, et a retardé le développement d’une épilepsie par stimulation électrique (kindling).",
+    "qid": "306a8f98"
+   },
+   {
+    "index": 15,
+    "corpus": "bdpm_rcp",
+    "page": "60575525",
+    "section": "5.1",
+    "quote": "Dans les essais non cliniques, le lacosamide associé au lévétiracétam, à la carbamazépine, la phénytoïne, le valproate, la lamotrigine, le topiramate ou la gabapentine présente des effets anticonvulsivants synergiques ou additifs.",
+    "qid": "1f509b1b"
+   },
+   {
+    "index": 16,
+    "corpus": "bdpm_rcp",
+    "page": "60575525",
+    "section": "5.1",
+    "quote": "L’efficacité du lacosamide en monothérapie a été établie dans une étude comparative en double aveugle, groupe parallèle, de non-infériorité à la carbamazépine LP chez 886 patients âgés de 16 ans ou plus, présentant une épilepsie nouvellement ou récemment diagnostiquée. Les patients devaient présenter des crises partielles non provoquées, avec ou sans généralisation secondaire. Les patients ont été randomisés dans le groupe carbamazépine LP ou lacosamide, sous forme de comprimé, dans un rapport de 1:1.",
+    "qid": "2b5a35c2"
+   },
+   {
+    "index": 17,
+    "corpus": "bdpm_rcp",
+    "page": "60575525",
+    "section": "5.1",
+    "quote": "L'efficacité et la tolérance du lacosamide ont été évaluées dans une étude de conversion à la monothérapie, multicentrique, en double aveugle, randomisée et contrôlée avec un groupe témoin historique. Dans cette étude, 425 patients âgés de 16 à 70 ans, présentant des crises partielles non contrôlées et traitées à doses stables par 1 ou 2 antiépileptiques commercialisés, ont été randomisés pour la conversion au lacosamide en monothérapie (soit 400 mg/jour ou 300 mg/jour dans un rapport de 3:1).",
+    "qid": "0157f4aa"
+   },
+   {
+    "index": 18,
+    "corpus": "bdpm_rcp",
+    "page": "60575525",
+    "section": "5.1",
+    "quote": "Chez les patients traités qui ont terminé la période de titration et débuté la période de sevrage des autres antiépileptiques (284 et 99 respectivement), la monothérapie a été maintenue chez respectivement 71,5 % et 70,7 % des patients, durant 57-105 jours (médiane 71 jours), pour une période d'observation ciblée à 70 jours.",
+    "qid": "015068ee"
+   },
+   {
+    "index": 19,
+    "corpus": "bdpm_rcp",
+    "page": "60575525",
+    "section": "5.1",
+    "quote": "Chez les patients traités qui ont terminé la période de titration et débuté la période de sevrage des autres antiépileptiques (284 et 99 respectivement), la monothérapie a été maintenue chez respectivement 71,5 % et 70,7 % des patients, durant 57-105 jours (médiane 71 jours), pour une période d'observation ciblée à 70 jours. Traitement en association L’efficacité du lacosamide comme traitement en association aux doses recommandées (200 mg/jour, 400 mg/jour) a été établie au cours de trois études cliniques multicentriques, randomisées et contrôlées versus placebo sur une période d’entretien de 12 semaines. Lors des études contrôlées, il a été démontré que la dose de 600 mg/jour de lacosamide était également efficace, bien que l’efficacité ait été similaire à celle de la dose de 400 mg/jour, et que les patients étaient moins susceptibles de tolérer cette dose en raison d’effets indésirables au niveau du système nerveux central et gastro-intestinaux. Par conséquent, la dose de 600 mg/jour n’est pas recommandée. La dose maximale recommandée est de 400 mg/jour. Ces études, ayant porté sur 1 308 patients présentant une épilepsie partielle d’une durée moyenne de 23 ans, ont été conçues pour évaluer l’efficacité et la tolérance du lacosamide administré en association à 1– 3 médicaments antiépileptiques chez des patients présentant des crises partielles, avec ou sans généralisation secondaire, non contrôlées.",
+    "qid": "9c6a6e30"
+   },
+   {
+    "index": 20,
+    "corpus": "bdpm_rcp",
+    "page": "60575525",
+    "section": "5.1",
+    "quote": "Les patients qui ont été randomisés pour recevoir le lacosamide (n = 171) ou le placebo (n = 172) devaient remplir les critères d’inclusion suivants : être traités à dose stable par un voire jusqu’à 3 médicaments antiépileptiques au plus, avoir continué à présenter au moins 2 crises partielles au cours des 4 semaines précédant la période initiale avant traitement, avec un intervalle sans crise n’excédant pas 21 jours au cours de la période de 8 semaines précédant l’admission à la période initiale avant traitement.",
+    "qid": "23791365"
+   },
+   {
+    "index": 21,
+    "corpus": "bdpm_rcp",
+    "page": "60575525",
+    "section": "5.1",
+    "quote": "L’efficacité du lacosamide en association chez les patients de 4 ans et plus atteints d’épilepsie généralisée idiopathique présentant des crises généralisées tonico-cloniques primaires (GTCP) a été établie lors d’une étude clinique multicentrique randomisée en double aveugle sur 24 semaines, contrôlée versus placebo en groupes parallèles. Cette étude comportait une période de référence historique de 12 semaines, une période de référence prospective de 4 semaines et une période de traitement de 24 semaines (qui comprenait une période de titration de 6 semaines et une période de maintien de 18 semaines). Les patients éligibles traités par 1 à 3 médicaments antiépileptiques à dose stable présentant au moins 3 crises GTCP documentées pendant la période de référence combinée de 16 semaines ont été randomisés selon un ratio de 1 contre 1 pour recevoir le lacosamide ou le placebo (population de la cohorte analysée : lacosamide n = 118, placebo n = 121, dont 8 patients dans le groupe d’âges ≥ 4 à La dose administrée aux patients a été augmentée jusqu’à atteindre la dose d’entretien cible de 12 mg/kg/jour chez les patients pesant moins de 30 kg, 8 mg/kg/jour chez les patients pesant de 30 à moins de 50 kg ou 400 mg/jour chez les patients pesant 50 kg ou plus.",
+    "qid": "d187c1e5"
    }
   ]
  },
@@ -1458,12 +2298,36 @@
     "index": 0,
     "corpus": "bdpm_rcp",
     "page": "61043653",
+    "section": "4.1",
+    "quote": "Traitement en monothérapie ou en association des épilepsies partielles et généralisées, incluant les crises tonico-cloniques.",
+    "qid": "ccba8f2a"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "61043653",
+    "section": "4.1",
+    "quote": "Crises associées au syndrome de Lennox-Gastaut. LAMICTAL est administré en association à un autre traitement mais peut être l'anti-épileptique (AE) de première intention dans le syndrome de Lennox-Gastaut.",
+    "qid": "f6a46325"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "61043653",
+    "section": "4.1",
+    "quote": "Traitement en association des épilepsies partielles et généralisées, incluant les crises tonico-cloniques et les crises associées à un syndrome de Lennox-Gastaut.",
+    "qid": "00c2d4c1"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "61043653",
     "section": "4.2",
     "quote": "Si la posologie calculée de lamotrigine (par exemple pour le traitement d'enfants atteints d'épilepsie ou des patients ayant une insuffisance hépatique) ne correspond pas à un nombre entier de comprimé(s), la dose devant être administrée est égale à l'unité inférieure du nombre de comprimé(s) entier(s).",
     "qid": "1666ec32"
    },
    {
-    "index": 1,
+    "index": 4,
     "corpus": "bdpm_rcp",
     "page": "61043653",
     "section": "4.2",
@@ -1471,7 +2335,7 @@
     "qid": "257d07ad"
    },
    {
-    "index": 2,
+    "index": 5,
     "corpus": "bdpm_rcp",
     "page": "61043653",
     "section": "4.4",
@@ -1479,7 +2343,7 @@
     "qid": "f13be041"
    },
    {
-    "index": 3,
+    "index": 6,
     "corpus": "bdpm_rcp",
     "page": "61043653",
     "section": "4.4",
@@ -1487,12 +2351,36 @@
     "qid": "9706f42b"
    },
    {
-    "index": 4,
+    "index": 7,
     "corpus": "bdpm_rcp",
     "page": "61043653",
     "section": "4.4",
     "quote": "Les données suggèrent que les réponses au traitement lors d'une association à des inducteurs enzymatiques sont moindres comparées à une association à des médicaments anti-épileptiques non inducteurs enzymatiques. La cause en est mal connue.",
     "qid": "c381c611"
+   },
+   {
+    "index": 8,
+    "corpus": "bdpm_rcp",
+    "page": "61043653",
+    "section": "5.1",
+    "quote": "Classe pharmacothérapeutique : autres anti épileptiques, code ATC : N03AX09",
+    "qid": "e02f6df6"
+   },
+   {
+    "index": 9,
+    "corpus": "bdpm_rcp",
+    "page": "61043653",
+    "section": "5.1",
+    "quote": "Les résultats d'études pharmacologiques suggèrent que la lamotrigine bloque préférentiellement et de façon voltage-dépendante les canaux sodiques activés. Cela inhibe l'activation répétitive et soutenue des neurones et inhibe la libération du glutamate (le neurotransmetteur qui joue un rôle clé dans la genèse des crises d'épilepsie). Ces effets contribuent probablement aux propriétés anti-convulsivantes de la lamotrigine.",
+    "qid": "e460aee1"
+   },
+   {
+    "index": 10,
+    "corpus": "bdpm_rcp",
+    "page": "61043653",
+    "section": "5.1",
+    "quote": "Une fois stabilisés par de la lamotrigine administrée en monothérapie ou en association, les patients ont été randomisés dans l'un des cinq groupes de traitement : lamotrigine (50, 200, 400 mg/jour), lithium (taux sériques de 0,8 à 1,1 mMol/L) ou placebo pendant 76 semaines au maximum (18 mois). Le critère principal d'évaluation a été le \"Délai d'intervention pour un épisode thymique (TIME)\", l'intervention étant définie par un traitement pharmacologique complémentaire ou une sismothérapie (ou électroconvulsivothérapie, ECT). L'étude SCAB2006 a eu une méthodologie similaire à celle de l'étude SCAB2003, mais différente de l'étude SCAB2003 par l'évaluation de doses flexibles de lamotrigine (100 à 400 mg/jour) et par l'inclusion de patients présentant un trouble bipolaire de type I qui devaient avoir présenté récemment ou présentaient un épisode maniaque. Les résultats sont présentés dans le tableau 7.",
+    "qid": "d4658b1b"
    }
   ]
  },
@@ -1502,12 +2390,44 @@
     "index": 0,
     "corpus": "bdpm_rcp",
     "page": "60591091",
+    "section": "4.1",
+    "quote": "LEVIDCEN est indiqué en monothérapie dans le traitement des crises partielles avec ou sans généralisation secondaire chez l’adulte et l’adolescent à partir de 16 ans présentant une épilepsie nouvellement diagnostiquée.",
+    "qid": "2f8388f1"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60591091",
+    "section": "4.1",
+    "quote": "dans le traitement des crises partielles avec ou sans généralisation secondaire chez l’adulte, l’adolescent, l’enfant et le nourrisson à partir de 1 mois présentant une épilepsie.",
+    "qid": "92089af9"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "60591091",
+    "section": "4.1",
+    "quote": "dans le traitement des crises myocloniques de l’adulte et de l’adolescent à partir de 12 ans présentant une épilepsie myoclonique juvénile.",
+    "qid": "cf844b39"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "60591091",
+    "section": "4.1",
+    "quote": "dans le traitement des crises généralisées tonico-cloniques primaires de l’adulte et de l’adolescent à partir de 12 ans présentant une épilepsie généralisée idiopathique.",
+    "qid": "20993823"
+   },
+   {
+    "index": 4,
+    "corpus": "bdpm_rcp",
+    "page": "60591091",
     "section": "4.2",
     "quote": "Adolescents (16 à 17 ans) pesant 50 kg ou plus, ayant des crises partielles avec ou sans généralisation secondaire et présentant une épilepsie nouvellement diagnostiquée",
     "qid": "f4bdcb3b"
    },
    {
-    "index": 1,
+    "index": 5,
     "corpus": "bdpm_rcp",
     "page": "60591091",
     "section": "4.4",
@@ -1515,7 +2435,7 @@
     "qid": "33c7a63f"
    },
    {
-    "index": 2,
+    "index": 6,
     "corpus": "bdpm_rcp",
     "page": "60591091",
     "section": "4.4",
@@ -1523,12 +2443,76 @@
     "qid": "60f32128"
    },
    {
-    "index": 3,
+    "index": 7,
     "corpus": "bdpm_rcp",
     "page": "60591091",
     "section": "4.4",
     "quote": "Une absence d’efficacité ou une aggravation des crises a par exemple été rapportée chez des patients atteints d’épilepsie associée à des mutations de la sous-unité alpha 8 du canal sodique voltage-dépendant (SCN8A).",
     "qid": "dd171dae"
+   },
+   {
+    "index": 8,
+    "corpus": "bdpm_rcp",
+    "page": "60591091",
+    "section": "5.1",
+    "quote": "Classe pharmacothérapeutique : antiépileptique, autres antiépileptiques, Code ATC : N03AX14.",
+    "qid": "d0a4b694"
+   },
+   {
+    "index": 9,
+    "corpus": "bdpm_rcp",
+    "page": "60591091",
+    "section": "5.1",
+    "quote": "Le principe actif, le lévétiracétam, est un dérivé de la pyrrolidone (le S-énantiomère de l’acétamide a-éthyl-2-oxo-1-pyrrolidine), chimiquement non apparenté aux substances actives anticomitiales existantes.",
+    "qid": "ca6ff15a"
+   },
+   {
+    "index": 10,
+    "corpus": "bdpm_rcp",
+    "page": "60591091",
+    "section": "5.1",
+    "quote": "Des études in vitro montrent que le lévétiracétam agit sur les concentrations calciques intra-neuronales en inhibant partiellement les canaux calciques de type-N et en réduisant la libération du calcium des réserves intra-neuronales. De plus, le lévétiracétam inverse partiellement l’effet inhibiteur du zinc et des béta-carbolines sur les canaux GABAergiques et GLYCINergiques. Par ailleurs, des études in vitro ont montré que le lévétiracétam se lie à un site spécifique du tissu cérébral des rongeurs. Ce site de liaison est la protéine 2A de la vésicule synaptique qui semble être impliquée dans la fusion vésiculaire et l’excrétion cellulaire des neurotransmetteurs. Le lévétiracétam et ses analogues montrent un degré d’affinité pour la protéine 2A de la vésicule synaptique en corrélation avec la puissance de protection contre les crises dans le modèle d’épilepsie des souris audiogènes. Cette découverte suggère que l’interaction entre le lévétiracétam et la protéine 2A de la vésicule synaptique semble contribuer au mécanisme d’action antiépileptique du médicament.",
+    "qid": "ae50c492"
+   },
+   {
+    "index": 11,
+    "corpus": "bdpm_rcp",
+    "page": "60591091",
+    "section": "5.1",
+    "quote": "Le lévétiracétam induit une protection contre les crises sur un grand nombre de modèles animaux de convulsions de type partielles et primaires généralisées sans avoir un effet proconvulsivant. Le métabolite principal est inactif. Chez l’homme, une activité dans les épilepsies partielles et généralisées (décharge épileptiforme/réponse photoparoxystique) a confirmé le large spectre du profil pharmacologique du lévétiracétam.",
+    "qid": "f604dd1f"
+   },
+   {
+    "index": 12,
+    "corpus": "bdpm_rcp",
+    "page": "60591091",
+    "section": "5.1",
+    "quote": "L’efficacité du lévétiracétam en monothérapie a été établie au cours d’un essai comparatif de non- infériorité en double aveugle, groupes parallèles, versus carbamazépine à libération prolongée (LP) chez 576 patients de 16 ans et plus présentant une épilepsie nouvellement ou récemment diagnostiquée. Les patients devaient avoir des crises partielles non provoquées ou seulement des crises généralisées tonico-cloniques. Les patients étaient randomisés pour recevoir carbamazépine LP 400-1200 mg/jour ou lévétiracétam 1000-3000 mg/jour. La durée du traitement pouvait aller jusqu’à 121 semaines en fonction de la réponse thérapeutique.",
+    "qid": "912a61c2"
+   },
+   {
+    "index": 13,
+    "corpus": "bdpm_rcp",
+    "page": "60591091",
+    "section": "5.1",
+    "quote": "Dans une étude correspondant à la pratique clinique, chez un nombre limité de patients répondeurs au lévétiracétam utilisé en association (36 patients adultes sur 69), les antiépileptiques associés ont pu être arrêtés.",
+    "qid": "952d7f4a"
+   },
+   {
+    "index": 14,
+    "corpus": "bdpm_rcp",
+    "page": "60591091",
+    "section": "5.1",
+    "quote": "L’efficacité du lévétiracétam a été établie lors d’une étude en double aveugle contrôlée versus placebo sur 16 semaines chez des patients de 12 ans et plus souffrant d’épilepsie généralisée idiopathique et présentant des crises myocloniques dans différents syndromes épileptiques. La majorité des patients avaient une épilepsie myoclonique juvénile.",
+    "qid": "7546fc50"
+   },
+   {
+    "index": 15,
+    "corpus": "bdpm_rcp",
+    "page": "60591091",
+    "section": "5.1",
+    "quote": "L’efficacité du lévétiracétam a été démontrée dans une étude en double aveugle contrôlée versus placebo sur 24 semaines incluant des adultes, des adolescents et un nombre limité d’enfants souffrant d’épilepsie généralisée idiopathique avec crises généralisées tonico-cloniques primaires (GTCP) dans différents syndromes épileptiques (épilepsie myoclonique juvénile, épilepsie- absences de l’adolescent, épilepsie-absences de l’enfant, épilepsie avec crises Grand-mal du réveil).",
+    "qid": "ac733f61"
    }
   ]
  },
@@ -1585,6 +2569,14 @@
     "section": "4.4",
     "quote": "Cet état peut entraîner à l'arrêt du traitement un phénomène de sevrage. Certains symptômes sont fréquents et d'apparence banale : insomnie, céphalées, anxiété importante, myalgies, tension musculaire, irritabilité. D'autres symptômes sont plus rares : agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions.",
     "qid": "f1ce4a41"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "68104411",
+    "section": "5.1",
+    "quote": "Anticonvulsivante,",
+    "qid": "964c9dba"
    }
   ]
  },
@@ -1597,6 +2589,14 @@
     "section": "4.4",
     "quote": "D'autres symptômes sont plus rares : agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions.",
     "qid": "d8a87b8c"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "69071035",
+    "section": "5.1",
+    "quote": "Anticonvulsivante",
+    "qid": "a74abbd1"
    }
   ]
  },
@@ -1609,6 +2609,14 @@
     "section": "4.4",
     "quote": "Cet état peut entraîner à l'arrêt du traitement un phénomène de sevrage. Certains symptômes sont fréquents et d'apparence banale : insomnie, céphalées, anxiété importante, myalgies, tension musculaire, irritabilité. D'autres symptômes sont plus rares : agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions.",
     "qid": "f1ce4a41"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "67177709",
+    "section": "5.1",
+    "quote": "anticonvulsivante,",
+    "qid": "b0d0a747"
    }
   ]
  },
@@ -1621,6 +2629,14 @@
     "section": "4.4",
     "quote": "Les symptômes signalés suite à un arrêt des benzodiazépines comprennent : maux de tête, douleur musculaire, anxiété, tension, dépression, insomnie, agitation, confusion, irritabilité, sudation et survenue d’un phénomène de rebond (réapparition temporaire des symptômes pour lesquels le traitement a été initié). Il peut s’avérer difficile de faire la distinction entre ces symptômes et les symptômes d’origine pour lesquels le médicament a été prescrit. Les symptômes suivants ont été observés dans des cas graves : sentiment de déréalisation, sentiment de dépersonnalisation, hyperacousie, acouphène, engourdissement et fourmillement au niveau des extrémités, hypersensibilité à la lumière, au bruit et au contact physique, mouvement involontaire, vomissement, hallucinations et convulsions. Les convulsions sont plus communes chez les patients ayant eu des troubles convulsifs ou prenant d’autres médicaments qui réduisent le seuil convulsif tels que des antidépresseurs.",
     "qid": "1959d0ce"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60186584",
+    "section": "5.1",
+    "quote": "Le lormétazépam a une grande affinité pour des sites de liaison spécifiques au niveau du système nerveux central. Ces récepteurs des benzodiazépines montrent une relation fonctionnelle proche avec les récepteurs du neuromédiateur inhibiteur, l’acide gamma-aminubotyrique (GABA). En tant qu’agoniste du récepteur des benzodiazépines, le lormétazépam renforce l’inhibition GABAergique de l’activité des neurones distaux. Cet effet se manifeste pharmacologiquement par un effet anxiolytique, anti-épileptique, myorelaxant et sédatif et hypnotique.",
+    "qid": "c8dd3315"
    }
   ]
  },
@@ -1807,6 +2823,18 @@
    }
   ]
  },
+ "midazolam": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "62149015",
+    "section": "5.1",
+    "quote": "Les propriétés pharmacodynamiques du midazolam et de ses métabolites, similaires à celles des autres benzodiazépines, comprennent des effets sédatifs, anxiolytiques, amnésiques (amnésie antérograde), hypnotiques, myorelaxants et anticonvulsivants.",
+    "qid": "bb5e75a8"
+   }
+  ]
+ },
  "milnacipran": {
   "candidates": [
    {
@@ -1868,6 +2896,14 @@
     "section": "4.4",
     "quote": "Troubles convulsifs Les données sont limitées chez les patients ayant des antécédents de crises convulsives, y compris les convulsions liées au sevrage alcoolique. La prudence est recommandée lorsqu’un traitement visant à réduire la consommation d’alcool est initié chez ces patients.",
     "qid": "4154acaa"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "63957761",
+    "section": "5.1",
+    "quote": "L’efficacité de Selincro sur la réduction de la consommation d’alcool chez des patients présentant une dépendance à l’alcool (DSM-IV) a été évaluée dans deux études d’efficacité. Les patients présentant des antécédents de delirium tremens, d’hallucinations, de convulsions, de comorbidités psychiatriques significatives ou d’anomalies significatives de la fonction hépatique, ainsi que ceux présentant des symptômes de sevrage significatifs à la visite de sélection ou à la visite de randomisation étaient exclus. A la visite de sélection, la majorité (80 %) des patients inclus présentaient une consommation d’alcool à risque élevé ou très élevé (consommation d’alcool > 60 g/jour pour les hommes et > 40 g/jour pour les femmes selon les niveaux de risque de consommation d’alcool de l’OMS) ; 65 % d’entre eux ont maintenu une consommation d’alcool à risque élevé ou très élevé entre la sélection et la randomisation.",
+    "qid": "35c51c37"
    }
   ]
  },
@@ -1904,6 +2940,14 @@
     "section": "4.4",
     "quote": "Cet état peut entraîner à l'arrêt du traitement un phénomène de sevrage. Certains symptômes sont fréquents et d’apparence banale : insomnie, céphalées, anxiété importante, myalgies, tension musculaire, irritabilité. D’autres symptômes sont plus rares : agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions.",
     "qid": "5ede6b00"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "66205536",
+    "section": "5.1",
+    "quote": "anticonvulsivante,",
+    "qid": "b0d0a747"
    }
   ]
  },
@@ -1935,6 +2979,14 @@
     "section": "4.4",
     "quote": "Cet état peut entraîner à l'arrêt du traitement un phénomène de sevrage. Certains symptômes sont fréquents et d'apparence banale : insomnie, céphalées, anxiété importante, myalgies, tension musculaire, irritabilité. D'autres symptômes sont plus rares : agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions.",
     "qid": "f1ce4a41"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60351986",
+    "section": "5.1",
+    "quote": "Anticonvulsivant.",
+    "qid": "d6a4f3c2"
    }
   ]
  },
@@ -1944,12 +2996,20 @@
     "index": 0,
     "corpus": "bdpm_rcp",
     "page": "61556061",
+    "section": "4.1",
+    "quote": "TRILEPTAL est indiqué dans le traitement des crises épileptiques partielles avec ou sans généralisation secondaire.",
+    "qid": "b6ec8d9a"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "61556061",
     "section": "4.2",
     "quote": "En monothérapie comme en association, le traitement par TRILEPTAL débute par une dose cliniquement efficace, répartie en deux prises par jour. La dose peut être augmentée selon la réponse clinique du patient. Lorsqu'on substitue TRILEPTAL à un autre antiépileptique, la dose de ce dernier doit être réduite progressivement lors de l’instauration du traitement. Lors d'associations, la charge médicamenteuse antiépileptique globale du patient étant accrue, il peut être nécessaire de réduire la dose de l'antiépileptique associé et/ou d’augmenter plus lentement la dose de TRILEPTAL (voir rubrique 4.5).",
     "qid": "13963cda"
    },
    {
-    "index": 1,
+    "index": 2,
     "corpus": "bdpm_rcp",
     "page": "61556061",
     "section": "4.2",
@@ -1957,7 +3017,7 @@
     "qid": "09fa854d"
    },
    {
-    "index": 2,
+    "index": 3,
     "corpus": "bdpm_rcp",
     "page": "61556061",
     "section": "4.2",
@@ -1965,7 +3025,7 @@
     "qid": "23c0c173"
    },
    {
-    "index": 3,
+    "index": 4,
     "corpus": "bdpm_rcp",
     "page": "61556061",
     "section": "4.2",
@@ -1973,7 +3033,7 @@
     "qid": "70e8044c"
    },
    {
-    "index": 4,
+    "index": 5,
     "corpus": "bdpm_rcp",
     "page": "61556061",
     "section": "4.4",
@@ -1981,7 +3041,7 @@
     "qid": "d3f59033"
    },
    {
-    "index": 5,
+    "index": 6,
     "corpus": "bdpm_rcp",
     "page": "61556061",
     "section": "4.4",
@@ -1989,7 +3049,7 @@
     "qid": "d8b08c48"
    },
    {
-    "index": 6,
+    "index": 7,
     "corpus": "bdpm_rcp",
     "page": "61556061",
     "section": "4.4",
@@ -1997,7 +3057,7 @@
     "qid": "3abeb9f6"
    },
    {
-    "index": 7,
+    "index": 8,
     "corpus": "bdpm_rcp",
     "page": "61556061",
     "section": "4.4",
@@ -2005,7 +3065,7 @@
     "qid": "57162e01"
    },
    {
-    "index": 8,
+    "index": 9,
     "corpus": "bdpm_rcp",
     "page": "61556061",
     "section": "4.4",
@@ -2013,12 +3073,44 @@
     "qid": "49a07909"
    },
    {
-    "index": 9,
+    "index": 10,
     "corpus": "bdpm_rcp",
     "page": "61556061",
     "section": "4.4",
     "quote": "Comme pour tous les médicaments antiépileptiques, le traitement par TRILEPTAL doit être arrêté progressivement pour diminuer le risque d’augmentation de la fréquence des crises épileptiques.",
     "qid": "84d6b44b"
+   },
+   {
+    "index": 11,
+    "corpus": "bdpm_rcp",
+    "page": "61556061",
+    "section": "5.1",
+    "quote": "Classe pharmacothérapeutique : Anti-épileptiques, code ATC : N03AF02.",
+    "qid": "2c93e011"
+   },
+   {
+    "index": 12,
+    "corpus": "bdpm_rcp",
+    "page": "61556061",
+    "section": "5.1",
+    "quote": "L’activité pharmacologique de l'oxcarbazépine est liée essentiellement à son métabolite (DMH) (voir rubrique 5.2). Le mécanisme d’action de l’oxcarbazépine et du DMH serait essentiellement dû à un blocage des canaux sodiques voltage-dépendant, ce qui a pour effet de stabiliser les membranes neuronales hyperexcitées, d’inhiber les décharges neuronales répétitives et de diminuer la propagation des influx synaptiques. Il est possible qu’une augmentation de la conductance du potassium et une modulation des canaux calciques voltage-dépendant activés contribuent également aux effets anticonvulsivants. Il n'a pas été observé d’interactions significatives avec les neurotransmetteurs cérébraux ou les sites des récepteurs modulateurs.",
+    "qid": "25d1e497"
+   },
+   {
+    "index": 13,
+    "corpus": "bdpm_rcp",
+    "page": "61556061",
+    "section": "5.1",
+    "quote": "L’oxcarbazépine et son métabolite actif (DMH) sont des antiépileptiques puissants et efficaces chez l’animal. Il a été montré qu’ils protégeaient les rongeurs contre les crises tonico-cloniques généralisées et, à moindre degré, contre les crises cloniques. Chez le singe Rhésus porteur d’implants en aluminium, ces substances actives abolissent ou réduisent la fréquence des crises partielles récurrentes chroniques. Chez des souris et rats traités quotidiennement pendant respectivement 5 jours ou 4 semaines par l’oxcarbazépine ou le DMH, il n’a pas été constaté de signe d'accoutumance (c’est-à-dire d’atténuation de l’effet anticonvulsivant) sur les crises tonico-cloniques.",
+    "qid": "f7673ebc"
+   },
+   {
+    "index": 14,
+    "corpus": "bdpm_rcp",
+    "page": "61556061",
+    "section": "5.1",
+    "quote": "Deux études d'efficacité randomisées, en aveugle et évaluées en fonction de la dose (étude 2339 et étude 2340) ont été menées chez des patients pédiatriques âgés de 1 mois à <17 ans (n = 31 patients âgés de 6 à <17 ans ; n = 189 patients âgés <6 ans). De plus, un certain nombre d'études ouvertes qui ont recruté des enfants ont été menées. En général, le profil de tolérance de l'oxcarbazépine chez les jeunes enfants (<6 ans) était similaire à celui des enfants plus âgés (≥ 6 ans). Cependant, dans certaines études chez des enfants plus jeunes (<4 ans) et des enfants plus âgés (≥ 4 ans), une différence de l’ordre d’un facteur ≥ 5 a été observée dans la proportion de patients souffrant de convulsions (7,9% contre 1,0%, respectivement) et l'état de mal épileptique (5% contre 1%, respectivement).",
+    "qid": "60d22407"
    }
   ]
  },
@@ -2111,12 +3203,28 @@
     "index": 0,
     "corpus": "bdpm_rcp",
     "page": "61849146",
+    "section": "4.1",
+    "quote": "crises d’épilepsie partielles avec ou sans généralisation secondaire chez les patients âgés de 4 ans et plus ;",
+    "qid": "b56ab176"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "61849146",
+    "section": "4.1",
+    "quote": "crises généralisées tonicocloniques primaires (GTCP) chez les patients âgés de 7 ans et plus atteints d’épilepsie généralisée idiopathique (EGI).",
+    "qid": "1ad1db86"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "61849146",
     "section": "4.2",
     "quote": "Crises d’épilepsie partielles",
     "qid": "281dfd23"
    },
    {
-    "index": 1,
+    "index": 3,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "4.2",
@@ -2124,7 +3232,7 @@
     "qid": "b1933be3"
    },
    {
-    "index": 2,
+    "index": 4,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "4.2",
@@ -2132,7 +3240,7 @@
     "qid": "dca7100e"
    },
    {
-    "index": 3,
+    "index": 5,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "4.2",
@@ -2140,7 +3248,7 @@
     "qid": "ff560d28"
    },
    {
-    "index": 4,
+    "index": 6,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "4.2",
@@ -2148,7 +3256,7 @@
     "qid": "a4e59400"
    },
    {
-    "index": 5,
+    "index": 7,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "4.2",
@@ -2156,7 +3264,7 @@
     "qid": "0071b6aa"
    },
    {
-    "index": 6,
+    "index": 8,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "4.2",
@@ -2164,7 +3272,7 @@
     "qid": "ff1a08e1"
    },
    {
-    "index": 7,
+    "index": 9,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "4.4",
@@ -2172,7 +3280,7 @@
     "qid": "eda1bbb8"
    },
    {
-    "index": 8,
+    "index": 10,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "4.4",
@@ -2180,7 +3288,7 @@
     "qid": "e7b39768"
    },
    {
-    "index": 9,
+    "index": 11,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "4.4",
@@ -2188,7 +3296,7 @@
     "qid": "b94d7b86"
    },
    {
-    "index": 10,
+    "index": 12,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "4.4",
@@ -2196,7 +3304,7 @@
     "qid": "49b77eae"
    },
    {
-    "index": 11,
+    "index": 13,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "4.4",
@@ -2204,12 +3312,132 @@
     "qid": "d6d99ee0"
    },
    {
-    "index": 12,
+    "index": 14,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "4.4",
     "quote": "Des cas d’hépatotoxicité (principalement une élévation des enzymes hépatiques) ont été rapportés avec l’utilisation du pérampanel en association avec d’autres antiépileptiques. En cas d’élévation des enzymes hépatiques, une surveillance de la fonction hépatique doit être envisagée.",
     "qid": "434c2f7a"
+   },
+   {
+    "index": 15,
+    "corpus": "bdpm_rcp",
+    "page": "61849146",
+    "section": "5.1",
+    "quote": "Classe pharmacothérapeutique : antiépileptiques, autres antiépileptiques, Code ATC : N03AX22",
+    "qid": "451068bc"
+   },
+   {
+    "index": 16,
+    "corpus": "bdpm_rcp",
+    "page": "61849146",
+    "section": "5.1",
+    "quote": "Le pérampanel est le premier représentant de la classe des antagonistes sélectifs, non compétitifs des récepteurs ionotropiques au glutamate de type AMPA (acide α-amino-3-hydroxy-5-méthyl-4- isoxazole propionique) présents sur les neurones post-synaptiques. Le glutamate est le principal neurotransmetteur excitateur du système nerveux central (SNC) et il est impliqué dans différents troubles neurologiques provoqués par une hyperexcitabilité neuronale. L’activation des récepteurs AMPA par le glutamate serait responsable de l’essentiel de la transmission synaptique excitatrice rapide dans le cerveau. Dans les études in vitro, le pérampanel n’est pas entré en compétition avec l’AMPA pour la liaison aux récepteurs AMPA, mais la liaison du pérampanel a été déplacée par des antagonistes non compétitifs des récepteurs AMPA, ce qui indique que le pérampanel est un antagoniste non compétitif de ces récepteurs. In vitro, le pérampanel a inhibé l’augmentation du calcium intracellulaire induite par l’activation des récepteurs AMPA (mais pas celle induite par l’activation des récepteurs NMDA). In vivo, le pérampanel a significativement allongé la période de latence des crises d’épilepsie chez un modèle d’épilepsie induite par les récepteurs AMPA.",
+    "qid": "e241977d"
+   },
+   {
+    "index": 17,
+    "corpus": "bdpm_rcp",
+    "page": "61849146",
+    "section": "5.1",
+    "quote": "Le mécanisme précis par lequel le pérampanel exerce ses effets antiépileptiques chez l’homme n’est pas complètement élucidé.",
+    "qid": "2fa4d477"
+   },
+   {
+    "index": 18,
+    "corpus": "bdpm_rcp",
+    "page": "61849146",
+    "section": "5.1",
+    "quote": "Une analyse (d’efficacité) pharmacocinétique-pharmacodynamique a été réalisée à partir des données groupées issues de trois études d’efficacité dans les crises d’épilepsie partielles. De plus, une analyse (d’efficacité) pharmacocinétique-pharmacodynamique a été réalisée dans le cadre d’une étude d’efficacité dans les crises généralisées tonicocloniques primaires. Dans les deux analyses, l’exposition au pérampanel est corrélée à la diminution de la fréquence des crises.",
+    "qid": "a0c9e047"
+   },
+   {
+    "index": 19,
+    "corpus": "bdpm_rcp",
+    "page": "61849146",
+    "section": "5.1",
+    "quote": "Crises d’épilepsie partielles L’efficacité du pérampanel en association dans les crises d’épilepsie partielles a été établie par trois études multicentriques, randomisées, en double insu, contrôlées contre placebo, de 19 semaines chez des patients adultes et adolescents. Les patients présentaient des crises d’épilepsie partielles avec ou sans généralisation secondaire et non correctement contrôlées par un à trois médicaments antiépileptiques concomitants. Durant une période initiale de 6 semaines, les patients devaient présenter plus de cinq crises d’épilepsie, avec des périodes sans crise n’excédant pas 25 jours. Dans ces trois études cliniques, l’ancienneté moyenne de l’épilepsie était d’environ 21,06 ans. Entre 85,3 % et 89,1 % des patients prenaient deux à trois médicaments antiépileptiques concomitants avec ou sans stimulation concurrente du nerf pneumogastrique.",
+    "qid": "179129b1"
+   },
+   {
+    "index": 20,
+    "corpus": "bdpm_rcp",
+    "page": "61849146",
+    "section": "5.1",
+    "quote": "Deux études (études 304 et 305) ont été menées pour comparer les doses de 8 et 12 mg/jour de pérampanel à un placebo et la troisième étude (étude 306) pour comparer les doses de 2, 4 et 8 mg/jour de pérampanel à un placebo. Dans les trois études, après une phase initiale de 6 semaines avant la randomisation destinée à établir la fréquence initiale des crises d’épilepsie, les patients ont été randomisés et la posologie a été augmentée progressivement jusqu’à la dose attribuée par randomisation. Pendant la phase de titration des trois études, le traitement a été instauré à la dose de 2 mg/jour et la dose était augmentée chaque semaine par paliers de 2 mg/jour jusqu’à la dose cible. Les patients présentant des événements indésirables intolérables pouvaient poursuivre le traitement à la même dose ou recevoir une dose inférieure à la dose antérieure. Dans les trois études, la phase de titration a été suivie d’une phase d’entretien d’une durée de 13 semaines, au cours de laquelle les patients devaient recevoir une dose stable de pérampanel.",
+    "qid": "7d114d9c"
+   },
+   {
+    "index": 21,
+    "corpus": "bdpm_rcp",
+    "page": "61849146",
+    "section": "5.1",
+    "quote": "Les taux de répondeurs à 50 % (définis par une réduction de 50 % de la fréquence des crises) combinés ont été de 19 % pour le placebo, 29 % pour la dose de 4 mg, 35 % pour la dose de 8 mg et 35 % pour la dose de 12 mg. Un effet statistiquement significatif sur la diminution de la fréquence des crises au cours d’une période de 28 jours (entre la phase initiale et la phase de traitement) a été observé par rapport au groupe placebo avec le traitement par le pérampanel aux doses de 4 mg/jour (étude 306), 8 mg/jour (études 304, 305 et 306) et 12 mg/jour (études 304 et 305). Les taux de répondeurs à 50 % dans les groupes 4 mg, 8 mg et 12 mg ont été respectivement de 23,0 %, 31,5 % et 30,0 % en association avec des médicaments antiépileptiques inducteurs enzymatiques et de 33,3 %, 46,5 % et 50,0 % lorsque le pérampanel était administré en association avec des médicaments antiépileptiques non inducteurs enzymatiques. Ces études montrent que le pérampanel administré en association aux doses de 4 mg à 12 mg une fois par jour est significativement plus efficace que le placebo dans cette population.",
+    "qid": "228d3a22"
+   },
+   {
+    "index": 22,
+    "corpus": "bdpm_rcp",
+    "page": "61849146",
+    "section": "5.1",
+    "quote": "Les données des études contrôlées contre placebo montrent une amélioration du contrôle des crises d’épilepsie avec la dose 4 mg de pérampanel une fois par jour et que ce bénéfice est majoré lorsque la dose est augmentée à 8 mg/jour. Dans la population globale, l’efficacité observée à la dose de 12 mg n’a pas été meilleure que celle observée à la dose de 8 mg. Un bénéfice de la dose de 12 mg a été observé chez certains patients supportant bien la dose de 8 mg et lorsque la réponse clinique à cette dose était insuffisante. Une réduction cliniquement significative de la fréquence des crises par rapport au placebo a été obtenue dès la deuxième semaine de traitement lorsque les patients atteignaient une dose journalière de 4 mg.",
+    "qid": "17da80fc"
+   },
+   {
+    "index": 23,
+    "corpus": "bdpm_rcp",
+    "page": "61849146",
+    "section": "5.1",
+    "quote": "Étude d’extension en ouvert Quatre-vingt-dix-sept pour cent des patients ayant terminé les études randomisées menées chez les patients présentant des crises d’épilepsie partielles ont été inclus dans l’étude d’extension en ouvert (n = 1 186). Les patients ayant participé aux études randomisées ont reçu le pérampanel en relais pendant 16 semaines, suivies d’une période d’entretien au long cours (≥ 1 an). La dose journalière moyenne était de 10,05 mg.",
+    "qid": "764133c0"
+   },
+   {
+    "index": 24,
+    "corpus": "bdpm_rcp",
+    "page": "61849146",
+    "section": "5.1",
+    "quote": "Crises généralisées tonicocloniques primaires L’efficacité du pérampanel en association chez les patients âgés de 12 ans et plus atteints d’épilepsie idiopathique généralisée présentant des crises généralisées tonicocloniques primaires (GTCP) a été établie par une étude multicentrique, randomisée en double insu, contrôlée contre placebo (étude 332). Les patients éligibles traités par un à trois médicaments antiépileptiques à dose stable présentant au moins trois crises généralisées tonicocloniques primaires pendant la période de pré-inclusion de 8 semaines ont été randomisés pour recevoir le pérampanel ou le placebo. La population était composée de 164 patients (pérampanel N = 82, placebo N = 82). La posologie était augmentée progressivement sur quatre semaines jusqu’à une dose cible de 8 mg par jour ou jusqu’à la dose maximale tolérée et les patients ont été traités pendant 13 semaines supplémentaires au dernier palier de dose atteint à la fin de la période de titration. La durée totale de la période de traitement était de 17 semaines. Le médicament à l’étude était administré une fois par jour.",
+    "qid": "4caf4596"
+   },
+   {
+    "index": 25,
+    "corpus": "bdpm_rcp",
+    "page": "61849146",
+    "section": "5.1",
+    "quote": "Le taux de répondeurs à 50 % (réduction de 50 % de la fréquence des crises généralisées tonicocloniques primaires) pendant la période d’entretien a été significativement plus élevé dans le groupe pérampanel (58,0 %) que dans le groupe placebo (35,8 %) (P = 0,0059). Le taux de répondeurs à 50 % a été de 22,2 % en association avec des médicaments antiépileptiques inducteurs enzymatiques et de 69,4 % lorsque le pérampanel était administré en association avec des médicaments antiépileptiques non inducteurs enzymatiques. Le nombre de patients traités par le pérampanel recevant des médicaments antiépileptiques inducteurs enzymatiques était faible (n = 9). La variation en pourcentage médiane de la fréquence des crises généralisées tonicocloniques primaires sur une période de 28 jours pendant les périodes de titration et d’entretien (combinées) par rapport à la période avant la randomisation a été plus importante avec le pérampanel (-76,5 %) qu’avec le placebo (-38,4 %) (P < 0,0001). Pendant la période d’entretien de 3 mois, 30,9 % des patients (25/81) traités par le pérampanel ont été libres de crises généralisées tonicocloniques primaires par rapport à 12,3 % des patients (10/81) recevant le placebo.",
+    "qid": "dead40a7"
+   },
+   {
+    "index": 26,
+    "corpus": "bdpm_rcp",
+    "page": "61849146",
+    "section": "5.1",
+    "quote": "Relais par une monothérapie Dans une étude rétrospective de la pratique clinique, 51 patients atteints d’épilepsie qui recevaient le pérampanel en traitement en association ont changé pour le pérampanel en monothérapie. La majorité de ces patients avait des antécédents de crises d’épilepsie partielles. Parmi ces patients, 14 (27 %) sont revenus au traitement en association au cours des mois suivants. Trente-quatre (34) patients ont été suivis pendant au moins 6 mois et sur ceux-ci, 24 patients (71 %) sont restés sous pérampanel en monothérapie pendant au moins 6 mois. Dix (10) patients ont été suivis pendant au moins 18 mois et sur ceux-ci, 3 patients (30 %) sont restés sous pérampanel en monothérapie pendant au moins 18 mois.",
+    "qid": "852425b8"
+   },
+   {
+    "index": 27,
+    "corpus": "bdpm_rcp",
+    "page": "61849146",
+    "section": "5.1",
+    "quote": "L’Agence européenne des médicaments a différé l’obligation de soumettre les résultats d’études réalisées avec Fycompa dans un ou plusieurs sous-groupes de la population pédiatrique dans l’indication d’épilepsies résistantes au traitement (syndromes épileptiques idiopathiques liés à l’âge et syndromes épileptiques liés à la localisation) (voir rubrique 4.2 pour les informations concernant l’usage chez les adolescents et les patients pédiatriques).",
+    "qid": "8f5c15d0"
+   },
+   {
+    "index": 28,
+    "corpus": "bdpm_rcp",
+    "page": "61849146",
+    "section": "5.1",
+    "quote": "Une étude non contrôlée en ouvert (étude 311) a été menée pour établir le lien entre exposition et efficacité du pérampanel en association chez 180 patients pédiatriques (âgés de 4 à 11 ans) présentant des crises partielles ou des crises généralisées tonicocloniques primaires mal contrôlées. La posologie était augmentée progressivement sur 11 semaines jusqu’à une dose cible de 8 mg/jour ou jusqu’à la dose maximale tolérée (sans dépasser 12 mg/jour) pour les patients n’utilisant pas de médicaments antiépileptiques concomitants inducteurs du CYP3A (carbamazépine, oxcarbazépine, eslicarbazépine et phénytoïne), ou jusqu’à une dose de 12 mg/jour ou la dose maximale tolérée (sans dépasser 16 mg/jour) pour les patients utilisant un médicament antiépileptique concomitant inducteur du CYP3A. La dose de pérampanel atteinte au terme de la période de titration a été maintenue pendant 12 semaines (pour un total de 23 semaines d’exposition) à la fin de l’étude principale. Les patients qui sont entrés dans la phase d’extension ont été traités pendant 29 semaines supplémentaires, pour une durée d’exposition totale de 52 semaines.",
+    "qid": "3555fda0"
+   },
+   {
+    "index": 29,
+    "corpus": "bdpm_rcp",
+    "page": "61849146",
+    "section": "5.1",
+    "quote": "Des résultats similaires ont été obtenus dans un sous‑groupe de patients présentant des crises généralisées tonicocloniques primaires d’épilepsie généralisée idiopathique (EGI) (n = 19 patients, dont 17 patients âgés de 7‑< 12 ans et 2 patients âgés de 4‑< 7 ans) ; les valeurs correspondantes étaient respectivement de ‑56,5 %, 63,2 % (n = 12/19), et 52,6 % (n = 10/19). Les effets du traitement sur la diminution médiane de la fréquence des crises (semaines 40‑52 : n = 11 patients, ‑100,0 %), le taux de répondeurs à 50 % (semaines 40‑52 : 54,5 %, n = 6/11), et le taux d’absence de crises (semaines 40‑52 : 36,4 %, n = 4/11) se sont poursuivis après 52 semaines de traitement par pérampanel. En raison du nombre très limité de patients, ces résultats doivent être interprétés avec prudence.",
+    "qid": "1e2334e2"
    }
   ]
  },
@@ -2242,12 +3470,36 @@
     "index": 0,
     "corpus": "bdpm_rcp",
     "page": "61475588",
+    "section": "4.1",
+    "quote": "Soit en association à un autre traitement antiépileptique :",
+    "qid": "28922a21"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "61475588",
+    "section": "4.1",
+    "quote": "o traitement des épilepsies généralisées : crises cloniques, toniques, tonico-cloniques,",
+    "qid": "723888cd"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "61475588",
+    "section": "4.1",
+    "quote": "o traitement des épilepsies partielles : crises partielles avec ou sans généralisation secondaire.",
+    "qid": "be3db1c1"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "61475588",
     "section": "4.4",
     "quote": "L'introduction d'un médicament antiépileptique peut, rarement, être suivie d'une recrudescence des crises ou de l'apparition d'un nouveau type de crise chez le patient, et ce indépendamment des fluctuations observées dans certaines maladies épileptiques. En ce qui concerne le phénobarbital, les causes de ces aggravations peuvent être : un choix de médicament mal approprié vis-à-vis des crises ou du syndrome épileptique du patient, une modification du traitement antiépileptique concomitant ou une interaction pharmacocinétique avec celui-ci, une toxicité ou un surdosage. Il peut ne pas y avoir d'autre explication qu'une réaction paradoxale.",
     "qid": "005c3d39"
    },
    {
-    "index": 1,
+    "index": 4,
     "corpus": "bdpm_rcp",
     "page": "61475588",
     "section": "4.4",
@@ -2255,12 +3507,28 @@
     "qid": "822553bb"
    },
    {
-    "index": 2,
+    "index": 5,
     "corpus": "bdpm_rcp",
     "page": "61475588",
     "section": "4.4",
     "quote": "Des idées et comportements suicidaires ont été rapportés chez des patients traités par des antiépileptiques dans plusieurs indications. Une méta-analyse d'essais randomisés, contrôlés versus placebo portant sur des antiépileptiques a également montré une légère augmentation du risque d'idées et de comportements suicidaires. Les causes de ce risque ne sont pas connues et les données disponibles n'excluent pas la possibilité d'une augmentation de ce risque pour le phénobarbital.",
     "qid": "0bf242bc"
+   },
+   {
+    "index": 6,
+    "corpus": "bdpm_rcp",
+    "page": "61475588",
+    "section": "5.1",
+    "quote": "Classe pharmacothérapeutique : ANTIEPILEPTIQUE ; code ATC : N03AA02",
+    "qid": "167f7e66"
+   },
+   {
+    "index": 7,
+    "corpus": "bdpm_rcp",
+    "page": "61475588",
+    "section": "5.1",
+    "quote": "Le phénobarbital est un barbiturique. Il présente des propriétés anticonvulsivantes, sédatives et hypnotiques.",
+    "qid": "bf1921fb"
    }
   ]
  },
@@ -2270,7 +3538,7 @@
     "index": 0,
     "corpus": "bdpm_rcp",
     "page": "62436200",
-    "section": "4.2",
+    "section": "4.1",
     "quote": "Traitement de l'état de mal épileptique de l'adulte et de l'enfant, en monothérapie ou en association.",
     "qid": "97141cb1"
    },
@@ -2278,12 +3546,20 @@
     "index": 1,
     "corpus": "bdpm_rcp",
     "page": "62436200",
+    "section": "4.1",
+    "quote": "Prévention des crises d'épilepsie de la phase aiguë après intervention neurochirurgicale ou chez des traumatisés crâniens graves quand l'administration orale de la phénytoïne est impossible.",
+    "qid": "8dc3df4c"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "62436200",
     "section": "4.2",
     "quote": "Une surveillance continue ou subcontinue de l'électrocardiogramme est fortement conseillée, surtout chez les personnes âgées ou à risque. On cherchera à identifier tout signe de détresse respiratoire. Un dosage des taux sériques de phénytoïne peut être nécessaire lors de la prise en charge d'un état de mal épileptique et de l'établissement du traitement d'entretien.",
     "qid": "afe191f8"
    },
    {
-    "index": 2,
+    "index": 3,
     "corpus": "bdpm_rcp",
     "page": "62436200",
     "section": "4.2",
@@ -2291,7 +3567,7 @@
     "qid": "df049bd0"
    },
    {
-    "index": 3,
+    "index": 4,
     "corpus": "bdpm_rcp",
     "page": "62436200",
     "section": "4.4",
@@ -2299,7 +3575,7 @@
     "qid": "3b7cd523"
    },
    {
-    "index": 4,
+    "index": 5,
     "corpus": "bdpm_rcp",
     "page": "62436200",
     "section": "4.4",
@@ -2307,7 +3583,7 @@
     "qid": "9a81aeea"
    },
    {
-    "index": 5,
+    "index": 6,
     "corpus": "bdpm_rcp",
     "page": "62436200",
     "section": "4.4",
@@ -2315,7 +3591,7 @@
     "qid": "3b4853b3"
    },
    {
-    "index": 6,
+    "index": 7,
     "corpus": "bdpm_rcp",
     "page": "62436200",
     "section": "4.4",
@@ -2323,7 +3599,7 @@
     "qid": "85f802ec"
    },
    {
-    "index": 7,
+    "index": 8,
     "corpus": "bdpm_rcp",
     "page": "62436200",
     "section": "4.4",
@@ -2331,7 +3607,7 @@
     "qid": "17c58285"
    },
    {
-    "index": 8,
+    "index": 9,
     "corpus": "bdpm_rcp",
     "page": "62436200",
     "section": "4.4",
@@ -2339,7 +3615,7 @@
     "qid": "d1931d91"
    },
    {
-    "index": 9,
+    "index": 10,
     "corpus": "bdpm_rcp",
     "page": "62436200",
     "section": "4.4",
@@ -2347,7 +3623,7 @@
     "qid": "36bf35b7"
    },
    {
-    "index": 10,
+    "index": 11,
     "corpus": "bdpm_rcp",
     "page": "62436200",
     "section": "4.4",
@@ -2355,7 +3631,7 @@
     "qid": "cbf793f0"
    },
    {
-    "index": 11,
+    "index": 12,
     "corpus": "bdpm_rcp",
     "page": "62436200",
     "section": "4.4",
@@ -2363,12 +3639,28 @@
     "qid": "d7cd4ecf"
    },
    {
-    "index": 12,
+    "index": 13,
     "corpus": "bdpm_rcp",
     "page": "62436200",
     "section": "4.4",
     "quote": "Comme cela a été démontré avec la carbamazépine, des études récentes suggèrent que le risque de survenue de ces réactions sévères serait aussi majoré lors de traitement par la phénytoïne chez les patients porteurs d'un variant héréditaire du gène HLA B, (HLA-B*1502). Cette variation est plus fréquente dans certaines populations chinoises. En conséquence, la vigilance doit être accrue chez les patients susceptibles d'être porteurs de cette variation génétique du fait de leurs origines. Un autre antiépileptique doit leur être proposé.",
     "qid": "e2b96ad3"
+   },
+   {
+    "index": 14,
+    "corpus": "bdpm_rcp",
+    "page": "62436200",
+    "section": "5.1",
+    "quote": "Classe pharmacothérapeutique : ANTIEPILEPTIQUES, code ATC : N03AB02.",
+    "qid": "8408fa35"
+   },
+   {
+    "index": 15,
+    "corpus": "bdpm_rcp",
+    "page": "62436200",
+    "section": "5.1",
+    "quote": "La phénytoïne est un anticonvulsivant.",
+    "qid": "eec0850b"
    }
   ]
  },
@@ -2480,6 +3772,14 @@
     "section": "4.4",
     "quote": "Cet état peut entraîner à l'arrêt du traitement un phénomène de sevrage. Certains symptômes sont fréquents et d'apparence banale : insomnie, céphalées, anxiété importante, myalgies, tension musculaire, irritabilité. D'autres symptômes sont plus rares : agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions.",
     "qid": "f1ce4a41"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60534076",
+    "section": "5.1",
+    "quote": "anticonvulsivante,",
+    "qid": "b0d0a747"
    }
   ]
  },
@@ -2489,12 +3789,20 @@
     "index": 0,
     "corpus": "bdpm_rcp",
     "page": "60061602",
+    "section": "4.1",
+    "quote": "PREGABALINE TEVA SANTE est indiqué chez l'adulte en association dans le traitement des crises épileptiques partielles avec ou sans généralisation secondaire.",
+    "qid": "3aa15ca5"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60061602",
     "section": "4.4",
     "quote": "Il n'existe pas de données suffisantes permettant une suppression des médicaments antiépileptiques concomitants dans le but d'instaurer une monothérapie, lorsque le contrôle des crises est atteint avec la prégabaline en association.",
     "qid": "c95a5094"
    },
    {
-    "index": 1,
+    "index": 2,
     "corpus": "bdpm_rcp",
     "page": "60061602",
     "section": "4.4",
@@ -2502,7 +3810,7 @@
     "qid": "d7ed4fbe"
    },
    {
-    "index": 2,
+    "index": 3,
     "corpus": "bdpm_rcp",
     "page": "60061602",
     "section": "4.4",
@@ -2510,12 +3818,36 @@
     "qid": "849e90cd"
    },
    {
-    "index": 3,
+    "index": 4,
     "corpus": "bdpm_rcp",
     "page": "60061602",
     "section": "4.4",
     "quote": "Les convulsions, notamment les états de mal épileptiques et les crises tonico-cloniques généralisées, peuvent apparaître pendant ou peu après l’arrêt du traitement par la prégabaline.",
     "qid": "562cefa5"
+   },
+   {
+    "index": 5,
+    "corpus": "bdpm_rcp",
+    "page": "60061602",
+    "section": "5.1",
+    "quote": "L’efficacité et la sécurité d’emploi de la prégabaline n’ont pas été établies dans le traitement en association de l’épilepsie chez les patients pédiatriques de moins de 12 ans et chez les adolescents. Les événements indésirables observés lors d’une étude pharmacocinétique et de tolérance qui incluait des patients âgés de 3 mois à 16 ans (n = 65) présentant des crises épileptiques partielles étaient similaires à ceux observés chez l’adulte. Les résultats d’une étude menée versus placebo pendant 12 semaines auprès de 295 patients pédiatriques âgés de 4 à 16 ans et d’une étude menée versus placebo pendant 14 jours auprès de 175 patients pédiatriques âgés de 1 mois à moins de 4 ans portant sur l’évaluation de l’efficacité et de la sécurité d’emploi de la prégabaline comme traitement adjuvant des crises épileptiques partielles et de deux études de sécurité d’emploi en ouvert pendant 1 an menées auprès de 54 et 431 patients pédiatriques épileptiques respectivement, âgés de 3 mois à 16 ans montrent que les événements indésirables de fièvre et d’infections des voies aériennes supérieures étaient observés plus fréquemment que dans les études chez les patients adultes épileptiques (voir rubriques 4.2, 4.8 et 5.2).",
+    "qid": "6d3a24a6"
+   },
+   {
+    "index": 6,
+    "corpus": "bdpm_rcp",
+    "page": "60061602",
+    "section": "5.1",
+    "quote": "Dans le cadre d’une étude contrôlée contre placebo pendant 12 semaines, des sujets pédiatriques (âgés de 4 à 16 ans) se sont vu attribuer la prégabaline à la posologie de 2,5 mg/kg/jour (150 mg/jour au maximum), la prégabaline à la posologie de 10 mg/kg/jour (600 mg/jour au maximum), ou le placebo. Le pourcentage de sujets ayant présenté une réduction de survenue de crises épileptiques partielles d’au moins 50 % par rapport à l’inclusion était de 40,6 % des sujets traités par la prégabaline à la posologie de 10 mg/kg/jour (p = 0,0068 versus placebo), 29,1 % des sujets traités par prégabaline à la posologie de 2,5 mg/kg/jour (p = 0,2600 versus placebo) et 22,6 % de ceux recevant le placebo.",
+    "qid": "0f282c0c"
+   },
+   {
+    "index": 7,
+    "corpus": "bdpm_rcp",
+    "page": "60061602",
+    "section": "5.1",
+    "quote": "Dans le cadre d’une étude contrôlée contre placebo pendant 14 jours, des sujets pédiatriques (âgés de 1 mois à moins de 4 ans) se sont vu attribuer la prégabaline à la posologie de 7 mg/kg/jour, la prégabaline à la posologie de 14 mg/kg/jour ou le placebo. Les fréquences médianes des crises épileptiques sur 24 heures étaient, respectivement, à l’inclusion et à la visite finale, de 4,7 et 3,8 pour la prégabaline 7 mg/kg/jour, 5,4 et 1,4 pour la prégabaline 14 mg/kg/jour et 2,9 et 2,3 pour le placebo. La prégabaline 14 mg/kg/jour a réduit significativement la fréquence transformée logarithmiquement des crises épileptiques partielles par rapport au placebo (p = 0,0223) ; la prégabaline 7 mg/kg/jour n’a pas montré d’amélioration par rapport au placebo.",
+    "qid": "52a0e787"
    }
   ]
  },
@@ -2525,12 +3857,36 @@
     "index": 0,
     "corpus": "bdpm_rcp",
     "page": "65201684",
+    "section": "4.1",
+    "quote": "soit en association à un autre traitement antiépileptique:",
+    "qid": "0dbe7fdd"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "65201684",
+    "section": "4.1",
+    "quote": "o Traitement des épilepsies généralisées: crises cloniques, toniques, tonico-cloniques.",
+    "qid": "a25dbdd1"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "65201684",
+    "section": "4.1",
+    "quote": "o Traitement des épilepsies partielles: crises partielles avec ou sans généralisation secondaire.",
+    "qid": "797689e2"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "65201684",
     "section": "4.2",
     "quote": "Le traitement doit systématiquement être personnalisé. Chez de nombreux patients, la primidone peut être administrée en monothérapie. Mais, dans certains cas, la primidone doit être associée à d'autres antiépileptiques ou à autre traitement symptomatique.",
     "qid": "a90a1147"
    },
    {
-    "index": 1,
+    "index": 4,
     "corpus": "bdpm_rcp",
     "page": "65201684",
     "section": "4.4",
@@ -2538,7 +3894,7 @@
     "qid": "1dcba04f"
    },
    {
-    "index": 2,
+    "index": 5,
     "corpus": "bdpm_rcp",
     "page": "65201684",
     "section": "4.4",
@@ -2546,12 +3902,28 @@
     "qid": "4a4b9aaf"
    },
    {
-    "index": 3,
+    "index": 6,
     "corpus": "bdpm_rcp",
     "page": "65201684",
     "section": "4.4",
     "quote": "Des idées et comportements suicidaires ont été rapportés chez des patients traités par des antiépileptiques dans plusieurs indications. Une méta-analyse d'essais randomisés, contrôlés versus placebo portant sur des antiépileptiques a également montré une légère augmentation du risque d'idées et de comportements suicidaires. Les causes de ce risque ne sont pas connues et les données disponibles n'excluent pas la possibilité d'une augmentation de ce risque pour la primidone.",
     "qid": "b12bd0f1"
+   },
+   {
+    "index": 7,
+    "corpus": "bdpm_rcp",
+    "page": "65201684",
+    "section": "5.1",
+    "quote": "Classe pharmacothérapeutique : ANTIEPILEPTIQUES (barbituriques et dérivés). Code ATC: N03AA03.",
+    "qid": "96d494b0"
+   },
+   {
+    "index": 8,
+    "corpus": "bdpm_rcp",
+    "page": "65201684",
+    "section": "5.1",
+    "quote": "L'activité de ce médicament s'explique par les propriétés antiépileptiques de trois substances actives, la primidone elle-même et ses deux principaux métabolites (phénobarbital et phényl-éthyl-malondiamide).",
+    "qid": "fd0f4315"
    }
   ]
  },
@@ -2742,17 +4114,49 @@
     "index": 0,
     "corpus": "bdpm_rcp",
     "page": "61501691",
-    "section": "4.2",
-    "quote": "Diacomit doit être uniquement administré sous la supervision d'un pédiatre ou d’un neuropédiatre expérimenté dans le diagnostic et le traitement de l’épilepsie du nourrisson et de l’enfant.",
-    "qid": "a299225d"
+    "section": "4.1",
+    "quote": "Diacomit est indiqué en association au valproate de sodium et au clobazam dans le traitement des convulsions tonicocloniques généralisées chez des patients atteints d’une épilepsie myoclonique sévère du nourrisson (EMSN, syndrome de Dravet) et insuffisamment contrôlées par l’association clobazam/valproate de sodium.",
+    "qid": "6548fbc8"
    },
    {
     "index": 1,
     "corpus": "bdpm_rcp",
     "page": "61501691",
     "section": "4.2",
+    "quote": "Diacomit doit être uniquement administré sous la supervision d'un pédiatre ou d’un neuropédiatre expérimenté dans le diagnostic et le traitement de l’épilepsie du nourrisson et de l’enfant.",
+    "qid": "a299225d"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "61501691",
+    "section": "4.2",
     "quote": "Adaptation de la dose des autres antiépileptiques associés au stiripentol Malgré l’absence de données pharmacologiques exhaustives sur des interactions médicamenteuses potentielles, les recommandations suivantes concernant la modification de la posologie des autres antiépileptiques associés au stiripentol sont données sur la base de l’expérience clinique.",
     "qid": "f5539d71"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "61501691",
+    "section": "5.1",
+    "quote": "Groupe pharmacothérapeutique : Antiépileptiques, autres antiépileptiques, code ATC : N03AX17",
+    "qid": "36ed0835"
+   },
+   {
+    "index": 4,
+    "corpus": "bdpm_rcp",
+    "page": "61501691",
+    "section": "5.1",
+    "quote": "Chez l’animal, le stiripentol antagonise les convulsions induites par un choc électrique, le pentétrazol et la bicuculline. Chez les rongeurs, le stiripentol paraît augmenter les concentrations cérébrales de l'acide gamma-aminobutyrique (GABA), principal neurotransmetteur inhibiteur dans le cerveau des mammifères. Ce phénomène semble dû à l’inhibition du captage du GABA dans les synaptosomes et/ou à celle de la GABA-transaminase. Des études ont également montré que le stiripentol augmentait la transmission médiée par le récepteur GABA-A dans l’hippocampe du rat immature et augmentait la durée moyenne d’ouverture (mais non la fréquence) des canaux chlorures de ce même récepteur par un mécanisme similaire à celui des barbituriques. En raison d'interactions pharmacocinétiques, le stiripentol potentialise l’effet d’autres anti-convulsivants tels que carbamazépine, valproate de sodium, phénytoïne, phénobarbital et de nombreuses benzodiazépines. Le second effet du stiripentol est principalement basé sur une inhibition de plusieurs iso-enzymes du CYP450, notamment 3A4 et 2C19, intervenant dans le métabolisme hépatique des autres médicaments anti-épileptiques.",
+    "qid": "02eed7ae"
+   },
+   {
+    "index": 5,
+    "corpus": "bdpm_rcp",
+    "page": "61501691",
+    "section": "5.1",
+    "quote": "Un essai randomisé et contrôlé contre placebo a évalué le stiripentol en association à d’autres anti- épileptiques chez 41 enfants atteints d’une EMSN. Après une phase initiale d’un mois, le placebo (n=20) ou le stiripentol (n=21) a été associé au valproate de sodium et au clobazam pendant une période en double insu de deux mois. Les patients ont ensuite reçu le stiripentol en ouvert. La réponse a été définie comme une diminution de plus de 50% de la fréquence des convulsions cloniques (ou tonicocloniques) au cours du second mois de la période en double insu comparativement à la phase initiale. Le nombre des répondeurs a été de 15 (71%) dans le groupe stiripentol (dont 9 totalement exempts de crises cloniques ou tonicocloniques) contre seulement 1 (5%) dans le groupe placebo, sans disparition totale des crises (IC95%, stiripentol : 52,1-90,7 ; placebo : 0-14,6). L’IC95% de la différence a été de 42,2-85,7. La modification en pourcentage par rapport à la phase initiale a été plus élevée sous stiripentol (-69%) que sous placebo (+7%, p < 0,0001). Des effets indésirables de sévérité modérée (somnolence, diminution de l’appétit) ont été observés chez 21 patients du groupe stiripentol contre 8 du groupe placebo, mais ont disparu chez 12 des 21 patients sous stiripentol après une réduction de la dose des deux autres antiépileptiques conjointement administrés (Chiron et al, Lancet, 2000).",
+    "qid": "7e41e0bd"
    }
   ]
  },
@@ -2786,12 +4190,20 @@
     "index": 0,
     "corpus": "bdpm_rcp",
     "page": "60058517",
+    "section": "4.1",
+    "quote": "Traitement des épilepsies partielles avec ou sans crises secondairement généralisées en addition aux autres antiépileptiques lorsque ceux-ci sont insuffisamment efficaces.",
+    "qid": "8b6d8ce5"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60058517",
     "section": "4.4",
     "quote": "En l'absence de données, GABITRIL n’est généralement pas recommandé dans les épilepsies généralisées, en particulier les formes idiopathiques comportant des absences et le syndrome de Lennox-Gastaut, ou formes apparentées.",
     "qid": "2700c60d"
    },
    {
-    "index": 1,
+    "index": 2,
     "corpus": "bdpm_rcp",
     "page": "60058517",
     "section": "4.4",
@@ -2799,7 +4211,7 @@
     "qid": "0eaa256e"
    },
    {
-    "index": 2,
+    "index": 3,
     "corpus": "bdpm_rcp",
     "page": "60058517",
     "section": "4.4",
@@ -2807,7 +4219,7 @@
     "qid": "52c9f4b3"
    },
    {
-    "index": 3,
+    "index": 4,
     "corpus": "bdpm_rcp",
     "page": "60058517",
     "section": "4.4",
@@ -2815,7 +4227,7 @@
     "qid": "c6966dd1"
    },
    {
-    "index": 4,
+    "index": 5,
     "corpus": "bdpm_rcp",
     "page": "60058517",
     "section": "4.4",
@@ -2823,7 +4235,7 @@
     "qid": "80da1c5f"
    },
    {
-    "index": 5,
+    "index": 6,
     "corpus": "bdpm_rcp",
     "page": "60058517",
     "section": "4.4",
@@ -2831,7 +4243,7 @@
     "qid": "93176a03"
    },
    {
-    "index": 6,
+    "index": 7,
     "corpus": "bdpm_rcp",
     "page": "60058517",
     "section": "4.4",
@@ -2839,7 +4251,7 @@
     "qid": "48ceb12a"
    },
    {
-    "index": 7,
+    "index": 8,
     "corpus": "bdpm_rcp",
     "page": "60058517",
     "section": "4.4",
@@ -2847,12 +4259,20 @@
     "qid": "bf514b67"
    },
    {
-    "index": 8,
+    "index": 9,
     "corpus": "bdpm_rcp",
     "page": "60058517",
     "section": "4.4",
     "quote": "L'efficacité et la sécurité d'emploi du GABITRIL n'ont pas été démontrées dans d'autres indications en dehors du traitement des épilepsies partielles avec ou sans crises secondairement généralisées en addition aux autres antiépileptiques lorsque ceux-ci sont insuffisamment efficaces chez l'adulte et les adolescents de plus de 12 ans.",
     "qid": "c1744da7"
+   },
+   {
+    "index": 10,
+    "corpus": "bdpm_rcp",
+    "page": "60058517",
+    "section": "5.1",
+    "quote": "Classe pharmacothérapeutique : ANTIEPILEPTIQUES, DERIVES D'ACIDES GRAS, code ATC : N03AG06.",
+    "qid": "41acdeb5"
    }
   ]
  },
@@ -2874,12 +4294,28 @@
     "index": 0,
     "corpus": "bdpm_rcp",
     "page": "61913385",
+    "section": "4.1",
+    "quote": "En monothérapie chez l’adulte, l’adolescent et l’enfant de plus de 6 ans dans l’épilepsie partielle avec ou sans généralisation secondaire ou dans les crises tonico-cloniques généralisées.",
+    "qid": "117c881b"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "61913385",
+    "section": "4.1",
+    "quote": "En association aux autres antiépileptiques chez l’enfant à partir de 2 ans, l’adolescent et l’adulte dans l’épilepsie partielle avec ou sans généralisation secondaire ou dans les crises tonico-cloniques généralisées, ainsi que dans le traitement des crises associées au syndrome de Lennox-Gastaut.",
+    "qid": "4b539a48"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "61913385",
     "section": "4.2",
     "quote": "Le traitement par topiramate doit être instauré et surveillé par un médecin spécialiste expérimenté dans la prise en charge de l’épilepsie ou de la migraine.",
     "qid": "39a1099b"
    },
    {
-    "index": 1,
+    "index": 3,
     "corpus": "bdpm_rcp",
     "page": "61913385",
     "section": "4.2",
@@ -2887,7 +4323,7 @@
     "qid": "0c85f70e"
    },
    {
-    "index": 2,
+    "index": 4,
     "corpus": "bdpm_rcp",
     "page": "61913385",
     "section": "4.2",
@@ -2895,7 +4331,7 @@
     "qid": "96bfc76c"
    },
    {
-    "index": 3,
+    "index": 5,
     "corpus": "bdpm_rcp",
     "page": "61913385",
     "section": "4.2",
@@ -2903,7 +4339,7 @@
     "qid": "d17b3c1d"
    },
    {
-    "index": 4,
+    "index": 6,
     "corpus": "bdpm_rcp",
     "page": "61913385",
     "section": "4.2",
@@ -2911,7 +4347,7 @@
     "qid": "17ae9306"
    },
    {
-    "index": 5,
+    "index": 7,
     "corpus": "bdpm_rcp",
     "page": "61913385",
     "section": "4.2",
@@ -2919,7 +4355,7 @@
     "qid": "8808892d"
    },
    {
-    "index": 6,
+    "index": 8,
     "corpus": "bdpm_rcp",
     "page": "61913385",
     "section": "4.2",
@@ -2927,7 +4363,7 @@
     "qid": "41985839"
    },
    {
-    "index": 7,
+    "index": 9,
     "corpus": "bdpm_rcp",
     "page": "61913385",
     "section": "4.3",
@@ -2935,7 +4371,7 @@
     "qid": "a6dbf4d5"
    },
    {
-    "index": 8,
+    "index": 10,
     "corpus": "bdpm_rcp",
     "page": "61913385",
     "section": "4.4",
@@ -2943,7 +4379,7 @@
     "qid": "adcb63bc"
    },
    {
-    "index": 9,
+    "index": 11,
     "corpus": "bdpm_rcp",
     "page": "61913385",
     "section": "4.4",
@@ -2951,12 +4387,76 @@
     "qid": "1ccc4ff7"
    },
    {
-    "index": 10,
+    "index": 12,
     "corpus": "bdpm_rcp",
     "page": "61913385",
     "section": "4.4",
     "quote": "Dans l’épilepsie, les troubles cognitifs sont multifactoriels et peuvent être dus à une étiologie sous-jacente, à la maladie épileptique elle-même ou au traitement antiépileptique. Il a été rapporté dans la littérature des cas de troubles de la fonction cognitive chez l’adulte traité par topiramate, nécessitant une réduction du dosage ou l’arrêt du traitement. Cependant, les études chez les enfants traités par le topiramate sont insuffisantes en regard des troubles cognitifs, et ils nécessitent encore d’être élucidés.",
     "qid": "b3400e06"
+   },
+   {
+    "index": 13,
+    "corpus": "bdpm_rcp",
+    "page": "61913385",
+    "section": "5.1",
+    "quote": "Classe pharmacothérapeutique : Antiépileptiques, autres antiépileptiques, code ATC : N03AX11.",
+    "qid": "1fc14809"
+   },
+   {
+    "index": 14,
+    "corpus": "bdpm_rcp",
+    "page": "61913385",
+    "section": "5.1",
+    "quote": "Le topiramate est classé comme monosaccharide sulfamate-substitué. Le mécanisme précis par lequel le topiramate exerce son effet anticonvulsivant et son effet prophylactique sur la migraine n’est pas connu. Les études électrophysiologiques et biochimiques sur cultures de neurones ont identifié trois propriétés susceptibles de contribuer à l’efficacité antiépileptique du topiramate.",
+    "qid": "a871e03f"
+   },
+   {
+    "index": 15,
+    "corpus": "bdpm_rcp",
+    "page": "61913385",
+    "section": "5.1",
+    "quote": "Le profil antiépileptique du topiramate étant sensiblement différent de celui des benzodiazépines, il pourrait avoir un effet modulateur sur un sous-type de récepteur GABAA insensible aux benzodiazépines. Le topiramate antagonise la capacité du kainate à activer le kainate/AMPA (acide α-amino-3-hydroxy-5-méthylisoxazole-4-propionique) sous-type du récepteur excitateur de l’amino acide (glutamate), mais n’a pas d’effet apparent sur le N-méthyl-D-aspartate (NMDA) au niveau du sous-type du récepteur NMDA. Ces effets du topiramate étaient concentration-dépendants dans la gamme de 1 µM à 200 µM, avec une activité minimum observée entre 1 µM et 10 µM.",
+    "qid": "f784f6ff"
+   },
+   {
+    "index": 16,
+    "corpus": "bdpm_rcp",
+    "page": "61913385",
+    "section": "5.1",
+    "quote": "De plus, le topiramate inhibe certaines isoenzymes de l’anhydrase carbonique. Cet effet pharmacologique est beaucoup plus faible que celui de l’acétazolamide, inhibiteur connu de l’anhydrase carbonique, et ne semble pas être un élément important de l’activité antiépileptique du topiramate.",
+    "qid": "5cfe7fef"
+   },
+   {
+    "index": 17,
+    "corpus": "bdpm_rcp",
+    "page": "61913385",
+    "section": "5.1",
+    "quote": "Au cours des études précliniques, le topiramate a montré une activité anticonvulsivante dans les tests de convulsion maximale par électrochoc (MES) chez le rat et la souris et est efficace sur les modèles murins d’épilepsie, qui incluent les convulsions toniques et les absences chez le rat spontanément épileptique (SER) et les convulsions tonico-cloniques induites chez le rat par stimulation de l’amygdale ou par ischémie globale. Le topiramate est seulement faiblement efficace sur le blocage des convulsions cloniques induites par l’antagoniste du récepteur GABAA, le pentylènetétrazole.",
+    "qid": "03df65cc"
+   },
+   {
+    "index": 18,
+    "corpus": "bdpm_rcp",
+    "page": "61913385",
+    "section": "5.1",
+    "quote": "Les études chez des souris recevant de façon concomitante du topiramate et de la carbamazépine ou du phénobarbital ont montré une activité anticonvulsivante synergique, alors que l’association avec la phénytoïne a montré un effet anticonvulsivant additif. Dans des essais bien contrôlés, en association, aucune corrélation n’a été mise en évidence entre les concentrations plasmatiques minimales et son efficacité clinique. Aucun problème de tolérance n’a été observé chez l’homme.",
+    "qid": "3933850d"
+   },
+   {
+    "index": 19,
+    "corpus": "bdpm_rcp",
+    "page": "61913385",
+    "section": "5.1",
+    "quote": "Traitement en monothérapie chez des patients âgés de 6 à 15 ans présentant une épilepsie nouvelle ou récente",
+    "qid": "65bbbc76"
+   },
+   {
+    "index": 20,
+    "corpus": "bdpm_rcp",
+    "page": "61913385",
+    "section": "5.1",
+    "quote": "Une étude en ouvert d'un an a été menée chez des patients pédiatriques âgés de 6 à 15 ans, dont 63 sujets présentant une épilepsie récente ou nouvelle, afin d'évaluer les effets du topiramate (28 sujets) par rapport au lévétiracétam sur la croissance, le développement et la minéralisation osseuse. Une croissance continue a été observée dans les deux groupes de traitement, mais le groupe topiramate a montré des réductions statistiquement significatives de la variation annuelle moyenne du poids corporel initial et de la densité minérale osseuse initiale par rapport au groupe lévétiracétam. Une tendance similaire a également été observée pour la taille et la vitesse de croissance, mais elle n'était pas statistiquement significative. Les changements liés à la croissance n'étaient pas cliniquement significatifs et ne limitaient pas le traitement. D'autres facteurs de confusion ne peuvent être exclus.",
+    "qid": "a3dd58ab"
    }
   ]
  },
@@ -3028,12 +4528,52 @@
     "index": 0,
     "corpus": "bdpm_rcp",
     "page": "60184188",
+    "section": "4.1",
+    "quote": "Chez l'adulte : soit en monothérapie, soit en association à un autre traitement antiépileptique :",
+    "qid": "0cd4df3e"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60184188",
+    "section": "4.1",
+    "quote": "Traitement des épilepsies généralisées: crises cloniques, toniques, tonico-cloniques, absences, crises myocloniques, atoniques, et syndrome de Lennox-Gastaut.",
+    "qid": "e7a6a2e4"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "60184188",
+    "section": "4.1",
+    "quote": "Traitement des épilepsies partielles: crises partielles avec ou sans généralisation secondaire.",
+    "qid": "59c512ad"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "60184188",
+    "section": "4.1",
+    "quote": "Chez l'enfant : soit en monothérapie, soit en association à un autre traitement antiépileptique :",
+    "qid": "cb985aa8"
+   },
+   {
+    "index": 4,
+    "corpus": "bdpm_rcp",
+    "page": "60184188",
+    "section": "4.1",
+    "quote": "Prévention de la récidive de crises après une ou plusieurs convulsions fébriles, présentant les critères de convulsions fébriles compliquées, en absence d'efficacité d'une prophylaxie intermittente par benzodiazépines.",
+    "qid": "a1e8140d"
+   },
+   {
+    "index": 5,
+    "corpus": "bdpm_rcp",
+    "page": "60184188",
     "section": "4.2",
     "quote": "Le traitement par valproate doit être instauré et surveillé par un médecin spécialiste expérimenté dans la prise en charge de l’épilepsie.",
     "qid": "3c4308d3"
    },
    {
-    "index": 1,
+    "index": 6,
     "corpus": "bdpm_rcp",
     "page": "60184188",
     "section": "4.2",
@@ -3041,7 +4581,7 @@
     "qid": "510ae1f1"
    },
    {
-    "index": 2,
+    "index": 7,
     "corpus": "bdpm_rcp",
     "page": "60184188",
     "section": "4.2",
@@ -3049,7 +4589,7 @@
     "qid": "2c3498a6"
    },
    {
-    "index": 3,
+    "index": 8,
     "corpus": "bdpm_rcp",
     "page": "60184188",
     "section": "4.2",
@@ -3057,7 +4597,7 @@
     "qid": "a860cb01"
    },
    {
-    "index": 4,
+    "index": 9,
     "corpus": "bdpm_rcp",
     "page": "60184188",
     "section": "4.2",
@@ -3065,7 +4605,7 @@
     "qid": "7a606035"
    },
    {
-    "index": 5,
+    "index": 10,
     "corpus": "bdpm_rcp",
     "page": "60184188",
     "section": "4.4",
@@ -3073,7 +4613,7 @@
     "qid": "bd27dbda"
    },
    {
-    "index": 6,
+    "index": 11,
     "corpus": "bdpm_rcp",
     "page": "60184188",
     "section": "4.4",
@@ -3081,7 +4621,7 @@
     "qid": "12094afb"
    },
    {
-    "index": 7,
+    "index": 12,
     "corpus": "bdpm_rcp",
     "page": "60184188",
     "section": "4.4",
@@ -3089,7 +4629,7 @@
     "qid": "35d2b941"
    },
    {
-    "index": 8,
+    "index": 13,
     "corpus": "bdpm_rcp",
     "page": "60184188",
     "section": "4.4",
@@ -3097,7 +4637,7 @@
     "qid": "ed17372e"
    },
    {
-    "index": 9,
+    "index": 14,
     "corpus": "bdpm_rcp",
     "page": "60184188",
     "section": "4.4",
@@ -3105,7 +4645,7 @@
     "qid": "6365bb6e"
    },
    {
-    "index": 10,
+    "index": 15,
     "corpus": "bdpm_rcp",
     "page": "60184188",
     "section": "4.4",
@@ -3113,7 +4653,7 @@
     "qid": "141e081e"
    },
    {
-    "index": 11,
+    "index": 16,
     "corpus": "bdpm_rcp",
     "page": "60184188",
     "section": "4.4",
@@ -3121,7 +4661,7 @@
     "qid": "7cd71810"
    },
    {
-    "index": 12,
+    "index": 17,
     "corpus": "bdpm_rcp",
     "page": "60184188",
     "section": "4.4",
@@ -3129,7 +4669,7 @@
     "qid": "d2fab079"
    },
    {
-    "index": 13,
+    "index": 18,
     "corpus": "bdpm_rcp",
     "page": "60184188",
     "section": "4.4",
@@ -3137,7 +4677,7 @@
     "qid": "408b42f3"
    },
    {
-    "index": 14,
+    "index": 19,
     "corpus": "bdpm_rcp",
     "page": "60184188",
     "section": "4.4",
@@ -3145,7 +4685,7 @@
     "qid": "ca78f968"
    },
    {
-    "index": 15,
+    "index": 20,
     "corpus": "bdpm_rcp",
     "page": "60184188",
     "section": "4.4",
@@ -3153,7 +4693,7 @@
     "qid": "8dbc7cdb"
    },
    {
-    "index": 16,
+    "index": 21,
     "corpus": "bdpm_rcp",
     "page": "60184188",
     "section": "4.4",
@@ -3161,7 +4701,7 @@
     "qid": "ffabc3fa"
    },
    {
-    "index": 17,
+    "index": 22,
     "corpus": "bdpm_rcp",
     "page": "60184188",
     "section": "4.4",
@@ -3169,12 +4709,36 @@
     "qid": "95bd40bd"
    },
    {
-    "index": 18,
+    "index": 23,
     "corpus": "bdpm_rcp",
     "page": "60184188",
     "section": "4.4",
     "quote": "L’administration du valproate peut déclencher la survenue ou l’aggravation d’une hypocarnitinémie pouvant entraîner une hyperammoniémie (susceptible de causer une encéphalopathie hyperammoniémique). D’autres symptômes tels qu’une toxicité hépatique, une hypoglycémie hypocétosique, une myopathie incluant une cardiomyopathie, une rhabdomyolyse, un syndrome de Fanconi ont été observés, principalement chez les patients présentant des facteurs de risque d’hypocarnitinémie ou une hypocarnitinémie préexistante. Les patients présentant un risque accru d’hypocarnitinémie symptomatique lorsqu’ils sont traités par valproate sont les patients présentant des troubles métaboliques, y compris des troubles mitochondriaux liés à la carnitine (voir également la rubrique 4.4 Patients présentant une maladie mitochondriale connue ou suspectée et Troubles du cycle de l’urée et risque d’hyperammoniémie), les patients ayant une altération de l’apport nutritionnel en carnitine, les patients de moins de 10 ans, et les patients traités de manière concomitante par des médicaments conjugués au pivalate ou par d’autres antiépileptiques.",
     "qid": "651ba086"
+   },
+   {
+    "index": 24,
+    "corpus": "bdpm_rcp",
+    "page": "60184188",
+    "section": "5.1",
+    "quote": "Classe pharmacothérapeutique : ANTIEPILEPTIQUE, code ATC : N03AG01.",
+    "qid": "e28d0bb2"
+   },
+   {
+    "index": 25,
+    "corpus": "bdpm_rcp",
+    "page": "60184188",
+    "section": "5.1",
+    "quote": "Ces propriétés anticonvulsivantes s'exercent contre des types très variés de crises convulsives chez l'animal et d'épilepsies chez l'homme.",
+    "qid": "3c7cb34d"
+   },
+   {
+    "index": 26,
+    "corpus": "bdpm_rcp",
+    "page": "60184188",
+    "section": "5.1",
+    "quote": "Les études expérimentales et cliniques du valproate suggèrent deux types d'action anticonvulsivantes.",
+    "qid": "cbf14da2"
    }
   ]
  },
@@ -3227,6 +4791,30 @@
     "section": "4.4",
     "quote": "Les patients présentant un risque accru d’hypocarnitinémie symptomatique lorsqu’ils sont traités par valproate sont les patients présentant des troubles métaboliques, y compris des troubles mitochondriaux liés à la carnitine (voir également la rubrique 4.4 Patients présentant une maladie mitochondriale connue ou suspectée et Troubles du cycle de l’urée et risque d’hyperammoniémie), les patients ayant une altération de l’apport nutritionnel en carnitine, les patients de moins de 10 ans, et les patients traités de manière concomitante par des médicaments conjugués au pivalate ou par d’autres antiépileptiques.",
     "qid": "4a740497"
+   },
+   {
+    "index": 6,
+    "corpus": "bdpm_rcp",
+    "page": "63737879",
+    "section": "5.1",
+    "quote": "Classe pharmacothérapeutique : ANTIEPILEPTIQUE, THYMOREGULATEUR, Code ATC : N03AG02",
+    "qid": "2423d660"
+   },
+   {
+    "index": 7,
+    "corpus": "bdpm_rcp",
+    "page": "63737879",
+    "section": "5.1",
+    "quote": "Chez l'homme, le valpromide a démontré une activité anticonvulsivante modérée.",
+    "qid": "23193761"
+   },
+   {
+    "index": 8,
+    "corpus": "bdpm_rcp",
+    "page": "63737879",
+    "section": "5.1",
+    "quote": "De même que pour son activité anticonvulsivante, le principal mécanisme d'action sous-tendant l'activité thymo-régulatrice du valpromide semble lié à un renforcement de la voie gabaergique.",
+    "qid": "beb88364"
    }
   ]
  },
@@ -3275,12 +4863,20 @@
     "index": 0,
     "corpus": "bdpm_rcp",
     "page": "61139833",
+    "section": "4.1",
+    "quote": "En association avec un autre traitement antiépileptique, traitement des épilepsies partielles résistantes, avec ou sans généralisation secondaire, lorsque toutes les autres associations thérapeutiques appropriées se sont révélées insuffisantes ou mal tolérées.",
+    "qid": "b5b61b41"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "61139833",
     "section": "4.2",
     "quote": "Le traitement par SABRIL ne peut être instauré que par un spécialiste en épileptologie, neurologie ou neurologie pédiatrique. Le suivi doit être assuré sous la supervision d'un spécialiste en épileptologie, neurologie ou neurologie pédiatrique.",
     "qid": "1ca31a97"
    },
    {
-    "index": 1,
+    "index": 2,
     "corpus": "bdpm_rcp",
     "page": "61139833",
     "section": "4.2",
@@ -3288,7 +4884,7 @@
     "qid": "e2c3fc5d"
    },
    {
-    "index": 2,
+    "index": 3,
     "corpus": "bdpm_rcp",
     "page": "61139833",
     "section": "4.2",
@@ -3296,7 +4892,7 @@
     "qid": "1efdede0"
    },
    {
-    "index": 3,
+    "index": 4,
     "corpus": "bdpm_rcp",
     "page": "61139833",
     "section": "4.2",
@@ -3304,7 +4900,7 @@
     "qid": "5c9772b7"
    },
    {
-    "index": 4,
+    "index": 5,
     "corpus": "bdpm_rcp",
     "page": "61139833",
     "section": "4.4",
@@ -3312,7 +4908,7 @@
     "qid": "537b2708"
    },
    {
-    "index": 5,
+    "index": 6,
     "corpus": "bdpm_rcp",
     "page": "61139833",
     "section": "4.4",
@@ -3320,12 +4916,44 @@
     "qid": "583f1a47"
    },
    {
-    "index": 6,
+    "index": 7,
     "corpus": "bdpm_rcp",
     "page": "61139833",
     "section": "4.4",
     "quote": "Des idées et comportements suicidaires ont été rapportés chez des patients traités par des antiépileptiques dans plusieurs indications. Une méta-analyse d’essais randomisés, contrôlés versus placebo portant sur des antiépileptiques a également montré une légère augmentation du risque d’idées et de comportements suicidaires. Les causes de ce risque ne sont pas connues et les données disponibles n’excluent pas la possibilité d’une augmentation de ce risque pour la vigabatrine.",
     "qid": "9436878f"
+   },
+   {
+    "index": 8,
+    "corpus": "bdpm_rcp",
+    "page": "61139833",
+    "section": "5.1",
+    "quote": "Classe pharmacothérapeutique : Antiépileptique- code ATC : N03AG04.",
+    "qid": "772bfb6e"
+   },
+   {
+    "index": 9,
+    "corpus": "bdpm_rcp",
+    "page": "61139833",
+    "section": "5.1",
+    "quote": "La vigabatrine est un antiépileptique dont le mécanisme d'action est clairement défini. Le traitement par la vigabatrine entraîne une augmentation de la concentration du GABA (acide gamma-aminobutyrique), principal neurotransmetteur cérébral inhibiteur. La vigabatrine est un inhibiteur irréversible sélectif de la GABA-transaminase, enzyme responsable du catabolisme du GABA.",
+    "qid": "a24ebdda"
+   },
+   {
+    "index": 10,
+    "corpus": "bdpm_rcp",
+    "page": "61139833",
+    "section": "5.1",
+    "quote": "Les essais cliniques contrôlés et à long terme ont montré que la vigabatrine est un anticonvulsivant efficace lorsqu'il est administré comme traitement d'appoint chez les patients épileptiques contrôlés de manière non satisfaisante par les traitements classiques. L'efficacité de la vigabatrine est particulièrement marquée chez les patients atteints d'épilepsie partielle.",
+    "qid": "b62ec35b"
+   },
+   {
+    "index": 11,
+    "corpus": "bdpm_rcp",
+    "page": "61139833",
+    "section": "5.1",
+    "quote": "L'épidémiologie des anomalies du champ visuel chez les patients présentant une épilepsie partielle réfractaire a été examinée dans une étude de phase IV observationnelle, en ouvert, multicentrique, comparative, en groupes parallèles, incluant 734 patients, âgés d'au moins 8 ans, et présentant une épilepsie partielle réfractaire depuis au moins un an.",
+    "qid": "acc9654b"
    }
   ]
  },
@@ -3370,6 +4998,22 @@
     "section": "4.4",
     "quote": "A l’arrêt du traitement, un syndrome de sevrage peut apparaitre. Certains symptômes sont fréquents et d'apparence banale : insomnie, céphalées, anxiété importante, myalgies, tension musculaire, irritabilité. D'autres symptômes sont plus rares : agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, délire, convulsions.",
     "qid": "0608923a"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "63179285",
+    "section": "5.1",
+    "quote": "anticonvulsivante,",
+    "qid": "b0d0a747"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "63179285",
+    "section": "5.1",
+    "quote": "Les études expérimentales ont montré un effet sédatif à des doses inférieures aux doses nécessaires pour obtenir des effets anticonvulsivants, myorelaxants ou anxiolytiques.",
+    "qid": "6e5fa2ec"
    }
   ]
  },
@@ -3379,12 +5023,28 @@
     "index": 0,
     "corpus": "bdpm_rcp",
     "page": "62741554",
+    "section": "4.1",
+    "quote": "en monothérapie dans le traitement de l’épilepsie partielle avec ou sans généralisation secondaire, chez les patients adultes présentant une épilepsie nouvellement diagnostiquée (voir rubrique 5.1) ;",
+    "qid": "e08b7db1"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "62741554",
+    "section": "4.1",
+    "quote": "en association dans le traitement de l’épilepsie partielle avec ou sans généralisation secondaire chez les adultes, adolescents et enfants âgés de 6 ans et plus.",
+    "qid": "47fd6f4f"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "62741554",
     "section": "4.2",
     "quote": "En cas d’arrêt du traitement par Zonisamide, l’interruption doit être progressive (voir rubrique 4.4). Lors des études cliniques chez l’adulte, la posologie a été réduite de 100 mg tous les sept jours avec ajustement concomitant des doses des autres médicaments antiépileptiques (le cas échéant).",
     "qid": "21130d84"
    },
    {
-    "index": 1,
+    "index": 3,
     "corpus": "bdpm_rcp",
     "page": "62741554",
     "section": "4.2",
@@ -3392,7 +5052,7 @@
     "qid": "e8b754ec"
    },
    {
-    "index": 2,
+    "index": 4,
     "corpus": "bdpm_rcp",
     "page": "62741554",
     "section": "4.4",
@@ -3400,7 +5060,7 @@
     "qid": "b01c2ea9"
    },
    {
-    "index": 3,
+    "index": 5,
     "corpus": "bdpm_rcp",
     "page": "62741554",
     "section": "4.4",
@@ -3408,7 +5068,7 @@
     "qid": "0e702b40"
    },
    {
-    "index": 4,
+    "index": 6,
     "corpus": "bdpm_rcp",
     "page": "62741554",
     "section": "4.4",
@@ -3416,7 +5076,7 @@
     "qid": "c934341c"
    },
    {
-    "index": 5,
+    "index": 7,
     "corpus": "bdpm_rcp",
     "page": "62741554",
     "section": "4.4",
@@ -3424,7 +5084,7 @@
     "qid": "868d7697"
    },
    {
-    "index": 6,
+    "index": 8,
     "corpus": "bdpm_rcp",
     "page": "62741554",
     "section": "4.4",
@@ -3432,7 +5092,7 @@
     "qid": "0c5221a0"
    },
    {
-    "index": 7,
+    "index": 9,
     "corpus": "bdpm_rcp",
     "page": "62741554",
     "section": "4.4",
@@ -3440,12 +5100,84 @@
     "qid": "971a61f4"
    },
    {
-    "index": 8,
+    "index": 10,
     "corpus": "bdpm_rcp",
     "page": "62741554",
     "section": "4.4",
     "quote": "Les troubles cognitifs chez les patients épileptiques ont été associés à la pathologie sous-jacente et/ou à l’administration d’un traitement antiépileptique. Dans une étude contrôlée du zonisamide versus placebo menée chez des enfants et adolescents, le pourcentage de patients présentant des troubles cognitifs était numériquement supérieur dans le groupe zonisamide par rapport au groupe placebo.",
     "qid": "f797bbd5"
+   },
+   {
+    "index": 11,
+    "corpus": "bdpm_rcp",
+    "page": "62741554",
+    "section": "5.1",
+    "quote": "Classe pharmacothérapeutique : Antiépileptiques, autres antiépileptiques, code ATC : N03AX15",
+    "qid": "c19b440e"
+   },
+   {
+    "index": 12,
+    "corpus": "bdpm_rcp",
+    "page": "62741554",
+    "section": "5.1",
+    "quote": "Le zonisamide est un dérivé du benzisoxazole. C’est un antiépileptique avec une faible activité anhydrase carbonique in vitro. Sa structure chimique n’est pas apparentée à d’autres antiépileptiques.",
+    "qid": "b5b60e61"
+   },
+   {
+    "index": 13,
+    "corpus": "bdpm_rcp",
+    "page": "62741554",
+    "section": "5.1",
+    "quote": "Le mécanisme d’action du zonisamide n’est pas totalement élucidé, mais il semblerait qu’il agisse sur les canaux sodiques et calciques voltage-dépendants, en bloquant les décharges neuronales synchrones, en réduisant la propagation des décharges épileptiques et en interrompant ainsi l’activité épileptique qui en résulte. Le zonisamide possède également un effet modulateur sur l’inhibition neuronale dans laquelle le GABA sert de médiateur.",
+    "qid": "990c1bca"
+   },
+   {
+    "index": 14,
+    "corpus": "bdpm_rcp",
+    "page": "62741554",
+    "section": "5.1",
+    "quote": "L’effet anticonvulsivant du zonisamide a été évalué sur différents modèles, chez plusieurs espèces présentant des crises induites ou naturelles, et le zonisamide semble agir comme un antiépileptique à large spectre chez ces modèles. Le zonisamide prévient les convulsions lors du test de l’électrochoc maximal et limite l’extension de la crise, notamment la propagation des convulsions du cortex à la structure subcorticale et il supprime l’activité focale épileptogène. Toutefois, contrairement à la phénytoïne et à la carbamazépine, le zonisamide agit essentiellement sur les crises ayant pour origine le cortex.",
+    "qid": "e0e557bb"
+   },
+   {
+    "index": 15,
+    "corpus": "bdpm_rcp",
+    "page": "62741554",
+    "section": "5.1",
+    "quote": "Monothérapie dans l’épilepsie partielle avec ou sans généralisation secondaire",
+    "qid": "9e77810e"
+   },
+   {
+    "index": 16,
+    "corpus": "bdpm_rcp",
+    "page": "62741554",
+    "section": "5.1",
+    "quote": "L’efficacité du zonisamide en monothérapie a été établie lors d’une étude de non-infériorité à la carbamazépine à libération prolongée (LP) en double aveugle, en groupes parallèles, menée chez 583 patients adultes présentant une épilepsie nouvellement diagnostiquée avec ou sans crises généralisées tonico-cloniques secondaires. Les patients randomisés à la carbamazépine ou au zonisamide ont reçu le traitement pendant une durée allant jusqu’à 24 mois en fonction de la réponse.",
+    "qid": "48cada0d"
+   },
+   {
+    "index": 17,
+    "corpus": "bdpm_rcp",
+    "page": "62741554",
+    "section": "5.1",
+    "quote": "La posologie a été augmentée jusqu’à la dose cible initiale de 600 mg de carbamazépine ou 300 mg de zonisamide. Chez les patients présentant une crise convulsive, la posologie était augmentée à la dose cible suivante, soit 800 mg de carbamazépine ou 400 mg de zonisamide. Si les patients présentaient une nouvelle crise, la posologie était augmentée à la dose cible maximale de 1 200 mg de carbamazépine ou 500 mg de zonisamide. Les patients n’ayant pas présenté de crise pendant 26 semaines à un palier de dose cible ont poursuivi le traitement à cette dose pendant 26 semaines de plus. Les principaux résultats de cette étude sont présentés dans le tableau ci-dessous :",
+    "qid": "38f464d4"
+   },
+   {
+    "index": 18,
+    "corpus": "bdpm_rcp",
+    "page": "62741554",
+    "section": "5.1",
+    "quote": "En association dans le traitement chez l’adulte de l’épilepsie partielle avec ou sans généralisation",
+    "qid": "07558268"
+   },
+   {
+    "index": 19,
+    "corpus": "bdpm_rcp",
+    "page": "62741554",
+    "section": "5.1",
+    "quote": "En association dans le traitement de l’épilepsie partielle avec ou sans généralisation chez les adolescents et les enfants (à partir de 6 ans)",
+    "qid": "dc3a897c"
    }
   ]
  },
@@ -3458,6 +5190,14 @@
     "section": "4.4",
     "quote": "Si une dépendance physique s’installe, une interruption soudaine du traitement sera accompagnée de symptômes de sevrage, pouvant être des maux de tête, douleurs musculaires, anxiété importante, tension, agitation, confusion et irritabilité. Dans les cas sévères, les symptômes suivants peuvent apparaître : déréalisation, dépersonnalisation, hyperacousie, engourdissements et picotements des extrémités, hypersensibilité à la lumière, au bruit et au contact physique, hallucinations ou crises d'épilepsie.",
     "qid": "85040cf5"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "68508795",
+    "section": "5.1",
+    "quote": "anticonvulsivant,",
+    "qid": "d6b6af6a"
    }
   ]
  },
