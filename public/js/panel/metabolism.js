@@ -7,6 +7,9 @@ import { subSection } from "./dom.js";
 
 const { t } = window.__I18N__;
 
+/** Enzyme strength tiers (`ENZYME_STRENGTHS` keys) shown in bold on a row. */
+const EMPHASIZED_STRENGTHS = new Set(["strong", "major"]);
+
 export function makeMetabolism(P) {
   const {
     appendLookupLink, el, nodePill, sourceBackedPill,
@@ -49,7 +52,10 @@ export function makeMetabolism(P) {
     if (row.strengthLabel) {
       const strength = (row.claims || {}).strength;
       line.append(
-        el("span", "bind-action", `· ${row.strengthLabel}`),
+        // The tiers a reader most needs to spot (a strong inhibitor, the major route)
+        // stand out in bold.
+        el(EMPHASIZED_STRENGTHS.has(row.strength) ? "strong" : "span", "bind-action",
+          `· ${row.strengthLabel}`),
         sourceBackedPill((strength && strength.grade) || "llm", strength,
           t("enzyme.gradesStrength", { strength: row.strengthLabel })));
     }
