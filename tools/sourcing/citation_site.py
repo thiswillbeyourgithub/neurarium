@@ -94,6 +94,11 @@ def excretion_key(row: dict) -> str:
     return f"{row.get('aspect')}:{row.get('value')}"
 
 
+def seizure_key(row: dict) -> str:
+    """A seizure-threshold row's key: its effect (``lowers``, ``withdrawal``, ``raises``)."""
+    return str(row.get("effect"))
+
+
 # ---------------------------------------------------------------------------
 # The authoring side: (file root, path) -> site.
 #
@@ -190,6 +195,13 @@ def _excretion_site(path: list) -> str | None:
     return site("drug", path[1], f"excretion[{path[2]}]")
 
 
+def _seizure_site(path: list) -> str | None:
+    """``seizure_threshold.json``: ``drugs/<drug>/<effect>/sources``."""
+    if len(path) < 3 or path[0] != "drugs":
+        return None
+    return site("drug", path[1], f"seizure_threshold[{path[2]}]")
+
+
 def _owner_kind(bucket: str) -> str:
     """``receptors``/``targets``, the two keys the owner-keyed caches split on."""
     return {"receptors": "receptor", "targets": "target"}.get(bucket, bucket)
@@ -252,6 +264,7 @@ RESOLVERS = {
     "drug_enzymes_wikipedia.json": _drug_enzymes_site,
     "workup.json": _workup_site,
     "excretion.json": _excretion_site,
+    "seizure_threshold.json": _seizure_site,
     "receptor_effects.json": _owner_keyed("effects"),
     "receptor_demographics.json": _owner_keyed("demographics"),
     # ``release_modulation.json``: ``<receptor>/<node key>`` (one node per key).
@@ -335,6 +348,8 @@ def node_index(*, drugs=(), metabolites=(), receptors=(), targets=None,
             put(site("drug", did, f"workup[{workup_key(w)}]"), w)
         for x in d.get("excretion") or []:
             put(site("drug", did, f"excretion[{excretion_key(x)}]"), x)
+        for x in d.get("seizure_threshold") or []:
+            put(site("drug", did, f"seizure_threshold[{seizure_key(x)}]"), x)
         for h in d.get("holders") or []:
             put(site("drug", did, f"holders[{h['market']}]"), h)
     for m in metabolites:
@@ -383,6 +398,8 @@ def member_label(obj, index: int) -> str:
             return workup_key(obj)
         if "aspect" in obj and "value" in obj:
             return excretion_key(obj)
+        if "effect" in obj and "sources" in obj and len(obj) == 2:
+            return seizure_key(obj)
         for k in ("target", "name", "id", "enzyme", "region", "brand", "release", "market"):
             if isinstance(obj.get(k), str):
                 return obj[k]

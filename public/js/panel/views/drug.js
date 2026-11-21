@@ -44,7 +44,7 @@ function metabolitePicker(on, onChange) {
 export function showDrug(P, drug, opts = {}) {
   const {
     addFactRow, appendAddons, appendLookupLink,
-    appendPossibleEffects, appendReference, appendReleaseChanges, appendWorkup, appendExcretion,
+    appendPossibleEffects, appendReference, appendReleaseChanges, appendWorkup, appendExcretion, appendSeizure,
     bindingRow, body, clearBody, clinpgxSearchUrl, data, derivedActiveMetabolites,
     derivedAutoModulation, derivedBox, directionArrow, drugById, drugNameLink,
     drugVariantsSubsection, el,
@@ -664,6 +664,7 @@ export function showDrug(P, drug, opts = {}) {
   appendReleaseChanges(drug);
   appendWorkup(drug);
   appendExcretion(drug);
+  appendSeizure(drug);
   // Every headed section starts collapsed (a drug panel is long): the heading
   // opens it, its content indented under it.
   finishBody();

@@ -415,8 +415,26 @@ export function makeSections(P) {
     close();
   };
 
+  // A drug panel's "Seizure threshold" section (BETA): one row per
+  // drug_seizure_threshold node (lowers it, seizures when stopped, raises it).
+  const appendSeizure = (drug) => {
+    const hasSeizure = (d) => !!(d.seizureThreshold && d.seizureThreshold.length);
+    const has = hasSeizure(drug);
+    const { ul, close } = betaSection("seizure", "drug.seizure", "drug.seizureHint",
+      { subKey: "drug.seizureSub", caveatKey: "drug.seizureCaveat",
+        empty: has ? null : "drug", extra: otherFormsExtra(drug, "seizure", hasSeizure) });
+    if (!has) return close();
+    for (const n of drug.seizureThreshold) {
+      const li = el("li", "eff-row");
+      li.appendChild(el("span", "loc-name", n.label));
+      li.appendChild(nodePill(n));
+      ul.appendChild(li);
+    }
+    close();
+  };
+
   return {
-    appendDemographics, appendExcretion, appendDownstream, drugVariantsSubsection, appendEffects,
+    appendDemographics, appendExcretion, appendSeizure, appendDownstream, drugVariantsSubsection, appendEffects,
     appendPossibleEffects, appendReleaseChanges, appendVariants, appendWorkup,
     betaHeading, betaSection, derivedRow, effectLink, inStructure, linkName,
     variantRow, viaChip,

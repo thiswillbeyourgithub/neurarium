@@ -67,6 +67,9 @@ def iter_drug_sources(drug):
     for xi, x in enumerate(drug.get("excretion", []) or []):
         yield from _listed(f"{did} excretion[{xi}] sources", x.get("sources"), True,
                            "excretion", x)
+    for si, x in enumerate(drug.get("seizure_threshold", []) or []):
+        yield from _listed(f"{did} seizure_threshold[{si}] sources", x.get("sources"),
+                           True, "seizure_threshold", x)
     # Holder names are short register strings ("holder: UCB PHARMA"), by design.
     for h in drug.get("holders", []) or []:
         yield from _listed(f"{did} holders[{h.get('market')}] sources", h.get("sources"),

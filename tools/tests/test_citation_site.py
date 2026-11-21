@@ -194,7 +194,7 @@ class NodeIndexTest(unittest.TestCase):
     def test_it_reaches_every_node_kind_it_claims(self):
         heads = {s.split("/", 1)[0].split(":", 1)[0] + "/" + s.split("/", 1)[1].split("[", 1)[0]
                  for s in self.nodes if "/" in s}
-        for want in ("drug/bindings", "drug/enzymes", "drug/metabolites", "drug/workup", "drug/excretion",
+        for want in ("drug/bindings", "drug/enzymes", "drug/metabolites", "drug/workup", "drug/excretion", "drug/seizure_threshold",
                      "drug/withdrawals", "drug/holders", "drug/brands",
                      "metabolite/bindings", "receptor/classification", "receptor/effects",
                      "receptor/release_modulation", "receptor/demographics"):

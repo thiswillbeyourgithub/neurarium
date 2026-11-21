@@ -25,6 +25,7 @@ from data_generators import history as HIST  # noqa: E402
 from lib.i18n_catalogue import catalogue as _catalogue  # noqa: E402
 from data_generators import workup as WORKUP  # noqa: E402
 from data_generators import excretion as EXCRETION  # noqa: E402
+from data_generators import seizure_threshold as SEIZURE  # noqa: E402
 from data_generators import formulations as FORM  # noqa: E402
 from data_generators import provenance as PROV  # noqa: E402
 from data_generators import release_modulation as RELMOD  # noqa: E402
@@ -377,6 +378,11 @@ def reconstruct_claims(quotes, data=None, on_cite=None, site_kinds=None):
                 add(q, f"Excretion of drug {nm}, {asp['en']}: "
                        f"{asp['values'][x['value']]['en']}{amt}.",
                     CS.site("drug", d["id"], f"excretion[{CS.excretion_key(x)}]"))
+        kind["now"] = "drug_seizure_threshold"
+        for x in d.get("seizure_threshold", []):
+            for q in _qids(x.get("sources", [])):
+                add(q, f"Drug {nm}: {SEIZURE.EFFECTS[x['effect']]['en'].lower()}.",
+                    CS.site("drug", d["id"], f"seizure_threshold[{CS.seizure_key(x)}]"))
         kind["now"] = "drug_holders"
         for h in d.get("holders", []):
             where = HIST.COUNTRIES[h["market"]]["en"]

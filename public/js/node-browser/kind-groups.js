@@ -50,6 +50,7 @@ export const KIND_GROUPS = [
     { label: "drug.pharmacogenomics", kinds: [["drug_pgx", "nodes.k.drug_pgx"]] },
     { label: "drug.workup", kinds: [["drug_workup", "nodes.k.drug_workup"]] },
     { label: "drug.excretion", kinds: [["drug_excretion", "nodes.k.drug_excretion"]] },
+    { label: "drug.seizure", kinds: [["drug_seizure_threshold", "nodes.k.drug_seizure_threshold"]] },
   ] },
   { label: "nodes.ownerTarget", sections: [
     { label: "nodes.secClassification", kinds: [

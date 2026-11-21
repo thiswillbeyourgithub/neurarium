@@ -1,5 +1,6 @@
 // The per-drug scalar facts: description, NbN, class, kinetics, formulations,
-// regulatory history, TDM, physicochemistry, workup, excretion. One graded node each.
+// regulatory history, TDM, physicochemistry, workup, excretion, seizure threshold. One
+// graded node each.
 
 import { localize } from "./localize.js";
 import { strongestGrade } from "../grades.js";
@@ -12,7 +13,8 @@ const pkValue = (v) => (v ? { ...v, uncertainty: mapUncertainty(v.uncertainty) }
 /** Resolve one drug's fact fields in place. */
 export function resolveDrugFacts(d, v) {
   const { drugCategoryLabels, releaseLabels, historyCountries, historyAgencies,
-          historyScopes, withdrawalReasons, workupTests, workupTimings, excretionAspects } = v;
+          historyScopes, withdrawalReasons, workupTests, workupTimings, excretionAspects,
+          seizureEffects } = v;
   d.description = d.description ? localize(d.description) : "";
   // Provenance grade of the description (llm synthesis vs a sourced Wikipedia
   // lead); the panel shows a pill beside it.
@@ -141,6 +143,12 @@ export function resolveDrugFacts(d, v) {
   d.bbb = d.bbb ? physNode(d.bbb_sources, {
     label: d.bbb.label, logbb: d.bbb.logbb ?? null, logbbMax: d.bbb.logbb_max ?? null,
   }) : null;
+  // Seizure threshold (kind drug_seizure_threshold, BETA): one node per effect
+  // (lowers / withdrawal / raises), rendered by panel/sections.js appendSeizure.
+  d.seizureThreshold = (d.seizure_threshold || []).map((x) => ({
+    effect: x.effect, label: (seizureEffects || {})[x.effect] || x.effect,
+    sources: mapSources(x.sources), provenance: strongestGrade(x.sources),
+  }));
   // Excretion (kind drug_excretion, BETA): one node per (aspect, value), rendered by
   // js/excretion.js + panel/sections.js appendExcretion.
   d.excretion = (d.excretion || []).map((x) => {

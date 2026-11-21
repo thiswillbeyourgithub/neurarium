@@ -20,7 +20,7 @@ NODE_KINDS = ("addons", "drug_bindings", "drug_binding_action", "drug_nbn", "dru
               "drug_holders", "drug_originator", "drug_originator_country",
               "drug_prodrug", "drug_constituents", "drug_therapeutic_range", "drug_alert_level",
               "drug_lipophilicity", "drug_polar_surface", "drug_bbb", "drug_workup",
-              "drug_excretion",
+              "drug_excretion", "drug_seizure_threshold",
               "drug_enzymes", "drug_enzyme_strength",
               "enzyme_variability", "drug_pgx",
               "drug_metabolites",
