@@ -17,6 +17,9 @@ sys.path.insert(0, str(TOOLS / "fetch"))
 sys.path.insert(0, str(TOOLS))
 import fetch_molecules as fm  # noqa: E402
 
+# Imageless on Wikipedia as SVG, but traced from its PNG (tools/fetch/png_to_svg.py).
+TRACED = {"tropatepine"}
+
 
 class DiagramFilterTest(unittest.TestCase):
     def test_diagrams_refused(self):
@@ -37,7 +40,7 @@ class DiagramFilterTest(unittest.TestCase):
     def test_declared_imageless_drug_has_no_image(self):
         """A FILE_OVERRIDES None means no structure SVG: none may be vendored for it."""
         for did, file in fm.FILE_OVERRIDES.items():
-            if file is None:
+            if file is None and did not in TRACED:
                 self.assertFalse((fm.OUT_DIR / f"{did}.svg").exists(), did)
 
 

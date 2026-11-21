@@ -82,7 +82,9 @@ FILE_OVERRIDES = {
     "rubidium_chloride": None,
     "calcium_carbimide": None,
     "methylfolate_l": None,
-    # Its only drawing is a PNG; the one SVG on the page is the synthesis scheme.
+    # Its only drawing is a PNG (the one SVG on the page is the synthesis scheme), so
+    # take nothing here: public/data/molecules/tropatepine.svg is that PNG traced by
+    # tools/fetch/png_to_svg.py.
     "tropatepine": None,
     # A monoclonal antibody: a protein of ~1300 residues has no skeletal formula
     # to draw, so the molecule slot stays empty rather than borrowing a cartoon.
