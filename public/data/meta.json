@@ -406,6 +406,7 @@
   },
   "seizure_threshold_effects": {
     "lowers": "Lowers the seizure threshold",
+    "possibly_lowers": "May lower the seizure threshold",
     "withdrawal": "Seizures when stopped abruptly",
     "raises": "Raises the seizure threshold (anticonvulsant)"
   },

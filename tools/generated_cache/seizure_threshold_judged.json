@@ -3,7 +3,7 @@
   {
    "index": 0,
    "qid": "5d440667",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "alprazolam": [
@@ -38,14 +38,14 @@
   {
    "index": 0,
    "qid": "ec3ca4d9",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "asenapine": [
   {
    "index": 0,
    "qid": "f9077d36",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "baclofen": [
@@ -69,7 +69,7 @@
   {
    "index": 0,
    "qid": "97272313",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "brivaracetam": [
@@ -90,7 +90,7 @@
   {
    "index": 0,
    "qid": "4146c4d2",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "bupropion": [
@@ -110,7 +110,7 @@
   {
    "index": 0,
    "qid": "bb0c8e60",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "caffeine": [],
@@ -141,11 +141,6 @@
  "cariprazine": [],
  "chlorpromazine": [
   {
-   "index": 0,
-   "qid": "9b601302",
-   "effect": "lowers"
-  },
-  {
    "index": 1,
    "qid": "a32be816",
    "effect": "lowers"
@@ -155,7 +150,7 @@
   {
    "index": 0,
    "qid": "c3dba36a",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "clobazam": [
@@ -171,11 +166,6 @@
   }
  ],
  "clomipramine": [
-  {
-   "index": 1,
-   "qid": "52ef2d9a",
-   "effect": "lowers"
-  },
   {
    "index": 2,
    "qid": "0ec4148c",
@@ -254,7 +244,7 @@
   {
    "index": 0,
    "qid": "47531671",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "dexmedetomidine": [],
@@ -275,19 +265,19 @@
   {
    "index": 0,
    "qid": "a09336ff",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   },
   {
    "index": 1,
    "qid": "70f0e277",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "doxepin": [
   {
    "index": 0,
    "qid": "dfd5b810",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "duloxetine": [],
@@ -352,14 +342,14 @@
   {
    "index": 0,
    "qid": "4a378cd4",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "flupenthixol": [
   {
    "index": 0,
    "qid": "a33bb795",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "fluphenazine": [],
@@ -375,7 +365,7 @@
   {
    "index": 0,
    "qid": "9807a47b",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "haloperidol": [
@@ -391,19 +381,19 @@
   {
    "index": 1,
    "qid": "c5d43f45",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   },
   {
    "index": 2,
    "qid": "dfd5b810",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "iproniazid": [
   {
    "index": 0,
    "qid": "9aba3dbc",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "lacosamide": [
@@ -431,14 +421,14 @@
   {
    "index": 0,
    "qid": "d3a9f010",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "lisdexamfetamine": [
   {
    "index": 0,
    "qid": "9f567117",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "lithium": [],
@@ -468,12 +458,12 @@
   {
    "index": 1,
    "qid": "91848187",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   },
   {
    "index": 2,
    "qid": "73cc6546",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "lurasidone": [],
@@ -496,7 +486,7 @@
   {
    "index": 0,
    "qid": "b56a2b72",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "methylphenidate_dl": [
@@ -517,7 +507,7 @@
   {
    "index": 0,
    "qid": "803f4c67",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "milnacipran": [],
@@ -534,11 +524,6 @@
   }
  ],
  "olanzapine": [
-  {
-   "index": 0,
-   "qid": "37674981",
-   "effect": "lowers"
-  },
   {
    "index": 1,
    "qid": "0ec4148c",
@@ -589,7 +574,7 @@
   {
    "index": 0,
    "qid": "e851cfdf",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "phenelzine": [],
@@ -635,7 +620,7 @@
   {
    "index": 0,
    "qid": "12edfa34",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "pitolisant": [],
@@ -643,7 +628,7 @@
   {
    "index": 0,
    "qid": "7b68b40b",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "prazepam": [
@@ -686,7 +671,7 @@
   {
    "index": 0,
    "qid": "67e6ee5e",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "propofol": [
@@ -709,21 +694,21 @@
   {
    "index": 0,
    "qid": "e8e930c0",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "scopolamine": [
   {
    "index": 0,
    "qid": "658efc13",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "sertraline": [
   {
    "index": 0,
    "qid": "1825bb55",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "sevoflurane": [
@@ -747,7 +732,7 @@
   {
    "index": 1,
    "qid": "70b393d1",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "stiripentol": [
@@ -761,14 +746,14 @@
   {
    "index": 0,
    "qid": "553468a4",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "sumatriptan": [
   {
    "index": 0,
    "qid": "50f2bb4b",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "tiagabine": [
@@ -792,7 +777,7 @@
   {
    "index": 0,
    "qid": "e1a8d4e5",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "topiramate": [
@@ -820,7 +805,7 @@
   {
    "index": 0,
    "qid": "87dcfc0b",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "valproate": [
@@ -846,14 +831,14 @@
   {
    "index": 1,
    "qid": "9fdd3a6a",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "venlafaxine": [
   {
    "index": 0,
    "qid": "0ead2d52",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "vigabatrin": [
@@ -872,14 +857,14 @@
   {
    "index": 1,
    "qid": "a5bac063",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "yohimbine": [
   {
    "index": 0,
    "qid": "e0f6091c",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "zolpidem": [
@@ -912,7 +897,7 @@
   {
    "index": 0,
    "qid": "75bb2360",
-   "effect": "lowers"
+   "effect": "possibly_lowers"
   }
  ],
  "midazolam": [

@@ -2,7 +2,7 @@
  "drugs": {
   "alimemazine": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -65,7 +65,7 @@
   ],
   "aripiprazole": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -78,7 +78,7 @@
   ],
   "asenapine": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -121,7 +121,7 @@
   ],
   "brexpiprazole": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -160,7 +160,7 @@
   ],
   "bromocriptine": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -192,7 +192,7 @@
   ],
   "cabergoline": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -251,12 +251,6 @@
     "effect": "lowers",
     "sources": [
      {
-      "corpus": "bdpm_rcp",
-      "page": "62184888",
-      "provenance": "verified",
-      "quote": "Chez les épileptiques en raison de la possibilité d'abaissement du seuil épileptogène. La survenue de crises convulsives impose l'arrêt du traitement ;"
-     },
-     {
       "corpus": "europepmc",
       "page": "11888352",
       "provenance": "verified",
@@ -267,7 +261,7 @@
   ],
   "citalopram": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -306,12 +300,6 @@
    {
     "effect": "lowers",
     "sources": [
-     {
-      "corpus": "bdpm_rcp",
-      "page": "61426025",
-      "provenance": "verified",
-      "quote": "Les antidépresseurs tricycliques sont connus pour abaisser le seuil épileptogène, de ce fait, ANAFRANIL doit être utilisé avec précaution (surveillance clinique et électrique renforcée) chez les patients épileptiques ou ayant des antécédents d'épilepsie ou présentant des facteurs de risque de convulsions, tels que des lésions cérébrales d'étiologies variées, une utilisation concomitante de médicaments abaissant le seuil épileptogène (voir rubrique 4.5), le sevrage alcoolique ou médicamenteux (médicaments ayant des propriétés anticonvulsivantes comme les benzodiazépines). Le risque de crises convulsives étant dose-dépendant, la posologie maximale recommandée d’ANAFRANIL ne doit pas être dépassée. La survenue de crises convulsives impose l'arrêt du traitement."
-     },
      {
       "corpus": "europepmc",
       "page": "17223086",
@@ -428,7 +416,7 @@
   ],
   "cyamemazine": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -465,7 +453,7 @@
   ],
   "donepezil": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -484,7 +472,7 @@
   ],
   "doxepin": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -601,7 +589,7 @@
   ],
   "fluoxetine": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -614,7 +602,7 @@
   ],
   "flupenthixol": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -640,7 +628,7 @@
   ],
   "galantamine": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -666,7 +654,7 @@
   ],
   "imipramine": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -685,7 +673,7 @@
   ],
   "iproniazid": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -737,7 +725,7 @@
   ],
   "levomepromazine": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -750,7 +738,7 @@
   ],
   "lisdexamfetamine": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -802,7 +790,7 @@
   ],
   "loxapine": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -840,7 +828,7 @@
   ],
   "methadone": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -879,7 +867,7 @@
   ],
   "mianserin": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -920,12 +908,6 @@
    {
     "effect": "lowers",
     "sources": [
-     {
-      "corpus": "bdpm_rcp",
-      "page": "60126594",
-      "provenance": "verified",
-      "quote": "L’olanzapine doit être utilisée avec prudence chez les patients qui ont des antécédents de convulsions ou qui sont placés dans des conditions susceptibles d’abaisser leur seuil convulsif. Des cas de convulsions ont été rapportés de manière peu fréquente chez les patients traités par olanzapine. Dans la plupart de ces cas, il existait soit des antécédents de convulsions soit des facteurs de risque de convulsions."
-     },
      {
       "corpus": "europepmc",
       "page": "17223086",
@@ -1011,7 +993,7 @@
   ],
   "periciazine": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -1098,7 +1080,7 @@
   ],
   "pipothiazine": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -1111,7 +1093,7 @@
   ],
   "pizotifen": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -1191,7 +1173,7 @@
   ],
   "promethazine": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -1230,7 +1212,7 @@
   ],
   "rivastigmine": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -1243,7 +1225,7 @@
   ],
   "scopolamine": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -1256,7 +1238,7 @@
   ],
   "sertraline": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -1294,7 +1276,7 @@
   ],
   "sodium_oxybate": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -1320,7 +1302,7 @@
   ],
   "sulpiride": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -1333,7 +1315,7 @@
   ],
   "sumatriptan": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -1381,7 +1363,7 @@
   ],
   "tiapride": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -1431,7 +1413,7 @@
   ],
   "trimipramine": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -1476,7 +1458,7 @@
   ],
   "varenicline": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -1489,7 +1471,7 @@
   ],
   "venlafaxine": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -1526,7 +1508,7 @@
   ],
   "vortioxetine": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -1539,7 +1521,7 @@
   ],
   "yohimbine": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
@@ -1602,7 +1584,7 @@
   ],
   "zuclopenthixol": [
    {
-    "effect": "lowers",
+    "effect": "possibly_lowers",
     "sources": [
      {
       "corpus": "bdpm_rcp",
