@@ -186,6 +186,10 @@ PAPERS: dict[str, str] = {
     "34308528": "A2A agonism (regadenoson): central A2A activation behind seizures (case report)",
     "17134847": "DAT inhibitors (cocaine, methylphenidate, amphetamines) induce delusional "
                 "parasitosis (Huber 2007, hypothesis + case reports)",
+    # Per-drug seizure threshold (fetch_seizure_threshold.SEIZURE_PAPERS).
+    "17223086": "seizure incidence vs placebo in FDA psychopharmacology trials, per drug "
+                "(Alper 2007)",
+    "11888352": "psychotropic drugs ranked by seizurogenic potential (Pisani 2002)",
     # Second source against a Wikipedia binding (CONTRADICTIONS).
     "12192085": "salvinorin A: selective kappa agonist, inactive at a receptor screen incl. D2 "
                 "(Roth 2002, against the Wikipedia D2 partial agonism)",

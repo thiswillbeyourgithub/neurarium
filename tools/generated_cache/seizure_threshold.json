@@ -1,0 +1,1300 @@
+{
+ "drugs": {
+  "alimemazine": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "66801066",
+      "provenance": "verified",
+      "quote": "Les phénotiazines abaissent le seuil épileptogène. La prudence est requise et la surveillance doit être renforcée chez les sujets épileptiques ou à risque de convulsions."
+     }
+    ]
+   }
+  ],
+  "alprazolam": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60647049",
+      "provenance": "verified",
+      "quote": "En cas de dépendance physique, un arrêt brutal du traitement peut entraîner des symptômes de sevrage. Ces symptômes peuvent être les suivants : insomnie, céphalées, myalgie, anxiété importante, tension nerveuse, impatiences, confusion, irritabilité. Dans les cas sévères, les symptômes suivants peuvent survenir : déréalisation, dépersonnalisation, hyperacousie, engourdissements et fourmillements des extrémités, hypersensibilité à la lumière, au bruit et au contact physique, hallucinations, crises épileptiques (voir rubrique 4.8)."
+     }
+    ]
+   },
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "europepmc",
+      "page": "17223086",
+      "provenance": "verified",
+      "quote": "Alprazolam, bupropion immediate release (IR) form, and quetiapine were also associated with higher seizure incidence."
+     }
+    ]
+   }
+  ],
+  "amisulpride": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60019927",
+      "provenance": "verified",
+      "quote": "L'amisulpride peut diminuer le seuil épileptogène. Les patients ayant des antécédents de crises convulsives doivent donc être étroitement surveillés lors du traitement par SOLIAN."
+     }
+    ]
+   }
+  ],
+  "amphetamine_d": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61746712",
+      "provenance": "verified",
+      "quote": "La dexamphétamine devra être utilisée avec précaution chez les patients épileptiques. La dexamphétamine peut abaisser le seuil épileptogène chez les patients ayant des antécédents de crises convulsives, chez les patients ayant présenté des anomalies de l’EEG en l’absence de crises convulsives et, dans de rares cas, chez des patients n’ayant pas d’antécédents de convulsions ni d’anomalies de l’EEG. En cas d’augmentation de la fréquence des crises convulsives ou de crises convulsives nouvellement apparues, la dexamphétamine doit être arrêtée."
+     }
+    ]
+   }
+  ],
+  "aripiprazole": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60031071",
+      "provenance": "verified",
+      "quote": "Dans les études cliniques menées préalablement à la mise sur le marché, des cas peu fréquents de convulsions ont été rapportés au cours du traitement par l'aripiprazole. Par conséquent, l'aripiprazole doit être utilisé avec prudence chez les patients ayant des antécédents de convulsions ou présentant une pathologie comportant des convulsions associées (voir rubrique 4.8)."
+     }
+    ]
+   }
+  ],
+  "asenapine": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "EMEA-H-C-001177",
+      "provenance": "verified",
+      "quote": "Convulsions Dans les essais cliniques, des cas de convulsions ont été rapportés occasionnellement pendant le traitement par asénapine. En conséquence, Sycrest doit être utilisé avec précaution chez les patients présentant des antécédents de convulsions ou atteints de pathologies associées à des convulsions."
+     }
+    ]
+   }
+  ],
+  "baclofen": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60304050",
+      "provenance": "verified",
+      "quote": "Sauf urgence liée à un surdosage ou à la survenue d’effets indésirables graves, le traitement doit toujours être arrêté progressivement en réduisant peu à peu la dose sur une période de 1 à 2 semainesenviron. Les effets indésirables suivants ont été rapportés lors d’une interruption brutale de Liorésal, notamment après un traitement médicamenteux prolongé : anxiété et état confusionnel, délire, hallucinations, troubles psychotiques, maniaques ou paranoïdes, convulsions (état de mal épileptique), dyskinésie, tachycardie, hyperthermie, rhabdomyolyse, aggravation temporaire de la spasticité comme effet de rebond et hypertonie."
+     },
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60304050",
+      "provenance": "verified",
+      "quote": "Chez les patients épileptiques souffrant de spasticité, des crises comitiales peuvent survenir à des doses thérapeutiques ou en cas de surdosage ou lors d’un sevrage. Chez ces patients poursuivre le traitement antiépileptique et renforcer la surveillance (voir rubrique 4.8)."
+     }
+    ]
+   },
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60304050",
+      "provenance": "verified",
+      "quote": "Chez les patients épileptiques souffrant de spasticité, des crises comitiales peuvent survenir à des doses thérapeutiques ou en cas de surdosage ou lors d’un sevrage. Chez ces patients poursuivre le traitement antiépileptique et renforcer la surveillance (voir rubrique 4.8)."
+     }
+    ]
+   }
+  ],
+  "brexpiprazole": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "EMEA-H-C-003841",
+      "provenance": "verified",
+      "quote": "Convulsions Comme avec les autres antipsychotiques, le brexpiprazole doit être utilisé avec prudence chez les patients ayant des antécédents de convulsions ou qui présentent d'autres pathologies susceptibles d’abaisser le seuil épileptogène. Des convulsions ont été rapportées durant l’utilisation de brexpiprazole (voir rubrique 4.8)."
+     }
+    ]
+   }
+  ],
+  "bromazepam": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "66796142",
+      "provenance": "verified",
+      "quote": "Cet état peut entraîner à l'arrêt du traitement un phénomène de sevrage. Certains symptômes sont fréquents et d'apparence banale : insomnie, céphalées, diarrhée, anxiété extrême, myalgies, tension, irritabilité, nervosité, confusion. Dans les cas sévères les symptômes suivants peuvent se produire : hyperacousie, agitation voire épisode confusionnel, paresthésies des extrémités, hypersensibilité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions."
+     }
+    ]
+   }
+  ],
+  "bromocriptine": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "63369053",
+      "provenance": "verified",
+      "quote": "Dans de rares cas, des effets indésirables graves tels qu’une hypertension, un infarctus du myocarde, des convulsions, un accident vasculaire cérébral ou des troubles psychiatriques ont été rapportés chez des femmes traitées avec de la bromocriptine pour l’inhibition de la lactation en post-partum."
+     }
+    ]
+   }
+  ],
+  "bupropion": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "64556383",
+      "provenance": "verified",
+      "quote": "La posologie recommandée de ZYBAN L.P. ne doit en aucun cas être dépassée compte tenu du risque dose-dépendant de convulsions. Pour des doses allant jusqu'à 300 mg par jour de ZYBAN L.P. (dose quotidienne maximale recommandée), l'incidence des convulsions est d'environ 0,1 % (1/1000)."
+     },
+     {
+      "corpus": "europepmc",
+      "page": "17223086",
+      "provenance": "verified",
+      "quote": "Alprazolam, bupropion immediate release (IR) form, and quetiapine were also associated with higher seizure incidence."
+     }
+    ]
+   }
+  ],
+  "cabergoline": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "69671845",
+      "provenance": "verified",
+      "quote": "Des événements indésirables graves, notamment hypertension, infarctus du myocarde, convulsions, accident vasculaire cérébral ou troubles psychiatriques, ont été rapportés chez des femmes en période post-partum traitées par cabergoline pour l’inhibition de la lactation. Chez certaines patientes, la survenue de convulsions ou d’un accident vasculaire cérébral a été précédée de céphalées sévères et/ou de troubles visuels transitoires. La tension artérielle doit être surveillée attentivement au cours du traitement. En cas d’hypertension, de douleurs thoraciques suggestives, de céphalées sévères, progressives ou permanentes (avec ou sans troubles visuels) ou de signes de toxicité pour le système nerveux central, la prise de cabergoline doit être interrompue et la patiente doit rapidement faire l’objet d’une évaluation."
+     }
+    ]
+   }
+  ],
+  "carbamazepine": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61009918",
+      "provenance": "verified",
+      "quote": "L’arrêt brutal de la carbamazépine peut précipiter les crises, par conséquent la carbamazépine doit être arrêtée progressivement sur une période de 6 mois. Selon les cas, un traitement transitoire par un antiépileptique à effet rapide peut s’avérer nécessaire."
+     }
+    ]
+   }
+  ],
+  "chlorpromazine": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "62184888",
+      "provenance": "verified",
+      "quote": "Chez les épileptiques en raison de la possibilité d'abaissement du seuil épileptogène. La survenue de crises convulsives impose l'arrêt du traitement ;"
+     },
+     {
+      "corpus": "europepmc",
+      "page": "11888352",
+      "provenance": "verified",
+      "quote": "Agreement, however, converges on the following: seizures triggered by psychotropic drugs are a dose-dependent adverse effect; maprotiline and clomipramine among antidepressants and chlorpromazine and clozapine among antipsychotics that have a relatively high seizurogenic potential; phenelzine, tranylcypromine, fluoxetine, paroxetine, sertraline, venlafaxine and trazodone among antidepressants and fluphenazine, haloperidol, pimozide and risperidone among antipsychotics that exhibit a relatively low risk."
+     }
+    ]
+   }
+  ],
+  "citalopram": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "68231138",
+      "provenance": "verified",
+      "quote": "Les convulsions sont un risque potentiel avec les traitements antidépresseurs. Le citalopram devra être interrompu chez tout patient présentant des convulsions."
+     }
+    ]
+   }
+  ],
+  "clobazam": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "62905911",
+      "provenance": "verified",
+      "quote": "Cet état peut entraîner à l'arrêt du traitement un phénomène de sevrage. Certains symptômes sont fréquents et d'apparence banale : insomnie, céphalées, anxiété importante, myalgies, tension musculaire, irritabilité. D'autres symptômes sont plus rares : agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions."
+     }
+    ]
+   }
+  ],
+  "clomipramine": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61426025",
+      "provenance": "verified",
+      "quote": "Les antidépresseurs tricycliques sont connus pour abaisser le seuil épileptogène, de ce fait, ANAFRANIL doit être utilisé avec précaution (surveillance clinique et électrique renforcée) chez les patients épileptiques ou ayant des antécédents d'épilepsie ou présentant des facteurs de risque de convulsions, tels que des lésions cérébrales d'étiologies variées, une utilisation concomitante de médicaments abaissant le seuil épileptogène (voir rubrique 4.5), le sevrage alcoolique ou médicamenteux (médicaments ayant des propriétés anticonvulsivantes comme les benzodiazépines). Le risque de crises convulsives étant dose-dépendant, la posologie maximale recommandée d’ANAFRANIL ne doit pas être dépassée. La survenue de crises convulsives impose l'arrêt du traitement."
+     },
+     {
+      "corpus": "europepmc",
+      "page": "17223086",
+      "provenance": "verified",
+      "quote": "Results Increased seizure incidence was observed with antipsychotics that was accounted for by clozapine and olanzapine, and with drugs indicated for the treatment of OCD that was accounted for by clomipramine."
+     },
+     {
+      "corpus": "europepmc",
+      "page": "11888352",
+      "provenance": "verified",
+      "quote": "Agreement, however, converges on the following: seizures triggered by psychotropic drugs are a dose-dependent adverse effect; maprotiline and clomipramine among antidepressants and chlorpromazine and clozapine among antipsychotics that have a relatively high seizurogenic potential; phenelzine, tranylcypromine, fluoxetine, paroxetine, sertraline, venlafaxine and trazodone among antidepressants and fluphenazine, haloperidol, pimozide and risperidone among antipsychotics that exhibit a relatively low risk."
+     }
+    ]
+   }
+  ],
+  "clonazepam": [
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61496251",
+      "provenance": "verified",
+      "quote": "On peut simplement considérer que l'on retrouve généralement une activité antiépileptique du clonazépam pour des concentrations plasmatiques variant de 20 ng/ml à 70 ng/ml."
+     },
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61496251",
+      "provenance": "verified",
+      "quote": "L'effet antiépileptique du clonazépam peut diminuer progressivement malgré l'utilisation de la même dose en cas d'administration durant plusieurs semaines."
+     }
+    ]
+   },
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61496251",
+      "provenance": "verified",
+      "quote": "Des symptômes de sevrage peuvent se développer après une période d'utilisation prolongée, notamment à doses élevées ou si la posologie quotidienne est réduite rapidement ou que le traitement est arrêté brutalement. Les symptômes, dont certains peuvent être d’apparence banale, sont à type de tremblements, sueurs, agitation, troubles du sommeil et anxiété, céphalées, diarrhée, douleurs musculaires, anxiété extrême, tension, impatience, changements d’humeur, confusion, irritabilité et crises épileptiques pouvant être la conséquence du sevrage au clonazépam. Dans les cas sévères, les symptômes suivants peuvent se manifester : déréalisation, dépersonnalisation, hyperacousie, engourdissement et picotements dans les extrémités, hypersensibilité à la lumière, au bruit et au contact physique ou hallucinations. Étant donné que le risque de symptômes de sevrage est plus important après l'arrêt brutal du traitement, le retrait brutal du médicament doit donc être évité et le traitement, même s'il n'était que de courte durée, doit être arrêté par la réduction progressive de la posologie quotidienne."
+     },
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61496251",
+      "provenance": "verified",
+      "quote": "Les anticonvulsivants, dont RIVOTRIL, ne doivent pas être arrêtés brutalement chez les patients épileptiques au risque de survenue d’un état de mal épileptique."
+     }
+    ]
+   }
+  ],
+  "clorazepate": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "62416105",
+      "provenance": "verified",
+      "quote": "Cet état peut entraîner à l'arrêt du traitement un phénomène de sevrage. Certains symptômes sont fréquents et d'apparence banale : insomnie, céphalées, anxiété importante, myalgies, tension musculaire, irritabilité. D'autres symptômes sont plus rares : agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions."
+     }
+    ]
+   }
+  ],
+  "clotiazepam": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "65558647",
+      "provenance": "verified",
+      "quote": "Dès l’apparition de la dépendance physique, l'arrêt brutal du traitement peut provoquer des symptômes de sevrage tels que maux de tête, douleurs musculaires, anxiété extrême, tension, agitation, confusion et irritabilité. Dans les cas graves, les symptômes suivants peuvent apparaître : déréalisation, dépersonnalisation, hyperacousie, engourdissements et picotements dans les extrémités, hypersensibilité à la lumière, au bruit et au contact physique, hallucinations et crises d'épilepsie."
+     }
+    ]
+   }
+  ],
+  "clozapine": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "62552920",
+      "provenance": "verified",
+      "quote": "Les patients ayant un antécédent d'épilepsie doivent être surveillés étroitement au cours du traitement par LEPONEX, car des convulsions dose-dépendantes ont été rapportées sous clozapine. Dans ce cas, il convient de réduire la posologie (voir rubrique 4.2) et, si nécessaire, d'instaurer un traitement anticonvulsivant."
+     },
+     {
+      "corpus": "bdpm_rcp",
+      "page": "62552920",
+      "provenance": "verified",
+      "quote": "LEPONEX peut provoquer des convulsions, de la somnolence, de l'hypotension orthostatique, une instabilité motrice et sensorielle pouvant entraîner des chutes et, par conséquent, des fractures ou d'autres blessures. Pour les patients atteints de maladies, d'affections ou prenant des médicaments susceptibles d'aggraver ces effets, une évaluation complète du risque de chute doit être réalisée lors de l'instauration d'un traitement antipsychotique et de façon récurrente chez les patients sous traitement antipsychotique à long terme."
+     },
+     {
+      "corpus": "europepmc",
+      "page": "17223086",
+      "provenance": "verified",
+      "quote": "Results Increased seizure incidence was observed with antipsychotics that was accounted for by clozapine and olanzapine, and with drugs indicated for the treatment of OCD that was accounted for by clomipramine."
+     },
+     {
+      "corpus": "europepmc",
+      "page": "11888352",
+      "provenance": "verified",
+      "quote": "Agreement, however, converges on the following: seizures triggered by psychotropic drugs are a dose-dependent adverse effect; maprotiline and clomipramine among antidepressants and chlorpromazine and clozapine among antipsychotics that have a relatively high seizurogenic potential; phenelzine, tranylcypromine, fluoxetine, paroxetine, sertraline, venlafaxine and trazodone among antidepressants and fluphenazine, haloperidol, pimozide and risperidone among antipsychotics that exhibit a relatively low risk."
+     }
+    ]
+   }
+  ],
+  "cyamemazine": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60271248",
+      "provenance": "verified",
+      "quote": "Chez les épileptiques en raison de la possibilité d'abaissement du seuil épileptogène ; la survenue de crises convulsives impose l'arrêt du traitement."
+     }
+    ]
+   }
+  ],
+  "diazepam": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60290800",
+      "provenance": "verified",
+      "quote": "Une fois qu’une dépendance physique s’est installée, l'arrêt brutal du traitement entrainera un phénomène de sevrage et de rebond. Certains symptômes sont fréquents et d'apparence banale: insomnie, céphalées, diarrhée, anxiété importante, myalgies, tension musculaire, irritabilité. D'autres symptômes sont plus rares: agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions."
+     }
+    ]
+   }
+  ],
+  "donepezil": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "62262995",
+      "provenance": "verified",
+      "quote": "Il a été rapporté des cas de syncope et de convulsions. Lors de l'examen de ces patients la possibilité de bloc cardiaque ou de pauses sinusales prolongées doit être envisagée."
+     },
+     {
+      "corpus": "bdpm_rcp",
+      "page": "62262995",
+      "provenance": "verified",
+      "quote": "Convulsions: les cholinomimétiques sont décrits comme potentiellement responsables de crises convulsives généralisées. Toutefois, les convulsions peuvent aussi être une manifestation de la maladie d'Alzheimer."
+     }
+    ]
+   }
+  ],
+  "doxepin": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "63046819",
+      "provenance": "verified",
+      "quote": "Chez les patients épileptiques ou ayant des antécédents d'épilepsie, il est prudent de renforcer la surveillance clinique et électrique, en raison de la possibilité d'abaissement du seuil épileptogène. La survenue de crises convulsives impose l'arrêt du traitement."
+     }
+    ]
+   }
+  ],
+  "eslicarbazepine_acetate": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "63927729",
+      "provenance": "verified",
+      "quote": "Si le traitement par l’acétate d’eslicarbazépine doit être suspendu, cela doit se faire de manière progressive afin de limiter le risque possible de crises convulsives à l’arrêt du traitement."
+     }
+    ]
+   }
+  ],
+  "estazolam": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "69888457",
+      "provenance": "verified",
+      "quote": "Cet état peut entraîner à l'arrêt du traitement un phénomène de sevrage. Certains symptômes sont fréquents et d'apparence banale : insomnie, céphalées, anxiété importante, myalgies, tension musculaire, irritabilité. D'autres symptômes sont plus rares : agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions."
+     }
+    ]
+   }
+  ],
+  "ethosuximide": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "68481191",
+      "provenance": "verified",
+      "quote": "Toute augmentation ou diminution de la posologie de l'éthosuximide doit être effectuée de façon progressive. Tout arrêt brutal est susceptible d'entraîner un état de mal épileptique."
+     }
+    ]
+   }
+  ],
+  "fenfluramine": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "62154820",
+      "provenance": "verified",
+      "quote": "Interruption du traitement En cas d’interruption du traitement, la dose doit être réduite progressivement. L’arrêt brutal du traitement doit être évité, dans la mesure du possible, afin réduire les risques d’augmentation de la fréquence des crises d’épilepsie et de survenue d’un état de mal épileptique. Une échocardiographie finale doit être effectuée 3 à 6 mois après la dernière dose du traitement par fenfluramine."
+     }
+    ]
+   }
+  ],
+  "flumazenil": [
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "67248985",
+      "provenance": "verified",
+      "quote": "L’utilisation de l’antagoniste n'est pas recommandée chez les malades épileptiques qui ont reçu un traitement prolongé par les benzodiazépines. Bien que le flumazénil ait des effets antiépileptiques intrinsèques, l'effet antagoniste brutal peut provoquer des convulsions chez les patients épileptiques."
+     }
+    ]
+   }
+  ],
+  "fluoxetine": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60338857",
+      "provenance": "verified",
+      "quote": "Lors d’un traitement antidépresseur, il existe un risque potentiel de convulsion. Par conséquent, comme avec d’autres antidépresseurs, le traitement par la fluoxétine doit être instauré avec précaution chez les patients ayant des antécédents d’épilepsie."
+     }
+    ]
+   }
+  ],
+  "flupenthixol": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "62571671",
+      "provenance": "verified",
+      "quote": "Une surveillance chez les patients épileptiques et les sujets présentant d’autres facteurs prédisposants (atteinte cérébrale) peut être conseillée en raison de la possibilité d’abaissement du seuil épileptogène."
+     }
+    ]
+   }
+  ],
+  "gabapentin": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61022591",
+      "provenance": "verified",
+      "quote": "Même si aucune donnée ne montre une recrudescence des crises avec la gabapentine, l'arrêt brutal des anticonvulsivants chez les patients épileptiques peut déclencher un état de mal épileptique (voir rubrique 4.2)."
+     }
+    ]
+   }
+  ],
+  "galantamine": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "63358402",
+      "provenance": "verified",
+      "quote": "Des crises convulsives ont été rapportées avec la galantamine (voir rubrique 4.8). L’activité épileptiforme peut également être une manifestation de la maladie d’Alzheimer. Une augmentation de l’activité cholinergique peut aggraver les symptômes liés aux troubles extrapyramidaux (voir rubrique 4.8)."
+     }
+    ]
+   }
+  ],
+  "haloperidol": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61490049",
+      "provenance": "verified",
+      "quote": "La survenue de crises épileptiques déclenchées par l’halopéridol a été signalée. La prudence est requise chez les patients atteints d’épilepsie ou présentant des prédispositions aux crises épileptiques (sevrage alcoolique et lésions cérébrales, par exemple)."
+     }
+    ]
+   }
+  ],
+  "imipramine": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "67117128",
+      "provenance": "verified",
+      "quote": "Les antidépresseurs tricycliques sont connus pour abaisser le seuil épileptogène, de ce fait TOFRANIL doit être utilisé avec précaution chez les patients épileptiques ou présentant des facteurs de risque de convulsions, tels que lésions cérébrales d'étiologies variées, en cas d'administration concomitante de médicaments abaissant le seuil épileptogène (voir rubrique 4.5 la liste des substances concernées) et en cas d'électroconvulsivothérapie concomitante. Le risque de crises convulsives étant dose-dépendant, la posologie maximale recommandée de TOFRANIL ne doit pas être dépassée. La survenue de crises convulsives impose l'arrêt du traitement."
+     },
+     {
+      "corpus": "bdpm_rcp",
+      "page": "67117128",
+      "provenance": "verified",
+      "quote": "Chez les patients épileptiques ou ayant des antécédents d'épilepsie, il est prudent de renforcer la surveillance clinique et électrique, en raison de la possibilité d'abaissement du seuil épileptogène. La survenue de crises convulsives impose l'arrêt du traitement."
+     }
+    ]
+   }
+  ],
+  "iproniazid": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61561635",
+      "provenance": "verified",
+      "quote": "o chez les sujets épileptiques: le nialamide a été associé à des traitements anti-épileptiques, avec des résultats variables; certains patients ont été améliorés, pour d'autres, la maladie s'est aggravée. Les IMAO sont susceptibles d'abaisser le seuil épileptogène."
+     }
+    ]
+   }
+  ],
+  "levomepromazine": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "64026417",
+      "provenance": "verified",
+      "quote": "chez les épileptiques en raison de la possibilité d'abaissement du seuil épileptogène ; la survenue de crises convulsives impose l'arrêt du traitement ;"
+     }
+    ]
+   }
+  ],
+  "lisdexamfetamine": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "64274416",
+      "provenance": "verified",
+      "quote": "Des données cliniques indiquent que les psychostimulants peuvent abaisser le seuil épileptogène chez les patients ayant des antécédents de crises convulsives, chez les patients ayant des antécédents d’anomalies de l’EEG en l’absence de crises convulsives et, dans de très rares cas, chez les patients n’ayant pas d’antécédents de crises convulsives ni de signes d’épilepsie sur l’EEG. En cas d’apparition ou d’aggravation des crises convulsives, le traitement doit être arrêté."
+     }
+    ]
+   }
+  ],
+  "loflazepate": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "68104411",
+      "provenance": "verified",
+      "quote": "Cet état peut entraîner à l'arrêt du traitement un phénomène de sevrage. Certains symptômes sont fréquents et d'apparence banale : insomnie, céphalées, anxiété importante, myalgies, tension musculaire, irritabilité. D'autres symptômes sont plus rares : agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions."
+     }
+    ]
+   }
+  ],
+  "lorazepam": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "67177709",
+      "provenance": "verified",
+      "quote": "Cet état peut entraîner à l'arrêt du traitement un phénomène de sevrage. Certains symptômes sont fréquents et d'apparence banale : insomnie, céphalées, anxiété importante, myalgies, tension musculaire, irritabilité. D'autres symptômes sont plus rares : agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions."
+     }
+    ]
+   }
+  ],
+  "lormetazepam": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60186584",
+      "provenance": "verified",
+      "quote": "Les symptômes signalés suite à un arrêt des benzodiazépines comprennent : maux de tête, douleur musculaire, anxiété, tension, dépression, insomnie, agitation, confusion, irritabilité, sudation et survenue d’un phénomène de rebond (réapparition temporaire des symptômes pour lesquels le traitement a été initié). Il peut s’avérer difficile de faire la distinction entre ces symptômes et les symptômes d’origine pour lesquels le médicament a été prescrit. Les symptômes suivants ont été observés dans des cas graves : sentiment de déréalisation, sentiment de dépersonnalisation, hyperacousie, acouphène, engourdissement et fourmillement au niveau des extrémités, hypersensibilité à la lumière, au bruit et au contact physique, mouvement involontaire, vomissement, hallucinations et convulsions. Les convulsions sont plus communes chez les patients ayant eu des troubles convulsifs ou prenant d’autres médicaments qui réduisent le seuil convulsif tels que des antidépresseurs."
+     }
+    ]
+   }
+  ],
+  "loxapine": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "64162292",
+      "provenance": "verified",
+      "quote": "Des convulsions ont été rapportées chez des patients recevant de la loxapine."
+     },
+     {
+      "corpus": "bdpm_rcp",
+      "page": "64162292",
+      "provenance": "verified",
+      "quote": "La loxapine doit être utilisée avec précaution chez les patients traités par des médicaments antiépileptiques, voire chez les patients ayant des antécédents de crises convulsives en raison de la possibilité d'abaissement du seuil épileptogène (voir rubrique 4.5)."
+     }
+    ]
+   }
+  ],
+  "maprotiline": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "63912862",
+      "provenance": "verified",
+      "quote": "Les antidépresseurs comme la maprotiline sont connus pour abaisser le seuil épileptogène et favoriser la survenue de convulsions notamment chez les patients épileptiques ou ayant des antécédents d’épilepsie, en cas d’administration concomitante de médicaments abaissant le seuil épileptogène (voir rubrique 4.5 la liste des substances concernées),), lors de l’interruption brutale d’un traitement concomitant par benzodiazépines, en cas d’électroconvulsivothérapie ou lors du dépassement de la posologie recommandée de LUDIOMIL. Dans tous ces cas, il est prudent de renforcer la surveillance clinique ou électrique. La survenue de crises convulsives impose l’arrêt du traitement. Bien que le lien de causalité n’ait pas été établi, le risque de convulsions peut être réduit par l’utilisation d’une faible posologie initiale, le maintien de la posologie initiale pendant 2 semaines puis l’augmentation progressive par petits paliers, le maintien de la dose d’entretien au niveau efficace minimal, l’ajustement prudent ou le fait d’éviter un traitement concomitant avec des médicaments abaissant le seuil épileptogène (par ex. phénothiazines, rispéridone) ou la réduction rapide des benzodiazépines."
+     },
+     {
+      "corpus": "europepmc",
+      "page": "11888352",
+      "provenance": "verified",
+      "quote": "Agreement, however, converges on the following: seizures triggered by psychotropic drugs are a dose-dependent adverse effect; maprotiline and clomipramine among antidepressants and chlorpromazine and clozapine among antipsychotics that have a relatively high seizurogenic potential; phenelzine, tranylcypromine, fluoxetine, paroxetine, sertraline, venlafaxine and trazodone among antidepressants and fluphenazine, haloperidol, pimozide and risperidone among antipsychotics that exhibit a relatively low risk."
+     }
+    ]
+   }
+  ],
+  "methadone": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60998856",
+      "provenance": "verified",
+      "quote": "Les opioïdes peuvent augmenter la pression du liquide céphalorachidien et entraîner des convulsions : ils doivent être utilisés avec précaution chez les patients présentant un traumatisme crânien, des lésions intracrâniennes, d'autres circonstances dans lesquelles la pression du liquide céphalo-rachidien peut être augmentée, ou en cas d’antécédents d’épilepsie."
+     }
+    ]
+   }
+  ],
+  "methylphenidate_dl": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60047182",
+      "provenance": "verified",
+      "quote": "Le méthylphénidate doit être utilisé avec prudence chez les patients atteints d’épilepsie. Le méthylphénidate peut abaisser le seuil épileptogène chez les patients ayant des antécédents de convulsions, chez les patients ayant présenté des anomalies de l’EEG en l’absence de convulsions et rarement chez des patients sans antécédents de convulsions ni anomalies de l’EEG. En cas d’augmentation de la fréquence des convulsions ou d’apparition de convulsions, le traitement par méthylphénidate devra être arrêté."
+     }
+    ]
+   }
+  ],
+  "metoclopramide": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61729093",
+      "provenance": "verified",
+      "quote": "Epilepsie (augmentation de la fréquence et de l'intensité des crises)."
+     }
+    ]
+   }
+  ],
+  "mianserin": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60854845",
+      "provenance": "verified",
+      "quote": "Chez les patients épileptiques ou ayant des antécédents d’épilepsie, il est prudent de renforcer la surveillance clinique et électrique, en raison de la possibilité d’abaissement du seuil épileptogène. La survenue de crises convulsives impose l’arrêt du traitement."
+     }
+    ]
+   }
+  ],
+  "nitrazepam": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "66205536",
+      "provenance": "verified",
+      "quote": "Cet état peut entraîner à l'arrêt du traitement un phénomène de sevrage. Certains symptômes sont fréquents et d’apparence banale : insomnie, céphalées, anxiété importante, myalgies, tension musculaire, irritabilité. D’autres symptômes sont plus rares : agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions."
+     }
+    ]
+   }
+  ],
+  "olanzapine": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60126594",
+      "provenance": "verified",
+      "quote": "L’olanzapine doit être utilisée avec prudence chez les patients qui ont des antécédents de convulsions ou qui sont placés dans des conditions susceptibles d’abaisser leur seuil convulsif. Des cas de convulsions ont été rapportés de manière peu fréquente chez les patients traités par olanzapine. Dans la plupart de ces cas, il existait soit des antécédents de convulsions soit des facteurs de risque de convulsions."
+     },
+     {
+      "corpus": "europepmc",
+      "page": "17223086",
+      "provenance": "verified",
+      "quote": "Results Increased seizure incidence was observed with antipsychotics that was accounted for by clozapine and olanzapine, and with drugs indicated for the treatment of OCD that was accounted for by clomipramine."
+     }
+    ]
+   }
+  ],
+  "oxazepam": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60351986",
+      "provenance": "verified",
+      "quote": "Cet état peut entraîner à l'arrêt du traitement un phénomène de sevrage. Certains symptômes sont fréquents et d'apparence banale : insomnie, céphalées, anxiété importante, myalgies, tension musculaire, irritabilité. D'autres symptômes sont plus rares : agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions."
+     }
+    ]
+   }
+  ],
+  "oxcarbazepine": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61556061",
+      "provenance": "verified",
+      "quote": "Comme pour tous les médicaments antiépileptiques, le traitement par TRILEPTAL doit être arrêté progressivement pour diminuer le risque d’augmentation de la fréquence des crises épileptiques."
+     }
+    ]
+   }
+  ],
+  "oxycodone": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60629186",
+      "provenance": "verified",
+      "quote": "L’utilisation prolongée de ce médicament peut entraîner une dépendance physique et un syndrome de sevrage peut apparaître lors d’un arrêt brutal du traitement. Le syndrome de sevrage est caractérisé par les symptômes suivants : bâillements, anxiété, irritabilité, frissons, mydriase, bouffées de chaleur, tremblements, sudation, larmoiement, rhinorrhée, agitation, convulsions, insomnie, nausées, vomissements, crampes abdominales, diarrhées et arthralgies."
+     }
+    ]
+   }
+  ],
+  "perampanel": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61849146",
+      "provenance": "verified",
+      "quote": "Arrêt du traitement Il est recommandé d’arrêter progressivement le traitement, afin de réduire le risque de crises d’épilepsie par effet rebond. Cependant, compte tenu de sa demi-vie longue et de la diminution lente des concentrations plasmatiques qui en résulte, le pérampanel peut être arrêté brutalement en cas d’absolue nécessité."
+     }
+    ]
+   }
+  ],
+  "periciazine": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "64676824",
+      "provenance": "verified",
+      "quote": "Chez les épileptiques en raison de la possibilité d'abaissement du seuil épileptogène; la survenue de crises convulsives impose l'arrêt du traitement."
+     }
+    ]
+   }
+  ],
+  "phenobarbital": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61475588",
+      "provenance": "verified",
+      "quote": "La prise prolongée de phénobarbital (100 mg par jour pendant 3 mois) peut entraîner l'apparition d'un syndrome de dépendance. Dans le cas où le patient devrait arrêter le traitement, il est recommandé de réduire progressivement la posologie. Comme avec tout antiépileptique, l'arrêt brutal du traitement peut entraîner l'apparition des crises et un état de mal, surtout en cas d'éthylisme surajouté."
+     }
+    ]
+   }
+  ],
+  "phenytoin": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "62436200",
+      "provenance": "verified",
+      "quote": "Les traitements par antiépileptiques ne doivent pas être brutalement interrompus à cause du risque d'augmentation de la fréquence des crises, incluant l'état épileptique."
+     }
+    ]
+   }
+  ],
+  "pimozide": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60625647",
+      "provenance": "verified",
+      "quote": "Comme d’autres antipsychotiques, le pimozide peut abaisser le seuil épileptogène notamment chez les patients épileptiques et les sujets présentant d’autres facteurs prédisposant aux convulsions (désintoxication alcoolique, atteinte cérébrale). Des états de Grand Mal ont également été rapportés chez des patients traités par ORAP."
+     }
+    ]
+   }
+  ],
+  "pipamperone": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "64210075",
+      "provenance": "verified",
+      "quote": "Epilepsie, convulsions : le pipampérone peut abaisser le seuil épileptogène notamment chez les patients épileptiques et les sujets présentant d'autres facteurs prédisposant aux convulsions (désintoxication alcoolique, atteinte cérébrale)."
+     }
+    ]
+   }
+  ],
+  "pipothiazine": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "62000861",
+      "provenance": "verified",
+      "quote": "chez les épileptiques en raison de la possibilité d'abaissement du seuil épileptogène; la survenue de crises convulsives impose l'arrêt du traitement;"
+     }
+    ]
+   }
+  ],
+  "pizotifen": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "65458611",
+      "provenance": "verified",
+      "quote": "Des crises d’épilepsie ont été observées chez les patients épileptiques. Le pizotifène doit être utilisé avec précaution chez ce type de patient."
+     }
+    ]
+   }
+  ],
+  "prazepam": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60534076",
+      "provenance": "verified",
+      "quote": "Cet état peut entraîner à l'arrêt du traitement un phénomène de sevrage. Certains symptômes sont fréquents et d'apparence banale : insomnie, céphalées, anxiété importante, myalgies, tension musculaire, irritabilité. D'autres symptômes sont plus rares : agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions."
+     }
+    ]
+   }
+  ],
+  "pregabalin": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60061602",
+      "provenance": "verified",
+      "quote": "Après l’arrêt d’un traitement à court ou à long terme par la prégabaline, des symptômes de sevrage ont été observés. Les symptômes suivants ont été rapportés : insomnie, céphalées, nausées, anxiété, diarrhée, syndrome grippal, nervosité, dépression, idées suicidaires, douleurs, convulsions, hyperhidrose et étourdissements. L’apparition de symptômes de sevrage après l’arrêt de la prégabaline peut indiquer une dépendance au médicament (voir rubrique 4.8). Le patient doit en être informé au début du traitement. Si la prégabaline doit être arrêtée, il est recommandé de le faire progressivement sur une période minimale de 1 semaine, indépendamment de l’indication (voir rubrique 4.2)."
+     },
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60061602",
+      "provenance": "verified",
+      "quote": "Les convulsions, notamment les états de mal épileptiques et les crises tonico-cloniques généralisées, peuvent apparaître pendant ou peu après l’arrêt du traitement par la prégabaline."
+     }
+    ]
+   }
+  ],
+  "primidone": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "65201684",
+      "provenance": "verified",
+      "quote": "L'arrêt brutal d'un traitement à dose antiépileptique efficace peut entraîner des crises convulsives et un état de mal, surtout en cas d'alcoolisme surajouté."
+     }
+    ]
+   }
+  ],
+  "promethazine": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "69646945",
+      "provenance": "verified",
+      "quote": "La surveillance (clinique et éventuellement électrique) doit être renforcée chez les épileptiques en raison de la possibilité d'abaissement du seuil épileptogène."
+     }
+    ]
+   }
+  ],
+  "propofol": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60616445",
+      "provenance": "verified",
+      "quote": "Epilepsie : s'assurer qu'avant l'anesthésie, tout patient épileptique a bien reçu son traitement anti comitial habituel. L'administration de propofol à des patients épileptiques connus peut augmenter le risque de survenue de crises convulsives."
+     }
+    ]
+   }
+  ],
+  "quetiapine": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "europepmc",
+      "page": "17223086",
+      "provenance": "verified",
+      "quote": "Alprazolam, bupropion immediate release (IR) form, and quetiapine were also associated with higher seizure incidence."
+     }
+    ]
+   }
+  ],
+  "rivastigmine": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60557826",
+      "provenance": "verified",
+      "quote": "Les cholinomimétiques peuvent induire ou aggraver une rétention urinaire et des convulsions. La prudence est recommandée lors du traitement de patients prédisposés à de telles maladies."
+     }
+    ]
+   }
+  ],
+  "scopolamine": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "63958849",
+      "provenance": "verified",
+      "quote": "Dans des cas isolés, une augmentation de la fréquence des crises chez les patients épileptiques a été signalée."
+     }
+    ]
+   }
+  ],
+  "sertraline": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60155788",
+      "provenance": "verified",
+      "quote": "Des convulsions peuvent survenir au cours du traitement par sertraline : la sertraline ne doit pas être utilisée chez les patients présentant une épilepsie instable et les patients présentant une épilepsie bien contrôlée doivent être attentivement surveillés. La prise de sertraline doit être interrompue chez tout patient développant des convulsions."
+     }
+    ]
+   }
+  ],
+  "sevoflurane": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "67329056",
+      "provenance": "verified",
+      "quote": "De rares cas de crises convulsives ont été rapportés avec l’utilisation du sévoflurane."
+     },
+     {
+      "corpus": "bdpm_rcp",
+      "page": "67329056",
+      "provenance": "verified",
+      "quote": "L’utilisation du sévoflurane a été associée à des crises convulsives aussi bien chez des enfants et des jeunes adultes que chez des adultes plus âgés présentant ou non des facteurs de prédisposition. Un avis clinique est nécessaire avant l’utilisation de sévoflurane chez des patients présentant un risque convulsif. Chez les enfants, la profondeur de l’anesthésie doit être limitée. La surveillance de la fonction cérébrale (électroencéphalogramme ou EEG) permet d’optimiser la dose du sévoflurane et de prévenir la survenue de crises convulsives chez les patients prédisposés (voir rubrique 4.4 – Population pédiatrique)."
+     },
+     {
+      "corpus": "bdpm_rcp",
+      "page": "67329056",
+      "provenance": "verified",
+      "quote": "L’utilisation du sévoflurane a été associée à des crises convulsives. La majorité de ces crises sont apparues chez des enfants à partir de l’âge de 2 mois et chez de jeunes adultes, dont la plupart ne présentaient aucun facteur de prédisposition. Un avis clinique est nécessaire lors de l’utilisation de sévoflurane chez des patients présentant un risque convulsif (voir rubrique 4.4 – Crises convulsives)."
+     }
+    ]
+   }
+  ],
+  "sodium_oxybate": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "67300599",
+      "provenance": "verified",
+      "quote": "Des crises convulsives ont été observées chez des patients traités par l’oxybate de sodium. Chez les patients épileptiques, la sécurité et l’efficacité de l’oxybate de sodium n’ont pas été établies, son utilisation n’est donc pas recommandée."
+     }
+    ]
+   }
+  ],
+  "sulpiride": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "62344129",
+      "provenance": "verified",
+      "quote": "chez les sujets épileptiques en raison de la possibilité d'abaissement du seuil épileptogène, des cas de convulsions ont été rapportés chez des patients traités par sulpiride (voir rubrique 4.8),"
+     }
+    ]
+   }
+  ],
+  "sumatriptan": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "64676030",
+      "provenance": "verified",
+      "quote": "Le sumatriptan doit être utilisé avec précaution chez les patients ayant des antécédents de convulsions ou présentant d’autres facteurs de risque susceptibles d’abaisser le seuil épileptogène, car des cas de convulsions ont été rapportés en association avec le sumatriptan (voir rubrique 4.8)."
+     }
+    ]
+   }
+  ],
+  "tiagabine": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60058517",
+      "provenance": "verified",
+      "quote": "Les données post-commercialisation ont montré que l'utilisation de GABITRIL a été associée à des convulsions et des états de mal épileptique chez des patients non épileptiques. Bien que les convulsions aient été signalées chez des patients recevant des doses quotidiennes recommandées de tiagabine, la majorité des cas ont été signalés dans un contexte de surdosage (voir rubrique 4.9) ou après une titration trop rapide."
+     }
+    ]
+   },
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60058517",
+      "provenance": "verified",
+      "quote": "Comme pour tout autre antiépileptique, l'arrêt brutal du traitement peut entraîner une recrudescence des crises. Il est donc recommandé de réduire progressivement la posologie sur une période allant de 2 à 3 semaines."
+     }
+    ]
+   }
+  ],
+  "tiapride": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "67890598",
+      "provenance": "verified",
+      "quote": "o chez les sujets épileptiques en raison de la possibilité d'abaissement du seuil épileptogène ;"
+     }
+    ]
+   }
+  ],
+  "topiramate": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61913385",
+      "provenance": "verified",
+      "quote": "Chez les patients avec ou sans antécédent de convulsion ou d’épilepsie, les médicaments antiépileptiques (MAE) dont le topiramate doivent être arrêtés progressivement afin de minimiser le risque potentiel de crise convulsive ou d’augmentation de la fréquence des crises. Au cours des essais cliniques, les doses journalières ont été diminuées par paliers hebdomadaires de 50-100 mg chez l’adulte présentant une épilepsie et de 25-50 mg chez l’adulte recevant du topiramate à des doses allant jusqu’à 100 mg/jour dans le traitement prophylactique de la migraine. Au cours des essais cliniques chez l’enfant, le topiramate a été progressivement arrêté sur une période de 2 à 8 semaines."
+     }
+    ]
+   }
+  ],
+  "tramadol": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60344529",
+      "provenance": "verified",
+      "quote": "Des convulsions ont été rapportées chez des patients traités par tramadol et susceptibles de présenter des convulsions ou recevant d'autres traitements qui abaissent le seuil épileptogène, en particulier les inhibiteurs sélectifs de la recapture de la sérotonine, les antidépresseurs tricycliques, les antipsychotiques, les analgésiques centraux ou les anesthésiques locaux. Les patients épileptiques contrôlés par un traitement ou les patients susceptibles de présenter des convulsions ne devront être traités par le tramadol qu'en cas de nécessité absolue. Des cas de convulsions ont été rapportés chez des patients recevant du tramadol aux doses recommandées. Le risque de convulsions est accru si les doses de tramadol dépassent la dose recommandée (400 mg)."
+     }
+    ]
+   }
+  ],
+  "trimipramine": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "63344192",
+      "provenance": "verified",
+      "quote": "Patients épileptiques : chez les patients épileptiques ou ayant des antécédents d’épilepsie, il est prudent de renforcer la surveillance clinique et électrique, en raison de la possibilité d’abaissement du seuil épileptogène. La survenue de crises convulsives impose l’arrêt du traitement."
+     }
+    ]
+   }
+  ],
+  "varenicline": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60442838",
+      "provenance": "verified",
+      "quote": "Dans les essais cliniques et depuis sa commercialisation, des cas de crises convulsives ont été rapportés chez des patients traités par CHAMPIX présentant ou non des antécédents de crises convulsives. CHAMPIX doit être utilisé avec précaution chez les patients présentant des antécédents de crises convulsives ou d’autres affections qui abaissent potentiellement le seuil épileptogène."
+     }
+    ]
+   }
+  ],
+  "venlafaxine": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61403425",
+      "provenance": "verified",
+      "quote": "Des convulsions peuvent survenir lors d’un traitement par venlafaxine. Comme avec tous les autres antidépresseurs, la venlafaxine doit être instaurée avec prudence chez les patients présentant des antécédents de convulsions, et les patients concernés doivent faire l’objet d’une surveillance étroite. En cas de crise convulsive, le traitement doit être interrompu."
+     }
+    ]
+   }
+  ],
+  "vigabatrin": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61139833",
+      "provenance": "verified",
+      "quote": "Comme avec tout antiépileptique, l'arrêt brutal du traitement peut entraîner l'apparition de crises de rebond. Dans le cas où le patient devrait arrêter un traitement par la vigabatrine, il est recommandé de réduire progressivement la posologie sur une période de 2 à 4 semaines."
+     }
+    ]
+   }
+  ],
+  "vortioxetine": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60316362",
+      "provenance": "verified",
+      "quote": "La survenue de convulsions est un risque potentiel associé au traitement par antidépresseurs. Par conséquent, la vortioxétine doit être introduite prudemment chez les patients ayant des antécédents de convulsions ou les patients présentant une épilepsie instable (voir rubrique 4.5). Le traitement doit être arrêté chez tout patient développant des convulsions ou chez qui une augmentation de la fréquence des convulsions est observée."
+     }
+    ]
+   }
+  ],
+  "yohimbine": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "69816276",
+      "provenance": "verified",
+      "quote": "Un cas d’augmentation des crises épileptiques lorsque la yohimbine avait été utilisée de manière concomitante au traitement pour l’épilepsie a été rapporté. Par conséquent, il ne peut pas être exclu que la yohimbine favoriserait les crises d'épilepsie chez les patients épileptiques."
+     }
+    ]
+   }
+  ],
+  "zolpidem": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "63179285",
+      "provenance": "verified",
+      "quote": "A l’arrêt du traitement, un syndrome de sevrage peut apparaitre. Certains symptômes sont fréquents et d'apparence banale : insomnie, céphalées, anxiété importante, myalgies, tension musculaire, irritabilité. D'autres symptômes sont plus rares : agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, délire, convulsions."
+     }
+    ]
+   }
+  ],
+  "zonisamide": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "62741554",
+      "provenance": "verified",
+      "quote": "Conformément à la pratique clinique usuelle, l’arrêt éventuel du zonisamide chez les patients épileptiques doit se faire de manière progressive pour limiter les risques de crises convulsives à l’arrêt du traitement. Il n’existe pas de données suffisantes concernant l’arrêt des médicaments antiépileptiques concomitants une fois les crises contrôlées avec le zonisamide administré en association pour pouvoir utiliser le zonisamide en monothérapie. Par conséquent, la prudence est recommandée lors de l’arrêt des autres médicaments antiépileptiques."
+     }
+    ]
+   }
+  ],
+  "zopiclone": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "68508795",
+      "provenance": "verified",
+      "quote": "Si une dépendance physique s’installe, une interruption soudaine du traitement sera accompagnée de symptômes de sevrage, pouvant être des maux de tête, douleurs musculaires, anxiété importante, tension, agitation, confusion et irritabilité. Dans les cas sévères, les symptômes suivants peuvent apparaître : déréalisation, dépersonnalisation, hyperacousie, engourdissements et picotements des extrémités, hypersensibilité à la lumière, au bruit et au contact physique, hallucinations ou crises d'épilepsie."
+     }
+    ]
+   }
+  ],
+  "zuclopenthixol": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60209937",
+      "provenance": "verified",
+      "quote": "Une surveillance particulière chez les patients épileptiques et les sujets présentant d'autres facteurs prédisposant (atteintes cérébrales) peut être conseillée en raison de la possibilité d'abaissement du seuil épileptogène."
+     }
+    ]
+   }
+  ]
+ }
+}

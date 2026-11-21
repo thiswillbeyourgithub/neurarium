@@ -1,0 +1,3484 @@
+{
+ "alimemazine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "66801066",
+    "section": "4.4",
+    "quote": "Les phénotiazines abaissent le seuil épileptogène. La prudence est requise et la surveillance doit être renforcée chez les sujets épileptiques ou à risque de convulsions.",
+    "qid": "5d440667"
+   }
+  ]
+ },
+ "alprazolam": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60647049",
+    "section": "4.4",
+    "quote": "En cas de dépendance physique, un arrêt brutal du traitement peut entraîner des symptômes de sevrage. Ces symptômes peuvent être les suivants : insomnie, céphalées, myalgie, anxiété importante, tension nerveuse, impatiences, confusion, irritabilité. Dans les cas sévères, les symptômes suivants peuvent survenir : déréalisation, dépersonnalisation, hyperacousie, engourdissements et fourmillements des extrémités, hypersensibilité à la lumière, au bruit et au contact physique, hallucinations, crises épileptiques (voir rubrique 4.8).",
+    "qid": "70154ebd"
+   },
+   {
+    "index": 1,
+    "corpus": "europepmc",
+    "page": "17223086",
+    "quote": "Alprazolam, bupropion immediate release (IR) form, and quetiapine were also associated with higher seizure incidence.",
+    "qid": "bce85b20"
+   }
+  ]
+ },
+ "amantadine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "67703803",
+    "section": "4.4",
+    "quote": "les patients présentant des antécédents d'épilepsie, d'états confusionnels, d'hallucinations ou ayant un état psychonévrotique grave non contrôlé par un traitement,",
+    "qid": "3f30e152"
+   }
+  ]
+ },
+ "amisulpride": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60019927",
+    "section": "4.4",
+    "quote": "L'amisulpride peut diminuer le seuil épileptogène. Les patients ayant des antécédents de crises convulsives doivent donc être étroitement surveillés lors du traitement par SOLIAN.",
+    "qid": "5fe70f7d"
+   }
+  ]
+ },
+ "amitriptyline": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "62633436",
+    "section": "4.4",
+    "quote": "Ce médicament doit être utilisé avec prudence chez les patients présentant les affections suivantes : crises convulsives, rétention urinaire, hypertrophie prostatique, hyperthyroïdie, symptomatologie paranoïaque et pathologie hépatique ou cardiovasculaire avancée, sténose du pylore et iléus paralytique.",
+    "qid": "ec71a386"
+   }
+  ]
+ },
+ "amphetamine_d": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "61746712",
+    "section": "4.4",
+    "quote": "La dexamphétamine devra être utilisée avec précaution chez les patients épileptiques. La dexamphétamine peut abaisser le seuil épileptogène chez les patients ayant des antécédents de crises convulsives, chez les patients ayant présenté des anomalies de l’EEG en l’absence de crises convulsives et, dans de rares cas, chez des patients n’ayant pas d’antécédents de convulsions ni d’anomalies de l’EEG. En cas d’augmentation de la fréquence des crises convulsives ou de crises convulsives nouvellement apparues, la dexamphétamine doit être arrêtée.",
+    "qid": "20c24af8"
+   }
+  ]
+ },
+ "aripiprazole": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60031071",
+    "section": "4.4",
+    "quote": "Dans les études cliniques menées préalablement à la mise sur le marché, des cas peu fréquents de convulsions ont été rapportés au cours du traitement par l'aripiprazole. Par conséquent, l'aripiprazole doit être utilisé avec prudence chez les patients ayant des antécédents de convulsions ou présentant une pathologie comportant des convulsions associées (voir rubrique 4.8).",
+    "qid": "ec3ca4d9"
+   }
+  ]
+ },
+ "asenapine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "EMEA-H-C-001177",
+    "section": "4.4",
+    "quote": "Convulsions Dans les essais cliniques, des cas de convulsions ont été rapportés occasionnellement pendant le traitement par asénapine. En conséquence, Sycrest doit être utilisé avec précaution chez les patients présentant des antécédents de convulsions ou atteints de pathologies associées à des convulsions.",
+    "qid": "f9077d36"
+   }
+  ]
+ },
+ "baclofen": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60304050",
+    "section": "4.4",
+    "quote": "Ne pas interrompre brutalement le traitement en raison du risque de syndrome de sevrage. En effet un arrêt brutal du traitement (par analogie avec ce qui a été observé en cas d’administration par voie intrathécale) peut entraîner un syndrome de sevrage parfois létal avec les symptômes suivants en relation avec une probable élévation du tonus sérotoninergique : troubles neuromusculaires (spasticité, dyskinésie, rhabdomyolyse, paresthésie, convulsions voire état de mal épileptique), prurit, dysautonomie (hyperthermie, hypotension), troubles de la conscience et du comportement (état confusionnel, hallucinations, état psychotique maniaque ou paranoïde) et coagulopathie.",
+    "qid": "4eb56df5"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60304050",
+    "section": "4.4",
+    "quote": "Des symptômes de sevrage, y compris des convulsions postnatales chez le nouveau-né, ont été rapportés suite à une exposition intra-utérine au LIORESAL administré par voie orale. L’administration de LIORESAL aux nouveau-nés présentant un syndrome de sevrage, avec réduction progressive de la dose peut aider à contrôler les réactions de sevrage (voir rubrique 4.6).",
+    "qid": "2f2858fe"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "60304050",
+    "section": "4.4",
+    "quote": "Sauf urgence liée à un surdosage ou à la survenue d’effets indésirables graves, le traitement doit toujours être arrêté progressivement en réduisant peu à peu la dose sur une période de 1 à 2 semainesenviron. Les effets indésirables suivants ont été rapportés lors d’une interruption brutale de Liorésal, notamment après un traitement médicamenteux prolongé : anxiété et état confusionnel, délire, hallucinations, troubles psychotiques, maniaques ou paranoïdes, convulsions (état de mal épileptique), dyskinésie, tachycardie, hyperthermie, rhabdomyolyse, aggravation temporaire de la spasticité comme effet de rebond et hypertonie.",
+    "qid": "a008a12b"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "60304050",
+    "section": "4.4",
+    "quote": "Chez les patients épileptiques souffrant de spasticité, des crises comitiales peuvent survenir à des doses thérapeutiques ou en cas de surdosage ou lors d’un sevrage. Chez ces patients poursuivre le traitement antiépileptique et renforcer la surveillance (voir rubrique 4.8).",
+    "qid": "9f4fb213"
+   }
+  ]
+ },
+ "brexpiprazole": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "EMEA-H-C-003841",
+    "section": "4.4",
+    "quote": "Convulsions Comme avec les autres antipsychotiques, le brexpiprazole doit être utilisé avec prudence chez les patients ayant des antécédents de convulsions ou qui présentent d'autres pathologies susceptibles d’abaisser le seuil épileptogène. Des convulsions ont été rapportées durant l’utilisation de brexpiprazole (voir rubrique 4.8).",
+    "qid": "97272313"
+   }
+  ]
+ },
+ "brivaracetam": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60579228",
+    "section": "4.2",
+    "quote": "Oubli de doses En cas d’oubli d’une ou plusieurs doses, le patient doit prendre une seule dose dès que possible et prendre la dose suivante à l’heure habituelle le matin ou le soir. Cela peut empêcher la concentration plasmatique de brivaracétam de diminuer en dessous de la concentration efficace et prévenir la réapparition de crises convulsives.",
+    "qid": "bdf0e9b7"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60579228",
+    "section": "4.4",
+    "quote": "Des cas d’idées et de comportements suicidaires ont été rapportés chez des patients traités par des médicaments antiépileptiques, y compris par le brivaracétam, dans plusieurs indications. Une méta- analyse d'études cliniques randomisées, contrôlées versus placebo, portant sur des antiépileptiques, a également montré une légère augmentation du risque d'idées et de comportements suicidaires. Le mécanisme de ce risque n’est pas connu et les données disponibles n’excluent pas la possibilité d’une augmentation de ce risque avec le brivaracétam. Les patients doivent être surveillés afin de détecter des signes d'idées et de comportements suicidaires et un traitement approprié devra être envisagé. Il devra être recommandé aux patients (et à leurs aidants) de consulter un médecin en cas de survenue de signes d’idées ou de comportements suicidaires. Voir également rubrique 4.8, données pédiatriques.",
+    "qid": "60e28a84"
+   }
+  ]
+ },
+ "bromazepam": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "66796142",
+    "section": "4.4",
+    "quote": "Cet état peut entraîner à l'arrêt du traitement un phénomène de sevrage. Certains symptômes sont fréquents et d'apparence banale : insomnie, céphalées, diarrhée, anxiété extrême, myalgies, tension, irritabilité, nervosité, confusion. Dans les cas sévères les symptômes suivants peuvent se produire : hyperacousie, agitation voire épisode confusionnel, paresthésies des extrémités, hypersensibilité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions.",
+    "qid": "3052ffb8"
+   }
+  ]
+ },
+ "bromocriptine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "63369053",
+    "section": "4.4",
+    "quote": "Dans de rares cas, des effets indésirables graves tels qu’une hypertension, un infarctus du myocarde, des convulsions, un accident vasculaire cérébral ou des troubles psychiatriques ont été rapportés chez des femmes traitées avec de la bromocriptine pour l’inhibition de la lactation en post-partum.",
+    "qid": "4146c4d2"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "63369053",
+    "section": "4.4",
+    "quote": "Chez certaines patientes, l’apparition de convulsions ou d’accident vasculaire cérébral était précédée d’une céphalée et/ou de troubles visuels transitoires. Il est recommandé de surveiller la pression artérielle attentivement, en particulier les jours suivants le début du traitement. En cas d’hypertension, de douleur thoracique, de céphalée sévère, progressive ou sans rémission (avec ou sans troubles visuels) ou dans le cas du développement d’une toxicité du système nerveux central, il est recommandé d’arrêter le traitement par bromocriptine et d’examiner la patiente rapidement.",
+    "qid": "fb91869e"
+   }
+  ]
+ },
+ "bupropion": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "64556383",
+    "section": "4.2",
+    "quote": "Le prescripteur devra évaluer la motivation du patient à s'arrêter de fumer. Les traitements d'aide au sevrage tabagique ont plus de chances de réussir chez les patients motivés pour s'arrêter de fumer et qui bénéficient d'un soutien de la motivation. La durée du traitement est de 7 à 9 semaines. En l'absence d'efficacité à la septième semaine, il n'y a pas lieu de poursuivre le traitement par ZYBAN L.P. Les comprimés de ZYBAN L.P. doivent être avalés entiers. Ils ne doivent pas être coupés, écrasés ni mâchés car cela peut augmenter le risque d’effets indésirables y compris de convulsions.",
+    "qid": "31a10230"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "64556383",
+    "section": "4.3",
+    "quote": "ZYBAN L.P. est contre-indiqué chez les patients présentant un trouble convulsif évolutif ou présentant un quelconque antécédent convulsif.",
+    "qid": "9bd3d5a0"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "64556383",
+    "section": "4.3",
+    "quote": "ZYBAN L.P. est contre-indiqué chez les patients qui à un moment quelconque du traitement, entament ou poursuivent un sevrage alcoolique ou un sevrage avec tout autre médicament dont l'interruption entraîne un risque de convulsions (en particulier les benzodiazépines et produits apparentés).",
+    "qid": "0ab90094"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "64556383",
+    "section": "4.3",
+    "quote": "ZYBAN L.P. ne doit pas être administré aux patients déjà traités par un autre médicament contenant du bupropion, l'incidence des convulsions étant dose dépendante et pour éviter les surdosages.",
+    "qid": "afa9d81c"
+   },
+   {
+    "index": 4,
+    "corpus": "bdpm_rcp",
+    "page": "64556383",
+    "section": "4.4",
+    "quote": "La posologie recommandée de ZYBAN L.P. ne doit en aucun cas être dépassée compte tenu du risque dose-dépendant de convulsions. Pour des doses allant jusqu'à 300 mg par jour de ZYBAN L.P. (dose quotidienne maximale recommandée), l'incidence des convulsions est d'environ 0,1 % (1/1000).",
+    "qid": "61af31ae"
+   },
+   {
+    "index": 5,
+    "corpus": "bdpm_rcp",
+    "page": "64556383",
+    "section": "4.4",
+    "quote": "Le risque de convulsions, au cours du traitement par ZYBAN L.P., est augmenté chez les patients présentant des facteurs de risque qui abaissent le seuil épileptogène. ZYBAN L.P. ne doit pas être administré à ces patients, sauf en cas de nécessité absolue et si le bénéfice attendu du sevrage tabagique l'emporte sur le risque de survenue de convulsions. Chez ces patients, la dose maximale à utiliser durant tout le traitement est de 150 mg par jour.",
+    "qid": "8edbae4e"
+   },
+   {
+    "index": 6,
+    "corpus": "bdpm_rcp",
+    "page": "64556383",
+    "section": "4.4",
+    "quote": "administration concomitante d'autres médicaments connus pour abaisser le seuil épileptogène (ex: antipsychotiques, antidépresseurs, antipaludéens, tramadol, théophylline, stéroïdes administrés par voie systémique, quinolones et antihistaminiques sédatifs). En cas de prescription de médicaments de ce type chez un patient en cours de traitement par ZYBAN L.P., la dose maximale de 150 mg par jour est préconisée pour la durée de traitement restante",
+    "qid": "f1f15f35"
+   },
+   {
+    "index": 7,
+    "corpus": "bdpm_rcp",
+    "page": "64556383",
+    "section": "4.4",
+    "quote": "ZYBAN L.P. doit être interrompu et ne doit plus être repris chez les patients qui présenteraient des convulsions sous traitement.",
+    "qid": "4562cc6f"
+   },
+   {
+    "index": 8,
+    "corpus": "bdpm_rcp",
+    "page": "64556383",
+    "section": "4.4",
+    "quote": "Des interactions pharmacocinétiques peuvent modifier les concentrations plasmatiques du bupropion ou de ses métabolites et favoriser ainsi la survenue d'effets indésirables (ex : sécheresse de la bouche, insomnie, convulsions). Il convient d'être prudent lors de l'administration concomitante de bupropion et de médicaments induisant ou inhibant son métabolisme.",
+    "qid": "42b00acc"
+   },
+   {
+    "index": 9,
+    "corpus": "bdpm_rcp",
+    "page": "64556383",
+    "section": "4.4",
+    "quote": "Tous les patients présentant une insuffisance hépatique doivent être étroitement surveillés en raison du risque d'effets indésirables (ex : insomnie, sécheresse de la bouche, convulsions) qui pourraient révéler des concentrations plasmatiques élevées du produit ou de ses métabolites.",
+    "qid": "73b9cd71"
+   },
+   {
+    "index": 10,
+    "corpus": "bdpm_rcp",
+    "page": "64556383",
+    "section": "4.4",
+    "quote": "ZYBAN L.P. est réservé à un usage oral uniquement. L’inhalation de comprimés écrasés ou l’injection de bupropion dissout a été rapporté et peut entrainer une libération rapide, une absorption accélérée et un surdosage potentiel. Des cas de convulsion et/ou de décès ont été rapportés suite à une administration de bupropion intra-nasale ou par injection parentérale.",
+    "qid": "da6c5e85"
+   },
+   {
+    "index": 11,
+    "corpus": "europepmc",
+    "page": "17223086",
+    "quote": "Alprazolam, bupropion immediate release (IR) form, and quetiapine were also associated with higher seizure incidence.",
+    "qid": "bce85b20"
+   },
+   {
+    "index": 12,
+    "corpus": "europepmc",
+    "page": "17223086",
+    "quote": "Second-generation antidepressants other than bupropion have an apparent anticonvulsant effect.",
+    "qid": "5bd67ba8"
+   }
+  ]
+ },
+ "buspirone": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "61964472",
+    "section": "4.3",
+    "quote": "Patients atteints d’épilepsie.",
+    "qid": "98afe48d"
+   }
+  ]
+ },
+ "cabergoline": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "69671845",
+    "section": "4.4",
+    "quote": "Des événements indésirables graves, notamment hypertension, infarctus du myocarde, convulsions, accident vasculaire cérébral ou troubles psychiatriques, ont été rapportés chez des femmes en période post-partum traitées par cabergoline pour l’inhibition de la lactation. Chez certaines patientes, la survenue de convulsions ou d’un accident vasculaire cérébral a été précédée de céphalées sévères et/ou de troubles visuels transitoires. La tension artérielle doit être surveillée attentivement au cours du traitement. En cas d’hypertension, de douleurs thoraciques suggestives, de céphalées sévères, progressives ou permanentes (avec ou sans troubles visuels) ou de signes de toxicité pour le système nerveux central, la prise de cabergoline doit être interrompue et la patiente doit rapidement faire l’objet d’une évaluation.",
+    "qid": "bb0c8e60"
+   }
+  ]
+ },
+ "caffeine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "65973294",
+    "section": "4.4",
+    "quote": "La caféine est à utiliser avec prudence en cas de troubles du rythme cardiaque, d'épilepsie ou d'hyperthyroïdie.",
+    "qid": "9d6f2b2d"
+   }
+  ]
+ },
+ "cannabidiol": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "61680130",
+    "section": "4.2",
+    "quote": "Le traitement par Epidyolex doit être instauré et supervisé sous la surveillance de médecins expérimentés dans le traitement de l’épilepsie.",
+    "qid": "4c84800e"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "61680130",
+    "section": "4.2",
+    "quote": "Adaptations posologiques d’autres médicaments utilisés en association au cannabidiol Un médecin expérimenté dans le traitement des patients recevant plusieurs antiépileptiques (AE) évaluera la nécessité d’adaptations posologiques spécifiques du cannabidiol ou du(des) médicament(s) associé(s) afin de tenir compte des éventuelles interactions médicamenteuses (voir rubriques 4.4 et 4.5).",
+    "qid": "67844440"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "61680130",
+    "section": "4.4",
+    "quote": "Dans une étude non contrôlée menée dans une indication autre que l’épilepsie, deux patients âgés ont développé des élévations des taux de phosphatase alcaline supérieures à deux fois la LSN ainsi que des élévations des transaminases. Les élévations ont été résolues après l’interruption du traitement par cannabidiol.",
+    "qid": "00fb1eb1"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "61680130",
+    "section": "4.4",
+    "quote": "Augmentation de la fréquence des crises d’épilepsie",
+    "qid": "9d681b52"
+   },
+   {
+    "index": 4,
+    "corpus": "bdpm_rcp",
+    "page": "61680130",
+    "section": "4.4",
+    "quote": "À l’instar des autres AE, une augmentation cliniquement significative de la fréquence des crises d’épilepsie peut apparaître pendant le traitement par cannabidiol ; cela peut nécessiter un ajustement de la dose de cannabidiol et/ou des AE associés, ou l’interruption du traitement par cannabidiol dans l’éventualité où le rapport bénéfice/risque serait négatif. Dans les essais cliniques de phase 3 menés dans le SLG, le SD et la STB, la fréquence observée d’états de mal épileptique était similaire entre les groupes cannabidiol et placebo.",
+    "qid": "ad7aee32"
+   }
+  ]
+ },
+ "carbamazepine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "61009918",
+    "section": "4.2",
+    "quote": "Epilepsies",
+    "qid": "b640f56b"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "61009918",
+    "section": "4.2",
+    "quote": "Lorsque l’on substitue la carbamazépine à un autre antiépileptique, réduire graduellement la dose de ce dernier.",
+    "qid": "1597a608"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "61009918",
+    "section": "4.2",
+    "quote": "Une monothérapie antiépileptique est recommandée chaque fois que possible. Le traitement antiépileptique doit être administré quotidiennement et de façon prolongée parfois indéfiniment. La prescription de carbamazépine nécessite une surveillance régulière. Toute modification posologique, toute substitution médicamenteuse doit s’effectuer très progressivement (voir rubrique 4.4).",
+    "qid": "a6a5a19f"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "61009918",
+    "section": "4.2",
+    "quote": "La dose de carbamazépine doit être adaptée aux besoins de chaque patient pour atteindre un contrôle suffisant des crises épileptiques. L’établissement de la dose optimale de carbamazépine peut être rendu plus aisé par le dosage plasmatique, en particulier en cas de polythérapie antiépileptique. Dans le traitement de l’épilepsie, la dose efficace nécessite généralement d’atteindre des concentrations plasmatiques totales de carbamazépine comprises entre 4 et 12 microgrammes/mL (17 à 50 micromoles/L) (voir rubrique 5.1).",
+    "qid": "2a525c96"
+   },
+   {
+    "index": 4,
+    "corpus": "bdpm_rcp",
+    "page": "61009918",
+    "section": "4.2",
+    "quote": "En raison de possible interactions médicamenteuses et des différences de propriétés pharmacocinétiques entre les antiépileptiques, la posologie de TEGRETOL doit être choisie avec prudence chez le sujet âgé.",
+    "qid": "e4a3a4d4"
+   },
+   {
+    "index": 5,
+    "corpus": "bdpm_rcp",
+    "page": "61009918",
+    "section": "4.4",
+    "quote": "L’existence de rares cas de réactions croisées entre la carbamazépine et les médicaments antiépileptiques aromatiques tels que la phénytoïne, la primidone et le phénobarbital doit rendre prudent le remplacement de la carbamazépine par l’une ou l’autre de ces molécules.",
+    "qid": "489056cf"
+   },
+   {
+    "index": 6,
+    "corpus": "bdpm_rcp",
+    "page": "61009918",
+    "section": "4.4",
+    "quote": "Crises d’épilepsie",
+    "qid": "6c189ea3"
+   },
+   {
+    "index": 7,
+    "corpus": "bdpm_rcp",
+    "page": "61009918",
+    "section": "4.4",
+    "quote": "L’introduction d’un médicament antiépileptique peut, rarement, être suivie d’une recrudescence des crises ou de l’apparition d’un nouveau type de crise chez le patient, et ce indépendamment des fluctuations observées dans certaines maladies épileptiques. En ce qui concerne la carbamazépine, les causes de ces aggravations peuvent être : un choix de médicament mal approprié vis-à-vis des crises ou du syndrome épileptique du patient, une modification du traitement antiépileptique concomitant ou une interaction pharmacocinétique avec celui-ci, une toxicité ou un surdosage. Il peut ne pas y avoir d’autre explication qu’une réaction paradoxale.",
+    "qid": "ac163a5b"
+   },
+   {
+    "index": 8,
+    "corpus": "bdpm_rcp",
+    "page": "61009918",
+    "section": "4.4",
+    "quote": "Des idées et comportements suicidaires ont été rapportés chez des patients traités par des antiépileptiques dans plusieurs indications. Une méta-analyse d’essais randomisés, contrôlés versus placebo portant sur des antiépileptiques a également montré une légère augmentation du risque d’idées et de comportements suicidaires. Les causes de ce risque ne sont pas connues et les données disponibles n’excluent pas la possibilité d’une augmentation de ce risque pour la carbamazépine.",
+    "qid": "04eca889"
+   },
+   {
+    "index": 9,
+    "corpus": "bdpm_rcp",
+    "page": "61009918",
+    "section": "4.4",
+    "quote": "Les femmes susceptibles de procréer doivent être informées sur la nécessité de consulter leur médecin dès qu’elles envisagent une grossesse afin de discuter du recours à d’autres traitements antiépileptiques alternatifs avant la conception et avant l’interruption de la contraception (voir rubrique 4.6).",
+    "qid": "be07a129"
+   },
+   {
+    "index": 10,
+    "corpus": "bdpm_rcp",
+    "page": "61009918",
+    "section": "4.4",
+    "quote": "L’arrêt brutal de la carbamazépine peut précipiter les crises, par conséquent la carbamazépine doit être arrêtée progressivement sur une période de 6 mois. Selon les cas, un traitement transitoire par un antiépileptique à effet rapide peut s’avérer nécessaire.",
+    "qid": "6a6e103f"
+   }
+  ]
+ },
+ "cariprazine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "EMEA-H-C-002770",
+    "section": "4.4",
+    "quote": "Crises d’épilepsie et convulsions",
+    "qid": "488f52d7"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "EMEA-H-C-002770",
+    "section": "4.4",
+    "quote": "La cariprazine doit être utilisée avec prudence chez les patients ayant des antécédents de crises d’épilepsie ou d’autres situations cliniques susceptibles d’abaisser le seuil épileptogène.",
+    "qid": "0ff6ea8e"
+   }
+  ]
+ },
+ "chlorpromazine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "62184888",
+    "section": "4.4",
+    "quote": "Chez les épileptiques en raison de la possibilité d'abaissement du seuil épileptogène. La survenue de crises convulsives impose l'arrêt du traitement ;",
+    "qid": "9b601302"
+   },
+   {
+    "index": 1,
+    "corpus": "europepmc",
+    "page": "11888352",
+    "quote": "Agreement, however, converges on the following: seizures triggered by psychotropic drugs are a dose-dependent adverse effect; maprotiline and clomipramine among antidepressants and chlorpromazine and clozapine among antipsychotics that have a relatively high seizurogenic potential; phenelzine, tranylcypromine, fluoxetine, paroxetine, sertraline, venlafaxine and trazodone among antidepressants and fluphenazine, haloperidol, pimozide and risperidone among antipsychotics that exhibit a relatively low risk.",
+    "qid": "a32be816"
+   }
+  ]
+ },
+ "citalopram": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "68231138",
+    "section": "4.4",
+    "quote": "Les convulsions sont un risque potentiel avec les traitements antidépresseurs. Le citalopram devra être interrompu chez tout patient présentant des convulsions.",
+    "qid": "c3dba36a"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "68231138",
+    "section": "4.4",
+    "quote": "Le citalopram devra être évité chez les patients présentant une épilepsie instable. En cas d’épilepsie contrôlée, une surveillance particulière des patients est recommandée. Le citalopram doit être interrompu en cas d’augmentation de la fréquence des convulsions.",
+    "qid": "1b06bc6d"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "68231138",
+    "section": "4.4",
+    "quote": "En raison du peu de données cliniques disponibles sur l'administration d’un ISRS simultanément à une électroconvulsivothérapie, la prudence est recommandée.",
+    "qid": "7448462a"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "68231138",
+    "section": "4.4",
+    "quote": "Ce médicament contient 76 mg d’alcool par ml. Il est déconseillé chez les patients souffrant de maladie du foie, d'alcoolisme, d'épilepsie, de même que chez les femmes enceintes.",
+    "qid": "c0f40a4d"
+   }
+  ]
+ },
+ "clobazam": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "62905911",
+    "section": "4.2",
+    "quote": "Prévention et traitement du delirium tremens et des autres manifestations du sevrage alcoolique : traitement bref de l'ordre de 8 à 10 jours. Epilepsie",
+    "qid": "f94ab3d1"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "62905911",
+    "section": "4.2",
+    "quote": "Dans le traitement de l'épilepsie, la posologie du clobazam doit être adaptée à chaque cas :",
+    "qid": "57eec9b3"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "62905911",
+    "section": "4.4",
+    "quote": "L'introduction d'un médicament antiépileptique peut, rarement, être suivie d'une recrudescence des crises ou de l'apparition d'un nouveau type de crise chez le patient, et ce indépendamment des fluctuations observées dans certaines maladies épileptiques. En ce qui concerne les benzodiazépines, les causes de ces aggravations peuvent être : un choix de médicament mal approprié vis à vis des crises ou du syndrome épileptique du patient, une modification du traitement antiépileptique concomitant ou une interaction pharmacocinétique avec celui-ci, une toxicité ou un surdosage. Il peut ne pas y avoir d'autre explication qu'une réaction paradoxale.",
+    "qid": "045e59a6"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "62905911",
+    "section": "4.4",
+    "quote": "Cet état peut entraîner à l'arrêt du traitement un phénomène de sevrage. Certains symptômes sont fréquents et d'apparence banale : insomnie, céphalées, anxiété importante, myalgies, tension musculaire, irritabilité. D'autres symptômes sont plus rares : agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions.",
+    "qid": "f1ce4a41"
+   },
+   {
+    "index": 4,
+    "corpus": "bdpm_rcp",
+    "page": "62905911",
+    "section": "4.4",
+    "quote": "Des réactions cutanées sévères (dont le syndrome de Stevens-Johnson et syndrome de Lyell) ont été rapportées après commercialisation du clobazam chez les enfants et les adultes. La plupart des cas ont été rapportés lors de l’emploi concomitant du clobazam et d’autres antiépileptiques, connus pour entraîner des réactions cutanées sévères.",
+    "qid": "c1371cab"
+   }
+  ]
+ },
+ "clomipramine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "61426025",
+    "section": "4.4",
+    "quote": "Convulsions",
+    "qid": "4de99b22"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "61426025",
+    "section": "4.4",
+    "quote": "Les antidépresseurs tricycliques sont connus pour abaisser le seuil épileptogène, de ce fait, ANAFRANIL doit être utilisé avec précaution (surveillance clinique et électrique renforcée) chez les patients épileptiques ou ayant des antécédents d'épilepsie ou présentant des facteurs de risque de convulsions, tels que des lésions cérébrales d'étiologies variées, une utilisation concomitante de médicaments abaissant le seuil épileptogène (voir rubrique 4.5), le sevrage alcoolique ou médicamenteux (médicaments ayant des propriétés anticonvulsivantes comme les benzodiazépines). Le risque de crises convulsives étant dose-dépendant, la posologie maximale recommandée d’ANAFRANIL ne doit pas être dépassée. La survenue de crises convulsives impose l'arrêt du traitement.",
+    "qid": "52ef2d9a"
+   },
+   {
+    "index": 2,
+    "corpus": "europepmc",
+    "page": "17223086",
+    "quote": "Results Increased seizure incidence was observed with antipsychotics that was accounted for by clozapine and olanzapine, and with drugs indicated for the treatment of OCD that was accounted for by clomipramine.",
+    "qid": "0ec4148c"
+   },
+   {
+    "index": 3,
+    "corpus": "europepmc",
+    "page": "11888352",
+    "quote": "Agreement, however, converges on the following: seizures triggered by psychotropic drugs are a dose-dependent adverse effect; maprotiline and clomipramine among antidepressants and chlorpromazine and clozapine among antipsychotics that have a relatively high seizurogenic potential; phenelzine, tranylcypromine, fluoxetine, paroxetine, sertraline, venlafaxine and trazodone among antidepressants and fluphenazine, haloperidol, pimozide and risperidone among antipsychotics that exhibit a relatively low risk.",
+    "qid": "a32be816"
+   }
+  ]
+ },
+ "clonazepam": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "61496251",
+    "section": "4.2",
+    "quote": "On peut simplement considérer que l'on retrouve généralement une activité antiépileptique du clonazépam pour des concentrations plasmatiques variant de 20 ng/ml à 70 ng/ml.",
+    "qid": "4c31dc80"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "61496251",
+    "section": "4.4",
+    "quote": "Des idées et comportements suicidaires ont été rapportés chez des patients traités par des antiépileptiques dans plusieurs indications. Une méta-analyse d'essais randomisés, contrôlés contre placebo, portant sur des antiépileptiques a également montré une légère augmentation du risque d’idées et de comportements suicidaires. Les causes de ce risque ne sont pas connues et les données disponibles n'excluent pas la possibilité d'une augmentation de ce risque avec le clonazépam.",
+    "qid": "59236779"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "61496251",
+    "section": "4.4",
+    "quote": "L'introduction d'un médicament antiépileptique peut, rarement, être suivie d'une recrudescence des crises ou de l'apparition d'un nouveau type de crise chez le patient, et ce indépendamment des fluctuations observées dans certaines maladies épileptiques. En ce qui concerne les benzodiazépines, les causes de ces aggravations peuvent être : un choix de médicament mal approprié vis-à-vis des crises ou du syndrome épileptique du patient, une modification du traitement antiépileptique concomitant ou une interaction pharmacocinétique avec celui-ci, une toxicité ou un surdosage. Il peut ne pas y avoir d'autre explication qu'une réaction paradoxale.",
+    "qid": "4b211fd5"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "61496251",
+    "section": "4.4",
+    "quote": "L'effet antiépileptique du clonazépam peut diminuer progressivement malgré l'utilisation de la même dose en cas d'administration durant plusieurs semaines.",
+    "qid": "88508b2f"
+   },
+   {
+    "index": 4,
+    "corpus": "bdpm_rcp",
+    "page": "61496251",
+    "section": "4.4",
+    "quote": "L'utilisation des benzodiazépines peut entraîner un état de pharmacodépendance physique et psychique y compris à des doses thérapeutiques et/ou chez des patients sans facteur de risque individualisé. En particulier, le traitement au long cours ou à doses élevées peut entraîner des affections réversibles telles que dysarthrie, incoordination motrice et trouble de la marche (ataxie), nystagmus et altération de la vision (diplopie). Par ailleurs, le risque d'amnésie antérograde, qui peut apparaître en cas d'utilisation des benzodiazépines aux posologies thérapeutiques, peut augmenter lors de posologies plus élevées. Les effets amnésiques peuvent être associés à un comportement inapproprié. Avec certaines formes d'épilepsie, une augmentation de la fréquence des crises (voir rubrique 4.8) est possible pendant le traitement au long cours.",
+    "qid": "dd9ce3e1"
+   },
+   {
+    "index": 5,
+    "corpus": "bdpm_rcp",
+    "page": "61496251",
+    "section": "4.4",
+    "quote": "Des symptômes de sevrage peuvent se développer après une période d'utilisation prolongée, notamment à doses élevées ou si la posologie quotidienne est réduite rapidement ou que le traitement est arrêté brutalement. Les symptômes, dont certains peuvent être d’apparence banale, sont à type de tremblements, sueurs, agitation, troubles du sommeil et anxiété, céphalées, diarrhée, douleurs musculaires, anxiété extrême, tension, impatience, changements d’humeur, confusion, irritabilité et crises épileptiques pouvant être la conséquence du sevrage au clonazépam. Dans les cas sévères, les symptômes suivants peuvent se manifester : déréalisation, dépersonnalisation, hyperacousie, engourdissement et picotements dans les extrémités, hypersensibilité à la lumière, au bruit et au contact physique ou hallucinations. Étant donné que le risque de symptômes de sevrage est plus important après l'arrêt brutal du traitement, le retrait brutal du médicament doit donc être évité et le traitement, même s'il n'était que de courte durée, doit être arrêté par la réduction progressive de la posologie quotidienne.",
+    "qid": "fb344aad"
+   },
+   {
+    "index": 6,
+    "corpus": "bdpm_rcp",
+    "page": "61496251",
+    "section": "4.4",
+    "quote": "Dans certains cas, on peut noter une réduction d'efficacité vers le 6ème mois de traitement obligeant à aménager les posologies du clonazépam et/ou à compléter le traitement avec un autre antiépileptique.",
+    "qid": "6d4e82cd"
+   },
+   {
+    "index": 7,
+    "corpus": "bdpm_rcp",
+    "page": "61496251",
+    "section": "4.4",
+    "quote": "Les anticonvulsivants, dont RIVOTRIL, ne doivent pas être arrêtés brutalement chez les patients épileptiques au risque de survenue d’un état de mal épileptique.",
+    "qid": "84953fcc"
+   },
+   {
+    "index": 8,
+    "corpus": "bdpm_rcp",
+    "page": "61496251",
+    "section": "4.4",
+    "quote": "La posologie de clonazépam doit être ajustée aux besoins individuels des patients présentant une maladie respiratoire (ex : broncho-pneumopathie chronique obstructive), ainsi que chez les patients prenant de façon concomitante un autre dépresseur du système nerveux central ou un autre antiépileptique (voir rubrique 4.5).",
+    "qid": "8da4077d"
+   }
+  ]
+ },
+ "clorazepate": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "62416105",
+    "section": "4.4",
+    "quote": "Cet état peut entraîner à l'arrêt du traitement un phénomène de sevrage. Certains symptômes sont fréquents et d'apparence banale : insomnie, céphalées, anxiété importante, myalgies, tension musculaire, irritabilité. D'autres symptômes sont plus rares : agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions.",
+    "qid": "f1ce4a41"
+   }
+  ]
+ },
+ "clotiazepam": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "65558647",
+    "section": "4.4",
+    "quote": "Dès l’apparition de la dépendance physique, l'arrêt brutal du traitement peut provoquer des symptômes de sevrage tels que maux de tête, douleurs musculaires, anxiété extrême, tension, agitation, confusion et irritabilité. Dans les cas graves, les symptômes suivants peuvent apparaître : déréalisation, dépersonnalisation, hyperacousie, engourdissements et picotements dans les extrémités, hypersensibilité à la lumière, au bruit et au contact physique, hallucinations et crises d'épilepsie.",
+    "qid": "53f8e6df"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "65558647",
+    "section": "4.4",
+    "quote": "Le traitement doit être instauré avec prudence chez les patients épileptiques.",
+    "qid": "5a9e0da2"
+   }
+  ]
+ },
+ "clozapine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "62552920",
+    "section": "4.2",
+    "quote": "La posologie doit être adaptée individuellement. Pour chaque patient, la dose efficace minimale sera utilisée. Pour des posologies non réalisables/adaptées à ce dosage, d’autres dosages de ce médicament sont disponibles. Une titration prudente et un schéma posologique à doses fractionnées sont nécessaires pour minimiser les risques d’hypotension, de convulsions et de sédation.",
+    "qid": "a7b24b7d"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "62552920",
+    "section": "4.2",
+    "quote": "Un petit nombre de patients peut nécessiter de plus fortes doses pour obtenir un plein effet thérapeutique. Dans ce cas, des augmentations judicieuses (n'excédant pas 100 mg) sont autorisées jusqu'à un maximum de 900 mg/jour. Cependant, il faut prendre en considération la possibilité d'une augmentation des effets indésirables (en particulier de crises comitiales) qui surviennent à des doses dépassant 450 mg/jour.",
+    "qid": "0f7409e8"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "62552920",
+    "section": "4.3",
+    "quote": "Epilepsie non contrôlée.",
+    "qid": "c2df0075"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "62552920",
+    "section": "4.4",
+    "quote": "Les patients ayant un antécédent d'épilepsie doivent être surveillés étroitement au cours du traitement par LEPONEX, car des convulsions dose-dépendantes ont été rapportées sous clozapine. Dans ce cas, il convient de réduire la posologie (voir rubrique 4.2) et, si nécessaire, d'instaurer un traitement anticonvulsivant.",
+    "qid": "a6153b45"
+   },
+   {
+    "index": 4,
+    "corpus": "bdpm_rcp",
+    "page": "62552920",
+    "section": "4.4",
+    "quote": "LEPONEX peut provoquer des convulsions, de la somnolence, de l'hypotension orthostatique, une instabilité motrice et sensorielle pouvant entraîner des chutes et, par conséquent, des fractures ou d'autres blessures. Pour les patients atteints de maladies, d'affections ou prenant des médicaments susceptibles d'aggraver ces effets, une évaluation complète du risque de chute doit être réalisée lors de l'instauration d'un traitement antipsychotique et de façon récurrente chez les patients sous traitement antipsychotique à long terme.",
+    "qid": "17f303c0"
+   },
+   {
+    "index": 5,
+    "corpus": "europepmc",
+    "page": "17223086",
+    "quote": "Results Increased seizure incidence was observed with antipsychotics that was accounted for by clozapine and olanzapine, and with drugs indicated for the treatment of OCD that was accounted for by clomipramine.",
+    "qid": "0ec4148c"
+   },
+   {
+    "index": 6,
+    "corpus": "europepmc",
+    "page": "11888352",
+    "quote": "Agreement, however, converges on the following: seizures triggered by psychotropic drugs are a dose-dependent adverse effect; maprotiline and clomipramine among antidepressants and chlorpromazine and clozapine among antipsychotics that have a relatively high seizurogenic potential; phenelzine, tranylcypromine, fluoxetine, paroxetine, sertraline, venlafaxine and trazodone among antidepressants and fluphenazine, haloperidol, pimozide and risperidone among antipsychotics that exhibit a relatively low risk.",
+    "qid": "a32be816"
+   }
+  ]
+ },
+ "cyamemazine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60271248",
+    "section": "4.4",
+    "quote": "Chez les épileptiques en raison de la possibilité d'abaissement du seuil épileptogène ; la survenue de crises convulsives impose l'arrêt du traitement.",
+    "qid": "47531671"
+   }
+  ]
+ },
+ "dexmedetomidine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "64729383",
+    "section": "4.4",
+    "quote": "La dexmedetomidine n’a pas l'action anticonvulsivante de certains sédatifs et ne supprimera donc pas une activité convulsive sous-jacente.",
+    "qid": "b5334840"
+   }
+  ]
+ },
+ "diazepam": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60290800",
+    "section": "4.4",
+    "quote": "L'introduction d'un médicament antiépileptique peut, rarement, être suivie d'une recrudescence des crises ou de l'apparition d'un nouveau type de crise chez le patient, et ce indépendamment des fluctuations observées dans certaines maladies épileptiques. En ce qui concerne le Valium, les causes de ces aggravations peuvent être: un choix de médicament mal approprié vis-à-vis des crises ou du syndrome épileptique du patient, une modification du traitement antiépileptique concomitant ou une interaction pharmacocinétique avec celui-ci, une toxicité ou un surdosage. Il peut ne pas y avoir d'autre explication qu'une réaction paradoxale.",
+    "qid": "a339eb23"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60290800",
+    "section": "4.4",
+    "quote": "Une fois qu’une dépendance physique s’est installée, l'arrêt brutal du traitement entrainera un phénomène de sevrage et de rebond. Certains symptômes sont fréquents et d'apparence banale: insomnie, céphalées, diarrhée, anxiété importante, myalgies, tension musculaire, irritabilité. D'autres symptômes sont plus rares: agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions.",
+    "qid": "1d0e50cc"
+   }
+  ]
+ },
+ "disulfiram": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "61500746",
+    "section": "4.3",
+    "quote": "Epilepsie,",
+    "qid": "e122e287"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "61500746",
+    "section": "4.4",
+    "quote": "Des réactions avec l'alcool peuvent survenir jusqu'à 2 semaines après l'arrêt du disulfirame. Des réactions plus sévères ont été rapportées : troubles du rythme cardiaque, crise d'angor, collapsus cardiovasculaire, infarctus du myocarde, mort subite, dépression respiratoire, accidents neurologiques (confusion mentale, encéphalopathie et convulsions).",
+    "qid": "c105ac4f"
+   }
+  ]
+ },
+ "donepezil": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "62262995",
+    "section": "4.4",
+    "quote": "Il a été rapporté des cas de syncope et de convulsions. Lors de l'examen de ces patients la possibilité de bloc cardiaque ou de pauses sinusales prolongées doit être envisagée.",
+    "qid": "a09336ff"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "62262995",
+    "section": "4.4",
+    "quote": "Convulsions: les cholinomimétiques sont décrits comme potentiellement responsables de crises convulsives généralisées. Toutefois, les convulsions peuvent aussi être une manifestation de la maladie d'Alzheimer.",
+    "qid": "70f0e277"
+   }
+  ]
+ },
+ "doxepin": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "63046819",
+    "section": "4.4",
+    "quote": "Chez les patients épileptiques ou ayant des antécédents d'épilepsie, il est prudent de renforcer la surveillance clinique et électrique, en raison de la possibilité d'abaissement du seuil épileptogène. La survenue de crises convulsives impose l'arrêt du traitement.",
+    "qid": "dfd5b810"
+   }
+  ]
+ },
+ "duloxetine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60299831",
+    "section": "4.4",
+    "quote": "Episodes maniaques et convulsions",
+    "qid": "8914390a"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60299831",
+    "section": "4.4",
+    "quote": "La duloxétine doit être utilisé avec prudence chez les patients présentant un antécédent d’épisode maniaque ou un diagnostic de trouble bipolaire et/ou des convulsions.",
+    "qid": "59ca2576"
+   }
+  ]
+ },
+ "escitalopram": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60474889",
+    "section": "4.4",
+    "quote": "L’escitalopram doit être interrompu si le patient présente des convulsions pour la première fois ou si la fréquence des convulsions augmente (pour les patients chez qui une épilepsie a été diagnostiquée précédemment). Les ISRS doivent être évités chez les patients présentant une épilepsie instable. En cas d’épilepsie contrôlée, une surveillance étroite des patients est recommandée.",
+    "qid": "63cb200d"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60474889",
+    "section": "4.4",
+    "quote": "En raison du peu de données cliniques disponibles sur l’administration d’un ISRS simultanément à une électroconvulsivothérapie, la prudence est recommandée.",
+    "qid": "a201a855"
+   }
+  ]
+ },
+ "esketamine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60811559",
+    "section": "4.3",
+    "quote": "en association avec des dérivés de la xanthine (par exemple aminophylline ou théophylline) (le seuil de convulsion peut être abaissé).",
+    "qid": "3c84405f"
+   }
+  ]
+ },
+ "eslicarbazepine_acetate": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "63927729",
+    "section": "4.2",
+    "quote": "L’acétate d’eslicarbazépine peut être utilisé en monothérapie ou en association à un traitement anticonvulsivant en cours. La dose initiale recommandée est de 400 mg une fois par jour avec augmentation à 800 mg une fois par jour après une ou deux semaines. En fonction de la réponse individuelle, la dose pourra être augmentée jusqu’à une dose maximum de 1 200 mg une fois par jour. En monothérapie, une dose de 1 600 mg une fois par jour pourrait être utilisée chez certains patients (voir rubrique 5.1).",
+    "qid": "03cad4d2"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "63927729",
+    "section": "4.4",
+    "quote": "La survenue d’idées ou d’un comportement suicidaires a été rapportée chez des patients traités par des antiépileptiques dans plusieurs indications. Une méta-analyse sur des études randomisées contrôlées contre placebo évaluant des antiépileptiques a également indiqué une légère augmentation du risque d'idées et de comportement suicidaires. Le mécanisme de ce risque reste inconnu et les données disponibles n’excluent pas la possibilité d’une augmentation du risque avec l'utilisation de l'acétate d'eslicarbazépine. Les patients traités par ce médicament devront par conséquent être surveillés de manière régulière pour détecter des signes d’idées et de comportements suicidaires et un traitement approprié doit être envisagé. Les patients (et leurs aidants) devront être avertis qu’ils doivent contacter un médecin au plus vite en cas de survenue de tout signe de comportement ou d'idées suicidaires.",
+    "qid": "7dbba693"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "63927729",
+    "section": "4.4",
+    "quote": "Si le traitement par l’acétate d’eslicarbazépine doit être suspendu, cela doit se faire de manière progressive afin de limiter le risque possible de crises convulsives à l’arrêt du traitement.",
+    "qid": "47184625"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "63927729",
+    "section": "4.4",
+    "quote": "La survenue d'une éruption cutanée (rash) a été décrite chez 1,2 % de la population totale traitée par acétate d’eslicarbazépine au cours d'études cliniques chez le patient épileptique. Des cas d’urticaire et d’angio-œdème ont été rapportés chez des patients sous acétate d’eslicarbazépine. L’angio-œdème dans un contexte d’hypersensibilité/de réaction anaphylactique associée à un œdème laryngé peut être fatal. En cas de signes ou de symptômes d’hypersensibilité, il est impératif d’interrompre immédiatement le traitement par acétate d’eslicarbazépine et l’instauration d’un traitement alternatif doit être envisagée.",
+    "qid": "7500a187"
+   }
+  ]
+ },
+ "estazolam": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "69888457",
+    "section": "4.4",
+    "quote": "Cet état peut entraîner à l'arrêt du traitement un phénomène de sevrage. Certains symptômes sont fréquents et d'apparence banale : insomnie, céphalées, anxiété importante, myalgies, tension musculaire, irritabilité. D'autres symptômes sont plus rares : agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions.",
+    "qid": "f1ce4a41"
+   }
+  ]
+ },
+ "ethosuximide": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "68481191",
+    "section": "4.4",
+    "quote": "Toute augmentation ou diminution de la posologie de l'éthosuximide doit être effectuée de façon progressive. Tout arrêt brutal est susceptible d'entraîner un état de mal épileptique.",
+    "qid": "498abd0b"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "68481191",
+    "section": "4.4",
+    "quote": "L'introduction d'un médicament antiépileptique peut, rarement, être suivie d'une recrudescence des crises ou de l'apparition d'un nouveau type de crise chez le patient, et ce indépendamment des fluctuations observées dans certaines maladies épileptiques. En ce qui concerne l'éthosuximide, les causes de ces aggravations peuvent être : un choix de médicament mal approprié vis à vis des crises ou du syndrome épileptique du patient, une modification du traitement antiépileptique concomitant ou une interaction pharmacocinétique avec celui-ci, une toxicité ou un surdosage. Il peut ne pas y avoir d'autre explication qu'une réaction paradoxale.",
+    "qid": "6f2d997a"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "68481191",
+    "section": "4.4",
+    "quote": "Des idées et comportements suicidaires ont été rapportés chez des patients traités par des antiépileptiques dans plusieurs indications. Une méta-analyse d’études randomisées contrôlées contre placebo de médicaments antiépileptiques a également montré une légère augmentation du risque d’idées et comportements suicidaires. Le mécanisme de ce risque est inconnu et les données disponibles ne permettent pas d’exclure la possibilité d’un risque accru avec ZARONTIN. Les patients doivent par conséquent être surveillés pour détecter des signes d’idées et comportements suicidaires et un traitement approprié doit être envisagé. Il convient de recommander aux patients (et à leur soignants) de consulter un médecin en cas d’apparition de signes d’idées ou comportements suicidaires.",
+    "qid": "ea66753b"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "68481191",
+    "section": "4.4",
+    "quote": "En cas d'absences associée à une autre forme d'épilepsie (crises généralisées ou partielles), dont l'éthosuximide utilisé seul est susceptible d'augmenter la fréquence, il est recommandé de lui associer un autre antiépileptique.",
+    "qid": "9bce33ca"
+   }
+  ]
+ },
+ "fenfluramine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "62154820",
+    "section": "4.2",
+    "quote": "Le traitement par Fintepla doit être instauré et supervisé par des médecins expérimentés dans le traitement de l’épilepsie.",
+    "qid": "3999b8d1"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "62154820",
+    "section": "4.2",
+    "quote": "Interruption du traitement En cas d’interruption du traitement, la dose doit être réduite progressivement. L’arrêt brutal du traitement doit être évité, dans la mesure du possible, afin réduire les risques d’augmentation de la fréquence des crises d’épilepsie et de survenue d’un état de mal épileptique. Une échocardiographie finale doit être effectuée 3 à 6 mois après la dernière dose du traitement par fenfluramine.",
+    "qid": "7721fc40"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "62154820",
+    "section": "4.4",
+    "quote": "La fenfluramine peut entraîner une diminution de l’appétit et une perte de poids (voir rubrique 4.8). Un effet additionnel sur la diminution de l’appétit peut se produire lorsque la fenfluramine est associée à d’autres médicaments antiépileptiques, par exemple le stiripentol. La perte de poids semble être dose-dépendante. La plupart des sujets ont repris du poids au cours du temps tout en poursuivant le traitement. Le poids du patient doit être surveillé. Une évaluation du rapport bénéfice/risque doit être effectuée avant de commencer le traitement par la fenfluramine chez les patients ayant des antécédents d’anorexie mentale ou de boulimie.",
+    "qid": "88e34c3d"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "62154820",
+    "section": "4.4",
+    "quote": "Des comportements et idées suicidaires ont été rapportés chez les patients traités par des médicaments antiépileptiques dans plusieurs indications. Une méta-analyse d’essais randomisés contrôlés contre placebo portant sur des médicaments antiépileptiques n’incluant pas la fenfluramine a montré une légère augmentation du risque de comportements et d’idées suicidaires. Le mécanisme de cet effet n’est pas connu et les données disponibles n’excluent pas la possibilité d’une augmentation de ce risque pour la fenfluramine. Il doit être recommandé aux patients et à leurs aidants de consulter un médecin si des signes de comportements et d’idées suicidaires venaient à apparaître.",
+    "qid": "9c277d27"
+   },
+   {
+    "index": 4,
+    "corpus": "bdpm_rcp",
+    "page": "62154820",
+    "section": "4.4",
+    "quote": "Augmentation de la fréquence des crises d’épilepsie",
+    "qid": "9d681b52"
+   },
+   {
+    "index": 5,
+    "corpus": "bdpm_rcp",
+    "page": "62154820",
+    "section": "4.4",
+    "quote": "Une augmentation cliniquement significative de la fréquence des crises d’épilepsie peut apparaître pendant le traitement par la fenfluramine. Cela peut nécessiter un ajustement de la dose de fenfluramine et/ou des médicaments antiépileptiques associés, ou l’interruption du traitement par la fenfluramine le rapport bénéfice/risque devenant négatif.",
+    "qid": "9e06744b"
+   },
+   {
+    "index": 6,
+    "corpus": "bdpm_rcp",
+    "page": "62154820",
+    "section": "4.4",
+    "quote": "La cyproheptadine est un puissant antagoniste des récepteurs de la sérotonine et peut donc diminuer l’efficacité de la fenfluramine. En cas d’association de cyproheptadine et de fenfluramine, les patients doivent être surveillés en vue de détecter toute aggravation des crises d’épilepsie. Si un traitement par la fenfluramine est instauré chez un patient prenant de la cyproheptadine, l’efficacité de la fenfluramine peut être réduite.",
+    "qid": "201c44de"
+   }
+  ]
+ },
+ "flumazenil": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "67248985",
+    "section": "4.3",
+    "quote": "Patients ayant reçu des benzodiazépines pour une pathologie présentant un risque vital (par exemple, contrôle de la pression intracrânienne ou état de mal épileptique).",
+    "qid": "3d9c6d1e"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "67248985",
+    "section": "4.4",
+    "quote": "L’utilisation de l’antagoniste n'est pas recommandée chez les malades épileptiques qui ont reçu un traitement prolongé par les benzodiazépines. Bien que le flumazénil ait des effets antiépileptiques intrinsèques, l'effet antagoniste brutal peut provoquer des convulsions chez les patients épileptiques.",
+    "qid": "c417a7bc"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "67248985",
+    "section": "4.4",
+    "quote": "Chez les patients ayant reçu un traitement prolongé avec des doses élevées de benzodiazépines, le bénéfice de l'utilisation de flumazénil doit être pesé face au risque éventuel de symptômes de sevrage aux benzodiazépines. Si, malgré un ajustement soigneux de la dose, des symptômes de sevrage aux benzodiazépines surviennent, une dose individuelle de 5 mg de diazépam ou 5 mg de midazolam peut être donnée par injection intraveineuse lente. L’utilisation de l’antagoniste n'est pas recommandée chez les malades épileptiques qui ont reçu un traitement prolongé par les benzodiazépines. Bien que le flumazénil ait des effets antiépileptiques intrinsèques, l'effet antagoniste brutal peut provoquer des convulsions chez les patients épileptiques. La prudence est recommandée pour les cas d’intoxication multiples. En particulier dans les intoxications poly médicamenteuses par benzodiazépines et antidépresseurs cycliques, certains effets toxiques tels que convulsions et arythmies cardiaques, provoqués par ces antidépresseurs mais qui apparaissent moins vite lors d’une administration concomitante de benzodiazépines, sont exacerbés par l’administration de flumazénil.",
+    "qid": "029614ad"
+   }
+  ]
+ },
+ "fluoxetine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60338857",
+    "section": "4.4",
+    "quote": "Lors d’un traitement antidépresseur, il existe un risque potentiel de convulsion. Par conséquent, comme avec d’autres antidépresseurs, le traitement par la fluoxétine doit être instauré avec précaution chez les patients ayant des antécédents d’épilepsie.",
+    "qid": "4a378cd4"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60338857",
+    "section": "4.4",
+    "quote": "Le traitement doit être interrompu chez tout patient présentant une crise d’épilepsie ou une augmentation de la fréquence de celles-ci. La fluoxétine doit être évitée chez les patients présentant une épilepsie instable ; une surveillance étroite s’impose chez les patients présentant une épilepsie contrôlée (voir rubrique 4.5).",
+    "qid": "f7208be5"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "60338857",
+    "section": "4.4",
+    "quote": "Quelques rares cas de prolongation de crises convulsives ont été rapportés chez des patients traités par fluoxétine et ECT ; une prudence particulière est donc recommandée.",
+    "qid": "5c14022d"
+   },
+   {
+    "index": 3,
+    "corpus": "europepmc",
+    "page": "11888352",
+    "quote": "Agreement, however, converges on the following: seizures triggered by psychotropic drugs are a dose-dependent adverse effect; maprotiline and clomipramine among antidepressants and chlorpromazine and clozapine among antipsychotics that have a relatively high seizurogenic potential; phenelzine, tranylcypromine, fluoxetine, paroxetine, sertraline, venlafaxine and trazodone among antidepressants and fluphenazine, haloperidol, pimozide and risperidone among antipsychotics that exhibit a relatively low risk.",
+    "qid": "a32be816"
+   }
+  ]
+ },
+ "flupenthixol": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "62571671",
+    "section": "4.4",
+    "quote": "Une surveillance chez les patients épileptiques et les sujets présentant d’autres facteurs prédisposants (atteinte cérébrale) peut être conseillée en raison de la possibilité d’abaissement du seuil épileptogène.",
+    "qid": "a33bb795"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "62571671",
+    "section": "4.4",
+    "quote": "L’utilisation de ce médicament est dangereuse chez les sujets alcooliques et doit être prise en compte chez les femmes enceintes ou allaitant, les enfants et les groupes à haut risque tels que les insuffisants hépatiques ou les épileptiques.",
+    "qid": "37313f9d"
+   }
+  ]
+ },
+ "fluphenazine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "europepmc",
+    "page": "11888352",
+    "quote": "Agreement, however, converges on the following: seizures triggered by psychotropic drugs are a dose-dependent adverse effect; maprotiline and clomipramine among antidepressants and chlorpromazine and clozapine among antipsychotics that have a relatively high seizurogenic potential; phenelzine, tranylcypromine, fluoxetine, paroxetine, sertraline, venlafaxine and trazodone among antidepressants and fluphenazine, haloperidol, pimozide and risperidone among antipsychotics that exhibit a relatively low risk.",
+    "qid": "a32be816"
+   }
+  ]
+ },
+ "fluvoxamine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60439525",
+    "section": "4.4",
+    "quote": "Bien que les études chez l’animal n’aient pas montré de propriétés proconvulsivantes de la fluvoxamine, ce médicament doit être utilisé avec précaution chez les patients présentant des antécédents de troubles convulsifs. La fluvoxamine doit être évitée en cas d’épilepsie instable. Les patients présentant une épilepsie bien contrôlée doivent être étroitement surveillés. Le traitement par fluvoxamine doit être arrêté en cas de survenue d’une crise convulsive ou en cas d’augmentation de la fréquence des crises.",
+    "qid": "01ec75a2"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60439525",
+    "section": "4.4",
+    "quote": "En raison d’une expérience clinique limitée, la prudence est de mise lors de l’association de fluvoxamine et d’électro-convulsivothérapie.",
+    "qid": "cac6334f"
+   }
+  ]
+ },
+ "gabapentin": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "61022591",
+    "section": "4.2",
+    "quote": "Epilepsie",
+    "qid": "23b6a727"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "61022591",
+    "section": "4.2",
+    "quote": "L'épilepsie requiert généralement un traitement au long cours. La posologie est déterminée individuellement par le médecin traitant en fonction de la tolérance et de l'efficacité.",
+    "qid": "43677e5b"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "61022591",
+    "section": "4.2",
+    "quote": "Dans les essais cliniques, l'intervalle des doses efficaces se situait entre 900 et 3600 mg/jour. Le traitement peut être instauré par une titration de dose, telle que décrite dans le tableau 1, ou par l'administration de 300 mg trois fois par jour (TID) au Jour 1. Par la suite, en fonction de la réponse et de la tolérance du patient, la dose peut être augmentée par paliers de 300 mg/jour tous les 2-3 jours jusqu'à une dose maximale de 3600 mg/jour. Une titration plus lente de la posologie de gabapentine peut être appropriée chez certains patients. Le délai minimum pour atteindre une dose de 1800 mg/jour est d'une semaine, pour atteindre 2400 mg/jour il est de 2 semaines au total et pour atteindre 3600 mg/jour il est de 3 semaines au total. Des posologies allant jusqu'à 4800 mg/jour ont été bien tolérées dans les études cliniques à long terme en ouvert. La dose quotidienne totale doit être répartie en trois prises et l'intervalle maximal entre les doses ne doit pas dépasser 12 heures afin d'éviter la recrudescence des convulsions.",
+    "qid": "6307c4f6"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "61022591",
+    "section": "4.2",
+    "quote": "Il n'est pas nécessaire de surveiller les concentrations plasmatiques de gabapentine dans le but d'optimiser le traitement par la gabapentine. Par ailleurs, la gabapentine peut être utilisée en association avec d'autres médicaments antiépileptiques sans crainte d'une éventuelle modification des concentrations plasmatiques de gabapentine ou des concentrations sériques des autres médicaments antiépileptiques.",
+    "qid": "ed3f9839"
+   },
+   {
+    "index": 4,
+    "corpus": "bdpm_rcp",
+    "page": "61022591",
+    "section": "4.4",
+    "quote": "Des idées et un comportement suicidaires ont été rapportés chez des patients traités par des agents antiépileptiques dans plusieurs indications. Une méta-analyse d'essais randomisés, contrôlés contre placebo de médicaments antiépileptiques a également montré un risque légèrement accru d'idées et de comportements suicidaires. Le mécanisme de ce risque n'est pas connu. Des cas d’idées et de comportements suicidaires ont été observés chez les patients traités par la gabapentine après commercialisation (voir rubrique 4.8).",
+    "qid": "360f9b13"
+   },
+   {
+    "index": 5,
+    "corpus": "bdpm_rcp",
+    "page": "61022591",
+    "section": "4.4",
+    "quote": "Crises d’épilepsie",
+    "qid": "6c189ea3"
+   },
+   {
+    "index": 6,
+    "corpus": "bdpm_rcp",
+    "page": "61022591",
+    "section": "4.4",
+    "quote": "Même si aucune donnée ne montre une recrudescence des crises avec la gabapentine, l'arrêt brutal des anticonvulsivants chez les patients épileptiques peut déclencher un état de mal épileptique (voir rubrique 4.2).",
+    "qid": "6234f818"
+   },
+   {
+    "index": 7,
+    "corpus": "bdpm_rcp",
+    "page": "61022591",
+    "section": "4.4",
+    "quote": "Comme avec les autres médicaments antiépileptiques, certains patients peuvent présenter une augmentation de la fréquence des crises ou l'apparition de nouveaux types de crises avec la gabapentine.",
+    "qid": "41a16da5"
+   },
+   {
+    "index": 8,
+    "corpus": "bdpm_rcp",
+    "page": "61022591",
+    "section": "4.4",
+    "quote": "Comme avec les autres antiépileptiques, les tentatives d'arrêt des antiépileptiques concomitants dans le traitement des patients réfractaires traités par un ou plusieurs antiépileptiques, en vue d'atteindre la monothérapie sous gabapentine, ont moins de chance de succès.",
+    "qid": "95be0494"
+   }
+  ]
+ },
+ "galantamine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "63358402",
+    "section": "4.4",
+    "quote": "Des crises convulsives ont été rapportées avec la galantamine (voir rubrique 4.8). L’activité épileptiforme peut également être une manifestation de la maladie d’Alzheimer. Une augmentation de l’activité cholinergique peut aggraver les symptômes liés aux troubles extrapyramidaux (voir rubrique 4.8).",
+    "qid": "9807a47b"
+   }
+  ]
+ },
+ "haloperidol": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "61490049",
+    "section": "4.4",
+    "quote": "La survenue de crises épileptiques déclenchées par l’halopéridol a été signalée. La prudence est requise chez les patients atteints d’épilepsie ou présentant des prédispositions aux crises épileptiques (sevrage alcoolique et lésions cérébrales, par exemple).",
+    "qid": "7cbd6f5f"
+   },
+   {
+    "index": 1,
+    "corpus": "europepmc",
+    "page": "11888352",
+    "quote": "Agreement, however, converges on the following: seizures triggered by psychotropic drugs are a dose-dependent adverse effect; maprotiline and clomipramine among antidepressants and chlorpromazine and clozapine among antipsychotics that have a relatively high seizurogenic potential; phenelzine, tranylcypromine, fluoxetine, paroxetine, sertraline, venlafaxine and trazodone among antidepressants and fluphenazine, haloperidol, pimozide and risperidone among antipsychotics that exhibit a relatively low risk.",
+    "qid": "a32be816"
+   }
+  ]
+ },
+ "hydromorphone": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "63771924",
+    "section": "4.3",
+    "quote": "épilepsie non contrôlée,",
+    "qid": "9d08dff3"
+   }
+  ]
+ },
+ "hydroxyzine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "61162294",
+    "section": "4.4",
+    "quote": "chez les jeunes enfants, qui sont plus particulièrement sensibles aux effets sur le système nerveux central (notamment convulsions),",
+    "qid": "e4eb3350"
+   }
+  ]
+ },
+ "imipramine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "67117128",
+    "section": "4.4",
+    "quote": "Convulsions",
+    "qid": "4de99b22"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "67117128",
+    "section": "4.4",
+    "quote": "Les antidépresseurs tricycliques sont connus pour abaisser le seuil épileptogène, de ce fait TOFRANIL doit être utilisé avec précaution chez les patients épileptiques ou présentant des facteurs de risque de convulsions, tels que lésions cérébrales d'étiologies variées, en cas d'administration concomitante de médicaments abaissant le seuil épileptogène (voir rubrique 4.5 la liste des substances concernées) et en cas d'électroconvulsivothérapie concomitante. Le risque de crises convulsives étant dose-dépendant, la posologie maximale recommandée de TOFRANIL ne doit pas être dépassée. La survenue de crises convulsives impose l'arrêt du traitement.",
+    "qid": "c5d43f45"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "67117128",
+    "section": "4.4",
+    "quote": "Chez les patients épileptiques ou ayant des antécédents d'épilepsie, il est prudent de renforcer la surveillance clinique et électrique, en raison de la possibilité d'abaissement du seuil épileptogène. La survenue de crises convulsives impose l'arrêt du traitement.",
+    "qid": "dfd5b810"
+   }
+  ]
+ },
+ "iproniazid": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "61561635",
+    "section": "4.4",
+    "quote": "o chez les sujets épileptiques: le nialamide a été associé à des traitements anti-épileptiques, avec des résultats variables; certains patients ont été améliorés, pour d'autres, la maladie s'est aggravée. Les IMAO sont susceptibles d'abaisser le seuil épileptogène.",
+    "qid": "9aba3dbc"
+   }
+  ]
+ },
+ "lacosamide": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60575525",
+    "section": "4.2",
+    "quote": "* Une dose de charge peut être administrée lorsque le médecin souhaite obtenir rapidement, pour un patient, la concentration plasmatique à l’état d’équilibre du lacosamide et l’effet thérapeutique. Elle doit être administrée sous surveillance médicale en tenant compte d’une possible augmentation de la survenue d’arythmies cardiaques graves et des effets indésirables affectant le système nerveux central (voir rubrique 4.8). L’administration d’une dose de charge n’a pas été étudiée en situation aiguë comme l’état de mal épileptique.",
+    "qid": "e2e20e74"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60575525",
+    "section": "4.2",
+    "quote": "Chez les patients ayant atteint une dose supérieure à 200 mg deux fois par jour (400 mg/jour) et ayant besoin d'un médicament antiépileptique supplémentaire, la posologie recommandée en association ci-dessous doit être suivie.",
+    "qid": "9cf59256"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "60575525",
+    "section": "4.2",
+    "quote": "L’administration d’une dose de charge n’a pas été étudiée en situation aiguë comme l’état de mal épileptique.",
+    "qid": "e03bbaf6"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "60575525",
+    "section": "4.2",
+    "quote": "Les données cliniques chez le sujet âgé épileptique sont limitées, en particulier à des doses supérieures à 400 mg/jour (voir rubriques 4.4, 4.8 et 5.1).",
+    "qid": "096921ac"
+   },
+   {
+    "index": 4,
+    "corpus": "bdpm_rcp",
+    "page": "60575525",
+    "section": "4.4",
+    "quote": "Des cas d'idées et comportements suicidaires ont été rapportés chez des patients traités par des médicaments antiépileptiques dans plusieurs indications. Une méta-analyse des études cliniques randomisés, contrôlés versus placebo, portant sur des médicaments antiépileptiques a également montré une légère augmentation du risque d’idées et comportements suicidaires.",
+    "qid": "f59dba2a"
+   },
+   {
+    "index": 5,
+    "corpus": "bdpm_rcp",
+    "page": "60575525",
+    "section": "4.4",
+    "quote": "Des allongements de l’espace PR liés à la dose ont été observés au cours des études cliniques avec le lacosamide. . Le lacosamide doit être utilisé avec précaution chez les patients ayant des arythmies sousjacentes, comme des patients ayant des troubles connus de la conduction cardiaque ou une cardiopathie sévère (par exemple, ischémie myocardique/infarctus du myocarde, insuffisance cardiaque, cardiopathie structurelle ou canalopathies sodiques cardiaques) ou des patients traités par des médicaments qui affectent la conduction cardiaque, notamment les médicaments antiarythmiques et antiépileptiques bloquant les canaux sodiques (voir rubrique 4.5), ainsi que chez les patients âgés.",
+    "qid": "7a6f6711"
+   },
+   {
+    "index": 6,
+    "corpus": "bdpm_rcp",
+    "page": "60575525",
+    "section": "4.4",
+    "quote": "Lors des études cliniques contrôlées versus placebo chez des patients présentant une épilepsie, aucun cas de fibrillation ou de flutter auriculaires n’a été rapporté ; cependant, des cas ont été rapportés lors des études cliniques en ouvert et depuis la commercialisation.",
+    "qid": "0e037615"
+   },
+   {
+    "index": 7,
+    "corpus": "bdpm_rcp",
+    "page": "60575525",
+    "section": "4.4",
+    "quote": "Chez les patients présentant plus d’un type de crises, le bénéfice observé pour le contrôle d’un type de crise doit être pondéré par toute aggravation observée d’un autre type de crise.Dégradation électro-clinique potentielle en cas de syndromes épileptiques pédiatriques spécifiques",
+    "qid": "1dd15251"
+   },
+   {
+    "index": 8,
+    "corpus": "bdpm_rcp",
+    "page": "60575525",
+    "section": "4.4",
+    "quote": "La tolérance et l’efficacité du lacosamide chez les patients pédiatriques présentant des syndromes épileptiques avec des crises partielles et généralisées coexistantes n’ont pas été déterminées.",
+    "qid": "71342741"
+   }
+  ]
+ },
+ "lamotrigine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "61043653",
+    "section": "4.2",
+    "quote": "Si la posologie calculée de lamotrigine (par exemple pour le traitement d'enfants atteints d'épilepsie ou des patients ayant une insuffisance hépatique) ne correspond pas à un nombre entier de comprimé(s), la dose devant être administrée est égale à l'unité inférieure du nombre de comprimé(s) entier(s).",
+    "qid": "1666ec32"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "61043653",
+    "section": "4.2",
+    "quote": "Si le contrôle de l'épilepsie est atteint avec un traitement en association, les AEs associés peuvent être arrêtés et les patients maintenus sous monothérapie par LAMICTAL.",
+    "qid": "257d07ad"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "61043653",
+    "section": "4.4",
+    "quote": "Chez les adultes recrutés dans les essais utilisant les recommandations posologiques actuelles de la lamotrigine, l'incidence des éruptions cutanées graves est d’environ 1 pour 500 patients épileptiques. Environ la moitié de ces cas a été rapportée comme étant des syndromes de Stevens-Johnson (1 pour 1000). Dans les essais cliniques chez les patients atteints de troubles bipolaires, l'incidence des éruptions cutanées graves est d'environ 1 pour 1000.",
+    "qid": "f13be041"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "61043653",
+    "section": "4.4",
+    "quote": "Comme avec d'autres AEs, l'arrêt brutal de LAMICTAL peut provoquer des crises par un effet rebond. La posologie de LAMICTAL doit être progressivement réduite sur une période de deux semaines, sauf s'il s'agit de problèmes de tolérance (par exemple éruption cutanée) nécessitant un arrêt brutal du traitement. D'après des données issues de la littérature, des crises convulsives sévères incluant l'état de mal peuvent conduire à une rhabdomyolyse, une défaillance multiviscérale et une coagulation intra-vasculaire disséminée pouvant parfois conduire au décès. Des cas similaires sont survenus en association avec l'utilisation de lamotrigine.",
+    "qid": "9706f42b"
+   },
+   {
+    "index": 4,
+    "corpus": "bdpm_rcp",
+    "page": "61043653",
+    "section": "4.4",
+    "quote": "Les données suggèrent que les réponses au traitement lors d'une association à des inducteurs enzymatiques sont moindres comparées à une association à des médicaments anti-épileptiques non inducteurs enzymatiques. La cause en est mal connue.",
+    "qid": "c381c611"
+   }
+  ]
+ },
+ "levetiracetam": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60591091",
+    "section": "4.2",
+    "quote": "Adolescents (16 à 17 ans) pesant 50 kg ou plus, ayant des crises partielles avec ou sans généralisation secondaire et présentant une épilepsie nouvellement diagnostiquée",
+    "qid": "f4bdcb3b"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60591091",
+    "section": "4.4",
+    "quote": "Des cas de suicide, tentative de suicide, idées et comportement suicidaires ont été rapportés chez des patients traités par des antiépileptiques (y compris le lévétiracétam). Une méta-analyse des essais randomisés, contrôlés versus placebo portant sur des médicaments antiépileptiques a montré une légère augmentation du risque de pensées et comportements suicidaires. Le mécanisme de ce risque n'est pas connu.",
+    "qid": "33c7a63f"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "60591091",
+    "section": "4.4",
+    "quote": "Comme avec d’autres types d’antiépileptiques, le lévétiracétam peut, dans de rares cas, accroître la fréquence ou la gravité des crises convulsives. Cet effet paradoxal, principalement signalé au cours du premier mois suivant l’instauration du lévétiracétam ou l’augmentation de la dose, était réversible après l’arrêt du médicament ou la diminution de la dose. Il doit être conseillé aux patients de consulter immédiatement leur médecin en cas d’aggravation des crises convulsives.",
+    "qid": "60f32128"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "60591091",
+    "section": "4.4",
+    "quote": "Une absence d’efficacité ou une aggravation des crises a par exemple été rapportée chez des patients atteints d’épilepsie associée à des mutations de la sous-unité alpha 8 du canal sodique voltage-dépendant (SCN8A).",
+    "qid": "dd171dae"
+   }
+  ]
+ },
+ "levomepromazine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "64026417",
+    "section": "4.4",
+    "quote": "chez les épileptiques en raison de la possibilité d'abaissement du seuil épileptogène ; la survenue de crises convulsives impose l'arrêt du traitement ;",
+    "qid": "d3a9f010"
+   }
+  ]
+ },
+ "lisdexamfetamine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "64274416",
+    "section": "4.4",
+    "quote": "Des données cliniques indiquent que les psychostimulants peuvent abaisser le seuil épileptogène chez les patients ayant des antécédents de crises convulsives, chez les patients ayant des antécédents d’anomalies de l’EEG en l’absence de crises convulsives et, dans de très rares cas, chez les patients n’ayant pas d’antécédents de crises convulsives ni de signes d’épilepsie sur l’EEG. En cas d’apparition ou d’aggravation des crises convulsives, le traitement doit être arrêté.",
+    "qid": "9f567117"
+   }
+  ]
+ },
+ "lithium": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "62124478",
+    "section": "4.4",
+    "quote": "EEG : risque de perturbation en cas d'atteinte du seuil épileptique ou d'antécédents comitiaux.",
+    "qid": "995deba9"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "62124478",
+    "section": "4.4",
+    "quote": "La prudence est recommandée chez les patients épileptiques ou traités par un médicament abaissant le seuil épileptogène (voir rubrique 4.8).",
+    "qid": "5504e7a1"
+   }
+  ]
+ },
+ "loflazepate": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "68104411",
+    "section": "4.4",
+    "quote": "Cet état peut entraîner à l'arrêt du traitement un phénomène de sevrage. Certains symptômes sont fréquents et d'apparence banale : insomnie, céphalées, anxiété importante, myalgies, tension musculaire, irritabilité. D'autres symptômes sont plus rares : agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions.",
+    "qid": "f1ce4a41"
+   }
+  ]
+ },
+ "loprazolam": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "69071035",
+    "section": "4.4",
+    "quote": "D'autres symptômes sont plus rares : agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions.",
+    "qid": "d8a87b8c"
+   }
+  ]
+ },
+ "lorazepam": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "67177709",
+    "section": "4.4",
+    "quote": "Cet état peut entraîner à l'arrêt du traitement un phénomène de sevrage. Certains symptômes sont fréquents et d'apparence banale : insomnie, céphalées, anxiété importante, myalgies, tension musculaire, irritabilité. D'autres symptômes sont plus rares : agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions.",
+    "qid": "f1ce4a41"
+   }
+  ]
+ },
+ "lormetazepam": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60186584",
+    "section": "4.4",
+    "quote": "Les symptômes signalés suite à un arrêt des benzodiazépines comprennent : maux de tête, douleur musculaire, anxiété, tension, dépression, insomnie, agitation, confusion, irritabilité, sudation et survenue d’un phénomène de rebond (réapparition temporaire des symptômes pour lesquels le traitement a été initié). Il peut s’avérer difficile de faire la distinction entre ces symptômes et les symptômes d’origine pour lesquels le médicament a été prescrit. Les symptômes suivants ont été observés dans des cas graves : sentiment de déréalisation, sentiment de dépersonnalisation, hyperacousie, acouphène, engourdissement et fourmillement au niveau des extrémités, hypersensibilité à la lumière, au bruit et au contact physique, mouvement involontaire, vomissement, hallucinations et convulsions. Les convulsions sont plus communes chez les patients ayant eu des troubles convulsifs ou prenant d’autres médicaments qui réduisent le seuil convulsif tels que des antidépresseurs.",
+    "qid": "1959d0ce"
+   }
+  ]
+ },
+ "loxapine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "64162292",
+    "section": "4.4",
+    "quote": "Crises d’épilepsies/convulsions",
+    "qid": "2710d2b5"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "64162292",
+    "section": "4.4",
+    "quote": "Des convulsions ont été rapportées chez des patients recevant de la loxapine.",
+    "qid": "91848187"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "64162292",
+    "section": "4.4",
+    "quote": "La loxapine doit être utilisée avec précaution chez les patients traités par des médicaments antiépileptiques, voire chez les patients ayant des antécédents de crises convulsives en raison de la possibilité d'abaissement du seuil épileptogène (voir rubrique 4.5).",
+    "qid": "73cc6546"
+   }
+  ]
+ },
+ "lurasidone": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "EMEA-H-C-002713",
+    "section": "4.4",
+    "quote": "Convulsions",
+    "qid": "4de99b22"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "EMEA-H-C-002713",
+    "section": "4.4",
+    "quote": "La lurasidone doit être utilisée avec prudence chez les patients présentant des antécédents de convulsions ou d’autres troubles susceptibles d’abaisser le seuil convulsif.",
+    "qid": "91b6da17"
+   }
+  ]
+ },
+ "maprotiline": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "63912862",
+    "section": "4.3",
+    "quote": "trouble convulsif ou seuil épileptogène bas (par ex. en cas d’atteinte cérébrale d’étiologies diverses, d’alcoolisme),",
+    "qid": "b4019841"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "63912862",
+    "section": "4.4",
+    "quote": "Convulsions",
+    "qid": "4de99b22"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "63912862",
+    "section": "4.4",
+    "quote": "Les antidépresseurs comme la maprotiline sont connus pour abaisser le seuil épileptogène et favoriser la survenue de convulsions notamment chez les patients épileptiques ou ayant des antécédents d’épilepsie, en cas d’administration concomitante de médicaments abaissant le seuil épileptogène (voir rubrique 4.5 la liste des substances concernées),), lors de l’interruption brutale d’un traitement concomitant par benzodiazépines, en cas d’électroconvulsivothérapie ou lors du dépassement de la posologie recommandée de LUDIOMIL. Dans tous ces cas, il est prudent de renforcer la surveillance clinique ou électrique. La survenue de crises convulsives impose l’arrêt du traitement. Bien que le lien de causalité n’ait pas été établi, le risque de convulsions peut être réduit par l’utilisation d’une faible posologie initiale, le maintien de la posologie initiale pendant 2 semaines puis l’augmentation progressive par petits paliers, le maintien de la dose d’entretien au niveau efficace minimal, l’ajustement prudent ou le fait d’éviter un traitement concomitant avec des médicaments abaissant le seuil épileptogène (par ex. phénothiazines, rispéridone) ou la réduction rapide des benzodiazépines.",
+    "qid": "d1aaf8e8"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "63912862",
+    "section": "4.4",
+    "quote": "L’utilisation concomitante de neuroleptiques (par ex. phénothiazines, rispéridone) peut entraîner l’augmentation des taux de maprotiline plasmatiques, la réduction du seuil épileptogène et des convulsions (voir rubrique 4.5).",
+    "qid": "72ba03a2"
+   },
+   {
+    "index": 4,
+    "corpus": "europepmc",
+    "page": "11888352",
+    "quote": "Agreement, however, converges on the following: seizures triggered by psychotropic drugs are a dose-dependent adverse effect; maprotiline and clomipramine among antidepressants and chlorpromazine and clozapine among antipsychotics that have a relatively high seizurogenic potential; phenelzine, tranylcypromine, fluoxetine, paroxetine, sertraline, venlafaxine and trazodone among antidepressants and fluphenazine, haloperidol, pimozide and risperidone among antipsychotics that exhibit a relatively low risk.",
+    "qid": "a32be816"
+   }
+  ]
+ },
+ "meclizine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60456535",
+    "section": "4.4",
+    "quote": "Le produit doit être utilisé avec précaution chez le patient épileptique.",
+    "qid": "0150e06d"
+   }
+  ]
+ },
+ "melatonin": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "63820563",
+    "section": "4.4",
+    "quote": "Il a été signalé que la mélatonine peut augmenter, diminuer et n’avoir aucun effet sur la fréquence des crises. En raison de l’incertitude concernant l’effet de la mélatonine sur les crises d’épilepsie, la prudence s’impose lors d’utilisation chez les patients souffrant d’épilepsie.",
+    "qid": "4efaa4b1"
+   }
+  ]
+ },
+ "memantine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60151124",
+    "section": "4.4",
+    "quote": "La prudence est recommandée chez les patients épileptiques, ayant des antécédents de convulsions ou chez les patients présentant des facteurs de risque d'épilepsie.",
+    "qid": "4a14bf62"
+   }
+  ]
+ },
+ "methadone": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60998856",
+    "section": "4.4",
+    "quote": "Les opioïdes peuvent augmenter la pression du liquide céphalorachidien et entraîner des convulsions : ils doivent être utilisés avec précaution chez les patients présentant un traumatisme crânien, des lésions intracrâniennes, d'autres circonstances dans lesquelles la pression du liquide céphalo-rachidien peut être augmentée, ou en cas d’antécédents d’épilepsie.",
+    "qid": "b56a2b72"
+   }
+  ]
+ },
+ "methylphenidate_dl": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60047182",
+    "section": "4.4",
+    "quote": "Convulsions",
+    "qid": "4de99b22"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60047182",
+    "section": "4.4",
+    "quote": "Le méthylphénidate doit être utilisé avec prudence chez les patients atteints d’épilepsie. Le méthylphénidate peut abaisser le seuil épileptogène chez les patients ayant des antécédents de convulsions, chez les patients ayant présenté des anomalies de l’EEG en l’absence de convulsions et rarement chez des patients sans antécédents de convulsions ni anomalies de l’EEG. En cas d’augmentation de la fréquence des convulsions ou d’apparition de convulsions, le traitement par méthylphénidate devra être arrêté.",
+    "qid": "91bc4829"
+   }
+  ]
+ },
+ "metoclopramide": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "61729093",
+    "section": "4.3",
+    "quote": "Epilepsie (augmentation de la fréquence et de l'intensité des crises).",
+    "qid": "67c37cef"
+   }
+  ]
+ },
+ "mianserin": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60854845",
+    "section": "4.4",
+    "quote": "Chez les patients épileptiques ou ayant des antécédents d’épilepsie, il est prudent de renforcer la surveillance clinique et électrique, en raison de la possibilité d’abaissement du seuil épileptogène. La survenue de crises convulsives impose l’arrêt du traitement.",
+    "qid": "803f4c67"
+   }
+  ]
+ },
+ "milnacipran": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60068034",
+    "section": "4.4",
+    "quote": "Chez les patients atteints d'épilepsie ou ayant des antécédents d'épilepsie : Le milnacipran doit être utilisé avec prudence et doit être interrompu chez tout patient présentant des convulsions.",
+    "qid": "2eee3a25"
+   }
+  ]
+ },
+ "mirtazapine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "65124914",
+    "section": "4.4",
+    "quote": "Une épilepsie ou un syndrome cérébral organique : bien que l’expérience clinique montre que les crises épileptiques sont rares au cours d’un traitement par la mirtazapine, NORSET doit être, comme les autres antidépresseurs, introduit avec prudence chez les patients présentant des antécédents de convulsions. Le traitement devra être arrêté chez tout patient développant des crises épileptiques, ou présentant une augmentation de la fréquence des crises.",
+    "qid": "2ffaf3e9"
+   }
+  ]
+ },
+ "morphine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60328261",
+    "section": "4.3",
+    "quote": "Épilepsie non contrôlée,",
+    "qid": "e2cf2982"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60328261",
+    "section": "4.4",
+    "quote": "Troubles épileptiques ou prédisposition aux convulsions,",
+    "qid": "621822f2"
+   }
+  ]
+ },
+ "nalmefene": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "63957761",
+    "section": "4.3",
+    "quote": "Patient ayant un antécédent récent de syndrome de sevrage aigu à l’alcool (incluant hallucinations, convulsions et delirium tremens).",
+    "qid": "fbc493ed"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "63957761",
+    "section": "4.4",
+    "quote": "Troubles convulsifs Les données sont limitées chez les patients ayant des antécédents de crises convulsives, y compris les convulsions liées au sevrage alcoolique. La prudence est recommandée lorsqu’un traitement visant à réduire la consommation d’alcool est initié chez ces patients.",
+    "qid": "4154acaa"
+   }
+  ]
+ },
+ "naloxone": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "62968616",
+    "section": "4.4",
+    "quote": "Contrairement à ce qui est observé chez l’adulte, un syndrome de sevrage aux opioïdes chez un nouveau-né (avant un mois), peut être mortel, s’il n’est pas diagnostiqué et pris en charge rapidement. Il peut présenter les symptômes suivants : convulsions, pleurs excessifs et reflexes hyperactifs.",
+    "qid": "64d1ac2c"
+   }
+  ]
+ },
+ "nefopam": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "62580656",
+    "section": "4.3",
+    "quote": "Convulsions ou antécédents de troubles convulsifs.",
+    "qid": "7d5cc64b"
+   }
+  ]
+ },
+ "nitrazepam": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "66205536",
+    "section": "4.4",
+    "quote": "Cet état peut entraîner à l'arrêt du traitement un phénomène de sevrage. Certains symptômes sont fréquents et d’apparence banale : insomnie, céphalées, anxiété importante, myalgies, tension musculaire, irritabilité. D’autres symptômes sont plus rares : agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions.",
+    "qid": "5ede6b00"
+   }
+  ]
+ },
+ "olanzapine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60126594",
+    "section": "4.4",
+    "quote": "L’olanzapine doit être utilisée avec prudence chez les patients qui ont des antécédents de convulsions ou qui sont placés dans des conditions susceptibles d’abaisser leur seuil convulsif. Des cas de convulsions ont été rapportés de manière peu fréquente chez les patients traités par olanzapine. Dans la plupart de ces cas, il existait soit des antécédents de convulsions soit des facteurs de risque de convulsions.",
+    "qid": "37674981"
+   },
+   {
+    "index": 1,
+    "corpus": "europepmc",
+    "page": "17223086",
+    "quote": "Results Increased seizure incidence was observed with antipsychotics that was accounted for by clozapine and olanzapine, and with drugs indicated for the treatment of OCD that was accounted for by clomipramine.",
+    "qid": "0ec4148c"
+   }
+  ]
+ },
+ "oxazepam": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60351986",
+    "section": "4.4",
+    "quote": "Cet état peut entraîner à l'arrêt du traitement un phénomène de sevrage. Certains symptômes sont fréquents et d'apparence banale : insomnie, céphalées, anxiété importante, myalgies, tension musculaire, irritabilité. D'autres symptômes sont plus rares : agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions.",
+    "qid": "f1ce4a41"
+   }
+  ]
+ },
+ "oxcarbazepine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "61556061",
+    "section": "4.2",
+    "quote": "En monothérapie comme en association, le traitement par TRILEPTAL débute par une dose cliniquement efficace, répartie en deux prises par jour. La dose peut être augmentée selon la réponse clinique du patient. Lorsqu'on substitue TRILEPTAL à un autre antiépileptique, la dose de ce dernier doit être réduite progressivement lors de l’instauration du traitement. Lors d'associations, la charge médicamenteuse antiépileptique globale du patient étant accrue, il peut être nécessaire de réduire la dose de l'antiépileptique associé et/ou d’augmenter plus lentement la dose de TRILEPTAL (voir rubrique 4.5).",
+    "qid": "13963cda"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "61556061",
+    "section": "4.2",
+    "quote": "Des essais cliniques contrôlés en monothérapie ont montré que la dose de 1 200 mg/jour est efficace chez des patients non traités par d'autres antiépileptiques. Néanmoins, une dose de 2 400 mg/jour s'est révélée efficace dans les épilepsies réfractaires de patients dont le traitement par d'autres antiépileptiques a été substitué par TRILEPTAL en monothérapie.",
+    "qid": "09fa854d"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "61556061",
+    "section": "4.2",
+    "quote": "Traitement en association à un autre traitement antiépileptique",
+    "qid": "23c0c173"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "61556061",
+    "section": "4.2",
+    "quote": "Lors d'essais cliniques contrôlés avec des traitements associés, des posologies journalières de 600 à 2 400 mg se sont avérées efficaces. Cependant, la majorité des patients n'a pu tolérer la dose de 2 400 mg/jour sans une réduction de la posologie des antiépileptiques associés, essentiellement en raison des effets indésirables sur le système nerveux central.",
+    "qid": "70e8044c"
+   },
+   {
+    "index": 4,
+    "corpus": "bdpm_rcp",
+    "page": "61556061",
+    "section": "4.4",
+    "quote": "Des réactions dermatologiques sévères, incluant syndrome de Stevens-Johnson, érythrodermie bulleuse avec épidermolyse (Syndrome de Lyell) et érythème polymorphe ont été très rarement signalés lors de l’utilisation de TRILEPTAL. Ces réactions dermatologiques sévères peuvent nécessiter une hospitalisation car elles peuvent menacer le pronostic vital et très rarement s’avérer fatales. Ces cas associés au TRILEPTAL se sont produits chez l’enfant et chez les adultes. Le temps moyen d’apparition était de 19 jours. Plusieurs cas isolés de réapparition de ces réactions cutanées sévères ont été signalés lors d’une reprise du traitement par TRILEPTAL. Si un patient développe une réaction cutanée avec TRILEPTAL, il faudra envisager l’arrêt immédiat de TRILEPTAL (à moins que l’étiologie de l’éruption ne soit pas clairement liée au médicament) et la prescription d’un autre médicament antiépileptique doit être envisagée afin d’éviter l’apparition de convulsions.",
+    "qid": "d3f59033"
+   },
+   {
+    "index": 5,
+    "corpus": "bdpm_rcp",
+    "page": "61556061",
+    "section": "4.4",
+    "quote": "Beaucoup de patients asiatiques positifs pour l’allèle HLA-B*1502 et traités par TRILEPTAL ne développeront pas de SSJ/TEN et les patients négatifs pour l’allèle HLA-B*1502 de toute origine ethnique peuvent toujours développer un SSJ/TEN. Ceci est également vrai pour l’allèle HLA-A*3101 par rapport au risque de SSJ, TEN, DRESS, AGEP ou d’éruption maculopapuleuse. Le développement de ces effets indésirables cutanés sévères et de leur morbidité lié à d’autres facteurs possibles tels que la dose d’antiépileptique, l’observance, les traitements concomitants, les co-morbidités, et le niveau de surveillance dermatologique n’ont pas été étudiés.",
+    "qid": "d8b08c48"
+   },
+   {
+    "index": 6,
+    "corpus": "bdpm_rcp",
+    "page": "61556061",
+    "section": "4.4",
+    "quote": "Risque d’aggravation des crises épileptiques",
+    "qid": "3abeb9f6"
+   },
+   {
+    "index": 7,
+    "corpus": "bdpm_rcp",
+    "page": "61556061",
+    "section": "4.4",
+    "quote": "Un risque d’aggravation des crises épileptiques a été rapporté avec TRILEPTAL. Le risque d’aggravation des crises épileptiques a été particulièrement observé chez les enfants mais il peut aussi se produire chez les adultes. En cas d’aggravation des crises épileptiques, TRILEPTAL doit être arrêté.",
+    "qid": "57162e01"
+   },
+   {
+    "index": 8,
+    "corpus": "bdpm_rcp",
+    "page": "61556061",
+    "section": "4.4",
+    "quote": "Des idées et comportements suicidaires ont été rapportés chez des patients traités par des médicaments antiépileptiques dans plusieurs indications. Une méta-analyse d’essais randomisés, contrôlés versus placebo portant sur des médicaments antiépileptiques a également montré une légère augmentation du risque d’idées et de comportements suicidaires. Les causes de ce risque ne sont pas connues et les données disponibles n’excluent pas la possibilité d’une augmentation de ce risque pour l’oxcarbazépine.",
+    "qid": "49a07909"
+   },
+   {
+    "index": 9,
+    "corpus": "bdpm_rcp",
+    "page": "61556061",
+    "section": "4.4",
+    "quote": "Comme pour tous les médicaments antiépileptiques, le traitement par TRILEPTAL doit être arrêté progressivement pour diminuer le risque d’augmentation de la fréquence des crises épileptiques.",
+    "qid": "84d6b44b"
+   }
+  ]
+ },
+ "oxycodone": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60629186",
+    "section": "4.4",
+    "quote": "L’utilisation prolongée de ce médicament peut entraîner une dépendance physique et un syndrome de sevrage peut apparaître lors d’un arrêt brutal du traitement. Le syndrome de sevrage est caractérisé par les symptômes suivants : bâillements, anxiété, irritabilité, frissons, mydriase, bouffées de chaleur, tremblements, sudation, larmoiement, rhinorrhée, agitation, convulsions, insomnie, nausées, vomissements, crampes abdominales, diarrhées et arthralgies.",
+    "qid": "a2f2d150"
+   }
+  ]
+ },
+ "paliperidone": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "64582563",
+    "section": "4.4",
+    "quote": "La palipéridone doit être utilisée avec prudence chez les patients présentant des antécédents de convulsions ou d’autres situations cliniques pouvant potentiellement abaisser le seuil épileptogène.",
+    "qid": "895db4fa"
+   }
+  ]
+ },
+ "paroxetine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60160707",
+    "section": "4.4",
+    "quote": "Epilepsie",
+    "qid": "23b6a727"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60160707",
+    "section": "4.4",
+    "quote": "Comme d’autres antidépresseurs, la paroxétine doit être utilisée avec précaution chez les patients épileptiques.",
+    "qid": "7bf520fc"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "60160707",
+    "section": "4.4",
+    "quote": "Convulsions",
+    "qid": "4de99b22"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "60160707",
+    "section": "4.4",
+    "quote": "L’incidence globale des crises convulsives est inférieure à 0,1 % chez les patients traités par la paroxétine. La survenue de crises convulsives impose l’arrêt du traitement.",
+    "qid": "1cd1c229"
+   },
+   {
+    "index": 4,
+    "corpus": "bdpm_rcp",
+    "page": "60160707",
+    "section": "4.4",
+    "quote": "Electroconvulsivothérapie (ECT)",
+    "qid": "f20fb2ce"
+   },
+   {
+    "index": 5,
+    "corpus": "bdpm_rcp",
+    "page": "60160707",
+    "section": "4.4",
+    "quote": "Il existe peu de données cliniques sur l’administration concomitante de paroxétine et d’électroconvulsivothérapie.",
+    "qid": "d3828e70"
+   },
+   {
+    "index": 6,
+    "corpus": "europepmc",
+    "page": "11888352",
+    "quote": "Agreement, however, converges on the following: seizures triggered by psychotropic drugs are a dose-dependent adverse effect; maprotiline and clomipramine among antidepressants and chlorpromazine and clozapine among antipsychotics that have a relatively high seizurogenic potential; phenelzine, tranylcypromine, fluoxetine, paroxetine, sertraline, venlafaxine and trazodone among antidepressants and fluphenazine, haloperidol, pimozide and risperidone among antipsychotics that exhibit a relatively low risk.",
+    "qid": "a32be816"
+   }
+  ]
+ },
+ "perampanel": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "61849146",
+    "section": "4.2",
+    "quote": "Crises d’épilepsie partielles",
+    "qid": "281dfd23"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "61849146",
+    "section": "4.2",
+    "quote": "d’épilepsie partielles.",
+    "qid": "b1933be3"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "61849146",
+    "section": "4.2",
+    "quote": "Le pérampanel à une dose allant jusqu’à 8 mg/jour est efficace dans le traitement des crises d’épilepsie",
+    "qid": "dca7100e"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "61849146",
+    "section": "4.2",
+    "quote": "Arrêt du traitement Il est recommandé d’arrêter progressivement le traitement, afin de réduire le risque de crises d’épilepsie par effet rebond. Cependant, compte tenu de sa demi-vie longue et de la diminution lente des concentrations plasmatiques qui en résulte, le pérampanel peut être arrêté brutalement en cas d’absolue nécessité.",
+    "qid": "ff560d28"
+   },
+   {
+    "index": 4,
+    "corpus": "bdpm_rcp",
+    "page": "61849146",
+    "section": "4.2",
+    "quote": "Arrêt du traitement Il est recommandé d’arrêter progressivement le traitement, afin de réduire le risque de crises d’épilepsie par effet rebond. Cependant, compte tenu de sa demi-vie longue et de la diminution lente des concentrations plasmatiques qui en résulte, le pérampanel peut être arrêté brutalement en cas d’absolue nécessité. Doses oubliées Une seule dose oubliée : compte tenu de la demi-vie longue du pérampanel, le patient doit attendre et prendre la dose suivante au moment habituel. En cas d’oubli de plus d’une dose pendant une période continue de moins de cinq demi-vies (3 semaines pour les patients ne recevant pas de médicaments antiépileptiques induisant le métabolisme du pérampanel, 1 semaine pour les autres patients (voir rubrique 4.5)), il convient d’envisager la reprise du traitement à la dernière dose administrée.",
+    "qid": "a4e59400"
+   },
+   {
+    "index": 5,
+    "corpus": "bdpm_rcp",
+    "page": "61849146",
+    "section": "4.2",
+    "quote": "Sujets âgés (65 ans et plus) Les études cliniques de Fycompa dans l’épilepsie n’ont pas inclus suffisamment de patients âgés de 65 ans et plus pour déterminer si leur réponse au traitement est différente de celle des patients plus jeunes. L’analyse des données de sécurité de 905 patients âgés traités par le pérampanel (dans le cadre d’études en double insu menées dans des indications autres que l’épilepsie) n’a mis en évidence aucune différence du profil de sécurité en fonction de l’âge. Couplés à l’absence de différence d’exposition au pérampanel liée à l’âge, ces résultats indiquent qu’aucune adaptation de la posologie n’est requise. Le pérampanel doit malgré tout être utilisé avec précaution chez les sujets âgés, en raison des interactions médicamenteuses éventuelles chez des patients polymédiqués (voir rubrique 4.4).",
+    "qid": "0071b6aa"
+   },
+   {
+    "index": 6,
+    "corpus": "bdpm_rcp",
+    "page": "61849146",
+    "section": "4.2",
+    "quote": "Population pédiatrique La sécurité et l’efficacité du pérampanel n’ont pas encore été établies chez les enfants âgés de moins de 4 ans dans l’indication des crises d’épilepsie partielles ou chez les enfants âgés de moins de 7 ans dans l’indication des crises généralisées tonicocloniques primaires.",
+    "qid": "ff1a08e1"
+   },
+   {
+    "index": 7,
+    "corpus": "bdpm_rcp",
+    "page": "61849146",
+    "section": "4.4",
+    "quote": "Des idées et un comportement suicidaires ont été rapportés chez des patients traités par des médicaments antiépileptiques dans plusieurs indications. Une méta-analyse des études randomisées contrôlées contre placebo portant sur des médicaments antiépileptiques a également montré une légère augmentation des idées et comportement suicidaires. Le mécanisme de ce risque n’est pas connu et les données disponibles ne permettent pas d’exclure la possibilité d’un risque accru avec le pérampanel. Par conséquent, les patients (enfants, adolescents et adultes) doivent être surveillés afin de déceler les signes d’idées et de comportement suicidaires et un traitement approprié doit être envisagé. Il convient de recommander aux patients (et à leurs aidants) de consulter un médecin en cas de survenue de signes d’idées et de comportement suicidaires.",
+    "qid": "eda1bbb8"
+   },
+   {
+    "index": 8,
+    "corpus": "bdpm_rcp",
+    "page": "61849146",
+    "section": "4.4",
+    "quote": "Les absences et les crises myocloniques sont deux types courants de crises généralisées qui surviennent fréquemment chez les patients atteints d’EGI. D’autres médicaments antiépileptiques sont connus pour induire ou aggraver ces types de crises. Les patients présentant des crises myocloniques et des épilepsies d’absence doivent être surveillés pendant leur traitement par Fycompa.",
+    "qid": "e7b39768"
+   },
+   {
+    "index": 9,
+    "corpus": "bdpm_rcp",
+    "page": "61849146",
+    "section": "4.4",
+    "quote": "Médicaments antiépileptiques concomitants inducteurs du CYP3A",
+    "qid": "b94d7b86"
+   },
+   {
+    "index": 10,
+    "corpus": "bdpm_rcp",
+    "page": "61849146",
+    "section": "4.4",
+    "quote": "Les taux de réponse après ajout de pérampanel à doses fixes étaient inférieurs lorsque les patients recevaient un traitement concomitant par des médicaments antiépileptiques inducteurs de l’enzyme CYP3A (carbamazépine, phénytoïne, oxcarbazépine) par rapport au taux de réponses des patients ayant reçu des médicaments antiépileptiques concomitants non inducteurs enzymatiques. La réponse du patient doit être surveillée lors du relais d’un médicament antiépileptique concomitant non inducteur par un médicament antiépileptique inducteur enzymatique et vice versa. En fonction de la réponse clinique et de la tolérance des patients, la dose peut être augmentée ou diminuée par paliers de 2 mg/jour (voir rubrique 4.2).",
+    "qid": "49b77eae"
+   },
+   {
+    "index": 11,
+    "corpus": "bdpm_rcp",
+    "page": "61849146",
+    "section": "4.4",
+    "quote": "Autres médicaments concomitants (non antiépileptiques) inducteurs ou inhibiteurs du cytochrome P450",
+    "qid": "d6d99ee0"
+   },
+   {
+    "index": 12,
+    "corpus": "bdpm_rcp",
+    "page": "61849146",
+    "section": "4.4",
+    "quote": "Des cas d’hépatotoxicité (principalement une élévation des enzymes hépatiques) ont été rapportés avec l’utilisation du pérampanel en association avec d’autres antiépileptiques. En cas d’élévation des enzymes hépatiques, une surveillance de la fonction hépatique doit être envisagée.",
+    "qid": "434c2f7a"
+   }
+  ]
+ },
+ "periciazine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "64676824",
+    "section": "4.4",
+    "quote": "Chez les épileptiques en raison de la possibilité d'abaissement du seuil épileptogène; la survenue de crises convulsives impose l'arrêt du traitement.",
+    "qid": "e851cfdf"
+   }
+  ]
+ },
+ "phenelzine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "europepmc",
+    "page": "11888352",
+    "quote": "Agreement, however, converges on the following: seizures triggered by psychotropic drugs are a dose-dependent adverse effect; maprotiline and clomipramine among antidepressants and chlorpromazine and clozapine among antipsychotics that have a relatively high seizurogenic potential; phenelzine, tranylcypromine, fluoxetine, paroxetine, sertraline, venlafaxine and trazodone among antidepressants and fluphenazine, haloperidol, pimozide and risperidone among antipsychotics that exhibit a relatively low risk.",
+    "qid": "a32be816"
+   }
+  ]
+ },
+ "phenobarbital": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "61475588",
+    "section": "4.4",
+    "quote": "L'introduction d'un médicament antiépileptique peut, rarement, être suivie d'une recrudescence des crises ou de l'apparition d'un nouveau type de crise chez le patient, et ce indépendamment des fluctuations observées dans certaines maladies épileptiques. En ce qui concerne le phénobarbital, les causes de ces aggravations peuvent être : un choix de médicament mal approprié vis-à-vis des crises ou du syndrome épileptique du patient, une modification du traitement antiépileptique concomitant ou une interaction pharmacocinétique avec celui-ci, une toxicité ou un surdosage. Il peut ne pas y avoir d'autre explication qu'une réaction paradoxale.",
+    "qid": "005c3d39"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "61475588",
+    "section": "4.4",
+    "quote": "La prise prolongée de phénobarbital (100 mg par jour pendant 3 mois) peut entraîner l'apparition d'un syndrome de dépendance. Dans le cas où le patient devrait arrêter le traitement, il est recommandé de réduire progressivement la posologie. Comme avec tout antiépileptique, l'arrêt brutal du traitement peut entraîner l'apparition des crises et un état de mal, surtout en cas d'éthylisme surajouté.",
+    "qid": "822553bb"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "61475588",
+    "section": "4.4",
+    "quote": "Des idées et comportements suicidaires ont été rapportés chez des patients traités par des antiépileptiques dans plusieurs indications. Une méta-analyse d'essais randomisés, contrôlés versus placebo portant sur des antiépileptiques a également montré une légère augmentation du risque d'idées et de comportements suicidaires. Les causes de ce risque ne sont pas connues et les données disponibles n'excluent pas la possibilité d'une augmentation de ce risque pour le phénobarbital.",
+    "qid": "0bf242bc"
+   }
+  ]
+ },
+ "phenytoin": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "62436200",
+    "section": "4.2",
+    "quote": "Traitement de l'état de mal épileptique de l'adulte et de l'enfant, en monothérapie ou en association.",
+    "qid": "97141cb1"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "62436200",
+    "section": "4.2",
+    "quote": "Une surveillance continue ou subcontinue de l'électrocardiogramme est fortement conseillée, surtout chez les personnes âgées ou à risque. On cherchera à identifier tout signe de détresse respiratoire. Un dosage des taux sériques de phénytoïne peut être nécessaire lors de la prise en charge d'un état de mal épileptique et de l'établissement du traitement d'entretien.",
+    "qid": "afe191f8"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "62436200",
+    "section": "4.2",
+    "quote": "D'autres mesures incluant l'administration concomitante par voie injectable d’une benzodiazépine ou d'un barbiturique à demi-vie courte peuvent être nécessaires pour contrôler rapidement les crises épileptiques.",
+    "qid": "df049bd0"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "62436200",
+    "section": "4.4",
+    "quote": "La voie intramusculaire ne doit pas être utilisée dans le traitement de mal épileptique car le pic plasmatique n'est pas atteint avant environ 24 heures.",
+    "qid": "3b7cd523"
+   },
+   {
+    "index": 4,
+    "corpus": "bdpm_rcp",
+    "page": "62436200",
+    "section": "4.4",
+    "quote": "L'introduction d'un médicament antiépileptique peut, rarement, être suivie d'une recrudescence des crises ou de l'apparition d'un nouveau type de crise chez le patient, et ce indépendamment des fluctuations observées dans certaines maladies épileptiques.",
+    "qid": "9a81aeea"
+   },
+   {
+    "index": 5,
+    "corpus": "bdpm_rcp",
+    "page": "62436200",
+    "section": "4.4",
+    "quote": "En ce qui concerne la phénytoïne, les causes de ces aggravations peuvent être : un choix de médicament mal approprié vis-à-vis des crises ou du syndrome épileptique du patient, une modification du traitement antiépileptique concomitant ou une interaction pharmacocinétique avec celui-ci, une toxicité ou un surdosage. Il peut ne pas y avoir d'autre explication qu'une réaction paradoxale.",
+    "qid": "3b4853b3"
+   },
+   {
+    "index": 6,
+    "corpus": "bdpm_rcp",
+    "page": "62436200",
+    "section": "4.4",
+    "quote": "Les traitements par antiépileptiques ne doivent pas être brutalement interrompus à cause du risque d'augmentation de la fréquence des crises, incluant l'état épileptique.",
+    "qid": "85f802ec"
+   },
+   {
+    "index": 7,
+    "corpus": "bdpm_rcp",
+    "page": "62436200",
+    "section": "4.4",
+    "quote": "Si une réduction de dose, une interruption ou une substitution par un médicament antiépileptique alternatif s'avèrent nécessaires, cela devra être réalisé progressivement sous contrôle du médecin. Cependant, lorsqu'un arrêt brutal s'impose, il est nécessaire de mettre rapidement en place un traitement alternatif de substitution. Dans le cas de réaction allergique ou d'hypersensibilité motivant cet arrêt, le traitement alternatif doit être un traitement antiépileptique n'appartenant pas à la classe des dérivés de l'hydantoïne.",
+    "qid": "17c58285"
+   },
+   {
+    "index": 8,
+    "corpus": "bdpm_rcp",
+    "page": "62436200",
+    "section": "4.4",
+    "quote": "La phénytoïne peut provoquer des lésions fœtales lorsqu’elle est administrée à une femme enceinte. L’exposition prénatale à la phénytoïne peut augmenter les risques de malformations congénitales majeures et d’autres effets indésirables sur le développement (voir rubrique 4.6). L’ampleur du risque pour le fœtus est inconnue lorsque l’utilisation de la phénytoïne est de courte durée (situations d’urgence). DILANTIN ne doit pas être utilisé chez les femmes en âge de procréer, sauf en cas de besoin clinique et, si possible, la femme doit être informée du risque potentiel pour le fœtus associé à l’utilisation de la phénytoïne pendant la grossesse. Dans les situations d’urgence, le risque d’effet délétère pour le foetus doit être évalué en tenant compte du risque de l’état de mal épileptique pour le fœtus et la femme enceinte. En cas d'instauration d'un traitement par phénytoïne chez une femme en âge de procréer :",
+    "qid": "d1931d91"
+   },
+   {
+    "index": 9,
+    "corpus": "bdpm_rcp",
+    "page": "62436200",
+    "section": "4.4",
+    "quote": "Des idées et comportements suicidaires ont été rapportés chez des patients traités par des antiépileptiques dans plusieurs indications. Une méta-analyse d'essais randomisés, contrôlés versus placebo portant sur des antiépileptiques a également montré une légère augmentation du risque d'idées et de comportements suicidaires. Les causes de ce risque ne sont pas connues et les données disponibles n'excluent pas la possibilité d'une augmentation de ce risque pour la phénytoïne.",
+    "qid": "36bf35b7"
+   },
+   {
+    "index": 10,
+    "corpus": "bdpm_rcp",
+    "page": "62436200",
+    "section": "4.4",
+    "quote": "Le syndrome d’hypersensibilité (SHS) ou réaction médicamenteuse avec éosinophilie et symptômes systémiques (DRESS) a été rapporté chez les patients prenant des antiépileptiques, y compris la phénytoïne. Certaines de ces réactions ont provoqué la mort ou engagé le pronostic vital.",
+    "qid": "cbf793f0"
+   },
+   {
+    "index": 11,
+    "corpus": "bdpm_rcp",
+    "page": "62436200",
+    "section": "4.4",
+    "quote": "Ce syndrome rare, dont le mécanisme mal connu pourrait faire intervenir le polymorphisme génétique attaché au CYP 450, survient en général après plus de 2 semaines d'exposition au médicament. Les publications et l'expérience suggèrent que ce syndrome surviendrait plus fréquemment et serait plus sévère chez les patients noirs, ceux ayant des antécédents familiaux ou ayant présenté une réaction d'hypersensibilité à un autre médicament antiépileptique ainsi que chez les patients immunodéprimés. La suspicion d'un tel symptôme doit entraîner l'arrêt immédiat du médicament, son remplacement par un médicament n'appartenant pas à la classe des hydantoïnes ainsi qu'une prise en charge adaptée.",
+    "qid": "d7cd4ecf"
+   },
+   {
+    "index": 12,
+    "corpus": "bdpm_rcp",
+    "page": "62436200",
+    "section": "4.4",
+    "quote": "Comme cela a été démontré avec la carbamazépine, des études récentes suggèrent que le risque de survenue de ces réactions sévères serait aussi majoré lors de traitement par la phénytoïne chez les patients porteurs d'un variant héréditaire du gène HLA B, (HLA-B*1502). Cette variation est plus fréquente dans certaines populations chinoises. En conséquence, la vigilance doit être accrue chez les patients susceptibles d'être porteurs de cette variation génétique du fait de leurs origines. Un autre antiépileptique doit leur être proposé.",
+    "qid": "e2b96ad3"
+   }
+  ]
+ },
+ "pimozide": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60625647",
+    "section": "4.4",
+    "quote": "Épilepsie, convulsions",
+    "qid": "b3083c64"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60625647",
+    "section": "4.4",
+    "quote": "Comme d’autres antipsychotiques, le pimozide peut abaisser le seuil épileptogène notamment chez les patients épileptiques et les sujets présentant d’autres facteurs prédisposant aux convulsions (désintoxication alcoolique, atteinte cérébrale). Des états de Grand Mal ont également été rapportés chez des patients traités par ORAP.",
+    "qid": "a59e3f4e"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "60625647",
+    "section": "4.4",
+    "quote": "La surveillance (clinique et éventuellement électrique) doit être renforcée chez les épileptiques.",
+    "qid": "bb8d5b29"
+   },
+   {
+    "index": 3,
+    "corpus": "europepmc",
+    "page": "11888352",
+    "quote": "Agreement, however, converges on the following: seizures triggered by psychotropic drugs are a dose-dependent adverse effect; maprotiline and clomipramine among antidepressants and chlorpromazine and clozapine among antipsychotics that have a relatively high seizurogenic potential; phenelzine, tranylcypromine, fluoxetine, paroxetine, sertraline, venlafaxine and trazodone among antidepressants and fluphenazine, haloperidol, pimozide and risperidone among antipsychotics that exhibit a relatively low risk.",
+    "qid": "a32be816"
+   }
+  ]
+ },
+ "pipamperone": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "64210075",
+    "section": "4.4",
+    "quote": "Epilepsie, convulsions : le pipampérone peut abaisser le seuil épileptogène notamment chez les patients épileptiques et les sujets présentant d'autres facteurs prédisposant aux convulsions (désintoxication alcoolique, atteinte cérébrale).",
+    "qid": "931dbd4b"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "64210075",
+    "section": "4.4",
+    "quote": "La surveillance (clinique et éventuellement électrique) doit être renforcée chez les épileptiques.",
+    "qid": "bb8d5b29"
+   }
+  ]
+ },
+ "pipothiazine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "62000861",
+    "section": "4.4",
+    "quote": "chez les épileptiques en raison de la possibilité d'abaissement du seuil épileptogène; la survenue de crises convulsives impose l'arrêt du traitement;",
+    "qid": "12edfa34"
+   }
+  ]
+ },
+ "pitolisant": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60227166",
+    "section": "4.4",
+    "quote": "Épilepsie",
+    "qid": "e59462b7"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60227166",
+    "section": "4.4",
+    "quote": "Des convulsions ont été rapportées à des doses élevées dans des modèles animaux (voir rubrique 5.3). Dans les études cliniques, un cas d’aggravation d'épilepsie a été rapporté chez un patient épileptique. Il convient d’être prudent chez les patients souffrant d'épilepsie sévère.",
+    "qid": "afd56425"
+   }
+  ]
+ },
+ "pizotifen": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "65458611",
+    "section": "4.4",
+    "quote": "Des crises d’épilepsie ont été observées chez les patients épileptiques. Le pizotifène doit être utilisé avec précaution chez ce type de patient.",
+    "qid": "7b68b40b"
+   }
+  ]
+ },
+ "prazepam": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60534076",
+    "section": "4.4",
+    "quote": "Cet état peut entraîner à l'arrêt du traitement un phénomène de sevrage. Certains symptômes sont fréquents et d'apparence banale : insomnie, céphalées, anxiété importante, myalgies, tension musculaire, irritabilité. D'autres symptômes sont plus rares : agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, convulsions.",
+    "qid": "f1ce4a41"
+   }
+  ]
+ },
+ "pregabalin": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60061602",
+    "section": "4.4",
+    "quote": "Il n'existe pas de données suffisantes permettant une suppression des médicaments antiépileptiques concomitants dans le but d'instaurer une monothérapie, lorsque le contrôle des crises est atteint avec la prégabaline en association.",
+    "qid": "c95a5094"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60061602",
+    "section": "4.4",
+    "quote": "Des idées et un comportement suicidaires ont été rapportés chez des patients traités avec des agents antiépileptiques dans plusieurs indications. Une méta-analyse d'essais randomisés contrôlés contre placebo de médicaments antiépileptiques a également montré un risque légèrement accru d'idées et de comportements suicidaires. Le mécanisme de ce risque n'est pas connu. Des cas d’idées et de comportement suicidaires ont été observés chez des patients traités par prégabaline après commercialisation (voir rubrique 4.8). Une étude épidémiologique où chaque patient est son propre témoin (comparant les périodes de traitement et les périodes sans traitement chez un même individu) a mis en évidence un risque augmenté de décès par suicide et d’apparition de comportement suicidaire chez les patients traités par prégabaline.",
+    "qid": "d7ed4fbe"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "60061602",
+    "section": "4.4",
+    "quote": "Après l’arrêt d’un traitement à court ou à long terme par la prégabaline, des symptômes de sevrage ont été observés. Les symptômes suivants ont été rapportés : insomnie, céphalées, nausées, anxiété, diarrhée, syndrome grippal, nervosité, dépression, idées suicidaires, douleurs, convulsions, hyperhidrose et étourdissements. L’apparition de symptômes de sevrage après l’arrêt de la prégabaline peut indiquer une dépendance au médicament (voir rubrique 4.8). Le patient doit en être informé au début du traitement. Si la prégabaline doit être arrêtée, il est recommandé de le faire progressivement sur une période minimale de 1 semaine, indépendamment de l’indication (voir rubrique 4.2).",
+    "qid": "849e90cd"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "60061602",
+    "section": "4.4",
+    "quote": "Les convulsions, notamment les états de mal épileptiques et les crises tonico-cloniques généralisées, peuvent apparaître pendant ou peu après l’arrêt du traitement par la prégabaline.",
+    "qid": "562cefa5"
+   }
+  ]
+ },
+ "primidone": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "65201684",
+    "section": "4.2",
+    "quote": "Le traitement doit systématiquement être personnalisé. Chez de nombreux patients, la primidone peut être administrée en monothérapie. Mais, dans certains cas, la primidone doit être associée à d'autres antiépileptiques ou à autre traitement symptomatique.",
+    "qid": "a90a1147"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "65201684",
+    "section": "4.4",
+    "quote": "L'introduction d'un médicament antiépileptique peut, dans de rares cas, être suivie d'une recrudescence des crises ou de l'apparition d'un nouveau type de crise chez le patient, et ce indépendamment des fluctuations observées dans certaines maladies épileptiques. En ce qui concerne la primidone, les causes de ces aggravations peuvent être: un choix de médicament mal approprié vis à vis des crises ou du syndrome épileptique du patient, une modification du traitement antiépileptique concomitant ou une interaction pharmacocinétique avec celui-ci, une toxicité ou un surdosage. Il peut ne pas y avoir d'autre explication qu'une réaction paradoxale.",
+    "qid": "1dcba04f"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "65201684",
+    "section": "4.4",
+    "quote": "L'arrêt brutal d'un traitement à dose antiépileptique efficace peut entraîner des crises convulsives et un état de mal, surtout en cas d'alcoolisme surajouté.",
+    "qid": "4a4b9aaf"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "65201684",
+    "section": "4.4",
+    "quote": "Des idées et comportements suicidaires ont été rapportés chez des patients traités par des antiépileptiques dans plusieurs indications. Une méta-analyse d'essais randomisés, contrôlés versus placebo portant sur des antiépileptiques a également montré une légère augmentation du risque d'idées et de comportements suicidaires. Les causes de ce risque ne sont pas connues et les données disponibles n'excluent pas la possibilité d'une augmentation de ce risque pour la primidone.",
+    "qid": "b12bd0f1"
+   }
+  ]
+ },
+ "promethazine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "69646945",
+    "section": "4.4",
+    "quote": "La surveillance (clinique et éventuellement électrique) doit être renforcée chez les épileptiques en raison de la possibilité d'abaissement du seuil épileptogène.",
+    "qid": "67e6ee5e"
+   }
+  ]
+ },
+ "propofol": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60616445",
+    "section": "4.4",
+    "quote": "Epilepsie : s'assurer qu'avant l'anesthésie, tout patient épileptique a bien reçu son traitement anti comitial habituel. L'administration de propofol à des patients épileptiques connus peut augmenter le risque de survenue de crises convulsives.",
+    "qid": "31c45a9a"
+   }
+  ]
+ },
+ "propranolol": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "62914611",
+    "section": "4.4",
+    "quote": "Ces hypoglycémies associées à la prise de propranolol ont pu se présenter exceptionnellement sous forme de crise convulsive et/ou coma.",
+    "qid": "66584610"
+   }
+  ]
+ },
+ "quetiapine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60078765",
+    "section": "4.4",
+    "quote": "Convulsions",
+    "qid": "4de99b22"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60078765",
+    "section": "4.4",
+    "quote": "Dans des études cliniques contrôlées, aucune différence de fréquence des convulsions n’a été observée chez les patients sous quétiapine ou placebo. Aucune donnée n’est disponible sur l’incidence des convulsions chez les patients ayant des antécédents de troubles convulsifs. Comme pour les autres antipsychotiques, la prudence est recommandée lors du traitement de patients ayant des antécédents de convulsions (voir rubrique 4.8).",
+    "qid": "cc536092"
+   },
+   {
+    "index": 2,
+    "corpus": "europepmc",
+    "page": "17223086",
+    "quote": "Alprazolam, bupropion immediate release (IR) form, and quetiapine were also associated with higher seizure incidence.",
+    "qid": "bce85b20"
+   }
+  ]
+ },
+ "risperidone": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60260497",
+    "section": "4.4",
+    "quote": "RISPERDAL doit être utilisé avec prudence chez les patients présentant des antécédents de convulsions ou d’autres situations cliniques pouvant potentiellement abaisser le seuil épileptogène.",
+    "qid": "aea90e3e"
+   },
+   {
+    "index": 1,
+    "corpus": "europepmc",
+    "page": "11888352",
+    "quote": "Agreement, however, converges on the following: seizures triggered by psychotropic drugs are a dose-dependent adverse effect; maprotiline and clomipramine among antidepressants and chlorpromazine and clozapine among antipsychotics that have a relatively high seizurogenic potential; phenelzine, tranylcypromine, fluoxetine, paroxetine, sertraline, venlafaxine and trazodone among antidepressants and fluphenazine, haloperidol, pimozide and risperidone among antipsychotics that exhibit a relatively low risk.",
+    "qid": "a32be816"
+   }
+  ]
+ },
+ "rivastigmine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60557826",
+    "section": "4.4",
+    "quote": "Les cholinomimétiques peuvent induire ou aggraver une rétention urinaire et des convulsions. La prudence est recommandée lors du traitement de patients prédisposés à de telles maladies.",
+    "qid": "e8e930c0"
+   }
+  ]
+ },
+ "scopolamine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "63958849",
+    "section": "4.4",
+    "quote": "Dans des cas isolés, une augmentation de la fréquence des crises chez les patients épileptiques a été signalée.",
+    "qid": "658efc13"
+   }
+  ]
+ },
+ "sertraline": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60155788",
+    "section": "4.4",
+    "quote": "Des convulsions peuvent survenir au cours du traitement par sertraline : la sertraline ne doit pas être utilisée chez les patients présentant une épilepsie instable et les patients présentant une épilepsie bien contrôlée doivent être attentivement surveillés. La prise de sertraline doit être interrompue chez tout patient développant des convulsions.",
+    "qid": "1825bb55"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60155788",
+    "section": "4.4",
+    "quote": "Les sujets âgés peuvent présenter un risque supérieur d'hyponatrémie avec les ISRS et IRSNA. De même, les patients traités par des diurétiques ou qui présentent une déplétion volumique d'autre origine présentent un risque aggravé (voir le paragraphe « Utilisation chez le sujet âgé »). L'interruption de la sertraline doit être envisagée chez les patients présentant une hyponatrémie symptomatique, et les mesures médicales appropriées doivent être mises en œuvre. Les signes et les symptômes d'hyponatrémie comprennent céphalées, difficultés de concentration, troubles de mémoire, confusion, faiblesse et instabilité pouvant conduire à des chutes. Les signes et les symptômes associés aux cas plus sévères et/ou aigus incluaient hallucinations, syncope, convulsions, coma, arrêt respiratoire et décès.",
+    "qid": "e5c3388a"
+   },
+   {
+    "index": 2,
+    "corpus": "europepmc",
+    "page": "11888352",
+    "quote": "Agreement, however, converges on the following: seizures triggered by psychotropic drugs are a dose-dependent adverse effect; maprotiline and clomipramine among antidepressants and chlorpromazine and clozapine among antipsychotics that have a relatively high seizurogenic potential; phenelzine, tranylcypromine, fluoxetine, paroxetine, sertraline, venlafaxine and trazodone among antidepressants and fluphenazine, haloperidol, pimozide and risperidone among antipsychotics that exhibit a relatively low risk.",
+    "qid": "a32be816"
+   }
+  ]
+ },
+ "sevoflurane": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "67329056",
+    "section": "4.4",
+    "quote": "De rares cas de crises convulsives ont été rapportés avec l’utilisation du sévoflurane.",
+    "qid": "ad5b2c6f"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "67329056",
+    "section": "4.4",
+    "quote": "L’utilisation du sévoflurane a été associée à des crises convulsives aussi bien chez des enfants et des jeunes adultes que chez des adultes plus âgés présentant ou non des facteurs de prédisposition. Un avis clinique est nécessaire avant l’utilisation de sévoflurane chez des patients présentant un risque convulsif. Chez les enfants, la profondeur de l’anesthésie doit être limitée. La surveillance de la fonction cérébrale (électroencéphalogramme ou EEG) permet d’optimiser la dose du sévoflurane et de prévenir la survenue de crises convulsives chez les patients prédisposés (voir rubrique 4.4 – Population pédiatrique).",
+    "qid": "7577aec1"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "67329056",
+    "section": "4.4",
+    "quote": "L’utilisation du sévoflurane a été associée à des crises convulsives. La majorité de ces crises sont apparues chez des enfants à partir de l’âge de 2 mois et chez de jeunes adultes, dont la plupart ne présentaient aucun facteur de prédisposition. Un avis clinique est nécessaire lors de l’utilisation de sévoflurane chez des patients présentant un risque convulsif (voir rubrique 4.4 – Crises convulsives).",
+    "qid": "adc72066"
+   }
+  ]
+ },
+ "sodium_oxybate": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "67300599",
+    "section": "4.4",
+    "quote": "Patients épileptiques",
+    "qid": "ece0a89c"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "67300599",
+    "section": "4.4",
+    "quote": "Des crises convulsives ont été observées chez des patients traités par l’oxybate de sodium. Chez les patients épileptiques, la sécurité et l’efficacité de l’oxybate de sodium n’ont pas été établies, son utilisation n’est donc pas recommandée.",
+    "qid": "70b393d1"
+   }
+  ]
+ },
+ "stiripentol": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "61501691",
+    "section": "4.2",
+    "quote": "Diacomit doit être uniquement administré sous la supervision d'un pédiatre ou d’un neuropédiatre expérimenté dans le diagnostic et le traitement de l’épilepsie du nourrisson et de l’enfant.",
+    "qid": "a299225d"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "61501691",
+    "section": "4.2",
+    "quote": "Adaptation de la dose des autres antiépileptiques associés au stiripentol Malgré l’absence de données pharmacologiques exhaustives sur des interactions médicamenteuses potentielles, les recommandations suivantes concernant la modification de la posologie des autres antiépileptiques associés au stiripentol sont données sur la base de l’expérience clinique.",
+    "qid": "f5539d71"
+   }
+  ]
+ },
+ "sulpiride": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "62344129",
+    "section": "4.4",
+    "quote": "chez les sujets épileptiques en raison de la possibilité d'abaissement du seuil épileptogène, des cas de convulsions ont été rapportés chez des patients traités par sulpiride (voir rubrique 4.8),",
+    "qid": "553468a4"
+   }
+  ]
+ },
+ "sumatriptan": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "64676030",
+    "section": "4.4",
+    "quote": "Le sumatriptan doit être utilisé avec précaution chez les patients ayant des antécédents de convulsions ou présentant d’autres facteurs de risque susceptibles d’abaisser le seuil épileptogène, car des cas de convulsions ont été rapportés en association avec le sumatriptan (voir rubrique 4.8).",
+    "qid": "50f2bb4b"
+   }
+  ]
+ },
+ "tiagabine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60058517",
+    "section": "4.4",
+    "quote": "En l'absence de données, GABITRIL n’est généralement pas recommandé dans les épilepsies généralisées, en particulier les formes idiopathiques comportant des absences et le syndrome de Lennox-Gastaut, ou formes apparentées.",
+    "qid": "2700c60d"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60058517",
+    "section": "4.4",
+    "quote": "Etant donné le mode d'action GABAergique de la tiagabine, et les données de l'expérimentation animale, un risque d'aggravation des absences chez les malades ayant une épilepsie généralisée traitée par GABITRIL ne peut être exclu.",
+    "qid": "0eaa256e"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "60058517",
+    "section": "4.4",
+    "quote": "Les données post-commercialisation ont montré que l'utilisation de GABITRIL a été associée à des convulsions et des états de mal épileptique chez des patients non épileptiques. Bien que les convulsions aient été signalées chez des patients recevant des doses quotidiennes recommandées de tiagabine, la majorité des cas ont été signalés dans un contexte de surdosage (voir rubrique 4.9) ou après une titration trop rapide.",
+    "qid": "52c9f4b3"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "60058517",
+    "section": "4.4",
+    "quote": "D'autres facteurs tels que des pathologies sous-jacentes ou l'utilisation concomitante de médicaments qui peuvent diminuer le seuil épileptogène peuvent contribuer à l'apparition des convulsions chez des patients non-épileptiques.",
+    "qid": "c6966dd1"
+   },
+   {
+    "index": 4,
+    "corpus": "bdpm_rcp",
+    "page": "60058517",
+    "section": "4.4",
+    "quote": "Comme pour tout autre antiépileptique, l'arrêt brutal du traitement peut entraîner une recrudescence des crises. Il est donc recommandé de réduire progressivement la posologie sur une période allant de 2 à 3 semaines.",
+    "qid": "80da1c5f"
+   },
+   {
+    "index": 5,
+    "corpus": "bdpm_rcp",
+    "page": "60058517",
+    "section": "4.4",
+    "quote": "Chez les patients ayant des antécédents de troubles du comportement graves, y compris des antécédents d'anxiété généralisée et de dépression, il existe un risque de résurgence de ces symptômes sous traitement par GABITRIL, comme cela a pu être noté avec certains autres antiépileptiques. Il convient donc d'instaurer le traitement avec des posologies initiales plus faibles, dans le cadre d'une surveillance clinique attentive.",
+    "qid": "93176a03"
+   },
+   {
+    "index": 6,
+    "corpus": "bdpm_rcp",
+    "page": "60058517",
+    "section": "4.4",
+    "quote": "Des idées et comportements suicidaires ont été rapportés chez des patients traités par des antiépileptiques dans plusieurs indications. Une méta-analyse d'essais randomisés, contrôlés versus placebo portant sur des antiépileptiques a également montré une légère augmentation du risque d'idées et de comportements suicidaires. Les causes de ce risque ne sont pas connues et les données disponibles n'excluent pas la possibilité d'une augmentation de ce risque pour la tiagabine.",
+    "qid": "48ceb12a"
+   },
+   {
+    "index": 7,
+    "corpus": "bdpm_rcp",
+    "page": "60058517",
+    "section": "4.4",
+    "quote": "Comme avec d'autres antiépileptiques, la tiagabine peut entraîner, chez certains patients, une augmentation de la fréquence des crises ou faire apparaître des crises de type différent. Ce phénomène peut être la conséquence d'un surdosage, d'une diminution des concentrations plasmatiques des médicaments antiépileptiques concomitants, de l'évolution de la maladie ou d'un effet paradoxal.",
+    "qid": "bf514b67"
+   },
+   {
+    "index": 8,
+    "corpus": "bdpm_rcp",
+    "page": "60058517",
+    "section": "4.4",
+    "quote": "L'efficacité et la sécurité d'emploi du GABITRIL n'ont pas été démontrées dans d'autres indications en dehors du traitement des épilepsies partielles avec ou sans crises secondairement généralisées en addition aux autres antiépileptiques lorsque ceux-ci sont insuffisamment efficaces chez l'adulte et les adolescents de plus de 12 ans.",
+    "qid": "c1744da7"
+   }
+  ]
+ },
+ "tiapride": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "67890598",
+    "section": "4.4",
+    "quote": "o chez les sujets épileptiques en raison de la possibilité d'abaissement du seuil épileptogène ;",
+    "qid": "e1a8d4e5"
+   }
+  ]
+ },
+ "topiramate": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "61913385",
+    "section": "4.2",
+    "quote": "Le traitement par topiramate doit être instauré et surveillé par un médecin spécialiste expérimenté dans la prise en charge de l’épilepsie ou de la migraine.",
+    "qid": "39a1099b"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "61913385",
+    "section": "4.2",
+    "quote": "Chez les patients avec ou sans antécédent de convulsion ou d’épilepsie, les médicaments antiépileptiques (MAE) dont le topiramate doivent être arrêtés progressivement afin de minimiser le risque potentiel de crise convulsive ou d’augmentation de la fréquence des crises. Au cours des essais cliniques, les doses journalières ont été diminuées par paliers hebdomadaires de 50-100 mg chez l’adulte présentant une épilepsie et de 25-50 mg chez l’adulte recevant du topiramate à des doses allant jusqu’à 100 mg/jour dans le traitement prophylactique de la migraine. Au cours des essais cliniques chez l’enfant, le topiramate a été progressivement arrêté sur une période de 2 à 8 semaines.",
+    "qid": "0c85f70e"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "61913385",
+    "section": "4.2",
+    "quote": "Epilepsie - Traitement en monothérapie",
+    "qid": "96bfc76c"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "61913385",
+    "section": "4.2",
+    "quote": "La posologie cible initiale recommandée pour le traitement par topiramate en monothérapie chez l’adulte est de 100 mg/jour à 200 mg/jour en 2 prises. La dose journalière maximale recommandée est de 500 mg/jour en 2 prises. Certains patients présentant des formes réfractaires d’épilepsie ont toléré des doses de 1000 mg/jour de topiramate en monothérapie. Ces recommandations posologiques concernent tous les adultes, sujets âgés compris, en l’absence d’insuffisance rénale sous-jacente.",
+    "qid": "d17b3c1d"
+   },
+   {
+    "index": 4,
+    "corpus": "bdpm_rcp",
+    "page": "61913385",
+    "section": "4.2",
+    "quote": "Traitement de l’épilepsie en association à d’autres antiépileptiques (épilepsie partielle avec ou sans généralisation, crises tonico-cloniques généralisées, ou crises associées au syndrome de Lennox-Gastaut)",
+    "qid": "17ae9306"
+   },
+   {
+    "index": 5,
+    "corpus": "bdpm_rcp",
+    "page": "61913385",
+    "section": "4.2",
+    "quote": "Dans les essais cliniques en association avec d’autres antiépileptiques, la dose de 200 mg a été la dose minimale efficace. La posologie journalière usuelle est de 200-400 mg/jour en deux prises.",
+    "qid": "8808892d"
+   },
+   {
+    "index": 6,
+    "corpus": "bdpm_rcp",
+    "page": "61913385",
+    "section": "4.2",
+    "quote": "La posologie journalière totale recommandée d’EPITOMAX (topiramate) en association avec d’autres antiépileptiques est d’environ 5 à 9 mg/kg/jour en deux prises. Le traitement doit débuter à 25 mg (ou moins, dans l’intervalle 1 à 3 mg/kg/jour) le soir pendant la première semaine. La posologie doit ensuite être augmentée par paliers de 1 à 2 semaines, par paliers de 1 à 3 mg/kg/jour (administrés en 2 prises), pour atteindre la posologie cliniquement optimale.",
+    "qid": "41985839"
+   },
+   {
+    "index": 7,
+    "corpus": "bdpm_rcp",
+    "page": "61913385",
+    "section": "4.3",
+    "quote": "Épilepsie :",
+    "qid": "a6dbf4d5"
+   },
+   {
+    "index": 8,
+    "corpus": "bdpm_rcp",
+    "page": "61913385",
+    "section": "4.4",
+    "quote": "Des idées et un comportement suicidaires ont été rapportés chez des patients traités par des antiépileptiques dans plusieurs indications. Une méta-analyse des essais randomisés contrôlés versus placebo réalisés avec des MAE a montré une légère augmentation du risque d’idées et des comportements suicidaires. Le mécanisme de ce risque n’est pas connu et les données disponibles n’excluent pas la possibilité d’une augmentation du risque avec le topiramate.",
+    "qid": "adcb63bc"
+   },
+   {
+    "index": 9,
+    "corpus": "bdpm_rcp",
+    "page": "61913385",
+    "section": "4.4",
+    "quote": "Une acidose métabolique, hyperchlorémique, sans trou anionique (c’est-à-dire diminution des bicarbonates sériques en dessous des limites de la normale en absence d’alcalose respiratoire) est associée au traitement par topiramate. Cette diminution des bicarbonates sériques est due à l’effet inhibiteur du topiramate sur l’anhydrase carbonique rénale. Généralement, la diminution des bicarbonates survient en début de traitement bien qu’elle puisse survenir à tout moment au cours du traitement. Ces diminutions sont généralement légères à modérées (diminution moyenne de 4 mmol/L aux doses de 100 mg/jour ou plus chez l’adulte et d’environ 6 mg/kg/jour chez l’enfant). Dans de rares cas, les patients ont présenté des diminutions jusqu’à des valeurs inférieures à 10 mmol/L. Les comorbidités ou les traitements qui prédisposent à l’acidose (par exemple maladie rénale, troubles respiratoires sévères, état de mal épileptique, diarrhée, chirurgie, régime cétogène ou certains médicaments) peuvent accentuer la diminution des bicarbonates due au topiramate.",
+    "qid": "1ccc4ff7"
+   },
+   {
+    "index": 10,
+    "corpus": "bdpm_rcp",
+    "page": "61913385",
+    "section": "4.4",
+    "quote": "Dans l’épilepsie, les troubles cognitifs sont multifactoriels et peuvent être dus à une étiologie sous-jacente, à la maladie épileptique elle-même ou au traitement antiépileptique. Il a été rapporté dans la littérature des cas de troubles de la fonction cognitive chez l’adulte traité par topiramate, nécessitant une réduction du dosage ou l’arrêt du traitement. Cependant, les études chez les enfants traités par le topiramate sont insuffisantes en regard des troubles cognitifs, et ils nécessitent encore d’être élucidés.",
+    "qid": "b3400e06"
+   }
+  ]
+ },
+ "tramadol": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60344529",
+    "section": "4.3",
+    "quote": "Epilepsie non contrôlée par un traitement (voir rubrique 4.4).",
+    "qid": "50eba596"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60344529",
+    "section": "4.4",
+    "quote": "Des convulsions ont été rapportées chez des patients traités par tramadol et susceptibles de présenter des convulsions ou recevant d'autres traitements qui abaissent le seuil épileptogène, en particulier les inhibiteurs sélectifs de la recapture de la sérotonine, les antidépresseurs tricycliques, les antipsychotiques, les analgésiques centraux ou les anesthésiques locaux. Les patients épileptiques contrôlés par un traitement ou les patients susceptibles de présenter des convulsions ne devront être traités par le tramadol qu'en cas de nécessité absolue. Des cas de convulsions ont été rapportés chez des patients recevant du tramadol aux doses recommandées. Le risque de convulsions est accru si les doses de tramadol dépassent la dose recommandée (400 mg).",
+    "qid": "dd756d84"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "60344529",
+    "section": "4.4",
+    "quote": "Le tramadol devra être utilisé avec prudence chez les patients prédisposés aux crises d'épilepsie, ou présentant des troubles biliaires, chez les patients dépendants aux opioïdes et chez les patients présentant un traumatisme crânien, une altération de l'état de conscience sans cause évidente, des troubles respiratoires d'origine centrale ou des troubles de la fonction respiratoire, ou une élévation de pression intra-crânienne.",
+    "qid": "940fa8f4"
+   }
+  ]
+ },
+ "tranylcypromine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "europepmc",
+    "page": "11888352",
+    "quote": "Agreement, however, converges on the following: seizures triggered by psychotropic drugs are a dose-dependent adverse effect; maprotiline and clomipramine among antidepressants and chlorpromazine and clozapine among antipsychotics that have a relatively high seizurogenic potential; phenelzine, tranylcypromine, fluoxetine, paroxetine, sertraline, venlafaxine and trazodone among antidepressants and fluphenazine, haloperidol, pimozide and risperidone among antipsychotics that exhibit a relatively low risk.",
+    "qid": "a32be816"
+   }
+  ]
+ },
+ "trazodone": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "europepmc",
+    "page": "11888352",
+    "quote": "Agreement, however, converges on the following: seizures triggered by psychotropic drugs are a dose-dependent adverse effect; maprotiline and clomipramine among antidepressants and chlorpromazine and clozapine among antipsychotics that have a relatively high seizurogenic potential; phenelzine, tranylcypromine, fluoxetine, paroxetine, sertraline, venlafaxine and trazodone among antidepressants and fluphenazine, haloperidol, pimozide and risperidone among antipsychotics that exhibit a relatively low risk.",
+    "qid": "a32be816"
+   }
+  ]
+ },
+ "trimipramine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "63344192",
+    "section": "4.4",
+    "quote": "Patients épileptiques : chez les patients épileptiques ou ayant des antécédents d’épilepsie, il est prudent de renforcer la surveillance clinique et électrique, en raison de la possibilité d’abaissement du seuil épileptogène. La survenue de crises convulsives impose l’arrêt du traitement.",
+    "qid": "87dcfc0b"
+   }
+  ]
+ },
+ "valproate": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60184188",
+    "section": "4.2",
+    "quote": "Le traitement par valproate doit être instauré et surveillé par un médecin spécialiste expérimenté dans la prise en charge de l’épilepsie.",
+    "qid": "3c4308d3"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60184188",
+    "section": "4.2",
+    "quote": "Il est recommandé que le traitement par valproate soit instauré et surveillé par un médecin spécialiste expérimenté dans la prise en charge de l’épilepsie (voir rubriques 4.4 et 4.6).",
+    "qid": "510ae1f1"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "60184188",
+    "section": "4.2",
+    "quote": "S'il s'agit d'un malade déjà en traitement et recevant d'autres antiépileptiques, introduire progressivement le valproate de sodium pour atteindre la dose optimum en deux semaines environ, puis réduire éventuellement les thérapeutiques associées en fonction du contrôle obtenu ;",
+    "qid": "2c3498a6"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "60184188",
+    "section": "4.2",
+    "quote": "S'il s'agit d'un malade ne recevant pas d'autres antiépileptiques, l'ascension de la posologie s'effectue de préférence par paliers successifs tous les 2 ou 3 jours de façon à atteindre la posologie optimum en une semaine environ ;",
+    "qid": "a860cb01"
+   },
+   {
+    "index": 4,
+    "corpus": "bdpm_rcp",
+    "page": "60184188",
+    "section": "4.2",
+    "quote": "En cas de nécessité, l'association d'autres antiépileptiques doit être réalisée de manière progressive (voir rubrique 4.5).",
+    "qid": "7a606035"
+   },
+   {
+    "index": 5,
+    "corpus": "bdpm_rcp",
+    "page": "60184188",
+    "section": "4.4",
+    "quote": "la patiente comprend la nécessité qu’un médecin spécialiste expérimenté dans la prise en charge de l’épilepsie réévalue régulièrement (au moins chaque année) le traitement ;",
+    "qid": "bd27dbda"
+   },
+   {
+    "index": 6,
+    "corpus": "bdpm_rcp",
+    "page": "60184188",
+    "section": "4.4",
+    "quote": "Une utilisation concomitante avec des médicaments contenant des œstrogènes, y compris les contraceptifs hormonaux contenant des œstrogènes, peut potentiellement entraîner une diminution de l’efficacité du valproate (voir rubrique 4.5). Les médecins prescripteurs doivent surveiller la réponse clinique (contrôle de l’épilepsie) à l’initiation ou à l’arrêt des médicaments contenant des œstrogènes.",
+    "qid": "12094afb"
+   },
+   {
+    "index": 7,
+    "corpus": "bdpm_rcp",
+    "page": "60184188",
+    "section": "4.4",
+    "quote": "Chez les femmes envisageant une grossesse, un médecin spécialiste expérimenté dans la prise en charge de l’épilepsie doit réévaluer le traitement par valproate et envisager l’ensemble des options thérapeutiques alternatives. Tous les efforts doivent être faits pour passer à un traitement alternatif approprié avant la conception et cela, avant que la contraception ne soit arrêtée (voir rubrique 4.6). Si un changement de traitement est impossible, la patiente devra recevoir des conseils supplémentaires au regard des risques que le valproate présente pour l’enfant à naître, afin de l’aider à prendre une décision éclairée concernant son projet familial.",
+    "qid": "35d2b941"
+   },
+   {
+    "index": 8,
+    "corpus": "bdpm_rcp",
+    "page": "60184188",
+    "section": "4.4",
+    "quote": "Le traitement par valproate chez les adolescents et hommes en âge de procréer doit être régulièrement réévalué par le prescripteur afin de déterminer si le valproate reste le traitement le plus approprié. Pour les patients de sexe masculin prévoyant de concevoir un enfant, des alternatives thérapeutiques doivent être envisagées et discutées avec les patients. Les situations individuelles doivent être évaluées au cas par cas. Il est recommandé de demander conseil à un médecin spécialisé dans la prise en charge de l’épilepsie.",
+    "qid": "ed17372e"
+   },
+   {
+    "index": 9,
+    "corpus": "bdpm_rcp",
+    "page": "60184188",
+    "section": "4.4",
+    "quote": "Comme avec les autres antiépileptiques, la prise de valproate peut être suivie, au lieu d’une amélioration, d’une aggravation réversible de la fréquence et de la sévérité des convulsions (incluant l’état de mal épileptique) ou de l’apparition de nouveaux types de convulsions chez le patient. En cas de convulsions aggravées, il doit être recommandé au patient de consulter immédiatement son médecin (voir rubrique 4.8). Ces convulsions sont à distinguer de celles qui peuvent survenir lors d'une interaction pharmacocinétique (voir rubrique 4.5), d'une toxicité (hépatopathie ou encéphalopathie - voir rubriques 4.4 et 4.8) ou d'un surdosage.",
+    "qid": "6365bb6e"
+   },
+   {
+    "index": 10,
+    "corpus": "bdpm_rcp",
+    "page": "60184188",
+    "section": "4.4",
+    "quote": "Les nourrissons et les jeunes enfants de moins de 3 ans présentant une épilepsie sévère et notamment une épilepsie associée à des lésions cérébrales, un retard psychique et (ou) une maladie métabolique congénitale, incluant des troubles mitochondriaux tels qu’une déficience en carnitine, des troubles du cycle de l’urée, des mutations POLG (voir rubriques 4.3 et 4.4) ou une maladie dégénérative d'origine génétique, sont les plus exposés à ce risque. Au-delà de l'âge de 3 ans, l'incidence de survenue diminue de façon significative et décroît progressivement avec l'âge.",
+    "qid": "141e081e"
+   },
+   {
+    "index": 11,
+    "corpus": "bdpm_rcp",
+    "page": "60184188",
+    "section": "4.4",
+    "quote": "Dans la grande majorité des cas, ces atteintes hépatiques ont été observées pendant les 6 premiers mois de traitement, le plus souvent entre la 2ème et la 12ème semaine et, généralement au cours de polythérapie antiépileptique.",
+    "qid": "7cd71810"
+   },
+   {
+    "index": 12,
+    "corpus": "bdpm_rcp",
+    "page": "60184188",
+    "section": "4.4",
+    "quote": "d'autre part, une réapparition des crises épileptiques alors que le traitement est correctement suivi.",
+    "qid": "d2fab079"
+   },
+   {
+    "index": 13,
+    "corpus": "bdpm_rcp",
+    "page": "60184188",
+    "section": "4.4",
+    "quote": "En cas de modification des traitements associés connus pour leur toxicité hépatique (augmentation de la dose ou nouveau traitement), la surveillance hépatique biologique doit être mise en place de nouveau (voir également la rubrique 4.5 sur le risque d'atteinte hépatique avec les dérivés salicylés, les autres anticonvulsivants incluant le cannabidiol).",
+    "qid": "408b42f3"
+   },
+   {
+    "index": 14,
+    "corpus": "bdpm_rcp",
+    "page": "60184188",
+    "section": "4.4",
+    "quote": "Les pancréatites d'évolution défavorable sont généralement observées chez le jeune enfant, ou chez les patients présentant une épilepsie sévère, des lésions cérébrales ou une polythérapie antiépileptique.",
+    "qid": "ca78f968"
+   },
+   {
+    "index": 15,
+    "corpus": "bdpm_rcp",
+    "page": "60184188",
+    "section": "4.4",
+    "quote": "Des idées et comportements suicidaires ont été rapportés chez des patients traités par des antiépileptiques dans plusieurs indications. Une méta-analyse d'essais randomisés, contrôlés versus placebo portant sur des antiépileptiques a également montré une légère augmentation du risque d'idées et de comportements suicidaires. Les causes de ce risque ne sont pas connues et les données disponibles n'excluent pas la possibilité d'une augmentation de ce risque pour le valproate.",
+    "qid": "8dbc7cdb"
+   },
+   {
+    "index": 16,
+    "corpus": "bdpm_rcp",
+    "page": "60184188",
+    "section": "4.4",
+    "quote": "Des troubles liés à la POLG devraient être soupçonnés chez les patients présentant des antécédents familiaux ou des symptômes évoquant un trouble lié à la POLG, y compris, entre autres, une encéphalopathie inexpliquée, une épilepsie réfractaire (focale, myoclonique), un état de mal épileptique à la présentation, des retards développementaux, une régression psychomotrice, une neuropathie axonale sensitivo-motrice, une myopathie, une ataxie cérébelleuse, une ophthalmoplégie, ou une migraine compliquée avec aura occipitale. Pour une évaluation diagnostique de tels troubles, un test des mutations de la POLG devrait être effectué, conformément à la pratique clinique actuelle (voir la rubrique 4.3).",
+    "qid": "ffabc3fa"
+   },
+   {
+    "index": 17,
+    "corpus": "bdpm_rcp",
+    "page": "60184188",
+    "section": "4.4",
+    "quote": "Il est à souligner que comme avec la plupart des antiépileptiques on peut observer, notamment en début de traitement, une augmentation modérée, isolée et transitoire des transaminases, en l’absence de tout signe clinique.",
+    "qid": "95bd40bd"
+   },
+   {
+    "index": 18,
+    "corpus": "bdpm_rcp",
+    "page": "60184188",
+    "section": "4.4",
+    "quote": "L’administration du valproate peut déclencher la survenue ou l’aggravation d’une hypocarnitinémie pouvant entraîner une hyperammoniémie (susceptible de causer une encéphalopathie hyperammoniémique). D’autres symptômes tels qu’une toxicité hépatique, une hypoglycémie hypocétosique, une myopathie incluant une cardiomyopathie, une rhabdomyolyse, un syndrome de Fanconi ont été observés, principalement chez les patients présentant des facteurs de risque d’hypocarnitinémie ou une hypocarnitinémie préexistante. Les patients présentant un risque accru d’hypocarnitinémie symptomatique lorsqu’ils sont traités par valproate sont les patients présentant des troubles métaboliques, y compris des troubles mitochondriaux liés à la carnitine (voir également la rubrique 4.4 Patients présentant une maladie mitochondriale connue ou suspectée et Troubles du cycle de l’urée et risque d’hyperammoniémie), les patients ayant une altération de l’apport nutritionnel en carnitine, les patients de moins de 10 ans, et les patients traités de manière concomitante par des médicaments conjugués au pivalate ou par d’autres antiépileptiques.",
+    "qid": "651ba086"
+   }
+  ]
+ },
+ "valpromide": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "63737879",
+    "section": "4.4",
+    "quote": "Les sujets âgés et les sujets atteints d’affections organiques graves peuvent mal tolérer le valpromide. Une surveillance particulière de ces malades est nécessaire, notamment lorsque le valpromide est administré à une posologie relativement importante, ou associé à de fortes doses d’autres psychotropes ou d’antiépileptiques.",
+    "qid": "38c92b4c"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "63737879",
+    "section": "4.4",
+    "quote": "En cas de modification des traitements associés connus pour leur toxicité hépatique (augmentation de la dose ou nouveau traitement), la surveillance hépatique biologique doit être mise en place de nouveau (voir également la rubrique 4.5 sur le risque d'atteinte hépatique avec les dérivés salicylés, les autres anticonvulsivants incluant le cannabidiol).",
+    "qid": "408b42f3"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "63737879",
+    "section": "4.4",
+    "quote": "Les pancréatites d'évolution défavorable sont généralement observées chez le jeune enfant, ou chez les patients présentant une épilepsie sévère, des lésions cérébrales ou une polythérapie antiépileptique.",
+    "qid": "ca78f968"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "63737879",
+    "section": "4.4",
+    "quote": "Des idées et comportement suicidaires ont été rapportés chez des patients traités par des antiépileptiques dans plusieurs indications. Une méta-analyse d'essais randomisés, contrôlés versus placebo portant sur des antiépileptiques a également montré une légère augmentation du risque d'idées et de comportements suicidaires. Les causes de ce risque ne sont pas connues et les données disponibles n'excluent pas la possibilité d'une augmentation de ce risque pour le valpromide.",
+    "qid": "00925426"
+   },
+   {
+    "index": 4,
+    "corpus": "bdpm_rcp",
+    "page": "63737879",
+    "section": "4.4",
+    "quote": "Des troubles liés à la POLG devraient être soupçonnés chez les patients présentant des antécédents familiaux ou des symptômes évoquant un trouble lié à la POLG, y compris, entre autres, une encéphalopathie inexpliquée, une épilepsie réfractaire (focale, myoclonique), un état de mal épileptique à la présentation, des retards développementaux, une régression psychomotrice, une neuropathie axonale sensitivo-motrice, une myopathie, une ataxie cérébelleuse, une ophthalmoplégie, ou une migraine compliquée avec aura occipitale. Pour une évaluation diagnostique de tels troubles, un test des mutations de la POLG devrait être effectué, conformément à la pratique clinique actuelle (voir la rubrique 4.3).",
+    "qid": "ffabc3fa"
+   },
+   {
+    "index": 5,
+    "corpus": "bdpm_rcp",
+    "page": "63737879",
+    "section": "4.4",
+    "quote": "Les patients présentant un risque accru d’hypocarnitinémie symptomatique lorsqu’ils sont traités par valproate sont les patients présentant des troubles métaboliques, y compris des troubles mitochondriaux liés à la carnitine (voir également la rubrique 4.4 Patients présentant une maladie mitochondriale connue ou suspectée et Troubles du cycle de l’urée et risque d’hyperammoniémie), les patients ayant une altération de l’apport nutritionnel en carnitine, les patients de moins de 10 ans, et les patients traités de manière concomitante par des médicaments conjugués au pivalate ou par d’autres antiépileptiques.",
+    "qid": "4a740497"
+   }
+  ]
+ },
+ "varenicline": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60442838",
+    "section": "4.4",
+    "quote": "Lors d’un essai clinique sur le sevrage tabagique, les événements indésirables neuropsychiatriques ont été rapportés plus fréquemment chez les patients présentant des antécédents de maladie psychiatrique que chez les patients ne présentant pas d’antécédents de maladie psychiatrique, indépendamment du type de traitement reçu (voir rubrique 5.1). La prudence est recommandée chez les patients présentant des antécédents de maladie psychiatrique et les patients doivent être informés en conséquence. Crises convulsives",
+    "qid": "83c2d0af"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60442838",
+    "section": "4.4",
+    "quote": "Dans les essais cliniques et depuis sa commercialisation, des cas de crises convulsives ont été rapportés chez des patients traités par CHAMPIX présentant ou non des antécédents de crises convulsives. CHAMPIX doit être utilisé avec précaution chez les patients présentant des antécédents de crises convulsives ou d’autres affections qui abaissent potentiellement le seuil épileptogène.",
+    "qid": "9fdd3a6a"
+   }
+  ]
+ },
+ "venlafaxine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "61403425",
+    "section": "4.4",
+    "quote": "Des convulsions peuvent survenir lors d’un traitement par venlafaxine. Comme avec tous les autres antidépresseurs, la venlafaxine doit être instaurée avec prudence chez les patients présentant des antécédents de convulsions, et les patients concernés doivent faire l’objet d’une surveillance étroite. En cas de crise convulsive, le traitement doit être interrompu.",
+    "qid": "0ead2d52"
+   },
+   {
+    "index": 1,
+    "corpus": "europepmc",
+    "page": "11888352",
+    "quote": "Agreement, however, converges on the following: seizures triggered by psychotropic drugs are a dose-dependent adverse effect; maprotiline and clomipramine among antidepressants and chlorpromazine and clozapine among antipsychotics that have a relatively high seizurogenic potential; phenelzine, tranylcypromine, fluoxetine, paroxetine, sertraline, venlafaxine and trazodone among antidepressants and fluphenazine, haloperidol, pimozide and risperidone among antipsychotics that exhibit a relatively low risk.",
+    "qid": "a32be816"
+   }
+  ]
+ },
+ "vigabatrin": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "61139833",
+    "section": "4.2",
+    "quote": "Le traitement par SABRIL ne peut être instauré que par un spécialiste en épileptologie, neurologie ou neurologie pédiatrique. Le suivi doit être assuré sous la supervision d'un spécialiste en épileptologie, neurologie ou neurologie pédiatrique.",
+    "qid": "1ca31a97"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "61139833",
+    "section": "4.2",
+    "quote": "Si, après un essai de traitement bien conduit, la vigabatrine ne procure pas une amélioration cliniquement significative des manifestations de l'épilepsie, le traitement doit être arrêté. Le traitement par la vigabatrine doit être arrêté progressivement sous étroite surveillance médicale. Une amélioration cliniquement significative est habituellement observée dans un délai de 2 à 4 semaines chez les patients présentant des spasmes infantiles, et dans un délai de 12 semaines chez les patients présentant des crises partielles complexes réfractaires.",
+    "qid": "e2c3fc5d"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "61139833",
+    "section": "4.2",
+    "quote": "L'efficacité maximale est généralement obtenue avec une posologie quotidienne comprise entre 2 et 3 g. Le traitement est instauré à une posologie quotidienne de 1 g en complément du traitement antiépileptique du patient. La dose quotidienne doit ensuite être augmentée par paliers de 0,5 g à intervalles d'une semaine en fonction de la réponse clinique et de la tolérance. La dose maximale recommandée est de 3 g/jour.",
+    "qid": "1efdede0"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "61139833",
+    "section": "4.2",
+    "quote": "Traitement des épilepsies partielles résistantes",
+    "qid": "5c9772b7"
+   },
+   {
+    "index": 4,
+    "corpus": "bdpm_rcp",
+    "page": "61139833",
+    "section": "4.4",
+    "quote": "Comme avec tout antiépileptique, certains patients sous vigabatrine peuvent présenter une augmentation de la fréquence des crises ou l'apparition de nouveaux types de crises (voir rubrique 4.8). Ces phénomènes peuvent également résulter d'un surdosage, d'une diminution des concentrations plasmatiques de l'antiépileptique administré parallèlement ou d'un effet paradoxal.",
+    "qid": "537b2708"
+   },
+   {
+    "index": 5,
+    "corpus": "bdpm_rcp",
+    "page": "61139833",
+    "section": "4.4",
+    "quote": "Comme avec tout antiépileptique, l'arrêt brutal du traitement peut entraîner l'apparition de crises de rebond. Dans le cas où le patient devrait arrêter un traitement par la vigabatrine, il est recommandé de réduire progressivement la posologie sur une période de 2 à 4 semaines.",
+    "qid": "583f1a47"
+   },
+   {
+    "index": 6,
+    "corpus": "bdpm_rcp",
+    "page": "61139833",
+    "section": "4.4",
+    "quote": "Des idées et comportements suicidaires ont été rapportés chez des patients traités par des antiépileptiques dans plusieurs indications. Une méta-analyse d’essais randomisés, contrôlés versus placebo portant sur des antiépileptiques a également montré une légère augmentation du risque d’idées et de comportements suicidaires. Les causes de ce risque ne sont pas connues et les données disponibles n’excluent pas la possibilité d’une augmentation de ce risque pour la vigabatrine.",
+    "qid": "9436878f"
+   }
+  ]
+ },
+ "vortioxetine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60316362",
+    "section": "4.4",
+    "quote": "Convulsions",
+    "qid": "4de99b22"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60316362",
+    "section": "4.4",
+    "quote": "La survenue de convulsions est un risque potentiel associé au traitement par antidépresseurs. Par conséquent, la vortioxétine doit être introduite prudemment chez les patients ayant des antécédents de convulsions ou les patients présentant une épilepsie instable (voir rubrique 4.5). Le traitement doit être arrêté chez tout patient développant des convulsions ou chez qui une augmentation de la fréquence des convulsions est observée.",
+    "qid": "a5bac063"
+   }
+  ]
+ },
+ "yohimbine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "69816276",
+    "section": "4.4",
+    "quote": "Un cas d’augmentation des crises épileptiques lorsque la yohimbine avait été utilisée de manière concomitante au traitement pour l’épilepsie a été rapporté. Par conséquent, il ne peut pas être exclu que la yohimbine favoriserait les crises d'épilepsie chez les patients épileptiques.",
+    "qid": "e0f6091c"
+   }
+  ]
+ },
+ "zolpidem": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "63179285",
+    "section": "4.4",
+    "quote": "A l’arrêt du traitement, un syndrome de sevrage peut apparaitre. Certains symptômes sont fréquents et d'apparence banale : insomnie, céphalées, anxiété importante, myalgies, tension musculaire, irritabilité. D'autres symptômes sont plus rares : agitation voire épisode confusionnel, paresthésies des extrémités, hyperréactivité à la lumière, au bruit, et au contact physique, dépersonnalisation, déréalisation, phénomènes hallucinatoires, délire, convulsions.",
+    "qid": "0608923a"
+   }
+  ]
+ },
+ "zonisamide": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "62741554",
+    "section": "4.2",
+    "quote": "En cas d’arrêt du traitement par Zonisamide, l’interruption doit être progressive (voir rubrique 4.4). Lors des études cliniques chez l’adulte, la posologie a été réduite de 100 mg tous les sept jours avec ajustement concomitant des doses des autres médicaments antiépileptiques (le cas échéant).",
+    "qid": "21130d84"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "62741554",
+    "section": "4.2",
+    "quote": "Épilepsie nouvellement diagnostiquée chez l’adulte",
+    "qid": "e8b754ec"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "62741554",
+    "section": "4.4",
+    "quote": "L’arrêt du zonisamide doit être envisagé chez les patients qui développent une éruption cutanée inexpliquée. Tous les patients qui développent une éruption cutanée pendant le traitement par le zonisamide doivent faire l’objet d’une surveillance étroite, et une prudence particulière est recommandée chez les patients traités en même temps par des médicaments antiépileptiques qui risquent de provoquer des éruptions cutanées.",
+    "qid": "b01c2ea9"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "62741554",
+    "section": "4.4",
+    "quote": "Crises convulsives à l’arrêt du traitement",
+    "qid": "0e702b40"
+   },
+   {
+    "index": 4,
+    "corpus": "bdpm_rcp",
+    "page": "62741554",
+    "section": "4.4",
+    "quote": "Conformément à la pratique clinique usuelle, l’arrêt éventuel du zonisamide chez les patients épileptiques doit se faire de manière progressive pour limiter les risques de crises convulsives à l’arrêt du traitement. Il n’existe pas de données suffisantes concernant l’arrêt des médicaments antiépileptiques concomitants une fois les crises contrôlées avec le zonisamide administré en association pour pouvoir utiliser le zonisamide en monothérapie. Par conséquent, la prudence est recommandée lors de l’arrêt des autres médicaments antiépileptiques.",
+    "qid": "c934341c"
+   },
+   {
+    "index": 5,
+    "corpus": "bdpm_rcp",
+    "page": "62741554",
+    "section": "4.4",
+    "quote": "Des idées et comportements suicidaires ont été rapportés chez des patients traités par des antiépileptiques dans plusieurs indications. Une méta-analyse d’études randomisées contrôlées contre placebo de médicaments antiépileptiques a également montré une légère augmentation du risque d’idées et comportements suicidaires. Le mécanisme de ce risque est inconnu et les données disponibles ne permettent pas d’exclure la possibilité d’un risque accru avec le zonisamide.",
+    "qid": "868d7697"
+   },
+   {
+    "index": 6,
+    "corpus": "bdpm_rcp",
+    "page": "62741554",
+    "section": "4.4",
+    "quote": "Une acidose métabolique hyperchlorémique sans trou anionique (diminution du taux de bicarbonate sérique en dessous des valeurs de référence normales en l’absence d’une alcalose respiratoire chronique) peut survenir lors du traitement par le zonisamide. Cette acidose métabolique est causée par la perte rénale de bicarbonate due à l’effet inhibiteur du zonisamide sur l’anhydrase carbonique. Ce déséquilibre électrolytique a été observé lors de l’administration du zonisamide dans les études cliniques contrôlées versus placebo et après la mise sur le marché. En général, l’acidose métabolique induite par le zonisamide survient en début de traitement, bien qu’elle puisse se développer à tout moment au cours du traitement. Les diminutions du bicarbonate sont généralement légères à modérées (diminution moyenne d’environ 3,5 mEq/l à des doses quotidiennes de 300 mg chez l’adulte) ; dans de rares cas, les patients peuvent présenter des baisses plus sévères. Les pathologies ou traitements qui prédisposent à l’acidose (tels que néphropathie, affections respiratoires sévères, état de mal épileptique, diarrhées, chirurgie, régime cétogène ou médicaments) peuvent avoir des effets additifs à ceux du zonisamide sur la diminution du bicarbonate.",
+    "qid": "0c5221a0"
+   },
+   {
+    "index": 7,
+    "corpus": "bdpm_rcp",
+    "page": "62741554",
+    "section": "4.4",
+    "quote": "Une perte de poids entraînant une dégradation de l’état général et la non-observance du traitement antiépileptique a été associée à une issue fatale (voir rubrique 4.8). Le zonisamide n’est pas recommandé chez les patients pédiatriques présentant un poids faible (définition selon les catégories d’IMC ajusté en fonction de l'âge de l’OMS) ou une diminution de l’appétit.",
+    "qid": "971a61f4"
+   },
+   {
+    "index": 8,
+    "corpus": "bdpm_rcp",
+    "page": "62741554",
+    "section": "4.4",
+    "quote": "Les troubles cognitifs chez les patients épileptiques ont été associés à la pathologie sous-jacente et/ou à l’administration d’un traitement antiépileptique. Dans une étude contrôlée du zonisamide versus placebo menée chez des enfants et adolescents, le pourcentage de patients présentant des troubles cognitifs était numériquement supérieur dans le groupe zonisamide par rapport au groupe placebo.",
+    "qid": "f797bbd5"
+   }
+  ]
+ },
+ "zopiclone": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "68508795",
+    "section": "4.4",
+    "quote": "Si une dépendance physique s’installe, une interruption soudaine du traitement sera accompagnée de symptômes de sevrage, pouvant être des maux de tête, douleurs musculaires, anxiété importante, tension, agitation, confusion et irritabilité. Dans les cas sévères, les symptômes suivants peuvent apparaître : déréalisation, dépersonnalisation, hyperacousie, engourdissements et picotements des extrémités, hypersensibilité à la lumière, au bruit et au contact physique, hallucinations ou crises d'épilepsie.",
+    "qid": "85040cf5"
+   }
+  ]
+ },
+ "zuclopenthixol": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60209937",
+    "section": "4.4",
+    "quote": "Une surveillance particulière chez les patients épileptiques et les sujets présentant d'autres facteurs prédisposant (atteintes cérébrales) peut être conseillée en raison de la possibilité d'abaissement du seuil épileptogène.",
+    "qid": "75bb2360"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60209937",
+    "section": "4.4",
+    "quote": "L’utilisation de ce médicament est dangereuse chez les sujets alcooliques et doit être prise en compte chez les femmes enceintes ou allaitant, les enfants et les groupes à haut risque tels que les insuffisants hépatiques ou les épileptiques.",
+    "qid": "37313f9d"
+   }
+  ]
+ }
+}

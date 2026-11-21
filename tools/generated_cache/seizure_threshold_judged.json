@@ -1,0 +1,770 @@
+{
+ "alimemazine": [
+  {
+   "index": 0,
+   "qid": "5d440667",
+   "effect": "lowers"
+  }
+ ],
+ "alprazolam": [
+  {
+   "index": 0,
+   "qid": "70154ebd",
+   "effect": "withdrawal"
+  },
+  {
+   "index": 1,
+   "qid": "bce85b20",
+   "effect": "lowers"
+  }
+ ],
+ "amantadine": [],
+ "amisulpride": [
+  {
+   "index": 0,
+   "qid": "5fe70f7d",
+   "effect": "lowers"
+  }
+ ],
+ "amitriptyline": [],
+ "amphetamine_d": [
+  {
+   "index": 0,
+   "qid": "20c24af8",
+   "effect": "lowers"
+  }
+ ],
+ "aripiprazole": [
+  {
+   "index": 0,
+   "qid": "ec3ca4d9",
+   "effect": "lowers"
+  }
+ ],
+ "asenapine": [
+  {
+   "index": 0,
+   "qid": "f9077d36",
+   "effect": "lowers"
+  }
+ ],
+ "baclofen": [
+  {
+   "index": 2,
+   "qid": "a008a12b",
+   "effect": "withdrawal"
+  },
+  {
+   "index": 3,
+   "qid": "9f4fb213",
+   "effect": "lowers"
+  },
+  {
+   "index": 3,
+   "qid": "9f4fb213",
+   "effect": "withdrawal"
+  }
+ ],
+ "brexpiprazole": [
+  {
+   "index": 0,
+   "qid": "97272313",
+   "effect": "lowers"
+  }
+ ],
+ "brivaracetam": [],
+ "bromazepam": [
+  {
+   "index": 0,
+   "qid": "3052ffb8",
+   "effect": "withdrawal"
+  }
+ ],
+ "bromocriptine": [
+  {
+   "index": 0,
+   "qid": "4146c4d2",
+   "effect": "lowers"
+  }
+ ],
+ "bupropion": [
+  {
+   "index": 4,
+   "qid": "61af31ae",
+   "effect": "lowers"
+  },
+  {
+   "index": 11,
+   "qid": "bce85b20",
+   "effect": "lowers"
+  }
+ ],
+ "buspirone": [],
+ "cabergoline": [
+  {
+   "index": 0,
+   "qid": "bb0c8e60",
+   "effect": "lowers"
+  }
+ ],
+ "caffeine": [],
+ "cannabidiol": [],
+ "carbamazepine": [
+  {
+   "index": 10,
+   "qid": "6a6e103f",
+   "effect": "withdrawal"
+  }
+ ],
+ "cariprazine": [],
+ "chlorpromazine": [
+  {
+   "index": 0,
+   "qid": "9b601302",
+   "effect": "lowers"
+  },
+  {
+   "index": 1,
+   "qid": "a32be816",
+   "effect": "lowers"
+  }
+ ],
+ "citalopram": [
+  {
+   "index": 0,
+   "qid": "c3dba36a",
+   "effect": "lowers"
+  }
+ ],
+ "clobazam": [
+  {
+   "index": 3,
+   "qid": "f1ce4a41",
+   "effect": "withdrawal"
+  }
+ ],
+ "clomipramine": [
+  {
+   "index": 1,
+   "qid": "52ef2d9a",
+   "effect": "lowers"
+  },
+  {
+   "index": 2,
+   "qid": "0ec4148c",
+   "effect": "lowers"
+  },
+  {
+   "index": 3,
+   "qid": "a32be816",
+   "effect": "lowers"
+  }
+ ],
+ "clonazepam": [
+  {
+   "index": 0,
+   "qid": "4c31dc80",
+   "effect": "raises"
+  },
+  {
+   "index": 3,
+   "qid": "88508b2f",
+   "effect": "raises"
+  },
+  {
+   "index": 5,
+   "qid": "fb344aad",
+   "effect": "withdrawal"
+  },
+  {
+   "index": 7,
+   "qid": "84953fcc",
+   "effect": "withdrawal"
+  }
+ ],
+ "clorazepate": [
+  {
+   "index": 0,
+   "qid": "f1ce4a41",
+   "effect": "withdrawal"
+  }
+ ],
+ "clotiazepam": [
+  {
+   "index": 0,
+   "qid": "53f8e6df",
+   "effect": "withdrawal"
+  }
+ ],
+ "clozapine": [
+  {
+   "index": 3,
+   "qid": "a6153b45",
+   "effect": "lowers"
+  },
+  {
+   "index": 4,
+   "qid": "17f303c0",
+   "effect": "lowers"
+  },
+  {
+   "index": 5,
+   "qid": "0ec4148c",
+   "effect": "lowers"
+  },
+  {
+   "index": 6,
+   "qid": "a32be816",
+   "effect": "lowers"
+  }
+ ],
+ "cyamemazine": [
+  {
+   "index": 0,
+   "qid": "47531671",
+   "effect": "lowers"
+  }
+ ],
+ "dexmedetomidine": [],
+ "diazepam": [
+  {
+   "index": 1,
+   "qid": "1d0e50cc",
+   "effect": "withdrawal"
+  }
+ ],
+ "disulfiram": [],
+ "donepezil": [
+  {
+   "index": 0,
+   "qid": "a09336ff",
+   "effect": "lowers"
+  },
+  {
+   "index": 1,
+   "qid": "70f0e277",
+   "effect": "lowers"
+  }
+ ],
+ "doxepin": [
+  {
+   "index": 0,
+   "qid": "dfd5b810",
+   "effect": "lowers"
+  }
+ ],
+ "duloxetine": [],
+ "escitalopram": [],
+ "esketamine": [],
+ "eslicarbazepine_acetate": [
+  {
+   "index": 2,
+   "qid": "47184625",
+   "effect": "withdrawal"
+  }
+ ],
+ "estazolam": [
+  {
+   "index": 0,
+   "qid": "f1ce4a41",
+   "effect": "withdrawal"
+  }
+ ],
+ "ethosuximide": [
+  {
+   "index": 0,
+   "qid": "498abd0b",
+   "effect": "withdrawal"
+  }
+ ],
+ "fenfluramine": [
+  {
+   "index": 1,
+   "qid": "7721fc40",
+   "effect": "withdrawal"
+  }
+ ],
+ "flumazenil": [
+  {
+   "index": 1,
+   "qid": "c417a7bc",
+   "effect": "raises"
+  }
+ ],
+ "fluoxetine": [
+  {
+   "index": 0,
+   "qid": "4a378cd4",
+   "effect": "lowers"
+  }
+ ],
+ "flupenthixol": [
+  {
+   "index": 0,
+   "qid": "a33bb795",
+   "effect": "lowers"
+  }
+ ],
+ "fluphenazine": [],
+ "fluvoxamine": [],
+ "gabapentin": [
+  {
+   "index": 6,
+   "qid": "6234f818",
+   "effect": "withdrawal"
+  }
+ ],
+ "galantamine": [
+  {
+   "index": 0,
+   "qid": "9807a47b",
+   "effect": "lowers"
+  }
+ ],
+ "haloperidol": [
+  {
+   "index": 0,
+   "qid": "7cbd6f5f",
+   "effect": "lowers"
+  }
+ ],
+ "hydromorphone": [],
+ "hydroxyzine": [],
+ "imipramine": [
+  {
+   "index": 1,
+   "qid": "c5d43f45",
+   "effect": "lowers"
+  },
+  {
+   "index": 2,
+   "qid": "dfd5b810",
+   "effect": "lowers"
+  }
+ ],
+ "iproniazid": [
+  {
+   "index": 0,
+   "qid": "9aba3dbc",
+   "effect": "lowers"
+  }
+ ],
+ "lacosamide": [],
+ "lamotrigine": [],
+ "levetiracetam": [],
+ "levomepromazine": [
+  {
+   "index": 0,
+   "qid": "d3a9f010",
+   "effect": "lowers"
+  }
+ ],
+ "lisdexamfetamine": [
+  {
+   "index": 0,
+   "qid": "9f567117",
+   "effect": "lowers"
+  }
+ ],
+ "lithium": [],
+ "loflazepate": [
+  {
+   "index": 0,
+   "qid": "f1ce4a41",
+   "effect": "withdrawal"
+  }
+ ],
+ "loprazolam": [],
+ "lorazepam": [
+  {
+   "index": 0,
+   "qid": "f1ce4a41",
+   "effect": "withdrawal"
+  }
+ ],
+ "lormetazepam": [
+  {
+   "index": 0,
+   "qid": "1959d0ce",
+   "effect": "withdrawal"
+  }
+ ],
+ "loxapine": [
+  {
+   "index": 1,
+   "qid": "91848187",
+   "effect": "lowers"
+  },
+  {
+   "index": 2,
+   "qid": "73cc6546",
+   "effect": "lowers"
+  }
+ ],
+ "lurasidone": [],
+ "maprotiline": [
+  {
+   "index": 2,
+   "qid": "d1aaf8e8",
+   "effect": "lowers"
+  },
+  {
+   "index": 4,
+   "qid": "a32be816",
+   "effect": "lowers"
+  }
+ ],
+ "meclizine": [],
+ "melatonin": [],
+ "memantine": [],
+ "methadone": [
+  {
+   "index": 0,
+   "qid": "b56a2b72",
+   "effect": "lowers"
+  }
+ ],
+ "methylphenidate_dl": [
+  {
+   "index": 1,
+   "qid": "91bc4829",
+   "effect": "lowers"
+  }
+ ],
+ "metoclopramide": [
+  {
+   "index": 0,
+   "qid": "67c37cef",
+   "effect": "lowers"
+  }
+ ],
+ "mianserin": [
+  {
+   "index": 0,
+   "qid": "803f4c67",
+   "effect": "lowers"
+  }
+ ],
+ "milnacipran": [],
+ "mirtazapine": [],
+ "morphine": [],
+ "nalmefene": [],
+ "naloxone": [],
+ "nefopam": [],
+ "nitrazepam": [
+  {
+   "index": 0,
+   "qid": "5ede6b00",
+   "effect": "withdrawal"
+  }
+ ],
+ "olanzapine": [
+  {
+   "index": 0,
+   "qid": "37674981",
+   "effect": "lowers"
+  },
+  {
+   "index": 1,
+   "qid": "0ec4148c",
+   "effect": "lowers"
+  }
+ ],
+ "oxazepam": [
+  {
+   "index": 0,
+   "qid": "f1ce4a41",
+   "effect": "withdrawal"
+  }
+ ],
+ "oxcarbazepine": [
+  {
+   "index": 9,
+   "qid": "84d6b44b",
+   "effect": "withdrawal"
+  }
+ ],
+ "oxycodone": [
+  {
+   "index": 0,
+   "qid": "a2f2d150",
+   "effect": "withdrawal"
+  }
+ ],
+ "paliperidone": [],
+ "paroxetine": [],
+ "perampanel": [
+  {
+   "index": 3,
+   "qid": "ff560d28",
+   "effect": "withdrawal"
+  }
+ ],
+ "periciazine": [
+  {
+   "index": 0,
+   "qid": "e851cfdf",
+   "effect": "lowers"
+  }
+ ],
+ "phenelzine": [],
+ "phenobarbital": [
+  {
+   "index": 1,
+   "qid": "822553bb",
+   "effect": "withdrawal"
+  }
+ ],
+ "phenytoin": [
+  {
+   "index": 6,
+   "qid": "85f802ec",
+   "effect": "withdrawal"
+  }
+ ],
+ "pimozide": [
+  {
+   "index": 1,
+   "qid": "a59e3f4e",
+   "effect": "lowers"
+  }
+ ],
+ "pipamperone": [
+  {
+   "index": 0,
+   "qid": "931dbd4b",
+   "effect": "lowers"
+  }
+ ],
+ "pipothiazine": [
+  {
+   "index": 0,
+   "qid": "12edfa34",
+   "effect": "lowers"
+  }
+ ],
+ "pitolisant": [],
+ "pizotifen": [
+  {
+   "index": 0,
+   "qid": "7b68b40b",
+   "effect": "lowers"
+  }
+ ],
+ "prazepam": [
+  {
+   "index": 0,
+   "qid": "f1ce4a41",
+   "effect": "withdrawal"
+  }
+ ],
+ "pregabalin": [
+  {
+   "index": 2,
+   "qid": "849e90cd",
+   "effect": "withdrawal"
+  },
+  {
+   "index": 3,
+   "qid": "562cefa5",
+   "effect": "withdrawal"
+  }
+ ],
+ "primidone": [
+  {
+   "index": 2,
+   "qid": "4a4b9aaf",
+   "effect": "withdrawal"
+  }
+ ],
+ "promethazine": [
+  {
+   "index": 0,
+   "qid": "67e6ee5e",
+   "effect": "lowers"
+  }
+ ],
+ "propofol": [
+  {
+   "index": 0,
+   "qid": "31c45a9a",
+   "effect": "lowers"
+  }
+ ],
+ "propranolol": [],
+ "quetiapine": [
+  {
+   "index": 2,
+   "qid": "bce85b20",
+   "effect": "lowers"
+  }
+ ],
+ "risperidone": [],
+ "rivastigmine": [
+  {
+   "index": 0,
+   "qid": "e8e930c0",
+   "effect": "lowers"
+  }
+ ],
+ "scopolamine": [
+  {
+   "index": 0,
+   "qid": "658efc13",
+   "effect": "lowers"
+  }
+ ],
+ "sertraline": [
+  {
+   "index": 0,
+   "qid": "1825bb55",
+   "effect": "lowers"
+  }
+ ],
+ "sevoflurane": [
+  {
+   "index": 0,
+   "qid": "ad5b2c6f",
+   "effect": "lowers"
+  },
+  {
+   "index": 1,
+   "qid": "7577aec1",
+   "effect": "lowers"
+  },
+  {
+   "index": 2,
+   "qid": "adc72066",
+   "effect": "lowers"
+  }
+ ],
+ "sodium_oxybate": [
+  {
+   "index": 1,
+   "qid": "70b393d1",
+   "effect": "lowers"
+  }
+ ],
+ "stiripentol": [],
+ "sulpiride": [
+  {
+   "index": 0,
+   "qid": "553468a4",
+   "effect": "lowers"
+  }
+ ],
+ "sumatriptan": [
+  {
+   "index": 0,
+   "qid": "50f2bb4b",
+   "effect": "lowers"
+  }
+ ],
+ "tiagabine": [
+  {
+   "index": 2,
+   "qid": "52c9f4b3",
+   "effect": "lowers"
+  },
+  {
+   "index": 4,
+   "qid": "80da1c5f",
+   "effect": "withdrawal"
+  }
+ ],
+ "tiapride": [
+  {
+   "index": 0,
+   "qid": "e1a8d4e5",
+   "effect": "lowers"
+  }
+ ],
+ "topiramate": [
+  {
+   "index": 1,
+   "qid": "0c85f70e",
+   "effect": "withdrawal"
+  }
+ ],
+ "tramadol": [
+  {
+   "index": 1,
+   "qid": "dd756d84",
+   "effect": "lowers"
+  }
+ ],
+ "tranylcypromine": [],
+ "trazodone": [],
+ "trimipramine": [
+  {
+   "index": 0,
+   "qid": "87dcfc0b",
+   "effect": "lowers"
+  }
+ ],
+ "valproate": [],
+ "valpromide": [],
+ "varenicline": [
+  {
+   "index": 1,
+   "qid": "9fdd3a6a",
+   "effect": "lowers"
+  }
+ ],
+ "venlafaxine": [
+  {
+   "index": 0,
+   "qid": "0ead2d52",
+   "effect": "lowers"
+  }
+ ],
+ "vigabatrin": [
+  {
+   "index": 5,
+   "qid": "583f1a47",
+   "effect": "withdrawal"
+  }
+ ],
+ "vortioxetine": [
+  {
+   "index": 1,
+   "qid": "a5bac063",
+   "effect": "lowers"
+  }
+ ],
+ "yohimbine": [
+  {
+   "index": 0,
+   "qid": "e0f6091c",
+   "effect": "lowers"
+  }
+ ],
+ "zolpidem": [
+  {
+   "index": 0,
+   "qid": "0608923a",
+   "effect": "withdrawal"
+  }
+ ],
+ "zonisamide": [
+  {
+   "index": 4,
+   "qid": "c934341c",
+   "effect": "withdrawal"
+  }
+ ],
+ "zopiclone": [
+  {
+   "index": 0,
+   "qid": "85040cf5",
+   "effect": "withdrawal"
+  }
+ ],
+ "zuclopenthixol": [
+  {
+   "index": 0,
+   "qid": "75bb2360",
+   "effect": "lowers"
+  }
+ ]
+}
