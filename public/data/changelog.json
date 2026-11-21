@@ -1,6 +1,56 @@
 {
   "versions": [
     {
+      "version": "3.178.0",
+      "date": "2026-11-21",
+      "entries": [
+        {
+          "category": "added",
+          "text": "New sleep effects on receptors: less or more REM sleep, more or less deep (slow-wave) sleep. Blocking 5-HT2A deepens sleep and activating 5-HT1A, 5-HT1B or 5-HT2A reduces REM sleep in people; the other statements come from rats or cats and carry an orange warning",
+          "commits": [
+            "99b6bbd4",
+            "789a735c"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Five review articles are now sources, linked by their DOI: Monti 2011, Watson 2010, Wichniak 2017, Bates 2026 and Zilles 2009",
+          "commits": [
+            "3223dc12"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "26 antiepileptic drugs now show that they raise the seizure threshold, from their French label's indications",
+          "commits": [
+            "4194a8ea",
+            "4ef946f0"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "Where receptors sit in the human brain is now also backed by receptor-binding maps of the cortex (Zilles 2009), for 15 receptor-region pairs",
+          "commits": [
+            "a6e50bd0"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "Tropatepine shows its molecule again, redrawn as a vector image from Wikipedia's picture",
+          "commits": [
+            "c22a1e99"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "The contact link and the \"idea for a feature\" line are written once and shared by the panels, the loading screen and the text version for AI assistants",
+          "commits": [
+            "1af6ad2d"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.177.1",
       "date": "2026-11-21",
       "entries": [
