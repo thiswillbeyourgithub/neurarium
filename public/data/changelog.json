@@ -1,6 +1,20 @@
 {
   "versions": [
     {
+      "version": "3.177.1",
+      "date": "2026-11-21",
+      "entries": [
+        {
+          "category": "data",
+          "text": "New effects: gut spasm (cramps) from muscarinic M3 activation, and an antispasmodic effect from blocking M2 / M3, the way hyoscine butylbromide relieves cramps; anticholinergic drugs now list it among their possible effects",
+          "commits": [
+            "875ec19b",
+            "934a67f0"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.177.0",
       "date": "2026-11-21",
       "entries": [
