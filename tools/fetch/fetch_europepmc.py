@@ -186,6 +186,10 @@ PAPERS: dict[str, str] = {
     "34308528": "A2A agonism (regadenoson): central A2A activation behind seizures (case report)",
     "17134847": "DAT inhibitors (cocaine, methylphenidate, amphetamines) induce delusional "
                 "parasitosis (Huber 2007, hypothesis + case reports)",
+    "42090293": "M2/M3 drive gut smooth muscle contraction; hyoscine butylbromide blocks "
+                "them (2026 review)",
+    "38570081": "hyoscine butylbromide inhibits cholinergic contractions of human colon "
+                "via mainly M3 receptors (ex vivo)",
     # Per-drug seizure threshold (fetch_seizure_threshold.SEIZURE_PAPERS).
     "17223086": "seizure incidence vs placebo in FDA psychopharmacology trials, per drug "
                 "(Alper 2007)",

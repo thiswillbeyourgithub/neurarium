@@ -110,6 +110,10 @@ RECEPTOR_EFFECTS: dict[str, dict[str, str]] = {
     "vasoconstriction": {"en": "Vasoconstriction", "fr": "Vasoconstriction"},
     "vasodilation": {"en": "Vasodilation", "fr": "Vasodilatation"},
     "bladder_relaxation": {"en": "Bladder relaxation", "fr": "Relâchement de la vessie"},
+    "gi_spasm": {"en": "Gut spasm (smooth muscle contraction, cramps)",
+                 "fr": "Spasme digestif (contraction des muscles lisses, crampes)"},
+    "antispasmodic": {"en": "Antispasmodic effect (relaxes gut spasm)",
+                      "fr": "Effet antispasmodique (relâche les spasmes digestifs)"},
     "gi_motility": {"en": "Increased gut motility (prokinetic)",
                     "fr": "Augmentation de la motilité digestive (prokinétique)"},
     # Effects of losing a receptor's function (a loss-of-function variant or a blocking
@@ -188,6 +192,8 @@ EFFECT_SEARCH_ALIASES: dict[str, tuple[str, ...]] = {
     "cardiovascular": ("tachycardia", "hypertension", "tachycardie"),
     "orthostatic_hypotension": ("blood pressure", "tension artérielle"),
     "seizures": ("epilepsy", "convulsions", "épilepsie"),
+    "gi_spasm": ("cramp", "colic", "stomach", "crampe", "colique", "estomac"),
+    "antispasmodic": ("cramp", "colic", "spasmolytic", "crampe", "colique", "spasmolytique"),
     "anticonvulsant": ("epilepsy", "convulsions", "épilepsie", "antiepileptic", "antiépileptique"),
 }
 
@@ -207,6 +213,7 @@ EFFECT_OPPOSITES: tuple[tuple[str, str], ...] = (
     ("anxiety", "anxiolytic"),
     ("itch", "antipruritic"),
     ("constipation", "gi_motility"),
+    ("gi_spasm", "antispasmodic"),
     ("bradycardia", "cardiovascular"),
     ("euphoria", "dysphoria"),
     ("anticholinergic_cognitive", "pro_cognitive"),

@@ -119,6 +119,12 @@ EFFECT_KEYWORDS: dict[str, re.Pattern[str]] = {k: re.compile(v, re.I) for k, v i
     "vasoconstriction": r"vasoconstrict|contraction of (?:\w+ ){0,4}(?:arter|vein)",
     "vasodilation": r"vasodilat|vasorelax",
     "bladder_relaxation": r"bladder relax|detrusor relax|overactive bladder",
+    # A contraction counts only beside a gut word (GtoPdb rows read "Contraction. |
+    # tissue: Esophageal smooth muscle."), so vascular contractions stay out.
+    "gi_spasm": (r"cramp|spasm|colic|contraction.{0,80}(?:intestin|gut\b|colon|ileum|"
+                 r"(?:o)?esophag|gastr|stomach)"),
+    "antispasmodic": (r"antispasmod|spasmoly|(?:reduc|inhibit)\w* (?:[\w-]+ ){0,3}"
+                      r"contractions"),
     "gi_motility": (r"gastric emptying|peristal|prokinetic|gut motility|"
                     r"gastrointestinal motility|colonic transit"),
     "muscle_weakness": r"weakness|paraly|myasthen|neuromuscular block",
@@ -147,6 +153,8 @@ SKIP_OWNERS = {"glutamate"}
 EFFECT_PAPERS: dict[str, tuple[str, ...]] = {
     "a2a": ("34308528",),
     "dat": ("17134847",),
+    "m2": ("42090293",),
+    "m3": ("42090293", "38570081"),
 }
 assert all(p in epmc.PAPERS for ps in EFFECT_PAPERS.values() for p in ps), \
     "EFFECT_PAPERS names a PMID missing from fetch_europepmc.PAPERS"
