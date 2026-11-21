@@ -289,22 +289,8 @@ export function wireToolbar({ focus, meshes, arrows, data, selection, tabs, urlS
     }
   });
 
-  // Ctrl/Cmd+F opens our in-panel search instead of the browser's native find
-  // (which would be useless here: the structures/connections are canvas + data,
-  // not page text). If search is already open we just re-focus and select its
-  // text so a second press lets the user retype straight away.
-  window.addEventListener("keydown", (event) => {
-    if ((event.ctrlKey || event.metaKey) && (event.key === "f" || event.key === "F")) {
-      event.preventDefault();
-      if (searchBox.hidden) {
-        openSearch();
-      } else {
-        // Already open: refocus + select so a second press retypes straight away.
-        searchInput.focus();
-        searchInput.select();
-      }
-    }
-  });
+  // Ctrl/Cmd+F is deliberately left to the browser's own find: f and Shift+F
+  // (js/boot/shortcuts.js) already open our search and the find-in-panel box.
 
   return { openSearchWithQuery };
 }
