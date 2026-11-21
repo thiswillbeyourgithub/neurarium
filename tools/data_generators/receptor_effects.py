@@ -172,6 +172,59 @@ def effect_nodes(owner: str, cache: dict[str, dict[str, list]],
     return out
 
 
+# Search-only words per effect (both languages, never displayed): a reader typing
+# "saliva" means dry mouth or hypersalivation even though neither label says it.
+EFFECT_SEARCH_ALIASES: dict[str, tuple[str, ...]] = {
+    "dry_mouth": ("saliva", "salivation", "xerostomia", "salive", "xérostomie", "bouche sèche"),
+    "hypersalivation": ("saliva", "salivation", "drooling", "ptyalism", "salive", "bave"),
+    "nausea": ("vomiting", "emesis", "vomissements"),
+    "antiemetic": ("vomiting", "emesis", "vomissements"),
+    "blurred_vision": ("vision", "accommodation", "vue"),
+    "mydriasis": ("pupil", "pupille"),
+    "miosis": ("pupil", "pupille", "myosis"),
+    "itch": ("pruritus", "prurit", "démangeaison"),
+    "antipruritic": ("pruritus", "prurit", "démangeaison"),
+    "sexual_dysfunction": ("libido", "erectile", "érectile", "anorgasmia", "anorgasmie"),
+    "cardiovascular": ("tachycardia", "hypertension", "tachycardie"),
+    "orthostatic_hypotension": ("blood pressure", "tension artérielle"),
+    "seizures": ("epilepsy", "convulsions", "épilepsie"),
+    "anticonvulsant": ("epilepsy", "convulsions", "épilepsie", "antiepileptic", "antiépileptique"),
+}
+
+# Opposite effects: searching one also lists the other (both labels become each other's
+# search keywords), so "mydriasis" shows miosis too.
+EFFECT_OPPOSITES: tuple[tuple[str, str], ...] = (
+    ("mydriasis", "miosis"),
+    ("dry_mouth", "hypersalivation"),
+    ("sedation", "wakefulness"),
+    ("insomnia", "sleep_promotion"),
+    ("appetite_increase", "appetite_decrease"),
+    ("bronchodilation", "bronchoconstriction"),
+    ("gastric_acid_reduction", "gastric_acid_increase"),
+    ("vasoconstriction", "vasodilation"),
+    ("nausea", "antiemetic"),
+    ("seizures", "anticonvulsant"),
+    ("anxiety", "anxiolytic"),
+    ("itch", "antipruritic"),
+    ("constipation", "gi_motility"),
+    ("bradycardia", "cardiovascular"),
+    ("euphoria", "dysphoria"),
+    ("anticholinergic_cognitive", "pro_cognitive"),
+    ("psychosis", "antipsychotic"),
+    ("extrapyramidal_symptoms", "antiparkinsonian"),
+)
+
+
+def search_keywords() -> dict[str, str]:
+    """effect -> its search-only keywords (aliases + the opposite effect's labels in both
+    languages), lowercased and space-joined; effects with none are absent."""
+    words: dict[str, list[str]] = {e: list(a) for e, a in EFFECT_SEARCH_ALIASES.items()}
+    for a, b in EFFECT_OPPOSITES:
+        for one, other in ((a, b), (b, a)):
+            words.setdefault(one, []).extend(RECEPTOR_EFFECTS[other].values())
+    return {e: " ".join(dict.fromkeys(w.lower() for w in ws)) for e, ws in words.items()}
+
+
 def meta_vocab() -> dict[str, Any]:
     """The two closed vocabularies, emitted into ``meta`` (labels stay bilingual: the
     serialization-time ``externalize`` pass collapses them like every other ``{en,fr}``)."""
@@ -179,4 +232,5 @@ def meta_vocab() -> dict[str, Any]:
         "receptor_effect_modes": {m: {"label": dict(v["label"]), "actions": list(v["actions"])}
                                   for m, v in RECEPTOR_EFFECT_MODES.items()},
         "receptor_effect_labels": {e: dict(v) for e, v in RECEPTOR_EFFECTS.items()},
+        "receptor_effect_search": search_keywords(),
     }

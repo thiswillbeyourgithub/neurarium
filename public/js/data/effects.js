@@ -8,6 +8,19 @@ import { resolveVariants } from "../receptor-variants.js";
 import { localize, localizeMap } from "./localize.js";
 import { mapSources, mapUncertainty } from "./sources.js";
 
+/**
+ * An effect's search keywords: its id words plus the build's search-only aliases and
+ * opposite-effect labels (`meta.receptor_effect_search`, data_generators/receptor_effects.py),
+ * so "saliv" finds dry mouth and "mydriasis" also lists miosis.
+ * @param {string} id effect id
+ * @param {object} metaRecord meta.json
+ * @returns {string}
+ */
+export function effectKeywords(id, metaRecord) {
+  const extra = (metaRecord.receptor_effect_search || {})[id];
+  return [id.replace(/_/g, " "), extra].filter(Boolean).join(" ");
+}
+
 export function resolveTargetAnnotations({ targets, drugs, drugById, metaRecord, v }, effectIndex) {
   const { drugTargets } = v;
   // receptor_effect nodes (BETA): target id -> resolved effect rows, for the
@@ -39,7 +52,7 @@ export function resolveTargetAnnotations({ targets, drugs, drugById, metaRecord,
   const effectRead = readEffectIndex(effectIndex, new Map(targets.map((tg) => [tg.id, tg])),
     effectsByTarget, new Map(drugs.map((d) => [d.id, d])), effectLabels);
   const effects = effectRead.effects
-    .map((e) => ({ ...e, name: e.label, keywords: e.id.replace(/_/g, " ") }));
+    .map((e) => ({ ...e, name: e.label, keywords: effectKeywords(e.id, metaRecord) }));
   const possibleEffectsByDrug = effectRead.byDrug;
 
   // receptor_release_modulation nodes (BETA): target id -> resolved rows, for the
