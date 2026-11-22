@@ -1,0 +1,1438 @@
+{
+ "agomelatine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 5,
+    "quote": "Agomelatine should be considered as an alternative approach to the treatment of depressed patients with marked insomnia symptoms.",
+    "qid": "45147e9d"
+   },
+   {
+    "index": 1,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 5,
+    "quote": "Agomelatine is a non-sedative antidepressant drug exerting agonistic action at melatonergic M1 and M2 receptors, and antagonistic action at serotonergic 5HT2c receptors [24].",
+    "qid": "f0cb474f"
+   },
+   {
+    "index": 2,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 5,
+    "quote": "In comparison to escitalopram, agomelatine is known to improve sleep latency after both short (after 2 weeks) and long (after 24 weeks) treatment.",
+    "qid": "d5a5bd2d"
+   },
+   {
+    "index": 3,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 5,
+    "quote": "In the second week, agomelatine slightly improves sleep continuity (increased total sleep time and sleep efficiency) and escitalopram worsens it [25].",
+    "qid": "879eeeac"
+   },
+   {
+    "index": 4,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 5,
+    "quote": "Moreover, treatment with agomelatine is not related to the suppression of REM sleep: it restores cyclical sleep profile, may increase the amount of SWS, and most importantly leads to the improvement of daytime alertness [26].",
+    "qid": "ed7b190d"
+   },
+   {
+    "index": 5,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 7,
+    "quote": "Comparison of agomelatine and escitalopram on nighttime sleep and daytime condition and efficacy in major depressive disorder patients.",
+    "qid": "15aacc3e"
+   },
+   {
+    "index": 6,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 7,
+    "quote": "Impact of the novel antidepressant agomelatine on disturbed sleep-wake cycles in depressed patients.",
+    "qid": "70a29f73"
+   },
+   {
+    "index": 7,
+    "corpus": "papers",
+    "page": "bates2026",
+    "pdf_page": 10,
+    "quote": "Impact of the novel antidepressant agomelatine on disturbed sleep-wake cycles in depressed patients.",
+    "qid": "70a29f73"
+   }
+  ]
+ },
+ "apomorphine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "bates2026",
+    "pdf_page": 3,
+    "quote": "For instance, apomorphine increased SWS at lower doses but decreased at higher doses, illustrating the nuanced relationship be­ tween dosage and sleep architecture.",
+    "qid": "b9b5f03c"
+   },
+   {
+    "index": 1,
+    "corpus": "papers",
+    "page": "bates2026",
+    "pdf_page": 9,
+    "quote": "Dopaminergic D2 receptor agonists (e.g., apomorphine, bromocriptine, quinpirole) emerged as the only investi­ gated class with a dose-response relationship concerning sleep.",
+    "qid": "28d152f1"
+   },
+   {
+    "index": 2,
+    "corpus": "papers",
+    "page": "bates2026",
+    "pdf_page": 9,
+    "quote": "Among these D2 receptor ag­ onists, apomorphine was the only agent with a demon­ strated increase in 0-30% increase in SWS time at lower concentrations.",
+    "qid": "a91c9a26"
+   }
+  ]
+ },
+ "atropine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 13,
+    "quote": "Enhancement of rapid eye movement sleep in the rat by actions at A1 and A2a aednosine receptor subtypes with a differential sensitivity to atropine.",
+    "qid": "40d33a44"
+   }
+  ]
+ },
+ "baclofen": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "bates2026",
+    "pdf_page": 9,
+    "quote": "11,17,23,27,28 Other GABA agonists, such as 1,4-butane­ diol, baclofen, GHB, magnesium, and progesterone, in­ creased SWS and REM sleep.",
+    "qid": "a2ee73c9"
+   },
+   {
+    "index": 1,
+    "corpus": "papers",
+    "page": "monti2011",
+    "pdf_page": 9,
+    "quote": "Accordingly, microinjection of the selective GABAB receptor agonist baclofen into the pedunculopontine tegmental nucleus (PPT) reduces REMS in the rat,143 whereas the GABAA agonist muscimol induces the opposite effect through a still unknown mechanism.144,145",
+    "qid": "3ba88246"
+   }
+  ]
+ },
+ "bromocriptine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "bates2026",
+    "pdf_page": 9,
+    "quote": "Dopaminergic D2 receptor agonists (e.g., apomorphine, bromocriptine, quinpirole) emerged as the only investi­ gated class with a dose-response relationship concerning sleep.",
+    "qid": "28d152f1"
+   },
+   {
+    "index": 1,
+    "corpus": "papers",
+    "page": "bates2026",
+    "pdf_page": 9,
+    "quote": "14 All other investigated dopamine agonists (bromocriptine, pramipexole, ropinirole) demonstrated no significant change except for quinpirole, with a 0-30% de­ crease in SWS duration.",
+    "qid": "041d1324"
+   }
+  ]
+ },
+ "buspirone": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 14,
+    "quote": "The use of sleep measures to compare a new 5HT1A agonist with buspirone in humans.",
+    "qid": "538bc993"
+   },
+   {
+    "index": 1,
+    "corpus": "papers",
+    "page": "monti2011",
+    "pdf_page": 5,
+    "quote": "Flesinoxan and 8-OH-DPAT, two full agonists of the 5-HT1A receptor at pre- and post-synaptic sites, the azapirones, buspirone, gepirone and ipsapirone, which behave as full agonists at the somatodendritic autoreceptor but only as partial agonists at the postsynaptic level, and the selective high-affinity silent antagonists WAY 100635 and p-MPPI have been used to characterize the role of 5-HT1A receptor in the regulation of sleep and W.",
+    "qid": "c15417a6"
+   },
+   {
+    "index": 2,
+    "corpus": "papers",
+    "page": "monti2011",
+    "pdf_page": 5,
+    "quote": "Buspirone, ipsapirone, and gepirone have been shown to increase time awake and to reduce SWS and REMS when given subcutaneous (s.c.) or intraperitoneal (i.p.) to rats.78,79 Subcutaneous injection of the azapirones into 5,7-dihydroxytryptaminepretreated rats led also to an increase of W and a reduction of sleep; this result further supports the dependence of these effects on",
+    "qid": "0758b882"
+   },
+   {
+    "index": 3,
+    "corpus": "papers",
+    "page": "monti2011",
+    "pdf_page": 6,
+    "quote": "postsynaptic 5-HT1A receptors.79 Similar sleep-disrupting effects of buspirone and ipsapirone have been described in human subjects with normal sleep and in patients with insomnia.",
+    "qid": "a0bb7549"
+   },
+   {
+    "index": 4,
+    "corpus": "papers",
+    "page": "monti2011",
+    "pdf_page": 6,
+    "quote": "Thus, buspirone administration increased W, prolonged REMS latency, and reduced REMS time in insomniac patients,80,81 whereas ipsapirone prolonged REMS latency and reduced REMS and SWS in healthy subjects.82 The reduction of REMS could be related to the azapirones acting on postsynaptic 5-HT1A receptors in the LDT/PPT nuclei to inhibit REM-on neurons.",
+    "qid": "23f30065"
+   },
+   {
+    "index": 5,
+    "corpus": "papers",
+    "page": "monti2011",
+    "pdf_page": 11,
+    "quote": "The effect of buspirone on sleep in the rat.",
+    "qid": "986e44cb"
+   },
+   {
+    "index": 6,
+    "corpus": "papers",
+    "page": "monti2011",
+    "pdf_page": 11,
+    "quote": "Sleep and waking in 5,7-DHT-lesioned or (�)pindolol-pretreated rats after administration of buspirone, ipsapirone or gepirone.",
+    "qid": "27310d1a"
+   },
+   {
+    "index": 7,
+    "corpus": "papers",
+    "page": "monti2011",
+    "pdf_page": 11,
+    "quote": "Buspirone: and anxiolytic without sedative effect.",
+    "qid": "4121f406"
+   },
+   {
+    "index": 8,
+    "corpus": "papers",
+    "page": "monti2011",
+    "pdf_page": 11,
+    "quote": "Buspirone: sedative or stimulant effect?",
+    "qid": "55d6d7ae"
+   }
+  ]
+ },
+ "caffeine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "bates2026",
+    "pdf_page": 10,
+    "quote": "Coffee, caffeine, and sleep: A systematic review of epidemiological studies and randomized controlled trials.",
+    "qid": "380f3b14"
+   },
+   {
+    "index": 1,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 4,
+    "quote": "Adenosine A1 and A2A receptors are antagonized by caffeine and the idea that adenosine promotes sleep is supported by the ubiquitous consumption of caffeine to maintain wakefulness and enhance alertness.",
+    "qid": "747b5457"
+   },
+   {
+    "index": 2,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 4,
+    "quote": "In humans, oral administration of caffeine prior to nocturnal sleep increases sleep latency and reduces sleep efficiency.",
+    "qid": "a1b58a98"
+   },
+   {
+    "index": 3,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 4,
+    "quote": "49 Furthermore, morning caffeine ingestion has been shown to decrease sleep efficiency and overall sleep during the subsequent night.",
+    "qid": "e56d092a"
+   },
+   {
+    "index": 4,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 4,
+    "quote": "Adenosine, however, is relevant for sleep medicine, as insomnia can be caused by consumption of caffeine or by the respiratory stimulant theophylline.",
+    "qid": "de450d32"
+   },
+   {
+    "index": 5,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 12,
+    "quote": "Caffeine reduces low-frequency delta activity in the human sleep EEG.",
+    "qid": "c628fc86"
+   }
+  ]
+ },
+ "carbamazepine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "bates2026",
+    "pdf_page": 3,
+    "quote": "This was carbamazepine in healthy adults, paramp­ enel in healthy adults, and GHB in adults with insomnia.",
+    "qid": "0f8674ed"
+   }
+  ]
+ },
+ "citalopram": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 2,
+    "quote": "The Sequenced Treatment Alternatives to Relieve Depression (STAR*D) study, which included a large sample of outpatients with non-psychotic MDD who responded without remitting after up to 12 weeks treatment with citalopram, found that midnocturnal insomnia was the most commonly observed residual symptom of depression, as it was still present in 79% patients [13].",
+    "qid": "0aa808d5"
+   },
+   {
+    "index": 1,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 6,
+    "quote": "Moreover, we have observed that for the treatment of insomnia low doses (5–10 mg) of citalopram administered in the morning can be an alternative to sedative antidepressants with good treatment effects [46].",
+    "qid": "faf8b817"
+   },
+   {
+    "index": 2,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 7,
+    "quote": "The therapy of primary insomnia with citalopram.",
+    "qid": "6d3a5497"
+   }
+  ]
+ },
+ "clonidine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 6,
+    "quote": "However, bilateral microinjection of an α 1-antagonist (prazosin), an α 2-agonist (clonidine), or a β-antagonist (propranolol) into the pedunculopontine tegmental nucleus increases REM sleep with little to no effect on NREM sleep or wakefulness.",
+    "qid": "431308a7"
+   }
+  ]
+ },
+ "clozapine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "bates2026",
+    "pdf_page": 3,
+    "quote": "For example: One manuscript reported increases in SWS in patients with schizophrenia taking clozapine, while another suggested a decrease in SWS.",
+    "qid": "94030a00"
+   }
+  ]
+ },
+ "cocaine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "bates2026",
+    "pdf_page": 10,
+    "quote": "Effect of illicit recreational drugs upon sleep: cocaine, ecstasy and marijuana.",
+    "qid": "d64e251c"
+   },
+   {
+    "index": 1,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 6,
+    "quote": "Stimulants such as amphetamine, cocaine, and methylphenidate increase wakefulness and counter hypersomnia by increasing levels of endogenous dopamine (reviewed in 105 ).",
+    "qid": "18128a55"
+   }
+  ]
+ },
+ "cyproheptadine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 6,
+    "quote": "97 Systemic administration of the H1 receptor antagonists mepyramine 98 and cyproheptadine 99 caused a significant increase in NREM sleep in cat and rat, respectively.",
+    "qid": "078c48d9"
+   }
+  ]
+ },
+ "diazepam": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 2,
+    "quote": "The differences in clinical effects caused by various benzodiazepine (e.g., diazepam) and nonbenzodiazepine (e.g., eszopiclone) sedative/hypnotics are attributed to the relative selectivity of these drugs for different GABAA receptor subtypes.",
+    "qid": "da9a7e19"
+   },
+   {
+    "index": 1,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 3,
+    "quote": "Recent in vivo data obtained from normal rats demonstrate that the sedative/hypnotics zolpidem, diazepam, and eszopiclone differentially alter acetylcholine release in the pontine reticular formation.",
+    "qid": "9777b731"
+   }
+  ]
+ },
+ "diphenhydramine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 6,
+    "quote": "First generation H1 receptor antagonists, such as diphenhydramine, cause drowsiness (sedation) and impaired performance in humans 95 and rats.",
+    "qid": "3cd73eca"
+   }
+  ]
+ },
+ "doxepin": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 1,
+    "quote": "However, at least in short-term treatment, many antidepressants with so-called activating effects (e.g. fluoxetine, venlafaxine) may disrupt sleep, while others with sedative properties (e.g., doxepin, mirtazapine, trazodone) rapidly improve sleep, but may cause problems in long-term treatment due to oversedation.For sleep-promoting action, the best effects can frequently be achieved with a very low dose, administered early enough before bedtime and importantly, always as a part of more complex interventions based on the cognitive-behavioral protocol to treat insomnia (CBT-I).",
+    "qid": "f214708d"
+   },
+   {
+    "index": 1,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 5,
+    "quote": "However, due to the lack of methodologically sound randomized clinical trials in insomnia, only one of them, doxepin, is approved by FDA for the treatment of sleep maintenance insomnia.",
+    "qid": "4d48ad43"
+   },
+   {
+    "index": 2,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 5,
+    "quote": "Furthermore, recent recommendations discourage the use of other drugs from this class than doxepin for the insomnia treatment [37••].",
+    "qid": "1d02c6e6"
+   },
+   {
+    "index": 3,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 5,
+    "quote": "Indeed, although there is evidence for efficacy of sedative antidepressants to promote sleep, for example for TCA in a form of a recent meta-analytic study [43•], it is important to remember that these drugs should be used in insomnia patients only in a very low dose, e.g., for doxepin as low as 3 to 6 mg or 25–50 mg for trazodone.",
+    "qid": "d8746953"
+   },
+   {
+    "index": 4,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 6,
+    "quote": "96 Newer antagonists that are relatively selective for the H1 histamine receptor, such as the potent antagonist doxepin, improve subjective and objective measures of sleep in insomnia patients without causing sedation or psychomotor impairments the next day.",
+    "qid": "ffa7ce02"
+   },
+   {
+    "index": 5,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 14,
+    "quote": "Efficacy and safety of doxepin 1 mg, 3 mg, and 6 mg in adults with primary insomnia.",
+    "qid": "4436c09b"
+   }
+  ]
+ },
+ "escitalopram": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 5,
+    "quote": "In comparison to escitalopram, agomelatine is known to improve sleep latency after both short (after 2 weeks) and long (after 24 weeks) treatment.",
+    "qid": "d5a5bd2d"
+   },
+   {
+    "index": 1,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 5,
+    "quote": "In the second week, agomelatine slightly improves sleep continuity (increased total sleep time and sleep efficiency) and escitalopram worsens it [25].",
+    "qid": "879eeeac"
+   },
+   {
+    "index": 2,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 7,
+    "quote": "Comparison of agomelatine and escitalopram on nighttime sleep and daytime condition and efficacy in major depressive disorder patients.",
+    "qid": "15aacc3e"
+   }
+  ]
+ },
+ "eszopiclone": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 5,
+    "quote": "The most frequently used drugs to treat insomnia aside from benzodiazepines and non-benzodiazepine (eszopiclone/ zopiclone, zaleplon, zolpidem) hypnotics are sedative antidepressants.",
+    "qid": "29e5014e"
+   },
+   {
+    "index": 1,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 2,
+    "quote": "The differences in clinical effects caused by various benzodiazepine (e.g., diazepam) and nonbenzodiazepine (e.g., eszopiclone) sedative/hypnotics are attributed to the relative selectivity of these drugs for different GABAA receptor subtypes.",
+    "qid": "da9a7e19"
+   },
+   {
+    "index": 2,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 3,
+    "quote": "Recent in vivo data obtained from normal rats demonstrate that the sedative/hypnotics zolpidem, diazepam, and eszopiclone differentially alter acetylcholine release in the pontine reticular formation.",
+    "qid": "9777b731"
+   },
+   {
+    "index": 3,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 3,
+    "quote": "39 Intravenous administration of eszopiclone prevented the REM phase of sleep, increased EEG delta power, and decreased acetylcholine release in rat pontine reticular formation.",
+    "qid": "573d1672"
+   },
+   {
+    "index": 4,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 3,
+    "quote": "40 To date, the non-benzodiazepine, benzodiazepine-receptor agonist eszopiclone remains the only sleeping medication for which the long-term (6 months) effects have been characterized.",
+    "qid": "a6319a78"
+   },
+   {
+    "index": 5,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 11,
+    "quote": "Sustained efficacy of eszopiclone over 6 months of nightly treatment: Results of a randomized, double-blind, placebo-controlled study in adults with chronic insomnia.",
+    "qid": "61f3cdc6"
+   },
+   {
+    "index": 6,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 12,
+    "quote": "Nightly treatment of primary insomnia with eszopiclone for six months: Effect on sleep, quality of life, and work limitations.",
+    "qid": "8d92ee11"
+   },
+   {
+    "index": 7,
+    "corpus": "papers",
+    "page": "monti2011",
+    "pdf_page": 1,
+    "quote": "It is known that during the administration of benzodiazepine (BZD) hypnotics to patients with insomnia there is a further reduction of SWS and REMS, whereas both variables tend to remain decreased during the use of non-BZD derivatives (zolpidem, zopiclone, eszopiclone, zaleplon).",
+    "qid": "aededd5b"
+   },
+   {
+    "index": 8,
+    "corpus": "papers",
+    "page": "monti2011",
+    "pdf_page": 9,
+    "quote": "Several benzodiazepine (BZD) and non-BZD (modified-release zolpidem, zopiclone, eszopiclone, modified-release indiplon) hypnotics improve sleep induction and sleep maintenance.",
+    "qid": "00d77970"
+   }
+  ]
+ },
+ "fentanyl": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 5,
+    "quote": "The finding that clinically used opioids, such as morphine and fentanyl, decrease adenosine levels in the pontine reticular formation 69 and disrupt REM sleep (reviewed in 70 ) suggests the possibility that adenosinergic transmission within the pontine reticular formation participates in REM sleep generation.",
+    "qid": "50c5ea50"
+   }
+  ]
+ },
+ "fluoxetine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 1,
+    "quote": "However, at least in short-term treatment, many antidepressants with so-called activating effects (e.g. fluoxetine, venlafaxine) may disrupt sleep, while others with sedative properties (e.g., doxepin, mirtazapine, trazodone) rapidly improve sleep, but may cause problems in long-term treatment due to oversedation.For sleep-promoting action, the best effects can frequently be achieved with a very low dose, administered early enough before bedtime and importantly, always as a part of more complex interventions based on the cognitive-behavioral protocol to treat insomnia (CBT-I).",
+    "qid": "f214708d"
+   },
+   {
+    "index": 1,
+    "corpus": "papers",
+    "page": "monti2011",
+    "pdf_page": 11,
+    "quote": "A study of the brain structures involved in the acute effects of fluoxetine on REM sleep in the rat.",
+    "qid": "f3f604b3"
+   }
+  ]
+ },
+ "gabapentin": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "bates2026",
+    "pdf_page": 8,
+    "quote": "Gabapentin and pregabalin, in particular, are frequently used off-label to improve sleep quality.",
+    "qid": "07795073"
+   }
+  ]
+ },
+ "haloperidol": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "bates2026",
+    "pdf_page": 11,
+    "quote": "A randomized, controlled prospective trial of zolpidem and haloperidol for use as sleeping agents in pediatric burn patients.",
+    "qid": "c33a452d"
+   }
+  ]
+ },
+ "isoflurane": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 2,
+    "quote": "21 Consistent with this finding are data showing that endogenous GABA levels in the pontine reticular formation are greater during wakefulness than during REM sleep 22 or during the loss of wakefulness caused by isoflurane.",
+    "qid": "9badbb6b"
+   },
+   {
+    "index": 1,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 2,
+    "quote": "Likewise, decreasing extracellular GABA levels in the pontine reticular formation of rat decreases wakefulness and increases sleep, 20 and shortens the time required for isoflurane to induce loss of consciousness.",
+    "qid": "d2fdb6d3"
+   },
+   {
+    "index": 2,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 2,
+    "quote": "21 Furthermore, blocking GABAA receptors in the pontine reticular formation increases time needed to regain wakefulness after isoflurane anesthesia.",
+    "qid": "e32ee91d"
+   },
+   {
+    "index": 3,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 21,
+    "quote": "Pontine reticular formation levels of GABA during wakefulness and isoflurane anesthesia Consistent results were obtained when measuring GABA during the transition from wakefulness to anesthesia (A) and during the resumption of wakefulness after anesthesia (B).",
+    "qid": "f796d4a2"
+   },
+   {
+    "index": 4,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 21,
+    "quote": "In both cases GABA was significantly decreased during the loss of wakefulness caused by isoflurane anesthesia.",
+    "qid": "33bb7f72"
+   }
+  ]
+ },
+ "ketamine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "bates2026",
+    "pdf_page": 11,
+    "quote": "Ketamine, sleep, and depression: current status and new questions.",
+    "qid": "e9de8311"
+   },
+   {
+    "index": 1,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 11,
+    "quote": "Ketamine and MK-801 decrease acetylcholine release in the pontine reticular formation, slow breathing, and disrupt sleep.",
+    "qid": "04bb3f84"
+   }
+  ]
+ },
+ "ketanserin": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "monti2011",
+    "pdf_page": 1,
+    "quote": "Of note, systemic administration of the 5-HT2A/2C receptor antagonists ritanserin, ketanserin, ICI-170,809 or sertindole at the beginning of the light period has been shown to induce a significant increase of SWS and a reduction of REMS in the rat.",
+    "qid": "0e941441"
+   },
+   {
+    "index": 1,
+    "corpus": "papers",
+    "page": "monti2011",
+    "pdf_page": 7,
+    "quote": "DOI significantly decreased the number of REM episodes, whereas ketanserin induced the opposite effect.",
+    "qid": "a2752e1a"
+   },
+   {
+    "index": 2,
+    "corpus": "papers",
+    "page": "monti2011",
+    "pdf_page": 7,
+    "quote": "Systemic administration of the non-selective 5-HT2 receptor agonists DOI and DOM has been shown to reduce SWS and REMS, and to augment W in the rat.95,99 Injection of the 5-HT2A/2C receptor antagonists ritanserin, ketanserin, ICI-170,809 or sertindole at the beginning of the light period induced a significant increase of SWS and a reduction of REMS in the rat.",
+    "qid": "8114586e"
+   },
+   {
+    "index": 3,
+    "corpus": "papers",
+    "page": "monti2011",
+    "pdf_page": 7,
+    "quote": "The effects of the non-selective 5-HT2 receptor antagonists ritanserin, ketanserin, seganserin and ICI-169,369, the selective 5-HT2A antagonist eplivanserin and the 5-HT2A inverse agonist nelotanserin have been studied on the sleep EEG of subjects with normal sleep.",
+    "qid": "b57d6e62"
+   },
+   {
+    "index": 4,
+    "corpus": "papers",
+    "page": "monti2011",
+    "pdf_page": 7,
+    "quote": "In addition, ritanserin discontinuation following daily administration for 8 weeks was not associated with the occurrence of withdrawal symptoms.117 On the other hand, the effects of ketanserin on sleep variables were restricted to an increase of SWS and a reduction of stage 2 sleep.118 During nighttime sleep after a nap in the evening, seganserin induced an increase in SWS and an enhancement of power density in the delta and theta frequencies during NREMS.",
+    "qid": "87dbbdf3"
+   },
+   {
+    "index": 5,
+    "corpus": "papers",
+    "page": "monti2011",
+    "pdf_page": 12,
+    "quote": "Age-dependent effect of ketanserin on the sleepewaking phases in rats.",
+    "qid": "0809063c"
+   }
+  ]
+ },
+ "levomilnacipran": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 4,
+    "quote": "The lowest rate of treatment emergent insomnia and somnolence (both below 2%) was reported for levomilnacipran.",
+    "qid": "823440ec"
+   }
+  ]
+ },
+ "melatonin": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 7,
+    "quote": "Changes of sleep architecture, spectral composition of sleep EEG, the nocturnal secretion of cortisol, ACTH, GH, prolactin, melatonin, ghrelin, and leptin, and the DEX-CRH test in depressed patients during treatment with mirtazapine.",
+    "qid": "9a1ba91a"
+   },
+   {
+    "index": 1,
+    "corpus": "papers",
+    "page": "bates2026",
+    "pdf_page": 2,
+    "quote": "Medications such as benzodiazepines, selective serotonin reuptake inhibitors (SSRIs), and novel agents like dual orexin receptor antag­ onists and melatonin receptor agonists have been studied for their effects on sleep architecture, specifically focusing on enhancing TST, SWS, and REM sleep.",
+    "qid": "fef684b7"
+   },
+   {
+    "index": 2,
+    "corpus": "papers",
+    "page": "bates2026",
+    "pdf_page": 11,
+    "quote": "Melatonin and the circadian regulation of sleep initiation, consolidation, structure, and the sleep EEG.",
+    "qid": "fe613eae"
+   },
+   {
+    "index": 3,
+    "corpus": "papers",
+    "page": "bates2026",
+    "pdf_page": 11,
+    "quote": "Melatonin receptor agonists: new options for insomnia and depression treatment.",
+    "qid": "17175faa"
+   },
+   {
+    "index": 4,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 18,
+    "quote": "Remifentanil inhibits rapid eye movement sleep but not the nocturnal melatonin surge in humans.",
+    "qid": "181c4715"
+   }
+  ]
+ },
+ "methadone": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 9,
+    "quote": "186 A nighttime dose of morphine or methadone also decreases stages 3 and 4 NREM sleep while increasing stage 2 NREM sleep.",
+    "qid": "af15f9f6"
+   }
+  ]
+ },
+ "mianserin": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 5,
+    "quote": "Mianserin and mirtazapine may induce restless legs syndrome in as many as 28% of patients [29].",
+    "qid": "964ff4a9"
+   }
+  ]
+ },
+ "mirtazapine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 1,
+    "quote": "However, at least in short-term treatment, many antidepressants with so-called activating effects (e.g. fluoxetine, venlafaxine) may disrupt sleep, while others with sedative properties (e.g., doxepin, mirtazapine, trazodone) rapidly improve sleep, but may cause problems in long-term treatment due to oversedation.For sleep-promoting action, the best effects can frequently be achieved with a very low dose, administered early enough before bedtime and importantly, always as a part of more complex interventions based on the cognitive-behavioral protocol to treat insomnia (CBT-I).",
+    "qid": "f214708d"
+   },
+   {
+    "index": 1,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 2,
+    "quote": "On the contrary, antidepressants with antihistaminergic action, like sedating TCA, mirtazapine, mianserine, or strong antagonistic action at serotonergic 5-HT2 receptors, like trazodone and nefazodone quickly improve sleep.",
+    "qid": "a6745496"
+   },
+   {
+    "index": 2,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 2,
+    "quote": "Some patients show improvement of sleep quality already after the first drug dose [15], which was specially discussed for mirtazapine as related to the faster onset of antidepressant action [16].",
+    "qid": "8b91d30b"
+   },
+   {
+    "index": 3,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 4,
+    "quote": "On the contrary to the treatment with SSRI and SNRI, in clinical studies with sedating antidepressants, e.g., mirtazapine and trazodone, the reported prevalence of treatment-emergent insomnia complaints in patients with major depressive disorder (MDD) was very low (below 2%).",
+    "qid": "23bf428a"
+   },
+   {
+    "index": 4,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 4,
+    "quote": "However, the rate of treatment-emergent somnolence was very high, 54% in patients being treated with mirtazapine as compared to 18% out of patients in the placebo arm and 46% in patients being treated with trazodone as compared to 19% out of patients receiving placebo.",
+    "qid": "afa2b610"
+   },
+   {
+    "index": 5,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 4,
+    "quote": "The sedative antidepressants may also induce a weight gain, what is particularly shown for mirtazapine but not for trazodone [23].",
+    "qid": "9916c637"
+   },
+   {
+    "index": 6,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 5,
+    "quote": "Mianserin and mirtazapine may induce restless legs syndrome in as many as 28% of patients [29].",
+    "qid": "964ff4a9"
+   },
+   {
+    "index": 7,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 7,
+    "quote": "Changes of sleep architecture, spectral composition of sleep EEG, the nocturnal secretion of cortisol, ACTH, GH, prolactin, melatonin, ghrelin, and leptin, and the DEX-CRH test in depressed patients during treatment with mirtazapine.",
+    "qid": "9a1ba91a"
+   },
+   {
+    "index": 8,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 7,
+    "quote": "Mirtazapine induces nightmares in depressed patients.",
+    "qid": "313dc17e"
+   }
+  ]
+ },
+ "morphine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 5,
+    "quote": "The finding that clinically used opioids, such as morphine and fentanyl, decrease adenosine levels in the pontine reticular formation 69 and disrupt REM sleep (reviewed in 70 ) suggests the possibility that adenosinergic transmission within the pontine reticular formation participates in REM sleep generation.",
+    "qid": "50c5ea50"
+   },
+   {
+    "index": 1,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 9,
+    "quote": "For example, a single intravenous infusion of morphine in healthy volunteers decreases stages 3 and 4 NREM sleep, decreases REM sleep, and increases stage 2 NREM sleep.",
+    "qid": "3d86b1a1"
+   },
+   {
+    "index": 2,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 9,
+    "quote": "186 A nighttime dose of morphine or methadone also decreases stages 3 and 4 NREM sleep while increasing stage 2 NREM sleep.",
+    "qid": "af15f9f6"
+   },
+   {
+    "index": 3,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 9,
+    "quote": "Local administration of morphine into the pontine reticular formation of cat 190 or rat 191 increases wakefulness and decreases REM sleep.",
+    "qid": "ba258c0d"
+   },
+   {
+    "index": 4,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 18,
+    "quote": "Acute intravenous administration of morphine perturbs sleep architecture in healthy pain-free young adults: a preliminary study.",
+    "qid": "5be815ee"
+   },
+   {
+    "index": 5,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 18,
+    "quote": "Sleep disruption and increased apneas after pontine microinjection of morphine.",
+    "qid": "2a046c7d"
+   },
+   {
+    "index": 6,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 19,
+    "quote": "Sleep and GABA levels in the oral part of rat pontine reticular formation are decreased by local and systemic administration of morphine.",
+    "qid": "6aa87bea"
+   }
+  ]
+ },
+ "nefazodone": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 2,
+    "quote": "On the contrary, antidepressants with antihistaminergic action, like sedating TCA, mirtazapine, mianserine, or strong antagonistic action at serotonergic 5-HT2 receptors, like trazodone and nefazodone quickly improve sleep.",
+    "qid": "a6745496"
+   }
+  ]
+ },
+ "olanzapine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "bates2026",
+    "pdf_page": 8,
+    "quote": "Among the an­ tipsychotics studied, olanzapine demonstrated the greatest increase in SWS in adults with schizophrenia, with one study demonstrating a 0-30% increase and another report­ ing a 30-60% increase.",
+    "qid": "8ff4f67f"
+   },
+   {
+    "index": 1,
+    "corpus": "papers",
+    "page": "bates2026",
+    "pdf_page": 9,
+    "quote": "ications such as cortisol and 5-HT2A antagonists (e.g., risperidone, olanzapine, and ziprasidone) enhanced SWS while suppressing REM sleep in healthy individuals.",
+    "qid": "c7e0eef0"
+   }
+  ]
+ },
+ "ondansetron": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "monti2011",
+    "pdf_page": 7,
+    "quote": "Pretreatment with the 5-HT3 antagonist ondansetron prevented the m-CPBG-induced suppression of REMS.121 Concerning the mechanism involved in the reduction of REMS by m-CPBG, it",
+    "qid": "01b5cdc0"
+   }
+  ]
+ },
+ "paroxetine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 5,
+    "quote": "In a study which has compared the effects of vortioxetine and paroxetine to the placebo in a group of 24 healthy male volunteers, it has been shown that the vortioxetine dose of 20 and 40 mg similarly to the paroxetine dose of 20 mg suppresses REM sleep by increasing REM sleep latency and diminishing duration of REM sleep.",
+    "qid": "115fe580"
+   },
+   {
+    "index": 1,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 7,
+    "quote": "Differentiated effects of the multimodal antidepressant vortioxetine on sleep architecture: part 1, a pharmacokinetic/ pharmacodynamic comparison with paroxetine in healthy men.",
+    "qid": "83a70630"
+   },
+   {
+    "index": 2,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 7,
+    "quote": "This is the first polysomnographic study presenting effects of vortioxetine on sleep architecture in comparison to placebo and paroxetine.",
+    "qid": "3b6d1552"
+   },
+   {
+    "index": 3,
+    "corpus": "papers",
+    "page": "monti2011",
+    "pdf_page": 12,
+    "quote": "Effect of SB-243213, a selective 5-HT2C receptor antagonist on the rat sleep profile: a comparison to paroxetine.",
+    "qid": "fabe3035"
+   }
+  ]
+ },
+ "pimavanserin": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "monti2011",
+    "pdf_page": 9,
+    "quote": "The effects of the selective 5-HT2A receptor antagonists volinanserin, eplivanserin and pruvanserin, and of the 5-HT2A receptor inverse agonists APD-125 and pimavanserin have been studied in patients with chronic primary insomnia.",
+    "qid": "f07a3632"
+   }
+  ]
+ },
+ "pramipexole": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "bates2026",
+    "pdf_page": 9,
+    "quote": "14 All other investigated dopamine agonists (bromocriptine, pramipexole, ropinirole) demonstrated no significant change except for quinpirole, with a 0-30% de­ crease in SWS duration.",
+    "qid": "041d1324"
+   }
+  ]
+ },
+ "prazosin": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 6,
+    "quote": "However, bilateral microinjection of an α 1-antagonist (prazosin), an α 2-agonist (clonidine), or a β-antagonist (propranolol) into the pedunculopontine tegmental nucleus increases REM sleep with little to no effect on NREM sleep or wakefulness.",
+    "qid": "431308a7"
+   }
+  ]
+ },
+ "pregabalin": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "bates2026",
+    "pdf_page": 8,
+    "quote": "Gabapentin and pregabalin, in particular, are frequently used off-label to improve sleep quality.",
+    "qid": "07795073"
+   }
+  ]
+ },
+ "propranolol": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 6,
+    "quote": "However, bilateral microinjection of an α 1-antagonist (prazosin), an α 2-agonist (clonidine), or a β-antagonist (propranolol) into the pedunculopontine tegmental nucleus increases REM sleep with little to no effect on NREM sleep or wakefulness.",
+    "qid": "431308a7"
+   }
+  ]
+ },
+ "quetiapine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 6,
+    "quote": "Despite the fact that the use of atypical antipsychotics, mostly quetiapine [44], is increasing for treatment of insomnia accompanying bipolar disorder and schizophrenia, we hold the conviction that sedative antidepressants are a valuable treatment option for such patients as well.",
+    "qid": "c0cec39f"
+   }
+  ]
+ },
+ "risperidone": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "bates2026",
+    "pdf_page": 9,
+    "quote": "ications such as cortisol and 5-HT2A antagonists (e.g., risperidone, olanzapine, and ziprasidone) enhanced SWS while suppressing REM sleep in healthy individuals.",
+    "qid": "c7e0eef0"
+   }
+  ]
+ },
+ "ropinirole": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "bates2026",
+    "pdf_page": 9,
+    "quote": "14 All other investigated dopamine agonists (bromocriptine, pramipexole, ropinirole) demonstrated no significant change except for quinpirole, with a 0-30% de­ crease in SWS duration.",
+    "qid": "041d1324"
+   }
+  ]
+ },
+ "sertindole": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "monti2011",
+    "pdf_page": 1,
+    "quote": "Of note, systemic administration of the 5-HT2A/2C receptor antagonists ritanserin, ketanserin, ICI-170,809 or sertindole at the beginning of the light period has been shown to induce a significant increase of SWS and a reduction of REMS in the rat.",
+    "qid": "0e941441"
+   },
+   {
+    "index": 1,
+    "corpus": "papers",
+    "page": "monti2011",
+    "pdf_page": 7,
+    "quote": "Systemic administration of the non-selective 5-HT2 receptor agonists DOI and DOM has been shown to reduce SWS and REMS, and to augment W in the rat.95,99 Injection of the 5-HT2A/2C receptor antagonists ritanserin, ketanserin, ICI-170,809 or sertindole at the beginning of the light period induced a significant increase of SWS and a reduction of REMS in the rat.",
+    "qid": "8114586e"
+   },
+   {
+    "index": 2,
+    "corpus": "papers",
+    "page": "monti2011",
+    "pdf_page": 12,
+    "quote": "Effects of sertindole on sleepewake states, electroencephalogram, behavioral patterns, and epileptic activity in rats.",
+    "qid": "1a9ec390"
+   }
+  ]
+ },
+ "sertraline": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 7,
+    "quote": "Effects of sertraline on sleep architecture in patients with depression.",
+    "qid": "6a638617"
+   }
+  ]
+ },
+ "sodium_oxybate": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "bates2026",
+    "pdf_page": 11,
+    "quote": "Pardi D, Black J. gamma-Hydroxybutyrate/sodium oxybate: neurobiology, and impact on sleep and wakefulness.",
+    "qid": "eec1ab06"
+   }
+  ]
+ },
+ "trazodone": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 1,
+    "quote": "However, at least in short-term treatment, many antidepressants with so-called activating effects (e.g. fluoxetine, venlafaxine) may disrupt sleep, while others with sedative properties (e.g., doxepin, mirtazapine, trazodone) rapidly improve sleep, but may cause problems in long-term treatment due to oversedation.For sleep-promoting action, the best effects can frequently be achieved with a very low dose, administered early enough before bedtime and importantly, always as a part of more complex interventions based on the cognitive-behavioral protocol to treat insomnia (CBT-I).",
+    "qid": "f214708d"
+   },
+   {
+    "index": 1,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 2,
+    "quote": "On the contrary, antidepressants with antihistaminergic action, like sedating TCA, mirtazapine, mianserine, or strong antagonistic action at serotonergic 5-HT2 receptors, like trazodone and nefazodone quickly improve sleep.",
+    "qid": "a6745496"
+   },
+   {
+    "index": 2,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 4,
+    "quote": "On the contrary to the treatment with SSRI and SNRI, in clinical studies with sedating antidepressants, e.g., mirtazapine and trazodone, the reported prevalence of treatment-emergent insomnia complaints in patients with major depressive disorder (MDD) was very low (below 2%).",
+    "qid": "23bf428a"
+   },
+   {
+    "index": 3,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 4,
+    "quote": "However, the rate of treatment-emergent somnolence was very high, 54% in patients being treated with mirtazapine as compared to 18% out of patients in the placebo arm and 46% in patients being treated with trazodone as compared to 19% out of patients receiving placebo.",
+    "qid": "afa2b610"
+   },
+   {
+    "index": 4,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 4,
+    "quote": "The sedative antidepressants may also induce a weight gain, what is particularly shown for mirtazapine but not for trazodone [23].",
+    "qid": "9916c637"
+   },
+   {
+    "index": 5,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 5,
+    "quote": "This is especially true for trazodone that is very often used as a sleep-promoting drug [3, 39–42].",
+    "qid": "25e2b6f1"
+   },
+   {
+    "index": 6,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 5,
+    "quote": "Indeed, although there is evidence for efficacy of sedative antidepressants to promote sleep, for example for TCA in a form of a recent meta-analytic study [43•], it is important to remember that these drugs should be used in insomnia patients only in a very low dose, e.g., for doxepin as low as 3 to 6 mg or 25–50 mg for trazodone.",
+    "qid": "d8746953"
+   },
+   {
+    "index": 7,
+    "corpus": "papers",
+    "page": "bates2026",
+    "pdf_page": 12,
+    "quote": "Trazodone changed the polysomnographic sleep architecture in insomnia disorder: a systematic review and meta-analysis.",
+    "qid": "40fbc1bf"
+   }
+  ]
+ },
+ "venlafaxine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 1,
+    "quote": "However, at least in short-term treatment, many antidepressants with so-called activating effects (e.g. fluoxetine, venlafaxine) may disrupt sleep, while others with sedative properties (e.g., doxepin, mirtazapine, trazodone) rapidly improve sleep, but may cause problems in long-term treatment due to oversedation.For sleep-promoting action, the best effects can frequently be achieved with a very low dose, administered early enough before bedtime and importantly, always as a part of more complex interventions based on the cognitive-behavioral protocol to treat insomnia (CBT-I).",
+    "qid": "f214708d"
+   },
+   {
+    "index": 1,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 4,
+    "quote": "Both treatment-emergent insomnia and somnolence were the most frequent (both equal to 24%) in patients with generalized anxiety disorders treated with venlafaxine.",
+    "qid": "d6ce0dec"
+   }
+  ]
+ },
+ "vortioxetine": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 5,
+    "quote": "Effects on sleep has recently been also reported for a vortioxetine, with clinical action mediated mainly by selective blockade of serotonin reuptake and direct modulation of serotonergic receptors activity (such as 5-HT3, 5-HT7, 5-HT1D, and 5-HT1B) [27].",
+    "qid": "ec73104e"
+   },
+   {
+    "index": 1,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 5,
+    "quote": "In a study which has compared the effects of vortioxetine and paroxetine to the placebo in a group of 24 healthy male volunteers, it has been shown that the vortioxetine dose of 20 and 40 mg similarly to the paroxetine dose of 20 mg suppresses REM sleep by increasing REM sleep latency and diminishing duration of REM sleep.",
+    "qid": "115fe580"
+   },
+   {
+    "index": 2,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 5,
+    "quote": "These negative effects of vortioxetine on sleep continuity are significant only for the higher dose [28•].",
+    "qid": "7ca1537b"
+   },
+   {
+    "index": 3,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 5,
+    "quote": "According to the FDA clinical trial register, the rate of treatment-emergent insomnia complaints or somnolence during the therapy with vortioxetine is lower when compared to SSRI and SNRI drugs [17••].",
+    "qid": "5cfdaa81"
+   },
+   {
+    "index": 4,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 7,
+    "quote": "Differentiated effects of the multimodal antidepressant vortioxetine on sleep architecture: part 1, a pharmacokinetic/ pharmacodynamic comparison with paroxetine in healthy men.",
+    "qid": "83a70630"
+   },
+   {
+    "index": 5,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 7,
+    "quote": "This is the first polysomnographic study presenting effects of vortioxetine on sleep architecture in comparison to placebo and paroxetine.",
+    "qid": "3b6d1552"
+   }
+  ]
+ },
+ "zaleplon": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 5,
+    "quote": "The most frequently used drugs to treat insomnia aside from benzodiazepines and non-benzodiazepine (eszopiclone/ zopiclone, zaleplon, zolpidem) hypnotics are sedative antidepressants.",
+    "qid": "29e5014e"
+   },
+   {
+    "index": 1,
+    "corpus": "papers",
+    "page": "bates2026",
+    "pdf_page": 12,
+    "quote": "Benefit-risk assessment of zaleplon in the treatment of insomnia.",
+    "qid": "77b5a23d"
+   },
+   {
+    "index": 2,
+    "corpus": "papers",
+    "page": "monti2011",
+    "pdf_page": 1,
+    "quote": "It is known that during the administration of benzodiazepine (BZD) hypnotics to patients with insomnia there is a further reduction of SWS and REMS, whereas both variables tend to remain decreased during the use of non-BZD derivatives (zolpidem, zopiclone, eszopiclone, zaleplon).",
+    "qid": "aededd5b"
+   }
+  ]
+ },
+ "ziprasidone": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "bates2026",
+    "pdf_page": 8,
+    "quote": "Interestingly, olanza­ pine and ziprasidone enhanced SWS sleep in both healthy individuals and individuals with schizophrenia, highlight­",
+    "qid": "9492c897"
+   },
+   {
+    "index": 1,
+    "corpus": "papers",
+    "page": "bates2026",
+    "pdf_page": 9,
+    "quote": "ications such as cortisol and 5-HT2A antagonists (e.g., risperidone, olanzapine, and ziprasidone) enhanced SWS while suppressing REM sleep in healthy individuals.",
+    "qid": "c7e0eef0"
+   }
+  ]
+ },
+ "zolpidem": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 5,
+    "quote": "The most frequently used drugs to treat insomnia aside from benzodiazepines and non-benzodiazepine (eszopiclone/ zopiclone, zaleplon, zolpidem) hypnotics are sedative antidepressants.",
+    "qid": "29e5014e"
+   },
+   {
+    "index": 1,
+    "corpus": "papers",
+    "page": "bates2026",
+    "pdf_page": 11,
+    "quote": "A randomized, controlled prospective trial of zolpidem and haloperidol for use as sleeping agents in pediatric burn patients.",
+    "qid": "c33a452d"
+   },
+   {
+    "index": 2,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 3,
+    "quote": "Recent in vivo data obtained from normal rats demonstrate that the sedative/hypnotics zolpidem, diazepam, and eszopiclone differentially alter acetylcholine release in the pontine reticular formation.",
+    "qid": "9777b731"
+   },
+   {
+    "index": 3,
+    "corpus": "papers",
+    "page": "monti2011",
+    "pdf_page": 1,
+    "quote": "It is known that during the administration of benzodiazepine (BZD) hypnotics to patients with insomnia there is a further reduction of SWS and REMS, whereas both variables tend to remain decreased during the use of non-BZD derivatives (zolpidem, zopiclone, eszopiclone, zaleplon).",
+    "qid": "aededd5b"
+   },
+   {
+    "index": 4,
+    "corpus": "papers",
+    "page": "monti2011",
+    "pdf_page": 9,
+    "quote": "Several benzodiazepine (BZD) and non-BZD (modified-release zolpidem, zopiclone, eszopiclone, modified-release indiplon) hypnotics improve sleep induction and sleep maintenance.",
+    "qid": "00d77970"
+   }
+  ]
+ },
+ "zopiclone": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "wichniak2017",
+    "pdf_page": 5,
+    "quote": "The most frequently used drugs to treat insomnia aside from benzodiazepines and non-benzodiazepine (eszopiclone/ zopiclone, zaleplon, zolpidem) hypnotics are sedative antidepressants.",
+    "qid": "29e5014e"
+   },
+   {
+    "index": 1,
+    "corpus": "papers",
+    "page": "monti2011",
+    "pdf_page": 1,
+    "quote": "It is known that during the administration of benzodiazepine (BZD) hypnotics to patients with insomnia there is a further reduction of SWS and REMS, whereas both variables tend to remain decreased during the use of non-BZD derivatives (zolpidem, zopiclone, eszopiclone, zaleplon).",
+    "qid": "aededd5b"
+   },
+   {
+    "index": 2,
+    "corpus": "papers",
+    "page": "monti2011",
+    "pdf_page": 9,
+    "quote": "Several benzodiazepine (BZD) and non-BZD (modified-release zolpidem, zopiclone, eszopiclone, modified-release indiplon) hypnotics improve sleep induction and sleep maintenance.",
+    "qid": "00d77970"
+   }
+  ]
+ }
+}

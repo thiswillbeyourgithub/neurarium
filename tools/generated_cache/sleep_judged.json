@@ -1,0 +1,378 @@
+{
+ "agomelatine": [
+  {
+   "index": 2,
+   "qid": "d5a5bd2d",
+   "effect": "sleep_latency_decrease"
+  },
+  {
+   "index": 3,
+   "qid": "879eeeac",
+   "effect": "total_sleep_increase"
+  },
+  {
+   "index": 4,
+   "qid": "ed7b190d",
+   "effect": "rem_unchanged"
+  }
+ ],
+ "apomorphine": [
+  {
+   "index": 2,
+   "qid": "a91c9a26",
+   "effect": "sws_increase",
+   "species": "rat"
+  }
+ ],
+ "atropine": [],
+ "baclofen": [
+  {
+   "index": 0,
+   "qid": "a2ee73c9",
+   "effect": "sws_increase"
+  },
+  {
+   "index": 0,
+   "qid": "a2ee73c9",
+   "effect": "rem_increase"
+  }
+ ],
+ "bromocriptine": [],
+ "buspirone": [
+  {
+   "index": 4,
+   "qid": "23f30065",
+   "effect": "sleep_disruption"
+  },
+  {
+   "index": 4,
+   "qid": "23f30065",
+   "effect": "rem_latency_increase"
+  },
+  {
+   "index": 4,
+   "qid": "23f30065",
+   "effect": "rem_suppression"
+  },
+  {
+   "index": 3,
+   "qid": "a0bb7549",
+   "effect": "sleep_disruption"
+  },
+  {
+   "index": 2,
+   "qid": "0758b882",
+   "effect": "sws_decrease",
+   "species": "rat"
+  }
+ ],
+ "caffeine": [
+  {
+   "index": 2,
+   "qid": "a1b58a98",
+   "effect": "sleep_disruption"
+  },
+  {
+   "index": 4,
+   "qid": "de450d32",
+   "effect": "sleep_disruption"
+  }
+ ],
+ "carbamazepine": [],
+ "citalopram": [],
+ "clonidine": [],
+ "clozapine": [],
+ "cocaine": [],
+ "cyproheptadine": [],
+ "diazepam": [],
+ "diphenhydramine": [
+  {
+   "index": 0,
+   "qid": "3cd73eca",
+   "effect": "sedation"
+  }
+ ],
+ "doxepin": [
+  {
+   "index": 4,
+   "qid": "ffa7ce02",
+   "effect": "total_sleep_increase"
+  },
+  {
+   "index": 1,
+   "qid": "4d48ad43",
+   "effect": "total_sleep_increase"
+  }
+ ],
+ "escitalopram": [
+  {
+   "index": 1,
+   "qid": "879eeeac",
+   "effect": "sleep_disruption"
+  }
+ ],
+ "eszopiclone": [
+  {
+   "index": 3,
+   "qid": "573d1672",
+   "effect": "rem_suppression",
+   "species": "rat"
+  },
+  {
+   "index": 3,
+   "qid": "573d1672",
+   "effect": "sws_increase",
+   "species": "rat"
+  },
+  {
+   "index": 8,
+   "qid": "00d77970",
+   "effect": "total_sleep_increase"
+  },
+  {
+   "index": 8,
+   "qid": "00d77970",
+   "effect": "sleep_latency_decrease"
+  }
+ ],
+ "fentanyl": [],
+ "fluoxetine": [
+  {
+   "index": 0,
+   "qid": "f214708d",
+   "effect": "sleep_disruption"
+  }
+ ],
+ "gabapentin": [],
+ "haloperidol": [],
+ "isoflurane": [],
+ "ketamine": [],
+ "ketanserin": [
+  {
+   "index": 4,
+   "qid": "87dbbdf3",
+   "effect": "sws_increase"
+  },
+  {
+   "index": 0,
+   "qid": "0e941441",
+   "effect": "rem_suppression",
+   "species": "rat"
+  }
+ ],
+ "levomilnacipran": [],
+ "melatonin": [],
+ "methadone": [
+  {
+   "index": 0,
+   "qid": "af15f9f6",
+   "effect": "sws_decrease"
+  }
+ ],
+ "mianserin": [
+  {
+   "index": 0,
+   "qid": "964ff4a9",
+   "effect": "restless_legs"
+  }
+ ],
+ "mirtazapine": [
+  {
+   "index": 1,
+   "qid": "a6745496",
+   "effect": "total_sleep_increase"
+  },
+  {
+   "index": 2,
+   "qid": "8b91d30b",
+   "effect": "total_sleep_increase"
+  },
+  {
+   "index": 4,
+   "qid": "afa2b610",
+   "effect": "sedation"
+  },
+  {
+   "index": 6,
+   "qid": "964ff4a9",
+   "effect": "restless_legs"
+  }
+ ],
+ "morphine": [
+  {
+   "index": 1,
+   "qid": "3d86b1a1",
+   "effect": "sws_decrease"
+  },
+  {
+   "index": 1,
+   "qid": "3d86b1a1",
+   "effect": "rem_suppression"
+  },
+  {
+   "index": 2,
+   "qid": "af15f9f6",
+   "effect": "sws_decrease"
+  }
+ ],
+ "nefazodone": [
+  {
+   "index": 0,
+   "qid": "a6745496",
+   "effect": "total_sleep_increase"
+  }
+ ],
+ "olanzapine": [
+  {
+   "index": 0,
+   "qid": "8ff4f67f",
+   "effect": "sws_increase"
+  },
+  {
+   "index": 1,
+   "qid": "c7e0eef0",
+   "effect": "sws_increase"
+  },
+  {
+   "index": 1,
+   "qid": "c7e0eef0",
+   "effect": "rem_suppression"
+  }
+ ],
+ "ondansetron": [],
+ "paroxetine": [
+  {
+   "index": 0,
+   "qid": "115fe580",
+   "effect": "rem_suppression"
+  },
+  {
+   "index": 0,
+   "qid": "115fe580",
+   "effect": "rem_latency_increase"
+  }
+ ],
+ "pimavanserin": [],
+ "pramipexole": [],
+ "prazosin": [],
+ "pregabalin": [],
+ "propranolol": [],
+ "quetiapine": [],
+ "risperidone": [
+  {
+   "index": 0,
+   "qid": "c7e0eef0",
+   "effect": "sws_increase"
+  },
+  {
+   "index": 0,
+   "qid": "c7e0eef0",
+   "effect": "rem_suppression"
+  }
+ ],
+ "ropinirole": [],
+ "sertindole": [
+  {
+   "index": 0,
+   "qid": "0e941441",
+   "effect": "sws_increase",
+   "species": "rat"
+  },
+  {
+   "index": 0,
+   "qid": "0e941441",
+   "effect": "rem_suppression",
+   "species": "rat"
+  }
+ ],
+ "sertraline": [],
+ "sodium_oxybate": [],
+ "trazodone": [
+  {
+   "index": 1,
+   "qid": "a6745496",
+   "effect": "total_sleep_increase"
+  },
+  {
+   "index": 3,
+   "qid": "afa2b610",
+   "effect": "sedation"
+  }
+ ],
+ "venlafaxine": [
+  {
+   "index": 0,
+   "qid": "f214708d",
+   "effect": "sleep_disruption"
+  },
+  {
+   "index": 1,
+   "qid": "d6ce0dec",
+   "effect": "sleep_disruption"
+  },
+  {
+   "index": 1,
+   "qid": "d6ce0dec",
+   "effect": "sedation"
+  }
+ ],
+ "vortioxetine": [
+  {
+   "index": 1,
+   "qid": "115fe580",
+   "effect": "rem_suppression"
+  },
+  {
+   "index": 1,
+   "qid": "115fe580",
+   "effect": "rem_latency_increase"
+  },
+  {
+   "index": 2,
+   "qid": "7ca1537b",
+   "effect": "sleep_disruption"
+  }
+ ],
+ "zaleplon": [],
+ "ziprasidone": [
+  {
+   "index": 0,
+   "qid": "9492c897",
+   "effect": "sws_increase"
+  },
+  {
+   "index": 1,
+   "qid": "c7e0eef0",
+   "effect": "sws_increase"
+  },
+  {
+   "index": 1,
+   "qid": "c7e0eef0",
+   "effect": "rem_suppression"
+  }
+ ],
+ "zolpidem": [
+  {
+   "index": 4,
+   "qid": "00d77970",
+   "effect": "total_sleep_increase"
+  },
+  {
+   "index": 4,
+   "qid": "00d77970",
+   "effect": "sleep_latency_decrease"
+  }
+ ],
+ "zopiclone": [
+  {
+   "index": 2,
+   "qid": "00d77970",
+   "effect": "total_sleep_increase"
+  },
+  {
+   "index": 2,
+   "qid": "00d77970",
+   "effect": "sleep_latency_decrease"
+  }
+ ]
+}

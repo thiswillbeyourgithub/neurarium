@@ -177,6 +177,9 @@
 "drug:agomelatine/formulations[ir]/tmax": "opus",
 "drug:agomelatine/tmax": "opus"
 },
+"q_0332b065243b": {
+"drug:caffeine/sleep[sleep_disruption]": "opus"
+},
 "q_033d849b7d0b": {
 "drug:reboxetine/excretion[route:renal]": "opus"
 },
@@ -326,6 +329,14 @@
 },
 "q_0652762a6f2c": {
 "drug:diazepam/brands[Diastat]": "sonnet"
+},
+"q_065ae2094451": {
+"drug:eszopiclone/sleep[sleep_latency_decrease]": "opus",
+"drug:eszopiclone/sleep[total_sleep_increase]": "opus",
+"drug:zolpidem/sleep[sleep_latency_decrease]": "opus",
+"drug:zolpidem/sleep[total_sleep_increase]": "opus",
+"drug:zopiclone/sleep[sleep_latency_decrease]": "opus",
+"drug:zopiclone/sleep[total_sleep_increase]": "opus"
 },
 "q_066666bc7f7b": {
 "drug:donepezil/brands[Aricept]": "sonnet"
@@ -1199,6 +1210,9 @@
 "q_1527333eb1e4": {
 "drug:pimozide/seizure_threshold[lowers]": "opus"
 },
+"q_1534a2ae47e6": {
+"drug:agomelatine/sleep[sleep_latency_decrease]": "opus"
+},
 "q_15682f6bd8cc": {
 "drug:vilazodone/first_approval": "opus"
 },
@@ -1630,6 +1644,9 @@
 },
 "q_1c7aa8242c0d": {
 "drug:penfluridol/categories": "opus"
+},
+"q_1c837f609e29": {
+"drug:caffeine/sleep[sleep_disruption]": "opus"
 },
 "q_1c8a17299056": {
 "drug:thioridazine/nbn": "sonnet"
@@ -2543,6 +2560,10 @@
 "q_2b9d56de88c7": {
 "receptor:m2/locations[midbrain]": "sonnet"
 },
+"q_2badb71bd243": {
+"drug:mianserin/sleep[restless_legs]": "opus",
+"drug:mirtazapine/sleep[restless_legs]": "opus"
+},
 "q_2bb5d5e5b101": {
 "drug:flumazenil/categories": "sonnet"
 },
@@ -2663,6 +2684,9 @@
 "q_2f1820a496cf": {
 "drug:flunarizine/excretion[route:fecal]": "opus"
 },
+"q_2f1d8dd8fbfa": {
+"drug:vortioxetine/sleep[sleep_disruption]": "opus"
+},
 "q_2f4664fb4b0e": {
 "drug:sildenafil/bindings[pde5:enzyme_inhibitor]": "sonnet"
 },
@@ -2715,6 +2739,9 @@
 },
 "q_30b5d24d70a2": {
 "drug:zonisamide/categories": "sonnet"
+},
+"q_30c8b5536a31": {
+"drug:ketanserin/sleep[sws_increase]": "opus"
 },
 "q_30d252aa1b57": {
 "drug:ropinirole/bindings[5ht2b:agonist]": "opus"
@@ -2903,6 +2930,12 @@
 "q_338892bdc6bd": {
 "target:dat/effects[inhibition:euphoria]": "opus"
 },
+"q_339c4f578385": {
+"drug:paroxetine/sleep[rem_latency_increase]": "opus",
+"drug:paroxetine/sleep[rem_suppression]": "opus",
+"drug:vortioxetine/sleep[rem_latency_increase]": "opus",
+"drug:vortioxetine/sleep[rem_suppression]": "opus"
+},
 "q_33b35a439a64": {
 "drug:lumateperone/bindings[d1:agonist]": "sonnet"
 },
@@ -2927,6 +2960,11 @@
 },
 "q_33ff153077b2": {
 "drug:trazodone/nbn": "sonnet"
+},
+"q_340163a7e8a8": {
+"drug:mirtazapine/sleep[total_sleep_increase]": "opus",
+"drug:nefazodone/sleep[total_sleep_increase]": "opus",
+"drug:trazodone/sleep[total_sleep_increase]": "opus"
 },
 "q_3401a1674abb": {
 "drug:brexpiprazole/workup[blood_count:during]": "opus"
@@ -3050,6 +3088,9 @@
 },
 "q_361423d97632": {
 "drug:valproate/bindings[nav:blocker]": "sonnet"
+},
+"q_361ad22c927c": {
+"drug:doxepin/sleep[total_sleep_increase]": "opus"
 },
 "q_363af5fde60f": {
 "drug:olanzapine/bindings[m1:antagonist]": "sonnet",
@@ -4579,6 +4620,10 @@
 "q_515f770f60a9": {
 "drug:chlordiazepoxide/first_approval": "opus"
 },
+"q_516c5c8319e0": {
+"drug:fluoxetine/sleep[sleep_disruption]": "opus",
+"drug:venlafaxine/sleep[sleep_disruption]": "opus"
+},
 "q_51ab1ad4235b": {
 "drug:gabapentin/bindings[cav:blocker]": "sonnet"
 },
@@ -4677,6 +4722,9 @@
 },
 "q_53998494f953": {
 "receptor:beta2/effects[agonism:vasodilation]": "opus"
+},
+"q_53b09b473501": {
+"drug:olanzapine/sleep[sws_increase]": "opus"
 },
 "q_53b77399f993": {
 "drug:tiagabine/tmax": "sonnet"
@@ -5883,10 +5931,17 @@
 "q_69a3a84fe82a": {
 "drug:pipothiazine/categories": "sonnet"
 },
+"q_69a649bd65a4": {
+"drug:mirtazapine/sleep[sedation]": "opus",
+"drug:trazodone/sleep[sedation]": "opus"
+},
 "q_69acbc1d1444": {
 "drug:heroin/first_approval": "opus"
 },
 "q_69b54890a7c9": {
+"drug:buspirone/sleep[rem_latency_increase]": "opus",
+"drug:buspirone/sleep[rem_suppression]": "opus",
+"drug:buspirone/sleep[sleep_disruption]": "opus",
 "receptor:5ht1a/effects[agonism:rem_suppression]": "opus"
 },
 "q_69de8808372d": {
@@ -6568,6 +6623,9 @@
 "projection:mammillary_R->thalamus_R": "opus",
 "projection:mammillary_R->thalamus_R/sign": "opus"
 },
+"q_751a8bf4a40c": {
+"drug:agomelatine/sleep[rem_unchanged]": "opus"
+},
 "q_75234c04218e": {
 "drug:bupropion/tmax": "sonnet"
 },
@@ -6748,6 +6806,10 @@
 "drug:doxepin/seizure_threshold[lowers]": "opus",
 "drug:doxepin/seizure_threshold[possibly_lowers]": "opus"
 },
+"q_78674a5aee07": {
+"drug:agomelatine/sleep[total_sleep_increase]": "opus",
+"drug:escitalopram/sleep[sleep_disruption]": "opus"
+},
 "q_7881746da37a": {
 "drug:pramipexole/half_life": "opus"
 },
@@ -6829,6 +6891,9 @@
 },
 "q_7a2db16a3eb8": {
 "receptor:5ht1a/locations[septal_nuclei]": "sonnet"
+},
+"q_7a3b56092321": {
+"drug:diphenhydramine/sleep[sedation]": "opus"
 },
 "q_7a452a62839d": {
 "drug:molindone/formulations[ir]/tmax": "opus",
@@ -7586,6 +7651,14 @@
 "q_8896a13ceda9": {
 "drug:lithium/workup[eeg:before]": "opus"
 },
+"q_88992e19f258": {
+"drug:olanzapine/sleep[rem_suppression]": "opus",
+"drug:olanzapine/sleep[sws_increase]": "opus",
+"drug:risperidone/sleep[rem_suppression]": "opus",
+"drug:risperidone/sleep[sws_increase]": "opus",
+"drug:ziprasidone/sleep[rem_suppression]": "opus",
+"drug:ziprasidone/sleep[sws_increase]": "opus"
+},
 "q_88a3d3daadb6": {
 "drug:periciazine/workup[blood_count:during]": "opus"
 },
@@ -7658,6 +7731,9 @@
 },
 "q_89dbf3d26490": {
 "drug:sibutramine/categories": "sonnet"
+},
+"q_89e5db1ad985": {
+"drug:apomorphine/sleep[sws_increase]": "opus"
 },
 "q_89fc4c9312ca": {
 "drug:sodium_oxybate/bindings[gaba_b:partial_agonist]": "sonnet"
@@ -7770,6 +7846,10 @@
 "drug:metoclopramide/bindings[5ht3:antagonist]": "sonnet",
 "drug:metoclopramide/bindings[5ht4:agonist]": "sonnet",
 "drug:metoclopramide/bindings[d2:antagonist]": "sonnet"
+},
+"q_8b8e6f2c0983": {
+"drug:baclofen/sleep[rem_increase]": "opus",
+"drug:baclofen/sleep[sws_increase]": "opus"
 },
 "q_8ba21c3f8504": {
 "drug:bromazepam/excretion[unchanged:urine]": "opus"
@@ -8036,6 +8116,10 @@
 },
 "q_9032484238a2": {
 "drug:flurazepam/bindings[gaba_a:pam]": "sonnet"
+},
+"q_90364ff8d0ac": {
+"drug:eszopiclone/sleep[rem_suppression]": "opus",
+"drug:eszopiclone/sleep[sws_increase]": "opus"
 },
 "q_905e2ad5b844": {
 "drug:suvorexant/tmax": "sonnet"
@@ -8744,6 +8828,10 @@
 "drug:amoxapine/bindings[5ht2b:antagonist]": "opus",
 "drug:amoxapine/bindings[5ht3:antagonist]": "opus"
 },
+"q_9bd33c6534fc": {
+"drug:venlafaxine/sleep[sedation]": "opus",
+"drug:venlafaxine/sleep[sleep_disruption]": "opus"
+},
 "q_9bd6c1e3852f": {
 "drug:rotigotine/originator": "opus"
 },
@@ -9337,6 +9425,9 @@
 "drug:bromocriptine/originator_country": "opus",
 "drug:lsd/originator_country": "opus",
 "drug:thioridazine/originator_country": "opus"
+},
+"q_a634064d2c07": {
+"drug:doxepin/sleep[total_sleep_increase]": "opus"
 },
 "q_a635a5d98797": {
 "drug:furosemide/workup[blood_pressure:during]": "opus"
@@ -10436,6 +10527,11 @@
 "drug:promethazine/excretion[route:fecal]": "opus",
 "drug:promethazine/excretion[route:renal]": "opus"
 },
+"q_ba22c54535e3": {
+"drug:ketanserin/sleep[rem_suppression]": "opus",
+"drug:sertindole/sleep[rem_suppression]": "opus",
+"drug:sertindole/sleep[sws_increase]": "opus"
+},
 "q_ba23cf159b77": {
 "target:dat/demographics[age:decrease:-]": "opus"
 },
@@ -11163,6 +11259,9 @@
 "q_c5e452b15143": {
 "drug:tasimelteon/excretion[route:fecal]": "opus",
 "drug:tasimelteon/excretion[route:renal]": "opus"
+},
+"q_c5e47564a556": {
+"drug:mirtazapine/sleep[total_sleep_increase]": "opus"
 },
 "q_c60508371af8": {
 "drug:lofexidine/half_life": "sonnet"
@@ -11967,6 +12066,9 @@
 "drug:flibanserin/bindings[alpha1c:antagonist]": "sonnet",
 "drug:flibanserin/bindings[alpha1d:antagonist]": "sonnet"
 },
+"q_d53708e91ebf": {
+"drug:buspirone/sleep[sleep_disruption]": "opus"
+},
 "q_d554071abfff": {
 "receptor:h3/effects[antagonism:wakefulness]": "opus"
 },
@@ -12431,6 +12533,10 @@
 "q_de36850ddf41": {
 "drug:quetiapine/bindings[d2:antagonist]": "sonnet"
 },
+"q_de43f08e29f2": {
+"drug:morphine/sleep[rem_suppression]": "opus",
+"drug:morphine/sleep[sws_decrease]": "opus"
+},
 "q_de553477c69e": {
 "drug:perospirone/brands[Lullan]": "sonnet"
 },
@@ -12659,6 +12765,9 @@
 "q_e2f235a4905b": {
 "drug:aripiprazole/bindings[5ht2c:antagonist]": "sonnet",
 "drug:aripiprazole/bindings[5ht7:antagonist]": "sonnet"
+},
+"q_e3017a432383": {
+"drug:buspirone/sleep[sws_decrease]": "opus"
 },
 "q_e31395739515": {
 "drug:imipramine/workup[blood_count:during]": "opus"
@@ -13509,6 +13618,9 @@
 "q_f18ef77ffe40": {
 "drug:memantine/excretion[urine_ph:dependent]": "opus"
 },
+"q_f192fc7ba7d7": {
+"drug:ziprasidone/sleep[sws_increase]": "opus"
+},
 "q_f1955921b297": {
 "drug:bromperidol/originator": "opus"
 },
@@ -14294,6 +14406,10 @@
 },
 "q_fe953267d5a6": {
 "drug:ibogaine/metabolites[noribogaine]": "sonnet"
+},
+"q_fe96bfa54a95": {
+"drug:methadone/sleep[sws_decrease]": "opus",
+"drug:morphine/sleep[sws_decrease]": "opus"
 },
 "q_fea3f75edf1a": {
 "drug:tapentadol/enzymes[cyp2c19:substrate]": "opus",

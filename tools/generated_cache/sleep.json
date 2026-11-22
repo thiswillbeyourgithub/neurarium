@@ -1,0 +1,661 @@
+{
+ "drugs": {
+  "agomelatine": [
+   {
+    "effect": "sleep_latency_decrease",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "wichniak2017",
+      "provenance": "verified",
+      "quote": "In comparison to escitalopram, agomelatine is known to improve sleep latency after both short (after 2 weeks) and long (after 24 weeks) treatment."
+     }
+    ]
+   },
+   {
+    "effect": "total_sleep_increase",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "wichniak2017",
+      "provenance": "verified",
+      "quote": "In the second week, agomelatine slightly improves sleep continuity (increased total sleep time and sleep efficiency) and escitalopram worsens it [25]."
+     }
+    ]
+   },
+   {
+    "effect": "rem_unchanged",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "wichniak2017",
+      "provenance": "verified",
+      "quote": "Moreover, treatment with agomelatine is not related to the suppression of REM sleep: it restores cyclical sleep profile, may increase the amount of SWS, and most importantly leads to the improvement of daytime alertness [26]."
+     }
+    ]
+   }
+  ],
+  "apomorphine": [
+   {
+    "effect": "sws_increase",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "bates2026",
+      "provenance": "verified",
+      "quote": "Among these D2 receptor ag­ onists, apomorphine was the only agent with a demon­ strated increase in 0-30% increase in SWS time at lower concentrations.",
+      "species": "rat"
+     }
+    ]
+   }
+  ],
+  "baclofen": [
+   {
+    "effect": "sws_increase",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "bates2026",
+      "provenance": "verified",
+      "quote": "11,17,23,27,28 Other GABA agonists, such as 1,4-butane­ diol, baclofen, GHB, magnesium, and progesterone, in­ creased SWS and REM sleep."
+     }
+    ]
+   },
+   {
+    "effect": "rem_increase",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "bates2026",
+      "provenance": "verified",
+      "quote": "11,17,23,27,28 Other GABA agonists, such as 1,4-butane­ diol, baclofen, GHB, magnesium, and progesterone, in­ creased SWS and REM sleep."
+     }
+    ]
+   }
+  ],
+  "buspirone": [
+   {
+    "effect": "sleep_disruption",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "monti2011",
+      "provenance": "verified",
+      "quote": "Thus, buspirone administration increased W, prolonged REMS latency, and reduced REMS time in insomniac patients,80,81 whereas ipsapirone prolonged REMS latency and reduced REMS and SWS in healthy subjects.82 The reduction of REMS could be related to the azapirones acting on postsynaptic 5-HT1A receptors in the LDT/PPT nuclei to inhibit REM-on neurons."
+     },
+     {
+      "corpus": "papers",
+      "page": "monti2011",
+      "provenance": "verified",
+      "quote": "postsynaptic 5-HT1A receptors.79 Similar sleep-disrupting effects of buspirone and ipsapirone have been described in human subjects with normal sleep and in patients with insomnia."
+     }
+    ]
+   },
+   {
+    "effect": "rem_latency_increase",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "monti2011",
+      "provenance": "verified",
+      "quote": "Thus, buspirone administration increased W, prolonged REMS latency, and reduced REMS time in insomniac patients,80,81 whereas ipsapirone prolonged REMS latency and reduced REMS and SWS in healthy subjects.82 The reduction of REMS could be related to the azapirones acting on postsynaptic 5-HT1A receptors in the LDT/PPT nuclei to inhibit REM-on neurons."
+     }
+    ]
+   },
+   {
+    "effect": "rem_suppression",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "monti2011",
+      "provenance": "verified",
+      "quote": "Thus, buspirone administration increased W, prolonged REMS latency, and reduced REMS time in insomniac patients,80,81 whereas ipsapirone prolonged REMS latency and reduced REMS and SWS in healthy subjects.82 The reduction of REMS could be related to the azapirones acting on postsynaptic 5-HT1A receptors in the LDT/PPT nuclei to inhibit REM-on neurons."
+     }
+    ]
+   },
+   {
+    "effect": "sws_decrease",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "monti2011",
+      "provenance": "verified",
+      "quote": "Buspirone, ipsapirone, and gepirone have been shown to increase time awake and to reduce SWS and REMS when given subcutaneous (s.c.) or intraperitoneal (i.p.) to rats.78,79 Subcutaneous injection of the azapirones into 5,7-dihydroxytryptaminepretreated rats led also to an increase of W and a reduction of sleep; this result further supports the dependence of these effects on",
+      "species": "rat"
+     }
+    ]
+   }
+  ],
+  "caffeine": [
+   {
+    "effect": "sleep_disruption",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "watson2010",
+      "provenance": "verified",
+      "quote": "In humans, oral administration of caffeine prior to nocturnal sleep increases sleep latency and reduces sleep efficiency."
+     },
+     {
+      "corpus": "papers",
+      "page": "watson2010",
+      "provenance": "verified",
+      "quote": "Adenosine, however, is relevant for sleep medicine, as insomnia can be caused by consumption of caffeine or by the respiratory stimulant theophylline."
+     }
+    ]
+   }
+  ],
+  "diphenhydramine": [
+   {
+    "effect": "sedation",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "watson2010",
+      "provenance": "verified",
+      "quote": "First generation H1 receptor antagonists, such as diphenhydramine, cause drowsiness (sedation) and impaired performance in humans 95 and rats."
+     }
+    ]
+   }
+  ],
+  "doxepin": [
+   {
+    "effect": "total_sleep_increase",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "watson2010",
+      "provenance": "verified",
+      "quote": "96 Newer antagonists that are relatively selective for the H1 histamine receptor, such as the potent antagonist doxepin, improve subjective and objective measures of sleep in insomnia patients without causing sedation or psychomotor impairments the next day."
+     },
+     {
+      "corpus": "papers",
+      "page": "wichniak2017",
+      "provenance": "verified",
+      "quote": "However, due to the lack of methodologically sound randomized clinical trials in insomnia, only one of them, doxepin, is approved by FDA for the treatment of sleep maintenance insomnia."
+     }
+    ]
+   }
+  ],
+  "escitalopram": [
+   {
+    "effect": "sleep_disruption",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "wichniak2017",
+      "provenance": "verified",
+      "quote": "In the second week, agomelatine slightly improves sleep continuity (increased total sleep time and sleep efficiency) and escitalopram worsens it [25]."
+     }
+    ]
+   }
+  ],
+  "eszopiclone": [
+   {
+    "effect": "rem_suppression",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "watson2010",
+      "provenance": "verified",
+      "quote": "39 Intravenous administration of eszopiclone prevented the REM phase of sleep, increased EEG delta power, and decreased acetylcholine release in rat pontine reticular formation.",
+      "species": "rat"
+     }
+    ]
+   },
+   {
+    "effect": "sws_increase",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "watson2010",
+      "provenance": "verified",
+      "quote": "39 Intravenous administration of eszopiclone prevented the REM phase of sleep, increased EEG delta power, and decreased acetylcholine release in rat pontine reticular formation.",
+      "species": "rat"
+     }
+    ]
+   },
+   {
+    "effect": "total_sleep_increase",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "monti2011",
+      "provenance": "verified",
+      "quote": "Several benzodiazepine (BZD) and non-BZD (modified-release zolpidem, zopiclone, eszopiclone, modified-release indiplon) hypnotics improve sleep induction and sleep maintenance."
+     }
+    ]
+   },
+   {
+    "effect": "sleep_latency_decrease",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "monti2011",
+      "provenance": "verified",
+      "quote": "Several benzodiazepine (BZD) and non-BZD (modified-release zolpidem, zopiclone, eszopiclone, modified-release indiplon) hypnotics improve sleep induction and sleep maintenance."
+     }
+    ]
+   }
+  ],
+  "fluoxetine": [
+   {
+    "effect": "sleep_disruption",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "wichniak2017",
+      "provenance": "verified",
+      "quote": "However, at least in short-term treatment, many antidepressants with so-called activating effects (e.g. fluoxetine, venlafaxine) may disrupt sleep, while others with sedative properties (e.g., doxepin, mirtazapine, trazodone) rapidly improve sleep, but may cause problems in long-term treatment due to oversedation.For sleep-promoting action, the best effects can frequently be achieved with a very low dose, administered early enough before bedtime and importantly, always as a part of more complex interventions based on the cognitive-behavioral protocol to treat insomnia (CBT-I)."
+     }
+    ]
+   }
+  ],
+  "ketanserin": [
+   {
+    "effect": "sws_increase",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "monti2011",
+      "provenance": "verified",
+      "quote": "In addition, ritanserin discontinuation following daily administration for 8 weeks was not associated with the occurrence of withdrawal symptoms.117 On the other hand, the effects of ketanserin on sleep variables were restricted to an increase of SWS and a reduction of stage 2 sleep.118 During nighttime sleep after a nap in the evening, seganserin induced an increase in SWS and an enhancement of power density in the delta and theta frequencies during NREMS."
+     }
+    ]
+   },
+   {
+    "effect": "rem_suppression",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "monti2011",
+      "provenance": "verified",
+      "quote": "Of note, systemic administration of the 5-HT2A/2C receptor antagonists ritanserin, ketanserin, ICI-170,809 or sertindole at the beginning of the light period has been shown to induce a significant increase of SWS and a reduction of REMS in the rat.",
+      "species": "rat"
+     }
+    ]
+   }
+  ],
+  "methadone": [
+   {
+    "effect": "sws_decrease",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "watson2010",
+      "provenance": "verified",
+      "quote": "186 A nighttime dose of morphine or methadone also decreases stages 3 and 4 NREM sleep while increasing stage 2 NREM sleep."
+     }
+    ]
+   }
+  ],
+  "mianserin": [
+   {
+    "effect": "restless_legs",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "wichniak2017",
+      "provenance": "verified",
+      "quote": "Mianserin and mirtazapine may induce restless legs syndrome in as many as 28% of patients [29]."
+     }
+    ]
+   }
+  ],
+  "mirtazapine": [
+   {
+    "effect": "total_sleep_increase",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "wichniak2017",
+      "provenance": "verified",
+      "quote": "On the contrary, antidepressants with antihistaminergic action, like sedating TCA, mirtazapine, mianserine, or strong antagonistic action at serotonergic 5-HT2 receptors, like trazodone and nefazodone quickly improve sleep."
+     },
+     {
+      "corpus": "papers",
+      "page": "wichniak2017",
+      "provenance": "verified",
+      "quote": "Some patients show improvement of sleep quality already after the first drug dose [15], which was specially discussed for mirtazapine as related to the faster onset of antidepressant action [16]."
+     }
+    ]
+   },
+   {
+    "effect": "sedation",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "wichniak2017",
+      "provenance": "verified",
+      "quote": "However, the rate of treatment-emergent somnolence was very high, 54% in patients being treated with mirtazapine as compared to 18% out of patients in the placebo arm and 46% in patients being treated with trazodone as compared to 19% out of patients receiving placebo."
+     }
+    ]
+   },
+   {
+    "effect": "restless_legs",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "wichniak2017",
+      "provenance": "verified",
+      "quote": "Mianserin and mirtazapine may induce restless legs syndrome in as many as 28% of patients [29]."
+     }
+    ]
+   }
+  ],
+  "morphine": [
+   {
+    "effect": "sws_decrease",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "watson2010",
+      "provenance": "verified",
+      "quote": "For example, a single intravenous infusion of morphine in healthy volunteers decreases stages 3 and 4 NREM sleep, decreases REM sleep, and increases stage 2 NREM sleep."
+     },
+     {
+      "corpus": "papers",
+      "page": "watson2010",
+      "provenance": "verified",
+      "quote": "186 A nighttime dose of morphine or methadone also decreases stages 3 and 4 NREM sleep while increasing stage 2 NREM sleep."
+     }
+    ]
+   },
+   {
+    "effect": "rem_suppression",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "watson2010",
+      "provenance": "verified",
+      "quote": "For example, a single intravenous infusion of morphine in healthy volunteers decreases stages 3 and 4 NREM sleep, decreases REM sleep, and increases stage 2 NREM sleep."
+     }
+    ]
+   }
+  ],
+  "nefazodone": [
+   {
+    "effect": "total_sleep_increase",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "wichniak2017",
+      "provenance": "verified",
+      "quote": "On the contrary, antidepressants with antihistaminergic action, like sedating TCA, mirtazapine, mianserine, or strong antagonistic action at serotonergic 5-HT2 receptors, like trazodone and nefazodone quickly improve sleep."
+     }
+    ]
+   }
+  ],
+  "olanzapine": [
+   {
+    "effect": "sws_increase",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "bates2026",
+      "provenance": "verified",
+      "quote": "Among the an­ tipsychotics studied, olanzapine demonstrated the greatest increase in SWS in adults with schizophrenia, with one study demonstrating a 0-30% increase and another report­ ing a 30-60% increase."
+     },
+     {
+      "corpus": "papers",
+      "page": "bates2026",
+      "provenance": "verified",
+      "quote": "ications such as cortisol and 5-HT2A antagonists (e.g., risperidone, olanzapine, and ziprasidone) enhanced SWS while suppressing REM sleep in healthy individuals."
+     }
+    ]
+   },
+   {
+    "effect": "rem_suppression",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "bates2026",
+      "provenance": "verified",
+      "quote": "ications such as cortisol and 5-HT2A antagonists (e.g., risperidone, olanzapine, and ziprasidone) enhanced SWS while suppressing REM sleep in healthy individuals."
+     }
+    ]
+   }
+  ],
+  "paroxetine": [
+   {
+    "effect": "rem_suppression",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "wichniak2017",
+      "provenance": "verified",
+      "quote": "In a study which has compared the effects of vortioxetine and paroxetine to the placebo in a group of 24 healthy male volunteers, it has been shown that the vortioxetine dose of 20 and 40 mg similarly to the paroxetine dose of 20 mg suppresses REM sleep by increasing REM sleep latency and diminishing duration of REM sleep."
+     }
+    ]
+   },
+   {
+    "effect": "rem_latency_increase",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "wichniak2017",
+      "provenance": "verified",
+      "quote": "In a study which has compared the effects of vortioxetine and paroxetine to the placebo in a group of 24 healthy male volunteers, it has been shown that the vortioxetine dose of 20 and 40 mg similarly to the paroxetine dose of 20 mg suppresses REM sleep by increasing REM sleep latency and diminishing duration of REM sleep."
+     }
+    ]
+   }
+  ],
+  "risperidone": [
+   {
+    "effect": "sws_increase",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "bates2026",
+      "provenance": "verified",
+      "quote": "ications such as cortisol and 5-HT2A antagonists (e.g., risperidone, olanzapine, and ziprasidone) enhanced SWS while suppressing REM sleep in healthy individuals."
+     }
+    ]
+   },
+   {
+    "effect": "rem_suppression",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "bates2026",
+      "provenance": "verified",
+      "quote": "ications such as cortisol and 5-HT2A antagonists (e.g., risperidone, olanzapine, and ziprasidone) enhanced SWS while suppressing REM sleep in healthy individuals."
+     }
+    ]
+   }
+  ],
+  "sertindole": [
+   {
+    "effect": "sws_increase",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "monti2011",
+      "provenance": "verified",
+      "quote": "Of note, systemic administration of the 5-HT2A/2C receptor antagonists ritanserin, ketanserin, ICI-170,809 or sertindole at the beginning of the light period has been shown to induce a significant increase of SWS and a reduction of REMS in the rat.",
+      "species": "rat"
+     }
+    ]
+   },
+   {
+    "effect": "rem_suppression",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "monti2011",
+      "provenance": "verified",
+      "quote": "Of note, systemic administration of the 5-HT2A/2C receptor antagonists ritanserin, ketanserin, ICI-170,809 or sertindole at the beginning of the light period has been shown to induce a significant increase of SWS and a reduction of REMS in the rat.",
+      "species": "rat"
+     }
+    ]
+   }
+  ],
+  "trazodone": [
+   {
+    "effect": "total_sleep_increase",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "wichniak2017",
+      "provenance": "verified",
+      "quote": "On the contrary, antidepressants with antihistaminergic action, like sedating TCA, mirtazapine, mianserine, or strong antagonistic action at serotonergic 5-HT2 receptors, like trazodone and nefazodone quickly improve sleep."
+     }
+    ]
+   },
+   {
+    "effect": "sedation",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "wichniak2017",
+      "provenance": "verified",
+      "quote": "However, the rate of treatment-emergent somnolence was very high, 54% in patients being treated with mirtazapine as compared to 18% out of patients in the placebo arm and 46% in patients being treated with trazodone as compared to 19% out of patients receiving placebo."
+     }
+    ]
+   }
+  ],
+  "venlafaxine": [
+   {
+    "effect": "sleep_disruption",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "wichniak2017",
+      "provenance": "verified",
+      "quote": "However, at least in short-term treatment, many antidepressants with so-called activating effects (e.g. fluoxetine, venlafaxine) may disrupt sleep, while others with sedative properties (e.g., doxepin, mirtazapine, trazodone) rapidly improve sleep, but may cause problems in long-term treatment due to oversedation.For sleep-promoting action, the best effects can frequently be achieved with a very low dose, administered early enough before bedtime and importantly, always as a part of more complex interventions based on the cognitive-behavioral protocol to treat insomnia (CBT-I)."
+     },
+     {
+      "corpus": "papers",
+      "page": "wichniak2017",
+      "provenance": "verified",
+      "quote": "Both treatment-emergent insomnia and somnolence were the most frequent (both equal to 24%) in patients with generalized anxiety disorders treated with venlafaxine."
+     }
+    ]
+   },
+   {
+    "effect": "sedation",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "wichniak2017",
+      "provenance": "verified",
+      "quote": "Both treatment-emergent insomnia and somnolence were the most frequent (both equal to 24%) in patients with generalized anxiety disorders treated with venlafaxine."
+     }
+    ]
+   }
+  ],
+  "vortioxetine": [
+   {
+    "effect": "rem_suppression",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "wichniak2017",
+      "provenance": "verified",
+      "quote": "In a study which has compared the effects of vortioxetine and paroxetine to the placebo in a group of 24 healthy male volunteers, it has been shown that the vortioxetine dose of 20 and 40 mg similarly to the paroxetine dose of 20 mg suppresses REM sleep by increasing REM sleep latency and diminishing duration of REM sleep."
+     }
+    ]
+   },
+   {
+    "effect": "rem_latency_increase",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "wichniak2017",
+      "provenance": "verified",
+      "quote": "In a study which has compared the effects of vortioxetine and paroxetine to the placebo in a group of 24 healthy male volunteers, it has been shown that the vortioxetine dose of 20 and 40 mg similarly to the paroxetine dose of 20 mg suppresses REM sleep by increasing REM sleep latency and diminishing duration of REM sleep."
+     }
+    ]
+   },
+   {
+    "effect": "sleep_disruption",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "wichniak2017",
+      "provenance": "verified",
+      "quote": "These negative effects of vortioxetine on sleep continuity are significant only for the higher dose [28•]."
+     }
+    ]
+   }
+  ],
+  "ziprasidone": [
+   {
+    "effect": "sws_increase",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "bates2026",
+      "provenance": "verified",
+      "quote": "Interestingly, olanza­ pine and ziprasidone enhanced SWS sleep in both healthy individuals and individuals with schizophrenia, highlight­"
+     },
+     {
+      "corpus": "papers",
+      "page": "bates2026",
+      "provenance": "verified",
+      "quote": "ications such as cortisol and 5-HT2A antagonists (e.g., risperidone, olanzapine, and ziprasidone) enhanced SWS while suppressing REM sleep in healthy individuals."
+     }
+    ]
+   },
+   {
+    "effect": "rem_suppression",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "bates2026",
+      "provenance": "verified",
+      "quote": "ications such as cortisol and 5-HT2A antagonists (e.g., risperidone, olanzapine, and ziprasidone) enhanced SWS while suppressing REM sleep in healthy individuals."
+     }
+    ]
+   }
+  ],
+  "zolpidem": [
+   {
+    "effect": "total_sleep_increase",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "monti2011",
+      "provenance": "verified",
+      "quote": "Several benzodiazepine (BZD) and non-BZD (modified-release zolpidem, zopiclone, eszopiclone, modified-release indiplon) hypnotics improve sleep induction and sleep maintenance."
+     }
+    ]
+   },
+   {
+    "effect": "sleep_latency_decrease",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "monti2011",
+      "provenance": "verified",
+      "quote": "Several benzodiazepine (BZD) and non-BZD (modified-release zolpidem, zopiclone, eszopiclone, modified-release indiplon) hypnotics improve sleep induction and sleep maintenance."
+     }
+    ]
+   }
+  ],
+  "zopiclone": [
+   {
+    "effect": "total_sleep_increase",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "monti2011",
+      "provenance": "verified",
+      "quote": "Several benzodiazepine (BZD) and non-BZD (modified-release zolpidem, zopiclone, eszopiclone, modified-release indiplon) hypnotics improve sleep induction and sleep maintenance."
+     }
+    ]
+   },
+   {
+    "effect": "sleep_latency_decrease",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "monti2011",
+      "provenance": "verified",
+      "quote": "Several benzodiazepine (BZD) and non-BZD (modified-release zolpidem, zopiclone, eszopiclone, modified-release indiplon) hypnotics improve sleep induction and sleep maintenance."
+     }
+    ]
+   }
+  ]
+ }
+}

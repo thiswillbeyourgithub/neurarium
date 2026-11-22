@@ -406,6 +406,25 @@
   },
   "drug_effect_kinds": [
     {
+      "kind": "drug_sleep",
+      "field": "sleep",
+      "section": "sleep",
+      "effects": {
+        "total_sleep_increase": "Improves sleep (more total sleep, better efficiency)",
+        "sleep_latency_decrease": "Falls asleep faster",
+        "sleep_disruption": "Disrupts sleep (insomnia, less or more broken sleep)",
+        "sedation": "Daytime sleepiness / sedation",
+        "sws_increase": "More deep (slow-wave) sleep",
+        "sws_decrease": "Less deep (slow-wave) sleep",
+        "rem_suppression": "Less REM sleep",
+        "rem_latency_increase": "Delays the first REM sleep (longer REM latency)",
+        "rem_increase": "More REM sleep",
+        "rem_unchanged": "Leaves REM sleep unchanged",
+        "restless_legs": "Restless legs / periodic limb movements",
+        "nightmares": "Nightmares / vivid dreams"
+      }
+    },
+    {
       "kind": "drug_seizure_threshold",
       "field": "seizure_threshold",
       "section": "seizure",
@@ -11997,8 +12016,10 @@
       "page_kind": "paper",
       "editable": false,
       "page_urls": {
+        "bates2026": "https://doi.org/10.2458/001c.161875",
         "monti2011": "https://doi.org/10.1016/j.smrv.2010.11.003",
         "watson2010": "https://doi.org/10.1016/j.jsmc.2010.08.003",
+        "wichniak2017": "https://doi.org/10.1007/s11920-017-0816-4",
         "zilles2009": "https://doi.org/10.1097/WCO.0b013e32832d95db"
       }
     },
@@ -12596,6 +12617,16 @@
         "missing": 0,
         "unknown": 0
       },
+      "drug_sleep": {
+        "total": 50,
+        "verified": 43,
+        "uncertain": 7,
+        "sourced": 0,
+        "llm": 0,
+        "nosource": 0,
+        "missing": 0,
+        "unknown": 0
+      },
       "drug_seizure_threshold": {
         "total": 117,
         "verified": 117,
@@ -12878,15 +12909,15 @@
       }
     },
     "nodes": {
-      "total": 11150,
-      "verified": 10344,
-      "uncertain": 438,
+      "total": 11200,
+      "verified": 10387,
+      "uncertain": 445,
       "sourced": 0,
       "llm": 230,
       "nosource": 138,
       "missing": 368,
       "unknown": 595,
-      "backed": 10782,
+      "backed": 10832,
       "pct_backed": 97
     },
     "ki_coverage": {
