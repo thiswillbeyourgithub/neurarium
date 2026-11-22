@@ -1,1 +1,289 @@
-{}
+{
+  "ba10": {
+    "file": "File:Brodmann_area_10_frontal.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/38/Brodmann_area_10_frontal.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 10",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba11": {
+    "file": "File:Brodmann_area_11_frontal.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/cc/Brodmann_area_11_frontal.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 11",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba12": {
+    "file": "File:Brodmann_area_12_frontal.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/a/af/Brodmann_area_12_frontal.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 12",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba17": {
+    "file": "File:Brodmann_areas_17_18_19.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/70/Brodmann_areas_17_18_19.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 17",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba18": {
+    "file": "File:Brodmann_Cytoarchitectonics_18.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/32/Brodmann_Cytoarchitectonics_18.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 18",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba19": {
+    "file": "File:Brodmann_Cytoarchitectonics_19.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Brodmann_Cytoarchitectonics_19.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 19",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba20": {
+    "file": "File:Brodmann_area_20.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Brodmann_area_20.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 20",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba21": {
+    "file": "File:Brodmann_area_21.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Brodmann_area_21.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 21",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba22": {
+    "file": "File:Brodmann_area_22_inside_lateral_sulcus.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/35/Brodmann_area_22_inside_lateral_sulcus.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 22",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba23": {
+    "file": "File:Brodmann_Cytoarchitectonics_23.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Brodmann_Cytoarchitectonics_23.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 23",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba24": {
+    "file": "File:Brodmann_area_24_medial.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Brodmann_area_24_medial.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 24",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba25": {
+    "file": "File:Brodmann_area_25_medial.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/19/Brodmann_area_25_medial.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 25",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba26": {
+    "file": "File:Brodmann_Cytoarchitectonics_26.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/82/Brodmann_Cytoarchitectonics_26.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 26",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba27": {
+    "file": "File:Brodmann_Cytoarchitectonics_27.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/5f/Brodmann_Cytoarchitectonics_27.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 27",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba28": {
+    "file": "File:Brodmann_Cytoarchitectonics_28.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/76/Brodmann_Cytoarchitectonics_28.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 28",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba29": {
+    "file": "File:Brodmann_Cytoarchitectonics_29.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/38/Brodmann_Cytoarchitectonics_29.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 29",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba30": {
+    "file": "File:Brodmann_Cytoarchitectonics_30.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Brodmann_Cytoarchitectonics_30.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 30",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba31": {
+    "file": "File:Brodmann_Cytoarchitectonics_31.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Brodmann_Cytoarchitectonics_31.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 31",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba32": {
+    "file": "File:Brodmann_area_32_medial.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/81/Brodmann_area_32_medial.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 32",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba33": {
+    "file": "File:Brodmann_area_33_medial.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Brodmann_area_33_medial.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 33",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba34": {
+    "file": "File:Brodmann_Cytoarchitectonics_34.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Brodmann_Cytoarchitectonics_34.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 34",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba35": {
+    "file": "File:Brodmann_Cytoarchitectonics_35.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/d/da/Brodmann_Cytoarchitectonics_35.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 35",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba36": {
+    "file": "File:Brodmann_Cytoarchitectonics_35.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/d/da/Brodmann_Cytoarchitectonics_35.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 36",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba37": {
+    "file": "File:Brodmann_area_37.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Brodmann_area_37.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 37",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba38": {
+    "file": "File:Brodmann_area_38.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Brodmann_area_38.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 38",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba39": {
+    "file": "File:Brodmann_area_39.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Brodmann_area_39.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 39",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba3_1_2": {
+    "file": "File:Blausen_0103_Brain_Sensory&Motor.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Blausen_0103_Brain_Sensory%26Motor.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann areas 3, 1 and 2",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba4": {
+    "file": "File:Brodmann_area_4_frontal.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/6/67/Brodmann_area_4_frontal.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 4",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba40": {
+    "file": "File:Gray725.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/2/20/Gray725.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 40",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba41_42": {
+    "file": "File:Brodmann_Cytoarchitectonics_41.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/77/Brodmann_Cytoarchitectonics_41.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann areas 41 and 42",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba43": {
+    "file": "File:Brodmann_area_43.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Brodmann_area_43.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 43",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba44": {
+    "file": "File:Brodmann_area_44_frontal.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/c0/Brodmann_area_44_frontal.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 44",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba45": {
+    "file": "File:Brodmann_area_45_frontal.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Brodmann_area_45_frontal.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 45",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba46": {
+    "file": "File:Brodmann_area_46_frontal.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/5f/Brodmann_area_46_frontal.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 46",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba47": {
+    "file": "File:Brodmann_area_47_frontal.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/0f/Brodmann_area_47_frontal.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 47",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba5": {
+    "file": "File:BA5_-_lateral_view.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/a/af/BA5_-_lateral_view.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 5",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba52": {
+    "file": "File:Brodmann_area_52_inside_lateral_sulcus.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/85/Brodmann_area_52_inside_lateral_sulcus.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 52",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba6": {
+    "file": "File:Brodmann_area_6_frontal.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Brodmann_area_6_frontal.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 6",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba7": {
+    "file": "File:Brodmann_area_7.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/6/6c/Brodmann_area_7.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 7",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba8": {
+    "file": "File:Brodmann_area_8_frontal.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Brodmann_area_8_frontal.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 8",
+    "kind": "raster",
+    "gallery": []
+  },
+  "ba9": {
+    "file": "File:Brodmann_area_9_frontal.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Brodmann_area_9_frontal.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Brodmann area 9",
+    "kind": "raster",
+    "gallery": []
+  }
+}

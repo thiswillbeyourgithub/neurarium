@@ -259,6 +259,14 @@ def resolve_image(title: str) -> tuple[str, str, str] | None:
     lead = _lead_image(title)
     if lead:
         return (lead[0], lead[1], "infobox")
+    # Last resort: the first raster figure in page order. A Brodmann-area article has no
+    # gif, its only svg is a blank brain outline, and pageimages names nothing, while
+    # its figure is a PNG ("Brodmann_Cytoarchitectonics_31.png").
+    for fname in images:
+        if fname.lower().endswith((".png", ".jpg", ".jpeg")) and not _is_gallery_chrome(fname):
+            url = _file_url(f"File:{fname}")
+            if url:
+                return (f"File:{fname}", url, "raster")
     return None
 
 
