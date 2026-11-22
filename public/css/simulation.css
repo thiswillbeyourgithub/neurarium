@@ -182,12 +182,14 @@
 .sim-colhit.on { fill: rgba(var(--ink), 0.08); }
 
 /* Plots side by side when the tab is wide (fullscreen), stacked in the side panel;
-   the clinical-effects plot spans both columns under them. */
+   the plasma plot sits above the receptor and clinical-effects plots, which share a row. */
 .sim-plots-wrap { container-type: inline-size; }
 @container (min-width: 900px) {
-  .sim-plots { display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; align-items: start; }
-  .sim-plots .sim-fx { grid-column: 1 / -1; }
+  .sim-bars { display: flex; column-gap: 20px; align-items: flex-start; }
+  .sim-bars > .sim-sec { flex: 1 1 0; min-width: 0; }
+  .sim-bars > .sim-sec:not([open]) { flex: 0 0 auto; }
 }
+.sim-sec:not([open]) > summary.sim-h { margin-bottom: 0; }
 .sim-pk.pinned .sim-cursor { stroke-width: 2; stroke-dasharray: none; }
 .sim-col-link { cursor: pointer; }
 .sim-col-link:hover { fill: var(--accent-bright); text-decoration: underline; }

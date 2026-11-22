@@ -394,6 +394,15 @@ export function createSimulation({ body, data, deps, ui }) {
     drugSec.appendChild(metabLabel);
   };
 
+  // A bar plot the reader can fold away (open by default, not persisted), using the
+  // app's shared `.disclosure` caret: <details> + <summary> carrying the heading.
+  const foldablePlot = (cls) => {
+    const d = el("details", `${cls} disclosure`);
+    d.open = true;
+    return d;
+  };
+  const plotSummary = (title) => el("summary", "sim-h", title);
+
   // ---- section 3: the plasma plot ----------------------------------------
   const pkSec = el("section", "sim-sec");
   const pkHost = el("div", "sim-plot-host");
@@ -500,7 +509,7 @@ export function createSimulation({ body, data, deps, ui }) {
   };
 
   // ---- section 4: the receptor plot --------------------------------------
-  const rxSec = el("section", "sim-sec");
+  const rxSec = foldablePlot("sim-sec");
   const rxHost = el("div", "sim-plot-host sim-scroll");
   const rxControls = el("div", "sim-controls");
   let rxCols = [];
@@ -512,7 +521,7 @@ export function createSimulation({ body, data, deps, ui }) {
   };
 
   const buildRxSection = () => {
-    rxSec.appendChild(el("h3", "sim-h", t("sim.rxTitle")));
+    rxSec.appendChild(plotSummary(t("sim.rxTitle")));
     const thrWrap = el("label", "sim-slider");
     thrWrap.appendChild(el("span", null, t("sim.rxThreshold")));
     const thr = document.createElement("input");
@@ -705,10 +714,10 @@ export function createSimulation({ body, data, deps, ui }) {
   // enzyme engaged at all), one column per effect, as tall as the strongest binding
   // behind it, grouped by the transmitter system of that receptor (dry mouth with the
   // other cholinergic effects). Same envelope as the receptor plot, so it never rescales.
-  const fxSec = el("section", "sim-sec sim-fx");
+  const fxSec = foldablePlot("sim-sec sim-fx");
   const fxHost = el("div", "sim-plot-host sim-scroll");
   const buildFxSection = () => {
-    const h = el("h3", "sim-h", t("sim.fxTitle"));
+    const h = plotSummary(t("sim.fxTitle"));
     h.appendChild(el("span", "beta-tag", t("sim.beta")));
     fxSec.appendChild(h);
     fxSec.appendChild(fxHost);
@@ -960,7 +969,10 @@ export function createSimulation({ body, data, deps, ui }) {
     // panel: a container query on this wrapper (css/simulation.css) decides.
     const plotsWrap = el("div", "sim-plots-wrap");
     const plots = el("div", "sim-plots");
-    plots.append(pkSec, rxSec, fxSec);
+    // The two bar plots share a row; a folded one frees its width for the other.
+    const bars = el("div", "sim-bars");
+    bars.append(rxSec, fxSec);
+    plots.append(pkSec, bars);
     plotsWrap.appendChild(plots);
     body.appendChild(plotsWrap);
     body.appendChild(solveSec);
