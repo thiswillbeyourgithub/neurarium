@@ -107,6 +107,10 @@ TYPED_ACTION = {"transporter": "reuptake_inhibitor", "enzyme": "enzyme_inhibitor
                 "ion_channel": "blocker"}
 
 
+# An affinity cell reporting zero activity ("0% at 10 μM", "0 %").
+NO_ACTIVITY_RE = re.compile(r"(?<![\d.,])0\s*%")
+
+
 def fold_cell(cell: str) -> str:
     """A table cell as the vocabulary sees it: footnotes gone, one space, lower case."""
     return wiki.clean_cell(cell).lower().strip()
@@ -150,6 +154,11 @@ def table_rows(table, valid_ids: set[str]) -> list[dict]:
         if not name or name == row[ki_col]["text"] or len(name) > 45:
             continue
         if wiki.RANGE_RE.match(wiki.greek_to_latin(name)):
+            continue
+        # A row measuring no activity at all (brexpiprazole's "NET | 0% at 10 μM |
+        # Blocker") says the drug does NOT act there: its Action cell is the target's
+        # usual action, not this drug's. A weak one (">10,000 | Agonist") still states it.
+        if NO_ACTIVITY_RE.search(row[ki_col]["text"]):
             continue
         tid = wiki.resolve_wiki_target(name, valid_ids)
         if tid is None:

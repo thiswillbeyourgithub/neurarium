@@ -2551,45 +2551,6 @@
    }
   ]
  },
- "drug:brexpiprazole/bindings[d5]": {
-  "by": {
-   "harness": "Claude Code",
-   "model": "opus"
-  },
-  "candidates_offered": 0,
-  "kind": "drug_binding_action",
-  "searched": "2026-10-12",
-  "sources": [
-   {
-    "corpus": "pdsp_ki",
-    "hits": 0,
-    "lookup": "Brexpiprazole x d5 (ligand rows joined to the target's gene)",
-    "note": "binding Ki rows only; PDSP records no direction"
-   },
-   {
-    "corpus": "gtopdb_ki",
-    "hits": 0,
-    "lookup": "Brexpiprazole x d5 in interactions.csv",
-    "note": "action column: none"
-   },
-   {
-    "corpus": "wikipedia_pharm",
-    "hits": 0,
-    "lookup": "article(s) brexpiprazole: Ki-table Action column + prose sentences naming the target with a direction word"
-   },
-   {
-    "corpus": "wikipedia_fr",
-    "hits": 0,
-    "lookup": "article brexpiprazole: sentences naming the target with a direction word"
-   },
-   {
-    "corpus": "europepmc",
-    "hits": 0,
-    "query": "ABSTRACT:\"Brexpiprazole\" AND (ABSTRACT:\"D5\" OR ABSTRACT:\"DRD5\") AND (agonist OR antagonist OR \"inverse agonist\" OR inhibitor OR blocker OR modulator OR releaser) AND SRC:MED AND HAS_ABSTRACT:y",
-    "read": []
-   }
-  ]
- },
  "drug:brexpiprazole/bindings[sigma1]": {
   "by": {
    "harness": "Claude Code",

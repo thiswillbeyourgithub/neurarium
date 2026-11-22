@@ -196,8 +196,8 @@ def parse_ki_cell(raw: str):
 
     Wikipedia affinity cells vary wildly: "1.6", a range "0.20-9.8 nM", commas
     "1,044", ceilings ">10,000 nM" / "300+", µM units, trailing species notes
-    "148 nM (canine)", and cells that inline other metrics
-    "0.087-0.5 (Ki) 1.9-50 (IC50)". Strategy: when a cell tags multiple metrics keep
+    "148 nM (canine)", cells that inline other metrics
+    "0.087-0.5 (Ki) 1.9-50 (IC50)", and percent-inhibition readouts "0% at 10 μM" (None). Strategy: when a cell tags multiple metrics keep
     only the (Ki)-tagged value group(s); strip notes/units/commas; pull every number
     but drop lower-bound ceilings (">X"/"X+"/a truncated "X-", i.e. "weaker than X,
     inactive") and any value >= 10 uM (fetch_ki.SENTINEL_NM, mirroring the PDSP filter);
@@ -217,6 +217,10 @@ def parse_ki_cell(raw: str):
     # measurement as a Ki or leak the label's own digits ("50" from "EC 50") as a range
     # bound (e.g. mianserin's "KOR | 530 (EC50)" was becoming a bogus 50-530 nM range).
     if OTHER_METRIC_CELL_RE.search(s) and not KI_LABEL_RE.search(s):
+        return None
+    # A percent left after the label filter is an inhibition readout, not a Ki:
+    # brexpiprazole's "NET | 0% at 10 μM" (inactive) was read as a 0 nM Ki.
+    if "%" in s:
         return None
     s = re.sub(r"\([^)]*\)", " ", s)               # drop (rat)/(canine)/(HT29) notes
     s = s.replace(",", "").replace("≈", "").replace("~", "")
@@ -238,7 +242,7 @@ def parse_ki_cell(raw: str):
             nums.append(float(num) * factor)
         except ValueError:
             continue
-    active = [v for v in nums if v < fetch_ki.SENTINEL_NM]
+    active = [v for v in nums if 0 < v < fetch_ki.SENTINEL_NM]  # a Ki is never 0
     if not active:
         return None
     lo, hi = min(active), max(active)

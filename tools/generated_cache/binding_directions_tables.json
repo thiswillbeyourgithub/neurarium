@@ -97,13 +97,6 @@
   "slug": "brexpiprazole",
   "rows": [
    {
-    "target": "net",
-    "wiki_name": "NET",
-    "cell": "Blocker",
-    "quote": "NET | 0% at 10 μM | Blocker",
-    "action": "reuptake_inhibitor"
-   },
-   {
     "target": "5ht2c",
     "wiki_name": "5-HT 2C",
     "cell": "Antagonist",
