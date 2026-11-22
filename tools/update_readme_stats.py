@@ -89,6 +89,7 @@ CORPUS_DESC = {
     "stahl_essential": ("Psychopharmacology (mechanisms)", "Receptor & target mechanism"),
     "carlat":          ("Clinical psychopharmacology", "Drug bindings (cross-check)"),
     "nieuwenhuys":     ("Neuroanatomy (CNS atlas)", "Region anatomy, connectivity"),
+    "nolte":           ("Functional neuroanatomy (textbook)", "Pathways, region anatomy, cortical areas"),
     "gtopdb":          ("Molecular pharmacology (IUPHAR/BPS database)", "Receptor & target expression regions"),
     "pdsp_ki":         ("Receptor binding pharmacology", "Drug binding affinities (Ki)"),
     "allen_ahba":      ("Brain transcriptome atlas (microarray)", "Receptor & target expression regions"),

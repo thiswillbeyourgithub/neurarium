@@ -12022,6 +12022,12 @@
         "zilles2009": "https://doi.org/10.1097/WCO.0b013e32832d95db"
       }
     },
+    "nolte": {
+      "ref": "Vanderah, Nolte's The Human Brain (2025)",
+      "citation": "Vanderah TW. Nolte's The Human Brain: An Introduction to its Functional Anatomy. Elsevier; 2025.",
+      "url": "https://search.worldcat.org/search?q=Nolte%27s+The+Human+Brain+Vanderah+2025",
+      "pages_dir": "data_sources/books/nolte/pages"
+    },
     "drugsfda": {
       "ref": "Drugs@FDA (U.S. FDA), approved application history",
       "citation": "U.S. Food and Drug Administration. Drugs@FDA: FDA-approved drugs, cited application's original approval (openFDA drug/drugsfda export, public domain; application number pinned per citation).",

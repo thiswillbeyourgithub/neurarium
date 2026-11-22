@@ -55,12 +55,11 @@ CACHE = ROOT / "tools" / "generated_cache"
 WORKLIST = CACHE / "projection_worklist.json"
 JUDGED = CACHE / "projection_judged.json"
 OUT = CACHE / "projection_sources.json"
-from data_generators.corpora import SOURCE_CORPORA  # noqa: E402
+from data_generators.corpora import PATHWAY_CORPORA, SOURCE_CORPORA  # noqa: E402
 
 # The prose corpora a pathway can be quoted from, each at its registered page tree
 # (Europe PMC, corpus #17, for what only a primary paper states, e.g. the claustrum).
-PAGES = {c: ROOT / SOURCE_CORPORA[c]["pages_dir"]
-         for c in ("kandel", "nieuwenhuys", "stahl_essential", "europepmc")}
+PAGES = {c: ROOT / SOURCE_CORPORA[c]["pages_dir"] for c in PATHWAY_CORPORA}
 ATTRS = ("transmitter", "sign", "route")
 
 

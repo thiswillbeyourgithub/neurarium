@@ -272,6 +272,7 @@ Every `~` and `✓` grade is checked against one of the sources below. Each is a
 | [CPIC, clinical pharmacogenetics dosing guideline](https://cpicpgx.org/) | Pharmacogenomic prescribing guidelines | What a clearance speed implies for a drug |
 | [Europe PMC, journal article](https://europepmc.org/) | Primary literature (Europe PMC abstracts) | Claims only a study measures (e.g. brain half-life) |
 | [Journal article, full text (PDF held by the author)](https://doi.org/) | Full-text reviews (PDFs held by the author) | Receptor effects on sleep stages (REM, slow-wave sleep) |
+| [Vanderah, Nolte's The Human Brain (2025)](https://search.worldcat.org/search?q=Nolte%27s+The+Human+Brain+Vanderah+2025) | Functional neuroanatomy (textbook) | Pathways, region anatomy, cortical areas |
 | [Drugs@FDA (U.S. FDA), approved application history](https://www.accessdata.fda.gov/scripts/cder/daf/) | US regulator register (Drugs@FDA) | First US approval, where no other source dates one |
 | [ClinPGx (PharmGKB), clinical annotation](https://www.clinpgx.org/) | Pharmacogenomic annotations (ClinPGx) | Receptor & target gene variant associations |
 | [PubChem (NCBI), computed compound properties](https://pubchem.ncbi.nlm.nih.gov/) | Chemistry database (PubChem computed properties) | Drug lipophilicity (XLogP3), polar surface area |

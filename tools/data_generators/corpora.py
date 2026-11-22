@@ -476,6 +476,20 @@ SOURCE_CORPORA: dict[str, dict] = {
         # Not editable: a published paper does not change under a citation.
         "editable": False,
     },
+    "nolte": {
+        # Functional neuroanatomy textbook corpus #26: Vanderah's Nolte, 2025 edition,
+        # the third anatomy book beside Kandel (#2) and Nieuwenhuys (#6): pathways,
+        # region anatomy and the cortical (Brodmann) areas behind the Functional areas.
+        # Split by tools/fetch/pdf_to_pages.py into data_sources/books/nolte/pages/<n>.md;
+        # `page` is the PDF page (the .md name), which runs ahead of the printed page.
+        # The text layer drops the "Th" / "fi" ligatures ("alamus" for "Thalamus"), so
+        # a quote is copied as the page has it. Copyrighted: author-side only.
+        "ref": "Vanderah, Nolte's The Human Brain (2025)",
+        "citation": "Vanderah TW. Nolte's The Human Brain: An Introduction to its "
+                    "Functional Anatomy. Elsevier; 2025.",
+        "url": "https://search.worldcat.org/search?q=Nolte%27s+The+Human+Brain+Vanderah+2025",
+        "pages_dir": "data_sources/books/nolte/pages",
+    },
     "drugsfda": {
         # Regulatory register corpus #18: Drugs@FDA, the FDA's own list of approved
         # applications, read from openFDA's bulk drug/drugsfda export (www.fda.gov
@@ -578,3 +592,9 @@ SOURCE_CORPORA: dict[str, dict] = {
         "pages_dir": "data_sources/books/agnp_tdm_2026/pages",
     },
 }
+
+
+# The prose corpora a pathway can be quoted from (the projection worklist and its
+# applier), each at its registered page tree. Appended at the end only, so a new corpus
+# never shifts an answered candidate index.
+PATHWAY_CORPORA = ("kandel", "nieuwenhuys", "stahl_essential", "europepmc", "nolte")

@@ -255,6 +255,7 @@ Corpora (`SOURCE_CORPORA`):
 - #24 `bdpm_rcp`: the same official French RCPs as #16, sections 4.2 / 4.3 / 4.4, the checks a label asks for before and during treatment (`drug_workup`, LLM index pick + judge), plus section 5.1 as a binding-gap input (French class words such as "anticholinergique" via `binding_gaps.FR_ALIASES`), `page` = product CIS, linked to the BDPM `/extrait` page (EMA SmPC PDF for a centrally authorised drug); built offline from an RCP copy on disk, freshest copy winning.
 - #18 `drugsfda`: Drugs@FDA (openFDA export), the fallback first **US** approval (`national: true`, code-read, no judge) where no other source dates one, `page` = NDA number.
 - #25 `papers`: full text of reviews the author holds as PDFs (`tools/fetch/fetch_papers.py` `PAPERS`, one page per paper with `## PDF page N` headings), `page` = paper key, linked by DOI; LLM-picked + judged, a non-human statement carries its `species`.
+- #26 `nolte`: Vanderah's Nolte, The Human Brain (2025), functional neuroanatomy textbook (pathways, region anatomy, cortical areas), `page` = PDF page of `data_sources/books/nolte/pages/`; its text layer drops the "Th"/"fi" ligatures, so quotes are copied as the page has them.
 
 Full detail (sourcing model, citation sites, book heading trails, the four uncertainty flags, per-corpus mechanics, the "% sourced" maths): [`docs/PROVENANCE.md`](docs/PROVENANCE.md).
 

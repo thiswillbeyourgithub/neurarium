@@ -150,6 +150,11 @@ def _kandel(page: int, quote: str) -> dict[str, Any]:
     return dict(corpus="kandel", page=page, provenance="verified", quote=quote)
 
 
+def _nolte(page: int, quote: str) -> dict[str, Any]:
+    """A verified Nolte (2025) quote-source (``page`` = the PDF/.md page number)."""
+    return dict(corpus="nolte", page=page, provenance="verified", quote=quote)
+
+
 def _nieuwenhuys(page: int, quote: str) -> dict[str, Any]:
     """A verified Nieuwenhuys atlas quote-source (``page`` = the PDF/.md page number)."""
     return dict(corpus="nieuwenhuys", page=page, provenance="verified", quote=quote)
