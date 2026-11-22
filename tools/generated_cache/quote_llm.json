@@ -6601,6 +6601,9 @@
 "q_73f9cfaeb6ae": {
 "drug:valbenazine/half_life": "opus"
 },
+"q_740f8c69f293": {
+"drug:methylphenidate_dl/formulations[xr]/release": "opus"
+},
 "q_7412108bdeb0": {
 "drug:clomipramine/workup[blood_count:during]": "opus"
 },

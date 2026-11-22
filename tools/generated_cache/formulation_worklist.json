@@ -1397,57 +1397,6 @@
        "qid": "34036f82"
       }
      ]
-    },
-    "brand:Medikinet": {
-     "brand": "Medikinet",
-     "candidates": [
-      {
-       "corpus": "wikipedia_pharm",
-       "page": "methylphenidate",
-       "line": "These products include a range of brand names such as Concerta XL, Medikinet XL, Equasym XL, and Ritalin LA, each with different ratios of immediate-release to modified-release components and varying duration of action from 8 to 12 hours.",
-       "releases": [
-        "xr",
-        "ir"
-       ],
-       "qid": "e74e7148"
-      },
-      {
-       "corpus": "wikipedia_pharm",
-       "page": "methylphenidate",
-       "line": "Clockwise from top: Concerta 18 mg, Medikinet 5 mg, Methylphenidate TAD 10 mg, Ritalin 10 mg, Medikinet XL 40 mg",
-       "releases": [
-        "xr"
-       ],
-       "qid": "c188c5d8"
-      },
-      {
-       "corpus": "wikipedia_pharm",
-       "page": "methylphenidate",
-       "line": "Medikinet XL (UK) | methylphenidate ER (US) | 8 hours | ER capsule",
-       "releases": [
-        "xr"
-       ],
-       "qid": "166a379b"
-      },
-      {
-       "corpus": "wikipedia_pharm",
-       "page": "methylphenidate",
-       "line": "Medikinet Retard/CR/Adult/Modified Release tablets are an extended-release oral capsule form of methylphenidate.",
-       "releases": [
-        "xr"
-       ],
-       "qid": "a125aeaf"
-      },
-      {
-       "corpus": "wikipedia_fr",
-       "page": "m_thylph_nidate",
-       "line": "↑ a et b « Meddispar - Médicaments à base de méthylphénidate (Concerta LP, Ritaline, Ritaline LP, Medikinet, Quasym LP et génériques) : modification des conditions de pre… », sur meddispar.fr (consulté le 26 juin 2022 ) .",
-       "releases": [
-        "xr"
-       ],
-       "qid": "d21d0926"
-      }
-     ]
     }
    }
   },

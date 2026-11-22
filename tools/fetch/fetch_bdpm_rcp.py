@@ -85,6 +85,13 @@ JUSTELESRCP = ROOT.parent / "justelesRCP"
 # levodopa; the partners themselves get no page (no label speaks for them alone).
 COMBO_PARTNERS = {"levodopa": ("CARBIDOPA", "BENSERAZIDE")}
 
+# Extra products stored only so a hand-placed quote can cite them (CIS -> why); never
+# written to bdpm_rcp_labels.json, so never the RCP a drug's workup or seizure pass reads.
+QUOTE_PRODUCTS = {
+    "61145640": "Medikinet: its 4.2 states the immediate / prolonged split, placing the "
+                "brand under methylphenidate's extended-release formulation",
+}
+
 # The sections read, in page order: (number, anchor name the RCP HTML carries).
 SECTIONS = (("4.1", "RcpIndicTherap"), ("4.2", "RcpPosoAdmin"), ("4.3", "RcpContreindications"),
             ("4.4", "RcpMisesEnGarde"), ("5.1", "RcpPropPharmacodynamiques"))
@@ -353,6 +360,15 @@ def main() -> int:
             cache[did]["cis"] = cis
         if best.get("ema"):
             cache[did]["ema"] = best["ema"]
+    for cis, _why in QUOTE_PRODUCTS.items():
+        if only:
+            break
+        best = freshest(copies(cis, args.justelesrcp, manifest))
+        if best:
+            page_path(PAGES_DIR, cis).write_text(
+                page_text(products.get(cis, {}), cis, best), encoding="utf-8")
+        else:
+            print(f"[warn] quote product {cis}: no RCP copy found")
     cache = dict(sorted(cache.items()))
     cache_io.write(CACHE_PATH, cache)
     print(f"[ok] {len(cache)} drug(s) with an RCP 4.x page; {len(missing)} without: "
