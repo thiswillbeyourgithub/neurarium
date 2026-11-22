@@ -382,7 +382,7 @@ export function wireFocus({
     show: (circuit) => info.showCircuit(circuit),
     title: (circuit) => circuit.name,
   });
-  // A functional area (BETA): its structures isolated, no arrow pinned, no pulse. Its
+  // A functional area (BETA): its structures isolated, no arrow lit (even those touching them), no pulse. Its
   // legend row stays lit while the isolate set is exactly those structures.
   const areaWatch = { active: false, meshes: new Set(),
     matches: (iso) => !!iso && iso.size === areaWatch.meshes.size
@@ -393,7 +393,7 @@ export function wireFocus({
     kind: "area",
     apply: (area) => {
       const aMeshes = meshesOfIds(area.structures);
-      selection.setCircuit(aMeshes, []);
+      selection.setCircuit(aMeshes, [], [], { noArrows: true });
       areaWatch.meshes = new Set(aMeshes);
       areaWatch.active = true;
       areaOverlay.show(area);

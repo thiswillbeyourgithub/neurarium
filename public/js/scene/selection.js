@@ -97,6 +97,9 @@ export function createSelection({ meshes, arrows }) {
   // and deliberately kept OUT of isolatedArrows so the flow animation's exact-match
   // watcher (circuitAnim.matches) is unaffected and they carry no beads.
   const contextArrows = new Set();
+  // True while a focus (a functional area) wants no arrow lit at all, not even the ones
+  // touching its isolated structures. Reset by every other focus change.
+  let noArrows = false;
   let baseOpacity = 1; // current transparency-slider value
   // Focus-change subscribers, each called on every apply() with the live isolate
   // state. Multiple because both the legend (greying) and the circuit pulse
@@ -122,7 +125,8 @@ export function createSelection({ meshes, arrows }) {
   // is off (a purely postsynaptic drug pins only context arrows and must not relight
   // every arrow grazing its regions).
   const arrowInFocus = (arrow) =>
-    isolatedArrows.size > 0 || contextArrows.size > 0
+    noArrows ? false
+    : isolatedArrows.size > 0 || contextArrows.size > 0
       ? isolatedArrows.has(arrow)
       : touchesIsolated(arrow);
 
@@ -204,6 +208,7 @@ export function createSelection({ meshes, arrows }) {
       }
       isolatedArrows.clear();
       contextArrows.clear();
+      noArrows = false;
       apply();
       onPickContent();
     },
@@ -213,8 +218,10 @@ export function createSelection({ meshes, arrows }) {
      * `staticArrows` (optional) are pinned at a dimmed *static* opacity (a drug's
      * postsynaptic-receptor pathways): highlighted but never animated, and kept out
      * of the pinned set so the flow animation's exact-match watcher is unaffected.
+     * `noArrows` lights no arrow at all (the touch fallback is off too).
      */
-    setCircuit(circuitMeshes, circuitArrows, staticArrows = []) {
+    setCircuit(circuitMeshes, circuitArrows, staticArrows = [], { noArrows: none = false } = {}) {
+      noArrows = none;
       isolated.clear();
       isolatedArrows.clear();
       contextArrows.clear();
@@ -233,6 +240,7 @@ export function createSelection({ meshes, arrows }) {
       isolated.clear();
       isolatedArrows.clear();
       contextArrows.clear();
+      noArrows = false;
       apply();
     },
     /**
