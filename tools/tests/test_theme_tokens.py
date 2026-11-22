@@ -79,6 +79,23 @@ class EveryTokenIsThemedTest(unittest.TestCase):
         self.assertEqual(light - dark, set())
 
 
+class OpenedSelectIsThemedTest(unittest.TestCase):
+    """An opened <select> list once showed light text on a white popup in the dark
+    theme (the drug panel's "include metabolites" picker): the selects tint themselves
+    with a translucent background the browser paints the popup from, so the options
+    need an opaque themed background of their own."""
+
+    def test_options_get_an_opaque_themed_background(self):
+        m = re.search(r"(?m)^select option[^{]*\{([^}]*)\}", stylesheet())
+        self.assertIsNotNone(m, "no rule styling select options")
+        self.assertIn("background-color: var(--page-bg)", m.group(1))
+        self.assertIn("color: var(--text)", m.group(1))
+        css = stylesheet()
+        for sel in (":root", ':root[data-theme="light"]'):
+            bg = re.search(r"--page-bg:\s*([^;]+);", _block(css, sel)).group(1).strip()
+            self.assertRegex(bg, r"^#[0-9a-fA-F]{6}$", f"{sel} --page-bg must be opaque")
+
+
 class NoLiteralInkTest(unittest.TestCase):
 
     def test_text_colour_comes_from_a_token(self):

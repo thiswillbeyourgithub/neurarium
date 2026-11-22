@@ -16,6 +16,13 @@ html, body {
 }
 #scene { display: block; width: 100vw; height: 100vh; }
 
+/* An opened <select>'s list: every select here tints itself with a translucent
+   rgba(var(--ink), a), and Firefox / Linux Chrome paint the dropdown from that tint
+   over the system's own popup colour, so the themed text landed on the wrong
+   background (light ink on a white list in the dark theme, e.g. the drug panel's
+   "include metabolites" picker). Options get an opaque, themed background instead. */
+select option, select optgroup { background-color: var(--page-bg); color: var(--text); }
+
 .panel {
   position: fixed;
   /* Above the CSS2D label overlay so corner controls stay clickable and
