@@ -81,9 +81,14 @@ export function createSimulation({ body, data, deps, ui }) {
   let entries = [];
   let metabOn = loadFlag(METAB_KEY, true);
   let threshold = 0.3;
-  let showUnknown = true;
+  // Direction-less bindings start hidden: most readers want the sourced directions.
+  let showUnknown = false;
   /** Hours since the shared dose the receptor plot is read at; null = each peak. */
   let scrubT = null;
+  /** A click on the plasma plot pins the cursor there until the next click. */
+  let pinnedT = null;
+  /** The plasma plot's right edge (hours), the range the receptor envelope samples. */
+  let pkTEnd = null;
   /** The solver's wish list: `[{id, name, axis}]`. */
   let wanted = [];
   let onlyListed = true;
@@ -138,6 +143,13 @@ export function createSimulation({ body, data, deps, ui }) {
   const targetName = (id) => {
     const tg = targetById.get(id);
     return tg ? tg.name : id;
+  };
+  /** The short label a column wears: the abbreviation a name ends with in brackets
+   *  ("Dopamine transporter (DAT)" -> "DAT"), else the name (receptors are short). */
+  const shortName = (id) => {
+    const name = targetName(id);
+    const m = /\(([^()]+)\)\s*$/.exec(name);
+    return m ? m[1] : name;
   };
   const targetSystem = (id) => {
     const tg = targetById.get(id);
@@ -393,6 +405,7 @@ export function createSimulation({ body, data, deps, ui }) {
   const buildPkSection = () => {
     pkSec.appendChild(el("h3", "sim-h", t("sim.pkTitle")));
     pkSec.appendChild(el("p", "sim-caption", t("sim.pkCaption", { h: TMAX_HOURS })));
+    pkSec.appendChild(el("p", "sim-caption", t("sim.pkPin")));
     pkSec.appendChild(pkHost);
     pkSec.appendChild(pkRead);
     pkSec.appendChild(pkLegend);
@@ -432,6 +445,8 @@ export function createSimulation({ body, data, deps, ui }) {
       }
     }
     if (!raw.length) {
+      pkTEnd = null;
+      pinnedT = null;
       pkHost.appendChild(el("p", "sim-empty", t("sim.pkNone")));
       pkRead.textContent = "";
       return;
@@ -442,6 +457,8 @@ export function createSimulation({ body, data, deps, ui }) {
       at: (h) => (l.ratio * l.curve.at(h)) / norm,
     }));
     const tEnd = Math.min(MAX_HOURS, Math.max(MIN_HOURS, ...raw.map((l) => tailEnd(l.curve))));
+    pkTEnd = tEnd;
+    if (pinnedT != null && pinnedT > tEnd) { pinnedT = null; scrubT = null; }
     pkPlot = buildPkPlot({ lines: pkLines, tEnd, t });
     pkHost.appendChild(pkPlot.svg);
     pkPlot.setCursor(scrubT);
@@ -458,17 +475,28 @@ export function createSimulation({ body, data, deps, ui }) {
     }
     // Pointer, not mouse: one path covers hover, drag and touch, and `touch-action:
     // none` on the svg (css/simulation.css) keeps a scrub from scrolling the panel instead.
+    // Hover follows the pointer; a click pins the cursor where it is (the receptor and
+    // effect plots then hold that time) until the next click releases it.
     const onMove = (ev) => {
       const h = pkPlot.timeAt(ev.clientX);
       if (h == null) return;
-      queueScrub(h);
+      if (pinnedT == null) queueScrub(h);
       const lines = pkLines.map((l) => `${l.name}: ${Math.round(l.at(h) * 100)}%`);
       showTip(`${formatTime(h, t)}\n${lines.join("\n")}`, ev.clientX, ev.clientY);
     };
+    const onClick = (ev) => {
+      const h = pkPlot.timeAt(ev.clientX);
+      if (h == null) return;
+      pinnedT = pinnedT == null ? h : null;
+      pkPlot.svg.classList.toggle("pinned", pinnedT != null);
+      queueScrub(pinnedT ?? h);
+    };
+    const onLeave = () => { if (pinnedT == null) queueScrub(null); hideTip(); };
+    pkPlot.svg.classList.toggle("pinned", pinnedT != null);
     pkPlot.svg.addEventListener("pointermove", onMove);
-    pkPlot.svg.addEventListener("pointerdown", onMove);
-    pkPlot.svg.addEventListener("pointerleave", () => { queueScrub(null); hideTip(); });
-    pkPlot.svg.addEventListener("pointercancel", () => { queueScrub(null); hideTip(); });
+    pkPlot.svg.addEventListener("click", onClick);
+    pkPlot.svg.addEventListener("pointerleave", onLeave);
+    pkPlot.svg.addEventListener("pointercancel", onLeave);
   };
 
   // ---- section 4: the receptor plot --------------------------------------
@@ -521,7 +549,7 @@ export function createSimulation({ body, data, deps, ui }) {
 
   /** One column's tooltip: what is engaged, how hard, and by whom. */
   const colTipText = (col) => {
-    const lines = [`${col.name} · ${col.systemLabel}`];
+    const lines = [`${col.fullName || col.name} · ${col.systemLabel}`];
     const say = (key, axis, linear) => {
       if (!axis) return;
       lines.push(`${t(key)}: ${Math.abs(axis).toFixed(2)} (${formatKi(1 / Math.abs(linear))})`);
@@ -537,17 +565,53 @@ export function createSimulation({ body, data, deps, ui }) {
     return lines.join("\n");
   };
 
+  // The receptor plot's columns and scale are fixed over the whole time range (the
+  // envelope), so scrubbing only changes the bar heights: no column appears or vanishes
+  // and the axis never rescales. Sampled once per drug list, not per scrub.
+  const ENVELOPE_SAMPLES = 60;
+  let envelopeKey = null;
+  let envelope = null; // {byTarget: Map(target -> {boost, block, unknown}), up, down}
+  const getEnvelope = (list) => {
+    const key = JSON.stringify([list.map((e) => [e.drug.id, e.ratio]), metabOn, pkTEnd]);
+    if (key === envelopeKey) return envelope;
+    const byTarget = new Map();
+    const note = (prof) => {
+      for (const row of prof.rows) {
+        const m = byTarget.get(row.target) || { boost: 0, block: 0, unknown: 0 };
+        m.boost = Math.max(m.boost, toAxis(row.boost));
+        m.block = Math.max(m.block, -toAxis(row.block));
+        m.unknown = Math.max(m.unknown, toAxis(row.unknown));
+        byTarget.set(row.target, m);
+      }
+    };
+    note(receptorProfile(list, { t: null, metabolites: metabOn }));
+    if (pkTEnd) {
+      for (let i = 0; i <= ENVELOPE_SAMPLES; i++) {
+        note(receptorProfile(list, { t: (i / ENVELOPE_SAMPLES) * pkTEnd, metabolites: metabOn }));
+      }
+    }
+    envelopeKey = key;
+    envelope = { byTarget };
+    return envelope;
+  };
+  /** The tallest each column reaches over time, under the current toggles. */
+  const peakOf = (m) => Math.max(m.boost, m.block, showUnknown ? m.unknown : 0);
+
   const renderRx = () => {
     rxHost.textContent = "";
+    fxHost.textContent = "";
     const list = modelEntries();
     if (!list.length) {
       rxHost.appendChild(el("p", "sim-empty", t("sim.rxNone")));
+      fxHost.appendChild(el("p", "sim-empty", t("sim.fxNone")));
       rxCols = [];
       renderWarnDynamic([]);
       return;
     }
+    const env = getEnvelope(list);
     const prof = receptorProfile(list, { t: scrubT, metabolites: metabOn });
     renderWarnDynamic(prof.flags);
+    const now = new Map(prof.rows.map((r) => [r.target, r]));
     const ligs = ligandIndex();
     const segsOf = (perLigand, positive) => {
       const raw = [...perLigand.entries()]
@@ -563,62 +627,151 @@ export function createSimulation({ body, data, deps, ui }) {
           shade: i, dim: !!info.dim, frac: Math.abs(v) / sum, value: v };
       });
     };
-    rxCols = prof.rows.map((row) => {
-      const boostAxis = toAxis(row.boost);
-      const blockAxis = toAxis(row.block);
-      const unknownAxis = toAxis(row.unknown);
-      const system = targetSystem(row.target);
+    const shown = [...env.byTarget.entries()].filter(([, m]) => peakOf(m) >= threshold);
+    rxCols = shown.map(([target, m]) => {
+      const row = now.get(target) || { boost: 0, block: 0, unknown: 0, perLigand: new Map() };
+      const system = targetSystem(target);
       return {
-        target: row.target, name: targetName(row.target), system,
-        systemLabel: systemLabel(system), systemColor: systemColor(system),
+        target, name: shortName(target), fullName: targetName(target), system,
+        systemLabel: systemLabel(system), systemColor: systemColor(system), peak: peakOf(m),
         boost: row.boost, block: row.block, unknown: row.unknown,
-        boostAxis, blockAxis, unknownAxis,
-        netAxis: toAxis(row.boost + row.block),
+        boostAxis: toAxis(row.boost), blockAxis: toAxis(row.block),
+        unknownAxis: toAxis(row.unknown), netAxis: toAxis(row.boost + row.block),
         up: segsOf(row.perLigand, true), down: segsOf(row.perLigand, false),
       };
-    }).filter((c) => Math.max(
-      Math.abs(c.boostAxis), Math.abs(c.blockAxis),
-      showUnknown ? c.unknownAxis : 0) >= threshold);
-
+    });
     if (!rxCols.length) {
       rxHost.appendChild(el("p", "sim-empty", t("sim.rxNone")));
+      fxHost.appendChild(el("p", "sim-empty", t("sim.fxNone")));
       return;
     }
-    // Systems lead with the one the combination hits hardest, so the reason a drug
-    // was picked is the first group read; the system-less bucket is pinned last.
+    // Systems lead with the one the combination hits hardest at any time, so the order
+    // is stable while scrubbing; the system-less bucket is pinned last.
+    rxCols = groupBySystem(rxCols, (c) => c.peak);
+    const domain = { up: 0, down: 0 };
+    for (const [, m] of shown) {
+      domain.up = Math.max(domain.up, m.boost + (showUnknown ? m.unknown : 0));
+      domain.down = Math.max(domain.down, m.block);
+    }
+    const plot = buildRxPlot({
+      cols: rxCols, showUnknown, t, domain,
+      segTitle: (col, seg) => `${seg.name} · ${col.name}: ${formatKi(1 / Math.abs(seg.value))}`,
+      onLabel: (col) => { const tg = targetById.get(col.target); if (tg) nav.target(tg); },
+    });
+    rxHost.appendChild(plot.svg);
+    wireColumnTips(plot, colTipText);
+    renderFx(shown, now);
+  };
+
+  /** Columns grouped by transmitter system, groups and members by `score`, desc. */
+  const groupBySystem = (cols, score) => {
     const groups = new Map();
-    for (const c of rxCols) {
+    for (const c of cols) {
       const key = c.system || "";
       if (!groups.has(key)) groups.set(key, []);
       groups.get(key).push(c);
     }
     const order = [...groups.keys()].sort((a, b) => {
       if (!a !== !b) return a ? -1 : 1;
-      const peak = (k) => Math.max(...groups.get(k).map((c) => Math.abs(c.netAxis)));
+      const peak = (k) => Math.max(...groups.get(k).map(score));
       return peak(b) - peak(a);
     });
-    rxCols = [];
+    const out = [];
     for (const key of order) {
-      const members = groups.get(key)
-        .sort((a, b) => Math.abs(b.netAxis) - Math.abs(a.netAxis));
+      const members = groups.get(key).sort((a, b) => score(b) - score(a));
       members.forEach((c, i) => { c.groupStart = i === 0; });
-      rxCols.push(...members);
+      out.push(...members);
     }
-    const plot = buildRxPlot({
-      cols: rxCols, showUnknown, t,
-      segTitle: (col, seg) => `${seg.name} · ${col.name}: ${formatKi(1 / Math.abs(seg.value))}`,
-    });
-    rxHost.appendChild(plot.svg);
+    return out;
+  };
+
+  /** Hover and touch on a column plot: highlight the column, follow with a tooltip. */
+  const wireColumnTips = (plot, text) => {
     const onMove = (ev) => {
       const col = plot.colAt(ev.clientX);
       plot.setHover(col);
-      if (col) showTip(colTipText(col), ev.clientX, ev.clientY);
+      if (col) showTip(text(col), ev.clientX, ev.clientY);
       else hideTip();
     };
     plot.svg.addEventListener("pointermove", onMove);
     plot.svg.addEventListener("pointerdown", onMove);
     plot.svg.addEventListener("pointerleave", () => { plot.setHover(null); hideTip(); });
     plot.svg.addEventListener("pointercancel", () => { plot.setHover(null); hideTip(); });
+  };
+
+  // ---- section 4b: the inferred clinical effects (BETA) --------------------
+  // Each engaged receptor's sourced receptor_effect nodes whose mode matches how it is
+  // engaged (agonism needs a boost, antagonism a block, inhibition a transporter or
+  // enzyme engaged at all), one column per effect, as tall as the strongest binding
+  // behind it, grouped by the transmitter system of that receptor (dry mouth with the
+  // other cholinergic effects). Same envelope as the receptor plot, so it never rescales.
+  const fxSec = el("section", "sim-sec sim-fx");
+  const fxHost = el("div", "sim-plot-host sim-scroll");
+  const buildFxSection = () => {
+    const h = el("h3", "sim-h", t("sim.fxTitle"));
+    h.appendChild(el("span", "beta-tag", t("sim.beta")));
+    fxSec.appendChild(h);
+    fxSec.appendChild(fxHost);
+    fxSec.appendChild(el("p", "sim-caption", t("sim.fxCaption")));
+  };
+  const modeAxis = (mode, m) => {
+    if (mode === "agonism") return m.boost;
+    if (mode === "antagonism") return m.block;
+    return Math.max(m.boost, m.block); // both, inhibition
+  };
+  const effectsOf = (rows) => {
+    const out = new Map(); // effect -> {label, value, via: [{target, value}]}
+    for (const [target, m] of rows) {
+      for (const e of data.effectsByTarget?.get(target) || []) {
+        const v = modeAxis(e.mode, m);
+        if (!(v > 0)) continue;
+        const cur = out.get(e.effect) || { effect: e.effect, label: e.label, value: 0, via: [] };
+        cur.via.push({ target, value: v, mode: e.modeLabel });
+        cur.value = Math.max(cur.value, v);
+        out.set(e.effect, cur);
+      }
+    }
+    return out;
+  };
+  const renderFx = (shown, now) => {
+    const peakFx = effectsOf(shown);
+    const nowRows = [...now.entries()].map(([target, r]) => [target, {
+      boost: toAxis(r.boost), block: -toAxis(r.block),
+    }]);
+    const nowFx = effectsOf(nowRows);
+    if (!peakFx.size) {
+      fxHost.appendChild(el("p", "sim-empty", t("sim.fxNone")));
+      return;
+    }
+    const cols = [...peakFx.values()].map((p) => {
+      const cur = nowFx.get(p.effect);
+      const lead = [...p.via].sort((a, b) => b.value - a.value)[0];
+      const system = targetSystem(lead.target);
+      const value = cur ? cur.value : 0;
+      return {
+        effect: p.effect, name: p.label, system, systemLabel: systemLabel(system),
+        systemColor: systemColor(system), peak: p.value, value, via: cur ? cur.via : p.via,
+        boostAxis: value, blockAxis: 0, unknownAxis: 0, netAxis: value,
+        up: value > 0 ? [{ key: p.effect, name: p.label, shade: 0, frac: 1, value }] : [],
+        down: [],
+      };
+    });
+    const ordered = groupBySystem(cols, (c) => c.peak);
+    const plot = buildRxPlot({
+      cols: ordered, showUnknown: false, t, ariaKey: "sim.fxTitle",
+      domain: { up: Math.max(...cols.map((c) => c.peak)), down: 0 },
+      segTitle: (col) => col.name,
+      onLabel: (col) => {
+        const e = (data.effects || []).find((x) => x.id === col.effect);
+        if (e) nav.effect(e);
+      },
+    });
+    fxHost.appendChild(plot.svg);
+    wireColumnTips(plot, (col) => [
+      `${col.name} · ${col.systemLabel}`,
+      ...col.via.sort((a, b) => b.value - a.value)
+        .map((v) => `  ${v.mode} ${shortName(v.target)}: ${v.value.toFixed(2)}`),
+    ].join("\n"));
   };
 
   // ---- section 5: the target profile + solver -----------------------------
@@ -793,6 +946,7 @@ export function createSimulation({ body, data, deps, ui }) {
     buildDrugSection();
     buildPkSection();
     buildRxSection();
+    buildFxSection();
     buildSolveSection();
     // The lead states the question the tab answers in both directions, and the unit
     // it answers it in, before the warnings box qualifies that answer.
@@ -802,8 +956,13 @@ export function createSimulation({ body, data, deps, ui }) {
     body.appendChild(lead);
     body.appendChild(warnBox);
     body.appendChild(drugSec);
-    body.appendChild(pkSec);
-    body.appendChild(rxSec);
+    // The plots sit side by side once the tab is wide (fullscreen), stacked in the side
+    // panel: a container query on this wrapper (css/simulation.css) decides.
+    const plotsWrap = el("div", "sim-plots-wrap");
+    const plots = el("div", "sim-plots");
+    plots.append(pkSec, rxSec, fxSec);
+    plotsWrap.appendChild(plots);
+    body.appendChild(plotsWrap);
     body.appendChild(solveSec);
     body.appendChild(feedbackFooter()); // like every panel (panel/feedback.js)
     renderWanted();

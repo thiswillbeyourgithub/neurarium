@@ -171,12 +171,21 @@ const SEG_SHADES = [1, 0.72, 0.52, 0.36];
  * @param {boolean} opts.showUnknown draw the hatched direction-less band
  * @param {Function} opts.t the i18n lookup
  * @param {Function} opts.segTitle `(col, seg) => string`, a segment's `<title>`
+ * @param {{up: number, down: number}} [opts.domain] a fixed axis (the tallest stacks
+ *   over the whole time range), so scrubbing in time never rescales the plot
+ * @param {(col: object) => void} [opts.onLabel] a click on a column's label
+ * @param {string} [opts.ariaKey] the plot's accessible name (the clinical-effects plot
+ *   reuses this one with its own)
  * @returns {{svg: SVGElement, colAt: (clientX: number) => object|null,
  *   setHover: (col: object|null) => void}}
  */
-export function buildRxPlot({ cols, showUnknown, t, segTitle }) {
+export function buildRxPlot({ cols, showUnknown, t, segTitle, domain = null, onLabel = null,
+  ariaKey = "sim.rxTitle" }) {
   const M = { left: 46, right: 14, top: 12 };
-  const plotH = 230, labelBand = 74, systemBand = 20;
+  // The rotated labels need room in proportion to the longest one (an effect name is
+  // much longer than a receptor's): ~4.2 px per 9 px character at -50 degrees.
+  const longest = Math.max(0, ...cols.map((c) => String(c.name).length));
+  const plotH = 230, labelBand = Math.max(40, Math.ceil(longest * 4.2) + 16), systemBand = 20;
   // Each group opens with a gap, so a column's x is its index plus the groups before it.
   let x = M.left;
   for (const col of cols) {
@@ -189,7 +198,10 @@ export function buildRxPlot({ cols, showUnknown, t, segTitle }) {
   const root = svg("svg", {
     class: "sim-plot sim-rx", viewBox: `0 0 ${W} ${H}`,
     preserveAspectRatio: "xMidYMid meet", role: "img",
-    "aria-label": t("sim.rxTitle"),
+    "aria-label": t(ariaKey),
+    // Never scaled past 1.5x its drawn size: a plot with few columns in a wide pane
+    // would otherwise blow its text up to headline size.
+    style: `max-width: ${Math.round(W * 1.5)}px`,
   });
 
   const defs = svg("defs");
@@ -204,7 +216,7 @@ export function buildRxPlot({ cols, showUnknown, t, segTitle }) {
 
   // Asymmetric domain: the axis gives each side exactly the room its tallest stack
   // needs, so a pure antagonist does not draw half an empty plot above the zero line.
-  let up = 0, down = 0;
+  let up = domain ? domain.up : 0, down = domain ? domain.down : 0;
   for (const c of cols) {
     up = Math.max(up, c.boostAxis + (showUnknown ? c.unknownAxis : 0), c.netAxis);
     down = Math.max(down, -c.blockAxis, -c.netAxis);
@@ -227,7 +239,9 @@ export function buildRxPlot({ cols, showUnknown, t, segTitle }) {
 
   // A column is painted in its receptor's transmitter colour (the one its pathways
   // wear in the 3D scene), so the plot reads as the brain does: a red glutamate
-  // column, a blue GABA one. Which drug carries which share of a stack is then said
+  // column, a blue GABA one. The colour goes in an inline `style`, not a `fill`
+  // attribute: a stylesheet rule (`.sim-seg`'s neutral fallback) outranks a presentation
+  // attribute, which once left every bar grey. Which drug carries which share of a stack is then said
   // by SHADE, not by hue: the segments are the same colour stepped down in opacity,
   // strongest contributor first, and each one names its drug on hover. A system with
   // no colour of its own leaves the fill to the stylesheet's neutral token.
@@ -238,7 +252,8 @@ export function buildRxPlot({ cols, showUnknown, t, segTitle }) {
     const cx = (groupFrom.x + endCol.x + COL_W) / 2;
     root.appendChild(svg("text", {
       class: "sim-group", x: cx, y: M.top + plotH + labelBand + 13,
-      "text-anchor": "middle", fill: groupFrom.systemColor,
+      "text-anchor": "middle",
+      style: groupFrom.systemColor ? `fill: ${groupFrom.systemColor}` : null,
     }, groupFrom.systemLabel));
   };
 
@@ -254,7 +269,7 @@ export function buildRxPlot({ cols, showUnknown, t, segTitle }) {
       const r = svg("rect", {
         class: seg.dim ? "sim-seg sim-seg-metab" : "sim-seg",
         x: bx, y: yOf(acc + h), width: bw, height: Math.max(0.5, yOf(acc) - yOf(acc + h)),
-        fill: col.systemColor, "fill-opacity": shadeOf(seg),
+        style: col.systemColor ? `fill: ${col.systemColor}` : null, "fill-opacity": shadeOf(seg),
       });
       r.appendChild(svg("title", {}, segTitle(col, seg)));
       root.appendChild(r);
@@ -268,7 +283,7 @@ export function buildRxPlot({ cols, showUnknown, t, segTitle }) {
       const r = svg("rect", {
         class: seg.dim ? "sim-seg sim-seg-metab" : "sim-seg",
         x: bx, y: yOf(acc), width: bw, height: Math.max(0.5, yOf(acc + h) - yOf(acc)),
-        fill: col.systemColor, "fill-opacity": shadeOf(seg),
+        style: col.systemColor ? `fill: ${col.systemColor}` : null, "fill-opacity": shadeOf(seg),
       });
       r.appendChild(svg("title", {}, segTitle(col, seg)));
       root.appendChild(r);
@@ -290,13 +305,15 @@ export function buildRxPlot({ cols, showUnknown, t, segTitle }) {
     }));
     root.appendChild(svg("rect", {
       class: "sim-sysbar", x: col.x + 2, y: M.top + plotH + 2,
-      width: COL_W - 4, height: 3, fill: col.systemColor,
+      width: COL_W - 4, height: 3, style: col.systemColor ? `fill: ${col.systemColor}` : null,
     }));
-    root.appendChild(svg("text", {
-      class: "sim-col", "text-anchor": "end",
+    const label = svg("text", {
+      class: onLabel ? "sim-col sim-col-link" : "sim-col", "text-anchor": "end",
       transform: `rotate(-50 ${col.x + COL_W / 2} ${M.top + plotH + 12})`,
       x: col.x + COL_W / 2, y: M.top + plotH + 12,
-    }, col.name));
+    }, col.name);
+    if (onLabel) label.addEventListener("click", () => onLabel(col));
+    root.appendChild(label);
     // One transparent full-height hit area per column: a pointer anywhere over the
     // column answers, not only over the few pixels a thin bar happens to occupy.
     const hit = svg("rect", {

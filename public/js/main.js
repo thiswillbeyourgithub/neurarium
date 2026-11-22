@@ -203,7 +203,7 @@ async function main() {
   // The Data browser + Simulation tabs, and the Sources popup's tally. The About modal
   // and setNo3d are wired further down, so both are late-bound.
   const { NODES_TAB_KEY, showNodeBrowser, showSimulation, simulation } = wireViews({
-    arrows, data, focusArea, focusCircuit, focusDrug, focusProjectionGroup, focusTarget, info, meshById,
+    arrows, data, focusArea, focusCircuit, focusDrug, focusEffect, focusProjectionGroup, focusTarget, info, meshById,
     openDataFiles: () => aboutModal.openDataFiles(), openDetailTab, selectConnection,
     selectStructure, setNo3d: (...a) => setNo3d(...a), sourcingModal, urlState,
   });

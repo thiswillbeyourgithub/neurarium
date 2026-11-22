@@ -442,6 +442,8 @@ app that **computes** a claim instead of reporting a sourced one, which is why t
 what it answers and in what unit, then a box listing what the model does not know (stated as
 non-exhaustive, and every string in it conditional).
 
+**Plots** (`js/sim-plots.js`, drawn by `js/simulation.js`): plasma levels over time, receptor engagement and, BETA, the possible clinical effects. Side by side when the tab is wide (a container query on `.sim-plots-wrap`), stacked in the side panel. Hovering the plasma plot moves the time cursor, a click pins it until the next click. The receptor plot's columns and scale come from the envelope over the whole time range (`getEnvelope`, 60 samples), so scrubbing only changes bar heights; bars wear their receptor family's colour, labels use the short name (the bracketed abbreviation, "DAT") and open the receptor. The clinical-effects plot joins each engaged receptor's sourced `receptor_effect` nodes whose mode matches the engagement (agonism a boost, antagonism a block, inhibition either), one column per effect as tall as its strongest binding, grouped by that receptor's family; a label opens the effect. Unknown-direction bands start hidden.
+
 **What it computes is an engagement index, never a percentage occupied**, and the distinction is
 load-bearing: occupancy is `(C/Ki)/(1 + Σ C/Ki)`, so a Ki supplies the denominators and the
 concentration at the receptor supplies everything else. Reaching a real C needs per-drug PK the

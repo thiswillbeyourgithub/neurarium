@@ -25,7 +25,7 @@ const { t } = window.__I18N__;
  *            showSimulation: () => void, simulation: object|null}}
  */
 export function wireViews({
-  arrows, data, focusArea, focusCircuit, focusDrug, focusProjectionGroup, focusTarget, info, meshById,
+  arrows, data, focusArea, focusCircuit, focusDrug, focusEffect, focusProjectionGroup, focusTarget, info, meshById,
   openDataFiles, openDetailTab, selectConnection, selectStructure, setNo3d, sourcingModal,
   urlState,
 }) {
@@ -139,7 +139,11 @@ export function wireViews({
     simulation = createSimulation({
       body: simBody,
       data,
-      deps: { t, nav: { drug: (d) => focusDrug(d, { frame: true }) } },
+      deps: { t, nav: {
+        drug: (d) => focusDrug(d, { frame: true }),
+        target: (tg) => focusTarget(tg, { frame: true }),
+        effect: (e) => focusEffect(e),
+      } },
       ui: { fold: foldText },
     });
     simulation.setOnChange(() => urlState.sync(200));
