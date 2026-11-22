@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.180.2",
+      "date": "2026-11-22",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Eight more functional areas of the frontal lobe are drawn on their own: frontal eye field (8), dorsolateral prefrontal cortex (9, 46), frontal pole (10), orbitofrontal cortex (11) and Broca's area with its neighbour (44, 45, 47). Their placement is approximate",
+          "commits": [
+            "6b8a8688"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.180.1",
       "date": "2026-11-22",
       "entries": [
