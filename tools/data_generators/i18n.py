@@ -252,6 +252,18 @@ FR: dict[str, str] = {
         "Sérotoninergique descendante (cérébelleuse)",
     "Descending serotonergic (medullary)":
         "Sérotoninergique descendante (bulbaire)",
+    "Mesolimbic (septal)": "Mésolimbique (septale)",
+    "Tectothalamic projection": "Projection tectothalamique",
+    "Solitary tract to hypothalamus": "Faisceau solitaire vers l'hypothalamus",
+    "Solitary tract to amygdala": "Faisceau solitaire vers l'amygdale",
+    "Branching dopaminergic axons of the ventral midbrain reach the septal area.":
+        "Les axones dopaminergiques ramifiés du mésencéphale ventral atteignent l'aire septale.",
+    "The inferior colliculus relays hearing to the medial geniculate nucleus and the superior colliculus vision to the pulvinar.":
+        "Le colliculus inférieur relaie l'audition vers le corps géniculé médial et le colliculus supérieur la vision vers le pulvinar.",
+    "The nucleus of the solitary tract relays visceral (vagal, glossopharyngeal) signals to the paraventricular nucleus.":
+        "Le noyau du faisceau solitaire relaie les signaux viscéraux (vagaux, glossopharyngiens) vers le noyau paraventriculaire.",
+    "The nucleus of the solitary tract and ventrolateral medulla project to the central amygdaloid nucleus.":
+        "Le noyau du faisceau solitaire et le bulbe ventrolatéral se projettent vers le noyau central de l'amygdale.",
     "Ascending serotonergic (septal)":
         "Sérotoninergique ascendante (septale)",
     "Ascending serotonergic (olfactory bulb)":

@@ -1889,6 +1889,9 @@
 "q_207ffa622972": {
 "drug:sulpiride/brands[Dogmatil]": "sonnet"
 },
+"q_20850fc1427a": {
+"projection:medulla->amygdala_R": "opus"
+},
 "q_2099af9e3d55": {
 "drug:olanzapinesamidorphan/bindings[m1:antagonist]": "sonnet",
 "drug:olanzapinesamidorphan/bindings[m2:antagonist]": "sonnet",
@@ -3160,6 +3163,9 @@
 },
 "q_377a7cfd98c3": {
 "drug:amphetamine_dl/excretion[urine_ph:dependent]": "opus"
+},
+"q_37940ebe4b52": {
+"projection:medulla->hypothalamus_R": "opus"
 },
 "q_37b3ec7d35c2": {
 "drug:lofepramine/bindings[sert:reuptake_inhibitor]": "sonnet"
@@ -7237,6 +7243,10 @@
 "drug:rizatriptan/bindings[5ht1b:agonist]": "sonnet",
 "drug:rizatriptan/bindings[5ht1d:agonist]": "sonnet"
 },
+"q_808fff6a3ea1": {
+"projection:vta_R->septal_nuclei_R": "opus",
+"projection:vta_R->septal_nuclei_R/transmitter": "opus"
+},
 "q_80a173f0edb3": {
 "drug:vigabatrin/seizure_threshold[withdrawal]": "opus"
 },
@@ -8595,6 +8605,9 @@
 },
 "q_98d938cbcdc0": {
 "drug:clozapine/bindings[5ht2a:antagonist]": "sonnet"
+},
+"q_98db665300c1": {
+"projection:midbrain->thalamus_R": "opus"
 },
 "q_98f15bd7f93e": {
 "drug:citalopram/brands[Ecosol]": "sonnet"

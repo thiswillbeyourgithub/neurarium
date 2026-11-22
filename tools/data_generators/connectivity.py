@@ -283,6 +283,28 @@ PROJECTIONS: list[dict[str, Any]] = [
          kind="serotonergic", neurotransmitter="Serotonin",
          label="Ascending serotonergic (septal)",
          description="Median raphe serotonin projects to the septum."),
+    # --- Pathways closing check_data family 6 / 10 gaps (2026-11-22), each stated by
+    #     one book sentence (projection_sources.json). ---
+    dict(**{"from": "vta_R", "to": "septal_nuclei_R"},
+         kind="dopaminergic", neurotransmitter="Dopamine",
+         label="Mesolimbic (septal)",
+         description="Branching dopaminergic axons of the ventral midbrain reach the "
+                     "septal area."),
+    dict(**{"from": "midbrain", "to": "thalamus_R"},
+         kind="excitatory", neurotransmitter="Glutamate",
+         label="Tectothalamic projection",
+         description="The inferior colliculus relays hearing to the medial geniculate "
+                     "nucleus and the superior colliculus vision to the pulvinar."),
+    dict(**{"from": "medulla", "to": "hypothalamus_R"},
+         kind="excitatory", neurotransmitter="Glutamate",
+         label="Solitary tract to hypothalamus",
+         description="The nucleus of the solitary tract relays visceral (vagal, "
+                     "glossopharyngeal) signals to the paraventricular nucleus."),
+    dict(**{"from": "medulla", "to": "amygdala_R"},
+         kind="excitatory", neurotransmitter="Glutamate",
+         label="Solitary tract to amygdala",
+         description="The nucleus of the solitary tract and ventrolateral medulla project "
+                     "to the central amygdaloid nucleus."),
     dict(**{"from": "raphe", "to": "olfactory_bulb_R"},
          kind="serotonergic", neurotransmitter="Serotonin",
          label="Ascending serotonergic (olfactory bulb)",

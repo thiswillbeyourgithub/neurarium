@@ -170,6 +170,15 @@ PROJECTION_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
     # all four VTA targets (the substantia-nigra->accumbens entry is left
     # unsourced: Kandel assigns the accumbens to the VTA, the nigra to the dorsal
     # striatum, so that pathway is suspect, see STATUS note).
+    # The septal area is named only in Kandel's branching-axon sentence.
+    ("vta_R", "septal_nuclei_R"): _kandel(982,
+        "Individual dopaminergic neurons have highly branching axons that project into "
+        "extensive regions of not only the other basal ganglia nuclei but also external "
+        "structures (eg, frontal cortex, septal area, amygdala, habenula)."),
+    # Tectothalamic: the inferior colliculus (midbrain) to the medial geniculate.
+    ("midbrain", "thalamus_R"): _kandel(701,
+        "Neurons of the inferior colliculus project to the superior colliculus and to "
+        "the medial geniculate nucleus of the thalamus."),
     ("vta_R", "accumbens_R"): _KQ_VTA_REWARD,
     ("vta_R", "amygdala_R"): _KQ_VTA_REWARD,
     ("vta_R", "frontal_R"): _KQ_VTA_REWARD,

@@ -252,6 +252,22 @@
     "provenance": "verified"
    }
   ],
+  "medulla->amygdala_R": [
+   {
+    "corpus": "nieuwenhuys",
+    "page": 412,
+    "quote": "Brain stem neurons located in the periaqueductal grey matter (PAG), the substantia nigra pars compacta, the ventral tegmental area, the dorsal raphe nucleus, the locus coeruleus, the lateral parabrachial nucleus, the nucleus of the solitary tract and the ventrolateral medulla project to the central amygdaloid nucleus [7, 35, 135, 148, 149, 151, 184, 220].",
+    "provenance": "verified"
+   }
+  ],
+  "medulla->hypothalamus_R": [
+   {
+    "corpus": "nieuwenhuys",
+    "page": 930,
+    "quote": "It is important to note that the nucleus of the solitary tract, the parabrachial complex and the periaqueductal grey all maintain strong, reciprocal connections with the hypothalamus, the central nucleus of the amygdala and the BST, all of which represent sites of origin of substantial descending limbic projections [11, 39, 45, 57, 85, 111, 118, 131].",
+    "provenance": "verified"
+   }
+  ],
   "nucleus_basalis_R->amygdala_R": [
    {
     "corpus": "nieuwenhuys",

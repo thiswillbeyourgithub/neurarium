@@ -658,5 +658,21 @@
     "qid": "1db28073"
    }
   ]
+ },
+ "medulla->amygdala_R": {
+  "route": [
+   {
+    "index": 20,
+    "qid": "5d49244d"
+   }
+  ]
+ },
+ "medulla->hypothalamus_R": {
+  "route": [
+   {
+    "index": 56,
+    "qid": "e5ec498e"
+   }
+  ]
  }
 }

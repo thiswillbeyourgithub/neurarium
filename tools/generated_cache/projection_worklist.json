@@ -2431,6 +2431,2129 @@
     }
    ]
   },
+  "vta_R->septal_nuclei_R": {
+   "from": "vta_R",
+   "to": "septal_nuclei_R",
+   "transmitter": "Dopamine",
+   "sign": null,
+   "need": [
+    "transmitter",
+    "route"
+   ],
+   "flag": [],
+   "label": "Mesolimbic (septal)",
+   "candidates": [
+    {
+     "corpus": "nieuwenhuys",
+     "page": 367,
+     "line": "The septum can be divided into a dorsal and a ventral part.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "afb6de33"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 296,
+     "line": "It is an assemblage of loosely arranged, mostly thin fibres extending from the septal area to the tegmentum of the midbrain.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "88f37ad0"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 367,
+     "line": "The ventral part, or _septum_ _verum,_ is situated directly rostral to the lamina terminalis within the paraterminal gyrus (Fig.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "16aa6471"
+    },
+    {
+     "corpus": "kandel",
+     "page": 93,
+     "line": "Receptor expression is high in the lateral septum (LS) but low in the ventral pallidum (VP) in the montane vole, which does not form pair bonds.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "7d0fe6ee"
+    },
+    {
+     "corpus": "kandel",
+     "page": 93,
+     "line": "Copyright © 2001 Academic Press.) Receptor expression is high in the lateral septum (LS) but low in the ventral pallidum (VP) in the montane vole, which does not form pair bonds.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "386c7f8f"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 60,
+     "line": "The telencephalic hemispheres can be subdivided into a dorsal pallium and a ventral subpallium. The subpallium comprises a small medial or septal zone and a much larger lateral zone.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "7b5a0406"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 67,
+     "line": "(e) All of the subpallial zones as well as the ventral and lateral pallial zones extend rostrally into the septum and participate caudally in the formation of the amygdaloid complex.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "4d6b886d"
+    },
+    {
+     "corpus": "europepmc",
+     "page": 38027491,
+     "line": "The neural circuits involved are PBN-amygdala, LC-RVM, amygdala-insula, ACC-amygdala, claustrum-ACC, bed nucleus of the stria terminalis-PVN and the PVN-ventral lateral septum circuit.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "487bfa7e"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 320,
+     "line": "cent basal telencephalic regions, with concentrations in the septum, nuclei of the diagonal band of Broca, dorsal and ventral parts of the medial preoptic area, and infundibular nucleus (Fig.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "016ed6ac"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 367,
+     "line": "The septum can be divided into a dorsal and a ventral part. Due to the expansion of the corpus callosum, the dorsal part is drawn out into a thin plate, composed largely of glial cells and nerve fibres.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "94dc9a0b"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 367,
+     "line": "Its ontogenetic development is complex because no less than four of the seven fundamental telencephalic zones participate in its formation (Fig. The septum can be divided into a dorsal and a ventral part.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "a6b86d3b"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 433,
+     "line": "The _accumbens_ _nucleus_ is a medial expansion of the head of the caudate nucleus, which extends around the ventral aspect of the lateral ventricle into the medial or septal wall of the hemisphere (Figs.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "7828885f"
+    },
+    {
+     "corpus": "europepmc",
+     "page": 39150998,
+     "line": "The identified regions encompassed many areas, such as bed nucleus of the stria terminalis, LH, medial preoptic area, medial septum, supramammillary nucleus, periaqueductal gray, and ventral tegmental area (fig.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "df1c145f"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 68,
+     "line": "ped Peduncular area po Preoptic area psb Palliosubpallial boundary pth Prethalamus rh Rostral hypothalamic area sep Septum st Striatum telh Telencephalic hemispheres th Thalamus vp Ventral pallium zl Zona limitans",
+     "attrs": [
+      "route"
+     ],
+     "qid": "92bef2be"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 187,
+     "line": "The ventral horn is surrounded by the lateral and ventral white matter of the cord. The dorsal white matter contained between the dorsal horn and the dorsal median septum corresponds to the _posterior_ _funiculus_ .",
+     "attrs": [
+      "route"
+     ],
+     "qid": "789ecb1a"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 467,
+     "line": "This continuum encompasses, apart from the large SI neurons, similar elements situated in the horizontal and ventral limbs of the nucleus of the diagonal band of Broca (DBBh, DBBv), and in the medial septal nucleus (MS).",
+     "attrs": [
+      "route"
+     ],
+     "qid": "b9a3770d"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 67,
+     "line": "(e) All of the subpallial zones as well as the ventral and lateral pallial zones extend rostrally into the septum and participate caudally in the formation of the amygdaloid complex. (f) The nature of the pallio-subpallial boundary is uncertain.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "61904e72"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 186,
+     "line": "The glial _posterior me-_ _dian septum_ extends from the central canal dorsally to the median dorsal sulcus (Fig. The grey matter of the cord is butterflyshaped and can be subdivided into _dorsal_ _and_ _ventral_ _horns_ and the _intermediate_ _zone_ .",
+     "attrs": [
+      "route"
+     ],
+     "qid": "db6bd7fb"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 67,
+     "line": "The _lateral_ _olfactory_ _tract_ relates precisely to its subpial zone. (e) All of the subpallial zones as well as the ventral and lateral pallial zones extend rostrally into the septum and participate caudally in the formation of the amygdaloid complex.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "f84b4e52"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 298,
+     "line": "It passes ventrally and ascends along the ventral surface of the midbrain to the mamillary body, where most of its fibres terminate. Some of them join the medial forebrain bundle and spread to the lateral preoptico-hypothalamic zone and septum [244, 255].",
+     "attrs": [
+      "route"
+     ],
+     "qid": "0db474d6"
+    },
+    {
+     "corpus": "kandel",
+     "page": 93,
+     "line": "Receptor expression is high in the lateral septum (LS) but low in the ventral pallidum (VP) in the montane vole, which does not form pair bonds. **Studies of Human Genetic Syndromes** **Have Provided Initial Insights Into the** **Underpinnings of Social Behavior**",
+     "attrs": [
+      "route"
+     ],
+     "qid": "e82ed1b2"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 892,
+     "line": "Afferents from the lateral tegmental field, the locus coeruleus, the tuber cinereum, the amygdala and the entopeduncular nucleus (medial segment of the globus pallidus) are restricted to the dorsal raphe nucleus; septal afferents terminate in the median raphe nucleus (Table 22.1).",
+     "attrs": [
+      "route"
+     ],
+     "qid": "9e221da8"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 296,
+     "line": "It is an assemblage of loosely arranged, mostly thin fibres extending from the septal area to the tegmentum of the midbrain. It traverses the lateral preoptico-hypothalamic area, the scattered neurons of which are collectively designated as the bed nucleus of the medial forebrain bundle.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "296d5534"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 320,
+     "line": "It appeared that GnRH-producing perikarya are widely scattered over the entire hypothalamus and adja cent basal telencephalic regions, with concentrations in the septum, nuclei of the diagonal band of Broca, dorsal and ventral parts of the medial preoptic area, and infundibular nucleus (Fig.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "e51e0e59"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 317,
+     "line": "Presumed cognitive inputs from the cerebral cortex are relayed to the PVH by the bed nucleus of the stria terminalis (BST) and ventral lateral septal nucleus (VLS), which in turn receive inputs from the prefrontal cortex (PF), amygdaloid complex (AM), and hippocampal formation (HF) [296, 362].",
+     "attrs": [
+      "route"
+     ],
+     "qid": "93946264"
+    },
+    {
+     "corpus": "europepmc",
+     "page": 36642737,
+     "line": "The lateral septum (LS) is implicated as a hub that regulates affective behaviors, such as reward, feeding, anxiety, fear, sociability, and memory [6–8]. It is well known that LS neurons are predominantly GABAergic, with only a small population of glutamatergic cells in the most ventral region [9].",
+     "attrs": [
+      "route"
+     ],
+     "qid": "591c959c"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 187,
+     "line": "The dorsal white matter contained between the dorsal horn and the dorsal median septum corresponds to the _posterior_ _funiculus_ . The ventral rootlets, which emerge from the ventral horn, are taken as the arbitrary border between the _lateral_ _and_ _anterior_ _funiculus_ of the spinal white matter.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "e4be0545"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 367,
+     "line": "This membranous structure, which is known as the _septum_ _pellucidum_, is bounded by the basal surface of the corpus callosum and by the rostral convexity of the fornix (Fig. The ventral part, or _septum_ _verum,_ is situated directly rostral to the lamina terminalis within the paraterminal gyrus (Fig.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "3da9a3f1"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 296,
+     "line": "The _fasciculus_ _medialis_ _telencephali_ or _medi-_ _al_ _forebrain_ _bundle_ (MFB) may be considered the central longitudinal pathway of the limbic forebrain-midbrain continuum. It is an assemblage of loosely arranged, mostly thin fibres extending from the septal area to the tegmentum of the midbrain.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "813e2f6f"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 367,
+     "line": "The ventral part, or _septum_ _verum,_ is situated directly rostral to the lamina terminalis within the paraterminal gyrus (Fig. It is bordered dorsally by the rostrum of the corpus callosum, rostrally by the precommissural portion of the hippocampus and caudally by the anterior commissure and the preoptic region.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "092faa41"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 326,
+     "line": "According to Hilton and colleagues [71, 147] this zone continues through the pontomedullary tegmentum caudally to the level of the dorsal motor nucleus of the vagus nerve. Lesion and electrical stimulation experiments have shown that the lateral septal nucleus (LS) is involved in defensive behaviour as well [34, 331].",
+     "attrs": [
+      "route"
+     ],
+     "qid": "57f7edb7"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 345,
+     "line": "The principal differences with the traditional subdivision of the subpallium are that: (1) only the central and medial nuclei of the amygdaloid complex are of subpallial origin and that (2) all of the subpallial zones, and even a restricted part of the ventral pallial zone, participate in the formation of the septum (Fig.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "a4d162a8"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 463,
+     "line": "In the rat, efferent fibres from the ventral pallidum have in addition been traced to numerous other areas, including the prefrontal cortex, the ventral striatum, the basolateral, lateral and central amygdaloid nuclei, the lateral septum, the area tegmentalis ventralis, the rostral raphe nuclei, the periaqueductal grey and the lo",
+     "attrs": [
+      "route"
+     ],
+     "qid": "84ed502c"
+    },
+    {
+     "corpus": "europepmc",
+     "page": 39150998,
+     "line": "To this end, we injected AAV-DIO-mCherry into the LS of Vgat-Cre mice and imaged mCherry+ axon terminals throughout the brain (fig. The identified regions encompassed many areas, such as bed nucleus of the stria terminalis, LH, medial preoptic area, medial septum, supramammillary nucleus, periaqueductal gray, and ventral tegmental area (fig.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "336387f2"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 433,
+     "line": "The _accumbens_ _nucleus_ is a medial expansion of the head of the caudate nucleus, which extends around the ventral aspect of the lateral ventricle into the medial or septal wall of the hemisphere (Figs. During development, increasing numbers of fibres passing to and from the dorsal, pallial parts of the hemispheres penetrate the striatal zone.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "f460cbcb"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 467,
+     "line": "These SI neurons represent the lateral part of a continuum of large neurons, known as the magnocellular basal forebrain (MBF). This continuum encompasses, apart from the large SI neurons, similar elements situated in the horizontal and ventral limbs of the nucleus of the diagonal band of Broca (DBBh, DBBv), and in the medial septal nucleus (MS).",
+     "attrs": [
+      "route"
+     ],
+     "qid": "eb567ad8"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 467,
+     "line": "This continuum encompasses, apart from the large SI neurons, similar elements situated in the horizontal and ventral limbs of the nucleus of the diagonal band of Broca (DBBh, DBBv), and in the medial septal nucleus (MS). The MBF contains two large intermingled, chemically specified populations of corticopetally projecting neurons, one cholinergic",
+     "attrs": [
+      "route"
+     ],
+     "qid": "8a173ce5"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 389,
+     "line": "This bundle, which originates mainly from the dorsal tegmental nucleus of Gudden, passes ventrally and then ascends along the ventral surface of the midbrain to the mamillary body, where most of its fibres terminate. Some of its fibres join the medial forebrain bundle and spread to the lateral preopticohypothalamic zone and the medial septal nucleus",
+     "attrs": [
+      "route"
+     ],
+     "qid": "461f85cb"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 320,
+     "line": "cent basal telencephalic regions, with concentrations in the septum, nuclei of the diagonal band of Broca, dorsal and ventral parts of the medial preoptic area, and infundibular nucleus (Fig. A retrograde tracer study [333] revealed that in rat approximately 50% of GnRH neurons in the preoptic and basal telencephalic regions project to the median eminence.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "9372f557"
+    },
+    {
+     "corpus": "europepmc",
+     "page": 39150998,
+     "line": "The identified regions encompassed many areas, such as bed nucleus of the stria terminalis, LH, medial preoptic area, medial septum, supramammillary nucleus, periaqueductal gray, and ventral tegmental area (fig. Among them, LH is known to be essential for orchestrating the complex repertoire of adaptive motivated behaviors to environmental challenge (35, 36).",
+     "attrs": [
+      "route"
+     ],
+     "qid": "b858c614"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 317,
+     "line": "The latter may provide the PVH with information about the circadian cycle. Presumed cognitive inputs from the cerebral cortex are relayed to the PVH by the bed nucleus of the stria terminalis (BST) and ventral lateral septal nucleus (VLS), which in turn receive inputs from the prefrontal cortex (PF), amygdaloid complex (AM), and hippocampal formation (HF) [296, 362].",
+     "attrs": [
+      "route"
+     ],
+     "qid": "56e319bd"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 892,
+     "line": "Afferents from the lateral tegmental field, the locus coeruleus, the tuber cinereum, the amygdala and the entopeduncular nucleus (medial segment of the globus pallidus) are restricted to the dorsal raphe nucleus; septal afferents terminate in the median raphe nucleus (Table 22.1). The nucleus raphe magnus shares many of these sources with the rostral group of raphe nuclei.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "e574b6f9"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 317,
+     "line": "Presumed cognitive inputs from the cerebral cortex are relayed to the PVH by the bed nucleus of the stria terminalis (BST) and ventral lateral septal nucleus (VLS), which in turn receive inputs from the prefrontal cortex (PF), amygdaloid complex (AM), and hippocampal formation (HF) [296, 362]. The control of thirst involves neuroendocrine, autonomic, and somatomotor responses.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "f567f2be"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 343,
+     "line": "LGE Lateral ganglionic eminence lot Lateral olfactory tract lv Lateral ventricle LP Lateral pallium ma Medial amygdaloid nucleus MGE Medial ganglionic eminence MP Medial pallium nc Neocortex ndb Nucleus of the diagonal band ot Olfactory tubercle pirc Piriform cortex psb Palliosubpallial boundary put Putamen sep Septum VP Ventral pallium vp Ventral pallidum vst Ventral striatum",
+     "attrs": [
+      "route"
+     ],
+     "qid": "04f7cceb"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 345,
+     "line": "The derivatives of these three zones are indicated in Table 11.1. The principal differences with the traditional subdivision of the subpallium are that: (1) only the central and medial nuclei of the amygdaloid complex are of subpallial origin and that (2) all of the subpallial zones, and even a restricted part of the ventral pallial zone, participate in the formation of the septum (Fig.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "e59b48c2"
+    },
+    {
+     "corpus": "europepmc",
+     "page": 38027491,
+     "line": "The neural circuits involved are PBN-amygdala, LC-RVM, amygdala-insula, ACC-amygdala, claustrum-ACC, bed nucleus of the stria terminalis-PVN and the PVN-ventral lateral septum circuit. Signals generated by acupuncture can modulate the central structures and interconnected neural circuits of multiple brain regions, including the medulla oblongata, cerebral cortex, thalamus, and hypothalamus.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "92592736"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 319,
+     "line": "This complex, designated here as the telodiencephalic reproductive complex (TDRC), encompasses the hypothalamic ventromedial (VMH), infundibular (INF), ventral premamillary (PMV), and suprachiasmatic (SCH) nuclei, the medial preoptic nucleus (MPN) and, in the basal telencephalon, the bed nucleus of the stria terminalis (BST), lateral septal nucleus (LS), nucleus of the diagonal band of Broca (NDB),",
+     "attrs": [
+      "route"
+     ],
+     "qid": "a92d6e62"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 415,
+     "line": "Fibres originating from the basal, accessory basal and central nuclei have been shown to pass via the ventral amygdalofugal pathway to a variety of structures, including the basal septal region, the substantia innominata, the magnocellular basal forebrain nuclei (particularly the nucleus basalis of Meynert and the nucleus of the horizontal limb of the diagonal band), the BST and the lateral hypothalamic area [105, 146, 147].",
+     "attrs": [
+      "route"
+     ],
+     "qid": "7c8de289"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 319,
+     "line": "This complex, designated here as the telodiencephalic reproductive complex (TDRC), encompasses the hypothalamic ventromedial (VMH), infundibular (INF), ventral premamillary (PMV), and suprachiasmatic (SCH) nuclei, the medial preoptic nucleus (MPN) and, in the basal telencephalon, the bed nucleus of the stria terminalis (BST), lateral septal nucleus (LS), nucleus of the diagonal band of Broca (NDB), and medial amygdaloid nucleus (MEA).",
+     "attrs": [
+      "route"
+     ],
+     "qid": "da5e6c72"
+    },
+    {
+     "corpus": "europepmc",
+     "page": 39012795,
+     "line": "We discovered that AACs are deployed across essentially all the pallium-derived brain structures, including not only the dorsal pallium-derived neocortex and medial pallium-derived hippocampal formation, but also the lateral pallium-derived claustrum-insular complex, and the ventral pallium-derived extended amygdaloid complex and olfactory centers. AACs are also abundant in anterior olfactory nucleus, taenia tecta, and lateral septum.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "5b8bf1eb"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 930,
+     "line": "Remarkably, some neurons situated in lamina I of the spinal and medullary dorsal horn and in the grey matter surrounding the spinal central canal project directly to many parts of the hypothalamus, including the posterior, ventromedial and paraventricular nuclei and the lateral hypothalamic area and, less densely, to a number of limbic telencephalic regions, including the amygdala, septum, nucleus accumbens, ventral pallidum and orbital cortex [20].",
+     "attrs": [
+      "route"
+     ],
+     "qid": "91ca919c"
+    },
+    {
+     "corpus": "europepmc",
+     "page": 38027491,
+     "line": "The brain nuclei involved in regulating visceral pain mainly include the nucleus of the solitary tract, parabrachial nucleus (PBN), locus coeruleus (LC), rostral ventromedial medulla (RVM), anterior cingulate cortex (ACC), paraventricular nucleus (PVN), and the amygdala. The neural circuits involved are PBN-amygdala, LC-RVM, amygdala-insula, ACC-amygdala, claustrum-ACC, bed nucleus of the stria terminalis-PVN and the PVN-ventral lateral septum circuit.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "2d20eb41"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 305,
+     "line": "Experimental studies have shown that the SCH in rat, in addition to its retinal input, receives afferents from a number of other sources including the intergeniculate leaflet (the homologue of the primate pregeniculate nucleus), pretectum, midbrain raphe nuclei, ventromedial hypothalamic nucleus, posterior hypothalamic area, lateral septum, ventral subiculum, infralimbic cortex, and paraventricular thalamic nucleus [133, 174, 182, 233, 238, 239, 335, 370].",
+     "attrs": [
+      "route"
+     ],
+     "qid": "2c811f8b"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 345,
+     "line": "The principal differences with the traditional subdivision of the subpallium are that: (1) only the central and medial nuclei of the amygdaloid complex are of subpallial origin and that (2) all of the subpallial zones, and even a restricted part of the ventral pallial zone, participate in the formation of the septum (Fig. In the discussion of the structure and fibre connections of the telencephalon, which occupies the second part of the present chapter (Chap.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "51fc5fe5"
+    },
+    {
+     "corpus": "europepmc",
+     "page": 39150998,
+     "line": "LSV, lateral septum, ventral part. (L) Number of scratching bouts for either saline- or CNO-treated animals. n = 7 mice. ***P < 0.001, unpaired t test. (M and N) Representative locomotion traces and quantitative analysis of the OFT (M) and EPM (N) data. *P < 0.05, **P < 0.01, ***P < 0.001, and ****P < 0.0001, unpaired t test. (O to Q) Schematics of experimental timeline (O), viral strategy (P), and histological verification (Q) for chemogenetic inhibition of Re → LS projection.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "25c3a42c"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 315,
+     "line": "High densities of H/O-positive fibres have been observed in numerous areas, including the entire hypothalamus (HY), septum (S), nucleus of the diagonal band (NDB), substantia innominata (SI), paraventricular thalamic nucleus (PVT), zona incerta (ZI), periaqueductal grey (PAG), dorsal raphe (DR) and central superior (CS) nuclei, laterodorsal (LDT) and pedunculopontine tegmental (PPT) nuclei, locus coeruleus, gigantocellular reticular nucleus (GR), and nucleus of the solitary tract (NST).",
+     "attrs": [
+      "route"
+     ],
+     "qid": "360669d7"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 896,
+     "line": "The main projections of the dorsal raphe nucleus are to the lateral geniculate body, the striatum, the entorhinal cortex, the olfactory bulb and the amygdala, and from the median raphe nucleus to the septum, basal forebrain and hippocampus [21]; however, many of these and other destinations are shared by these nuclei (Table 21.2, Chaps. Local targets include the periaqueductal grey, the lateral pontine tegmental field with the locus coeruleus, the pedunculopontine nucleus and the substan",
+     "attrs": [
+      "route"
+     ],
+     "qid": "110b8249"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 415,
+     "line": "Fibres originating from the basal, accessory basal and central nuclei have been shown to pass via the ventral amygdalofugal pathway to a variety of structures, including the basal septal region, the substantia innominata, the magnocellular basal forebrain nuclei (particularly the nucleus basalis of Meynert and the nucleus of the horizontal limb of the diagonal band), the BST and the lateral hypothalamic area [105, 146, 147]. The projection to the latter area arises mainly from the central amygdaloid nucleus.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "b43998bc"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 463,
+     "line": "In the rat, efferent fibres from the ventral pallidum have in addition been traced to numerous other areas, including the prefrontal cortex, the ventral striatum, the basolateral, lateral and central amygdaloid nuclei, the lateral septum, the area tegmentalis ventralis, the rostral raphe nuclei, the periaqueductal grey and the lo The projections from the ventral pallidum to the mediodorsal thalamic nucleus, the subthalamic nucleus and the lateral hypothalamus are distinctly topographically organized [150, 162].",
+     "attrs": [
+      "route"
+     ],
+     "qid": "758f63dd"
+    },
+    {
+     "corpus": "europepmc",
+     "page": 39150998,
+     "line": "LSI, lateral septum, intermediate part; LSV, lateral septum, ventral part. (L) Number of scratching bouts for either saline- or CNO-treated animals. n = 7 mice. ***P < 0.001, unpaired t test. (M and N) Representative locomotion traces and quantitative analysis of the OFT (M) and EPM (N) data. *P < 0.05, **P < 0.01, ***P < 0.001, and ****P < 0.0001, unpaired t test. (O to Q) Schematics of experimental timeline (O), viral strategy (P), and histological verification (Q) for chemogenetic inhibition of Re → LS projection.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "f2c4e9c3"
+    }
+   ]
+  },
+  "midbrain->thalamus_R": {
+   "from": "midbrain",
+   "to": "thalamus_R",
+   "transmitter": "Glutamate",
+   "sign": "excitatory",
+   "need": [
+    "transmitter",
+    "sign",
+    "route"
+   ],
+   "flag": [],
+   "label": "Tectothalamic projection",
+   "candidates": [
+    {
+     "corpus": "kandel",
+     "page": 986,
+     "line": "**The Striatum and Subthalamic Nucleus Receive** **Signals Mainly from the Cerebral Cortex,** **Thalamus, and Ventral Midbrain** Signals received by the striatum from the cerebral cortex and thalamus are conveyed by excitatory glutamatergic neurotransmission.",
+     "attrs": [
+      "transmitter",
+      "sign",
+      "route"
+     ],
+     "qid": "6f0b90d2"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 276,
+     "line": "Excitatory input from the upper pontine and lower mesencephalic tegmentum by neurons employing acetylcholine and nitric oxide as transmitters (these fibres originate from the pedunculopontine tegmental and laterodorsal tegmental nuclei and terminate in virtually all thalamic nuclei [222]) d.",
+     "attrs": [
+      "sign",
+      "route"
+     ],
+     "qid": "037a5500"
+    },
+    {
+     "corpus": "kandel",
+     "page": 982,
+     "line": "Inhibitory (GABAergic) inputs come from the striatum and globus pallidus (external) and excitatory input from the subthalamus. Pars reticulata neurons are also GABAergic and impose strong inhibitory control over parts of the thalamus and brain stem, including the superior colliculus, pedunculopontine nucleus, and parts of the midbrain and medullary reticular formation.",
+     "attrs": [
+      "sign",
+      "route"
+     ],
+     "qid": "9e9a83c1"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 826,
+     "line": "The ascending limb of the uncinate tract terminates in the periaqueductal grey, the intralaminar nuclei and the ventral lateral nucleus of the thalamus. The projection of the caudal pole of the fastigial nucleus is completely crossed and targets the excitatory and inhibitory burst cells in the paramedian pontine reticular formation, the rostral interstitial nucleus of the medial longitudinal fascicle, and Cajal’s interstitial nucleus in the mesencephalon (Fig.",
+     "attrs": [
+      "sign",
+      "route"
+     ],
+     "qid": "ea26360c"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 305,
+     "line": "glion cells [242] which costore glutamate and pituitary adenylate-cyclase-activating polypeptide (PACAP) as neurotransmitters [130]. Experimental studies have shown that the SCH in rat, in addition to its retinal input, receives afferents from a number of other sources including the intergeniculate leaflet (the homologue of the primate pregeniculate nucleus), pretectum, midbrain raphe nuclei, ventromedial hypothalamic nucleus, posterior hypothalamic area, lateral septum, ventral subiculum, infralimbic cortex, and paraventricular thalamic nucleus [133, 174, 182, 233, 238, 239, 335, 370].",
+     "attrs": [
+      "transmitter",
+      "route"
+     ],
+     "qid": "08456300"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 780,
+     "line": "These ascending collaterals form the ventral ascending bundle, which terminates in the interstitial nucleus of Cajal, the riMLF, the mesencephalic reticular formation lateral to the interstitial nucleus, the supraoculomotor central grey, the nucleus of Edinger-Westphal, the zona incerta, several thalamic intralaminar and midline nuclei, and in the paralaminar portion of the dorsomedial thalamic nucleus (Fig. The predorsal bundle terminates in the nucleus reticularis pontis oralis and caudalis and the paragigantocellular nucleus, regions that contain the excitatory and inhibitory short lead burst cells of the horizontal saccadic system, located rostral and caudal to the abducens nucleus.",
+     "attrs": [
+      "sign",
+      "route"
+     ],
+     "qid": "b2aa39e8"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 823,
+     "line": "The crossed ascending limb of the uncinate tract connects the fastigial nucleus with the periaqueductal grey and the adjoining reticular formation in the mesencephalon, the superior colliculus, saccade-generating centres in the mesencephalon and the ventral lateral and intralaminar nuclei of the thalamus. The caudal pole of the fastigial nucleus, which receives a projection from the folium and tuber vermis (lobule VII of Larsell, also known as the oculomotor vermis), projects contralaterally to the excitatory and inhibitory burst cells of the horizontal gaze centre in the paramedian pontine reticular formation, to the rostral interstital nucleus of the medial longitudinal fascicle and the Cajal’s interstitial nucleus of the vertical gaze centre and to medial and lateral portions of the pontine nuclei and the nucleus reticularis tegmenti pontis [123] (Figs.",
+     "attrs": [
+      "sign",
+      "route"
+     ],
+     "qid": "0376f1f2"
+    },
+    {
+     "corpus": "kandel",
+     "page": 521,
+     "line": "This set of neurons projects to the midbrain and thalamus.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "bb7cefd6"
+    },
+    {
+     "corpus": "kandel",
+     "page": 984,
+     "line": "contacting targets in the thalamus, midbrain, and hindbrain.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "6fc6e2e9"
+    },
+    {
+     "corpus": "kandel",
+     "page": 984,
+     "line": "Chapter 38 / The Basal Ganglia 937 contacting targets in the thalamus, midbrain, and hindbrain.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "010cbcc3"
+    },
+    {
+     "corpus": "kandel",
+     "page": 1635,
+     "line": "from cerebral cortex, thalamus, and ventral midbrain, 939 disinhibition as final expression of,",
+     "attrs": [
+      "route"
+     ],
+     "qid": "e28a6ee7"
+    },
+    {
+     "corpus": "kandel",
+     "page": 1557,
+     "line": "DMPFC, dorsomedial prefrontal cortex; dmTHAL, dorsomedial thalamus; PAG, periaqueductal gray matter;",
+     "attrs": [
+      "route"
+     ],
+     "qid": "611d9314"
+    },
+    {
+     "corpus": "kandel",
+     "page": 138,
+     "line": "The principal components are the motor cortex, basal ganglia, thalamus, midbrain, cerebellum, and spinal cord.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "7120913e"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 213,
+     "line": "The geniculate bodies and the pulvinar of the thalamus are located lateral to the rostral mesencephalon (Figs.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "b01d1211"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 914,
+     "line": "Projections from the pontomesencephalic tegmentum to the thalamus, tectum, basal ganglia, and basal forebrain.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "849db166"
+    },
+    {
+     "corpus": "kandel",
+     "page": 450,
+     "line": "Connections to subcortical structures in the thalamus and midbrain are defined in Figure 21–7B. (Abbreviations:",
+     "attrs": [
+      "route"
+     ],
+     "qid": "392dfc05"
+    },
+    {
+     "corpus": "kandel",
+     "page": 979,
+     "line": "The Striatum and Subthalamic Nucleus Receive Signals Mainly from the Cerebral Cortex, Thalamus, and Ventral Midbrain",
+     "attrs": [
+      "route"
+     ],
+     "qid": "26a141d8"
+    },
+    {
+     "corpus": "kandel",
+     "page": 910,
+     "line": "The nuclei are shown in a parasagittal section through the thalamus, pons, midbrain, and cerebellum of a rhesus monkey.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "eda3e7fe"
+    },
+    {
+     "corpus": "kandel",
+     "page": 25,
+     "line": "The Striatum and Subthalamic Nucleus Receive Signals Mainly from the Cerebral Cortex, Thalamus, and Ventral Midbrain 939",
+     "attrs": [
+      "route"
+     ],
+     "qid": "1aa83d47"
+    },
+    {
+     "corpus": "europepmc",
+     "page": 36642737,
+     "line": "LS is reciprocally connected with thalamic and midbrain structures and regulates appropriate emotional expression [24–26].",
+     "attrs": [
+      "route"
+     ],
+     "qid": "bcdc3f15"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 215,
+     "line": "The _pretectum_ is an ill-defined region, extending between the rostral margin of the superior colliculus and the thalamus.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "bab39b2f"
+    },
+    {
+     "corpus": "kandel",
+     "page": 986,
+     "line": "**The Striatum and Subthalamic Nucleus Receive** **Signals Mainly from the Cerebral Cortex,** **Thalamus, and Ventral Midbrain**",
+     "attrs": [
+      "route"
+     ],
+     "qid": "cdf97e3c"
+    },
+    {
+     "corpus": "kandel",
+     "page": 701,
+     "line": "**Figure 28–2** The central auditory pathways extend from the brain stem through the midbrain and thalamus to the auditory cortex.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "9fdcb20e"
+    },
+    {
+     "corpus": "kandel",
+     "page": 1685,
+     "line": "1304, 1305f signals from cerebral cortex, thalamus, and ventral midbrain to, 934 Strick, Peter, 911 Stringed instrument players, hand",
+     "attrs": [
+      "route"
+     ],
+     "qid": "b2da6762"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 730,
+     "line": "They decussate in the isthmus region and pass diffusely through the midbrain tegmentum and the fields of Forel to terminate in the thalamus.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "df86ecfa"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 826,
+     "line": "The ascending limb of the uncinate tract terminates in the periaqueductal grey, the intralaminar nuclei and the ventral lateral nucleus of the thalamus.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "b106e652"
+    },
+    {
+     "corpus": "kandel",
+     "page": 450,
+     "line": "Connections to subcortical structures in the thalamus and midbrain are defined in Figure 21–7B. (Abbreviations: V1, V2, V3, and V4, occipital visual areas;",
+     "attrs": [
+      "route"
+     ],
+     "qid": "786c0846"
+    },
+    {
+     "corpus": "kandel",
+     "page": 699,
+     "line": "The neural pathways that process acoustic information extend from the ear to the brain stem, through the midbrain and thalamus, to the cerebral cortex (Figure 28–2).",
+     "attrs": [
+      "route"
+     ],
+     "qid": "a4ea9caa"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 702,
+     "line": "The mesencephalic periaqueductal grey receives afferents from spinal laminae I, VI, VII and VIII, and projects to the intralaminar thalamic nuclei [6, 50, 113, 163].",
+     "attrs": [
+      "route"
+     ],
+     "qid": "3b3eab65"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 215,
+     "line": "They project to the thalamus, the superior colliculus and the reticular formation. The region located between the tectum and the pes is the _tegmentum_ _mesencephali_ .",
+     "attrs": [
+      "route"
+     ],
+     "qid": "8a702338"
+    },
+    {
+     "corpus": "kandel",
+     "page": 521,
+     "line": "This set of neurons projects to the midbrain and thalamus. A second class of lamina I neurons receives input from C fibers that are activated selectively by cool stimuli.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "b660aac8"
+    },
+    {
+     "corpus": "kandel",
+     "page": 521,
+     "line": "Because they respond selectively to noxious stimulation, they have been called _nociceptive-specific_ _neurons_ . This set of neurons projects to the midbrain and thalamus.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "0faa3ffe"
+    },
+    {
+     "corpus": "kandel",
+     "page": 910,
+     "line": "**Figure 35–3** The oculomotor nuclei in the brain stem. The nuclei are shown in a parasagittal section through the thalamus, pons, midbrain, and cerebellum of a rhesus monkey.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "79759b3e"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 879,
+     "line": "They include the periaqueductal grey, the ventral tegmental area, the midbrain lateral central tegmental field, and the parafascicular, posterior and intralaminar thalamic nuclei.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "85bce27a"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 215,
+     "line": "It is reciprocally connected with the superior colliculus. The _pretectum_ is an ill-defined region, extending between the rostral margin of the superior colliculus and the thalamus.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "760e0674"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 213,
+     "line": "The geniculate bodies and the pulvinar of the thalamus are located lateral to the rostral mesencephalon (Figs. Structures at the level of the mesencephalon are summarized in the diagrams of Figs.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "6e007e70"
+    },
+    {
+     "corpus": "kandel",
+     "page": 59,
+     "line": "The **diencephalon** lies rostral to the midbrain and contains two structures. The _thalamus_ processes most of the information reaching the cerebral cortex from the rest of the central nervous system.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "48cf67b1"
+    },
+    {
+     "corpus": "kandel",
+     "page": 979,
+     "line": "**Physiological Signals Provide Further Clues to Function in** **the Basal Ganglia** The Striatum and Subthalamic Nucleus Receive Signals Mainly from the Cerebral Cortex, Thalamus, and Ventral Midbrain",
+     "attrs": [
+      "route"
+     ],
+     "qid": "985ae73c"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 463,
+     "line": "As has already been discussed, the efferents from the substantia nigra, pars reticulata terminate in several thalamic nuclei, in the superior colliculus and in the caudolateral mesencephalic tegmentum.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "d97086a0"
+    },
+    {
+     "corpus": "kandel",
+     "page": 450,
+     "line": "The zone of overlap (purple) shows that both pathways originate from the same source in V1. Connections to subcortical structures in the thalamus and midbrain are defined in Figure 21–7B. (Abbreviations:",
+     "attrs": [
+      "route"
+     ],
+     "qid": "c223cdae"
+    },
+    {
+     "corpus": "kandel",
+     "page": 138,
+     "line": "**Figure 4–15** Voluntary movement requires coordination of all components of the motor system. The principal components are the motor cortex, basal ganglia, thalamus, midbrain, cerebellum, and spinal cord.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "5d6ea857"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 730,
+     "line": "Most of these fibres ascend with the superior cerebellar peduncle. They decussate in the isthmus region and pass diffusely through the midbrain tegmentum and the fields of Forel to terminate in the thalamus.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "ba50937f"
+    },
+    {
+     "corpus": "kandel",
+     "page": 25,
+     "line": "**Physiological Signals Provide Further Clues** **to Function in the Basal Ganglia 939** The Striatum and Subthalamic Nucleus Receive Signals Mainly from the Cerebral Cortex, Thalamus, and Ventral Midbrain 939",
+     "attrs": [
+      "route"
+     ],
+     "qid": "972e0336"
+    },
+    {
+     "corpus": "kandel",
+     "page": 138,
+     "line": "The principal components are the motor cortex, basal ganglia, thalamus, midbrain, cerebellum, and spinal cord. The principal descending projections are shown in green; feedback projections and local connections",
+     "attrs": [
+      "route"
+     ],
+     "qid": "33d59946"
+    },
+    {
+     "corpus": "kandel",
+     "page": 986,
+     "line": "**Physiological Signals Provide Further Clues** **to Function in the Basal Ganglia** **The Striatum and Subthalamic Nucleus Receive** **Signals Mainly from the Cerebral Cortex,** **Thalamus, and Ventral Midbrain**",
+     "attrs": [
+      "route"
+     ],
+     "qid": "d3b47e30"
+    },
+    {
+     "corpus": "kandel",
+     "page": 1040,
+     "line": "Retinal ganglion cells that contain the photopigment melanopsin act as luminance detectors, sending their axons through the optic tract to the olivary pretectal nucleus, at the junction of the midbrain and the thalamus.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "2b41d544"
+    },
+    {
+     "corpus": "kandel",
+     "page": 979,
+     "line": "The Striatum and Subthalamic Nucleus Receive Signals Mainly from the Cerebral Cortex, Thalamus, and Ventral Midbrain Ventral Midbrain Dopamine Neurons Receive Input From External Structures and Other Basal Ganglia Nuclei",
+     "attrs": [
+      "route"
+     ],
+     "qid": "6c6ebfa7"
+    },
+    {
+     "corpus": "kandel",
+     "page": 1218,
+     "line": "In most vertebrate species, the tectum of the midbrain (called the superior colliculus in mammals) is the major target of retinal axons, but a small number of axons project to the lateral geniculate nucleus of the thalamus.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "760326b4"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 556,
+     "line": "Pyramidal neurons situated in lamina V have been shown to project subcortically to the intralaminar and other “aspecific” thalamic nuclei, the striatum, the red nucleus, the tectum, the medulla oblongata and the spinal cord.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "d9201037"
+    },
+    {
+     "corpus": "europepmc",
+     "page": 17068778,
+     "line": "The [(11)C]LBT-999 uptake was decreased by these antagonists in the putamen (-79 and -92%, respectively), caudate (-80 and -91%, respectively), midbrain (-73 and -78%, respectively), and thalamus (-34 and -46%, respectively).",
+     "attrs": [
+      "route"
+     ],
+     "qid": "2865699b"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 213,
+     "line": "Laterally it follows the caudal border of the optic tracts, where the pes pedunculi emerges on the ventral surface. The geniculate bodies and the pulvinar of the thalamus are located lateral to the rostral mesencephalon (Figs.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "923e9224"
+    },
+    {
+     "corpus": "kandel",
+     "page": 25,
+     "line": "The Striatum and Subthalamic Nucleus Receive Signals Mainly from the Cerebral Cortex, Thalamus, and Ventral Midbrain 939 Ventral Midbrain Dopamine Neurons Receive Input From External Structures and Other Basal Ganglia Nuclei 939",
+     "attrs": [
+      "route"
+     ],
+     "qid": "22512bc4"
+    },
+    {
+     "corpus": "kandel",
+     "page": 701,
+     "line": "**Figure 28–2** The central auditory pathways extend from the brain stem through the midbrain and thalamus to the auditory cortex. The fibers in the cochlear nerve (cranial nerve VIII) terminate in the cochlear nuclei of the brain stem.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "349f5724"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 441,
+     "line": "The elements in the external segment project to the subthalamic nucleus, whereas those in the internal segment project to the thalamus, the lateral habenular nucleus and the pedunculopontine nucleus in the caudal mesencephalic tegmentum.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "7230257a"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 325,
+     "line": "The strongest activation was found in a number of structures in the mesencephalon and diencephalon including the VTA (i.e. “reward area”), lateral central tegmental field, and ventralis posterior, midline, and intralaminar thalamic nuclei.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "32e928a1"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 702,
+     "line": "mediating the motivational aspects of pain, with relays in laminae VII and VIII of the spinal grey matter, the periaqueductal grey, the hypothalamus and the intralaminar nuclei of the thalamus, projecting to the anterior cingulate cortex (Fig.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "45e03b2f"
+    },
+    {
+     "corpus": "kandel",
+     "page": 982,
+     "line": "Pars reticulata neurons are also GABAergic and impose strong inhibitory control over parts of the thalamus and brain stem, including the superior colliculus, pedunculopontine nucleus, and parts of the midbrain and medullary reticular formation.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "46cd5e8b"
+    },
+    {
+     "corpus": "kandel",
+     "page": 500,
+     "line": "Additionally, the pyramidal neurons in layer V project subcortically to the spinal cord, brain stem, midbrain, and basal ganglia. Corticothalamic neurons in layer VI project back to the afferent thalamic nucleus providing sensory input to that column.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "5dd34977"
+    },
+    {
+     "corpus": "kandel",
+     "page": 1073,
+     "line": "The spinal cord also projects to the main somatosensory nucleus of the thalamus (ventral posterolateral nucleus). All of the efferent pathways shown here (except perhaps for the periaqueductal gray) project directly to autonomic preganglionic neurons.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "b25bf947"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 458,
+     "line": "The reticular formation, particularly its mesencephalic portion, is one of the principal sources of afferent fibres to the intralaminar nuclei of the thalamus and, as pointed out earlier, the latter project to both the caudate nucleus and the putamen.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "568fce33"
+    }
+   ]
+  },
+  "medulla->hypothalamus_R": {
+   "from": "medulla",
+   "to": "hypothalamus_R",
+   "transmitter": "Glutamate",
+   "sign": "excitatory",
+   "need": [
+    "transmitter",
+    "sign",
+    "route"
+   ],
+   "flag": [],
+   "label": "Solitary tract to hypothalamus",
+   "candidates": [
+    {
+     "corpus": "europepmc",
+     "page": 38027491,
+     "line": "Signals generated by acupuncture can modulate the central structures and interconnected neural circuits of multiple brain regions, including the medulla oblongata, cerebral cortex, thalamus, and hypothalamus. This analgesic process also involves the participation of various neurotransmitters and/or receptors, such as 5-hydroxytryptamine, glutamate, and enkephalin.",
+     "attrs": [
+      "transmitter",
+      "route"
+     ],
+     "qid": "f7495176"
+    },
+    {
+     "corpus": "europepmc",
+     "page": 38422648,
+     "line": "In this review, we discuss the contribution of brainstem, hypothalamic, amygdalar and cortical structures in PS genesis. We propose that muscle atonia during PS is due to activation of glutamatergic neurons localized in the pontine sublaterodorsal tegmental nucleus (SLD) projecting to glycinergic/GABAergic pre-motoneurons localized in the ventro-medial medulla (vmM).",
+     "attrs": [
+      "transmitter",
+      "route"
+     ],
+     "qid": "acb83b0c"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 958,
+     "line": "projection to the inferior olive 725 parastriate belt 602 parasubiculum 372 paraventricular hypothalamic nucleus 290;",
+     "attrs": [
+      "route"
+     ],
+     "qid": "423178a9"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 56,
+     "line": "The habenular nuclei receive their main afferents from limbic structures (septum, hypothalamus), via the _stria_ _medullaris_ .",
+     "attrs": [
+      "route"
+     ],
+     "qid": "8f4ded1a"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 935,
+     "line": "The fibres of this projection innervate the lateral hypothalamic area and numerous centres in the midbrain, pons and medulla oblongata (Fig.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "341e8263"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 254,
+     "line": "The _stria_ _medulla-_ _ris_ is a complex bundle of fibres originating from the septal region and the lateral preoptico-hypothalamic continuum.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "71c4d368"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 925,
+     "line": "PBN Parabrachial nuclei PH Posterior hypothalamic nucleus S Septal region SOL Solitary nucleus SCH Suprachiasmatic nucleus VLM Ventrolateral medulla",
+     "attrs": [
+      "route"
+     ],
+     "qid": "3d76ee3e"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 298,
+     "line": "This fascicle extends from the posterior part of the hypothalamus to the caudal medulla oblongata and occupies a periventricular position over its entire length.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "1ae8aa5c"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 935,
+     "line": "Its descending fibres enter the hypothalamus and pass, via the medial forebrain bundle, to lateral tegmental parts of the mesencephalon, pons and medulla oblongata.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "913bddfa"
+    },
+    {
+     "corpus": "kandel",
+     "page": 1041,
+     "line": "Meanwhile, other neurons in the ventrolateral medulla increase the firing of hypothalamic neurons that secrete vasopressin from their terminals in the posterior pituitary gland.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "5ce71b4e"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 419,
+     "line": "clei, the reticular formation and the nucleus of the solitary tract, whereas the output of the medial division of the extended amygdala is confined mainly to the medial hypothalamus",
+     "attrs": [
+      "route"
+     ],
+     "qid": "7fd5fba9"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 925,
+     "line": "926 Section III Functional Systems PBN Parabrachial nuclei PH Posterior hypothalamic nucleus S Septal region SOL Solitary nucleus SCH Suprachiasmatic nucleus VLM Ventrolateral medulla",
+     "attrs": [
+      "route"
+     ],
+     "qid": "d19cc5e2"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 926,
+     "line": "The dorsal longitudinal fasciculus of Schütz extends from the posterior part of the hypothalamus to the caudal medulla oblongata and occupies a periventricular position over its entire length.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "4b91ea4b"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 958,
+     "line": "projection to the inferior olive 725 parastriate belt 602 parasubiculum 372 paraventricular hypothalamic nucleus 290; 311 paraventricular thalamic nucleus 301 paraventriculo-hypophyseal tract 291;",
+     "attrs": [
+      "route"
+     ],
+     "qid": "24fbc474"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 932,
+     "line": "Indirect hypothalamocerebellar pathways, relayed through various brain stem nuclei, including the pons and the inferior olive, have also been described (for a review, see Dietrichs and Haines [32]).",
+     "attrs": [
+      "route"
+     ],
+     "qid": "661a0806"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 310,
+     "line": "vagus nerves terminating in the nucleus of the solitary tract (NST). The viscerosensory information carried by these fibres is mediated to the CRH cells by a direct solitario-hypothalamic projection. b.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "1206d6bb"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 702,
+     "line": "An alternative nociceptive spinal pathway to the paraventricular nucleus of the hypothalamus includes the catecholaminergic cells situated in the A1 region of the ventrolateral medulla oblongata [119] (Fig.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "f2bcf07c"
+    },
+    {
+     "corpus": "europepmc",
+     "page": 38027491,
+     "line": "Signals generated by acupuncture can modulate the central structures and interconnected neural circuits of multiple brain regions, including the medulla oblongata, cerebral cortex, thalamus, and hypothalamus.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "b13591a9"
+    },
+    {
+     "corpus": "kandel",
+     "page": 750,
+     "line": "tympani and vagus nerves and terminate in the nucleus of the solitary tract in the brain stem. From there, taste information is relayed through the thalamus to the gustatory cortex as well as to the hypothalamus.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "0abf9f31"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 958,
+     "line": "Syn: nucleus of the anterior funiculus parasol ganglion cells (retina) 754 parasolitary nucleus 718 projection to the inferior olive 725 parastriate belt 602 parasubiculum 372 paraventricular hypothalamic nucleus 290;",
+     "attrs": [
+      "route"
+     ],
+     "qid": "de594ee8"
+    },
+    {
+     "corpus": "kandel",
+     "page": 1064,
+     "line": "Important groups of supraspinal neurons that excite preganglionic sympathetic activity are located in the rostral ventrolateral medulla, the raphe pallidus in the brain stem, and the paraventricular nucleus in the hypothalamus.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "3f0b7f17"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 419,
+     "line": "clei, the reticular formation and the nucleus of the solitary tract, whereas the output of the medial division of the extended amygdala is confined mainly to the medial hypothalamus **Fibre** **Connections** **of** **the** **BST**",
+     "attrs": [
+      "route"
+     ],
+     "qid": "8c307858"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 56,
+     "line": "The _epithalamic_ _zone_ gives origin to the _ha-_ _benular_ _nuclei_ and the _pineal_ _gland_ ( _epiphysis_ ). The habenular nuclei receive their main afferents from limbic structures (septum, hypothalamus), via the _stria_ _medullaris_ .",
+     "attrs": [
+      "route"
+     ],
+     "qid": "bb46966e"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 929,
+     "line": "(a) _Humoral_ _Input._ The sodium concentration of the blood and the concentration of glucose, free fatty acids and other nutrients are monitored by specialized hypothalamic and extrahypothalamic (e.g. nucleus of the solitary tract) neurons.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "b891f433"
+    },
+    {
+     "corpus": "kandel",
+     "page": 1560,
+     "line": "Serotonergic and noradrenergic neurons in the pons and medulla project widely to highly diverse terminal fields in brain regions that include the hypothalamus, hippocampus, amygdala, basal ganglia, and cerebral cortex (Figures 61–5 and 61–6).",
+     "attrs": [
+      "route"
+     ],
+     "qid": "c3e87aa3"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 298,
+     "line": "This fascicle extends from the posterior part of the hypothalamus to the caudal medulla oblongata and occupies a periventricular position over its entire length. Rostrally its fibres become incorporated into the hypothalamic periventricular system.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "88c0a1c7"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 56,
+     "line": "The habenular nuclei receive their main afferents from limbic structures (septum, hypothalamus), via the _stria_ _medullaris_ . This fibre system passes along _the_ _taenia_ _thalami_, i.e. the seam of attachment of the diencephalic roof plate (Fig.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "17a7f990"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 892,
+     "line": "The dorsal and median raphe nuclei share afferents from the lateral habenular and the interpeduncular nuclei, hypothalamus and preoptic area, the nucleus of the solitary tract, the substantia nigra, the basal telencephalon and the prefrontal cortex.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "d9439787"
+    },
+    {
+     "corpus": "kandel",
+     "page": 1073,
+     "line": "Other pathways from the spinal cord (not shown) also transmit visceral information to many parts of the central autonomic network, including the nucleus of the solitary tract, parabrachial nucleus, periaqueductal gray, hypothalamus, amygdala, and cortex.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "733e2d26"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 254,
+     "line": "The _stria_ _medulla-_ _ris_ is a complex bundle of fibres originating from the septal region and the lateral preoptico-hypothalamic continuum. These fibres assemble in the region behind the anterior commissure and pass along the taenia thalami to the habenula.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "2472e8b6"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 935,
+     "line": "caudally, to descend through the most lateral part of the hypothalamus and the tegmental regions of the brain stem [59, 103]. The fibres of this projection innervate the lateral hypothalamic area and numerous centres in the midbrain, pons and medulla oblongata (Fig.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "90c47987"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 898,
+     "line": "Among them, the central nucleus of the amygdala, the preoptic area, different hypothalamic nuclei, the periaqueductal grey, the nucleus of the solitary tract, the prefrontal cortex, the adrenergic cell group C1 [32] and Barrington’s micturition area may be mentioned.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "6131672b"
+    },
+    {
+     "corpus": "kandel",
+     "page": 1048,
+     "line": "They are closely related to the A1– A3 cell groups in the medulla (Figure 40–11A). Histaminergic cell groups are mainly found in the tuberomammillary nucleus and adjacent areas of the posterior hypothalamus (near the mammillary body) and are named E1–E5 (Figure 40–11B).",
+     "attrs": [
+      "route"
+     ],
+     "qid": "9af93913"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 938,
+     "line": "The _pre-autonomic_ _cell_ _groups_ include the paraventricular hypothalamic nucleus, a group of cells in the intermediate part of the lateral hypothalamic zone, Barrington’s pontine micturition centre and the caudal, cardiovascular portion of the ventrolateral medulla.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "e818fe71"
+    },
+    {
+     "corpus": "kandel",
+     "page": 1048,
+     "line": "The B1–B4 cell groups in the medulla mainly provide descending modulation of sensory, motor, and autonomic neurons in the brain stem and spinal cord. The B5–B7 neurons in the pons mainly provide serotonergic innervation of the thalamus, hypothalamus, and cerebral cortex.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "1d475903"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 325,
+     "line": "The cells of the A1 group surround the nucleus of the lateral funiculus, whereas those of the A2 group are embedded in the nucleus of the solitary tract, dorsal motor nucleus of the vagus, and intervening area (Figs. Both cell groups are known to project to the hypothalamus.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "2b2843bb"
+    },
+    {
+     "corpus": "kandel",
+     "page": 1045,
+     "line": "The A1 and A2 groups, located among the neurons of the nucleus ambiguus and the nucleus of the solitary tract (respectively), are mainly concerned with autonomic functions. Together, they modulate hypothalamic and brain stem systems that regulate the autonomic nervous system.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "76b7a681"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 932,
+     "line": "Indirect hypothalamocerebellar pathways, relayed through various brain stem nuclei, including the pons and the inferior olive, have also been described (for a review, see Dietrichs and Haines [32]). The functional significance of the hypothalamocerebellar circuits is unknown.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "dd47a3e0"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 254,
+     "line": "It receives afferents via the stria medullaris and gives origin to the habenulo-interpeduncular tract or fasciculus retroflexus (Fig. The _stria_ _medulla-_ _ris_ is a complex bundle of fibres originating from the septal region and the lateral preoptico-hypothalamic continuum.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "c925dfd7"
+    },
+    {
+     "corpus": "kandel",
+     "page": 1041,
+     "line": "This combination of increased cardiac output and increased vascular resistance elevates blood pressure. Meanwhile, other neurons in the ventrolateral medulla increase the firing of hypothalamic neurons that secrete vasopressin from their terminals in the posterior pituitary gland.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "6a4d6b7c"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 935,
+     "line": "Its descending fibres enter the hypothalamus and pass, via the medial forebrain bundle, to lateral tegmental parts of the mesencephalon, pons and medulla oblongata. The termination pattern of these descending BST fibres is virtually identical to that of the amygdala [52, 57] (Table 23.1).",
+     "attrs": [
+      "route"
+     ],
+     "qid": "d2f6b92e"
+    },
+    {
+     "corpus": "kandel",
+     "page": 1560,
+     "line": "Serotonergic and noradrenergic neurons in the pons and medulla project widely to highly diverse terminal fields in brain regions that include the hypothalamus, hippocampus, amygdala, basal ganglia, and cerebral cortex (Figures 61–5 and 61–6). Chapter 61 / Disorders of Mood and Anxiety 1513",
+     "attrs": [
+      "route"
+     ],
+     "qid": "de92a7b6"
+    },
+    {
+     "corpus": "kandel",
+     "page": 130,
+     "line": "Groups of neurons are also located within the fibers of the internal medullary lamina and are collectively referred to as the intralaminar nuclei. The _anterior group_ receives its major input from the mammillary nuclei of the hypothalamus and from the presubiculum of the hippocampal formation.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "ff209c23"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 935,
+     "line": "The fibres of this projection innervate the lateral hypothalamic area and numerous centres in the midbrain, pons and medulla oblongata (Fig. The arch-shaped _bed_ _nucleus_ _of_ _the_ _stria_ _ter-_ _minalis_ _(BST)_ is caudally directly continuous with the medial and central amygdaloid nuclei.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "176c1752"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 898,
+     "line": "Numerous regions project to the periLC. Among them, the central nucleus of the amygdala, the preoptic area, different hypothalamic nuclei, the periaqueductal grey, the nucleus of the solitary tract, the prefrontal cortex, the adrenergic cell group C1 [32] and Barrington’s micturition area may be mentioned.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "b655c894"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 316,
+     "line": "The lateral hypothalamic area (LHA) in which the O/H and MCH neuronal populations are embedded receives, besides afferents from the infundibular nucleus, input from a variety of other structures ranging from the medial prefrontal cortex to the nucleus of the solitary tract [31, 36, 167, 189, 214, 254, 293].",
+     "attrs": [
+      "route"
+     ],
+     "qid": "4ed6b265"
+    },
+    {
+     "corpus": "kandel",
+     "page": 1041,
+     "line": "Meanwhile, other neurons in the ventrolateral medulla increase the firing of hypothalamic neurons that secrete vasopressin from their terminals in the posterior pituitary gland. Vasopressin also has a direct vasoconstrictor effect, and it maintains blood volume by reducing water excretion through the kidney.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "e1690766"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 905,
+     "line": "These inhibitory neurons receive an input from baroreceptor-activated cells of the nucleus of the solitary tract, thus causing inhibition of vasomotor tone. Ascending projections from the A1 and A2 groups control vasopressin release by the paraventricular hypothalamic nucleus in a complementing manner (Chap.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "89e1caeb"
+    },
+    {
+     "corpus": "kandel",
+     "page": 1077,
+     "line": "The neurons in the MnPO that indirectly respond to cold and warmth send efferent signals via relays through the medial preoptic area, dorsomedial hypothalamus, and raphe pallidus in the ventral medulla, and from there on to the sympathetic preganglionic neurons in the intermediolateral nucleus of the spinal cord.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "7f373553"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 466,
+     "line": "nucleus of solitary tract <sup>*</sup> bed nucleus stria terminalis medialis bed nucleus stria terminalis medialis medial amygdaloid nucleus <sup>*</sup> medial amygdaloid nucleus medial preoptic area <sup>*</sup> medial & lateral preoptic area anterior hypothalamus anterior hypothalamus ventromedial hypothalamus",
+     "attrs": [
+      "route"
+     ],
+     "qid": "dbbb0095"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 892,
+     "line": "The raphe nuclei receive their input mainly from limbic structures. The dorsal and median raphe nuclei share afferents from the lateral habenular and the interpeduncular nuclei, hypothalamus and preoptic area, the nucleus of the solitary tract, the substantia nigra, the basal telencephalon and the prefrontal cortex.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "e8490efe"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 932,
+     "line": "This projection is reciprocated by hypothalamocerebellar fibres, which reach all parts of the cerebellar cortex and nuclei. Indirect hypothalamocerebellar pathways, relayed through various brain stem nuclei, including the pons and the inferior olive, have also been described (for a review, see Dietrichs and Haines [32]).",
+     "attrs": [
+      "route"
+     ],
+     "qid": "36fa1148"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 321,
+     "line": "Neurons sensitive to circulating androgen and estrogen are found predominantly in (greater) limbic structures with direct connections with the hypothalamus such as the olfactory bulb, olfactory cortex, hippocampal formation, periaqueductal grey, parabrachial nuclei, nucleus of the solitary tract, and spinal laminae I, II, and X.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "1fb6531c"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 935,
+     "line": "The BST projects substantially to the amygdaloid complex, the mediobasal telencephalon and the hypothalamus and to a large number of grisea located in the brain stem. Its descending fibres enter the hypothalamus and pass, via the medial forebrain bundle, to lateral tegmental parts of the mesencephalon, pons and medulla oblongata.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "a604a620"
+    },
+    {
+     "corpus": "kandel",
+     "page": 1175,
+     "line": "The forebrain divides further to form the telencephalon, from which cortex, hippocampus, and basal ganglia arise; and the diencephalon, which gives rise to thalamus, hypothalamus, and retina. The hindbrain divides to form the pons and cerebellum anteriorly and the medulla posteriorly. \u00075. \u0007Anterior-posterior patterning is established",
+     "attrs": [
+      "route"
+     ],
+     "qid": "76b32d63"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 303,
+     "line": "centres are synaptically interrupted in autonomic premotor nuclei such as the A5 noradrenergic cell group and ventrolateral medulla. Apart from the paraventricular nucleus, the dorsomedial nucleus and lateral hypothalamic area also provide descending connections to the autonomic nuclei of the lower brain stem and spinal cord [209, 360].",
+     "attrs": [
+      "route"
+     ],
+     "qid": "822ff868"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 930,
+     "line": "It is important to note that the nucleus of the solitary tract, the parabrachial complex and the periaqueductal grey all maintain strong, reciprocal connections with the hypothalamus, the central nucleus of the amygdala and the BST, all of which represent sites of origin of substantial descending limbic projections [11, 39, 45, 57, 85, 111, 118, 131].",
+     "attrs": [
+      "route"
+     ],
+     "qid": "e5ec498e"
+    },
+    {
+     "corpus": "kandel",
+     "page": 1073,
+     "line": "Such learned responses are prevented by selective lesions of the amygdalar region, which projects to the Other pathways from the spinal cord (not shown) also transmit visceral information to many parts of the central autonomic network, including the nucleus of the solitary tract, parabrachial nucleus, periaqueductal gray, hypothalamus, amygdala, and cortex.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "270b1c44"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 684,
+     "line": "Ascending fibres from the spinal cord cross in the ventral white commissure and join the anterolateral fasciculus, a composite pathway, which terminates at different levels of the brain stem, the thalamus, the hypothalamus and in restricted regions of the telencephalon (Figs. The medial lemniscus takes its origin from the dorsal column nuclei in the caudal medulla.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "8ba53788"
+    },
+    {
+     "corpus": "kandel",
+     "page": 1073,
+     "line": "Other pathways from the spinal cord (not shown) also transmit visceral information to many parts of the central autonomic network, including the nucleus of the solitary tract, parabrachial nucleus, periaqueductal gray, hypothalamus, amygdala, and cortex. The spinal cord also projects to the main somatosensory nucleus of the thalamus (ventral posterolateral nucleus).",
+     "attrs": [
+      "route"
+     ],
+     "qid": "2d4d75eb"
+    }
+   ]
+  },
+  "medulla->amygdala_R": {
+   "from": "medulla",
+   "to": "amygdala_R",
+   "transmitter": "Glutamate",
+   "sign": "excitatory",
+   "need": [
+    "transmitter",
+    "sign",
+    "route"
+   ],
+   "flag": [],
+   "label": "Solitary tract to amygdala",
+   "candidates": [
+    {
+     "corpus": "europepmc",
+     "page": 38422648,
+     "line": "In this review, we discuss the contribution of brainstem, hypothalamic, amygdalar and cortical structures in PS genesis. We propose that muscle atonia during PS is due to activation of glutamatergic neurons localized in the pontine sublaterodorsal tegmental nucleus (SLD) projecting to glycinergic/GABAergic pre-motoneurons localized in the ventro-medial medulla (vmM).",
+     "attrs": [
+      "transmitter",
+      "route"
+     ],
+     "qid": "acb83b0c"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 951,
+     "line": "See: primary afferents estrogen 315 excitatory burst cells (generation of saccades) 770 extended amygdala concept 414 external arcuate fibres 198 external capsule 417 external carotid artery 99 middle meningeal artery 99 external eye muscles, motor pools 728 external germinal layer (of cerebellum) 18 external granular layer (of cerebellum) 18 external limiting membrane (retina) 751 external medullary lamina thalamus 210 external nucleus of the inferior colliculus 214 extrapyramidal motor system 428;",
+     "attrs": [
+      "sign",
+      "route"
+     ],
+     "qid": "f7b5439b"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 419,
+     "line": "clei, the reticular formation and the nucleus of the solitary tract, whereas the output of the medial division of the extended amygdala is confined mainly to the medial hypothalamus",
+     "attrs": [
+      "route"
+     ],
+     "qid": "7fd5fba9"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 419,
+     "line": "clei, the reticular formation and the nucleus of the solitary tract, whereas the output of the medial division of the extended amygdala is confined mainly to the medial hypothalamus **Fibre** **Connections** **of** **the** **BST**",
+     "attrs": [
+      "route"
+     ],
+     "qid": "8c307858"
+    },
+    {
+     "corpus": "kandel",
+     "page": 1560,
+     "line": "Serotonergic and noradrenergic neurons in the pons and medulla project widely to highly diverse terminal fields in brain regions that include the hypothalamus, hippocampus, amygdala, basal ganglia, and cerebral cortex (Figures 61–5 and 61–6).",
+     "attrs": [
+      "route"
+     ],
+     "qid": "c3e87aa3"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 406,
+     "line": "The periaqueductal gray also integrates inputs from nociceptive pathways and limbic structures such as the amygdala and limbic cortex, and sends outputs to brainstem nuclei and the rostroventromedial medulla to drive descending inhibitory pathways.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "39ca2e43"
+    },
+    {
+     "corpus": "kandel",
+     "page": 1073,
+     "line": "Other pathways from the spinal cord (not shown) also transmit visceral information to many parts of the central autonomic network, including the nucleus of the solitary tract, parabrachial nucleus, periaqueductal gray, hypothalamus, amygdala, and cortex.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "733e2d26"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 898,
+     "line": "Among them, the central nucleus of the amygdala, the preoptic area, different hypothalamic nuclei, the periaqueductal grey, the nucleus of the solitary tract, the prefrontal cortex, the adrenergic cell group C1 [32] and Barrington’s micturition area may be mentioned.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "6131672b"
+    },
+    {
+     "corpus": "europepmc",
+     "page": 38027491,
+     "line": "The brain nuclei involved in regulating visceral pain mainly include the nucleus of the solitary tract, parabrachial nucleus (PBN), locus coeruleus (LC), rostral ventromedial medulla (RVM), anterior cingulate cortex (ACC), paraventricular nucleus (PVN), and the amygdala.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "de12cda9"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 406,
+     "line": "The periaqueductal gray also integrates inputs from nociceptive pathways and limbic structures such as the amygdala and limbic cortex, and sends outputs to brainstem nuclei and the rostroventromedial medulla to drive descending inhibitory pathways. Some of these descending pathways",
+     "attrs": [
+      "route"
+     ],
+     "qid": "b6bd016b"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 935,
+     "line": "Its descending fibres enter the hypothalamus and pass, via the medial forebrain bundle, to lateral tegmental parts of the mesencephalon, pons and medulla oblongata. The termination pattern of these descending BST fibres is virtually identical to that of the amygdala [52, 57] (Table 23.1).",
+     "attrs": [
+      "route"
+     ],
+     "qid": "d2f6b92e"
+    },
+    {
+     "corpus": "kandel",
+     "page": 1560,
+     "line": "Serotonergic and noradrenergic neurons in the pons and medulla project widely to highly diverse terminal fields in brain regions that include the hypothalamus, hippocampus, amygdala, basal ganglia, and cerebral cortex (Figures 61–5 and 61–6). Chapter 61 / Disorders of Mood and Anxiety 1513",
+     "attrs": [
+      "route"
+     ],
+     "qid": "de92a7b6"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 935,
+     "line": "The fibres of this projection innervate the lateral hypothalamic area and numerous centres in the midbrain, pons and medulla oblongata (Fig. The arch-shaped _bed_ _nucleus_ _of_ _the_ _stria_ _ter-_ _minalis_ _(BST)_ is caudally directly continuous with the medial and central amygdaloid nuclei.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "176c1752"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 922,
+     "line": "The functional state of these structures is not affected solely by neural afferents from the hippocampus and the amygdala, but is also modulated by impulses travelling along visceral-sensory pathways ascending from the spinal cord and the medulla oblongata as well as by various blood-borne agents.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "07d800ae"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 898,
+     "line": "Numerous regions project to the periLC. Among them, the central nucleus of the amygdala, the preoptic area, different hypothalamic nuclei, the periaqueductal grey, the nucleus of the solitary tract, the prefrontal cortex, the adrenergic cell group C1 [32] and Barrington’s micturition area may be mentioned.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "b655c894"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 466,
+     "line": "nucleus of solitary tract <sup>*</sup> bed nucleus stria terminalis medialis bed nucleus stria terminalis medialis medial amygdaloid nucleus <sup>*</sup> medial amygdaloid nucleus medial preoptic area <sup>*</sup> medial & lateral preoptic area anterior hypothalamus anterior hypothalamus ventromedial hypothalamus",
+     "attrs": [
+      "route"
+     ],
+     "qid": "dbbb0095"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 930,
+     "line": "Other information concerning the internal body state converges via the vagus nerve on the nucleus of the solitary tract. This information is conveyed partly directly and partly indirectly via relays in the parabrachial nuclei or in the periaqueductal grey to prosencephalic limbic regions, including the amygdala [62].",
+     "attrs": [
+      "route"
+     ],
+     "qid": "1cb7718e"
+    },
+    {
+     "corpus": "kandel",
+     "page": 1048,
+     "line": "Rather, scientists refer to the cholinergic neurons by their location, eg, the pedunculopontine (Ch6) and laterodorsal tegmental (Ch5) neurons in the pons, which project widely from the cerebral cortex to the medulla, and the basal forebrain (Ch1–Ch4) groups, which project to the cerebral cortex, hippocampus, and amygdala.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "1d3b0af2"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 935,
+     "line": "The BST projects substantially to the amygdaloid complex, the mediobasal telencephalon and the hypothalamus and to a large number of grisea located in the brain stem. Its descending fibres enter the hypothalamus and pass, via the medial forebrain bundle, to lateral tegmental parts of the mesencephalon, pons and medulla oblongata.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "a604a620"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 930,
+     "line": "It is important to note that the nucleus of the solitary tract, the parabrachial complex and the periaqueductal grey all maintain strong, reciprocal connections with the hypothalamus, the central nucleus of the amygdala and the BST, all of which represent sites of origin of substantial descending limbic projections [11, 39, 45, 57, 85, 111, 118, 131].",
+     "attrs": [
+      "route"
+     ],
+     "qid": "e5ec498e"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 412,
+     "line": "Brain stem neurons located in the periaqueductal grey matter (PAG), the substantia nigra pars compacta, the ventral tegmental area, the dorsal raphe nucleus, the locus coeruleus, the lateral parabrachial nucleus, the nucleus of the solitary tract and the ventrolateral medulla project to the central amygdaloid nucleus [7, 35, 135, 148, 149, 151, 184, 220].",
+     "attrs": [
+      "route"
+     ],
+     "qid": "5d49244d"
+    },
+    {
+     "corpus": "kandel",
+     "page": 1073,
+     "line": "Such learned responses are prevented by selective lesions of the amygdalar region, which projects to the Other pathways from the spinal cord (not shown) also transmit visceral information to many parts of the central autonomic network, including the nucleus of the solitary tract, parabrachial nucleus, periaqueductal gray, hypothalamus, amygdala, and cortex.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "270b1c44"
+    },
+    {
+     "corpus": "kandel",
+     "page": 1073,
+     "line": "Other pathways from the spinal cord (not shown) also transmit visceral information to many parts of the central autonomic network, including the nucleus of the solitary tract, parabrachial nucleus, periaqueductal gray, hypothalamus, amygdala, and cortex. The spinal cord also projects to the main somatosensory nucleus of the thalamus (ventral posterolateral nucleus).",
+     "attrs": [
+      "route"
+     ],
+     "qid": "2d4d75eb"
+    },
+    {
+     "corpus": "kandel",
+     "page": 1072,
+     "line": "**Central Control of Autonomic Function Can** **Involve the Periaqueductal Gray, Medial** **Prefrontal Cortex, and Amygdala** The periaqueductal gray, which surrounds the cerebral aqueduct in the midbrain, receives inputs from most parts of the central autonomic network and projects to the medullary reticular formation to initiate integrated behavioral and autonomic responses.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "f25db79e"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 326,
+     "line": "Fernandez de Molina and Hunsperger [34] showed that electrical stimulation along a continuous zone that includes the amygdala, stria terminalis, hypothalamus, and periaqueductal grey elicits defensive behaviour. According to Hilton and colleagues [71, 147] this zone continues through the pontomedullary tegmentum caudally to the level of the dorsal motor nucleus of the vagus nerve.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "db857f91"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 419,
+     "line": "Ricardo and Koh [174, 175] have emphasized that the BST receives the most dense pathways ascending from the interoceptive portion of the nucleus of the solitary tract to the forebrain. The BST projects substantially to the amygdala, the mediobasal telencephalon, the hypothalamus, the thalamus and to a considerable number of grisea located in the brain stem [36, 37, 49–51, 78, 206].",
+     "attrs": [
+      "route"
+     ],
+     "qid": "f10cc044"
+    },
+    {
+     "corpus": "kandel",
+     "page": 1048,
+     "line": "Rather, scientists refer to the cholinergic neurons by their location, eg, the pedunculopontine (Ch6) and laterodorsal tegmental (Ch5) neurons in the pons, which project widely from the cerebral cortex to the medulla, and the basal forebrain (Ch1–Ch4) groups, which project to the cerebral cortex, hippocampus, and amygdala. **Monoaminergic Neurons Share Many** **Cellular Properties**",
+     "attrs": [
+      "route"
+     ],
+     "qid": "5ecb67b5"
+    },
+    {
+     "corpus": "europepmc",
+     "page": 38027491,
+     "line": "The neural circuits involved are PBN-amygdala, LC-RVM, amygdala-insula, ACC-amygdala, claustrum-ACC, bed nucleus of the stria terminalis-PVN and the PVN-ventral lateral septum circuit. Signals generated by acupuncture can modulate the central structures and interconnected neural circuits of multiple brain regions, including the medulla oblongata, cerebral cortex, thalamus, and hypothalamus.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "92592736"
+    },
+    {
+     "corpus": "kandel",
+     "page": 1560,
+     "line": "The relevant monoamine neurotransmitters— serotonin, norepinephrine, and dopamine—are synthesized by cells that reside within brain stem nuclei (Chapter 40). Serotonergic and noradrenergic neurons in the pons and medulla project widely to highly diverse terminal fields in brain regions that include the hypothalamus, hippocampus, amygdala, basal ganglia, and cerebral cortex (Figures 61–5 and 61–6).",
+     "attrs": [
+      "route"
+     ],
+     "qid": "3b62af99"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 922,
+     "line": "The functional state of these structures is not affected solely by neural afferents from the hippocampus and the amygdala, but is also modulated by impulses travelling along visceral-sensory pathways ascending from the spinal cord and the medulla oblongata as well as by various blood-borne agents. Moreover, the limbic system as a whole is implicated in the regulation of affective and motivated behaviours.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "d14a1626"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 898,
+     "line": "Among them, the central nucleus of the amygdala, the preoptic area, different hypothalamic nuclei, the periaqueductal grey, the nucleus of the solitary tract, the prefrontal cortex, the adrenergic cell group C1 [32] and Barrington’s micturition area may be mentioned. The locus coeruleus is densely innervated by hypocretin/orexin fibres, originating from the perifornical region of the hypothalamus [49] (see also Chap.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "4cc7cd8a"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 406,
+     "line": "The periaqueductal gray is discussed in relationship to its connections with the amygdala and the motor component of the fear response in Chapter 8 and illustrated in Figure 8-9. The periaqueductal gray also integrates inputs from nociceptive pathways and limbic structures such as the amygdala and limbic cortex, and sends outputs to brainstem nuclei and the rostroventromedial medulla to drive descending inhibitory pathways.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "478dcb82"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 922,
+     "line": "The structures constituting the limbic axis are centrally involved in the regulation of endocrine and visceral effector mechanisms. The functional state of these structures is not affected solely by neural afferents from the hippocampus and the amygdala, but is also modulated by impulses travelling along visceral-sensory pathways ascending from the spinal cord and the medulla oblongata as well as by various blood-borne agents.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "9c3adca9"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 324,
+     "line": "The PAG receives input from a variety of structures including several limbic cortical fields (prelimbic, infralimbic, anterior cingulate) [132, 217], the amygdaloid complex [177, 178], MPN [15, 30, 220], VMH [30, 217, 402], zona incerta (ZI) [163, 217, 220], ATV [187], dorsal raphe and central superior nuclei [30, 220], parabrachial nuclei [30, 220], pontine and medullary reticular formation [30, 220], and spinal cord [224, 398].",
+     "attrs": [
+      "route"
+     ],
+     "qid": "b05e988e"
+    },
+    {
+     "corpus": "europepmc",
+     "page": 38027491,
+     "line": "Acupuncture can exert analgesic effects by integrating and interacting input signals from acupuncture points and the sites of pain in the central nervous system. The brain nuclei involved in regulating visceral pain mainly include the nucleus of the solitary tract, parabrachial nucleus (PBN), locus coeruleus (LC), rostral ventromedial medulla (RVM), anterior cingulate cortex (ACC), paraventricular nucleus (PVN), and the amygdala.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "9cef1b46"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 930,
+     "line": "Remarkably, some neurons situated in lamina I of the spinal and medullary dorsal horn and in the grey matter surrounding the spinal central canal project directly to many parts of the hypothalamus, including the posterior, ventromedial and paraventricular nuclei and the lateral hypothalamic area and, less densely, to a number of limbic telencephalic regions, including the amygdala, septum, nucleus accumbens, ventral pallidum and orbital cortex [20].",
+     "attrs": [
+      "route"
+     ],
+     "qid": "91ca919c"
+    },
+    {
+     "corpus": "europepmc",
+     "page": 38027491,
+     "line": "The brain nuclei involved in regulating visceral pain mainly include the nucleus of the solitary tract, parabrachial nucleus (PBN), locus coeruleus (LC), rostral ventromedial medulla (RVM), anterior cingulate cortex (ACC), paraventricular nucleus (PVN), and the amygdala. The neural circuits involved are PBN-amygdala, LC-RVM, amygdala-insula, ACC-amygdala, claustrum-ACC, bed nucleus of the stria terminalis-PVN and the PVN-ventral lateral septum circuit.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "2d20eb41"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 412,
+     "line": "Brain stem neurons located in the periaqueductal grey matter (PAG), the substantia nigra pars compacta, the ventral tegmental area, the dorsal raphe nucleus, the locus coeruleus, the lateral parabrachial nucleus, the nucleus of the solitary tract and the ventrolateral medulla project to the central amygdaloid nucleus [7, 35, 135, 148, 149, 151, 184, 220]. Most of the brain stem centres mentioned project to the amygdala via the ventral amygdalofugal pathway.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "4d92a6ac"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 412,
+     "line": "The ventral thalamic peripeduncular nucleus projects to the medial cortical, central and lateral amygdaloid nuclei [7, 149, 151, 184]. Brain stem neurons located in the periaqueductal grey matter (PAG), the substantia nigra pars compacta, the ventral tegmental area, the dorsal raphe nucleus, the locus coeruleus, the lateral parabrachial nucleus, the nucleus of the solitary tract and the ventrolateral medulla project to the central amygdaloid nucleus [7, 35, 135, 148, 149, 151, 184, 220].",
+     "attrs": [
+      "route"
+     ],
+     "qid": "457726c3"
+    },
+    {
+     "corpus": "kandel",
+     "page": 1048,
+     "line": "This classification system did not include the many other cholinergic neurons in the nervous system, such as motor neurons or striatal interneurons, and is not used much anymore. Rather, scientists refer to the cholinergic neurons by their location, eg, the pedunculopontine (Ch6) and laterodorsal tegmental (Ch5) neurons in the pons, which project widely from the cerebral cortex to the medulla, and the basal forebrain (Ch1–Ch4) groups, which project to the cerebral cortex, hippocampus, and amygdala.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "c22df195"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 296,
+     "line": "The lateral stream of fibres from MFB to brain stem sweeps laterally and caudally over the dorsal border of the substantia nigra into a ventrolateral tegmental position immediately caudal to the substantia nigra; at this level it curves dorsomedially and then descends through the central tegmental area to the lateral tegmental field of the pons and medulla oblongata. This stream contains fibres descending from the central nucleus of the amygdala [162, 279, 390], the bed nucleus of the stria terminalis",
+     "attrs": [
+      "route"
+     ],
+     "qid": "8be0d679"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 892,
+     "line": "The dorsal and median raphe nuclei share afferents from the lateral habenular and the interpeduncular nuclei, hypothalamus and preoptic area, the nucleus of the solitary tract, the substantia nigra, the basal telencephalon and the prefrontal cortex. Afferents from the lateral tegmental field, the locus coeruleus, the tuber cinereum, the amygdala and the entopeduncular nucleus (medial segment of the globus pallidus) are restricted to the dorsal raphe nucleus; septal afferents terminate in the median raphe nucleus (Table 22.1).",
+     "attrs": [
+      "route"
+     ],
+     "qid": "8b6ea2a1"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 930,
+     "line": "This information is conveyed partly directly and partly indirectly via relays in the parabrachial nuclei or in the periaqueductal grey to prosencephalic limbic regions, including the amygdala [62]. It is important to note that the nucleus of the solitary tract, the parabrachial complex and the periaqueductal grey all maintain strong, reciprocal connections with the hypothalamus, the central nucleus of the amygdala and the BST, all of which represent sites of origin of substantial descending limbic projections [11, 39, 45, 57, 85, 111, 118, 131].",
+     "attrs": [
+      "route"
+     ],
+     "qid": "efbd2ff7"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 311,
+     "line": "**Fig.** **10.6.** Circuitry subserving the stress response. _A1_, _A2_, noradrenergic cell groups; _AC_, adrenal cortex; _AM_, amygdala; _APG_, anterior pituitary gland; _BST_, bed nucleus of stria terminalis; _CING_, cingulate cortex; _CRH_, corticotropin-releasing hormone; _GCS_, glucocorticoids; _HF_, hippocampal formation; _LC_, locus coeruleus; _ME_, median eminence; _NST_, nucleus of the solitary tract; _PAG_, periaqueductal gray; _PB_, parabrachial nuclei; _PVH_, paraventricular hypothalamic nucleus; _S_, septal nuclei; _SFO_, subfornical organ",
+     "attrs": [
+      "route"
+     ],
+     "qid": "beb453fc"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 930,
+     "line": "It is important to note that the nucleus of the solitary tract, the parabrachial complex and the periaqueductal grey all maintain strong, reciprocal connections with the hypothalamus, the central nucleus of the amygdala and the BST, all of which represent sites of origin of substantial descending limbic projections [11, 39, 45, 57, 85, 111, 118, 131]. A third route by which interoceptive (particularly cardiovascular) information is conveyed to the limbic prosencephalon passes via the ventrolateral medulla and the catecholaminergic cell groups A1 and C1 embedded therein.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "a721e993"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 930,
+     "line": "Remarkably, some neurons situated in lamina I of the spinal and medullary dorsal horn and in the grey matter surrounding the spinal central canal project directly to many parts of the hypothalamus, including the posterior, ventromedial and paraventricular nuclei and the lateral hypothalamic area and, less densely, to a number of limbic telencephalic regions, including the amygdala, septum, nucleus accumbens, ventral pallidum and orbital cortex [20]. A direct visual input reaches the hypothalamus via the retinohypothalamic tract, which terminates in the suprachiasmatic nucleus.",
+     "attrs": [
+      "route"
+     ],
+     "qid": "b333d8a9"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 311,
+     "line": "306 Section II Structure of Spinal Cord and Brain Parts **Fig.** **10.6.** Circuitry subserving the stress response. _A1_, _A2_, noradrenergic cell groups; _AC_, adrenal cortex; _AM_, amygdala; _APG_, anterior pituitary gland; _BST_, bed nucleus of stria terminalis; _CING_, cingulate cortex; _CRH_, corticotropin-releasing hormone; _GCS_, glucocorticoids; _HF_, hippocampal formation; _LC_, locus coeruleus; _ME_, median eminence; _NST_, nucleus of the solitary tract; _PAG_, periaqueductal gray; _PB_, parabrachial nuclei; _PVH_, paraventricular hypothalamic nucleus; _S_, septal nuclei; _SFO_, subfornical organ",
+     "attrs": [
+      "route"
+     ],
+     "qid": "54cfe93b"
+    },
+    {
+     "corpus": "nieuwenhuys",
+     "page": 930,
+     "line": "It is noteworthy that the parabrachial complex contains numerous neurons that are exclusively activated by noxious stimuli applied to several areas of the body and that these ‘nociceptive-specific’ neurons have been demonstrated to project to the nucleus centralis amygdalae and the retrochiasmatic area of the hypothalamus [11, 12, 61]. Remarkably, some neurons situated in lamina I of the spinal and medullary dorsal horn and in the grey matter surrounding the spinal central canal project directly to many parts of the hypothalamus, including the posterior, ventromedial and paraventricular nuclei and the lateral hypothalamic area and, less densely, to a number of limbic telencephalic regions, including the amygdala, septum, nucleus accumbens, ventral pallidum and orbital cortex [20].",
+     "attrs": [
+      "route"
+     ],
+     "qid": "78d21465"
+    }
+   ]
+  },
   "locus_coeruleus_R->frontal_R": {
    "from": "locus_coeruleus_R",
    "to": "frontal_R",
