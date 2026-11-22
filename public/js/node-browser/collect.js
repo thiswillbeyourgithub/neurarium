@@ -156,6 +156,9 @@ export function collectNodes(data, deps, opts = {}) {
     }
   }
 
+  for (const a of data.functionalAreas || []) {
+    push("functional_areas", a.name, `BA ${a.number}`, a.provenance, () => nav.area(a), a);
+  }
   for (const c of data.circuits || []) {
     owner = c.id;
     push("circuits", c.name, "", c.provenance, () => nav.circuit(c), c);

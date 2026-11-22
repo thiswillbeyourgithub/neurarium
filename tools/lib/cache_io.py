@@ -87,6 +87,7 @@ FORMATS: dict[str, Format | Callable[[Any], str]] = {
     "category_judged.json": DEFAULT,
     "category_worklist.json": DEFAULT,
     "circuit_images_sources.json": INDENT2,
+    "functional_area_images_sources.json": INDENT2,
     "classification_judged.json": DEFAULT,
     "classification_sources.json": SORTED,
     "classification_worklist.json": DEFAULT,

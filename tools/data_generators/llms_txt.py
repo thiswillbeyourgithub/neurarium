@@ -37,6 +37,7 @@ FEEDBACK = (f"{_EN['panel.feedback']} [{_EN['panel.feedbackIssue']}]({REPO_URL}/
 COLLECTION_BLURBS: dict[str, str] = {
     "structures": "brain regions (id, name, group, position, aliases, sources). Paired regions are emitted once on the right (`mirror: true`); the left twin is implied",
     "projections": "pathways between regions (from, to, kind, transmitter/sign claims, sources)",
+    "functional_areas": "BETA functional areas: the human Brodmann areas, each `{number, name, structures, own_shape}` naming the modeled structures it lies in (a lobe until the area has its own drawn shape, `own_shape`), with the book sentence placing it",
     "circuits": "named circuits (a set of regions; member pathways are the projections with both ends in the set)",
     "projection_groups": "projection groups by kind or sign (members are the projections matching it)",
     "receptors": "neurotransmitter receptors (family, class, sign, synaptic site, expression regions + density, effects, variants), each attribute graded separately",

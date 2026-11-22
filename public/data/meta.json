@@ -12742,6 +12742,16 @@
         "missing": 0,
         "unknown": 0
       },
+      "functional_areas": {
+        "total": 43,
+        "verified": 35,
+        "uncertain": 0,
+        "sourced": 0,
+        "llm": 0,
+        "nosource": 8,
+        "missing": 8,
+        "unknown": 0
+      },
       "projection_groups": {
         "total": 12,
         "verified": 12,
@@ -12914,15 +12924,15 @@
       }
     },
     "nodes": {
-      "total": 11201,
-      "verified": 10383,
+      "total": 11244,
+      "verified": 10418,
       "uncertain": 445,
       "sourced": 0,
       "llm": 236,
-      "nosource": 137,
-      "missing": 373,
+      "nosource": 145,
+      "missing": 381,
       "unknown": 594,
-      "backed": 10828,
+      "backed": 10863,
       "pct_backed": 97
     },
     "ki_coverage": {

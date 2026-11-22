@@ -187,6 +187,7 @@ from data_generators import physchem  # noqa: E402 (PubChem #21 + B3DB #22)
 from data_generators import workup  # noqa: E402 (RCP 4.2-4.4 workup, BDPM #24)
 from data_generators import excretion  # noqa: E402 (route, unchanged share, kidney, urine pH)
 from data_generators.drug_effect_kinds import KINDS as DRUG_EFFECT_KINDS  # noqa: E402 (sleep, seizure threshold)
+from data_generators import functional_areas as FUNCTIONAL_AREAS  # noqa: E402 (BETA)
 from data_generators import page_links as PAGE_LINKS  # noqa: E402 (per-page source urls)
 from data_generators.unknown import apply_unknown  # noqa: E402
 
@@ -1533,28 +1534,59 @@ def _build_projections(structures: list[dict[str, Any]]) -> list[dict[str, Any]]
     return projections
 
 
+def _expand_bases(bases: list[str], structure_ids: set[str], what: str) -> list[str]:
+    """Base structure ids -> the emitted ids (both hemispheres for a paired form, the
+    bare id for a midline one), so a set can't reference a structure that doesn't exist."""
+    ids: list[str] = []
+    for base in bases:
+        members = [sid for sid in (base, f"{base}_R", f"{base}_L") if sid in structure_ids]
+        if not members:
+            raise KeyError(f"{what} references unknown structure {base!r} "
+                           f"(no {base}, {base}_R or {base}_L emitted).")
+        ids.extend(members)
+    return ids
+
+
+def _attach_image(record: dict[str, Any], img: dict[str, Any] | None) -> None:
+    """Hot-linked Wikipedia illustration (hero + gallery) on a circuit or area record,
+    the treatment a structure gets; nothing when the item was not resolved."""
+    if img and img.get("url"):
+        record["structure_image"] = img["url"]
+        gallery = [g["url"] for g in img.get("gallery", []) if g.get("url")]
+        if gallery:
+            record["structure_image_gallery"] = gallery
+
+
+def _build_functional_areas(structures: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Every functional area record (BETA, data_generators/functional_areas.py)."""
+    images = _load_image_sources("functional_area_images_sources.json")
+    structure_ids = {r["id"] for r in structures}
+    out = []
+    for area in FUNCTIONAL_AREAS.AREAS:
+        what = f"functional area {area['id']!r}"
+        record = {"id": area["id"], "number": area["number"], "name": area["name"],
+                  "structures": _expand_bases(area["structures"], structure_ids, what),
+                  "own_shape": area["id"] in FUNCTIONAL_AREAS.OWN_SHAPE,
+                  "wikipedia": area["wikipedia"],
+                  "wikipedia_provenance": _wiki_provenance(area["id"])}
+        if area["sources"]:
+            record["sources"] = _expand_sources(area["sources"], what)
+        _attach_image(record, images.get(area["id"]))
+        out.append(record)
+    return out
+
+
 def _build_circuits(structures: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Every circuit record. Each base structure id expands to whatever was emitted
-    (both hemispheres for a paired form, the bare id for a midline one). Built from
-    the structure records already collected, so it can't reference a structure that
-    doesn't exist."""
+    """Every circuit record, its base structure ids expanded (see _expand_bases)."""
     circuits: list[dict[str, Any]] = []
     circuit_images = _load_circuit_images()
     structure_ids = {r["id"] for r in structures}
     for circuit in CIRCUITS:
-        ids: list[str] = []
-        for base in circuit["structures"]:
-            members = [sid for sid in (base, f"{base}_R", f"{base}_L")
-                       if sid in structure_ids]
-            if not members:
-                raise KeyError(
-                    f"Circuit {circuit['id']!r} references unknown structure "
-                    f"{base!r} (no {base}, {base}_R or {base}_L emitted).")
-            ids.extend(members)
         record = {
             "id": circuit["id"],
             "name": _t(circuit["name"]),
-            "structures": ids,
+            "structures": _expand_bases(circuit["structures"], structure_ids,
+                                        f"Circuit {circuit['id']!r}"),
         }
         if circuit.get("description"):
             record["description"] = {"en": circuit["description"],
@@ -1572,12 +1604,7 @@ def _build_circuits(structures: list[dict[str, Any]]) -> list[dict[str, Any]]:
         # Hot-linked Wikipedia illustration (hero + gallery), keyed by circuit id, the
         # same treatment a structure gets (see _load_circuit_images). Only set when the
         # circuit was resolved, so an unillustrated one renders no image.
-        cimg = circuit_images.get(circuit["id"])
-        if cimg and cimg.get("url"):
-            record["structure_image"] = cimg["url"]
-            cgallery = [g["url"] for g in cimg.get("gallery", []) if g.get("url")]
-            if cgallery:
-                record["structure_image_gallery"] = cgallery
+        _attach_image(record, circuit_images.get(circuit["id"]))
         circuits.append(record)
     return circuits
 
@@ -1674,7 +1701,8 @@ def _build_drugs(drug_targets: dict[str, dict[str, Any]], receptor_bases: set[st
 
 
 def _apply_uncertainty_passes(*, structures, projections, circuits, projection_groups,
-                              receptors, drug_targets, drugs, metabolites) -> None:
+                              receptors, drug_targets, drugs, metabolites,
+                              functional_areas=()) -> None:
     """The cross-node post-passes that flag claims (uncertain / unknown / contradicted /
     animal evidence), in their dependency order (each comment says why)."""
     # The "uncertain" badges: a post-pass, not part of _drug_record, because two of the
@@ -1731,6 +1759,7 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     projections = _build_projections(structures)
     INTEGRITY.validate_quote_registries()
     circuits = _build_circuits(structures)
+    functional_areas = _build_functional_areas(structures)
     projection_groups = _build_projection_groups()
     # Receptors and drug-target regions reference structure *bases* like circuits do
     # (the viewer expands them to both hemispheres).
@@ -1740,6 +1769,7 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     drug_targets = _build_drug_targets(receptors)
     drugs, metabolites, drug_ids = _build_drugs(drug_targets, receptor_bases)
     nodes = dict(structures=structures, projections=projections, circuits=circuits,
+                 functional_areas=functional_areas,
                  projection_groups=projection_groups, receptors=receptors,
                  drug_targets=drug_targets, drugs=drugs, metabolites=metabolites)
     _apply_uncertainty_passes(**nodes)
@@ -1756,6 +1786,7 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     meta = build_meta(**nodes, addons=addons)
     return ({"meta": meta, "structures": structures,
              "projections": projections, "circuits": circuits,
+             "functional_areas": functional_areas,
              "projection_groups": projection_groups,
              "receptors": receptors, "drugs": drugs,
              "metabolites": metabolites, "addons": addons}, shapes)

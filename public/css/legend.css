@@ -149,3 +149,8 @@
   flex: 0 0 auto;
 }
 .swatch.line { height: 4px; border-radius: 2px; }
+
+/* A functional area not drawn yet (it lights its whole lobe): a quieter row. */
+.legend-item.coarse { opacity: 0.55; }
+.legend-item.coarse.selected { opacity: 1; }
+.area-coarse { font-size: 11px; color: var(--muted); margin: 2px 0 6px; }

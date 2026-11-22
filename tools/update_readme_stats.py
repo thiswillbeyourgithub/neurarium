@@ -150,6 +150,7 @@ KIND_LABELS = {
     "projection_transmitter": "Pathway transmitter",
     "projection_sign": "Pathway sign (excit./inhib.)",
     "circuits": "Functional circuits",
+    "functional_areas": "Functional areas (Brodmann, BETA)",
     "projection_groups": "Projection groups",
     "receptors": "Receptor system/family",
     "receptor_class": "Receptor mechanism class",

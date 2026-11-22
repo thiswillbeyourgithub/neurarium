@@ -83,6 +83,8 @@ SOURCES_JSON = TOOLS / "generated_cache" / "structure_images_sources.json"
 # Circuits get their own sources file (same schema), keyed by circuit id, so the two
 # concerns never share a key namespace. Read by generate_data.py's _load_circuit_images.
 CIRCUIT_SOURCES_JSON = TOOLS / "generated_cache" / "circuit_images_sources.json"
+AREAS_JSONL = CIRCUITS_JSONL.parent / "functional_areas.jsonl"
+AREA_SOURCES_JSON = CIRCUIT_SOURCES_JSON.parent / "functional_area_images_sources.json"
 
 # The French Wikipedia MediaWiki endpoint (the gallery also scans the FR article,
 # which often carries labelled diagrams the EN one does not). Same /w/api.php shape.
@@ -374,14 +376,16 @@ def load_structure_bases() -> list[tuple[str, str]]:
     return list(seen.items())
 
 
-def load_circuit_bases() -> list[tuple[str, str]]:
-    """``(circuit_id, wikipedia_url)`` pairs, one per circuit that has a wikipedia
-    link. Same shape as :func:`load_structure_bases` so the resolution loop is shared;
-    a circuit id has no hemisphere suffix, so it is used verbatim as the key."""
-    if not CIRCUITS_JSONL.exists():
+def load_circuit_bases(path: Path | None = None) -> list[tuple[str, str]]:
+    """``(id, wikipedia_url)`` pairs, one per record of a set collection (circuits by
+    default, functional areas too) that has a wikipedia link. Same shape as
+    :func:`load_structure_bases` so the resolution loop is shared; such an id has no
+    hemisphere suffix, so it is used verbatim as the key."""
+    path = path or CIRCUITS_JSONL
+    if not path.exists():
         return []
     out: list[tuple[str, str]] = []
-    for line in CIRCUITS_JSONL.read_text(encoding="utf-8").splitlines():
+    for line in path.read_text(encoding="utf-8").splitlines():
         if not line.strip():
             continue
         rec = json.loads(line)
@@ -497,7 +501,7 @@ def main() -> None:
                     help="only process the first N items per target (smoke test)")
     ap.add_argument("--delay", type=float, default=0.2,
                     help="seconds to sleep between items (politeness)")
-    ap.add_argument("--target", choices=("structures", "circuits", "all"),
+    ap.add_argument("--target", choices=("structures", "circuits", "areas", "all"),
                     default="all",
                     help="which node kind's images to resolve (default: all)")
     args = ap.parse_args()
@@ -525,6 +529,14 @@ def main() -> None:
         # Circuits carry no manual overrides (empty map); everything else is identical.
         resolve_list(filtered(load_circuit_bases()), csources, {}, args)
         _persist(csources, CIRCUIT_SOURCES_JSON)
+
+    if args.target in ("areas", "all"):
+        asources: dict[str, dict] = {}
+        if AREA_SOURCES_JSON.exists():
+            asources = json.loads(AREA_SOURCES_JSON.read_text(encoding="utf-8"))
+        print("\n--- functional areas ---")
+        resolve_list(filtered(load_circuit_bases(AREAS_JSONL)), asources, {}, args)
+        _persist(asources, AREA_SOURCES_JSON)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,178 @@
+"""Functional areas (BETA): named sets of brain structures a reader searches by function.
+
+Node kind ``functional_areas`` (one node per area, ``functional_areas.jsonl``). The first
+family is the human Brodmann areas, listed as on Wikipedia's "Brodmann area" article
+(section "For humans and other primates"; areas 13, 14, 15 and 49, found only in other
+primates or rodents, are left out). Each area names the modeled structures (base ids) it
+lies in and, where a book states it, one quote tying the area number to its place or
+role (Nolte #26, Nieuwenhuys #6, Kandel #2). An area no book names ships unsourced.
+
+The modeled brain is coarser than the areas (each lobe is one structure), so until an
+area has its own drawn sub-structure (``own_shape``) the viewer lights the lobe(s) it
+lies in and greys the area's row. Cutting those sub-structures is gradual (see CLAUDE.md
+"Structure granularity").
+
+Built with the help of Claude Code.
+"""
+from __future__ import annotations
+
+from typing import Any
+
+from .provenance import _kandel, _nieuwenhuys, _nolte
+
+WIKI = "https://en.wikipedia.org/wiki/"
+
+# Shared sentences (one quote object per sentence, cited by several areas).
+_N_PERIARCHI = _nieuwenhuys(367,
+    "it can be said that the periarchicortex comprises the infralimbic cortex (area 25), "
+    "the anterior cingulate cortex (area 24), the retrosplenial areas 29 and 30 and the "
+    "entorhinal cortex (area 28; Fig. 12.3).")
+_N_CINGULATE = _nieuwenhuys(515,
+    "They are the source of thalamic fibres to the cingulate gyrus (areas 23, 24, 32), "
+    "including the retrosplenial areas 29 and 30")
+_N_PERIRHINAL = _nieuwenhuys(390,
+    "The medial temporal lobe is a morphologically heterogeneous structure, which "
+    "encompasses the well-differentiated temporal portion of the hippocampal formation, "
+    "the entorhinal cortex, the areas TH and TF and the perirhinal areas 35 and 36 "
+    "(Fig. 12.3).")
+_N_DLPFC = _nieuwenhuys(450,
+    "The dorsolateral prefrontal loop originates principally in Brodmann’s areas 9 and 46.")
+_N_ORBITO = _nieuwenhuys(623,
+    "the caudal orbitofrontal cortex (areas 12, 13, 14 and caudal part of area 11)")
+_N_PARIETAL = _nieuwenhuys(516,
+    "This area includes the caudal part of the superior parietal lobule (area 7), most of "
+    "the inferior parietal lobule (areas 39 and 40)")
+_N_ANGULAR = _nieuwenhuys(613,
+    "the extension of areas 39 and 40 of Brodmann correspond roughly to those of the "
+    "angular and supramarginal gyri, respectively.")
+_N_INFEROTEMPORAL = _nieuwenhuys(413,
+    "The visual association cortex, which occupies most of the inferior part of the "
+    "temporal lobe (areas 20 and 21)")
+_N_BROCA = _nieuwenhuys(603,
+    "It is generally accepted that areas 44 and 45 of Brodmann in the inferior part of the "
+    "frontal lobe constitute the cytoarchitectonic correlates of Broca’s speech region.")
+_NO_VISUAL_ASSOC = _nolte(550,
+    "areas 18 and 19, which surround the primary visual cortex, are part of the visual "
+    "association cortex.")
+
+
+def _a(num: str, title: str, en: str, fr: str, structures: list[str],
+       sources: list[dict] | None = None) -> dict[str, Any]:
+    return {"id": "ba" + num.replace(", ", "_").replace(" and ", "_"), "number": num,
+            "name": {"en": en, "fr": fr}, "structures": structures,
+            "wikipedia": WIKI + title.replace(" ", "_"), "sources": sources or []}
+
+
+# Area -> where it lies among the modeled structures, in Wikipedia's order.
+AREAS: list[dict[str, Any]] = [
+    _a("3, 1 and 2", "Brodmann areas 3, 1 and 2", "Primary somatosensory cortex",
+       "Cortex somatosensoriel primaire", ["parietal"],
+       [_nolte(661, "postcentral gyrus is the site of the primary somatosensory cortex "
+                    "(Brodmann areas 3, 1, and 2).")]),
+    _a("4", "Brodmann area 4", "Primary motor cortex", "Cortex moteur primaire", ["frontal"],
+       [_nolte(554, "Primary motor cortex corresponds to Brodmann’s area 4, occupying a "
+                    "tapering strip in the precentral gyrus, mostly in the anterior wall of "
+                    "the central sulcus.")]),
+    _a("5", "Brodmann area 5", "Superior parietal lobule (somatosensory association)",
+       "Lobule pariétal supérieur (association somatosensorielle)", ["parietal"],
+       [_nieuwenhuys(610, "except for its most anterior part (area 5), which forms the "
+                          "(unimodal) somatosensory association cortex.")]),
+    _a("6", "Brodmann area 6", "Premotor cortex and supplementary motor area",
+       "Cortex prémoteur et aire motrice supplémentaire", ["frontal"],
+       [_nolte(555, "Movements can be elicited by stimulating area 6 on the lateral surface "
+                    "of the hemisphere (premotor cortex)")]),
+    _a("7", "Brodmann area 7", "Superior parietal lobule (visuo-motor coordination)",
+       "Lobule pariétal supérieur (coordination visuomotrice)", ["parietal"], [_N_PARIETAL]),
+    _a("8", "Brodmann area 8", "Frontal eye fields", "Champs oculomoteurs frontaux",
+       ["frontal"],
+       [_nieuwenhuys(270, "is reciprocally connected with the frontal eye field (area 8) "
+                          "and entire prefrontal cortex")]),
+    _a("9", "Brodmann area 9", "Dorsolateral prefrontal cortex",
+       "Cortex préfrontal dorsolatéral", ["frontal"], [_N_DLPFC]),
+    _a("10", "Brodmann area 10", "Anterior prefrontal cortex (frontal pole)",
+       "Cortex préfrontal antérieur (pôle frontal)", ["frontal"],
+       [_nieuwenhuys(617, "the frontal pole (area 10)")]),
+    _a("11", "Brodmann area 11", "Orbitofrontal cortex", "Cortex orbitofrontal",
+       ["frontal"], [_N_ORBITO]),
+    _a("12", "Brodmann area 12", "Orbitofrontal cortex (between the superior frontal gyrus "
+       "and the inferior rostral sulcus)", "Cortex orbitofrontal (entre gyrus frontal "
+       "supérieur et sillon rostral inférieur)", ["frontal"], [_N_ORBITO]),
+    _a("16", "Brodmann area 16", "Insular cortex", "Cortex insulaire", ["insula"]),
+    _a("17", "Brodmann area 17", "Primary visual cortex (V1)", "Cortex visuel primaire (V1)",
+       ["occipital"],
+       [_nolte(650, "Its upper and lower banks contain the primary visual cortex "
+                    "(Brodmann area 17).")]),
+    _a("18", "Brodmann area 18", "Secondary visual cortex (V2)",
+       "Cortex visuel secondaire (V2)", ["occipital"], [_NO_VISUAL_ASSOC]),
+    _a("19", "Brodmann area 19", "Associative visual cortex (V3, V4, V5)",
+       "Cortex visuel associatif (V3, V4, V5)", ["occipital"], [_NO_VISUAL_ASSOC]),
+    _a("20", "Brodmann area 20", "Inferior temporal gyrus", "Gyrus temporal inférieur",
+       ["temporal"], [_N_INFEROTEMPORAL]),
+    _a("21", "Brodmann area 21", "Middle temporal gyrus", "Gyrus temporal moyen",
+       ["temporal"], [_N_INFEROTEMPORAL]),
+    _a("22", "Brodmann area 22", "Superior temporal gyrus (Wernicke's area)",
+       "Gyrus temporal supérieur (aire de Wernicke)", ["temporal"],
+       [_nolte(667, "posterior part of the superior temporal gyrus (Brodmann area 22)")]),
+    _a("23", "Brodmann area 23", "Ventral posterior cingulate cortex",
+       "Cortex cingulaire postérieur ventral", ["cingulate"], [_N_CINGULATE]),
+    _a("24", "Brodmann area 24", "Ventral anterior cingulate cortex",
+       "Cortex cingulaire antérieur ventral", ["cingulate"], [_N_PERIARCHI]),
+    _a("25", "Brodmann area 25", "Subgenual area", "Aire subgénuale", ["cingulate"],
+       [_N_PERIARCHI]),
+    _a("26", "Brodmann area 26", "Ectosplenial area", "Aire ectospléniale", ["cingulate"]),
+    _a("27", "Brodmann area 27", "Presubiculum", "Présubiculum", ["hippocampus"]),
+    _a("28", "Brodmann area 28", "Ventral entorhinal cortex", "Cortex entorhinal ventral",
+       ["temporal"], [_N_PERIARCHI]),
+    _a("29", "Brodmann area 29", "Retrosplenial cortex", "Cortex rétrosplénial",
+       ["cingulate"], [_N_PERIARCHI]),
+    _a("30", "Brodmann area 30", "Retrosplenial cortex (subdivision)",
+       "Cortex rétrosplénial (subdivision)", ["cingulate"], [_N_PERIARCHI]),
+    _a("31", "Brodmann area 31", "Dorsal posterior cingulate cortex",
+       "Cortex cingulaire postérieur dorsal", ["cingulate"]),
+    _a("32", "Brodmann area 32", "Dorsal anterior cingulate cortex",
+       "Cortex cingulaire antérieur dorsal", ["cingulate"], [_N_CINGULATE]),
+    _a("33", "Brodmann area 33", "Anterior cingulate cortex (pregenual)",
+       "Cortex cingulaire antérieur (prégénual)", ["cingulate"]),
+    _a("34", "Brodmann area 34", "Dorsal entorhinal cortex", "Cortex entorhinal dorsal",
+       ["temporal"]),
+    _a("35", "Brodmann area 35", "Perirhinal cortex", "Cortex périrhinal", ["temporal"],
+       [_N_PERIRHINAL]),
+    _a("36", "Brodmann area 36", "Perirhinal cortex (ectorhinal)",
+       "Cortex périrhinal (ectorhinal)", ["temporal"], [_N_PERIRHINAL]),
+    _a("37", "Brodmann area 37", "Fusiform gyrus", "Gyrus fusiforme", ["temporal"],
+       [_nieuwenhuys(608, "the entire inferotemporal cortex, composed of areas 37, 20 and "
+                          "21, are included in the ventral stream.")]),
+    _a("38", "Brodmann area 38", "Temporal pole", "Pôle temporal", ["temporal"],
+       [_nieuwenhuys(620, "which corresponds to area 38 of Brodmann, is commonly "
+                          "designated as a paralimbic structure.")]),
+    _a("39", "Brodmann area 39", "Angular gyrus", "Gyrus angulaire", ["parietal"],
+       [_N_ANGULAR]),
+    _a("40", "Brodmann area 40", "Supramarginal gyrus", "Gyrus supramarginal", ["parietal"],
+       [_N_ANGULAR]),
+    _a("41 and 42", "Brodmann areas 41 and 42", "Auditory cortex", "Cortex auditif",
+       ["temporal"],
+       [_nolte(554, "One or two transverse temporal gyri (of Heschl; see Fig. 14.18) cross "
+                    "the posterior part of this surface and form Brodmann’s areas 41 and "
+                    "42.")]),
+    _a("43", "Brodmann area 43", "Gustatory cortex (parietal operculum)",
+       "Cortex gustatif (opercule pariétal)", ["parietal"],
+       [_kandel(499, "is located on the upper bank of the lateral sulcus (Sylvian fissure) "
+                     "and on the parietal operculum; it covers Brodmann’s area 43.")]),
+    _a("44", "Brodmann area 44", "Broca's area (pars opercularis)",
+       "Aire de Broca (pars opercularis)", ["frontal"], [_N_BROCA]),
+    _a("45", "Brodmann area 45", "Broca's area (pars triangularis)",
+       "Aire de Broca (pars triangularis)", ["frontal"], [_N_BROCA]),
+    _a("46", "Brodmann area 46", "Dorsolateral prefrontal cortex (area 46)",
+       "Cortex préfrontal dorsolatéral (aire 46)", ["frontal"], [_N_DLPFC]),
+    _a("47", "Brodmann area 47", "Orbital part of the inferior frontal gyrus",
+       "Partie orbitaire du gyrus frontal inférieur", ["frontal"],
+       [_nieuwenhuys(633, "also includes the inferior prefrontal region corresponding to "
+                          "area 47")]),
+    _a("48", "Brodmann area 48", "Retrosubicular area", "Aire rétrosubiculaire",
+       ["temporal"]),
+    _a("52", "Brodmann area 52", "Parainsular area", "Aire parainsulaire",
+       ["temporal", "insula"]),
+]
+
+# Areas with their own drawn sub-structure (the rest light their lobe, row greyed).
+OWN_SHAPE: set[str] = set()

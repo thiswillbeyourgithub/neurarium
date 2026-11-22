@@ -79,6 +79,7 @@ export const KIND_GROUPS = [
     ["projection_transmitter", "nodes.k.projection_transmitter"],
     ["projection_sign", "nodes.k.projection_sign"],
   ] },
+  { label: "nodes.ownerArea", kinds: [["functional_areas", "nodes.k.functional_areas"]] },
   { label: "nodes.ownerCircuit", kinds: [["circuits", "nodes.k.circuits"]] },
   { label: "nodes.ownerGroup", kinds: [["projection_groups", "nodes.k.projection_groups"]] },
   { label: "nodes.ownerAddon", kinds: [["addons", "nodes.k.addons"]] },

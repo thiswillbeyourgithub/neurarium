@@ -40,3 +40,27 @@ export function buildEffectLegend(data, onPick) {
     items: data.effects || [], count: (effect) => effect.drugs.length,
     tagTitle: t("effects.legendTag"), onPick });
 }
+
+/**
+ * Build the Functional areas section (#areas-body, BETA): one row per Brodmann area in
+ * Wikipedia's order, tagged with its number. An area without its own drawn shape yet
+ * lights the whole lobe it lies in, so its row is greyed (`coarse`) with a tooltip.
+ * @param {import("./data.js").BrainData} data
+ * @param {(area: object) => void} onPick
+ * @returns {(activeId: string|null) => void} reflect: lights the active row
+ */
+export function buildAreaLegend(data, onPick) {
+  const areas = data.functionalAreas || [];
+  const reflect = buildBrowseList({ section: "areas", captionKey: "areas.legendHint",
+    kind: "area", items: areas.map((a) => ({ ...a, label: a.name })),
+    count: (a) => a.number, tagTitle: t("areas.legendTag"),
+    onPick: (item) => onPick(areas.find((a) => a.id === item.id)) });
+  for (const a of areas) {
+    const row = document.querySelector(`#areas-body [data-tour-id="area:${a.id}"]`);
+    if (row && !a.own_shape) {
+      row.classList.add("coarse");
+      row.title = t("areas.coarseTip");
+    }
+  }
+  return reflect;
+}

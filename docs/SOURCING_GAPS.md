@@ -16,6 +16,7 @@ Every node is graded (see `docs/PROVENANCE.md`); a bare `llm` grade and NOSOURCE
 | `receptor_synaptic` | 56 | 42 | 0 | 0 | 14 | 0 | 0 |
 | `projection_sign` | 41 | 17 | 13 | 0 | 11 | 0 | 0 |
 | `drug_enzyme_strength` | 148 | 135 | 3 | 0 | 10 | 0 | 0 |
+| `functional_areas` | 43 | 35 | 0 | 0 | 0 | 8 | 0 |
 | `drug_categories` | 314 | 307 | 0 | 0 | 7 | 0 | 0 |
 | `drug_half_life` | 283 | 272 | 6 | 0 | 0 | 5 | 0 |
 | `receptor_sign` | 56 | 51 | 0 | 0 | 5 | 0 | 0 |

@@ -372,8 +372,8 @@ class QuoteTableTest(unittest.TestCase):
     def setUpClass(cls):
         cls.quotes = {q["id"]: q for q in _load_jsonl(DATA_DIR / "quotes.jsonl")}
         cls.docs = [json.loads((DATA_DIR / "meta.json").read_text(encoding="utf-8"))]
-        for name in ("structures", "projections", "circuits",
-                     "projection_groups", "receptors", "drugs", "metabolites", "addons"):
+        import claim_walk as CW  # the one list of emitted collections
+        for name in CW.COLLECTIONS:
             cls.docs.extend(_load_jsonl(DATA_DIR / f"{name}.jsonl"))
 
     def test_no_inline_quotes_remain(self):

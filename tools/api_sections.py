@@ -168,6 +168,13 @@ FIELDS: dict[str, dict[str, Label]] = {
         "tentative": Label(None, why="worded in the route pill's tooltip"),
         "sources": _NOLABEL_SOURCES,
     },
+    "area": {
+        "sources": Label("area.heading"),
+        "structures": Label("area.structures", section=True),
+        "number": Label(None, why="folded into the identity line (area.heading)"),
+        "own_shape": Label(None, why="viewer drawing state (a lobe lights until the area is drawn)"),
+        "wikipedia": _REFERENCE,
+    },
     "circuit": {
         "sources": Label("circuit.heading"),
         "structures": Label("circuit.structures", section=True),
@@ -312,6 +319,7 @@ ALWAYS: dict[str, dict[str, Section]] = {
         **({"release_modulation": Section("relmod.heading")} if kind == "receptor" else {}),
     } for kind, regions in (("receptor", "locations"), ("target", "regions"))},
     "circuit": {"structures": Section("circuit.structures")},
+    "area": {"structures": Section("area.structures")},
 }
 
 

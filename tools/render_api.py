@@ -55,14 +55,14 @@ import node_id  # noqa: E402 (the id shape check_data enforces)
 import api_sections as AS  # noqa: E402 (the panel's labels + layout, one table)
 
 PUBLIC = Path(__file__).resolve().parent.parent / "public"
-COLLECTIONS = ("structures", "projections", "circuits", "projection_groups",
-               "receptors", "drugs", "metabolites", "addons")
+COLLECTIONS = ("structures", "projections", "circuits", "functional_areas",
+               "projection_groups", "receptors", "drugs", "metabolites", "addons")
 
 # Presentation-only fields (geometry, colours, images), each with its reason there.
 SKIP = set(AS.HIDDEN)
 # The viewer's `#tabs=<kind>:<id>` opener for each page kind, where one exists.
 TAB_KIND = {"drug": "drug", "receptor": "target", "target": "target", "structure": "structure",
-            "circuit": "circuit", "group": "group", "effect": "effect"}
+            "circuit": "circuit", "group": "group", "effect": "effect", "area": "area"}
 # What JS encodeURIComponent leaves unescaped, so a page URL matches the viewer's byte for byte.
 URI_SAFE = "-_.!~*'()"
 API = "/api"  # absolute links, so a page reads the same served at any address (the 404)
@@ -131,6 +131,7 @@ def stamped(text: str) -> str:
 KIND_TITLES = {"drug": "Drugs", "metabolite": "Active metabolites", "receptor": "Receptors",
                "target": "Other drug targets", "structure": "Brain regions",
                "projection": "Pathways", "circuit": "Circuits", "group": "Projection groups",
+               "area": "Functional areas (Brodmann, BETA)",
                "effect": "Clinical effects (BETA, derived)"}
 
 
@@ -165,6 +166,7 @@ class Renderer:
             "structure": {r["id"]: r for r in data["structures"]},
             "projection": {projection_id(r): r for r in data["projections"]},
             "circuit": {r["id"]: r for r in data["circuits"]},
+            "area": {r["id"]: r for r in data.get("functional_areas", [])},
             "group": {r["id"]: r for r in data["projection_groups"]},
         }
         self.modes = data["meta"].get("receptor_effect_modes") or {}

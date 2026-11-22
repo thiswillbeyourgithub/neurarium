@@ -5,6 +5,7 @@ import { closeOpenTip } from "./tooltip.js";
 import { el, btn, flashRow, foldSections, keepSelectionOnSummaries, withSubtitle } from "./dom.js";
 import { showEffect } from "./views/effect.js";
 import { showCircuit } from "./views/circuit.js";
+import { showArea } from "./views/area.js";
 import { showProjectionGroup } from "./views/projection-group.js";
 import { show } from "./views/connection.js";
 import { showStructure } from "./views/structure.js";
@@ -247,6 +248,7 @@ export function createInfoPanel(data, sourcingModal) {
     showDrug: (...args) => showDrug(P, ...args),
 
     showCircuit: (...args) => showCircuit(P, ...args),
+    showArea: (...args) => showArea(P, ...args),
 
     showProjectionGroup: (...args) => showProjectionGroup(P, ...args),
 

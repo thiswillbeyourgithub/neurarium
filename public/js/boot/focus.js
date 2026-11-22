@@ -7,7 +7,7 @@
 import { createCircuitAnimation } from "../circuit-anim.js";
 import { createReceptorMarkers } from "../receptor-markers.js";
 import { createDrugAnimation } from "../drug-anim.js";
-import { buildEffectLegend, buildEnzymeLegend } from "../legend/browse.js";
+import { buildAreaLegend, buildEffectLegend, buildEnzymeLegend } from "../legend/browse.js";
 import { buildTargetLegend } from "../legend/targets.js";
 import { buildDrugLegend } from "../legend/drugs.js";
 import { TYPING_SETTLE_MS } from "./toolbar.js";
@@ -381,6 +381,26 @@ export function wireFocus({
     show: (circuit) => info.showCircuit(circuit),
     title: (circuit) => circuit.name,
   });
+  // A functional area (BETA): its structures isolated, no arrow pinned, no pulse. Its
+  // legend row stays lit while the isolate set is exactly those structures.
+  const areaWatch = { active: false, meshes: new Set(),
+    matches: (iso) => !!iso && iso.size === areaWatch.meshes.size
+      && [...areaWatch.meshes].every((m) => iso.has(m)),
+    hide: () => { areaWatch.active = false; } };
+  const focusArea = createSceneFocus({
+    kind: "area",
+    apply: (area) => {
+      const aMeshes = meshesOfIds(area.structures);
+      selection.setCircuit(aMeshes, []);
+      areaWatch.meshes = new Set(aMeshes);
+      areaWatch.active = true;
+      return aMeshes;
+    },
+    show: (area) => info.showArea(area),
+    title: (area) => area.name,
+    watch: areaWatch,
+    buildLegend: (onPick) => buildAreaLegend(data, onPick),
+  });
   // The (established) arrows this projection group stands for: by sign in sign
   // mode, by kind otherwise (the data record is per kind/sign). Tentative arrows
   // are excluded, matching the established-only legend rows.
@@ -402,7 +422,7 @@ export function wireFocus({
 
   return {
     circuitAnim, drugAnim, receptorMarkers,
-    focusCircuit, focusDrug, focusEffect, focusEnzyme, focusProjectionGroup, focusTarget,
-    selectConnection, selectDrug, selectStructure, selectTarget,
+    focusArea, focusCircuit, focusDrug, focusEffect, focusEnzyme, focusProjectionGroup,
+    focusTarget, selectConnection, selectDrug, selectStructure, selectTarget,
   };
 }

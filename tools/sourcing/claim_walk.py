@@ -40,7 +40,7 @@ EXCLUDE_CORPUS = {"allen_ahba"}
 UNPLACED = "*"
 
 # The emitted collections the walk reads, as ``data`` keys (``meta`` is one object).
-COLLECTIONS = ("structures", "projections", "circuits", "projection_groups",
+COLLECTIONS = ("structures", "projections", "circuits", "functional_areas", "projection_groups",
                "receptors", "drugs", "metabolites", "addons")
 
 
@@ -531,6 +531,13 @@ def reconstruct_claims(quotes, data=None, on_cite=None, site_kinds=None):
         for q in _qids(c.get("sources", [])):
             add(q, f"Functional circuit '{c['name']}': {c.get('description', '')}",
                 CS.site("circuit", c["id"]))
+
+    kind["now"] = "functional_areas"
+    for a in data.get("functional_areas", []):
+        lobes = ", ".join(a["structures"])
+        for q in _qids(a.get("sources", [])):
+            add(q, f"Brodmann area {a['number']} ({a['name']}) lies in: {lobes}.",
+                CS.site("functional_area", a["id"]))
 
     kind["now"] = "projection_groups"
     for g in data["projection_groups"]:

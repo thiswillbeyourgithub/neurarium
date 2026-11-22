@@ -108,6 +108,7 @@ from checks.baked_meshes import check_baked_meshes
 from checks.changelog import check_changelog
 from checks.clinpgx_variants import check_clinpgx_variants
 from checks.common import DATA_DIR, Report, expand_mirrored, load_jsonl, load_meta
+from checks.functional_areas import check_functional_areas  # noqa: E402
 from checks.connectivity import check_connectivity
 from checks.duplicates import check_duplicates
 from checks.enzyme_variability import check_enzyme_variability
@@ -137,6 +138,7 @@ def main():
     structures = load_jsonl(report, "structures")
     projections = expand_mirrored(load_jsonl(report, "projections"))
     circuits = load_jsonl(report, "circuits")
+    functional_areas = load_jsonl(report, "functional_areas")
     projection_groups = load_jsonl(report, "projection_groups")
     receptors = load_jsonl(report, "receptors")
     drugs = load_jsonl(report, "drugs")
@@ -149,11 +151,12 @@ def main():
     quotes_by_id = load_quotes(report)
     referenced, dangling = set(), []
     rehydrate_quotes([meta, structures, projections, circuits, projection_groups,
-                      receptors, drugs, metabolites, addons], quotes_by_id, referenced,
+                      receptors, drugs, metabolites, addons, functional_areas],
+                     quotes_by_id, referenced,
                      dangling)
     check_quotes(report, quotes_by_id, referenced, dangling)
     collections = [meta, structures, projections, circuits, projection_groups,
-                   receptors, drugs, metabolites, addons]
+                   receptors, drugs, metabolites, addons, functional_areas]
     if only:
         check_freshness(report, meta, collections, metabolites=metabolites,
                         receptors=receptors)
@@ -169,6 +172,7 @@ def main():
                   metabolites, circuits, projection_groups, CONTRADICTIONS,
                   quotes_by_id)
     check_connectivity(report, structures, projections)
+    check_functional_areas(report, structures, functional_areas)
     check_ki_coverage(report, meta, drugs)
     check_flow_consistency(report, meta, drugs, projections, receptors)
     check_changelog(report)

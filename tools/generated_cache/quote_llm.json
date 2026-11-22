@@ -681,6 +681,9 @@
 "q_0c10093165d0": {
 "drug:promethazine/categories": "sonnet"
 },
+"q_0c13f1d6f894": {
+"functional_area:ba38": "opus"
+},
 "q_0c265070ae51": {
 "drug:levomilnacipran/brands[Fetzima]": "sonnet"
 },
@@ -816,6 +819,9 @@
 "q_0e2f760c1d5d": {
 "drug:ketamine/excretion[route:fecal]": "opus",
 "drug:ketamine/excretion[route:renal]": "opus"
+},
+"q_0e43f0984f7d": {
+"functional_area:ba10": "opus"
 },
 "q_0e7e4b34be09": {
 "drug:pentobarbital/originator_country": "opus"
@@ -1479,6 +1485,9 @@
 "q_19c789e5ac35": {
 "drug:pseudoephedrine/half_life": "sonnet"
 },
+"q_19db223a037b": {
+"functional_area:ba22": "opus"
+},
 "q_19deb0cf25dc": {
 "drug:viloxazine/bindings[5ht2b:antagonist]": "sonnet",
 "drug:viloxazine/bindings[5ht2c:agonist]": "sonnet"
@@ -1749,6 +1758,9 @@
 },
 "q_1e83e6057bcc": {
 "receptor:5ht2a/effects[antagonism:sws_increase]": "opus"
+},
+"q_1e8bb09353f7": {
+"functional_area:ba41_42": "opus"
 },
 "q_1ea82803d893": {
 "drug:pimavanserin/first_approval": "opus"
@@ -2202,6 +2214,9 @@
 },
 "q_255287c1b271": {
 "drug:lithium/excretion[route:renal]": "opus"
+},
+"q_255c82433f9c": {
+"functional_area:ba7": "opus"
 },
 "q_25604aa22aa0": {
 "drug:methylphenidate_dl/enzymes[ces1:substrate]": "opus",
@@ -4313,6 +4328,9 @@
 "projection:thalamus_R->frontal_R": "opus",
 "projection:thalamus_R->frontal_R/transmitter": "opus"
 },
+"q_4bb2a021aae7": {
+"functional_area:ba43": "opus"
+},
 "q_4bb47c34afe7": {
 "drug:tasimelteon/formulations[ir]/tmax": "opus",
 "drug:tasimelteon/tmax": "sonnet"
@@ -4347,6 +4365,9 @@
 },
 "q_4c44fadb4b27": {
 "drug:lurasidone/workup[weight:during]": "opus"
+},
+"q_4c5501b3b100": {
+"functional_area:ba5": "opus"
 },
 "q_4c78f92729f7": {
 "drug:hydromorphone/half_life": "sonnet"
@@ -5258,6 +5279,10 @@
 },
 "q_5ebd64019872": {
 "receptor:ampa/classification[sign]": "opus"
+},
+"q_5ec583a76dc9": {
+"functional_area:ba20": "opus",
+"functional_area:ba21": "opus"
 },
 "q_5ec728bcce23": {
 "drug:furosemide/workup[glycaemia:during]": "opus"
@@ -6645,6 +6670,13 @@
 "drug:chlordiazepoxide/metabolites[desmethyldiazepam]": "opus",
 "drug:chlordiazepoxide/metabolites[oxazepam]": "opus"
 },
+"q_75536ca1e3b4": {
+"functional_area:ba24": "opus",
+"functional_area:ba25": "opus",
+"functional_area:ba28": "opus",
+"functional_area:ba29": "opus",
+"functional_area:ba30": "opus"
+},
 "q_756bea28a599": {
 "drug:cabergoline/bindings[5ht7:antagonist]": "sonnet"
 },
@@ -8019,6 +8051,9 @@
 },
 "q_8e4d234389a9": {
 "drug:dextromethorphanbupropion/metabolites[dextrorphan]": "opus"
+},
+"q_8e4f11429a34": {
+"functional_area:ba3_1_2": "opus"
 },
 "q_8e53fb9252ff": {
 "drug:pipamperone/formulations[ir]/tmax": "opus",
@@ -9422,6 +9457,10 @@
 "drug:lurasidone/formulations[ir]/tmax": "opus",
 "drug:lurasidone/tmax": "sonnet"
 },
+"q_a598fb7b7c2b": {
+"functional_area:ba18": "opus",
+"functional_area:ba19": "opus"
+},
 "q_a5a8259fae6e": {
 "receptor:mu/locations[temporal]": "sonnet"
 },
@@ -9592,6 +9631,10 @@
 },
 "q_a867e4302e5b": {
 "drug:cariprazine/workup[weight:during]": "opus"
+},
+"q_a86d58535518": {
+"functional_area:ba44": "opus",
+"functional_area:ba45": "opus"
 },
 "q_a8769de1b0fd": {
 "drug:flibanserin/excretion[route:fecal]": "opus",
@@ -9838,6 +9881,9 @@
 },
 "q_ae018a33a59a": {
 "drug:donepezil/nbn": "sonnet"
+},
+"q_ae09ffd2b421": {
+"functional_area:ba4": "opus"
 },
 "q_ae0a179184c1": {
 "drug:amantadine/excretion[route:renal]": "opus",
@@ -10324,6 +10370,10 @@
 "q_b64c60fb07a6": {
 "drug:zuclopenthixol/bindings[h1:antagonist]": "sonnet"
 },
+"q_b6589bb3f49b": {
+"functional_area:ba46": "opus",
+"functional_area:ba9": "opus"
+},
 "q_b65906b22bbe": {
 "drug:deutetrabenazine/excretion[route:fecal]": "opus",
 "drug:deutetrabenazine/excretion[route:renal]": "opus"
@@ -10531,6 +10581,9 @@
 "q_b9dbfe73d79d": {
 "drug:clomipramine/metabolites[desmethylclomipramine]": "sonnet",
 "drug:clomipramine/metabolites[desmethylclomipramine]/formed_by[cyp1a2]": "sonnet"
+},
+"q_b9e81b32cf6d": {
+"functional_area:ba8": "opus"
 },
 "q_b9ed21e62773": {
 "projection:raphe->olfactory_bulb_R": "opus",
@@ -12597,6 +12650,10 @@
 "q_df16922282ac": {
 "drug:amitriptyline/excretion[route:renal]": "opus"
 },
+"q_df4ec639914f": {
+"functional_area:ba23": "opus",
+"functional_area:ba32": "opus"
+},
 "q_df52b5091f52": {
 "receptor:kappa/effects[agonism:prolactin_elevation]": "opus"
 },
@@ -12736,6 +12793,9 @@
 "q_e236e913075c": {
 "drug:thioridazine/brands[Melleril]": "sonnet"
 },
+"q_e2480283fb4d": {
+"functional_area:ba6": "opus"
+},
 "q_e24ec405afd3": {
 "drug:phentermine/first_approval": "opus"
 },
@@ -12793,6 +12853,10 @@
 },
 "q_e33e41a9b351": {
 "drug:diazepam/metabolites[desmethyldiazepam]": "opus"
+},
+"q_e3459b05a416": {
+"functional_area:ba11": "opus",
+"functional_area:ba12": "opus"
 },
 "q_e34b205b320f": {
 "target:net/effects[inhibition:analgesia]": "opus"
@@ -13903,6 +13967,9 @@
 "q_f5e41f00a4c0": {
 "drug:oxycodone/categories": "sonnet"
 },
+"q_f5f466ba4a55": {
+"functional_area:ba47": "opus"
+},
 "q_f602466ff73c": {
 "drug:mescaline/categories": "sonnet"
 },
@@ -14056,6 +14123,10 @@
 "q_f869a311a4e5": {
 "drug:flupenthixol/nbn": "sonnet"
 },
+"q_f87271e57b0c": {
+"functional_area:ba39": "opus",
+"functional_area:ba40": "opus"
+},
 "q_f88cdf651d3a": {
 "drug:acamprosate/excretion[route:renal]": "opus",
 "drug:acamprosate/excretion[unchanged:urine]": "opus"
@@ -14157,6 +14228,10 @@
 "drug:buprenorphine/enzymes[cyp2c8:substrate]": "opus",
 "drug:buprenorphine/metabolites[norbuprenorphine]/formed_by[cyp2c8]": "opus",
 "drug:buprenorphine/metabolites[norbuprenorphine]/formed_by[cyp3a4]": "opus"
+},
+"q_fa76dcb6967b": {
+"functional_area:ba35": "opus",
+"functional_area:ba36": "opus"
 },
 "q_fa7bf45fa5e4": {
 "projection:vta_R->temporal_R": "opus"
@@ -14308,6 +14383,9 @@
 "q_fcf754e9065c": {
 "drug:fentanyl/originator": "opus"
 },
+"q_fcfc423ca056": {
+"functional_area:ba17": "opus"
+},
 "q_fd026d4dc9e3": {
 "drug:risperidone/excretion[route:fecal]": "opus",
 "drug:risperidone/excretion[route:renal]": "opus"
@@ -14440,6 +14518,9 @@
 },
 "q_feed4210c811": {
 "drug:amobarbital/first_approval": "opus"
+},
+"q_feeedaddae77": {
+"functional_area:ba37": "opus"
 },
 "q_fef9c47901a7": {
 "drug:vilazodone/bindings[5ht1a:partial_agonist]": "sonnet"

@@ -299,7 +299,8 @@ def resolve(root: str, path: list) -> str | None:
 # ---------------------------------------------------------------------------
 
 def node_index(*, drugs=(), metabolites=(), receptors=(), targets=None,
-               projections=(), circuits=(), groups=(), structures=()):
+               projections=(), circuits=(), groups=(), structures=(),
+               functional_areas=()):
     """``(nodes, ambiguous)``: every node-shaped site -> its dict, plus the sites two
     nodes share (a duplicated binding row), which no entry may name.
 
@@ -379,6 +380,8 @@ def node_index(*, drugs=(), metabolites=(), receptors=(), targets=None,
             put(site("projection", pid, facet), claim)
     for c in circuits:
         put(site("circuit", c["id"]), c)
+    for a in functional_areas:
+        put(site("functional_area", a["id"]), a)
     for g in groups:
         put(site("group", f"{g['mode']}:{g['key']}"), g)
     for s in structures:

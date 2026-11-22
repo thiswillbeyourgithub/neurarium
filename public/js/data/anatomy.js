@@ -27,7 +27,7 @@ export function mirrorProjections(projections) {
  * Resolve projection colours + every anatomy display string; returns the
  * projection groups indexed by `${mode}:${key}`.
  */
-export function resolveAnatomy({ projections, structures, circuits, projectionGroups, v }) {
+export function resolveAnatomy({ projections, structures, circuits, functionalAreas = [], projectionGroups, v }) {
   const { projectionColors, kindSigns, signColors } = v;
   // Resolve each projection's colours from its kind (kept as the raw key, since it
   // indexes the colour/label maps): `color` is the per-transmitter colour (default
@@ -66,6 +66,14 @@ export function resolveAnatomy({ projections, structures, circuits, projectionGr
     // Further gif/svg from the structure's EN+FR articles, revealed by the panel's
     // "show more" (always an array, so the viewer can test .length).
     s.structureImageGallery = s.structure_image_gallery || [];
+  }
+  // Functional areas (BETA): a set of structures like a circuit, with no description of
+  // its own (the panel live-fetches the Wikipedia lead) and no pathways.
+  for (const a of functionalAreas) {
+    a.name = localize(a.name);
+    a.provenance = strongestGrade(a.sources);
+    a.structureImage = a.structure_image || null;
+    a.structureImageGallery = a.structure_image_gallery || [];
   }
   for (const c of circuits) {
     c.name = localize(c.name);

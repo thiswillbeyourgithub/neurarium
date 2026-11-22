@@ -25,7 +25,7 @@ const { t } = window.__I18N__;
  *            showSimulation: () => void, simulation: object|null}}
  */
 export function wireViews({
-  arrows, data, focusCircuit, focusDrug, focusProjectionGroup, focusTarget, info, meshById,
+  arrows, data, focusArea, focusCircuit, focusDrug, focusProjectionGroup, focusTarget, info, meshById,
   openDataFiles, openDetailTab, selectConnection, selectStructure, setNo3d, sourcingModal,
   urlState,
 }) {
@@ -48,6 +48,7 @@ export function wireViews({
       if (arrow) selectConnection(arrow, { frame: true, isolate: true });
     },
     circuit: (c) => focusCircuit(c, { frame: true }),
+    area: (a) => focusArea(a, { frame: true }),
     group: (g) => focusProjectionGroup(g, { frame: true }),
   };
   const sourcingNav = {

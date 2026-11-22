@@ -37,6 +37,8 @@ export function wireControls({ camera, controls, meshes, arrows, labels, focus, 
   const structuresToggle = document.getElementById("structures-toggle");
   const structuresBody = document.getElementById("structures-body");
   const projectionsToggle = document.getElementById("projections-toggle");
+  const areasToggle = document.getElementById("areas-toggle");
+  const areasBody = document.getElementById("areas-body");
   const projectionsBody = document.getElementById("projections-body");
   const receptorsToggle = document.getElementById("receptors-toggle");
   const receptorsBody = document.getElementById("receptors-body");
@@ -148,6 +150,7 @@ export function wireControls({ camera, controls, meshes, arrows, labels, focus, 
     { toggle: enzymesToggle, body: enzymesBody },
     { toggle: effectsToggle, body: effectsBody },
     { toggle: structuresToggle, body: structuresBody },
+    { toggle: areasToggle, body: areasBody },
     { toggle: projectionsToggle, body: projectionsBody },
   ];
   for (const s of sections) {
