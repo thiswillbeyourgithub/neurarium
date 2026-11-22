@@ -1826,7 +1826,6 @@
 {"id": "q_327a0ac77e65", "corpus": "wikipedia_pharm", "page": "dextroamphetamine", "quote": "Excretion is enhanced in more acidic urine.", "llm": "opus", "fetched": "2026-10-11"}
 {"id": "q_3284d3a6611f", "corpus": "wikipedia_pharm", "page": "vortioxetine", "quote": "Excretion | 59% in urine , 26% in feces", "llm": "opus", "fetched": "2026-10-11"}
 {"id": "q_3286883b8706", "corpus": "stahl", "page": 193, "quote": "Duraclon (injection)", "llm": "sonnet", "heading": ["Clonidine", "Therapeutics"]}
-{"id": "q_328cc7b910e8", "corpus": "bdpm", "page": "61145640", "quote": "MEDIKINET 5 mg, gélule à libération modifiée", "fetched": "2026-10-10"}
 {"id": "q_32a0018dbc3a", "corpus": "wikipedia_pharm", "page": "meclizine", "quote": "It is metabolized in the liver by the CYP2D6 enzyme.", "llm": "opus", "fetched": "2026-10-11"}
 {"id": "q_32c2840c31f2", "corpus": "gtopdb_function", "page": 9, "quote": "5-HT4 receptor (HTR4), GtoPdb target 9 | physiological function (Human): Stimulation of gastric emptying. | tissue: In vivo.", "species": "Human", "llm": "opus", "fetched": "2026-10-15"}
 {"id": "q_32c541299a22", "corpus": "gtopdb_ki", "page": "domperidone", "quote": "domperidone at D3 receptor (DRD3, Human): Antagonist / Antagonist, pKi 7.1-7.6 [PMID 8301582]", "species": "Human", "fetched": "2026-10-12"}

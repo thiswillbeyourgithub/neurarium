@@ -48,7 +48,7 @@ RELEASES: dict[str, dict[str, Any]] = {
     },
     "xr": {
         "en": "Extended release", "fr": "Libération prolongée",
-        "abbr": (r"\b(?:XR|XL|SR|CR|ER|LA|CD|LP)\b",),
+        "abbr": (r"\b(?:XR|XL|SR|CR|ER|LA|CD|LP)\b", r"\bL\.P\.(?!\w)"),  # "QUASYM L.P."
         "words": (r"(?:extended|sustained|controlled|prolonged|slow)[- ]release",),
         "fr_words": (r"lib[ée]ration prolong",),
     },
@@ -120,6 +120,9 @@ for _rid in PRECEDENCE:
 IR_FORMS_EN = re.compile(
     r"\b(?:TABLET|CAPSULE|SYRUP|ELIXIR|(?:ORAL )?SOLUTION, ORAL|ORAL SOLUTION|"
     r"ORAL SUSPENSION|SUSPENSION, ORAL)\b", re.IGNORECASE)
+# "Modified release" (delayed OR extended) in the form: never immediate release, so an
+# oral form beside it ("gélule à libération modifiée") must not fall to "ir".
+MODIFIED = re.compile(r"modified[- ]release|lib[ée]ration modifi[ée]e", re.IGNORECASE)
 IR_FORMS_FR = re.compile(
     r"\b(?:comprim[ée]s?|g[ée]lules?|capsules?|solution buvable|suspension buvable|"
     r"sirop|gouttes buvables|granul[ée]s)\b", re.IGNORECASE)
@@ -190,7 +193,7 @@ def classify_label_title(title: str, routes=()) -> str | None:
     if routes - {"ORAL"}:
         # One non-oral route names the release; a label mixing routes is not one product.
         return classify(next(iter(routes))) if len(routes) == 1 else None
-    return "ir" if IR_FORMS_EN.search(body) else None
+    return "ir" if IR_FORMS_EN.search(body) and not MODIFIED.search(body) else None
 
 
 def classify_denomination(denomination: str, route: str) -> str | None:
@@ -202,6 +205,10 @@ def classify_denomination(denomination: str, route: str) -> str | None:
     'ir'
     >>> classify_denomination("AOTAL 333 mg, comprimé enrobé gastro-résistant", "orale")
     'dr'
+    >>> classify_denomination("QUASYM L.P. 30 mg, gélule à libération modifiée", "orale")
+    'xr'
+    >>> classify_denomination("X 30 mg, gélule à libération modifiée", "orale") is None
+    True
     >>> classify_denomination("GENCEBOK 10 mg/mL, solution pour perfusion",
     ...                        "intraveineuse;orale")
     'injection'
@@ -210,7 +217,8 @@ def classify_denomination(denomination: str, route: str) -> str | None:
     if named:
         return named
     routes = [r.strip().lower() for r in (route or "").split(";") if r.strip()]
-    if routes == ["orale"] and IR_FORMS_FR.search(denomination or ""):
+    if routes == ["orale"] and IR_FORMS_FR.search(denomination or "") \
+            and not MODIFIED.search(denomination or ""):
         return "ir"
     return None
 

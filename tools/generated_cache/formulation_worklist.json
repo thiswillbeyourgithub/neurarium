@@ -262,21 +262,6 @@
        "qid": "c6001120"
       }
      ]
-    },
-    "brand:Dexedrine": {
-     "brand": "Dexedrine",
-     "candidates": [
-      {
-       "corpus": "wikipedia_pharm",
-       "page": "amphetamine",
-       "line": "Main articles and pharmaceuticals | Amphetamine Adzenys ER Adzenys XR-ODT Dyanavel XR Evekeo Evekeo ODT Mixed amphetamine salts Adderall Adderall XR Mydayis Levoamphetamine N/A Dextroamphetamine Dexedrine ProCentra Zenzedi Lisdexamfetamine Vyvanse | Amphetamine | Adzenys ER Adzenys XR-ODT Dyanavel XR Evekeo Evekeo ODT Mixed amphetamine salts Adderall Adderall XR Mydayis | Levoamphetamine | N/A | Dextroamphetamine | Dexedrine ProCentra Zenzedi | Lisdexamfetamine | Vyvanse",
-       "releases": [
-        "xr",
-        "odt"
-       ],
-       "qid": "4ac02393"
-      }
-     ]
     }
    }
   },
@@ -457,38 +442,6 @@
         "xr"
        ],
        "qid": "79e6fc98"
-      }
-     ]
-    },
-    "brand:Contrave": {
-     "brand": "Contrave",
-     "candidates": [
-      {
-       "corpus": "wikipedia_pharm",
-       "page": "bupropion",
-       "line": "^ \"Drug Approval Package: Contrave (naltrexone hydrochloride/bupropion hydrochloride) Extended-Release Tablets NDA #200063\" .",
-       "releases": [
-        "xr"
-       ],
-       "qid": "2727e8b6"
-      },
-      {
-       "corpus": "wikipedia_pharm",
-       "page": "bupropion",
-       "line": "^ \"Contrave Extended-Release – naltrexone hydrochloride and bupropion hydrochloride tablet, extended-release\" .",
-       "releases": [
-        "xr"
-       ],
-       "qid": "de84f0e2"
-      },
-      {
-       "corpus": "wikipedia_pharm",
-       "page": "bupropion",
-       "line": "^ a b c \"Highlight os Prescribing Information: CONTRAVE (naltrexone hydrochloride and bupropion hydrochloride) extended-release tablets, for oral use\" (PDF) .",
-       "releases": [
-        "xr"
-       ],
-       "qid": "c7167b8c"
       }
      ]
     }
@@ -964,29 +917,6 @@
   "ketamine": {
    "name": "Ketamine",
    "items": {
-    "brand:Spravato": {
-     "brand": "Spravato",
-     "candidates": [
-      {
-       "corpus": "wikipedia_fr",
-       "page": "k_tamine",
-       "line": "Aux États-Unis , elle est commercialisée depuis mars 2019 comme antidépresseur sous le nom de « Spravato » (laboratoires Janssen ), en spray nasal .",
-       "releases": [
-        "nasal"
-       ],
-       "qid": "9fc544a2"
-      },
-      {
-       "corpus": "wikipedia_fr",
-       "page": "k_tamine",
-       "line": "Toutefois, la revue médicale française Prescrire rapporte en mars 2022 que l'évaluation clinique de l' eskétamine par voie nasale (Spravato), centrée sur deux essais chez des patients adultes hospitalisés en urgence, montre un effet incertain sur les symptômes dépressifs, un surcroît de comportements auto-agressifs, et une augmentation des tentatives de suicide dans les semaines qui suivent.",
-       "releases": [
-        "nasal"
-       ],
-       "qid": "78ef4340"
-      }
-     ]
-    },
     "half_life": {
      "value": {
       "hours": 2.5
@@ -1465,6 +1395,57 @@
         "xr"
        ],
        "qid": "34036f82"
+      }
+     ]
+    },
+    "brand:Medikinet": {
+     "brand": "Medikinet",
+     "candidates": [
+      {
+       "corpus": "wikipedia_pharm",
+       "page": "methylphenidate",
+       "line": "These products include a range of brand names such as Concerta XL, Medikinet XL, Equasym XL, and Ritalin LA, each with different ratios of immediate-release to modified-release components and varying duration of action from 8 to 12 hours.",
+       "releases": [
+        "xr",
+        "ir"
+       ],
+       "qid": "e74e7148"
+      },
+      {
+       "corpus": "wikipedia_pharm",
+       "page": "methylphenidate",
+       "line": "Clockwise from top: Concerta 18 mg, Medikinet 5 mg, Methylphenidate TAD 10 mg, Ritalin 10 mg, Medikinet XL 40 mg",
+       "releases": [
+        "xr"
+       ],
+       "qid": "c188c5d8"
+      },
+      {
+       "corpus": "wikipedia_pharm",
+       "page": "methylphenidate",
+       "line": "Medikinet XL (UK) | methylphenidate ER (US) | 8 hours | ER capsule",
+       "releases": [
+        "xr"
+       ],
+       "qid": "166a379b"
+      },
+      {
+       "corpus": "wikipedia_pharm",
+       "page": "methylphenidate",
+       "line": "Medikinet Retard/CR/Adult/Modified Release tablets are an extended-release oral capsule form of methylphenidate.",
+       "releases": [
+        "xr"
+       ],
+       "qid": "a125aeaf"
+      },
+      {
+       "corpus": "wikipedia_fr",
+       "page": "m_thylph_nidate",
+       "line": "↑ a et b « Meddispar - Médicaments à base de méthylphénidate (Concerta LP, Ritaline, Ritaline LP, Medikinet, Quasym LP et génériques) : modification des conditions de pre… », sur meddispar.fr (consulté le 26 juin 2022 ) .",
+       "releases": [
+        "xr"
+       ],
+       "qid": "d21d0926"
       }
      ]
     }
@@ -2000,6 +1981,15 @@
         "xr"
        ],
        "qid": "e0be678a"
+      },
+      {
+       "corpus": "wikipedia_fr",
+       "page": "qu_tiapine",
+       "line": "↑ (en) Phil Milford, « AstraZeneca May Link Seroquel, Diabetes, Doctor Says », Bloomberg.com , Bloomberg L.P.",
+       "releases": [
+        "xr"
+       ],
+       "qid": "16a4c4d2"
       }
      ]
     }
@@ -2202,29 +2192,6 @@
        "qid": "0a09072e"
       }
      ]
-    },
-    "brand:Qsymia": {
-     "brand": "Qsymia",
-     "candidates": [
-      {
-       "corpus": "wikipedia_pharm",
-       "page": "topiramate",
-       "line": "^ \"Qsymia- phentermine and topiramate capsule, extended release\" .",
-       "releases": [
-        "xr"
-       ],
-       "qid": "b61c58d5"
-      },
-      {
-       "corpus": "wikipedia_pharm",
-       "page": "topiramate",
-       "line": "\"Phentermine and topiramate extended release (Qsymia™): first global approval\".",
-       "releases": [
-        "xr"
-       ],
-       "qid": "691a6889"
-      }
-     ]
     }
    }
   },
@@ -2242,6 +2209,57 @@
         "xr"
        ],
        "qid": "6f89bdf8"
+      },
+      {
+       "corpus": "wikipedia_fr",
+       "page": "acide_valpro_que",
+       "line": "Princeps | Convulex (Belgique, Suisse) Depakene (Canada, États-Unis) Depakine (Belgique, France, Suisse) Dépakine (France) Dépakote (France) Epival (Canada, États-Unis) Merck-valproate (Belgique) Micropakine L.P.",
+       "releases": [
+        "xr"
+       ],
+       "qid": "e7e1c17d"
+      }
+     ]
+    },
+    "brand:Dépakine": {
+     "brand": "Dépakine",
+     "candidates": [
+      {
+       "corpus": "wikipedia_fr",
+       "page": "acide_valpro_que",
+       "line": "Princeps | Convulex (Belgique, Suisse) Depakene (Canada, États-Unis) Depakine (Belgique, France, Suisse) Dépakine (France) Dépakote (France) Epival (Canada, États-Unis) Merck-valproate (Belgique) Micropakine L.P.",
+       "releases": [
+        "xr"
+       ],
+       "qid": "e7e1c17d"
+      }
+     ]
+    },
+    "brand:Micropakine": {
+     "brand": "Micropakine",
+     "candidates": [
+      {
+       "corpus": "wikipedia_fr",
+       "page": "acide_valpro_que",
+       "line": "Princeps | Convulex (Belgique, Suisse) Depakene (Canada, États-Unis) Depakine (Belgique, France, Suisse) Dépakine (France) Dépakote (France) Epival (Canada, États-Unis) Merck-valproate (Belgique) Micropakine L.P.",
+       "releases": [
+        "xr"
+       ],
+       "qid": "e7e1c17d"
+      }
+     ]
+    },
+    "brand:Dépakote": {
+     "brand": "Dépakote",
+     "candidates": [
+      {
+       "corpus": "wikipedia_fr",
+       "page": "acide_valpro_que",
+       "line": "Princeps | Convulex (Belgique, Suisse) Depakene (Canada, États-Unis) Depakine (Belgique, France, Suisse) Dépakine (France) Dépakote (France) Epival (Canada, États-Unis) Merck-valproate (Belgique) Micropakine L.P.",
+       "releases": [
+        "xr"
+       ],
+       "qid": "e7e1c17d"
       }
      ]
     },
@@ -2466,6 +2484,25 @@
         "injection"
        ],
        "qid": "b77421ad"
+      }
+     ]
+    }
+   }
+  },
+  "nefopam": {
+   "name": "Nefopam",
+   "items": {
+    "brand:Acupan": {
+     "brand": "Acupan",
+     "candidates": [
+      {
+       "corpus": "wikipedia_pharm",
+       "page": "nefopam",
+       "line": "^ a b c d e f g h i \"Data Sheet ACUPAN™ Nefopam hydrochloride 30 mg tablets 20 mg intramuscular injection\" (PDF) .",
+       "releases": [
+        "injection"
+       ],
+       "qid": "d9c1e2db"
       }
      ]
     }

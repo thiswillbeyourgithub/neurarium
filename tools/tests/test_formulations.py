@@ -52,6 +52,12 @@ class ClassifyTest(unittest.TestCase):
     def test_denomination_needs_an_oral_only_route_for_ir(self):
         self.assertIsNone(F.classify_denomination("X 10 mg, comprimé", "orale;rectale"))
         self.assertEqual(F.classify_denomination("X 10 mg, comprimé", "orale"), "ir")
+        # Methylphenidate's "QUASYM L.P." (dotted LP) once read as immediate release:
+        # "gélule" alone made it ir. A modified release is never ir.
+        self.assertEqual(F.classify_denomination(
+            "QUASYM L.P. 30 mg, gélule à libération modifiée", "orale"), "xr")
+        self.assertIsNone(F.classify_denomination("X 30 mg, gélule à libération modifiée", "orale"))
+        self.assertIsNone(F.classify_label_title("X CAPSULE, MODIFIED RELEASE [Y]"))
 
     def test_label_route_overrides_a_bare_tablet(self):
         # Generic Saphris: the SPL title says "TABLET", its route code says sublingual.
