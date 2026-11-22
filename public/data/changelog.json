@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.178.2",
+      "date": "2026-11-22",
+      "entries": [
+        {
+          "category": "data",
+          "text": "Flunarizine and oxetorone show their molecule, redrawn as vector images from Wikipedia's pictures",
+          "commits": [
+            "5c00a3e9"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.178.1",
       "date": "2026-11-22",
       "entries": [
