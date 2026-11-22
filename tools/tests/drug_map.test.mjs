@@ -132,6 +132,16 @@ test("effects: the strongest affinity behind each possible effect, measuredKi ap
   assert.equal(p.has("d2"), false);                // receptors not asked for
 });
 
+test("sleep: each stated sleep effect weighted by the drug's strongest affinity", () => {
+  const d = drug("a", [b("d2", 1), b("h1", 100), { target: "m1" }],
+    { effectNodes: { sleep: [{ effect: "sedation" }, { effect: "rem_suppression" }] } });
+  const p = buildProfiles([d], { sources: ["sleep"], normalize: "off", measuredKi: true }).get("a");
+  assert.deepEqual([...p], [["sleep:sedation", 4], ["sleep:rem_suppression", 4]]); // D2's 1 nM
+  // No sleep node, no sleep feature: the drug cannot be placed on this source.
+  assert.equal(buildProfiles([drug("b", [b("d2", 1)])], { sources: ["sleep"] }).has("b"), false);
+  assert.deepEqual(parseSources("sleep,receptors"), ["receptors", "sleep"]);
+});
+
 test("parseSources: URL order-free, old 'both' kept, default when empty", () => {
   assert.deepEqual(parseSources("effects,tone"), ["tone", "effects"]);
   assert.deepEqual(parseSources("both"), ["receptors", "tone"]);
@@ -326,6 +336,7 @@ test("inertOptions: the Advanced switches that cannot change this view", async (
   assert.deepEqual(Object.keys(v(["effects"])), ["signed"]);
   assert.deepEqual(Object.keys(v(["tone"])), ["signed", "measuredKi"]);
   assert.deepEqual(v(["receptors", "effects"]), {});
+  assert.deepEqual(Object.keys(v(["sleep"])), ["signed"]); // its weight reads Measured Ki
   // A picked subset counts: only tone / effect features picked leaves Signed inert.
   assert.deepEqual(Object.keys(v(["receptors", "tone"], ["tone:serotonin", "tone:dopamine", "tone:gaba"])), ["signed", "measuredKi"]);
   assert.deepEqual(v(["receptors", "effects"], ["d2", "h1", "effect:sedation"]), {});

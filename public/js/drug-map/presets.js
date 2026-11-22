@@ -1,7 +1,9 @@
 // Drugs map presets: ready-made views a click loads, each a patch over DEFAULT_VIEW
 // (js/drug-map/model.js), so a preset starts from the defaults rather than stacking on
 // whatever the reader had set. Pure data + two helpers, no DOM, so node tests run it.
-// A preset's display name is the i18n key `drugmap.preset.<id>`. The README pictures of
+// A preset's display name is the i18n key `drugmap.preset.<id>`. The map opens on
+// OPENING_PRESET, while "default" (DEFAULT_VIEW, the base every preset patches) is what
+// the URL is written against, so an old link keeps its meaning. The README pictures of
 // every preset are rendered by tools/shot_drugs_map.py, which clicks each button.
 
 import { DEFAULT_VIEW } from "./model.js";
@@ -13,6 +15,10 @@ const ANTIDEPRESSANTS = ["ssri", "snri", "tricyclic", "maoi", "antidepressant_ot
 export const PRESETS = [
   // Back to the defaults: every drug on its whole receptor binding profile.
   { id: "default", view: {} },
+  // The antidepressants by what reviews say each does to sleep (BETA, the drug_sleep
+  // nodes): the sedating ones (mirtazapine, trazodone, doxepin) apart from the REM
+  // suppressors (paroxetine, vortioxetine) and the activating ones. The map opens on it.
+  { id: "ad_sleep", view: { cats: ANTIDEPRESSANTS, sources: ["sleep"] } },
   // Where each antipsychotic sits on the dopamine system alone, coloured by its NbN
   // mechanism: separates the D2 antagonists from the partial agonists and the D4-leaning ones.
   { id: "ap_dopamine", view: { cats: ANTIPSYCHOTICS, only: ["d1", "d2", "d3", "d4", "d5", "dat"], color: "nbn" } },
@@ -49,6 +55,9 @@ export const PRESETS = [
   // Stimulants by dopamine against noradrenaline reuptake.
   { id: "stimulants", view: { cats: ["stimulant"], only: ["dat", "net"] } },
 ];
+
+/** The preset the map opens on when the link names no view of its own (drugs-map-main.js). */
+export const OPENING_PRESET = "ad_sleep";
 
 /**
  * The full view a preset loads: the defaults, then the preset's patch (`cats` as a Set,

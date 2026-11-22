@@ -10,6 +10,7 @@ import { createTheme } from "./theme.js";
 import { stampVersion } from "./boot/version-stamp.js";
 import { wireThemeButton } from "./boot/header-toggles.js";
 import { createDrugMap } from "./drug-map/view.js";
+import { OPENING_PRESET, PRESETS, presetView } from "./drug-map/presets.js";
 import { viewerUrl, readmeUrl } from "./drug-map/site.js";
 import { showDevNotice } from "./dev-notice.js";
 
@@ -35,7 +36,12 @@ async function main() {
   }
 
   const urlState = createUrlState();
-  const drugMap = createDrugMap({ data, onChange: () => urlState.sync() });
+  // A link naming no map key (every one starts with "dm") opens on the opening preset; a
+  // link that names some applies them over the defaults, as when it was written.
+  const named = [...new URLSearchParams(window.location.hash.replace(/^#/, "")).keys()]
+    .some((k) => k.startsWith("dm"));
+  const start = named ? null : presetView(PRESETS.find((p) => p.id === OPENING_PRESET));
+  const drugMap = createDrugMap({ data, onChange: () => urlState.sync(), start });
   drugMap.registerUrl(urlState);
   // Apply the incoming link before the first draw (each applied key re-renders, but a
   // newer render cancels an older one, so only the last is drawn), then follow later

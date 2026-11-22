@@ -4,7 +4,7 @@
 // `render()` reflects the view. In both lists a click picks, shift-click or long-press
 // drops (`pickOrDrop`, `pickSet`).
 
-import { categoryColor, COLOR_MODES, EFFECT_PREFIX, FEATURE_SOURCES, inertOptions, NORM_MODES, pickSet, primaryCategory, TONE_PREFIX } from "./model.js";
+import { BETA_SOURCES, categoryColor, COLOR_MODES, EFFECT_PREFIX, FEATURE_SOURCES, inertOptions, NORM_MODES, pickSet, PREFIXED_SOURCES, primaryCategory } from "./model.js";
 import { button, chipSearch, el, foldBox, pickOrDrop } from "./dom.js";
 import { groupTargetsBySystem } from "../legend/targets.js";
 import { matchesPreset, PRESETS, presetView } from "./presets.js";
@@ -60,7 +60,7 @@ export function createControls({ data, drugs, nameOf, featureKeys, getView, setV
   sourceSwitch.setAttribute("role", "group");
   sourceSwitch.setAttribute("aria-label", t("drugmap.source"));
   for (const s of FEATURE_SOURCES) {
-    const b = button("seg-btn", t(s === "effects" ? "drugmap.source.effectsBeta" : `drugmap.source.${s}`), () => {
+    const b = button("seg-btn", t(`drugmap.source.${s}${BETA_SOURCES.has(s) ? "Beta" : ""}`), () => {
       const cur = getView().sources;
       const next = cur.includes(s) ? cur.filter((x) => x !== s) : FEATURE_SOURCES.filter((x) => x === s || cur.includes(x));
       if (next.length) setView({ sources: next });
@@ -82,13 +82,17 @@ export function createControls({ data, drugs, nameOf, featureKeys, getView, setV
     [...systemOf].map(([id, system]) => ({ id, system, name: nameOf(id) })),
     (x) => boundBy.get(x.id)).map(([key, list]) => [
     key === "_other" ? t("targets.otherSystem") : families[key] || key, list.map((x) => x.id)]);
-  const toneKeys = featureKeys.filter((k) => k.startsWith(TONE_PREFIX));
-  const effectKeys = featureKeys.filter((k) => k.startsWith(EFFECT_PREFIX))
-    .sort((a, b) => nameOf(a).localeCompare(nameOf(b)));
+  // One picker group per prefixed source (tone, body effects, sleep); body effects are
+  // many, so they are listed by name.
+  const prefixedGroups = PREFIXED_SOURCES.map(([s, prefix]) => {
+    const keys = featureKeys.filter((k) => k.startsWith(prefix));
+    if (prefix === EFFECT_PREFIX) keys.sort((a, b) => nameOf(a).localeCompare(nameOf(b)));
+    return [s, keys];
+  });
   const groupsFor = (sources) => [
     ...(sources.includes("receptors") ? targetGroups : []),
-    ...(sources.includes("tone") && toneKeys.length ? [[t("drugmap.source.tone"), toneKeys]] : []),
-    ...(sources.includes("effects") && effectKeys.length ? [[t("drugmap.source.effects"), effectKeys]] : []),
+    ...prefixedGroups.filter(([s, keys]) => sources.includes(s) && keys.length)
+      .map(([s, keys]) => [t(`drugmap.source.${s}`), keys]),
   ];
   const axesValue = el("span", "dm-row-value");
   const axesPanel = el("div", "dm-panel");

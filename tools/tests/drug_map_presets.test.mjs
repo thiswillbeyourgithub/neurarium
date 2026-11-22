@@ -7,7 +7,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { buildProfiles, DEFAULT_VIEW, filterDrugs, mappableDrugs } from "../../public/js/drug-map/model.js";
-import { matchesPreset, PRESETS, presetView } from "../../public/js/drug-map/presets.js";
+import { matchesPreset, OPENING_PRESET, PRESETS, presetView } from "../../public/js/drug-map/presets.js";
 
 const root = new URL("../../public/", import.meta.url);
 const drugs = readFileSync(new URL("data/drugs.jsonl", root), "utf8")
@@ -58,6 +58,17 @@ test("every receptor preset places at least 3 drugs", () => {
     const placed = buildProfiles(kept, { normalize: v.normalize, signed: v.signed, only: v.only, measuredKi: v.measuredKi });
     assert.ok(placed.size >= 3, `${p.id}: ${placed.size} drug(s) placed`);
   }
+});
+
+test("the opening preset exists and places at least 3 drugs on their sleep effects", () => {
+  const p = PRESETS.find((q) => q.id === OPENING_PRESET);
+  assert.ok(p, OPENING_PRESET);
+  const v = presetView(p);
+  // js/data/drug-facts.js resolves each drug's `sleep[]` into effectNodes.sleep.
+  const withSleep = viewerDrugs.map((d) => ({ ...d, effectNodes: { sleep: d.sleep || [] } }));
+  const shown = filterDrugs(mappableDrugs(withSleep), v);
+  const placed = buildProfiles(shown, v);
+  assert.ok(placed.size >= 3, `${p.id}: ${placed.size} drug(s) placed`);
 });
 
 test("every preset has an English and a French name", () => {

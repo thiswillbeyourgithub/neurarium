@@ -19,6 +19,10 @@
 //     to the drug's binding direction), valued by the strongest affinity among the
 //     bindings behind it (same `pKi - PKI_FLOOR` scale, `measuredKi` applies). Unsigned:
 //     an effect is a possibility, it has no opposite.
+//   - sleep (BETA): one key per sleep effect a review states for the drug itself
+//     (`sleep:<effect>`, the drug_sleep nodes, `drug.effectNodes.sleep`), valued by the
+//     drug's strongest binding affinity (same scale, `measuredKi` applies): no binding
+//     stands behind a drug-level statement, so the drug's potency weighs it. Unsigned.
 //   Any non-empty set of sources sits side by side in one vector (`sources`).
 // `normalize` is one of NORM_MODES:
 //   "off" (the default) / "none" in the UI: raw values, so a potent, promiscuous drug
@@ -45,11 +49,16 @@ export const PKI_UNMEASURED = 7;
 /** Signed mode: a binding's net effect as a sign. A partial agonist / modulator
  *  ("modulate") counts as half an agonist; an affinity-only binding (no effect) as 0. */
 export const EFFECT_SIGN = { boost: 1, block: -1, modulate: 0.5 };
-export const FEATURE_SOURCES = ["receptors", "tone", "effects"];
+export const FEATURE_SOURCES = ["receptors", "tone", "effects", "sleep"];
 export const TONE_PREFIX = "tone:";
 export const EFFECT_PREFIX = "effect:";
-/** A receptor / target feature key, as opposed to a tone or a body-effect key. */
-export const isTargetKey = (k) => !k.startsWith(TONE_PREFIX) && !k.startsWith(EFFECT_PREFIX);
+export const SLEEP_PREFIX = "sleep:";
+/** The sources whose keys carry a prefix, in FEATURE_SOURCES order: [source, prefix]. */
+export const PREFIXED_SOURCES = [["tone", TONE_PREFIX], ["effects", EFFECT_PREFIX], ["sleep", SLEEP_PREFIX]];
+/** The BETA sources (their toggle reads "(beta)"). */
+export const BETA_SOURCES = new Set(["effects", "sleep"]);
+/** A receptor / target feature key, as opposed to a tone, body-effect or sleep key. */
+export const isTargetKey = (k) => !PREFIXED_SOURCES.some(([, p]) => k.startsWith(p));
 
 export const NORM_MODES = ["off", "shape", "dose"]; // picker order, "off" first
 /** "dose" normalization: the occupancy each drug's strongest binding is dosed to. */
@@ -60,6 +69,10 @@ const affinityOf = (b) => {
   const pki = hasMeasuredKi(b) ? 9 - Math.log10(b.ki.median) : PKI_UNMEASURED;
   return Math.max(0, pki - PKI_FLOOR);
 };
+/** A drug's strongest binding affinity (pKi - PKI_FLOOR), over measured Ki only with
+ *  `measuredKi`: the dose anchor, and what weighs a drug-level sleep statement. */
+const strongestAffinity = (d, measuredKi) => Math.max(0, ...(d.bindings || [])
+  .filter((b) => b.target && (!measuredKi || hasMeasuredKi(b))).map(affinityOf));
 
 /**
  * Each drug's feature vector (see the module comment). Receptor features use
@@ -79,7 +92,7 @@ export function buildProfiles(drugs, { normalize = "off", signed = false, source
   const keep = only ? new Set(only) : null;
   const out = new Map();
   for (const d of drugs) {
-    const rec = new Map(), tone = new Map(), eff = new Map();
+    const rec = new Map(), tone = new Map(), eff = new Map(), slp = new Map();
     if (sources.includes("receptors")) {
       for (const b of d.bindings || []) {
         if (!b.target || (measuredKi && !hasMeasuredKi(b))) continue;
@@ -99,10 +112,14 @@ export function buildProfiles(drugs, { normalize = "off", signed = false, source
         if (a) eff.set(EFFECT_PREFIX + e.effect, a);
       }
     }
+    if (sources.includes("sleep")) {
+      const a = strongestAffinity(d, measuredKi);
+      for (const n of (d.effectNodes || {}).sleep || []) if (a) slp.set(SLEEP_PREFIX + n.effect, a);
+    }
     // The affinity blocks' values are pKi - PKI_FLOOR, so the anchor is too.
     const occupancy = normalize === "dose" ? doseOccupancy(d, measuredKi) : null;
     const v = new Map();
-    for (const block of [rec, tone, eff]) {
+    for (const block of [rec, tone, eff, slp]) {
       const kept = [...block].filter(([k, w]) => w && (!keep || keep.has(k)));
       const norm = Math.hypot(...kept.map(([, w]) => w));
       const scale = normalize === "off" ? (w) => w
@@ -124,8 +141,7 @@ export function buildProfiles(drugs, { normalize = "off", signed = false, source
  * @returns {(w: number) => number}
  */
 function doseOccupancy(d, measuredKi) {
-  const top = Math.max(0, ...(d.bindings || [])
-    .filter((b) => b.target && (!measuredKi || hasMeasuredKi(b))).map(affinityOf));
+  const top = strongestAffinity(d, measuredKi);
   const k = DOSE_OCCUPANCY / (1 - DOSE_OCCUPANCY); // C / Ki_main
   return (w) => Math.sign(w) / (1 + 10 ** (top - Math.abs(w)) / k);
 }
@@ -303,7 +319,7 @@ export function parseSources(value) {
  * The Advanced switches that cannot change the map in this view, each with the i18n key
  * of why (shown greyed out with that reason, the stored value kept for when it applies
  * again). From buildProfiles: Signed only signs receptor bindings, Measured Ki only
- * filters bindings (read by the receptor and body-effect blocks, never by tone), and
+ * filters bindings (read by the receptor, body-effect and sleep blocks, never by tone), and
  * the "shape" normalization is skipped when one or two picked features are plotted
  * directly (unit length would put every drug on one circle; "dose" still applies). A picked
  * subset (`only`) counts too: Signed is inert with only tone / effect features picked.
@@ -317,9 +333,10 @@ export function inertOptions(view) {
   const uses = (source, test) => view.sources.includes(source) && (!keys || keys.some(test));
   const receptors = uses("receptors", isTargetKey);
   const effects = uses("effects", (k) => k.startsWith(EFFECT_PREFIX));
+  const sleep = uses("sleep", (k) => k.startsWith(SLEEP_PREFIX));
   const out = {};
   if (!receptors) out.signed = "drugmap.inert.signed";
-  if (!receptors && !effects) out.measuredKi = "drugmap.inert.measuredKi";
+  if (!receptors && !effects && !sleep) out.measuredKi = "drugmap.inert.measuredKi";
   if (keys && keys.length <= 2) out.normalize = "drugmap.inert.normalize";
   return out;
 }

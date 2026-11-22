@@ -13,7 +13,7 @@
 // (also served as drugsmap.olicorne.org, see docs/drugs-map/README.md) without loading
 // three.js, the meshes or the panels.
 
-import { buildProfiles, COLOR_MODES, colorize, DEFAULT_VIEW, directPoints, EFFECT_PREFIX, filterDrugs, mappableDrugs, NORM_MODES, parseSources, pca, TONE_PREFIX } from "./model.js";
+import { buildProfiles, COLOR_MODES, colorize, DEFAULT_VIEW, directPoints, EFFECT_PREFIX, filterDrugs, mappableDrugs, NORM_MODES, parseSources, pca, SLEEP_PREFIX, TONE_PREFIX } from "./model.js";
 import { placeLabels, sizesFor } from "./layout.js";
 import { spreadPoints } from "./spread.js";
 import { button, chipSearch, el, foldBox, H, rotate, svgEl, W } from "./dom.js";
@@ -43,18 +43,20 @@ const SLOW_MS = 5000;
 /**
  * Build the map into #drugmap-body. Nothing is drawn until the first `render()`, so the
  * caller can apply the URL's view first and the map opens on it without a transition.
- * @param {{data: object, onChange: () => void}} o
- *   onChange runs after any view change (URL sync)
+ * @param {{data: object, onChange: () => void, start?: object|null}} o
+ *   onChange runs after any view change (URL sync); `start` is the view it opens on
+ *   (default DEFAULT_VIEW)
  * @returns {{render: () => Promise<void>, registerUrl: (urlState: object) => void}}
  */
-export function createDrugMap({ data, onChange }) {
+export function createDrugMap({ data, onChange, start = null }) {
   const body = document.getElementById("drugmap-body");
   // Each drug carries its possible body effects (the build-time effect index, BETA), the
   // "effects" feature source (see buildProfiles).
   const effectsOf = data.possibleEffectsByDrug || new Map();
   const drugs = mappableDrugs(data.drugs || []).map((d) => ({ ...d, possibleEffects: effectsOf.get(d.id) || [] }));
   const catLabels = data.meta.drugCategoryLabels || {};
-  // Every feature key -> its display name: targets, `tone:<kind>` systems, `effect:<id>`.
+  // Every feature key -> its display name: targets, `tone:<kind>` systems, `effect:<id>`,
+  // `sleep:<effect>`.
   const featureName = new Map();
   for (const d of drugs) for (const b of d.bindings || []) featureName.set(b.target, b.targetName || b.target);
   for (const d of drugs) {
@@ -63,8 +65,11 @@ export function createDrugMap({ data, onChange }) {
     }
   }
   for (const d of drugs) for (const e of d.possibleEffects) featureName.set(EFFECT_PREFIX + e.effect, e.label);
+  for (const d of drugs) {
+    for (const n of (d.effectNodes || {}).sleep || []) featureName.set(SLEEP_PREFIX + n.effect, n.label);
+  }
   const nameOf = (key) => featureName.get(key) || key;
-  let view = { ...DEFAULT_VIEW, hidden: new Set() };
+  let view = start || { ...DEFAULT_VIEW, hidden: new Set() };
   // The camera: viewBox once zoomed / panned (null = fit) and the rotation (radians).
   let cam = { box: null, angle: 0 };
   if (!body) return { render: async () => {}, registerUrl() {} };

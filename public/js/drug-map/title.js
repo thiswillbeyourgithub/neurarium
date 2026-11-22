@@ -11,7 +11,7 @@
 // their own clause: "All drugs by D2 and H1 binding and sedation". DOM-free (node
 // tests): the caller passes `t` and the groupings the controls already built.
 
-import { EFFECT_PREFIX, isTargetKey as isTarget, TONE_PREFIX } from "./model.js";
+import { EFFECT_PREFIX, isTargetKey as isTarget, SLEEP_PREFIX, TONE_PREFIX } from "./model.js";
 
 /** Past this many named classes / systems / targets, the title gives a count. */
 export const MAX_ITEMS = 5;
@@ -97,9 +97,10 @@ export function plotTitle(view, { t, families, systems, catName, nameOf: fullNam
         : owners.length <= 3 ? t("drugmap.ttl.manySystemTargets", { n: targets.length, list: list(owners) })
           : t("drugmap.ttl.manyTargets", { n: targets.length }));
     }
-    // Tones and effects: one clause each, a whole group named by its label.
+    // Tones, effects and sleep effects: one clause each, a whole group named by its label.
     for (const [prefix, one, many] of [[TONE_PREFIX, "drugmap.ttl.tones", "drugmap.ttl.manyTones"],
-      [EFFECT_PREFIX, "drugmap.ttl.effects", "drugmap.ttl.manyEffects"]]) {
+      [EFFECT_PREFIX, "drugmap.ttl.effects", "drugmap.ttl.manyEffects"],
+      [SLEEP_PREFIX, "drugmap.ttl.sleep", "drugmap.ttl.manySleep"]]) {
       const keys = known.filter((k) => k.startsWith(prefix));
       if (!keys.length) continue;
       const groups = systems.filter(([, ks]) => ks.some((k) => k.startsWith(prefix)));
