@@ -1,6 +1,33 @@
 {
   "versions": [
     {
+      "version": "3.179.1",
+      "date": "2026-11-22",
+      "entries": [
+        {
+          "category": "fixed",
+          "text": "Drop-down lists (such as \"include metabolites\" on a drug's panel) now follow the day/night theme when opened, instead of showing light text on a white list",
+          "commits": [
+            "03385093"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "Four new sourced pathways: dopamine from the ventral tegmental area to the septum, the inferior colliculus to the thalamus, and the brain stem's solitary tract nucleus to the hypothalamus and to the amygdala",
+          "commits": [
+            "ae62cb4a"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "The data check now lists only the warnings worth acting on: the ones confirmed as expected by design move to a review list, each with its reason",
+          "commits": [
+            "4ff865ef"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.179.0",
       "date": "2026-11-22",
       "entries": [
