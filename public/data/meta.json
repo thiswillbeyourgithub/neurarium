@@ -12246,6 +12246,7 @@
     "drug.top": "drug",
     "drug.metabolism": "drug",
     "drug.timing": "drug",
+    "drug.sleep": "drug",
     "receptor.top": "receptor",
     "target.top": "target",
     "structure.top": "structure",
@@ -12383,8 +12384,8 @@
   "provenance_stats": {
     "by_kind": {
       "addons": {
-        "total": 4,
-        "verified": 4,
+        "total": 5,
+        "verified": 5,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -12924,15 +12925,15 @@
       }
     },
     "nodes": {
-      "total": 11244,
-      "verified": 10421,
+      "total": 11245,
+      "verified": 10422,
       "uncertain": 442,
       "sourced": 0,
       "llm": 236,
       "nosource": 145,
       "missing": 381,
       "unknown": 594,
-      "backed": 10863,
+      "backed": 10864,
       "pct_backed": 97
     },
     "ki_coverage": {

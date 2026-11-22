@@ -43,6 +43,9 @@ ADDON_SLOTS: dict[str, str] = {
     # that the brain does not follow). Drawn whenever the drug has either duration,
     # unlike drug.metabolism, which needs enzyme rows to exist at all.
     "drug.timing": "drug",
+    # Inside the drug panel's Sleep section (BETA), above its rows or its empty line:
+    # what a drug is known to do to sleep that no review sentence states as a row.
+    "drug.sleep": "drug",
     # Top of a receptor / non-receptor-target / structure panel, same role as
     # drug.top for the other three panel kinds.
     "receptor.top": "receptor",
@@ -104,6 +107,53 @@ ADDON_BASES: tuple[str, ...] = ("claim", "dataset")
 # ---------------------------------------------------------------------------
 
 ADDONS: list[dict[str, Any]] = [
+    {
+        # The agitated waking is the author's clinical observation, not a sourced fact;
+        # the text says so. Each step of the mechanism is Stahl's.
+        "id": "loxapine_agitated_waking",
+        "owner_kind": "drug",
+        "owner": "loxapine",
+        "slot": "drug.sleep",
+        "display": "admonition",
+        "tone": "caution",
+        "title": {
+            "en": "Waking up agitated",
+            "fr": "Réveil agité",
+        },
+        "text": {
+            "en": "Patients on loxapine are known in practice to wake up agitated, going "
+                  "from asleep to fully awake abruptly (a clinical observation, not "
+                  "stated by the sources below). A plausible mechanism from what they "
+                  "do state: loxapine's sedation comes from its antihistamine (H1) "
+                  "action and its oral half-life is short (about 4 hours), while its "
+                  "metabolite amoxapine, longer-lived, blocks noradrenaline reuptake. As "
+                  "loxapine is cleared the H1 blockade lifts while amoxapine still "
+                  "raises noradrenaline, which favours an abrupt, aroused waking.",
+            "fr": "En pratique, les patients sous loxapine se réveillent souvent agités, "
+                  "passant brusquement du sommeil à l'éveil complet (une observation "
+                  "clinique, que les sources ci-dessous n'énoncent pas). Un mécanisme "
+                  "plausible d'après ce qu'elles disent : la sédation de la loxapine vient "
+                  "de son action antihistaminique (H1) et sa demi-vie orale est courte "
+                  "(environ 4 heures), tandis que son métabolite, l'amoxapine, qui dure "
+                  "plus longtemps, bloque la recapture de la noradrénaline. Quand la "
+                  "loxapine est éliminée, le blocage H1 se lève alors que l'amoxapine "
+                  "augmente encore la noradrénaline, ce qui favorise un réveil brusque et "
+                  "agité.",
+        },
+        "sources": [
+            {"corpus": "stahl", "page": 472, "provenance": "verified",
+             "quote": "Antihistaminic actions may cause sedation, weight gain"},
+            {"corpus": "stahl", "page": 474, "provenance": "verified",
+             "quote": "Half-life approximately 4 hours for oral formulation"},
+            {"corpus": "stahl", "page": 474, "provenance": "verified",
+             "quote": "Multiple active metabolites with longer halflives than parent drug"},
+            {"corpus": "stahl", "page": 474, "provenance": "verified",
+             "quote": "N-desmethyl loxapine is amoxapine, an antidepressant"},
+            {"corpus": "stahl", "page": 47, "provenance": "verified",
+             "quote": "Blocks norepinephrine reuptake pump (norepinephrine transporter), "
+                      "presumably increasing noradrenergic neurotransmission"},
+        ],
+    },
     {
         # The half-life chip above is lithium's SERUM elimination half-life (Stahl);
         # the organ it acts on lets go of it more slowly. One small 7Li MRS study (two

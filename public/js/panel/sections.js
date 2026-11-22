@@ -15,9 +15,12 @@ import { bindingKi } from "./format.js";
 
 const { ofNoun, t } = window.__I18N__;
 
+// Drug-level effect sections carrying an addon slot (section id -> slot).
+const DRUG_EFFECT_SLOTS = { sleep: "drug.sleep" };
+
 export function makeSections(P) {
   const {
-    body, data, derivedActiveMetabolites, effectById, el, fmtKi, metaboliteContributors,
+    appendAddons, body, data, derivedActiveMetabolites, effectById, el, fmtKi, metaboliteContributors,
     nodePill, onEffectPick, onTargetPick, resolveBase, sourceBackedPill, targetById,
     withOtherForms,
   } = P;
@@ -423,9 +426,12 @@ export function makeSections(P) {
     const hasAny = (d) => nodes(d).length > 0;
     const has = hasAny(drug);
     const key = `drug.${k.section}`;
-    const { ul, close } = betaSection(k.section, key, `${key}Hint`,
+    const { sec, ul, close } = betaSection(k.section, key, `${key}Hint`,
       { subKey: `${key}Sub`, caveatKey: `${key}Caveat`,
         empty: has ? null : "drug", extra: otherFormsExtra(drug, k.section, hasAny) });
+    // The section's addon slot (drug.sleep), drawn even when it has no row.
+    const slot = DRUG_EFFECT_SLOTS[k.section];
+    if (slot && sec) appendAddons(sec, "drug", drug.id, slot);
     if (!has) return close();
     for (const n of nodes(drug)) {
       const li = el("li", "eff-row");

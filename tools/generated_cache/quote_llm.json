@@ -1288,6 +1288,7 @@
 "drug:stiripentol/first_approval": "opus"
 },
 "q_16c8732270c3": {
+"addon:drug:loxapine": "opus",
 "drug:loxapine/bindings[h1:antagonist]": "sonnet"
 },
 "q_16cc951502a5": {
@@ -2345,6 +2346,9 @@
 "q_27d9ad7ee778": {
 "drug:prothipendyl/categories": "opus"
 },
+"q_27f63b51ce9e": {
+"addon:drug:loxapine": "opus"
+},
 "q_27f9948c2ac2": {
 "drug:sildenafil/brands[Revatio]": "sonnet"
 },
@@ -3175,6 +3179,9 @@
 "q_372d2834a32d": {
 "drug:amoxapine/metabolites[7_hydroxyamoxapine]": "sonnet",
 "drug:amoxapine/metabolites[8_hydroxyamoxapine]": "sonnet"
+},
+"q_374ec0edb818": {
+"addon:drug:loxapine": "opus"
 },
 "q_3775dc8afdfc": {
 "drug:nortriptyline/nbn": "sonnet"
@@ -8796,6 +8803,7 @@
 "drug:clozapine/brands[Versacloz (oral suspension)]": "sonnet"
 },
 "q_9a91daeb45d8": {
+"addon:drug:loxapine": "opus",
 "drug:amoxapine/bindings[net:reuptake_inhibitor]": "sonnet"
 },
 "q_9a98cb2a9efd": {
@@ -12909,6 +12917,7 @@
 "drug:blonanserin/half_life": "sonnet"
 },
 "q_e3d32921a7ea": {
+"addon:drug:loxapine": "opus",
 "drug:loxapine/half_life": "sonnet"
 },
 "q_e3e9beddddbf": {

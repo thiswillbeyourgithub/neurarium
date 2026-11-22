@@ -225,6 +225,7 @@ SLOT_PLACE: dict[str, tuple[str, tuple[str, ...]]] = {
     "drug.top": ("drug", ()), "receptor.top": ("receptor", ()),
     "target.top": ("target", ()), "structure.top": ("structure", ()),
     "drug.timing": ("drug", ("half_life", "tmax")),
+    "drug.sleep": ("drug", ("sleep",)),
     "drug.metabolism": ("drug", ("enzymes",)),
     "section.metabolism": ("drug", ("enzymes",)),
     "section.projections": ("projection", ()),
