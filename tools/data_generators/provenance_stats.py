@@ -13,6 +13,7 @@ from typing import Any
 from lib.drugs_io import is_combination
 
 from . import node_kinds as node_kinds_mod
+from .drug_effect_kinds import KINDS as DRUG_EFFECT_KINDS
 from .provenance import _GRADE_RANK, DEFAULT_PROVENANCE, product_holders
 
 
@@ -246,10 +247,11 @@ def _provenance_stats(structures: list[dict[str, Any]],
     workup_grades = [_node_grade(r) for d in drugs for r in d.get("workup", []) or []]
     # Excretion (data_generators/excretion.py, BETA): ONE node per (drug, aspect, value).
     excretion_grades = [_node_grade(r) for d in drugs for r in d.get("excretion", []) or []]
-    # Seizure threshold (data_generators/seizure_threshold.py, BETA): ONE node per
+    # Drug-level effect kinds (data_generators/drug_effect_kinds.py, BETA): ONE node per
     # (drug, effect).
-    seizure_grades = [_node_grade(r) for d in drugs
-                      for r in d.get("seizure_threshold", []) or []]
+    drug_effect_grades = {k.kind: [_node_grade(r) for d in drugs
+                                   for r in d.get(k.field, []) or []]
+                          for k in DRUG_EFFECT_KINDS}
     # Drug-metabolism nodes ("<drug> is a substrate of / inhibits / induces <enzyme>"),
     # one per (drug, enzyme, role) row. A pharmacokinetic claim, independent of the
     # drug's receptor bindings: it is what the derived drug -> drug interaction edges
@@ -468,7 +470,7 @@ def _provenance_stats(structures: list[dict[str, Any]],
         "drug_bbb": tally(physchem_grades["bbb"]),
         "drug_workup": tally(workup_grades),
         "drug_excretion": tally(excretion_grades),
-        "drug_seizure_threshold": tally(seizure_grades),
+        **{kind: tally(g) for kind, g in drug_effect_grades.items()},
         "drug_enzymes": tally(enzyme_grades),
         "drug_enzyme_strength": tally(enzyme_strength_grades),
         "drug_pgx": tally(pgx_grades),

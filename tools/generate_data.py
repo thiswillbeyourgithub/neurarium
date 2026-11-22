@@ -186,7 +186,7 @@ from data_generators import tdm  # noqa: E402 (AGNP TDM ranges, corpus #19)
 from data_generators import physchem  # noqa: E402 (PubChem #21 + B3DB #22)
 from data_generators import workup  # noqa: E402 (RCP 4.2-4.4 workup, BDPM #24)
 from data_generators import excretion  # noqa: E402 (route, unchanged share, kidney, urine pH)
-from data_generators import seizure_threshold  # noqa: E402 (lowers / raises / withdrawal)
+from data_generators.drug_effect_kinds import KINDS as DRUG_EFFECT_KINDS  # noqa: E402 (sleep, seizure threshold)
 from data_generators import page_links as PAGE_LINKS  # noqa: E402 (per-page source urls)
 from data_generators.unknown import apply_unknown  # noqa: E402
 
@@ -1322,9 +1322,10 @@ def _drug_record(drug: dict[str, Any], valid_targets: set[str],
     # Excretion (kind drug_excretion, BETA): one node per (aspect, value). See
     # data_generators/excretion.py.
     out.update(excretion.drug_excretion(drug["id"], _quote_sources))
-    # Seizure threshold (kind drug_seizure_threshold, BETA): one node per effect. See
-    # data_generators/seizure_threshold.py.
-    out.update(seizure_threshold.drug_seizure_threshold(drug["id"], _quote_sources))
+    # Drug-level effect kinds (BETA: sleep, seizure threshold): one node per effect. See
+    # data_generators/drug_effect_kinds.py.
+    for kind in DRUG_EFFECT_KINDS:
+        out.update(kind.drug_nodes(drug["id"], _quote_sources))
     # Active metabolites named in the source (one graded node each, kind
     # `drug_metabolites`): references into the one-per-molecule store, see
     # _drug_metabolites + _metabolite_records.

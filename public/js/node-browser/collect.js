@@ -351,9 +351,10 @@ export function collectNodes(data, deps, opts = {}) {
       push("drug_workup", d.name, `${t("drug.workupShort")} ${formatWorkup(n, t("drug.workupOnlyIf"))}`,
         n.provenance, go, n);
     }
-    for (const n of d.seizureThreshold || []) {
-      push("drug_seizure_threshold", d.name, `${t("drug.seizureShort")} ${n.label}`,
-        n.provenance, go, n);
+    for (const k of meta.drugEffectKinds || []) {
+      for (const n of (d.effectNodes || {})[k.field] || []) {
+        push(k.kind, d.name, `${t(`drug.${k.section}Short`)} ${n.label}`, n.provenance, go, n);
+      }
     }
     for (const n of d.excretion || []) {
       push("drug_excretion", d.name, `${t("drug.excretionShort")} ${formatExcretion(n)}`,

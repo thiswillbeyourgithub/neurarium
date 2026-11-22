@@ -415,16 +415,19 @@ export function makeSections(P) {
     close();
   };
 
-  // A drug panel's "Seizure threshold" section (BETA): one row per
-  // drug_seizure_threshold node (lowers it, seizures when stopped, raises it).
-  const appendSeizure = (drug) => {
-    const hasSeizure = (d) => !!(d.seizureThreshold && d.seizureThreshold.length);
-    const has = hasSeizure(drug);
-    const { ul, close } = betaSection("seizure", "drug.seizure", "drug.seizureHint",
-      { subKey: "drug.seizureSub", caveatKey: "drug.seizureCaveat",
-        empty: has ? null : "drug", extra: otherFormsExtra(drug, "seizure", hasSeizure) });
+  // A drug panel's section for one drug-level effect kind (BETA, meta
+  // drug_effect_kinds, e.g. "Seizure threshold"): one row per node of kind `k`, keyed
+  // by its `section` (tour anchor, icon, drug.<section>* i18n keys).
+  const appendDrugEffects = (drug, k) => {
+    const nodes = (d) => (d.effectNodes || {})[k.field] || [];
+    const hasAny = (d) => nodes(d).length > 0;
+    const has = hasAny(drug);
+    const key = `drug.${k.section}`;
+    const { ul, close } = betaSection(k.section, key, `${key}Hint`,
+      { subKey: `${key}Sub`, caveatKey: `${key}Caveat`,
+        empty: has ? null : "drug", extra: otherFormsExtra(drug, k.section, hasAny) });
     if (!has) return close();
-    for (const n of drug.seizureThreshold) {
+    for (const n of nodes(drug)) {
       const li = el("li", "eff-row");
       li.appendChild(el("span", "loc-name", n.label));
       li.appendChild(nodePill(n));
@@ -434,7 +437,7 @@ export function makeSections(P) {
   };
 
   return {
-    appendDemographics, appendExcretion, appendSeizure, appendDownstream, drugVariantsSubsection, appendEffects,
+    appendDemographics, appendExcretion, appendDrugEffects, appendDownstream, drugVariantsSubsection, appendEffects,
     appendPossibleEffects, appendReleaseChanges, appendVariants, appendWorkup,
     betaHeading, betaSection, derivedRow, effectLink, inStructure, linkName,
     variantRow, viaChip,

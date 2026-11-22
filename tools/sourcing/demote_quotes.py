@@ -69,6 +69,7 @@ from pipeline.gate import PageGate  # noqa: E402 (the applier's page gate)
 import citation_site as CS  # noqa: E402
 from lib.io_atomic import atomic_write_text  # noqa: E402
 from lib import cache_io  # noqa: E402
+from data_generators.drug_effect_kinds import KINDS as DRUG_EFFECT_KINDS  # noqa: E402
 
 # The applier-written caches that can hold a quote-bearing source. The hand-authored
 # registries are deliberately absent: see the module docstring.
@@ -77,7 +78,7 @@ CACHE_FILES = ("location_sources.json", "classification_sources.json",
                "expression_density.json", "enzyme_variability.json",
                "receptor_effects.json", "release_modulation.json",
                "receptor_demographics.json", "workup.json",
-               "excretion.json", "seizure_threshold.json")
+               "excretion.json", *(k.cache.name for k in DRUG_EFFECT_KINDS))
 
 
 def _is_source(obj) -> bool:

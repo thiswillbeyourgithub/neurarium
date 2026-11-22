@@ -21,7 +21,7 @@ effect carries patterns its quote must ALL match (``requires``), so the applier
 (``tools/sourcing/apply_seizure_threshold.py``) refuses a pick whose sentence does not
 itself speak of seizures (and, for ``withdrawal``, of stopping), and the fetcher
 (``tools/fetch/fetch_seizure_threshold.py``) offers lines on the same seizure pattern.
-Labels are bilingual inline, emitted into meta ``seizure_threshold_effects``. Data lives
+Labels are bilingual inline, emitted into meta ``drug_effect_kinds``. Data lives
 in the committed ``tools/generated_cache/seizure_threshold.json`` (applier-written).
 
 Built with the help of Claude Code.
@@ -67,7 +67,8 @@ EFFECTS: dict[str, dict[str, Any]] = {
 
 
 KIND = DrugEffectKind("drug_seizure_threshold", "seizure_threshold", "seizure threshold",
-                      CACHE, EFFECTS, exclusive=(("lowers", "possibly_lowers"),))
+                      CACHE, EFFECTS, exclusive=(("lowers", "possibly_lowers"),),
+                      section="seizure")
 says, meta_labels = KIND.says, KIND.meta_labels
 
 

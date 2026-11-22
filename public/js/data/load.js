@@ -128,7 +128,7 @@ export async function loadBrainData(dataDir = "data", onProgress = null, { shape
           drugCategoryPlurals, drugCategoryGroups, drugCategoryGroupLabels,
           drugEffectColors, drugEffectLabels, systemFlowKinds, sourceCorpora,
           densityMinReliability, provenanceStats, addonSlots, addonTones,
-          quotePipelines, excretionAspects } = v;
+          quotePipelines, excretionAspects, drugEffectKinds } = v;
 
   return {
     structures,
@@ -154,6 +154,7 @@ export async function loadBrainData(dataDir = "data", onProgress = null, { shape
     byId,
     meta: {
       excretionAspects,
+      drugEffectKinds,
       projectionColors,
       groupLabels,
       kindLabels,

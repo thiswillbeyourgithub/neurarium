@@ -54,8 +54,11 @@ export function readVocab(metaRecord) {
   const workupTimings = localizeMap(metaRecord.workup_timings);
   // Excretion aspects (BETA): aspect -> {label, values: {value -> label}}.
   const excretionAspects = localizeAspects(metaRecord.excretion_aspects, localize);
-  // Seizure-threshold effects (BETA): effect -> label.
-  const seizureEffects = localizeMap(metaRecord.seizure_threshold_effects);
+  // Drug-level effect kinds (BETA: sleep, seizure threshold), in panel order:
+  // [{kind, field, section, labels: effect -> label}].
+  const drugEffectKinds = (metaRecord.drug_effect_kinds || []).map((k) => ({
+    kind: k.kind, field: k.field, section: k.section, labels: localizeMap(k.effects),
+  }));
   // Formulation release types (closed vocabulary, display order): id -> label.
   const releaseLabels = localizeMap(metaRecord.drug_releases);
   const drugTargets = metaRecord.drug_targets || {};
@@ -122,7 +125,7 @@ export function readVocab(metaRecord) {
     workupTests,
     workupTimings,
     excretionAspects,
-    seizureEffects,
+    drugEffectKinds,
     releaseLabels,
     drugTargets,
     drugActions,

@@ -8,6 +8,7 @@ Part of the ``tools/check_data.py`` checker (see docs/DATA_CHECKS.md).
 # grade and quote walks cannot skip a formulation's claims).
 from data_generators.provenance import product_holders
 from data_generators.provenance_stats import own_targets
+from data_generators.drug_effect_kinds import KINDS as DRUG_EFFECT_KINDS
 
 
 # The per-drug physicochemistry citations (kinds drug_lipophilicity / drug_polar_surface /
@@ -67,9 +68,10 @@ def iter_drug_sources(drug):
     for xi, x in enumerate(drug.get("excretion", []) or []):
         yield from _listed(f"{did} excretion[{xi}] sources", x.get("sources"), True,
                            "excretion", x)
-    for si, x in enumerate(drug.get("seizure_threshold", []) or []):
-        yield from _listed(f"{did} seizure_threshold[{si}] sources", x.get("sources"),
-                           True, "seizure_threshold", x)
+    for kind in DRUG_EFFECT_KINDS:
+        for si, x in enumerate(drug.get(kind.field, []) or []):
+            yield from _listed(f"{did} {kind.field}[{si}] sources", x.get("sources"),
+                               True, kind.field, x)
     # Holder names are short register strings ("holder: UCB PHARMA"), by design.
     for h in drug.get("holders", []) or []:
         yield from _listed(f"{did} holders[{h.get('market')}] sources", h.get("sources"),

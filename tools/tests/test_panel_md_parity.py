@@ -23,6 +23,7 @@ Built with the help of Claude Code.
 """
 from __future__ import annotations
 
+import json
 import re
 import sys
 import unittest
@@ -88,6 +89,13 @@ def panel_heading_keys() -> dict[str, str]:
                 keys = T_KEY.findall(args)
             for k in keys:
                 out.setdefault(k, path.relative_to(ROOT).as_posix())
+    # The drug-level effect sections (sections.js appendDrugEffects, one per meta
+    # drug_effect_kinds entry) build their keys from the section id.
+    if "appendDrugEffects" in (PANEL / "sections.js").read_text(encoding="utf-8"):
+        meta = json.loads((ROOT / "public" / "data" / "meta.json").read_text(encoding="utf-8"))
+        for k in meta.get("drug_effect_kinds", []):
+            for key in (f"drug.{k['section']}", f"drug.{k['section']}Sub"):
+                out.setdefault(key, "public/js/panel/sections.js")
     return out
 
 

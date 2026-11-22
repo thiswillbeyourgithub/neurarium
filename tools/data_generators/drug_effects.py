@@ -6,8 +6,12 @@ A kind is a :class:`DrugEffectKind`: its emitted field, its cache, and its vocab
 ``{effect: {en, fr, requires}}`` where ``requires`` lists patterns a quote must ALL match
 (the applier's gate, so a pick cannot attach a sentence to an effect it never states).
 ``exclusive`` lists effect pairs a drug may not carry together (the stronger and the
-hedged form of one claim). The generator, the applier and the meta labels all read it,
-so a new kind is a vocabulary plus a fetcher, never a copy of this logic.
+hedged form of one claim). ``section`` names its drug panel section: the tour anchor, the
+section icon and the ``drug.<section>*`` i18n keys (heading, ``Sub``, ``Hint``,
+``Caveat``, ``Short``). Every consumer (generator, meta, tally, check walk, citation
+sites, claim walk, viewer panel, node browser, /api pages) loops over the registry
+``data_generators.drug_effect_kinds.KINDS``, so a new kind is a vocabulary plus a
+fetcher and a registry line, never a copy of this logic.
 
 Built with the help of Claude Code.
 """
@@ -19,6 +23,8 @@ from pathlib import Path
 from typing import Any, Callable
 
 from . import caches
+from .quotes.uncertainty import _uncertainty_bullet
+from lib.species import is_primate, species_key
 
 
 @dataclass
@@ -29,6 +35,7 @@ class DrugEffectKind:
     cache: Path
     effects: dict[str, dict[str, Any]]
     exclusive: tuple[tuple[str, str], ...] = ()
+    section: str = ""               # panel section id, e.g. "sleep" (keys drug.sleep*)
     _data: dict | None = field(default=None, repr=False)
 
     def says(self, effect: str, *texts: str | None) -> bool:
@@ -40,6 +47,17 @@ class DrugEffectKind:
     def meta_labels(self) -> dict[str, dict[str, str]]:
         """effect -> ``{en, fr}`` (patterns stay author-side)."""
         return {k: {"en": v["en"], "fr": v["fr"]} for k, v in self.effects.items()}
+
+    @property
+    def cache_files(self) -> tuple[str, ...]:
+        """The applier's cache plus the fetcher's worklist and the picker's judged file."""
+        stem = self.cache.stem
+        return (self.cache.name, f"{stem}_judged.json", f"{stem}_worklist.json")
+
+    def meta_entry(self) -> dict[str, Any]:
+        """What the viewer needs to render the kind (meta ``drug_effect_kinds``)."""
+        return {"kind": self.kind, "field": self.field, "section": self.section,
+                "effects": self.meta_labels()}
 
     def data(self) -> dict:
         if self._data is None:
@@ -62,7 +80,15 @@ class DrugEffectKind:
             seen.add(effect)
             if not r.get("sources"):
                 raise ValueError(f"{what}: no source")
-            out.append({"effect": effect, "sources": quote_sources(r["sources"], what)})
+            node = {"effect": effect, "sources": quote_sources(r["sources"], what)}
+            # Every source names a non-primate species (a rat study in a review): the
+            # animal_evidence flag, as on receptor effects.
+            kinds = [species_key(s.get("species")) for s in r["sources"]]
+            if kinds and all(k and not is_primate(k) for k in kinds):
+                node["uncertainty"] = [_uncertainty_bullet(
+                    "animal_evidence", what=what, node=node, source=node["sources"][0],
+                    args={"species": sorted(set(kinds))})]
+            out.append(node)
         for a, b in self.exclusive:
             if {a, b} <= seen:
                 raise ValueError(f"Drug {drug_id!r}: both {a} and {b} (keep the stronger)")
