@@ -1,6 +1,28 @@
 {
   "versions": [
     {
+      "version": "3.180.0",
+      "date": "2026-11-22",
+      "entries": [
+        {
+          "category": "added",
+          "text": "New \"Functional areas\" section (beta), between brain structures and projections: the 43 human Brodmann areas, findable by function (\"primary motor cortex\", \"frontal eye fields\") or by number (\"BA4\"). Each panel shows the area's Wikipedia picture and summary and the structures it lies in. The areas are not drawn on their own yet: picking one lights the whole lobe it sits in",
+          "commits": [
+            "5ad49e1f",
+            "50e8547b"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "A new source, the neuroanatomy textbook Nolte's The Human Brain (2025), backs brain areas and pathways",
+          "commits": [
+            "8edcb72b",
+            "1829c6b9"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.179.1",
       "date": "2026-11-22",
       "entries": [
