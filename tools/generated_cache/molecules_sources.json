@@ -494,6 +494,12 @@
     "title": "Flumazenil",
     "url": "https://upload.wikimedia.org/wikipedia/commons/1/10/Flumazenil.svg"
   },
+  "flunarizine": {
+    "file": "File:Flunarizine.png",
+    "title": "Flunarizine",
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Flunarizine.png",
+    "vectorized": "tools/fetch/png_to_svg.py (potrace)"
+  },
   "flunitrazepam": {
     "file": "File:Flunitrazepam_structure.svg",
     "title": "Flunitrazepam",
@@ -923,6 +929,12 @@
     "file": "File:Oxcarbazepine.svg",
     "title": "Oxcarbazepine",
     "url": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Oxcarbazepine.svg"
+  },
+  "oxetorone": {
+    "file": "File:Oxetorone.png",
+    "title": "Oxetorone",
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Oxetorone.png",
+    "vectorized": "tools/fetch/png_to_svg.py (potrace)"
   },
   "oxycodone": {
     "file": "File:Oxycodone.svg",

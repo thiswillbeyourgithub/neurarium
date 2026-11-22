@@ -18,7 +18,7 @@ sys.path.insert(0, str(TOOLS))
 import fetch_molecules as fm  # noqa: E402
 
 # Imageless on Wikipedia as SVG, but traced from its PNG (tools/fetch/png_to_svg.py).
-TRACED = {"tropatepine"}
+TRACED = {"tropatepine", "flunarizine", "oxetorone"}
 
 
 class DiagramFilterTest(unittest.TestCase):

@@ -86,6 +86,9 @@ FILE_OVERRIDES = {
     # take nothing here: public/data/molecules/tropatepine.svg is that PNG traced by
     # tools/fetch/png_to_svg.py.
     "tropatepine": None,
+    # Drawn only as PNGs: the SVGs here are those PNGs traced by png_to_svg.py.
+    "flunarizine": None,
+    "oxetorone": None,
     # A mixture of alkaloids: its lead SVG is codeine, one constituent, not opium.
     "opium": None,
     # A monoclonal antibody: a protein of ~1300 residues has no skeletal formula
