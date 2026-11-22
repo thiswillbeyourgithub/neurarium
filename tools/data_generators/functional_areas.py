@@ -185,11 +185,28 @@ AREA_SHAPES: dict[str, dict[str, Any]] = {
     "ba4": {"lobe": "frontal", "cuts": [
         {"normal": [0.0, 0.32, 1.0], "offset": -1.394},
         {"normal": [0.0, -1.0, 0.0], "offset": 0.6}]},
+    # Premotor cortex, "area 6 on the lateral surface", the band just anterior to BA4.
+    "ba6": {"lobe": "frontal", "cuts": [
+        {"normal": [0.0, -0.32, -1.0], "offset": 1.394},
+        {"normal": [0.0, 0.32, 1.0], "offset": -0.794},
+        {"normal": [0.0, -1.0, 0.0], "offset": 0.6}]},
+    # "the postcentral gyrus is the site of the primary somatosensory cortex": the
+    # parietal strip just behind the same central-sulcus plane (0.32 y + z = 0.2 here).
+    "ba3_1_2": {"lobe": "parietal", "cuts": [
+        {"normal": [0.0, -0.32, -1.0], "offset": 0.35},
+        {"normal": [0.0, -1.0, 0.0], "offset": 1.4}]},
     # "Its upper and lower banks [the calcarine sulcus] contain the primary visual
     # cortex": the medial face of the occipital lobe, its posterior part and the pole.
     "ba17": {"lobe": "occipital", "cuts": [
         {"normal": [1.0, 0.0, 0.0], "offset": 0.1},
         {"normal": [0.0, 0.0, 1.0], "offset": 0.1}]},
+    # "areas 18 and 19, which surround the primary visual cortex": 18 the lateral
+    # posterior occipital lobe beside BA17, 19 its anterior part.
+    "ba18": {"lobe": "occipital", "cuts": [
+        {"normal": [-1.0, 0.0, 0.0], "offset": -0.1},
+        {"normal": [0.0, 0.0, 1.0], "offset": 0.45}]},
+    "ba19": {"lobe": "occipital", "cuts": [
+        {"normal": [0.0, 0.0, -1.0], "offset": -0.45}]},
 }
 OWN_SHAPE: set[str] = set(AREA_SHAPES)
 
