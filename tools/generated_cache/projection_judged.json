@@ -467,6 +467,12 @@
     "index": 0,
     "qid": "a0f0fdc8"
    }
+  ],
+  "route": [
+   {
+    "index": 1,
+    "qid": "fb5b6da0"
+   }
   ]
  },
  "temporal_R->caudate_R": {
@@ -672,6 +678,18 @@
    {
     "index": 56,
     "qid": "e5ec498e"
+   }
+  ]
+ },
+ "temporal_L->temporal_R": {
+  "route": [
+   {
+    "index": 0,
+    "qid": "4fb2429e"
+   },
+   {
+    "index": 2,
+    "qid": "da827b1f"
    }
   ]
  }

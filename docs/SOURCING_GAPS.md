@@ -20,7 +20,7 @@ Every node is graded (see `docs/PROVENANCE.md`); a bare `llm` grade and NOSOURCE
 | `drug_categories` | 314 | 307 | 0 | 0 | 7 | 0 | 0 |
 | `drug_half_life` | 283 | 272 | 6 | 0 | 0 | 5 | 0 |
 | `receptor_sign` | 56 | 51 | 0 | 0 | 5 | 0 | 0 |
-| `projections` | 120 | 82 | 37 | 0 | 0 | 1 | 0 |
+| `projections` | 120 | 85 | 34 | 0 | 0 | 1 | 0 |
 | `drug_brands` | 579 | 578 | 0 | 0 | 0 | 1 | 0 |
 | `references` | 461 | 0 | 0 | 461 | 0 | 0 | 0 |
 | `receptor_effect` | 207 | 182 | 25 | 0 | 0 | 0 | 10 |

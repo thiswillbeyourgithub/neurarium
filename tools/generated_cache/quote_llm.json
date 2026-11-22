@@ -88,6 +88,9 @@
 "q_01d92a51ab4d": {
 "drug:molindone/categories": "sonnet"
 },
+"q_01d9aea537e5": {
+"projection:parietal_R->caudate_R": "opus"
+},
 "q_01e3f17f9061": {
 "drug:lorazepam/nbn": "sonnet"
 },
@@ -4387,6 +4390,9 @@
 "q_4ca865185f07": {
 "drug:levomilnacipran/excretion[route:renal]": "opus"
 },
+"q_4cc043c4c105": {
+"projection:temporal_L->temporal_R": "opus"
+},
 "q_4cc4c34ca2c9": {
 "drug:levomilnacipran/excretion[route:renal]": "opus"
 },
@@ -7175,6 +7181,9 @@
 },
 "q_7f5949da4c7b": {
 "drug:modafinil/bindings[dat:reuptake_inhibitor]": "sonnet"
+},
+"q_7f6280d04de9": {
+"projection:temporal_L->temporal_R": "opus"
 },
 "q_7f7e97e86e13": {
 "projection:pons->thalamus_R": "opus",

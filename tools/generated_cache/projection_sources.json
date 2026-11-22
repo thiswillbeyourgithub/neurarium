@@ -384,6 +384,12 @@
     "page": 435,
     "quote": "The principal afferent systems to the striatum are glutamatergic fibres from the cerebral cortex [98, 221, 391] and from the intralaminar thalamic nucleus [351], dopaminergic fibres from the substantia nigra [233] and serotoninergic fibres from the dorsal raphe nucleus [243, 319].",
     "provenance": "verified"
+   },
+   {
+    "corpus": "nolte",
+    "page": 483,
+    "quote": "For example, the frontal eye eld (see Chapter 21) projects to the caudate nucleus, which is involved in eye movement control, and parietal association cortex projects to parts of the putamen as well as to parts of the caudate nucleus.",
+    "provenance": "verified"
    }
   ],
   "pons->cerebellum": [
@@ -531,6 +537,18 @@
     "corpus": "nieuwenhuys",
     "page": 573,
     "quote": "A continuous network of excitatory elements potentially involving the entire neocortex and even extending into the hippocampal region is constituted by the ipsilaterally and contralaterally projecting cortico-cortical pyramidal neurons.",
+    "provenance": "verified"
+   },
+   {
+    "corpus": "nolte",
+    "page": 636,
+    "quote": "Fibers that will cross in the anterior commissure, interconnecting the temporal lobes.",
+    "provenance": "verified"
+   },
+   {
+    "corpus": "nolte",
+    "page": 634,
+    "quote": "Commissural bers interconnecting the temporal lobes, together with a few crossing olfactory bers.",
     "provenance": "verified"
    }
   ],
