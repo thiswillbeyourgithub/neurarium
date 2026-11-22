@@ -1,6 +1,33 @@
 {
   "versions": [
     {
+      "version": "3.183.0",
+      "date": "2026-11-22",
+      "entries": [
+        {
+          "category": "improved",
+          "text": "In the Simulation, the receptor plot and the clinical-effects plot can each be folded from their heading, the other one then taking the whole width",
+          "commits": [
+            "312b8876"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "Focusing a functional area no longer lights the projection arrows of its lobe, which distracted from the area itself",
+          "commits": [
+            "61411212"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "The \"Have an idea\" footer of the Settings pane now sits at the end of its content instead of staying pinned at the bottom",
+          "commits": [
+            "4954a492"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.182.0",
       "date": "2026-11-22",
       "entries": [
