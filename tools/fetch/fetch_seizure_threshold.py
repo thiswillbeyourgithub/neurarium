@@ -105,18 +105,6 @@ def _rcp_candidates(labels: dict) -> dict[str, list[dict]]:
     return out
 
 
-def _name_patterns(drugs: list[dict]) -> dict[str, re.Pattern]:
-    """drug id -> a whole-word pattern of its INN (parenthetical qualifier dropped),
-    for names only one roster id carries."""
-    by_name: dict[str, list[str]] = defaultdict(list)
-    for d in drugs:
-        base = re.sub(r"\s*\(.*\)\s*$", "", d["name"]).strip().lower()
-        if base:
-            by_name[base].append(d["id"])
-    return {ids[0]: re.compile(rf"\b{re.escape(n)}\b", re.IGNORECASE)
-            for n, ids in by_name.items() if len(ids) == 1}
-
-
 def _paper_lines(pmid: str) -> list[str]:
     """The abstract / body sentences of a stored Europe PMC page (header lines dropped)."""
     path = corpus_page_path("europepmc", pmid)
@@ -128,7 +116,7 @@ def _paper_lines(pmid: str) -> list[str]:
 
 
 def _paper_candidates(drugs: list[dict]) -> dict[str, list[dict]]:
-    pats = _name_patterns(drugs)
+    pats = drugs_io.unique_name_patterns(drugs)
     out: dict[str, list[dict]] = defaultdict(list)
     for pmid in SEIZURE_PAPERS:
         for line in _paper_lines(pmid):

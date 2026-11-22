@@ -7,7 +7,7 @@ Built with the help of Claude Code.
 """
 from __future__ import annotations
 
-from . import seizure_threshold
+from . import seizure_threshold, sleep
 
-KINDS = (seizure_threshold.KIND,)
+KINDS = (sleep.KIND, seizure_threshold.KIND)
 BY_FIELD = {k.field: k for k in KINDS}

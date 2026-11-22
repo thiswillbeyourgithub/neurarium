@@ -383,7 +383,7 @@ def reconstruct_claims(quotes, data=None, on_cite=None, site_kinds=None):
             for x in d.get(ek.field, []):
                 for q in _qids(x.get("sources", [])):
                     add(q, f"Drug {nm}: {ek.effects[x['effect']]['en'].lower()}.",
-                        CS.site("drug", d["id"], f"{ek.field}[{CS.effect_key(x)}]"))
+                        CS.site("drug", d["id"], f"{ek.field}[{CS.effect_key(x)}]"), x)
         kind["now"] = "drug_holders"
         for h in d.get("holders", []):
             where = HIST.COUNTRIES[h["market"]]["en"]

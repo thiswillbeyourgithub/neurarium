@@ -58,6 +58,7 @@ STRICT = [
     ("apply_drugsfda", []),
     ("apply_excretion", []),
     ("apply_seizure_threshold", []),
+    ("apply_sleep", []),
     ("apply_expression_density", []),
     ("apply_gtopdb_ki", []),
     ("apply_ki_prose", []),

@@ -108,6 +108,7 @@ FIELDS: dict[str, dict[str, Label]] = {
         "pgx": Label("drug.pgx", "drug.pgxSub", parent="drug.pharmacogenomics"),
         "workup": Label("drug.workup", "drug.workupSub"),
         "excretion": Label("drug.excretion", "drug.excretionSub"),
+        "sleep": Label("drug.sleep", "drug.sleepSub"),
         "seizure_threshold": Label("drug.seizure", "drug.seizureSub"),
         "wikipedia": _REFERENCE,
         "aliases": _ALIASES,
@@ -300,6 +301,7 @@ ALWAYS: dict[str, dict[str, Section]] = {
         "pgx": Section("drug.pgx"),
         "workup": Section("drug.workup"),
         "excretion": Section("drug.excretion"),
+        "sleep": Section("drug.sleep"),
         "seizure_threshold": Section("drug.seizure"),
     },
     **{kind: {

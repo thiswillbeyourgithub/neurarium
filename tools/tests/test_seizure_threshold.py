@@ -17,6 +17,7 @@ sys.path.insert(0, str(TOOLS / "sourcing"))
 from data_generators import seizure_threshold as S  # noqa: E402
 import fetch_seizure_threshold as F  # noqa: E402
 import apply_seizure_threshold as A  # noqa: E402
+from lib import drugs_io  # noqa: E402
 from lib.quote_match import normalize_for_match  # noqa: E402
 from pipeline.judged import qid  # noqa: E402
 
@@ -62,7 +63,7 @@ class FetcherTest(unittest.TestCase):
         self.assertEqual(F._with_stopping_context(items, 2, self.page(items)), items[2]["line"])
 
     def test_a_shared_name_is_never_matched(self):
-        pats = F._name_patterns([{"id": "methylphenidate_dl", "name": "Methylphenidate (D,L)"},
+        pats = drugs_io.unique_name_patterns([{"id": "methylphenidate_dl", "name": "Methylphenidate (D,L)"},
                                  {"id": "methylphenidate_d", "name": "Methylphenidate (D)"},
                                  {"id": "clozapine", "name": "Clozapine"}])
         self.assertEqual(set(pats), {"clozapine"})

@@ -137,6 +137,7 @@ KIND_LABELS = {
     "drug_bbb": "Drug blood-brain barrier label",
     "drug_workup": "Drug pre-prescription workup (BETA)",
     "drug_excretion": "Drug excretion: route, unchanged share, kidney, urine pH (BETA)",
+    "drug_sleep": "Drug sleep effects: total sleep, onset, stages, sedation (BETA)",
     "drug_seizure_threshold": "Drug seizure threshold: lowers, raises, withdrawal (BETA)",
     "drug_enzymes": "Drug metabolising enzymes",
     "drug_enzyme_strength": "Drug metabolism strength tier",

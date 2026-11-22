@@ -20,6 +20,7 @@ benzodiazepines, is one record and four references, e.g.::
 
 import json
 import re
+from collections import defaultdict
 from pathlib import Path
 
 from lib.io_atomic import atomic_write_text
@@ -182,3 +183,16 @@ def non_modeled_metabolites(drugs: list[dict], metabolites: list[dict],
         out.append({"id": m["id"], "name": m["name"], "parents": parents[m["id"]],
                     "key": key(m["name"])})
     return out
+
+
+def unique_name_patterns(drugs: list[dict]) -> dict[str, re.Pattern]:
+    """drug id -> a whole-word pattern of its INN (parenthetical qualifier dropped), for
+    names only one roster id carries: a paper naming "methylphenidate" does not say
+    whether it means the racemate or an enantiomer, so neither is matched."""
+    by_name: dict[str, list[str]] = defaultdict(list)
+    for d in drugs:
+        base = re.sub(r"\s*\(.*\)\s*$", "", d["name"]).strip().lower()
+        if base:
+            by_name[base].append(d["id"])
+    return {ids[0]: re.compile(rf"\b{re.escape(n)}\b", re.IGNORECASE)
+            for n, ids in by_name.items() if len(ids) == 1}
