@@ -7,6 +7,7 @@
 import { createCircuitAnimation } from "../circuit-anim.js";
 import { createReceptorMarkers } from "../receptor-markers.js";
 import { createDrugAnimation } from "../drug-anim.js";
+import { createAreaOverlay } from "../scene/area-overlay.js";
 import { buildAreaLegend, buildEffectLegend, buildEnzymeLegend } from "../legend/browse.js";
 import { buildTargetLegend } from "../legend/targets.js";
 import { buildDrugLegend } from "../legend/drugs.js";
@@ -386,7 +387,8 @@ export function wireFocus({
   const areaWatch = { active: false, meshes: new Set(),
     matches: (iso) => !!iso && iso.size === areaWatch.meshes.size
       && [...areaWatch.meshes].every((m) => iso.has(m)),
-    hide: () => { areaWatch.active = false; } };
+    hide: () => { areaWatch.active = false; areaOverlay.hide(); } };
+  const areaOverlay = createAreaOverlay({ meshById });
   const focusArea = createSceneFocus({
     kind: "area",
     apply: (area) => {
@@ -394,6 +396,7 @@ export function wireFocus({
       selection.setCircuit(aMeshes, []);
       areaWatch.meshes = new Set(aMeshes);
       areaWatch.active = true;
+      areaOverlay.show(area);
       return aMeshes;
     },
     show: (area) => info.showArea(area),

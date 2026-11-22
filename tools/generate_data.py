@@ -1557,8 +1557,10 @@ def _attach_image(record: dict[str, Any], img: dict[str, Any] | None) -> None:
             record["structure_image_gallery"] = gallery
 
 
-def _build_functional_areas(structures: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Every functional area record (BETA, data_generators/functional_areas.py)."""
+def _build_functional_areas(structures: list[dict[str, Any]],
+                            shapes: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
+    """Every functional area record (BETA, data_generators/functional_areas.py). An area
+    with its own shape adds ``area_<id>`` to ``shapes`` (written with the rest)."""
     images = _load_image_sources("functional_area_images_sources.json")
     structure_ids = {r["id"] for r in structures}
     out = []
@@ -1571,6 +1573,11 @@ def _build_functional_areas(structures: list[dict[str, Any]]) -> list[dict[str, 
                   "wikipedia_provenance": _wiki_provenance(area["id"])}
         if area["sources"]:
             record["sources"] = _expand_sources(area["sources"], what)
+        spec = FUNCTIONAL_AREAS.AREA_SHAPES.get(area["id"])
+        if spec:
+            key = f"area_{area['id']}"
+            shapes[key] = FUNCTIONAL_AREAS.area_shape(area["id"], shapes[spec["lobe"]])
+            record["shape_file"] = f"data/shapes/{key}.json"
         _attach_image(record, images.get(area["id"]))
         out.append(record)
     return out
@@ -1759,7 +1766,7 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     projections = _build_projections(structures)
     INTEGRITY.validate_quote_registries()
     circuits = _build_circuits(structures)
-    functional_areas = _build_functional_areas(structures)
+    functional_areas = _build_functional_areas(structures, shapes)
     projection_groups = _build_projection_groups()
     # Receptors and drug-target regions reference structure *bases* like circuits do
     # (the viewer expands them to both hemispheres).

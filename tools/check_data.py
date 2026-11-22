@@ -177,7 +177,7 @@ def main():
     check_flow_consistency(report, meta, drugs, projections, receptors)
     check_changelog(report)
     check_innervation(report, meta, structures, projections, receptors)
-    check_baked_meshes(report, structures)
+    check_baked_meshes(report, structures + functional_areas)
     check_enzyme_variability(report, meta, drugs)
     check_clinpgx_variants(report, meta, receptors)
     check_freshness(report, meta, collections, metabolites=metabolites,

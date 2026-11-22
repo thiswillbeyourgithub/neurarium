@@ -174,5 +174,30 @@ AREAS: list[dict[str, Any]] = [
        ["temporal", "insula"]),
 ]
 
-# Areas with their own drawn sub-structure (the rest light their lobe, row greyed).
-OWN_SHAPE: set[str] = set()
+# Areas with their own drawn shape: the lobe's SDF (in its local frame) intersected with
+# half-spaces ``{normal, offset}`` keeping ``dot(p, normal) <= offset``, so the area is
+# exactly a piece of its lobe. Approximate placements read off the cited sentence; the
+# rest light their whole lobe, row greyed. Add one area at a time.
+AREA_SHAPES: dict[str, dict[str, Any]] = {
+    # "a tapering strip in the precentral gyrus, mostly in the anterior wall of the
+    # central sulcus": a band along the frontal lobe's tilted posterior cut (the sulcus,
+    # 0.32 y + z = -1.944), above the lateral fissure.
+    "ba4": {"lobe": "frontal", "cuts": [
+        {"normal": [0.0, 0.32, 1.0], "offset": -1.394},
+        {"normal": [0.0, -1.0, 0.0], "offset": 0.6}]},
+    # "Its upper and lower banks [the calcarine sulcus] contain the primary visual
+    # cortex": the medial face of the occipital lobe, its posterior part and the pole.
+    "ba17": {"lobe": "occipital", "cuts": [
+        {"normal": [1.0, 0.0, 0.0], "offset": 0.1},
+        {"normal": [0.0, 0.0, 1.0], "offset": 0.1}]},
+}
+OWN_SHAPE: set[str] = set(AREA_SHAPES)
+
+
+def area_shape(area_id: str, lobe_shape: dict[str, Any]) -> dict[str, Any]:
+    """The SDF shape file of an area: its lobe's shape cut by the area's half-spaces."""
+    cut = AREA_SHAPES[area_id]["cuts"]
+    return {"type": "sdf", "resolution": lobe_shape["resolution"],
+            "bounds": lobe_shape["bounds"],
+            "root": {"op": "intersect", "nodes": [lobe_shape["root"], *(
+                {"prim": "plane", "normal": c["normal"], "offset": c["offset"]} for c in cut)]}}

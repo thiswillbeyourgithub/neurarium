@@ -90,7 +90,8 @@ class GeneratedArtifactsFreshTest(unittest.TestCase):
     def test_baked_meshes_match_their_shapes(self):
         report = Report()
         with redirect_stdout(io.StringIO()) as out:
-            check_baked_meshes(report, load_jsonl(report, "structures"))
+            check_baked_meshes(report, load_jsonl(report, "structures")
+                               + load_jsonl(report, "functional_areas"))
         self.assertEqual(report.errors, 0, out.getvalue())
 
 

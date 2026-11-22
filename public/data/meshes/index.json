@@ -16,6 +16,20 @@
       "triangles": 11120,
       "bytes": 74531
     },
+    "data/shapes/area_ba17.json": {
+      "file": "area_ba17.bin",
+      "spec_sha256": "3f0252e3d96c4a70a329c57d16c92b805687c0ba679aae17b8d8f71820070bdf",
+      "vertices": 1991,
+      "triangles": 4084,
+      "bytes": 26204
+    },
+    "data/shapes/area_ba4.json": {
+      "file": "area_ba4.bin",
+      "spec_sha256": "7941a2197254cfa61852db6fa7dca495dfa09fd75225436c94d93fe261e2100f",
+      "vertices": 7534,
+      "triangles": 15460,
+      "bytes": 97036
+    },
     "data/shapes/caudate.json": {
       "file": "caudate.bin",
       "spec_sha256": "ddef94ddd36909f54692d180b01a6c39ee5346c4c2dd7399b61e06c0ccc2b320",

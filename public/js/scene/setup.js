@@ -16,6 +16,11 @@ export function setRepaint(fn) {
   repaint = fn;
 }
 
+/** Ask the on-demand loop for one frame (e.g. after an async mesh landed). */
+export function requestRepaint() {
+  repaint();
+}
+
 /** Build scene, camera, renderer and controls. @returns {object} the bundle. */
 export function initThree() {
   const canvas = document.getElementById("scene");

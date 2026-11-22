@@ -359,7 +359,7 @@ function buildCurveGeometry(shape) {
  * @param {THREE.BufferGeometry} geometry
  * @returns {THREE.BufferGeometry} the same geometry, mutated
  */
-function mirrorGeometryX(geometry) {
+export function mirrorGeometryX(geometry) {
   geometry.scale(-1, 1, 1);
   if (geometry.index) {
     // Reverse each triangle's winding by swapping its 2nd and 3rd indices.

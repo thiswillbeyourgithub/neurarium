@@ -36,7 +36,8 @@ def check_baked_meshes(report, structures):
         return
 
     baked = manifest.get("meshes") or {}
-    # Every DISTINCT sdf shape file, the same set the bake tool collects.
+    # Every DISTINCT sdf shape file (structures and drawn functional areas), the same
+    # set the bake tool collects.
     wanted = {}
     for row in structures:
         shape_file = row.get("shape_file")

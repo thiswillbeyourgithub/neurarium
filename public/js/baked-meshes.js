@@ -16,6 +16,25 @@ import { decodeMesh, FORMAT_VERSION } from "./mesh-codec.js";
 import { fetchJson, fetchOk } from "./net.js";
 
 /**
+ * One baked mesh by its shape file (a functional area's, fetched on demand), or null.
+ * @param {string} base  data directory, e.g. "data".
+ * @param {string} shapeFile  e.g. "data/shapes/area_ba4.json"
+ * @returns {Promise<{positions:Float32Array, indices:Uint32Array}|null>}
+ */
+export async function loadBakedMesh(base, shapeFile) {
+  try {
+    const manifest = await fetchJson(`${base}/meshes/index.json`);
+    const entry = manifest?.format === FORMAT_VERSION && (manifest.meshes || {})[shapeFile];
+    if (!entry) return null;
+    return decodeMesh(await (await fetchOk(`${base}/meshes/${entry.file}`)).arrayBuffer());
+  } catch (err) {
+    console.info(`baked meshes: ${shapeFile} unavailable (${err.message})`);
+    return null;
+  }
+}
+
+/**
+ * Every baked mesh (see the module comment).
  * @param {string} base  data directory, e.g. "data".
  * @param {(p:{loaded:number,total:number}) => void} [onProgress]
  * @returns {Promise<Map<string, {positions:Float32Array, indices:Uint32Array}>>}

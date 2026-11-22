@@ -47,8 +47,11 @@ const sha256 = (buf) => crypto.createHash("sha256").update(buf).digest("hex");
  * would ship 20 duplicate meshes.
  */
 function collectShapeFiles() {
-  const lines = fs.readFileSync(path.join(PUBLIC, "data", "structures.jsonl"), "utf8")
-    .trim().split("\n");
+  // Functional areas with their own shape (BETA) are baked like a structure.
+  const lines = ["structures.jsonl", "functional_areas.jsonl"].flatMap((f) => {
+    const p = path.join(PUBLIC, "data", f);
+    return fs.existsSync(p) ? fs.readFileSync(p, "utf8").trim().split("\n") : [];
+  });
   const out = new Map();
   for (const line of lines) {
     const s = JSON.parse(line);
