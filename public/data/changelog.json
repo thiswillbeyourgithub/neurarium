@@ -1,6 +1,33 @@
 {
   "versions": [
     {
+      "version": "3.182.0",
+      "date": "2026-11-22",
+      "entries": [
+        {
+          "category": "added",
+          "text": "The Simulation shows the possible clinical effects (beta) of the receptors a combination engages at each moment, grouped by transmitter system (dry mouth with the other cholinergic effects), each bar as tall as the strongest binding behind it; click one to open it",
+          "commits": [
+            "85e96c07"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Loxapine's Sleep section notes that patients often wake up agitated, with a plausible mechanism: its sedating antihistamine effect fades fast while its longer-lived metabolite amoxapine still raises noradrenaline",
+          "commits": [
+            "bf86a368"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "In the Simulation, the plots sit side by side in full screen, a click pins the time cursor, the receptor plot keeps the same receptors and scale while you move in time, its bars take their transmitter's colour, receptors use their short name (DAT) and open on click, and bands of unknown direction start hidden",
+          "commits": [
+            "85e96c07"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.181.1",
       "date": "2026-11-22",
       "entries": [
