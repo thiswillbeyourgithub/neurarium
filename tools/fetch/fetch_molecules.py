@@ -86,6 +86,8 @@ FILE_OVERRIDES = {
     # take nothing here: public/data/molecules/tropatepine.svg is that PNG traced by
     # tools/fetch/png_to_svg.py.
     "tropatepine": None,
+    # A mixture of alkaloids: its lead SVG is codeine, one constituent, not opium.
+    "opium": None,
     # A monoclonal antibody: a protein of ~1300 residues has no skeletal formula
     # to draw, so the molecule slot stays empty rather than borrowing a cartoon.
     "erenumab": None,
@@ -109,8 +111,14 @@ def http_json(params: dict, api_url: str = API) -> dict:
     return json.loads(polite_http.fetch(f"{api_url}?{query}", timeout=30))
 
 
-def http_bytes(url: str) -> bytes:
-    """Download a binary resource (the SVG) with our User-Agent."""
+def http_bytes(url: str, file_title: str | None = None) -> bytes:
+    """Download a binary resource (the SVG) with our User-Agent. With ``file_title``
+    ("File:X.svg"), fetch it through Commons' Special:FilePath redirect: the
+    upload.wikimedia.org host rate-limits (429) scripted downloads it serves directly
+    while the redirect keeps working."""
+    if file_title:
+        name = urllib.parse.quote(file_title.split(":", 1)[-1].replace(" ", "_"))
+        url = f"https://commons.wikimedia.org/wiki/Special:FilePath/{name}"
     return polite_http.fetch(url, timeout=60)
 
 
@@ -350,7 +358,7 @@ def main() -> None:
                 time.sleep(args.delay)
                 continue
             file_title, url = resolved
-            svg = sanitize_svg(http_bytes(url))
+            svg = sanitize_svg(http_bytes(url, file_title))
             if len(svg) > MAX_SVG_BYTES and not args.allow_huge:
                 # A skeletal formula is a few KB. Anything this size is the article's
                 # 3D ball-and-stick or space-filling render, which resolves as the

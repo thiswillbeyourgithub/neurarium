@@ -124,6 +124,11 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/a/ae/Betahistine.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
     "title": "Betahistine"
   },
+  "biperiden": {
+    "file": "File:Biperiden_stereoisomers.svg",
+    "title": "Biperiden",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Biperiden_stereoisomers.svg"
+  },
   "blonanserin": {
     "file": "File:Blonanserin.svg",
     "title": "Blonanserin",
@@ -223,6 +228,11 @@
     "file": "File:Cariprazine.svg",
     "title": "Cariprazine",
     "url": "https://upload.wikimedia.org/wikipedia/commons/5/58/Cariprazine.svg"
+  },
+  "carpipramine": {
+    "file": "File:Carpipramine.svg",
+    "title": "Carpipramine",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Carpipramine.svg"
   },
   "chloral_hydrate": {
     "file": "File:Chloral_hydrate.svg",
@@ -429,6 +439,11 @@
     "title": "Esketamine",
     "url": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Esketamine2DCSD.svg"
   },
+  "eslicarbazepine_acetate": {
+    "file": "File:Eslicarbazepine_acetate_skeletal_formula.svg",
+    "title": "Eslicarbazepine acetate",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Eslicarbazepine_acetate_skeletal_formula.svg"
+  },
   "estazolam": {
     "file": "File:Estazolam.svg",
     "title": "Estazolam",
@@ -448,6 +463,11 @@
     "file": "File:Ethosuximide.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/6/69/Ethosuximide.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
     "title": "Ethosuximide"
+  },
+  "etifoxine": {
+    "file": "File:Etifoxine.svg",
+    "title": "Etifoxine",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Etifoxine.svg"
   },
   "etomidate": {
     "file": "File:Etomidate.svg",
@@ -578,6 +598,11 @@
     "file": "File:Indalpine_structure.svg",
     "title": "Indalpine",
     "url": "https://upload.wikimedia.org/wikipedia/commons/4/42/Indalpine_structure.svg"
+  },
+  "iproniazid": {
+    "file": "File:Iproniazid.svg",
+    "title": "Iproniazid",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/9/96/Iproniazid.svg"
   },
   "isocarboxazid": {
     "file": "File:Isocarboxazid structure.svg",
@@ -839,6 +864,11 @@
     "title": "Nefazodone",
     "url": "https://upload.wikimedia.org/wikipedia/commons/8/87/Nefazodone.svg"
   },
+  "nefopam": {
+    "file": "File:Nefopam_enantiomers_labelled.svg",
+    "title": "Nefopam",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/18/Nefopam_enantiomers_labelled.svg"
+  },
   "niaprazine": {
     "file": "File:Niaprazine.svg",
     "title": "Niaprazine",
@@ -858,6 +888,11 @@
     "file": "File:Nitrazepam.svg",
     "title": "Nitrazepam",
     "url": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Nitrazepam.svg"
+  },
+  "nordazepam": {
+    "file": "File:Nordazepam.svg",
+    "title": "Nordazepam",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Nordazepam.svg"
   },
   "nortriptyline": {
     "file": "File:Nortriptyline.svg",
@@ -909,6 +944,11 @@
     "title": "Paroxetine",
     "url": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Paroxetine-2D-skeletal.svg"
   },
+  "penfluridol": {
+    "file": "File:Penfluridol.svg",
+    "title": "Penfluridol",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Penfluridol.svg"
+  },
   "pentazocine": {
     "file": "File:Pentazocine-racemate2DCSD.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/4/49/Pentazocine-racemate2DCSD.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
@@ -928,6 +968,11 @@
     "file": "File:Perazine.svg",
     "title": "Perazine",
     "url": "https://upload.wikimedia.org/wikipedia/commons/2/28/Perazine.svg"
+  },
+  "periciazine": {
+    "file": "File:Periciazine.svg",
+    "title": "Periciazine",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Periciazine.svg"
   },
   "perospirone": {
     "file": "File:Perospirone.svg",
@@ -998,6 +1043,11 @@
     "file": "File:Pipotiazine.svg",
     "title": "Pipotiazine",
     "url": "https://upload.wikimedia.org/wikipedia/commons/0/0f/Pipotiazine.svg"
+  },
+  "piribedil": {
+    "file": "File:Piribedil.svg",
+    "title": "Piribedil",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Piribedil.svg"
   },
   "pitolisant": {
     "file": "File:Pitolisant skeletal.svg",
@@ -1204,6 +1254,11 @@
     "title": "Solriamfetol",
     "url": "https://upload.wikimedia.org/wikipedia/commons/3/37/Solriamfetol.svg"
   },
+  "stiripentol": {
+    "file": "File:Stiripentol_structure.svg",
+    "title": "Stiripentol",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Stiripentol_structure.svg"
+  },
   "sulfonmethane": {
     "file": "File:Sulfonal.svg",
     "title": "Sulfonmethane",
@@ -1354,6 +1409,11 @@
     "file": "File:Sodium valproate.svg",
     "title": "Valproate",
     "url": "https://upload.wikimedia.org/wikipedia/commons/0/07/Sodium_valproate.svg"
+  },
+  "valpromide": {
+    "file": "File:Valpromide.svg",
+    "title": "Valpromide",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Valpromide.svg"
   },
   "varenicline": {
     "file": "File:Varenicline.svg",
