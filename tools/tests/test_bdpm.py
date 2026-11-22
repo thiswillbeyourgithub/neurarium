@@ -208,6 +208,37 @@ class BrandApplyTest(unittest.TestCase):
                          "provenance": "verified", "extraction": "code"}]}])
         self.assertEqual(len(drugs[1]["brands"]), 1)       # accent-folded duplicate
 
+    def test_a_brand_another_drug_holds_is_refused(self):
+        # BDPM lists a ketamine product named after esketamine's Spravato: refused, as
+        # the French ketamine article's mention of it once leaked onto ketamine.
+        import tempfile
+        import apply_brand_names as A
+        with tempfile.TemporaryDirectory() as tmp:
+            pages = Path(tmp)
+            (pages / "1.md").write_text("# SPRAVATO 28 mg\ncis: 1\n", "utf-8")
+            drugs = [{"id": "ketamine", "brands": []},
+                     {"id": "esketamine", "formulations": [
+                         {"release": "nasal", "brands": [{"name": "Spravato"}]}]}]
+            labels = {"ketamine": {"brands": [{"name": "Spravato", "quote": "SPRAVATO",
+                                               "cis": "1"}]}}
+            touched, added, present, misses = A.apply_bdpm(drugs, labels, pages)
+        self.assertEqual((touched, added), (0, 0))
+        self.assertEqual(misses, ["ketamine: 'Spravato' is esketamine's brand"])
+        self.assertEqual(A.holders(drugs), {A.brand_key("Spravato"): "esketamine"})
+
+    def test_no_brand_sits_on_two_drugs(self):
+        import apply_brand_names as A
+        from lib import drugs_io
+        seen, clash = {}, []
+        for d in drugs_io.load_drugs():
+            names = {A.brand_key(b["name"]) for b in [*(d.get("brands") or []),
+                     *(b for f in d.get("formulations") or [] for b in f.get("brands") or [])]}
+            for k in names:
+                if k in seen:
+                    clash.append(f"{k}: {seen[k]} and {d['id']}")
+                seen.setdefault(k, d["id"])
+        self.assertEqual(clash, [])
+
     def test_brand_key_folds_accents_case_and_spaces(self):
         # French Wikipedia writes Stahl's "Risperdal Consta" as "Risperdalconsta" and
         # "Tranxene" as "Tranxène": both once shipped as a second brand node.

@@ -82,6 +82,19 @@ def add_brand(existing: list, seen: set, name: str, region: str, source: dict) -
     return True
 
 
+def holders(drugs: list[dict]) -> dict[str, str]:
+    """``brand_key -> drug id`` for every brand a roster drug carries (its own list and
+    its formulations'). One trade name is one product, so a name another drug holds is
+    never added: the French ketamine article mentions esketamine's "Spravato", the
+    amphetamine one dextroamphetamine's "Dexedrine", the bupropion one the naltrexone
+    combination's "Contrave"."""
+    out: dict[str, str] = {}
+    for d in drugs:
+        for b in [*(d.get("brands") or []), *F.placed(d, "brands")]:
+            out.setdefault(brand_key(b["name"]), d["id"])
+    return out
+
+
 def merge_duplicate_brands(drugs: list[dict]) -> list[str]:
     """Fold every drug's same-``brand_key`` brands into the FIRST one, in place.
 
@@ -125,6 +138,7 @@ def apply_bdpm(drugs: list[dict], labels: dict, pages: Path = BDPM_PAGES):
     """
     touched = added = present = 0
     misses = []
+    held = holders(drugs)
     for d in drugs:
         brands = (labels.get(d["id"]) or {}).get("brands") or []
         existing = d.get("brands") or []
@@ -133,6 +147,9 @@ def apply_bdpm(drugs: list[dict], labels: dict, pages: Path = BDPM_PAGES):
         for b in brands:
             if brand_key(b["name"]) in seen:
                 present += 1
+                continue
+            if held.get(brand_key(b["name"]), d["id"]) != d["id"]:
+                misses.append(f"{d['id']}: {b['name']!r} is {held[brand_key(b['name'])]}'s brand")
                 continue
             head = (read_page(pages, b['cis']) or "").split("\n", 1)[0]
             if normalize_for_match(b["quote"]) not in normalize_for_match(head):
@@ -202,6 +219,7 @@ def main():
     applied = added = skipped_present = gated_out = no_page = 0
     misses = []
     page_cache = {}
+    held = holders(drugs)
     for did, names in judged.items():
         d = by_id.get(did)
         wl = worklist.get(did)
@@ -225,6 +243,10 @@ def main():
             if not key or key in seen:
                 if key:
                     skipped_present += 1
+                continue
+            if held.get(key, did) != did:
+                gated_out += 1
+                misses.append(f"{did}: {name!r} is {held[key]}'s brand")
                 continue
             if normalize_for_match(name) not in page_norm:
                 gated_out += 1
