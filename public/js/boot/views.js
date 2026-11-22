@@ -64,7 +64,9 @@ export function wireViews({
   // The feature-request footer closing every detail panel (panel/feedback.js) closes
   // the static panes too: Settings, About and Sources. Built once: a language switch
   // reloads the page. The Data browser and Simulation append theirs when they build.
-  for (const host of [document.getElementById("settings-pane"),
+  // Settings hosts it inside #controls-main, the scroll area: appended to the pane
+  // itself it would sit outside the scroller, pinned below it and always visible.
+  for (const host of [document.getElementById("controls-main"),
     document.querySelector("#about-modal .modal"), document.querySelector("#sourcing-modal .modal")]) {
     host?.appendChild(feedbackFooter());
   }
