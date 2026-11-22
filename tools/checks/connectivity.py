@@ -4,6 +4,11 @@ Part of the ``tools/check_data.py`` checker (see docs/DATA_CHECKS.md).
 """
 
 
+from lib.structure_ids import base_id
+
+from .expected import ONE_WAY_STRUCTURES
+
+
 def check_connectivity(report, structures, projections):
     """Warn about structures the connectome leaves stranded or one-sided.
 
@@ -49,12 +54,14 @@ def check_connectivity(report, structures, projections):
     for sid in sorted(isolated):
         report.warn(f"structure {sid}: no projections touch it "
                     f"(isolated in the connectome)")
-    for sid in sorted(in_only):
-        report.warn(f"structure {sid}: only inward projections "
-                    f"(receives, never projects out)")
-    for sid in sorted(out_only):
-        report.warn(f"structure {sid}: only outward projections "
-                    f"(projects out, never receives)")
+    for sids, what in ((in_only, "only inward projections (receives, never projects out)"),
+                       (out_only, "only outward projections (projects out, never receives)")):
+        for sid in sorted(sids):
+            why = ONE_WAY_STRUCTURES.get(base_id(sid))
+            if why:
+                report.review(f"structure {sid}: {what}; expected: {why}")
+            else:
+                report.warn(f"structure {sid}: {what}")
 
     flagged = len(isolated) + len(in_only) + len(out_only)
     if not flagged:

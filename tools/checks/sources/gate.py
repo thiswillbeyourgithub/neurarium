@@ -20,6 +20,7 @@ from lib.page_file import page_file, read_page_file  # (refuses a path-like page
 from lib.quote_match import normalize_for_match
 
 from ..common import REPO_ROOT
+from ..expected import SHORT_QUOTES
 
 # A normalized quote shorter than this risks an incidental substring match (a few
 # common words appearing on the page by chance), so a too-short quote is warned
@@ -146,6 +147,11 @@ class QuoteGate:
         # whole row of the page, never an incidental substring of prose.
         if (not short_ok and " | " not in quote
                 and len(needle.replace(" ", "")) < _MIN_QUOTE_CHARS):
+            why = next((w for (pre, q), w in SHORT_QUOTES.items()
+                        if q == quote and ctx.startswith(pre)), None)
+            if why:
+                report.review(f"{ctx}: short quote {quote!r}; expected: {why}")
+                return
             report.warn(f"{ctx}: quote is very short ({quote!r}); it matched "
                         f"but may be an incidental substring")
 

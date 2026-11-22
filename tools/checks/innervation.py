@@ -7,6 +7,8 @@ from collections import defaultdict
 
 from lib.structure_ids import base_id
 
+from .expected import LOCAL_INTERNEURON_REGIONS, LOCAL_SYSTEMS
+
 
 def check_innervation(report, meta, structures, projections, receptors):
     """Family 10: per-transmitter-system **innervation coverage** (warns, never errors).
@@ -75,6 +77,10 @@ def check_innervation(report, meta, structures, projections, receptors):
     for kind in sorted(set(flow.values())):
         exp, got = expressed[kind], reached[kind]
         gap = sorted(exp - got, key=lambda b: (-len(owners[kind][b]), b))
+        for b in [b for b in gap if (kind, b) in LOCAL_INTERNEURON_REGIONS]:
+            report.review(f"{kind}: {names.get(b, b)} expressed, reached by no pathway; "
+                          f"expected: {LOCAL_INTERNEURON_REGIONS[(kind, b)]}")
+        gap = [b for b in gap if (kind, b) not in LOCAL_INTERNEURON_REGIONS]
         if gap:
             report.warn(
                 f"{kind}: {len(gap)}/{len(exp)} region(s) express it but no {kind} "
@@ -99,6 +105,9 @@ def check_innervation(report, meta, structures, projections, receptors):
         fam = rec.get("family")
         if fam and fam not in flow and not rec.get("ubiquitous"):
             unmapped[fam] |= set(rec.get("locations") or [])
+    for fam in sorted(set(unmapped) & set(LOCAL_SYSTEMS)):
+        report.review(f"{fam}: receptors but no projection kind; expected: {LOCAL_SYSTEMS[fam]}")
+        unmapped.pop(fam)
     if unmapped:
         report.warn(
             "system(s) with receptors but no projection kind at all (no modeled "
