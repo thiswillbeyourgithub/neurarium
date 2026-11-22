@@ -16,6 +16,20 @@
       "triangles": 11120,
       "bytes": 74531
     },
+    "data/shapes/area_ba10.json": {
+      "file": "area_ba10.bin",
+      "spec_sha256": "0c84d54fc10f42d7db4dde1814acd2bb9ea44e6f007705f86978067dc8ebc8cf",
+      "vertices": 2333,
+      "triangles": 4884,
+      "bytes": 29903
+    },
+    "data/shapes/area_ba11.json": {
+      "file": "area_ba11.bin",
+      "spec_sha256": "8a92f8b5e2571b9156dcddb130bd2f99c12c61d902192a9cb5713f4c400ee66d",
+      "vertices": 3650,
+      "triangles": 7552,
+      "bytes": 48901
+    },
     "data/shapes/area_ba17.json": {
       "file": "area_ba17.bin",
       "spec_sha256": "3f0252e3d96c4a70a329c57d16c92b805687c0ba679aae17b8d8f71820070bdf",
@@ -51,12 +65,54 @@
       "triangles": 15460,
       "bytes": 97036
     },
+    "data/shapes/area_ba44.json": {
+      "file": "area_ba44.bin",
+      "spec_sha256": "f54ed01c95257579946c0ea3949f539e2e2ad94d1b838fa47e1d1a1534fb980f",
+      "vertices": 3204,
+      "triangles": 6712,
+      "bytes": 42059
+    },
+    "data/shapes/area_ba45.json": {
+      "file": "area_ba45.bin",
+      "spec_sha256": "5d4a09dd01d84aabd2c299c430cfe6f34a1ce4f3e294df01520b4d80eabed2b4",
+      "vertices": 2848,
+      "triangles": 5812,
+      "bytes": 36535
+    },
+    "data/shapes/area_ba46.json": {
+      "file": "area_ba46.bin",
+      "spec_sha256": "8beda1e77f7805f1ab0449e02cb8f083aed38e472f8b829b4f3e34aaadcbf6ee",
+      "vertices": 4387,
+      "triangles": 9044,
+      "bytes": 57245
+    },
+    "data/shapes/area_ba47.json": {
+      "file": "area_ba47.bin",
+      "spec_sha256": "cd2c50b8e5ca95a819b88afc99a312d19e567400844f3cbf18787b71d831ff4c",
+      "vertices": 2158,
+      "triangles": 4388,
+      "bytes": 27613
+    },
     "data/shapes/area_ba6.json": {
       "file": "area_ba6.bin",
       "spec_sha256": "effd40af0161e948af3e4e66e77ef568da6f15446530f49bcfc579dc2d5cee9f",
       "vertices": 7378,
       "triangles": 15248,
       "bytes": 95784
+    },
+    "data/shapes/area_ba8.json": {
+      "file": "area_ba8.bin",
+      "spec_sha256": "af1403119df23992e05b4090f5c746638b6db8cb3af80e8c6d524eb42190b1dc",
+      "vertices": 4406,
+      "triangles": 9064,
+      "bytes": 57601
+    },
+    "data/shapes/area_ba9.json": {
+      "file": "area_ba9.bin",
+      "spec_sha256": "9dbad7cd6e0a7e99b16fc17c4747bfad8aa677e9e6f9774a22f59e10aae0d3bf",
+      "vertices": 2953,
+      "triangles": 6128,
+      "bytes": 39629
     },
     "data/shapes/caudate.json": {
       "file": "caudate.bin",

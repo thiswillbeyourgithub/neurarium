@@ -190,6 +190,52 @@ AREA_SHAPES: dict[str, dict[str, Any]] = {
         {"normal": [0.0, -0.32, -1.0], "offset": 1.394},
         {"normal": [0.0, 0.32, 1.0], "offset": -0.794},
         {"normal": [0.0, -1.0, 0.0], "offset": 0.6}]},
+    # The rest of the frontal lobe, banded by s = 0.32 y + z (distance in front of the
+    # central sulcus, s = -1.944) and height y: dorsal (frontal eye field, then
+    # dorsolateral prefrontal), ventrolateral (Broca's 44 / 45, then 47), the frontal pole
+    # (10) and the orbital floor (11).
+    # frontal eye field (area 8)
+    "ba8": {"lobe": "frontal", "cuts": [
+        {"normal": [0.0, -0.32, -1.0], "offset": 0.794},
+        {"normal": [0.0, 0.32, 1.0], "offset": -0.2},
+        {"normal": [0.0, -1.0, 0.0], "offset": -0.2}]},
+    # dorsolateral prefrontal (area 9)
+    "ba9": {"lobe": "frontal", "cuts": [
+        {"normal": [0.0, -0.32, -1.0], "offset": 0.2},
+        {"normal": [0.0, 0.32, 1.0], "offset": 0.6},
+        {"normal": [0.0, -1.0, 0.0], "offset": -0.4}]},
+    # dorsolateral prefrontal (area 46), below area 9
+    "ba46": {"lobe": "frontal", "cuts": [
+        {"normal": [0.0, -0.32, -1.0], "offset": 0.2},
+        {"normal": [0.0, 0.32, 1.0], "offset": 0.6},
+        {"normal": [0.0, -1.0, 0.0], "offset": 0.6},
+        {"normal": [0.0, 1.0, 0.0], "offset": 0.4}]},
+    # frontal pole (area 10)
+    "ba10": {"lobe": "frontal", "cuts": [
+        {"normal": [0.0, -0.32, -1.0], "offset": -0.6},
+        {"normal": [0.0, -1.0, 0.0], "offset": 0.9}]},
+    # orbitofrontal (area 11), the frontal floor
+    "ba11": {"lobe": "frontal", "cuts": [
+        {"normal": [0.0, -0.32, -1.0], "offset": 0.6},
+        {"normal": [0.0, 1.0, 0.0], "offset": -0.9}]},
+    # Broca's area, pars opercularis (44)
+    "ba44": {"lobe": "frontal", "cuts": [
+        {"normal": [0.0, -0.32, -1.0], "offset": 1.0},
+        {"normal": [0.0, 0.32, 1.0], "offset": -0.45},
+        {"normal": [0.0, -1.0, 0.0], "offset": 1.3},
+        {"normal": [0.0, 1.0, 0.0], "offset": -0.6}]},
+    # Broca's area, pars triangularis (45)
+    "ba45": {"lobe": "frontal", "cuts": [
+        {"normal": [0.0, -0.32, -1.0], "offset": 0.45},
+        {"normal": [0.0, 0.32, 1.0], "offset": 0.05},
+        {"normal": [0.0, -1.0, 0.0], "offset": 1.3},
+        {"normal": [0.0, 1.0, 0.0], "offset": -0.6}]},
+    # orbital part of the inferior frontal gyrus (47)
+    "ba47": {"lobe": "frontal", "cuts": [
+        {"normal": [0.0, -0.32, -1.0], "offset": -0.05},
+        {"normal": [0.0, 0.32, 1.0], "offset": 0.6},
+        {"normal": [0.0, -1.0, 0.0], "offset": 1.3},
+        {"normal": [0.0, 1.0, 0.0], "offset": -0.6}]},
     # "the postcentral gyrus is the site of the primary somatosensory cortex": the
     # parietal strip just behind the same central-sulcus plane (0.32 y + z = 0.2 here).
     "ba3_1_2": {"lobe": "parietal", "cuts": [
