@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.181.1",
+      "date": "2026-11-22",
+      "entries": [
+        {
+          "category": "fixed",
+          "text": "Medikinet, a methylphenidate with an immediate and a prolonged half, is now listed under extended release, as its French label states",
+          "commits": [
+            "661c3d70"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.181.0",
       "date": "2026-11-22",
       "entries": [
