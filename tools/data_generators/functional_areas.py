@@ -254,13 +254,63 @@ AREA_SHAPES: dict[str, dict[str, Any]] = {
     "ba19": {"lobe": "occipital", "cuts": [
         {"normal": [0.0, 0.0, -1.0], "offset": -0.45}]},
 }
+
+
+def _box(lobe: str, **lim: float) -> dict[str, Any]:
+    """An area as an axis box in its host's local frame: ``x_min=0.2`` keeps x >= 0.2,
+    ``s_max`` bounds s = 0.32 y + z (distance in front of the parietal central-sulcus
+    plane). A host with no limit given is the whole host (insula, BA16)."""
+    axes = {"x": [1.0, 0.0, 0.0], "y": [0.0, 1.0, 0.0], "z": [0.0, 0.0, 1.0],
+            "s": [0.0, 0.32, 1.0]}
+    cuts = []
+    for key, v in lim.items():
+        ax, side = key.split("_")
+        n = axes[ax]
+        cuts.append({"normal": n, "offset": v} if side == "max"
+                    else {"normal": [-c for c in n], "offset": -v})
+    return {"lobe": lobe, "cuts": cuts}
+
+
+# The remaining areas, placed from the location their cited sentence (or Wikipedia's
+# list) gives, in each host's local frame: parietal (s from the central sulcus, y up),
+# temporal (x lateral, y up with its top at y ~ 0.58 - 0.18 z, z anterior: pole near z 2.6), the cingulate arc (z anterior,
+# y up), the insula whole, the hippocampus' posterior end for the presubiculum.
+AREA_SHAPES.update({
+    "ba5": _box("parietal", s_min=-0.85, s_max=-0.35, y_min=-0.4),
+    "ba7": _box("parietal", s_max=-0.85, y_min=-0.4),
+    "ba40": _box("parietal", s_min=-0.9, s_max=-0.35, y_min=-2.0, y_max=-0.4),
+    "ba39": _box("parietal", s_max=-0.9, y_min=-2.0, y_max=-0.4),
+    "ba43": _box("parietal", s_min=-0.6, y_max=-1.4),
+    "ba38": _box("temporal", z_min=1.4),
+    "ba22": _box("temporal", y_min=0.1, z_min=-1.5, z_max=1.4),
+    "ba41_42": _box("temporal", y_min=0.25, x_max=0.2, z_min=-0.9, z_max=0.1),
+    "ba21": _box("temporal", x_min=0.0, y_min=-0.2, y_max=0.1, z_min=-1.8, z_max=1.4),
+    "ba20": _box("temporal", x_min=-0.6, y_max=-0.2, z_min=-1.5, z_max=1.4),
+    "ba37": _box("temporal", y_max=0.5, z_max=-1.5),
+    "ba28": _box("temporal", x_max=-0.6, y_max=0.0, z_min=0.6, z_max=1.9),
+    "ba34": _box("temporal", x_max=-0.6, y_min=0.0, y_max=0.6, z_min=0.6, z_max=1.9),
+    "ba35": _box("temporal", x_max=-0.6, y_max=0.3, z_min=-0.4, z_max=0.6),
+    "ba36": _box("temporal", x_min=-0.6, x_max=-0.2, y_max=0.3, z_min=-0.4, z_max=0.6),
+    "ba48": _box("temporal", x_max=-0.6, y_max=0.3, z_min=-1.5, z_max=-0.4),
+    "ba24": _box("cingulate", z_min=0.3, y_min=0.0, y_max=0.95),
+    "ba32": _box("cingulate", z_min=0.3, y_min=0.95),
+    "ba25": _box("cingulate", z_min=0.9, y_max=-0.1),
+    "ba33": _box("cingulate", z_min=1.2, y_min=-0.1, y_max=0.6),
+    "ba23": _box("cingulate", z_min=-1.0, z_max=-0.2, y_max=0.9),
+    "ba31": _box("cingulate", z_min=-1.0, z_max=-0.2, y_min=0.9),
+    "ba29": _box("cingulate", z_max=-1.0, y_max=0.0),
+    "ba30": _box("cingulate", z_max=-1.0, y_min=0.0),
+    "ba26": _box("cingulate", z_max=-1.2, y_max=-0.2),
+    "ba16": _box("insula"),
+    "ba27": _box("hippocampus", z_max=-0.2),
+})
 OWN_SHAPE: set[str] = set(AREA_SHAPES)
 
 
 def area_shape(area_id: str, lobe_shape: dict[str, Any]) -> dict[str, Any]:
     """The SDF shape file of an area: its lobe's shape cut by the area's half-spaces."""
     cut = AREA_SHAPES[area_id]["cuts"]
-    return {"type": "sdf", "resolution": lobe_shape["resolution"],
-            "bounds": lobe_shape["bounds"],
+    out = {k: lobe_shape[k] for k in ("resolution", "bounds", "margin") if k in lobe_shape}
+    return {"type": "sdf", **out,
             "root": {"op": "intersect", "nodes": [lobe_shape["root"], *(
                 {"prim": "plane", "normal": c["normal"], "offset": c["offset"]} for c in cut)]}}

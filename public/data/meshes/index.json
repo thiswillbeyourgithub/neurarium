@@ -30,6 +30,13 @@
       "triangles": 7552,
       "bytes": 48901
     },
+    "data/shapes/area_ba16.json": {
+      "file": "area_ba16.bin",
+      "spec_sha256": "b9e56a1be68c3b0fbb438d16dff2f53f0de58517552c4cbd3bd386276d2a60df",
+      "vertices": 6218,
+      "triangles": 13108,
+      "bytes": 89468
+    },
     "data/shapes/area_ba17.json": {
       "file": "area_ba17.bin",
       "spec_sha256": "3f0252e3d96c4a70a329c57d16c92b805687c0ba679aae17b8d8f71820070bdf",
@@ -51,6 +58,146 @@
       "triangles": 16580,
       "bytes": 95171
     },
+    "data/shapes/area_ba20.json": {
+      "file": "area_ba20.bin",
+      "spec_sha256": "78803bacb5e843000cb11f1967d4320ec4d0e3f8e87dcd831adfa7ff9dc3adad",
+      "vertices": 1316,
+      "triangles": 2692,
+      "bytes": 15231
+    },
+    "data/shapes/area_ba21.json": {
+      "file": "area_ba21.bin",
+      "spec_sha256": "c0f7904267e15a5d16daf2cd9c2dcd0cb318e4f25efb7a239df6b4de6269405f",
+      "vertices": 734,
+      "triangles": 1568,
+      "bytes": 9187
+    },
+    "data/shapes/area_ba22.json": {
+      "file": "area_ba22.bin",
+      "spec_sha256": "35e9f61c7d70f52918aac27b396f59e936bd0d0dc2cce30c456ec22f4d5cdb47",
+      "vertices": 3783,
+      "triangles": 7768,
+      "bytes": 48628
+    },
+    "data/shapes/area_ba23.json": {
+      "file": "area_ba23.bin",
+      "spec_sha256": "96f72ea184463fcb7eec8df8bd07f2166d5a1da854c8541757b59db18d868f98",
+      "vertices": 811,
+      "triangles": 1672,
+      "bytes": 9307
+    },
+    "data/shapes/area_ba24.json": {
+      "file": "area_ba24.bin",
+      "spec_sha256": "4962e2a0f48882999271ee5a4cb0439d1549749c05a5946651170412ca45717c",
+      "vertices": 2163,
+      "triangles": 4416,
+      "bytes": 27774
+    },
+    "data/shapes/area_ba25.json": {
+      "file": "area_ba25.bin",
+      "spec_sha256": "77a2dc640e740fe0565d48a3a79b64ae029e4362ec845e135a55688d01bf1dcb",
+      "vertices": 841,
+      "triangles": 1728,
+      "bytes": 10096
+    },
+    "data/shapes/area_ba26.json": {
+      "file": "area_ba26.bin",
+      "spec_sha256": "9352473e48f86b25efc24029036458d591ca13d35729cc248cb17a4b0bfb5a26",
+      "vertices": 495,
+      "triangles": 1024,
+      "bytes": 5749
+    },
+    "data/shapes/area_ba27.json": {
+      "file": "area_ba27.bin",
+      "spec_sha256": "31d8a68942a6bf8a0e3995d040685f904fe6192d5b5b50a4d8b30382f3a9b41e",
+      "vertices": 2368,
+      "triangles": 4988,
+      "bytes": 32490
+    },
+    "data/shapes/area_ba28.json": {
+      "file": "area_ba28.bin",
+      "spec_sha256": "1e4eb87b95084210fa91204eb0ab8fd4dc14ae5bb22aa2bad791bf8d420bcc01",
+      "vertices": 591,
+      "triangles": 1196,
+      "bytes": 6728
+    },
+    "data/shapes/area_ba29.json": {
+      "file": "area_ba29.bin",
+      "spec_sha256": "38906defed581725d8a047a10e00660c2a62fa69fc5cb0141f7e513f1ef21263",
+      "vertices": 920,
+      "triangles": 1904,
+      "bytes": 11132
+    },
+    "data/shapes/area_ba30.json": {
+      "file": "area_ba30.bin",
+      "spec_sha256": "f72ff909dfb70db4d7917da0adeb29f14a092a015fe2c85641e24f5ad48e4a81",
+      "vertices": 1882,
+      "triangles": 3836,
+      "bytes": 25007
+    },
+    "data/shapes/area_ba31.json": {
+      "file": "area_ba31.bin",
+      "spec_sha256": "922a7ba7d43be106eb10c3baa803f13a9f5816027901b88da3d8b72bea1861fd",
+      "vertices": 1285,
+      "triangles": 2604,
+      "bytes": 15162
+    },
+    "data/shapes/area_ba32.json": {
+      "file": "area_ba32.bin",
+      "spec_sha256": "9c7f8863b136f50cbb0241c4a6a6522991656204b685ab5c4595de59d1a095ec",
+      "vertices": 1405,
+      "triangles": 2880,
+      "bytes": 16171
+    },
+    "data/shapes/area_ba33.json": {
+      "file": "area_ba33.bin",
+      "spec_sha256": "bedd680091939079b21bc46c45d7263752d2366a7c049d236de3782a4868f691",
+      "vertices": 1037,
+      "triangles": 2092,
+      "bytes": 12131
+    },
+    "data/shapes/area_ba34.json": {
+      "file": "area_ba34.bin",
+      "spec_sha256": "cfab939f2424a88a6e76edde46728ebe6fcd513b5f0c2df9e1e534ad933d54eb",
+      "vertices": 762,
+      "triangles": 1564,
+      "bytes": 8645
+    },
+    "data/shapes/area_ba35.json": {
+      "file": "area_ba35.bin",
+      "spec_sha256": "9bebfc76434c72bf4405dfeb0f85da907d2cad41d8042ea96e77761c702989cd",
+      "vertices": 1118,
+      "triangles": 2240,
+      "bytes": 12649
+    },
+    "data/shapes/area_ba36.json": {
+      "file": "area_ba36.bin",
+      "spec_sha256": "5cf6ac446ba35bcfdbd86c2a6b737ff85fe8263dc93cf510811313b7162f6c83",
+      "vertices": 834,
+      "triangles": 1680,
+      "bytes": 9813
+    },
+    "data/shapes/area_ba37.json": {
+      "file": "area_ba37.bin",
+      "spec_sha256": "cd6f5e4302f7d9ef2c18a22e2b0bb1c732cd626c4df1c0634d10ab9fbfa7d074",
+      "vertices": 2011,
+      "triangles": 4112,
+      "bytes": 26235
+    },
+    "data/shapes/area_ba38.json": {
+      "file": "area_ba38.bin",
+      "spec_sha256": "12fe3e990074356a2272e7118abc78ac5c186aea26fb4af4b50de400c558f681",
+      "vertices": 580,
+      "triangles": 1220,
+      "bytes": 6728
+    },
+    "data/shapes/area_ba39.json": {
+      "file": "area_ba39.bin",
+      "spec_sha256": "623f0a2ee2fe977fe6bd98fb4312594037ece5372f485ebf6a0af400d700f4a7",
+      "vertices": 7577,
+      "triangles": 15472,
+      "bytes": 97094
+    },
     "data/shapes/area_ba3_1_2.json": {
       "file": "area_ba3_1_2.bin",
       "spec_sha256": "258e7404cdcb546c901989d00a94a7ea3467753eb237e1e2b356258620fa37ab",
@@ -64,6 +211,27 @@
       "vertices": 7534,
       "triangles": 15460,
       "bytes": 97036
+    },
+    "data/shapes/area_ba40.json": {
+      "file": "area_ba40.bin",
+      "spec_sha256": "108caf46fb6f3a6e38df9950557eff41971d6a9365c1f154e367a373dfce4a35",
+      "vertices": 6436,
+      "triangles": 13060,
+      "bytes": 82023
+    },
+    "data/shapes/area_ba41_42.json": {
+      "file": "area_ba41_42.bin",
+      "spec_sha256": "a3cb4cf55ab1a65bd866d4b1ebf32c82e9f29a01f5620edaaed7b840d461460a",
+      "vertices": 1260,
+      "triangles": 2520,
+      "bytes": 14234
+    },
+    "data/shapes/area_ba43.json": {
+      "file": "area_ba43.bin",
+      "spec_sha256": "3364b1b5de0b2e9e41fa4efba281fd983ad5af7626f1561680e0c5569da4e6d4",
+      "vertices": 5792,
+      "triangles": 11796,
+      "bytes": 75847
     },
     "data/shapes/area_ba44.json": {
       "file": "area_ba44.bin",
@@ -93,12 +261,33 @@
       "triangles": 4388,
       "bytes": 27613
     },
+    "data/shapes/area_ba48.json": {
+      "file": "area_ba48.bin",
+      "spec_sha256": "e57ecede530fee59e418156a0325dac734be9b8c9bf8b53f6fffe262d38edada",
+      "vertices": 1197,
+      "triangles": 2404,
+      "bytes": 13587
+    },
+    "data/shapes/area_ba5.json": {
+      "file": "area_ba5.bin",
+      "spec_sha256": "a653445ec8c225691c99ddb0f02b8b48b6fda1c23f59c5d6d81a30e03526d0f8",
+      "vertices": 3713,
+      "triangles": 7504,
+      "bytes": 47499
+    },
     "data/shapes/area_ba6.json": {
       "file": "area_ba6.bin",
       "spec_sha256": "effd40af0161e948af3e4e66e77ef568da6f15446530f49bcfc579dc2d5cee9f",
       "vertices": 7378,
       "triangles": 15248,
       "bytes": 95784
+    },
+    "data/shapes/area_ba7.json": {
+      "file": "area_ba7.bin",
+      "spec_sha256": "f29ffc981a19c007fb85e7a421e4df04eac29c1bff85bc4a134e0360d1df4615",
+      "vertices": 3913,
+      "triangles": 7988,
+      "bytes": 50505
     },
     "data/shapes/area_ba8.json": {
       "file": "area_ba8.bin",

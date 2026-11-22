@@ -1,0 +1,44 @@
+{
+  "type": "sdf",
+  "resolution": 64,
+  "bounds": [
+    [
+      -0.6,
+      -1.2,
+      -1.35
+    ],
+    [
+      0.6,
+      1.2,
+      1.35
+    ]
+  ],
+  "root": {
+    "op": "intersect",
+    "nodes": [
+      {
+        "op": "displace",
+        "octaves": 2,
+        "freq": 2.6,
+        "amp": 0.1,
+        "unit": 1.1,
+        "seed": 15,
+        "nodes": [
+          {
+            "prim": "ellipsoid",
+            "center": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "radii": [
+              0.4,
+              0.95,
+              1.1
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

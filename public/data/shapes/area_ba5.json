@@ -1,0 +1,145 @@
+{
+  "type": "sdf",
+  "resolution": 92,
+  "bounds": [
+    [
+      -0.99,
+      -3.45,
+      -1.9
+    ],
+    [
+      2.05,
+      0.95,
+      1.7
+    ]
+  ],
+  "root": {
+    "op": "intersect",
+    "nodes": [
+      {
+        "op": "subtract",
+        "nodes": [
+          {
+            "op": "intersect",
+            "nodes": [
+              {
+                "op": "displace",
+                "octaves": 2,
+                "freq": 2.2,
+                "amp": 0.13,
+                "unit": 1.9,
+                "seed": 12,
+                "origin": [
+                  0.85,
+                  1.8,
+                  -0.2
+                ],
+                "nodes": [
+                  {
+                    "prim": "ellipsoid",
+                    "center": [
+                      0.3,
+                      -1.25,
+                      0.05
+                    ],
+                    "radii": [
+                      1.55,
+                      2.0,
+                      3.4
+                    ]
+                  }
+                ]
+              },
+              {
+                "prim": "plane",
+                "normal": [
+                  0.0,
+                  0.32,
+                  1.0
+                ],
+                "offset": 0.2
+              },
+              {
+                "prim": "plane",
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "offset": 1.7
+              },
+              {
+                "prim": "plane",
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "offset": 1.5
+              }
+            ]
+          },
+          {
+            "prim": "plane",
+            "normal": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "offset": -0.79
+          },
+          {
+            "op": "intersect",
+            "nodes": [
+              {
+                "prim": "plane",
+                "normal": [
+                  0.0,
+                  1.0,
+                  0.18
+                ],
+                "offset": -1.828
+              },
+              {
+                "prim": "plane",
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "offset": -0.1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "prim": "plane",
+        "normal": [
+          -0.0,
+          -0.32,
+          -1.0
+        ],
+        "offset": 0.85
+      },
+      {
+        "prim": "plane",
+        "normal": [
+          0.0,
+          0.32,
+          1.0
+        ],
+        "offset": -0.35
+      },
+      {
+        "prim": "plane",
+        "normal": [
+          -0.0,
+          -1.0,
+          -0.0
+        ],
+        "offset": 0.4
+      }
+    ]
+  }
+}
