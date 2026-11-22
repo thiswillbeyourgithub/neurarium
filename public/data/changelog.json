@@ -8,43 +8,43 @@
           "category": "added",
           "text": "A drug's panel has a new \"Sleep\" section (beta): what review articles say the drug itself does to sleep, such as more total sleep, falling asleep faster, less REM sleep, deeper sleep, daytime sleepiness, restless legs. Statements that come only from rat studies carry an orange warning",
           "commits": [
-            "b7d888dd",
-            "b7b655ae"
+            "a168e762",
+            "ea0557ab"
           ]
         },
         {
           "category": "added",
           "text": "DrugsMap can place drugs by their effects on sleep (beta), and now opens on the antidepressants compared this way: the sedating ones (mirtazapine, trazodone, doxepin) sit apart from those that suppress REM sleep (paroxetine, vortioxetine). Links shared before keep showing what they showed",
           "commits": [
-            "9b05eac5"
+            "2648e71d"
           ]
         },
         {
           "category": "fixed",
           "text": "Brexpiprazole no longer shows a made-up action on the noradrenaline transporter: a table cell saying it has no effect there (0% at 10 µM) had been read as a very strong affinity",
           "commits": [
-            "c268dc2e"
+            "cbc49516"
           ]
         },
         {
           "category": "fixed",
           "text": "Seven brand names no longer appear under the wrong drug, for example Spravato (esketamine) under ketamine or Fetzima (levomilnacipran) under milnacipran",
           "commits": [
-            "84a7d5df"
+            "32b01494"
           ]
         },
         {
           "category": "fixed",
           "text": "Quasym, a modified-release methylphenidate, is no longer listed as immediate release",
           "commits": [
-            "b55a1265"
+            "30152f49"
           ]
         },
         {
           "category": "improved",
           "text": "The sleep and seizure-threshold sections are drawn by one shared piece of code, so the next drug-level section needs no new code of its own",
           "commits": [
-            "9a956943"
+            "5cf0ab52"
           ]
         }
       ]
