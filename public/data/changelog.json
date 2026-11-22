@@ -1,6 +1,27 @@
 {
   "versions": [
     {
+      "version": "3.178.1",
+      "date": "2026-11-22",
+      "entries": [
+        {
+          "category": "data",
+          "text": "Seizure threshold: 37 drugs now say they \"may lower\" the threshold instead of \"lower\" it, because their label only warns in hedged or class-wide terms (fluoxetine's \"risque potentiel ... comme avec d'autres antidépresseurs\"); 20 keep \"lowers\" on a plain, drug-specific statement",
+          "commits": [
+            "2eb71564",
+            "c7a4d4c1"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "12 more drugs show their molecule (biperiden, carpipramine, eslicarbazepine acetate, etifoxine, iproniazid, nefopam, nordazepam, penfluridol, periciazine, piribedil, stiripentol, valpromide)",
+          "commits": [
+            "a8c85979"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.178.0",
       "date": "2026-11-21",
       "entries": [
