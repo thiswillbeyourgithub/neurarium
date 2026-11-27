@@ -1546,5 +1546,35 @@
     "file": "File:Zuranolone.svg",
     "title": "Zuranolone",
     "url": "https://upload.wikimedia.org/wikipedia/commons/5/57/Zuranolone.svg"
+  },
+  "alfentanil": {
+    "file": "File:Alfentanil-2D-skeletal.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Alfentanil-2D-skeletal.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Alfentanil"
+  },
+  "desflurane": {
+    "file": "File:(RS)-Desfluran_Structural_Formula_V1.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/c8/%28RS%29-Desfluran_Structural_Formula_V1.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Desflurane"
+  },
+  "methohexital": {
+    "file": "File:Methohexital.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/58/Methohexital.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Methohexital"
+  },
+  "remifentanil": {
+    "file": "File:Remifentanil2DCSDS.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/18/Remifentanil2DCSDS.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Remifentanil"
+  },
+  "remimazolam": {
+    "file": "File:Remimazolam.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/6/61/Remimazolam.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Remimazolam"
+  },
+  "sufentanil": {
+    "file": "File:Sufentanil.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Sufentanil.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Sufentanil"
   }
 }

@@ -54,6 +54,46 @@
     "value": 2.7
    }
   },
+  "alfentanil": {
+   "bbb": {
+    "label": "BBB+",
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "51263",
+      "provenance": "verified",
+      "quote": "B3DB row 1421: trimethoprim | CID 51263 | logBB - | BBB+ | group B | references R1, R13, R19, R6, R14, R15, R23, R24, R27, R27, R27, R30, R30, R36"
+     }
+    ]
+   },
+   "cid": 51263,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "51263",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 81.1 Å²"
+     }
+    ],
+    "value": 81.1
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "51263",
+      "provenance": "verified",
+      "quote": "XLogP3: 2.2"
+     }
+    ],
+    "value": 2.2
+   }
+  },
   "alimemazine": {
    "bbb": {
     "label": "BBB+",
@@ -2752,6 +2792,47 @@
      }
     ],
     "value": 4.1
+   }
+  },
+  "desflurane": {
+   "bbb": {
+    "label": "BBB+",
+    "logbb": 0.11,
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "42113",
+      "provenance": "verified",
+      "quote": "B3DB row 629: desflurane (suprane) | CID 42113 | logBB 0.11 | BBB+ | group A | references R2, R2, R8, R12, R20, R21, R25, R27, R27, R35, R39, R40, R43, R47"
+     }
+    ]
+   },
+   "cid": 42113,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "42113",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 9.2 Å²"
+     }
+    ],
+    "value": 9.2
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "42113",
+      "provenance": "verified",
+      "quote": "XLogP3: 2.6"
+     }
+    ],
+    "value": 2.6
    }
   },
   "desipramine": {
@@ -6071,6 +6152,47 @@
     "value": 2.5
    }
   },
+  "methohexital": {
+   "bbb": {
+    "label": "BBB+",
+    "logbb": -0.1,
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "9034",
+      "provenance": "verified",
+      "quote": "B3DB row 471: 151-83-7 | CID 9034 | logBB -0.1 | BBB+ | group A | references R5, R8, R21, R27, R2, R2, R27, R3, R4, R11, R12, R20, R25, R35, R36, R38, R39, R41, R43, R46, R47, R40, R44"
+     }
+    ]
+   },
+   "cid": 9034,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "9034",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 66.5 Å²"
+     }
+    ],
+    "value": 66.5
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "9034",
+      "provenance": "verified",
+      "quote": "XLogP3: 2.3"
+     }
+    ],
+    "value": 2.3
+   }
+  },
   "methylfolate_l": {
    "cid": 444412,
    "tpsa": {
@@ -9029,6 +9151,73 @@
     "value": 3.0
    }
   },
+  "remifentanil": {
+   "bbb": {
+    "label": "BBB+",
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "60815",
+      "provenance": "verified",
+      "quote": "B3DB row 1419: remifentanil | CID 60815 | logBB - | BBB+ | group B | references R1, R13, R19, R6, R14, R23, R24, R26, R27, R27, R27, R30, R30, R37"
+     }
+    ]
+   },
+   "cid": 60815,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "60815",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 76.2 Å²"
+     }
+    ],
+    "value": 76.2
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "60815",
+      "provenance": "verified",
+      "quote": "XLogP3: 1.9"
+     }
+    ],
+    "value": 1.9
+   }
+  },
+  "remimazolam": {
+   "cid": 9867812,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "9867812",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 69.4 Å²"
+     }
+    ],
+    "value": 69.4
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "9867812",
+      "provenance": "verified",
+      "quote": "XLogP3: 3.4"
+     }
+    ],
+    "value": 3.4
+   }
+  },
   "reserpine": {
    "bbb": {
     "label": "BBB+",
@@ -9828,6 +10017,47 @@
      }
     ],
     "value": 3.6
+   }
+  },
+  "sufentanil": {
+   "bbb": {
+    "label": "BBB+",
+    "logbb": 0.2,
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "41693",
+      "provenance": "verified",
+      "quote": "B3DB row 667: sufentanil | CID 41693 | logBB 0.2 | BBB+ | group A | references R47"
+     }
+    ]
+   },
+   "cid": 41693,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "41693",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 61 Å²"
+     }
+    ],
+    "value": 61.0
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "41693",
+      "provenance": "verified",
+      "quote": "XLogP3: 4"
+     }
+    ],
+    "value": 4.0
    }
   },
   "sulfonmethane": {
