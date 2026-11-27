@@ -12,6 +12,7 @@ import { groupByMode } from "../receptor-effects.js";
 import { EFFECT_GROUPINGS, groupPossibleEffects, loadEffectGrouping, saveEffectGrouping }
   from "../effect-grouping.js";
 import { bindingKi } from "./format.js";
+import { buildEffectSiteSwitch, filterBySite } from "../effect-site.js";
 
 const { ofNoun, t } = window.__I18N__;
 
@@ -130,7 +131,7 @@ export function makeSections(P) {
   // with neither, the empty section. `kind`: "receptor" | "target" (its wording).
   const appendEffects = (rows, unknown, kind) => {
     const has = !!(rows && rows.length);
-    const { ul, group, close } = betaSection("effects", "effects.heading", "effects.hint",
+    const { sec, ul, close } = betaSection("effects", "effects.heading", "effects.hint",
       { grouped: has, subKey: "effects.headingSub", empty: has || unknown ? null : kind });
     if (!has && !unknown) return close();
     if (!has) {
@@ -138,16 +139,27 @@ export function makeSections(P) {
       li.appendChild(el("span", "loc-name", t("effects.unknown")));
       li.appendChild(sourceBackedPill("unknown", { unknown }));
       ul.appendChild(li);
+      return close();
     }
-    for (const { rows: inMode } of groupByMode(rows, (e) => e.mode, data.meta.effectModes)) {
-      const list = group(inMode[0].modeLabel, "drug-cat");
-      for (const e of inMode) {
-        const li = el("li");
-        li.appendChild(effectLink(e.effect, e.label));
-        li.appendChild(nodePill(e));
-        list.appendChild(li);
+    // The central / peripheral switch (js/effect-site.js) re-renders the groups in place.
+    const box = el("div", "effect-site-box");
+    const render = () => {
+      box.textContent = "";
+      const shown = filterBySite(rows);
+      if (!shown.length) box.appendChild(el("p", "legend-caption", t("effects.siteEmpty")));
+      for (const { rows: inMode } of groupByMode(shown, (e) => e.mode, data.meta.effectModes)) {
+        box.appendChild(el("h4", "drug-cat", inMode[0].modeLabel));
+        const list = box.appendChild(el("ul"));
+        for (const e of inMode) {
+          const li = el("li");
+          li.appendChild(effectLink(e.effect, e.label));
+          li.appendChild(nodePill(e));
+          list.appendChild(li);
+        }
       }
-    }
+    };
+    sec.append(buildEffectSiteSwitch(render).el, box);
+    render();
     close();
   };
 
@@ -185,12 +197,17 @@ export function makeSections(P) {
     const mix = mixedCompounds(drug, sec, ul, effects.flatMap((e) => e.via));
     const compoundOf = mix && mix.compoundOf;
     const modeSwitch = el("div", "seg-switch");
+    let curMode = loadEffectGrouping();
     sec.insertBefore(modeSwitch, ul);
+    sec.insertBefore(buildEffectSiteSwitch(() => render(curMode)).el, ul);
     sec.insertBefore(el("p", "eff-lead", t("effects.couldCauseLead")), ul);
     const render = (mode) => {
+      curMode = mode;
       ul.innerHTML = "";
       for (const seg of modeSwitch.children) seg.classList.toggle("active", seg.dataset.mode === mode);
-      for (const g of groupPossibleEffects(effects, mode, bindingKi)) {
+      const shown = filterBySite(effects);
+      if (!shown.length) ul.appendChild(el("li", "legend-caption", t("effects.siteEmpty")));
+      for (const g of groupPossibleEffects(shown, mode, bindingKi)) {
         if (mode === "effect") {
           const li = derivedRow(effectLink(g.key, g.label), g.items, compoundOf);
           // The Ki sits right after each via chip (before its pill), items in order.
@@ -225,7 +242,7 @@ export function makeSections(P) {
       });
       modeSwitch.appendChild(seg);
     }
-    render(loadEffectGrouping());
+    render(curMode);
     close();
   };
 
