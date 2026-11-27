@@ -435,6 +435,23 @@
       "Forest Laboratories a acquis en 2004 une licence pour le développement et les droits exclusifs de commercialisation aux États-Unis ."
     ]
   },
+  "carisoprodol": {
+    "fr_slug": "carisoprodol",
+    "fr_title": "Carisoprodol",
+    "name": "Carisoprodol",
+    "sentences": [
+      "Carisoprodol"
+    ]
+  },
+  "cenobamate": {
+    "fr_slug": "c_nobamate",
+    "fr_title": "Cénobamate",
+    "name": "Cenobamate",
+    "sentences": [
+      "Informations générales",
+      "Il est vendu sous les noms de marque Xcopri et Ontozry ."
+    ]
+  },
   "chloral_hydrate": {
     "fr_slug": "hydrate_de_chloral",
     "fr_title": "Hydrate de chloral",
@@ -1672,6 +1689,15 @@
       "Il est commercialisé en France sous le nom de Zophren par le laboratoire GlaxoSmithKline ."
     ]
   },
+  "opicapone": {
+    "fr_slug": "opicapone",
+    "fr_title": "Opicapone",
+    "name": "Opicapone",
+    "sentences": [
+      "Informations générales",
+      "L'opicapone , vendu sous le nom de marque Ongentys, est un médicament utilisé avec la lévodopa / carbidopa pour la maladie de Parkinson , ."
+    ]
+  },
   "orphenadrine": {
     "fr_slug": "orph_nadrine",
     "fr_title": "Orphénadrine",
@@ -2330,6 +2356,16 @@
       "Il n'est pas commercialisé en France.",
       "À noter qu'en France en décembre 2015 , bien que le Sativex ait obtenu son autorisation de mise sur le marché en janvier 2014 , il n'est toujours pas commercialisé, en raison d’un désaccord entre le fabricant et le gouvernement au sujet du prix de vente .",
       "Cette harmonisation facilite la commercialisation de produits contenant du cannabidiol (CBD), à condition que la teneur en THC demeure en dessous de cette limite."
+    ]
+  },
+  "thiocolchicoside": {
+    "fr_slug": "thiocolchicoside",
+    "fr_title": "Thiocolchicoside",
+    "name": "Thiocolchicoside",
+    "sentences": [
+      "Thiocolchicoside",
+      "Il est utilisé comme médicament myorelaxant (sous les noms commerciaux Coltramyl et Miorel par exemple) aux effets anti-inflammatoires et analgésiques , , , .",
+      "Le thiocolchicoside se décompose dans le corps en un métabolite appelé 3-déméthylthiocolchicine (également connu sous le nom de SL59.0955 ou M2) qui pourrait endommager les cellules en division, induisant ainsi une toxicité chez l'embryon, des changements néoplasiques et une réduction de la fertilité chez les hommes ."
     ]
   },
   "thiopental": {
