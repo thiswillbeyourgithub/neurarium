@@ -1878,6 +1878,19 @@
    ],
    "name": "Daridorexant"
   },
+  "desflurane": {
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Pharmacology",
+     "n": 0,
+     "page": "desflurane",
+     "qid": "d0d1559c",
+     "quote": "It is carried by albumin in the human body and is minimally metabolized by cytochrome CYP2E1 in the liver, which produces a metabolite trifluoroacetic acid and is eliminated through the urine."
+    }
+   ],
+   "name": "Desflurane"
+  },
   "desipramine": {
    "candidates": [
     {

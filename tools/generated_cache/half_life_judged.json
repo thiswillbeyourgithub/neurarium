@@ -358,5 +358,28 @@
   "hours_max": 43.4,
   "index": 0,
   "qid": "06abcfc6"
+ },
+ "remimazolam": {
+  "hours": 0.75,
+  "hours_max": 1.167,
+  "index": 0,
+  "qid": "b78394ae"
+ },
+ "remifentanil": {
+  "hours": 0.05,
+  "hours_max": 0.167,
+  "index": 3,
+  "qid": "7d050beb"
+ },
+ "sufentanil": {
+  "hours": 13.067,
+  "index": 1,
+  "qid": "10ae0cef"
+ },
+ "alfentanil": {
+  "hours": 1.383,
+  "hours_max": 3.717,
+  "index": 2,
+  "qid": "a56008c3"
  }
 }

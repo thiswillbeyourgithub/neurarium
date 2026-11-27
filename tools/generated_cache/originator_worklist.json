@@ -5118,6 +5118,61 @@
      "qid": "f33476ac"
     }
    ]
+  },
+  "remimazolam": {
+   "name": "Remimazolam",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "remimazolam",
+     "line": "It is a benzodiazepine drug, developed by PAION AG in collaboration with several regional licensees as an alternative to the short-acting imidazobenzodiazepine midazolam , for use in the induction of anesthesia and conscious sedation for minor invasive procedures.",
+     "qid": "aa8e289d"
+    }
+   ]
+  },
+  "desflurane": {
+   "name": "Desflurane",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "desflurane",
+     "line": "It was developed in the 1980s and approved by the FDA in 1992 as a faster acting and clearing inhalant anesthetic compared to previously used inhalant anesthetics.",
+     "qid": "f873ec6c"
+    }
+   ]
+  },
+  "remifentanil": {
+   "name": "Remifentanil",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "remifentanil",
+     "line": "Prior to the development of remifentanil, most short-acting hypnotics and amnestics faced issues with prolonged use, where accumulation would result in unfavorable lingering effects during post-operative recovery.",
+     "qid": "a0aeb565"
+    }
+   ]
+  },
+  "sufentanil": {
+   "name": "Sufentanil",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "sufentanil",
+     "line": "Sufentanil was first synthesized at Janssen Pharmaceutica in 1974.",
+     "qid": "685b2587"
+    }
+   ]
+  },
+  "alfentanil": {
+   "name": "Alfentanil",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "alfentanil",
+     "line": "Discovered at Janssen Pharmaceutica in 1976, alfentanil is classified as a Schedule II drug in the United States.",
+     "qid": "15af4da3"
+    }
+   ]
   }
  },
  "companies": {

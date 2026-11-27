@@ -8058,6 +8058,56 @@
      "qid": "844c9264"
     }
    ]
+  },
+  "remimazolam": {
+   "name": "Remimazolam",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "remimazolam",
+     "line": "Remimazolam was approved for medical use in the United States in July 2020, and in the European Union in March 2021.",
+     "context": "The most common side effects for procedural sedation include low blood pressure , high blood pressure , diastolic hypertension, systolic hypertension , low blood oxygen level , and diastolic hypotension.",
+     "qid": "f84a37ce"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "remimazolam",
+     "line": "On 28 January 2021, the Committee for Medicinal Products for Human Use (CHMP) of the European Medicines Agency (EMA) adopted a positive opinion, recommending the granting of a marketing authorization for the medicinal product Byfavo, intended for procedural sedation.",
+     "context": "Remimazolam was approved for medical use in the United States in July 2020, and in the European Union in March 2021.",
+     "qid": "284f3686"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "remimazolam",
+     "line": "Remimazolam (Byfavo) was approved for medical use in the European Union in March 2021.",
+     "context": "The applicant for this medicinal product is PAION Netherlands B.V.",
+     "qid": "413ba79b"
+    }
+   ]
+  },
+  "desflurane": {
+   "name": "Desflurane",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "desflurane",
+     "line": "It was developed in the 1980s and approved by the FDA in 1992 as a faster acting and clearing inhalant anesthetic compared to previously used inhalant anesthetics.",
+     "context": "Desflurane , sold under the brand name Suprane , is a highly fluorinated methyl ethyl ether used for induction and maintenance of general anesthesia .",
+     "qid": "f873ec6c"
+    }
+   ]
+  },
+  "remifentanil": {
+   "name": "Remifentanil",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "remifentanil",
+     "line": "and was FDA approved on July 12, 1996.",
+     "context": "Remifentanil was patented by Glaxo Wellcome Inc.",
+     "qid": "bb004474"
+    }
+   ]
   }
  }
 }

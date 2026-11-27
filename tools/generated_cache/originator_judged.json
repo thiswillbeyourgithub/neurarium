@@ -722,6 +722,18 @@
    "name": "Burroughs Wellcome",
    "company": null,
    "qid": "f33476ac"
+  },
+  "sufentanil": {
+   "index": 0,
+   "name": "Janssen Pharmaceutica",
+   "company": "janssen_pharmaceuticals",
+   "qid": "685b2587"
+  },
+  "alfentanil": {
+   "index": 0,
+   "name": "Janssen Pharmaceutica",
+   "company": "janssen_pharmaceuticals",
+   "qid": "15af4da3"
   }
  },
  "companies": {

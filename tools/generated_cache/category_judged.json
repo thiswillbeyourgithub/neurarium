@@ -524,5 +524,53 @@
    "index": 4,
    "qid": "55c67097"
   }
+ ],
+ "remimazolam": [
+  {
+   "index": 2,
+   "qid": "aa8e289d"
+  }
+ ],
+ "methohexital": [
+  {
+   "index": 2,
+   "qid": "22d6d45e"
+  }
+ ],
+ "desflurane": [
+  {
+   "index": 1,
+   "qid": "381a729b"
+  },
+  {
+   "index": 2,
+   "qid": "f873ec6c"
+  }
+ ],
+ "remifentanil": [
+  {
+   "index": 0,
+   "qid": "75c357c9"
+  },
+  {
+   "index": 2,
+   "qid": "27242d12"
+  }
+ ],
+ "sufentanil": [
+  {
+   "index": 1,
+   "qid": "56071caf"
+  }
+ ],
+ "alfentanil": [
+  {
+   "index": 0,
+   "qid": "75c357c9"
+  },
+  {
+   "index": 3,
+   "qid": "992b12c2"
+  }
  ]
 }

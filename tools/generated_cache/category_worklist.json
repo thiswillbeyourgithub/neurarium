@@ -431,6 +431,344 @@
      "qid": "ec042707"
     }
    ]
+  },
+  "remimazolam": {
+   "name": "Remimazolam",
+   "categories": [
+    "benzodiazepine",
+    "anesthetic"
+   ],
+   "labels": [
+    "Benzodiazepine",
+    "Anesthetic"
+   ],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "remimazolam",
+     "line": "IUPAC name methyl 3-benzodiazepin-4-yl]propanoate",
+     "qid": "2001cb59"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "remimazolam",
+     "line": "Remimazolam ( CNS7056 ), sold under the brand name Byfavo , is a medication for the induction and maintenance of procedural sedation in adults for invasive diagnostic or surgical procedures lasting 30 minutes or less.",
+     "qid": "1e913124"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "remimazolam",
+     "line": "It is a benzodiazepine drug, developed by PAION AG in collaboration with several regional licensees as an alternative to the short-acting imidazobenzodiazepine midazolam , for use in the induction of anesthesia and conscious sedation for minor invasive procedures.",
+     "qid": "aa8e289d"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "remimazolam",
+     "line": "Remimazolam was found to have both a more rapid onset and a shorter duration than midazolam, and human clinical trials showed a faster recovery time and predictable, consistent pharmacokinetics, suggesting some advantages over existing drugs for these applications.",
+     "qid": "7cd9e712"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "remimazolam",
+     "line": "The most common side effects for procedural sedation include low blood pressure , high blood pressure , diastolic hypertension, systolic hypertension , low blood oxygen level , and diastolic hypotension.",
+     "qid": "04a0900c"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "remimazolam",
+     "line": "Remimazolam was approved for medical use in the United States in July 2020, and in the European Union in March 2021.",
+     "qid": "f84a37ce"
+    }
+   ]
+  },
+  "methohexital": {
+   "name": "Methohexital",
+   "categories": [
+    "anesthetic"
+   ],
+   "labels": [
+    "Anesthetic"
+   ],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "methohexital",
+     "line": "Drug class | Barbiturate",
+     "qid": "25c9ff5d"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "methohexital",
+     "line": "IUPAC name 5-Hex-3-yn-2-yl-1-methyl-5-prop-2-enyl-1,3-diazinane-2,4,6-trione",
+     "qid": "9e49ba0a"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "methohexital",
+     "line": "Methohexital (generic INN ), with the trade names Brevital and Bietal , amongst others, is a barbiturate known as a rapid-acting CNS depressant drug rapid onset inducing anesthesia; efficacy rapid onset of action and its short duration of action has drawn resemblance to sodium thiopental .",
+     "qid": "22d6d45e"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "methohexital",
+     "line": "It is similar in its effects to sodium thiopental, a drug it competed with in the market for anesthetics .",
+     "qid": "69c27a70"
+    }
+   ]
+  },
+  "desflurane": {
+   "name": "Desflurane",
+   "categories": [
+    "anesthetic"
+   ],
+   "labels": [
+    "Anesthetic"
+   ],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "desflurane",
+     "line": "IUPAC name 2-(difluoromethoxy)-1,1,1,2-tetrafluoroethane",
+     "qid": "c78a0179"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "desflurane",
+     "line": "Desflurane , sold under the brand name Suprane , is a highly fluorinated methyl ethyl ether used for induction and maintenance of general anesthesia .",
+     "qid": "381a729b"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "desflurane",
+     "line": "It was developed in the 1980s and approved by the FDA in 1992 as a faster acting and clearing inhalant anesthetic compared to previously used inhalant anesthetics.",
+     "qid": "f873ec6c"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "desflurane",
+     "line": "Like halothane , enflurane , and isoflurane , it is a racemic mixture of ( R ) and ( S ) optical isomers ( enantiomers ).",
+     "qid": "709d5790"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "desflurane",
+     "line": "Additionally, it has the most rapid onset and offset of the volatile anesthetic drugs used for general anesthesia due to its low solubility in blood (since desflurane is both lipophobic and hydrophobic).",
+     "qid": "95959109"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "desflurane",
+     "line": "Some drawbacks of desflurane are its low potency, its pungency, and its high cost (though at low flow fresh gas rates, the cost difference between desflurane and isoflurane appears to be insignificant ).",
+     "qid": "b16c2608"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "desflurane",
+     "line": "It may cause tachycardia and airway irritability when administered at concentrations greater than 10% by volume.",
+     "qid": "bf52082d"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "desflurane",
+     "line": "Due to this airway irritability, desflurane is infrequently used to induce anesthesia via inhalation techniques.",
+     "qid": "d252c288"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "desflurane",
+     "line": "Though it vaporizes very readily, it is a liquid at room temperature.",
+     "qid": "fa93d8fe"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "desflurane",
+     "line": "Desflurane has a high vapor pressure and a low boiling point, requiring a specific anesthetic vaporizer.",
+     "qid": "81697edc"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "desflurane",
+     "line": "Anaesthetic machines are fitted with a specialized anaesthetic vaporizer unit that heats liquid desflurane at a constant temperature and pressure.",
+     "qid": "2e47052b"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "desflurane",
+     "line": "This enables the agent to be available at a constant vapor pressure and negating the effects of fluctuating ambient temperatures.",
+     "qid": "7c28a3d5"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "desflurane",
+     "line": "Desflurane, along with enflurane and to a lesser extent isoflurane , has been shown to react with the carbon dioxide absorbent in anesthesia circuits to produce detectable levels of carbon monoxide through degradation of the anesthetic agent.",
+     "qid": "485dddac"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "desflurane",
+     "line": "The CO 2 absorbent Baralyme , when dried, is most culpable for the production of carbon monoxide from desflurane degradation, although it is also seen with soda lime absorbent as well.",
+     "qid": "5c5e1ca3"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "desflurane",
+     "line": "Dry conditions in the carbon dioxide absorbent are conducive to this phenomenon, such as those resulting from high fresh gas flows.",
+     "qid": "88096e67"
+    }
+   ]
+  },
+  "remifentanil": {
+   "name": "Remifentanil",
+   "categories": [
+    "opioid"
+   ],
+   "labels": [
+    "Opioid / opioid modulator"
+   ],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "remifentanil",
+     "line": "Drug class | Opioid",
+     "qid": "75c357c9"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "remifentanil",
+     "line": "IUPAC name methyl 1-(3-methoxy-3-oxopropyl)-4-( N -phenylpropanamido)piperidine-4-carboxylate",
+     "qid": "9a69c07a"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "remifentanil",
+     "line": "Remifentanil , marketed under the brand name Ultiva is a potent, short-acting synthetic opioid analgesic drug .",
+     "qid": "27242d12"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "remifentanil",
+     "line": "It is given to patients during surgery to relieve pain and as an adjunct to an anesthetic .",
+     "qid": "730df909"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "remifentanil",
+     "line": "Remifentanil is used for sedation as well as combined with other medications for use in general anesthesia .",
+     "qid": "fd4b0f4d"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "remifentanil",
+     "line": "The use of remifentanil has made possible the use of high-dose opioid and low-dose hypnotic anesthesia, due to synergism between remifentanil and various hypnotic drugs and volatile anesthetics.",
+     "qid": "58ce2ac2"
+    }
+   ]
+  },
+  "sufentanil": {
+   "name": "Sufentanil",
+   "categories": [
+    "opioid"
+   ],
+   "labels": [
+    "Opioid / opioid modulator"
+   ],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "sufentanil",
+     "line": "IUPAC name N -- N -phenylpropanamide",
+     "qid": "69198a9e"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "sufentanil",
+     "line": "Sufentanil , sold under the brand names Sufenta among others, is a synthetic opioid analgesic drug approximately 5 to 10 times as potent as its parent drug , fentanyl , and 500 to 1,000 times as potent as morphine .",
+     "qid": "56071caf"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "sufentanil",
+     "line": "Structurally, sufentanil differs from fentanyl through the addition of a methoxymethyl group on the piperidine ring (which increases potency but is believed to reduce duration of action ), and the replacement of the phenyl ring by thiophene .",
+     "qid": "28e0f30b"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "sufentanil",
+     "line": "Sufentanil was first synthesized at Janssen Pharmaceutica in 1974.",
+     "qid": "685b2587"
+    }
+   ]
+  },
+  "alfentanil": {
+   "name": "Alfentanil",
+   "categories": [
+    "opioid"
+   ],
+   "labels": [
+    "Opioid / opioid modulator"
+   ],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "alfentanil",
+     "line": "Drug class | Opioid",
+     "qid": "75c357c9"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "alfentanil",
+     "line": "3D model of alfentanil molecule",
+     "qid": "bd5d107c"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "alfentanil",
+     "line": "IUPAC name N -{1--4-(methoxymethyl)piperidin-4-yl}- N -phenylpropanamide",
+     "qid": "08dc765a"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "alfentanil",
+     "line": "Alfentanil , sold under the brand name Alfenta among others, is a potent, short-acting synthetic opioid analgesic drug used for anesthesia in surgery .",
+     "qid": "992b12c2"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "alfentanil",
+     "line": "It is an analogue of fentanyl with around one-fourth to one-tenth the potency, one-third the duration of action, and an onset of action four times faster than that of fentanyl.",
+     "qid": "4b8b8b20"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "alfentanil",
+     "line": "Alfentanil has a pKa of approximately 6.5, which leads to a very high proportion of the drug being uncharged at physiologic pH, a characteristic responsible for its rapid-onset.",
+     "qid": "8a51f931"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "alfentanil",
+     "line": "It is an agonist of the μ-opioid receptor .",
+     "qid": "71ee4504"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "alfentanil",
+     "line": "While alfentanil tends to cause fewer cardiovascular complications than other similar drugs such as fentanyl and remifentanil , it tends to give stronger respiratory depression and so requires careful monitoring of breathing and vital signs.",
+     "qid": "ba4388b1"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "alfentanil",
+     "line": "Almost exclusively used by anesthesia providers during portions of a case where quick, fast-acting (though not long-lasting) pain control is needed (as, for example, during nerve blocks ), alfentanil is administered by the parenteral (injected) route for fast-onset and precise control of dosage.",
+     "qid": "fbf13b0e"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "alfentanil",
+     "line": "Discovered at Janssen Pharmaceutica in 1976, alfentanil is classified as a Schedule II drug in the United States.",
+     "qid": "15af4da3"
+    }
+   ]
   }
  }
 }

@@ -1046,6 +1046,22 @@
    "strength": "major"
   }
  ],
+ "desflurane": [
+  {
+   "enzyme": "cyp2e1",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "desflurane",
+     "provenance": "verified",
+     "quote": "It is carried by albumin in the human body and is minimally metabolized by cytochrome CYP2E1 in the liver, which produces a metabolite trifluoroacetic acid and is eliminated through the urine."
+    }
+   ],
+   "strength": "minor"
+  }
+ ],
  "desipramine": [
   {
    "enzyme": "cyp2d6",

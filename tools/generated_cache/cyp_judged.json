@@ -3990,5 +3990,14 @@
    "role": "substrate",
    "qid": "bd7f6f66"
   }
+ ],
+ "desflurane": [
+  {
+   "enzyme": "cyp2e1",
+   "n": 0,
+   "role": "substrate",
+   "strength": "minor",
+   "qid": "d0d1559c"
+  }
  ]
 }

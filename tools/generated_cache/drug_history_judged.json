@@ -2473,5 +2473,35 @@
  "cyclizine": {
   "approval": null,
   "withdrawals": []
+ },
+ "remimazolam": {
+  "approval": {
+   "agency": null,
+   "country": "us",
+   "index": 0,
+   "year": 2020,
+   "qid": "f84a37ce"
+  },
+  "withdrawals": []
+ },
+ "desflurane": {
+  "approval": {
+   "agency": "fda",
+   "country": "us",
+   "index": 0,
+   "year": 1992,
+   "qid": "f873ec6c"
+  },
+  "withdrawals": []
+ },
+ "remifentanil": {
+  "approval": {
+   "agency": "fda",
+   "country": "us",
+   "index": 0,
+   "year": 1996,
+   "qid": "bb004474"
+  },
+  "withdrawals": []
  }
 }

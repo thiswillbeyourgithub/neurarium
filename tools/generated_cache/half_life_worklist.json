@@ -6395,5 +6395,206 @@
     "qid": "4ece89be"
    }
   ]
+ },
+ "remimazolam": {
+  "name": "Remimazolam",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "remimazolam",
+    "line": "Elimination half-life | 45–70 minutes",
+    "durations": [
+     {
+      "hours": 0.75,
+      "hours_max": 1.167
+     }
+    ],
+    "qid": "b78394ae"
+   }
+  ]
+ },
+ "methohexital": {
+  "name": "Methohexital",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "methohexital",
+    "line": "Elimination half-life | 5.6 ± 2.7 minutes",
+    "durations": [
+     {
+      "hours": 0.045
+     }
+    ],
+    "qid": "5076da6a"
+   }
+  ]
+ },
+ "desflurane": {
+  "name": "Desflurane",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "desflurane",
+    "line": "Desflurane has a half life of 8.16 ± 3.15 minutes.",
+    "durations": [
+     {
+      "hours": 0.052
+     }
+    ],
+    "qid": "a61feb4c"
+   }
+  ]
+ },
+ "remifentanil": {
+  "name": "Remifentanil",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "remifentanil",
+    "line": "Elimination half-life | 1-20 minutes",
+    "durations": [
+     {
+      "hours": 0.017,
+      "hours_max": 0.333
+     }
+    ],
+    "qid": "f200e070"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "remifentanil",
+    "line": "This means that accumulation does not occur with remifentanil and its context-sensitive half-life remains at 4 minutes after a 4-hour infusion.",
+    "durations": [
+     {
+      "hours": 0.067
+     },
+     {
+      "hours": 4.0
+     }
+    ],
+    "qid": "dd151882"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "remifentanil",
+    "line": "The half-life is 6 minutes in the dog.",
+    "durations": [
+     {
+      "hours": 0.1
+     }
+    ],
+    "qid": "f0b30c4e"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "64569231",
+    "line": "Après l’administration du rémifentanil aux doses recommandées, la demi-vie d’élimination effective varie de 3 à 10 minutes.",
+    "durations": [
+     {
+      "hours": 0.05,
+      "hours_max": 0.167
+     }
+    ],
+    "qid": "7d050beb"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "64569231",
+    "line": "Chez les adultes sains, la demi-vie du métabolite est de 2 heures.",
+    "durations": [
+     {
+      "hours": 2.0
+     }
+    ],
+    "qid": "2e8d4c59"
+   }
+  ]
+ },
+ "sufentanil": {
+  "name": "Sufentanil",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "sufentanil",
+    "line": "Elimination half-life | 162 minutes",
+    "durations": [
+     {
+      "hours": 2.7
+     }
+    ],
+    "qid": "d2d28188"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "61562566",
+    "line": "La demi-vie terminale moyenne d’élimination du sufentanil est de 784 minutes (intervalle : 656-938 minutes).",
+    "durations": [
+     {
+      "hours": 13.067
+     },
+     {
+      "hours": 10.933,
+      "hours_max": 15.633
+     }
+    ],
+    "qid": "10ae0cef"
+   }
+  ]
+ },
+ "alfentanil": {
+  "name": "Alfentanil",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "alfentanil",
+    "line": "Elimination half-life | 90–111 minutes",
+    "durations": [
+     {
+      "hours": 1.5,
+      "hours_max": 1.85
+     }
+    ],
+    "qid": "f4998f36"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "63670722",
+    "line": "Les demi-vies séquentielles de distribution de l’alfentanil varient de 0,4 à 2,2 min et de 8 à 32 min.",
+    "durations": [
+     {
+      "hours": 0.007,
+      "hours_max": 0.037
+     },
+     {
+      "hours": 0.133,
+      "hours_max": 0.533
+     }
+    ],
+    "qid": "9ceb5219"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "63670722",
+    "line": "Des demi-vies d’élimination terminale variant de 83 à 223 minutes ont été observées.",
+    "durations": [
+     {
+      "hours": 1.383,
+      "hours_max": 3.717
+     }
+    ],
+    "qid": "a56008c3"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "63670722",
+    "line": "Après administration IV d’une dose unique de 50 µg/kg en 2 minutes, la demi-vie terminale chez les sujets cirrhotiques est significativement plus longue que dans le groupe contrôle (patients avec une fonction hépatique normale).",
+    "durations": [
+     {
+      "hours": 0.033
+     }
+    ],
+    "qid": "7b131484"
+   }
+  ]
  }
 }
