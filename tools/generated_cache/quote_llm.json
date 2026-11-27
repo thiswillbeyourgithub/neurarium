@@ -43,6 +43,9 @@
 "q_007c8889c167": {
 "drug:disulfiram/brands[Antabuse]": "sonnet"
 },
+"q_009073801f56": {
+"drug:metopimazine/categories": "opus"
+},
 "q_0091e519f0ae": {
 "drug:hydroxyzine/first_approval": "opus",
 "drug:hydroxyzine/originator": "opus"
@@ -610,6 +613,9 @@
 "q_0a94883d2b35": {
 "drug:ketamine/brands[Ketalar]": "sonnet"
 },
+"q_0a9d0b1be5b0": {
+"drug:palonosetron/excretion[unchanged:urine]": "opus"
+},
 "q_0abff3e5ee60": {
 "drug:phenelzine/excretion[route:renal]": "opus"
 },
@@ -1060,6 +1066,9 @@
 "q_1207c796e314": {
 "drug:asenapine/nbn": "sonnet"
 },
+"q_120f3a102695": {
+"drug:chlorphenamine/bindings[sert:reuptake_inhibitor]": "opus"
+},
 "q_121195607d14": {
 "drug:ketamine/excretion[route:fecal]": "opus",
 "drug:ketamine/excretion[route:renal]": "opus"
@@ -1505,6 +1514,10 @@
 "q_19ee789b5de4": {
 "drug:chlorpromazine/half_life": "sonnet"
 },
+"q_19faef267031": {
+"drug:tropisetron/excretion[route:fecal]": "opus",
+"drug:tropisetron/excretion[route:renal]": "opus"
+},
 "q_19fd28003a64": {
 "drug:asenapine/formulations[sublingual]/half_life": "opus",
 "drug:asenapine/formulations[sublingual]/release": "opus",
@@ -1750,6 +1763,9 @@
 "q_1e102b0c3690": {
 "drug:primidone/seizure_threshold[raises]": "opus"
 },
+"q_1e21956968cb": {
+"drug:metopimazine/formulations[odt]/half_life": "opus"
+},
 "q_1e49978bd2c6": {
 "drug:eszopiclone/excretion[route:renal]": "opus",
 "drug:eszopiclone/excretion[unchanged:urine]": "opus"
@@ -1858,6 +1874,10 @@
 },
 "q_1fcee5971632": {
 "drug:cyamemazine/excretion[route:renal]": "opus"
+},
+"q_1fd1767baa02": {
+"drug:palonosetron/excretion[route:renal]": "opus",
+"drug:palonosetron/excretion[unchanged:urine]": "opus"
 },
 "q_1fe2db4363a6": {
 "drug:methylphenidate_dl/brands[Concerta]": "sonnet"
@@ -2158,6 +2178,9 @@
 "drug:prochlorperazine/excretion[route:fecal]": "opus",
 "drug:prochlorperazine/excretion[route:renal]": "opus"
 },
+"q_242330bc43cc": {
+"drug:chlorphenamine/bindings[muscarinic:antagonist]": "opus"
+},
 "q_24235c8995ce": {
 "drug:sibutramine/withdrawals[au:2010]": "opus",
 "drug:sibutramine/withdrawals[ca:2010]": "opus",
@@ -2420,6 +2443,9 @@
 "drug:piribedil/bindings[d3:agonist]": "opus",
 "drug:piribedil/categories": "opus"
 },
+"q_28f686933013": {
+"drug:chlorphenamine/categories": "opus"
+},
 "q_28f81aa98fc8": {
 "drug:phentermine/tmax": "sonnet"
 },
@@ -2516,6 +2542,9 @@
 },
 "q_2a31a1a619b4": {
 "drug:cannabidiol/workup[liver_function:during]": "opus"
+},
+"q_2a401260b6b2": {
+"drug:alizapride/half_life": "opus"
 },
 "q_2a49f960a0c6": {
 "drug:tapentadol/half_life": "sonnet"
@@ -2732,6 +2761,9 @@
 },
 "q_2f1d8dd8fbfa": {
 "drug:vortioxetine/sleep[sleep_disruption]": "opus"
+},
+"q_2f28cb422f93": {
+"drug:tropisetron/brands[Navoban]": "opus"
 },
 "q_2f4664fb4b0e": {
 "drug:sildenafil/bindings[pde5:enzyme_inhibitor]": "sonnet"
@@ -3171,6 +3203,10 @@
 },
 "q_36d15c8b8463": {
 "drug:disulfiram/categories": "sonnet"
+},
+"q_36d4a129baa1": {
+"drug:metopimazine/bindings[d2:antagonist]": "opus",
+"drug:metopimazine/bindings[d3:antagonist]": "opus"
 },
 "q_36d926eca2f6": {
 "drug:methaqualone/brands[Revonal]": "sonnet"
@@ -6592,6 +6628,9 @@
 "q_734b4dd852fa": {
 "drug:domperidone/first_approval": "opus"
 },
+"q_735b4b61e51f": {
+"drug:palonosetron/originator": "opus"
+},
 "q_7366c06d5039": {
 "projection:claustrum_R->frontal_R": "opus"
 },
@@ -7418,6 +7457,9 @@
 "q_82974afb2d96": {
 "drug:pseudoephedrine/bindings[net:releaser]": "sonnet"
 },
+"q_82a97d07d023": {
+"drug:cyclizine/half_life": "opus"
+},
 "q_82b20eed402d": {
 "drug:lormetazepam/half_life": "sonnet"
 },
@@ -7643,6 +7685,9 @@
 "q_86e89ea9b771": {
 "drug:mianserin/nbn": "sonnet"
 },
+"q_86ee4d9005c8": {
+"drug:metopimazine/excretion[route:renal]": "opus"
+},
 "q_86f9d401838c": {
 "drug:paliperidone/formulations[depot]/release": "opus"
 },
@@ -7762,6 +7807,9 @@
 },
 "q_890635ba9f67": {
 "drug:paliperidone/bindings[5ht2a:antagonist]": "sonnet"
+},
+"q_8909c86a9df7": {
+"drug:palonosetron/categories": "opus"
 },
 "q_892992de6c04": {
 "drug:guanfacine/excretion[unchanged:urine]": "opus"
@@ -8183,6 +8231,9 @@
 "q_8f6ed71dbb65": {
 "drug:armodafinil/brands[Nuvigil]": "sonnet"
 },
+"q_8f9b959b347d": {
+"drug:chlorphenamine/bindings[h1:inverse_agonist]": "opus"
+},
 "q_8f9c9d9be69b": {
 "drug:oxcarbazepine/brands[Trileptal]": "sonnet"
 },
@@ -8519,6 +8570,9 @@
 "q_95956dd7fe11": {
 "drug:codeine/categories": "sonnet"
 },
+"q_95cc74cc94bf": {
+"drug:cyclizine/bindings[h1:antagonist]": "opus"
+},
 "q_95ef0225397d": {
 "drug:memantine/brands[Memox]": "sonnet"
 },
@@ -8700,6 +8754,9 @@
 "q_98c1165394cb": {
 "receptor:5ht3/locations[midbrain]": "sonnet"
 },
+"q_98d716849e4d": {
+"drug:palonosetron/categories": "opus"
+},
 "q_98d938cbcdc0": {
 "drug:clozapine/bindings[5ht2a:antagonist]": "sonnet"
 },
@@ -8740,6 +8797,9 @@
 "q_99554ed34c6f": {
 "drug:valproate/workup[liver_function:before]": "opus",
 "drug:valproate/workup[liver_function:during]": "opus"
+},
+"q_995da3870515": {
+"drug:tropisetron/first_approval": "opus"
 },
 "q_9971c0f66292": {
 "drug:methamphetamine/bindings[vmat2:vesicular_releaser]": "sonnet"
@@ -8858,6 +8918,9 @@
 },
 "q_9abfa53241ec": {
 "drug:methamphetamine/excretion[urine_ph:acidic_faster]": "opus"
+},
+"q_9ac6623d12bf": {
+"drug:cyclizine/categories": "opus"
 },
 "q_9ae0e62b342d": {
 "drug:brexpiprazole/seizure_threshold[lowers]": "opus",
@@ -9120,6 +9183,9 @@
 },
 "q_9e928ebf4279": {
 "drug:nefazodone/originator_country": "opus"
+},
+"q_9ea48d061ebd": {
+"drug:alizapride/categories": "opus"
 },
 "q_9ea604644949": {
 "drug:nortriptyline/bindings[alpha1a:antagonist]": "sonnet",
@@ -9425,6 +9491,9 @@
 "q_a3a18ecd7d5c": {
 "drug:quetiapine/excretion[route:fecal]": "opus",
 "drug:quetiapine/excretion[route:renal]": "opus"
+},
+"q_a3a5887e283a": {
+"drug:tropisetron/half_life": "opus"
 },
 "q_a3cf5513a57a": {
 "drug:ethosuximide/seizure_threshold[raises]": "opus"
@@ -11094,6 +11163,9 @@
 "q_c14bc2c37f97": {
 "drug:yohimbine/excretion[route:renal]": "opus"
 },
+"q_c1541c142b7f": {
+"drug:cyclizine/originator": "opus"
+},
 "q_c1694bec90d6": {
 "drug:methadone/half_life": "opus"
 },
@@ -11565,6 +11637,9 @@
 "q_c90a769d2390": {
 "receptor:nachr_a4b2/effects[agonism:euphoria]": "opus"
 },
+"q_c922d44517fc": {
+"drug:palonosetron/bindings[5ht3:antagonist]": "opus"
+},
 "q_c9429e83cd86": {
 "drug:thiothixene/bindings[alpha1a:antagonist]": "sonnet",
 "drug:thiothixene/bindings[alpha1b:antagonist]": "sonnet",
@@ -11750,6 +11825,9 @@
 },
 "q_ccb389fb9ff8": {
 "receptor:mu/effects[agonism:constipation]": "opus"
+},
+"q_ccd526972225": {
+"drug:alizapride/bindings[d2:antagonist]": "opus"
 },
 "q_ccd9309ff2ec": {
 "drug:sulpiride/brands[Aiglonyl]": "sonnet"
@@ -11955,6 +12033,9 @@
 "receptor:alpha1b/locations[cerebellum]": "sonnet",
 "receptor:alpha1b/locations[pons]": "sonnet"
 },
+"q_d00284a6001d": {
+"drug:alizapride/excretion[route:renal]": "opus"
+},
 "q_d00399fd2733": {
 "drug:domperidone/excretion[unchanged:urine]": "opus"
 },
@@ -11963,6 +12044,9 @@
 },
 "q_d020cbd5ebbe": {
 "drug:lormetazepam/brands[Noctamide]": "sonnet"
+},
+"q_d029cf237111": {
+"drug:chlorphenamine/half_life": "opus"
 },
 "q_d02c92c54387": {
 "drug:methylphenidate_dl/brands[Rilatine]": "sonnet"
@@ -12314,6 +12398,11 @@
 "receptor:cb1/classification[family]": "sonnet",
 "receptor:cb1/classification[synaptic]": "sonnet"
 },
+"q_d766588eb740": {
+"drug:metopimazine/bindings[5ht2a:antagonist]": "opus",
+"drug:metopimazine/bindings[alpha1:antagonist]": "opus",
+"drug:metopimazine/bindings[h1:antagonist]": "opus"
+},
 "q_d77f0f0e6fe9": {
 "drug:erenumab/categories": "sonnet"
 },
@@ -12515,6 +12604,9 @@
 "q_db1001a0bf1d": {
 "drug:bupropion/formulations[xr]/release": "opus"
 },
+"q_db1191e4c76a": {
+"drug:cyclizine/categories": "opus"
+},
 "q_db2d287f5bc3": {
 "drug:fluphenazine/excretion[route:fecal]": "opus",
 "drug:fluphenazine/excretion[route:renal]": "opus"
@@ -12563,6 +12655,9 @@
 "q_dc39beccb155": {
 "drug:pimavanserin/bindings[5ht2a:antagonist]": "sonnet",
 "drug:pimavanserin/bindings[5ht2a:inverse_agonist]": "sonnet"
+},
+"q_dc86a7b6b544": {
+"drug:tropisetron/categories": "opus"
 },
 "q_dc8dd3808801": {
 "receptor:h1/effects[antagonism:anxiolytic]": "opus"
@@ -13008,6 +13103,10 @@
 "q_e43c88af7abd": {
 "drug:isocarboxazid/excretion[route:renal]": "opus"
 },
+"q_e4419edb6938": {
+"drug:tropisetron/bindings[5ht3:antagonist]": "opus",
+"drug:tropisetron/bindings[nachr_a7:partial_agonist]": "opus"
+},
 "q_e44c9490891f": {
 "receptor:5ht3/effects[antagonism:antidepressant]": "opus"
 },
@@ -13281,6 +13380,9 @@
 "drug:galantamine/seizure_threshold[lowers]": "opus",
 "drug:galantamine/seizure_threshold[possibly_lowers]": "opus"
 },
+"q_e80048263dcc": {
+"drug:chlorphenamine/excretion[route:renal]": "opus"
+},
 "q_e8533f788019": {
 "drug:perampanel/categories": "opus"
 },
@@ -13371,6 +13473,9 @@
 },
 "q_e992255a0513": {
 "drug:cytisine/categories": "sonnet"
+},
+"q_e9b3673591ac": {
+"drug:chlorphenamine/categories": "opus"
 },
 "q_e9b687913d31": {
 "drug:sulpiride/categories": "sonnet"
@@ -13517,6 +13622,9 @@
 },
 "q_ecf5c0c3268c": {
 "drug:imipramine/first_approval": "opus"
+},
+"q_ed0896c6a38b": {
+"drug:palonosetron/half_life": "opus"
 },
 "q_ed101e2de560": {
 "drug:methamphetamine/bindings[alpha2c:agonist]": "opus"
@@ -14409,6 +14517,9 @@
 },
 "q_fbe185762a17": {
 "drug:phencyclidine/bindings[nmda:antagonist]": "sonnet"
+},
+"q_fbe92a0e10ae": {
+"drug:metopimazine/tmax": "opus"
 },
 "q_fc0abedb6a33": {
 "drug:lormetazepam/bindings[gaba_a:pam]": "sonnet"
