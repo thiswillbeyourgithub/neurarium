@@ -179,6 +179,12 @@
   "spl_version": 16,
   "title": "FLUVOXAMINE MALEATE TABLET [APOTEX CORP]"
  },
+ "fosphenytoin": {
+  "published_date": "Mar 23, 2026",
+  "setid": "bb38bc6a-99c7-4cda-b3f0-37f629d060cf",
+  "spl_version": 3,
+  "title": "FOSPHENYTOIN SODIUM INJECTION, SOLUTION [GLENMARK PHARMACEUTICALS INC., USA]"
+ },
  "furosemide": {
   "published_date": "Sep 15, 2026",
   "setid": "0b3d986c-eecc-adbe-e063-6294a90a0fb2",
@@ -190,6 +196,12 @@
   "setid": "261889d3-41c8-4655-98f7-41317778e7a1",
   "spl_version": 2,
   "title": "GALANTAMINE TABLET, FILM COATED [BRYANT RANCH PREPACK]"
+ },
+ "ganaxolone": {
+  "published_date": "Sep 30, 2026",
+  "setid": "d91612c4-b03a-4be4-a1ee-6a13e3b83d4e",
+  "spl_version": 14,
+  "title": "ZTALMY (GANAXOLONE) SUSPENSION [IMMEDICA PHARMA US INC]"
  },
  "guanfacine": {
   "published_date": "Sep 15, 2026",
@@ -478,6 +490,12 @@
   "setid": "8f0e73bf-6025-44f6-ab64-0983322de0df",
   "spl_version": 6,
   "title": "COBENFY (XANOMELINE AND TROSPIUM CHLORIDE) CAPSULE, COATED PELLETS COBENFY (XANOMELINE AND TROSPIUM CHLORIDE) KIT [E.R. SQUIBB & SONS, L.L.C.]"
+ },
+ "ziconotide": {
+  "published_date": "Jul 14, 2025",
+  "setid": "b025d8ed-937d-4597-9ad1-0b2f6e0ee5b1",
+  "spl_version": 6,
+  "title": "PRIALT (ZICONOTIDE ACETATE) INJECTION, SOLUTION [TERSERA THERAPEUTICS LLC]"
  },
  "ziprasidone": {
   "published_date": "Aug 28, 2026",
