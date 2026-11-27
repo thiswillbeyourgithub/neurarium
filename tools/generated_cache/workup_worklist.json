@@ -11454,5 +11454,131 @@
     "qid": "58b89ee2"
    }
   ]
+ },
+ "almotriptan": {
+  "page": "64165648",
+  "denomination": "ALMOTRIPTAN ARROW 12,5 mg, comprimé pelliculé",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.4",
+    "under": "",
+    "quote": "Dans de très rares cas, comme avec les autres agonistes des récepteurs 5HT1B/1D, des vasospasmes des artères coronaires et des infarctus du myocarde ont été rapportés, par conséquent l’almotriptan ne doit pas être administré aux patients qui pourraient être atteints d’une pathologie coronarienne non diagnostiquée sans la recherche préalable d’une potentielle pathologie cardio-vasculaire sous-jacente. Ces patients incluent les femmes ménopausées, les hommes de plus de 40 ans et les patients présentant d’autres facteurs de risques de pathologie coronarienne tels que l’hypertension non contrôlée, l’hypercholestérolémie, l’obésité, le diabète, le tabagisme ou des antécédents familiaux clairs de pathologies cardiaques.",
+    "tests": [
+     "lipids"
+    ],
+    "qid": "5b836622"
+   }
+  ]
+ },
+ "eletriptan": {
+  "page": "63476564",
+  "denomination": "RELPAX 40 mg, comprimé pelliculé",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.2",
+    "under": "Patients présentant une insuffisance rénale",
+    "quote": "Les effets de RELPAX sur la tension artérielle étant amplifiés en cas d'insuffisance rénale (voir rubrique 4.4), il est recommandé d'instaurer le traitement à une posologie initiale de 20 mg chez les patients souffrant d'insuffisance rénale légère ou modérée. La posologie quotidienne maximale ne devra pas dépasser 40 mg. RELPAX est contre-indiqué chez les patients présentant une insuffisance rénale sévère.",
+    "tests": [
+     "blood_pressure"
+    ],
+    "qid": "69722fb0"
+   },
+   {
+    "index": 1,
+    "section": "4.4",
+    "under": "Patients présentant une insuffisance cardiaque",
+    "quote": "RELPAX ne doit pas être administré sans évaluation préalable dans les cas suivants : patients chez lesquels une cardiopathie asymptomatique est possible, patients ayant un risque de maladie coronarienne (par exemple patients souffrant d'hypertension artérielle, de diabète, patients fumeurs ou utilisant un traitement de substitution à la nicotine, hommes âgés de plus de 40 ans, femmes ménopausées et patients présentant des antécédents familiaux importants de maladie coronarienne). Le bilan cardiovasculaire peut ne pas identifier tous les patients qui ont une maladie cardiovasculaire et, dans de très rares cas, des accidents cardiaques graves sont survenus chez des patients sans affection cardiaque sous-jacente, à la suite de l'administration d'agonistes 5-HT1. Les patients chez lesquels une maladie coronarienne a été diagnostiquée ne doivent pas être traités par RELPAX (voir rubrique 4.3).",
+    "tests": [
+     "blood_pressure"
+    ],
+    "qid": "ff0f7f63"
+   },
+   {
+    "index": 2,
+    "section": "4.4",
+    "under": "Patients présentant une insuffisance cardiaque",
+    "quote": "Des augmentations légères et transitoires de la tension artérielle ont été observées avec des doses supérieures ou égales à 60 mg d'élétriptan (doses utilisées en clinique). Cependant, ces augmentations n'ont pas été accompagnées de manifestations cliniques dans les études cliniques réalisées. Ce type d'effets a été nettement plus marqué chez des sujets âgés ou présentant une insuffisance rénale. Chez les patients présentant une insuffisance rénale, on a observé une augmentation maximale moyenne de la pression artérielle systolique comprise entre 14 et 17 mmHg (normal : 3 mmHg) et de la pression artérielle diastolique de 14 à 21 mmHg (normal : 4 mmHg). Chez les sujets âgés, on a observé une augmentation maximale moyenne de la pression artérielle systolique de 23 mmHg en comparaison à 13 mmHg chez l'adulte jeune (placebo 8 mmHg). Après la mise sur le marché, des augmentations de la tension artérielle ont été rapportées chez des patients recevant des doses de 20 et 40 mg d'élétriptan, ainsi que chez des patients sans insuffisance rénale et des sujets non-âgés.",
+    "tests": [
+     "blood_pressure"
+    ],
+    "qid": "5f103610"
+   }
+  ]
+ },
+ "frovatriptan": {
+  "page": "60435263",
+  "denomination": "TIGREAT 2,5 mg, comprimé pelliculé",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.3",
+    "under": "",
+    "quote": "Hypertension artérielle modérée ou sévère, hypertension légère non contrôlée.",
+    "tests": [
+     "blood_pressure"
+    ],
+    "qid": "4e7e0830"
+   }
+  ]
+ },
+ "lasmiditan": {
+  "page": "EMEA-H-C-005332",
+  "denomination": "Rayvow (EMEA/H/C/005332)",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.4",
+    "under": "Syndrome sérotoninergique",
+    "quote": "Un syndrome sérotoninergique a été rapporté et peut survenir avec le lasmiditan seul ou co-administré avec d’autres médicaments sérotoninergiques [par exemple, les inhibiteurs sélectifs de la recapture de la sérotonine (ISRSs), les inhibiteurs de la recapture de la sérotonine et de la noradrénaline (IRSNAs), les antidépresseurs tricycliques (ATCs), et les inhibiteurs de la monoamine oxydase (IMAOs)]. L’expérience clinique de l’utilisation du lasmiditan et des triptans dans un intervalle de temps rapproché est limitée. Les risques de développer un syndrome sérotoninergique peuvent s’additionner. Les symptômes d’un syndrome sérotoninergique peuvent comprendre des modifications de l’état mental (par exemple agitation, hallucinations, coma), une instabilité du système nerveux autonome (par exemple tachycardie, tension artérielle instable, hyperthermie), des signes neuromusculaires (par exemple hyperréflexie, incoordination), et/ou des signes et symptômes gastro-intestinaux (par exemple nausées, vomissements, diarrhées). Ces réactions peuvent être sévères. L’apparition des symptômes survient généralement quelques minutes à quelques heures après l’administration d’une nouvelle prise, ou d’une dose plus élevée, d’un médicament sérotoninergique. Si un traitement concomitant avec d’autres médicaments sérotoninergiques est justifié sur le plan clinique, une surveillance attentive du patient est recommandée, tout particulièrement pendant l’instauration du traitement, et lors de l’augmentation des doses. Le lasmiditan doit être interrompu en cas de suspicion de syndrome sérotoninergique.",
+    "tests": [
+     "blood_pressure"
+    ],
+    "qid": "4fab945c"
+   }
+  ]
+ },
+ "naratriptan": {
+  "page": "67586588",
+  "denomination": "NARAMIG 2,5 mg, comprimé pelliculé",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.3",
+    "under": "",
+    "quote": "Hypertension artérielle modérée ou sévère, hypertension légère non contrôlée.",
+    "tests": [
+     "blood_pressure"
+    ],
+    "qid": "4e7e0830"
+   }
+  ]
+ },
+ "zolmitriptan": {
+  "page": "68232350",
+  "denomination": "ZOMIG 2,5 mg, comprimé pelliculé",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.2",
+    "under": "Insuffisant rénal",
+    "quote": "Aucun ajustement de dose n’est nécessaire chez les patients ayant une clairance de la créatinine supérieure à 15 ml/min (voir rubriques 4.3 et 5.2).",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "8fc34bf1"
+   },
+   {
+    "index": 1,
+    "section": "4.4",
+    "under": "",
+    "quote": "Le zolmitriptan ne doit pas être administré aux patients ayant des facteurs de risque de maladie cardiaque ischémique par exemple tabagisme, utilisation de thérapies de substitution à base de nicotine, hypertension, hyperlipidémie, diabète, hérédité) sans un bilan cardio-vasculaire préalable (voir rubrique 4.3).",
+    "tests": [
+     "lipids"
+    ],
+    "qid": "54ab87d7"
+   }
+  ]
  }
 }
