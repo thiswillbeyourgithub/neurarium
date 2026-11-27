@@ -6022,5 +6022,72 @@
   }
  ],
  "desflurane": [],
- "sufentanil": []
+ "sufentanil": [],
+ "oxymorphone": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "50228092",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "50228092",
+   "value": "fecal"
+  }
+ ],
+ "dihydrocodeine": [],
+ "nalbuphine": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "5b5e3560",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "5b5e3560",
+   "value": "fecal"
+  }
+ ],
+ "butorphanol": [
+  {
+   "aspect": "route",
+   "index": 3,
+   "qid": "fc574d97",
+   "value": "renal",
+   "amount": "70 to 80%"
+  },
+  {
+   "aspect": "route",
+   "index": 3,
+   "qid": "fc574d97",
+   "value": "fecal",
+   "amount": "approximately 15%"
+  }
+ ],
+ "cyclobenzaprine": [
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "a2143440",
+   "value": "renal"
+  }
+ ],
+ "orphenadrine": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "f3133baf",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "f3133baf",
+   "value": "fecal"
+  }
+ ]
 }

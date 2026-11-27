@@ -10719,5 +10719,57 @@
     "qid": "75d30549"
    }
   ]
+ },
+ "dihydrocodeine": {
+  "page": "67482372",
+  "denomination": "DICODIN L.P. 60 mg, comprimé à libération prolongée",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.4",
+    "under": "Précautions particulières d’emploi",
+    "quote": "Les opioïdes, comme la dihydrocodéine, peuvent avoir une action pharmacologique sur l’axe hypothalamo-hypophysaire ou gonadique. Certaines modifications ont été observées telles qu’une augmentation de la prolactinémie et une diminution du cortisol plasmatique, de la testostérone, de l'hormone lutéinisante et de l'hormone folliculo-stimulante. Ces modifications hormonales peuvent se manifester par des symptômes cliniques.",
+    "tests": [
+     "prolactin"
+    ],
+    "qid": "e3c7fa9a"
+   }
+  ]
+ },
+ "nalbuphine": {
+  "page": "61214830",
+  "denomination": "NALBUPHINE RENAUDIN 20 mg/2 mL, solution injectable",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "La dose à administrer est basée sur le poids du patient. Il convient d’éviter les erreurs de dosage dues à la confusion entre milligramme (mg) et millilitre (mL), lesquelles pourraient entraîner un surdosage accidentel (voir le tableau 1 [adultes] ou le tableau 2 [patients pédiatriques] des doses ci-dessous).",
+    "tests": [
+     "weight"
+    ],
+    "qid": "5e808d61"
+   },
+   {
+    "index": 1,
+    "section": "4.2",
+    "under": "Chez l'adulte :",
+    "quote": "la dose recommandée est de 10 à 20 mg de chlorhydrate de nalbuphine pour les patients de 70 kg, ce qui équivaut à 0,1 à 0,3 mg/kg de poids corporel, par voie intraveineuse, intramusculaire ou sous-cutanée. La dose unique maximale chez l’adulte ne doit pas dépasser 20 mg. La dose peut être répétée après 3 à 6 heures, si nécessaire, la dose quotidienne totale maximale étant de 160 mg.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "bc15e971"
+   },
+   {
+    "index": 2,
+    "section": "4.2",
+    "under": "Population pédiatrique (enfant de 18 mois à 15 ans) :",
+    "quote": "la dose recommandée est de 0,1 à 0,2 mg/kg de poids corporel par voie intraveineuse, intramusculaire ou sous-cutanée. La dose unique maximale est de 0,2 mg de chlorhydrate de nalbuphine par kilogramme de poids corporel. La dose peut être répétée après 4 à 6 heures, si nécessaire, la dose quotidienne totale maximale étant de 1,2 mg/kg. La voie intraveineuse ou sous-cutanée doit être préférée chez l'enfant.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "a7d65d3d"
+   }
+  ]
  }
 }

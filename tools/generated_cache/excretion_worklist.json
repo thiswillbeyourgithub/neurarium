@@ -18030,5 +18030,232 @@
     "qid": "d0c8910f"
    }
   ]
+ },
+ "oxymorphone": {
+  "name": "Oxymorphone",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "oxymorphone",
+    "line": "Excretion | Urine, feces",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "50228092"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "oxymorphone",
+    "line": "Decreased renal function associated with aging leads to decreased clearance of the drug, resulting in narrow therapeutic windows and increasing the danger of overdose.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "ca771be2"
+   }
+  ]
+ },
+ "dihydrocodeine": {
+  "name": "Dihydrocodeine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "dihydrocodeine",
+    "line": "Although some of the metabolites are far more potent, the concentration of NDHM and NDHM-6-G in urine were minimal, suggesting no significant role in pain relief.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "f0bd1dd4"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "dihydrocodeine",
+    "line": "\"Two assays for dihydrocodeine in plasma and in urine and their use to determine the bioavailability of a controlled-release product\".",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "3b7c49b2"
+   }
+  ]
+ },
+ "nalbuphine": {
+  "name": "Nalbuphine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "nalbuphine",
+    "line": "Excretion | Urine , bile , feces ;",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "5b5e3560"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "nalbuphine",
+    "line": "pH is adjusted, if necessary, with hydrochloric acid .",
+    "named": [
+     "urine_ph:dependent",
+     "urine_ph:acidic_faster"
+    ],
+    "qid": "d2dcc178"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "nalbuphine",
+    "line": "pH is adjusted, if necessary, with hydrochloric acid.",
+    "named": [
+     "urine_ph:dependent",
+     "urine_ph:acidic_faster"
+    ],
+    "qid": "a11172df"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "nalbuphine",
+    "line": "\"Determination of nalbuphine in drug abusers' urine\".",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "ad8623db"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "nalbuphine",
+    "line": "^ DeRossi R, Jardim PH, Marques BC, Martins AR, Hermeto LC, Frazilio FD (2014).",
+    "named": [
+     "urine_ph:dependent"
+    ],
+    "qid": "7f655f66"
+   }
+  ]
+ },
+ "butorphanol": {
+  "name": "Butorphanol",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "butorphanol",
+    "line": "Excretion | Kidney , 75% Biliary , 11-14% Fecal , 15%",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "77f0fffe"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "butorphanol",
+    "line": "^ a b Gear RW, Miaskowski C, Gordon NC, Paul SM, Heller PH, Levine JD (November 1999).",
+    "named": [
+     "urine_ph:dependent"
+    ],
+    "qid": "dd6819d7"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "9822ca3f-aee2-46e5-8a96-495400e65d10",
+    "line": "Elimination occurs by urine and fecal excretion.",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "a90a7767"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "9822ca3f-aee2-46e5-8a96-495400e65d10",
+    "line": "When 3 H labeled butorphanol is administered to normal subjects, most (70 to 80%) of the dose is recovered in the urine, while approximately 15% is recovered in the feces.",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "fc574d97"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "9822ca3f-aee2-46e5-8a96-495400e65d10",
+    "line": "About 5% of the dose is recovered in the urine as butorphanol.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "a181c0af"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "9822ca3f-aee2-46e5-8a96-495400e65d10",
+    "line": "Forty-nine percent is eliminated in the urine as hydroxybutorphanol.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "cd2ec5bf"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "9822ca3f-aee2-46e5-8a96-495400e65d10",
+    "line": "Less than 5% is excreted in the urine as norbutorphanol.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "0a18ec9e"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "9822ca3f-aee2-46e5-8a96-495400e65d10",
+    "line": "In renally impaired patients with creatinine clearances <30 mL/min, the elimination half-life was approximately doubled and the total body clearance was approximately one half (10.5 hours [clearance 150 L/h] compared to 5.8 hours [clearance 260 L/h] in healthy subjects).",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "9d4371ef"
+   }
+  ]
+ },
+ "cyclobenzaprine": {
+  "name": "Cyclobenzaprine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "cyclobenzaprine",
+    "line": "Excretion | Kidney",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "d15d14e0"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "b524d150-0a83-42d1-a884-b930e49760cd",
+    "line": "Cyclobenzaprine is extensively metabolized, and is excreted primarily as glucuronides via the kidney.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "a2143440"
+   }
+  ]
+ },
+ "orphenadrine": {
+  "name": "Orphenadrine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "orphenadrine",
+    "line": "Excretion | Renal and biliary",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "f3133baf"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "orphenadrine",
+    "line": "Common side effects include dry mouth, dizziness, drowsiness, constipation, urine retention, blurred vision, and headache.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "53622f4e"
+   }
+  ]
  }
 }

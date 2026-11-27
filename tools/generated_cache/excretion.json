@@ -1363,6 +1363,34 @@
     "value": "renal"
    }
   ],
+  "butorphanol": [
+   {
+    "amount": "70 to 80%",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "dailymed",
+      "page": "9822ca3f-aee2-46e5-8a96-495400e65d10",
+      "provenance": "verified",
+      "quote": "When 3 H labeled butorphanol is administered to normal subjects, most (70 to 80%) of the dose is recovered in the urine, while approximately 15% is recovered in the feces."
+     }
+    ],
+    "value": "renal"
+   },
+   {
+    "amount": "approximately 15%",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "dailymed",
+      "page": "9822ca3f-aee2-46e5-8a96-495400e65d10",
+      "provenance": "verified",
+      "quote": "When 3 H labeled butorphanol is administered to normal subjects, most (70 to 80%) of the dose is recovered in the urine, while approximately 15% is recovered in the feces."
+     }
+    ],
+    "value": "fecal"
+   }
+  ],
   "cabergoline": [
    {
     "amount": "environ 18 %",
@@ -2102,6 +2130,20 @@
       "page": "cyclobarbital",
       "provenance": "verified",
       "quote": "Excretion | Renal"
+     }
+    ],
+    "value": "renal"
+   }
+  ],
+  "cyclobenzaprine": [
+   {
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "dailymed",
+      "page": "b524d150-0a83-42d1-a884-b930e49760cd",
+      "provenance": "verified",
+      "quote": "Cyclobenzaprine is extensively metabolized, and is excreted primarily as glucuronides via the kidney."
      }
     ],
     "value": "renal"
@@ -5480,6 +5522,32 @@
     "value": "renal"
    }
   ],
+  "nalbuphine": [
+   {
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "nalbuphine",
+      "provenance": "verified",
+      "quote": "Excretion | Urine , bile , feces ;"
+     }
+    ],
+    "value": "renal"
+   },
+   {
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "nalbuphine",
+      "provenance": "verified",
+      "quote": "Excretion | Urine , bile , feces ;"
+     }
+    ],
+    "value": "fecal"
+   }
+  ],
   "nalmefene": [
    {
     "aspect": "route",
@@ -5887,6 +5955,32 @@
     "value": "urine"
    }
   ],
+  "orphenadrine": [
+   {
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "orphenadrine",
+      "provenance": "verified",
+      "quote": "Excretion | Renal and biliary"
+     }
+    ],
+    "value": "renal"
+   },
+   {
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "orphenadrine",
+      "provenance": "verified",
+      "quote": "Excretion | Renal and biliary"
+     }
+    ],
+    "value": "fecal"
+   }
+  ],
   "oxazepam": [
    {
     "aspect": "route",
@@ -6025,6 +6119,32 @@
      }
     ],
     "value": "urine"
+   }
+  ],
+  "oxymorphone": [
+   {
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "oxymorphone",
+      "provenance": "verified",
+      "quote": "Excretion | Urine, feces"
+     }
+    ],
+    "value": "renal"
+   },
+   {
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "oxymorphone",
+      "provenance": "verified",
+      "quote": "Excretion | Urine, feces"
+     }
+    ],
+    "value": "fecal"
    }
   ],
   "paliperidone": [
