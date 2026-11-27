@@ -4517,6 +4517,46 @@
     "value": 2.6
    }
   },
+  "fosphenytoin": {
+   "bbb": {
+    "label": "BBB+",
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "56339",
+      "provenance": "verified",
+      "quote": "B3DB row 2477: fosphenytoin | CID 56339 | logBB - | BBB+ | group B | references R1, R13, R6, R15, R23, R27, R30"
+     }
+    ]
+   },
+   "cid": 56339,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "56339",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 116 Å²"
+     }
+    ],
+    "value": 116.0
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "56339",
+      "provenance": "verified",
+      "quote": "XLogP3: 0.6"
+     }
+    ],
+    "value": 0.6
+   }
+  },
   "furosemide": {
    "bbb": {
     "label": "BBB-",
@@ -4637,6 +4677,46 @@
      }
     ],
     "value": 1.8
+   }
+  },
+  "ganaxolone": {
+   "bbb": {
+    "label": "BBB+",
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "6918305",
+      "provenance": "verified",
+      "quote": "B3DB row 1210: ganaxolone | CID 6918305 | logBB - | BBB+ | group B | references R1, R27, R30"
+     }
+    ]
+   },
+   "cid": 6918305,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "6918305",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 37.3 Å²"
+     }
+    ],
+    "value": 37.3
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "6918305",
+      "provenance": "verified",
+      "quote": "XLogP3: 5"
+     }
+    ],
+    "value": 5.0
    }
   },
   "glutethimide": {
@@ -6761,6 +6841,33 @@
     "value": 1.4
    }
   },
+  "mirogabalin": {
+   "cid": 49802951,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "49802951",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 63.3 Å²"
+     }
+    ],
+    "value": 63.3
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "49802951",
+      "provenance": "verified",
+      "quote": "XLogP3: -1.7"
+     }
+    ],
+    "value": -1.7
+   }
+  },
   "mirtazapine": {
    "bbb": {
     "label": "BBB+",
@@ -8599,6 +8706,47 @@
     "value": 2.5
    }
   },
+  "physostigmine": {
+   "bbb": {
+    "label": "BBB+",
+    "logbb": 0.1,
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "5983",
+      "provenance": "verified",
+      "quote": "B3DB row 612: eserine | CID 5983 | logBB 0.1 | BBB+ | group A | references R44, R8, R11, R11, R17, R21, R42, R5"
+     }
+    ]
+   },
+   "cid": 5983,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "5983",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 44.8 Å²"
+     }
+    ],
+    "value": 44.8
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "5983",
+      "provenance": "verified",
+      "quote": "XLogP3: 0.7"
+     }
+    ],
+    "value": 0.7
+   }
+  },
   "pimavanserin": {
    "cid": 10071196,
    "tpsa": {
@@ -9651,6 +9799,47 @@
      }
     ],
     "value": 4.0
+   }
+  },
+  "riluzole": {
+   "bbb": {
+    "label": "BBB+",
+    "logbb": 0.3,
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "5070",
+      "provenance": "verified",
+      "quote": "B3DB row 726: riluzole | CID 5070 | logBB 0.3 | BBB+ | group A | references R27, R18, R26"
+     }
+    ]
+   },
+   "cid": 5070,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "5070",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 76.4 Å²"
+     }
+    ],
+    "value": 76.4
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "5070",
+      "provenance": "verified",
+      "quote": "XLogP3: 3.6"
+     }
+    ],
+    "value": 3.6
    }
   },
   "rimegepant": {
@@ -12069,6 +12258,33 @@
      }
     ],
     "value": 1.0
+   }
+  },
+  "ziconotide": {
+   "cid": 16135415,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "16135415",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 1310 Å²"
+     }
+    ],
+    "value": 1310.0
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "16135415",
+      "provenance": "verified",
+      "quote": "XLogP3: -14"
+     }
+    ],
+    "value": -14.0
    }
   },
   "zimelidine": {
