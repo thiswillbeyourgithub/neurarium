@@ -437,6 +437,14 @@
       "Le chlordiazépoxide commercialisé sous le nom de Librax est une association de chlordiazépoxide et de bromure de clidinium, un antispasmodique."
     ]
   },
+  "chlorphenamine": {
+    "fr_slug": "chlorph_niramine",
+    "fr_title": "Chlorphéniramine",
+    "name": "Chlorphenamine",
+    "sentences": [
+      "Chlorphéniramine"
+    ]
+  },
   "chlorpromazine": {
     "fr_slug": "chlorpromazine",
     "fr_title": "Chlorpromazine",
@@ -581,6 +589,14 @@
       "Elle est commercialisée en France depuis 1972 sous le nom de Tercian .",
       "N'est pas commercialisé en Amérique du Nord , en Belgique ou en Suisse .",
       "La cyamémazine, commercialisée sous le nom de Tercian en France, est disponible sous forme de :"
+    ]
+  },
+  "cyclizine": {
+    "fr_slug": "cyclizine",
+    "fr_title": "Cyclizine",
+    "name": "Cyclizine",
+    "sentences": [
+      "Structure de la cyclizine"
     ]
   },
   "cyproheptadine": {
@@ -1402,6 +1418,14 @@
       "Mis au point et commercialisé par les laboratoires Delagrange en 1964 sous le nom de Primpéran ® , il est depuis le 6 avril 1982 dans le domaine public."
     ]
   },
+  "metopimazine": {
+    "fr_slug": "m_topimazine",
+    "fr_title": "Métopimazine",
+    "name": "Metopimazine",
+    "sentences": [
+      "Métopimazine"
+    ]
+  },
   "mianserin": {
     "fr_slug": "mians_rine",
     "fr_title": "Miansérine",
@@ -1621,6 +1645,14 @@
     "sentences": [
       "Palipéridone",
       "La palipéridone est commercialisée en Europe sous les noms « Xeplion » et « Trevicta » et en Amérique du Nord sous le nom « Invega » sous les formes galéniques suivantes :"
+    ]
+  },
+  "palonosetron": {
+    "fr_slug": "palonos_tron",
+    "fr_title": "Palonosétron",
+    "name": "Palonosetron",
+    "sentences": [
+      "Palonosétron"
     ]
   },
   "paroxetine": {
@@ -2350,6 +2382,15 @@
       "Identification",
       "La tropatépine (nom de marque : Lepticur) est un médicament anticholinergique utilisé pour traiter la maladie de Parkinson et des syndromes apparentés.",
       "Elle est vendue sous le nom commercial Lepticur."
+    ]
+  },
+  "tropisetron": {
+    "fr_slug": "tropis_tron",
+    "fr_title": "Tropisétron",
+    "name": "Tropisetron",
+    "sentences": [
+      "Identification",
+      "Il est commercialisé en France sous le nom de Navoban par le laboratoire Novartis depuis le 17 février 1995 ."
     ]
   },
   "valbenazine": {
