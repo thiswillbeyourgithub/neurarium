@@ -8288,6 +8288,20 @@
      "line": "Its approval in the European Union was withdrawn in 2008.",
      "context": "Carisoprodol was approved for medical use in the United States in 1959.",
      "qid": "790b0380"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "carisoprodol",
+     "line": "L'usage médical du carisoprodol a été approuvé aux États-Unis en 1959 .",
+     "context": "Le carisoprodol est un médicament utilisé contre les douleurs musculaires.",
+     "qid": "175cb0ed"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "carisoprodol",
+     "line": "Son approbation en Europe a été retirée en 2008 .",
+     "context": "L'usage médical du carisoprodol a été approuvé aux États-Unis en 1959 .",
+     "qid": "d1d26041"
     }
    ]
   },
@@ -8335,6 +8349,13 @@
      "line": "Opicapone was approved for medical use in the European Union in February 2022.",
      "context": "The applicant for this medicinal product is Bial Portela & Companhia S.A.",
      "qid": "b8151402"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "opicapone",
+     "line": "Le médicament a été approuvé pour un usage médical en Europe en 2016 et aux États-Unis en 2020 , .",
+     "context": "L'opicapone , vendu sous le nom de marque Ongentys, est un médicament utilisé avec la lévodopa / carbidopa pour la maladie de Parkinson , .",
+     "qid": "13f9acc1"
     }
    ]
   },
@@ -8375,6 +8396,13 @@
      "line": "Ontozry was authorized for medical use in the European Union in March 2021.",
      "context": "The applicant for this medicinal product is Arvelle Therapeutics Netherlands B.V.",
      "qid": "d3957cbd"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "c_nobamate",
+     "line": "Le cénobamate a été approuvé pour un usage médical aux États-Unis en 2019 et en Europe en 2021 , .",
+     "context": "Il est vendu sous les noms de marque Xcopri et Ontozry .",
+     "qid": "22713278"
     }
    ]
   },
