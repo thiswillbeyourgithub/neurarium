@@ -139,6 +139,46 @@ RECEPTOR_EFFECTS: dict[str, dict[str, str]] = {
 }
 
 
+# Where each effect arises, for the viewer's central / peripheral switch: ``central`` =
+# the brain or spinal cord, ``peripheral`` = organs outside it (gut, heart, vessels,
+# glands, eye, bladder, muscle), ``both`` = the textbook mechanism runs through both
+# (nausea: area postrema + gut 5-HT3; prolactin: the pituitary sits outside the
+# blood-brain barrier). A vocabulary attribute, not a sourced node: it says where an
+# effect lives, not that any receptor causes it. Must cover every RECEPTOR_EFFECTS id.
+EFFECT_SITE_KINDS: tuple[str, ...] = ("central", "peripheral", "both")
+_CENTRAL = (
+    "sedation", "weight_gain", "appetite_increase", "hallucinations",
+    "extrapyramidal_symptoms", "tardive_dyskinesia", "akathisia",
+    "anticholinergic_cognitive", "insomnia", "anxiety", "euphoria", "dysphoria",
+    "respiratory_depression", "seizures", "psychosis", "delusional_parasitosis",
+    "anticonvulsant", "anxiolytic", "antidepressant", "antipsychotic", "antiparkinsonian",
+    "appetite_decrease", "pro_cognitive", "sleep_promotion", "circadian_shift",
+    "wakefulness", "rem_suppression", "rem_increase", "sws_increase", "sws_decrease",
+    "hypothermia", "exaggerated_startle", "ataxia",
+    "night_blindness",  # the retina is CNS tissue
+)
+_PERIPHERAL = (
+    "orthostatic_hypotension", "dry_mouth", "hypersalivation", "constipation",
+    "blurred_vision", "mydriasis", "urinary_retention", "cardiac_valvulopathy",
+    "bradycardia", "bronchodilation", "bronchoconstriction", "gastric_acid_reduction",
+    "gastric_acid_increase", "vasoconstriction", "vasodilation", "bladder_relaxation",
+    "gi_spasm", "antispasmodic", "gi_motility", "muscle_weakness",
+)
+_BOTH = (
+    "dizziness", "prolactin_elevation", "miosis", "nausea", "sexual_dysfunction",
+    "cardiovascular", "antiemetic", "analgesia", "antimigraine", "itch", "antipruritic",
+)
+EFFECT_SITES: dict[str, str] = {
+    **{e: "central" for e in _CENTRAL},
+    **{e: "peripheral" for e in _PERIPHERAL},
+    **{e: "both" for e in _BOTH},
+}
+_site_gap = set(RECEPTOR_EFFECTS) ^ set(EFFECT_SITES)
+if _site_gap or len(EFFECT_SITES) != len(_CENTRAL) + len(_PERIPHERAL) + len(_BOTH):
+    raise ValueError(f"EFFECT_SITES must place every RECEPTOR_EFFECTS id exactly once; "
+                     f"off by {sorted(_site_gap)}")
+
+
 # How a picked sentence's evidence was obtained, read by the picker at judge time and
 # stored per source by the applier: ``isolated_tissue`` = an isolated human tissue
 # preparation only (a vessel ring, a mucosa strip), ``in_vivo`` = anything stated of a
@@ -262,4 +302,5 @@ def meta_vocab() -> dict[str, Any]:
                                   for m, v in RECEPTOR_EFFECT_MODES.items()},
         "receptor_effect_labels": {e: dict(v) for e, v in RECEPTOR_EFFECTS.items()},
         "receptor_effect_search": search_keywords(),
+        "receptor_effect_sites": dict(EFFECT_SITES),
     }
