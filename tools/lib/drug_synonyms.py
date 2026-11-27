@@ -26,6 +26,8 @@ SYNONYMS = {
     # The INN "tomoxetine" named the (R)-enantiomer, renamed atomoxetine in 2003. Its
     # racemate LY135252 is deliberately absent.
     "atomoxetine": ["Tomoxetine"],
+    # US Adopted Name of the same (racemic) molecule.
+    "chlorphenamine": ["Chlorpheniramine"],
     # Developer code names (company serial numbers) of the same molecule.
     "agomelatine": ["S 20098"],
     "aripiprazole": ["OPC-14597"],
@@ -36,4 +38,5 @@ SYNONYMS = {
     "lurasidone": ["SM 13496"],
     "mirtazapine": ["Org3770", "ORG-3770"],
     "pimavanserin": ["ACP-103"],
+    "tropisetron": ["ICS 205-930", "ICS 205930"],
 }

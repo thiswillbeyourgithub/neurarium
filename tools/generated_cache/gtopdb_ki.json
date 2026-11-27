@@ -4198,6 +4198,27 @@
     }
    }
   },
+  "cyclizine": {
+   "h1": {
+    "action": "antagonist",
+    "ki": {
+     "max": 4.4668,
+     "median": 4.4668,
+     "min": 4.4668,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": null,
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "cyclizine",
+     "provenance": "verified",
+     "quote": "cyclizine at H1 receptor (HRH1, Human): Antagonist / Antagonist, pKi 8.35",
+     "species": "Human"
+    }
+   }
+  },
   "cyproheptadine": {
    "5ht6": {
     "action": "antagonist",
@@ -9112,6 +9133,27 @@
     }
    }
   },
+  "palonosetron": {
+   "5ht3": {
+    "action": "antagonist",
+    "ki": {
+     "max": 0.0324,
+     "median": 0.0324,
+     "min": 0.0324,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "20724042",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "palonosetron",
+     "provenance": "verified",
+     "quote": "palonosetron at 5-HT3A (HTR3A, Human): Antagonist / Antagonist, pKi 10.49 [PMID 20724042]",
+     "species": "Human"
+    }
+   }
+  },
   "pargyline": {
    "mao_b": {
     "action": "enzyme_inhibitor",
@@ -13208,6 +13250,57 @@
      "page": "trimipramine",
      "provenance": "verified",
      "quote": "trimipramine at SERT (SLC6A4, Human): Inhibitor / Inhibition, pKi 6.83 [PMID 9537821]",
+     "species": "Human"
+    }
+   }
+  },
+  "tropisetron": {
+   "5ht3": {
+    "action": "antagonist",
+    "ki": {
+     "max": 3.1623,
+     "median": 2.3736,
+     "min": 1.5849,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "7565620",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "tropisetron",
+     "provenance": "verified",
+     "quote": "tropisetron at 5-HT3A (HTR3A, Human): Antagonist / Antagonist, pKi 8.5-8.8 [PMID 7565620]",
+     "species": "Human"
+    }
+   },
+   "5ht4": {
+    "action": "antagonist",
+    "ki": {
+     "max": 501.1872,
+     "median": 290.31,
+     "min": 79.4328,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9349523",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "tropisetron",
+     "provenance": "verified",
+     "quote": "tropisetron at 5-HT4 receptor (HTR4, Human): Antagonist / Antagonist, pKi 6.3-7.1 [PMID 9349523]",
+     "species": "Human"
+    }
+   },
+   "glycine": {
+    "action": "antagonist",
+    "pmid": null,
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "tropisetron",
+     "provenance": "verified",
+     "quote": "tropisetron at glycine receptor α1 subunit (GLRA1, Human): Antagonist / Antagonist, pKi 4.1",
      "species": "Human"
     }
    }

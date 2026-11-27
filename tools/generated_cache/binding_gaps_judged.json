@@ -1913,5 +1913,234 @@
    "action": "antagonist",
    "qid": "1596ce31"
   }
+ ],
+ "alizapride": [
+  {
+   "index": 0,
+   "target": "d2",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "3ae25398"
+  },
+  {
+   "index": 1,
+   "target": "dopamine",
+   "pick": false,
+   "reason": "class-wide; the specific D2 antagonism is picked from candidate 0",
+   "qid": "3ae25398"
+  }
+ ],
+ "chlorphenamine": [
+  {
+   "index": 0,
+   "target": "h1",
+   "pick": true,
+   "action": "inverse_agonist",
+   "qid": "e8dc312a"
+  },
+  {
+   "index": 1,
+   "target": "muscarinic",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "73d86fa4"
+  },
+  {
+   "index": 2,
+   "target": "h1",
+   "pick": false,
+   "reason": "H1 inverse agonism is picked from candidate 0",
+   "qid": "d57bd5f2"
+  },
+  {
+   "index": 3,
+   "target": "sert",
+   "pick": true,
+   "action": "reuptake_inhibitor",
+   "qid": "d57bd5f2"
+  }
+ ],
+ "cyclizine": [
+  {
+   "index": 0,
+   "target": "h1",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "e376ae36"
+  }
+ ],
+ "metopimazine": [
+  {
+   "index": 0,
+   "target": "d2",
+   "pick": false,
+   "reason": "D2 picked from candidate 3 (the article's pharmacology sentence)",
+   "qid": "e754e298"
+  },
+  {
+   "index": 1,
+   "target": "d3",
+   "pick": false,
+   "reason": "D3 picked from candidate 4",
+   "qid": "e754e298"
+  },
+  {
+   "index": 2,
+   "target": "d2",
+   "pick": false,
+   "reason": "restates D2 antagonism, picked from candidate 3",
+   "qid": "706db19a"
+  },
+  {
+   "index": 3,
+   "target": "d2",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "b2529ce7"
+  },
+  {
+   "index": 4,
+   "target": "d3",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "b2529ce7"
+  },
+  {
+   "index": 5,
+   "target": "5ht2a",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "8dcc9e4d"
+  },
+  {
+   "index": 6,
+   "target": "alpha1",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "8dcc9e4d"
+  },
+  {
+   "index": 7,
+   "target": "h1",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "8dcc9e4d"
+  }
+ ],
+ "palonosetron": [
+  {
+   "index": 0,
+   "target": "5ht3",
+   "pick": false,
+   "reason": "5-HT3 picked from candidate 4",
+   "qid": "7d9efd76"
+  },
+  {
+   "index": 1,
+   "target": "5ht3",
+   "pick": false,
+   "reason": "tolerability comparison, not a mechanism claim",
+   "qid": "caf8605d"
+  },
+  {
+   "index": 2,
+   "target": "net",
+   "pick": false,
+   "reason": "interaction case reports, no NET action stated",
+   "qid": "6e8a272a"
+  },
+  {
+   "index": 3,
+   "target": "sert",
+   "pick": false,
+   "reason": "interaction case reports, no SERT action stated",
+   "qid": "6e8a272a"
+  },
+  {
+   "index": 4,
+   "target": "5ht3",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "bc22b2a4"
+  },
+  {
+   "index": 5,
+   "target": "5ht3",
+   "pick": false,
+   "reason": "class-wide statement about setrons; candidate 4 names palonosetron",
+   "qid": "7d68566c"
+  },
+  {
+   "index": 6,
+   "target": "5ht3",
+   "pick": false,
+   "reason": "ATC class line; candidate 4 already picked",
+   "qid": "40a31678"
+  },
+  {
+   "index": 7,
+   "target": "5ht3",
+   "pick": false,
+   "reason": "5-HT3 picked from candidate 4",
+   "qid": "b2f70920"
+  },
+  {
+   "index": 8,
+   "target": "m2",
+   "pick": false,
+   "reason": "trial dosing text, m2 is a unit (mg/m2), not a receptor",
+   "qid": "ec7e14cc"
+  },
+  {
+   "index": 9,
+   "target": "delta",
+   "pick": false,
+   "reason": "table header, not a claim",
+   "qid": "a4cbd21f"
+  },
+  {
+   "index": 10,
+   "target": "delta",
+   "pick": false,
+   "reason": "table header, not a claim",
+   "qid": "a4cbd21f"
+  },
+  {
+   "index": 11,
+   "target": "delta",
+   "pick": false,
+   "reason": "table header, not a claim",
+   "qid": "a4cbd21f"
+  }
+ ],
+ "tropisetron": [
+  {
+   "index": 0,
+   "target": "5ht3",
+   "pick": false,
+   "reason": "5-HT3 picked from candidate 1",
+   "qid": "406c2506"
+  },
+  {
+   "index": 1,
+   "target": "5ht3",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "e09f0fe4"
+  },
+  {
+   "index": 2,
+   "target": "nachr_a7",
+   "pick": true,
+   "action": "partial_agonist",
+   "qid": "e09f0fe4"
+  },
+  {
+   "index": 3,
+   "target": "nachr_a7",
+   "pick": false,
+   "reason": "hedged 'possible co-agonist or other modulatory action'; candidate 2 states the action",
+   "qid": "f7ee6fc4"
+  }
  ]
 }

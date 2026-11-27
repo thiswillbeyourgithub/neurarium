@@ -43,6 +43,28 @@
   ]
  },
  {
+  "drug": "alizapride",
+  "name": "Alizapride",
+  "slug": "alizapride",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "d2",
+    "target_name": "D2",
+    "origin": "prose",
+    "line": "Alizapride blocks D2 dopamine receptors in the vomiting center .",
+    "qid": "3ae25398"
+   },
+   {
+    "target": "dopamine",
+    "target_name": "Dopamine receptors",
+    "origin": "prose",
+    "line": "Alizapride blocks D2 dopamine receptors in the vomiting center .",
+    "qid": "3ae25398"
+   }
+  ]
+ },
+ {
   "drug": "alpidem",
   "name": "Alpidem",
   "slug": "alpidem",
@@ -415,6 +437,42 @@
   ]
  },
  {
+  "drug": "chlorphenamine",
+  "name": "Chlorphenamine",
+  "slug": "chlorphenamine",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "h1",
+    "target_name": "H1",
+    "origin": "prose",
+    "line": "It is specifically a potent inverse agonist of the histamine H 1 receptor .",
+    "qid": "e8dc312a"
+   },
+   {
+    "target": "muscarinic",
+    "target_name": "Muscarinic acetylcholine receptors",
+    "origin": "prose",
+    "line": "The drug is also commonly described as possessing weak anticholinergic activity by acting as an antagonist of the muscarinic acetylcholine receptors .",
+    "qid": "73d86fa4"
+   },
+   {
+    "target": "h1",
+    "target_name": "H1",
+    "origin": "prose",
+    "line": "In addition to acting as an inverse agonist at the H 1 receptor, chlorphenamine has been found to act as a serotonin reuptake inhibitor (K d = 15.2 nM for the serotonin transporter ).",
+    "qid": "d57bd5f2"
+   },
+   {
+    "target": "sert",
+    "target_name": "Serotonin transporter (SERT)",
+    "origin": "prose",
+    "line": "In addition to acting as an inverse agonist at the H 1 receptor, chlorphenamine has been found to act as a serotonin reuptake inhibitor (K d = 15.2 nM for the serotonin transporter ).",
+    "qid": "d57bd5f2"
+   }
+  ]
+ },
+ {
   "drug": "clonidine",
   "name": "Clonidine",
   "slug": "clonidine",
@@ -477,6 +535,21 @@
     "origin": "prose",
     "line": "The increased concentration of dopamine in the synapse activates post-synaptic dopamine receptors, which makes the drug rewarding and promotes the compulsive use of cocaine.",
     "qid": "befb824a"
+   }
+  ]
+ },
+ {
+  "drug": "cyclizine",
+  "name": "Cyclizine",
+  "slug": "cyclizine",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "h1",
+    "target_name": "H1",
+    "origin": "prose",
+    "line": "Cyclizine is a piperazine derivative with histamine H 1 -receptor antagonist ( antihistamine ) activity.",
+    "qid": "e376ae36"
    }
   ]
  },
@@ -1105,6 +1178,70 @@
   ]
  },
  {
+  "drug": "metopimazine",
+  "name": "Metopimazine",
+  "slug": "metopimazine",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "d2",
+    "target_name": "D2",
+    "origin": "prose",
+    "line": "However, it has also been described as a highly potent and selective dopamine D 2 and D 3 receptor antagonist .",
+    "qid": "e754e298"
+   },
+   {
+    "target": "d3",
+    "target_name": "D3",
+    "origin": "prose",
+    "line": "However, it has also been described as a highly potent and selective dopamine D 2 and D 3 receptor antagonist .",
+    "qid": "e754e298"
+   },
+   {
+    "target": "d2",
+    "target_name": "D2",
+    "origin": "prose",
+    "line": "The D 2 receptor antagonism of metopimazine is thought to underlie its antiemetic and gastroprokinetic effects.",
+    "qid": "706db19a"
+   },
+   {
+    "target": "d2",
+    "target_name": "D2",
+    "origin": "prose",
+    "line": "Metopimazine, a phenothiazine derivative, is a potent D2/D3 dopamine receptor antagonist.",
+    "qid": "b2529ce7"
+   },
+   {
+    "target": "d3",
+    "target_name": "D3",
+    "origin": "prose",
+    "line": "Metopimazine, a phenothiazine derivative, is a potent D2/D3 dopamine receptor antagonist.",
+    "qid": "b2529ce7"
+   },
+   {
+    "target": "5ht2a",
+    "target_name": "5-HT2A",
+    "origin": "prose",
+    "line": "Metopimazine has also shown adrenergic alpha1, histamine H1, serotonin 5HT2a antagonism.",
+    "qid": "8dcc9e4d"
+   },
+   {
+    "target": "alpha1",
+    "target_name": "α1 adrenergic receptors",
+    "origin": "prose",
+    "line": "Metopimazine has also shown adrenergic alpha1, histamine H1, serotonin 5HT2a antagonism.",
+    "qid": "8dcc9e4d"
+   },
+   {
+    "target": "h1",
+    "target_name": "H1",
+    "origin": "prose",
+    "line": "Metopimazine has also shown adrenergic alpha1, histamine H1, serotonin 5HT2a antagonism.",
+    "qid": "8dcc9e4d"
+   }
+  ]
+ },
+ {
   "drug": "mirtazapine",
   "name": "Mirtazapine",
   "slug": "mirtazapine",
@@ -1420,6 +1557,110 @@
     "corpus": "bdpm_rcp",
     "page": "69768949",
     "qid": "b1fd2d69"
+   }
+  ]
+ },
+ {
+  "drug": "palonosetron",
+  "name": "Palonosetron",
+  "slug": "palonosetron",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "5ht3",
+    "target_name": "5-HT3",
+    "origin": "prose",
+    "line": "It is a 5-HT 3 antagonist .",
+    "qid": "7d9efd76"
+   },
+   {
+    "target": "5ht3",
+    "target_name": "5-HT3",
+    "origin": "prose",
+    "line": "Palonosetron is similarly well tolerated as other 5-HT 3 antagonists, and slightly less than placebo .",
+    "qid": "caf8605d"
+   },
+   {
+    "target": "net",
+    "target_name": "Norepinephrine transporter (NET)",
+    "origin": "prose",
+    "line": "There are case reports about serotonin syndrome when the drug is combined with serotonergic substances, such as selective serotonin reuptake inhibitors (SSRIs) and serotonin–norepinephrine reuptake inhibitors (SNRIs), two common types of antidepressants.",
+    "qid": "6e8a272a"
+   },
+   {
+    "target": "sert",
+    "target_name": "Serotonin transporter (SERT)",
+    "origin": "prose",
+    "line": "There are case reports about serotonin syndrome when the drug is combined with serotonergic substances, such as selective serotonin reuptake inhibitors (SSRIs) and serotonin–norepinephrine reuptake inhibitors (SNRIs), two common types of antidepressants.",
+    "qid": "6e8a272a"
+   },
+   {
+    "target": "5ht3",
+    "target_name": "5-HT3",
+    "origin": "prose",
+    "line": "Palonosetron is a 5-HT 3 antagonist , commonly known as a setron .",
+    "qid": "bc22b2a4"
+   },
+   {
+    "target": "5ht3",
+    "target_name": "5-HT3",
+    "origin": "prose",
+    "line": "These drugs act by blocking serotonin from binding to the 5-HT 3 receptor .",
+    "qid": "7d68566c"
+   },
+   {
+    "target": "5ht3",
+    "target_name": "5-HT3",
+    "origin": "rcp_5.1",
+    "line": "Classe pharmacothérapeutique : Antiémétiques et antinauséeux, antagonistes de la sérotonine (5HT3), Code ATC : A04AA05",
+    "corpus": "bdpm_rcp",
+    "page": "67044648",
+    "qid": "40a31678"
+   },
+   {
+    "target": "5ht3",
+    "target_name": "5-HT3",
+    "origin": "rcp_5.1",
+    "line": "Le palonosétron est un antagoniste sélectif à haute affinité des récepteurs 5HT3 de la sérotonine.",
+    "corpus": "bdpm_rcp",
+    "page": "67044648",
+    "qid": "b2f70920"
+   },
+   {
+    "target": "m2",
+    "target_name": "M2",
+    "origin": "rcp_5.1",
+    "line": "Lors d'une étude randomisée en double aveugle conduite sur 667 patients recevant une chimiothérapie hautement émétisante incluant cisplatine à ≥ 60 mg/m2, cyclophosphamide à > 1 500 mg/m2 et dacarbazine, le palonosétron 250 microgrammes et 750 microgrammes a été comparé à l’ondansétron 32 mg administré par voie intraveineuse le premier jour. Un traitement prophylactique par la dexaméthasone a été administré avant la chimiothérapie chez 67 % des patients.",
+    "corpus": "bdpm_rcp",
+    "page": "67044648",
+    "qid": "ec7e14cc"
+   },
+   {
+    "target": "delta",
+    "target_name": "δ (DOR)",
+    "origin": "rcp_5.1",
+    "line": "Delta",
+    "corpus": "bdpm_rcp",
+    "page": "67044648",
+    "qid": "a4cbd21f"
+   },
+   {
+    "target": "delta",
+    "target_name": "δ (DOR)",
+    "origin": "rcp_5.1",
+    "line": "Delta",
+    "corpus": "bdpm_rcp",
+    "page": "67044648",
+    "qid": "a4cbd21f"
+   },
+   {
+    "target": "delta",
+    "target_name": "δ (DOR)",
+    "origin": "rcp_5.1",
+    "line": "Delta",
+    "corpus": "bdpm_rcp",
+    "page": "67044648",
+    "qid": "a4cbd21f"
    }
   ]
  },
@@ -2334,6 +2575,42 @@
     "origin": "prose",
     "line": "Trimipramine is a weak but significant antagonist of the dopamine D 1 and D 2 receptors , and also binds to the D 4 receptor (K i = 275 nM).",
     "qid": "61b3df16"
+   }
+  ]
+ },
+ {
+  "drug": "tropisetron",
+  "name": "Tropisetron",
+  "slug": "tropisetron",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "5ht3",
+    "target_name": "5-HT3",
+    "origin": "prose",
+    "line": "Tropisetron is a serotonin 5-HT 3 receptor antagonist used mainly as an antiemetic to treat nausea and vomiting following chemotherapy , although it has been used experimentally as an analgesic in cases of fibromyalgia .",
+    "qid": "406c2506"
+   },
+   {
+    "target": "5ht3",
+    "target_name": "5-HT3",
+    "origin": "prose",
+    "line": "Tropisetron acts as both a selective 5-HT 3 receptor antagonist and α 7 -nicotinic receptor partial agonist .",
+    "qid": "e09f0fe4"
+   },
+   {
+    "target": "nachr_a7",
+    "target_name": "Neuronal α7 nAChR",
+    "origin": "prose",
+    "line": "Tropisetron acts as both a selective 5-HT 3 receptor antagonist and α 7 -nicotinic receptor partial agonist .",
+    "qid": "e09f0fe4"
+   },
+   {
+    "target": "nachr_a7",
+    "target_name": "Neuronal α7 nAChR",
+    "origin": "prose",
+    "line": "Tropisetron have been shown to sensitise human α 7 -nicotinic receptors to low concentrations of acetylcholine, indicative of a possible co-agonist or other modulatory action of tropisetron at these receptors.",
+    "qid": "f7ee6fc4"
    }
   ]
  },
