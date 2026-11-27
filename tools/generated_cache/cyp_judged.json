@@ -3999,5 +3999,64 @@
    "strength": "minor",
    "qid": "d0d1559c"
   }
+ ],
+ "oxymorphone": [
+  {
+   "enzyme": "cyp3a4",
+   "n": 0,
+   "role": "substrate",
+   "qid": "de81dedf"
+  },
+  {
+   "enzyme": "ugt",
+   "n": 0,
+   "role": "substrate",
+   "qid": "de81dedf"
+  }
+ ],
+ "dihydrocodeine": [
+  {
+   "enzyme": "cyp3a4",
+   "n": 0,
+   "role": "substrate",
+   "qid": "ec4dfb02"
+  },
+  {
+   "enzyme": "cyp2d6",
+   "n": 0,
+   "role": "substrate",
+   "qid": "ec4dfb02"
+  }
+ ],
+ "nalbuphine": [
+  {
+   "enzyme": "ugt",
+   "n": 0,
+   "role": "substrate",
+   "qid": "64e0ecc3"
+  }
+ ],
+ "cyclobenzaprine": [
+  {
+   "enzyme": "cyp3a4",
+   "n": 0,
+   "role": "substrate",
+   "strength": "major",
+   "qid": "3753a3cc"
+  },
+  {
+   "enzyme": "cyp1a2",
+   "n": 0,
+   "role": "substrate",
+   "strength": "major",
+   "qid": "3753a3cc"
+  },
+  {
+   "enzyme": "cyp2d6",
+   "n": 0,
+   "role": "substrate",
+   "strength": "minor",
+   "qid": "3753a3cc"
+  }
  ]
 }

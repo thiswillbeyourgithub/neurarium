@@ -935,5 +935,16 @@
   "index": 0,
   "hours": 1.0,
   "qid": "ffd0cc1c"
+ },
+ "dihydrocodeine": {
+  "index": 0,
+  "hours": 1.7,
+  "qid": "a35faec2"
+ },
+ "butorphanol": {
+  "index": 0,
+  "hours": 0.333,
+  "hours_max": 0.667,
+  "qid": "0bf9e669"
  }
 }

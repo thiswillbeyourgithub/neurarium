@@ -2501,5 +2501,44 @@
       "chloral_hydrate"
     ],
     "pdsp_targets": []
+  },
+  {
+    "metabolite": "Dihydromorphine",
+    "parents": [
+      "dihydrocodeine"
+    ],
+    "key": "dihydromorphine",
+    "wiki_title": "Dihydromorphine",
+    "slug": "dihydromorphine",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [
+      "Dihydromorphine acts as an agonist at the μ-opioid with a K i value of 2.5 nM compared to 4.9 nM of morphine , δ-opioid with a K i value of 137 nM compared to 273 nM of morphine and κ-opioid with a K i value of 223 nM compared to 227 nM of morphine. Dihydromorphine is therefore slightly more μ-selective than morphine. Agonism of the μ-opioid and δ-opioid receptors is largely responsible for the clinical effects of opioids like dihydromorphine, with the μ-agonism providing more analgesia than the δ.",
+      "Dihydrocodeine exerts its analgesic action through affinity to predominantly μ-opioid receptor and to lesser extent to κ-opioid receptor and δ-opioid receptor . A 1956 source states that 30 mg of subcutaneous dihydrocodeine is equianalgesic to 10 mg of morphine. Another source states that dihydrocodeine is twice as strong as codeine and the metabolite dihydromorphine is likewise twice as strong as morphine."
+    ],
+    "pages": [
+      "dihydromorphine",
+      "dihydrocodeine"
+    ],
+    "pdsp_targets": [
+      {
+        "target": "delta",
+        "ki_id": 3673,
+        "value_nm": 203.4
+      },
+      {
+        "target": "kappa",
+        "ki_id": 3675,
+        "value_nm": 83.8
+      },
+      {
+        "target": "mu",
+        "ki_id": 3399,
+        "value_nm": 1.7
+      }
+    ]
   }
 ]

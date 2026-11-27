@@ -5458,5 +5458,54 @@
     "qid": "e0b0d404"
    }
   ]
+ },
+ "dihydrocodeine": {
+  "name": "Dihydrocodeine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "dihydrocodeine",
+    "line": "After oral absorption, the drug is absorbed relatively rapidly with mean peak concentration at 1.7 hours.",
+    "durations": [
+     {
+      "hours": 1.7
+     }
+    ],
+    "qid": "a35faec2"
+   }
+  ]
+ },
+ "butorphanol": {
+  "name": "Butorphanol",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "9822ca3f-aee2-46e5-8a96-495400e65d10",
+    "line": "Butorphanol Tartrate Injection is rapidly absorbed after IM injection and peak plasma levels are reached in 20 to 40 minutes.",
+    "durations": [
+     {
+      "hours": 0.333,
+      "hours_max": 0.667
+     }
+    ],
+    "qid": "0bf9e669"
+   }
+  ]
+ },
+ "cyclobenzaprine": {
+  "name": "Cyclobenzaprine",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "b524d150-0a83-42d1-a884-b930e49760cd",
+    "line": "(n = 18), peak plasma concentration was 25.9 ng/mL (range, 12.8 to 46.1 ng/mL), and area under the concentration-time (AUC) curve over an 8-hour dosing interval was 177 ng·hr/mL (range, 80 to 319 ng·hr/mL).",
+    "durations": [
+     {
+      "hours": 8.0
+     }
+    ],
+    "qid": "2b4c5133"
+   }
+  ]
  }
 }

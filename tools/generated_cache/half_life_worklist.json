@@ -6596,5 +6596,211 @@
     "qid": "7b131484"
    }
   ]
+ },
+ "oxymorphone": {
+  "name": "Oxymorphone",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "oxymorphone",
+    "line": "Elimination half-life | 10–12 hours",
+    "durations": [
+     {
+      "hours": 10.0,
+      "hours_max": 12.0
+     }
+    ],
+    "qid": "b831040b"
+   }
+  ]
+ },
+ "levomethadone": {
+  "name": "Levomethadone",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "levomethadone",
+    "line": "Elimination half-life | ~18 hours",
+    "durations": [
+     {
+      "hours": 18.0
+     }
+    ],
+    "qid": "a56bd26b"
+   }
+  ]
+ },
+ "dihydrocodeine": {
+  "name": "Dihydrocodeine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "dihydrocodeine",
+    "line": "Elimination half-life | 4 hours",
+    "durations": [
+     {
+      "hours": 4.0
+     }
+    ],
+    "qid": "f68a9835"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "dihydrocodeine",
+    "line": "The mean half-life is 4 hours.",
+    "durations": [
+     {
+      "hours": 4.0
+     }
+    ],
+    "qid": "69782553"
+   }
+  ]
+ },
+ "nalbuphine": {
+  "name": "Nalbuphine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "nalbuphine",
+    "line": "Elimination half-life | ~5 hours (3–6 hours)",
+    "durations": [
+     {
+      "hours": 5.0
+     },
+     {
+      "hours": 3.0,
+      "hours_max": 6.0
+     }
+    ],
+    "qid": "2de5bfc0"
+   }
+  ]
+ },
+ "butorphanol": {
+  "name": "Butorphanol",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "butorphanol",
+    "line": "Elimination half-life | 4–7 hours",
+    "durations": [
+     {
+      "hours": 4.0,
+      "hours_max": 7.0
+     }
+    ],
+    "qid": "f3007744"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "9822ca3f-aee2-46e5-8a96-495400e65d10",
+    "line": "The elimination half-life of hydroxybutorphanol is about 18 hours and, as a consequence, considerable accumulation (~5-fold) occurs when butorphanol is dosed to steady state.",
+    "durations": [
+     {
+      "hours": 18.0
+     }
+    ],
+    "qid": "735ada85"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "9822ca3f-aee2-46e5-8a96-495400e65d10",
+    "line": "In renally impaired patients with creatinine clearances <30 mL/min, the elimination half-life was approximately doubled and the total body clearance was approximately one half (10.5 hours [clearance 150 L/h] compared to 5.8 hours [clearance 260 L/h] in healthy subjects).",
+    "durations": [
+     {
+      "hours": 10.5
+     },
+     {
+      "hours": 5.8
+     }
+    ],
+    "qid": "9d4371ef"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "9822ca3f-aee2-46e5-8a96-495400e65d10",
+    "line": "After intravenous administration to patients with hepatic impairment, the elimination half-life of butorphanol was approximately tripled and total body clearance was approximately one half (half-life 16.8 hours, clearance 92 L/h) compared to healthy subjects (half-life 4.8 hours, clearance 175 L/h).",
+    "durations": [
+     {
+      "hours": 16.8
+     },
+     {
+      "hours": 4.8
+     }
+    ],
+    "qid": "6a215a29"
+   }
+  ]
+ },
+ "cyclobenzaprine": {
+  "name": "Cyclobenzaprine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "cyclobenzaprine",
+    "line": "Elimination half-life | 32 hours (extended-release, range 8–37 hours), 18 hours (immediate release, range 8–37 hours)",
+    "durations": [
+     {
+      "hours": 32.0
+     },
+     {
+      "hours": 8.0,
+      "hours_max": 37.0
+     },
+     {
+      "hours": 18.0
+     },
+     {
+      "hours": 8.0,
+      "hours_max": 37.0
+     }
+    ],
+    "qid": "d43aaafa"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "cyclobenzaprine",
+    "line": "The elimination half-life of cyclobenzaprine is 18 hours and it has a clearance of 0.7 L/min.",
+    "durations": [
+     {
+      "hours": 18.0
+     }
+    ],
+    "qid": "2bea512a"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "b524d150-0a83-42d1-a884-b930e49760cd",
+    "line": "Cyclobenzaprine is eliminated quite slowly, with an effective half-life of 18 hours (range 8 to 37 hours;",
+    "durations": [
+     {
+      "hours": 18.0
+     },
+     {
+      "hours": 8.0,
+      "hours_max": 37.0
+     }
+    ],
+    "qid": "de35a507"
+   }
+  ]
+ },
+ "orphenadrine": {
+  "name": "Orphenadrine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "orphenadrine",
+    "line": "Elimination half-life | 13–20 hours",
+    "durations": [
+     {
+      "hours": 13.0,
+      "hours_max": 20.0
+     }
+    ],
+    "qid": "b8d4d5bb"
+   }
+  ]
  }
 }

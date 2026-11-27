@@ -572,5 +572,55 @@
    "index": 3,
    "qid": "992b12c2"
   }
+ ],
+ "oxymorphone": [
+  {
+   "index": 0,
+   "qid": "75c357c9"
+  },
+  {
+   "index": 6,
+   "qid": "27516398"
+  }
+ ],
+ "levomethadone": [
+  {
+   "index": 1,
+   "qid": "1a2df773"
+  }
+ ],
+ "dihydrocodeine": [
+  {
+   "index": 5,
+   "qid": "85432850"
+  }
+ ],
+ "nalbuphine": [
+  {
+   "index": 2,
+   "qid": "5c887c25"
+  }
+ ],
+ "butorphanol": [
+  {
+   "index": 2,
+   "qid": "e11c0245"
+  }
+ ],
+ "cyclobenzaprine": [
+  {
+   "index": 3,
+   "qid": "a2b1933b"
+  }
+ ],
+ "orphenadrine": [
+  {
+   "index": 1,
+   "qid": "8e601b8e"
+  },
+  {
+   "index": 2,
+   "qid": "e24349e3"
+  }
  ]
 }

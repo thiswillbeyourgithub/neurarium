@@ -381,5 +381,43 @@
   "hours_max": 3.717,
   "index": 2,
   "qid": "a56008c3"
+ },
+ "oxymorphone": {
+  "hours": 10.0,
+  "hours_max": 12.0,
+  "index": 0,
+  "qid": "b831040b"
+ },
+ "levomethadone": {
+  "hours": 18.0,
+  "index": 0,
+  "qid": "a56bd26b"
+ },
+ "dihydrocodeine": {
+  "hours": 4.0,
+  "index": 1,
+  "qid": "69782553"
+ },
+ "nalbuphine": {
+  "hours": 5.0,
+  "index": 0,
+  "qid": "2de5bfc0"
+ },
+ "butorphanol": {
+  "hours": 4.0,
+  "hours_max": 7.0,
+  "index": 0,
+  "qid": "f3007744"
+ },
+ "cyclobenzaprine": {
+  "hours": 18.0,
+  "index": 1,
+  "qid": "2bea512a"
+ },
+ "orphenadrine": {
+  "hours": 13.0,
+  "hours_max": 20.0,
+  "index": 0,
+  "qid": "b8d4d5bb"
  }
 }

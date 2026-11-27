@@ -469,5 +469,24 @@
         "quote": "Zimelidine and its principal active metabolite, norzimelidine, preferentially inhibit serotonin uptake while having little effect on the reuptake of noradrenaline or dopamine."
       }
     ]
+  },
+  "dihydromorphine": {
+    "bindings": [
+      {
+        "target": "mu",
+        "action": "agonist",
+        "quote": "Dihydromorphine acts as an agonist at the μ-opioid with a K i value of 2.5 nM compared to 4.9 nM of morphine , δ-opioid with a K i value of 137 nM compared to 273 nM of morphine and κ-opioid with a K i value of 223 nM compared to 227 nM of morphine."
+      },
+      {
+        "target": "delta",
+        "action": "agonist",
+        "quote": "Dihydromorphine acts as an agonist at the μ-opioid with a K i value of 2.5 nM compared to 4.9 nM of morphine , δ-opioid with a K i value of 137 nM compared to 273 nM of morphine and κ-opioid with a K i value of 223 nM compared to 227 nM of morphine."
+      },
+      {
+        "target": "kappa",
+        "action": "agonist",
+        "quote": "Dihydromorphine acts as an agonist at the μ-opioid with a K i value of 2.5 nM compared to 4.9 nM of morphine , δ-opioid with a K i value of 137 nM compared to 273 nM of morphine and κ-opioid with a K i value of 223 nM compared to 227 nM of morphine."
+      }
+    ]
   }
 }

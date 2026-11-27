@@ -1015,6 +1015,50 @@
    ]
   }
  ],
+ "cyclobenzaprine": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "cyclobenzaprine",
+     "provenance": "verified",
+     "quote": "Metabolism | major: CYP3A4 , CYP1A2 ; minor: CYP2D6 , N-demethylation"
+    }
+   ],
+   "strength": "major"
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "cyclobenzaprine",
+     "provenance": "verified",
+     "quote": "Metabolism | major: CYP3A4 , CYP1A2 ; minor: CYP2D6 , N-demethylation"
+    }
+   ],
+   "strength": "minor"
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "cyclobenzaprine",
+     "provenance": "verified",
+     "quote": "Metabolism | major: CYP3A4 , CYP1A2 ; minor: CYP2D6 , N-demethylation"
+    }
+   ],
+   "strength": "major"
+  }
+ ],
  "cyproheptadine": [
   {
    "enzyme": "ugt",
@@ -1259,6 +1303,34 @@
     }
    ],
    "strength": "major"
+  }
+ ],
+ "dihydrocodeine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "dihydrocodeine",
+     "provenance": "verified",
+     "quote": "Metabolism | Mainly hepatic , through CYP3A4 and CYP2D6"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "dihydrocodeine",
+     "provenance": "verified",
+     "quote": "Metabolism | Mainly hepatic , through CYP3A4 and CYP2D6"
+    }
+   ]
   }
  ],
  "diphenhydramine": [
@@ -3137,6 +3209,21 @@
    "strength": "major"
   }
  ],
+ "nalbuphine": [
+  {
+   "enzyme": "ugt",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "nalbuphine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( glucuronidation )"
+    }
+   ]
+  }
+ ],
  "nefazodone": [
   {
    "enzyme": "cyp2d6",
@@ -3437,6 +3524,34 @@
     }
    ],
    "strength": "major"
+  }
+ ],
+ "oxymorphone": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "oxymorphone",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP3A4 , glucuronidation )"
+    }
+   ]
+  },
+  {
+   "enzyme": "ugt",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "oxymorphone",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP3A4 , glucuronidation )"
+    }
+   ]
   }
  ],
  "palonosetron": [

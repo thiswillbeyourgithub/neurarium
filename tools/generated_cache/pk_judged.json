@@ -1726,5 +1726,15 @@
     "name": "Didesmethylsibutramine"
    }
   ]
+ },
+ "dihydrocodeine": {
+  "metabolites": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "dihydrocodeine",
+    "quote": "Another source states that dihydrocodeine is twice as strong as codeine and the metabolite dihydromorphine is likewise twice as strong as morphine.",
+    "name": "Dihydromorphine"
+   }
+  ]
  }
 }

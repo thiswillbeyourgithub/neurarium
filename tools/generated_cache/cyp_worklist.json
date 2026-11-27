@@ -1772,6 +1772,19 @@
    ],
    "name": "Codeine"
   },
+  "cyclobenzaprine": {
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "(lead)",
+     "n": 0,
+     "page": "cyclobenzaprine",
+     "qid": "3753a3cc",
+     "quote": "Metabolism | major: CYP3A4 , CYP1A2 ; minor: CYP2D6 , N-demethylation"
+    }
+   ],
+   "name": "Cyclobenzaprine"
+  },
   "cyproheptadine": {
    "candidates": [
     {
@@ -2101,6 +2114,35 @@
     }
    ],
    "name": "Diazepam"
+  },
+  "dihydrocodeine": {
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "(lead)",
+     "n": 0,
+     "page": "dihydrocodeine",
+     "qid": "ec4dfb02",
+     "quote": "Metabolism | Mainly hepatic , through CYP3A4 and CYP2D6"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Pharmacology",
+     "n": 1,
+     "page": "dihydrocodeine",
+     "qid": "2db80408",
+     "quote": "Dihydrocodeine (DHC) is O -demethylated into dihydromorphine (DHM) by CYP2D6 and N -demethylated into nordihydrocodeine (NDHC) by CYP3A4 , summarily yielding nordihydromorphine (NDHM)."
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Pharmacology",
+     "n": 2,
+     "page": "dihydrocodeine",
+     "qid": "3b153989",
+     "quote": "Due to the multidirectional metabolism, as opposed to tramadol and codeine , CYP2D6 activity probably does not influence DHC analgesia."
+    }
+   ],
+   "name": "Dihydrocodeine"
   },
   "diphenhydramine": {
    "candidates": [
@@ -4363,6 +4405,19 @@
    ],
    "name": "Morphine"
   },
+  "nalbuphine": {
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "(lead)",
+     "n": 0,
+     "page": "nalbuphine",
+     "qid": "64e0ecc3",
+     "quote": "Metabolism | Liver ( glucuronidation )"
+    }
+   ],
+   "name": "Nalbuphine"
+  },
   "nefazodone": {
    "candidates": [
     {
@@ -4812,6 +4867,27 @@
     }
    ],
    "name": "Oxycodone"
+  },
+  "oxymorphone": {
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "(lead)",
+     "n": 0,
+     "page": "oxymorphone",
+     "qid": "de81dedf",
+     "quote": "Metabolism | Liver ( CYP3A4 , glucuronidation )"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Chemistry",
+     "n": 1,
+     "page": "oxymorphone",
+     "qid": "e0a473df",
+     "quote": "Oxymorphone is also a minor metabolite of oxycodone , which is formed by CYP2D6 -mediated O-demethylation."
+    }
+   ],
+   "name": "Oxymorphone"
   },
   "palonosetron": {
    "candidates": [

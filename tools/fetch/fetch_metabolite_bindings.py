@@ -107,6 +107,7 @@ OWN_ARTICLE = {
     "dextrorphan": "Dextrorphan",
     "norbuprenorphine": "Norbuprenorphine",
     "oxymorphone": "Oxymorphone",
+    "dihydromorphine": "Dihydromorphine",
     "norketamine": "Norketamine",
     "hydroxynorketamine": "Hydroxynorketamine",
     "3,4-methylenedioxyamphetamine (mda)": "3,4-Methylenedioxyamphetamine",
