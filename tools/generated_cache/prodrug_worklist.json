@@ -199,7 +199,7 @@
    "metabolites": [
     {
      "name": "Desmethyldiazepam (nordazepam)",
-     "drug_id": null
+     "drug_id": "nordazepam"
     }
    ],
    "candidates": [
@@ -226,7 +226,7 @@
   },
   "dmt": {
    "name": "DMT",
-   "bindings": 14,
+   "bindings": 15,
    "metabolites": [],
    "candidates": [
     {
@@ -312,7 +312,7 @@
   },
   "fluphenazine": {
    "name": "Fluphenazine",
-   "bindings": 28,
+   "bindings": 26,
    "metabolites": [],
    "candidates": [
     {
@@ -724,7 +724,7 @@
    "metabolites": [
     {
      "name": "Desmethyldiazepam (nordazepam)",
-     "drug_id": null
+     "drug_id": "nordazepam"
     }
    ],
    "candidates": [
@@ -1292,10 +1292,82 @@
     }
    ]
   },
+  "nordazepam": {
+   "name": "Nordazepam",
+   "bindings": 1,
+   "metabolites": [],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "nordazepam",
+     "line": "Nordazepam is among the longest lasting (longest half-life) benzodiazepines, and its occurrence as a metabolite is responsible for most cumulative side-effects of its myriad pro-drugs when they are used repeatedly at moderate-high doses;",
+     "qid": "90d0e940"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "nordazepam",
+     "line": "the nordazepam metabolite oxazepam is also active (and is a more potent, full BZD-site agonist), which contributes to nordazepam cumulative side-effects but occur too minutely to contribute to the cumulative side-effects of nordazepam pro-drugs (except when they are abused chronically in extremely supra-therapeutic doses).",
+     "qid": "2b039900"
+    }
+   ]
+  },
+  "eslicarbazepine_acetate": {
+   "name": "Eslicarbazepine acetate",
+   "bindings": 0,
+   "metabolites": [
+    {
+     "name": "Eslicarbazepine",
+     "drug_id": null
+    }
+   ],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "eslicarbazepine_acetate",
+     "line": "Similarly to oxcarbazepine , ESL behaves as a prodrug to ( S )-(+)- licarbazepine .",
+     "qid": "db1d8b97"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "eslicarbazepine_acetate",
+     "line": "The active component, eslicarbazepine, has the same mechanism of action as oxcarbazepine (which is a prodrug for licarbazepine, the racemate of eslicarbazepine) and most likely the closely related carbamazepine.",
+     "qid": "8fdf6ea0"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "eslicarbazepine_acetate",
+     "line": "As the name suggests, eslicarbazepine acetate is the acetate ester prodrug of eslicarbazepine.",
+     "qid": "d89ea1b2"
+    }
+   ]
+  },
+  "valpromide": {
+   "name": "Valpromide",
+   "bindings": 0,
+   "metabolites": [
+    {
+     "name": "Valproic acid",
+     "drug_id": "valproate"
+    }
+   ],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "valpromide",
+     "line": "Hydrolysis in Drug and Prodrug Metabolism: Chemistry, Biochemistry, and Enzymology by Bernard Testa, Joachim M.",
+     "qid": "45117e8e"
+    }
+   ]
+  },
   "carisoprodol": {
    "name": "Carisoprodol",
    "bindings": 1,
-   "metabolites": [],
+   "metabolites": [
+    {
+     "name": "Meprobamate",
+     "drug_id": "meprobamate"
+    }
+   ],
    "candidates": [
     {
      "corpus": "wikipedia_pharm",
@@ -1308,7 +1380,12 @@
   "fosphenytoin": {
    "name": "Fosphenytoin",
    "bindings": 0,
-   "metabolites": [],
+   "metabolites": [
+    {
+     "name": "Phenytoin",
+     "drug_id": "phenytoin"
+    }
+   ],
    "candidates": [
     {
      "corpus": "wikipedia_pharm",
@@ -1330,16 +1407,107 @@
     }
    ]
   },
+  "riluzole": {
+   "name": "Riluzole",
+   "bindings": 1,
+   "metabolites": [],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "riluzole",
+     "line": "A prodrug formulation of riluzole, troriluzole , has been researched as a potential treatment for several different conditions.",
+     "qid": "b904ad0b"
+    }
+   ]
+  },
+  "aprepitant": {
+   "name": "Aprepitant",
+   "bindings": 1,
+   "metabolites": [],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "aprepitant",
+     "line": "A prodrug , fosaprepitant , is also available for intravenous administration.",
+     "qid": "bfe1337e"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "aprepitant",
+     "line": "Following IV administration of a 14 C-labeled prodrug of aprepitant (L-758298), which is converted rapidly and completely to aprepitant, approximately 57% of the total radioactivity is excreted in the urine and 45% in feces.",
+     "qid": "3848364a"
+    }
+   ]
+  },
   "fosaprepitant": {
    "name": "Fosaprepitant",
    "bindings": 0,
-   "metabolites": [],
+   "metabolites": [
+    {
+     "name": "Aprepitant",
+     "drug_id": "aprepitant"
+    }
+   ],
    "candidates": [
     {
      "corpus": "wikipedia_pharm",
      "page": "fosaprepitant",
      "line": "It is a prodrug of aprepitant .",
      "qid": "49c8561a"
+    }
+   ]
+  },
+  "methysergide": {
+   "name": "Methysergide",
+   "bindings": 9,
+   "metabolites": [
+    {
+     "name": "Methylergonovine",
+     "drug_id": null
+    }
+   ],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "methysergide",
+     "line": "The drug is a prodrug of methylergometrine (methylergonovine), which circulates at levels about 10 times higher than those of methysergide.",
+     "qid": "673cdce3"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "methysergide",
+     "line": "However, subsequent research has found that methysergide is a rapidly converted prodrug of methylergometrine , an efficacious serotonin receptor agonist , and that both methysergide and methylergometrine produce psychedelic effects themselves at supratherapeutic doses.",
+     "qid": "ef1e2662"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "methysergide",
+     "line": "As such, methysergide may be considered a prodrug of methylergonovine.",
+     "qid": "4d10f2c6"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "methysergide",
+     "line": "DDH-LSD) 6-Alkyllysergamides: BU-LAD CE-LAD (CHLORETH-LAD) CPM-LAD CYP-LAD (TRALA-22) ETH-LAD FLUORETH-LAD (FE-LAD) FP-LAD IP-LAD NBOMe-LAD PARGY-LAD PRO-LAD 1-Alkyllysergamides (prodrugs): Methysergide (1-methylmethylergonovine;",
+     "qid": "570f76ef"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "methysergide",
+     "line": "UML-491) MLA-74 (1-methyl-LAE) MLD-41 (1-methyl-LSD) MPD-75 (1-methyl-LPD) OML-632 (1-hydroxymethyl-LSD) 1-Acyllysergamides (prodrugs): 1-Formyl-LSD 1B-LSD 1BP-LSD 1Bz-LSD 1cP-AL-LAD 1cP-LSD 1cP-MiPLA 1D-AL-LAD 1D-LSD 1DD-LSD 1F-LSD 1Fe-LSD 1H-LSD 1P-AL-LAD 1P-ETH-LAD 1P-LSD 1P-MiPLA 1S-LSD 1SB-LSD (1BS-LSD;",
+     "qid": "ae383a1d"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "methysergide",
+     "line": "1-Alkyllysergamides (prodrugs): Methysergide (1-methylmethylergonovine;",
+     "qid": "ec84d6fa"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "methysergide",
+     "line": "1-Acyllysergamides (prodrugs): 1-Formyl-LSD",
+     "qid": "47b4735f"
     }
    ]
   }

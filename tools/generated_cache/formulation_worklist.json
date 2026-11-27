@@ -2477,6 +2477,360 @@
     }
    }
   },
+  "remifentanil": {
+   "name": "Remifentanil",
+   "items": {
+    "brand:Ultiva": {
+     "brand": "Ultiva",
+     "candidates": [
+      {
+       "corpus": "wikipedia_pharm",
+       "page": "remifentanil",
+       "line": "^ \"Remifentanil, IV opioid analgesic, Remi | Ultiva\" .",
+       "releases": [
+        "injection"
+       ],
+       "qid": "89ebd682"
+      }
+     ]
+    }
+   }
+  },
+  "oxymorphone": {
+   "name": "Oxymorphone",
+   "items": {
+    "brand:Numorphan": {
+     "brand": "Numorphan",
+     "candidates": [
+      {
+       "corpus": "wikipedia_pharm",
+       "page": "oxymorphone",
+       "line": "Numorphan (suppository and injectable solution)",
+       "releases": [
+        "injection"
+       ],
+       "qid": "e0eec155"
+      },
+      {
+       "corpus": "wikipedia_fr",
+       "page": "oxymorphone",
+       "line": "Numorphan (suppositoire et solution injectable)",
+       "releases": [
+        "injection"
+       ],
+       "qid": "81e684f7"
+      }
+     ]
+    },
+    "brand:Opana": {
+     "brand": "Opana",
+     "candidates": [
+      {
+       "corpus": "wikipedia_pharm",
+       "page": "oxymorphone",
+       "line": "Endo responded by voluntarily removing Opana ER from the market a month later.",
+       "releases": [
+        "xr"
+       ],
+       "qid": "16ab9da6"
+      },
+      {
+       "corpus": "wikipedia_pharm",
+       "page": "oxymorphone",
+       "line": "Oxymorphone was marketed by Endo Pharmaceuticals, under the brand name(s) Opana and Opana ER.",
+       "releases": [
+        "xr"
+       ],
+       "qid": "7da46ba1"
+      },
+      {
+       "corpus": "wikipedia_pharm",
+       "page": "oxymorphone",
+       "line": "Opana ER was withdrawn by the manufacturer in 2017 due to an FDA request, making it unavailable in the US.",
+       "releases": [
+        "xr"
+       ],
+       "qid": "f8a7ed11"
+      },
+      {
+       "corpus": "wikipedia_pharm",
+       "page": "oxymorphone",
+       "line": "Opana ER (extended-release tablet): June 2017 FDA removal request due to rates of IV abuse.",
+       "releases": [
+        "injection",
+        "xr"
+       ],
+       "qid": "1ee8151a"
+      },
+      {
+       "corpus": "wikipedia_pharm",
+       "page": "oxymorphone",
+       "line": "Opana IR (immediate-release tablet)",
+       "releases": [
+        "ir"
+       ],
+       "qid": "0a3d349d"
+      },
+      {
+       "corpus": "wikipedia_pharm",
+       "page": "oxymorphone",
+       "line": "In January 2013, the Centers for Disease Control and Prevention (CDC) reported an illness associated with intravenous (IV) abuse of oral Opana ER (oxymorphone) in Tennessee.",
+       "releases": [
+        "injection",
+        "xr"
+       ],
+       "qid": "03734f82"
+      },
+      {
+       "corpus": "wikipedia_pharm",
+       "page": "oxymorphone",
+       "line": "If IV Opana abuse is acknowledged, supportive care, instead of therapeutic plasma exchange could be considered.",
+       "releases": [
+        "injection"
+       ],
+       "qid": "4f491047"
+      },
+      {
+       "corpus": "wikipedia_pharm",
+       "page": "oxymorphone",
+       "line": "The common opioid of abuse in this outbreak has been identified as Opana ER, a time-released oxymorphone pain killer formulated to be resistant to crushing, manufactured by Endo Pharmaceuticals.",
+       "releases": [
+        "xr"
+       ],
+       "qid": "cac01d8b"
+      },
+      {
+       "corpus": "wikipedia_pharm",
+       "page": "oxymorphone",
+       "line": "The CDC opened a larger investigation into all disease outbreaks involving Opana ER, focusing on the incidence of thrombotic thrombocytopenic purpura (TTP)-like illness in the 2012 Tennessee outbreak, as well as the 2015 HIV outbreak in Indiana.",
+       "releases": [
+        "xr"
+       ],
+       "qid": "792bc68c"
+      },
+      {
+       "corpus": "wikipedia_pharm",
+       "page": "oxymorphone",
+       "line": "The FDA launched a post-marketing safety study regarding the reformulation of Opana ER in 2012 and the Indiana state government helped fund another study exploring the link between HIV infection and injection use of oxymorphone in Indiana from 2014 to 2015.",
+       "releases": [
+        "injection",
+        "xr"
+       ],
+       "qid": "710d6bd9"
+      },
+      {
+       "corpus": "wikipedia_pharm",
+       "page": "oxymorphone",
+       "line": "The results of these studies found that the reformulation of Opana to a hard to crush tablet unintentionally increased the risk of transmission of acquired blood borne infections because opioid abusers switched from using the drug through the nasal route to injection.",
+       "releases": [
+        "nasal",
+        "injection"
+       ],
+       "qid": "68e5a152"
+      },
+      {
+       "corpus": "wikipedia_pharm",
+       "page": "oxymorphone",
+       "line": "In June 2017, faced with the public health crisis, the opioid epidemic, the FDA asked Endo Pharmaceuticals to \"remove its opioid pain medication, reformulated Opana ER (oxymorphone hydrochloride), from the market\".",
+       "releases": [
+        "xr"
+       ],
+       "qid": "604c93cc"
+      },
+      {
+       "corpus": "wikipedia_pharm",
+       "page": "oxymorphone",
+       "line": "\"Press Announcements – FDA requests removal of Opana ER for risks related to abuse\" .",
+       "releases": [
+        "xr"
+       ],
+       "qid": "227ac031"
+      },
+      {
+       "corpus": "wikipedia_pharm",
+       "page": "oxymorphone",
+       "line": "^ a b \"FDA requests removal of Opana ER for risks related to abuse\" (Press release).",
+       "releases": [
+        "xr"
+       ],
+       "qid": "626eb44f"
+      },
+      {
+       "corpus": "wikipedia_pharm",
+       "page": "oxymorphone",
+       "line": "Food and Drug Administration requested that Endo Pharmaceuticals remove its opioid pain medication, reformulated Opana ER (oxymorphone hydrochloride), from the market...",
+       "releases": [
+        "xr"
+       ],
+       "qid": "b9c035b2"
+      },
+      {
+       "corpus": "wikipedia_pharm",
+       "page": "oxymorphone",
+       "line": "\"Thrombotic thrombocytopenic purpura (TTP)-like illness associated with intravenous Opana ER abuse—Tennessee, 2012\" .",
+       "releases": [
+        "injection",
+        "xr"
+       ],
+       "qid": "66bebd71"
+      },
+      {
+       "corpus": "wikipedia_pharm",
+       "page": "oxymorphone",
+       "line": "\"Successful treatment of intravenously abused oral Opana ER-induced thrombotic microangiopathy without plasma exchange\" .",
+       "releases": [
+        "injection",
+        "xr"
+       ],
+       "qid": "9ab65e93"
+      },
+      {
+       "corpus": "wikipedia_pharm",
+       "page": "oxymorphone",
+       "line": "\"Postmarketing Safety Issues Related to Reformulated Opana ER\" (PDF) .",
+       "releases": [
+        "xr"
+       ],
+       "qid": "c4b94e4a"
+      },
+      {
+       "corpus": "wikipedia_pharm",
+       "page": "oxymorphone",
+       "line": "\"Endo caves to FDA pressure, will pull Opana ER from the market\" .",
+       "releases": [
+        "xr"
+       ],
+       "qid": "feb3c290"
+      },
+      {
+       "corpus": "wikipedia_fr",
+       "page": "oxymorphone",
+       "line": "Elle est également distribuée sous le nom d'Opana et Opana ER.",
+       "releases": [
+        "xr"
+       ],
+       "qid": "224429b3"
+      },
+      {
+       "corpus": "wikipedia_fr",
+       "page": "oxymorphone",
+       "line": "Les comprimés à libération prolongée (Opana ER) sont retirés du marché en 2017 à la suite d'une décision de la Food and Drugs Administration (FDA) qui veut en limiter le mésusage dans le contexte de la crise des opioïdes .",
+       "releases": [
+        "xr"
+       ],
+       "qid": "9bbd5b86"
+      },
+      {
+       "corpus": "wikipedia_fr",
+       "page": "oxymorphone",
+       "line": "Opana ER (comprimés à libération prolongée retirés du marché en 2017 pour limiter le mésusage )",
+       "releases": [
+        "xr"
+       ],
+       "qid": "7337fa54"
+      }
+     ]
+    }
+   }
+  },
+  "dihydrocodeine": {
+   "name": "Dihydrocodeine",
+   "items": {
+    "brand:Dicodin": {
+     "brand": "Dicodin",
+     "candidates": [
+      {
+       "corpus": "wikipedia_pharm",
+       "page": "dihydrocodeine",
+       "line": "Common trade names for the extended-release tablets are Didor Continus, Codidol, Codi-Contin, Dicodin (made in France and the major product containing the tartrate salt), Contugesic, DHC, and DHC Continus.",
+       "releases": [
+        "xr"
+       ],
+       "qid": "a934e59c"
+      },
+      {
+       "corpus": "wikipedia_fr",
+       "page": "dihydrocod_ine",
+       "line": "La molécule y est uniquement commercialisée sous le nom de Dicodin L.P.",
+       "releases": [
+        "xr"
+       ],
+       "qid": "4f2064cd"
+      }
+     ]
+    },
+    "brand:Paracodine": {
+     "brand": "Paracodine",
+     "candidates": [
+      {
+       "corpus": "wikipedia_fr",
+       "page": "dihydrocod_ine",
+       "line": "En Belgique, on trouve la dihydrocodéine sous forme à libération immédiate pour soulager la toux sèche sous le nom de Paracodine .",
+       "releases": [
+        "ir"
+       ],
+       "qid": "b8479800"
+      }
+     ]
+    }
+   }
+  },
+  "butorphanol": {
+   "name": "Butorphanol",
+   "items": {
+    "tmax": {
+     "value": {
+      "hours": 0.333,
+      "hours_max": 0.667
+     },
+     "candidates": [
+      {
+       "corpus": "dailymed",
+       "page": "9822ca3f-aee2-46e5-8a96-495400e65d10",
+       "line": "Butorphanol Tartrate Injection is rapidly absorbed after IM injection and peak plasma levels are reached in 20 to 40 minutes.",
+       "releases": [
+        "injection"
+       ],
+       "durations": [
+        {
+         "hours": 0.333,
+         "hours_max": 0.667
+        }
+       ],
+       "qid": "0bf9e669"
+      }
+     ]
+    }
+   }
+  },
+  "ziconotide": {
+   "name": "Ziconotide",
+   "items": {
+    "brand:Prialt": {
+     "brand": "Prialt",
+     "candidates": [
+      {
+       "corpus": "wikipedia_pharm",
+       "page": "ziconotide",
+       "line": "^ \"Prialt solution for infusion - Summary of Product Characteristics (SmPC) - (eMC)\" .",
+       "releases": [
+        "injection"
+       ],
+       "qid": "376a582b"
+      },
+      {
+       "corpus": "wikipedia_fr",
+       "page": "ziconotide",
+       "line": "↑ (en) « Prialt solution for infusion - Summary of Product Characteristics (SmPC) - (eMC) », Electronic Medicines Compendium, janvier 2017 (consulté le 21 avril 2018 )",
+       "releases": [
+        "injection"
+       ],
+       "qid": "ec725d4f"
+      }
+     ]
+    }
+   }
+  },
   "zolmitriptan": {
    "name": "Zolmitriptan",
    "items": {

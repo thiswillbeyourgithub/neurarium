@@ -18,7 +18,7 @@
     ],
     "pdsp_targets": [
       {
-        "target": "nachr_a7",
+        "target": "gaba_a",
         "ki_id": 9376,
         "value_nm": 205.0
       }
@@ -157,11 +157,10 @@
         "page": "3_4_methylenedioxyamphetamine"
       }
     ],
-    "unresolved_ki": [
-      "'TAAR1' (Ki 220–250 (K i ) (rat) 740 ( EC 50 ) (rat) 86% ( E max ) (rat) 160–180 (K i ) (mouse) 580 ( EC 50 ) (mouse) 102% ( E max ) (rat) 3,600 ( EC 50 ) (human) 11% ( E max ) (human))"
-    ],
+    "unresolved_ki": [],
     "action_candidates": [
       "In terms of its pharmacology , MDA is a serotonin–norepinephrine–dopamine releasing agent (SNDRA) and a serotonin 5-HT 2 receptor agonist , including of the serotonin 5-HT 2A receptor . It has a duration of 5 to 8 hours or around 6 hours typically.",
+      "MDA is a substrate of the serotonin , norepinephrine , dopamine , and vesicular monoamine transporters , and in relation to this, acts as a reuptake inhibitor and releasing agent of serotonin , norepinephrine , and dopamine (that is, it is an SNDRA ). It is also an agonist of the serotonin 5-HT 2A , 5-HT 2B , and 5-HT 2C receptors and shows affinity for the α 2A - , α 2B - , and α 2C -adrenergic receptors and serotonin 5-HT 1A and 5-HT 7 receptors .",
       "In terms of the subjective and behavioral effects of MDA, it is thought that serotonin release is required for its entactogenic effects, dopamine release is required for its euphoriant ( rewarding and addictive ) effects, dopamine and norepinephrine release are required for its psychostimulant effects, and direct agonism of the serotonin 5-HT 2A receptor is required for its mild psychedelic effects. The entactogenic effects of drugs like MDA are thought to be dependent on a precise balance of serotonin and dopamine release as well as serotonin receptor agonism. The longer duration of MDA compared to MDMA appears to be related to pharmacodynamics as opposed to pharmacokinetics , for instance the effects of MDA depending relatively more on serotonin 5-HT 2A receptor agonism than on serotonin release.",
       "MDA constitutes part of the core structure of the β-adrenergic receptor agonist protokylol ."
     ],
@@ -467,31 +466,6 @@
     "pdsp_targets": []
   },
   {
-    "metabolite": "Desmethyldiazepam (nordazepam)",
-    "parents": [
-      "chlordiazepoxide",
-      "clorazepate",
-      "diazepam",
-      "prazepam"
-    ],
-    "key": "desmethyldiazepam_nordazepam",
-    "wiki_title": "Nordazepam",
-    "slug": "nordazepam",
-    "own_article": true,
-    "found": true,
-    "from_parent": false,
-    "ki_bindings": [],
-    "unresolved_ki": [],
-    "action_candidates": [
-      "Nordazepam is a partial agonist at the GABA A receptor , which makes it less potent than other benzodiazepines, particularly in its amnesic and muscle-relaxing effects. Its elimination half-life is between 36 and 200 hours , with wide variation among individuals; factors such as age and sex are known to impact it. The variation of reported half-lives are attributed to differences in nordazepam metabolism and that of its metabolites as nordazepam is hydroxylated to active metabolites such as oxazepam, before finally being glucuronidated and excreted in the urine. This can be attributed to extremely variable hepatic and renal metabolic functions among individuals depending upon a number of factors (including age, ethnicity, disease, and current or previous use/abuse of other drugs/medicines)."
-    ],
-    "pages": [
-      "nordazepam",
-      "chlordiazepoxide"
-    ],
-    "pdsp_targets": []
-  },
-  {
     "metabolite": "Desmethylselegiline",
     "parents": [
       "selegiline"
@@ -648,36 +622,9 @@
         },
         "quote": "SERT | 401–484 | Rat",
         "page": "dextrorphan"
-      },
-      {
-        "target": "5ht1b",
-        "wiki_name": "5-HT 1B / 1D",
-        "ki": {
-          "median": 1000.0,
-          "min": 1000.0,
-          "max": 1000.0,
-          "raw": "54% at 1 μM"
-        },
-        "quote": "5-HT 1B / 1D | 54% at 1 μM | Rat",
-        "page": "dextrorphan"
-      },
-      {
-        "target": "h1",
-        "wiki_name": "H 1",
-        "ki": {
-          "median": 1000.0,
-          "min": 1000.0,
-          "max": 1000.0,
-          "raw": "95% at 1 μM"
-        },
-        "quote": "H 1 | 95% at 1 μM | Rat",
-        "page": "dextrorphan"
       }
     ],
-    "unresolved_ki": [
-      "'β' (Ki 35% at 1 μM)",
-      "'mAChRs' (Ki 100% at 1 μM)"
-    ],
+    "unresolved_ki": [],
     "action_candidates": [
       "Dextrorphan ( DXO ) is a psychoactive drug of the morphinan class which acts as an antitussive or cough suppressant and in high doses a dissociative hallucinogen . It is the dextrorotatory enantiomer of racemorphan ; the levorotatory enantiomer is levorphanol . Dextrorphan is produced by O-demethylation of dextromethorphan by CYP2D6 . Dextrorphan is an NMDA antagonist and contributes to the psychoactive effects of dextromethorphan.",
       "The pharmacology of dextrorphan is similar to that of dextromethorphan (DXM). However, dextrorphan is much more potent as an NMDA receptor antagonist and much less active as a serotonin reuptake inhibitor , but retains DXM's activity as a norepinephrine reuptake inhibitor . It also has more affinity for the opioid receptors than dextromethorphan, significantly so at high doses."
@@ -807,6 +754,45 @@
     "pdsp_targets": []
   },
   {
+    "metabolite": "Dihydromorphine",
+    "parents": [
+      "dihydrocodeine"
+    ],
+    "key": "dihydromorphine",
+    "wiki_title": "Dihydromorphine",
+    "slug": "dihydromorphine",
+    "own_article": true,
+    "found": true,
+    "from_parent": false,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [
+      "Dihydromorphine acts as an agonist at the μ-opioid with a K i value of 2.5 nM compared to 4.9 nM of morphine , δ-opioid with a K i value of 137 nM compared to 273 nM of morphine and κ-opioid with a K i value of 223 nM compared to 227 nM of morphine. Dihydromorphine is therefore slightly more μ-selective than morphine. Agonism of the μ-opioid and δ-opioid receptors is largely responsible for the clinical effects of opioids like dihydromorphine, with the μ-agonism providing more analgesia than the δ.",
+      "Dihydrocodeine exerts its analgesic action through affinity to predominantly μ-opioid receptor and to lesser extent to κ-opioid receptor and δ-opioid receptor . A 1956 source states that 30 mg of subcutaneous dihydrocodeine is equianalgesic to 10 mg of morphine. Another source states that dihydrocodeine is twice as strong as codeine and the metabolite dihydromorphine is likewise twice as strong as morphine."
+    ],
+    "pages": [
+      "dihydromorphine",
+      "dihydrocodeine"
+    ],
+    "pdsp_targets": [
+      {
+        "target": "delta",
+        "ki_id": 3673,
+        "value_nm": 203.4
+      },
+      {
+        "target": "kappa",
+        "ki_id": 3675,
+        "value_nm": 83.8
+      },
+      {
+        "target": "mu",
+        "ki_id": 3399,
+        "value_nm": 1.7
+      }
+    ]
+  },
+  {
     "metabolite": "Dopamine",
     "parents": [
       "levodopa"
@@ -873,8 +859,8 @@
       },
       {
         "target": "d4",
-        "ki_id": 83280,
-        "value_nm": 630.0
+        "ki_id": 7053,
+        "value_nm": 180.0
       },
       {
         "target": "d5",
@@ -897,6 +883,25 @@
         "value_nm": 1000.0
       }
     ]
+  },
+  {
+    "metabolite": "Eslicarbazepine",
+    "parents": [
+      "eslicarbazepine_acetate"
+    ],
+    "key": "eslicarbazepine",
+    "wiki_title": "Eslicarbazepine acetate",
+    "slug": "eslicarbazepine_acetate",
+    "own_article": false,
+    "found": true,
+    "from_parent": true,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [],
+    "pages": [
+      "eslicarbazepine_acetate"
+    ],
+    "pdsp_targets": []
   },
   {
     "metabolite": "Hydroxynorketamine",
@@ -1019,6 +1024,7 @@
     "unresolved_ki": [],
     "action_candidates": [
       "Licarbazepine is a voltage-gated sodium channel blocker with anticonvulsant and mood-stabilizing effects that is related to oxcarbazepine . It is an active metabolite of oxcarbazepine . In addition, an enantiomer of licarbazepine, eslicarbazepine (( S )-(+)-licarbazepine), is an active metabolite of eslicarbazepine acetate . Oxcarbazepine and eslicarbazepine acetate are inactive on their own, and behave instead as prodrugs to licarbazepine and eslicarbazepine, respectively, to produce their therapeutic effects.",
+      "Oxcarbazepine is a prodrug , which is largely metabolized to its pharmacologically active 10-monohydroxy derivative licarbazepine (sometimes abbreviated MHD ). Oxcarbazepine and MHD exert their action by blocking voltage-sensitive sodium channels, thus leading to the stabilization of hyper-excited neural membranes, suppression of repetitive neuronal firing and diminishment propagation of synaptic impulses. Furthermore, anticonvulsant effects of these compounds could be attributed to enhanced potassium conductance and modulation of high-voltage activated calcium channels.",
       "Both oxcarbazepine and licarbazepine were found to show anticonvulsant properties in seizure models done on animals. These compounds had protective functions whenever tonic extension seizures were induced electrically, but such protection was less apparent whenever seizures were induced chemically. There was no observable tolerance during a four weeks course of treatment with daily administration of oxcarbazepine or licarbazepine in electroshock test on mice and rats. Most of the antiepileptic activity can be attributed to licarbazepine. Aside from its reduction in side effects, it is presumed to have the same main mechanism as carbamazepine, sodium channel inhibition, and is generally used to treat the same conditions."
     ],
     "pages": [
@@ -2143,48 +2149,6 @@
     "pdsp_targets": []
   },
   {
-    "metabolite": "Oxymorphone",
-    "parents": [
-      "oxycodone"
-    ],
-    "key": "oxymorphone",
-    "wiki_title": "Oxymorphone",
-    "slug": "oxymorphone",
-    "own_article": true,
-    "found": true,
-    "from_parent": false,
-    "ki_bindings": [],
-    "unresolved_ki": [],
-    "action_candidates": [
-      "Oxymorphone , sold under the brand names Numorphan and Opana among others, is a highly potent opioid analgesic indicated for treatment of severe pain. Pain relief after injection begins after about 5–10 minutes; after oral administration it begins after about 30 minutes and lasts about 3–4 hours for immediate-release tablets and 12 hours for extended-release tablets. The elimination half-life of oxymorphone is much faster intravenously, and as such, the drug is most commonly used orally. Like oxycodone , which metabolizes to oxymorphone, oxymorphone has a high abuse potential.",
-      "Oxymorphone was developed in Germany in 1914. It was patented in 1955 and approved for medical use in 1959. In June 2017 the FDA asked Endo Pharmaceuticals to remove its product from the US market. This was in part due to the opioid epidemic in the US, and the fact that a 2012 reformulation failed to stop illicit injection of the drug. Endo responded by voluntarily removing Opana ER from the market a month later. Generic versions of extended-release oxymorphone, such as those manufactured by Amneal Pharmaceuticals , are still available in the US.",
-      "Oxymorphone elicits its effects by binding to and activating the μ-opioid receptor (MOR) and, to a much lesser extent, the δ-opioid receptor (DOR) and κ-opioid receptor (KOR). Its activity at the DOR may augment its action at the MOR. Oxymorphone is 10 times more potent than morphine.",
-      "In the United States, as of 2013 more than 12 million people abused opioid drugs at least once a year. In 2010, 16,652 deaths were related to opiate overdose, in 2015 this number increased to 33,091. In September 2013, new FDA labeling guidelines for long-acting and extended-release opioids required manufacturers to remove moderate pain as use indication, reserving the drug for \"pain severe enough to require daily, around-the-clock, long-term opioid treatment\" however it did not restrict physicians from prescribing opioids for moderate, \"as needed\" usage.",
-      "In June 2017, faced with the public health crisis, the opioid epidemic, the FDA asked Endo Pharmaceuticals to \"remove its opioid pain medication, reformulated Opana ER (oxymorphone hydrochloride), from the market\". In their 8 June 2017 press release they also noted that, this was the first time the FDA had taken steps to \"remove a currently marketed opioid pain medication from sale due to public health consequences of abuse.\" By 6 July 2017, Endo International voluntarily complied with the FDA removal request."
-    ],
-    "pages": [
-      "oxymorphone",
-      "oxycodone"
-    ],
-    "pdsp_targets": [
-      {
-        "target": "delta",
-        "ki_id": 36073,
-        "value_nm": 80.5
-      },
-      {
-        "target": "kappa",
-        "ki_id": 36083,
-        "value_nm": 61.6
-      },
-      {
-        "target": "mu",
-        "ki_id": 70674,
-        "value_nm": 11.0
-      }
-    ]
-  },
-  {
     "metabolite": "Psilocin",
     "parents": [
       "psilocybin"
@@ -2501,45 +2465,6 @@
       "chloral_hydrate"
     ],
     "pdsp_targets": []
-  },
-  {
-    "metabolite": "Dihydromorphine",
-    "parents": [
-      "dihydrocodeine"
-    ],
-    "key": "dihydromorphine",
-    "wiki_title": "Dihydromorphine",
-    "slug": "dihydromorphine",
-    "own_article": true,
-    "found": true,
-    "from_parent": false,
-    "ki_bindings": [],
-    "unresolved_ki": [],
-    "action_candidates": [
-      "Dihydromorphine acts as an agonist at the μ-opioid with a K i value of 2.5 nM compared to 4.9 nM of morphine , δ-opioid with a K i value of 137 nM compared to 273 nM of morphine and κ-opioid with a K i value of 223 nM compared to 227 nM of morphine. Dihydromorphine is therefore slightly more μ-selective than morphine. Agonism of the μ-opioid and δ-opioid receptors is largely responsible for the clinical effects of opioids like dihydromorphine, with the μ-agonism providing more analgesia than the δ.",
-      "Dihydrocodeine exerts its analgesic action through affinity to predominantly μ-opioid receptor and to lesser extent to κ-opioid receptor and δ-opioid receptor . A 1956 source states that 30 mg of subcutaneous dihydrocodeine is equianalgesic to 10 mg of morphine. Another source states that dihydrocodeine is twice as strong as codeine and the metabolite dihydromorphine is likewise twice as strong as morphine."
-    ],
-    "pages": [
-      "dihydromorphine",
-      "dihydrocodeine"
-    ],
-    "pdsp_targets": [
-      {
-        "target": "delta",
-        "ki_id": 3673,
-        "value_nm": 203.4
-      },
-      {
-        "target": "kappa",
-        "ki_id": 3675,
-        "value_nm": 83.8
-      },
-      {
-        "target": "mu",
-        "ki_id": 3399,
-        "value_nm": 1.7
-      }
-    ]
   },
   {
     "metabolite": "N-desmethylzolmitriptan",

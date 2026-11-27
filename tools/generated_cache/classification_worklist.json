@@ -1190,6 +1190,20 @@
      "qid": "3c722ce2"
     }
    ]
+  },
+  "nk1": {
+   "kind": "receptor",
+   "name": "NK1",
+   "wikipedia": "https://en.wikipedia.org/wiki/Tachykinin_receptor_1",
+   "values": {
+    "receptor_class": "metabotropic",
+    "sign": "excitatory",
+    "synaptic": "postsynaptic"
+   },
+   "need": [
+    "synaptic"
+   ],
+   "candidates": []
   }
  }
 }

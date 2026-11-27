@@ -21885,6 +21885,65 @@
    "wikipedia": "https://en.wikipedia.org/wiki/Sodium_channel",
    "candidates": [
     {
+     "corpus": "stahl_essential",
+     "page": 86,
+     "line": "For the psychopharmacologist, what is now of interest is the fact that various sodium channels may be the sites of action of several anticonvulsants, some of which have mood-stabilizing and pain-reducing properties.",
+     "effects": [
+      "seizures",
+      "anticonvulsant",
+      "analgesia"
+     ],
+     "qid": "4a8d19e3"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 352,
+     "line": "All tricyclic antidepressants block reuptake of norepinephrine and are antagonists at histamine 1 (H1), α1-adrenergic, and muscarinic cholinergic receptors; they also block voltagesensitive sodium channels (A, B, and C).",
+     "effects": [
+      "antidepressant"
+     ],
+     "qid": "18519659"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 352,
+     "line": "Tricyclic antidepressants also weakly block voltage-sensitive sodium channels in the heart and brain at therapeutic doses; in overdose, this action is thought to be the cause of coma and seizures due to central nervous system actions, and cardiac arrhythmias and cardiac arrest and death due to peripheral cardiac actions (Figure 7-68).",
+     "effects": [
+      "seizures",
+      "anticonvulsant",
+      "antidepressant"
+     ],
+     "qid": "81f4f7fe"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 353,
+     "line": "Tricyclic antidepressants block voltagesensitive sodium channels in the brain (top) and heart (bottom).",
+     "effects": [
+      "antidepressant"
+     ],
+     "qid": "9aa03700"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 366,
+     "line": "The hypothesized action of carbamazepine upon the α subunit of VSSCs (Figure 7-80) is different from the hypothesized actions of valproate on these sodium channels (Figure 7-76), but may be similar to how the anticonvulsants oxcarbazepine and its active metabolite eslicarbazepine also act.",
+     "effects": [
+      "seizures",
+      "anticonvulsant"
+     ],
+     "qid": "9cf76ba4"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 606,
+     "line": "Benarroch EE (2007) Sodium channels and pain. _Neurology_",
+     "effects": [
+      "analgesia"
+     ],
+     "qid": "a020222a"
+    },
+    {
      "corpus": "gtopdb_function",
      "page": 578,
      "line": "Nav1.1 (SCN1A), GtoPdb target 578 | pathophysiology: Generalized epilepsy with febrile seizures plus, type 2; GEFSP2 | drugs: Treated with anti-epileptic drugs.",
@@ -21901,6 +21960,66 @@
    "name": "Voltage-gated calcium channel",
    "wikipedia": "https://en.wikipedia.org/wiki/Voltage-gated_calcium_channel",
    "candidates": [
+    {
+     "corpus": "stahl_essential",
+     "page": 87,
+     "line": "This channel exists not only in the central nervous system, where its functions are still being clarified, but also on vascular smooth muscle where it regulates blood pressure and where a group of drugs known as dihydropyridine “calcium channel blockers” interact as therapeutic antihypertensives to lower blood pressure.",
+     "effects": [
+      "cardiovascular"
+     ],
+     "qid": "f0cdb53f"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 348,
+     "line": "Ketamine is an NMDA receptor antagonist; however, its rapid antidepressant effects may also be related to indirect effects on AMPA receptor signaling. (A) A second hypothesis is that blockade of the NMDA receptor leads to rapid activation of AMPA, which activates voltage-sensitive calcium channels (VSCCs) to allow calcium influx. (B) This in turn would lead to activation of brainderived neurotrophic factor (BDNF) and VEGF (vascular endothelial growth factor) release, which bind to TRKB and FLK1 receptors, respectively, triggering cascades that induce dendritic spine formation.",
+     "effects": [
+      "antidepressant"
+     ],
+     "qid": "df315734"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 396,
+     "line": "(serotonin–norepinephrine reuptake inhibitors, discussed in Chapter 7 on treatment for mood disorders [Figures 7-28 through 7-33]) and the α2δ ligands (anticonvulsants that block voltage-gated calcium channels or VSCCs, discussed in Chapter 8 on anxiety disorders [Figures 8-17 and 8-18]).",
+     "effects": [
+      "anxiety",
+      "seizures",
+      "anticonvulsant",
+      "anxiolytic"
+     ],
+     "qid": "562a93dd"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 413,
+     "line": "In other words, this can lead to neuropathic pain. (B) Alpha-2-delta ligands such as gabapentin or pregabalin bind to the α2δ subunit of voltage-sensitive calcium channels (VSCCs), changing their conformation to reduce calcium influx and therefore reduce excessive stimulation of postsynaptic receptors.",
+     "effects": [
+      "analgesia"
+     ],
+     "qid": "cf68a03f"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 414,
+     "line": "**Figure 9-17** Anatomic actions of α2δ ligands. (A) Alpha-2-delta ligands may bind to voltage-sensitive calcium channels in the dorsal horn to reduce excitatory neurotransmission and alleviate pain. (B) Alpha-2-delta ligands may also bind to voltage-sensitive calcium channels in the thalamus and cortex to reduce excitatory neurotransmission and alleviate pain.",
+     "effects": [
+      "analgesia"
+     ],
+     "qid": "9b5c92de"
+    },
+    {
+     "corpus": "stahl_essential",
+     "page": 416,
+     "line": "The critical role of voltage-sensitive calcium channels (VSCCs) is also explained, providing the basis for the actions of α2δ ligands as agents that also reduce the perception of pain in diabetic peripheral neuropathic pain, fibromyalgia, painful physical symptoms of depression and anxiety disorders, shingles, and other neuropathic pain conditions.",
+     "effects": [
+      "anxiety",
+      "anxiolytic",
+      "antidepressant",
+      "analgesia"
+     ],
+     "qid": "cc1f3023"
+    },
     {
      "corpus": "gtopdb_function",
      "page": 532,
