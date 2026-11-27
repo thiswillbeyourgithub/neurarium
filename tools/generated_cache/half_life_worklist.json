@@ -6129,5 +6129,271 @@
     "qid": "b72ac4b4"
    }
   ]
+ },
+ "palonosetron": {
+  "name": "Palonosetron",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "palonosetron",
+    "line": "Elimination half-life | Approximately 40–50 hours",
+    "durations": [
+     {
+      "hours": 40.0,
+      "hours_max": 50.0
+     }
+    ],
+    "qid": "1fbaf572"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "palonosetron",
+    "line": "Biological half-life in healthy persons was 37±12 hours in a study, and 48±19 hours in cancer patients.",
+    "durations": [
+     {
+      "hours": 12.0
+     },
+     {
+      "hours": 19.0
+     }
+    ],
+    "qid": "f04816e1"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "palonosetron",
+    "line": "In 10% of patients, half-life is over 100 hours.",
+    "durations": [
+     {
+      "hours": 100.0
+     }
+    ],
+    "qid": "116c72d2"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "palonosetron",
+    "line": "Most other marketed setrons have half-lives in the range of about two to 15 hours.",
+    "durations": [
+     {
+      "hours": 15.0
+     }
+    ],
+    "qid": "4468d73b"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "d53aad46-1dc6-4b09-a44c-8c175ffa53e6",
+    "line": "After a single dose of AKYNZEO capsules, netupitant is eliminated from the body in a multi-exponential fashion and the mean ± SD of apparent elimination half-life was of 96 ± 59 hours in healthy subjects and 80 ± 29 hours in cancer patients.",
+    "durations": [
+     {
+      "hours": 59.0
+     },
+     {
+      "hours": 29.0
+     }
+    ],
+    "qid": "1536e8e9"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "d53aad46-1dc6-4b09-a44c-8c175ffa53e6",
+    "line": "In patients, following intravenous infusion of AKYNZEO for injection, the mean ± SD total body clearance (CL) and terminal half-life (t 1/2 ) of netupitant were 14.1 ± 5.3 L/h and 144 ± 73 hours, respectively.",
+    "durations": [
+     {
+      "hours": 73.0
+     }
+    ],
+    "qid": "b92a46f5"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "d53aad46-1dc6-4b09-a44c-8c175ffa53e6",
+    "line": "Following oral administration of AKYNZEO capsules in healthy subjects and cancer patients, the mean ( ± SD) of half-life of palonosetron was 44 ± 15 hours and 50 ± 16 hours, respectively, whereas the mean ± SD of total body clearance (CL/F) was 9.6 ± 2.7 L/h and 10.0 ± 3.4 L/h, respectively.",
+    "durations": [
+     {
+      "hours": 15.0
+     },
+     {
+      "hours": 16.0
+     }
+    ],
+    "qid": "8ec53b1f"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "d53aad46-1dc6-4b09-a44c-8c175ffa53e6",
+    "line": "The mean ± SD of terminal elimination half-life and systemic plasma clearance (CL) of fosnetupitant were respectively 0.75 ± 0.40 hours and 249 ± 270 L/h in cancer patients after a single IV dose of AKYNZEO.",
+    "durations": [
+     {
+      "hours": 0.4
+     }
+    ],
+    "qid": "298c4cc5"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "67044648",
+    "line": "Après une administration intraveineuse, la diminution initiale des concentrations plasmatiques est suivie d'une élimination corporelle lente, avec une demi-vie d'élimination terminale de 40 heures environ.",
+    "durations": [
+     {
+      "hours": 40.0
+     }
+    ],
+    "qid": "cfe6e0f0"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "67044648",
+    "line": "La faible clairance corporelle totale et l’important volume de distribution se sont traduits par une demi-vie plasmatique d'élimination terminale de 40 heures environ.",
+    "durations": [
+     {
+      "hours": 40.0
+     }
+    ],
+    "qid": "50684777"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "67044648",
+    "line": "Chez 10 % des patients, la demi-vie d'élimination terminale moyenne a été supérieure à 100 heures.",
+    "durations": [
+     {
+      "hours": 100.0
+     }
+    ],
+    "qid": "dc4e3431"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "67044648",
+    "line": "Après administration d’une dose de 20 μg/kg, la demi-vie médiane était de 29,5 heures dans la population totale et allait de 20 à 30 heures selon les tranches d’âge.",
+    "durations": [
+     {
+      "hours": 29.5
+     },
+     {
+      "hours": 20.0,
+      "hours_max": 30.0
+     }
+    ],
+    "qid": "ea8cf994"
+   }
+  ]
+ },
+ "tropisetron": {
+  "name": "Tropisetron",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "tropisetron",
+    "line": "Elimination half-life | 6–8 hours",
+    "durations": [
+     {
+      "hours": 6.0,
+      "hours_max": 8.0
+     }
+    ],
+    "qid": "69dd7303"
+   }
+  ]
+ },
+ "metopimazine": {
+  "name": "Metopimazine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "metopimazine",
+    "line": "The maximum plasma concentration (Cmax) of metopimazine is reached approximately 60 minutes after oral administration, and the elimination half-life is approximately two hours.",
+    "durations": [
+     {
+      "hours": 1.0
+     }
+    ],
+    "qid": "ffd0cc1c"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "61183089",
+    "line": "La demi-vie d'élimination du produit est de l'ordre de 4 h 30.",
+    "durations": [
+     {
+      "hours": 4.5
+     }
+    ],
+    "qid": "c027f495"
+   }
+  ]
+ },
+ "alizapride": {
+  "name": "Alizapride",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "alizapride",
+    "line": "Elimination half-life | 3 hours",
+    "durations": [
+     {
+      "hours": 3.0
+     }
+    ],
+    "qid": "204b2716"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "alizapride",
+    "line": "It has a plasma half-life of 3 hours.",
+    "durations": [
+     {
+      "hours": 3.0
+     }
+    ],
+    "qid": "553bb48c"
+   }
+  ]
+ },
+ "cyclizine": {
+  "name": "Cyclizine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "cyclizine",
+    "line": "Elimination half-life | 20 hours",
+    "durations": [
+     {
+      "hours": 20.0
+     }
+    ],
+    "qid": "80685047"
+   }
+  ]
+ },
+ "chlorphenamine": {
+  "name": "Chlorphenamine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "chlorphenamine",
+    "line": "Elimination half-life | 13.9–43.4 hours",
+    "durations": [
+     {
+      "hours": 13.9,
+      "hours_max": 43.4
+     }
+    ],
+    "qid": "06abcfc6"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "chlorphenamine",
+    "line": "The elimination half-life of chlorphenamine has variously ranged between 13.9 and 43.4 hours in adults following a single dose in clinical studies.",
+    "durations": [
+     {
+      "hours": 43.4
+     }
+    ],
+    "qid": "4ece89be"
+   }
+  ]
  }
 }

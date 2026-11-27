@@ -5324,5 +5324,139 @@
     "qid": "4bab2bfc"
    }
   ]
+ },
+ "palonosetron": {
+  "name": "Palonosetron",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "d53aad46-1dc6-4b09-a44c-8c175ffa53e6",
+    "line": "Upon single oral administration of AKYNZEO capsules to healthy subjects and patients, netupitant and palonosetron were measurable within 1 hour after administration and reached the maximum concentration (Cmax) in approximately 4 to 5 hours (Table 8).",
+    "durations": [
+     {
+      "hours": 1.0
+     },
+     {
+      "hours": 4.0,
+      "hours_max": 5.0
+     }
+    ],
+    "qid": "26117480"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "d53aad46-1dc6-4b09-a44c-8c175ffa53e6",
+    "line": "In cancer patients who received a single dose of AKYNZEO capsules 1 hour prior to chemotherapy (docetaxel, etoposide, or cyclophosphamide), the C max and the area under the concentration-time curve from time zero to infinity (AUC inf ) of netupitant and its metabolites were similar to those in healthy subjects.",
+    "durations": [
+     {
+      "hours": 1.0
+     }
+    ],
+    "qid": "d5de85f7"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "d53aad46-1dc6-4b09-a44c-8c175ffa53e6",
+    "line": "Following single intravenous doses of AKYNZEO for injection in patients or fosnetupitant in healthy subjects, C max of netupitant and palonosetron were achieved at the end of the 30-minute infusion (Table 9).",
+    "durations": [
+     {
+      "hours": 0.5
+     }
+    ],
+    "qid": "e4a5a034"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "d53aad46-1dc6-4b09-a44c-8c175ffa53e6",
+    "line": "The median t max for metabolite M2 was 5 hours and was about 17 to 32 hours for metabolites M1 and M3, respectively.",
+    "durations": [
+     {
+      "hours": 5.0
+     },
+     {
+      "hours": 17.0,
+      "hours_max": 32.0
+     }
+    ],
+    "qid": "48577656"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "d53aad46-1dc6-4b09-a44c-8c175ffa53e6",
+    "line": "Following single intravenous doses of AKYNZEO for injection in patients (235 mg fosnetupitant and 0.25 mg palonosetron infused in 30 minutes) or fosnetupitant in healthy subjects (235 mg fosnetupitant infused in 30 minutes), maximum concentrations of fosnetupitant were achieved at the end of the 30-minute infusion (Table 11).",
+    "durations": [
+     {
+      "hours": 0.5
+     },
+     {
+      "hours": 0.5
+     },
+     {
+      "hours": 0.5
+     }
+    ],
+    "qid": "4af1b1c5"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "d53aad46-1dc6-4b09-a44c-8c175ffa53e6",
+    "line": "The median t max for M1, M2, and M3 were 12, 2 and 12 hours, respectively.",
+    "durations": [
+     {
+      "hours": 12.0
+     }
+    ],
+    "qid": "47c661d5"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "67044648",
+    "line": "Après une perfusion intraveineuse unique de palonosétron 20 μg/kg, les concentrations plasmatiques maximales (CT) observées à la fin de la perfusion de 15 minutes ont été très variables dans toutes les tranches d’âge et avaient tendance à être plus faibles chez les patients âgés de moins de 6 ans que chez les patients pédiatriques plus âgés.",
+    "durations": [
+     {
+      "hours": 0.25
+     }
+    ],
+    "qid": "19528987"
+   }
+  ]
+ },
+ "metopimazine": {
+  "name": "Metopimazine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "metopimazine",
+    "line": "The maximum plasma concentration (Cmax) of metopimazine is reached approximately 60 minutes after oral administration, and the elimination half-life is approximately two hours.",
+    "durations": [
+     {
+      "hours": 1.0
+     }
+    ],
+    "qid": "ffd0cc1c"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "metopimazine",
+    "line": "Metopimazine is rapidly metabolized to metopimazine acid (Tmax ~2 hours), its major metabolite in humans.",
+    "durations": [
+     {
+      "hours": 2.0
+     }
+    ],
+    "qid": "01dd0985"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "61183089",
+    "line": "Après administration orale, le pic plasmatique est atteint en 30 minutes.",
+    "durations": [
+     {
+      "hours": 0.5
+     }
+    ],
+    "qid": "e0b0d404"
+   }
+  ]
  }
 }

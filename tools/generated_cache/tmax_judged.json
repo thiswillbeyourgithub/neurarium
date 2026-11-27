@@ -930,5 +930,10 @@
   "hours": 2.0,
   "hours_max": 3.0,
   "qid": "4bab2bfc"
+ },
+ "metopimazine": {
+  "index": 0,
+  "hours": 1.0,
+  "qid": "ffd0cc1c"
  }
 }

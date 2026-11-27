@@ -325,5 +325,38 @@
   "hours": 2.3,
   "index": 0,
   "qid": "2c2cea6f"
+ },
+ "palonosetron": {
+  "hours": 40.0,
+  "hours_max": 50.0,
+  "index": 0,
+  "qid": "1fbaf572"
+ },
+ "tropisetron": {
+  "hours": 6.0,
+  "hours_max": 8.0,
+  "index": 0,
+  "qid": "69dd7303"
+ },
+ "metopimazine": {
+  "hours": 4.5,
+  "index": 1,
+  "qid": "c027f495"
+ },
+ "alizapride": {
+  "hours": 3.0,
+  "index": 1,
+  "qid": "553bb48c"
+ },
+ "cyclizine": {
+  "hours": 20.0,
+  "index": 0,
+  "qid": "80685047"
+ },
+ "chlorphenamine": {
+  "hours": 13.9,
+  "hours_max": 43.4,
+  "index": 0,
+  "qid": "06abcfc6"
  }
 }
