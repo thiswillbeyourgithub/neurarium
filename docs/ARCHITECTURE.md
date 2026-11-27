@@ -172,8 +172,8 @@ catch-all `sources` block. The exact field list of each file is in tools/README.
 pairs share a single right-side file; the left member reflects it). Shape types:
 `blob` (a noise-deformed ellipsoid), `curve` (a tube swept along a spline),
 `composite` (several sub-shapes merged), and `sdf` (an authored signed-distance
-atlas meshed via marching cubes, replacing the procedural forms one structure at a
-time; see the `geometry_refinements/` effort in CLAUDE.md).
+atlas meshed via marching cubes, the form most structures now use; the refinement effort that
+authored them is complete and archived out of the repo).
 
 ### Viewer: `public/`
 
@@ -332,12 +332,6 @@ The per-file detail behind CLAUDE.md's one-line file map. Section names cited as
 
 **The `tools/` script reference and the emitted-data field contract (`public/data/` `.jsonl` / `meta.json` / `shapes/*.json` fields) live in [`tools/README.md`](../tools/README.md)** (Tool reference + Data contract). The generator layout is under Authoring above (plus the `genes` and `quote_table` modules of `tools/data_generators/`). Each geometry form is one `data/shapes/<name>.json` (`blob`/`curve`/`composite`, L/R pairs share one right-side file via `mirror:true`). The author-side scripts are grouped: external-data fetchers under `tools/fetch/`, provenance appliers under `tools/sourcing/`; their generated caches in `tools/generated_cache/`. Run them from the repo root (`python tools/fetch/<x>.py`).
 
-> [!NOTE]
-> An ongoing effort under `geometry_refinements/` (its own `CLAUDE.md` +
-> `STATUS.md`, auto-loaded only when working there) is replacing the procedural
-> blob/curve/composite shapes with a self-authored SDF atlas, one structure at a time. It
-> adds an `sdf` shape type. Before editing `data/shapes/*` or `shapes.js`
-> geometry, check its `STATUS.md` so two sessions don't collide.
 
 Viewer (`public/`):
 

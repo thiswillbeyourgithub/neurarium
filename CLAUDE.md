@@ -94,7 +94,6 @@ Full detail (principles, data flow, module graph, boot sequence, per-file map): 
 
 - `public/` is the only web-exposed dir; `docker/`, `tools/` (fetch/, sourcing/, lib/ (shared libraries, never scripts), generated_cache/; see [`tools/README.md`](tools/README.md)), `.env` are never reachable. Generated `public/data/` is committed.
 - Symmetric regions + projections are authored once on the right (`mirror: true`) and reflected by the consumer (`js/data.js`, `check_data.py`), so one pathway = one node.
-- Check `geometry_refinements/STATUS.md` before editing `data/shapes/*` or `shapes.js` geometry.
 - `sw.js` always revalidates conditionally (not stale-while-revalidate); bump `CACHE` when caching logic changes.
 - Caddy `encode` uses an explicit content-type list (a new asset type ships uncompressed until added) and pins `.webmanifest`/`.jsonl` types.
 - SEO canonical / `og:url` / `og:image` / JSON-LD URLs are hardcoded (4 spots in `index.html` + `sitemap.xml`/`robots.txt` + `llms_txt.SITE_URL`; the drugs map's in `drugs-map.html` + `js/drug-map/site.js` `NEURARIUM_URL` + `DRUGSMAP_HOST` + `REPO_URL`, the latter also `llms_txt.REPO_URL`).

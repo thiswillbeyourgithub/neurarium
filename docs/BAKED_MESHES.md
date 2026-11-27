@@ -69,8 +69,8 @@ python tools/check_data.py           # family 11, same hash comparison
 
 Re-bake with `node tools/bake_meshes.mjs` (run after `generate_data.py`, since it reads the
 emitted `public/data/structures.jsonl`). A missing bake is a **warning**, not an error: the
-fallback is correct, only slow. This is what keeps `tools/serve.py` and the
-`geometry_refinements/` loop working on a tree that has not been re-baked.
+fallback is correct, only slow. This is what keeps `tools/serve.py` and a
+shape-sculpting loop (`tools/sculpt_shot.py`) working on a tree that has not been re-baked.
 
 ## Serving
 

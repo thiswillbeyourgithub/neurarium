@@ -5,8 +5,8 @@
 # ///
 """Render one structure from several angles into a labeled contact sheet.
 
-This is the eye of the geometry_refinements refine loop (see
-``geometry_refinements/CLAUDE.md``): author/adjust a structure's SDF spec,
+This is the eye of a shape-refinement loop (the original effort is archived; its
+working dir ``geometry_refinements/`` is recreated on demand): author/adjust a structure's SDF spec,
 regenerate the data, then run this to *see* the result from front / right / top /
 iso at once and critique it against the reference images.
 

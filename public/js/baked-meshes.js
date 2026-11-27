@@ -5,7 +5,7 @@
 // the app: a missing manifest, an unknown format version, a failed file, a
 // corrupt buffer, all just mean "no baked mesh for that shape", and js/main.js
 // meshes whatever is missing at runtime through the SDF worker pool exactly as
-// before. That keeps `tools/serve.py` and the geometry_refinements loop working
+// before. That keeps `tools/serve.py` and a shape-sculpting loop working
 // on a tree that has not been re-baked, and it means a bad deploy degrades to
 // slow rather than to blank.
 //

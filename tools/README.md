@@ -871,5 +871,5 @@ reflects it across x. Three types:
   round-capped tapered tube swept along a spline (caudate; brainstem levels
   midbrain/pons/medulla).
 - `composite` `{parts:[...]}` — sub-shapes (each optional offset/scale/rotate)
-  merged into one mesh (cerebellum = 2 hemispheres + vermis). The `sdf` type (SDF atlas,
-  under `geometry_refinements/`) is documented there; see CLAUDE.md's geometry note.
+  merged into one mesh (cerebellum = 2 hemispheres + vermis). The `sdf` type (SDF atlas)
+  is documented in `public/js/sdf.js`.

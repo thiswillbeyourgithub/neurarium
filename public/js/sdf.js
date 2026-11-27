@@ -18,7 +18,7 @@
 // Why SDF: it is the only medium that does *smooth-union* (melting the cortical
 // lobes of a hemisphere into one continuous surface with soft valleys, instead of
 // a bunch of separate balls), while also carving thin shells and reading as
-// organic form. See geometry_refinements/CLAUDE.md for the whole effort.
+// organic form.
 //
 // Coordinate convention is neurarium's: x left(-)/right(+), y down(-)/up(+),
 // z posterior(-)/anterior(+); brain centered on the origin; arbitrary units.

@@ -5,7 +5,7 @@
 // import map and therefore cannot resolve the bare "three" specifier. Keeping the
 // noise here, dependency-free, is what lets the worker reuse the exact same fold
 // field the main-thread blob/SDF builders use (no duplicated Perlin, identical
-// surfaces). See js/sdf-worker.js and geometry_refinements/.
+// surfaces). See js/sdf-worker.js.
 
 // Cheap deterministic integer hash -> uint32, seeded so each structure's surface
 // is unique but stable. Shared by the gradient picker below.
