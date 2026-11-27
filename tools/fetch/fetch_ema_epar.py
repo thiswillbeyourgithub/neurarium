@@ -171,11 +171,15 @@ def _load_table(path: Path, url: str, refresh: bool) -> list[dict]:
 # Loads justelesRCP's converter by path and runs it on stdin: the body of the isolated
 # child :meth:`Epar.convert` spawns (argv[1] = the converter's path).
 _CONVERT_CHILD = (
-    "import importlib.util, json, sys\n"
+    "import importlib.util, json, os, sys\n"
+    "out = os.fdopen(os.dup(1), 'w')\n"
+    "os.dup2(2, 1)\n"
+    "sys.path.insert(0, os.path.dirname(sys.argv[1]))\n"
     "spec = importlib.util.spec_from_file_location('justelesrcp_ema_pdf', sys.argv[1])\n"
     "mod = importlib.util.module_from_spec(spec)\n"
     "spec.loader.exec_module(mod)\n"
-    "json.dump(mod.convert(sys.stdin.buffer.read()), sys.stdout)\n"
+    "json.dump(mod.convert(sys.stdin.buffer.read()), out)\n"
+    "out.close()\n"
 )
 
 
@@ -204,8 +208,10 @@ class Epar:
     def convert(self, pdf: bytes) -> dict:
         """justelesRCP's ``src/ema_pdf.convert`` over ``pdf`` (needs pymupdf: ``uv run
         --with pymupdf``), run in a ``python -I`` child: the sibling checkout is not ours,
-        so it never shares this process, and isolation keeps its directory (or ours) off
-        the child's import path. The PDF goes in on stdin, the ``{html, date}`` dict comes
+        so it never shares this process, and isolation keeps ours (and the cwd) off the
+        child's import path; only the converter's own ``src/`` is added, for its sibling
+        imports (``from bdpm import ...``). MuPDF prints its warnings on fd 1, so the
+        child points fd 1 at stderr and writes the JSON to a private dup of stdout. The PDF goes in on stdin, the ``{html, date}`` dict comes
         back as JSON; a failing converter raises with its stderr tail."""
         path = self.justelesrcp / "src" / "ema_pdf.py"
         proc = subprocess.run([sys.executable, "-I", "-c", _CONVERT_CHILD, str(path)],

@@ -14,6 +14,7 @@ Built with the help of Claude Code.
 """
 
 import json
+import os
 import sys
 import tempfile
 import unittest
@@ -173,27 +174,37 @@ class PageBuilderTest(unittest.TestCase):
 
 class ConverterIsolationTest(unittest.TestCase):
     """Regression: the sibling converter ran in-process; it now runs in a ``python -I``
-    child, so neither its directory nor ours is on the child's import path."""
+    child, so the caller's cwd is off the child's import path, while the converter's own
+    ``src/`` is on it (it imports its sibling ``bdpm``). MuPDF prints warnings on fd 1,
+    which must not corrupt the JSON reply."""
 
     def test_converter_runs_in_an_isolated_child(self):
-        with tempfile.TemporaryDirectory() as tmp:
+        with tempfile.TemporaryDirectory() as tmp, tempfile.TemporaryDirectory() as cwd:
             src = Path(tmp, "src")
             src.mkdir()
-            # A planted module next to the converter: an un-isolated import would load it.
-            (src / "planted.py").write_text("LOADED = True\n", encoding="utf-8")
+            (src / "sibling.py").write_text("OK = True\n", encoding="utf-8")
+            # A planted module in the caller's cwd: an un-isolated child would load it.
+            Path(cwd, "planted.py").write_text("LOADED = True\n", encoding="utf-8")
             (src / "ema_pdf.py").write_text(
-                "import sys\n"
+                "import os, sys\n"
+                "from sibling import OK\n"
                 "def convert(pdf):\n"
+                "    os.write(1, b'MuPDF error: format error\\n')\n"
+                "    print('noise')\n"
                 "    try:\n"
                 "        import planted  # noqa: F401\n"
                 "        shadowed = True\n"
                 "    except ImportError:\n"
                 "        shadowed = False\n"
                 "    return {'html': str(sys.flags.isolated), 'date': str(shadowed),\n"
-                "            'n': len(pdf)}\n", encoding="utf-8")
+                "            'n': len(pdf), 'sibling': OK}\n", encoding="utf-8")
             epar = E.Epar.__new__(E.Epar)
             epar.justelesrcp = Path(tmp)
-            self.assertEqual(epar.convert(b"%PDF-1.4"), {"html": "1", "date": "False", "n": 8})
+            here = os.getcwd()
+            os.chdir(cwd)
+            self.addCleanup(os.chdir, here)
+            self.assertEqual(epar.convert(b"%PDF-1.4"),
+                             {"html": "1", "date": "False", "n": 8, "sibling": True})
 
     def test_a_failing_converter_raises(self):
         with tempfile.TemporaryDirectory() as tmp:
