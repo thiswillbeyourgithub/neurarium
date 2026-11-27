@@ -8629,6 +8629,13 @@
      "line": "In the United States, the Food and Drug Administration (FDA) approved naratriptan on February 11, 1998.",
      "context": "Naratriptan was patented in 1987 and was introduced for medical use in 1997.",
      "qid": "5c11b7d9"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "naratriptan",
+     "line": "Le naratriptan a été breveté en 1987 et approuvé pour un usage médical en 1997 .",
+     "context": "L’innocuité pendant la grossesse n’est pas clairement établie.",
+     "qid": "53f456f8"
     }
    ]
   },
@@ -8648,6 +8655,13 @@
      "line": "Almotriptan was patented in 1992 and was approved for medical use in 2000.",
      "context": "It was discovered and developed by Almirall-Prodesfarma .",
      "qid": "a77b88e2"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "almotriptan",
+     "line": "Le médicament a été breveté en 1992 et approuvé pour un usage médical en 2000 .",
+     "context": "L'almotriptan est un médicament antimigraineux de type triptan .",
+     "qid": "f6988838"
     }
    ]
   },
@@ -8700,6 +8714,13 @@
      "line": "Rayvow was approved for medical use in the European Union in August 2022.",
      "context": "The applicant for this medicinal product is Eli Lilly Nederland B.V.",
      "qid": "33ae18f3"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "lasmiditan",
+     "line": "Le médicament a été approuvé pour un usage médical aux États-Unis en 2019 .",
+     "context": "Le Lasmiditan est un médicament antimigraineux vendu sous le nom de marque Reyvow .",
+     "qid": "5246f094"
     }
    ]
   }
