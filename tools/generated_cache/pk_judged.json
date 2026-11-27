@@ -1736,5 +1736,21 @@
     "name": "Dihydromorphine"
    }
   ]
+ },
+ "zolmitriptan": {
+  "metabolites": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "zolmitriptan",
+    "quote": "Zolmitriptan's major metabolite , N -desmethylzolmitriptan (183C91), is also active and has about 2- to 6-fold the affinity of zolmitriptan for the serotonin 5-HT 1B and 5-HT 1D receptors.",
+    "name": "N-desmethylzolmitriptan",
+    "half_life": {
+     "hours": 3.5,
+     "corpus": "wikipedia_pharm",
+     "page": "zolmitriptan",
+     "quote": "Elimination half-life | Zolmitriptan: 3 hours N -Desmethylzolmitriptan: 3.5 hours"
+    }
+   }
+  ]
  }
 }

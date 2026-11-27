@@ -2540,5 +2540,27 @@
         "value_nm": 1.7
       }
     ]
+  },
+  {
+    "metabolite": "N-desmethylzolmitriptan",
+    "parents": [
+      "zolmitriptan"
+    ],
+    "key": "n_desmethylzolmitriptan",
+    "wiki_title": "Zolmitriptan",
+    "slug": "zolmitriptan",
+    "own_article": false,
+    "found": true,
+    "from_parent": true,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [
+      "Following administration of the non-selective cytochrome P450 inhibitor cimetidine , the elimination half-life and total exposure of zolmitriptan and its active metabolite were approximately doubled. The major metabolite of zolmitriptan, N -desmethylzolmitriptan (183C91), which is active and has several-fold greater affinity for the serotonin 5-HT 1B and 5-HT 1D receptors than zolmitriptan, is metabolized into an inactive form by monoamine oxidase A (MAO-A). The reversible inhibitor of MAO-A (RIMA) moclobemide combined with zolmitriptan has been found to increase N -desmethylzolmitriptan exposure and peak levels by 1.5- to 3-fold.",
+      "Zolmitriptan's major metabolite , N -desmethylzolmitriptan (183C91), is also active and has about 2- to 6-fold the affinity of zolmitriptan for the serotonin 5-HT 1B and 5-HT 1D receptors."
+    ],
+    "pages": [
+      "zolmitriptan"
+    ],
+    "pdsp_targets": []
   }
 ]

@@ -65,3 +65,4 @@
 {"id": "meprobamate", "name": "Meprobamate", "drug_id": "meprobamate"}
 {"id": "phenytoin", "name": "Phenytoin", "drug_id": "phenytoin"}
 {"id": "aprepitant", "name": "Aprepitant", "drug_id": "aprepitant"}
+{"id": "n_desmethylzolmitriptan", "name": "N-desmethylzolmitriptan", "half_life": {"hours": 3.5}, "half_life_sources": [{"corpus": "wikipedia_pharm", "page": "zolmitriptan", "quote": "Elimination half-life | Zolmitriptan: 3 hours N -Desmethylzolmitriptan: 3.5 hours", "provenance": "verified"}]}
