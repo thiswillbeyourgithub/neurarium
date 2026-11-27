@@ -1876,6 +1876,46 @@
     "value": 4.3
    }
   },
+  "carisoprodol": {
+   "bbb": {
+    "label": "BBB+",
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "2576",
+      "provenance": "verified",
+      "quote": "B3DB row 5690: carisoprodol | CID 2576 | logBB - | BBB+ | group C | references R23, R37"
+     }
+    ]
+   },
+   "cid": 2576,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "2576",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 90.7 Å²"
+     }
+    ],
+    "value": 90.7
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "2576",
+      "provenance": "verified",
+      "quote": "XLogP3: 1.9"
+     }
+    ],
+    "value": 1.9
+   }
+  },
   "carpipramine": {
    "bbb": {
     "label": "BBB+",
@@ -1914,6 +1954,33 @@
      }
     ],
     "value": 4.5
+   }
+  },
+  "cenobamate": {
+   "cid": 11962412,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "11962412",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 95.9 Å²"
+     }
+    ],
+    "value": 95.9
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "11962412",
+      "provenance": "verified",
+      "quote": "XLogP3: 1.5"
+     }
+    ],
+    "value": 1.5
    }
   },
   "chloral_hydrate": {
@@ -3934,6 +4001,47 @@
      }
     ],
     "value": 3.0
+   }
+  },
+  "felbamate": {
+   "bbb": {
+    "label": "BBB+",
+    "logbb": -0.19,
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "3331",
+      "provenance": "verified",
+      "quote": "B3DB row 417: felbamate | CID 3331 | logBB -0.19 | BBB+ | group A | references R18, R26, R27"
+     }
+    ]
+   },
+   "cid": 3331,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "3331",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 105 Å²"
+     }
+    ],
+    "value": 105.0
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "3331",
+      "provenance": "verified",
+      "quote": "XLogP3: 0.6"
+     }
+    ],
+    "value": 0.6
    }
   },
   "fenfluramine": {
@@ -7475,6 +7583,33 @@
     "value": 2.3
    }
   },
+  "opicapone": {
+   "cid": 135565903,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "135565903",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 151 Å²"
+     }
+    ],
+    "value": 151.0
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "135565903",
+      "provenance": "verified",
+      "quote": "XLogP3: 3.4"
+     }
+    ],
+    "value": 3.4
+   }
+  },
   "opipramol": {
    "bbb": {
     "label": "BBB+",
@@ -9788,6 +9923,46 @@
     "value": 4.9
    }
   },
+  "rufinamide": {
+   "bbb": {
+    "label": "BBB+",
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "129228",
+      "provenance": "verified",
+      "quote": "B3DB row 2300: rufinamide | CID 129228 | logBB - | BBB+ | group B | references R1, R13, R19, R6, R23, R24, R27, R27, R27, R30, R30"
+     }
+    ]
+   },
+   "cid": 129228,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "129228",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 73.8 Å²"
+     }
+    ],
+    "value": 73.8
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "129228",
+      "provenance": "verified",
+      "quote": "XLogP3: 0.7"
+     }
+    ],
+    "value": 0.7
+   }
+  },
   "safinamide": {
    "cid": 131682,
    "tpsa": {
@@ -10644,6 +10819,33 @@
     "value": 7.0
    }
   },
+  "thiocolchicoside": {
+   "cid": 72067,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "72067",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 189 Å²"
+     }
+    ],
+    "value": 189.0
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "72067",
+      "provenance": "verified",
+      "quote": "XLogP3: -0.4"
+     }
+    ],
+    "value": -0.4
+   }
+  },
   "thioridazine": {
    "bbb": {
     "label": "BBB+",
@@ -10950,6 +11152,33 @@
      }
     ],
     "value": 3.3
+   }
+  },
+  "tolperisone": {
+   "cid": 5511,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "5511",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 20.3 Å²"
+     }
+    ],
+    "value": 20.3
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "5511",
+      "provenance": "verified",
+      "quote": "XLogP3: 3.4"
+     }
+    ],
+    "value": 3.4
    }
   },
   "topiramate": {
