@@ -55,5 +55,13 @@ class AliasEnantiomerTest(unittest.TestCase):
         self.assertFalse(bad, "aliasing a racemate onto one enantiomer leaks its assays")
 
 
+class SlugifyTest(unittest.TestCase):
+    def test_enantiomer_and_racemate_get_distinct_pages(self):
+        # "(-)-methadone" used to slug to "methadone" and overwrite the racemate's page.
+        self.assertEqual(gk.slugify("methadone"), "methadone")
+        self.assertEqual(gk.slugify("(-)-methadone"), "minus-methadone")
+        self.assertEqual(gk.slugify("(+)-propranolol"), "plus-propranolol")
+
+
 if __name__ == "__main__":
     unittest.main()

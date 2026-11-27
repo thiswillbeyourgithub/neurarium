@@ -6872,7 +6872,7 @@
     "pmid": "9686407",
     "source": {
      "corpus": "gtopdb_ki",
-     "page": "methadone",
+     "page": "minus-methadone",
      "provenance": "verified",
      "quote": "(-)-methadone at δ receptor (OPRD1, Human): Agonist / Full agonist, pKi 6.9 [PMID 9686407]",
      "species": "Human"
@@ -6891,7 +6891,7 @@
     "pmid": "9686407",
     "source": {
      "corpus": "gtopdb_ki",
-     "page": "methadone",
+     "page": "minus-methadone",
      "provenance": "verified",
      "quote": "(-)-methadone at κ receptor (OPRK1, Human): Agonist / Partial agonist, pKi 6.5 [PMID 9686407]",
      "species": "Human"
@@ -6910,7 +6910,7 @@
     "pmid": "9686407",
     "source": {
      "corpus": "gtopdb_ki",
-     "page": "methadone",
+     "page": "minus-methadone",
      "provenance": "verified",
      "quote": "(-)-methadone at μ receptor (OPRM1, Human): Agonist / Full agonist, pKi 9.2 [PMID 9686407]",
      "species": "Human"
@@ -14903,6 +14903,65 @@
      "page": "dextrorphan",
      "provenance": "verified",
      "quote": "dextrorphan at GluN2C (GRIN2C, Human): Channel blocker / None, pIC50 6.94 [PMID 17303642]",
+     "species": "Human"
+    }
+   }
+  },
+  "Dihydromorphine": {
+   "delta": {
+    "action": "agonist",
+    "ki": {
+     "max": 199.5262,
+     "median": 199.5262,
+     "min": 199.5262,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9686407",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "dihydromorphine",
+     "provenance": "verified",
+     "quote": "dihydromorphine at δ receptor (OPRD1, Human): Agonist / Full agonist, pKi 6.7 [PMID 9686407]",
+     "species": "Human"
+    }
+   },
+   "kappa": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 79.4328,
+     "median": 79.4328,
+     "min": 79.4328,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9686407",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "dihydromorphine",
+     "provenance": "verified",
+     "quote": "dihydromorphine at κ receptor (OPRK1, Human): Agonist / Partial agonist, pKi 7.1 [PMID 9686407]",
+     "species": "Human"
+    }
+   },
+   "mu": {
+    "action": "agonist",
+    "ki": {
+     "max": 1.5849,
+     "median": 1.5849,
+     "min": 1.5849,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9686407",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "dihydromorphine",
+     "provenance": "verified",
+     "quote": "dihydromorphine at μ receptor (OPRM1, Human): Agonist / Full agonist, pKi 8.8 [PMID 9686407]",
      "species": "Human"
     }
    }

@@ -148,7 +148,10 @@ LIGAND_ALIASES = {norm(k): norm(v) for k, v in _RAW_ALIASES.items()}
 
 
 def slugify(name: str) -> str:
-    return re.sub(r"[^a-z0-9]+", "-", plain(name).lower()).strip("-")
+    """Page slug of a ligand name. A "(+)" / "(-)" stereo sign is spelled out, or
+    "(-)-methadone" and the racemate "methadone" would share (and overwrite) one page."""
+    s = plain(name).lower().replace("(+)", "plus-").replace("(-)", "minus-")
+    return re.sub(r"[^a-z0-9]+", "-", s).strip("-")
 
 
 def owner_genes(valid_targets: set[str]) -> dict[str, set[str]]:
