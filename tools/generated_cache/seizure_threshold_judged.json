@@ -121,7 +121,7 @@
    "effect": "raises"
   },
   {
-   "index": 8,
+   "index": 7,
    "qid": "3b435523",
    "effect": "raises"
   }
@@ -322,7 +322,7 @@
  "fenfluramine": [
   {
    "index": 2,
-   "qid": "7721fc40",
+   "qid": "804a6232",
    "effect": "withdrawal"
   },
   {
@@ -560,12 +560,12 @@
  "paroxetine": [],
  "perampanel": [
   {
-   "index": 5,
-   "qid": "ff560d28",
+   "index": 4,
+   "qid": "411bc8cc",
    "effect": "withdrawal"
   },
   {
-   "index": 17,
+   "index": 14,
    "qid": "2fa4d477",
    "effect": "raises"
   }
@@ -829,7 +829,7 @@
  ],
  "varenicline": [
   {
-   "index": 1,
+   "index": 0,
    "qid": "9fdd3a6a",
    "effect": "possibly_lowers"
   }
@@ -855,7 +855,7 @@
  ],
  "vortioxetine": [
   {
-   "index": 1,
+   "index": 0,
    "qid": "a5bac063",
    "effect": "possibly_lowers"
   }

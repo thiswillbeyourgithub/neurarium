@@ -173,8 +173,8 @@
     "corpus": "bdpm_rcp",
     "page": "60579228",
     "section": "4.2",
-    "quote": "Oubli de doses En cas d’oubli d’une ou plusieurs doses, le patient doit prendre une seule dose dès que possible et prendre la dose suivante à l’heure habituelle le matin ou le soir. Cela peut empêcher la concentration plasmatique de brivaracétam de diminuer en dessous de la concentration efficace et prévenir la réapparition de crises convulsives.",
-    "qid": "bdf0e9b7"
+    "quote": "En cas d’oubli d’une ou plusieurs doses, le patient doit prendre une seule dose dès que possible et prendre la dose suivante à l’heure habituelle le matin ou le soir. Cela peut empêcher la concentration plasmatique de brivaracétam de diminuer en dessous de la concentration efficace et prévenir la réapparition de crises convulsives.",
+    "qid": "b35a6204"
    },
    {
     "index": 2,
@@ -471,8 +471,8 @@
     "corpus": "bdpm_rcp",
     "page": "61680130",
     "section": "4.2",
-    "quote": "Adaptations posologiques d’autres médicaments utilisés en association au cannabidiol Un médecin expérimenté dans le traitement des patients recevant plusieurs antiépileptiques (AE) évaluera la nécessité d’adaptations posologiques spécifiques du cannabidiol ou du(des) médicament(s) associé(s) afin de tenir compte des éventuelles interactions médicamenteuses (voir rubriques 4.4 et 4.5).",
-    "qid": "67844440"
+    "quote": "Un médecin expérimenté dans le traitement des patients recevant plusieurs antiépileptiques (AE) évaluera la nécessité d’adaptations posologiques spécifiques du cannabidiol ou du(des) médicament(s) associé(s) afin de tenir compte des éventuelles interactions médicamenteuses (voir rubriques 4.4 et 4.5).",
+    "qid": "055c5a9b"
    },
    {
     "index": 4,
@@ -487,19 +487,11 @@
     "corpus": "bdpm_rcp",
     "page": "61680130",
     "section": "4.4",
-    "quote": "Augmentation de la fréquence des crises d’épilepsie",
-    "qid": "9d681b52"
-   },
-   {
-    "index": 6,
-    "corpus": "bdpm_rcp",
-    "page": "61680130",
-    "section": "4.4",
     "quote": "À l’instar des autres AE, une augmentation cliniquement significative de la fréquence des crises d’épilepsie peut apparaître pendant le traitement par cannabidiol ; cela peut nécessiter un ajustement de la dose de cannabidiol et/ou des AE associés, ou l’interruption du traitement par cannabidiol dans l’éventualité où le rapport bénéfice/risque serait négatif. Dans les essais cliniques de phase 3 menés dans le SLG, le SD et la STB, la fréquence observée d’états de mal épileptique était similaire entre les groupes cannabidiol et placebo.",
     "qid": "ad7aee32"
    },
    {
-    "index": 7,
+    "index": 6,
     "corpus": "bdpm_rcp",
     "page": "61680130",
     "section": "5.1",
@@ -507,7 +499,7 @@
     "qid": "aeabd418"
    },
    {
-    "index": 8,
+    "index": 7,
     "corpus": "bdpm_rcp",
     "page": "61680130",
     "section": "5.1",
@@ -515,7 +507,7 @@
     "qid": "3b435523"
    },
    {
-    "index": 9,
+    "index": 8,
     "corpus": "bdpm_rcp",
     "page": "61680130",
     "section": "5.1",
@@ -523,15 +515,15 @@
     "qid": "5b7eabcf"
    },
    {
-    "index": 10,
+    "index": 9,
     "corpus": "bdpm_rcp",
     "page": "61680130",
     "section": "5.1",
-    "quote": "Traitement adjuvant des patients atteints d’un syndrome de Lennox-Gastaut (SLG) L’efficacité de cannabidiol dans le traitement adjuvant des crises d’épilepsie associées au SLG a été évaluée dans deux études randomisées, en double aveugle, contrôlées versus placebo, dans des groupes parallèles (GWPCARE3 et GWPCARE4). Chaque étude consistait en une période d’inclusion de 4 semaines, une période d’ajustement posologique de 2 semaines et une période d’entretien de 12 semaines. L’âge moyen de la population de l’étude était de 15 ans et 94 % des patients prenaient 2 AE concomitants (AEc) ou plus pendant l’essai. Les AEc les plus couramment utilisés (> 25 % des patients) dans les deux essais étaient le valproate, le clobazam, la lamotrigine, le lévétiracétam et le rufinamide. Environ 50 % des patients prenaient du clobazam. Parmi les patients ne prenant pas de clobazam, la plupart avaient déjà pris du clobazam mais avaient arrêté le traitement.",
-    "qid": "a92f9b0f"
+    "quote": "L’efficacité de cannabidiol dans le traitement adjuvant des crises d’épilepsie associées au SLG a été évaluée dans deux études randomisées, en double aveugle, contrôlées versus placebo, dans des groupes parallèles (GWPCARE3 et GWPCARE4). Chaque étude consistait en une période d’inclusion de 4 semaines, une période d’ajustement posologique de 2 semaines et une période d’entretien de 12 semaines. L’âge moyen de la population de l’étude était de 15 ans et 94 % des patients prenaient 2 AE concomitants (AEc) ou plus pendant l’essai. Les AEc les plus couramment utilisés (> 25 % des patients) dans les deux essais étaient le valproate, le clobazam, la lamotrigine, le lévétiracétam et le rufinamide. Environ 50 % des patients prenaient du clobazam. Parmi les patients ne prenant pas de clobazam, la plupart avaient déjà pris du clobazam mais avaient arrêté le traitement.",
+    "qid": "4b8e2a43"
    },
    {
-    "index": 11,
+    "index": 10,
     "corpus": "bdpm_rcp",
     "page": "61680130",
     "section": "5.1",
@@ -539,15 +531,15 @@
     "qid": "c7572c19"
    },
    {
-    "index": 12,
+    "index": 11,
     "corpus": "bdpm_rcp",
     "page": "61680130",
     "section": "5.1",
-    "quote": "Traitement adjuvant des patients atteints du syndrome de Dravet L’efficacité de cannabidiol dans le traitement adjuvant des crises d’épilepsie associées au SD a été évaluée dans deux études randomisées, en double aveugle, contrôlées versus placebo, dans des groupes parallèles (GWPCARE2 et GWPCARE1). Chaque étude consistait en une période d’inclusion de 4 semaines, une période d’ajustement posologique de 2 semaines et une période d’entretien de 12 semaines. L’âge moyen de la population de l’étude était de 9 ans et 94 % des patients prenaient 2 AEc ou plus pendant l’essai. Les AEc les plus couramment utilisés (> 25 % des patients) dans les deux essais étaient le valproate, le clobazam, le stiripentol et le lévétiracétam. Environ 65 % des patients prenaient concomitamment du clobazam. Parmi les patients ne prenant pas de clobazam, la plupart avaient déjà pris du clobazam mais avaient arrêté le traitement.",
-    "qid": "3d5583af"
+    "quote": "L’efficacité de cannabidiol dans le traitement adjuvant des crises d’épilepsie associées au SD a été évaluée dans deux études randomisées, en double aveugle, contrôlées versus placebo, dans des groupes parallèles (GWPCARE2 et GWPCARE1). Chaque étude consistait en une période d’inclusion de 4 semaines, une période d’ajustement posologique de 2 semaines et une période d’entretien de 12 semaines. L’âge moyen de la population de l’étude était de 9 ans et 94 % des patients prenaient 2 AEc ou plus pendant l’essai. Les AEc les plus couramment utilisés (> 25 % des patients) dans les deux essais étaient le valproate, le clobazam, le stiripentol et le lévétiracétam. Environ 65 % des patients prenaient concomitamment du clobazam. Parmi les patients ne prenant pas de clobazam, la plupart avaient déjà pris du clobazam mais avaient arrêté le traitement.",
+    "qid": "9ba824a0"
    },
    {
-    "index": 13,
+    "index": 12,
     "corpus": "bdpm_rcp",
     "page": "61680130",
     "section": "5.1",
@@ -555,7 +547,7 @@
     "qid": "59146165"
    },
    {
-    "index": 14,
+    "index": 13,
     "corpus": "bdpm_rcp",
     "page": "61680130",
     "section": "5.1",
@@ -563,7 +555,7 @@
     "qid": "39101a73"
    },
    {
-    "index": 15,
+    "index": 14,
     "corpus": "bdpm_rcp",
     "page": "61680130",
     "section": "5.1",
@@ -571,7 +563,7 @@
     "qid": "021c6d67"
    },
    {
-    "index": 16,
+    "index": 15,
     "corpus": "bdpm_rcp",
     "page": "61680130",
     "section": "5.1",
@@ -579,7 +571,7 @@
     "qid": "010dcb8f"
    },
    {
-    "index": 17,
+    "index": 16,
     "corpus": "bdpm_rcp",
     "page": "61680130",
     "section": "5.1",
@@ -587,7 +579,7 @@
     "qid": "48876882"
    },
    {
-    "index": 18,
+    "index": 17,
     "corpus": "bdpm_rcp",
     "page": "61680130",
     "section": "5.1",
@@ -595,7 +587,7 @@
     "qid": "b251e423"
    },
    {
-    "index": 19,
+    "index": 18,
     "corpus": "bdpm_rcp",
     "page": "61680130",
     "section": "5.1",
@@ -603,15 +595,15 @@
     "qid": "e412914d"
    },
    {
-    "index": 20,
+    "index": 19,
     "corpus": "bdpm_rcp",
     "page": "61680130",
     "section": "5.1",
-    "quote": "Traitement adjuvant des patients atteints de sclérose tubéreuse de Bourneville (STB) L’efficacité du cannabidiol (25 et 50 mg/kg/jour) dans le traitement adjuvant des crises d’épilepsie associées à la STB a été évaluée dans une étude randomisée, en double aveugle, contrôlée versus placebo, dans des groupes parallèles (GWPCARE6). L’étude consistait en une période d’inclusion de 4 semaines, une période de titration de 4 semaines et une période d’entretien de 12 semaines (période de traitement et d’évaluation principale de 16 semaines).",
-    "qid": "1e973f07"
+    "quote": "L’efficacité du cannabidiol (25 et 50 mg/kg/jour) dans le traitement adjuvant des crises d’épilepsie associées à la STB a été évaluée dans une étude randomisée, en double aveugle, contrôlée versus placebo, dans des groupes parallèles (GWPCARE6). L’étude consistait en une période d’inclusion de 4 semaines, une période de titration de 4 semaines et une période d’entretien de 12 semaines (période de traitement et d’évaluation principale de 16 semaines).",
+    "qid": "20cc07ba"
    },
    {
-    "index": 21,
+    "index": 20,
     "corpus": "bdpm_rcp",
     "page": "61680130",
     "section": "5.1",
@@ -619,7 +611,7 @@
     "qid": "897a8ade"
    },
    {
-    "index": 22,
+    "index": 21,
     "corpus": "bdpm_rcp",
     "page": "61680130",
     "section": "5.1",
@@ -627,7 +619,7 @@
     "qid": "2132983a"
    },
    {
-    "index": 23,
+    "index": 22,
     "corpus": "bdpm_rcp",
     "page": "61680130",
     "section": "5.1",
@@ -635,7 +627,7 @@
     "qid": "0c1f46fc"
    },
    {
-    "index": 24,
+    "index": 23,
     "corpus": "bdpm_rcp",
     "page": "61680130",
     "section": "5.1",
@@ -643,7 +635,7 @@
     "qid": "3bdd452e"
    },
    {
-    "index": 25,
+    "index": 24,
     "corpus": "bdpm_rcp",
     "page": "61680130",
     "section": "5.1",
@@ -651,7 +643,7 @@
     "qid": "618492b2"
    },
    {
-    "index": 26,
+    "index": 25,
     "corpus": "bdpm_rcp",
     "page": "61680130",
     "section": "5.1",
@@ -659,7 +651,7 @@
     "qid": "27a5a64e"
    },
    {
-    "index": 27,
+    "index": 26,
     "corpus": "bdpm_rcp",
     "page": "61680130",
     "section": "5.1",
@@ -1602,8 +1594,8 @@
     "corpus": "bdpm_rcp",
     "page": "62154820",
     "section": "4.2",
-    "quote": "Interruption du traitement En cas d’interruption du traitement, la dose doit être réduite progressivement. L’arrêt brutal du traitement doit être évité, dans la mesure du possible, afin réduire les risques d’augmentation de la fréquence des crises d’épilepsie et de survenue d’un état de mal épileptique. Une échocardiographie finale doit être effectuée 3 à 6 mois après la dernière dose du traitement par fenfluramine.",
-    "qid": "7721fc40"
+    "quote": "En cas d’interruption du traitement, la dose doit être réduite progressivement. L’arrêt brutal du traitement doit être évité, dans la mesure du possible, afin réduire les risques d’augmentation de la fréquence des crises d’épilepsie et de survenue d’un état de mal épileptique. Une échocardiographie finale doit être effectuée 3 à 6 mois après la dernière dose du traitement par fenfluramine.",
+    "qid": "804a6232"
    },
    {
     "index": 3,
@@ -1626,19 +1618,11 @@
     "corpus": "bdpm_rcp",
     "page": "62154820",
     "section": "4.4",
-    "quote": "Augmentation de la fréquence des crises d’épilepsie",
-    "qid": "9d681b52"
-   },
-   {
-    "index": 6,
-    "corpus": "bdpm_rcp",
-    "page": "62154820",
-    "section": "4.4",
     "quote": "Une augmentation cliniquement significative de la fréquence des crises d’épilepsie peut apparaître pendant le traitement par la fenfluramine. Cela peut nécessiter un ajustement de la dose de fenfluramine et/ou des médicaments antiépileptiques associés, ou l’interruption du traitement par la fenfluramine le rapport bénéfice/risque devenant négatif.",
     "qid": "9e06744b"
    },
    {
-    "index": 7,
+    "index": 6,
     "corpus": "bdpm_rcp",
     "page": "62154820",
     "section": "4.4",
@@ -1646,7 +1630,7 @@
     "qid": "201c44de"
    },
    {
-    "index": 8,
+    "index": 7,
     "corpus": "bdpm_rcp",
     "page": "62154820",
     "section": "5.1",
@@ -1654,7 +1638,7 @@
     "qid": "4ab30d3d"
    },
    {
-    "index": 9,
+    "index": 8,
     "corpus": "bdpm_rcp",
     "page": "62154820",
     "section": "5.1",
@@ -1662,7 +1646,7 @@
     "qid": "d1e883f8"
    },
    {
-    "index": 10,
+    "index": 9,
     "corpus": "bdpm_rcp",
     "page": "62154820",
     "section": "5.1",
@@ -1670,7 +1654,7 @@
     "qid": "4f258d85"
    },
    {
-    "index": 11,
+    "index": 10,
     "corpus": "bdpm_rcp",
     "page": "62154820",
     "section": "5.1",
@@ -1678,7 +1662,7 @@
     "qid": "4ad6c00a"
    },
    {
-    "index": 12,
+    "index": 11,
     "corpus": "bdpm_rcp",
     "page": "62154820",
     "section": "5.1",
@@ -1686,7 +1670,7 @@
     "qid": "15c73e52"
    },
    {
-    "index": 13,
+    "index": 12,
     "corpus": "bdpm_rcp",
     "page": "62154820",
     "section": "5.1",
@@ -1694,7 +1678,7 @@
     "qid": "7c28cbf4"
    },
    {
-    "index": 14,
+    "index": 13,
     "corpus": "bdpm_rcp",
     "page": "62154820",
     "section": "5.1",
@@ -1702,7 +1686,7 @@
     "qid": "68e4f236"
    },
    {
-    "index": 15,
+    "index": 14,
     "corpus": "bdpm_rcp",
     "page": "62154820",
     "section": "5.1",
@@ -1710,7 +1694,7 @@
     "qid": "69d28e88"
    },
    {
-    "index": 16,
+    "index": 15,
     "corpus": "bdpm_rcp",
     "page": "62154820",
     "section": "5.1",
@@ -1718,7 +1702,7 @@
     "qid": "641eca14"
    },
    {
-    "index": 17,
+    "index": 16,
     "corpus": "bdpm_rcp",
     "page": "62154820",
     "section": "5.1",
@@ -1726,23 +1710,23 @@
     "qid": "d5ef95a3"
    },
    {
+    "index": 17,
+    "corpus": "bdpm_rcp",
+    "page": "62154820",
+    "section": "5.1",
+    "quote": "Les patients atteints du syndrome de Dravet qui ont participé à l’étude 1, l’étude 2 et à l’étude 3 ont pu entrer dans une étude d’extension en ouvert (étude 5). L’objectif principal de l’étude d’extension en ouvert (OLE) était d’évaluer la sécurité à long terme de la fenfluramine à des doses de 0,2 à 0,7 mg/kg/jour, la dose de fenfluramine pouvant être ajustée pour optimiser le traitement. Les données concernent 374 patients qui ont participé à l’étude en ouvert et qui ont reçu de la fenfluramine pendant une période allant jusqu’à 3 ans (durée médiane du traitement :824 jours ; intervalle : 7-1 280). Une variation médiane en pourcentage par rapport à l’inclusion de la fréquence des crises convulsives (FCC) pendant la période globale de traitement OLE de -66,81 % (p < 0,001) a été observée. Sur les 375 participants de l’étude, 12,8 % sont sortis de l’étude en raison d’un manque d’efficacité, 2,9 % en raison d’événements indésirables et 5,3 % à la demande du médecin ou de la famille.",
+    "qid": "f13c0bff"
+   },
+   {
     "index": 18,
     "corpus": "bdpm_rcp",
     "page": "62154820",
     "section": "5.1",
-    "quote": "Données d’essais menés en ouvert Les patients atteints du syndrome de Dravet qui ont participé à l’étude 1, l’étude 2 et à l’étude 3 ont pu entrer dans une étude d’extension en ouvert (étude 5). L’objectif principal de l’étude d’extension en ouvert (OLE) était d’évaluer la sécurité à long terme de la fenfluramine à des doses de 0,2 à 0,7 mg/kg/jour, la dose de fenfluramine pouvant être ajustée pour optimiser le traitement. Les données concernent 374 patients qui ont participé à l’étude en ouvert et qui ont reçu de la fenfluramine pendant une période allant jusqu’à 3 ans (durée médiane du traitement :824 jours ; intervalle : 7-1 280). Une variation médiane en pourcentage par rapport à l’inclusion de la fréquence des crises convulsives (FCC) pendant la période globale de traitement OLE de -66,81 % (p < 0,001) a été observée. Sur les 375 participants de l’étude, 12,8 % sont sortis de l’étude en raison d’un manque d’efficacité, 2,9 % en raison d’événements indésirables et 5,3 % à la demande du médecin ou de la famille.",
-    "qid": "41fe7a25"
+    "quote": "L’efficacité de la fenfluramine pour le traitement des crises d’épilepsie associées au syndrome de Lennox-Gastaut chez les patients âgés de 2 à 35 ans a été évaluée dans une étude randomisée, en double insu et contrôlée versus placebo (étude 4, partie 1). La partie 1 comprenait 2 cohortes analysées indépendamment, la cohorte A et la cohorte B. La cohorte A correspondait à la cohorte de l’analyse principale et comprenait des patients d’Amérique du Nord, d’Europe et d’Australie et la cohorte B des patients japonais.",
+    "qid": "6316e02a"
    },
    {
     "index": 19,
-    "corpus": "bdpm_rcp",
-    "page": "62154820",
-    "section": "5.1",
-    "quote": "Enfants et adultes atteints du syndrome de Lennox-Gastaut L’efficacité de la fenfluramine pour le traitement des crises d’épilepsie associées au syndrome de Lennox-Gastaut chez les patients âgés de 2 à 35 ans a été évaluée dans une étude randomisée, en double insu et contrôlée versus placebo (étude 4, partie 1). La partie 1 comprenait 2 cohortes analysées indépendamment, la cohorte A et la cohorte B. La cohorte A correspondait à la cohorte de l’analyse principale et comprenait des patients d’Amérique du Nord, d’Europe et d’Australie et la cohorte B des patients japonais.",
-    "qid": "4d7a5bce"
-   },
-   {
-    "index": 20,
     "corpus": "bdpm_rcp",
     "page": "62154820",
     "section": "5.1",
@@ -1750,7 +1734,7 @@
     "qid": "95fd6357"
    },
    {
-    "index": 21,
+    "index": 20,
     "corpus": "bdpm_rcp",
     "page": "62154820",
     "section": "5.1",
@@ -1758,7 +1742,7 @@
     "qid": "87b64207"
    },
    {
-    "index": 22,
+    "index": 21,
     "corpus": "bdpm_rcp",
     "page": "62154820",
     "section": "5.1",
@@ -1766,7 +1750,7 @@
     "qid": "a82604b7"
    },
    {
-    "index": 23,
+    "index": 22,
     "corpus": "bdpm_rcp",
     "page": "62154820",
     "section": "5.1",
@@ -1774,7 +1758,7 @@
     "qid": "6dbf5bbb"
    },
    {
-    "index": 24,
+    "index": 23,
     "corpus": "bdpm_rcp",
     "page": "62154820",
     "section": "5.1",
@@ -1782,7 +1766,7 @@
     "qid": "43638c88"
    },
    {
-    "index": 25,
+    "index": 24,
     "corpus": "bdpm_rcp",
     "page": "62154820",
     "section": "5.1",
@@ -2906,8 +2890,8 @@
     "corpus": "bdpm_rcp",
     "page": "63957761",
     "section": "4.4",
-    "quote": "Troubles convulsifs Les données sont limitées chez les patients ayant des antécédents de crises convulsives, y compris les convulsions liées au sevrage alcoolique. La prudence est recommandée lorsqu’un traitement visant à réduire la consommation d’alcool est initié chez ces patients.",
-    "qid": "4154acaa"
+    "quote": "Les données sont limitées chez les patients ayant des antécédents de crises convulsives, y compris les convulsions liées au sevrage alcoolique. La prudence est recommandée lorsqu’un traitement visant à réduire la consommation d’alcool est initié chez ces patients.",
+    "qid": "3b3deb52"
    },
    {
     "index": 2,
@@ -3232,59 +3216,51 @@
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "4.2",
-    "quote": "Crises d’épilepsie partielles",
-    "qid": "281dfd23"
+    "quote": "Le pérampanel aux doses de 4 mg/jour à 12 mg/jour est efficace dans le traitement des crises d’épilepsie partielles.",
+    "qid": "5e7d322c"
    },
    {
     "index": 3,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "4.2",
-    "quote": "d’épilepsie partielles.",
-    "qid": "b1933be3"
+    "quote": "Le pérampanel à une dose allant jusqu’à 8 mg/jour est efficace dans le traitement des crises d’épilepsie généralisées tonicocloniques primaires.",
+    "qid": "7be9629c"
    },
    {
     "index": 4,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "4.2",
-    "quote": "Le pérampanel à une dose allant jusqu’à 8 mg/jour est efficace dans le traitement des crises d’épilepsie",
-    "qid": "dca7100e"
+    "quote": "Il est recommandé d’arrêter progressivement le traitement, afin de réduire le risque de crises d’épilepsie par effet rebond. Cependant, compte tenu de sa demi-vie longue et de la diminution lente des concentrations plasmatiques qui en résulte, le pérampanel peut être arrêté brutalement en cas d’absolue nécessité.",
+    "qid": "411bc8cc"
    },
    {
     "index": 5,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "4.2",
-    "quote": "Arrêt du traitement Il est recommandé d’arrêter progressivement le traitement, afin de réduire le risque de crises d’épilepsie par effet rebond. Cependant, compte tenu de sa demi-vie longue et de la diminution lente des concentrations plasmatiques qui en résulte, le pérampanel peut être arrêté brutalement en cas d’absolue nécessité.",
-    "qid": "ff560d28"
+    "quote": "En cas d’oubli de plus d’une dose pendant une période continue de moins de cinq demi-vies (3 semaines pour les patients ne recevant pas de médicaments antiépileptiques induisant le métabolisme du pérampanel, 1 semaine pour les autres patients (voir rubrique 4.5)), il convient d’envisager la reprise du traitement à la dernière dose administrée.",
+    "qid": "6f35f2a2"
    },
    {
     "index": 6,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "4.2",
-    "quote": "Arrêt du traitement Il est recommandé d’arrêter progressivement le traitement, afin de réduire le risque de crises d’épilepsie par effet rebond. Cependant, compte tenu de sa demi-vie longue et de la diminution lente des concentrations plasmatiques qui en résulte, le pérampanel peut être arrêté brutalement en cas d’absolue nécessité. Doses oubliées Une seule dose oubliée : compte tenu de la demi-vie longue du pérampanel, le patient doit attendre et prendre la dose suivante au moment habituel. En cas d’oubli de plus d’une dose pendant une période continue de moins de cinq demi-vies (3 semaines pour les patients ne recevant pas de médicaments antiépileptiques induisant le métabolisme du pérampanel, 1 semaine pour les autres patients (voir rubrique 4.5)), il convient d’envisager la reprise du traitement à la dernière dose administrée.",
-    "qid": "a4e59400"
+    "quote": "Les études cliniques de Fycompa dans l’épilepsie n’ont pas inclus suffisamment de patients âgés de 65 ans et plus pour déterminer si leur réponse au traitement est différente de celle des patients plus jeunes. L’analyse des données de sécurité de 905 patients âgés traités par le pérampanel (dans le cadre d’études en double insu menées dans des indications autres que l’épilepsie) n’a mis en évidence aucune différence du profil de sécurité en fonction de l’âge. Couplés à l’absence de différence d’exposition au pérampanel liée à l’âge, ces résultats indiquent qu’aucune adaptation de la posologie n’est requise. Le pérampanel doit malgré tout être utilisé avec précaution chez les sujets âgés, en raison des interactions médicamenteuses éventuelles chez des patients polymédiqués (voir rubrique 4.4).",
+    "qid": "b483703a"
    },
    {
     "index": 7,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "4.2",
-    "quote": "Sujets âgés (65 ans et plus) Les études cliniques de Fycompa dans l’épilepsie n’ont pas inclus suffisamment de patients âgés de 65 ans et plus pour déterminer si leur réponse au traitement est différente de celle des patients plus jeunes. L’analyse des données de sécurité de 905 patients âgés traités par le pérampanel (dans le cadre d’études en double insu menées dans des indications autres que l’épilepsie) n’a mis en évidence aucune différence du profil de sécurité en fonction de l’âge. Couplés à l’absence de différence d’exposition au pérampanel liée à l’âge, ces résultats indiquent qu’aucune adaptation de la posologie n’est requise. Le pérampanel doit malgré tout être utilisé avec précaution chez les sujets âgés, en raison des interactions médicamenteuses éventuelles chez des patients polymédiqués (voir rubrique 4.4).",
-    "qid": "0071b6aa"
+    "quote": "La sécurité et l’efficacité du pérampanel n’ont pas encore été établies chez les enfants âgés de moins de 4 ans dans l’indication des crises d’épilepsie partielles ou chez les enfants âgés de moins de 7 ans dans l’indication des crises généralisées tonicocloniques primaires.",
+    "qid": "82a86c62"
    },
    {
     "index": 8,
-    "corpus": "bdpm_rcp",
-    "page": "61849146",
-    "section": "4.2",
-    "quote": "Population pédiatrique La sécurité et l’efficacité du pérampanel n’ont pas encore été établies chez les enfants âgés de moins de 4 ans dans l’indication des crises d’épilepsie partielles ou chez les enfants âgés de moins de 7 ans dans l’indication des crises généralisées tonicocloniques primaires.",
-    "qid": "ff1a08e1"
-   },
-   {
-    "index": 9,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "4.4",
@@ -3292,7 +3268,7 @@
     "qid": "eda1bbb8"
    },
    {
-    "index": 10,
+    "index": 9,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "4.4",
@@ -3300,15 +3276,7 @@
     "qid": "e7b39768"
    },
    {
-    "index": 11,
-    "corpus": "bdpm_rcp",
-    "page": "61849146",
-    "section": "4.4",
-    "quote": "Médicaments antiépileptiques concomitants inducteurs du CYP3A",
-    "qid": "b94d7b86"
-   },
-   {
-    "index": 12,
+    "index": 10,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "4.4",
@@ -3316,15 +3284,7 @@
     "qid": "49b77eae"
    },
    {
-    "index": 13,
-    "corpus": "bdpm_rcp",
-    "page": "61849146",
-    "section": "4.4",
-    "quote": "Autres médicaments concomitants (non antiépileptiques) inducteurs ou inhibiteurs du cytochrome P450",
-    "qid": "d6d99ee0"
-   },
-   {
-    "index": 14,
+    "index": 11,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "4.4",
@@ -3332,7 +3292,7 @@
     "qid": "434c2f7a"
    },
    {
-    "index": 15,
+    "index": 12,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "5.1",
@@ -3340,7 +3300,7 @@
     "qid": "451068bc"
    },
    {
-    "index": 16,
+    "index": 13,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "5.1",
@@ -3348,7 +3308,7 @@
     "qid": "e241977d"
    },
    {
-    "index": 17,
+    "index": 14,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "5.1",
@@ -3356,7 +3316,7 @@
     "qid": "2fa4d477"
    },
    {
-    "index": 18,
+    "index": 15,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "5.1",
@@ -3364,15 +3324,15 @@
     "qid": "a0c9e047"
    },
    {
-    "index": 19,
+    "index": 16,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "5.1",
-    "quote": "Crises d’épilepsie partielles L’efficacité du pérampanel en association dans les crises d’épilepsie partielles a été établie par trois études multicentriques, randomisées, en double insu, contrôlées contre placebo, de 19 semaines chez des patients adultes et adolescents. Les patients présentaient des crises d’épilepsie partielles avec ou sans généralisation secondaire et non correctement contrôlées par un à trois médicaments antiépileptiques concomitants. Durant une période initiale de 6 semaines, les patients devaient présenter plus de cinq crises d’épilepsie, avec des périodes sans crise n’excédant pas 25 jours. Dans ces trois études cliniques, l’ancienneté moyenne de l’épilepsie était d’environ 21,06 ans. Entre 85,3 % et 89,1 % des patients prenaient deux à trois médicaments antiépileptiques concomitants avec ou sans stimulation concurrente du nerf pneumogastrique.",
-    "qid": "179129b1"
+    "quote": "L’efficacité du pérampanel en association dans les crises d’épilepsie partielles a été établie par trois études multicentriques, randomisées, en double insu, contrôlées contre placebo, de 19 semaines chez des patients adultes et adolescents. Les patients présentaient des crises d’épilepsie partielles avec ou sans généralisation secondaire et non correctement contrôlées par un à trois médicaments antiépileptiques concomitants. Durant une période initiale de 6 semaines, les patients devaient présenter plus de cinq crises d’épilepsie, avec des périodes sans crise n’excédant pas 25 jours. Dans ces trois études cliniques, l’ancienneté moyenne de l’épilepsie était d’environ 21,06 ans. Entre 85,3 % et 89,1 % des patients prenaient deux à trois médicaments antiépileptiques concomitants avec ou sans stimulation concurrente du nerf pneumogastrique.",
+    "qid": "0cc7d77e"
    },
    {
-    "index": 20,
+    "index": 17,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "5.1",
@@ -3380,7 +3340,7 @@
     "qid": "7d114d9c"
    },
    {
-    "index": 21,
+    "index": 18,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "5.1",
@@ -3388,7 +3348,7 @@
     "qid": "228d3a22"
    },
    {
-    "index": 22,
+    "index": 19,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "5.1",
@@ -3396,23 +3356,23 @@
     "qid": "17da80fc"
    },
    {
-    "index": 23,
+    "index": 20,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "5.1",
-    "quote": "Étude d’extension en ouvert Quatre-vingt-dix-sept pour cent des patients ayant terminé les études randomisées menées chez les patients présentant des crises d’épilepsie partielles ont été inclus dans l’étude d’extension en ouvert (n = 1 186). Les patients ayant participé aux études randomisées ont reçu le pérampanel en relais pendant 16 semaines, suivies d’une période d’entretien au long cours (≥ 1 an). La dose journalière moyenne était de 10,05 mg.",
-    "qid": "764133c0"
+    "quote": "Quatre-vingt-dix-sept pour cent des patients ayant terminé les études randomisées menées chez les patients présentant des crises d’épilepsie partielles ont été inclus dans l’étude d’extension en ouvert (n = 1 186). Les patients ayant participé aux études randomisées ont reçu le pérampanel en relais pendant 16 semaines, suivies d’une période d’entretien au long cours (≥ 1 an). La dose journalière moyenne était de 10,05 mg.",
+    "qid": "a491f130"
    },
    {
-    "index": 24,
+    "index": 21,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "5.1",
-    "quote": "Crises généralisées tonicocloniques primaires L’efficacité du pérampanel en association chez les patients âgés de 12 ans et plus atteints d’épilepsie idiopathique généralisée présentant des crises généralisées tonicocloniques primaires (GTCP) a été établie par une étude multicentrique, randomisée en double insu, contrôlée contre placebo (étude 332). Les patients éligibles traités par un à trois médicaments antiépileptiques à dose stable présentant au moins trois crises généralisées tonicocloniques primaires pendant la période de pré-inclusion de 8 semaines ont été randomisés pour recevoir le pérampanel ou le placebo. La population était composée de 164 patients (pérampanel N = 82, placebo N = 82). La posologie était augmentée progressivement sur quatre semaines jusqu’à une dose cible de 8 mg par jour ou jusqu’à la dose maximale tolérée et les patients ont été traités pendant 13 semaines supplémentaires au dernier palier de dose atteint à la fin de la période de titration. La durée totale de la période de traitement était de 17 semaines. Le médicament à l’étude était administré une fois par jour.",
-    "qid": "4caf4596"
+    "quote": "L’efficacité du pérampanel en association chez les patients âgés de 12 ans et plus atteints d’épilepsie idiopathique généralisée présentant des crises généralisées tonicocloniques primaires (GTCP) a été établie par une étude multicentrique, randomisée en double insu, contrôlée contre placebo (étude 332). Les patients éligibles traités par un à trois médicaments antiépileptiques à dose stable présentant au moins trois crises généralisées tonicocloniques primaires pendant la période de pré-inclusion de 8 semaines ont été randomisés pour recevoir le pérampanel ou le placebo. La population était composée de 164 patients (pérampanel N = 82, placebo N = 82). La posologie était augmentée progressivement sur quatre semaines jusqu’à une dose cible de 8 mg par jour ou jusqu’à la dose maximale tolérée et les patients ont été traités pendant 13 semaines supplémentaires au dernier palier de dose atteint à la fin de la période de titration. La durée totale de la période de traitement était de 17 semaines. Le médicament à l’étude était administré une fois par jour.",
+    "qid": "1d403e06"
    },
    {
-    "index": 25,
+    "index": 22,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "5.1",
@@ -3420,15 +3380,15 @@
     "qid": "dead40a7"
    },
    {
-    "index": 26,
+    "index": 23,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "5.1",
-    "quote": "Relais par une monothérapie Dans une étude rétrospective de la pratique clinique, 51 patients atteints d’épilepsie qui recevaient le pérampanel en traitement en association ont changé pour le pérampanel en monothérapie. La majorité de ces patients avait des antécédents de crises d’épilepsie partielles. Parmi ces patients, 14 (27 %) sont revenus au traitement en association au cours des mois suivants. Trente-quatre (34) patients ont été suivis pendant au moins 6 mois et sur ceux-ci, 24 patients (71 %) sont restés sous pérampanel en monothérapie pendant au moins 6 mois. Dix (10) patients ont été suivis pendant au moins 18 mois et sur ceux-ci, 3 patients (30 %) sont restés sous pérampanel en monothérapie pendant au moins 18 mois.",
-    "qid": "852425b8"
+    "quote": "Dans une étude rétrospective de la pratique clinique, 51 patients atteints d’épilepsie qui recevaient le pérampanel en traitement en association ont changé pour le pérampanel en monothérapie. La majorité de ces patients avait des antécédents de crises d’épilepsie partielles. Parmi ces patients, 14 (27 %) sont revenus au traitement en association au cours des mois suivants. Trente-quatre (34) patients ont été suivis pendant au moins 6 mois et sur ceux-ci, 24 patients (71 %) sont restés sous pérampanel en monothérapie pendant au moins 6 mois. Dix (10) patients ont été suivis pendant au moins 18 mois et sur ceux-ci, 3 patients (30 %) sont restés sous pérampanel en monothérapie pendant au moins 18 mois.",
+    "qid": "fc05f9c6"
    },
    {
-    "index": 27,
+    "index": 24,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "5.1",
@@ -3436,7 +3396,7 @@
     "qid": "8f5c15d0"
    },
    {
-    "index": 28,
+    "index": 25,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "5.1",
@@ -3444,7 +3404,7 @@
     "qid": "3555fda0"
    },
    {
-    "index": 29,
+    "index": 26,
     "corpus": "bdpm_rcp",
     "page": "61849146",
     "section": "5.1",
@@ -3747,14 +3707,6 @@
   "candidates": [
    {
     "index": 0,
-    "corpus": "bdpm_rcp",
-    "page": "60227166",
-    "section": "4.4",
-    "quote": "Épilepsie",
-    "qid": "e59462b7"
-   },
-   {
-    "index": 1,
     "corpus": "bdpm_rcp",
     "page": "60227166",
     "section": "4.4",
@@ -4143,8 +4095,8 @@
     "corpus": "bdpm_rcp",
     "page": "61501691",
     "section": "4.2",
-    "quote": "Adaptation de la dose des autres antiépileptiques associés au stiripentol Malgré l’absence de données pharmacologiques exhaustives sur des interactions médicamenteuses potentielles, les recommandations suivantes concernant la modification de la posologie des autres antiépileptiques associés au stiripentol sont données sur la base de l’expérience clinique.",
-    "qid": "f5539d71"
+    "quote": "Malgré l’absence de données pharmacologiques exhaustives sur des interactions médicamenteuses potentielles, les recommandations suivantes concernant la modification de la posologie des autres antiépileptiques associés au stiripentol sont données sur la base de l’expérience clinique.",
+    "qid": "10f7e9a5"
    },
    {
     "index": 3,
@@ -4837,14 +4789,6 @@
     "corpus": "bdpm_rcp",
     "page": "60442838",
     "section": "4.4",
-    "quote": "Lors d’un essai clinique sur le sevrage tabagique, les événements indésirables neuropsychiatriques ont été rapportés plus fréquemment chez les patients présentant des antécédents de maladie psychiatrique que chez les patients ne présentant pas d’antécédents de maladie psychiatrique, indépendamment du type de traitement reçu (voir rubrique 5.1). La prudence est recommandée chez les patients présentant des antécédents de maladie psychiatrique et les patients doivent être informés en conséquence. Crises convulsives",
-    "qid": "83c2d0af"
-   },
-   {
-    "index": 1,
-    "corpus": "bdpm_rcp",
-    "page": "60442838",
-    "section": "4.4",
     "quote": "Dans les essais cliniques et depuis sa commercialisation, des cas de crises convulsives ont été rapportés chez des patients traités par CHAMPIX présentant ou non des antécédents de crises convulsives. CHAMPIX doit être utilisé avec précaution chez les patients présentant des antécédents de crises convulsives ou d’autres affections qui abaissent potentiellement le seuil épileptogène.",
     "qid": "9fdd3a6a"
    }
@@ -4973,14 +4917,6 @@
   "candidates": [
    {
     "index": 0,
-    "corpus": "bdpm_rcp",
-    "page": "60316362",
-    "section": "4.4",
-    "quote": "Convulsions",
-    "qid": "4de99b22"
-   },
-   {
-    "index": 1,
     "corpus": "bdpm_rcp",
     "page": "60316362",
     "section": "4.4",

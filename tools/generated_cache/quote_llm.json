@@ -2514,6 +2514,9 @@
 "q_2a30c6ce8da3": {
 "drug:thiothixene/half_life": "sonnet"
 },
+"q_2a31a1a619b4": {
+"drug:cannabidiol/workup[liver_function:during]": "opus"
+},
 "q_2a49f960a0c6": {
 "drug:tapentadol/half_life": "sonnet"
 },
@@ -12554,6 +12557,9 @@
 "q_dc0e91552ef9": {
 "drug:sibutramine/originator": "opus"
 },
+"q_dc220d6a0e63": {
+"drug:fenfluramine/seizure_threshold[withdrawal]": "opus"
+},
 "q_dc39beccb155": {
 "drug:pimavanserin/bindings[5ht2a:antagonist]": "sonnet",
 "drug:pimavanserin/bindings[5ht2a:inverse_agonist]": "sonnet"
@@ -12674,6 +12680,9 @@
 },
 "q_de36850ddf41": {
 "drug:quetiapine/bindings[d2:antagonist]": "sonnet"
+},
+"q_de3c033bd982": {
+"drug:perampanel/seizure_threshold[withdrawal]": "opus"
 },
 "q_de43f08e29f2": {
 "drug:morphine/sleep[rem_suppression]": "opus",
