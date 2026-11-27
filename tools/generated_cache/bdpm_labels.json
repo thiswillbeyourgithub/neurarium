@@ -44,6 +44,12 @@
  "alizapride": {
   "brands": []
  },
+ "almotriptan": {
+  "brands": [],
+  "cis": "64165648",
+  "denomination": "ALMOTRIPTAN ARROW 12,5 mg, comprimé pelliculé",
+  "why": "plain oral"
+ },
  "alprazolam": {
   "brands": [
    {
@@ -575,6 +581,18 @@
  "duloxetine": {
   "brands": []
  },
+ "eletriptan": {
+  "brands": [
+   {
+    "cis": "63476564",
+    "name": "Relpax",
+    "quote": "RELPAX"
+   }
+  ],
+  "cis": "63476564",
+  "denomination": "RELPAX 40 mg, comprimé pelliculé",
+  "why": "plain oral, brand-name product"
+ },
  "entacapone": {
   "brands": [
    {
@@ -785,6 +803,18 @@
   "cis": "60771794",
   "denomination": "PRODILANTIN 75 mg/mL, solution à diluer pour perfusion/solution injectable",
   "why": "no plain-oral product; non-modified-release intramusculaire;intraveineuse, brand-name product"
+ },
+ "frovatriptan": {
+  "brands": [
+   {
+    "cis": "60435263",
+    "name": "Tigreat",
+    "quote": "TIGREAT"
+   }
+  ],
+  "cis": "60435263",
+  "denomination": "TIGREAT 2,5 mg, comprimé pelliculé",
+  "why": "plain oral, brand-name product"
  },
  "furosemide": {
   "brands": [
@@ -1233,6 +1263,18 @@
  },
  "naltrexone": {
   "brands": []
+ },
+ "naratriptan": {
+  "brands": [
+   {
+    "cis": "67586588",
+    "name": "Naramig",
+    "quote": "NARAMIG"
+   }
+  ],
+  "cis": "67586588",
+  "denomination": "NARAMIG 2,5 mg, comprimé pelliculé",
+  "why": "plain oral, brand-name product"
  },
  "nefopam": {
   "brands": [
@@ -2113,6 +2155,23 @@
     "quote": "PRIALT"
    }
   ]
+ },
+ "zolmitriptan": {
+  "brands": [
+   {
+    "cis": "68232350",
+    "name": "Zomig",
+    "quote": "ZOMIG"
+   },
+   {
+    "cis": "68354386",
+    "name": "Zomigoro",
+    "quote": "ZOMIGORO"
+   }
+  ],
+  "cis": "68232350",
+  "denomination": "ZOMIG 2,5 mg, comprimé pelliculé",
+  "why": "plain oral, brand-name product"
  },
  "zolpidem": {
   "brands": [

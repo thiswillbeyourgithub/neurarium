@@ -1,4 +1,10 @@
 {
+ "almotriptan": {
+  "published_date": "Jan 08, 2026",
+  "setid": "6fa380c4-c885-4743-85bf-88819ae68645",
+  "spl_version": 10,
+  "title": "ALMOTRIPTAN TABLET, FILM COATED [AJANTA PHARMA USA INC.]"
+ },
  "alprazolam": {
   "published_date": "Sep 02, 2026",
   "setid": "a23063c0-099a-4256-b95f-3a857bbf704b",
@@ -137,6 +143,12 @@
   "spl_version": 2,
   "title": "DONEPEZIL HYDROCHLORIDE TABLET, FILM COATED [REMEDYREPACK INC.]"
  },
+ "eletriptan": {
+  "published_date": "May 21, 2026",
+  "setid": "49686c51-bbd9-45f0-92b1-8ffa81612e35",
+  "spl_version": 2,
+  "title": "ELETRIPTAN HYDROBROMIDE TABLET, FILM COATED [APNAR PHARMA LP]"
+ },
  "entacapone": {
   "published_date": "Jun 29, 2026",
   "setid": "9d4e886e-edec-471d-b619-bf4828a6b7ce",
@@ -197,6 +209,12 @@
   "spl_version": 3,
   "title": "FOSPHENYTOIN SODIUM INJECTION, SOLUTION [GLENMARK PHARMACEUTICALS INC., USA]"
  },
+ "frovatriptan": {
+  "published_date": "Jun 29, 2026",
+  "setid": "d303af88-e0c1-4fb2-ba8e-83b7e6d163cd",
+  "spl_version": 2,
+  "title": "FROVATRIPTAN SUCCINATE TABLET, FILM COATED [LEADING PHARMA, LLC]"
+ },
  "furosemide": {
   "published_date": "Sep 15, 2026",
   "setid": "0b3d986c-eecc-adbe-e063-6294a90a0fb2",
@@ -232,6 +250,12 @@
   "setid": "b9a0ca8c-593c-48e8-b2a7-d30d5f6e6a9b",
   "spl_version": 3,
   "title": "LACOSAMIDE SOLUTION [NOVADOZ PHARMACEUTICALS LLC]"
+ },
+ "lasmiditan": {
+  "published_date": "Aug 10, 2026",
+  "setid": "aea3358c-ff41-4490-9e6d-c7bf7b3de13f",
+  "spl_version": 16,
+  "title": "REYVOW (LASMIDITAN) TABLET [ELI LILLY AND COMPANY]"
  },
  "levetiracetam": {
   "published_date": "Sep 11, 2026",
@@ -298,6 +322,12 @@
   "setid": "83c7ac15-ece9-47de-b83c-d575544fa449",
   "spl_version": 2,
   "title": "CESAMET (NABILONE) CAPSULE [BAUSCH HEALTH US LLC]"
+ },
+ "naratriptan": {
+  "published_date": "Aug 12, 2026",
+  "setid": "63ea356f-0895-4540-b242-8e611eacd938",
+  "spl_version": 1,
+  "title": "NARATRIPTAN TABLET [ASCLEMED USA INC.]"
  },
  "nefazodone": {
   "published_date": "Nov 17, 2025",
@@ -514,6 +544,12 @@
   "setid": "b1f52226-4fb4-48bf-8bfd-0c9df6ca02fa",
   "spl_version": 14,
   "title": "ZIPRASIDONE HYDROCHLORIDE (ZIPRASIDONE HCL) CAPSULE [GOLDEN STATE MEDICAL SUPPLY, INC.]"
+ },
+ "zolmitriptan": {
+  "published_date": "Jan 30, 2026",
+  "setid": "333caafc-2e63-49f8-a0c6-534e528d228d",
+  "spl_version": 14,
+  "title": "ZOLMITRIPTAN TABLET, FILM COATED [GLENMARK PHARMACEUTICALS INC.,USA]"
  },
  "zolpidem": {
   "published_date": "Sep 07, 2026",

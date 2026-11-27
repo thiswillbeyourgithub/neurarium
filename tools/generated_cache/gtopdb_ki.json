@@ -118,6 +118,30 @@
     }
    }
   },
+  "almotriptan": {
+   "5ht1b": {
+    "action": "agonist",
+    "pmid": "11134654",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "almotriptan",
+     "provenance": "verified",
+     "quote": "almotriptan at 5-HT1B receptor (HTR1B, Human): Agonist / Agonist, pIC50 7.92 [PMID 11134654]",
+     "species": "Human"
+    }
+   },
+   "5ht1d": {
+    "action": "agonist",
+    "pmid": "11134654",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "almotriptan",
+     "provenance": "verified",
+     "quote": "almotriptan at 5-HT1D receptor (HTR1D, Human): Agonist / Agonist, pIC50 7.89 [PMID 11134654]",
+     "species": "Human"
+    }
+   }
+  },
   "alprazolam": {
    "gaba_a": {
     "action": "pam",
@@ -5154,6 +5178,103 @@
     }
    }
   },
+  "eletriptan": {
+   "5ht1a": {
+    "action": "agonist",
+    "ki": {
+     "max": 39.8107,
+     "median": 39.8107,
+     "min": 39.8107,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "10193663",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "eletriptan",
+     "provenance": "verified",
+     "quote": "eletriptan at 5-HT1A receptor (HTR1A, Human): Agonist / Full agonist, pKi 7.4 [PMID 10193663]",
+     "species": "Human"
+    }
+   },
+   "5ht1b": {
+    "action": "agonist",
+    "ki": {
+     "max": 10.0,
+     "median": 10.0,
+     "min": 10.0,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "10193663",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "eletriptan",
+     "provenance": "verified",
+     "quote": "eletriptan at 5-HT1B receptor (HTR1B, Human): Agonist / Full agonist, pKi 8 [PMID 10193663]",
+     "species": "Human"
+    }
+   },
+   "5ht1d": {
+    "action": "agonist",
+    "ki": {
+     "max": 1.2589,
+     "median": 1.2589,
+     "min": 1.2589,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "10193663",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "eletriptan",
+     "provenance": "verified",
+     "quote": "eletriptan at 5-HT1D receptor (HTR1D, Human): Agonist / Full agonist, pKi 8.9 [PMID 10193663]",
+     "species": "Human"
+    }
+   },
+   "5ht1e": {
+    "action": "agonist",
+    "ki": {
+     "max": 63.0957,
+     "median": 63.0957,
+     "min": 63.0957,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "10193663",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "eletriptan",
+     "provenance": "verified",
+     "quote": "eletriptan at 5-ht1e receptor (HTR1E, Human): Agonist / Full agonist, pKi 7.2 [PMID 10193663]",
+     "species": "Human"
+    }
+   },
+   "5ht1f": {
+    "action": "agonist",
+    "ki": {
+     "max": 10.0,
+     "median": 10.0,
+     "min": 10.0,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "10193663",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "eletriptan",
+     "provenance": "verified",
+     "quote": "eletriptan at 5-HT1F receptor (HTR1F, Human): Agonist / Full agonist, pKi 8 [PMID 10193663]",
+     "species": "Human"
+    }
+   }
+  },
   "entacapone": {
    "comt": {
     "action": "blocker",
@@ -5893,6 +6014,65 @@
      "page": "fosaprepitant",
      "provenance": "verified",
      "quote": "fosaprepitant at NK1 receptor (TACR1, Human): Antagonist / Antagonist, pIC50 8.92 [PMID 10737756]",
+     "species": "Human"
+    }
+   }
+  },
+  "frovatriptan": {
+   "5ht1a": {
+    "action": "agonist",
+    "ki": {
+     "max": 60.256,
+     "median": 60.256,
+     "min": 60.256,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9986723",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "frovatriptan",
+     "provenance": "verified",
+     "quote": "frovatriptan at 5-HT1A receptor (HTR1A, Human): Agonist / Agonist, pKi 7.22 [PMID 9986723]",
+     "species": "Human"
+    }
+   },
+   "5ht1b": {
+    "action": "agonist",
+    "ki": {
+     "max": 10.2329,
+     "median": 10.2329,
+     "min": 10.2329,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9986723",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "frovatriptan",
+     "provenance": "verified",
+     "quote": "frovatriptan at 5-HT1B receptor (HTR1B, Human): Agonist / Agonist, pKi 7.99 [PMID 9986723]",
+     "species": "Human"
+    }
+   },
+   "5ht1d": {
+    "action": "agonist",
+    "ki": {
+     "max": 4.3652,
+     "median": 4.3652,
+     "min": 4.3652,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9986723",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "frovatriptan",
+     "provenance": "verified",
+     "quote": "frovatriptan at 5-HT1D receptor (HTR1D, Human): Agonist / Agonist, pKi 8.36 [PMID 9986723]",
      "species": "Human"
     }
    }
@@ -6885,6 +7065,27 @@
      "provenance": "verified",
      "quote": "lamotrigine at Nav1.2 (Scn2a, Rat): Channel blocker / Pore blocker, pIC50 4.5 [PMID 12604088]",
      "species": "Rat"
+    }
+   }
+  },
+  "lasmiditan": {
+   "5ht1f": {
+    "action": "agonist",
+    "ki": {
+     "max": 1.9953,
+     "median": 1.9953,
+     "min": 1.9953,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "20855361",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "lasmiditan",
+     "provenance": "verified",
+     "quote": "lasmiditan at 5-HT1F receptor (HTR1F, Human): Agonist / Full agonist, pKi 8.7 [PMID 20855361]",
+     "species": "Human"
     }
    }
   },
@@ -8917,6 +9118,103 @@
      "page": "naltrexone",
      "provenance": "verified",
      "quote": "naltrexone at μ receptor (OPRM1, Human): Antagonist / Antagonist, pKi 9.15-9.7 [PMID 9686407]",
+     "species": "Human"
+    }
+   }
+  },
+  "naratriptan": {
+   "5ht1a": {
+    "action": "agonist",
+    "ki": {
+     "max": 79.4328,
+     "median": 52.2758,
+     "min": 25.1189,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9205951",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "naratriptan",
+     "provenance": "verified",
+     "quote": "naratriptan at 5-HT1A receptor (HTR1A, Human): Agonist / Full agonist, pKi 7.1-7.6 [PMID 9205951]",
+     "species": "Human"
+    }
+   },
+   "5ht1b": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 7.9433,
+     "median": 7.9433,
+     "min": 7.9433,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "10193663",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "naratriptan",
+     "provenance": "verified",
+     "quote": "naratriptan at 5-HT1B receptor (HTR1B, Human): Agonist / Partial agonist, pKi 8.1 [PMID 10193663]",
+     "species": "Human"
+    }
+   },
+   "5ht1d": {
+    "action": "agonist",
+    "ki": {
+     "max": 3.9811,
+     "median": 2.4905,
+     "min": 1.0,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "10193663",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "naratriptan",
+     "provenance": "verified",
+     "quote": "naratriptan at 5-HT1D receptor (HTR1D, Human): Agonist / Full agonist, pKi 8.4-9 [PMID 10193663]",
+     "species": "Human"
+    }
+   },
+   "5ht1e": {
+    "action": "agonist",
+    "ki": {
+     "max": 19.9526,
+     "median": 19.9526,
+     "min": 19.9526,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "10193663",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "naratriptan",
+     "provenance": "verified",
+     "quote": "naratriptan at 5-ht1e receptor (HTR1E, Human): Agonist / Full agonist, pKi 7.7 [PMID 10193663]",
+     "species": "Human"
+    }
+   },
+   "5ht1f": {
+    "action": "agonist",
+    "ki": {
+     "max": 6.3096,
+     "median": 6.3096,
+     "min": 6.3096,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "15900510",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "naratriptan",
+     "provenance": "verified",
+     "quote": "naratriptan at 5-HT1F receptor (HTR1F, Human): Agonist / Full agonist, pKi 8.2 [PMID 15900510]",
      "species": "Human"
     }
    }
@@ -14688,6 +14986,103 @@
      "page": "ziprasidone",
      "provenance": "verified",
      "quote": "ziprasidone at SERT (SLC6A4, Human): Inhibitor / Inhibition, pKi 7.28",
+     "species": "Human"
+    }
+   }
+  },
+  "zolmitriptan": {
+   "5ht1a": {
+    "action": "agonist",
+    "ki": {
+     "max": 251.1886,
+     "median": 251.1886,
+     "min": 251.1886,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "10193663",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "zolmitriptan",
+     "provenance": "verified",
+     "quote": "zolmitriptan at 5-HT1A receptor (HTR1A, Human): Agonist / Full agonist, pKi 6.6 [PMID 10193663]",
+     "species": "Human"
+    }
+   },
+   "5ht1b": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 19.9526,
+     "median": 19.9526,
+     "min": 19.9526,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "10193663",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "zolmitriptan",
+     "provenance": "verified",
+     "quote": "zolmitriptan at 5-HT1B receptor (HTR1B, Human): Agonist / Partial agonist, pKi 7.7 [PMID 10193663]",
+     "species": "Human"
+    }
+   },
+   "5ht1d": {
+    "action": "agonist",
+    "ki": {
+     "max": 1.2589,
+     "median": 1.2589,
+     "min": 1.2589,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "10193663",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "zolmitriptan",
+     "provenance": "verified",
+     "quote": "zolmitriptan at 5-HT1D receptor (HTR1D, Human): Agonist / Full agonist, pKi 8.9 [PMID 10193663]",
+     "species": "Human"
+    }
+   },
+   "5ht1e": {
+    "action": "agonist",
+    "ki": {
+     "max": 19.9526,
+     "median": 19.9526,
+     "min": 19.9526,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "10193663",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "zolmitriptan",
+     "provenance": "verified",
+     "quote": "zolmitriptan at 5-ht1e receptor (HTR1E, Human): Agonist / Full agonist, pKi 7.7 [PMID 10193663]",
+     "species": "Human"
+    }
+   },
+   "5ht1f": {
+    "action": "agonist",
+    "ki": {
+     "max": 39.8107,
+     "median": 35.7167,
+     "min": 31.6228,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "15900510",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "zolmitriptan",
+     "provenance": "verified",
+     "quote": "zolmitriptan at 5-HT1F receptor (HTR1F, Human): Agonist / Full agonist, pKi 7.4-7.5 [PMID 15900510]",
      "species": "Human"
     }
    }

@@ -55,6 +55,20 @@
    "5.1"
   ]
  },
+ "almotriptan": {
+  "cis": "64165648",
+  "date_source": "file mtime",
+  "denomination": "ALMOTRIPTAN ARROW 12,5 mg, comprimé pelliculé",
+  "fetched": "2026-11-27",
+  "page": "64165648",
+  "sections": [
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
  "alprazolam": {
   "cis": "60647049",
   "date_source": "justelesRCP scrape manifest last_fetch",
@@ -855,6 +869,20 @@
    "5.1"
   ]
  },
+ "eletriptan": {
+  "cis": "63476564",
+  "date_source": "file mtime",
+  "denomination": "RELPAX 40 mg, comprimé pelliculé",
+  "fetched": "2026-11-27",
+  "page": "63476564",
+  "sections": [
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
  "entacapone": {
   "cis": "65562898",
   "date_source": "file mtime",
@@ -1107,6 +1135,20 @@
    "5.1"
   ]
  },
+ "frovatriptan": {
+  "cis": "60435263",
+  "date_source": "file mtime",
+  "denomination": "TIGREAT 2,5 mg, comprimé pelliculé",
+  "fetched": "2026-11-27",
+  "page": "60435263",
+  "sections": [
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
  "furosemide": {
   "cis": "61547571",
   "date_source": "file mtime",
@@ -1331,6 +1373,31 @@
   "denomination": "LAMICTAL 2 mg, comprimé dispersible ou à croquer",
   "fetched": "2026-07-19",
   "page": "61043653",
+  "sections": [
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
+ "lasmiditan": {
+  "date_source": "download date",
+  "denomination": "Rayvow (EMEA/H/C/005332)",
+  "ema": {
+   "authorised": "2022-08-17",
+   "epar": "https://www.ema.europa.eu/en/medicines/human/EPAR/rayvow",
+   "generic": false,
+   "holder": "Eli Lilly Nederland B.V.",
+   "language": "fr",
+   "number": "EMEA/H/C/005332",
+   "pdf": "https://www.ema.europa.eu/fr/documents/product-information/rayvow-epar-product-information_fr.pdf",
+   "pi_updated": "2026-02-06",
+   "product": "Rayvow",
+   "status": "Authorised"
+  },
+  "fetched": "2026-11-27",
+  "page": "EMEA-H-C-005332",
   "sections": [
    "4.1",
    "4.2",
@@ -1762,6 +1829,20 @@
   "denomination": "NALTREXONE VIATRIS 50 mg, comprimé pelliculé sécable",
   "fetched": "2026-07-27",
   "page": "60370919",
+  "sections": [
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
+ "naratriptan": {
+  "cis": "67586588",
+  "date_source": "file mtime",
+  "denomination": "NARAMIG 2,5 mg, comprimé pelliculé",
+  "fetched": "2026-11-27",
+  "page": "67586588",
   "sections": [
    "4.1",
    "4.2",
@@ -2821,6 +2902,20 @@
   "denomination": "PRIALT 100 microgrammes/ml, solution pour perfusion",
   "fetched": "2026-09-30",
   "page": "66495139",
+  "sections": [
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
+ "zolmitriptan": {
+  "cis": "68232350",
+  "date_source": "file mtime",
+  "denomination": "ZOMIG 2,5 mg, comprimé pelliculé",
+  "fetched": "2026-11-27",
+  "page": "68232350",
   "sections": [
    "4.1",
    "4.2",

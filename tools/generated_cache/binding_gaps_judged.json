@@ -2762,5 +2762,225 @@
    "pick": true,
    "action": "antagonist"
   }
+ ],
+ "almotriptan": [
+  {
+   "index": 0,
+   "target": "5ht1b",
+   "pick": true,
+   "action": "agonist",
+   "qid": "35f6e27e"
+  },
+  {
+   "index": 1,
+   "target": "5ht1d",
+   "pick": true,
+   "action": "agonist",
+   "qid": "35f6e27e"
+  }
+ ],
+ "eletriptan": [
+  {
+   "index": 0,
+   "target": "5ht1b",
+   "pick": false,
+   "reason": "side-effect mechanism sentence; direction picked from the RCP 5.1 candidate",
+   "qid": "98f2e0c7"
+  },
+  {
+   "index": 1,
+   "target": "5ht1b",
+   "pick": false,
+   "reason": "potency comparison; direction picked from the RCP 5.1 candidate",
+   "qid": "f34faa84"
+  },
+  {
+   "index": 2,
+   "target": "5ht1d",
+   "pick": false,
+   "reason": "potency comparison; direction picked from the RCP 5.1 candidate",
+   "qid": "f34faa84"
+  },
+  {
+   "index": 3,
+   "target": "5ht2a",
+   "pick": true,
+   "action": "agonist",
+   "qid": "f34faa84"
+  },
+  {
+   "index": 4,
+   "target": "5ht1b",
+   "pick": true,
+   "action": "agonist",
+   "qid": "89d97430"
+  },
+  {
+   "index": 5,
+   "target": "5ht1d",
+   "pick": true,
+   "action": "agonist",
+   "qid": "89d97430"
+  },
+  {
+   "index": 6,
+   "target": "5ht1a",
+   "pick": false,
+   "reason": "affinity only, no direction",
+   "qid": "f66d89d6"
+  },
+  {
+   "index": 7,
+   "target": "5ht1e",
+   "pick": false,
+   "reason": "affinity only, no direction",
+   "qid": "f66d89d6"
+  },
+  {
+   "index": 8,
+   "target": "5ht1f",
+   "pick": false,
+   "reason": "affinity only, no direction",
+   "qid": "f66d89d6"
+  },
+  {
+   "index": 9,
+   "target": "5ht2b",
+   "pick": false,
+   "reason": "affinity only, no direction",
+   "qid": "f66d89d6"
+  },
+  {
+   "index": 10,
+   "target": "5ht7",
+   "pick": false,
+   "reason": "affinity only, no direction",
+   "qid": "f66d89d6"
+  }
+ ],
+ "frovatriptan": [
+  {
+   "index": 0,
+   "target": "5ht1b",
+   "pick": true,
+   "action": "agonist",
+   "qid": "9cfe02bd"
+  },
+  {
+   "index": 1,
+   "target": "5ht1d",
+   "pick": true,
+   "action": "agonist",
+   "qid": "9cfe02bd"
+  },
+  {
+   "index": 2,
+   "target": "5ht1f",
+   "pick": true,
+   "action": "agonist",
+   "qid": "9cfe02bd"
+  },
+  {
+   "index": 3,
+   "target": "5ht7",
+   "pick": true,
+   "action": "agonist",
+   "qid": "38bd969e"
+  },
+  {
+   "index": 4,
+   "target": "5ht1b",
+   "pick": false,
+   "reason": "same claim already picked from prose candidate 0",
+   "qid": "76ed2d4f"
+  },
+  {
+   "index": 5,
+   "target": "5ht1d",
+   "pick": false,
+   "reason": "same claim already picked from prose candidate 1",
+   "qid": "76ed2d4f"
+  }
+ ],
+ "lasmiditan": [
+  {
+   "index": 0,
+   "target": "5ht1f",
+   "pick": true,
+   "action": "agonist",
+   "qid": "0578512e"
+  },
+  {
+   "index": 1,
+   "target": "5ht1f",
+   "pick": false,
+   "reason": "same claim already picked from prose candidate 0",
+   "qid": "3961c6e1"
+  }
+ ],
+ "zolmitriptan": [
+  {
+   "index": 0,
+   "target": "5ht1b",
+   "pick": true,
+   "action": "agonist",
+   "qid": "6ca107f7"
+  },
+  {
+   "index": 1,
+   "target": "5ht1d",
+   "pick": true,
+   "action": "agonist",
+   "qid": "6ca107f7"
+  },
+  {
+   "index": 2,
+   "target": "mao_a",
+   "pick": false,
+   "reason": "about moclobemide raising a metabolite exposure, not zolmitriptan acting on MAO-A",
+   "qid": "40fa3d8d"
+  },
+  {
+   "index": 3,
+   "target": "5ht1a",
+   "pick": false,
+   "reason": "weak affinity, no direction",
+   "qid": "78cdd55d"
+  },
+  {
+   "index": 4,
+   "target": "5ht1b",
+   "pick": false,
+   "reason": "same claim already picked from candidate 0",
+   "qid": "78cdd55d"
+  },
+  {
+   "index": 5,
+   "target": "5ht1d",
+   "pick": false,
+   "reason": "same claim already picked from candidate 1",
+   "qid": "78cdd55d"
+  },
+  {
+   "index": 6,
+   "target": "5ht1b",
+   "pick": false,
+   "reason": "effect sentence; same claim already picked from candidate 0",
+   "qid": "e6a27fac"
+  },
+  {
+   "index": 7,
+   "target": "5ht1d",
+   "pick": false,
+   "reason": "effect sentence; same claim already picked from candidate 1",
+   "qid": "e6a27fac"
+  },
+  {
+   "index": 8,
+   "target": "cgrp",
+   "pick": false,
+   "reason": "inhibits CGRP release, not an action on the CGRP receptor; animal statement",
+   "qid": "f919ed73"
+  }
  ]
 }

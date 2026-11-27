@@ -3550,5 +3550,281 @@
     "qid": "fe42d4d4"
    }
   ]
+ },
+ {
+  "drug": "almotriptan",
+  "name": "Almotriptan",
+  "slug": "almotriptan",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "5ht1b",
+    "target_name": "5-HT1B",
+    "origin": "rcp_5.1",
+    "line": "L'almotriptan est un agoniste sélectif des récepteurs 5HT1B et 5HT1D. Ces récepteurs sont impliqués dans la vasoconstriction de certains vaisseaux sanguins intracrâniens comme cela a été démontré dans des études conduites sur des préparations isolées de tissus humains.",
+    "corpus": "bdpm_rcp",
+    "page": "64165648",
+    "qid": "35f6e27e"
+   },
+   {
+    "target": "5ht1d",
+    "target_name": "5-HT1D",
+    "origin": "rcp_5.1",
+    "line": "L'almotriptan est un agoniste sélectif des récepteurs 5HT1B et 5HT1D. Ces récepteurs sont impliqués dans la vasoconstriction de certains vaisseaux sanguins intracrâniens comme cela a été démontré dans des études conduites sur des préparations isolées de tissus humains.",
+    "corpus": "bdpm_rcp",
+    "page": "64165648",
+    "qid": "35f6e27e"
+   }
+  ]
+ },
+ {
+  "drug": "eletriptan",
+  "name": "Eletriptan",
+  "slug": "eletriptan",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "5ht1b",
+    "target_name": "5-HT1B",
+    "origin": "prose",
+    "line": "This is due to the unusual side effect of coronary vasoconstriction due to serotonin 5-HT 1B receptor agonism, which can precipitate a heart attack in those already at risk.",
+    "qid": "98f2e0c7"
+   },
+   {
+    "target": "5ht1b",
+    "target_name": "5-HT1B",
+    "origin": "prose",
+    "line": "The drug is also notable in being a weak serotonin 5-HT 2A receptor agonist ( EC 50 = 851 nM), albeit with about two to three orders of magnitude lower activational potency than at the serotonin 5-HT 1B and 5-HT 1D receptors.",
+    "qid": "f34faa84"
+   },
+   {
+    "target": "5ht1d",
+    "target_name": "5-HT1D",
+    "origin": "prose",
+    "line": "The drug is also notable in being a weak serotonin 5-HT 2A receptor agonist ( EC 50 = 851 nM), albeit with about two to three orders of magnitude lower activational potency than at the serotonin 5-HT 1B and 5-HT 1D receptors.",
+    "qid": "f34faa84"
+   },
+   {
+    "target": "5ht2a",
+    "target_name": "5-HT2A",
+    "origin": "prose",
+    "line": "The drug is also notable in being a weak serotonin 5-HT 2A receptor agonist ( EC 50 = 851 nM), albeit with about two to three orders of magnitude lower activational potency than at the serotonin 5-HT 1B and 5-HT 1D receptors.",
+    "qid": "f34faa84"
+   },
+   {
+    "target": "5ht1b",
+    "target_name": "5-HT1B",
+    "origin": "rcp_5.1",
+    "line": "L'élétriptan est un agoniste sélectif des récepteurs vasculaires 5-HT1B et des récepteurs neuronaux 5-HT1D.",
+    "corpus": "bdpm_rcp",
+    "page": "63476564",
+    "qid": "89d97430"
+   },
+   {
+    "target": "5ht1d",
+    "target_name": "5-HT1D",
+    "origin": "rcp_5.1",
+    "line": "L'élétriptan est un agoniste sélectif des récepteurs vasculaires 5-HT1B et des récepteurs neuronaux 5-HT1D.",
+    "corpus": "bdpm_rcp",
+    "page": "63476564",
+    "qid": "89d97430"
+   },
+   {
+    "target": "5ht1a",
+    "target_name": "5-HT1A",
+    "origin": "rcp_5.1",
+    "line": "L'élétriptan montre également une affinité importante pour les récepteurs 5-HT1F, ce qui peut contribuer à son mécanisme d'action antimigraineux. L'élétriptan montre une affinité modeste pour les récepteurs recombinants humains 5-HT1A, 5-HT2B, 5-HT1E et 5-HT7.",
+    "corpus": "bdpm_rcp",
+    "page": "63476564",
+    "qid": "f66d89d6"
+   },
+   {
+    "target": "5ht1e",
+    "target_name": "5-HT1E",
+    "origin": "rcp_5.1",
+    "line": "L'élétriptan montre également une affinité importante pour les récepteurs 5-HT1F, ce qui peut contribuer à son mécanisme d'action antimigraineux. L'élétriptan montre une affinité modeste pour les récepteurs recombinants humains 5-HT1A, 5-HT2B, 5-HT1E et 5-HT7.",
+    "corpus": "bdpm_rcp",
+    "page": "63476564",
+    "qid": "f66d89d6"
+   },
+   {
+    "target": "5ht1f",
+    "target_name": "5-HT1F",
+    "origin": "rcp_5.1",
+    "line": "L'élétriptan montre également une affinité importante pour les récepteurs 5-HT1F, ce qui peut contribuer à son mécanisme d'action antimigraineux. L'élétriptan montre une affinité modeste pour les récepteurs recombinants humains 5-HT1A, 5-HT2B, 5-HT1E et 5-HT7.",
+    "corpus": "bdpm_rcp",
+    "page": "63476564",
+    "qid": "f66d89d6"
+   },
+   {
+    "target": "5ht2b",
+    "target_name": "5-HT2B",
+    "origin": "rcp_5.1",
+    "line": "L'élétriptan montre également une affinité importante pour les récepteurs 5-HT1F, ce qui peut contribuer à son mécanisme d'action antimigraineux. L'élétriptan montre une affinité modeste pour les récepteurs recombinants humains 5-HT1A, 5-HT2B, 5-HT1E et 5-HT7.",
+    "corpus": "bdpm_rcp",
+    "page": "63476564",
+    "qid": "f66d89d6"
+   },
+   {
+    "target": "5ht7",
+    "target_name": "5-HT7",
+    "origin": "rcp_5.1",
+    "line": "L'élétriptan montre également une affinité importante pour les récepteurs 5-HT1F, ce qui peut contribuer à son mécanisme d'action antimigraineux. L'élétriptan montre une affinité modeste pour les récepteurs recombinants humains 5-HT1A, 5-HT2B, 5-HT1E et 5-HT7.",
+    "corpus": "bdpm_rcp",
+    "page": "63476564",
+    "qid": "f66d89d6"
+   }
+  ]
+ },
+ {
+  "drug": "frovatriptan",
+  "name": "Frovatriptan",
+  "slug": "frovatriptan",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "5ht1b",
+    "target_name": "5-HT1B",
+    "origin": "prose",
+    "line": "Frovatriptan is a serotonin receptor agonist , with high affinity for the serotonin 5-HT 1B and 5-HT 1D receptors and with weaker activity at the serotonin 5-HT 1F receptor .",
+    "qid": "9cfe02bd"
+   },
+   {
+    "target": "5ht1d",
+    "target_name": "5-HT1D",
+    "origin": "prose",
+    "line": "Frovatriptan is a serotonin receptor agonist , with high affinity for the serotonin 5-HT 1B and 5-HT 1D receptors and with weaker activity at the serotonin 5-HT 1F receptor .",
+    "qid": "9cfe02bd"
+   },
+   {
+    "target": "5ht1f",
+    "target_name": "5-HT1F",
+    "origin": "prose",
+    "line": "Frovatriptan is a serotonin receptor agonist , with high affinity for the serotonin 5-HT 1B and 5-HT 1D receptors and with weaker activity at the serotonin 5-HT 1F receptor .",
+    "qid": "9cfe02bd"
+   },
+   {
+    "target": "5ht7",
+    "target_name": "5-HT7",
+    "origin": "prose",
+    "line": "Uniquely among most triptans, frovatriptan is also a relatively potent serotonin 5-HT 7 receptor agonist .",
+    "qid": "38bd969e"
+   },
+   {
+    "target": "5ht1b",
+    "target_name": "5-HT1B",
+    "origin": "rcp_5.1",
+    "line": "Le frovatriptan est un agoniste sélectif des récepteurs 5-HT. Il présente une forte affinité pour les sites de liaison 5-HT1B et 5-HT1D dans des dosages radioligands et présente des effets agonistes puissants sur les récepteurs 5-HT1B et 5-HT1D dans des biodosages fonctionnels.",
+    "corpus": "bdpm_rcp",
+    "page": "60435263",
+    "qid": "76ed2d4f"
+   },
+   {
+    "target": "5ht1d",
+    "target_name": "5-HT1D",
+    "origin": "rcp_5.1",
+    "line": "Le frovatriptan est un agoniste sélectif des récepteurs 5-HT. Il présente une forte affinité pour les sites de liaison 5-HT1B et 5-HT1D dans des dosages radioligands et présente des effets agonistes puissants sur les récepteurs 5-HT1B et 5-HT1D dans des biodosages fonctionnels.",
+    "corpus": "bdpm_rcp",
+    "page": "60435263",
+    "qid": "76ed2d4f"
+   }
+  ]
+ },
+ {
+  "drug": "lasmiditan",
+  "name": "Lasmiditan",
+  "slug": "lasmiditan",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "5ht1f",
+    "target_name": "5-HT1F",
+    "origin": "prose",
+    "line": "Lasmiditan is a serotonin receptor agonist that, like the unsuccessful LY-334,370 , selectively binds to the 5-HT 1F receptor subtype.",
+    "qid": "0578512e"
+   },
+   {
+    "target": "5ht1f",
+    "target_name": "5-HT1F",
+    "origin": "rcp_5.1",
+    "line": "Le lasmiditan est un agoniste du récepteur de la 5-hydroxytryptamine (5-HT1F) qui possède une forte affinité pour ce récepteur, pénétrant au niveau central. Le mécanisme d’action précis est inconnu, cependant les effets thérapeutiques du lasmiditan dans le traitement de la migraine implique probablement des effets agonistes du récepteur 5-HT1F, une diminution de la libération de neuropeptides et une inhibition des voies de la douleur, dont le nerf trijumeau.",
+    "corpus": "bdpm_rcp",
+    "page": "EMEA-H-C-005332",
+    "qid": "3961c6e1"
+   }
+  ]
+ },
+ {
+  "drug": "zolmitriptan",
+  "name": "Zolmitriptan",
+  "slug": "zolmitriptan",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "5ht1b",
+    "target_name": "5-HT1B",
+    "origin": "prose",
+    "line": "The drug acts as a selective serotonin 5-HT 1B and 5-HT 1D receptor agonist .",
+    "qid": "6ca107f7"
+   },
+   {
+    "target": "5ht1d",
+    "target_name": "5-HT1D",
+    "origin": "prose",
+    "line": "The drug acts as a selective serotonin 5-HT 1B and 5-HT 1D receptor agonist .",
+    "qid": "6ca107f7"
+   },
+   {
+    "target": "mao_a",
+    "target_name": "Monoamine oxidase A (MAO-A)",
+    "origin": "prose",
+    "line": "The reversible inhibitor of MAO-A (RIMA) moclobemide combined with zolmitriptan has been found to increase N -desmethylzolmitriptan exposure and peak levels by 1.5- to 3-fold.",
+    "qid": "40fa3d8d"
+   },
+   {
+    "target": "5ht1a",
+    "target_name": "5-HT1A",
+    "origin": "prose",
+    "line": "Zolmitriptan is a selective serotonin 5-HT 1B and 5-HT 1D receptor agonist with weak affinity for the serotonin 5-HT 1A receptor .",
+    "qid": "78cdd55d"
+   },
+   {
+    "target": "5ht1b",
+    "target_name": "5-HT1B",
+    "origin": "prose",
+    "line": "Zolmitriptan is a selective serotonin 5-HT 1B and 5-HT 1D receptor agonist with weak affinity for the serotonin 5-HT 1A receptor .",
+    "qid": "78cdd55d"
+   },
+   {
+    "target": "5ht1d",
+    "target_name": "5-HT1D",
+    "origin": "prose",
+    "line": "Zolmitriptan is a selective serotonin 5-HT 1B and 5-HT 1D receptor agonist with weak affinity for the serotonin 5-HT 1A receptor .",
+    "qid": "78cdd55d"
+   },
+   {
+    "target": "5ht1b",
+    "target_name": "5-HT1B",
+    "origin": "prose",
+    "line": "Its action on serotonin 5-HT 1B and 5-HT 1D receptors causes vasoconstriction in intracranial blood vessels ; as well it can inhibit the release of pro-inflammatory neuropeptides from trigeminal perivascular nerve endings .",
+    "qid": "e6a27fac"
+   },
+   {
+    "target": "5ht1d",
+    "target_name": "5-HT1D",
+    "origin": "prose",
+    "line": "Its action on serotonin 5-HT 1B and 5-HT 1D receptors causes vasoconstriction in intracranial blood vessels ; as well it can inhibit the release of pro-inflammatory neuropeptides from trigeminal perivascular nerve endings .",
+    "qid": "e6a27fac"
+   },
+   {
+    "target": "cgrp",
+    "target_name": "CGRP receptor",
+    "origin": "rcp_5.1",
+    "line": "Chez l’animal, le zolmitriptan, grâce à son activité agoniste sur les récepteurs 5HT1, induit une vasoconstriction et une inhibition de la libération du peptide lié au gène de la calcitonine (CGRP), du peptide vasoactif intestinal (VIP) et de la substance P.",
+    "corpus": "bdpm_rcp",
+    "page": "68232350",
+    "qid": "f919ed73"
+   }
+  ]
  }
 ]
