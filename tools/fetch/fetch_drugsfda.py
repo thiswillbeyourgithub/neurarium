@@ -84,6 +84,7 @@ FDA_NAMES: dict[str, list[str]] = {
     "valproate": ["valproic acid", "divalproex", "valproate"],
     "thc": ["dronabinol"],
     "triiodothyronine": ["liothyronine"],
+    "chlorphenamine": ["chlorpheniramine"],
 }
 
 
