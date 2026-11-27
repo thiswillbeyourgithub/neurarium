@@ -8733,6 +8733,13 @@
      "line": "In December 2019, the US Food and Drug Administration approved Ubrelvy produced by Allergan USA, Inc.",
      "context": "23% of patients were taking a preventive medication for migraine.",
      "qid": "462aad1d"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "ubrogepant",
+     "line": "Elle n'est pas commercialisé en France en 2025.",
+     "context": "L' ubrogepant est une molécule de la famille des gépants , inhibitrice du récepteur au peptide relié au gène calcitonine , utilisé comme médicament de la migraine , .",
+     "qid": "f5c23766"
     }
    ]
   },
@@ -8745,6 +8752,13 @@
      "line": "Atogepant was approved for medical use in the United States in September 2021, and in the European Union in August 2023.",
      "context": "The most common side effects include nausea, constipation, tiredness, somnolence (sleepiness), decreased appetite, and decreased weight.",
      "qid": "852c4c72"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "atogepant",
+     "line": "Il a été approuvé pour un usage médical aux États-Unis en septembre 2021 et en France en décembre 2023 .",
+     "context": "Il s'agit d'un gépant , un antagoniste des récepteurs au peptide relié au gène de la calcitonine (CGRPR) actif par voie orale , .",
+     "qid": "81334d86"
     }
    ]
   },
@@ -8776,6 +8790,18 @@
      "line": "United States production of methysergide (Sansert) was discontinued on the manufacturer's own behalf in 2002.",
      "context": "market after taking over Sandoz , but currently lists it as a discontinued product.",
      "qid": "cc21d66e"
+    }
+   ]
+  },
+  "dihydroergotamine": {
+   "name": "Dihydroergotamine",
+   "candidates": [
+    {
+     "corpus": "wikipedia_fr",
+     "page": "dihydroergotamine",
+     "line": "La dihydroergotamine est un médicament dérivé de l' ergot de seigle principalement utilisé dans le traitement de la migraine qui a été introduit dans les années 1970, sous la marque Séglor et Ikaran.",
+     "context": "bile",
+     "qid": "21bb765e"
     }
    ]
   }

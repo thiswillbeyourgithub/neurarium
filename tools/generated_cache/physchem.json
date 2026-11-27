@@ -773,6 +773,33 @@
     "value": 3.8
    }
   },
+  "atogepant": {
+   "cid": 72163100,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "72163100",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 104 Å²"
+     }
+    ],
+    "value": 104.0
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "72163100",
+      "provenance": "verified",
+      "quote": "XLogP3: 3.4"
+     }
+    ],
+    "value": 3.4
+   }
+  },
   "atomoxetine": {
    "bbb": {
     "label": "BBB+",
@@ -3318,6 +3345,46 @@
     "value": 2.2
    }
   },
+  "dihydroergotamine": {
+   "bbb": {
+    "label": "BBB-",
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "10531",
+      "provenance": "verified",
+      "quote": "B3DB row 1884: dihydroergotamine | CID 10531 | logBB - | BBB- | group B | references R1, R24, R27, R30"
+     }
+    ]
+   },
+   "cid": 10531,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "10531",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 118 Å²"
+     }
+    ],
+    "value": 118.0
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "10531",
+      "provenance": "verified",
+      "quote": "XLogP3: 2.4"
+     }
+    ],
+    "value": 2.4
+   }
+  },
   "diphenhydramine": {
    "bbb": {
     "label": "BBB+",
@@ -3819,6 +3886,46 @@
      }
     ],
     "value": 0.9
+   }
+  },
+  "ergotamine": {
+   "bbb": {
+    "label": "BBB+",
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "8223",
+      "provenance": "verified",
+      "quote": "B3DB row 6809: ergotamine | CID 8223 | logBB - | BBB+ | group C | references R26, R34"
+     }
+    ]
+   },
+   "cid": 8223,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "8223",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 118 Å²"
+     }
+    ],
+    "value": 118.0
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "8223",
+      "provenance": "verified",
+      "quote": "XLogP3: 2"
+     }
+    ],
+    "value": 2.0
    }
   },
   "escitalopram": {
@@ -6875,6 +6982,46 @@
      }
     ],
     "value": 0.2
+   }
+  },
+  "methysergide": {
+   "bbb": {
+    "label": "BBB+",
+    "match": "name",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "4163",
+      "provenance": "verified",
+      "quote": "B3DB row 5176: methysergide | CID 4163 | logBB - | BBB+ | group C | references R14, R23"
+     }
+    ]
+   },
+   "cid": 9681,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "9681",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 57.5 Å²"
+     }
+    ],
+    "value": 57.5
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "9681",
+      "provenance": "verified",
+      "quote": "XLogP3: 2.3"
+     }
+    ],
+    "value": 2.3
    }
   },
   "metoclopramide": {
@@ -12082,6 +12229,33 @@
      }
     ],
     "value": 3.8
+   }
+  },
+  "ubrogepant": {
+   "cid": 68748835,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "68748835",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 104 Å²"
+     }
+    ],
+    "value": 104.0
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "68748835",
+      "provenance": "verified",
+      "quote": "XLogP3: 3.1"
+     }
+    ],
+    "value": 3.1
    }
   },
   "valbenazine": {
