@@ -117,6 +117,7 @@ FAMILY_BY_GTOPDB_FAMILY: dict[str, str] = {
     "Nicotinic acetylcholine receptors (nACh)": "cholinergic",
     "Opioid receptors": "opioidergic",
     "Sigma receptors": "sigma",
+    "Tachykinin receptors": "tachykinin",
 }
 
 # Transducer family -> the sign it implies. Narrow on purpose: only the three canonical

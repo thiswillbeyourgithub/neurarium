@@ -1212,6 +1212,23 @@
     "type": "lgic",
     "type_quote": "nicotinic acetylcholine receptor \u03b11 subunit (CHRNA1), GtoPdb target 462 | type: lgic | family: Nicotinic acetylcholine receptors (nACh)"
   },
+  "nk1": {
+    "family": "Tachykinin receptors",
+    "gene": "TACR1",
+    "kind": "receptor",
+    "target_id": 360,
+    "target_name": "NK1 receptor",
+    "transduction": [
+      {
+        "effectors": "Adenylyl cyclase stimulation, Phospholipase C stimulation",
+        "quote": "NK1 receptor (TACR1), GtoPdb target 360 | transduction: Gs family, Gq/G11 family | effectors: Adenylyl cyclase stimulation, Phospholipase C stimulation",
+        "secondary": false,
+        "transducers": "Gs family, Gq/G11 family"
+      }
+    ],
+    "type": "gpcr",
+    "type_quote": "NK1 receptor (TACR1), GtoPdb target 360 | type: gpcr | family: Tachykinin receptors"
+  },
   "nmda": {
     "family": "Ionotropic glutamate receptors",
     "gene": "GRIN1",
@@ -1231,6 +1248,16 @@
     "transduction": [],
     "type": "enzyme",
     "type_quote": "phosphodiesterase 5A (PDE5A), GtoPdb target 1304 | type: enzyme | family: Phosphodiesterases, 3',5'-cyclic nucleotide (PDEs)"
+  },
+  "ryr1": {
+    "family": "Ryanodine receptors (RyR)",
+    "gene": "RYR1",
+    "kind": "target",
+    "target_id": 747,
+    "target_name": "RyR1",
+    "transduction": [],
+    "type": "vgic",
+    "type_quote": "RyR1 (RYR1), GtoPdb target 747 | type: vgic | family: Ryanodine receptors (RyR)"
   },
   "sigma1": {
     "family": "Sigma receptors",

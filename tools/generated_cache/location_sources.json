@@ -4522,6 +4522,80 @@
     }
    ]
   },
+  "nk1": {
+   "amygdala": [
+    {
+     "corpus": "gtopdb",
+     "page": 360,
+     "provenance": "verified",
+     "quote": "Striatum > cerebral cortex, hippocampus, amygdala > thalamus, cerebellum.",
+     "species": "Human"
+    }
+   ],
+   "caudate": [
+    {
+     "corpus": "gtopdb",
+     "page": 360,
+     "provenance": "verified",
+     "quote": "Striatum > cerebral cortex, hippocampus, amygdala > thalamus, cerebellum.",
+     "species": "Human"
+    }
+   ],
+   "cerebellum": [
+    {
+     "corpus": "gtopdb",
+     "page": 360,
+     "provenance": "verified",
+     "quote": "Striatum > cerebral cortex, hippocampus, amygdala > thalamus, cerebellum.",
+     "species": "Human"
+    }
+   ],
+   "frontal": [
+    {
+     "corpus": "gtopdb",
+     "page": 360,
+     "provenance": "verified",
+     "quote": "Prefrontal and visual cortex; thin band at the cortical surface and dots of localised on small non-pyramidal cells and in the neuropil (layers I-III).",
+     "species": "Human"
+    }
+   ],
+   "hippocampus": [
+    {
+     "corpus": "gtopdb",
+     "page": 360,
+     "provenance": "verified",
+     "quote": "Striatum > cerebral cortex, hippocampus, amygdala > thalamus, cerebellum.",
+     "species": "Human"
+    }
+   ],
+   "midbrain": [
+    {
+     "corpus": "gtopdb",
+     "page": 360,
+     "provenance": "verified",
+     "quote": "Brainstem auditory nuclei; cochlear nucleus, lateral superior olive, the medial nucleus of the trapezoid body, and inferior colliculus.",
+     "species": "Rat"
+    }
+   ],
+   "putamen": [
+    {
+     "corpus": "gtopdb",
+     "page": 360,
+     "provenance": "verified",
+     "quote": "Striatum > cerebral cortex, hippocampus, amygdala > thalamus, cerebellum.",
+     "species": "Human"
+    }
+   ],
+   "thalamus": [
+    {
+     "corpus": "gtopdb",
+     "page": 360,
+     "provenance": "verified",
+     "quote": "Striatum > cerebral cortex, hippocampus, amygdala > thalamus, cerebellum.",
+     "species": "Human"
+    }
+   ]
+  },
   "sigma1": {
    "cerebellum": [
     {

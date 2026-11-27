@@ -92,6 +92,8 @@ WIKI_ALIASES = {
     "kappaopioid": "kappa", "kopioid": "kappa", "kor": "kappa",
     "nmda": "nmda", "sigma1": "sigma1", "sigmar1": "sigma1", "sigma": "sigma1",
     "vmat2": "vmat2", "cb1": "cb1",
+    "nk1r": "nk1", "neurokinin1": "nk1", "tacr1": "nk1", "substancepreceptor": "nk1",
+    "ryr1": "ryr1", "ryanodinereceptor1": "ryr1", "ryanodinereceptor": "ryr1",
 }
 
 # A subtype-less coarse name we deliberately DROP (no coarse id, exactly as PDSP

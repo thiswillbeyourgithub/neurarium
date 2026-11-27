@@ -68,7 +68,7 @@ RECEPTORS_JSONL = REPO / "public" / "data" / "receptors.jsonl"
 # the representative gene (first listed in lib.gene_maps.TARGET_GENES), the isoform our
 # entry actually models.
 CLASS_TARGETS = ("carbonic_anhydrase", "pde5", "cav_t", "melanocortin", "muscarinic", "alpha1",
-                 "dopamine")
+                 "dopamine", "ryr1")
 TARGET_GENES: dict[str, str] = {tid: _TARGET_GENE_LISTS[tid][0] for tid in CLASS_TARGETS}
 
 

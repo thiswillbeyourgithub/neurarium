@@ -46,6 +46,7 @@ class ReceptorTest(unittest.TestCase):
         "glycinergic": 1,
         "purinergic": 1,
         "sigma": 1,
+        "tachykinin": 1,
     }
 
     @classmethod
@@ -53,16 +54,16 @@ class ReceptorTest(unittest.TestCase):
         cls.receptors = _load_jsonl(DATA_DIR / "receptors.jsonl")
 
     def test_count_and_unique_ids(self):
-        self.assertEqual(len(self.receptors), 62)
+        self.assertEqual(len(self.receptors), 63)
         ids = [r["id"] for r in self.receptors]
-        self.assertEqual(len(set(ids)), 62, "receptor ids are not unique")
+        self.assertEqual(len(set(ids)), 63, "receptor ids are not unique")
 
     def test_family_distribution(self):
         counts = {}
         for r in self.receptors:
             counts[r["family"]] = counts.get(r["family"], 0) + 1
         self.assertEqual(counts, self.EXPECTED_FAMILIES)
-        self.assertEqual(sum(counts.values()), 62)
+        self.assertEqual(sum(counts.values()), 63)
 
 
 class ReferentialIntegrityTest(unittest.TestCase):

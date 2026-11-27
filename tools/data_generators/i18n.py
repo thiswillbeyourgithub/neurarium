@@ -676,6 +676,7 @@ FR: dict[str, str] = {
     "Purinergic": "Purinergique",
     "Sigma": "Sigma",
     "Melatonergic": "Mélatoninergique",
+    "Tachykinin": "Tachykinine",
     "Ionotropic (ligand-gated ion channel)":
         "Ionotrope (canal ionique ligand-dépendant)",
     "Metabotropic (GPCR)": "Métabotrope (RCPG)",
@@ -699,6 +700,7 @@ FR: dict[str, str] = {
     "Glycine": "Glycine",
     "Endocannabinoids": "Endocannabinoïdes",
     "Adenosine": "Adénosine",
+    "Substance P": "Substance P",
     "Sigma ligands": "Ligands sigma",
     "Melatonin": "Mélatonine",
 }

@@ -146,6 +146,8 @@ STAHL_ESSENTIAL_RECEPTOR_QUOTES: dict[str, dict[str, Any]] = {
     "mt1": _SE_MELATONIN, "mt2": _SE_MELATONIN,
     "h3": _stahl_ess(421, "Histamine 3 (H3) receptors are presynaptic autoreceptors"),
     "h4": _stahl_ess(422, "There is a fourth type of histamine receptor, H4"),
+    # Pain-circuit figure legend: names substance P as NK1's transmitter, nothing more.
+    "nk1": _stahl_ess(399, "substance P (NK1, 2, and 3 receptors)"),
 }
 
 # A receptor's classification is NOT one claim but four independent ones, each its
@@ -211,7 +213,7 @@ RECEPTOR_CLASSIFICATION_COVERAGE: dict[str, tuple[str, ...]] = {
     # only the presynaptic site is backed, not the sign.
     "cb1": _FY,
     # Existence-only / enumeration quotes: family alone.
-    "a2a": _F, "sigma1": _F, "mt1": _F, "mt2": _F, "h4": _F,
+    "a2a": _F, "sigma1": _F, "mt1": _F, "mt2": _F, "h4": _F, "nk1": _F,
     # H3 "presynaptic autoreceptors": family + site.
     "h3": _FY,
 }

@@ -21,6 +21,7 @@ from . import (
     purinergic,
     serotonergic,
     sigma,
+    tachykinin,
 )
 
 RECEPTORS: list[dict[str, Any]] = (
@@ -37,4 +38,5 @@ RECEPTORS: list[dict[str, Any]] = (
     + purinergic.ENTRIES
     + sigma.ENTRIES
     + melatonergic.ENTRIES
+    + tachykinin.ENTRIES
 )

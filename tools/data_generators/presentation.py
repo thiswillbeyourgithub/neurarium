@@ -125,6 +125,7 @@ RECEPTOR_FAMILY_LABELS: dict[str, str] = {
     "purinergic": "Purinergic",
     "sigma": "Sigma",
     "melatonergic": "Melatonergic",
+    "tachykinin": "Tachykinin",
 }
 # Receptor mechanism class. "chaperone" is here for the sigma-1 receptor, which is
 # neither a ligand-gated channel nor a GPCR but an intracellular ER chaperone.
@@ -149,6 +150,7 @@ RECEPTOR_FAMILY_COLORS: dict[str, str] = {
     "purinergic": "#6b9bd2",       # mid blue, lighter than the inhibitory blue
     "sigma": "#a89bb5",            # muted lilac
     "melatonergic": PROJECTION_COLORS["melatonergic"],
+    "tachykinin": "#c9806b",       # terracotta: a neuropeptide, no modeled projection
 }
 
 RECEPTOR_CLASS_LABELS: dict[str, str] = {

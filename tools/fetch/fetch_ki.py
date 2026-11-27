@@ -76,7 +76,7 @@ GENE_TO_ID = {
     "HRH1": "h1", "HRH2": "h2", "HRH3": "h3", "HRH4": "h4",
     "OPRM1": "mu", "OPRD1": "delta", "OPRK1": "kappa",
     "SLC6A4": "sert", "SLC6A3": "dat", "SLC6A2": "net", "SLC18A2": "vmat2",
-    "CNR1": "cb1", "ADORA2A": "a2a", "SIGMAR1": "sigma1",
+    "CNR1": "cb1", "ADORA2A": "a2a", "SIGMAR1": "sigma1", "TACR1": "nk1",
     "CHRNA7": "nachr_a7", "MAOA": "mao_a", "MAOB": "mao_b",
 }
 

@@ -91,6 +91,7 @@ EXTRA_TARGET_GENES: dict[str, list[str]] = {
     # alpha2D is the rodent orthologue of the human alpha2A gene.
     "alpha2d": ["ADRA2A"],
     "mt1": ["MTNR1A"], "mt2": ["MTNR1B"],
+    "nk1": ["TACR1"],
 }
 
 # GtoPdb files INN spellings and markup-bearing names; map ours onto theirs. Both

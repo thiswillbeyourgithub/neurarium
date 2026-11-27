@@ -1846,6 +1846,32 @@
     }
    ]
   },
+  "nk1": {
+   "family": [
+    {
+     "corpus": "gtopdb_class",
+     "page": 360,
+     "provenance": "verified",
+     "quote": "NK1 receptor (TACR1), GtoPdb target 360 | type: gpcr | family: Tachykinin receptors"
+    }
+   ],
+   "receptor_class": [
+    {
+     "corpus": "gtopdb_class",
+     "page": 360,
+     "provenance": "verified",
+     "quote": "NK1 receptor (TACR1), GtoPdb target 360 | type: gpcr | family: Tachykinin receptors"
+    }
+   ],
+   "sign": [
+    {
+     "corpus": "gtopdb_class",
+     "page": 360,
+     "provenance": "verified",
+     "quote": "NK1 receptor (TACR1), GtoPdb target 360 | transduction: Gs family, Gq/G11 family | effectors: Adenylyl cyclase stimulation, Phospholipase C stimulation"
+    }
+   ]
+  },
   "nmda": {
    "family": [
     {
@@ -2006,6 +2032,14 @@
     "page": 1304,
     "provenance": "verified",
     "quote": "phosphodiesterase 5A (PDE5A), GtoPdb target 1304 | type: enzyme | family: Phosphodiesterases, 3',5'-cyclic nucleotide (PDEs)"
+   }
+  ],
+  "ryr1": [
+   {
+    "corpus": "gtopdb_class",
+    "page": 747,
+    "provenance": "verified",
+    "quote": "RyR1 (RYR1), GtoPdb target 747 | type: vgic | family: Ryanodine receptors (RyR)"
    }
   ]
  }

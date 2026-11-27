@@ -677,6 +677,15 @@ DRUG_TARGETS: dict[str, dict[str, Any]] = {
               "type": "ion_channel", "system": None,
               "wikipedia": "https://en.wikipedia.org/wiki/T-type_calcium_channel",
               "regions": ["thalamus", "frontal", "temporal"]},
+    # The skeletal-muscle calcium-release channel of the sarcoplasmic reticulum,
+    # dantrolene's target. Peripheral like the muscle nAChR receptor: no brain
+    # region is claimed (empty footprint), so a drug acting on it lights nothing
+    # and drives no flow, while its binding still lists and sources normally.
+    "ryr1": {"name": {"en": "Ryanodine receptor 1 (RyR1)",
+                      "fr": "Récepteur de la ryanodine 1 (RyR1)"},
+             "type": "ion_channel", "system": None,
+             "wikipedia": "https://en.wikipedia.org/wiki/RYR1",
+             "regions": []},
     # The enzyme that MAKES dopamine (and serotonin) out of its amino-acid
     # precursor, so it is the one enzyme here a drug can feed rather than only block:
     # levodopa is its substrate. Filed under the dopaminergic system because every

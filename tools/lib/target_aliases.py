@@ -143,6 +143,11 @@ EXTRA_ALIASES: dict[str, list[str]] = {
     "cav": ["calcium channel", "calcium channels", "sodium and calcium channels"],
     # The coarse group target. The boundary rule already keeps "alpha2" off "alpha2A".
     "alpha2": ["alpha2 adrenergic", "alpha2 autoreceptor", "alpha2 adrenoceptor"],
+    # The substance P receptor goes by its neurokinin number and its transmitter.
+    "nk1": ["NK1R", "neurokinin 1", "neurokinin-1", "neurokinin 1 receptor",
+            "substance P receptor", "TACR1"],
+    # The skeletal-muscle ryanodine receptor; prose rarely gives the subtype number.
+    "ryr1": ["ryanodine receptor", "ryanodine receptor 1", "ryanodine receptor type 1", "RYR1"],
 }
 
 

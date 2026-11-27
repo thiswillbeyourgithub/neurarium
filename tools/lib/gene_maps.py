@@ -41,6 +41,8 @@ RECEPTOR_GENES: dict[str, str] = {
     # others
     "cb1": "CNR1", "a2a": "ADORA2A", "mt1": "MTNR1A", "mt2": "MTNR1B",
     "sigma1": "SIGMAR1", "glycine": "GLRA1",
+    # tachykinin (substance P)
+    "nk1": "TACR1",
 }
 
 
@@ -84,6 +86,8 @@ TARGET_GENES = {
     "cav": ["CACNA1A", "CACNA1B", "CACNA1C"],
     "cav_a2d": ["CACNA2D1", "CACNA2D2"],
     "cav_t": ["CACNA1G", "CACNA1H", "CACNA1I"],
+    # skeletal-muscle sarcoplasmic reticulum calcium-release channel (peripheral).
+    "ryr1": ["RYR1"],
     "sv2a": ["SV2A"],
     # GABA transaminase, the enzyme that degrades GABA (vigabatrin's target).
     "gaba_t": ["ABAT"],

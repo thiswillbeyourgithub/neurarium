@@ -28,7 +28,7 @@ LOCAL_INTERNEURON_REGIONS: dict[tuple[str, str], str] = {
 # Receptor families acting locally, with no single source nucleus to draw a pathway from.
 LOCAL_SYSTEMS: dict[str, str] = {
     fam: "local neuromodulator / fast transmitter, no single source nucleus"
-    for fam in ("opioidergic", "cannabinoid", "sigma", "glycinergic", "purinergic",
+    for fam in ("opioidergic", "cannabinoid", "sigma", "glycinergic", "purinergic", "tachykinin",
                 "glutamatergic", "gabaergic")
 }
 

@@ -838,6 +838,29 @@
      "species": "Human"
     }
    ]
+  },
+  "nk1": {
+   "donors": 6,
+   "profile": {
+    "amygdala": 0.22,
+    "caudate": 1.42,
+    "cerebellum": -0.78,
+    "frontal": -0.17,
+    "hippocampus": -0.21,
+    "midbrain": 0.46,
+    "putamen": 1.19,
+    "thalamus": -0.07
+   },
+   "reliability": 0.8,
+   "sources": [
+    {
+     "corpus": "allen_ahba",
+     "page": "TACR1",
+     "provenance": "verified",
+     "quote": "TACR1 relative expression across 6 donors (9861,10021,12876,14380,15496,15697), probe 1024641, within-donor z-score of log2 intensity, cross-donor profile agreement r=+0.80: caudate +1.42 (6d), putamen +1.19 (6d), midbrain +0.46 (6d), amygdala +0.22 (6d), thalamus -0.07 (6d), frontal -0.17 (6d), hippocampus -0.21 (6d), cerebellum -0.78 (6d)",
+     "species": "Human"
+    }
+   ]
   }
  },
  "targets": {
