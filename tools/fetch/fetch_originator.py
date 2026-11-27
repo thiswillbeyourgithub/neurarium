@@ -70,7 +70,7 @@ COMPANY_ARTICLES: dict[str, list[str]] = {
     "astra_ab": ["Astra AB"],
     "beecham_group": ["Beecham"],
     "boots_company": ["Boots"],
-    "bristol_myers_squibb": ["Bristol-Myers Squibb"],
+    "bristol_myers_squibb": ["Bristol-Myers Squibb", "Bristol-Myers"],
     "eisai_company": ["Eisai"],
     "eli_lilly_and_company": ["Eli Lilly and Company"],
     "farmitalia": ["Farmitalia-Carlo Erba"],

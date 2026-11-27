@@ -249,6 +249,14 @@
   "butobarbital": {
    "status": "none"
   },
+  "butorphanol": {
+   "application": "NDA017857",
+   "applications": 2,
+   "date": "1978-08-22",
+   "quote": "NDA017857 | STADOL | BUTORPHANOL TARTRATE | INJECTABLE | ORIG approved 1978-08-22",
+   "status": "found",
+   "year": 1978
+  },
   "cabergoline": {
    "application": "NDA020664",
    "applications": 1,
@@ -423,6 +431,14 @@
   "cyclobarbital": {
    "status": "none"
   },
+  "cyclobenzaprine": {
+   "application": "NDA017821",
+   "applications": 3,
+   "date": "1977-08-26",
+   "quote": "NDA017821 | FLEXERIL | CYCLOBENZAPRINE HYDROCHLORIDE | TABLET | ORIG approved 1977-08-26",
+   "status": "found",
+   "year": 1977
+  },
   "cyproheptadine": {
    "application": "NDA012649",
    "applications": 2,
@@ -494,6 +510,9 @@
     "NDA218623"
    ],
    "status": "undated"
+  },
+  "dihydrocodeine": {
+   "status": "none"
   },
   "dimenhydrinate": {
    "status": "none"
@@ -884,6 +903,9 @@
    ],
    "status": "undated"
   },
+  "levomethadone": {
+   "status": "none"
+  },
   "levomilnacipran": {
    "application": "NDA204168",
    "class": "Type 2 - New Active Ingredient",
@@ -1132,6 +1154,14 @@
    "status": "found",
    "year": 1985
   },
+  "nalbuphine": {
+   "application": "NDA018024",
+   "applications": 2,
+   "date": "1979-05-15",
+   "quote": "NDA018024 | NUBAIN | NALBUPHINE HYDROCHLORIDE | SOLUTION | ORIG approved 1979-05-15",
+   "status": "found",
+   "year": 1979
+  },
   "nalmefene": {
    "application": "NDA020459",
    "applications": 3,
@@ -1229,6 +1259,14 @@
   "opium": {
    "status": "none"
   },
+  "orphenadrine": {
+   "application": "NDA010653",
+   "applications": 3,
+   "date": "1957-05-10",
+   "quote": "NDA010653 | DISIPAL | ORPHENADRINE HYDROCHLORIDE | TABLET | ORIG approved 1957-05-10",
+   "status": "found",
+   "year": 1957
+  },
   "oxazepam": {
    "application": "NDA015539",
    "applications": 1,
@@ -1252,6 +1290,12 @@
    "application": "NDA020932",
    "class": "Type 3 - New Dosage Form",
    "date": "1998-10-26",
+   "status": "superseded"
+  },
+  "oxymorphone": {
+   "application": "NDA011707",
+   "class": "Type 3 - New Dosage Form",
+   "date": "1959-04-02",
    "status": "superseded"
   },
   "paliperidone": {

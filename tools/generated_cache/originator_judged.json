@@ -734,7 +734,17 @@
    "name": "Janssen Pharmaceutica",
    "company": "janssen_pharmaceuticals",
    "qid": "15af4da3"
-  }
+  },
+  "butorphanol": {
+   "index": 0,
+   "name": "Bristol-Myers",
+   "company": "bristol_myers_squibb",
+   "qid": "e11c0245"
+  },
+  "oxymorphone": null,
+  "dihydrocodeine": null,
+  "nalbuphine": null,
+  "orphenadrine": null
  },
  "companies": {
   "novartis": {

@@ -8122,6 +8122,155 @@
      "qid": "bb004474"
     }
    ]
+  },
+  "oxymorphone": {
+   "name": "Oxymorphone",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "oxymorphone",
+     "line": "It was patented in 1955 and approved for medical use in 1959.",
+     "context": "Oxymorphone was developed in Germany in 1914.",
+     "qid": "96bc1f6c"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "oxymorphone",
+     "line": "It was introduced in the United States in January 1959 and other countries around the same time.",
+     "context": "Oxymorphone was first developed in Germany in 1914, and patented in the US by Endo Pharmaceuticals in 1955.",
+     "qid": "a2b0f8b0"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "oxymorphone",
+     "line": "In 1924, the United States banned the sale and importation of opium for the manufacture of heroin, an opioid pain medication which was being abused.",
+     "context": "HK20 (20 mgs) oblong white.",
+     "qid": "bd9f62c2"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "oxymorphone",
+     "line": "The FDA launched a post-marketing safety study regarding the reformulation of Opana ER in 2012 and the Indiana state government helped fund another study exploring the link between HIV infection and injection use of oxymorphone in Indiana from 2014 to 2015.",
+     "context": "The CDC opened a larger investigation into all disease outbreaks involving Opana ER, focusing on the incidence of thrombotic thrombocytopenic purpura (TTP)-like illness in the 2012 Tennessee outbreak, as well as the 2015 HIV outbreak in Indiana.",
+     "qid": "710d6bd9"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "oxymorphone",
+     "line": "In their 8 June 2017 press release they also noted that, this was the first time the FDA had taken steps to \"remove a currently marketed opioid pain medication from sale due to public health consequences of abuse.\" By 6 July 2017, Endo International voluntarily complied with the FDA removal request.",
+     "context": "In June 2017, faced with the public health crisis, the opioid epidemic, the FDA asked Endo Pharmaceuticals to \"remove its opioid pain medication, reformulated Opana ER (oxymorphone hydrochloride), from the market\".",
+     "qid": "14b6157d"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "oxymorphone",
+     "line": "D’abord développée en Allemagne vers 1914, elle est brevetée aux États-Unis par la compagnie pharmaceutique Endo Pharmaceuticals en 1955 et introduite sur le marché américain en janvier 1959 et par la suite dans de nombreux autres pays à travers le monde.",
+     "context": "Son absorption peut être potentialisée fortement en présence d'alcool, ce qui peut créer une surdose.",
+     "qid": "7ff3bdc7"
+    }
+   ]
+  },
+  "dihydrocodeine": {
+   "name": "Dihydrocodeine",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "dihydrocodeine",
+     "line": "It was developed in Germany in 1908 and first marketed in 1911.",
+     "context": "Dihydrocodeine , sold under the brand name Dicodin among others, is a semi- synthetic opioid analgesic prescribed for pain or severe dyspnea , or as an antitussive , either alone or compounded with paracetamol (acetaminophen) (as in co-dydramol ) or aspirin .",
+     "qid": "1bde2449"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "dihydrocodeine",
+     "line": "It was first described in 1911 and approved for medical use in 1948.",
+     "context": "Dihydrocodeine is used as an alternative to codeine and similarly belongs to step 2 of the WHO analgesic ladder .",
+     "qid": "5c1efbd0"
+    }
+   ]
+  },
+  "nalbuphine": {
+   "name": "Nalbuphine",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "nalbuphine",
+     "line": "Nalbuphine was patented in 1968 and was introduced for medical use in the United States in 1979.",
+     "context": "Specifically, it acts as a moderate- efficacy partial agonist or antagonist of the μ-opioid receptor (MOR) and as a high-efficacy partial agonist of the κ-opioid receptor (KOR), whereas it has relatively low affinity for the δ-opioid receptor (DOR) and sigma receptors .",
+     "qid": "3d08b374"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "nalbuphine",
+     "line": "Nalbuphine was first synthesized in 1965 and was introduced for medical use in the United States in 1979.",
+     "context": "It is marketed in many countries throughout the world.",
+     "qid": "7c9bde44"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "nalbuphine",
+     "line": "Nubain was approved for marketing in the United States in 1978 and remains as the only opioid analgesic of this type (marketed in the U.S.) not controlled under the Controlled Substances Act (CSA).",
+     "context": "2001).",
+     "qid": "fa80513d"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "nalbuphine",
+     "line": "Nubain, the Astra USA brand name for injectable nalbuphine HCL, was discontinued from being marketed in 2008 in the United States for commercial reasons (Federal Register 2008);",
+     "context": "Nalbuphine HCL is currently available only as an injectable in the US and the European Union .",
+     "qid": "b07047ad"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "nalbuphine",
+     "line": "Nalbuphine was initially designated as a Schedule II controlled substance in the United States along with other opioids upon the introduction of the 1970 Controlled Substances Act .",
+     "context": "This is because whereas MOR agonists produce euphoria, MOR antagonists do not, and KOR agonists like nalbuphine moreover actually produce dysphoria .",
+     "qid": "e619ca8e"
+    }
+   ]
+  },
+  "butorphanol": {
+   "name": "Butorphanol",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "butorphanol",
+     "line": "It was patented in 1971 and approved for medical use in 1979.",
+     "context": "The tablet form is only used in dogs, cats and horses due to low bioavailability in humans.",
+     "qid": "2484be09"
+    }
+   ]
+  },
+  "cyclobenzaprine": {
+   "name": "Cyclobenzaprine",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "cyclobenzaprine",
+     "line": "Cyclobenzaprine was approved for medical use in the United States in 1977.",
+     "context": "Chemically, it is very similar to tricyclic antidepressants like amitriptyline .",
+     "qid": "fde74ca5"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "cyclobenzaprine",
+     "line": "L'utilisation médicale de la cyclobenzaprine a été approuvée aux États-Unis en 1977 , elle est disponible en tant que médicament générique .",
+     "context": "La cyclobenzaprine , vendue entre autres sous le nom de marque Flexeril .",
+     "qid": "999037d7"
+    }
+   ]
+  },
+  "orphenadrine": {
+   "name": "Orphenadrine",
+   "candidates": [
+    {
+     "corpus": "wikipedia_fr",
+     "page": "orph_nadrine",
+     "line": "L'orphénadrine a été développée dans les années 1940 et approuvée pour un usage médical aux États-Unis en 1957 , .",
+     "context": "Il est pris par voie orale ou par injection .",
+     "qid": "4a77214b"
+    }
+   ]
   }
  }
 }

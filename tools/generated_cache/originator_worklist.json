@@ -5173,6 +5173,109 @@
      "qid": "15af4da3"
     }
    ]
+  },
+  "oxymorphone": {
+   "name": "Oxymorphone",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "oxymorphone",
+     "line": "Oxymorphone was developed in Germany in 1914.",
+     "qid": "2a4d23eb"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "oxymorphone",
+     "line": "Oxymorphone was first developed in Germany in 1914, and patented in the US by Endo Pharmaceuticals in 1955.",
+     "qid": "2ac574c1"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "oxymorphone",
+     "line": "Since 2013, with greatly increasing morbidity and deaths from overdoses of synthetic opioids, such as oxycodone , tramadol , and fentanyl , this issue has developed into a full-fledged epidemic.",
+     "qid": "e530f7f2"
+    }
+   ]
+  },
+  "dihydrocodeine": {
+   "name": "Dihydrocodeine",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "dihydrocodeine",
+     "line": "It was developed in Germany in 1908 and first marketed in 1911.",
+     "qid": "1bde2449"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "dihydrocodeine",
+     "line": "It was first described in 1911 and approved for medical use in 1948.",
+     "qid": "5c1efbd0"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "dihydrocodeine",
+     "line": "Dihydrocodeine was developed during the search for more effective cough medication, especially to help reduce the spread of tuberculosis, pertussis, and pneumonia in the years from c.a.",
+     "qid": "4c26ada9"
+    }
+   ]
+  },
+  "nalbuphine": {
+   "name": "Nalbuphine",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "nalbuphine",
+     "line": "Nalbuphine was first synthesized in 1965 and was introduced for medical use in the United States in 1979.",
+     "qid": "7c9bde44"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "nalbuphine",
+     "line": "In the search for opioid analgesics with less abuse potential than pure MOR agonist opioids, a number of semisynthetic opioids were developed.",
+     "qid": "c283713a"
+    }
+   ]
+  },
+  "butorphanol": {
+   "name": "Butorphanol",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "butorphanol",
+     "line": "Butorphanol is a morphinan -type synthetic agonist–antagonist opioid analgesic developed by Bristol-Myers .",
+     "qid": "e11c0245"
+    }
+   ]
+  },
+  "orphenadrine": {
+   "name": "Orphenadrine",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "orphenadrine",
+     "line": "It was discovered and developed in the 1940s.",
+     "qid": "c191afca"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "orphenadrine",
+     "line": "In 1943, one of his students, Fred Huber, synthesized diphenhydramine .",
+     "qid": "8d1581d7"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "orphenadrine",
+     "line": "While he was there, he led the development of orphenadrine, an analog of diphenhydramine.",
+     "qid": "85bd14bd"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "orphenadrine",
+     "line": "Prior to the development of amantadine in the late 1960s and then other drugs, anticholinergics like orphenadrine were the mainstay of Parkinson's treatment.",
+     "qid": "7304a665"
+    }
+   ]
   }
  },
  "companies": {

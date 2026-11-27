@@ -2503,5 +2503,65 @@
    "qid": "bb004474"
   },
   "withdrawals": []
+ },
+ "oxymorphone": {
+  "approval": {
+   "agency": null,
+   "country": "us",
+   "index": 1,
+   "year": 1959,
+   "qid": "a2b0f8b0"
+  },
+  "withdrawals": []
+ },
+ "dihydrocodeine": {
+  "approval": {
+   "agency": null,
+   "country": null,
+   "index": 0,
+   "year": 1911,
+   "qid": "1bde2449"
+  },
+  "withdrawals": []
+ },
+ "nalbuphine": {
+  "approval": {
+   "agency": null,
+   "country": "us",
+   "index": 2,
+   "year": 1978,
+   "qid": "fa80513d"
+  },
+  "withdrawals": []
+ },
+ "butorphanol": {
+  "approval": {
+   "agency": null,
+   "country": null,
+   "index": 0,
+   "year": 1979,
+   "qid": "2484be09"
+  },
+  "withdrawals": []
+ },
+ "cyclobenzaprine": {
+  "approval": {
+   "agency": null,
+   "country": "us",
+   "index": 0,
+   "year": 1977,
+   "qid": "fde74ca5"
+  },
+  "withdrawals": []
+ },
+ "orphenadrine": {
+  "approval": {
+   "agency": null,
+   "country": "us",
+   "index": 0,
+   "year": 1957,
+   "qid": "4a77214b"
+  },
+  "withdrawals": []
  }
 }
