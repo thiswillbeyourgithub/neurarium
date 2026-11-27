@@ -180,6 +180,7 @@ def boot(page, base: str, lang: str) -> None:
 
 def walk(page, max_actions: int = 200) -> list[str]:
     """Advance to the end; return a list of problems (empty = clean run)."""
+    from playwright.sync_api import TimeoutError as PwTimeout
     problems, seen = [], set()
     total, stuck = 0, 0
     for _ in range(max_actions):
@@ -190,6 +191,15 @@ def walk(page, max_actions: int = 200) -> list[str]:
         if n not in seen:
             seen.add(n)
             print(f"step {n}/{total}: {state['title']}")
+        # A reader sees nothing until the step's reveal drops pre-reveal (a scrollTo step
+        # holds it up to REVEAL_WAIT_MAX_MS while its row scrolls in), so acting earlier
+        # reads the previous step's ring, and a panel wheel then sets userScrolled and
+        # stops the tour re-centring its target (a step-19 flake once).
+        try:
+            page.wait_for_function("() => !document.querySelector('#tour-root.pre-reveal')",
+                                   timeout=8000)
+        except PwTimeout:
+            pass  # a stuck reveal surfaces as a no-progress retry below
         page.wait_for_timeout(400)  # let before() + the reveal timer run, like a reader
         what = act(page, page.evaluate(STATE_JS), stuck)
         if "is a link" in what:
