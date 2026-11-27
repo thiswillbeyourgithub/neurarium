@@ -476,5 +476,53 @@
    "index": 2,
    "qid": "cb57e634"
   }
+ ],
+ "palonosetron": [
+  {
+   "index": 1,
+   "qid": "dd54aff2"
+  },
+  {
+   "index": 9,
+   "qid": "05de936b"
+  }
+ ],
+ "tropisetron": [
+  {
+   "index": 1,
+   "qid": "406c2506"
+  }
+ ],
+ "metopimazine": [
+  {
+   "index": 1,
+   "qid": "cf6f9458"
+  }
+ ],
+ "alizapride": [
+  {
+   "index": 1,
+   "qid": "13afe961"
+  }
+ ],
+ "cyclizine": [
+  {
+   "index": 13,
+   "qid": "247260d1"
+  },
+  {
+   "index": 14,
+   "qid": "e6b3dd06"
+  }
+ ],
+ "chlorphenamine": [
+  {
+   "index": 1,
+   "qid": "eb8d43dc"
+  },
+  {
+   "index": 4,
+   "qid": "55c67097"
+  }
  ]
 }
