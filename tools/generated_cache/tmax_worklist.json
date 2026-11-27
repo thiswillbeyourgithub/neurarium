@@ -5819,5 +5819,221 @@
     "qid": "f4dbc97d"
    }
   ]
+ },
+ "zolmitriptan": {
+  "name": "Zolmitriptan",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "333caafc-2e63-49f8-a0c6-534e528d228d",
+    "line": "The AUC and C max of zolmitriptan are similar following administration of zolmitriptan tablets and zolmitriptan orally disintegrating tablets, but the T max is somewhat later with zolmitriptan orally disintegrating tablets, with a median T max of 3 hours for zolmitriptan orally disintegrating tablet compared with 1.5 hours for the zolmitriptan tablet.",
+    "durations": [
+     {
+      "hours": 3.0
+     },
+     {
+      "hours": 1.5
+     }
+    ],
+    "qid": "3cf49d87"
+   }
+  ]
+ },
+ "eletriptan": {
+  "name": "Eletriptan",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "49686c51-bbd9-45f0-92b1-8ffa81612e35",
+    "line": "Absorption: Eletriptan is well absorbed after oral administration with peak plasma levels occurring approximately 1.5 hours after dosing to healthy subjects.",
+    "durations": [
+     {
+      "hours": 1.5
+     }
+    ],
+    "qid": "b7a930bc"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "49686c51-bbd9-45f0-92b1-8ffa81612e35",
+    "line": "In patients with moderate to severe migraine the median T max is 2.0 hours.",
+    "durations": [
+     {
+      "hours": 2.0
+     }
+    ],
+    "qid": "3219a47e"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "63476564",
+    "line": "Le Tmax moyen est de 1,5 heures après l'administration orale.",
+    "durations": [
+     {
+      "hours": 1.5
+     }
+    ],
+    "qid": "37005f63"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "63476564",
+    "line": "Après une administration orale pendant une crise de migraine, une réduction d'environ 30 % de l'ASC a été observée, et le Tmax a été prolongé jusqu'à 2,8 heures.",
+    "durations": [
+     {
+      "hours": 2.8
+     }
+    ],
+    "qid": "297568a0"
+   }
+  ]
+ },
+ "naratriptan": {
+  "name": "Naratriptan",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "63ea356f-0895-4540-b242-8e611eacd938",
+    "line": "Following administration of a 2.5-mg tablet, the peak concentrations are obtained in 2 to 3 hours.",
+    "durations": [
+     {
+      "hours": 2.0,
+      "hours_max": 3.0
+     }
+    ],
+    "qid": "c723e3bf"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "67586588",
+    "line": "Après administration orale, le naratriptan est absorbé avec des concentrations plasmatiques maximales observées à 2-3 heures.",
+    "durations": [
+     {
+      "hours": 2.0,
+      "hours_max": 3.0
+     }
+    ],
+    "qid": "5efd7e9d"
+   }
+  ]
+ },
+ "almotriptan": {
+  "name": "Almotriptan",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "almotriptan",
+    "line": "C max is observed 1.5–4 hours after oral administration, and approximately 50% of the drug is excreted unchanged in the urine.",
+    "durations": [
+     {
+      "hours": 1.5,
+      "hours_max": 4.0
+     }
+    ],
+    "qid": "2432a39b"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "6fa380c4-c885-4743-85bf-88819ae68645",
+    "line": "The absolute bioavailability of almotriptan is about 70%, with peak plasma levels occurring 1 to 3 hours after administration;",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 3.0
+     }
+    ],
+    "qid": "6cd522a3"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "6fa380c4-c885-4743-85bf-88819ae68645",
+    "line": "Co-administration of almotriptan and moclobemide (150 mg twice daily for 8 days) resulted in a 27% decrease in almotriptan clearance and an increase in C max of approximately 6%.",
+    "durations": [
+     {
+      "hours": 192.0
+     }
+    ],
+    "qid": "45fdf45c"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "64165648",
+    "line": "Les concentrations plasmatiques maximales (Cmax) sont atteintes à peu près entre 1,5 et 3 heures après l'administration.",
+    "durations": [
+     {
+      "hours": 1.5,
+      "hours_max": 3.0
+     }
+    ],
+    "qid": "799c9d48"
+   }
+  ]
+ },
+ "frovatriptan": {
+  "name": "Frovatriptan",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "d303af88-e0c1-4fb2-ba8e-83b7e6d163cd",
+    "line": "Mean maximum blood concentrations (C max ) in patients are achieved approximately 2 to 4 hours after administration of a single oral dose of frovatriptan 2.5 mg.",
+    "durations": [
+     {
+      "hours": 2.0,
+      "hours_max": 4.0
+     }
+    ],
+    "qid": "c5814501"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "60435263",
+    "line": "Après l'administration à des sujets sains d'une dose orale unique de frovatriptan à 2,5 mg, la concentration moyenne maximale déterminée sur sang total (concentration sanguine) en frovatriptan (Cmax), est atteinte entre 2 et 4 heures, elle était de 4,2 ng/ml chez les hommes et 7,0 ng/ml chez les femmes.",
+    "durations": [
+     {
+      "hours": 2.0,
+      "hours_max": 4.0
+     }
+    ],
+    "qid": "fe027e73"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "60435263",
+    "line": "L'alimentation n'a aucun effet significatif sur la biodisponibilité du frovatriptan, mais allonge légèrement le tmax d'environ 1 heure.",
+    "durations": [
+     {
+      "hours": 1.0
+     }
+    ],
+    "qid": "d2b05ee2"
+   }
+  ]
+ },
+ "lasmiditan": {
+  "name": "Lasmiditan",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "aea3358c-ff41-4490-9e6d-c7bf7b3de13f",
+    "line": "Following oral administration, lasmiditan is rapidly absorbed with a median t max of 1.8 hours.",
+    "durations": [
+     {
+      "hours": 1.8
+     }
+    ],
+    "qid": "5d1572ec"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "aea3358c-ff41-4490-9e6d-c7bf7b3de13f",
+    "line": "Coadministration of lasmiditan with a high-fat meal increased the mean lasmiditan C max and AUC values by 22% and 19%, respectively, and delayed the median t max by 1 hour.",
+    "durations": [
+     {
+      "hours": 1.0
+     }
+    ],
+    "qid": "8e9228c9"
+   }
+  ]
  }
 }

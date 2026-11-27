@@ -1003,5 +1003,38 @@
   "hours_max": 4,
   "index": 0,
   "qid": "f4dbc97d"
+ },
+ "zolmitriptan": {
+  "hours": 1.5,
+  "index": 0,
+  "qid": "3cf49d87"
+ },
+ "eletriptan": {
+  "hours": 1.5,
+  "index": 0,
+  "qid": "b7a930bc"
+ },
+ "naratriptan": {
+  "hours": 2.0,
+  "hours_max": 3.0,
+  "index": 0,
+  "qid": "c723e3bf"
+ },
+ "almotriptan": {
+  "hours": 1.0,
+  "hours_max": 3.0,
+  "index": 1,
+  "qid": "6cd522a3"
+ },
+ "frovatriptan": {
+  "hours": 2.0,
+  "hours_max": 4.0,
+  "index": 0,
+  "qid": "c5814501"
+ },
+ "lasmiditan": {
+  "hours": 1.8,
+  "index": 0,
+  "qid": "5d1572ec"
  }
 }

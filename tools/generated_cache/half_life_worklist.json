@@ -7331,5 +7331,312 @@
     "qid": "5c51e19d"
    }
   ]
+ },
+ "zolmitriptan": {
+  "name": "Zolmitriptan",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "zolmitriptan",
+    "line": "Elimination half-life | Zolmitriptan: 3 hours N -Desmethylzolmitriptan: 3.5 hours",
+    "durations": [
+     {
+      "hours": 3.0
+     },
+     {
+      "hours": 3.5
+     }
+    ],
+    "qid": "84e7faba"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "zolmitriptan",
+    "line": "Zolmitriptan has a relatively short elimination half-life of 3 hours, and so symptoms of overdose may be expected to resolve within around 15 hours post-intake.",
+    "durations": [
+     {
+      "hours": 3.0
+     },
+     {
+      "hours": 15.0
+     }
+    ],
+    "qid": "9a0a3c36"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "zolmitriptan",
+    "line": "Zolmitriptan has an elimination half-life of about 3 hours before it undergoes renal elimination ;",
+    "durations": [
+     {
+      "hours": 3.0
+     }
+    ],
+    "qid": "2f80f2f8"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "68232350",
+    "line": "Les demi-vies d’élimination du zolmitriptan et de ses métabolites sont approximativement de 2,5 à 3 heures.",
+    "durations": [
+     {
+      "hours": 2.5,
+      "hours_max": 3.0
+     }
+    ],
+    "qid": "c52cf19c"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "68232350",
+    "line": "Cependant, les ASC du zolmitriptan et du métabolite actif sont légèrement supérieures (16 et 35 %, respectivement) et les demi-vies d’élimination sont légèrement augmentées, soit 3 à 3,5 heures.",
+    "durations": [
+     {
+      "hours": 3.0,
+      "hours_max": 3.5
+     }
+    ],
+    "qid": "5e762e4f"
+   }
+  ]
+ },
+ "eletriptan": {
+  "name": "Eletriptan",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "eletriptan",
+    "line": "Elimination half-life | 4 hours",
+    "durations": [
+     {
+      "hours": 4.0
+     }
+    ],
+    "qid": "f68a9835"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "63476564",
+    "line": "Bien que statistiquement non significative, une légère réduction (16 %) de la clairance, associée à une augmentation statistiquement significative de la demi-vie (d'environ 4,4 à 5,7 heures) est observée chez les personnes âgées (65 à 93 ans) par rapport aux adultes plus jeunes.",
+    "durations": [
+     {
+      "hours": 4.4,
+      "hours_max": 5.7
+     }
+    ],
+    "qid": "d127e85d"
+   }
+  ]
+ },
+ "naratriptan": {
+  "name": "Naratriptan",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "naratriptan",
+    "line": "Elimination half-life | 5–8 hours",
+    "durations": [
+     {
+      "hours": 5.0,
+      "hours_max": 8.0
+     }
+    ],
+    "qid": "c2523384"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "63ea356f-0895-4540-b242-8e611eacd938",
+    "line": "The mean elimination half-life of naratriptan is 6 hours.",
+    "durations": [
+     {
+      "hours": 6.0
+     }
+    ],
+    "qid": "daa8837a"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "63ea356f-0895-4540-b242-8e611eacd938",
+    "line": "Decrease in clearances resulted in an increase of mean half-life from 6 hours (healthy) to 11 hours (range: 7 to 20 hours).",
+    "durations": [
+     {
+      "hours": 6.0
+     },
+     {
+      "hours": 11.0
+     },
+     {
+      "hours": 7.0,
+      "hours_max": 20.0
+     }
+    ],
+    "qid": "d573ac35"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "63ea356f-0895-4540-b242-8e611eacd938",
+    "line": "This resulted in an approximately 40% increase in the half-life (range: 8 to 16 hours).",
+    "durations": [
+     {
+      "hours": 8.0,
+      "hours_max": 16.0
+     }
+    ],
+    "qid": "fe72ae45"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "67586588",
+    "line": "La demi-vie d'élimination moyenne (t½) est de 6 heures.",
+    "durations": [
+     {
+      "hours": 6.0
+     }
+    ],
+    "qid": "158c6215"
+   }
+  ]
+ },
+ "almotriptan": {
+  "name": "Almotriptan",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "almotriptan",
+    "line": "Elimination half-life | 3–4 hours",
+    "durations": [
+     {
+      "hours": 3.0,
+      "hours_max": 4.0
+     }
+    ],
+    "qid": "3ff6f949"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "almotriptan",
+    "line": "Its biological half-life is 3 hours, and its bioavailability 70%.",
+    "durations": [
+     {
+      "hours": 3.0
+     }
+    ],
+    "qid": "f5184ae0"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "6fa380c4-c885-4743-85bf-88819ae68645",
+    "line": "Almotriptan has a mean half-life of 3 to 4 hours.",
+    "durations": [
+     {
+      "hours": 3.0,
+      "hours_max": 4.0
+     }
+    ],
+    "qid": "a96bf6c7"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "6fa380c4-c885-4743-85bf-88819ae68645",
+    "line": "Renal and total clearance, and amount of drug excreted in the urine, were lower in elderly healthy volunteers (age 65 to 76 years) than in younger healthy volunteers (age 19 to 34 years), resulting in longer terminal half-life (3.7 hours vs.",
+    "durations": [
+     {
+      "hours": 3.7
+     }
+    ],
+    "qid": "a108a5cc"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "64165648",
+    "line": "La demi-vie d'élimination est d'environ 3,5 heures chez les sujets sains.",
+    "durations": [
+     {
+      "hours": 3.5
+     }
+    ],
+    "qid": "6102356e"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "64165648",
+    "line": "Après administration par voie intraveineuse d'almotriptan à des sujets sains les valeurs moyennes du volume de distribution, de la clairance totale et de la demi-vie d'élimination ont été respectivement de 195 L, 40 L/h et 3,4 h.",
+    "durations": [
+     {
+      "hours": 3.4
+     }
+    ],
+    "qid": "cc4d1909"
+   }
+  ]
+ },
+ "frovatriptan": {
+  "name": "Frovatriptan",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "frovatriptan",
+    "line": "Elimination half-life | 26–30 hours",
+    "durations": [
+     {
+      "hours": 26.0,
+      "hours_max": 30.0
+     }
+    ],
+    "qid": "db0f8d14"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "frovatriptan",
+    "line": "Frovatriptan has a terminal elimination half-life of approximately 26 hours, making it the longest within its class.",
+    "durations": [
+     {
+      "hours": 26.0
+     }
+    ],
+    "qid": "b6493681"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "d303af88-e0c1-4fb2-ba8e-83b7e6d163cd",
+    "line": "The mean terminal elimination half-life of frovatriptan in both males and females is approximately 26 hours.",
+    "durations": [
+     {
+      "hours": 26.0
+     }
+    ],
+    "qid": "968f4c13"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "60435263",
+    "line": "La demi-vie d'élimination terminale est de l'ordre de 26 heures, indépendamment du sexe, alors que la phase d'élimination terminale seule devient dominante après environ 12 heures.",
+    "durations": [
+     {
+      "hours": 26.0
+     },
+     {
+      "hours": 12.0
+     }
+    ],
+    "qid": "161c29bc"
+   }
+  ]
+ },
+ "lasmiditan": {
+  "name": "Lasmiditan",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "aea3358c-ff41-4490-9e6d-c7bf7b3de13f",
+    "line": "Lasmiditan was eliminated with a geometric mean t ½ value of approximately 5.7 hours.",
+    "durations": [
+     {
+      "hours": 5.7
+     }
+    ],
+    "qid": "3b61fa82"
+   }
+  ]
  }
 }
