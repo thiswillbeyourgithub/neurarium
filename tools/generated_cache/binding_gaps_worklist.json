@@ -3498,5 +3498,57 @@
     "qid": "aab7c472"
    }
   ]
+ },
+ {
+  "drug": "aprepitant",
+  "name": "Aprepitant",
+  "slug": "aprepitant",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "5ht3",
+    "target_name": "5-HT3",
+    "origin": "prose",
+    "line": "It has also been shown to increase the activity of the 5-HT 3 receptor antagonist ondansetron and the corticosteroid dexamethasone , which are also used to prevent nausea and vomiting caused by chemotherapy.",
+    "qid": "2cb75aab"
+   },
+   {
+    "target": "nk1",
+    "target_name": "NK1",
+    "origin": "prose",
+    "line": "In addition to its activity as an NK 1 receptor antagonist, aprepitant has also been identified as a microtubule-targeting agent (MTA).",
+    "qid": "e75338af"
+   }
+  ]
+ },
+ {
+  "drug": "dantrolene",
+  "name": "Dantrolene",
+  "slug": "dantrolene",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "ryr1",
+    "target_name": "Ryanodine receptor 1 (RyR1)",
+    "origin": "prose",
+    "line": "Dantrolene depresses excitation-contraction coupling in skeletal muscle by acting as a receptor antagonist to the ryanodine receptor 1 in the membrane of the sarcoplasmic reticulum.",
+    "qid": "62b7649d"
+   }
+  ]
+ },
+ {
+  "drug": "fosaprepitant",
+  "name": "Fosaprepitant",
+  "slug": "fosaprepitant",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "nk1",
+    "target_name": "NK1",
+    "origin": "prose",
+    "line": "Fosaprepitant is a substance P/ neurokinin-1 (NK 1 ) receptor antagonist .",
+    "qid": "fe42d4d4"
+   }
+  ]
  }
 ]

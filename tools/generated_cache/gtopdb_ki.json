@@ -933,6 +933,27 @@
     }
    }
   },
+  "aprepitant": {
+   "nk1": {
+    "action": "antagonist",
+    "ki": {
+     "max": 0.0891,
+     "median": 0.0891,
+     "min": 0.0891,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9804700",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "aprepitant",
+     "provenance": "verified",
+     "quote": "aprepitant at NK1 receptor (TACR1, Human): Antagonist / Antagonist, pKi 10.05 [PMID 9804700]",
+     "species": "Human"
+    }
+   }
+  },
   "aripiprazole": {
    "5ht1a": {
     "action": "partial_agonist",
@@ -4407,6 +4428,19 @@
     }
    }
   },
+  "dantrolene": {
+   "ryr1": {
+    "action": "antagonist",
+    "pmid": null,
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "dantrolene",
+     "provenance": "verified",
+     "quote": "dantrolene at RyR1 (RYR1, Human): Antagonist / Antagonist, no affinity reported",
+     "species": "Human"
+    }
+   }
+  },
   "daridorexant": {
    "orexin": {
     "action": "antagonist",
@@ -5846,6 +5880,19 @@
      "page": "fluvoxamine",
      "provenance": "verified",
      "quote": "fluvoxamine at sigma receptor chaperone 1 (SIGMAR1, Human): None / Binding, pKi 7.44 [PMID 23641311]",
+     "species": "Human"
+    }
+   }
+  },
+  "fosaprepitant": {
+   "nk1": {
+    "action": "antagonist",
+    "pmid": "10737756",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "fosaprepitant",
+     "provenance": "verified",
+     "quote": "fosaprepitant at NK1 receptor (TACR1, Human): Antagonist / Antagonist, pIC50 8.92 [PMID 10737756]",
      "species": "Human"
     }
    }

@@ -1329,6 +1329,19 @@
      "qid": "8bfc4f40"
     }
    ]
+  },
+  "fosaprepitant": {
+   "name": "Fosaprepitant",
+   "bindings": 0,
+   "metabolites": [],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "fosaprepitant",
+     "line": "It is a prodrug of aprepitant .",
+     "qid": "49c8561a"
+    }
+   ]
   }
  }
 }

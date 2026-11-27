@@ -2728,5 +2728,39 @@
    "reason": "downstream release of glutamate, not a receptor binding",
    "qid": "aab7c472"
   }
+ ],
+ "aprepitant": [
+  {
+   "index": 0,
+   "target": "5ht3",
+   "qid": "2cb75aab",
+   "pick": false,
+   "reason": "the 5-HT3 antagonist is another drug (ondansetron)"
+  },
+  {
+   "index": 1,
+   "target": "nk1",
+   "qid": "e75338af",
+   "pick": true,
+   "action": "antagonist"
+  }
+ ],
+ "fosaprepitant": [
+  {
+   "index": 0,
+   "target": "nk1",
+   "qid": "fe42d4d4",
+   "pick": false,
+   "reason": "prodrug: its NK1 antagonism is aprepitant's, borrowed through the prodrug link, not an own binding"
+  }
+ ],
+ "dantrolene": [
+  {
+   "index": 0,
+   "target": "ryr1",
+   "qid": "62b7649d",
+   "pick": true,
+   "action": "antagonist"
+  }
  ]
 }

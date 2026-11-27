@@ -70,5 +70,11 @@
   "metabolite": "Phenytoin",
   "drug_id": "phenytoin",
   "qid": "f03ab9bd"
+ },
+ "fosaprepitant": {
+  "index": 0,
+  "metabolite": "Aprepitant",
+  "drug_id": "aprepitant",
+  "qid": "49c8561a"
  }
 }

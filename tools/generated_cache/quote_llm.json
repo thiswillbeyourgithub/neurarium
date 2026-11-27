@@ -13,6 +13,9 @@
 "drug:paliperidone/excretion[route:renal]": "opus",
 "drug:paliperidone/excretion[unchanged:urine]": "opus"
 },
+"q_0046941fcc3d": {
+"drug:aprepitant/bindings[nk1:antagonist]": "opus"
+},
 "q_0046f0b3a048": {
 "drug:ziprasidone/categories": "sonnet"
 },
@@ -7808,6 +7811,10 @@
 "q_84353582ac55": {
 "drug:buspirone/originator_country": "opus"
 },
+"q_843ace3f76ec": {
+"drug:fosaprepitant/metabolites[aprepitant]": "opus",
+"drug:fosaprepitant/prodrug": "opus"
+},
 "q_84473bced014": {
 "drug:ondansetron/originator_country": "opus"
 },
@@ -11617,6 +11624,9 @@
 },
 "q_c1b136b12b7e": {
 "receptor:ampa/effects[agonism:seizures]": "opus"
+},
+"q_c1bd40fd7300": {
+"drug:dantrolene/bindings[ryr1:antagonist]": "opus"
 },
 "q_c1e3af5e5303": {
 "drug:naltrexone/excretion[route:renal]": "opus"
