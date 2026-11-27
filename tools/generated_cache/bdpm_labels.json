@@ -109,6 +109,23 @@
  "apomorphine": {
   "brands": []
  },
+ "aprepitant": {
+  "brands": [
+   {
+    "cis": "60574505",
+    "name": "Emend",
+    "quote": "EMEND"
+   },
+   {
+    "cis": "66046596",
+    "name": "Atanto",
+    "quote": "ATANTO"
+   }
+  ],
+  "cis": "66046596",
+  "denomination": "ATANTO 80 mg, gélule",
+  "why": "plain oral, brand-name product"
+ },
  "aripiprazole": {
   "brands": [
    {
@@ -426,6 +443,18 @@
     "quote": "PERIACTINE"
    }
   ]
+ },
+ "dantrolene": {
+  "brands": [
+   {
+    "cis": "60385682",
+    "name": "Dantrium",
+    "quote": "DANTRIUM"
+   }
+  ],
+  "cis": "60385682",
+  "denomination": "DANTRIUM 100 mg, gélule",
+  "why": "plain oral, brand-name product"
  },
  "daridorexant": {
   "brands": [

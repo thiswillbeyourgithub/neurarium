@@ -23,6 +23,12 @@
   "spl_version": 20,
   "title": "AMOXAPINE TABLET [ACTAVIS PHARMA, INC.]"
  },
+ "aprepitant": {
+  "published_date": "Nov 06, 2026",
+  "setid": "696f9e80-9cae-403b-de9e-078343ce4713",
+  "spl_version": 43,
+  "title": "EMEND (APREPITANT) CAPSULE EMEND (APREPITANT) KIT EMEND (APREPITANT) POWDER, FOR SUSPENSION [MERCK SHARP & DOHME LLC]"
+ },
  "asenapine": {
   "published_date": "Apr 28, 2025",
   "setid": "16e1cc9f-7699-49ea-b179-acb65e162304",
@@ -178,6 +184,12 @@
   "setid": "6eeb14df-6fcf-a737-5359-5744eb4accea",
   "spl_version": 16,
   "title": "FLUVOXAMINE MALEATE TABLET [APOTEX CORP]"
+ },
+ "fosaprepitant": {
+  "published_date": "Oct 26, 2026",
+  "setid": "18a60093-cec8-1b8c-e063-6394a90a8902",
+  "spl_version": 6,
+  "title": "FOCINVEZ (FOSAPREPITANT DIMEGLUMINE) INJECTION [STERISCIENCE SPECIALTIES PRIVATE LIMITED]"
  },
  "fosphenytoin": {
   "published_date": "Mar 23, 2026",

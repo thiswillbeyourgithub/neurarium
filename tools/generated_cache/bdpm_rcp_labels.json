@@ -139,6 +139,20 @@
    "5.1"
   ]
  },
+ "aprepitant": {
+  "cis": "66046596",
+  "date_source": "file mtime",
+  "denomination": "ATANTO 80 mg, gélule",
+  "fetched": "2026-11-27",
+  "page": "66046596",
+  "sections": [
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
  "aripiprazole": {
   "cis": "60031071",
   "date_source": "justelesRCP scrape manifest last_fetch",
@@ -612,6 +626,20 @@
   "denomination": "PERIACTINE 4 mg, comprimé",
   "fetched": "2026-07-30",
   "page": "67231270",
+  "sections": [
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
+ "dantrolene": {
+  "cis": "60385682",
+  "date_source": "file mtime",
+  "denomination": "DANTRIUM 100 mg, gélule",
+  "fetched": "2026-11-27",
+  "page": "60385682",
   "sections": [
    "4.1",
    "4.2",
