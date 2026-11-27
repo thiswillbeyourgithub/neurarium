@@ -18957,5 +18957,465 @@
     "qid": "476a941c"
    }
   ]
+ },
+ "zolmitriptan": {
+  "name": "Zolmitriptan",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "zolmitriptan",
+    "line": "Excretion | Urine : ~65% Feces : ~30%",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "8ca61272"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "zolmitriptan",
+    "line": "Zolmitriptan has an elimination half-life of about 3 hours before it undergoes renal elimination ;",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "2f80f2f8"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "zolmitriptan",
+    "line": "its clearance is greater than the glomerular filtration rate suggesting that there is some renal tubular secretion of the compound.",
+    "named": [
+     "route:renal",
+     "renal_process:filtration",
+     "renal_process:tubular_secretion"
+    ],
+    "qid": "5030fdf3"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "68232350",
+    "line": "Les trois principaux métabolites sont : l’acide indole acétique (principal métabolite urinaire et plasmatique), les analogues N-oxyde et N-desméthyl du zolmitriptan.",
+    "named": [
+     "route:renal",
+     "urine_ph:acidic_faster"
+    ],
+    "qid": "94ce8c13"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "68232350",
+    "line": "Plus de 60 % de la dose administrée par voie orale sont retrouvés dans les urines (principalement sous forme d’acide indole acétique) et environ 30 % dans les fèces sous forme inchangée.",
+    "named": [
+     "route:renal",
+     "unchanged:urine",
+     "urine_ph:acidic_faster"
+    ],
+    "qid": "7e5ec9e3"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "68232350",
+    "line": "Après administration intraveineuse, la clairance plasmatique totale est de 10 ml/min/kg, dont le tiers est représenté par la clairance rénale.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "b9d570ed"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "68232350",
+    "line": "La clairance rénale du zolmitriptan et de ses métabolites est réduite (de 7 à 8 fois) chez les patients avec insuffisance rénale modérée à sévère.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "78ef04b8"
+   }
+  ]
+ },
+ "eletriptan": {
+  "name": "Eletriptan",
+  "candidates": [
+   {
+    "corpus": "bdpm",
+    "page": "63476564",
+    "line": "Une troisième zone de radioactivité dans le plasma n'a pas été formellement identifiée, mais il est très probable qu'il s'agisse d'un mélange de métabolites hydroxylés, qui ont été également observés excrétés dans l'urine et les fèces.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "03c09489"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "63476564",
+    "line": "La clairance rénale moyenne après administration orale est d'environ 3,9 L/h.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "4ed8957b"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "63476564",
+    "line": "La clairance non rénale représente environ 90 % de la clairance totale, indiquant que l'élétriptan est éliminé principalement par métabolisme.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "63942552"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "63476564",
+    "line": "Les sujets présentant une insuffisance rénale légère (clairance de la créatinine 61 à 89 ml/mn), modérée (clairance de la créatinine 31 à 60 ml/mn) ou sévère (clairance de la créatinine < 30 ml/mn) n'ont pas montré d'altérations statistiquement significatives des propriétés pharmacocinétiques de l'élétriptan ou de la liaison aux protéines plasmatiques.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "b1aa4521"
+   }
+  ]
+ },
+ "naratriptan": {
+  "name": "Naratriptan",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "naratriptan",
+    "line": "Excretion | Renal",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "aab9a100"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "naratriptan",
+    "line": "^ Havanka H, Dahlöf C, Pop PH, Diener HC, Winter P, Whitehouse H, et al.",
+    "named": [
+     "urine_ph:dependent"
+    ],
+    "qid": "a0e400b3"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "63ea356f-0895-4540-b242-8e611eacd938",
+    "line": "Elimination: Naratriptan is predominantly eliminated in urine, with 50% of the dose recovered unchanged and 30% as metabolites in urine.",
+    "named": [
+     "route:renal",
+     "unchanged:urine"
+    ],
+    "qid": "0ef94aa2"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "63ea356f-0895-4540-b242-8e611eacd938",
+    "line": "The renal clearance (220 mL/min) exceeds glomerular filtration rate, indicating active tubular secretion.",
+    "named": [
+     "route:renal",
+     "renal_process:filtration",
+     "renal_process:tubular_secretion"
+    ],
+    "qid": "94046e2c"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "63ea356f-0895-4540-b242-8e611eacd938",
+    "line": "Renal Impairment: Clearance of naratriptan was reduced by 50% in subjects with moderate renal impairment (creatinine clearance: 18 to 39 mL/min) compared with the normal group.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "41c22b0f"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "63ea356f-0895-4540-b242-8e611eacd938",
+    "line": "The effects of severe renal impairment (creatinine clearance: ≤ 15 mL/min) on the pharmacokinetics of naratriptan have not been assessed",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "a029b660"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "67586588",
+    "line": "La clairance rénale est identique chez l'homme et la femme (220 ml/min) et est supérieure au taux de filtration glomérulaire suggérant que le naratriptan est sécrété de façon active au niveau des tubules rénaux.",
+    "named": [
+     "route:renal",
+     "renal_process:filtration",
+     "renal_process:tubular_secretion"
+    ],
+    "qid": "8c8a5417"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "67586588",
+    "line": "Le naratriptan est principalement excrété dans l'urine avec 50 % de la dose retrouvée sous forme inchangée et 30 % retrouvée sous forme de métabolites inactifs.",
+    "named": [
+     "route:renal",
+     "unchanged:urine"
+    ],
+    "qid": "e05dd2ea"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "67586588",
+    "line": "L'excrétion rénale est la principale voie d'élimination du naratriptan.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "2d599634"
+   }
+  ]
+ },
+ "almotriptan": {
+  "name": "Almotriptan",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "almotriptan",
+    "line": "C max is observed 1.5–4 hours after oral administration, and approximately 50% of the drug is excreted unchanged in the urine.",
+    "named": [
+     "route:renal",
+     "unchanged:urine"
+    ],
+    "qid": "2432a39b"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "6fa380c4-c885-4743-85bf-88819ae68645",
+    "line": "Almotriptan is eliminated primarily by renal excretion (about 75% of the oral dose), with approximately 40% of an administered dose excreted unchanged in urine.",
+    "named": [
+     "route:renal",
+     "unchanged:urine"
+    ],
+    "qid": "fbf2a1b9"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "6fa380c4-c885-4743-85bf-88819ae68645",
+    "line": "Renal clearance exceeds the glomerular filtration rate by approximately 3-fold, indicating an active mechanism.",
+    "named": [
+     "route:renal",
+     "renal_process:filtration"
+    ],
+    "qid": "d6e7b2c6"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "6fa380c4-c885-4743-85bf-88819ae68645",
+    "line": "Approximately 13% of the administered dose is excreted via feces, both unchanged and metabolized.",
+    "named": [
+     "route:fecal",
+     "unchanged:urine"
+    ],
+    "qid": "7d59d30d"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "6fa380c4-c885-4743-85bf-88819ae68645",
+    "line": "Renal and total clearance, and amount of drug excreted in the urine, were lower in elderly healthy volunteers (age 65 to 76 years) than in younger healthy volunteers (age 19 to 34 years), resulting in longer terminal half-life (3.7 hours vs.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "a108a5cc"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "6fa380c4-c885-4743-85bf-88819ae68645",
+    "line": "The clearance of almotriptan was approximately 65% lower in patients with severe renal impairment (Cl/F=19.8 L/hour;",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "34224abd"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "6fa380c4-c885-4743-85bf-88819ae68645",
+    "line": "creatinine clearance between 10 and 30 mL/min) and approximately 40% lower in patients with moderate renal impairment (Cl/F=34.2 L/hour;",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "262e2d74"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "64165648",
+    "line": "Plus de 75 % de la dose administrée est éliminée dans les urines et le reste dans les selles.",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "95d2b97f"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "64165648",
+    "line": "Environ 50 % de l'excrétion rénale ou fécale est de l'almotriptan inchangé.",
+    "named": [
+     "route:renal",
+     "route:fecal",
+     "unchanged:urine"
+    ],
+    "qid": "f8aaa798"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "64165648",
+    "line": "La clairance rénale (CLR) représente environ les deux tiers de la clairance totale et la sécrétion tubulaire rénale est probablement également impliquée.",
+    "named": [
+     "route:renal",
+     "renal_process:tubular_secretion"
+    ],
+    "qid": "9fc138c3"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "64165648",
+    "line": "Selon ces résultats, la réduction de la clairance totale de l'almotriptan était de -20 %, -40 % et -65 % pour les patients atteints respectivement d'insuffisance rénale légère, modérée et sévère.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "01fc5a77"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "64165648",
+    "line": "Comme prévu, les clairances totale (CL) et rénale (CLR) ont été diminuées mais sans signification clinique chez les volontaires sains âgés par rapport à un groupe témoin jeune.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "c57237de"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "64165648",
+    "line": "Par conséquent, même si ces mécanismes de clairance étaient totalement ou en partie bloqués les concentrations plasmatiques d'almotriptan seraient augmentées de 2 fois au maximum sachant que la fonction rénale (et la clairance rénale de l'almotriptan) ne sont pas altérées par un dysfonctionnement hépatique.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "1ad475dd"
+   }
+  ]
+ },
+ "frovatriptan": {
+  "name": "Frovatriptan",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "frovatriptan",
+    "line": "Excretion | Kidney",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "d15d14e0"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "d303af88-e0c1-4fb2-ba8e-83b7e6d163cd",
+    "line": "Following administration of a single oral dose of radiolabeled frovatriptan 2.5 mg to healthy male and female subjects, 32% of the dose was recovered in urine and 62% in feces.",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "77188a8d"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "d303af88-e0c1-4fb2-ba8e-83b7e6d163cd",
+    "line": "Radiolabeled compounds excreted in urine were unchanged frovatriptan, hydroxylated frovatriptan, N- acetyl desmethyl frovatriptan, hydroxylated N-acetyl desmethyl frovatriptan and desmethyl frovatriptan, together with several other minor metabolites.",
+    "named": [
+     "route:renal",
+     "unchanged:urine"
+    ],
+    "qid": "ddfeab1f"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "d303af88-e0c1-4fb2-ba8e-83b7e6d163cd",
+    "line": "Renal clearance accounted for about 40% (82 mL/min) and 45% (60 mL/min) of total clearance in males and females, respectively.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "3d5d2bc5"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "d303af88-e0c1-4fb2-ba8e-83b7e6d163cd",
+    "line": "The pharmacokinetics of frovatriptan following a single oral dose of 2.5 mg was not different in patients with renal impairment (5 males and 6 females, creatinine clearance 16 - 73 mL/min) compared to subjects with normal renal function.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "0bcfa13c"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "60435263",
+    "line": "Suite à l'administration orale de 2,5 mg de frovatriptan radiomarqué à des sujets sains, 32 % de la dose a été retrouvée dans les urines, et 62 % dans les matières fécales.",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "30cb8530"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "60435263",
+    "line": "Les composés radiomarqués excrétés dans les urines consistaient en du frovatriptan inchangé, en hydroxyl frovatriptan, en N-acétyl frovatriptan N-déméthylé, en N-acétyl hydroxyl frovatriptan N-déméthylé, et en frovatriptan N-déméthylé, avec d'autres métabolites de moindre importance.",
+    "named": [
+     "route:renal",
+     "unchanged:urine"
+    ],
+    "qid": "7ba88cf6"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "60435263",
+    "line": "La clairance rénale a atteint 38 % (82 ml/min) de la clairance totale chez les hommes et 49 % (65 ml/min) chez les femmes.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "e502fa11"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "60435263",
+    "line": "L'exposition systémique au frovatriptan ainsi que la demi-vie d'élimination n'est pas significativement différente chez les sujets de sexe masculin et de sexe féminin souffrant d'insuffisance rénale (clairance de la créatinine 16-73 ml/min), par rapport à celle des sujets sains.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "841e5fcc"
+   }
+  ]
+ },
+ "lasmiditan": {
+  "name": "Lasmiditan",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "aea3358c-ff41-4490-9e6d-c7bf7b3de13f",
+    "line": "Renal excretion is a minor route of lasmiditan clearance.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "b54fe4b6"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "aea3358c-ff41-4490-9e6d-c7bf7b3de13f",
+    "line": "Recovery of unchanged lasmiditan in urine was low and accounted for approximately 3% of the dose.",
+    "named": [
+     "route:renal",
+     "unchanged:urine"
+    ],
+    "qid": "79c0e721"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "aea3358c-ff41-4490-9e6d-c7bf7b3de13f",
+    "line": "Metabolite S-M8 represented approximately 66% of the dose in urine, with the majority of recovery within 48 hours postdose.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "23bafe9a"
+   }
+  ]
  }
 }

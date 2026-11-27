@@ -6268,5 +6268,110 @@
    "qid": "a4b83273",
    "value": "urine"
   }
- ]
+ ],
+ "zolmitriptan": [
+  {
+   "amount": "~65%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "8ca61272",
+   "value": "renal"
+  },
+  {
+   "amount": "~30%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "8ca61272",
+   "value": "fecal"
+  },
+  {
+   "aspect": "renal_process",
+   "index": 2,
+   "qid": "5030fdf3",
+   "value": "tubular_secretion"
+  }
+ ],
+ "naratriptan": [
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "0ef94aa2",
+   "value": "renal"
+  },
+  {
+   "amount": "50%",
+   "aspect": "unchanged",
+   "index": 2,
+   "qid": "0ef94aa2",
+   "value": "urine"
+  },
+  {
+   "aspect": "renal_process",
+   "index": 3,
+   "qid": "94046e2c",
+   "value": "tubular_secretion"
+  }
+ ],
+ "almotriptan": [
+  {
+   "amount": "about 75%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "fbf2a1b9",
+   "value": "renal"
+  },
+  {
+   "amount": "approximately 40%",
+   "aspect": "unchanged",
+   "index": 1,
+   "qid": "fbf2a1b9",
+   "value": "urine"
+  },
+  {
+   "amount": "Approximately 13%",
+   "aspect": "route",
+   "index": 3,
+   "qid": "7d59d30d",
+   "value": "fecal"
+  }
+ ],
+ "frovatriptan": [
+  {
+   "amount": "32%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "77188a8d",
+   "value": "renal"
+  },
+  {
+   "amount": "62%",
+   "aspect": "route",
+   "index": 1,
+   "qid": "77188a8d",
+   "value": "fecal"
+  },
+  {
+   "aspect": "unchanged",
+   "index": 2,
+   "qid": "ddfeab1f",
+   "value": "urine"
+  }
+ ],
+ "lasmiditan": [
+  {
+   "amount": "approximately 66%",
+   "aspect": "route",
+   "index": 2,
+   "qid": "23bafe9a",
+   "value": "renal"
+  },
+  {
+   "amount": "approximately 3%",
+   "aspect": "unchanged",
+   "index": 1,
+   "qid": "79c0e721",
+   "value": "urine"
+  }
+ ],
+ "eletriptan": []
 }

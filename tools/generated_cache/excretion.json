@@ -120,6 +120,47 @@
     "value": "renal"
    }
   ],
+  "almotriptan": [
+   {
+    "amount": "about 75%",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "dailymed",
+      "page": "6fa380c4-c885-4743-85bf-88819ae68645",
+      "provenance": "verified",
+      "quote": "Almotriptan is eliminated primarily by renal excretion (about 75% of the oral dose), with approximately 40% of an administered dose excreted unchanged in urine."
+     }
+    ],
+    "value": "renal"
+   },
+   {
+    "amount": "approximately 40%",
+    "aspect": "unchanged",
+    "sources": [
+     {
+      "corpus": "dailymed",
+      "page": "6fa380c4-c885-4743-85bf-88819ae68645",
+      "provenance": "verified",
+      "quote": "Almotriptan is eliminated primarily by renal excretion (about 75% of the oral dose), with approximately 40% of an administered dose excreted unchanged in urine."
+     }
+    ],
+    "value": "urine"
+   },
+   {
+    "amount": "Approximately 13%",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "dailymed",
+      "page": "6fa380c4-c885-4743-85bf-88819ae68645",
+      "provenance": "verified",
+      "quote": "Approximately 13% of the administered dose is excreted via feces, both unchanged and metabolized."
+     }
+    ],
+    "value": "fecal"
+   }
+  ],
   "alpidem": [
    {
     "aspect": "route",
@@ -3609,6 +3650,46 @@
     "value": "renal"
    }
   ],
+  "frovatriptan": [
+   {
+    "amount": "32%",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "dailymed",
+      "page": "d303af88-e0c1-4fb2-ba8e-83b7e6d163cd",
+      "provenance": "verified",
+      "quote": "Following administration of a single oral dose of radiolabeled frovatriptan 2.5 mg to healthy male and female subjects, 32% of the dose was recovered in urine and 62% in feces."
+     }
+    ],
+    "value": "renal"
+   },
+   {
+    "amount": "62%",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "dailymed",
+      "page": "d303af88-e0c1-4fb2-ba8e-83b7e6d163cd",
+      "provenance": "verified",
+      "quote": "Following administration of a single oral dose of radiolabeled frovatriptan 2.5 mg to healthy male and female subjects, 32% of the dose was recovered in urine and 62% in feces."
+     }
+    ],
+    "value": "fecal"
+   },
+   {
+    "aspect": "unchanged",
+    "sources": [
+     {
+      "corpus": "dailymed",
+      "page": "d303af88-e0c1-4fb2-ba8e-83b7e6d163cd",
+      "provenance": "verified",
+      "quote": "Radiolabeled compounds excreted in urine were unchanged frovatriptan, hydroxylated frovatriptan, N- acetyl desmethyl frovatriptan, hydroxylated N-acetyl desmethyl frovatriptan and desmethyl frovatriptan, together with several other minor metabolites."
+     }
+    ],
+    "value": "urine"
+   }
+  ],
   "furosemide": [
    {
     "amount": "66%",
@@ -4268,6 +4349,34 @@
      }
     ],
     "value": "fecal"
+   }
+  ],
+  "lasmiditan": [
+   {
+    "amount": "approximately 66%",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "dailymed",
+      "page": "aea3358c-ff41-4490-9e6d-c7bf7b3de13f",
+      "provenance": "verified",
+      "quote": "Metabolite S-M8 represented approximately 66% of the dose in urine, with the majority of recovery within 48 hours postdose."
+     }
+    ],
+    "value": "renal"
+   },
+   {
+    "amount": "approximately 3%",
+    "aspect": "unchanged",
+    "sources": [
+     {
+      "corpus": "dailymed",
+      "page": "aea3358c-ff41-4490-9e6d-c7bf7b3de13f",
+      "provenance": "verified",
+      "quote": "Recovery of unchanged lasmiditan in urine was low and accounted for approximately 3% of the dose."
+     }
+    ],
+    "value": "urine"
    }
   ],
   "lemborexant": [
@@ -5804,6 +5913,45 @@
      }
     ],
     "value": "renal"
+   }
+  ],
+  "naratriptan": [
+   {
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "dailymed",
+      "page": "63ea356f-0895-4540-b242-8e611eacd938",
+      "provenance": "verified",
+      "quote": "Elimination: Naratriptan is predominantly eliminated in urine, with 50% of the dose recovered unchanged and 30% as metabolites in urine."
+     }
+    ],
+    "value": "renal"
+   },
+   {
+    "amount": "50%",
+    "aspect": "unchanged",
+    "sources": [
+     {
+      "corpus": "dailymed",
+      "page": "63ea356f-0895-4540-b242-8e611eacd938",
+      "provenance": "verified",
+      "quote": "Elimination: Naratriptan is predominantly eliminated in urine, with 50% of the dose recovered unchanged and 30% as metabolites in urine."
+     }
+    ],
+    "value": "urine"
+   },
+   {
+    "aspect": "renal_process",
+    "sources": [
+     {
+      "corpus": "dailymed",
+      "page": "63ea356f-0895-4540-b242-8e611eacd938",
+      "provenance": "verified",
+      "quote": "The renal clearance (220 mL/min) exceeds glomerular filtration rate, indicating active tubular secretion."
+     }
+    ],
+    "value": "tubular_secretion"
    }
   ],
   "nefazodone": [
@@ -9551,6 +9699,46 @@
      }
     ],
     "value": "urine"
+   }
+  ],
+  "zolmitriptan": [
+   {
+    "amount": "~65%",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "zolmitriptan",
+      "provenance": "verified",
+      "quote": "Excretion | Urine : ~65% Feces : ~30%"
+     }
+    ],
+    "value": "renal"
+   },
+   {
+    "amount": "~30%",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "zolmitriptan",
+      "provenance": "verified",
+      "quote": "Excretion | Urine : ~65% Feces : ~30%"
+     }
+    ],
+    "value": "fecal"
+   },
+   {
+    "aspect": "renal_process",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "zolmitriptan",
+      "provenance": "verified",
+      "quote": "its clearance is greater than the glomerular filtration rate suggesting that there is some renal tubular secretion of the compound."
+     }
+    ],
+    "value": "tubular_secretion"
    }
   ],
   "zolpidem": [
