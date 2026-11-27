@@ -246,6 +246,30 @@
     ]
    }
   ],
+  "cenobamate": [
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61025114",
+      "provenance": "verified",
+      "quote": "Ontozry est indiqué chez l’adulte atteint d’une épilepsie non contrôlée par au moins deux traitements antérieurs, pour le traitement en association des crises partielles avec ou sans généralisation secondaire."
+     }
+    ]
+   },
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61025114",
+      "provenance": "verified",
+      "quote": "Il est recommandé d’arrêter progressivement le traitement, afin de réduire le risque de crises d’épilepsie par effet rebond (c.-à-d. sur au moins 2 semaines), sauf si un arrêt brutal est requis pour des raisons de sécurité."
+     }
+    ]
+   }
+  ],
   "chlorpromazine": [
    {
     "effect": "lowers",
@@ -546,6 +570,30 @@
       "page": "68481191",
       "provenance": "verified",
       "quote": "L'éthosuximide est un antiépileptique spécifique des absences, il supprime l'activité paroxystique, pointes-ondes à 3 cycles par seconde, associée aux pertes de conscience, caractéristiques des crises des absences."
+     }
+    ]
+   }
+  ],
+  "felbamate": [
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60223278",
+      "provenance": "verified",
+      "quote": "Syndrome de Lennox-Gastaut : en complément du traitement antérieur, traitement du syndrome de Lennox-Gastaut chez les patients à partir de 4 ans, non contrôlé par les autres médicaments antiépileptiques appropriés disponibles."
+     }
+    ]
+   },
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60223278",
+      "provenance": "verified",
+      "quote": "Les antiépileptiques, notamment le felbamate, ne doivent pas, en général, être interrompus brutalement, en raison d'une possible augmentation de la fréquence des crises convulsives. Cependant, si la gravité du ou des effet(s) indésirable(s) justifie un arrêt immédiat, une surveillance médicale attentive est obligatoire."
      }
     ]
    }
@@ -1223,6 +1271,30 @@
     ]
    }
   ],
+  "rufinamide": [
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "62205873",
+      "provenance": "verified",
+      "quote": "Inovelon est indiqué en traitement adjuvant des crises d'épilepsie associées au syndrome de Lennox-Gastaut (SLG) chez les patients âgés de 1 an ou plus."
+     }
+    ]
+   },
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "62205873",
+      "provenance": "verified",
+      "quote": "Le rufinamide doit être arrêté progressivement afin de réduire le risque possible de crises d’épilepsie à l’arrêt. Dans les études cliniques, le traitement était arrêté en réduisant la dose d’environ 25 % tous les deux jours. Les données sur l’arrêt des traitements antiépileptiques associés, une fois l’épilepsie contrôlée par l’ajout du rufinamide, sont insuffisantes."
+     }
+    ]
+   }
+  ],
   "scopolamine": [
    {
     "effect": "possibly_lowers",
@@ -1322,6 +1394,19 @@
       "page": "64676030",
       "provenance": "verified",
       "quote": "Le sumatriptan doit être utilisé avec précaution chez les patients ayant des antécédents de convulsions ou présentant d’autres facteurs de risque susceptibles d’abaisser le seuil épileptogène, car des cas de convulsions ont été rapportés en association avec le sumatriptan (voir rubrique 4.8)."
+     }
+    ]
+   }
+  ],
+  "thiocolchicoside": [
+   {
+    "effect": "lowers",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "65617572",
+      "provenance": "verified",
+      "quote": "Enfin, le thiocolchicoside agit également comme un antagoniste des récepteurs de type GABAA (principalement situés au niveau du cortex cérébral), cette action pharmacologique étant connue pour avoir des propriétés convulsivantes ou proconvulsivantes."
      }
     ]
    }

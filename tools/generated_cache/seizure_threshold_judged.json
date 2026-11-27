@@ -910,5 +910,48 @@
  "droperidol": [],
  "alfentanil": [],
  "desflurane": [],
- "sufentanil": []
+ "sufentanil": [],
+ "thiocolchicoside": [
+  {
+   "index": 1,
+   "qid": "7ce7260d",
+   "effect": "lowers"
+  }
+ ],
+ "cenobamate": [
+  {
+   "index": 0,
+   "qid": "5ff69b26",
+   "effect": "raises"
+  },
+  {
+   "index": 2,
+   "qid": "d0562ce0",
+   "effect": "withdrawal"
+  }
+ ],
+ "rufinamide": [
+  {
+   "index": 0,
+   "qid": "d517ae1d",
+   "effect": "raises"
+  },
+  {
+   "index": 3,
+   "qid": "738d383e",
+   "effect": "withdrawal"
+  }
+ ],
+ "felbamate": [
+  {
+   "index": 1,
+   "qid": "7d2dbf29",
+   "effect": "raises"
+  },
+  {
+   "index": 7,
+   "qid": "1a9400ff",
+   "effect": "withdrawal"
+  }
+ ]
 }

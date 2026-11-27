@@ -5204,5 +5204,325 @@
     "qid": "37313f9d"
    }
   ]
+ },
+ "cenobamate": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "61025114",
+    "section": "4.1",
+    "quote": "Ontozry est indiqué chez l’adulte atteint d’une épilepsie non contrôlée par au moins deux traitements antérieurs, pour le traitement en association des crises partielles avec ou sans généralisation secondaire.",
+    "qid": "5ff69b26"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "61025114",
+    "section": "4.2",
+    "quote": "Tableau 1: Posologie recommandée chez les adultes atteints de crises d’épilepsie partielles",
+    "qid": "b98d2f75"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "61025114",
+    "section": "4.2",
+    "quote": "Il est recommandé d’arrêter progressivement le traitement, afin de réduire le risque de crises d’épilepsie par effet rebond (c.-à-d. sur au moins 2 semaines), sauf si un arrêt brutal est requis pour des raisons de sécurité.",
+    "qid": "d0562ce0"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "61025114",
+    "section": "4.2",
+    "quote": "Les études cliniques sur le cénobamate n’ont pas inclus suffisamment de patients âgés de 65 ans et plus pour déterminer si leur réponse au traitement est différente de celle des patients plus jeunes. Les sujets âgés traités par antiépileptiques semblent présenter une plus grande incidence de réactions indésirables tels que fatigue, troubles de la marche, chutes, ataxie, troubles de l’équilibre, étourdissements et somnolence. En général, il convient d’être prudent dans l’adaptation posologique pour un patient âgé et commencer par la limite basse de l’intervalle posologique, afin de tenir compte de la diminution des fonctions rénale et hépatique, plus fréquente dans cette population ainsi que des comorbidités et interactions potentielles chez ces patients polymédiqués (voir rubrique 4.4).",
+    "qid": "07d483b7"
+   },
+   {
+    "index": 4,
+    "corpus": "bdpm_rcp",
+    "page": "61025114",
+    "section": "4.4",
+    "quote": "Des idées et comportements suicidaires ont été rapportés chez des patients traités par des médicaments antiépileptiques incluant le cénobamate. Une méta-analyse des études randomisées contre placebo portant sur des médicaments antiépileptiques a également montré une légère augmentation du risque d’idées et de comportements suicidaires. Le mécanisme de ce risque est inconnu. Une surveillance du patient est donc nécessaire afin de détecter des signes d’idées et comportements suicidaires et un traitement approprié doit être envisagé. Il convient de conseiller aux patients (et à leurs aidants) de consulter un médecin en cas d’apparition de signes d’idées ou de comportements suicidaires.",
+    "qid": "421ae9ae"
+   },
+   {
+    "index": 5,
+    "corpus": "bdpm_rcp",
+    "page": "61025114",
+    "section": "4.4",
+    "quote": "Une réaction médicamenteuse avec éosinophilie et symptômes systémiques (syndrome DRESS [Drug Reaction with Eosinophilia and Systemic Symptoms]), qui peut engager le pronostic vital ou être mortelle, a été rapportée avec le cénobamate lorsque le traitement a été instauré à des doses plus élevées puis soumis à une augmentation rapide (hebdomadaire ou plus rapprochée) (voir rubrique 4.8). Aucun cas de syndrome DRESS n’a été rapporté dans une étude de sécurité en ouvert menée auprès de 1 340 patients épileptiques lorsque le cénobamate était instauré à 12,5 mg/jour avec augmentation de la dose toutes les deux semaines. Au moment de la prescription, les patients doivent être informés des signes et symptômes du syndrome DRESS et la survenue de réactions cutanées doit être étroitement surveillée. Les symptômes du syndrome DRESS comprennent généralement, mais non exclusivement, de la fièvre, une éruption cutanée associée à l’atteinte d’autres systèmes d’organes, une lymphadénopathie, des anomalies des tests de la fonction hépatique et une éosinophilie. Il est important de noter que des manifestations précoces d’hypersensibilité, telles que la fièvre ou une lymphadénopathie peuvent être présentes même si l’éruption cutanée n’est pas visible. Si des signes et symptômes évocateurs de ces réactions apparaissent, le cénobamate doit être immédiatement arrêté et un autre traitement doit être envisagé (le cas échéant).",
+    "qid": "729c9714"
+   },
+   {
+    "index": 6,
+    "corpus": "bdpm_rcp",
+    "page": "61025114",
+    "section": "4.4",
+    "quote": "Des élévations des enzymes hépatiques ainsi que de rares cas d’atteinte hépatique sévère avec insuffisance hépatique ont été rapportés chez des patients traités par le cénobamate. De nombreux cas sont survenus dans le contexte clinique d’une polythérapie avec d’autres médicaments antiépileptiques (voir rubrique 4.8). Les transaminases sériques (ALAT et ASAT), la gamma-glutamyl-transférase (GGT), les phosphatases alcalines et la bilirubine totale doivent être évaluées avant l’initiation du cénobamate et surveillées pendant le traitement. En cas de suspicion ou de découverte d’une atteinte hépatique, une réduction de la dose ou l’arrêt du cénobamate doit être envisagé.",
+    "qid": "8a815d6e"
+   },
+   {
+    "index": 7,
+    "corpus": "bdpm_rcp",
+    "page": "61025114",
+    "section": "4.4",
+    "quote": "Un raccourcissement dose-dépendant de l’intervalle QTcF a été observé avec le cénobamate. Aucun raccourcissement de l’intervalle QTcF en dessous de 340 ms n’a été observé (voir rubrique 5.1). Les études cliniques n’ont pas montré que l’association du cénobamate avec d’autres antiépileptiques intensifiait le raccourcissement de l’intervalle QT. Les cliniciens doivent faire preuve de prudence lors de la prescription de cénobamate en association avec d’autres médicaments connus pour raccourcir l’intervalle QT.",
+    "qid": "405a80b5"
+   },
+   {
+    "index": 8,
+    "corpus": "bdpm_rcp",
+    "page": "61025114",
+    "section": "5.1",
+    "quote": "Classe pharmacothérapeutique: antiépileptiques, autres antiépileptiques, Code ATC: N03AX25.",
+    "qid": "432bb1b6"
+   },
+   {
+    "index": 9,
+    "corpus": "bdpm_rcp",
+    "page": "61025114",
+    "section": "5.1",
+    "quote": "Le cénobamate est une petite molécule avec un double mécanisme d’action. C’est un modulateur allostérique positif de sous-types du canal ionique de l’acide γ-aminobutyrique (GABAA), qui ne se lie pas au site de liaison des benzodiazépines. Le cénobamate réduit les décharges neuronales répétitives en améliorant l’inactivation des canaux sodiques et en inhibant la persistance du courant sodique. Le mécanisme d’action précis par lequel le cénobamate exerce ses effets thérapeutiques chez les patients présentant des crises d’épilepsie focales est inconnu.",
+    "qid": "90c9993a"
+   },
+   {
+    "index": 10,
+    "corpus": "bdpm_rcp",
+    "page": "61025114",
+    "section": "5.1",
+    "quote": "L’efficacité du cénobamate comme traitement adjuvant dans les crises d’épilepsie partielles a été étudiée dans une étude multicentrique, randomisée, en double aveugle et contrôlée par placebo, chez des patients adultes dont l’épilepsie partielle n’était pas correctement contrôlée par les traitements antiépileptiques antérieurs. Les patients ont été traités par un à trois médicaments antiépileptiques concomitants, maintenus à posologie stable au cours de l’étude en double aveugle. La dose quotidienne de cénobamate était de 100 à 400 mg/jour. L’étude comportait une période initiale de 8 semaines, pendant laquelle les patients devaient présenter au moins 3 ou 4 crises épileptiques partielles sur 28 jours et aucune période sans crise dépassant 3 à 4 semaines, suivie d’une période de traitement de 18 semaines dont 12 semaines à dose fixe. Les médicaments antiépileptiques les plus fréquemment pris en début d’étude étaient le lévétiracétam, la lamotrigine, la carbamazépine et le lacosamide. Tous les sujets ayant intégré l’étude ont continué à présenter des crises, bien qu’une majorité avait déjà reçu 2 médicaments antiépileptiques ou plus. Plus de 80 % des patients prenaient deux médicaments antiépileptiques concomitants ou plus au moment de l’inclusion dans l’étude. Les résultats d’efficacité sont résumés dans le tableau 3.",
+    "qid": "80e6c282"
+   },
+   {
+    "index": 11,
+    "corpus": "bdpm_rcp",
+    "page": "61025114",
+    "section": "5.1",
+    "quote": "L’étude a comparé des doses de cénobamate de 100 mg/jour, 200 mg/jour et 400 mg/jour à un placebo, en plus du traitement de fond. Les sujets recevaient un traitement de fond à dose stable composé d’un à trois médicaments antiépileptiques. Les patients ont débuté le traitement à une dose quotidienne de 50 mg, laquelle a été ensuite augmentée de 50 mg/jour chaque semaine jusqu’à atteindre 200 mg/jour, puis de 100 mg/jour chaque semaine chez les sujets randomisés à 400 mg/jour.",
+    "qid": "3cf468e2"
+   },
+   {
+    "index": 12,
+    "corpus": "bdpm_rcp",
+    "page": "61025114",
+    "section": "5.1",
+    "quote": "L’Agence européenne des médicaments a différé l’obligation de soumettre les résultats d’études réalisées avec Ontozry dans un ou plusieurs sous-groupes de la population pédiatrique atteinte d’épilepsie (voir rubrique 4.2 pour les informations concernant l’usage pédiatrique).",
+    "qid": "7c08dc3d"
+   }
+  ]
+ },
+ "felbamate": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60223278",
+    "section": "4.1",
+    "quote": "Le felbamate n'est pas indiqué comme traitement antiépileptique de première intention. Le felbamate peut être prescrit dans l'indication suivante après une évaluation soigneuse du rapport risque/bénéfice prenant en compte le risque de toxicité hématologique, en particulier d'aplasie médullaire, et d'hépatotoxicité sévère. Le risque potentiel lié à l'utilisation du felbamate doit être mis en balance avec les risques associés à l'absence de traitement médical approprié.",
+    "qid": "b77840dd"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60223278",
+    "section": "4.1",
+    "quote": "Syndrome de Lennox-Gastaut : en complément du traitement antérieur, traitement du syndrome de Lennox-Gastaut chez les patients à partir de 4 ans, non contrôlé par les autres médicaments antiépileptiques appropriés disponibles.",
+    "qid": "7d2dbf29"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "60223278",
+    "section": "4.1",
+    "quote": "Une évaluation rigoureuse de l'efficacité du felbamate doit être effectuée après 2 à 3 mois de traitement. Seuls les patients pour lesquels une amélioration clinique majeure de leur syndrome épileptique (i.e. réduction marquée de la fréquence des crises ou de leur sévérité) aura été constatée dans ce laps de temps devront continuer le traitement par le felbamate (voir rubrique 4.4).",
+    "qid": "4159df4f"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "60223278",
+    "section": "4.2",
+    "quote": "Le felbamate doit uniquement être utilisé sous la surveillance d’un neurologue ou d’un pédiatre possédant une expérience dans le traitement de l’épilepsie.",
+    "qid": "ffd62a03"
+   },
+   {
+    "index": 4,
+    "corpus": "bdpm_rcp",
+    "page": "60223278",
+    "section": "4.2",
+    "quote": "En association avec d'autres antiépileptiques : le felbamate administré en association avec la carbamazépine, la phénytoïne, le phénobarbital ou l'acide valproïque peut augmenter l'incidence de leurs effets indésirables respectifs (voir rubrique 4.5). La posologie initiale recommandée pour le felbamate est de 600 mg à 1 200 mg/jour, administrée en 2 ou 3 prises. Chez les patients déjà traités par carbamazépine, phénytoïne, phénobarbital, et/ou acide valproïque, la posologie de ces produits doit être réduite de 20 % à 30 % lors de l'introduction du felbamate.",
+    "qid": "b9bc3bdb"
+   },
+   {
+    "index": 5,
+    "corpus": "bdpm_rcp",
+    "page": "60223278",
+    "section": "4.2",
+    "quote": "La posologie quotidienne du felbamate peut alors être augmentée par paliers de 600 à 1 200 mg à intervalles d'environ une semaine, jusqu'à un maximum de 3 600 mg/jour administrés en 3 à 4 prises. Une adaptation des doses de carbamazépine, de phénytoïne, de phénobarbital, et d'acide valproïque peut être nécessaire en fonction de l'augmentation de la posologie du felbamate. Cependant, les interactions médicamenteuses sont dose-dépendantes et sont sujettes à variabilité inter-individuelle. Par conséquent, tout ajustement de posologie des antiépileptiques associés doit être basé non seulement sur les taux plasmatiques à l'état d’équilibre, mais aussi sur l'observation clinique.",
+    "qid": "49b187db"
+   },
+   {
+    "index": 6,
+    "corpus": "bdpm_rcp",
+    "page": "60223278",
+    "section": "4.2",
+    "quote": "En association avec d'autres antiépileptiques : le felbamate administré en association avec la carbamazépine, la phénytoïne, le phénobarbital ou l'acide valproïque peut augmenter l'incidence de leurs effets indésirables respectifs (voir rubrique 4.5). La posologie initiale recommandée pour le felbamate est de 7,5 mg/kg/jour à 15 mg/kg/jour, administrés en 2 ou 3 prises. Chez les patients déjà traités par carbamazépine, phénytoïne, phénobarbital et/ou acide valproïque, la posologie de ces produits doit être réduite de 20 % à 30 % lors de l'introduction du felbamate. La posologie quotidienne du felbamate peut alors être augmentée par paliers de 7,5 mg/kg à 15 mg/kg à intervalle d'une semaine au moins, jusqu'à un maximum de 45 mg/kg/jour (sans dépasser 3 600 mg/jour) administrés en 3 à 4 prises. Une adaptation des doses de carbamazépine, de phénytoïne, de phénobarbital et/ou d'acide valproïque peut être nécessaire en fonction de l'augmentation de la posologie du felbamate. Cependant, les interactions médicamenteuses sont dose-dépendantes et sont sujettes à variabilité inter-individuelle. Par conséquent, tout ajustement de posologie des antiépileptiques associés doit être basé non seulement sur les taux plasmatiques à l'état d’équilibre, mais aussi sur l'observation clinique.",
+    "qid": "b47160a0"
+   },
+   {
+    "index": 7,
+    "corpus": "bdpm_rcp",
+    "page": "60223278",
+    "section": "4.4",
+    "quote": "Les antiépileptiques, notamment le felbamate, ne doivent pas, en général, être interrompus brutalement, en raison d'une possible augmentation de la fréquence des crises convulsives. Cependant, si la gravité du ou des effet(s) indésirable(s) justifie un arrêt immédiat, une surveillance médicale attentive est obligatoire.",
+    "qid": "1a9400ff"
+   },
+   {
+    "index": 8,
+    "corpus": "bdpm_rcp",
+    "page": "60223278",
+    "section": "4.4",
+    "quote": "Comme rapporté avec les autres antiépileptiques, certains patients peuvent présenter une augmentation de la fréquence des crises ou l’apparition de nouveaux types de crises (voir rubrique 4.8). Ces phénomènes peuvent résulter d’un surdosage, d’une diminution des concentrations plasmatiques du traitement antiépileptique administré parallèlement, ou d’un effet paradoxal.",
+    "qid": "a1c60abf"
+   },
+   {
+    "index": 9,
+    "corpus": "bdpm_rcp",
+    "page": "60223278",
+    "section": "4.4",
+    "quote": "Des idées et comportements suicidaires ont été rapportés chez des patients traités par des antiépileptiques dans plusieurs indications. Une méta-analyse d’essais randomisés, contrôlés versus placebo portant sur des antiépileptiques a également montré une légère augmentation du risque d’idées et de comportements suicidaires. Les causes de ce risque ne sont pas connues et les données disponibles n’excluent pas la possibilité d’une augmentation de ce risque pour le felbamate.",
+    "qid": "87f3f5ea"
+   },
+   {
+    "index": 10,
+    "corpus": "bdpm_rcp",
+    "page": "60223278",
+    "section": "5.1",
+    "quote": "Classe pharmacothérapeutique : Système nerveux, antiépileptique, code ATC : N03AX10.",
+    "qid": "8f026fef"
+   },
+   {
+    "index": 11,
+    "corpus": "bdpm_rcp",
+    "page": "60223278",
+    "section": "5.1",
+    "quote": "Le felbamate est un nouvel antiépileptique, tant du point de vue chimique que pharmacologique. Il s'agit d'un dicarbamate dont la structure diffère de celle des autres carbamates connus. Son mécanisme d'action précis n'est pas élucidé.",
+    "qid": "93abd246"
+   },
+   {
+    "index": 12,
+    "corpus": "bdpm_rcp",
+    "page": "60223278",
+    "section": "5.1",
+    "quote": "Lors des études précliniques pharmacologiques, le profil anti-convulsivant du felbamate a été démontré grâce à de nombreux modèles animaux. Chez la souris, le felbamate est efficace tant sur les crises induites par électrochoc maximal que par injection sous-cutanée de pentylène-tétrazole. Il est également efficace sur les crises déclenchées par la picrotoxine et la bicuculline. L'efficacité du felbamate sur les modèles de crises déclenchées chimiquement ou par électrochoc maximal suggère que le produit exerce son activité antiépileptique en élevant le seuil épileptogène et en prévenant la généralisation des crises.",
+    "qid": "cf09245b"
+   },
+   {
+    "index": 13,
+    "corpus": "bdpm_rcp",
+    "page": "60223278",
+    "section": "5.1",
+    "quote": "Le felbamate a été administré à des doses uniques allant jusqu'à 1 200 mg ou des doses multiples de 200 mg à 600 mg, deux fois par jour pendant 28 jours, chez des volontaires sains. Des sujets épileptiques (avec crises partielles) ont été traités jusqu'à 28 jours et 6 semaines par des doses de 800 mg et 1 200 mg 2 fois par jour, respectivement. Ces essais n'ont montré aucun effet indésirable significatif au niveau des principaux systèmes de l'organisme : SNC, appareil cardio-vasculaire, système hématopoïétique, rénal, hépatique ou respiratoire.",
+    "qid": "a2772b40"
+   }
+  ]
+ },
+ "rufinamide": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "62205873",
+    "section": "4.1",
+    "quote": "Inovelon est indiqué en traitement adjuvant des crises d'épilepsie associées au syndrome de Lennox-Gastaut (SLG) chez les patients âgés de 1 an ou plus.",
+    "qid": "d517ae1d"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "62205873",
+    "section": "4.2",
+    "quote": "Le traitement par le rufinamide doit être instauré par un médecin spécialise en pédiatrie ou en neurologie et expérimenté dans la prise en charge de l’épilepsie.",
+    "qid": "80edee34"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "62205873",
+    "section": "4.4",
+    "quote": "Lors des études de développement clinique, il a été observé des cas d’état de mal épileptique lors du traitement par le rufinamide, alors qu’aucun cas n’a été observé avec le placebo. Ces événements ont conduit à l’arrêt du rufinamide dans 20 % des cas. Le rapport bénéfice/risque doit être réévalué si de nouveaux types de crises d’épilepsie apparaissent et (ou) si la fréquence de l’état de mal épileptique augmente par rapport à l’état initial du patient.",
+    "qid": "a277ada6"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "62205873",
+    "section": "4.4",
+    "quote": "Le rufinamide doit être arrêté progressivement afin de réduire le risque possible de crises d’épilepsie à l’arrêt. Dans les études cliniques, le traitement était arrêté en réduisant la dose d’environ 25 % tous les deux jours. Les données sur l’arrêt des traitements antiépileptiques associés, une fois l’épilepsie contrôlée par l’ajout du rufinamide, sont insuffisantes.",
+    "qid": "738d383e"
+   },
+   {
+    "index": 4,
+    "corpus": "bdpm_rcp",
+    "page": "62205873",
+    "section": "4.4",
+    "quote": "Des cas de syndrome grave d’hypersensibilité aux médicaments antiépileptiques incluant des syndromes DRESS (éruption cutanée avec éosinophilie et symptômes systémiques) et de Stevens-Johnson (SJS) sont survenus en association avec le traitement par rufinamide. Les signes et symptômes étaient variés ; cependant les patients présentaient généralement, mais pas exclusivement, de la fièvre et une éruption cutanée associés à une atteinte d’autres organes / systèmes. Parmi les autres manifestations on peut citer une lymphadénopathie, des anomalies des épreuves fonctionnelles hépatiques et une hématurie. Les manifestions du trouble étant variables, d’autres signes et symptômes d’organes / systèmes non observés jusqu’ici peuvent apparaître. Le syndrome d’hypersensibilité aux médicaments antiépileptiques (MAE) s’est produit peu de temps après l’instauration du traitement par le rufinamide et dans la population pédiatrique. En cas de suspicion de cette réaction, il convient d’arrêter le rufinamide et d'instaurer un autre traitement. Tous les patients développant une éruption cutanée sous rufinamide doivent être étroitement surveillés.",
+    "qid": "5d8987b8"
+   },
+   {
+    "index": 5,
+    "corpus": "bdpm_rcp",
+    "page": "62205873",
+    "section": "4.4",
+    "quote": "Des idées et un comportement suicidaires ont été rapportés chez des patients traités par des antiépileptiques dans plusieurs indications. Une méta-analyse d’études randomisées et contrôlées contre placebo de médicaments antiépileptiques a également montré une légère augmentation du risque d’idées et de comportements suicidaires. Le mécanisme de ce risque n’est pas connu et les données disponibles ne permettent pas d’exclure la possibilité d’un risque accru avec Inovelon.",
+    "qid": "fbe70530"
+   },
+   {
+    "index": 6,
+    "corpus": "bdpm_rcp",
+    "page": "62205873",
+    "section": "5.1",
+    "quote": "Classe pharmacothérapeutique : Antiépileptiques, dérivés du carboxamide, code ATC : N03AF03.",
+    "qid": "bb83cfb9"
+   },
+   {
+    "index": 7,
+    "corpus": "bdpm_rcp",
+    "page": "62205873",
+    "section": "5.1",
+    "quote": "Le rufinamide module l’activité des canaux sodiques, prolongeant leur état inactif. Le rufinamide est actif chez divers modèles animaux d’épilepsie.",
+    "qid": "36811994"
+   },
+   {
+    "index": 8,
+    "corpus": "bdpm_rcp",
+    "page": "62205873",
+    "section": "5.1",
+    "quote": "Dans le cadre d’une étude en double aveugle, contrôlée contre placebo, Inovelon (rufinamide comprimés) a été administré à des doses allant jusqu’à 45 mg/kg/jour pendant 84 jours, chez 139 patients présentant des crises d’épilepsie associées au syndrome de Lennox-Gastaut (comprenant à la fois des absences atypiques et des chutes subites) mal contrôlées. Des patients de deux sexes (âgés de 4 à 30 ans) étaient éligibles s’ils présentaient les critères suivants : antécédents de différents types de crises, qui devaient inclure des absences atypiques et des chutes subites (c’est-à-dire crises toniques/atoniques ou astatiques) ; traitement concomitant par 1 à 3 médicaments antiépileptiques à dose fixe ; au moins 90 crises dans le mois précédant la période de 28 jours précédant l’entrée dans l’étude ; EGG réalisé au cours des 6 mois précédant l’entrée dans l’étude montrant un profil de complexes pointes-ondes lentes (2,5 Hz) ; poids d’au moins 18 kg ; et TDM ou IRM confirmant l’absence de lésion progressive. Toutes les crises étaient classées selon les critères de classification révisés des crises convulsives de l’International League Against Epilepsy. Comme il est difficile pour les aidants de différencier précisément les crises toniques et atoniques, le panel d’experts internationaux de neuropédiatres a convenu de regrouper ces types de crises et de les appeler crises toniques/atoniques ou « chutes subites ». De ce fait, les chutes subites étaient l’un des critères d’évaluation principaux. Une amélioration significative a été observée pour les trois critères principaux : la variation en pourcentage de la fréquence totale des crises d’épilepsie par période de 28 jours pendant la phase d’entretien par rapport à la fréquence initiale (-35,8 % sous Inovelon versus -1,6 % sous placebo, p = 0,0006), le nombre de crises toniques/atoniques (-42,9 % sous Inovelon versus 2,2 % sous placebo, p = 0,0002) et le score d’intensité des crises à partir de l’évaluation globale effectuée par le parent/tuteur à la fin de la phase en double aveugle (amélioration importante ou très importante chez 32,2 % des patients sous Inovelon versus 14,5 % dans le bras placebo, p = 0,0041).",
+    "qid": "def52677"
+   }
+  ]
+ },
+ "thiocolchicoside": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "65617572",
+    "section": "4.4",
+    "quote": "Chez les patients épileptiques ou à risque de convulsions, il est recommandé d’évaluer le rapport bénéfice-risque du thiocolchicoside et de renforcer la surveillance clinique. La survenue de crises convulsives impose l’arrêt du traitement.",
+    "qid": "1d50c3a6"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "65617572",
+    "section": "5.1",
+    "quote": "Enfin, le thiocolchicoside agit également comme un antagoniste des récepteurs de type GABAA (principalement situés au niveau du cortex cérébral), cette action pharmacologique étant connue pour avoir des propriétés convulsivantes ou proconvulsivantes.",
+    "qid": "7ce7260d"
+   }
+  ]
  }
 }
