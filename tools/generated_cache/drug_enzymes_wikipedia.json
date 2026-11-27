@@ -4482,6 +4482,21 @@
    "strength": "major"
   }
  ],
+ "riluzole": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "riluzole",
+     "provenance": "verified",
+     "quote": "Metabolism | Hepatic ( CYP1A2 )"
+    }
+   ]
+  }
+ ],
  "ropinirole": [
   {
    "enzyme": "cyp1a2",

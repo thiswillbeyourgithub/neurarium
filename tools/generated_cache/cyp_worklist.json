@@ -5887,6 +5887,27 @@
    ],
    "name": "Reboxetine"
   },
+  "riluzole": {
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "(lead)",
+     "n": 0,
+     "page": "riluzole",
+     "qid": "b2005919",
+     "quote": "Metabolism | Hepatic ( CYP1A2 )"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Interactions",
+     "n": 1,
+     "page": "riluzole",
+     "qid": "8c781c14",
+     "quote": "CYP1A2 substrates, inhibitors and inducers would probably interact with riluzole, due to its dependency on this cytochrome for metabolism."
+    }
+   ],
+   "name": "Riluzole"
+  },
   "rimonabant": {
    "candidates": [
     {

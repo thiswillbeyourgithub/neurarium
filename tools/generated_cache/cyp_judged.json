@@ -4174,5 +4174,19 @@
    "role": "inhibitor",
    "qid": "af047631"
   }
+ ],
+ "riluzole": [
+  {
+   "enzyme": "cyp1a2",
+   "n": 0,
+   "role": "substrate",
+   "qid": "b2005919"
+  },
+  {
+   "enzyme": "cyp1a2",
+   "n": 1,
+   "role": "substrate",
+   "qid": "8c781c14"
+  }
  ]
 }
