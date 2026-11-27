@@ -6714,6 +6714,23 @@
    }
   ]
  },
+ "palonosetron": {
+  "page": "67044648",
+  "denomination": "PALONOSETRON REIG JOFRE 250 microgrammes, solution injectable",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.4",
+    "under": "",
+    "quote": "Cependant, comme pour d’autres antagonistes des récepteurs 5-HT3, il est recommandé d’être prudent en cas d'utilisation de palonosétron chez des patients présentant ou susceptibles de présenter un allongement de l'intervalle QT. Les facteurs de risque sont notamment des antécédents personnels ou familiaux d’allongement de l’intervalle QT, les déséquilibres électrolytiques, l’insuffisance cardiaque congestive, les bradyarythmies, les troubles de la conduction et l’administration d’antiarythmiques ou d’autres médicaments entraînant un allongement de l’intervalle QT ou des troubles électrolytiques. L’hypokaliémie et l’hypomagnésémie doivent être corrigées avant l’administration d’un antagoniste des récepteurs 5-HT3.",
+    "tests": [
+     "ecg",
+     "electrolytes"
+    ],
+    "qid": "26c45534"
+   }
+  ]
+ },
  "paroxetine": {
   "page": "60160707",
   "denomination": "DEROXAT 20 mg, comprimé pelliculé sécable",
