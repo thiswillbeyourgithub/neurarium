@@ -1465,6 +1465,20 @@
    "5.1"
   ]
  },
+ "metopimazine": {
+  "cis": "61183089",
+  "date_source": "file mtime",
+  "denomination": "VOGALIB 7,5 mg SANS SUCRE, lyophilisat oral édulcoré à l'aspartam",
+  "fetched": "2026-11-27",
+  "page": "61183089",
+  "sections": [
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
  "mianserin": {
   "cis": "60854845",
   "date_source": "file mtime",
@@ -1737,6 +1751,20 @@
   "denomination": "PALIPERIDONE TEVA 75 mg, suspension injectable à libération prolongée",
   "fetched": "2026-10-15",
   "page": "64582563",
+  "sections": [
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
+ "palonosetron": {
+  "cis": "67044648",
+  "date_source": "file mtime",
+  "denomination": "PALONOSETRON REIG JOFRE 250 microgrammes, solution injectable",
+  "fetched": "2026-11-27",
+  "page": "67044648",
   "sections": [
    "4.1",
    "4.2",

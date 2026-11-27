@@ -29,6 +29,9 @@
    }
   ]
  },
+ "alizapride": {
+  "brands": []
+ },
  "alprazolam": {
   "brands": [
    {
@@ -1000,6 +1003,28 @@
    }
   ]
  },
+ "metopimazine": {
+  "brands": [
+   {
+    "cis": "61183089",
+    "name": "Vogalib",
+    "quote": "VOGALIB"
+   },
+   {
+    "cis": "61264153",
+    "name": "Vogalene",
+    "quote": "VOGALENE"
+   },
+   {
+    "cis": "62154681",
+    "name": "Isalia",
+    "quote": "ISALIA"
+   }
+  ],
+  "cis": "61183089",
+  "denomination": "VOGALIB 7,5 mg SANS SUCRE, lyophilisat oral édulcoré à l'aspartam",
+  "why": "plain oral, brand-name product"
+ },
  "mianserin": {
   "brands": [],
   "cis": "60854845",
@@ -1259,6 +1284,12 @@
     "quote": "OXYCONTIN"
    }
   ]
+ },
+ "palonosetron": {
+  "brands": [],
+  "cis": "67044648",
+  "denomination": "PALONOSETRON REIG JOFRE 250 microgrammes, solution injectable",
+  "why": "no plain-oral product; non-modified-release intraveineuse"
  },
  "paroxetine": {
   "brands": [
