@@ -94,6 +94,33 @@
     "value": 4.7
    }
   },
+  "alizapride": {
+   "cid": 43008,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "43008",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 83.1 Å²"
+     }
+    ],
+    "value": 83.1
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "43008",
+      "provenance": "verified",
+      "quote": "XLogP3: 1.5"
+     }
+    ],
+    "value": 1.5
+   }
+  },
   "alpidem": {
    "bbb": {
     "label": "BBB+",
@@ -1892,6 +1919,47 @@
     "value": 2.4
    }
   },
+  "chlorphenamine": {
+   "bbb": {
+    "label": "BBB+",
+    "logbb": 1.53,
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "2725",
+      "provenance": "verified",
+      "quote": "B3DB row 1054: chlorpheniramine | CID 2725 | logBB 1.53 | BBB+ | group A | references R47"
+     }
+    ]
+   },
+   "cid": 2725,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "2725",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 16.1 Å²"
+     }
+    ],
+    "value": 16.1
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "2725",
+      "provenance": "verified",
+      "quote": "XLogP3: 3.4"
+     }
+    ],
+    "value": 3.4
+   }
+  },
   "chlorpromazine": {
    "bbb": {
     "label": "BBB+",
@@ -2488,6 +2556,46 @@
      }
     ],
     "value": 4.4
+   }
+  },
+  "cyclizine": {
+   "bbb": {
+    "label": "BBB+",
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "6726",
+      "provenance": "verified",
+      "quote": "B3DB row 5275: cyclizine | CID 6726 | logBB - | BBB+ | group C | references R14, R23"
+     }
+    ]
+   },
+   "cid": 6726,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "6726",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 6.5 Å²"
+     }
+    ],
+    "value": 6.5
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "6726",
+      "provenance": "verified",
+      "quote": "XLogP3: 3.6"
+     }
+    ],
+    "value": 3.6
    }
   },
   "cyclobarbital": {
@@ -6112,6 +6220,46 @@
     "value": 2.6
    }
   },
+  "metopimazine": {
+   "bbb": {
+    "label": "BBB+",
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "26388",
+      "provenance": "verified",
+      "quote": "B3DB row 2089: metopimazine | CID 26388 | logBB - | BBB+ | group B | references R1, R13, R19, R6, R24, R27, R27, R27, R30, R30"
+     }
+    ]
+   },
+   "cid": 26388,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "26388",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 117 Å²"
+     }
+    ],
+    "value": 117.0
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "26388",
+      "provenance": "verified",
+      "quote": "XLogP3: 3.1"
+     }
+    ],
+    "value": 3.1
+   }
+  },
   "mianserin": {
    "bbb": {
     "label": "BBB+",
@@ -7244,6 +7392,33 @@
      }
     ],
     "value": 2.2
+   }
+  },
+  "palonosetron": {
+   "cid": 148211,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "148211",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 23.6 Å²"
+     }
+    ],
+    "value": 23.6
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "148211",
+      "provenance": "verified",
+      "quote": "XLogP3: 2.8"
+     }
+    ],
+    "value": 2.8
    }
   },
   "pargyline": {
@@ -10679,6 +10854,46 @@
      }
     ],
     "value": 4.8
+   }
+  },
+  "tropisetron": {
+   "bbb": {
+    "label": "BBB+",
+    "match": "name",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "656665",
+      "provenance": "verified",
+      "quote": "B3DB row 7731: tropisetron | CID 656665 | logBB - | BBB+ | group C | references R34"
+     }
+    ]
+   },
+   "cid": 72165,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "72165",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 45.3 Å²"
+     }
+    ],
+    "value": 45.3
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "72165",
+      "provenance": "verified",
+      "quote": "XLogP3: 3.8"
+     }
+    ],
+    "value": 3.8
    }
   },
   "valbenazine": {

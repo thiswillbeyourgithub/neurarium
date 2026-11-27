@@ -19,6 +19,11 @@
     "title": "Alimemazine",
     "url": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Alimemazine.svg"
   },
+  "alizapride": {
+    "file": "File:Alizapride.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/52/Alizapride.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Alizapride"
+  },
   "alpidem": {
     "file": "File:Alpidem.svg",
     "title": "Alpidem",
@@ -244,6 +249,11 @@
     "title": "Chlordiazepoxide",
     "url": "https://upload.wikimedia.org/wikipedia/commons/5/57/Chlordiazepoxide_structure.svg"
   },
+  "chlorphenamine": {
+    "file": "File:Chlorphenamine.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Chlorphenamine.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Chlorphenamine"
+  },
   "chlorpromazine": {
     "file": "File:Chlorpromazine.svg",
     "title": "Chlorpromazine",
@@ -318,6 +328,11 @@
     "file": "File:Cyamemazine.svg",
     "title": "Cyamemazine",
     "url": "https://upload.wikimedia.org/wikipedia/commons/7/75/Cyamemazine.svg"
+  },
+  "cyclizine": {
+    "file": "File:Cyclizine2DCSD.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/00/Cyclizine2DCSD.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Cyclizine"
   },
   "cyclobarbital": {
     "file": "File:Cyclobarbital.svg",
@@ -810,6 +825,11 @@
     "title": "Metoclopramide",
     "url": "https://upload.wikimedia.org/wikipedia/commons/4/49/Metoclopramide.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original"
   },
+  "metopimazine": {
+    "file": "File:Metopimazine.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Metopimazine.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Metopimazine"
+  },
   "mianserin": {
     "file": "File:Mianserin_2D_structure.svg",
     "title": "Mianserin",
@@ -950,6 +970,11 @@
     "file": "File:Paliperidone.svg",
     "title": "Paliperidone",
     "url": "https://upload.wikimedia.org/wikipedia/commons/6/6c/Paliperidone.svg"
+  },
+  "palonosetron": {
+    "file": "File:Palonosetron_structure.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/d/de/Palonosetron_structure.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Palonosetron"
   },
   "pargyline": {
     "file": "File:Pargyline.svg",
@@ -1416,6 +1441,11 @@
     "title": "Tropatepine",
     "url": "https://upload.wikimedia.org/wikipedia/commons/3/3b/Tropatepine.png",
     "vectorized": "tools/fetch/png_to_svg.py (potrace)"
+  },
+  "tropisetron": {
+    "file": "File:Tropisetron2DACS.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Tropisetron2DACS.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Tropisetron"
   },
   "valbenazine": {
     "file": "File:Valbenazine.svg",
