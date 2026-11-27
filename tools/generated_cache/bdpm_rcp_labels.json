@@ -206,6 +206,20 @@
    "5.1"
   ]
  },
+ "atogepant": {
+  "cis": "67880725",
+  "date_source": "justelesRCP EMA scrape manifest last_fetch",
+  "denomination": "AQUIPTA 10 mg, comprimé",
+  "fetched": "2026-09-30",
+  "page": "67880725",
+  "sections": [
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
  "atropine": {
   "cis": "63358772",
   "date_source": "justelesRCP scrape manifest last_fetch",
@@ -749,6 +763,20 @@
   "denomination": "DICODIN L.P. 60 mg, comprimé à libération prolongée",
   "fetched": "2026-07-27",
   "page": "67482372",
+  "sections": [
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
+ "dihydroergotamine": {
+  "cis": "62455371",
+  "date_source": "file mtime",
+  "denomination": "DIERGOSPRAY 4 mg/ml, solution pour pulvérisation nasale",
+  "fetched": "2026-11-27",
+  "page": "62455371",
   "sections": [
    "4.1",
    "4.2",

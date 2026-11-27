@@ -137,6 +137,12 @@
   "spl_version": 16,
   "title": "DIAZEPAM TABLET [MYLAN PHARMACEUTICALS INC.]"
  },
+ "dihydroergotamine": {
+  "published_date": "Jun 29, 2026",
+  "setid": "0982a44a-dc0c-75c0-e063-6394a90a6d6c",
+  "spl_version": 3,
+  "title": "ATZUMI (DIHYDROERGOTAMINE MESYLATE) POWDER [SATSUMA PHARMACEUTICALS, INC.]"
+ },
  "donepezil": {
   "published_date": "Sep 10, 2026",
   "setid": "de96349a-5fee-4de9-921c-e453d44b3203",
@@ -502,6 +508,12 @@
   "setid": "5add318e-11b9-42f8-b052-0d8cebb32fcf",
   "spl_version": 26,
   "title": "TRIAZOLAM TABLET [MYLAN PHARMACEUTICALS INC.]"
+ },
+ "ubrogepant": {
+  "published_date": "Oct 01, 2026",
+  "setid": "36106b14-d410-4faf-a361-2871de8198c3",
+  "spl_version": 1,
+  "title": "UBRELVY (UBROGEPANT) TABLET [SPORTPHARM LLC]"
  },
  "valproate": {
   "published_date": "Jun 22, 2026",

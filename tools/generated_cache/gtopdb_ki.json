@@ -4716,6 +4716,122 @@
     }
    }
   },
+  "dihydroergotamine": {
+   "5ht1b": {
+    "action": "agonist",
+    "ki": {
+     "max": 10.0,
+     "median": 5.3155,
+     "min": 0.631,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8863519",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "dihydroergotamine",
+     "provenance": "verified",
+     "quote": "dihydroergotamine at 5-HT1B receptor (HTR1B, Human): Agonist / Full agonist, pKi 8-9.2 [PMID 8863519]",
+     "species": "Human"
+    }
+   },
+   "5ht1d": {
+    "action": "agonist",
+    "ki": {
+     "max": 0.631,
+     "median": 0.3784,
+     "min": 0.1259,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9605573",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "dihydroergotamine",
+     "provenance": "verified",
+     "quote": "dihydroergotamine at 5-HT1D receptor (HTR1D, Human): Agonist / Full agonist, pKi 9.2-9.9 [PMID 9605573]",
+     "species": "Human"
+    }
+   },
+   "5ht1e": {
+    "action": "agonist",
+    "ki": {
+     "max": 2511.8864,
+     "median": 2511.8864,
+     "min": 2511.8864,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8863519",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "dihydroergotamine",
+     "provenance": "verified",
+     "quote": "dihydroergotamine at 5-ht1e receptor (HTR1E, Human): Agonist / Full agonist, pKi 5.6 [PMID 8863519]",
+     "species": "Human"
+    }
+   },
+   "5ht1f": {
+    "action": "agonist",
+    "ki": {
+     "max": 251.1886,
+     "median": 165.3107,
+     "min": 79.4328,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "15900510",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "dihydroergotamine",
+     "provenance": "verified",
+     "quote": "dihydroergotamine at 5-HT1F receptor (HTR1F, Human): Agonist / Full agonist, pKi 6.6-7.1 [PMID 15900510]",
+     "species": "Human"
+    }
+   },
+   "5ht6": {
+    "action": "antagonist",
+    "ki": {
+     "max": 12.5893,
+     "median": 8.8006,
+     "min": 5.0119,
+     "n_human": 0,
+     "n_nonhuman": 1,
+     "param": "pKi"
+    },
+    "pmid": "7680751",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "dihydroergotamine",
+     "provenance": "verified",
+     "quote": "dihydroergotamine at 5-HT6 receptor (Htr6, Rat): Antagonist / Antagonist, pKi 7.9-8.3 [PMID 7680751]",
+     "species": "Rat"
+    }
+   },
+   "5ht7": {
+    "action": "antagonist",
+    "ki": {
+     "max": 10.0,
+     "median": 10.0,
+     "min": 10.0,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8226867",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "dihydroergotamine",
+     "provenance": "verified",
+     "quote": "dihydroergotamine at 5-HT7 receptor (HTR7, Human): Antagonist / Antagonist, pKi 8 [PMID 8226867]",
+     "species": "Human"
+    }
+   }
+  },
   "diphenhydramine": {
    "h1": {
     "action": "antagonist",
@@ -5293,6 +5409,179 @@
      "provenance": "verified",
      "quote": "entacapone at Catechol-O-methyltransferase (COMT, Human): Inhibitor / Inhibition, pKi 9.52 [PMID 7703232]",
      "species": "Human"
+    }
+   }
+  },
+  "ergotamine": {
+   "5ht1d": {
+    "action": "agonist",
+    "ki": {
+     "max": 0.7943,
+     "median": 0.7943,
+     "min": 0.7943,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "10715164",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "ergotamine",
+     "provenance": "verified",
+     "quote": "ergotamine at 5-HT1D receptor (HTR1D, Human): Agonist / Agonist, pKi 9.1 [PMID 10715164]",
+     "species": "Human"
+    }
+   },
+   "5ht1e": {
+    "action": "agonist",
+    "ki": {
+     "max": 630.9573,
+     "median": 566.0723,
+     "min": 501.1872,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "1608964",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "ergotamine",
+     "provenance": "verified",
+     "quote": "ergotamine at 5-ht1e receptor (HTR1E, Human): Agonist / Full agonist, pKi 6.2-6.3 [PMID 1608964]",
+     "species": "Human"
+    }
+   },
+   "5ht1f": {
+    "action": "agonist",
+    "ki": {
+     "max": 158.4893,
+     "median": 158.4893,
+     "min": 158.4893,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8380639",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "ergotamine",
+     "provenance": "verified",
+     "quote": "ergotamine at 5-HT1F receptor (HTR1F, Human): Agonist / Full agonist, pKi 6.8 [PMID 8380639]",
+     "species": "Human"
+    }
+   },
+   "5ht2a": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 1.0,
+     "median": 1.0,
+     "min": 1.0,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "15322733",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "ergotamine",
+     "provenance": "verified",
+     "quote": "ergotamine at 5-HT2A receptor (HTR2A, Human): Agonist / Partial agonist, pKi 9 [PMID 15322733]",
+     "species": "Human"
+    }
+   },
+   "5ht2b": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 3.1623,
+     "median": 2.2106,
+     "min": 1.2589,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "15322733",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "ergotamine",
+     "provenance": "verified",
+     "quote": "ergotamine at 5-HT2B receptor (HTR2B, Human): Agonist / Partial agonist, pKi 8.5-8.9 [PMID 15322733]",
+     "species": "Human"
+    }
+   },
+   "5ht2c": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 1.9953,
+     "median": 1.9953,
+     "min": 1.9953,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "15322733",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "ergotamine",
+     "provenance": "verified",
+     "quote": "ergotamine at 5-HT2C receptor (HTR2C, Human): Agonist / Partial agonist, pKi 8.7 [PMID 15322733]",
+     "species": "Human"
+    }
+   },
+   "5ht5a": {
+    "action": "antagonist",
+    "ki": {
+     "max": 10.0,
+     "median": 5.9976,
+     "min": 1.9953,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "7988681",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "ergotamine",
+     "provenance": "verified",
+     "quote": "ergotamine at 5-HT5A receptor (HTR5A, Human): Antagonist / Antagonist, pKi 8-8.7 [PMID 7988681]",
+     "species": "Human"
+    }
+   },
+   "5ht6": {
+    "action": "agonist",
+    "ki": {
+     "max": 10.0,
+     "median": 6.2559,
+     "min": 2.5119,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "9730917",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "ergotamine",
+     "provenance": "verified",
+     "quote": "ergotamine at 5-HT6 receptor (HTR6, Human): Agonist / Full agonist, pKi 8-8.6 [PMID 9730917]",
+     "species": "Human"
+    }
+   },
+   "5ht7": {
+    "action": "antagonist",
+    "ki": {
+     "max": 50.1187,
+     "median": 50.1187,
+     "min": 50.1187,
+     "n_human": 0,
+     "n_nonhuman": 1,
+     "param": "pKi"
+    },
+    "pmid": "8394987",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "ergotamine",
+     "provenance": "verified",
+     "quote": "ergotamine at 5-HT7 receptor (Htr7, Mouse): Antagonist / Antagonist, pKi 7.3 [PMID 8394987]",
+     "species": "Mouse"
     }
    }
   },
@@ -8229,6 +8518,198 @@
      "page": "methylphenidate",
      "provenance": "verified",
      "quote": "methylphenidate at NET (SLC6A2, Human): Inhibitor / Inhibition, pIC50 7.21",
+     "species": "Human"
+    }
+   }
+  },
+  "methysergide": {
+   "5ht1b": {
+    "action": "antagonist",
+    "ki": {
+     "max": 251.1886,
+     "median": 138.1538,
+     "min": 25.1189,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "1565658",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "methysergide",
+     "provenance": "verified",
+     "quote": "methysergide at 5-HT1B receptor (HTR1B, Human): Antagonist / Antagonist, pKi 6.6-7.6 [PMID 1565658]",
+     "species": "Human"
+    }
+   },
+   "5ht1d": {
+    "action": "antagonist",
+    "ki": {
+     "max": 3.9811,
+     "median": 2.62,
+     "min": 1.2589,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "1565658",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "methysergide",
+     "provenance": "verified",
+     "quote": "methysergide at 5-HT1D receptor (HTR1D, Human): Antagonist / Antagonist, pKi 8.4-8.9 [PMID 1565658]",
+     "species": "Human"
+    }
+   },
+   "5ht1e": {
+    "action": "antagonist",
+    "ki": {
+     "max": 316.2278,
+     "median": 237.3585,
+     "min": 158.4893,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8863519",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "methysergide",
+     "provenance": "verified",
+     "quote": "methysergide at 5-ht1e receptor (HTR1E, Human): Antagonist / Antagonist, pKi 6.5-6.8 [PMID 8863519]",
+     "species": "Human"
+    }
+   },
+   "5ht1f": {
+    "action": "antagonist",
+    "ki": {
+     "max": 6.3096,
+     "median": 6.3096,
+     "min": 6.3096,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "15900510",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "methysergide",
+     "provenance": "verified",
+     "quote": "methysergide at 5-HT1F receptor (HTR1F, Human): Antagonist / Antagonist, pKi 8.2 [PMID 15900510]",
+     "species": "Human"
+    }
+   },
+   "5ht2a": {
+    "action": "antagonist",
+    "ki": {
+     "max": 3.9811,
+     "median": 3.9811,
+     "min": 3.9811,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "15322733",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "methysergide",
+     "provenance": "verified",
+     "quote": "methysergide at 5-HT2A receptor (HTR2A, Human): Antagonist / Antagonist, pKi 8.4 [PMID 15322733]",
+     "species": "Human"
+    }
+   },
+   "5ht2b": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 10.0,
+     "median": 5.1991,
+     "min": 0.3981,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "15322733",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "methysergide",
+     "provenance": "verified",
+     "quote": "methysergide at 5-HT2B receptor (HTR2B, Human): Agonist / Partial agonist, pKi 8-9.4 [PMID 15322733]",
+     "species": "Human"
+    }
+   },
+   "5ht2c": {
+    "action": "antagonist",
+    "ki": {
+     "max": 2.5119,
+     "median": 1.6531,
+     "min": 0.7943,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "15322733",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "methysergide",
+     "provenance": "verified",
+     "quote": "methysergide at 5-HT2C receptor (HTR2C, Human): Antagonist / Antagonist, pKi 8.6-9.1 [PMID 15322733]",
+     "species": "Human"
+    }
+   },
+   "5ht5a": {
+    "action": "antagonist",
+    "ki": {
+     "max": 100.0,
+     "median": 100.0,
+     "min": 100.0,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "7988681",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "methysergide",
+     "provenance": "verified",
+     "quote": "methysergide at 5-HT5A receptor (HTR5A, Human): Antagonist / Antagonist, pKi 7 [PMID 7988681]",
+     "species": "Human"
+    }
+   },
+   "5ht6": {
+    "action": "antagonist",
+    "ki": {
+     "max": 316.2278,
+     "median": 237.3585,
+     "min": 158.4893,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8522988",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "methysergide",
+     "provenance": "verified",
+     "quote": "methysergide at 5-HT6 receptor (HTR6, Human): Antagonist / Antagonist, pKi 6.5-6.8 [PMID 8522988]",
+     "species": "Human"
+    }
+   },
+   "5ht7": {
+    "action": "antagonist",
+    "ki": {
+     "max": 79.4328,
+     "median": 47.6409,
+     "min": 15.8489,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "11414657",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "methysergide",
+     "provenance": "verified",
+     "quote": "methysergide at 5-HT7 receptor (HTR7, Human): Antagonist / Antagonist, pKi 7.1-7.8 [PMID 11414657]",
      "species": "Human"
     }
    }

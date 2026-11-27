@@ -2982,5 +2982,197 @@
    "reason": "inhibits CGRP release, not an action on the CGRP receptor; animal statement",
    "qid": "f919ed73"
   }
+ ],
+ "ubrogepant": [
+  {
+   "index": 0,
+   "target": "cgrp",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "01a14e2e"
+  }
+ ],
+ "atogepant": [
+  {
+   "index": 0,
+   "target": "cgrp",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "f34473b1"
+  },
+  {
+   "index": 1,
+   "target": "cgrp",
+   "pick": false,
+   "reason": "ATC class line; the same CGRP antagonism is picked from the article sentence (candidate 0)",
+   "qid": "4c59f61e"
+  },
+  {
+   "index": 2,
+   "target": "a2a",
+   "pick": false,
+   "reason": "trial description, not about the adenosine A2A receptor",
+   "qid": "4f22d2cf"
+  }
+ ],
+ "ergotamine": [
+  {
+   "index": 0,
+   "target": "5ht2b",
+   "pick": true,
+   "action": "agonist",
+   "qid": "06e64af6"
+  },
+  {
+   "index": 1,
+   "target": "5ht2a",
+   "pick": true,
+   "action": "agonist",
+   "qid": "b32a6254"
+  }
+ ],
+ "dihydroergotamine": [
+  {
+   "index": 0,
+   "target": "5ht1b",
+   "pick": true,
+   "action": "agonist",
+   "qid": "41cde0dd"
+  },
+  {
+   "index": 1,
+   "target": "5ht1d",
+   "pick": true,
+   "action": "agonist",
+   "qid": "41cde0dd"
+  },
+  {
+   "index": 2,
+   "target": "5ht1f",
+   "pick": true,
+   "action": "agonist",
+   "qid": "41cde0dd"
+  },
+  {
+   "index": 3,
+   "target": "5ht2b",
+   "pick": true,
+   "action": "agonist",
+   "qid": "032ab755"
+  },
+  {
+   "index": 4,
+   "target": "5ht2a",
+   "pick": true,
+   "action": "agonist",
+   "qid": "cdc7d933"
+  },
+  {
+   "index": 5,
+   "target": "5ht1d",
+   "pick": false,
+   "reason": "5-HT1D agonism already picked from the article sentence (candidate 1)",
+   "qid": "89da2bfe"
+  }
+ ],
+ "methysergide": [
+  {
+   "index": 0,
+   "target": "5ht2a",
+   "pick": false,
+   "reason": "the metabolite methylergonovine's action, not methysergide's",
+   "qid": "cbe73f8f"
+  },
+  {
+   "index": 1,
+   "target": "5ht2b",
+   "pick": false,
+   "reason": "the metabolite methylergonovine's action, not methysergide's",
+   "qid": "cbe73f8f"
+  },
+  {
+   "index": 2,
+   "target": "5ht1a",
+   "pick": true,
+   "action": "partial_agonist",
+   "qid": "a2b5debc"
+  },
+  {
+   "index": 3,
+   "target": "5ht2a",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "a2b5debc"
+  },
+  {
+   "index": 4,
+   "target": "5ht2b",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "a2b5debc"
+  },
+  {
+   "index": 5,
+   "target": "5ht2c",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "a2b5debc"
+  },
+  {
+   "index": 6,
+   "target": "5ht7",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "a2b5debc"
+  },
+  {
+   "index": 7,
+   "target": "5ht2a",
+   "pick": false,
+   "reason": "the metabolite methylergometrine's action",
+   "qid": "5e2e8f12"
+  },
+  {
+   "index": 8,
+   "target": "5ht2b",
+   "pick": false,
+   "reason": "the metabolite methylergometrine's action",
+   "qid": "5e2e8f12"
+  },
+  {
+   "index": 9,
+   "target": "5ht1b",
+   "pick": false,
+   "reason": "comparison describing the metabolite methylergonovine",
+   "qid": "431e642a"
+  },
+  {
+   "index": 10,
+   "target": "5ht1d",
+   "pick": false,
+   "reason": "comparison describing the metabolite methylergonovine",
+   "qid": "431e642a"
+  },
+  {
+   "index": 11,
+   "target": "5ht2a",
+   "pick": false,
+   "reason": "the metabolite methylergonovine's action",
+   "qid": "8caf784f"
+  },
+  {
+   "index": 12,
+   "target": "5ht2a",
+   "pick": false,
+   "reason": "does not name the drug; psychedelic effect attributed via the metabolite",
+   "qid": "3a27edf2"
+  },
+  {
+   "index": 13,
+   "target": "5ht2b",
+   "pick": false,
+   "reason": "activation via metabolism into methylergonovine, the metabolite's action",
+   "qid": "5ab32451"
+  }
  ]
 }

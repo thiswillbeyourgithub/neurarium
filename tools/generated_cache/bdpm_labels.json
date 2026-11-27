@@ -141,6 +141,15 @@
    }
   ]
  },
+ "atogepant": {
+  "brands": [
+   {
+    "cis": "67880725",
+    "name": "Aquipta",
+    "quote": "AQUIPTA"
+   }
+  ]
+ },
  "atropine": {
   "brands": [],
   "cis": "63358772",
@@ -509,6 +518,18 @@
     "quote": "DICODIN"
    }
   ]
+ },
+ "dihydroergotamine": {
+  "brands": [
+   {
+    "cis": "62455371",
+    "name": "Diergospray",
+    "quote": "DIERGOSPRAY"
+   }
+  ],
+  "cis": "62455371",
+  "denomination": "DIERGOSPRAY 4 mg/ml, solution pour pulvérisation nasale",
+  "why": "no plain-oral product; non-modified-release nasale, brand-name product"
  },
  "dimenhydrinate": {
   "brands": [

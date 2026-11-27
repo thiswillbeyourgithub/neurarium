@@ -3826,5 +3826,233 @@
     "qid": "f919ed73"
    }
   ]
+ },
+ {
+  "drug": "atogepant",
+  "name": "Atogepant",
+  "slug": "atogepant",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "cgrp",
+    "target_name": "CGRP receptor",
+    "origin": "prose",
+    "line": "It is a gepant , a calcitonin gene-related peptide receptor antagonist administered orally .",
+    "qid": "f34473b1"
+   },
+   {
+    "target": "cgrp",
+    "target_name": "CGRP receptor",
+    "origin": "rcp_5.1",
+    "line": "Classe pharmacothérapeutique : Analgésiques, antagonistes du récepteur du CGRP (calcitonin gene-related peptide), Code ATC : N02CD07",
+    "corpus": "bdpm_rcp",
+    "page": "67880725",
+    "qid": "4c59f61e"
+   },
+   {
+    "target": "a2a",
+    "target_name": "A2A",
+    "origin": "rcp_5.1",
+    "line": "Dans l'étude ELEVATE, 315 patients adultes atteints de migraine épisodique et précédemment en échec à 2 à 4 classes de traitements prophylactiques oraux (par exemple, topiramate, antidépresseurs tricycliques, bêta-bloquants) en raison de leur efficacité et/ou de leur tolérabilité ont été randomisés 1:1 pour recevoir soit 60 mg d'atogépant (N = 157), soit un placebo (N = 158), et ce pendant 12 semaines. Les résultats de cette étude étaient cohérents avec les principaux résultats des études d’efficacité précédentes sur la migraine épisodique et statistiquement significatifs pour les critères d'efficacité primaires et secondaires, y compris plusieurs mesures de résultats rapportés par les patients et évaluant le fonctionnement. Le traitement par atogépant a permis de réduire de 4,2 jours le nombre moyen de JMM, contre 1,9 jour dans le groupe placebo (p<0,001). 50,6 % (78/154) des patients du groupe atogépant ont obtenu une réduction d'au moins 50 % de JMM par rapport à la valeur initiale, contre 18,1 % (28/155) dans le groupe placebo (odds ratio [IC 95 %] : 4,82 [2,85, 8,14], p<0,001).",
+    "corpus": "bdpm_rcp",
+    "page": "67880725",
+    "qid": "4f22d2cf"
+   }
+  ]
+ },
+ {
+  "drug": "dihydroergotamine",
+  "name": "Dihydroergotamine",
+  "slug": "dihydroergotamine",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "5ht1b",
+    "target_name": "5-HT1B",
+    "origin": "prose",
+    "line": "Dihydroergotamine's antimigraine activity is due to its action as an agonist at the serotonin 5-HT 1B , 5-HT 1D , and 5-HT 1F receptors .",
+    "qid": "41cde0dd"
+   },
+   {
+    "target": "5ht1d",
+    "target_name": "5-HT1D",
+    "origin": "prose",
+    "line": "Dihydroergotamine's antimigraine activity is due to its action as an agonist at the serotonin 5-HT 1B , 5-HT 1D , and 5-HT 1F receptors .",
+    "qid": "41cde0dd"
+   },
+   {
+    "target": "5ht1f",
+    "target_name": "5-HT1F",
+    "origin": "prose",
+    "line": "Dihydroergotamine's antimigraine activity is due to its action as an agonist at the serotonin 5-HT 1B , 5-HT 1D , and 5-HT 1F receptors .",
+    "qid": "41cde0dd"
+   },
+   {
+    "target": "5ht2b",
+    "target_name": "5-HT2B",
+    "origin": "prose",
+    "line": "Dihydroergotamine is an agonist of the serotonin 5-HT 2B receptor and has been associated with cardiac valvulopathy .",
+    "qid": "032ab755"
+   },
+   {
+    "target": "5ht2a",
+    "target_name": "5-HT2A",
+    "origin": "prose",
+    "line": "In spite of acting as an agonist of the serotonin 5-HT 2A receptor , dihydroergotamine has been described as non- hallucinogenic .",
+    "qid": "cdc7d933"
+   },
+   {
+    "target": "5ht1d",
+    "target_name": "5-HT1D",
+    "origin": "rcp_5.1",
+    "line": "La dihydroergotamine présente une affinité moyenne à élevée pour divers sous-types de récepteurs sérotoninergiques. Elle possède une activité agoniste particulièrement puissante au niveau des récepteurs 5-HT1D, qui est supposée sous-tendre son efficacité antimigraineuse.",
+    "corpus": "bdpm_rcp",
+    "page": "62455371",
+    "qid": "89da2bfe"
+   }
+  ]
+ },
+ {
+  "drug": "ergotamine",
+  "name": "Ergotamine",
+  "slug": "ergotamine",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "5ht2b",
+    "target_name": "5-HT2B",
+    "origin": "prose",
+    "line": "Ergotamine is an agonist of the serotonin 5-HT 2B receptor and has been associated with cardiac valvulopathy .",
+    "qid": "06e64af6"
+   },
+   {
+    "target": "5ht2a",
+    "target_name": "5-HT2A",
+    "origin": "prose",
+    "line": "Despite acting as a potent serotonin 5-HT 2A receptor agonist, ergotamine is said to be non- hallucinogenic similarly to lisuride .",
+    "qid": "b32a6254"
+   }
+  ]
+ },
+ {
+  "drug": "methysergide",
+  "name": "Methysergide",
+  "slug": "methysergide",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "5ht2a",
+    "target_name": "5-HT2A",
+    "origin": "prose",
+    "line": "Methysergide's major active metabolite, methylergonovine , also contributes to its activity, most notably 5-HT 2A and 5-HT 2B receptor partial agonism.",
+    "qid": "cbe73f8f"
+   },
+   {
+    "target": "5ht2b",
+    "target_name": "5-HT2B",
+    "origin": "prose",
+    "line": "Methysergide's major active metabolite, methylergonovine , also contributes to its activity, most notably 5-HT 2A and 5-HT 2B receptor partial agonism.",
+    "qid": "cbe73f8f"
+   },
+   {
+    "target": "5ht1a",
+    "target_name": "5-HT1A",
+    "origin": "prose",
+    "line": "Methysergide is an agonist of 5-HT 1 receptors , including a partial agonist at the 5-HT 1A receptor, and is an antagonist at the 5-HT 2A , 5-HT 2B , 5-HT 2C , and 5-HT 7 receptors.",
+    "qid": "a2b5debc"
+   },
+   {
+    "target": "5ht2a",
+    "target_name": "5-HT2A",
+    "origin": "prose",
+    "line": "Methysergide is an agonist of 5-HT 1 receptors , including a partial agonist at the 5-HT 1A receptor, and is an antagonist at the 5-HT 2A , 5-HT 2B , 5-HT 2C , and 5-HT 7 receptors.",
+    "qid": "a2b5debc"
+   },
+   {
+    "target": "5ht2b",
+    "target_name": "5-HT2B",
+    "origin": "prose",
+    "line": "Methysergide is an agonist of 5-HT 1 receptors , including a partial agonist at the 5-HT 1A receptor, and is an antagonist at the 5-HT 2A , 5-HT 2B , 5-HT 2C , and 5-HT 7 receptors.",
+    "qid": "a2b5debc"
+   },
+   {
+    "target": "5ht2c",
+    "target_name": "5-HT2C",
+    "origin": "prose",
+    "line": "Methysergide is an agonist of 5-HT 1 receptors , including a partial agonist at the 5-HT 1A receptor, and is an antagonist at the 5-HT 2A , 5-HT 2B , 5-HT 2C , and 5-HT 7 receptors.",
+    "qid": "a2b5debc"
+   },
+   {
+    "target": "5ht7",
+    "target_name": "5-HT7",
+    "origin": "prose",
+    "line": "Methysergide is an agonist of 5-HT 1 receptors , including a partial agonist at the 5-HT 1A receptor, and is an antagonist at the 5-HT 2A , 5-HT 2B , 5-HT 2C , and 5-HT 7 receptors.",
+    "qid": "a2b5debc"
+   },
+   {
+    "target": "5ht2a",
+    "target_name": "5-HT2A",
+    "origin": "prose",
+    "line": "Methysergide is metabolized into methylergometrine in humans, which in contrast to methysergide is a partial agonist of the 5-HT 2A and 5-HT 2B receptors and also interacts with various other targets.",
+    "qid": "5e2e8f12"
+   },
+   {
+    "target": "5ht2b",
+    "target_name": "5-HT2B",
+    "origin": "prose",
+    "line": "Methysergide is metabolized into methylergometrine in humans, which in contrast to methysergide is a partial agonist of the 5-HT 2A and 5-HT 2B receptors and also interacts with various other targets.",
+    "qid": "5e2e8f12"
+   },
+   {
+    "target": "5ht1b",
+    "target_name": "5-HT1B",
+    "origin": "prose",
+    "line": "Methylergonovine appears to be 10 times more potent than methysergide as an agonist of the 5-HT 1B and 5-HT 1D receptors and has higher intrinsic efficacy in activating these receptors.",
+    "qid": "431e642a"
+   },
+   {
+    "target": "5ht1d",
+    "target_name": "5-HT1D",
+    "origin": "prose",
+    "line": "Methylergonovine appears to be 10 times more potent than methysergide as an agonist of the 5-HT 1B and 5-HT 1D receptors and has higher intrinsic efficacy in activating these receptors.",
+    "qid": "431e642a"
+   },
+   {
+    "target": "5ht2a",
+    "target_name": "5-HT2A",
+    "origin": "prose",
+    "line": "Metabolism of methysergide into methylergonovine, which is a potent serotonin 5-HT 2A receptor agonist, is considered to be responsible for the psychedelic effects of methysergide at high doses.",
+    "qid": "8caf784f"
+   },
+   {
+    "target": "5ht2a",
+    "target_name": "5-HT2A",
+    "origin": "prose",
+    "line": "The psychedelic effects can specifically be attributed to activation of the serotonin 5-HT 2A receptor .",
+    "qid": "3a27edf2"
+   },
+   {
+    "target": "5ht2b",
+    "target_name": "5-HT2B",
+    "origin": "prose",
+    "line": "The drug can activate the serotonin 5-HT 2B receptor due to metabolism into methylergonovine and for this reason has been associated with cardiac valvulopathy .",
+    "qid": "5ab32451"
+   }
+  ]
+ },
+ {
+  "drug": "ubrogepant",
+  "name": "Ubrogepant",
+  "slug": "ubrogepant",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "cgrp",
+    "target_name": "CGRP receptor",
+    "origin": "prose",
+    "line": "Ubrogepant is a small-molecule calcitonin gene-related peptide receptor antagonist .",
+    "qid": "01a14e2e"
+   }
+  ]
  }
 ]

@@ -148,6 +148,9 @@ EXTRA_ALIASES: dict[str, list[str]] = {
             "substance P receptor", "TACR1"],
     # The skeletal-muscle ryanodine receptor; prose rarely gives the subtype number.
     "ryr1": ["ryanodine receptor", "ryanodine receptor 1", "ryanodine receptor type 1", "RYR1"],
+    # Gepant articles spell the abbreviation out ("calcitonin gene-related peptide
+    # receptor antagonist").
+    "cgrp": ["calcitonin gene-related peptide receptor"],
 }
 
 
