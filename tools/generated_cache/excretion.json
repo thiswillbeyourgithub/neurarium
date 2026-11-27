@@ -79,6 +79,33 @@
     "value": "urine"
    }
   ],
+  "alfentanil": [
+   {
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "bdpm",
+      "page": "63670722",
+      "provenance": "verified",
+      "quote": "Les métabolites sont inactifs et 70 à 80 % de ces métabolites sont éliminés dans les urines."
+     }
+    ],
+    "value": "renal"
+   },
+   {
+    "amount": "1 %",
+    "aspect": "unchanged",
+    "sources": [
+     {
+      "corpus": "bdpm",
+      "page": "63670722",
+      "provenance": "verified",
+      "quote": "Seulement 1 % de la dose administrée est retrouvé sous forme inchangée dans l'urine."
+     }
+    ],
+    "value": "urine"
+   }
+  ],
   "alizapride": [
    {
     "aspect": "route",
@@ -4934,6 +4961,20 @@
     "value": "acidic_faster"
    }
   ],
+  "methohexital": [
+   {
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "methohexital",
+      "provenance": "verified",
+      "quote": "Excretion | excreted in feces"
+     }
+    ],
+    "value": "fecal"
+   }
+  ],
   "methylfolate_l": [
    {
     "aspect": "route",
@@ -7228,6 +7269,20 @@
       "page": "reboxetine",
       "provenance": "verified",
       "quote": "Excretion | Urine (78%;"
+     }
+    ],
+    "value": "renal"
+   }
+  ],
+  "remifentanil": [
+   {
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "bdpm",
+      "page": "64569231",
+      "provenance": "verified",
+      "quote": "Chez les patients ayant une fonction rénale normale, 95 % du métabolite principal du rémifentanil sont éliminés dans les urines, en 7 à 10 heures environ."
      }
     ],
     "value": "renal"

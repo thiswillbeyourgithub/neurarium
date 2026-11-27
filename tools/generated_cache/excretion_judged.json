@@ -5989,5 +5989,36 @@
    "value": "renal"
   }
  ],
- "cyclizine": []
+ "cyclizine": [],
+ "methohexital": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "198bb7fa",
+   "value": "fecal"
+  }
+ ],
+ "remifentanil": [
+  {
+   "aspect": "route",
+   "index": 3,
+   "qid": "07aa6ede",
+   "value": "renal"
+  }
+ ],
+ "alfentanil": [
+  {
+   "aspect": "route",
+   "index": 3,
+   "qid": "e3d1d26c",
+   "value": "renal"
+  },
+  {
+   "amount": "1 %",
+   "aspect": "unchanged",
+   "index": 2,
+   "qid": "122798e8",
+   "value": "urine"
+  }
+ ]
 }

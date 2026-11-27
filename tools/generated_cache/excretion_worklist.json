@@ -17841,5 +17841,194 @@
     "qid": "26da43e8"
    }
   ]
+ },
+ "methohexital": {
+  "name": "Methohexital",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "methohexital",
+    "line": "Excretion | excreted in feces",
+    "named": [
+     "route:fecal"
+    ],
+    "qid": "198bb7fa"
+   }
+  ]
+ },
+ "desflurane": {
+  "name": "Desflurane",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "desflurane",
+    "line": "It is carried by albumin in the human body and is minimally metabolized by cytochrome CYP2E1 in the liver, which produces a metabolite trifluoroacetic acid and is eliminated through the urine.",
+    "named": [
+     "route:renal",
+     "urine_ph:acidic_faster"
+    ],
+    "qid": "d0d1559c"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "desflurane",
+    "line": "Only 0.02% of the metabolite is recovered from urine, the remainder eliminated through the lungs.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "938de542"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "desflurane",
+    "line": "Evaluation der Sedierungstiefe und der Aufwachzeiten frisch operierter Patienten mit neurophysiologischem Monitoring im Rahmen der Studie: Desfluran versus Propofol zur Sedierung beatmeter Patienten (PDF) (Ph.D.",
+    "named": [
+     "urine_ph:dependent"
+    ],
+    "qid": "724ba8c4"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "desflurane",
+    "line": "Verträglichkeit, Nebenwirkungen und Hämodynamik der inhalativen Sedierung mit Desfluran im Rahmen der Studie: Desfluran versus Propofol zur Sedierung beatmeter Patienten (PDF) (Ph.D.",
+    "named": [
+     "urine_ph:dependent"
+    ],
+    "qid": "4f2b3b36"
+   }
+  ]
+ },
+ "remifentanil": {
+  "name": "Remifentanil",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "remifentanil",
+    "line": "This leads often to more hemodynamic stability during surgery and a quicker post-operative recovery time.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "f900b872"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "remifentanil",
+    "line": "Prior to the development of remifentanil, most short-acting hypnotics and amnestics faced issues with prolonged use, where accumulation would result in unfavorable lingering effects during post-operative recovery.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "a0aeb565"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "remifentanil",
+    "line": "^ Dahaba AA, Grabner T, Rehak PH, List WF, Metzler H (September 2004).",
+    "named": [
+     "urine_ph:dependent"
+    ],
+    "qid": "98f6ae88"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "64569231",
+    "line": "Chez les patients ayant une fonction rénale normale, 95 % du métabolite principal du rémifentanil sont éliminés dans les urines, en 7 à 10 heures environ.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "07aa6ede"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "64569231",
+    "line": "La clairance du métabolite acide carboxylique est diminuée chez les patients insuffisants rénaux.",
+    "named": [
+     "urine_ph:acidic_faster"
+    ],
+    "qid": "003987ea"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "64569231",
+    "line": "L’hémodialyse permet d’éliminer au moins 30 % du métabolite acide carboxylique.",
+    "named": [
+     "urine_ph:acidic_faster"
+    ],
+    "qid": "a66be1a2"
+   }
+  ]
+ },
+ "sufentanil": {
+  "name": "Sufentanil",
+  "candidates": [
+   {
+    "corpus": "bdpm",
+    "page": "61562566",
+    "line": "Environ 80% de la dose administrée sont éliminés dans les 24 heures suivant l’administration, 2% seulement sont éliminés sous forme inchangée.",
+    "named": [
+     "unchanged:urine"
+    ],
+    "qid": "3d9364f4"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "61562566",
+    "line": "Le volume de distribution à l’état d’équilibre, la clairance totale et la demi-vie terminale d’élimination chez les patients dialysés devant subir une greffe rénale ne diffèrent pas par rapport aux sujets sains.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "34199420"
+   }
+  ]
+ },
+ "alfentanil": {
+  "name": "Alfentanil",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "alfentanil",
+    "line": "Alfentanil has a pKa of approximately 6.5, which leads to a very high proportion of the drug being uncharged at physiologic pH, a characteristic responsible for its rapid-onset.",
+    "named": [
+     "urine_ph:dependent"
+    ],
+    "qid": "8a51f931"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "63670722",
+    "line": "Le faible degré d'ionisation (11 % à pH = 7,4) contribue significativement à la distribution rapide du produit.",
+    "named": [
+     "urine_ph:dependent"
+    ],
+    "qid": "77d383ae"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "63670722",
+    "line": "Seulement 1 % de la dose administrée est retrouvé sous forme inchangée dans l'urine.",
+    "named": [
+     "route:renal",
+     "unchanged:urine"
+    ],
+    "qid": "122798e8"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "63670722",
+    "line": "Les métabolites sont inactifs et 70 à 80 % de ces métabolites sont éliminés dans les urines.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "e3d1d26c"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "63670722",
+    "line": "Lorsque l'état d'équilibre est atteint après perfusion, la demi-vie d'élimination demeure inchangée.",
+    "named": [
+     "unchanged:urine"
+    ],
+    "qid": "d0c8910f"
+   }
+  ]
  }
 }
