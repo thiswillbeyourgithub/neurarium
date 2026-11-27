@@ -8774,6 +8774,18 @@
     }
    ]
   },
+  "dihydroergotamine": {
+   "name": "Dihydroergotamine",
+   "candidates": [
+    {
+     "corpus": "wikipedia_fr",
+     "page": "dihydroergotamine",
+     "line": "La dihydroergotamine est un médicament dérivé de l' ergot de seigle principalement utilisé dans le traitement de la migraine qui a été introduit dans les années 1970, sous la marque Séglor et Ikaran.",
+     "context": "bile",
+     "qid": "21bb765e"
+    }
+   ]
+  },
   "methysergide": {
    "name": "Methysergide",
    "candidates": [
@@ -8790,18 +8802,6 @@
      "line": "United States production of methysergide (Sansert) was discontinued on the manufacturer's own behalf in 2002.",
      "context": "market after taking over Sandoz , but currently lists it as a discontinued product.",
      "qid": "cc21d66e"
-    }
-   ]
-  },
-  "dihydroergotamine": {
-   "name": "Dihydroergotamine",
-   "candidates": [
-    {
-     "corpus": "wikipedia_fr",
-     "page": "dihydroergotamine",
-     "line": "La dihydroergotamine est un médicament dérivé de l' ergot de seigle principalement utilisé dans le traitement de la migraine qui a été introduit dans les années 1970, sous la marque Séglor et Ikaran.",
-     "context": "bile",
-     "qid": "21bb765e"
     }
    ]
   }
