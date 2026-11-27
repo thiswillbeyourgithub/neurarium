@@ -62,6 +62,9 @@
 "q_00fa6f7110b3": {
 "drug:trimipramine/bindings[muscarinic:antagonist]": "opus"
 },
+"q_011159d9316c": {
+"drug:ganaxolone/bindings[gaba_a:pam]": "opus"
+},
 "q_0127b6712aef": {
 "drug:caffeine/excretion[route:renal]": "opus"
 },
@@ -416,6 +419,9 @@
 "receptor:alpha2a/classification[family]": "sonnet",
 "receptor:alpha2a/classification[receptor_class]": "sonnet"
 },
+"q_073bc4a60097": {
+"drug:fosphenytoin/categories": "opus"
+},
 "q_07413b810e57": {
 "drug:donepezil/seizure_threshold[lowers]": "opus",
 "drug:donepezil/seizure_threshold[possibly_lowers]": "opus"
@@ -502,6 +508,9 @@
 },
 "q_08be8f154135": {
 "drug:valproate/tmax": "sonnet"
+},
+"q_08e3ef528a91": {
+"drug:riluzole/excretion[route:renal]": "opus"
 },
 "q_09263864eba3": {
 "drug:chlorpromazine/first_approval": "opus"
@@ -1218,6 +1227,9 @@
 "q_142cca0baab2": {
 "receptor:5ht2a/effects[agonism:prolactin_elevation]": "opus"
 },
+"q_1434f5f60ee2": {
+"drug:fosphenytoin/seizure_threshold[raises]": "opus"
+},
 "q_144e9dd4910c": {
 "drug:sertraline/brands[Lustral]": "sonnet"
 },
@@ -1401,6 +1413,9 @@
 },
 "q_17c92ff4237a": {
 "drug:phentermine/excretion[urine_ph:dependent]": "opus"
+},
+"q_17f25b8a3dcf": {
+"drug:riluzole/excretion[route:renal]": "opus"
 },
 "q_17f653e3793d": {
 "drug:rivastigmine/originator": "opus"
@@ -2101,6 +2116,9 @@
 },
 "q_224dd19392dd": {
 "drug:mirtazapine/originator_country": "opus"
+},
+"q_225751fa80b6": {
+"drug:riluzole/excretion[unchanged:urine]": "opus"
 },
 "q_22580062533c": {
 "drug:ketamine/first_approval": "opus"
@@ -3992,6 +4010,9 @@
 "drug:ephedrine/bindings[net:releaser]": "sonnet",
 "drug:ephedrine/categories": "sonnet"
 },
+"q_42f0634a7195": {
+"drug:ziconotide/first_approval": "opus"
+},
 "q_4316df2267a0": {
 "drug:sertraline/brands[No-Dep]": "sonnet"
 },
@@ -4763,6 +4784,9 @@
 "q_5000399d66c5": {
 "receptor:beta2/effects[agonism:bronchodilation]": "opus"
 },
+"q_5009e421dde2": {
+"drug:fosphenytoin/seizure_threshold[withdrawal]": "opus"
+},
 "q_501627412a14": {
 "drug:tiapride/excretion[route:renal]": "opus"
 },
@@ -5232,6 +5256,9 @@
 "q_59403d1dd24c": {
 "drug:opicapone/categories": "opus"
 },
+"q_594916ddad55": {
+"drug:ziconotide/bindings[cav:blocker]": "opus"
+},
 "q_59555415c621": {
 "projection:frontal_L->frontal_R": "opus",
 "projection:frontal_L->frontal_R/transmitter": "opus"
@@ -5408,6 +5435,9 @@
 },
 "q_5cd9732c0ff7": {
 "projection:cerebellum->thalamus_R": "sonnet"
+},
+"q_5d1719d75412": {
+"drug:ganaxolone/categories": "opus"
 },
 "q_5d48916da936": {
 "drug:ketanserin/categories": "opus"
@@ -5589,6 +5619,9 @@
 "receptor:alpha1b/effects[antagonism:orthostatic_hypotension]": "opus",
 "receptor:alpha1d/effects[antagonism:orthostatic_hypotension]": "opus"
 },
+"q_5fc636147a44": {
+"drug:fosphenytoin/tmax": "opus"
+},
 "q_5fc9770dfcc1": {
 "drug:selegiline/excretion[route:fecal]": "opus",
 "drug:selegiline/excretion[route:renal]": "opus"
@@ -5751,6 +5784,9 @@
 },
 "q_621e76908745": {
 "receptor:sigma1/effects[agonism:anxiolytic]": "opus"
+},
+"q_622a363ecf02": {
+"drug:ganaxolone/brands[Ztalmy]": "opus"
 },
 "q_6231136d30bc": {
 "drug:dmt/excretion[unchanged:urine]": "opus"
@@ -6007,6 +6043,9 @@
 },
 "q_65e8d2a1497d": {
 "drug:memantine/brands[Namenda XR]": "sonnet"
+},
+"q_65fb91a8b0f1": {
+"drug:fosphenytoin/excretion[route:renal]": "opus"
 },
 "q_6602560c406d": {
 "drug:aripiprazole/categories": "sonnet"
@@ -6445,6 +6484,9 @@
 "q_6de31681e0a8": {
 "drug:metoclopramide/half_life": "sonnet"
 },
+"q_6e0becc5d2b2": {
+"drug:ganaxolone/seizure_threshold[raises]": "opus"
+},
 "q_6e106b2cd81f": {
 "drug:varenicline/first_approval": "opus"
 },
@@ -6837,6 +6879,9 @@
 },
 "q_7393668ed116": {
 "drug:chlordiazepoxide/categories": "sonnet"
+},
+"q_7399222914c9": {
+"drug:riluzole/brands[Rilutek]": "opus"
 },
 "q_73aa07f3b179": {
 "drug:moclobemide/brands[Arima]": "sonnet"
@@ -7706,6 +7751,9 @@
 "drug:cabergoline/formulations[ir]/tmax": "opus",
 "drug:cabergoline/tmax": "opus"
 },
+"q_8359efff9e39": {
+"drug:fosphenytoin/first_approval": "opus"
+},
 "q_837fe808cd4e": {
 "receptor:5ht2a/release_modulation[heteroreceptor:-:glutamatergic_neuron:dopamine:decrease]": "opus"
 },
@@ -7866,6 +7914,9 @@
 },
 "q_8626ada33f1c": {
 "receptor:gaba_a/effects[antagonism:seizures]": "opus"
+},
+"q_863af3706133": {
+"drug:riluzole/half_life": "opus"
 },
 "q_86600b788a37": {
 "drug:lsd/withdrawals[fr:1966]": "opus"
@@ -8362,6 +8413,10 @@
 "q_8dafb6219e9e": {
 "drug:phenterminetopiramate/originator": "opus"
 },
+"q_8dcc3cce4b9c": {
+"drug:fosphenytoin/workup[blood_pressure:during]": "opus",
+"drug:fosphenytoin/workup[ecg:during]": "opus"
+},
 "q_8dfc0430503a": {
 "drug:tapentadol/originator": "opus"
 },
@@ -8391,6 +8446,9 @@
 },
 "q_8e61e4dd737a": {
 "drug:amphetamine_d/workup[weight:during]": "opus"
+},
+"q_8e6562ab0291": {
+"drug:fosphenytoin/workup[drug_level:during]": "opus"
 },
 "q_8e93eebf5c40": {
 "receptor:alpha1a/release_modulation[heteroreceptor:raphe:cell_body:serotonin:increase]": "opus",
@@ -8494,6 +8552,10 @@
 "q_90364ff8d0ac": {
 "drug:eszopiclone/sleep[rem_suppression]": "opus",
 "drug:eszopiclone/sleep[sws_increase]": "opus"
+},
+"q_9053e276f8cf": {
+"drug:fosphenytoin/metabolites[phenytoin]": "opus",
+"drug:fosphenytoin/prodrug": "opus"
 },
 "q_905e2ad5b844": {
 "drug:suvorexant/tmax": "sonnet"
@@ -8656,6 +8718,9 @@
 },
 "q_9310628694fd": {
 "drug:oxazepam/excretion[route:renal]": "opus"
+},
+"q_931ce559b423": {
+"drug:ganaxolone/first_approval": "opus"
 },
 "q_9324b9cef106": {
 "drug:buprenorphine/formulations[sublingual]/half_life": "opus",
@@ -9320,6 +9385,9 @@
 "drug:cariprazine/bindings[5ht1a:partial_agonist]": "sonnet",
 "drug:cariprazine/bindings[5ht2b:antagonist]": "sonnet"
 },
+"q_9c9da3a62532": {
+"drug:ganaxolone/categories": "opus"
+},
 "q_9cb8e80d78fd": {
 "projection:subthalamic_nucleus_R->globus_pallidus_R": "opus",
 "projection:subthalamic_nucleus_R->globus_pallidus_R/sign": "opus",
@@ -9361,6 +9429,9 @@
 },
 "q_9d250028b64e": {
 "drug:ketanserin/tmax": "sonnet"
+},
+"q_9d43247cdc80": {
+"drug:ziconotide/brands[Prialt]": "opus"
 },
 "q_9d4649b672d3": {
 "receptor:beta1/effects[antagonism:anxiolytic]": "opus"
@@ -10150,6 +10221,10 @@
 "q_aa36d6fcc759": {
 "drug:buprenorphine/formulations[sublingual]/release": "opus"
 },
+"q_aa38b21a3871": {
+"drug:riluzole/workup[liver_function:before]": "opus",
+"drug:riluzole/workup[liver_function:during]": "opus"
+},
 "q_aa3dee2b15ad": {
 "drug:clonazepam/nbn": "sonnet"
 },
@@ -10201,6 +10276,9 @@
 },
 "q_ab415c4973e5": {
 "drug:etomidate/excretion[unchanged:urine]": "opus"
+},
+"q_ab48e6810c03": {
+"drug:riluzole/workup[blood_count:during]": "opus"
 },
 "q_ab6e72d36289": {
 "drug:valproate/first_approval": "opus"
@@ -10491,6 +10569,9 @@
 },
 "q_b0bd5e887d7a": {
 "drug:levetiracetam/seizure_threshold[raises]": "opus"
+},
+"q_b0e00703bddb": {
+"drug:ziconotide/half_life": "opus"
 },
 "q_b0f25d81d5a3": {
 "drug:nordazepam/excretion[route:renal]": "opus"
@@ -11085,6 +11166,9 @@
 "drug:diphenhydramine/excretion[route:fecal]": "opus",
 "drug:diphenhydramine/excretion[route:renal]": "opus"
 },
+"q_ba7ac0471ee3": {
+"drug:fosphenytoin/categories": "opus"
+},
 "q_ba8badfd3364": {
 "receptor:5ht1b/release_modulation[autoreceptor:-:presynaptic_terminal:serotonin:decrease]": "opus"
 },
@@ -11149,6 +11233,9 @@
 },
 "q_bb520cd46c10": {
 "drug:cyclobenzaprine/excretion[route:renal]": "opus"
+},
+"q_bb65334579fe": {
+"drug:riluzole/bindings[gaba_a:pam]": "opus"
 },
 "q_bb7b150c0415": {
 "drug:ondansetron/first_approval": "opus"
@@ -11254,6 +11341,9 @@
 },
 "q_bd36116fee52": {
 "drug:escitalopram/half_life": "sonnet"
+},
+"q_bd43aa56bafd": {
+"drug:fosphenytoin/excretion[route:renal]": "opus"
 },
 "q_bd64ce87227d": {
 "drug:pipothiazine/formulations[depot]/half_life": "opus",
@@ -11707,6 +11797,10 @@
 },
 "q_c40059d706b0": {
 "drug:loflazepate/excretion[route:renal]": "opus"
+},
+"q_c41a1dad0524": {
+"drug:physostigmine/bindings[ache:enzyme_inhibitor]": "opus",
+"drug:physostigmine/bindings[bche:enzyme_inhibitor]": "opus"
 },
 "q_c41f5f4fdd87": {
 "drug:butobarbital/originator": "opus"
@@ -12533,6 +12627,9 @@
 "drug:phenobarbital/enzymes[cyp2c19:substrate]": "opus",
 "drug:phenobarbital/enzymes[cyp2c19:substrate]/strength": "opus"
 },
+"q_d35d57fcb4d7": {
+"drug:riluzole/tmax": "opus"
+},
 "q_d361082354cf": {
 "drug:dothiepin/bindings[alpha1a:antagonist]": "sonnet",
 "drug:dothiepin/bindings[alpha1b:antagonist]": "sonnet",
@@ -12760,6 +12857,9 @@
 "drug:metopimazine/bindings[5ht2a:antagonist]": "opus",
 "drug:metopimazine/bindings[alpha1:antagonist]": "opus",
 "drug:metopimazine/bindings[h1:antagonist]": "opus"
+},
+"q_d7742bf75970": {
+"drug:mirogabalin/first_approval": "opus"
 },
 "q_d77f0f0e6fe9": {
 "drug:erenumab/categories": "sonnet"
@@ -13009,6 +13109,9 @@
 },
 "q_dbc2037fb57a": {
 "drug:lithium/brands[Eskalith]": "sonnet"
+},
+"q_dbf6aa5a070f": {
+"drug:ganaxolone/tmax": "opus"
 },
 "q_dc0e91552ef9": {
 "drug:sibutramine/originator": "opus"
@@ -14209,6 +14312,9 @@
 "drug:furosemide/excretion[renal_process:tubular_secretion]": "opus",
 "drug:furosemide/excretion[route:renal]": "opus"
 },
+"q_f007ac98d282": {
+"drug:fosphenytoin/half_life": "opus"
+},
 "q_f02329429198": {
 "drug:agomelatine/brands[Melitor]": "sonnet"
 },
@@ -15051,6 +15157,9 @@
 },
 "q_fd8e79a00529": {
 "receptor:5ht2a/effects[antagonism:sleep_promotion]": "opus"
+},
+"q_fd9ce32a97ec": {
+"drug:mirogabalin/originator": "opus"
 },
 "q_fda224a28c60": {
 "drug:quetiapine/nbn": "sonnet"
