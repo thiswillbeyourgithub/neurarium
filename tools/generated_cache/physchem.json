@@ -566,6 +566,53 @@
     "value": 2.3
    }
   },
+  "aprepitant": {
+   "bbb": {
+    "label": "BBB+",
+    "match": "name",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "135761774",
+      "provenance": "verified",
+      "quote": "B3DB row 5649: aprepitant | CID 135761774 | logBB - | BBB+ | group C | references R23"
+     },
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "135761774",
+      "provenance": "verified",
+      "quote": "B3DB row 7732: aprepitant | CID 135413536 | logBB - | BBB+ | group C | references R34, R37"
+     }
+    ]
+   },
+   "cid": 6918365,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "6918365",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 75.2 Å²"
+     }
+    ],
+    "value": 75.2
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "6918365",
+      "provenance": "verified",
+      "quote": "XLogP3: 4.2"
+     }
+    ],
+    "value": 4.2
+   }
+  },
   "aripiprazole": {
    "bbb": {
     "label": "BBB+",
@@ -2915,6 +2962,37 @@
     "value": 0.2
    }
   },
+  "dantrolene": {
+   "b3db_conflict": [
+    "row 5553: BBB-",
+    "row 5945: BBB+"
+   ],
+   "cid": 2952,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "2952",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 121 Å²"
+     }
+    ],
+    "value": 121.0
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "2952",
+      "provenance": "verified",
+      "quote": "XLogP3: 1.7"
+     }
+    ],
+    "value": 1.7
+   }
+  },
   "daridorexant": {
    "cid": 91801202,
    "tpsa": {
@@ -4515,6 +4593,33 @@
      }
     ],
     "value": 2.6
+   }
+  },
+  "fosaprepitant": {
+   "cid": 135413538,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "135413538",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 124 Å²"
+     }
+    ],
+    "value": 124.0
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "135413538",
+      "provenance": "verified",
+      "quote": "XLogP3: 1"
+     }
+    ],
+    "value": 1.0
    }
   },
   "fosphenytoin": {

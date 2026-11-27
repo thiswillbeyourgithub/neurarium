@@ -6215,5 +6215,58 @@
    "value": "urine"
   }
  ],
- "ziconotide": []
+ "ziconotide": [],
+ "aprepitant": [
+  {
+   "amount": "57%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "3b79fb20",
+   "value": "renal"
+  },
+  {
+   "amount": "45%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "3b79fb20",
+   "value": "fecal"
+  }
+ ],
+ "fosaprepitant": [
+  {
+   "amount": "57%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "61a9c883",
+   "value": "renal"
+  },
+  {
+   "amount": "45%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "61a9c883",
+   "value": "fecal"
+  }
+ ],
+ "dantrolene": [
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "a4b83273",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "a4b83273",
+   "value": "fecal"
+  },
+  {
+   "amount": "1 à 4 %",
+   "aspect": "unchanged",
+   "index": 1,
+   "qid": "a4b83273",
+   "value": "urine"
+  }
+ ]
 }

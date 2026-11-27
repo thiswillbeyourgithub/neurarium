@@ -601,6 +601,34 @@
     "value": "urine"
    }
   ],
+  "aprepitant": [
+   {
+    "amount": "57%",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "aprepitant",
+      "provenance": "verified",
+      "quote": "Excretion | Kidney (57%), feces (45%)"
+     }
+    ],
+    "value": "renal"
+   },
+   {
+    "amount": "45%",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "aprepitant",
+      "provenance": "verified",
+      "quote": "Excretion | Kidney (57%), feces (45%)"
+     }
+    ],
+    "value": "fecal"
+   }
+  ],
   "aripiprazole": [
    {
     "amount": "27%",
@@ -2206,6 +2234,45 @@
     "value": "fecal"
    }
   ],
+  "dantrolene": [
+   {
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "bdpm",
+      "page": "60385682",
+      "provenance": "verified",
+      "quote": "La substance mère et les métabolites sont principalement excrétés par les voies rénale et biliaire, l'excrétion rénale se produisant à un ratio de 79 % de 5-hydroxy-dantrolène, 17 % d'acétylamino-dantrolène et 1 à 4 % de dantrolène inchangé."
+     }
+    ],
+    "value": "renal"
+   },
+   {
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "bdpm",
+      "page": "60385682",
+      "provenance": "verified",
+      "quote": "La substance mère et les métabolites sont principalement excrétés par les voies rénale et biliaire, l'excrétion rénale se produisant à un ratio de 79 % de 5-hydroxy-dantrolène, 17 % d'acétylamino-dantrolène et 1 à 4 % de dantrolène inchangé."
+     }
+    ],
+    "value": "fecal"
+   },
+   {
+    "amount": "1 à 4 %",
+    "aspect": "unchanged",
+    "sources": [
+     {
+      "corpus": "bdpm",
+      "page": "60385682",
+      "provenance": "verified",
+      "quote": "La substance mère et les métabolites sont principalement excrétés par les voies rénale et biliaire, l'excrétion rénale se produisant à un ratio de 79 % de 5-hydroxy-dantrolène, 17 % d'acétylamino-dantrolène et 1 à 4 % de dantrolène inchangé."
+     }
+    ],
+    "value": "urine"
+   }
+  ],
   "daridorexant": [
    {
     "amount": "57%",
@@ -3492,6 +3559,34 @@
      }
     ],
     "value": "urine"
+   }
+  ],
+  "fosaprepitant": [
+   {
+    "amount": "57%",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "dailymed",
+      "page": "18a60093-cec8-1b8c-e063-6394a90a8902",
+      "provenance": "verified",
+      "quote": "14 C]-fosaprepitant to healthy subjects, 57% of the radioactivity was recovered in urine and 45% in feces."
+     }
+    ],
+    "value": "renal"
+   },
+   {
+    "amount": "45%",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "dailymed",
+      "page": "18a60093-cec8-1b8c-e063-6394a90a8902",
+      "provenance": "verified",
+      "quote": "14 C]-fosaprepitant to healthy subjects, 57% of the radioactivity was recovered in urine and 45% in feces."
+     }
+    ],
+    "value": "fecal"
    }
   ],
   "fosphenytoin": [

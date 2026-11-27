@@ -154,6 +154,23 @@
     "timing": "during"
    }
   ],
+  "aprepitant": [
+   {
+    "conditions": [
+     "Chez les patients traités au long cours par la warfarine"
+    ],
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "66046596",
+      "provenance": "verified",
+      "quote": "Chez les patients traités au long cours par la warfarine, l’INR (International Normalised Ratio) doit être étroitement surveillé au cours du traitement par ATANTO et pendant 14 jours après chaque cure de 3 jours d’ATANTO (voir rubrique 4.5)."
+     }
+    ],
+    "test": "coagulation",
+    "timing": "during"
+   }
+  ],
   "aripiprazole": [
    {
     "conditions": [
@@ -1064,6 +1081,32 @@
     ],
     "test": "ecg",
     "timing": "before"
+   }
+  ],
+  "dantrolene": [
+   {
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60385682",
+      "provenance": "verified",
+      "quote": "Avant le début et pendant le traitement par DANTRIUM, les enzymes hépatiques doivent être surveillées à intervalles réguliers ; en particulier, l'ASAT et l'ALAT qui doivent être dosées fréquemment. Les patients pour lesquels le risque de lésions hépatiques est accru doivent faire l'objet d'une surveillance particulièrement étroite. Si les valeurs sont en dehors de la norme ou si des symptômes de lésions hépatiques apparaissent, DANTRIUM doit être arrêté."
+     }
+    ],
+    "test": "liver_function",
+    "timing": "before"
+   },
+   {
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60385682",
+      "provenance": "verified",
+      "quote": "Avant le début et pendant le traitement par DANTRIUM, les enzymes hépatiques doivent être surveillées à intervalles réguliers ; en particulier, l'ASAT et l'ALAT qui doivent être dosées fréquemment. Les patients pour lesquels le risque de lésions hépatiques est accru doivent faire l'objet d'une surveillance particulièrement étroite. Si les valeurs sont en dehors de la norme ou si des symptômes de lésions hépatiques apparaissent, DANTRIUM doit être arrêté."
+     }
+    ],
+    "test": "liver_function",
+    "timing": "during"
    }
   ],
   "desflurane": [

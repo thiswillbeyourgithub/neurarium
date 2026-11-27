@@ -775,7 +775,14 @@
    "name": "Daiichi Sankyo",
    "company": null,
    "qid": "bc5ff3c7"
-  }
+  },
+  "fosaprepitant": {
+   "index": 0,
+   "name": "Merck",
+   "company": "merck_co",
+   "qid": "8b183e9b"
+  },
+  "dantrolene": null
  },
  "companies": {
   "novartis": {

@@ -684,5 +684,31 @@
    "index": 11,
    "qid": "d9428b57"
   }
+ ],
+ "aprepitant": [
+  {
+   "index": 0,
+   "qid": "727b3931"
+  },
+  {
+   "index": 2,
+   "qid": "659b5277"
+  }
+ ],
+ "fosaprepitant": [
+  {
+   "index": 0,
+   "qid": "bc29280a"
+  },
+  {
+   "index": 2,
+   "qid": "15ea6061"
+  }
+ ],
+ "dantrolene": [
+  {
+   "index": 0,
+   "qid": "b0059757"
+  }
  ]
 }

@@ -1846,6 +1846,9 @@
 "q_1eaca552bd7b": {
 "metabolite:psilocin/bindings[5ht1a:agonist]": "opus"
 },
+"q_1eb71dd0a613": {
+"drug:aprepitant/categories": "opus"
+},
 "q_1ebf11122192": {
 "receptor:kappa/locations[accumbens]": "sonnet",
 "receptor:kappa/locations[midbrain]": "sonnet",
@@ -2160,6 +2163,9 @@
 "q_22c0b8d4c6cd": {
 "structure:medulla": "sonnet"
 },
+"q_22d429b83015": {
+"drug:aprepitant/half_life": "opus"
+},
 "q_22e5ea1315ad": {
 "drug:ziprasidone/bindings[5ht2a:antagonist]": "sonnet"
 },
@@ -2179,6 +2185,7 @@
 },
 "q_2308a731ef36": {
 "drug:amitriptyline/originator_country": "opus",
+"drug:fosaprepitant/originator_country": "opus",
 "drug:protriptyline/originator_country": "opus",
 "drug:suvorexant/originator_country": "opus"
 },
@@ -2652,6 +2659,9 @@
 },
 "q_2a8a40e3df45": {
 "projection:periaqueductal_gray->raphe": "opus"
+},
+"q_2a95a88e339e": {
+"drug:aprepitant/categories": "opus"
 },
 "q_2a9cd78b0289": {
 "drug:methylphenidate_dl/originator": "opus"
@@ -3544,6 +3554,9 @@
 },
 "q_3b282236c244": {
 "drug:diazepam/half_life": "sonnet"
+},
+"q_3b39bf8a462e": {
+"drug:aprepitant/tmax": "opus"
 },
 "q_3b45aed355a2": {
 "receptor:5ht1b/effects[antagonism:antidepressant]": "opus"
@@ -4695,6 +4708,9 @@
 "q_4e52adc971f6": {
 "drug:buprenorphine/brands[Zubsolv (with naloxone)]": "sonnet"
 },
+"q_4e5eb4f2b624": {
+"drug:aprepitant/brands[Emend]": "opus"
+},
 "q_4e6ef74d3b91": {
 "drug:fenfluramine/seizure_threshold[raises]": "opus"
 },
@@ -5636,6 +5652,9 @@
 "drug:lurasidone/excretion[route:fecal]": "opus",
 "drug:lurasidone/excretion[route:renal]": "opus"
 },
+"q_5fd9fbde7d80": {
+"drug:dantrolene/categories": "opus"
+},
 "q_6004af5dd8ef": {
 "drug:piribedil/workup[blood_pressure:during]": "opus"
 },
@@ -5825,6 +5844,9 @@
 },
 "q_62866cfed28c": {
 "group:kind:noradrenergic": "opus"
+},
+"q_629f89e889b6": {
+"drug:fosaprepitant/first_approval": "opus"
 },
 "q_62c45a82532c": {
 "drug:clomipramine/workup[blood_pressure:before]": "opus"
@@ -6657,6 +6679,9 @@
 "q_70996e599fb4": {
 "drug:apomorphine/half_life": "opus"
 },
+"q_70a9f9bc1915": {
+"drug:dantrolene/brands[Dantrium]": "opus"
+},
 "q_70b0296f4386": {
 "drug:ondansetron/formulations[ir]/tmax": "opus",
 "drug:ondansetron/tmax": "opus"
@@ -7119,6 +7144,10 @@
 "q_7789474f1cc3": {
 "drug:risperidone/brands[Risperdal]": "sonnet"
 },
+"q_778b057aa308": {
+"drug:fosaprepitant/excretion[route:fecal]": "opus",
+"drug:fosaprepitant/excretion[route:renal]": "opus"
+},
 "q_779f36be9da7": {
 "drug:trifluoperazine/brands[Stelazine]": "sonnet"
 },
@@ -7252,6 +7281,9 @@
 },
 "q_7a24f293d611": {
 "receptor:m2/locations[occipital]": "opus"
+},
+"q_7a2adc8e4ae3": {
+"drug:dantrolene/tmax": "opus"
 },
 "q_7a2db16a3eb8": {
 "receptor:5ht1a/locations[septal_nuclei]": "sonnet"
@@ -7468,6 +7500,10 @@
 },
 "q_7ecb5a740e94": {
 "drug:apomorphine/categories": "opus"
+},
+"q_7edb4f8585c2": {
+"drug:dantrolene/workup[liver_function:before]": "opus",
+"drug:dantrolene/workup[liver_function:during]": "opus"
 },
 "q_7edc2f751c58": {
 "drug:lithium/workup[thyroid_function:before]": "opus"
@@ -7725,6 +7761,11 @@
 },
 "q_82b20eed402d": {
 "drug:lormetazepam/half_life": "sonnet"
+},
+"q_82ce39b8cab7": {
+"drug:dantrolene/excretion[route:fecal]": "opus",
+"drug:dantrolene/excretion[route:renal]": "opus",
+"drug:dantrolene/excretion[unchanged:urine]": "opus"
 },
 "q_82e982b7677e": {
 "drug:fentanyl/categories": "sonnet"
@@ -9014,6 +9055,9 @@
 "drug:levetiracetam/excretion[renal_process:filtration]": "opus",
 "drug:levetiracetam/excretion[renal_process:tubular_reabsorption]": "opus"
 },
+"q_976aed1e48c6": {
+"drug:fosaprepitant/categories": "opus"
+},
 "q_9778defa6e9b": {
 "receptor:h2/effects[agonism:gastric_acid_increase]": "opus"
 },
@@ -9647,6 +9691,9 @@
 "q_a0595007c652": {
 "drug:alimemazine/half_life": "sonnet"
 },
+"q_a059cb186a64": {
+"drug:aprepitant/workup[coagulation:during]": "opus"
+},
 "q_a06d9fd9f434": {
 "drug:trazodone/bindings[5ht1a:partial_agonist]": "sonnet",
 "drug:trazodone/bindings[alpha2:antagonist]": "sonnet"
@@ -9745,6 +9792,10 @@
 },
 "q_a2013005e481": {
 "drug:triiodothyronine/categories": "sonnet"
+},
+"q_a20143193b43": {
+"drug:aprepitant/excretion[route:fecal]": "opus",
+"drug:aprepitant/excretion[route:renal]": "opus"
 },
 "q_a22b88d4ed0a": {
 "drug:oxymorphone/categories": "opus"
@@ -10217,6 +10268,9 @@
 "drug:alprazolam/seizure_threshold[lowers]": "opus",
 "drug:bupropion/seizure_threshold[lowers]": "opus",
 "drug:quetiapine/seizure_threshold[lowers]": "opus"
+},
+"q_a9e1bd23bf3c": {
+"drug:dantrolene/half_life": "opus"
 },
 "q_a9e5e1238da5": {
 "drug:clomipramine/workup[ecg:during]": "opus"
@@ -13153,6 +13207,9 @@
 "q_dcbbdd6e9bba": {
 "drug:mianserin/excretion[route:fecal]": "opus"
 },
+"q_dcc4b24b1339": {
+"drug:aprepitant/first_approval": "opus"
+},
 "q_dcc6d85969c8": {
 "receptor:mt2/effects[agonism:circadian_shift]": "opus"
 },
@@ -13345,6 +13402,9 @@
 },
 "q_dfd1b075aaee": {
 "drug:trihexyphenidyl/categories": "sonnet"
+},
+"q_dfdd49c6c034": {
+"drug:fosaprepitant/originator": "opus"
 },
 "q_dfed525d0356": {
 "drug:bremelanotide/first_approval": "opus"
@@ -13915,6 +13975,9 @@
 "q_e8d1ff2708e3": {
 "drug:thiopental/brands[Nesdonal]": "sonnet",
 "drug:thiopental/formulations[injection]/brands[Nesdonal]": "opus"
+},
+"q_e8de110f8a20": {
+"drug:fosaprepitant/categories": "opus"
 },
 "q_e8e80d5b760b": {
 "drug:oxazepam/categories": "sonnet"

@@ -2665,5 +2665,29 @@
    "qid": "25a7aab3"
   },
   "withdrawals": []
+ },
+ "aprepitant": {
+  "approval": {
+   "agency": "fda",
+   "country": "us",
+   "index": 1,
+   "year": 2003,
+   "qid": "cd3aebd2"
+  },
+  "withdrawals": []
+ },
+ "fosaprepitant": {
+  "approval": {
+   "agency": null,
+   "country": null,
+   "index": 0,
+   "year": 2008,
+   "qid": "a97fe95e"
+  },
+  "withdrawals": []
+ },
+ "dantrolene": {
+  "approval": null,
+  "withdrawals": []
  }
 }

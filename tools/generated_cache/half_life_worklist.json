@@ -7224,5 +7224,112 @@
     "qid": "09011bf8"
    }
   ]
+ },
+ "aprepitant": {
+  "name": "Aprepitant",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "aprepitant",
+    "line": "Elimination half-life | 9–13 hours",
+    "durations": [
+     {
+      "hours": 9.0,
+      "hours_max": 13.0
+     }
+    ],
+    "qid": "ecb40438"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "66046596",
+    "line": "La demi-vie terminale varie d'environ 9 à 13 heures.",
+    "durations": [
+     {
+      "hours": 9.0,
+      "hours_max": 13.0
+     }
+    ],
+    "qid": "707942f3"
+   }
+  ]
+ },
+ "fosaprepitant": {
+  "name": "Fosaprepitant",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "fosaprepitant",
+    "line": "Elimination half-life | 9 to 13 hours (aprepitant)",
+    "durations": [
+     {
+      "hours": 9.0,
+      "hours_max": 13.0
+     }
+    ],
+    "qid": "094fcb9a"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "18a60093-cec8-1b8c-e063-6394a90a8902",
+    "line": "The apparent terminal half-life ranged from approximately 9 to 13 hours.",
+    "durations": [
+     {
+      "hours": 9.0,
+      "hours_max": 13.0
+     }
+    ],
+    "qid": "d0bdcb1a"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "18a60093-cec8-1b8c-e063-6394a90a8902",
+    "line": "Rifampin: When a single 375-mg dose of oral aprepitant was administered on Day 9 of a 14-day regimen of 600 mg/day of rifampin, a strong CYP3A4 inducer, the AUC of aprepitant decreased approximately 11-fold and the mean terminal half-life decreased approximately 3-fold",
+    "durations": [
+     {
+      "hours": 336.0
+     }
+    ],
+    "qid": "93a94c0f"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "18a60093-cec8-1b8c-e063-6394a90a8902",
+    "line": "Ketoconazole: When a single 125-mg dose of oral aprepitant was administered on Day 5 of a 10-day regimen of 400 mg/day of ketoconazole, a strong CYP3A4 inhibitor, the AUC of aprepitant increased approximately 5-fold and the mean terminal half-life of aprepitant increased approximately 3-fold",
+    "durations": [
+     {
+      "hours": 240.0
+     }
+    ],
+    "qid": "ab3a2290"
+   }
+  ]
+ },
+ "dantrolene": {
+  "name": "Dantrolene",
+  "candidates": [
+   {
+    "corpus": "bdpm",
+    "page": "60385682",
+    "line": "La demi-vie biologique moyenne chez l'adulte est de 8,7 heures après une dose par voie orale de 100 mg.",
+    "durations": [
+     {
+      "hours": 8.7
+     }
+    ],
+    "qid": "3553b60f"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "60385682",
+    "line": "Chez les enfants atteints de spasticité chronique, une demi-vie d'élimination de 7,3 heures a été constatée.",
+    "durations": [
+     {
+      "hours": 7.3
+     }
+    ],
+    "qid": "5c51e19d"
+   }
+  ]
  }
 }

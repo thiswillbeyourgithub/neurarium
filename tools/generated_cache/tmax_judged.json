@@ -992,5 +992,16 @@
   "hours": 1.0,
   "hours_max": 1.5,
   "qid": "7a7266cd"
+ },
+ "aprepitant": {
+  "hours": 4,
+  "index": 0,
+  "qid": "32ec91fa"
+ },
+ "dantrolene": {
+  "hours": 3,
+  "hours_max": 4,
+  "index": 0,
+  "qid": "f4dbc97d"
  }
 }

@@ -149,6 +149,15 @@
       "Dans cette dernière indication, il a été commercialisé sous les noms Ixense et Uprima, mais son inefficacité a fait que ces produits ont été retirés du marché en octobre 2004 ."
     ]
   },
+  "aprepitant": {
+    "fr_slug": "apr_pitant",
+    "fr_title": "Aprépitant",
+    "name": "Aprepitant",
+    "sentences": [
+      "Identification",
+      "Il est commercialisé par les Laboratoires Merck Sharp et Dohme-Chibret sous le nom de Emend ."
+    ]
+  },
   "aripiprazole": {
     "fr_slug": "aripiprazole",
     "fr_title": "Aripiprazole",
@@ -657,6 +666,15 @@
     "name": "Cytisine",
     "sentences": [
       "Structure de la cytistine"
+    ]
+  },
+  "dantrolene": {
+    "fr_slug": "dantrol_ne",
+    "fr_title": "Dantrolène",
+    "name": "Dantrolene",
+    "sentences": [
+      "Identification",
+      "Il est commercialisé sous le nom de Dantrium en Europe et sous le nom de dantrolène en Amérique du Nord."
     ]
   },
   "daridorexant": {

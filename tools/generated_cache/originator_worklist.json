@@ -5418,6 +5418,40 @@
      "qid": "bc5ff3c7"
     }
    ]
+  },
+  "fosaprepitant": {
+   "name": "Fosaprepitant",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "fosaprepitant",
+     "line": "Fosaprepitant was developed by Merck & Co.",
+     "qid": "8b183e9b"
+    }
+   ]
+  },
+  "dantrolene": {
+   "name": "Dantrolene",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "dantrolene",
+     "line": "Dantrolene was first described in the scientific literature in 1967, as one of several hydantoin derivatives proposed as a new class of muscle relaxant.",
+     "qid": "0c8bf1d3"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "dantrolene",
+     "line": "Dantrolene underwent extensive further development, and its action on skeletal muscle was described in detail in 1973.",
+     "qid": "d2a728d5"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "dantrolene",
+     "line": "Dantrolene was widely used in the management of spasticity before its efficacy in treating malignant hyperthermia was discovered by South African anesthesiologist Gaisford Harrison and reported in a landmark 1975 article published in the British Journal of Anaesthesia .",
+     "qid": "1ae6f9d5"
+    }
+   ]
   }
  },
  "companies": {

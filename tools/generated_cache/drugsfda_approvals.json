@@ -92,6 +92,14 @@
    "status": "found",
    "year": 2004
   },
+  "aprepitant": {
+   "application": "NDA021549",
+   "applications": 5,
+   "date": "2003-03-26",
+   "quote": "NDA021549 | EMEND | APREPITANT | CAPSULE | ORIG approved 2003-03-26",
+   "status": "found",
+   "year": 2003
+  },
   "aripiprazole": {
    "application": "NDA021436",
    "applications": 9,
@@ -464,6 +472,14 @@
   "cytisine": {
    "status": "none"
   },
+  "dantrolene": {
+   "application": "NDA017443",
+   "applications": 3,
+   "date": "1974-01-15",
+   "quote": "NDA017443 | DANTRIUM | DANTROLENE SODIUM | CAPSULE | ORIG approved 1974-01-15",
+   "status": "found",
+   "year": 1974
+  },
   "daridorexant": {
    "application": "NDA214985",
    "applications": 1,
@@ -744,6 +760,9 @@
    "quote": "NDA020243 | LUVOX | FLUVOXAMINE MALEATE | TABLET | ORIG approved 1994-12-05",
    "status": "found",
    "year": 1994
+  },
+  "fosaprepitant": {
+   "status": "none"
   },
   "fosphenytoin": {
    "application": "NDA020450",

@@ -2301,5 +2301,28 @@
    "condition": "La survenue d’une maladie fébrile",
    "qid": "76b609e7"
   }
+ ],
+ "aprepitant": [
+  {
+   "index": 0,
+   "test": "coagulation",
+   "timing": "during",
+   "qid": "e380732c",
+   "condition": "Chez les patients traités au long cours par la warfarine"
+  }
+ ],
+ "dantrolene": [
+  {
+   "index": 1,
+   "test": "liver_function",
+   "timing": "before",
+   "qid": "58b89ee2"
+  },
+  {
+   "index": 1,
+   "test": "liver_function",
+   "timing": "during",
+   "qid": "58b89ee2"
+  }
  ]
 }

@@ -18816,5 +18816,146 @@
     "qid": "faafdc22"
    }
   ]
+ },
+ "aprepitant": {
+  "name": "Aprepitant",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "aprepitant",
+    "line": "Excretion | Kidney (57%), feces (45%)",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "3b79fb20"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "aprepitant",
+    "line": "Following IV administration of a 14 C-labeled prodrug of aprepitant (L-758298), which is converted rapidly and completely to aprepitant, approximately 57% of the total radioactivity is excreted in the urine and 45% in feces.",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "3848364a"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "aprepitant",
+    "line": "No unchanged substance is excreted in urine.",
+    "named": [
+     "route:renal",
+     "unchanged:urine"
+    ],
+    "qid": "a22a2644"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "66046596",
+    "line": "L’aprépitant n’est pas excrété sous forme inchangée dans les urines.",
+    "named": [
+     "route:renal",
+     "unchanged:urine"
+    ],
+    "qid": "ee703e30"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "66046596",
+    "line": "Les métabolites sont excrétés dans les urines et, par voie biliaire, dans les fèces.",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "7755b34f"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "66046596",
+    "line": "Après administration à des sujets sains d’une dose intraveineuse unique de 100 mg de fosaprépitant, une prodrogue de l’aprépitant, marqué au [14C], 57 % de la radioactivité ont été récupérés dans les urines et 45 % dans les fèces.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "c4cf27aa"
+   }
+  ]
+ },
+ "fosaprepitant": {
+  "name": "Fosaprepitant",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "18a60093-cec8-1b8c-e063-6394a90a8902",
+    "line": "14 C]-fosaprepitant to healthy subjects, 57% of the radioactivity was recovered in urine and 45% in feces.",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "61a9c883"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "18a60093-cec8-1b8c-e063-6394a90a8902",
+    "line": "aprepitant is not renally excreted.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "bbf521f6"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "18a60093-cec8-1b8c-e063-6394a90a8902",
+    "line": "A single 240-mg oral dose of aprepitant was administered to patients with severe renal impairment (creatinine clearance less than 30 mL/min/1.73 m",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "7e4b5086"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "18a60093-cec8-1b8c-e063-6394a90a8902",
+    "line": "2 as measured by 24-hour urinary creatinine clearance) and to patients with end stage renal disease (ESRD) requiring hemodialysis.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "e753d6e7"
+   }
+  ]
+ },
+ "dantrolene": {
+  "name": "Dantrolene",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "dantrolene",
+    "line": "Excretion | Bile duct , kidney",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "d11e5d01"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "60385682",
+    "line": "La substance mère et les métabolites sont principalement excrétés par les voies rénale et biliaire, l'excrétion rénale se produisant à un ratio de 79 % de 5-hydroxy-dantrolène, 17 % d'acétylamino-dantrolène et 1 à 4 % de dantrolène inchangé.",
+    "named": [
+     "route:renal",
+     "route:fecal",
+     "unchanged:urine"
+    ],
+    "qid": "a4b83273"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "60385682",
+    "line": "La clairance rénale (5-OH-dantrolène) est de 1,8 à 7,8 L/h.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "476a941c"
+   }
+  ]
  }
 }

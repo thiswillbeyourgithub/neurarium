@@ -8517,6 +8517,63 @@
      "qid": "2a2b009d"
     }
    ]
+  },
+  "aprepitant": {
+   "name": "Aprepitant",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "aprepitant",
+     "line": "Aprepitant was approved for medical use in the European Union and the United States in 2003.",
+     "context": "It works by blocking substance P from attaching to the NK 1 receptors .",
+     "qid": "be3b7410"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "aprepitant",
+     "line": "It was approved by the US Food and Drug Administration (FDA) in 2003.",
+     "context": "It is on the World Health Organization's List of Essential Medicines .",
+     "qid": "cd3aebd2"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "aprepitant",
+     "line": "In 2008, fosaprepitant , an intravenous form of aprepitant was approved in the United States.",
+     "context": "It was approved by the US Food and Drug Administration (FDA) in 2003.",
+     "qid": "bc7d74c0"
+    }
+   ]
+  },
+  "fosaprepitant": {
+   "name": "Fosaprepitant",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "fosaprepitant",
+     "line": "and was approved for medical use in the United States, and in the European Union in January 2008.",
+     "context": "Fosaprepitant was developed by Merck & Co.",
+     "qid": "a97fe95e"
+    }
+   ]
+  },
+  "dantrolene": {
+   "name": "Dantrolene",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "dantrolene",
+     "line": "In March 2024, the Committee for Medicinal Products for Human Use (CHMP) of the European Medicines Agency (EMA) adopted a positive opinion, recommending the granting of a marketing authorization for the medicinal product Agilus, intended for the treatment of malignant hyperthermia in combination with adequate support measures.",
+     "context": "Before dantrolene, the only available treatment for malignant hyperthermia was either procainamide or procaine , the latter being associated with a 60% mortality rate in animal models.",
+     "qid": "22fbbcaa"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "dantrolene",
+     "line": "Dantrolene sodium, hemiheptahydrate (Agilus) was approved for medical use in the European Union in May 2024.",
+     "context": "It was designated an orphan drug.",
+     "qid": "d66c772d"
+    }
+   ]
   }
  }
 }

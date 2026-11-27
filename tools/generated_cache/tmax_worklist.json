@@ -5746,5 +5746,78 @@
     "qid": "8a7f72f5"
    }
   ]
+ },
+ "aprepitant": {
+  "name": "Aprepitant",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "696f9e80-9cae-403b-de9e-078343ce4713",
+    "line": "The C max of 1.6 mcg/mL and 1.4 mcg/mL were reached in approximately 4 hours (T max ) on Day 1 and Day 3, respectively.",
+    "durations": [
+     {
+      "hours": 4.0
+     }
+    ],
+    "qid": "32ec91fa"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "66046596",
+    "line": "Le pic de concentration plasmatique (Cmax) médian était d'environ 1,3 µg/mL à J1, atteint au bout de 4 heures environ.",
+    "durations": [
+     {
+      "hours": 4.0
+     }
+    ],
+    "qid": "ba143cc3"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "66046596",
+    "line": "Le pic de concentration plasmatique (Cmax) médian était d'environ 1,2 µg/mL à J1, atteint entre 5 et 7 heures.",
+    "durations": [
+     {
+      "hours": 5.0,
+      "hours_max": 7.0
+     }
+    ],
+    "qid": "71fac455"
+   }
+  ]
+ },
+ "fosaprepitant": {
+  "name": "Fosaprepitant",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "18a60093-cec8-1b8c-e063-6394a90a8902",
+    "line": "0-24hr , peak plasma concentration (C",
+    "durations": [
+     {
+      "hours": 0.0,
+      "hours_max": 24.0
+     }
+    ],
+    "qid": "dc323bd9"
+   }
+  ]
+ },
+ "dantrolene": {
+  "name": "Dantrolene",
+  "candidates": [
+   {
+    "corpus": "bdpm",
+    "page": "60385682",
+    "line": "Après l'administration de 25 mg de dantrolène sodique, les concentrations plasmatiques maximales ont été atteintes après 3 à 4 heures et étaient de 0,22 µg/mL.",
+    "durations": [
+     {
+      "hours": 3.0,
+      "hours_max": 4.0
+     }
+    ],
+    "qid": "f4dbc97d"
+   }
+  ]
  }
 }

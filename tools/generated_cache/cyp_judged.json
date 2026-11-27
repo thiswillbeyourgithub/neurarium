@@ -4188,5 +4188,35 @@
    "role": "substrate",
    "qid": "8c781c14"
   }
+ ],
+ "aprepitant": [
+  {
+   "enzyme": "cyp3a4",
+   "n": 1,
+   "role": "substrate",
+   "strength": "major",
+   "qid": "cb315770"
+  },
+  {
+   "enzyme": "cyp1a2",
+   "n": 1,
+   "role": "substrate",
+   "strength": "minor",
+   "qid": "cb315770"
+  },
+  {
+   "enzyme": "cyp2c19",
+   "n": 1,
+   "role": "substrate",
+   "strength": "minor",
+   "qid": "cb315770"
+  },
+  {
+   "enzyme": "cyp3a4",
+   "n": 2,
+   "role": "inhibitor",
+   "strength": "moderate",
+   "qid": "9e50f475"
+  }
  ]
 }

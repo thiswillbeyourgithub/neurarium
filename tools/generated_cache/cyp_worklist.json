@@ -323,6 +323,43 @@
    ],
    "name": "Apomorphine"
   },
+  "aprepitant": {
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "(lead)",
+     "n": 0,
+     "page": "aprepitant",
+     "qid": "4150c407",
+     "quote": "Metabolism | Liver (mostly CYP3A4 - mediated; some contributions by CYP2C19 & CYP1A2 )"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Pharmacokinetics",
+     "n": 1,
+     "page": "aprepitant",
+     "qid": "cb315770",
+     "quote": "Aprepitant is metabolized primarily by CYP3A4 with minor metabolism by CYP1A2 and CYP2C19 ."
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Pharmacokinetics",
+     "n": 2,
+     "page": "aprepitant",
+     "qid": "9e50f475",
+     "quote": "As a moderate inhibitor of CYP3A4, aprepitant can increase plasma concentrations of co-administered medicinal products that are metabolized through CYP3A4."
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Pharmacokinetics",
+     "n": 3,
+     "page": "aprepitant",
+     "qid": "66514b0d",
+     "quote": "Specific interaction has been demonstrated with oxycodone , where aprepitant both increased the efficacy and worsened the side effects of oxycodone; however it is unclear whether this is due to CYP3A4 inhibition or through its NK 1 antagonist action."
+    }
+   ],
+   "name": "Aprepitant"
+  },
   "aripiprazole": {
    "candidates": [
     {

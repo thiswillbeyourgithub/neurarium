@@ -156,6 +156,64 @@
    ]
   }
  ],
+ "aprepitant": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "aprepitant",
+     "provenance": "verified",
+     "quote": "Aprepitant is metabolized primarily by CYP3A4 with minor metabolism by CYP1A2 and CYP2C19 ."
+    }
+   ],
+   "strength": "minor"
+  },
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "aprepitant",
+     "provenance": "verified",
+     "quote": "Aprepitant is metabolized primarily by CYP3A4 with minor metabolism by CYP1A2 and CYP2C19 ."
+    }
+   ],
+   "strength": "minor"
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "aprepitant",
+     "provenance": "verified",
+     "quote": "As a moderate inhibitor of CYP3A4, aprepitant can increase plasma concentrations of co-administered medicinal products that are metabolized through CYP3A4."
+    }
+   ],
+   "strength": "moderate"
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "aprepitant",
+     "provenance": "verified",
+     "quote": "Aprepitant is metabolized primarily by CYP3A4 with minor metabolism by CYP1A2 and CYP2C19 ."
+    }
+   ],
+   "strength": "major"
+  }
+ ],
  "aripiprazole": [
   {
    "enzyme": "cyp2d6",
