@@ -2456,6 +2456,26 @@
      ]
     }
    }
+  },
+  "metopimazine": {
+   "name": "Metopimazine",
+   "items": {
+    "brand:Vogalene": {
+     "brand": "Vogalene",
+     "candidates": [
+      {
+       "corpus": "wikipedia_pharm",
+       "page": "metopimazine",
+       "line": "Vogalene® is available under different forms, including 15 mg capsules, 7.5 mg orally disintegrating tablets, 5 mg suppository , 0.1% oral liquid, and a 10 mg/mL intravenous (IV) solution approved for the prevention of chemotherapy-induced nausea and vomiting.",
+       "releases": [
+        "injection",
+        "odt"
+       ],
+       "qid": "a5b7f55e"
+      }
+     ]
+    }
+   }
   }
  }
 }
