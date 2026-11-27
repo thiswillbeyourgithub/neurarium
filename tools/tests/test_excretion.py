@@ -37,6 +37,11 @@ class VocabularyTest(unittest.TestCase):
         self.assertEqual(X.named(LINE0), ["route:renal", "unchanged:urine"])
         self.assertIn("urine_ph:dependent", X.named(LINE1))
 
+    def test_french_faeces_with_grave_accent(self):
+        # BDPM RCPs spell it "fèces" (grave), not "féces": the fecal route was unmatched.
+        line = "la radioactivité totale est principalement excrétée dans les fèces (79 %)"
+        self.assertTrue(X.says("route", "fecal", line))
+
     def test_is_span(self):
         self.assertTrue(X.is_span("95%", LINE0))
         self.assertTrue(X.is_span("ABOUT  95%", LINE0))

@@ -43,7 +43,7 @@ ASPECTS: dict[str, dict[str, Any]] = {
                   "attests": r"urin|kidney|renal|\breins?\b|r[ée]nal"},
         "fecal": {"en": "faeces (bile)", "fr": "selles (bile)",
                   "attests": r"f(?:a|ae)?ec(?:es|al)|stool|\bbil(?:e|iary)\b|"
-                             r"selles|f[ée]c[ae]|biliaire"},
+                             r"selles|f[éeè]c[ae]|biliaire"},
     }},
     "unchanged": {"en": "excreted unchanged", "fr": "excrété inchangé", "values": {
         "urine": {"en": "in urine", "fr": "dans les urines",
