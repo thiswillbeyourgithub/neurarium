@@ -354,6 +354,15 @@
       "Butobarbital"
     ]
   },
+  "butorphanol": {
+    "fr_slug": "butorphanol",
+    "fr_title": "Butorphanol",
+    "name": "Butorphanol",
+    "sentences": [
+      "Cet article ne cite pas suffisamment ses sources ( août 2026 ).",
+      "Enfin, le butorphanol est commercialisé en spray nasal (formes non disponibles en France) en oto-rhino-laryngologie ."
+    ]
+  },
   "cabergoline": {
     "fr_slug": "cabergoline",
     "fr_title": "Cabergoline",
@@ -607,6 +616,15 @@
       "Structure de la cyclizine"
     ]
   },
+  "cyclobenzaprine": {
+    "fr_slug": "cyclobenzaprine",
+    "fr_title": "Cyclobenzaprine",
+    "name": "Cyclobenzaprine",
+    "sentences": [
+      "Cyclobenzaprine",
+      "La cyclobenzaprine , vendue entre autres sous le nom de marque Flexeril ."
+    ]
+  },
   "cyproheptadine": {
     "fr_slug": "cyproheptadine",
     "fr_title": "Cyproheptadine",
@@ -695,6 +713,17 @@
       "Structure du diazépam",
       "Commercialisé en 1963 sous la marque Valium Écouter ⓘ par les laboratoires Hoffmann-La Roche , c'est la seconde benzodiazépine qui est apparue sur le marché des produits pharmaceutiques, après le chlordiazépoxide ( Librium ) en 1960 .",
       "Cette rapidité d'action conditionne également un risque d'addiction accru ."
+    ]
+  },
+  "dihydrocodeine": {
+    "fr_slug": "dihydrocod_ine",
+    "fr_title": "Dihydrocodéine",
+    "name": "Dihydrocodeine",
+    "sentences": [
+      "Ne pas confondre avec la dihydrocodéinone .",
+      "À l'étranger, la dihydrocodéine est commercialisée sous diverses spécialités, notamment en association avec du paracétamol ou des anti-inflammatoires .",
+      "La molécule y est uniquement commercialisée sous le nom de Dicodin L.P. , sous forme de comprimé à libération prolongée , dosé à 60 milligrammes par comprimé sous forme de tartrate .",
+      "En Belgique, on trouve la dihydrocodéine sous forme à libération immédiate pour soulager la toux sèche sous le nom de Paracodine ."
     ]
   },
   "dimenhydrinate": {
@@ -1524,6 +1553,14 @@
       "Il est commercialisé sous le nom de Césamet au Royaume-Uni , au Canada et en Espagne où il est prescrit pour le soulagement de douleurs chroniques ou comme hypnotique ."
     ]
   },
+  "nalbuphine": {
+    "fr_slug": "nalbuphine",
+    "fr_title": "Nalbuphine",
+    "name": "Nalbuphine",
+    "sentences": [
+      "Identification"
+    ]
+  },
   "nalmefene": {
     "fr_slug": "nalm_f_ne",
     "fr_title": "Nalméfène",
@@ -1635,6 +1672,15 @@
       "Il est commercialisé en France sous le nom de Zophren par le laboratoire GlaxoSmithKline ."
     ]
   },
+  "orphenadrine": {
+    "fr_slug": "orph_nadrine",
+    "fr_title": "Orphénadrine",
+    "name": "Orphenadrine",
+    "sentences": [
+      "Orphénadrine",
+      "L'orphénadrine , vendue sous de nombreuses marques , est un médicament utilisé pour traiter les douleurs musculaires , notamment les lombalgies , et le parkinsonisme , ."
+    ]
+  },
   "oxazepam": {
     "fr_slug": "oxaz_pam",
     "fr_title": "Oxazépam",
@@ -1661,6 +1707,16 @@
     "sentences": [
       "Structure de l'oxycodone",
       "Commercialisé agressivement par Purdue Pharma dans les années 1990 sous la dénomination commerciale, entre autres, d'OxyContin, il est alors largement utilisé pour traiter les douleurs modérées."
+    ]
+  },
+  "oxymorphone": {
+    "fr_slug": "oxymorphone",
+    "fr_title": "Oxymorphone",
+    "name": "Oxymorphone",
+    "sentences": [
+      "Cet article ne cite pas suffisamment ses sources ( août 2026 ).",
+      "Dans certains pays, l’oxymorphone est distribué sous le nom de Numorphan et Numorphan Oral.",
+      "Elle est également distribuée sous le nom d'Opana et Opana ER."
     ]
   },
   "paliperidone": {

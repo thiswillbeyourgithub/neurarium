@@ -616,5 +616,19 @@
   ],
   "remifentanil": [
     "Ultiva"
+  ],
+  "butorphanol": [],
+  "cyclobenzaprine": [
+    "Flexeril"
+  ],
+  "dihydrocodeine": [
+    "Dicodin",
+    "Paracodine"
+  ],
+  "nalbuphine": [],
+  "orphenadrine": [],
+  "oxymorphone": [
+    "Numorphan",
+    "Opana"
   ]
 }
