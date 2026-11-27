@@ -31,7 +31,7 @@ function connectionSideTag(proj) {
  * @returns {Array<{type:string, label:string, names?:string[], keywords?:string,
  *   fields?:object, select:Function, preview?:Function}>}
  */
-export function buildSearchItems({ meshes, arrows, data, tabs, selectStructure, selectConnection, focusTarget, focusDrug, focusEnzyme, focusEffect, focusCircuit, focusProjectionGroup, focusArea }) {
+export function buildSearchItems({ meshes, arrows, data, tabs, selectStructure, selectConnection, focusTarget, focusDrug, focusEnzyme, focusEffect, focusCircuit, focusProjectionGroup, focusArea, focusNetwork }) {
   // One searchable index over structures + connections + receptors, each carrying
   // the action to run when it is picked. Built once. Mirrored L/R twins are
   // collapsed to a single row (a brain is symmetric, so "frontal lobe" and
@@ -247,6 +247,15 @@ export function buildSearchItems({ meshes, arrows, data, tabs, selectStructure, 
       keywords: `Brodmann ${area.number} BA${area.number.replace(/\D+/g, " BA")} ${t("panel.areas")}`,
       select: () => focusArea(area, { frame: true }),
       preview: () => focusArea(area, { preview: true }),
+    })),
+    // Networks (BETA): a pick isolates the structures of their member areas.
+    ...(data.networks || []).map((net) => ({
+      type: "network",
+      label: `${net.name} · ${t("search.tagNetwork")}`,
+      names: [net.name],
+      keywords: `network ${t("panel.networks")}`,
+      select: () => focusNetwork(net, { frame: true }),
+      preview: () => focusNetwork(net, { preview: true }),
     })),
     ...(data.circuits || []).map((circuit) => ({
       type: "circuit",

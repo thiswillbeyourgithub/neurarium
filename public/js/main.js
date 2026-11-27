@@ -169,7 +169,7 @@ async function main() {
   // its owner, wireControls, registers URL keys that must follow the Drugs list's.
   const {
     circuitAnim, drugAnim, receptorMarkers,
-    focusArea, focusCircuit, focusDrug, focusEffect, focusEnzyme, focusProjectionGroup,
+    focusArea, focusCircuit, focusNetwork, focusDrug, focusEffect, focusEnzyme, focusProjectionGroup,
     focusTarget, selectConnection, selectStructure,
   } = wireFocus({
     arrows, autoSpreadIfDeep: (...a) => autoSpreadIfDeep(...a), data, focus, info,
@@ -203,7 +203,7 @@ async function main() {
   // The Data browser + Simulation tabs, and the Sources popup's tally. The About modal
   // and setNo3d are wired further down, so both are late-bound.
   const { NODES_TAB_KEY, showNodeBrowser, showSimulation, simulation } = wireViews({
-    arrows, data, focusArea, focusCircuit, focusDrug, focusEffect, focusProjectionGroup, focusTarget, info, meshById,
+    arrows, data, focusArea, focusCircuit, focusNetwork, focusDrug, focusEffect, focusProjectionGroup, focusTarget, info, meshById,
     openDataFiles: () => aboutModal.openDataFiles(), openDetailTab, selectConnection,
     selectStructure, setNo3d: (...a) => setNo3d(...a), sourcingModal, urlState,
   });
@@ -213,7 +213,7 @@ async function main() {
   // Hold arrows a constant apparent width as the camera zooms (advanced by its
   // tick() in the render loop, like arrowRetrim).
   const arrowWidth = createArrowWidth({ arrows, camera, controls, focus });
-  const toolbar = wireToolbar({ focus, meshes, arrows, data, selection, tabs, urlState, expandPanel, selectStructure, selectConnection, focusTarget, focusDrug, focusEnzyme, focusEffect, focusCircuit, focusProjectionGroup, focusArea });
+  const toolbar = wireToolbar({ focus, meshes, arrows, data, selection, tabs, urlState, expandPanel, selectStructure, selectConnection, focusTarget, focusDrug, focusEnzyme, focusEffect, focusCircuit, focusProjectionGroup, focusArea, focusNetwork });
   // A drug panel's clickable Class / Nomenclature opens search with a structured
   // filter (class:"..." / nbn:"...") so you can pivot to the whole class.
   info.onSearch(toolbar.openSearchWithQuery);
@@ -255,7 +255,7 @@ async function main() {
   });
 
   wireUrlBindings({
-    aboutModal, arrows, changelog, data, focusArea, focusCircuit, focusDrug,
+    aboutModal, arrows, changelog, data, focusArea, focusCircuit, focusNetwork, focusDrug,
     focusEffect, focusEnzyme, focusProjectionGroup, focusTarget, legendModal, meshes,
     selectConnection, selectStructure, shortcutsHelp,
     showNodeBrowser, showSimulation,

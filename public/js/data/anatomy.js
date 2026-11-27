@@ -27,7 +27,7 @@ export function mirrorProjections(projections) {
  * Resolve projection colours + every anatomy display string; returns the
  * projection groups indexed by `${mode}:${key}`.
  */
-export function resolveAnatomy({ projections, structures, circuits, functionalAreas = [], projectionGroups, v }) {
+export function resolveAnatomy({ projections, structures, circuits, functionalAreas = [], networks = [], projectionGroups, v }) {
   const { projectionColors, kindSigns, signColors } = v;
   // Resolve each projection's colours from its kind (kept as the raw key, since it
   // indexes the colour/label maps): `color` is the per-transmitter colour (default
@@ -74,6 +74,12 @@ export function resolveAnatomy({ projections, structures, circuits, functionalAr
     a.provenance = strongestGrade(a.sources);
     a.structureImage = a.structure_image || null;
     a.structureImageGallery = a.structure_image_gallery || [];
+  }
+  // Networks (BETA): sets of functional areas, lit like an area (their member areas'
+  // structures, emitted resolved in `structures`).
+  for (const n of networks) {
+    n.name = localize(n.name);
+    n.provenance = strongestGrade(n.sources);
   }
   for (const c of circuits) {
     c.name = localize(c.name);

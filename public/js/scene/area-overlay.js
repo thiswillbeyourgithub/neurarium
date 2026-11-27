@@ -17,7 +17,7 @@ const ACCENT = "#ffd166";
 
 /**
  * @param {{meshById: Map<string, THREE.Mesh>}} deps
- * @returns {{show: (area: object) => Promise<void>, hide: () => void}}
+ * @returns {{show: (areas: object|object[]) => Promise<void>, hide: () => void}}
  */
 export function createAreaOverlay({ meshById }) {
   const geomByFile = new Map(); // shape_file -> Promise<THREE.BufferGeometry|null>
@@ -50,12 +50,21 @@ export function createAreaOverlay({ meshById }) {
     current = [];
   };
 
-  const show = async (area) => {
+  // `areas`: one area or a list (a network overlays every drawn member area at once).
+  const show = async (areas) => {
     hide();
-    if (!area.own_shape || !area.shape_file) return;
+    const drawn = [areas].flat().filter((a) => a.own_shape && a.shape_file);
+    if (!drawn.length) return;
     const mine = token;
-    const geom = await geometryOf(area.shape_file);
-    if (!geom || mine !== token) return;
+    const geoms = await Promise.all(drawn.map((a) => geometryOf(a.shape_file)));
+    if (mine !== token) return;
+    drawn.forEach((area, i) => {
+      if (geoms[i]) addArea(area, geoms[i]);
+    });
+    requestRepaint();
+  };
+
+  const addArea = (area, geom) => {
     for (const id of area.structures) {
       const parent = meshById.get(id);
       if (!parent) continue;
@@ -72,7 +81,6 @@ export function createAreaOverlay({ meshById }) {
       parent.add(mesh);
       current.push({ parent, mesh });
     }
-    requestRepaint();
   };
 
   return { show, hide };

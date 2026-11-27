@@ -6,6 +6,7 @@ import { el, btn, flashRow, foldSections, keepSelectionOnSummaries, withSubtitle
 import { showEffect } from "./views/effect.js";
 import { showCircuit } from "./views/circuit.js";
 import { showArea } from "./views/area.js";
+import { showNetwork } from "./views/network.js";
 import { showProjectionGroup } from "./views/projection-group.js";
 import { show } from "./views/connection.js";
 import { showStructure } from "./views/structure.js";
@@ -98,6 +99,9 @@ export function createInfoPanel(data, sourcingModal) {
   // a drug panel's "Pharmacodynamics: net neurotransmission" list is clicked. The panel hands back the
   // group record; the caller focuses it exactly like its Projections legend row.
   const onProjectionGroupPick = delegate("onProjectionGroupPick");
+  // Set by the caller (onArea): a member-area row in a network panel (BETA) focuses
+  // that functional area exactly like its legend row.
+  const onAreaPick = delegate("onAreaPick");
   // Set by the caller (onSearch): run a search query. A drug panel's clickable
   // Class / Nomenclature values hand back a `field:"value"` query string; the caller
   // opens the search box pre-filled with it (see wireToolbar.openSearchWithQuery).
@@ -197,7 +201,7 @@ export function createInfoPanel(data, sourcingModal) {
     addFactRow, appendSourcedHeading, baseNameOf, baseResolves, body, clearBody, data,
     drugById, effectById, el, enzymeById, finishBody, groupOfBase, nameOf,
     onConnectionPick, onDrugPick, onEffectPick, onEnzymePick, onImagePick,
-    onProjectionGroupPick, onStructurePick, onTargetPick, resolveBase, sourcingModal,
+    onAreaPick, onProjectionGroupPick, onStructurePick, onTargetPick, resolveBase, sourcingModal,
     targetById,
   };
   Object.assign(P, makePills(P));
@@ -249,6 +253,7 @@ export function createInfoPanel(data, sourcingModal) {
 
     showCircuit: (...args) => showCircuit(P, ...args),
     showArea: (...args) => showArea(P, ...args),
+    showNetwork: (...args) => showNetwork(P, ...args),
 
     showProjectionGroup: (...args) => showProjectionGroup(P, ...args),
 
@@ -301,6 +306,11 @@ export function createInfoPanel(data, sourcingModal) {
      */
     onProjectionGroup(fn) {
       pickHandlers.onProjectionGroupPick = fn;
+    },
+
+    /** Register the handler run when a network panel's member-area row is clicked. */
+    onArea(fn) {
+      pickHandlers.onAreaPick = fn;
     },
 
     /**

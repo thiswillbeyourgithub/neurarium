@@ -53,7 +53,7 @@ export async function loadBrainData(dataDir = "data", onProgress = null, { shape
       console.error("Could not load French translations; showing English data.", e);
     }
   }
-  const [metaRecord, structures, projections, circuits, functionalAreas, projectionGroups,
+  const [metaRecord, structures, projections, circuits, functionalAreas, networks, projectionGroups,
          receptors, drugs, metaboliteRecords, addonRecords, quotes, effectIndex] =
     await Promise.all([
       fetchOrThrow(`${dataDir}/meta.json`).then((r) => r.json()),
@@ -61,6 +61,7 @@ export async function loadBrainData(dataDir = "data", onProgress = null, { shape
       fetchJsonl(`${dataDir}/projections.jsonl`),
       fetchJsonl(`${dataDir}/circuits.jsonl`),
       fetchJsonl(`${dataDir}/functional_areas.jsonl`),
+      fetchJsonl(`${dataDir}/networks.jsonl`),
       fetchJsonl(`${dataDir}/projection_groups.jsonl`),
       fetchJsonl(`${dataDir}/receptors.jsonl`),
       fetchJsonl(`${dataDir}/drugs.jsonl`),
@@ -83,7 +84,7 @@ export async function loadBrainData(dataDir = "data", onProgress = null, { shape
   // as if they had been emitted inline. The `provenance` grade stays on the node.
   const quotesById = Object.create(null);
   for (const q of quotes) quotesById[q.id] = q;
-  rehydrateQuotes([metaRecord, structures, projections, circuits, functionalAreas,
+  rehydrateQuotes([metaRecord, structures, projections, circuits, functionalAreas, networks,
                    projectionGroups, receptors, drugs, metaboliteRecords, addonRecords],
                   quotesById);
   // A metabolite is ONE record per molecule (metabolites.jsonl: name, drug_id, own T½,
@@ -103,7 +104,7 @@ export async function loadBrainData(dataDir = "data", onProgress = null, { shape
   onProgress?.({ stage: "meta-ready", meta: metaRecord });
 
   const v = readVocab(metaRecord);
-  const ds = { metaRecord, structures, projections, circuits, functionalAreas, projectionGroups,
+  const ds = { metaRecord, structures, projections, circuits, functionalAreas, networks, projectionGroups,
                receptors, drugs, v };
   const projectionGroupsByKey = resolveAnatomy(ds);
   if (shapes) await loadShapes(structures, onProgress);
@@ -136,6 +137,7 @@ export async function loadBrainData(dataDir = "data", onProgress = null, { shape
     projections,
     circuits,
     functionalAreas,
+    networks,
     projectionGroups,
     projectionGroupsByKey,
     receptors,

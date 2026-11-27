@@ -78,3 +78,18 @@ export function buildAreaLegend(data, onPick) {
   }
   return reflect;
 }
+
+/**
+ * Build the Networks section (#networks-body, BETA): one row per large-scale network,
+ * tagged with how many functional areas it spans.
+ * @param {import("./data.js").BrainData} data
+ * @param {(network: object) => void} onPick
+ * @returns {(activeId: string|null) => void} reflect: lights the active row
+ */
+export function buildNetworkLegend(data, onPick) {
+  const networks = data.networks || [];
+  return buildBrowseList({ section: "networks", captionKey: "networks.legendHint",
+    kind: "network", items: networks.map((n) => ({ ...n, label: n.name })),
+    count: (n) => n.areas.length, tagTitle: t("networks.legendTag"),
+    onPick: (item) => onPick(networks.find((n) => n.id === item.id)) });
+}

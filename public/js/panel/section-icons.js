@@ -58,6 +58,7 @@ export const SECTION_ICONS = {
   connections: "share-2", // Connectivity (structure)
   pathways: "route", // Component pathways (circuit / group)
   structures: "brain", // Component structures (circuit / group)
+  areas: "map-pin", // Member functional areas (network)
   forms: "atom", // Active metabolites it forms (enzyme)
   variability: "chart-column", // How fast people clear it (enzyme)
 };

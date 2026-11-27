@@ -9,7 +9,7 @@ import { stripSide } from "../util.js";
 import { MAP_PAGE } from "../drug-map/site.js";
 
 export function wireUrlBindings({
-  aboutModal, arrows, changelog, data, focusArea, focusCircuit, focusDrug, focusEffect,
+  aboutModal, arrows, changelog, data, focusArea, focusCircuit, focusNetwork, focusDrug, focusEffect,
   focusEnzyme, focusProjectionGroup, focusTarget, legendModal, meshes,
   selectConnection, selectStructure, shortcutsHelp, showNodeBrowser, showSimulation,
   simulation, sourcingModal, tabs, urlState,
@@ -42,6 +42,7 @@ export function wireUrlBindings({
     target: (v) => { const tg = findByIdOrName(data.targets, v); if (tg) focusTarget(tg, { frame: true }); return !!tg; },
     circuit: (v) => { const c = findByIdOrName(data.circuits, v); if (c) focusCircuit(c, { frame: true }); return !!c; },
     area: (v) => { const a = findByIdOrName(data.functionalAreas || [], v); if (a) focusArea(a, { frame: true }); return !!a; },
+    network: (v) => { const n = findByIdOrName(data.networks || [], v); if (n) focusNetwork(n, { frame: true }); return !!n; },
     group: (v) => { const g = findByIdOrName(data.projectionGroups, v); if (g) focusProjectionGroup(g, { frame: true }); return !!g; },
     enzyme: (v) => { const e = findByIdOrName(data.enzymes || [], v); if (e) focusEnzyme(e); return !!e; },
     effect: (v) => { const e = findByIdOrName(data.effects || [], v); if (e) focusEffect(e); return !!e; },

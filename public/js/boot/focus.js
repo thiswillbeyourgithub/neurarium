@@ -8,7 +8,7 @@ import { createCircuitAnimation } from "../circuit-anim.js";
 import { createReceptorMarkers } from "../receptor-markers.js";
 import { createDrugAnimation } from "../drug-anim.js";
 import { createAreaOverlay } from "../scene/area-overlay.js";
-import { buildAreaLegend, buildEffectLegend, buildEnzymeLegend } from "../legend/browse.js";
+import { buildAreaLegend, buildEffectLegend, buildEnzymeLegend, buildNetworkLegend } from "../legend/browse.js";
 import { buildTargetLegend } from "../legend/targets.js";
 import { buildDrugLegend } from "../legend/drugs.js";
 import { TYPING_SETTLE_MS } from "./toolbar.js";
@@ -382,27 +382,41 @@ export function wireFocus({
     show: (circuit) => info.showCircuit(circuit),
     title: (circuit) => circuit.name,
   });
-  // A functional area (BETA): its structures isolated, no arrow lit (even those touching them), no pulse. Its
-  // legend row stays lit while the isolate set is exactly those structures.
-  const areaWatch = { active: false, meshes: new Set(),
-    matches: (iso) => !!iso && iso.size === areaWatch.meshes.size
-      && [...areaWatch.meshes].every((m) => iso.has(m)),
-    hide: () => { areaWatch.active = false; areaOverlay.hide(); } };
+  // A functional area or a network (BETA): its structures isolated, no arrow lit (even
+  // those touching them), no pulse, its drawn areas overlaid. Its legend row stays lit
+  // while the isolate set is exactly those structures. One overlay serves both kinds:
+  // a new focus isolates first, which fires the previous watcher's hide.
   const areaOverlay = createAreaOverlay({ meshById });
-  const focusArea = createSceneFocus({
-    kind: "area",
-    apply: (area) => {
-      const aMeshes = meshesOfIds(area.structures);
-      selection.setCircuit(aMeshes, [], [], { noArrows: true });
-      areaWatch.meshes = new Set(aMeshes);
-      areaWatch.active = true;
-      areaOverlay.show(area);
-      return aMeshes;
-    },
+  const createOverlayFocus = ({ kind, areasOf, show, buildLegend }) => {
+    const watch = { active: false, meshes: new Set(),
+      matches: (iso) => !!iso && iso.size === watch.meshes.size
+        && [...watch.meshes].every((m) => iso.has(m)),
+      hide: () => { watch.active = false; areaOverlay.hide(); } };
+    return createSceneFocus({
+      kind,
+      apply: (item) => {
+        const itemMeshes = meshesOfIds(item.structures);
+        selection.setCircuit(itemMeshes, [], [], { noArrows: true });
+        watch.meshes = new Set(itemMeshes);
+        watch.active = true;
+        areaOverlay.show(areasOf(item));
+        return itemMeshes;
+      },
+      show, title: (item) => item.name, watch, buildLegend,
+    });
+  };
+  const focusArea = createOverlayFocus({
+    kind: "area", areasOf: (area) => area,
     show: (area) => info.showArea(area),
-    title: (area) => area.name,
-    watch: areaWatch,
     buildLegend: (onPick) => buildAreaLegend(data, onPick),
+  });
+  const areaById = new Map((data.functionalAreas || []).map((a) => [a.id, a]));
+  info.onArea((area) => focusArea(area, { frame: true }));
+  const focusNetwork = createOverlayFocus({
+    kind: "network",
+    areasOf: (net) => net.areas.map((id) => areaById.get(id)).filter(Boolean),
+    show: (net) => info.showNetwork(net),
+    buildLegend: (onPick) => buildNetworkLegend(data, onPick),
   });
   // The (established) arrows this projection group stands for: by sign in sign
   // mode, by kind otherwise (the data record is per kind/sign). Tentative arrows
@@ -425,7 +439,7 @@ export function wireFocus({
 
   return {
     circuitAnim, drugAnim, receptorMarkers,
-    focusArea, focusCircuit, focusDrug, focusEffect, focusEnzyme, focusProjectionGroup,
+    focusArea, focusCircuit, focusDrug, focusEffect, focusEnzyme, focusNetwork, focusProjectionGroup,
     focusTarget, selectConnection, selectDrug, selectStructure, selectTarget,
   };
 }

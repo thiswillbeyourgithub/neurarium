@@ -29,7 +29,7 @@ export const TYPING_SETTLE_MS = 400;
  *   selectStructure:Function, selectConnection:Function,
  *   selectTarget:Function}} deps
  */
-export function wireToolbar({ focus, meshes, arrows, data, selection, tabs, urlState, expandPanel, selectStructure, selectConnection, focusTarget, focusDrug, focusEnzyme, focusEffect, focusCircuit, focusProjectionGroup, focusArea }) {
+export function wireToolbar({ focus, meshes, arrows, data, selection, tabs, urlState, expandPanel, selectStructure, selectConnection, focusTarget, focusDrug, focusEnzyme, focusEffect, focusCircuit, focusProjectionGroup, focusArea, focusNetwork }) {
   const resetBtn = document.getElementById("reset-view");
   const searchToggle = document.getElementById("search-toggle");
   const searchBox = document.getElementById("search");
@@ -56,7 +56,7 @@ export function wireToolbar({ focus, meshes, arrows, data, selection, tabs, urlS
   });
 
   // The searchable index (search/index.js), built once.
-  const items = buildSearchItems({ meshes, arrows, data, tabs, selectStructure, selectConnection, focusTarget, focusDrug, focusEnzyme, focusEffect, focusCircuit, focusProjectionGroup, focusArea });
+  const items = buildSearchItems({ meshes, arrows, data, tabs, selectStructure, selectConnection, focusTarget, focusDrug, focusEnzyme, focusEffect, focusCircuit, focusProjectionGroup, focusArea, focusNetwork });
 
   // Type-filter chips above the results: scope the search to one kind of thing
   // (a structure, a drug, ...). The label reuses each section's own heading so the
@@ -68,7 +68,7 @@ export function wireToolbar({ focus, meshes, arrows, data, selection, tabs, urlS
   const FILTER_LABELS = {
     structure: "panel.structures", connection: "search.filterConnections",
     target: "panel.receptors", drug: "panel.drugs",
-    circuit: "legend.circuits", group: "legendKey.pathways", area: "panel.areas",
+    circuit: "legend.circuits", group: "legendKey.pathways", area: "panel.areas", network: "panel.networks",
     enzyme: "panel.enzymes", effect: "panel.effects", command: "search.filterCommands",
   };
   let activeType = null;

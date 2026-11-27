@@ -47,7 +47,7 @@ export function wireShortcuts(help, tabs, selection, lightbox, aboutModal, legen
     const search = document.getElementById("search");
     if (search && !search.hidden) click("search-toggle");
     for (const id of ["drugs-toggle", "receptors-toggle", "enzymes-toggle", "effects-toggle",
-                      "structures-toggle", "areas-toggle", "projections-toggle"]) {
+                      "structures-toggle", "areas-toggle", "networks-toggle", "projections-toggle"]) {
       const tg = document.getElementById(id);
       if (tg && tg.getAttribute("aria-expanded") === "true") tg.click();
     }
@@ -85,6 +85,7 @@ export function wireShortcuts(help, tabs, selection, lightbox, aboutModal, legen
       ["effects-toggle", "effects-body"],
       ["structures-toggle", "structures-body"],
       ["areas-toggle", "areas-body"],
+      ["networks-toggle", "networks-body"],
       ["projections-toggle", "projections-body"],
     ];
     let activeEl = null;

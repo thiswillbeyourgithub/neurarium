@@ -24,6 +24,7 @@ export const KINDS = [
   { kind: "projection_transmitter", label: "about.kindProjectionTransmitter" },
   { kind: "projection_sign", label: "about.kindProjectionSign" },
   { kind: "functional_areas", label: "about.kindAreas", example: "ba4" },
+  { kind: "networks", label: "about.kindNetworks", example: "default_mode" },
   { kind: "circuits", label: "about.kindCircuits" },
   { kind: "projection_groups", label: "about.kindProjectionGroups" },
   { kind: "receptors", label: "about.kindReceptors", example: "5ht2a" },
