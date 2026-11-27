@@ -102,7 +102,8 @@ def _provenance_stats(structures: list[dict[str, Any]],
                       drug_targets: dict[str, dict[str, Any]],
                       addons: list[dict[str, Any]],
                       enzymes: dict[str, Any] | None = None,
-                      functional_areas: list[dict[str, Any]] = ()) -> dict[str, Any]:
+                      functional_areas: list[dict[str, Any]] = (),
+                      networks: list[dict[str, Any]] = ()) -> dict[str, Any]:
     """Programmatic sourcing tally over the dataset's **nodes** (see the Nodes
     section of CLAUDE.md), emitted into ``meta.provenance_stats``.
 
@@ -484,6 +485,8 @@ def _provenance_stats(structures: list[dict[str, Any]],
         "circuits": tally(circuit_grades),
         # Functional areas (BETA): one node per area (a set of structures).
         "functional_areas": tally([_node_grade(a) for a in functional_areas]),
+        # Large-scale networks (BETA): one node per network (a set of areas).
+        "networks": tally([_node_grade(n) for n in networks]),
         "projection_groups": tally(projection_group_grades),
         "receptors": tally(receptor_family_grades),
         "receptor_class": tally(receptor_class_grades),

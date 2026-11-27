@@ -63,7 +63,8 @@ from data_generators.quotes import UNCERTAINTY_REASONS
 
 
 def build_meta(*, structures, projections, circuits, projection_groups, receptors,
-                drug_targets, drugs, metabolites, addons, functional_areas=()) -> dict[str, Any]:
+                drug_targets, drugs, metabolites, addons, functional_areas=(),
+               networks=()) -> dict[str, Any]:
     """The ``meta.json`` object: presentation maps, vocabularies and the tally."""
     # Presentation metadata (its own meta.json) so a consumer reading the dataset
     # is self-contained: arrow colours + legend headings live in the data, not
@@ -204,6 +205,6 @@ def build_meta(*, structures, projections, circuits, projection_groups, receptor
         "provenance_stats": _provenance_stats(
             structures, projections, circuits, projection_groups,
             receptors, drugs, metabolites, drug_targets, addons, enzymes,
-            functional_areas=functional_areas),
+            functional_areas=functional_areas, networks=networks),
     }
     return meta

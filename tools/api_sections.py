@@ -175,6 +175,12 @@ FIELDS: dict[str, dict[str, Label]] = {
         "own_shape": Label(None, why="viewer drawing state (a lobe lights until the area is drawn)"),
         "wikipedia": _REFERENCE,
     },
+    "network": {
+        "sources": Label("network.heading"),
+        "areas": Label("network.areas", section=True),
+        "structures": Label("network.structures", section=True),
+        "wikipedia": _REFERENCE,
+    },
     "circuit": {
         "sources": Label("circuit.heading"),
         "structures": Label("circuit.structures", section=True),
@@ -321,6 +327,7 @@ ALWAYS: dict[str, dict[str, Section]] = {
     } for kind, regions in (("receptor", "locations"), ("target", "regions"))},
     "circuit": {"structures": Section("circuit.structures")},
     "area": {"structures": Section("area.structures")},
+    "network": {"areas": Section("network.areas"), "structures": Section("network.structures")},
 }
 
 

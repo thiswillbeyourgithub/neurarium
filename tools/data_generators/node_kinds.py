@@ -26,7 +26,7 @@ NODE_KINDS = ("addons", "drug_bindings", "drug_binding_action", "drug_nbn", "dru
               "drug_metabolites",
               "drug_metabolite_enzyme", "drug_metabolite_bindings",
               "projections", "projection_transmitter", "projection_sign",
-              "circuits", "functional_areas", "projection_groups", "receptors",
+              "circuits", "functional_areas", "networks", "projection_groups", "receptors",
               "receptor_class", "receptor_sign", "receptor_synaptic",
               "receptor_locations", "receptor_density", "targets", "target_polarity",
               "target_locations", "target_density", "receptor_effect",

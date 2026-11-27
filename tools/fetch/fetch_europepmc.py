@@ -201,6 +201,9 @@ PAPERS: dict[str, str] = {
     "6148044": "benzodiazepine-site Ki vs [3H]flunitrazepam: nitrazepam, chlordiazepoxide (mouse)",
     "1848631": "benzodiazepine-site Kd of 22 benzodiazepines in human frontal cortex",
     "1687574": "lormetazepam Ki at the omega 1 / omega 2 benzodiazepine sites",
+    # Large-scale brain networks (data_generators/networks.py).
+    "31707621": "large-scale networks: dorsal attention, somatomotor, visual and the other "
+                "canonical networks with their anatomy (Uddin, Yeo, Spreng 2019 taxonomy review)",
 }
 
 # Owner id -> PubMed ids --ki-prose reads beside the papers its Wikipedia article cites:

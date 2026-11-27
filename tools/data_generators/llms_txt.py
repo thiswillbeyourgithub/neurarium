@@ -38,6 +38,7 @@ COLLECTION_BLURBS: dict[str, str] = {
     "structures": "brain regions (id, name, group, position, aliases, sources). Paired regions are emitted once on the right (`mirror: true`); the left twin is implied",
     "projections": "pathways between regions (from, to, kind, transmitter/sign claims, sources)",
     "functional_areas": "BETA functional areas: the human Brodmann areas, each `{number, name, structures, own_shape}` naming the modeled structures it lies in (a lobe until the area has its own drawn shape, `own_shape`), with the book sentence placing it",
+    "networks": "BETA large-scale brain networks (default mode, salience, central executive, dorsal attention, sensorimotor, visual), each `{name, areas, structures}`: the functional-area ids it spans and the union of their structures, with the book / review sentence placing it",
     "circuits": "named circuits (a set of regions; member pathways are the projections with both ends in the set)",
     "projection_groups": "projection groups by kind or sign (members are the projections matching it)",
     "receptors": "neurotransmitter receptors (family, class, sign, synaptic site, expression regions + density, effects, variants), each attribute graded separately",

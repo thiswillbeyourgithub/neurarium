@@ -188,6 +188,7 @@ from data_generators import workup  # noqa: E402 (RCP 4.2-4.4 workup, BDPM #24)
 from data_generators import excretion  # noqa: E402 (route, unchanged share, kidney, urine pH)
 from data_generators.drug_effect_kinds import KINDS as DRUG_EFFECT_KINDS  # noqa: E402 (sleep, seizure threshold)
 from data_generators import functional_areas as FUNCTIONAL_AREAS  # noqa: E402 (BETA)
+from data_generators import networks as NETWORKS  # noqa: E402 (BETA)
 from data_generators import page_links as PAGE_LINKS  # noqa: E402 (per-page source urls)
 from data_generators.unknown import apply_unknown  # noqa: E402
 
@@ -1583,6 +1584,31 @@ def _build_functional_areas(structures: list[dict[str, Any]],
     return out
 
 
+def _build_networks(structures: list[dict[str, Any]],
+                    areas: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Every large-scale network record (BETA, data_generators/networks.py): its member
+    areas (validated against the emitted areas) and the union of their structures with
+    its own extra ones, so the viewer lights a network like an area."""
+    area_by_id = {a["id"]: a for a in areas}
+    structure_ids = {r["id"] for r in structures}
+    out = []
+    for net in NETWORKS.NETWORKS:
+        what = f"network {net['id']!r}"
+        missing = [a for a in net["areas"] if a not in area_by_id]
+        if missing:
+            raise KeyError(f"{what} references unknown functional area(s) {missing}")
+        ids = [sid for a in net["areas"] for sid in area_by_id[a]["structures"]]
+        ids += _expand_bases(net["structures"], structure_ids, what)
+        record = {"id": net["id"], "name": net["name"], "areas": net["areas"],
+                  "structures": list(dict.fromkeys(ids)),
+                  "wikipedia": net["wikipedia"],
+                  "wikipedia_provenance": _wiki_provenance(net["id"])}
+        if net["sources"]:
+            record["sources"] = _expand_sources(net["sources"], what)
+        out.append(record)
+    return out
+
+
 def _build_circuits(structures: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Every circuit record, its base structure ids expanded (see _expand_bases)."""
     circuits: list[dict[str, Any]] = []
@@ -1709,7 +1735,7 @@ def _build_drugs(drug_targets: dict[str, dict[str, Any]], receptor_bases: set[st
 
 def _apply_uncertainty_passes(*, structures, projections, circuits, projection_groups,
                               receptors, drug_targets, drugs, metabolites,
-                              functional_areas=()) -> None:
+                              functional_areas=(), networks=()) -> None:
     """The cross-node post-passes that flag claims (uncertain / unknown / contradicted /
     animal evidence), in their dependency order (each comment says why)."""
     # The "uncertain" badges: a post-pass, not part of _drug_record, because two of the
@@ -1767,6 +1793,7 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     INTEGRITY.validate_quote_registries()
     circuits = _build_circuits(structures)
     functional_areas = _build_functional_areas(structures, shapes)
+    networks = _build_networks(structures, functional_areas)
     projection_groups = _build_projection_groups()
     # Receptors and drug-target regions reference structure *bases* like circuits do
     # (the viewer expands them to both hemispheres).
@@ -1776,7 +1803,7 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     drug_targets = _build_drug_targets(receptors)
     drugs, metabolites, drug_ids = _build_drugs(drug_targets, receptor_bases)
     nodes = dict(structures=structures, projections=projections, circuits=circuits,
-                 functional_areas=functional_areas,
+                 functional_areas=functional_areas, networks=networks,
                  projection_groups=projection_groups, receptors=receptors,
                  drug_targets=drug_targets, drugs=drugs, metabolites=metabolites)
     _apply_uncertainty_passes(**nodes)
@@ -1793,7 +1820,7 @@ def build_records() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     meta = build_meta(**nodes, addons=addons)
     return ({"meta": meta, "structures": structures,
              "projections": projections, "circuits": circuits,
-             "functional_areas": functional_areas,
+             "functional_areas": functional_areas, "networks": networks,
              "projection_groups": projection_groups,
              "receptors": receptors, "drugs": drugs,
              "metabolites": metabolites, "addons": addons}, shapes)
