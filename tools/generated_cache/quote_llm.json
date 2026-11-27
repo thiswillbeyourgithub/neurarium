@@ -502,8 +502,8 @@
 },
 "q_094e2a4a34cc": {
 "group:kind:melatonergic": "opus",
-"projection:pineal->hypothalamus_R": "opus",
-"projection:pineal->hypothalamus_R/transmitter": "opus",
+"projection:pineal->suprachiasmatic_R": "opus",
+"projection:pineal->suprachiasmatic_R/transmitter": "opus",
 "structure:pineal": "opus"
 },
 "q_09546bd1fed7": {
@@ -1513,6 +1513,9 @@
 "q_1a1df5856915": {
 "drug:brotizolam/excretion[route:renal]": "opus"
 },
+"q_1a35e4f3de95": {
+"structure:periaqueductal_gray": "opus"
+},
 "q_1a41245c66c3": {
 "drug:guanfacine/excretion[renal_process:tubular_secretion]": "opus"
 },
@@ -2516,6 +2519,12 @@
 },
 "q_2a7066162efb": {
 "drug:lisdexamfetamine/brands[Venvanse]": "sonnet"
+},
+"q_2a7f359fe1be": {
+"structure:area_postrema": "opus"
+},
+"q_2a8a40e3df45": {
+"projection:periaqueductal_gray->raphe": "opus"
 },
 "q_2a9cd78b0289": {
 "drug:methylphenidate_dl/originator": "opus"
@@ -7196,8 +7205,14 @@
 "projection:temporal_L->temporal_R": "opus"
 },
 "q_7f7e97e86e13": {
-"projection:pons->thalamus_R": "opus",
-"projection:pons->thalamus_R/transmitter": "opus"
+"projection:laterodorsal_tegmental_R->thalamus_R": "opus",
+"projection:laterodorsal_tegmental_R->thalamus_R/transmitter": "opus",
+"projection:pedunculopontine_R->thalamus_R": "opus",
+"projection:pedunculopontine_R->thalamus_R/transmitter": "opus",
+"structure:laterodorsal_tegmental_L": "opus",
+"structure:laterodorsal_tegmental_R": "opus",
+"structure:pedunculopontine_L": "opus",
+"structure:pedunculopontine_R": "opus"
 },
 "q_7f95a0a85cc3": {
 "drug:sertraline/brands[Xydep]": "sonnet"
@@ -8975,8 +8990,10 @@
 "receptor:mu/effects[agonism:miosis]": "opus"
 },
 "q_9d17f76cc190": {
-"projection:pons->vta_R": "opus",
-"projection:pons->vta_R/transmitter": "opus"
+"projection:laterodorsal_tegmental_R->vta_R": "opus",
+"projection:laterodorsal_tegmental_R->vta_R/transmitter": "opus",
+"projection:pedunculopontine_R->vta_R": "opus",
+"projection:pedunculopontine_R->vta_R/transmitter": "opus"
 },
 "q_9d204633ef65": {
 "drug:betahistine/bindings[h1:partial_agonist]": "sonnet",
@@ -10260,8 +10277,8 @@
 "drug:mirtazapine/tmax": "sonnet"
 },
 "q_b45c45ab851d": {
-"projection:pons->substantia_nigra_R": "opus",
-"projection:pons->substantia_nigra_R/transmitter": "opus"
+"projection:pedunculopontine_R->substantia_nigra_R": "opus",
+"projection:pedunculopontine_R->substantia_nigra_R/transmitter": "opus"
 },
 "q_b47682bd71e6": {
 "drug:atomoxetine/bindings[net:reuptake_inhibitor]": "sonnet"
@@ -12316,6 +12333,10 @@
 },
 "q_d8796a74f2b7": {
 "drug:cyproheptadine/bindings[5ht2c:antagonist]": "opus"
+},
+"q_d889a7a94b6a": {
+"structure:suprachiasmatic_L": "opus",
+"structure:suprachiasmatic_R": "opus"
 },
 "q_d88f167b3bb6": {
 "target:cgrp/effects[antagonism:antimigraine]": "opus"

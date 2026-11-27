@@ -182,6 +182,14 @@
     "provenance": "verified"
    }
   ],
+  "laterodorsal_tegmental_R->vta_R": [
+   {
+    "corpus": "kandel",
+    "page": 1115,
+    "quote": "These dopaminergic neurons are excited by glutamatergic cells in the prefrontal cortex and amygdala as well as from cholinergic cells in the laterodorsal tegmental and pedunculopontine nuclei of the hindbrain, and are inhibited by local GABAergic cells within or just caudal to the ventral tegmental area.",
+    "provenance": "verified"
+   }
+  ],
   "locus_coeruleus_R->caudate_R": [
    {
     "corpus": "europepmc",
@@ -392,6 +400,22 @@
     "provenance": "verified"
    }
   ],
+  "pedunculopontine_R->substantia_nigra_R": [
+   {
+    "corpus": "nieuwenhuys",
+    "page": 443,
+    "quote": "Excitatory afferents to the substantia nigra originate from glutamatergic neurons in the subthalamic nucleus and from glutamatergic and cholinergic neurons in the pedunculopontine tegmental nucleus [35, 245, 277].",
+    "provenance": "verified"
+   }
+  ],
+  "pedunculopontine_R->vta_R": [
+   {
+    "corpus": "kandel",
+    "page": 1115,
+    "quote": "These dopaminergic neurons are excited by glutamatergic cells in the prefrontal cortex and amygdala as well as from cholinergic cells in the laterodorsal tegmental and pedunculopontine nuclei of the hindbrain, and are inhibited by local GABAergic cells within or just caudal to the ventral tegmental area.",
+    "provenance": "verified"
+   }
+  ],
   "pons->cerebellum": [
    {
     "corpus": "europepmc",
@@ -403,22 +427,6 @@
     "corpus": "europepmc",
     "page": 2422596,
     "quote": "Double-labeled neurons were observed in all subdivisions of the pontine nuclei, indicating that pontine neurons which contain glutamate-like immunoreactivity project to the cerebellum. Based on the hypothesis that increased levels of glutamate, glutaminase and aspartate aminotransferase reflect a transmitter role for glutamate, the present data raise the possibility that glutamate may be a major neurotransmitter of pontocerebellar fibers.",
-    "provenance": "verified"
-   }
-  ],
-  "pons->substantia_nigra_R": [
-   {
-    "corpus": "nieuwenhuys",
-    "page": 443,
-    "quote": "Excitatory afferents to the substantia nigra originate from glutamatergic neurons in the subthalamic nucleus and from glutamatergic and cholinergic neurons in the pedunculopontine tegmental nucleus [35, 245, 277].",
-    "provenance": "verified"
-   }
-  ],
-  "pons->vta_R": [
-   {
-    "corpus": "kandel",
-    "page": 1115,
-    "quote": "These dopaminergic neurons are excited by glutamatergic cells in the prefrontal cortex and amygdala as well as from cholinergic cells in the laterodorsal tegmental and pedunculopontine nuclei of the hindbrain, and are inhibited by local GABAergic cells within or just caudal to the ventral tegmental area.",
     "provenance": "verified"
    }
   ],

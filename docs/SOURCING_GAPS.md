@@ -9,20 +9,20 @@ Every node is graded (see `docs/PROVENANCE.md`); a bare `llm` grade and NOSOURCE
 | Node kind | Total | Verified | Uncertain | Sourced | `llm` | NOSOURCE | Unknown |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | `drug_binding_action` | 1564 | 1200 | 119 | 0 | 132 | 113 | 584 |
+| `projection_transmitter` | 123 | 90 | 11 | 0 | 22 | 0 | 0 |
 | `receptor_locations` | 383 | 346 | 16 | 0 | 21 | 0 | 0 |
-| `projection_transmitter` | 120 | 88 | 11 | 0 | 21 | 0 | 0 |
 | `drug_bindings` | 1943 | 1737 | 189 | 0 | 0 | 17 | 0 |
 | `target_locations` | 158 | 143 | 0 | 0 | 15 | 0 | 0 |
 | `receptor_synaptic` | 56 | 42 | 0 | 0 | 14 | 0 | 0 |
-| `projection_sign` | 41 | 17 | 13 | 0 | 11 | 0 | 0 |
+| `projection_sign` | 42 | 17 | 13 | 0 | 12 | 0 | 0 |
 | `drug_enzyme_strength` | 148 | 135 | 3 | 0 | 10 | 0 | 0 |
 | `functional_areas` | 43 | 35 | 0 | 0 | 0 | 8 | 0 |
 | `drug_categories` | 314 | 307 | 0 | 0 | 7 | 0 | 0 |
 | `drug_half_life` | 283 | 272 | 6 | 0 | 0 | 5 | 0 |
 | `receptor_sign` | 56 | 51 | 0 | 0 | 5 | 0 | 0 |
-| `projections` | 120 | 85 | 34 | 0 | 0 | 1 | 0 |
+| `projections` | 123 | 88 | 34 | 0 | 0 | 1 | 0 |
 | `drug_brands` | 579 | 578 | 0 | 0 | 0 | 1 | 0 |
-| `references` | 461 | 0 | 0 | 461 | 0 | 0 | 0 |
+| `references` | 469 | 0 | 0 | 469 | 0 | 0 | 0 |
 | `receptor_effect` | 207 | 182 | 25 | 0 | 0 | 0 | 10 |
 | `drug_metabolite_bindings` | 205 | 191 | 14 | 0 | 0 | 0 | 0 |
 | `drug_sleep` | 50 | 43 | 7 | 0 | 0 | 0 | 0 |

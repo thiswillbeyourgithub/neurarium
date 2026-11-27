@@ -555,7 +555,7 @@ PROJECTIONS: list[dict[str, Any]] = [
     #     -> spinal cord -> superior cervical ganglion -> pineal) is deliberately
     #     NOT drawn: it leaves the brain, and a direct arrow would sell a
     #     multi-synaptic peripheral loop as one hop. ---
-    dict(**{"from": "pineal", "to": "hypothalamus_R"},
+    dict(**{"from": "pineal", "to": "suprachiasmatic_R"},
          kind="melatonergic", neurotransmitter="Melatonin",
          label="Pineal melatonin (suprachiasmatic)",
          description="Melatonin from the pineal gland reaches the MT1 and MT2 "
@@ -563,27 +563,45 @@ PROJECTIONS: list[dict[str, Any]] = [
                      "A hormonal route through the CSF and the bloodstream, not "
                      "an axonal tract."),
     # --- The OTHER cholinergic source Kandel names on the same page: the
-    #     mesopontine groups (pedunculopontine + laterodorsal tegmental nuclei),
-    #     which sit inside the already-modeled pons and are the thalamus's
-    #     acetylcholine supply. Cutting them out as their own nuclei is not yet
-    #     demand-justified (the brainstem is deliberately coarse), so the arrow
-    #     leaves the pons itself. ---
-    dict(**{"from": "pons", "to": "thalamus_R"},
+    #     mesopontine groups, a ventrolateral pedunculopontine and a dorsomedial
+    #     laterodorsal tegmental cluster, the thalamus's acetylcholine supply
+    #     (p.1047) and an excitatory drive onto the VTA dopamine neurons (p.1115). ---
+    dict(**{"from": "pedunculopontine_R", "to": "thalamus_R"},
          kind="cholinergic", neurotransmitter="Acetylcholine",
-         label="Mesopontine cholinergic (thalamic)",
-         description="Pedunculopontine and laterodorsal tegmental cholinergic "
-                     "neurons in the pons innervate the thalamus, gating what it "
-                     "relays to the cortex across the sleep-wake cycle."),
-    dict(**{"from": "pons", "to": "vta_R"},
+         label="Pedunculopontine cholinergic (thalamic)",
+         description="Pedunculopontine cholinergic neurons innervate the thalamus, "
+                     "gating what it relays to the cortex across the sleep-wake "
+                     "cycle."),
+    dict(**{"from": "laterodorsal_tegmental_R", "to": "thalamus_R"},
          kind="cholinergic", neurotransmitter="Acetylcholine",
-         label="Mesopontine cholinergic (VTA)",
-         description="Pedunculopontine and laterodorsal tegmental cholinergic "
-                     "neurons excite the dopamine neurons of the VTA."),
-    dict(**{"from": "pons", "to": "substantia_nigra_R"},
+         label="Laterodorsal tegmental cholinergic (thalamic)",
+         description="Laterodorsal tegmental cholinergic neurons innervate the "
+                     "thalamus."),
+    dict(**{"from": "pedunculopontine_R", "to": "vta_R"},
+         kind="cholinergic", neurotransmitter="Acetylcholine",
+         label="Pedunculopontine cholinergic (VTA)",
+         description="Pedunculopontine cholinergic neurons excite the dopamine "
+                     "neurons of the VTA."),
+    dict(**{"from": "laterodorsal_tegmental_R", "to": "vta_R"},
+         kind="cholinergic", neurotransmitter="Acetylcholine",
+         label="Laterodorsal tegmental cholinergic (VTA)",
+         description="Laterodorsal tegmental cholinergic neurons excite the "
+                     "dopamine neurons of the VTA."),
+    dict(**{"from": "pedunculopontine_R", "to": "substantia_nigra_R"},
          kind="cholinergic", neurotransmitter="Acetylcholine",
          label="Mesopontine cholinergic (nigral)",
          description="Pedunculopontine cholinergic neurons excite the "
                      "substantia nigra."),
+    # --- Descending pain control: the periaqueductal gray drives the raphe
+    #     magnus (Kandel p.536), which then gates pain at the spinal dorsal horn.
+    #     The PAG's own transmitter is not stated by the source, hence an
+    #     unsourced excitatory claim. ---
+    dict(**{"from": "periaqueductal_gray", "to": "raphe"},
+         kind="excitatory", neurotransmitter="Glutamate",
+         label="Periaqueductal gray to raphe (pain control)",
+         description="The periaqueductal gray drives the nucleus raphe magnus, "
+                     "the first relay of the descending pain-control system "
+                     "where opioids act."),
     dict(**{"from": "nucleus_basalis_R", "to": "frontal_R"},
          kind="cholinergic", neurotransmitter="Acetylcholine",
          label="Basal forebrain cholinergic (frontal)",

@@ -1289,6 +1289,16 @@
       "Therapeutics",
       "Brands"
     ],
+    "q_2a7f359fe1be": [
+      "40 The Brain Stem",
+      "Neuronal Ensembles in the Brain Stem Reticular Formation Coordinate Reflexes and Simple Behaviors Necessary for Homeostasis and Survival",
+      "Control of Breathing Provides an Example of How Pattern Generators Are Integrated Into More Complex Behaviors"
+    ],
+    "q_2a8a40e3df45": [
+      "20 Pain",
+      "Opioid Peptides Contribute to Endogenous Pain Control",
+      "Endogenous Opioid Peptides and Their Receptors Are Distributed in Pain-Modulatory Systems"
+    ],
     "q_2a9fc516fe66": [
       "Chlordiazepoxide",
       "Therapeutics",
@@ -5770,6 +5780,11 @@
       "Moclobemide",
       "Therapeutics",
       "Brands"
+    ],
+    "q_d889a7a94b6a": [
+      "44 Sleep and Wakefulness",
+      "Sleep Is Regulated by Homeostatic and Circadian Drives",
+      "Circadian Control of Sleep Depends on Hypothalamic Relays"
     ],
     "q_d8e3639465cf": [
       "Fluoxetine",

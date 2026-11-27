@@ -12771,8 +12771,8 @@
         "unknown": 0
       },
       "projections": {
-        "total": 120,
-        "verified": 85,
+        "total": 123,
+        "verified": 88,
         "uncertain": 34,
         "sourced": 0,
         "llm": 0,
@@ -12781,23 +12781,23 @@
         "unknown": 0
       },
       "projection_transmitter": {
-        "total": 120,
-        "verified": 88,
+        "total": 123,
+        "verified": 90,
         "uncertain": 11,
         "sourced": 0,
-        "llm": 21,
+        "llm": 22,
         "nosource": 0,
-        "missing": 21,
+        "missing": 22,
         "unknown": 0
       },
       "projection_sign": {
-        "total": 41,
+        "total": 42,
         "verified": 17,
         "uncertain": 13,
         "sourced": 0,
-        "llm": 11,
+        "llm": 12,
         "nosource": 0,
-        "missing": 11,
+        "missing": 12,
         "unknown": 0
       },
       "circuits": {
@@ -12971,8 +12971,8 @@
         "unknown": 0
       },
       "structures": {
-        "total": 57,
-        "verified": 57,
+        "total": 65,
+        "verified": 65,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -12981,10 +12981,10 @@
         "unknown": 0
       },
       "references": {
-        "total": 461,
+        "total": 469,
         "verified": 0,
         "uncertain": 0,
-        "sourced": 461,
+        "sourced": 469,
         "llm": 0,
         "nosource": 0,
         "missing": 0,
@@ -12992,15 +12992,15 @@
       }
     },
     "nodes": {
-      "total": 11245,
-      "verified": 10422,
+      "total": 11260,
+      "verified": 10435,
       "uncertain": 442,
       "sourced": 0,
-      "llm": 236,
+      "llm": 238,
       "nosource": 145,
-      "missing": 381,
+      "missing": 383,
       "unknown": 594,
-      "backed": 10864,
+      "backed": 10877,
       "pct_backed": 97
     },
     "ki_coverage": {

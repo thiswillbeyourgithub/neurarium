@@ -45,6 +45,13 @@
       }
     ]
   },
+  "area_postrema": {
+    "file": "File:Gray709.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/77/Gray709.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Area postrema",
+    "kind": "raster",
+    "gallery": []
+  },
   "caudate": {
     "file": "File:Caudate_nucleus_coronal_sections.gif",
     "url": "https://upload.wikimedia.org/wikipedia/commons/d/da/Caudate_nucleus_coronal_sections.gif",
@@ -332,6 +339,20 @@
       }
     ]
   },
+  "pedunculopontine": {
+    "file": "File:The_nuclei_of_the_Modulatory_network.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/a/ad/The_nuclei_of_the_Modulatory_network.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Pedunculopontine nucleus",
+    "kind": "raster",
+    "gallery": []
+  },
+  "periaqueductal_gray": {
+    "file": "File:Gray678.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Gray678.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Periaqueductal gray",
+    "kind": "raster",
+    "gallery": []
+  },
   "pituitary": {
     "file": "File:Diagram_showing_the_position_of_the_pituitary_gland_in_the_brain_CRUK_413.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Diagram_showing_the_position_of_the_pituitary_gland_in_the_brain_CRUK_413.svg",
@@ -450,6 +471,13 @@
         "lang": "en"
       }
     ]
+  },
+  "suprachiasmatic": {
+    "file": "File:Suprachiasmatic_Nucleus.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/80/Suprachiasmatic_Nucleus.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+    "title": "Suprachiasmatic nucleus",
+    "kind": "raster",
+    "gallery": []
   },
   "temporal": {
     "file": "File:Temporal_lobe_animation.gif",

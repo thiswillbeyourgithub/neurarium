@@ -8,7 +8,7 @@ data_generators.provenance. No import cycle: provenance <- quotes <- connectivit
 """
 from typing import Any
 
-from data_generators.provenance import _kandel, _nieuwenhuys
+from data_generators.provenance import _kandel, _nieuwenhuys, _nolte
 
 # Pathway sentences reused across PROJECTION_QUOTES, STRUCTURE_QUOTES and the
 # CIRCUITS / PROJECTION_GROUPS literals in data_generators.connectivity (which
@@ -114,6 +114,16 @@ _NQ_RAPHE_STRIATUM = _nieuwenhuys(896,
 # ``build_records`` raises (typo guard). This is the projection analogue of the
 # per-binding drug sources; ``check_data.py`` confirms each quote verbatim on the
 # cited page (the verify gate).
+# The sentence immediately before the one _KQ_CHOLINERGIC_BASAL quotes: same
+# figure legend, the other half of the cholinergic map. It names both mesopontine
+# nuclei, so it grades the two structures and their thalamic arrows.
+_KQ_MESOPONTINE = _kandel(1047,
+    "Those in the pons and midbrain (mesopontine groups) are divided into a "
+    "ventrolateral cluster (pedunculopontine nucleus) and the dorsomedial "
+    "cluster (laterodorsal tegmental nucleus). The mesopontine cholinergic "
+    "neurons project to the brain stem reticular formation and the thalamus.")
+
+
 PROJECTION_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
     # Dopaminergic nigrostriatal (one sentence covers both striatal targets).
     ("substantia_nigra_R", "putamen_R"): _KQ_NIGROSTRIATAL,
@@ -211,18 +221,18 @@ PROJECTION_QUOTES: dict[tuple[str, str], dict[str, Any]] = {
     ("tuberomammillary_R", "pons"): _KQ_HISTAMINE_NEURAXIS,
     ("tuberomammillary_R", "medulla"): _KQ_HISTAMINE_NEURAXIS,
     ("tuberomammillary_R", "cerebellum"): _KQ_HISTAMINE_NEURAXIS,
-    ("pineal", "hypothalamus_R"): _KQ_MELATONIN,
+    ("pineal", "suprachiasmatic_R"): _KQ_MELATONIN,
     # Ascending cholinergic: one Kandel sentence (p.1047) puts the nucleus basalis
     # of Meynert in the basal forebrain group and has it projecting "throughout the
     # cerebral cortex, hippocampus, and amygdala", backing all six NBM targets
     # (the four lobes + cingulate cortex + amygdala).
     # The sentence immediately before the one _KQ_CHOLINERGIC_BASAL quotes: same
     # figure legend, the other half of the cholinergic map.
-    ("pons", "thalamus_R"): _kandel(1047,
-        "Those in the pons and midbrain (mesopontine groups) are divided into a "
-        "ventrolateral cluster (pedunculopontine nucleus) and the dorsomedial "
-        "cluster (laterodorsal tegmental nucleus). The mesopontine cholinergic "
-        "neurons project to the brain stem reticular formation and the thalamus."),
+    ("pedunculopontine_R", "thalamus_R"): _KQ_MESOPONTINE,
+    ("laterodorsal_tegmental_R", "thalamus_R"): _KQ_MESOPONTINE,
+    ("periaqueductal_gray", "raphe"): _kandel(536,
+        "Both the serotonergic nucleus raphe magnus and noradrenergic nuclei "
+        "receive input from neurons in the periaqueductal gray region."),
     ("nucleus_basalis_R", "frontal_R"): _KQ_CHOLINERGIC_BASAL,
     ("nucleus_basalis_R", "parietal_R"): _KQ_CHOLINERGIC_BASAL,
     ("nucleus_basalis_R", "temporal_R"): _KQ_CHOLINERGIC_BASAL,
@@ -497,4 +507,19 @@ STRUCTURE_QUOTES: dict[str, dict[str, Any]] = {
         "epithelium."),
     "septal_nuclei": _KSQ_BASAL_FOREBRAIN,
     "nucleus_basalis": _KSQ_BASAL_FOREBRAIN,
+    "pedunculopontine": _KQ_MESOPONTINE,
+    "laterodorsal_tegmental": _KQ_MESOPONTINE,
+    "suprachiasmatic": _kandel(1137,
+        "The suprachiasmatic nucleus exerts control over all of the other body "
+        "clocks by regulating body temperature as well as autonomic, endocrine, "
+        "and behavioral functions."),
+    "area_postrema": _kandel(1041,
+        "Toxic substances in the blood stream can be detected by nerve cells in "
+        "the area postrema, a small region adjacent to the nucleus of the "
+        "solitary tract along the floor of the fourth ventricle."),
+    # Kandel never places it anatomically, Nolte does.
+    "periaqueductal_gray": _nolte(292,
+        "Medial to it, encircling the aqueduct, is a particularly pale-staining "
+        "region of gray matter called, appropriately enough, the periaqueductal "
+        "gray."),
 }
