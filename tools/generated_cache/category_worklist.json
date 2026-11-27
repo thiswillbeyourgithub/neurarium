@@ -721,6 +721,300 @@
      "qid": "2a2b009d"
     }
    ]
+  },
+  "zolmitriptan": {
+   "name": "Zolmitriptan",
+   "categories": [
+    "antimigraine"
+   ],
+   "labels": [
+    "Antimigraine"
+   ],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "zolmitriptan",
+     "line": "Drug class | Serotonin 5-HT 1B , 5-HT 1D , 5-HT 1E , and 5-HT 1F receptor agonist ; Antimigraine agent ; Triptan",
+     "qid": "0dc2c9ee"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "zolmitriptan",
+     "line": "IUPAC name ( S )-4-({3--1 H -indol-5-yl}methyl)-1,3-oxazolidin-2-one",
+     "qid": "4aebfbab"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "zolmitriptan",
+     "line": "Zolmitriptan , sold under the brand name Zomig among others, is a serotonergic medication which is used in the acute treatment of migraine attacks with or without aura and cluster headaches .",
+     "qid": "e9210c80"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "zolmitriptan",
+     "line": "It is taken by mouth as a swallowed or disintegrating tablet or as a nasal spray .",
+     "qid": "77779630"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "zolmitriptan",
+     "line": "Side effects include tightness in the neck or throat, jaw pain , dizziness , paresthesia , asthenia , somnolence , warm/cold sensations, nausea , chest pressure , and dry mouth .",
+     "qid": "20fb4843"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "zolmitriptan",
+     "line": "The drug acts as a selective serotonin 5-HT 1B and 5-HT 1D receptor agonist .",
+     "qid": "6ca107f7"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "zolmitriptan",
+     "line": "Structurally , it is a triptan and a tryptamine derivative .",
+     "qid": "eceb8be0"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "zolmitriptan",
+     "line": "It was patented in 1990 and was approved for medical use in 1997.",
+     "qid": "b489abc0"
+    }
+   ]
+  },
+  "eletriptan": {
+   "name": "Eletriptan",
+   "categories": [
+    "antimigraine"
+   ],
+   "labels": [
+    "Antimigraine"
+   ],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "eletriptan",
+     "line": "Drug class | Serotonin 5-HT 1B , 5-HT 1D , 5-HT 1E , and 5-HT 1F receptor agonist ; Triptan ; Antimigraine agent",
+     "qid": "d998cdb4"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "eletriptan",
+     "line": "IUPAC name 3-{methyl}-5--1 H -indole",
+     "qid": "aeaf2d86"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "eletriptan",
+     "line": "Eletriptan , sold under the brand name Relpax and used in the form of eletriptan hydrobromide, is a second-generation triptan medication intended for treatment of migraine headaches .",
+     "qid": "1032258b"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "eletriptan",
+     "line": "It is used as an abortive medication , blocking a migraine attack which is already in progress.",
+     "qid": "470fe186"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "eletriptan",
+     "line": "Eletriptan is marketed and manufactured by Pfizer .",
+     "qid": "ddfbcade"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "eletriptan",
+     "line": "Eletriptan is a therapeutic alternative on the World Health Organization's List of Essential Medicines .",
+     "qid": "6a62290b"
+    }
+   ]
+  },
+  "naratriptan": {
+   "name": "Naratriptan",
+   "categories": [
+    "antimigraine"
+   ],
+   "labels": [
+    "Antimigraine"
+   ],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "naratriptan",
+     "line": "Drug class | Serotonin 5-HT 1B , 5-HT 1D , 5-HT 1E , and 5-HT 1F receptor agonist ; Antimigraine agent ; Triptan",
+     "qid": "0dc2c9ee"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "naratriptan",
+     "line": "IUPAC name N -methyl-2-ethanesulfonamide",
+     "qid": "9e9bbd00"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "naratriptan",
+     "line": "Naratriptan , sold under the brand names Amerge and Naramig among others, is a triptan drug marketed by GlaxoSmithKline and is used for the treatment of migraine headaches .",
+     "qid": "ddcd267b"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "naratriptan",
+     "line": "It is a selective serotonin 5-HT 1 receptor family agonist .",
+     "qid": "568950ea"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "naratriptan",
+     "line": "It was patented in 1987 and approved for medical use in 1997.",
+     "qid": "42f38684"
+    }
+   ]
+  },
+  "almotriptan": {
+   "name": "Almotriptan",
+   "categories": [
+    "antimigraine"
+   ],
+   "labels": [
+    "Antimigraine"
+   ],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "almotriptan",
+     "line": "Drug class | Serotonin 5-HT 1B , 5-HT 1D , and 5-HT 1F receptor agonist ; Triptan ; Antimigraine agent",
+     "qid": "97a535ac"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "almotriptan",
+     "line": "IUPAC name N , N -dimethyl-2- -ethanamine",
+     "qid": "71438904"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "almotriptan",
+     "line": "Almotriptan , sold under the brand names Axert and Almogran among others, is a triptan medication used in the treatment of heavy migraine headache .",
+     "qid": "6318d8ce"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "almotriptan",
+     "line": "Almotriptan was patented in 1992 and approved for medical use in 2000.",
+     "qid": "6a66ea67"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "almotriptan",
+     "line": "It was discovered and developed by Almirall-Prodesfarma .",
+     "qid": "692e233e"
+    }
+   ]
+  },
+  "frovatriptan": {
+   "name": "Frovatriptan",
+   "categories": [
+    "antimigraine"
+   ],
+   "labels": [
+    "Antimigraine"
+   ],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "frovatriptan",
+     "line": "Drug class | Serotonin 5-HT 1B , 5-HT 1D , 5-HT 1F , and 5-HT 7 receptor agonist",
+     "qid": "fb0848fe"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "frovatriptan",
+     "line": "IUPAC name (+)-( R )-3-Methylamino-6-carboxamido-1,2,3,4-tetrahydrocarbazole",
+     "qid": "8e8c7761"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "frovatriptan",
+     "line": "Frovatriptan , sold under the brand name Frova among others, is a triptan medication developed by Vernalis for the treatment of migraine headaches and for short term prevention of menstrual migraine .",
+     "qid": "e9d709fc"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "frovatriptan",
+     "line": "The product is licensed to Endo Pharmaceuticals in North America and Menarini in Europe.",
+     "qid": "968dc658"
+    }
+   ]
+  },
+  "lasmiditan": {
+   "name": "Lasmiditan",
+   "categories": [
+    "antimigraine"
+   ],
+   "labels": [
+    "Antimigraine"
+   ],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "lasmiditan",
+     "line": "Drug class | Serotonin 5-HT 1F receptor agonist ; Antimigraine agent",
+     "qid": "676cffeb"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "lasmiditan",
+     "line": "IUPAC name 2,4,6-Trifluoro- N --2-pyridinyl]benzamide",
+     "qid": "0bd7525d"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "lasmiditan",
+     "line": "Lasmiditan , sold under the brand name Reyvow , is a medication used to treat migraines .",
+     "qid": "075de23c"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "lasmiditan",
+     "line": "It is not useful for prevention .",
+     "qid": "bb1e0ead"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "lasmiditan",
+     "line": "Common side effects include sleepiness , dizziness , tiredness , and numbness .",
+     "qid": "a5ba9ecb"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "lasmiditan",
+     "line": "Lasmiditan was approved in the United States in October 2019 and became available in February 2020.",
+     "qid": "5695c2fc"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "lasmiditan",
+     "line": "It was developed by Eli Lilly .",
+     "qid": "52090986"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "lasmiditan",
+     "line": "Food and Drug Administration (FDA) considers it to be a first-in-class medication .",
+     "qid": "c4581a14"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "lasmiditan",
+     "line": "Lasmiditan is a Schedule V controlled substance in the United States.",
+     "qid": "70f5d105"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "lasmiditan",
+     "line": "In August 2026, the FDA withdrew approval of Reyvow at the request of Eli Lilly after the company notified the agency that the drug was no longer marketed.",
+     "qid": "e0831d7a"
+    }
+   ]
   }
  }
 }

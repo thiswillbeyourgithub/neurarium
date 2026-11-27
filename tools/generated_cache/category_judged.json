@@ -710,5 +710,41 @@
    "index": 0,
    "qid": "b0059757"
   }
+ ],
+ "zolmitriptan": [
+  {
+   "index": 0,
+   "qid": "0dc2c9ee"
+  }
+ ],
+ "eletriptan": [
+  {
+   "index": 0,
+   "qid": "d998cdb4"
+  }
+ ],
+ "naratriptan": [
+  {
+   "index": 0,
+   "qid": "0dc2c9ee"
+  }
+ ],
+ "almotriptan": [
+  {
+   "index": 0,
+   "qid": "97a535ac"
+  }
+ ],
+ "frovatriptan": [
+  {
+   "index": 2,
+   "qid": "e9d709fc"
+  }
+ ],
+ "lasmiditan": [
+  {
+   "index": 0,
+   "qid": "676cffeb"
+  }
  ]
 }
