@@ -1065,6 +1065,20 @@
    "5.1"
   ]
  },
+ "fosphenytoin": {
+  "cis": "60771794",
+  "date_source": "file mtime",
+  "denomination": "PRODILANTIN 75 mg/mL, solution à diluer pour perfusion/solution injectable",
+  "fetched": "2026-11-27",
+  "page": "60771794",
+  "sections": [
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
  "furosemide": {
   "cis": "61547571",
   "date_source": "file mtime",
@@ -1099,6 +1113,31 @@
   "denomination": "GALANTAMINE BIOGARAN LP 8 mg, gélule à libération prolongée",
   "fetched": "2026-07-31",
   "page": "63358402",
+  "sections": [
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
+ "ganaxolone": {
+  "date_source": "download date",
+  "denomination": "Ztalmy (EMEA/H/C/005825)",
+  "ema": {
+   "authorised": "2023-07-26",
+   "epar": "https://www.ema.europa.eu/en/medicines/human/EPAR/ztalmy",
+   "generic": false,
+   "holder": "Marinus Pharmaceuticals Emerald Limited",
+   "language": "fr",
+   "number": "EMEA/H/C/005825",
+   "pdf": "https://www.ema.europa.eu/fr/documents/product-information/ztalmy-epar-product-information_fr.pdf",
+   "pi_updated": "2026-07-01",
+   "product": "Ztalmy",
+   "status": "Authorised"
+  },
+  "fetched": "2026-11-27",
+  "page": "EMEA-H-C-005825",
   "sections": [
    "4.1",
    "4.2",
@@ -2191,6 +2230,20 @@
    "5.1"
   ]
  },
+ "riluzole": {
+  "cis": "68413596",
+  "date_source": "file mtime",
+  "denomination": "TEGLUTIK 5 mg/ml, suspension buvable",
+  "fetched": "2026-11-27",
+  "page": "68413596",
+  "sections": [
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
  "rimegepant": {
   "cis": "65899221",
   "date_source": "justelesRCP EMA scrape manifest last_fetch",
@@ -2726,6 +2779,20 @@
   "denomination": "YOCORAL 5 mg, comprimé",
   "fetched": "2026-10-10",
   "page": "69816276",
+  "sections": [
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
+ "ziconotide": {
+  "cis": "66495139",
+  "date_source": "justelesRCP EMA scrape manifest last_fetch",
+  "denomination": "PRIALT 100 microgrammes/ml, solution pour perfusion",
+  "fetched": "2026-09-30",
+  "page": "66495139",
   "sections": [
    "4.1",
    "4.2",

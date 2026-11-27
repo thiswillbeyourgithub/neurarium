@@ -64,5 +64,11 @@
   "metabolite": "Desmethylsibutramine",
   "drug_id": null,
   "qid": "2bada7fb"
+ },
+ "fosphenytoin": {
+  "index": 0,
+  "metabolite": "Phenytoin",
+  "drug_id": "phenytoin",
+  "qid": "f03ab9bd"
  }
 }

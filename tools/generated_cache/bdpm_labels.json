@@ -745,6 +745,18 @@
    }
   ]
  },
+ "fosphenytoin": {
+  "brands": [
+   {
+    "cis": "60771794",
+    "name": "Prodilantin",
+    "quote": "PRODILANTIN"
+   }
+  ],
+  "cis": "60771794",
+  "denomination": "PRODILANTIN 75 mg/mL, solution à diluer pour perfusion/solution injectable",
+  "why": "no plain-oral product; non-modified-release intramusculaire;intraveineuse, brand-name product"
+ },
  "furosemide": {
   "brands": [
    {
@@ -1590,6 +1602,28 @@
   "denomination": "ULTIVA 2 mg, poudre pour solution injectable ou pour perfusion",
   "why": "no plain-oral product; non-modified-release intraveineuse, brand-name product"
  },
+ "riluzole": {
+  "brands": [
+   {
+    "cis": "66292199",
+    "name": "Rilutek",
+    "quote": "RILUTEK"
+   },
+   {
+    "cis": "68413596",
+    "name": "Teglutik",
+    "quote": "TEGLUTIK"
+   },
+   {
+    "cis": "69481874",
+    "name": "Emylif",
+    "quote": "EMYLIF"
+   }
+  ],
+  "cis": "68413596",
+  "denomination": "TEGLUTIK 5 mg/ml, suspension buvable",
+  "why": "plain oral, brand-name product"
+ },
  "rimegepant": {
   "brands": [
    {
@@ -2041,6 +2075,15 @@
   "cis": "69816276",
   "denomination": "YOCORAL 5 mg, comprimé",
   "why": "plain oral, brand-name product"
+ },
+ "ziconotide": {
+  "brands": [
+   {
+    "cis": "66495139",
+    "name": "Prialt",
+    "quote": "PRIALT"
+   }
+  ]
  },
  "zolpidem": {
   "brands": [

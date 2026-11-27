@@ -1304,6 +1304,31 @@
      "qid": "93cbe03b"
     }
    ]
+  },
+  "fosphenytoin": {
+   "name": "Fosphenytoin",
+   "bindings": 0,
+   "metabolites": [],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "fosphenytoin",
+     "line": "Fosphenytoin , also known as fosphenytoin sodium , and sold under the brand name Cerebyx among others, is a water-soluble phenytoin prodrug that is administered intravenously to deliver phenytoin, potentially more safely than intravenous phenytoin .",
+     "qid": "f03ab9bd"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "fosphenytoin",
+     "line": "One solution was to develop a prodrug that did not have these drawbacks.",
+     "qid": "c9740512"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "fosphenytoin",
+     "line": "\"Low-melting phenytoin prodrugs as alternative oral delivery modes for phenytoin: a model for other high-melting sparingly water-soluble drugs\".",
+     "qid": "8bfc4f40"
+    }
+   ]
   }
  }
 }
