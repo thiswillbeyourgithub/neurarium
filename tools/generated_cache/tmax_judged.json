@@ -975,5 +975,22 @@
   "qid": "e292e8c8",
   "hours": 2.0,
   "hours_max": 6.0
+ },
+ "fosphenytoin": {
+  "index": 0,
+  "hours": 0.5,
+  "qid": "5ab6426d"
+ },
+ "ganaxolone": {
+  "index": 0,
+  "hours": 2.0,
+  "hours_max": 3.0,
+  "qid": "9b9d5677"
+ },
+ "riluzole": {
+  "index": 0,
+  "hours": 1.0,
+  "hours_max": 1.5,
+  "qid": "7a7266cd"
  }
 }

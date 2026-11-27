@@ -454,5 +454,22 @@
   "qid": "f41b7b1a",
   "hours": 20.0,
   "hours_max": 23.0
+ },
+ "fosphenytoin": {
+  "index": 1,
+  "hours": 0.25,
+  "qid": "a2a5a089"
+ },
+ "riluzole": {
+  "index": 1,
+  "hours": 9.0,
+  "hours_max": 15.0,
+  "qid": "6a4c846b"
+ },
+ "ziconotide": {
+  "index": 0,
+  "hours": 2.9,
+  "hours_max": 6.5,
+  "qid": "09011bf8"
  }
 }

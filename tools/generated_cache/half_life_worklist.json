@@ -7105,5 +7105,124 @@
     "qid": "284f17bb"
    }
   ]
+ },
+ "fosphenytoin": {
+  "name": "Fosphenytoin",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "fosphenytoin",
+    "line": "Elimination half-life | 15 minutes to convert to phenytoin",
+    "durations": [
+     {
+      "hours": 0.25
+     }
+    ],
+    "qid": "b85c67d4"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "bb38bc6a-99c7-4cda-b3f0-37f629d060cf",
+    "line": "The conversion half-life of fosphenytoin to phenytoin is approximately 15 minutes.",
+    "durations": [
+     {
+      "hours": 0.25
+     }
+    ],
+    "qid": "a2a5a089"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "bb38bc6a-99c7-4cda-b3f0-37f629d060cf",
+    "line": "Fosphenytoin is completely converted to phenytoin following IV administration, with a half-life of approximately 15 minutes.",
+    "durations": [
+     {
+      "hours": 0.25
+     }
+    ],
+    "qid": "fc1b275c"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "bb38bc6a-99c7-4cda-b3f0-37f629d060cf",
+    "line": "Mean total phenytoin half-life values (12.0 to 28.9 hr) following fosphenytoin sodium administration at these doses are similar to those after equal doses of parenteral Dilantin and tend to be greater at higher plasma phenytoin concentrations.",
+    "durations": [
+     {
+      "hours": 12.0,
+      "hours_max": 28.9
+     }
+    ],
+    "qid": "94c20a52"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "60771794",
+    "line": "La demi-vie de la biotransformation de la fosphénytoïne en phénytoïne est d'environ 15 minutes.",
+    "durations": [
+     {
+      "hours": 0.25
+     }
+    ],
+    "qid": "b85bedd9"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "60771794",
+    "line": "Les demi-vies moyennes de la phénytoïne totale (12,0 à 28,9 heures) après administration de fosphénytoïne à ces doses sont similaires à celles obtenues après administration parentérale de doses identiques de phénytoïne et ont tendance à augmenter avec l'augmentation des concentrations plasmatiques de phénytoïne.",
+    "durations": [
+     {
+      "hours": 12.0,
+      "hours_max": 28.9
+     }
+    ],
+    "qid": "c62276c4"
+   }
+  ]
+ },
+ "riluzole": {
+  "name": "Riluzole",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "riluzole",
+    "line": "Elimination half-life | 9–15 hours",
+    "durations": [
+     {
+      "hours": 9.0,
+      "hours_max": 15.0
+     }
+    ],
+    "qid": "dc27fdde"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "68413596",
+    "line": "La demi-vie d'élimination est de 9 à 15 heures.",
+    "durations": [
+     {
+      "hours": 9.0,
+      "hours_max": 15.0
+     }
+    ],
+    "qid": "6a4c846b"
+   }
+  ]
+ },
+ "ziconotide": {
+  "name": "Ziconotide",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "ziconotide",
+    "line": "Elimination half-life | 2.9–6.5 hours",
+    "durations": [
+     {
+      "hours": 2.9,
+      "hours_max": 6.5
+     }
+    ],
+    "qid": "09011bf8"
+   }
+  ]
  }
 }

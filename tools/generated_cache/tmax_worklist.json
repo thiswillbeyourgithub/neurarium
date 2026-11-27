@@ -5674,5 +5674,77 @@
     "qid": "e292e8c8"
    }
   ]
+ },
+ "fosphenytoin": {
+  "name": "Fosphenytoin",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "bb38bc6a-99c7-4cda-b3f0-37f629d060cf",
+    "line": "Peak concentrations occur at approximately 30 minutes postdose.",
+    "durations": [
+     {
+      "hours": 0.5
+     }
+    ],
+    "qid": "5ab6426d"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "60771794",
+    "line": "les concentrations maximales sont atteintes environ 30 minutes après l'injection.",
+    "durations": [
+     {
+      "hours": 0.5
+     }
+    ],
+    "qid": "2c414b71"
+   }
+  ]
+ },
+ "ganaxolone": {
+  "name": "Ganaxolone",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "d91612c4-b03a-4be4-a1ee-6a13e3b83d4e",
+    "line": "Following oral administration of ZTALMY, ganaxolone is absorbed with a time to maximum plasma concentration (T max ) of 2 to 3 hours.",
+    "durations": [
+     {
+      "hours": 2.0,
+      "hours_max": 3.0
+     }
+    ],
+    "qid": "9b9d5677"
+   }
+  ]
+ },
+ "riluzole": {
+  "name": "Riluzole",
+  "candidates": [
+   {
+    "corpus": "bdpm",
+    "page": "68413596",
+    "line": "Le riluzole est rapidement absorbé après administration orale et les concentrations plasmatiques maximales sont atteintes en 60 à 90 minutes (Cmax = 173 ± 72 (DS) ng/ml).",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 1.5
+     }
+    ],
+    "qid": "7a7266cd"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "68413596",
+    "line": "Le riluzole est plus rapidement absorbé après administration de suspension buvable (Tmax d'environ 30 minutes), avec une Cmax environ 20 % supérieure à celle de l'administration de riluzole en comprimés (Rapport 122,32 % ;",
+    "durations": [
+     {
+      "hours": 0.5
+     }
+    ],
+    "qid": "8a7f72f5"
+   }
+  ]
  }
 }
