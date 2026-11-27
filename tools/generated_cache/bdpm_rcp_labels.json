@@ -687,6 +687,20 @@
    "5.1"
   ]
  },
+ "dihydrocodeine": {
+  "cis": "67482372",
+  "date_source": "justelesRCP scrape manifest last_fetch",
+  "denomination": "DICODIN L.P. 60 mg, comprimé à libération prolongée",
+  "fetched": "2026-07-27",
+  "page": "67482372",
+  "sections": [
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
  "dimenhydrinate": {
   "cis": "60173964",
   "date_source": "file mtime",
@@ -1597,6 +1611,20 @@
   "denomination": "ACTISKENAN 5 mg, comprimé orodispersible",
   "fetched": "2026-10-10",
   "page": "60328261",
+  "sections": [
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
+ "nalbuphine": {
+  "cis": "61214830",
+  "date_source": "justelesRCP scrape manifest last_fetch",
+  "denomination": "NALBUPHINE RENAUDIN 20 mg/2 mL, solution injectable",
+  "fetched": "2026-08-01",
+  "page": "61214830",
   "sections": [
    "4.1",
    "4.2",

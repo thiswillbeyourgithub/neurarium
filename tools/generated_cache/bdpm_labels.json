@@ -457,6 +457,15 @@
    }
   ]
  },
+ "dihydrocodeine": {
+  "brands": [
+   {
+    "cis": "67482372",
+    "name": "Dicodin",
+    "quote": "DICODIN"
+   }
+  ]
+ },
  "dimenhydrinate": {
   "brands": [
    {
@@ -1125,6 +1134,9 @@
   "cis": "60328261",
   "denomination": "ACTISKENAN 5 mg, comprimé orodispersible",
   "why": "plain oral, brand-name product"
+ },
+ "nalbuphine": {
+  "brands": []
  },
  "nalmefene": {
   "brands": [

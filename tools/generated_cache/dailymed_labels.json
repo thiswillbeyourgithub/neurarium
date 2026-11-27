@@ -47,6 +47,12 @@
   "spl_version": 14,
   "title": "BROMOCRIPTINE MESYLATE CAPSULE [ZYDUS PHARMACEUTICALS USA INC.]"
  },
+ "butorphanol": {
+  "published_date": "Nov 19, 2026",
+  "setid": "9822ca3f-aee2-46e5-8a96-495400e65d10",
+  "spl_version": 30,
+  "title": "BUTORPHANOL TARTRATE INJECTION, SOLUTION [HOSPIRA, INC.]"
+ },
  "cannabidiol": {
   "published_date": "Jun 15, 2026",
   "setid": "8bf27097-4870-43fb-94f0-f3d0871d1eec",
@@ -88,6 +94,12 @@
   "setid": "d724b5b4-6654-4bf5-9eed-e2c7943084ed",
   "spl_version": 3,
   "title": "NUMBRINO (COCAINE HYDROCHLORIDE NASAL) SOLUTION [OMNIVIUM PHARMACEUTICALS LLC.]"
+ },
+ "cyclobenzaprine": {
+  "published_date": "Nov 26, 2026",
+  "setid": "b524d150-0a83-42d1-a884-b930e49760cd",
+  "spl_version": 5,
+  "title": "CYCLOBENZAPRINE HYDROCHLORIDE TABLET, FILM COATED [A-S MEDICATION SOLUTIONS]"
  },
  "deutetrabenazine": {
   "published_date": "Mar 24, 2025",
