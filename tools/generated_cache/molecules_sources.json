@@ -1576,5 +1576,25 @@
     "file": "File:Sufentanil.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Sufentanil.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
     "title": "Sufentanil"
+  },
+  "butorphanol": {
+    "file": "File:Butorphanol2DCSDT.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/82/Butorphanol2DCSDT.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Butorphanol"
+  },
+  "cyclobenzaprine": {
+    "file": "File:Cyclobenzaprine.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Cyclobenzaprine.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Cyclobenzaprine"
+  },
+  "dihydrocodeine": {
+    "file": "File:Dihydrocodeine_skeletal.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/9/97/Dihydrocodeine_skeletal.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Dihydrocodeine"
+  },
+  "orphenadrine": {
+    "file": "File:Orphenadrine.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/57/Orphenadrine.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Orphenadrine"
   }
 }
