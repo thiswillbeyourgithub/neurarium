@@ -3494,6 +3494,26 @@
     "value": "urine"
    }
   ],
+  "fosphenytoin": [
+   {
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "dailymed",
+      "page": "bb38bc6a-99c7-4cda-b3f0-37f629d060cf",
+      "provenance": "verified",
+      "quote": "Phenytoin derived from administration of fosphenytoin sodium is excreted in urine primarily as 5-(p-hydroxyphenyl)-5-phenylhydantoin and its glucuronide;"
+     },
+     {
+      "corpus": "bdpm",
+      "page": "60771794",
+      "provenance": "verified",
+      "quote": "La phénytoïne formée après administration de fosphénytoïne est largement métabolisée dans le foie et excrétée dans les urines principalement sous forme de 5-(p-hydroxy-phényl)-5-phénylhydantoïne et de son glucuronide ;"
+     }
+    ],
+    "value": "renal"
+   }
+  ],
   "furosemide": [
    {
     "amount": "66%",
@@ -7532,6 +7552,40 @@
      }
     ],
     "value": "renal"
+   }
+  ],
+  "riluzole": [
+   {
+    "amount": "environ 90 %",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "bdpm",
+      "page": "68413596",
+      "provenance": "verified",
+      "quote": "L'excrétion urinaire totale représente environ 90 % de la dose."
+     },
+     {
+      "corpus": "bdpm",
+      "page": "68413596",
+      "provenance": "verified",
+      "quote": "Le riluzole est éliminé principalement dans les urines."
+     }
+    ],
+    "value": "renal"
+   },
+   {
+    "amount": "2 %",
+    "aspect": "unchanged",
+    "sources": [
+     {
+      "corpus": "bdpm",
+      "page": "68413596",
+      "provenance": "verified",
+      "quote": "Seulement 2 % d’une dose de riluzole sont retrouvés sous forme inchangée dans les urines."
+     }
+    ],
+    "value": "urine"
    }
   ],
   "rimonabant": [

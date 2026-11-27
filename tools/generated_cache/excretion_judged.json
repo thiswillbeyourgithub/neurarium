@@ -6178,5 +6178,42 @@
    "value": "urine",
    "amount": "40% to 50%"
   }
- ]
+ ],
+ "fosphenytoin": [
+  {
+   "aspect": "route",
+   "index": 2,
+   "qid": "7887c8a2",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 6,
+   "qid": "bd07c976",
+   "value": "renal"
+  }
+ ],
+ "riluzole": [
+  {
+   "amount": "environ 90 %",
+   "aspect": "route",
+   "index": 5,
+   "qid": "b2aae161",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 4,
+   "qid": "a702469c",
+   "value": "renal"
+  },
+  {
+   "amount": "2 %",
+   "aspect": "unchanged",
+   "index": 7,
+   "qid": "c663ace2",
+   "value": "urine"
+  }
+ ],
+ "ziconotide": []
 }

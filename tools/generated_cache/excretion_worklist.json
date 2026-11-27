@@ -18636,5 +18636,185 @@
     "qid": "8f4a13a3"
    }
   ]
+ },
+ "fosphenytoin": {
+  "name": "Fosphenytoin",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "fosphenytoin",
+    "line": "Excretion | Kidney (as phenytoin)",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "8502cb7d"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "bb38bc6a-99c7-4cda-b3f0-37f629d060cf",
+    "line": "Fosphenytoin is not excreted in urine.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "3153b141"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "bb38bc6a-99c7-4cda-b3f0-37f629d060cf",
+    "line": "Phenytoin derived from administration of fosphenytoin sodium is excreted in urine primarily as 5-(p-hydroxyphenyl)-5-phenylhydantoin and its glucuronide;",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "7887c8a2"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "bb38bc6a-99c7-4cda-b3f0-37f629d060cf",
+    "line": "little unchanged phenytoin (1% to 5% of the Fosphenytoin sodium dose) is recovered in urine.",
+    "named": [
+     "route:renal",
+     "unchanged:urine"
+    ],
+    "qid": "a7094ba4"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "bb38bc6a-99c7-4cda-b3f0-37f629d060cf",
+    "line": "It has been reported in the literature that the plasma clearance of phenytoin (the active metabolite of fosphenytoin sodium) generally increased during pregnancy, reached a peak in the third trimester and returned to the level of pre-pregnancy after few weeks or months of delivery [see Dosage and Administration (2.9) ] .",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "1450f561"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "60771794",
+    "line": "La fosphénytoïne n'est pas excrétée dans les urines.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "5f8995cb"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "60771794",
+    "line": "La phénytoïne formée après administration de fosphénytoïne est largement métabolisée dans le foie et excrétée dans les urines principalement sous forme de 5-(p-hydroxy-phényl)-5-phénylhydantoïne et de son glucuronide ;",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "bd07c976"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "60771794",
+    "line": "on ne retrouve que peu de phénytoïne inchangée dans les urines (1 à 5 % de la dose de fosphénytoïne).",
+    "named": [
+     "route:renal",
+     "unchanged:urine"
+    ],
+    "qid": "78fef077"
+   }
+  ]
+ },
+ "riluzole": {
+  "name": "Riluzole",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "riluzole",
+    "line": "Excretion | Urine (90%)",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "0d30cece"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "68413596",
+    "line": "Le riluzole sous forme inchangée est le composant principal retrouvé dans le plasma.",
+    "named": [
+     "unchanged:urine"
+    ],
+    "qid": "12bb8d70"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "68413596",
+    "line": "Les métabolites identifiés dans les urines sont trois dérivés phénoliques et un dérivé uréido.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "5fa95a21"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "68413596",
+    "line": "Du riluzole inchangé est également retrouvé.",
+    "named": [
+     "unchanged:urine"
+    ],
+    "qid": "b5c872a9"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "68413596",
+    "line": "Le riluzole est éliminé principalement dans les urines.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "a702469c"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "68413596",
+    "line": "L'excrétion urinaire totale représente environ 90 % de la dose.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "b2aae161"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "68413596",
+    "line": "Les glucuronides représentent plus de 85 % des métabolites retrouvés dans les urines.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "12b696bf"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "68413596",
+    "line": "Seulement 2 % d’une dose de riluzole sont retrouvés sous forme inchangée dans les urines.",
+    "named": [
+     "route:renal",
+     "unchanged:urine"
+    ],
+    "qid": "c663ace2"
+   }
+  ]
+ },
+ "ziconotide": {
+  "name": "Ziconotide",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "ziconotide",
+    "line": "Excretion | <1% urine",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "61079971"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "ziconotide",
+    "line": "Others may include weakness, hypertonia , ataxia , abnormal vision, anorexia , somnolence , unsteadiness on feet, vertigo , urinary retention, pruritus, increased sweating, diarrhea , nausea , vomiting, asthenia , fever , rigors, sinusitis , muscle spasms, myalgia, insomnia , anxiety , amnesia, tremor , memory impairment, and induced psychiatric disorders.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "faafdc22"
+   }
+  ]
  }
 }
