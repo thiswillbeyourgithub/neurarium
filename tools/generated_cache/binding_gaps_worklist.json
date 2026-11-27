@@ -3336,5 +3336,167 @@
     "qid": "4ba93c35"
    }
   ]
+ },
+ {
+  "drug": "ganaxolone",
+  "name": "Ganaxolone",
+  "slug": "ganaxolone",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "gaba_a",
+    "target_name": "GABA-A",
+    "origin": "prose",
+    "line": "Ganaxolone is a neuroactive steroid gamma-aminobutyric acid (GABA) A receptor positive modulator .",
+    "qid": "e981d573"
+   },
+   {
+    "target": "gaba_a",
+    "target_name": "GABA-A",
+    "origin": "prose",
+    "line": "Ganaxolone is a synthetic analog of the endogenous neurosteroid allopregnanolone and acts as a positive allosteric modulator of GABAA receptors .",
+    "qid": "cbf3e6c7"
+   },
+   {
+    "target": "delta",
+    "target_name": "δ (DOR)",
+    "origin": "prose",
+    "line": "Electrophysiological and animal studies show that ganaxolone potentiates both synaptic (phasic) and extrasynaptic (tonic) GABAA receptors, including δ subunit –containing receptors, thereby raising seizure threshold and limiting seizure propagation.",
+    "qid": "d3b2165d"
+   },
+   {
+    "target": "gaba_a",
+    "target_name": "GABA-A",
+    "origin": "prose",
+    "line": "Electrophysiological and animal studies show that ganaxolone potentiates both synaptic (phasic) and extrasynaptic (tonic) GABAA receptors, including δ subunit –containing receptors, thereby raising seizure threshold and limiting seizure propagation.",
+    "qid": "d3b2165d"
+   },
+   {
+    "target": "gaba_a",
+    "target_name": "GABA-A",
+    "origin": "prose",
+    "line": "Ganaxolone binds to allosteric sites of the GABA A receptor to modulate and open the chloride ion channel , resulting in a hyperpolarization of the neuron.",
+    "qid": "318ab298"
+   },
+   {
+    "target": "gaba_a",
+    "target_name": "GABA-A",
+    "origin": "rcp_5.1",
+    "line": "La ganaxolone est un analogue méthylique au neurostéroïde endogène alloprégnanolone. La ganaxolone est un stéroïde neuroactif qui module positivement et allostériquement les récepteurs de l’acide gamma-aminobutyrique de type A (GABAA) dans le SNC en interagissant avec un site de reconnaissance distinct des autres modulateurs allostériques des récepteurs GABAA.",
+    "corpus": "bdpm_rcp",
+    "page": "EMEA-H-C-005825",
+    "qid": "bb4e217c"
+   },
+   {
+    "target": "gaba_a",
+    "target_name": "GABA-A",
+    "origin": "rcp_5.1",
+    "line": "Le mécanisme précis par lequel la ganaxolone exerce ses effets thérapeutiques dans le traitement des crises associées au CDD n’est pas connu, mais ses effets anticonvulsivants seraient dus à cette modulation de la fonction du récepteur GABAA qui assure une modulation constante, ou tonique, de la neurotransmission inhibitrice induite par le GABA.",
+    "corpus": "bdpm_rcp",
+    "page": "EMEA-H-C-005825",
+    "qid": "1bfb8d47"
+   }
+  ]
+ },
+ {
+  "drug": "physostigmine",
+  "name": "Physostigmine",
+  "slug": "physostigmine",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "gaba_b",
+    "target_name": "GABA-B",
+    "origin": "prose",
+    "line": "Furthermore, lower doses of GHB produce a stronger action at the GHB receptor than at the GABA B receptor , resulting in a stimulating effect which would act synergistically with physostigmine and produce hyperstimulation when the GHB blood levels begin to drop.",
+    "qid": "392f8aa3"
+   },
+   {
+    "target": "ache",
+    "target_name": "Acetylcholinesterase",
+    "origin": "prose",
+    "line": "It is a reversible inhibitor of acetylcholinesterase and butyrylcholinesterase , the enzymes responsible for the breakdown of acetylcholine in the synaptic cleft of the neuromuscular junction and other organs.",
+    "qid": "b68f2eef"
+   },
+   {
+    "target": "bche",
+    "target_name": "Butyrylcholinesterase",
+    "origin": "prose",
+    "line": "It is a reversible inhibitor of acetylcholinesterase and butyrylcholinesterase , the enzymes responsible for the breakdown of acetylcholine in the synaptic cleft of the neuromuscular junction and other organs.",
+    "qid": "b68f2eef"
+   },
+   {
+    "target": "muscarinic",
+    "target_name": "Muscarinic acetylcholine receptors",
+    "origin": "prose",
+    "line": "It indirectly stimulates both nicotinic and muscarinic acetylcholine receptors .",
+    "qid": "0227f2f1"
+   }
+  ]
+ },
+ {
+  "drug": "riluzole",
+  "name": "Riluzole",
+  "slug": "riluzole",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "kainate",
+    "target_name": "Kainate",
+    "origin": "prose",
+    "line": "Riluzole has also been reported to directly inhibit the kainate and NMDA receptors .",
+    "qid": "01dc7a32"
+   },
+   {
+    "target": "nmda",
+    "target_name": "NMDA",
+    "origin": "prose",
+    "line": "Riluzole has also been reported to directly inhibit the kainate and NMDA receptors .",
+    "qid": "01dc7a32"
+   },
+   {
+    "target": "gaba_a",
+    "target_name": "GABA-A",
+    "origin": "prose",
+    "line": "The drug has also been shown to postsynaptically potentiate GABA A receptors via an allosteric binding site.",
+    "qid": "4b7f2c8d"
+   },
+   {
+    "target": "glutamate",
+    "target_name": "Glutamate receptors",
+    "origin": "prose",
+    "line": "Rather, its ability to stimulate glutamate uptake seems to mediate many of its effects.",
+    "qid": "328fbbd9"
+   }
+  ]
+ },
+ {
+  "drug": "ziconotide",
+  "name": "Ziconotide",
+  "slug": "ziconotide",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "cav",
+    "target_name": "Voltage-gated calcium channel",
+    "origin": "prose",
+    "line": "Ziconotide acts as a selective N-type voltage-gated calcium channel blocker .",
+    "qid": "99a4eed5"
+   },
+   {
+    "target": "cgrp",
+    "target_name": "CGRP receptor",
+    "origin": "prose",
+    "line": "This action inhibits the release of pro- nociceptive neurochemicals like glutamate , calcitonin gene-related peptide (CGRP), and substance P in the brain and spinal cord , resulting in pain relief.",
+    "qid": "aab7c472"
+   },
+   {
+    "target": "glutamate",
+    "target_name": "Glutamate receptors",
+    "origin": "prose",
+    "line": "This action inhibits the release of pro- nociceptive neurochemicals like glutamate , calcitonin gene-related peptide (CGRP), and substance P in the brain and spinal cord , resulting in pain relief.",
+    "qid": "aab7c472"
+   }
+  ]
  }
 ]

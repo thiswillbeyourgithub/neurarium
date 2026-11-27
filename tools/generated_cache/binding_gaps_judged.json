@@ -2594,5 +2594,139 @@
    "action": "blocker",
    "qid": "4ba93c35"
   }
+ ],
+ "ganaxolone": [
+  {
+   "index": 0,
+   "target": "gaba_a",
+   "pick": false,
+   "reason": "duplicate of index 1, which states the same modulation",
+   "qid": "e981d573"
+  },
+  {
+   "index": 1,
+   "target": "gaba_a",
+   "pick": true,
+   "action": "pam",
+   "qid": "cbf3e6c7"
+  },
+  {
+   "index": 2,
+   "target": "delta",
+   "pick": false,
+   "reason": "the delta named here is the GABA-A delta subunit, not the delta opioid receptor",
+   "qid": "d3b2165d"
+  },
+  {
+   "index": 3,
+   "target": "gaba_a",
+   "pick": false,
+   "reason": "duplicate of index 1; animal and electrophysiology finding",
+   "qid": "d3b2165d"
+  },
+  {
+   "index": 4,
+   "target": "gaba_a",
+   "pick": false,
+   "reason": "duplicate of index 1",
+   "qid": "318ab298"
+  },
+  {
+   "index": 5,
+   "target": "gaba_a",
+   "pick": false,
+   "reason": "duplicate of index 1",
+   "qid": "bb4e217c"
+  },
+  {
+   "index": 6,
+   "target": "gaba_a",
+   "pick": false,
+   "reason": "duplicate of index 1; hedged (mecanisme pas connu)",
+   "qid": "1bfb8d47"
+  }
+ ],
+ "physostigmine": [
+  {
+   "index": 0,
+   "target": "gaba_b",
+   "pick": false,
+   "reason": "the sentence's subject is another drug (GHB)",
+   "qid": "392f8aa3"
+  },
+  {
+   "index": 1,
+   "target": "ache",
+   "pick": true,
+   "action": "enzyme_inhibitor",
+   "qid": "b68f2eef"
+  },
+  {
+   "index": 2,
+   "target": "bche",
+   "pick": true,
+   "action": "enzyme_inhibitor",
+   "qid": "b68f2eef"
+  },
+  {
+   "index": 3,
+   "target": "muscarinic",
+   "pick": false,
+   "reason": "indirect stimulation through raised acetylcholine, not a binding",
+   "qid": "0227f2f1"
+  }
+ ],
+ "riluzole": [
+  {
+   "index": 0,
+   "target": "kainate",
+   "pick": false,
+   "reason": "hedged claim (has been reported), the article calls it controversial",
+   "qid": "01dc7a32"
+  },
+  {
+   "index": 1,
+   "target": "nmda",
+   "pick": false,
+   "reason": "hedged claim (has been reported), the article calls it controversial",
+   "qid": "01dc7a32"
+  },
+  {
+   "index": 2,
+   "target": "gaba_a",
+   "pick": true,
+   "action": "pam",
+   "qid": "4b7f2c8d"
+  },
+  {
+   "index": 3,
+   "target": "glutamate",
+   "pick": false,
+   "reason": "glutamate uptake is a downstream effect, not a receptor binding",
+   "qid": "328fbbd9"
+  }
+ ],
+ "ziconotide": [
+  {
+   "index": 0,
+   "target": "cav",
+   "pick": true,
+   "action": "blocker",
+   "qid": "99a4eed5"
+  },
+  {
+   "index": 1,
+   "target": "cgrp",
+   "pick": false,
+   "reason": "downstream release of a neurochemical, not a binding at the CGRP receptor",
+   "qid": "aab7c472"
+  },
+  {
+   "index": 2,
+   "target": "glutamate",
+   "pick": false,
+   "reason": "downstream release of glutamate, not a receptor binding",
+   "qid": "aab7c472"
+  }
  ]
 }

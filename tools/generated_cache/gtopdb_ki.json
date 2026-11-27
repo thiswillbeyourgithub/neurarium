@@ -5887,6 +5887,18 @@
     }
    }
   },
+  "ganaxolone": {
+   "gaba_a": {
+    "pmid": "9016329",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "ganaxolone",
+     "provenance": "verified",
+     "quote": "ganaxolone at GABAA receptor α1 subunit (GABRA1, Human): Allosteric modulator / Potentiation, pEC50 6.59 [PMID 9016329]",
+     "species": "Human"
+    }
+   }
+  },
   "granisetron": {
    "5ht3": {
     "action": "antagonist",
@@ -9782,6 +9794,30 @@
      "page": "phenytoin",
      "provenance": "verified",
      "quote": "phenytoin at Nav1.2 (SCN2A, Human): Channel blocker / Pore blocker, pIC50 4.9 [PMID 1658608]",
+     "species": "Human"
+    }
+   }
+  },
+  "physostigmine": {
+   "ache": {
+    "action": "enzyme_inhibitor",
+    "pmid": "16570913",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "physostigmine",
+     "provenance": "verified",
+     "quote": "physostigmine at acetylcholinesterase (Yt blood group) (ACHE, Human): Inhibitor / Inhibition, pIC50 7.6-7.8 [PMID 16570913]",
+     "species": "Human"
+    }
+   },
+   "bche": {
+    "action": "enzyme_inhibitor",
+    "pmid": "16570913",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "physostigmine",
+     "provenance": "verified",
+     "quote": "physostigmine at butyrylcholinesterase (BCHE, Human): Inhibitor / Inhibition, pIC50 7.6-7.8 [PMID 16570913]",
      "species": "Human"
     }
    }
@@ -14362,6 +14398,19 @@
      "page": "yohimbine",
      "provenance": "verified",
      "quote": "yohimbine at α2A-adrenoceptor (ADRA2A, Human): Antagonist / Antagonist, pKi 8.4-8.7 [PMID 7996470]",
+     "species": "Human"
+    }
+   }
+  },
+  "ziconotide": {
+   "cav": {
+    "action": "antagonist",
+    "pmid": "11756491",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "ziconotide",
+     "provenance": "verified",
+     "quote": "ziconotide at Cav2.2 (CACNA1B, Human): Channel blocker / Antagonist, pIC50 1 [PMID 11756491]",
      "species": "Human"
     }
    }
