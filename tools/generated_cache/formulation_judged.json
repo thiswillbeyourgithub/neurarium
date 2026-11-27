@@ -551,5 +551,10 @@
     }
    ]
   }
+ },
+ "zolmitriptan": {
+  "tmax": {
+   "molecule": true
+  }
  }
 }

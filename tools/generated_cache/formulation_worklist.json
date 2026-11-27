@@ -2476,6 +2476,35 @@
      ]
     }
    }
+  },
+  "zolmitriptan": {
+   "name": "Zolmitriptan",
+   "items": {
+    "tmax": {
+     "value": {
+      "hours": 1.5
+     },
+     "candidates": [
+      {
+       "corpus": "dailymed",
+       "page": "333caafc-2e63-49f8-a0c6-534e528d228d",
+       "line": "The AUC and C max of zolmitriptan are similar following administration of zolmitriptan tablets and zolmitriptan orally disintegrating tablets, but the T max is somewhat later with zolmitriptan orally disintegrating tablets, with a median T max of 3 hours for zolmitriptan orally disintegrating tablet compared with 1.5 hours for the zolmitriptan tablet.",
+       "releases": [
+        "odt"
+       ],
+       "durations": [
+        {
+         "hours": 3.0
+        },
+        {
+         "hours": 1.5
+        }
+       ],
+       "qid": "3cf49d87"
+      }
+     ]
+    }
+   }
   }
  }
 }
