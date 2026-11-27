@@ -46,6 +46,25 @@ def merge_scoped_list(existing: list, scoped: list, key: str) -> list:
     return out + list(fresh.values())
 
 
+def merge_scoped_ids(existing: dict, scoped: dict, only) -> dict:
+    """Merge a scoped build of an id-keyed mapping into ``existing``.
+
+    Every id in ``only`` is re-decided by ``scoped`` (kept in place when it still has
+    candidates, dropped when it no longer does), every other entry is kept untouched, a
+    new id is appended. With no ``only`` the build was a full one and wins outright.
+
+    >>> merge_scoped_ids({"a": 1, "b": 2, "c": 3}, {"b": 9, "d": 4}, {"b", "c", "d"})
+    {'a': 1, 'b': 9, 'd': 4}
+    >>> merge_scoped_ids({"a": 1}, {"b": 2}, None)
+    {'b': 2}
+    """
+    if not only:
+        return scoped
+    out = {k: v for k, v in existing.items() if k not in only or k in scoped}
+    out.update(scoped)
+    return out
+
+
 def shown(path, root) -> Path:
     """``path`` relative to ``root`` for a fetcher's log line, else ``path`` unchanged: a
     ``--out`` outside the repo (a scratch rebuild) must not crash after the write.

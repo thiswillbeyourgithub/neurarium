@@ -212,7 +212,9 @@ def main() -> int:
     payload = {
         "vocabulary": {"roles": ROLES, "strengths": STRENGTHS,
                        "enzymes": sorted(KNOWN_ENZYMES)},
-        "drugs": worklist,
+        "drugs": worklist_io.merge_scoped_ids(
+            worklist_io.read(args.out, required=False, default={}).get("drugs", {}),
+            worklist, only),
     }
     worklist_io.write(args.out, payload, name=OUT)
     print(f"{stats['drug: queued']} drugs, {stats['candidates']} candidate sentences")

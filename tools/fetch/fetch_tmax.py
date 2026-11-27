@@ -197,9 +197,14 @@ def build(only: set[str] | None = None, pattern=PEAK_RE, skip=None, values=None
     return worklist
 
 
-def write_worklist(worklist: dict, out: Path, what: str, name: Path = OUT_PATH) -> None:
+def write_worklist(worklist: dict, out: Path, what: str, name: Path = OUT_PATH,
+                   only: set[str] | None = None) -> None:
     """Write a worklist (in the format of the cache ``name``) and print its per-corpus
-    candidate counts."""
+    candidate counts. A scoped build (``only``) is merged into the existing ``out``, so
+    the other drugs' candidates, which their judged picks index into, survive."""
+    if only:
+        worklist = worklist_io.merge_scoped_ids(
+            worklist_io.read(out, required=False, default={}), worklist, only)
     worklist_io.write(out, worklist, name=name)
     n_cand = sum(len(v["candidates"]) for v in worklist.values())
     by_corpus: dict[str, int] = {}
@@ -222,7 +227,7 @@ def main() -> int:
     args = ap.parse_args()
     only = {d.strip() for d in args.only.split(",") if d.strip()} if args.only else None
 
-    write_worklist(build(only), args.out, "a time-to-peak")
+    write_worklist(build(only), args.out, "a time-to-peak", only=only)
     return 0
 
 

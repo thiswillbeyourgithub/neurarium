@@ -9,6 +9,7 @@ in a temp dir, so it runs on a clone that lacks the gitignored corpus #9 / #10 t
 Built with the help of Claude Code.
 """
 
+import json
 import sys
 import tempfile
 import unittest
@@ -101,6 +102,24 @@ class ScopedWorklistMergeTest(unittest.TestCase):
         out = merge_scoped_list(existing, [{"key": "b", "v": 3}, {"key": "c", "v": 4}], "key")
         self.assertEqual(out, [{"key": "a", "v": 1}, {"key": "b", "v": 3},
                                {"key": "c", "v": 4}])
+
+    def test_tmax_family_only_build_keeps_other_drugs(self):
+        """``fetch_tmax`` / ``fetch_half_life`` / ``fetch_excretion --only`` (all through
+        ``fetch_tmax.write_worklist``) once overwrote the whole worklist with the scoped
+        drugs; a scoped drug that lost its candidates must drop, the rest stay."""
+        sys.path.insert(0, str(ROOT / "tools" / "fetch"))
+        import fetch_tmax
+        cand = {"corpus": "bdpm", "page": "1", "quote": "q"}
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "tmax_worklist.json"
+            fetch_tmax.write_worklist(
+                {d: {"name": d, "candidates": [dict(cand)]} for d in ("x", "y", "z")},
+                out, "a time-to-peak")
+            fetch_tmax.write_worklist({"y": {"name": "y", "candidates": [dict(cand, quote="new")]}},
+                                      out, "a time-to-peak", only={"y", "z"})
+            got = json.loads(out.read_text("utf-8"))
+        self.assertEqual(list(got), ["x", "y"])
+        self.assertEqual(got["y"]["candidates"][0]["quote"], "new")
 
 
 if __name__ == "__main__":
