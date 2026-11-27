@@ -270,5 +270,39 @@
    "36835142"
   ],
   "searched": "2026-10-16"
+ },
+ "receptor:nk1/effects": {
+  "hits": 1720,
+  "query": "(ABSTRACT:\"NK1 receptor\" OR ABSTRACT:\"NK1R receptor\" OR ABSTRACT:\"NK1R\" OR ABSTRACT:\"neurokinin 1 receptor\" OR ABSTRACT:\"neurokinin 1\" OR ABSTRACT:\"neurokinin-1 receptor\" OR ABSTRACT:\"neurokinin-1\" OR ABSTRACT:\"substance P receptor\" OR ABSTRACT:\"TACR1\") AND (agonist OR antagonist OR \"inverse agonist\" OR inhibitor OR blocker OR modulator OR releaser OR agonism OR antagonism OR blockade OR activation OR stimulation) AND (sedat* OR somnolen* OR \"weight gain\" OR appetite OR hypotension OR dizziness OR hallucinat* OR prolactin OR extrapyramidal OR dyskinesia OR akathisia OR cognit* OR memory OR nausea OR vomiting OR sexual OR insomnia OR anxi* OR euphori* OR dysphori* OR \"respiratory depression\" OR seizure* OR convuls* OR psychosis OR psychotic OR \"heart rate\" OR \"blood pressure\" OR valvulopath* OR antiemetic OR anticonvulsant OR antidepressant OR antipsychotic OR parkinson* OR analges* OR pain OR migraine OR sleep OR circadian OR wakefulness OR hypotherm* OR bradycardia OR bronchodilat* OR \"gastric acid\" OR vasoconstrict* OR vasodilat* OR bladder OR motility) AND (human OR humans OR patients OR volunteers OR \"healthy subjects\") AND SRC:MED AND HAS_ABSTRACT:y",
+  "read": [
+   "42799033",
+   "42534550",
+   "42205501",
+   "42748473",
+   "42489789",
+   "42795776",
+   "41871968",
+   "42137787",
+   "42614956",
+   "43014571"
+  ],
+  "searched": "2026-11-27"
+ },
+ "target:ryr1/effects": {
+  "hits": 1347,
+  "query": "(ABSTRACT:\"Ryanodine receptor 1 (RyR1) receptor\" OR ABSTRACT:\"Ryanodine receptor 1 (RyR1)\" OR ABSTRACT:\"RyR1 receptor\" OR ABSTRACT:\"RyR1\" OR ABSTRACT:\"Ryanodine receptor 1 receptor\" OR ABSTRACT:\"Ryanodine receptor 1\" OR ABSTRACT:\"ryanodine receptor\" OR ABSTRACT:\"ryanodine receptor type 1 receptor\" OR ABSTRACT:\"ryanodine receptor type 1\") AND (agonist OR antagonist OR \"inverse agonist\" OR inhibitor OR blocker OR modulator OR releaser OR agonism OR antagonism OR blockade OR activation OR stimulation) AND (sedat* OR somnolen* OR \"weight gain\" OR appetite OR hypotension OR dizziness OR hallucinat* OR prolactin OR extrapyramidal OR dyskinesia OR akathisia OR cognit* OR memory OR nausea OR vomiting OR sexual OR insomnia OR anxi* OR euphori* OR dysphori* OR \"respiratory depression\" OR seizure* OR convuls* OR psychosis OR psychotic OR \"heart rate\" OR \"blood pressure\" OR valvulopath* OR antiemetic OR anticonvulsant OR antidepressant OR antipsychotic OR parkinson* OR analges* OR pain OR migraine OR sleep OR circadian OR wakefulness OR hypotherm* OR bradycardia OR bronchodilat* OR \"gastric acid\" OR vasoconstrict* OR vasodilat* OR bladder OR motility) AND (human OR humans OR patients OR volunteers OR \"healthy subjects\") AND SRC:MED AND HAS_ABSTRACT:y",
+  "read": [
+   "42577080",
+   "43032885",
+   "43021088",
+   "42326997",
+   "42609043",
+   "42838934",
+   "43011109",
+   "42948137",
+   "42769728",
+   "42218780"
+  ],
+  "searched": "2026-11-27"
  }
 }

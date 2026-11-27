@@ -3530,6 +3530,9 @@
 "q_3af20dd6d810": {
 "drug:bromocriptine/workup[eye_exam:during]": "opus"
 },
+"q_3afc57d9cafe": {
+"receptor:nk1/classification[family]": "opus"
+},
 "q_3b0da938e3eb": {
 "receptor:5ht1e/locations[frontal]": "sonnet"
 },
@@ -7050,6 +7053,9 @@
 "q_767a1c9b3573": {
 "drug:tolcapone/workup[liver_function:before]": "opus",
 "drug:tolcapone/workup[liver_function:during]": "opus"
+},
+"q_76bd9a46303b": {
+"receptor:nk1/effects[antagonism:antiemetic]": "opus"
 },
 "q_76bdc7050d55": {
 "drug:tetrabenazine/bindings[vmat2:vesicular_inhibitor]": "sonnet",

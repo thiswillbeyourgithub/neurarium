@@ -19969,6 +19969,100 @@
     }
    ]
   },
+  "nk1": {
+   "kind": "receptor",
+   "name": "NK1",
+   "wikipedia": "https://en.wikipedia.org/wiki/Tachykinin_receptor_1",
+   "candidates": [
+    {
+     "corpus": "stahl_essential",
+     "page": 399,
+     "line": "Neurotransmitters present in the dorsal horn that have been best studied in terms of pain transmission include substance P (NK1, 2, and 3 receptors), endorphins (μ-opioid receptors), norepinephrine (α2 adrenoceptors), and serotonin (5HT1B/D and 5HT3 receptors).",
+     "effects": [
+      "analgesia"
+     ],
+     "qid": "0e702017"
+    },
+    {
+     "corpus": "gtopdb_function",
+     "page": 360,
+     "line": "NK1 receptor (TACR1), GtoPdb target 360 | physiological function (Human): Patients with moderate to severe major depression, robust antidepressant effects were consistently observed upon treatment with and NK1 antagonist. | tissue: In vivo",
+     "effects": [
+      "antidepressant"
+     ],
+     "species": "Human",
+     "qid": "2cab5610"
+    },
+    {
+     "corpus": "gtopdb_function",
+     "page": 360,
+     "line": "NK1 receptor (TACR1), GtoPdb target 360 | physiological function (Human): Analgesic effects are induced by NK1 receptor agonists administered to either the ventral tegmental area or nucleus accumbens septi. | tissue: In vivo.",
+     "effects": [
+      "analgesia"
+     ],
+     "species": "Human",
+     "qid": "940ce544"
+    },
+    {
+     "corpus": "gtopdb_function",
+     "page": 360,
+     "line": "NK1 receptor (TACR1), GtoPdb target 360 | pathophysiology: Colitis | role: Colonic inflammation, colonic fibrosis, colitis induced transformation",
+     "effects": [
+      "cardiac_valvulopathy"
+     ],
+     "qid": "ec126a7c"
+    },
+    {
+     "corpus": "europepmc",
+     "page": "42534550",
+     "line": "Postoperative nausea and vomiting (PONV) provides a clinically validated perioperative phenotype of substance P (SP)/neurokinin-1 receptor (NK1R; TACR1) pharmacology, because NK1R antagonists are established antiemetic agents for selected high-risk patients.",
+     "effects": [
+      "nausea",
+      "antiemetic"
+     ],
+     "qid": "f9033adf"
+    },
+    {
+     "corpus": "europepmc",
+     "page": "42205501",
+     "line": "Nausea and vomiting arise from complex interactions between central and peripheral pathways involving the chemoreceptor trigger zone, vagal afferents, and multiple neurotransmitter systems, including dopamine (D2), serotonin (5-HT3), histamine (H1), muscarinic (M1), and neurokinin-1 (NK1) receptors.",
+     "effects": [
+      "nausea",
+      "antiemetic"
+     ],
+     "qid": "0d6e4a33"
+    },
+    {
+     "corpus": "europepmc",
+     "page": "42489789",
+     "line": "Therapeutic strategies are discussed alongside repurposed drugs in preclinical and clinical studies, including N-methyl-D-aspartate (NMDA) receptor antagonists, neurokinin-1 receptor antagonists, drugs targeting the gamma-aminobutyric acid (GABA) system, antiepileptics, antidepressants, opioids, cannabinoids, dopamine receptor agonists, melatonin receptor agonists, and antidiabetics.",
+     "effects": [
+      "anticonvulsant",
+      "antidepressant"
+     ],
+     "qid": "a9627d29"
+    },
+    {
+     "corpus": "europepmc",
+     "page": "42614956",
+     "line": "Dupilumab is currently the first Food and Drug Administration (FDA)-approved biologic for PN, followed by nemolizumab whereas other emerging agents-including additional monoclonal antibodies, Janus kinase (JAK) inhibitors, neurokinin-1 (NK1) receptor antagonists, opioid antagonists, and neuromodulators-remain at varying stages of clinical investigation (Phase II-III), acting on cytokine-neuroinflammatory pathways to relieve pruritus and improve patients' quality of life.",
+     "effects": [
+      "itch",
+      "antipruritic"
+     ],
+     "qid": "51ed81c6"
+    },
+    {
+     "corpus": "europepmc",
+     "page": "43014571",
+     "line": "Maropitant, a neurokinin-1 receptor antagonist used as an antiemetic in veterinary medicine, has shown anti-inflammatory and neuroprotective properties in experimental studies.",
+     "effects": [
+      "antiemetic"
+     ],
+     "qid": "5b01c9fb"
+    }
+   ]
+  },
   "sert": {
    "kind": "target",
    "name": "Serotonin transporter (SERT)",
@@ -21977,6 +22071,41 @@
       "anticonvulsant"
      ],
      "qid": "6993007b"
+    }
+   ]
+  },
+  "ryr1": {
+   "kind": "target",
+   "name": "Ryanodine receptor 1 (RyR1)",
+   "wikipedia": "https://en.wikipedia.org/wiki/RYR1",
+   "candidates": [
+    {
+     "corpus": "europepmc",
+     "page": "43021088",
+     "line": "Conclusion In patients with MH and concomitant TBI, delayed seizures may arise primarily from the structural brain injury (cerebral contusions and/or the surgical manipulation of hematoma evacuation), although acute systemic insult (MH) and potential genetic susceptibility (RYR1 variant) could represent additional, unconfirmed contributing factors.Dantrolene should not be relied upon for CNS complications, as its limited CNS penetration and RyR1 selectivity render it ineffective for seizure control.This case suggests that CNS sequelae deserve consideration in MH patients with overlapping risk factors, while recognizing that traumatic brain injury remains the most likely primary cause of seizure in this setting.",
+     "effects": [
+      "seizures",
+      "anticonvulsant"
+     ],
+     "qid": "eb30072e"
+    },
+    {
+     "corpus": "europepmc",
+     "page": "43011109",
+     "line": "Case presentation We report the case of an 18-year-old man with a longstanding RYR1-related congenital myopathy with an autosomal dominant family pattern, who was admitted for a severe depressive episode with active suicidal ideation and a suicide plan.",
+     "effects": [
+      "antidepressant"
+     ],
+     "qid": "1828c8aa"
+    },
+    {
+     "corpus": "europepmc",
+     "page": "43011109",
+     "line": "Although a direct pathophysiological relationship between RYR1 dysfunction and major depressive disorder or an RYR1-specific psychiatric phenotype cannot be inferred, chronic disability, impaired autonomy, awareness of genetic transmission, and associated family dynamics may contribute to psychological distress.",
+     "effects": [
+      "antidepressant"
+     ],
+     "qid": "22f9f876"
     }
    ]
   },

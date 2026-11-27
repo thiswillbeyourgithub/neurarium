@@ -2739,6 +2739,17 @@
    }
   ]
  },
+ "nk1": {
+  "antagonism:antiemetic": [
+   {
+    "corpus": "europepmc",
+    "evidence": "in_vivo",
+    "page": "42534550",
+    "provenance": "verified",
+    "quote": "Postoperative nausea and vomiting (PONV) provides a clinically validated perioperative phenotype of substance P (SP)/neurokinin-1 receptor (NK1R; TACR1) pharmacology, because NK1R antagonists are established antiemetic agents for selected high-risk patients."
+   }
+  ]
+ },
  "nmda": {
   "antagonism:antidepressant": [
    {

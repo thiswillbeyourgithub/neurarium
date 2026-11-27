@@ -3472,6 +3472,21 @@
      "37": "rat"
     }
    }
+  ],
+  "nk1": [
+   {
+    "effect": "antiemetic",
+    "mode": "antagonism",
+    "picks": [
+     {
+      "index": 4,
+      "qid": "f9033adf"
+     }
+    ],
+    "evidence": {
+     "4": "in_vivo"
+    }
+   }
   ]
  }
 }
