@@ -19417,5 +19417,95 @@
     "qid": "23bafe9a"
    }
   ]
+ },
+ "ubrogepant": {
+  "name": "Ubrogepant",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "ubrogepant",
+    "line": "Excretion | fecal/biliary",
+    "named": [
+     "route:fecal"
+    ],
+    "qid": "60ebbef0"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "36106b14-d410-4faf-a361-2871de8198c3",
+    "line": "Ubrogepant is excreted mostly via the biliary/fecal route, while the renal route is a minor route of elimination.",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "d91c657c"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "36106b14-d410-4faf-a361-2871de8198c3",
+    "line": "14 C]-ubrogepant to healthy male subjects, 42% and 6% of the dose was recovered as unchanged ubrogepant in feces and urine, respectively.",
+    "named": [
+     "route:renal",
+     "route:fecal",
+     "unchanged:urine"
+    ],
+    "qid": "66c53037"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "36106b14-d410-4faf-a361-2871de8198c3",
+    "line": "Population pharmacokinetic analysis based on pooled data from clinical studies was used to evaluate the effect of renal impairment characterized based on estimated creatinine clearance (CLcr) using the Cockcroft-Gault (C-G) equation.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "e3532081"
+   }
+  ]
+ },
+ "ergotamine": {
+  "name": "Ergotamine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "ergotamine",
+    "line": "Excretion | 90% Bile duct",
+    "named": [
+     "route:fecal"
+    ],
+    "qid": "c4a0d2e8"
+   }
+  ]
+ },
+ "dihydroergotamine": {
+  "name": "Dihydroergotamine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "dihydroergotamine",
+    "line": "Excretion | Bile duct",
+    "named": [
+     "route:fecal"
+    ],
+    "qid": "e6490108"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "62455371",
+    "line": "L’excrétion se fait essentiellement par les fèces via la bile.",
+    "named": [
+     "route:fecal"
+    ],
+    "qid": "d66124d3"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "62455371",
+    "line": "Après administration nasale, l’excrétion urinaire de la substance mère et des métabolites est d’environ 2 %.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "cbdacf02"
+   }
+  ]
  }
 }

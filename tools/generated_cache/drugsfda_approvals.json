@@ -130,6 +130,14 @@
    "status": "found",
    "year": 2009
   },
+  "atogepant": {
+   "application": "NDA215206",
+   "applications": 1,
+   "date": "2021-09-28",
+   "quote": "NDA215206 | QULIPTA | ATOGEPANT | TABLET | ORIG approved 2021-09-28",
+   "status": "found",
+   "year": 2021
+  },
   "atomoxetine": {
    "application": "NDA021411",
    "applications": 2,
@@ -552,6 +560,14 @@
   "dihydrocodeine": {
    "status": "none"
   },
+  "dihydroergotamine": {
+   "application": "NDA005929",
+   "applications": 5,
+   "date": "1946-04-12",
+   "quote": "NDA005929 | D.H.E. 45 | DIHYDROERGOTAMINE MESYLATE | INJECTABLE | ORIG approved 1946-04-12",
+   "status": "found",
+   "year": 1946
+  },
   "dimenhydrinate": {
    "status": "none"
   },
@@ -638,6 +654,12 @@
   },
   "erenumab": {
    "status": "none"
+  },
+  "ergotamine": {
+   "application": "NDA012102",
+   "class": "Type 3 - New Dosage Form",
+   "date": "1960-01-13",
+   "status": "superseded"
   },
   "escitalopram": {
    "application": "NDA021323",
@@ -1171,6 +1193,14 @@
    "class": "Type 3 - New Dosage Form",
    "date": "1955-12-05",
    "status": "superseded"
+  },
+  "methysergide": {
+   "application": "NDA012516",
+   "applications": 1,
+   "date": "1962-02-12",
+   "quote": "NDA012516 | SANSERT | METHYSERGIDE MALEATE | TABLET | ORIG approved 1962-02-12",
+   "status": "found",
+   "year": 1962
   },
   "metoclopramide": {
    "application": "NDA017862",
@@ -2084,6 +2114,14 @@
   },
   "tropisetron": {
    "status": "none"
+  },
+  "ubrogepant": {
+   "application": "NDA211765",
+   "applications": 1,
+   "date": "2019-12-23",
+   "quote": "NDA211765 | UBRELVY | UBROGEPANT | TABLET | ORIG approved 2019-12-23",
+   "status": "found",
+   "year": 2019
   },
   "valbenazine": {
    "application": "NDA209241",

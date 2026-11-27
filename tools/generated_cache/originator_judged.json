@@ -801,6 +801,18 @@
    "name": "Eli Lilly and Company",
    "company": "eli_lilly_and_company",
    "qid": "51197fa0"
+  },
+  "ubrogepant": {
+   "index": 0,
+   "name": "Merck",
+   "company": "merck_co",
+   "qid": "4176a10c"
+  },
+  "dihydroergotamine": {
+   "index": 0,
+   "name": "Sandoz",
+   "company": "sandoz",
+   "qid": "3c9648c4"
   }
  },
  "companies": {

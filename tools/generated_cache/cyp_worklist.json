@@ -2276,6 +2276,19 @@
    ],
    "name": "Dihydrocodeine"
   },
+  "dihydroergotamine": {
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Contraindications",
+     "n": 0,
+     "page": "dihydroergotamine",
+     "qid": "6941a460",
+     "quote": "Dihydroergotamine is contraindicated with potent CYP3A4 inhibitors, like macrolide antibiotics."
+    }
+   ],
+   "name": "Dihydroergotamine"
+  },
   "diphenhydramine": {
    "candidates": [
     {
@@ -7275,6 +7288,19 @@
     }
    ],
    "name": "Tropisetron"
+  },
+  "ubrogepant": {
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "(lead)",
+     "n": 0,
+     "page": "ubrogepant",
+     "qid": "9f0d8ae0",
+     "quote": "Ubrogepant is contraindicated for co-administration with strong CYP3A4 inhibitors."
+    }
+   ],
+   "name": "Ubrogepant"
   },
   "valbenazine": {
    "candidates": [

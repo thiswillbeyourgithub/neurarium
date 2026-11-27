@@ -8723,6 +8723,61 @@
      "qid": "5246f094"
     }
    ]
+  },
+  "ubrogepant": {
+   "name": "Ubrogepant",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "ubrogepant",
+     "line": "In December 2019, the US Food and Drug Administration approved Ubrelvy produced by Allergan USA, Inc.",
+     "context": "23% of patients were taking a preventive medication for migraine.",
+     "qid": "462aad1d"
+    }
+   ]
+  },
+  "atogepant": {
+   "name": "Atogepant",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "atogepant",
+     "line": "Atogepant was approved for medical use in the United States in September 2021, and in the European Union in August 2023.",
+     "context": "The most common side effects include nausea, constipation, tiredness, somnolence (sleepiness), decreased appetite, and decreased weight.",
+     "qid": "852c4c72"
+    }
+   ]
+  },
+  "ergotamine": {
+   "name": "Ergotamine",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "ergotamine",
+     "line": "It was first isolated from the ergot fungus by Arthur Stoll , at Sandoz in 1918, and was marketed as Gynergen in 1921.",
+     "context": "It has been used to prevent post-partum hemorrhage (bleeding after childbirth).",
+     "qid": "337dd40c"
+    }
+   ]
+  },
+  "methysergide": {
+   "name": "Methysergide",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "methysergide",
+     "line": "Based on the possible involvement of serotonin in migraine attacks, it was introduced in 1959 by Sicuteri as a preventive drug for migraine.",
+     "context": "This resulted in a compound with selectivity and high potency as a serotonin (5-HT) inhibitor.",
+     "qid": "7a06d8fe"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "methysergide",
+     "line": "United States production of methysergide (Sansert) was discontinued on the manufacturer's own behalf in 2002.",
+     "context": "market after taking over Sandoz , but currently lists it as a discontinued product.",
+     "qid": "cc21d66e"
+    }
+   ]
   }
  }
 }

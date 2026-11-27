@@ -6035,5 +6035,48 @@
     "qid": "8e9228c9"
    }
   ]
+ },
+ "ubrogepant": {
+  "name": "Ubrogepant",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "36106b14-d410-4faf-a361-2871de8198c3",
+    "line": "Following oral administration of UBRELVY, ubrogepant is absorbed with peak plasma concentrations at approximately 1.5 hours.",
+    "durations": [
+     {
+      "hours": 1.5
+     }
+    ],
+    "qid": "4952799c"
+   }
+  ]
+ },
+ "dihydroergotamine": {
+  "name": "Dihydroergotamine",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "0982a44a-dc0c-75c0-e063-6394a90a6d6c",
+    "line": "Following ATZUMI administration, the mean maximum plasma concentration was 2.1 ng/mL, and the median time from dosing to maximum plasma concentration was approximately 0.5 hours.",
+    "durations": [
+     {
+      "hours": 0.5
+     }
+    ],
+    "qid": "82726397"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "62455371",
+    "line": "Après administration nasale, la dihydroergotamine est rapidement absorbée (Tmax d’environ 45 min).",
+    "durations": [
+     {
+      "hours": 0.75
+     }
+    ],
+    "qid": "70179ef4"
+   }
+  ]
  }
 }

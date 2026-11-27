@@ -7638,5 +7638,77 @@
     "qid": "3b61fa82"
    }
   ]
+ },
+ "ubrogepant": {
+  "name": "Ubrogepant",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "ubrogepant",
+    "line": "Elimination half-life | 5–7 hours",
+    "durations": [
+     {
+      "hours": 5.0,
+      "hours_max": 7.0
+     }
+    ],
+    "qid": "3973df2a"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "36106b14-d410-4faf-a361-2871de8198c3",
+    "line": "The elimination half-life of ubrogepant is approximately 5-7 hours.",
+    "durations": [
+     {
+      "hours": 5.0,
+      "hours_max": 7.0
+     }
+    ],
+    "qid": "8c42ac4d"
+   }
+  ]
+ },
+ "ergotamine": {
+  "name": "Ergotamine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "ergotamine",
+    "line": "Elimination half-life | 2 hours",
+    "durations": [
+     {
+      "hours": 2.0
+     }
+    ],
+    "qid": "6ef88f81"
+   }
+  ]
+ },
+ "dihydroergotamine": {
+  "name": "Dihydroergotamine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "dihydroergotamine",
+    "line": "Elimination half-life | 9 hours",
+    "durations": [
+     {
+      "hours": 9.0
+     }
+    ],
+    "qid": "36ddf524"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "62455371",
+    "line": "L’élimination plasmatique est biphasique avec une demi-vie terminale d’environ 10 heures.",
+    "durations": [
+     {
+      "hours": 10.0
+     }
+    ],
+    "qid": "4342277a"
+   }
+  ]
  }
 }

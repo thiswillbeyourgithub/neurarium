@@ -513,5 +513,21 @@
   "hours": 5.7,
   "index": 0,
   "qid": "3b61fa82"
+ },
+ "ubrogepant": {
+  "hours": 5.0,
+  "hours_max": 7.0,
+  "index": 1,
+  "qid": "8c42ac4d"
+ },
+ "ergotamine": {
+  "hours": 2.0,
+  "index": 0,
+  "qid": "6ef88f81"
+ },
+ "dihydroergotamine": {
+  "hours": 10.0,
+  "index": 1,
+  "qid": "4342277a"
  }
 }

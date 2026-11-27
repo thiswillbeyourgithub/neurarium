@@ -5508,6 +5508,68 @@
      "qid": "51197fa0"
     }
    ]
+  },
+  "ubrogepant": {
+   "name": "Ubrogepant",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "ubrogepant",
+     "line": "Ubrogepant was discovered by Merck and is first described in a patent application prioritized in 2010.",
+     "qid": "4176a10c"
+    }
+   ]
+  },
+  "atogepant": {
+   "name": "Atogepant",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "atogepant",
+     "line": "Atogepant was developed by the biopharmaceutical company AbbVie .",
+     "qid": "d18036c4"
+    }
+   ]
+  },
+  "dihydroergotamine": {
+   "name": "Dihydroergotamine",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "dihydroergotamine",
+     "line": "Dihydroergotamine was synthesized by Albert Hofmann and Werner Stoll at Sandoz in 1943.",
+     "qid": "3c9648c4"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "dihydroergotamine",
+     "line": "It was first described in the scientific literature that same year.",
+     "qid": "1880a8a2"
+    }
+   ]
+  },
+  "methysergide": {
+   "name": "Methysergide",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "methysergide",
+     "line": "Methysergide was first described in the literature by 1958.",
+     "qid": "8f33b19d"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "methysergide",
+     "line": "Methysergide was synthesized from lysergic acid by adding a methyl group and a butanolamid group.",
+     "qid": "902ada22"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "methysergide",
+     "line": "This finding provided an incentive for the development of sumatriptan .",
+     "qid": "03efaf11"
+    }
+   ]
   }
  },
  "companies": {

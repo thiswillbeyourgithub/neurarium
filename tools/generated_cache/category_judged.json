@@ -746,5 +746,39 @@
    "index": 0,
    "qid": "676cffeb"
   }
+ ],
+ "ubrogepant": [
+  {
+   "index": 1,
+   "qid": "50e145e3"
+  }
+ ],
+ "atogepant": [
+  {
+   "index": 1,
+   "qid": "1bf6186b"
+  }
+ ],
+ "ergotamine": [
+  {
+   "index": 3,
+   "qid": "aa201626"
+  }
+ ],
+ "dihydroergotamine": [
+  {
+   "index": 2,
+   "qid": "6b9a3844"
+  }
+ ],
+ "methysergide": [
+  {
+   "index": 0,
+   "qid": "997e0bee"
+  },
+  {
+   "index": 2,
+   "qid": "298d935e"
+  }
  ]
 }

@@ -244,6 +244,10 @@
 "q_043b212f9148": {
 "drug:pethidine/originator": "opus"
 },
+"q_046d646ab358": {
+"drug:ubrogepant/excretion[route:fecal]": "opus",
+"drug:ubrogepant/excretion[route:renal]": "opus"
+},
 "q_049cea99200a": {
 "drug:fluoxetine/originator_country": "opus",
 "drug:lasmiditan/originator_country": "opus",
@@ -534,6 +538,9 @@
 },
 "q_092fae0b3e32": {
 "drug:tapentadol/categories": "sonnet"
+},
+"q_093b838f31f8": {
+"drug:ubrogepant/originator": "opus"
 },
 "q_0949ab3e60d4": {
 "receptor:d2/locations[frontal]": "sonnet"
@@ -2216,7 +2223,8 @@
 "drug:amitriptyline/originator_country": "opus",
 "drug:fosaprepitant/originator_country": "opus",
 "drug:protriptyline/originator_country": "opus",
-"drug:suvorexant/originator_country": "opus"
+"drug:suvorexant/originator_country": "opus",
+"drug:ubrogepant/originator_country": "opus"
 },
 "q_2311fcd955b9": {
 "drug:varenicline/excretion[route:renal]": "opus"
@@ -2373,6 +2381,9 @@
 },
 "q_256690b05ae0": {
 "drug:cariprazine/nbn": "sonnet"
+},
+"q_2568bc7b3bfa": {
+"drug:ergotamine/half_life": "opus"
 },
 "q_258eed36da6d": {
 "target:dat/demographics[sex:higher_in_female:-]": "opus"
@@ -2533,6 +2544,9 @@
 "q_2874391c4082": {
 "drug:moclobemide/excretion[route:renal]": "opus",
 "drug:moclobemide/excretion[unchanged:urine]": "opus"
+},
+"q_287688a06342": {
+"drug:atogepant/first_approval": "opus"
 },
 "q_2890cd4eeebe": {
 "drug:scopolamine/excretion[unchanged:urine]": "opus"
@@ -3129,6 +3143,9 @@
 "q_33178c00457d": {
 "drug:biperiden/brands[Akinophyl]": "sonnet"
 },
+"q_331acc97f99c": {
+"drug:ubrogepant/categories": "opus"
+},
 "q_331b39c39dbf": {
 "drug:cyamemazine/categories": "sonnet"
 },
@@ -3349,6 +3366,9 @@
 "drug:olanzapine/bindings[m4:antagonist]": "sonnet",
 "drug:olanzapine/bindings[m5:antagonist]": "sonnet"
 },
+"q_365cbd95d0c4": {
+"drug:methysergide/first_approval": "opus"
+},
 "q_366349fe8ce4": {
 "drug:amphetamine_dl/brands[Adderall XR]": "sonnet"
 },
@@ -3476,6 +3496,9 @@
 },
 "q_38f705f8edbd": {
 "drug:methylfolate_l/brands[Deplin]": "sonnet"
+},
+"q_390829db7ec0": {
+"drug:atogepant/brands[Qulipta]": "opus"
 },
 "q_39097506a125": {
 "drug:olanzapine/bindings[h1:antagonist]": "sonnet"
@@ -4138,6 +4161,9 @@
 "q_439b9dfeccf3": {
 "drug:fluoxetine/nbn": "sonnet"
 },
+"q_439eb3ace722": {
+"drug:ergotamine/first_approval": "opus"
+},
 "q_43ca72ac5495": {
 "receptor:a2a/classification[family]": "sonnet"
 },
@@ -4162,6 +4188,9 @@
 },
 "q_43ff5a182036": {
 "drug:granisetron/first_approval": "opus"
+},
+"q_440771b3f7d5": {
+"drug:methysergide/categories": "opus"
 },
 "q_44159e7f69cc": {
 "drug:pregabalin/seizure_threshold[withdrawal]": "opus"
@@ -4757,6 +4786,9 @@
 "q_4db7ffbe7575": {
 "drug:carbamazepine/metabolites[carbamazepine_10_11_epoxide]/formed_by[cyp3a4]": "sonnet"
 },
+"q_4ddb076dda36": {
+"drug:ergotamine/excretion[route:fecal]": "opus"
+},
 "q_4de4f00f7ee8": {
 "drug:remifentanil/sleep[rem_suppression]": "opus"
 },
@@ -5085,6 +5117,9 @@
 },
 "q_53752ce05a65": {
 "drug:phenobarbital/workup[pregnancy_test:before]": "opus"
+},
+"q_5396ce63d8c9": {
+"drug:ubrogepant/tmax": "opus"
 },
 "q_53998494f953": {
 "receptor:beta2/effects[agonism:vasodilation]": "opus"
@@ -6073,6 +6108,9 @@
 },
 "q_649ab0211da9": {
 "drug:phenytoin/first_approval": "opus"
+},
+"q_649afaf8d289": {
+"drug:ubrogepant/half_life": "opus"
 },
 "q_64a1b3a2c066": {
 "drug:phenelzine/brands[Nardelzine]": "sonnet"
@@ -7580,6 +7618,9 @@
 },
 "q_7e56c9ad450a": {
 "drug:perospirone/half_life": "opus"
+},
+"q_7e67d0b9b0fb": {
+"drug:dihydroergotamine/excretion[route:fecal]": "opus"
 },
 "q_7e6bc635f704": {
 "drug:dextromethorphanquinidine/first_approval": "opus"
@@ -10166,6 +10207,7 @@
 },
 "q_a6218e446b27": {
 "drug:bromocriptine/originator_country": "opus",
+"drug:dihydroergotamine/originator_country": "opus",
 "drug:lsd/originator_country": "opus",
 "drug:thioridazine/originator_country": "opus"
 },
@@ -10264,6 +10306,9 @@
 "q_a71bfd780ff9": {
 "receptor:5ht1b/effects[agonism:vasoconstriction]": "opus"
 },
+"q_a71c2fedc8ed": {
+"drug:dihydroergotamine/half_life": "opus"
+},
 "q_a7575ff07e02": {
 "drug:gabapentin/seizure_threshold[raises]": "opus"
 },
@@ -10301,6 +10346,9 @@
 },
 "q_a7fe2216f26a": {
 "drug:lurasidone/categories": "sonnet"
+},
+"q_a80b8239b2b6": {
+"drug:dihydroergotamine/tmax": "opus"
 },
 "q_a81440c0755d": {
 "drug:citalopram/originator_country": "opus",
@@ -11385,6 +11433,9 @@
 "structure:amygdala_L": "sonnet",
 "structure:amygdala_R": "sonnet"
 },
+"q_babb30ad7f77": {
+"drug:ubrogepant/excretion[unchanged:urine]": "opus"
+},
 "q_bac4572fef66": {
 "drug:bupropion/formulations[ir]/release": "opus"
 },
@@ -11961,6 +12012,9 @@
 "q_c348194bc1d9": {
 "drug:bupropion/categories": "sonnet"
 },
+"q_c34a01c2b068": {
+"drug:ergotamine/categories": "opus"
+},
 "q_c34e3280b7b0": {
 "drug:gabapentin/bindings[cav_a2d:antagonist]": "sonnet"
 },
@@ -12404,6 +12458,9 @@
 "drug:hydroxyzine/bindings[5ht2a:antagonist]": "opus",
 "drug:hydroxyzine/bindings[alpha1:antagonist]": "opus",
 "drug:hydroxyzine/bindings[d2:antagonist]": "opus"
+},
+"q_cae7f9bedb06": {
+"drug:dihydroergotamine/categories": "opus"
 },
 "q_cb0c96449c66": {
 "drug:2cb/bindings[5ht2b:agonist]": "sonnet"
@@ -13109,6 +13166,9 @@
 "q_d77f0f0e6fe9": {
 "drug:erenumab/categories": "sonnet"
 },
+"q_d7948d109d92": {
+"drug:methysergide/withdrawals[us:2002]": "opus"
+},
 "q_d798befd745c": {
 "drug:ziprasidone/nbn": "sonnet"
 },
@@ -13559,6 +13619,9 @@
 },
 "q_df16922282ac": {
 "drug:amitriptyline/excretion[route:renal]": "opus"
+},
+"q_df193546f810": {
+"drug:ubrogepant/first_approval": "opus"
 },
 "q_df4ec639914f": {
 "functional_area:ba23": "opus",
@@ -14074,6 +14137,9 @@
 "metabolite:l_amphetamine/bindings[dat:releaser]": "sonnet",
 "metabolite:l_amphetamine/bindings[net:releaser]": "sonnet"
 },
+"q_e72b48ce9f58": {
+"drug:atogepant/categories": "opus"
+},
 "q_e72c12a7fcd5": {
 "drug:pimozide/bindings[h1:antagonist]": "sonnet"
 },
@@ -14196,6 +14262,9 @@
 },
 "q_e92d77b7f09e": {
 "drug:prazosin/brands[Minipress]": "sonnet"
+},
+"q_e93e90208d46": {
+"drug:methysergide/categories": "opus"
 },
 "q_e944ae5e2eda": {
 "drug:thioridazine/excretion[route:fecal]": "opus"
@@ -14432,6 +14501,9 @@
 "drug:buspirone/excretion[route:fecal]": "opus",
 "drug:buspirone/excretion[route:renal]": "opus"
 },
+"q_edcb0d1c4a18": {
+"drug:dihydroergotamine/originator": "opus"
+},
 "q_edd1f55f5a19": {
 "drug:olanzapine/workup[lipids:before]": "opus",
 "drug:olanzapine/workup[lipids:during]": "opus"
@@ -14569,6 +14641,9 @@
 },
 "q_ef67f40a99b1": {
 "drug:memantine/bindings[sigma1:agonist]": "opus"
+},
+"q_ef803fee3368": {
+"drug:dihydroergotamine/excretion[route:renal]": "opus"
 },
 "q_ef95258483bd": {
 "drug:amitriptyline/half_life": "sonnet"

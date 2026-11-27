@@ -2757,5 +2757,53 @@
     "qid": "e0831d7a"
    }
   ]
+ },
+ "ubrogepant": {
+  "approval": {
+   "agency": "fda",
+   "country": "us",
+   "index": 0,
+   "year": 2019,
+   "qid": "462aad1d"
+  },
+  "withdrawals": []
+ },
+ "atogepant": {
+  "approval": {
+   "agency": null,
+   "country": "us",
+   "index": 0,
+   "year": 2021,
+   "qid": "852c4c72"
+  },
+  "withdrawals": []
+ },
+ "ergotamine": {
+  "approval": {
+   "agency": null,
+   "country": null,
+   "index": 0,
+   "year": 1921,
+   "qid": "337dd40c"
+  },
+  "withdrawals": []
+ },
+ "methysergide": {
+  "approval": {
+   "agency": null,
+   "country": null,
+   "index": 0,
+   "year": 1959,
+   "qid": "7a06d8fe"
+  },
+  "withdrawals": [
+   {
+    "country": "us",
+    "index": 1,
+    "reason": "unstated",
+    "year": 2002,
+    "qid": "cc21d66e"
+   }
+  ]
  }
 }

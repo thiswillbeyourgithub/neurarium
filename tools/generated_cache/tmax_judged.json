@@ -1036,5 +1036,15 @@
   "hours": 1.8,
   "index": 0,
   "qid": "5d1572ec"
+ },
+ "ubrogepant": {
+  "index": 0,
+  "hours": 1.5,
+  "qid": "4952799c"
+ },
+ "dihydroergotamine": {
+  "index": 1,
+  "hours": 0.75,
+  "qid": "70179ef4"
  }
 }

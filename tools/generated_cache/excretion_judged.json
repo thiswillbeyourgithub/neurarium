@@ -6373,5 +6373,50 @@
    "value": "urine"
   }
  ],
- "eletriptan": []
+ "eletriptan": [],
+ "ubrogepant": [
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "d91c657c",
+   "value": "fecal"
+  },
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "d91c657c",
+   "value": "renal"
+  },
+  {
+   "amount": "6%",
+   "aspect": "unchanged",
+   "index": 2,
+   "qid": "66c53037",
+   "value": "urine"
+  }
+ ],
+ "ergotamine": [
+  {
+   "amount": "90%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "c4a0d2e8",
+   "value": "fecal"
+  }
+ ],
+ "dihydroergotamine": [
+  {
+   "aspect": "route",
+   "index": 1,
+   "qid": "d66124d3",
+   "value": "fecal"
+  },
+  {
+   "amount": "2 %",
+   "aspect": "route",
+   "index": 2,
+   "qid": "cbdacf02",
+   "value": "renal"
+  }
+ ]
 }

@@ -200,6 +200,15 @@
       "Ce médicament n'est actuellement plus commercialisé en France ."
     ]
   },
+  "atogepant": {
+    "fr_slug": "atogepant",
+    "fr_title": "Atogepant",
+    "name": "Atogepant",
+    "sentences": [
+      "Identification",
+      "L' Atogepant , vendu sous le nom de marque Qulipta , est un médicament utilisé pour traiter les migraines ."
+    ]
+  },
   "atomoxetine": {
     "fr_slug": "atomox_tine",
     "fr_title": "Atomoxétine",
@@ -769,6 +778,14 @@
       "En Belgique, on trouve la dihydrocodéine sous forme à libération immédiate pour soulager la toux sèche sous le nom de Paracodine ."
     ]
   },
+  "dihydroergotamine": {
+    "fr_slug": "dihydroergotamine",
+    "fr_title": "Dihydroergotamine",
+    "name": "Dihydroergotamine",
+    "sentences": [
+      "Dihydroergotamine"
+    ]
+  },
   "dimenhydrinate": {
     "fr_slug": "dim_nhydrinate",
     "fr_title": "Diménhydrinate",
@@ -875,6 +892,14 @@
     "sentences": [
       "Informations générales",
       "L’ érénumab , commercialisé sous le nom d'Aimovig par le groupe Novartis , est un anticorps monoclonal humain qui se fixe au récepteur du peptide relié au gène de la calcitonine (CGRP) ."
+    ]
+  },
+  "ergotamine": {
+    "fr_slug": "ergotamine",
+    "fr_title": "Ergotamine",
+    "name": "Ergotamine",
+    "sentences": [
+      "Structure de l'ergotamine"
     ]
   },
   "escitalopram": {
@@ -2613,6 +2638,15 @@
     "sentences": [
       "Identification",
       "Il est commercialisé en France sous le nom de Navoban par le laboratoire Novartis depuis le 17 février 1995 ."
+    ]
+  },
+  "ubrogepant": {
+    "fr_slug": "ubrogepant",
+    "fr_title": "Ubrogepant",
+    "name": "Ubrogepant",
+    "sentences": [
+      "L' ubrogepant est une molécule de la famille des gépants , inhibitrice du récepteur au peptide relié au gène calcitonine , utilisé comme médicament de la migraine , .",
+      "Elle n'est pas commercialisé en France en 2025."
     ]
   },
   "valbenazine": {

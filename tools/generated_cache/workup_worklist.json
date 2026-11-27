@@ -11580,5 +11580,37 @@
     "qid": "54ab87d7"
    }
   ]
+ },
+ "atogepant": {
+  "page": "67880725",
+  "denomination": "AQUIPTA 10 mg, comprimé",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.2",
+    "under": "Insuffisance rénale",
+    "quote": "Aucun ajustement posologique n’est recommandé chez les patients présentant une insuffisance rénale légère ou modérée (voir rubrique 5.2). Chez les patients présentant une insuffisance rénale sévère (clairance de la créatinine [ClCr] de 15 à 29 mL/min) et chez les patients atteints d’insuffisance rénale terminale (IRT) (ClCr < 15 mL/min), la dose recommandée est de 10 mg une fois par jour. Chez les patients atteints d’IRT sous hémodialyse intermittente, AQUIPTA doit être pris de préférence après la séance de dialyse.",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "a06c521e"
+   }
+  ]
+ },
+ "dihydroergotamine": {
+  "page": "62455371",
+  "denomination": "DIERGOSPRAY 4 mg/ml, solution pour pulvérisation nasale",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.3",
+    "under": "",
+    "quote": "Conditions prédisposant à des réactions angiospastiques : insuffisance coronaire (en particulier angor instable ou spastique), états infectieux sévères (septicémie), choc, maladie vasculaire oblitérante, maladies vasculaires périphériques telles que syndrome de Raynaud, antécédents d’accident ischémique transitoire ou de souffrance cérébrale ou d’hypertension artérielle mal contrôlée.",
+    "tests": [
+     "blood_pressure"
+    ],
+    "qid": "66c40eda"
+   }
+  ]
  }
 }

@@ -2539,6 +2539,33 @@
     "value": "acidic_faster"
    }
   ],
+  "dihydroergotamine": [
+   {
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "bdpm",
+      "page": "62455371",
+      "provenance": "verified",
+      "quote": "L’excrétion se fait essentiellement par les fèces via la bile."
+     }
+    ],
+    "value": "fecal"
+   },
+   {
+    "amount": "2 %",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "bdpm",
+      "page": "62455371",
+      "provenance": "verified",
+      "quote": "Après administration nasale, l’excrétion urinaire de la substance mère et des métabolites est d’environ 2 %."
+     }
+    ],
+    "value": "renal"
+   }
+  ],
   "diphenhydramine": [
    {
     "amount": "94%",
@@ -3021,6 +3048,21 @@
      }
     ],
     "value": "acidic_faster"
+   }
+  ],
+  "ergotamine": [
+   {
+    "amount": "90%",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "ergotamine",
+      "provenance": "verified",
+      "quote": "Excretion | 90% Bile duct"
+     }
+    ],
+    "value": "fecal"
    }
   ],
   "escitalopram": [
@@ -9264,6 +9306,45 @@
      }
     ],
     "value": "fecal"
+   }
+  ],
+  "ubrogepant": [
+   {
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "dailymed",
+      "page": "36106b14-d410-4faf-a361-2871de8198c3",
+      "provenance": "verified",
+      "quote": "Ubrogepant is excreted mostly via the biliary/fecal route, while the renal route is a minor route of elimination."
+     }
+    ],
+    "value": "fecal"
+   },
+   {
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "dailymed",
+      "page": "36106b14-d410-4faf-a361-2871de8198c3",
+      "provenance": "verified",
+      "quote": "Ubrogepant is excreted mostly via the biliary/fecal route, while the renal route is a minor route of elimination."
+     }
+    ],
+    "value": "renal"
+   },
+   {
+    "amount": "6%",
+    "aspect": "unchanged",
+    "sources": [
+     {
+      "corpus": "dailymed",
+      "page": "36106b14-d410-4faf-a361-2871de8198c3",
+      "provenance": "verified",
+      "quote": "14 C]-ubrogepant to healthy male subjects, 42% and 6% of the dose was recovered as unchanged ubrogepant in feces and urine, respectively."
+     }
+    ],
+    "value": "urine"
    }
   ],
   "valbenazine": [
