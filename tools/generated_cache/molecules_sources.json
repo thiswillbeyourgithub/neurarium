@@ -1616,5 +1616,25 @@
     "file": "File:Rufinamide.svg",
     "url": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Rufinamide.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
     "title": "Rufinamide"
+  },
+  "dihydroergotamine": {
+    "file": "File:Dihydroergotamine.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/9/93/Dihydroergotamine.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Dihydroergotamine"
+  },
+  "ergotamine": {
+    "file": "File:Ergotamine-skeletal.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/7f/Ergotamine-skeletal.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Ergotamine"
+  },
+  "methysergide": {
+    "file": "File:Methysergide.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/2/21/Methysergide.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Methysergide"
+  },
+  "ubrogepant": {
+    "file": "File:Ubrogepant.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Ubrogepant.svg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=original",
+    "title": "Ubrogepant"
   }
 }
