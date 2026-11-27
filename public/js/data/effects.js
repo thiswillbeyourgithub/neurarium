@@ -29,11 +29,16 @@ export function resolveTargetAnnotations({ targets, drugs, drugById, metaRecord,
   const effectModes = Object.fromEntries(Object.entries(metaRecord.receptor_effect_modes || {})
     .map(([k, v]) => [k, { label: localize(v.label), actions: v.actions || [] }]));
   const effectLabels = localizeMap(metaRecord.receptor_effect_labels);
+  // Where each effect arises (central / peripheral / both), for the effect-site switch
+  // (js/effect-site.js); an id the build did not place counts as both, so it never hides.
+  const sites = metaRecord.receptor_effect_sites || {};
+  const siteOf = (id) => sites[id] || "both";
   const effectsByTarget = new Map();
   for (const tgt of targets) {
     const raw = tgt.receptor ? tgt.receptor.effects : (drugTargets[tgt.id] || {}).effects;
     const rows = resolveEffects(raw, effectModes, effectLabels)
-      .map((e) => ({ ...e, sources: mapSources(e.sources), uncertainty: mapUncertainty(e.uncertainty) }));
+      .map((e) => ({ ...e, site: siteOf(e.effect), sources: mapSources(e.sources),
+        uncertainty: mapUncertainty(e.uncertainty) }));
     tgt.effectInfo = rows;
     // {searched, corpora} when every required corpus was searched and none states an
     // effect (tools/data_generators/unknown.py): the panel's blue UNKNOWN row. Never an
@@ -52,8 +57,9 @@ export function resolveTargetAnnotations({ targets, drugs, drugById, metaRecord,
   const effectRead = readEffectIndex(effectIndex, new Map(targets.map((tg) => [tg.id, tg])),
     effectsByTarget, new Map(drugs.map((d) => [d.id, d])), effectLabels);
   const effects = effectRead.effects
-    .map((e) => ({ ...e, name: e.label, keywords: effectKeywords(e.id, metaRecord) }));
+    .map((e) => ({ ...e, site: siteOf(e.id), name: e.label, keywords: effectKeywords(e.id, metaRecord) }));
   const possibleEffectsByDrug = effectRead.byDrug;
+  for (const list of possibleEffectsByDrug.values()) for (const e of list) e.site = siteOf(e.effect);
 
   // receptor_release_modulation nodes (BETA): target id -> resolved rows, for the
   // receptor panel's Downstream section and the drug panel's derived release changes
