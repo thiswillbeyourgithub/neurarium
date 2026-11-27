@@ -8271,6 +8271,124 @@
      "qid": "4a77214b"
     }
    ]
+  },
+  "carisoprodol": {
+   "name": "Carisoprodol",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "carisoprodol",
+     "line": "Carisoprodol was approved for medical use in the United States in 1959.",
+     "context": "Some of its effects are believed to occur after metabolic conversion into meprobamate , carisoprodol's main active metabolite.",
+     "qid": "4812ca00"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "carisoprodol",
+     "line": "Its approval in the European Union was withdrawn in 2008.",
+     "context": "Carisoprodol was approved for medical use in the United States in 1959.",
+     "qid": "790b0380"
+    }
+   ]
+  },
+  "opicapone": {
+   "name": "Opicapone",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opicapone",
+     "line": "In June 2016, it was authorised for use in the European Union.",
+     "context": "This helps to improve the symptoms of Parkinson's disease, such as stiffness and slowness of movement.",
+     "qid": "abeb93f7"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opicapone",
+     "line": "It was authorised for use in the United States in April 2020.",
+     "context": "In June 2016, it was authorised for use in the European Union.",
+     "qid": "803d9e72"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opicapone",
+     "line": "Opicapone was authorised for medical use in the European Union in June 2016.",
+     "context": "It was authorised for use in the United States in April 2020.",
+     "qid": "b557a8e8"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opicapone",
+     "line": "Opicapone was authorised for medical use in the United States in April 2020.",
+     "context": "In February 2017, its developer Bial sold exclusive marketing rights for the United States and Canada to Neurocrine Biosciences for an initial payment of US$30 million .",
+     "qid": "680c99d3"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opicapone",
+     "line": "On 16 December 2021, the Committee for Medicinal Products for Human Use (CHMP) of the European Medicines Agency (EMA) adopted a positive opinion, recommending the granting of a marketing authorisation for the medicinal product Ontilyv, intended for the treatment of Parkinson's disease.",
+     "context": "The benefit was evaluated by measuring the change from baseline in total daily \"off\" time in opicapone- and placebo-receiving participants.",
+     "qid": "56f3b81a"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opicapone",
+     "line": "Opicapone was approved for medical use in the European Union in February 2022.",
+     "context": "The applicant for this medicinal product is Bial Portela & Companhia S.A.",
+     "qid": "b8151402"
+    }
+   ]
+  },
+  "cenobamate": {
+   "name": "Cenobamate",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "cenobamate",
+     "line": "Cenobamate was approved for medical use in the United States in November 2019, and placed in Schedule V of the Controlled Substances Act in March 2020.",
+     "context": "It is taken by mouth .",
+     "qid": "fa2e8f4a"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "cenobamate",
+     "line": "Cenobamate was authorized for medical use in the European Union in March 2021, approved for use in the UK in December 2021, and approved for use in Canada in June 2023.",
+     "context": "Cenobamate was approved for medical use in the United States in November 2019, and placed in Schedule V of the Controlled Substances Act in March 2020.",
+     "qid": "a88a2438"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "cenobamate",
+     "line": "The US Food and Drug Administration (FDA) approved cenobamate in November 2019, and granted the application for Xcopri to SK Life Science Inc.",
+     "context": "During the trials, doses of 100, 200, and 400 milligrams (mg) daily reduced the number of seizures per 28 days compared with the placebo group.",
+     "qid": "fcb157e8"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "cenobamate",
+     "line": "In January 2021, the Committee for Medicinal Products for Human Use of the European Medicines Agency adopted a positive opinion, recommending the granting of a marketing authorization.",
+     "context": "The US Food and Drug Administration (FDA) approved cenobamate in November 2019, and granted the application for Xcopri to SK Life Science Inc.",
+     "qid": "c1ed7325"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "cenobamate",
+     "line": "Ontozry was authorized for medical use in the European Union in March 2021.",
+     "context": "The applicant for this medicinal product is Arvelle Therapeutics Netherlands B.V.",
+     "qid": "d3957cbd"
+    }
+   ]
+  },
+  "rufinamide": {
+   "name": "Rufinamide",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "rufinamide",
+     "line": "Rufinamide was approved by the US Food and Drug Administration (FDA) in November 2008, as adjunctive treatment of seizures associated with Lennox-Gastaut syndrome in children four years and older and adults.",
+     "context": "Rufinamide, a triazole derivative, was developed in 2004 by Novartis Pharma, AG , and is manufactured by Eisai .",
+     "qid": "7e0b88c1"
+    }
+   ]
   }
  }
 }

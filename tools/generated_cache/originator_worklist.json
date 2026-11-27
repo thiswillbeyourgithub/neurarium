@@ -5276,6 +5276,67 @@
      "qid": "7304a665"
     }
    ]
+  },
+  "carisoprodol": {
+   "name": "Carisoprodol",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "carisoprodol",
+     "line": "In June 1959, several American pharmacologists convened at Wayne State University in Detroit to discuss a newly discovered structural analogue of meprobamate .",
+     "qid": "87bd4a06"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "carisoprodol",
+     "line": "It had been developed by Frank Berger at Wallace Laboratories and was named carisoprodol.",
+     "qid": "e9249458"
+    }
+   ]
+  },
+  "tolperisone": {
+   "name": "Tolperisone",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "tolperisone",
+     "line": "Tolperisone was developed in the 1960s in Hungary.",
+     "qid": "226e300d"
+    }
+   ]
+  },
+  "opicapone": {
+   "name": "Opicapone",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opicapone",
+     "line": "In February 2017, its developer Bial sold exclusive marketing rights for the United States and Canada to Neurocrine Biosciences for an initial payment of US$30 million .",
+     "qid": "697d8caa"
+    }
+   ]
+  },
+  "rufinamide": {
+   "name": "Rufinamide",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "rufinamide",
+     "line": "Rufinamide, a triazole derivative, was developed in 2004 by Novartis Pharma, AG , and is manufactured by Eisai .",
+     "qid": "b98c99cd"
+    }
+   ]
+  },
+  "felbamate": {
+   "name": "Felbamate",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "felbamate",
+     "line": "Felbamate was discovered by Frank Berger at Wallace Laboratories .",
+     "qid": "3d7954a7"
+    }
+   ]
   }
  },
  "companies": {

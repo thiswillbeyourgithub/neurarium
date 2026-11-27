@@ -744,7 +744,32 @@
   "oxymorphone": null,
   "dihydrocodeine": null,
   "nalbuphine": null,
-  "orphenadrine": null
+  "orphenadrine": null,
+  "carisoprodol": {
+   "index": 1,
+   "name": "Wallace Laboratories",
+   "company": null,
+   "qid": "e9249458"
+  },
+  "felbamate": {
+   "index": 0,
+   "name": "Wallace Laboratories",
+   "company": null,
+   "qid": "3d7954a7"
+  },
+  "rufinamide": {
+   "index": 0,
+   "name": "Novartis Pharma, AG",
+   "company": null,
+   "qid": "b98c99cd"
+  },
+  "opicapone": {
+   "index": 0,
+   "name": "Bial",
+   "company": null,
+   "qid": "697d8caa"
+  },
+  "tolperisone": null
  },
  "companies": {
   "novartis": {

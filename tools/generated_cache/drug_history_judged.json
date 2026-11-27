@@ -2563,5 +2563,53 @@
    "qid": "4a77214b"
   },
   "withdrawals": []
+ },
+ "carisoprodol": {
+  "approval": {
+   "agency": null,
+   "country": "us",
+   "index": 0,
+   "year": 1959,
+   "qid": "4812ca00"
+  },
+  "withdrawals": [
+   {
+    "country": "eu",
+    "index": 1,
+    "reason": "unstated",
+    "year": 2008,
+    "qid": "790b0380"
+   }
+  ]
+ },
+ "opicapone": {
+  "approval": {
+   "agency": null,
+   "country": "eu",
+   "index": 2,
+   "year": 2016,
+   "qid": "b557a8e8"
+  },
+  "withdrawals": []
+ },
+ "cenobamate": {
+  "approval": {
+   "agency": null,
+   "country": "us",
+   "index": 0,
+   "year": 2019,
+   "qid": "fa2e8f4a"
+  },
+  "withdrawals": []
+ },
+ "rufinamide": {
+  "approval": {
+   "agency": "fda",
+   "country": "us",
+   "index": 0,
+   "year": 2008,
+   "qid": "7e0b88c1"
+  },
+  "withdrawals": []
  }
 }
