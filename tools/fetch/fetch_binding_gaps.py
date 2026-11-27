@@ -17,7 +17,7 @@ author-side, see ``CLAUDE.local.md``) often says it ("tetrabenazine is a reversi
 inhibitor"). The drugbox's "Biomolecular targets" row would be the structured answer, but
 almost no stored article carries one, so prose is what closes the class.
 
-Three inputs per drug, both minus every target it already covers
+Four inputs per drug, each minus every target it already covers
 (``binding_gaps.bound_targets``):
 
 * **drugbox**: a ``Biomolecular targets`` / ``Inhibited transporters`` / ``Target`` cell
@@ -27,6 +27,10 @@ Three inputs per drug, both minus every target it already covers
   the same extractor the direction pass uses) cut into sentences
   (``lib.corpora.wikipedia.SENTENCE_SPLIT``), each carrying a direction word and naming a
   modeled target under the shared matcher ``tools/target_aliases.py``;
+* **prose_list**: a pharmacology section's property list, each "- " item under a lead
+  line ending in ":" (:func:`list_items`, the lead carried as ``lead`` for the judge),
+  which the prose extractor skips; offered after every prose candidate so a judged
+  index never shifts;
 * **rcp**: the drug's French RCP section 5.1 (corpus #24 ``bdpm_rcp``, pages built by
   ``fetch_bdpm_rcp.py``), a lead line ending in ":" joined with its list items
   (:func:`rcp_units`), French class words read through ``binding_gaps.FR_ALIASES``. Each
@@ -67,6 +71,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -146,6 +151,9 @@ def candidates_for(drug: dict, page_text: str, aliases: dict[str, list[str]],
     for origin, line in [("drugbox", ln) for ln in drugbox_cells(page_text)] + \
             [("prose", ln) for ln in prose_sentences(page_text)]:
         out += line_candidates(drug, origin, line, aliases, names, siblings, bg.WIKI_CORPUS)
+    for lead, item in list_items(page_text):
+        out += [{**c, "lead": lead} for c in
+                line_candidates(drug, "prose_list", item, aliases, names, siblings, bg.WIKI_CORPUS)]
     return out
 
 
@@ -178,6 +186,34 @@ def rcp_units(page_text: str) -> list[str]:
             continue
         lead = line if line.endswith(":") else None
         out.append(line)
+    return out
+
+
+# A Wikipedia heading whose section states the drug's pharmacodynamics.
+PHARMACOLOGY_HEADING_RE = re.compile(r"^#+\s*(Pharmacology|Pharmacodynamics|Mechanism of action)\b",
+                                     re.IGNORECASE)
+
+
+def list_items(page_text: str) -> list[tuple[str, str]]:
+    """``(lead, item)`` for each "- " item under a lead line ending in ":" in an
+    article's pharmacology sections, the item carrying a direction word: a property
+    list ("Orphenadrine is known to have these pharmacological properties:" then
+    "- H 1 receptor antagonist ( antihistamine )") that :func:`prose_sentences` never
+    sees, ``action_lines`` dropping every "- " line.
+
+    The item alone is the quote (a verbatim line, one claim, its own negation scope);
+    the lead rides along so the judge reads whose property it is."""
+    out, inside, lead = [], False, None
+    for raw in page_text.splitlines():
+        line = raw.strip()
+        if line.startswith("#"):
+            inside, lead = bool(PHARMACOLOGY_HEADING_RE.match(line)), None
+        elif inside and line.startswith("- "):
+            item = line[2:].strip()
+            if lead and bd.DIRECTION_RE.search(item) and (lead, item) not in out:
+                out.append((lead, item))
+        elif inside and line:
+            lead = line if line.endswith(":") else None
     return out
 
 

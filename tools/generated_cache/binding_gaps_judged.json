@@ -2199,5 +2199,288 @@
    "action": "pam",
    "qid": "40ee36d2"
   }
+ ],
+ "butorphanol": [
+  {
+   "index": 0,
+   "target": "kappa",
+   "pick": true,
+   "action": "partial_agonist",
+   "qid": "e22f53da"
+  },
+  {
+   "index": 1,
+   "target": "mu",
+   "pick": true,
+   "action": "partial_agonist",
+   "qid": "e22f53da"
+  },
+  {
+   "index": 2,
+   "target": "kappa",
+   "pick": false,
+   "reason": "kappa already picked from index 0",
+   "qid": "5eac9e14"
+  },
+  {
+   "index": 3,
+   "target": "kappa",
+   "pick": false,
+   "reason": "kappa already picked from index 0",
+   "qid": "d29f813e"
+  }
+ ],
+ "cyclobenzaprine": [
+  {
+   "index": 0,
+   "target": "muscarinic",
+   "pick": false,
+   "reason": "class-wide receptor families; same targets picked from index 2-11 sentence",
+   "qid": "821414dd"
+  },
+  {
+   "index": 1,
+   "target": "net",
+   "pick": false,
+   "reason": "net already picked from index 11",
+   "qid": "821414dd"
+  },
+  {
+   "index": 2,
+   "target": "5ht2a",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "7d9e7abf"
+  },
+  {
+   "index": 3,
+   "target": "5ht2b",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "7d9e7abf"
+  },
+  {
+   "index": 4,
+   "target": "5ht2c",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "7d9e7abf"
+  },
+  {
+   "index": 5,
+   "target": "5ht6",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "7d9e7abf"
+  },
+  {
+   "index": 6,
+   "target": "5ht7",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "7d9e7abf"
+  },
+  {
+   "index": 7,
+   "target": "alpha1",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "7d9e7abf"
+  },
+  {
+   "index": 8,
+   "target": "alpha2",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "7d9e7abf"
+  },
+  {
+   "index": 9,
+   "target": "h1",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "7d9e7abf"
+  },
+  {
+   "index": 10,
+   "target": "muscarinic",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "7d9e7abf"
+  },
+  {
+   "index": 11,
+   "target": "net",
+   "pick": true,
+   "action": "reuptake_inhibitor",
+   "qid": "7d9e7abf"
+  },
+  {
+   "index": 12,
+   "target": "m1",
+   "pick": false,
+   "reason": "hedged claim (is said to be)",
+   "qid": "13ed85c1"
+  },
+  {
+   "index": 13,
+   "target": "m2",
+   "pick": false,
+   "reason": "hedged claim (is said to be)",
+   "qid": "13ed85c1"
+  },
+  {
+   "index": 14,
+   "target": "m3",
+   "pick": false,
+   "reason": "hedged claim (is said to be)",
+   "qid": "13ed85c1"
+  },
+  {
+   "index": 15,
+   "target": "muscarinic",
+   "pick": false,
+   "reason": "not this drug's direct pharmacological claim (class-wide, comparison, animal-only or duplicate)",
+   "qid": "13ed85c1"
+  }
+ ],
+ "levomethadone": [
+  {
+   "index": 0,
+   "target": "nmda",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "f8cd1c11"
+  }
+ ],
+ "nalbuphine": [
+  {
+   "index": 0,
+   "target": "delta",
+   "pick": false,
+   "reason": "no direction (relatively low affinity)",
+   "qid": "deb9b3a2"
+  },
+  {
+   "index": 1,
+   "target": "kappa",
+   "pick": true,
+   "action": "partial_agonist",
+   "qid": "deb9b3a2"
+  },
+  {
+   "index": 2,
+   "target": "mu",
+   "pick": true,
+   "action": "partial_agonist",
+   "qid": "deb9b3a2"
+  },
+  {
+   "index": 3,
+   "target": "kappa",
+   "pick": false,
+   "reason": "not this drug's direct pharmacological claim (class-wide, comparison, animal-only or duplicate)",
+   "qid": "fd838942"
+  },
+  {
+   "index": 4,
+   "target": "mu",
+   "pick": false,
+   "reason": "not this drug's direct pharmacological claim (class-wide, comparison, animal-only or duplicate)",
+   "qid": "fd838942"
+  },
+  {
+   "index": 5,
+   "target": "kappa",
+   "pick": false,
+   "reason": "not this drug's direct pharmacological claim (class-wide, comparison, animal-only or duplicate)",
+   "qid": "8da6109a"
+  },
+  {
+   "index": 6,
+   "target": "mu",
+   "pick": false,
+   "reason": "not this drug's direct pharmacological claim (class-wide, comparison, animal-only or duplicate)",
+   "qid": "8da6109a"
+  },
+  {
+   "index": 7,
+   "target": "kappa",
+   "pick": false,
+   "reason": "not this drug's direct pharmacological claim (class-wide, comparison, animal-only or duplicate)",
+   "qid": "f57f7e97"
+  },
+  {
+   "index": 8,
+   "target": "mu",
+   "pick": false,
+   "reason": "not this drug's direct pharmacological claim (class-wide, comparison, animal-only or duplicate)",
+   "qid": "f57f7e97"
+  },
+  {
+   "index": 9,
+   "target": "mu",
+   "pick": false,
+   "reason": "not this drug's direct pharmacological claim (class-wide, comparison, animal-only or duplicate)",
+   "qid": "c283713a"
+  },
+  {
+   "index": 10,
+   "target": "kappa",
+   "pick": false,
+   "reason": "not this drug's direct pharmacological claim (class-wide, comparison, animal-only or duplicate)",
+   "qid": "22fdc9b9"
+  },
+  {
+   "index": 11,
+   "target": "kappa",
+   "pick": false,
+   "reason": "not this drug's direct pharmacological claim (class-wide, comparison, animal-only or duplicate)",
+   "qid": "c93d10a4"
+  },
+  {
+   "index": 12,
+   "target": "mu",
+   "pick": false,
+   "reason": "not this drug's direct pharmacological claim (class-wide, comparison, animal-only or duplicate)",
+   "qid": "c93d10a4"
+  },
+  {
+   "index": 13,
+   "target": "mu",
+   "pick": false,
+   "reason": "not this drug's direct pharmacological claim (class-wide, comparison, animal-only or duplicate)",
+   "qid": "8aad2a2f"
+  },
+  {
+   "index": 14,
+   "target": "alpha2",
+   "pick": false,
+   "reason": "not this drug's direct pharmacological claim (class-wide, comparison, animal-only or duplicate)",
+   "qid": "eea48d61"
+  }
+ ],
+ "orphenadrine": [
+  {
+   "index": 0,
+   "target": "h1",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "af294e54"
+  },
+  {
+   "index": 1,
+   "target": "nmda",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "c352499e"
+  },
+  {
+   "index": 2,
+   "target": "dat",
+   "pick": true,
+   "action": "reuptake_inhibitor",
+   "qid": "487b7a98"
+  }
  ]
 }

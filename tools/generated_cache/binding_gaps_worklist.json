@@ -2856,5 +2856,321 @@
     "qid": "40ee36d2"
    }
   ]
+ },
+ {
+  "drug": "butorphanol",
+  "name": "Butorphanol",
+  "slug": "butorphanol",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "kappa",
+    "target_name": "κ (KOR)",
+    "origin": "prose",
+    "line": "Butorphanol exhibits partial agonist and antagonist activity at the μ-opioid receptor , as well as partial agonist activity at the κ-opioid receptor (K i = 2.5 nM;",
+    "qid": "e22f53da"
+   },
+   {
+    "target": "mu",
+    "target_name": "μ (MOR)",
+    "origin": "prose",
+    "line": "Butorphanol exhibits partial agonist and antagonist activity at the μ-opioid receptor , as well as partial agonist activity at the κ-opioid receptor (K i = 2.5 nM;",
+    "qid": "e22f53da"
+   },
+   {
+    "target": "kappa",
+    "target_name": "κ (KOR)",
+    "origin": "prose",
+    "line": "Because of its κ-agonist activity, at analgesic doses butorphanol increases pulmonary arterial pressure and cardiac work.",
+    "qid": "5eac9e14"
+   },
+   {
+    "target": "kappa",
+    "target_name": "κ (KOR)",
+    "origin": "prose",
+    "line": "Additionally, κ-agonism can cause dysphoria at therapeutic or supratherapeutic doses; this gives butorphanol a lower potential for abuse than other opioid drugs.",
+    "qid": "d29f813e"
+   }
+  ]
+ },
+ {
+  "drug": "cyclobenzaprine",
+  "name": "Cyclobenzaprine",
+  "slug": "cyclobenzaprine",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "muscarinic",
+    "target_name": "Muscarinic acetylcholine receptors",
+    "origin": "prose",
+    "line": "In any case, it is known to inhibit serotonin and norepinephrine reuptake and to block serotonin , adrenergic , histamine , and muscarinic acetylcholine receptors .",
+    "qid": "821414dd"
+   },
+   {
+    "target": "net",
+    "target_name": "Norepinephrine transporter (NET)",
+    "origin": "prose",
+    "line": "In any case, it is known to inhibit serotonin and norepinephrine reuptake and to block serotonin , adrenergic , histamine , and muscarinic acetylcholine receptors .",
+    "qid": "821414dd"
+   },
+   {
+    "target": "5ht2a",
+    "target_name": "5-HT2A",
+    "origin": "prose",
+    "line": "Its known actions include serotonin–norepinephrine reuptake inhibition , serotonin 5-HT 2A , 5-HT 2B , 5-HT 2C , 5-HT 6 , and 5-HT 7 receptor antagonism , α 1 - and α 2 -adrenergic receptor antagonism, histamine H 1 receptor noncompetitive antagonism , and muscarinic acetylcholine receptor antagonism.",
+    "qid": "7d9e7abf"
+   },
+   {
+    "target": "5ht2b",
+    "target_name": "5-HT2B",
+    "origin": "prose",
+    "line": "Its known actions include serotonin–norepinephrine reuptake inhibition , serotonin 5-HT 2A , 5-HT 2B , 5-HT 2C , 5-HT 6 , and 5-HT 7 receptor antagonism , α 1 - and α 2 -adrenergic receptor antagonism, histamine H 1 receptor noncompetitive antagonism , and muscarinic acetylcholine receptor antagonism.",
+    "qid": "7d9e7abf"
+   },
+   {
+    "target": "5ht2c",
+    "target_name": "5-HT2C",
+    "origin": "prose",
+    "line": "Its known actions include serotonin–norepinephrine reuptake inhibition , serotonin 5-HT 2A , 5-HT 2B , 5-HT 2C , 5-HT 6 , and 5-HT 7 receptor antagonism , α 1 - and α 2 -adrenergic receptor antagonism, histamine H 1 receptor noncompetitive antagonism , and muscarinic acetylcholine receptor antagonism.",
+    "qid": "7d9e7abf"
+   },
+   {
+    "target": "5ht6",
+    "target_name": "5-HT6",
+    "origin": "prose",
+    "line": "Its known actions include serotonin–norepinephrine reuptake inhibition , serotonin 5-HT 2A , 5-HT 2B , 5-HT 2C , 5-HT 6 , and 5-HT 7 receptor antagonism , α 1 - and α 2 -adrenergic receptor antagonism, histamine H 1 receptor noncompetitive antagonism , and muscarinic acetylcholine receptor antagonism.",
+    "qid": "7d9e7abf"
+   },
+   {
+    "target": "5ht7",
+    "target_name": "5-HT7",
+    "origin": "prose",
+    "line": "Its known actions include serotonin–norepinephrine reuptake inhibition , serotonin 5-HT 2A , 5-HT 2B , 5-HT 2C , 5-HT 6 , and 5-HT 7 receptor antagonism , α 1 - and α 2 -adrenergic receptor antagonism, histamine H 1 receptor noncompetitive antagonism , and muscarinic acetylcholine receptor antagonism.",
+    "qid": "7d9e7abf"
+   },
+   {
+    "target": "alpha1",
+    "target_name": "α1 adrenergic receptors",
+    "origin": "prose",
+    "line": "Its known actions include serotonin–norepinephrine reuptake inhibition , serotonin 5-HT 2A , 5-HT 2B , 5-HT 2C , 5-HT 6 , and 5-HT 7 receptor antagonism , α 1 - and α 2 -adrenergic receptor antagonism, histamine H 1 receptor noncompetitive antagonism , and muscarinic acetylcholine receptor antagonism.",
+    "qid": "7d9e7abf"
+   },
+   {
+    "target": "alpha2",
+    "target_name": "α2 adrenergic receptors",
+    "origin": "prose",
+    "line": "Its known actions include serotonin–norepinephrine reuptake inhibition , serotonin 5-HT 2A , 5-HT 2B , 5-HT 2C , 5-HT 6 , and 5-HT 7 receptor antagonism , α 1 - and α 2 -adrenergic receptor antagonism, histamine H 1 receptor noncompetitive antagonism , and muscarinic acetylcholine receptor antagonism.",
+    "qid": "7d9e7abf"
+   },
+   {
+    "target": "h1",
+    "target_name": "H1",
+    "origin": "prose",
+    "line": "Its known actions include serotonin–norepinephrine reuptake inhibition , serotonin 5-HT 2A , 5-HT 2B , 5-HT 2C , 5-HT 6 , and 5-HT 7 receptor antagonism , α 1 - and α 2 -adrenergic receptor antagonism, histamine H 1 receptor noncompetitive antagonism , and muscarinic acetylcholine receptor antagonism.",
+    "qid": "7d9e7abf"
+   },
+   {
+    "target": "muscarinic",
+    "target_name": "Muscarinic acetylcholine receptors",
+    "origin": "prose",
+    "line": "Its known actions include serotonin–norepinephrine reuptake inhibition , serotonin 5-HT 2A , 5-HT 2B , 5-HT 2C , 5-HT 6 , and 5-HT 7 receptor antagonism , α 1 - and α 2 -adrenergic receptor antagonism, histamine H 1 receptor noncompetitive antagonism , and muscarinic acetylcholine receptor antagonism.",
+    "qid": "7d9e7abf"
+   },
+   {
+    "target": "net",
+    "target_name": "Norepinephrine transporter (NET)",
+    "origin": "prose",
+    "line": "Its known actions include serotonin–norepinephrine reuptake inhibition , serotonin 5-HT 2A , 5-HT 2B , 5-HT 2C , 5-HT 6 , and 5-HT 7 receptor antagonism , α 1 - and α 2 -adrenergic receptor antagonism, histamine H 1 receptor noncompetitive antagonism , and muscarinic acetylcholine receptor antagonism.",
+    "qid": "7d9e7abf"
+   },
+   {
+    "target": "m1",
+    "target_name": "M1",
+    "origin": "prose",
+    "line": "In terms of its antimuscarinic activity, it is said to be an antagonist of the muscarinic acetylcholine M 1 , M 2 , and M 3 receptors , but not of the muscarinic acetylcholine M 4 or M 5 receptor .",
+    "qid": "13ed85c1"
+   },
+   {
+    "target": "m2",
+    "target_name": "M2",
+    "origin": "prose",
+    "line": "In terms of its antimuscarinic activity, it is said to be an antagonist of the muscarinic acetylcholine M 1 , M 2 , and M 3 receptors , but not of the muscarinic acetylcholine M 4 or M 5 receptor .",
+    "qid": "13ed85c1"
+   },
+   {
+    "target": "m3",
+    "target_name": "M3",
+    "origin": "prose",
+    "line": "In terms of its antimuscarinic activity, it is said to be an antagonist of the muscarinic acetylcholine M 1 , M 2 , and M 3 receptors , but not of the muscarinic acetylcholine M 4 or M 5 receptor .",
+    "qid": "13ed85c1"
+   },
+   {
+    "target": "muscarinic",
+    "target_name": "Muscarinic acetylcholine receptors",
+    "origin": "prose",
+    "line": "In terms of its antimuscarinic activity, it is said to be an antagonist of the muscarinic acetylcholine M 1 , M 2 , and M 3 receptors , but not of the muscarinic acetylcholine M 4 or M 5 receptor .",
+    "qid": "13ed85c1"
+   }
+  ]
+ },
+ {
+  "drug": "levomethadone",
+  "name": "Levomethadone",
+  "slug": "levomethadone",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "nmda",
+    "target_name": "NMDA",
+    "origin": "prose",
+    "line": "In addition to its activity at the opioid receptors , levomethadone has been found to act as a weak competitive antagonist of the N -methyl- D -aspartate (NMDA) receptor complex and as a potent noncompetitive antagonist of the α 3 β 4 nicotinic acetylcholine (nACh) receptor .",
+    "qid": "f8cd1c11"
+   }
+  ]
+ },
+ {
+  "drug": "nalbuphine",
+  "name": "Nalbuphine",
+  "slug": "nalbuphine",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "delta",
+    "target_name": "δ (DOR)",
+    "origin": "prose",
+    "line": "Specifically, it acts as a moderate- efficacy partial agonist or antagonist of the μ-opioid receptor (MOR) and as a high-efficacy partial agonist of the κ-opioid receptor (KOR), whereas it has relatively low affinity for the δ-opioid receptor (DOR) and sigma receptors .",
+    "qid": "deb9b3a2"
+   },
+   {
+    "target": "kappa",
+    "target_name": "κ (KOR)",
+    "origin": "prose",
+    "line": "Specifically, it acts as a moderate- efficacy partial agonist or antagonist of the μ-opioid receptor (MOR) and as a high-efficacy partial agonist of the κ-opioid receptor (KOR), whereas it has relatively low affinity for the δ-opioid receptor (DOR) and sigma receptors .",
+    "qid": "deb9b3a2"
+   },
+   {
+    "target": "mu",
+    "target_name": "μ (MOR)",
+    "origin": "prose",
+    "line": "Specifically, it acts as a moderate- efficacy partial agonist or antagonist of the μ-opioid receptor (MOR) and as a high-efficacy partial agonist of the κ-opioid receptor (KOR), whereas it has relatively low affinity for the δ-opioid receptor (DOR) and sigma receptors .",
+    "qid": "deb9b3a2"
+   },
+   {
+    "target": "kappa",
+    "target_name": "κ (KOR)",
+    "origin": "prose",
+    "line": "Evidence suggests that κ-opioid receptor (KOR) activation can counteract MOR-mediated effects in the brain.",
+    "qid": "fd838942"
+   },
+   {
+    "target": "mu",
+    "target_name": "μ (MOR)",
+    "origin": "prose",
+    "line": "Evidence suggests that κ-opioid receptor (KOR) activation can counteract MOR-mediated effects in the brain.",
+    "qid": "fd838942"
+   },
+   {
+    "target": "kappa",
+    "target_name": "κ (KOR)",
+    "origin": "prose",
+    "line": "It behaves as a moderate- efficacy partial agonist (or mixed agonist/antagonist ) of the MOR and as a high-efficacy partial agonist of the KOR.",
+    "qid": "8da6109a"
+   },
+   {
+    "target": "mu",
+    "target_name": "μ (MOR)",
+    "origin": "prose",
+    "line": "It behaves as a moderate- efficacy partial agonist (or mixed agonist/antagonist ) of the MOR and as a high-efficacy partial agonist of the KOR.",
+    "qid": "8da6109a"
+   },
+   {
+    "target": "kappa",
+    "target_name": "κ (KOR)",
+    "origin": "prose",
+    "line": "The authors point out that the nalbuphine moiety is approximately ten times more pharmacologically potent than the mixed opioid agonist/antagonist butorphanol on an \"antagonist index\" scale which quantitates the drug's ability to act both as an analgesic (via opioid KOR agonism) as well as a MOR antagonist.",
+    "qid": "f57f7e97"
+   },
+   {
+    "target": "mu",
+    "target_name": "μ (MOR)",
+    "origin": "prose",
+    "line": "The authors point out that the nalbuphine moiety is approximately ten times more pharmacologically potent than the mixed opioid agonist/antagonist butorphanol on an \"antagonist index\" scale which quantitates the drug's ability to act both as an analgesic (via opioid KOR agonism) as well as a MOR antagonist.",
+    "qid": "f57f7e97"
+   },
+   {
+    "target": "mu",
+    "target_name": "μ (MOR)",
+    "origin": "prose",
+    "line": "In the search for opioid analgesics with less abuse potential than pure MOR agonist opioids, a number of semisynthetic opioids were developed.",
+    "qid": "c283713a"
+   },
+   {
+    "target": "kappa",
+    "target_name": "κ (KOR)",
+    "origin": "prose",
+    "line": "The mixed agonists-antagonists drug class exerts their analgesic actions by agonistic activity at the KOR.",
+    "qid": "22fdc9b9"
+   },
+   {
+    "target": "kappa",
+    "target_name": "κ (KOR)",
+    "origin": "prose",
+    "line": "While all drugs in this class possess MOR antagonistic activity leading to less abuse potential, nalbuphine is the only approved drug in the mixed agonist–antagonist class listed in terms of its pharmacological actions and selectivities on opioid receptors as a MOR partial agonist or antagonist as well as a KOR agonist (Gustein et al.",
+    "qid": "c93d10a4"
+   },
+   {
+    "target": "mu",
+    "target_name": "μ (MOR)",
+    "origin": "prose",
+    "line": "While all drugs in this class possess MOR antagonistic activity leading to less abuse potential, nalbuphine is the only approved drug in the mixed agonist–antagonist class listed in terms of its pharmacological actions and selectivities on opioid receptors as a MOR partial agonist or antagonist as well as a KOR agonist (Gustein et al.",
+    "qid": "c93d10a4"
+   },
+   {
+    "target": "mu",
+    "target_name": "μ (MOR)",
+    "origin": "prose",
+    "line": "Nalbuphine induces sedation and analgesia in the dog but is less effective compared to μ-opioid receptor agonists.",
+    "qid": "8aad2a2f"
+   },
+   {
+    "target": "alpha2",
+    "target_name": "α2 adrenergic receptors",
+    "origin": "prose",
+    "line": "Combination of nalbuphine with an α 2 -adrenergic receptor agonist or acepromazine provides greater sedation.",
+    "qid": "eea48d61"
+   }
+  ]
+ },
+ {
+  "drug": "orphenadrine",
+  "name": "Orphenadrine",
+  "slug": "orphenadrine",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "h1",
+    "target_name": "H1",
+    "origin": "prose_list",
+    "line": "H 1 receptor antagonist ( antihistamine )",
+    "lead": "Orphenadrine is known to have these pharmacological properties:",
+    "qid": "af294e54"
+   },
+   {
+    "target": "nmda",
+    "target_name": "NMDA",
+    "origin": "prose_list",
+    "line": "NMDA receptor antagonist (K i value of 6.0 ± 0.7 μM , one hundred times less potent than phencyclidine , which binds with a K i of 59 nM)",
+    "lead": "Orphenadrine is known to have these pharmacological properties:",
+    "qid": "c352499e"
+   },
+   {
+    "target": "dat",
+    "target_name": "Dopamine transporter (DAT)",
+    "origin": "prose_list",
+    "line": "NDRI ( norepinephrine and dopamine reuptake inhibitor )",
+    "lead": "Orphenadrine is known to have these pharmacological properties:",
+    "qid": "487b7a98"
+   }
+  ]
  }
 ]
