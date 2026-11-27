@@ -1,4 +1,16 @@
 {
+ "alfentanil": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "63670722",
+    "section": "4.4",
+    "quote": "Des mouvements (myo) cloniques non épileptiques peuvent être observés.",
+    "qid": "93cfb679"
+   }
+  ]
+ },
  "alimemazine": {
   "candidates": [
    {
@@ -1208,6 +1220,18 @@
     "section": "4.4",
     "quote": "Chez les épileptiques en raison de la possibilité d'abaissement du seuil épileptogène ; la survenue de crises convulsives impose l'arrêt du traitement.",
     "qid": "47531671"
+   }
+  ]
+ },
+ "desflurane": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "65421851",
+    "section": "5.1",
+    "quote": "Les études sur l'animal montrent une induction d'anesthésie et un réveil plus rapide que pour l'isoflurane avec un profil cardiorespiratoire similaire. Il n'y a pas eu d'effets de type épileptogène ou d'autres effets indésirables observables à l'EEG et d'autres produits ajoutés au cours de l'anesthésie n'ont pas provoqué d'effets imprévus ou toxiques décelés à l'EEG.",
+    "qid": "9db1a607"
    }
   ]
  },
@@ -4121,6 +4145,18 @@
     "section": "5.1",
     "quote": "Un essai randomisé et contrôlé contre placebo a évalué le stiripentol en association à d’autres anti- épileptiques chez 41 enfants atteints d’une EMSN. Après une phase initiale d’un mois, le placebo (n=20) ou le stiripentol (n=21) a été associé au valproate de sodium et au clobazam pendant une période en double insu de deux mois. Les patients ont ensuite reçu le stiripentol en ouvert. La réponse a été définie comme une diminution de plus de 50% de la fréquence des convulsions cloniques (ou tonicocloniques) au cours du second mois de la période en double insu comparativement à la phase initiale. Le nombre des répondeurs a été de 15 (71%) dans le groupe stiripentol (dont 9 totalement exempts de crises cloniques ou tonicocloniques) contre seulement 1 (5%) dans le groupe placebo, sans disparition totale des crises (IC95%, stiripentol : 52,1-90,7 ; placebo : 0-14,6). L’IC95% de la différence a été de 42,2-85,7. La modification en pourcentage par rapport à la phase initiale a été plus élevée sous stiripentol (-69%) que sous placebo (+7%, p < 0,0001). Des effets indésirables de sévérité modérée (somnolence, diminution de l’appétit) ont été observés chez 21 patients du groupe stiripentol contre 8 du groupe placebo, mais ont disparu chez 12 des 21 patients sous stiripentol après une réduction de la dose des deux autres antiépileptiques conjointement administrés (Chiron et al, Lancet, 2000).",
     "qid": "7e41e0bd"
+   }
+  ]
+ },
+ "sufentanil": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "61562566",
+    "section": "4.4",
+    "quote": "Des mouvements (myo) cloniques non épileptiques peuvent être observés.",
+    "qid": "93cfb679"
    }
   ]
  },

@@ -440,6 +440,19 @@
     ]
    }
   ],
+  "remifentanil": [
+   {
+    "effect": "rem_suppression",
+    "sources": [
+     {
+      "corpus": "papers",
+      "page": "watson2010",
+      "provenance": "verified",
+      "quote": "187 Constant infusion of analgesic doses of remifentanil overnight decreases REM sleep in healthy volunteers."
+     }
+    ]
+   }
+  ],
   "risperidone": [
    {
     "effect": "sws_increase",

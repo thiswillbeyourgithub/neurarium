@@ -1099,6 +1099,26 @@
    }
   ]
  },
+ "remifentanil": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 9,
+    "quote": "187 Constant infusion of analgesic doses of remifentanil overnight decreases REM sleep in healthy volunteers.",
+    "qid": "23638e9c"
+   },
+   {
+    "index": 1,
+    "corpus": "papers",
+    "page": "watson2010",
+    "pdf_page": 18,
+    "quote": "Remifentanil inhibits rapid eye movement sleep but not the nocturnal melatonin surge in humans.",
+    "qid": "181c4715"
+   }
+  ]
+ },
  "risperidone": {
   "candidates": [
    {

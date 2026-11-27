@@ -1040,6 +1040,32 @@
     "timing": "before"
    }
   ],
+  "desflurane": [
+   {
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "65421851",
+      "provenance": "verified",
+      "quote": "Durant l'entretien, la pression artérielle et la fréquence cardiaque doivent être surveillées avec attention dans le cadre de l'évaluation de la profondeur de l'anesthésie (voir rubrique 4.4)."
+     }
+    ],
+    "test": "blood_pressure",
+    "timing": "during"
+   },
+   {
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "65421851",
+      "provenance": "verified",
+      "quote": "Durant l'entretien, la pression artérielle et la fréquence cardiaque doivent être surveillées avec attention dans le cadre de l'évaluation de la profondeur de l'anesthésie (voir rubrique 4.4)."
+     }
+    ],
+    "test": "heart_rate",
+    "timing": "during"
+   }
+  ],
   "disulfiram": [
    {
     "sources": [

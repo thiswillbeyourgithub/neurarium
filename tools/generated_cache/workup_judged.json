@@ -2197,5 +2197,23 @@
    "condition": "Chez les patients à risque d'arythmies cardiaques"
   }
  ],
- "palonosetron": []
+ "palonosetron": [],
+ "remimazolam": [],
+ "remifentanil": [],
+ "sufentanil": [],
+ "alfentanil": [],
+ "desflurane": [
+  {
+   "index": 0,
+   "test": "blood_pressure",
+   "timing": "during",
+   "qid": "4283a388"
+  },
+  {
+   "index": 0,
+   "test": "heart_rate",
+   "timing": "during",
+   "qid": "4283a388"
+  }
+ ]
 }

@@ -10414,5 +10414,310 @@
     "qid": "96aaa096"
    }
   ]
+ },
+ "alfentanil": {
+  "page": "63670722",
+  "denomination": "RAPIFEN 5 mg (0,5 mg/ml), solution injectable",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "La posologie sera individualisée. Les facteurs à prendre en compte pour déterminer la posologie sont l'âge, le poids corporel, l'état physique, les maladies sous-jacentes (voir rubrique 4.4), l'utilisation d'autres médicaments (voir rubrique 4.5), le type d'anesthésie employé et le type et la durée de l'intervention chirurgicale.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "5effec94"
+   },
+   {
+    "index": 1,
+    "section": "4.2",
+    "under": "Population pédiatrique",
+    "quote": "Les paramètres pharmacocinétiques sont très variables chez les nouveau-nés, particulièrement chez les prématurés. La clairance et la liaison aux protéines sont plus faibles et une dose plus faible de RAPIFEN peut être nécessaire. Les nouveau-nés doivent être étroitement surveillés et la dose d’alfentanil doit être adaptée en fonction de la réponse.",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "52403fbd"
+   },
+   {
+    "index": 2,
+    "section": "4.2",
+    "under": "Population pédiatrique",
+    "quote": "La clairance peut être supérieure à celle de l’adulte. Il peut être nécessaire d’augmenter la vitesse de perfusion de RAPIFEN pour maintenir l’analgésie.",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "629a7a35"
+   },
+   {
+    "index": 3,
+    "section": "4.2",
+    "under": "Population pédiatrique",
+    "quote": "La clairance peut être légèrement supérieure chez l’enfant et il peut être nécessaire d’augmenter la vitesse de perfusion.",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "9d5ba3ac"
+   },
+   {
+    "index": 4,
+    "section": "4.4",
+    "under": "Précautions d’emploi",
+    "quote": "L'administration d'alfentanil en bolus IV rapides doit être évitée chez les patients présentant des troubles de la circulation intracérébrale : chez ces patients, une diminution transitoire de la pression artérielle a parfois été associée à une réduction de courte durée de la pression cérébrale de perfusion.",
+    "tests": [
+     "blood_pressure"
+    ],
+    "qid": "28cece67"
+   },
+   {
+    "index": 5,
+    "section": "4.4",
+    "under": "Précautions d’emploi",
+    "quote": "En cas d'hypothyroïdie non contrôlée, de rares cas de chutes tensionnelles ont été rapportés. En conséquence, la dose initiale sera diminuée et la surveillance post-opératoire doit être prolongée.",
+    "tests": [
+     "thyroid_function"
+    ],
+    "qid": "c896eb24"
+   }
+  ]
+ },
+ "desflurane": {
+  "page": "65421851",
+  "denomination": "SUPRANE, liquide pour inhalation par vapeur",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Durant l'entretien, la pression artérielle et la fréquence cardiaque doivent être surveillées avec attention dans le cadre de l'évaluation de la profondeur de l'anesthésie (voir rubrique 4.4).",
+    "tests": [
+     "blood_pressure",
+     "heart_rate"
+    ],
+    "qid": "4283a388"
+   },
+   {
+    "index": 1,
+    "section": "4.4",
+    "under": "",
+    "quote": "Les puissants agents anesthésiques par inhalation peuvent déclencher chez les sujets prédisposés (antécédents d'hyperthermie maligne d'effort, myopathies telles que les dystrophies musculaires, syndrome de King, myotonie, myopathies à noyau central) un état d'hypermétabolisme des muscles squelettiques entraînant un important besoin en oxygène et induisant les signes cliniques d'un syndrome connu sous le nom d'hyperthermie maligne. Il a été démontré que le desflurane est un inducteur potentiel d'hyperthermie maligne. Ce syndrome se manifeste par une hypercapnie et peut aussi inclure une rigidité musculaire, une tachycardie, une tachypnée, une cyanose, des arythmies, et/ou une pression artérielle instable. Certains signes non spécifiques pourraient aussi apparaître au cours d'une anesthésie légère : hypoxie aigüe, hypercapnie, et hypovolémie. Le traitement de l'hyperthermie maligne consiste en l'arrêt des agents inducteurs, l'administration intraveineuse de dantrolène sodique et la mise en place d'un traitement symptomatique. Une insuffisance rénale peut survenir secondairement, et la diurèse doit être surveillée et facilitée si possible. Il est déconseillé d'utiliser le desflurane chez les sujets susceptibles de présenter une hyperthermie maligne. Des cas d'hyperthermie maligne avec une issue fatale ont été rapportés avec le desflurane.",
+    "tests": [
+     "blood_pressure"
+    ],
+    "qid": "7eb034b9"
+   },
+   {
+    "index": 2,
+    "section": "4.4",
+    "under": "",
+    "quote": "De rares augmentations de la kaliémie ont été associées à l'utilisation d'agents anesthésiques inhalés, incluant le desflurane, provoquant ainsi des arythmies cardiaques, certaines fatales, chez les patients au cours de la période postopératoire. Les patients présentant des dystrophies musculaires aussi bien latentes que symptomatiques, particulièrement la dystrophie musculaire de Duchenne, apparaissent être plus vulnérables. L'utilisation concomitante de succinylcholine a été associée dans la majorité de ces cas. Ces patients ont également présenté une augmentation significative des taux sériques de créatine phosphokinase et, dans certains cas, une modification de la composition de l'urine avec myoglobinurie. Malgré la similarité avec l'hyperthermie maligne, aucun de ces patients n'a montré de signe ou de symptôme de rigidité musculaire ou d'état hypermétabolique. Un traitement précoce et intensif pour traiter l'hyperkaliémie et les arythmies résistantes est recommandé, ainsi que la recherche post-opératoire d'une maladie neuromusculaire latente.",
+    "tests": [
+     "electrolytes",
+     "drug_level"
+    ],
+    "qid": "972cacfe"
+   },
+   {
+    "index": 3,
+    "section": "4.4",
+    "under": "Précautions d'emploi",
+    "quote": "Le desflurane, comme les autres agents anesthésiques inhalés, est susceptible d'augmenter la pression du liquide céphalo-rachidien et la pression intracrânienne et de diminuer la pression de perfusion cérébrale chez les patients présentant une masse intracérébrale. Chez ces patients, l'anesthésie peut être maintenue par le desflurane à une concentration alvéolaire inférieure à 0,8 CAM, en maintenant un certain degré d'hyperventilation alvéolaire (hypocapnie modérée de l'ordre de 35 mm Hg) durant la période précédant l'ouverture de la boîte crânienne. Le maintien de la pression de perfusion cérébrale (et donc de la pression artérielle moyenne) doit être assuré avec la plus grande attention.",
+    "tests": [
+     "blood_pressure"
+    ],
+    "qid": "eb04ebe3"
+   },
+   {
+    "index": 4,
+    "section": "4.4",
+    "under": "Précautions d'emploi",
+    "quote": "Chez les patients souffrant d'une maladie coronarienne, le maintien de la pression artérielle et de la fréquence cardiaque est important pour éviter l'ischémie myocardique. Des augmentations transitoires marquées de la fréquence cardiaque, de la pression artérielle moyenne et des concentrations en éphédrine et en noréphédrine sont associées à une augmentation rapide des concentrations en desflurane. Le desflurane ne doit pas être utilisé seul comme agent inducteur d'anesthésie chez des patients à risque de maladie coronarienne ou chez des patients chez lesquels une augmentation de la fréquence cardiaque ou de la pression artérielle est indésirable. Il doit être utilisé avec d'autres médicaments, de préférence des opiacés et des hypnotiques par voie intraveineuse.",
+    "tests": [
+     "blood_pressure",
+     "heart_rate"
+    ],
+    "qid": "105f8360"
+   },
+   {
+    "index": 5,
+    "section": "4.4",
+    "under": "Précautions d'emploi",
+    "quote": "Au cours de l'entretien de l'anesthésie, une augmentation de la fréquence cardiaque et de la pression artérielle, apparaissant après une augmentation rapide de la concentration en desflurane, ne sont pas les signes d'une anesthésie inadaptée. Le changement dû à l'activation sympathique se résout approximativement en 4 minutes. L'augmentation de la fréquence cardiaque et de la pression artérielle apparaissant avant ou en l'absence d'une augmentation rapide de la concentration en desflurane peut être interprétée comme le signe d'une anesthésie légère.",
+    "tests": [
+     "blood_pressure",
+     "heart_rate"
+    ],
+    "qid": "85bcbbf6"
+   }
+  ]
+ },
+ "remifentanil": {
+  "page": "64569231",
+  "denomination": "ULTIVA 2 mg, poudre pour solution injectable ou pour perfusion",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.2",
+    "under": "",
+    "quote": "En cas d’administration en mode « AIVOC », ULTIVA doit être utilisé en association avec un agent hypnotique administré par voie inhalée ou intraveineuse, au cours de l’induction et de l’entretien de l’anesthésie chez les patients adultes ventilés (voir tableau 1). En association avec ces agents, une analgésie appropriée pour l’induction de l’anesthésie et la chirurgie peut généralement être obtenue avec des concentrations plasmatiques cibles en rémifentanil allant de 3 à 8 nanogrammes/ml. La dose d'ULTIVA doit être adaptée (titration) en fonction de la réponse individuelle du patient. Certains actes chirurgicaux particulièrement algiques peuvent nécessiter des concentrations sanguines cibles allant jusqu’à 15 nanogrammes/ml.",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "0a859be7"
+   },
+   {
+    "index": 1,
+    "section": "4.2",
+    "under": "",
+    "quote": "Les données issues des essais cliniques sur l’utilisation du rémifentanil chez les nouveau-nés et les nourrissons âgés de moins de 1 an sont limitées (voir rubrique 5.1). Le profil pharmacocinétique du rémifentanil chez les nouveau-nés et les nourrissons âgés de moins de 1 an est comparable à celui observé chez l'adulte après ajustement en fonction du poids corporel (voir rubrique 5.2). Néanmoins, les données cliniques disponibles étant insuffisantes, l’administration d’ULTIVA n’est pas recommandée dans cette classe d’âge.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "37d251ba"
+   },
+   {
+    "index": 2,
+    "section": "4.2",
+    "under": "",
+    "quote": "En cas d’administration en mode « AIVOC », ULTIVA doit être utilisé en association avec un agent hypnotique inhalé ou administré par voie intraveineuse au cours de l’induction et de l’entretien de l’anesthésie chez les patients adultes ventilés (voir tableau 3). En association avec ces agents, une analgésie appropriée à la chirurgie cardiaque est généralement atteinte pour des concentrations sanguines cibles de rémifentanil plus élevées que celles utilisées pour les actes de chirurgie générale. Des concentrations sanguines allant jusqu’à 20 nanogrammes/ml ont été utilisées dans le cadre des études cliniques avec titrage en fonction de la réponse individuelle du patient. Aux doses recommandées ci-dessus, le rémifentanil réduit de façon significative la quantité d’agent hypnotique requise pour maintenir l’anesthésie. En conséquence, l’isoflurane et le propofol doivent être administrés selon les recommandations préalablement énoncées afin d’éviter une augmentation des effets hémodynamiques tels qu’une hypotension et une bradycardie (voir rubrique 4.2.2 : Tableau et paragraphe concernant les Médicaments associés).",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "d71c0c0e"
+   },
+   {
+    "index": 3,
+    "section": "4.2",
+    "under": "",
+    "quote": "Aucun ajustement des doses recommandées ci-dessus n’est nécessaire chez les patients insuffisants rénaux y compris ceux sous dialyse. Cependant, la clairance du métabolite acide carboxylique est diminuée chez les insuffisants rénaux (voir rubrique 5.2).",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "44285b36"
+   },
+   {
+    "index": 4,
+    "section": "4.2",
+    "under": "",
+    "quote": "En cas d’obésité, la posologie de rémifentanil doit être réduite et basée sur le poids idéal théorique du patient car la clairance et le volume de distribution du rémifentanil sont mieux corrélés au poids idéal théorique qu’au poids réel.",
+    "tests": [
+     "renal_function",
+     "weight"
+    ],
+    "qid": "13c14620"
+   },
+   {
+    "index": 5,
+    "section": "4.2",
+    "under": "",
+    "quote": "Sur la base du calcul de la masse maigre corporelle (LBM) utilisé dans le modèle de Minto, le LBM peut être sous évalué chez les femmes présentant un index de masse corporelle (BMI) supérieur à 35 kg/m2 et chez les hommes présentant un BMI supérieur à 40 kg/m2. Afin d’éviter un sous-dosage chez ces patients, le rémifentanil doit être soigneusement adapté (titration) à la réponse individuelle.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "c00517bc"
+   },
+   {
+    "index": 6,
+    "section": "4.2",
+    "under": "",
+    "quote": "Sur la base des données disponibles à ce jour, une adaptation posologique chez les patients ayant une altération de la fonction rénale n'est pas nécessaire y compris chez les patients en Unité de Soins Intensifs.",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "9ba10bbd"
+   },
+   {
+    "index": 7,
+    "section": "4.2",
+    "under": "",
+    "quote": "Les résultats observés au cours des études menées sur un nombre limité de patients présentant une altération des fonctions hépatiques, ne justifient pas d’adaptation posologique dans cette population. Toutefois, les patients atteints d’une insuffisance hépatique sévère peuvent être légèrement plus sensibles aux effets dépresseurs respiratoires du rémifentanil (voir rubrique 4.4). Ces patients nécessitent donc une surveillance étroite et la posologie de rémifentanil doit être adaptée aux besoins individuels de chaque patient.",
+    "tests": [
+     "liver_function"
+    ],
+    "qid": "781e324f"
+   }
+  ]
+ },
+ "remimazolam": {
+  "page": "68722379",
+  "denomination": "Byfavo (EMEA/H/C/005246)",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.2",
+    "under": "Populations particulières",
+    "quote": "Personnes âgées, patients avec un statut physique évalué selon la classification de la Société américaine des anesthésistes (American Society of Anesthesiologists Physical Status, ASA-PS) de III ou IV et patients dont le poids corporel est inférieur à 50 kg Les patients âgés et les patients présentant un score ASA de III ou IV peuvent être plus sensibles aux effets des sédatifs. Avant l’administration de rémimazolam, une évaluation minutieuse de l’état général des patients âgés de 65 ans ou plus et/ou présentant un score ASA de III ou IV, en particulier ceux de faible poids corporel (<50 kg), est par conséquent particulièrement pertinente lorsqu’il s’agit de décider d’ajustements posologiques individualisés pour ces patients (voir rubrique 4.4).",
+    "tests": [
+     "weight"
+    ],
+    "qid": "4b0687ab"
+   },
+   {
+    "index": 1,
+    "section": "4.2",
+    "under": "Insuffisance rénale",
+    "quote": "Aucun ajustement de la dose n’est nécessaire, quel que soit le degré d’insuffisance rénale (y compris chez les patients dont le débit de filtration glomérulaire [DFG] est inférieur à 15 ml/min).",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "f9634ec8"
+   },
+   {
+    "index": 2,
+    "section": "4.2",
+    "under": "Insuffisance hépatique",
+    "quote": "L’enzyme de métabolisation (carboxylestérase-1 [CES-1]) du rémimazolam est principalement située dans le foie et la clairance du rémimazolam est proportionnellement affectée en fonction du stade d’insuffisance hépatique (voir rubrique 5.2). Aucun ajustement posologique n’est recommandé pour les patients présentant une insuffisance hépatique légère (scores de Child-Pugh 5 et 6) ou modérée (scores de Child-Pugh 7 à 9). Chez les patients présentant une insuffisance hépatique sévère (scores de Child-Pugh de 10 à 15 ; données obtenues auprès de 3 sujets seulement lors des essais cliniques), les effets cliniques peuvent être plus marqués et durer plus longtemps que chez les sujets sains. Aucun ajustement posologique n’est nécessaire, mais une attention particulière est recommandée lors de l’administration des doses de titration et le rémimazolam doit être augmenté de façon très progressive jusqu’à obtenir un effet chez ces patients (voir rubrique 4.4).",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "e35ed297"
+   },
+   {
+    "index": 3,
+    "section": "4.4",
+    "under": "Insuffisance hépatique",
+    "quote": "Les effets cliniques peuvent être plus prononcés et plus longs chez les patients présentant une insuffisance hépatique sévère en raison d’une clairance réduite (voir rubrique 5.2). Une attention particulière doit être accordée lors de l’administration des doses de titration (voir rubrique 4.2). Ces patients peuvent être plus sensibles à une dépression respiratoire (voir rubrique 4.8).",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "fb5d81d8"
+   }
+  ]
+ },
+ "sufentanil": {
+  "page": "61562566",
+  "denomination": "SUFENTA 10 microgrammes/2 ml, solution injectable (I.V. ou péridurale)",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.4",
+    "under": "",
+    "quote": "Les opioïdes peuvent induire une hypotension, particulièrement chez les patients présentant une hypovolémie. Des mesures appropriées permettant de maintenir une pression artérielle stable doivent être prises. En cas d'hypovolémie non corrigée ou d'insuffisance cardiaque non compensée, la dose d'induction devra être adaptée et administrée lentement afin d'éviter une dépression cardio-vasculaire souvent majorée par l'administration concomitante d'autres drogues anesthésiques.",
+    "tests": [
+     "blood_pressure"
+    ],
+    "qid": "75255c88"
+   },
+   {
+    "index": 1,
+    "section": "4.4",
+    "under": "",
+    "quote": "L’administration de sufentanil en bolus IV rapide doit être évitée chez les patients présentant des troubles de la circulation intracérébrale : chez ces patients, une diminution transitoire de la pression artérielle moyenne a parfois été associée à une réduction de courte durée de la pression de perfusion cérébrale.",
+    "tests": [
+     "blood_pressure"
+    ],
+    "qid": "05e3b02a"
+   },
+   {
+    "index": 2,
+    "section": "4.4",
+    "under": "",
+    "quote": "Une diminution de la posologie est recommandée chez les patients présentant : une hypothyroïdie non contrôlée ; une maladie pulmonaire ; une capacité respiratoire diminuée ; une insuffisance hépatique ou rénale et chez les patients alcooliques. Chez ces patients, la surveillance post-opératoire doit être prolongée.",
+    "tests": [
+     "thyroid_function"
+    ],
+    "qid": "75d30549"
+   }
+  ]
  }
 }

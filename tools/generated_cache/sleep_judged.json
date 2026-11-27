@@ -374,5 +374,12 @@
    "qid": "00d77970",
    "effect": "sleep_latency_decrease"
   }
+ ],
+ "remifentanil": [
+  {
+   "index": 0,
+   "qid": "23638e9c",
+   "effect": "rem_suppression"
+  }
  ]
 }
