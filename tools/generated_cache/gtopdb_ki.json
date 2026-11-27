@@ -16072,6 +16072,103 @@
     }
    }
   },
+  "Methylergonovine": {
+   "5ht1e": {
+    "action": "antagonist",
+    "ki": {
+     "max": 100.0,
+     "median": 81.5479,
+     "min": 63.0957,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8380639",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "methylergonovine",
+     "provenance": "verified",
+     "quote": "methylergonovine at 5-ht1e receptor (HTR1E, Human): Antagonist / Antagonist, pKi 7-7.2 [PMID 8380639]",
+     "species": "Human"
+    }
+   },
+   "5ht1f": {
+    "action": "antagonist",
+    "ki": {
+     "max": 31.6228,
+     "median": 31.6228,
+     "min": 31.6228,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "8380639",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "methylergonovine",
+     "provenance": "verified",
+     "quote": "methylergonovine at 5-HT1F receptor (HTR1F, Human): Antagonist / Antagonist, pKi 7.5 [PMID 8380639]",
+     "species": "Human"
+    }
+   },
+   "5ht2a": {
+    "action": "agonist",
+    "ki": {
+     "max": 0.3981,
+     "median": 0.3981,
+     "min": 0.3981,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "15322733",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "methylergonovine",
+     "provenance": "verified",
+     "quote": "methylergonovine at 5-HT2A receptor (HTR2A, Human): Agonist / Full agonist, pKi 9.4 [PMID 15322733]",
+     "species": "Human"
+    }
+   },
+   "5ht2b": {
+    "action": "partial_agonist",
+    "ki": {
+     "max": 0.5012,
+     "median": 0.5012,
+     "min": 0.5012,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "15322733",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "methylergonovine",
+     "provenance": "verified",
+     "quote": "methylergonovine at 5-HT2B receptor (HTR2B, Human): Agonist / Partial agonist, pKi 9.3 [PMID 15322733]",
+     "species": "Human"
+    }
+   },
+   "5ht2c": {
+    "action": "agonist",
+    "ki": {
+     "max": 5.0119,
+     "median": 5.0119,
+     "min": 5.0119,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "15322733",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "methylergonovine",
+     "provenance": "verified",
+     "quote": "methylergonovine at 5-HT2C receptor (HTR2C, Human): Agonist / Full agonist, pKi 8.3 [PMID 15322733]",
+     "species": "Human"
+    }
+   }
+  },
   "Norfenfluramine": {
    "5ht2b": {
     "action": "agonist",

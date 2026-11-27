@@ -491,5 +491,29 @@
   },
   "n_desmethylzolmitriptan": {
     "bindings": []
+  },
+  "methylergonovine": {
+    "bindings": [
+      {
+        "target": "5ht1b",
+        "action": "agonist",
+        "quote": "Methylergonovine appears to be 10 times more potent than methysergide as an agonist of the 5-HT 1B and 5-HT 1D receptors and has higher intrinsic efficacy in activating these receptors."
+      },
+      {
+        "target": "5ht1d",
+        "action": "agonist",
+        "quote": "Methylergonovine appears to be 10 times more potent than methysergide as an agonist of the 5-HT 1B and 5-HT 1D receptors and has higher intrinsic efficacy in activating these receptors."
+      },
+      {
+        "target": "5ht2a",
+        "action": "agonist",
+        "quote": "Metabolism of methysergide into methylergonovine, which is a potent serotonin 5-HT 2A receptor agonist, is considered to be responsible for the psychedelic effects of methysergide at high doses."
+      },
+      {
+        "target": "5ht2b",
+        "action": "agonist",
+        "quote": "The drug can activate the serotonin 5-HT 2B receptor due to metabolism into methylergonovine and for this reason has been associated with cardiac valvulopathy ."
+      }
+    ]
   }
 }

@@ -2183,6 +2183,9 @@
 "q_229b5be5a92b": {
 "drug:pramipexole/categories": "opus"
 },
+"q_22a862806265": {
+"drug:methysergide/metabolites[methylergonovine]": "opus"
+},
 "q_22b8b1c45c93": {
 "drug:trifluoperazine/categories": "sonnet"
 },
@@ -2324,6 +2327,13 @@
 "q_24a7ca7baff4": {
 "drug:tapentadol/formulations[ir]/tmax": "opus",
 "drug:tapentadol/tmax": "sonnet"
+},
+"q_24bf29a8e0dd": {
+"drug:methysergide/bindings[5ht1a:partial_agonist]": "opus",
+"drug:methysergide/bindings[5ht2a:antagonist]": "opus",
+"drug:methysergide/bindings[5ht2b:antagonist]": "opus",
+"drug:methysergide/bindings[5ht2c:antagonist]": "opus",
+"drug:methysergide/bindings[5ht7:antagonist]": "opus"
 },
 "q_24cc9972d37c": {
 "receptor:glycine/classification[sign]": "opus"
@@ -3724,6 +3734,9 @@
 "q_3cb6c4b627fd": {
 "drug:haloperidol/seizure_threshold[lowers]": "opus"
 },
+"q_3ccdd263f2d1": {
+"metabolite:methylergonovine/bindings[5ht2b:agonist]": "opus"
+},
 "q_3cfa78c2bcd0": {
 "drug:bupropion/brands[Aplenzin]": "sonnet"
 },
@@ -4537,6 +4550,9 @@
 "q_4a5fe9aa05ae": {
 "drug:ethanol/excretion[route:renal]": "opus"
 },
+"q_4a63784ec107": {
+"drug:dihydroergotamine/bindings[5ht2a:agonist]": "opus"
+},
 "q_4a66e72c887c": {
 "drug:tramadol/bindings[delta:agonist]": "opus"
 },
@@ -4837,6 +4853,10 @@
 "q_4f74cca1d2c1": {
 "drug:lsd/excretion[route:renal]": "opus",
 "drug:lsd/excretion[unchanged:urine]": "opus"
+},
+"q_4f7706d5273b": {
+"metabolite:methylergonovine/bindings[5ht1b:agonist]": "opus",
+"metabolite:methylergonovine/bindings[5ht1d:agonist]": "opus"
 },
 "q_4f7f30b14e23": {
 "drug:lasmiditan/first_approval": "opus"
@@ -5665,6 +5685,9 @@
 },
 "q_5eeaf62bbdbf": {
 "drug:duloxetine/half_life": "sonnet"
+},
+"q_5eee530724ed": {
+"metabolite:methylergonovine/bindings[5ht2a:agonist]": "opus"
 },
 "q_5ef76a8b2678": {
 "receptor:5ht5a/locations[hippocampus]": "sonnet"
@@ -8059,6 +8082,9 @@
 },
 "q_863af3706133": {
 "drug:riluzole/half_life": "opus"
+},
+"q_86535085b5d0": {
+"drug:atogepant/bindings[cgrp:antagonist]": "opus"
 },
 "q_86600b788a37": {
 "drug:lsd/withdrawals[fr:1966]": "opus"
@@ -13089,6 +13115,9 @@
 "q_d7bf6a50706d": {
 "drug:vigabatrin/seizure_threshold[raises]": "opus"
 },
+"q_d7c086d59dcd": {
+"drug:dihydroergotamine/bindings[5ht2b:agonist]": "opus"
+},
 "q_d7c299200f88": {
 "drug:valpromide/metabolites[valproic_acid]": "opus"
 },
@@ -13331,6 +13360,9 @@
 },
 "q_dba83981089b": {
 "drug:dexmedetomidine/excretion[route:renal]": "opus"
+},
+"q_dbae5d23d5ae": {
+"drug:ergotamine/bindings[5ht2b:agonist]": "opus"
 },
 "q_dbc2037fb57a": {
 "drug:lithium/brands[Eskalith]": "sonnet"
@@ -13766,6 +13798,9 @@
 },
 "q_e37bac7319b6": {
 "drug:hydroxyzine/bindings[muscarinic:antagonist]": "opus"
+},
+"q_e3846bf9edcc": {
+"drug:ergotamine/bindings[5ht2a:agonist]": "opus"
 },
 "q_e3931ec47c64": {
 "drug:cocaine/excretion[unchanged:urine]": "opus",
@@ -14429,6 +14464,11 @@
 "q_ee082e674223": {
 "receptor:mt2/locations[hypothalamus]": "sonnet"
 },
+"q_ee0c4c2fd75f": {
+"drug:dihydroergotamine/bindings[5ht1b:agonist]": "opus",
+"drug:dihydroergotamine/bindings[5ht1d:agonist]": "opus",
+"drug:dihydroergotamine/bindings[5ht1f:agonist]": "opus"
+},
 "q_ee101b8043ec": {
 "drug:imipramine/categories": "sonnet"
 },
@@ -14748,6 +14788,9 @@
 },
 "q_f36d2e81ad60": {
 "drug:tianeptine/brands[Coaxil]": "sonnet"
+},
+"q_f370d52991d4": {
+"drug:ubrogepant/bindings[cgrp:antagonist]": "opus"
 },
 "q_f372b242d492": {
 "receptor:nmda/classification[sign]": "opus"

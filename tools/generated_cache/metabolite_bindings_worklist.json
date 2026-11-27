@@ -2562,5 +2562,59 @@
       "zolmitriptan"
     ],
     "pdsp_targets": []
+  },
+  {
+    "metabolite": "Methylergonovine",
+    "parents": [
+      "methysergide"
+    ],
+    "key": "methylergonovine",
+    "wiki_title": "Methysergide",
+    "slug": "methysergide",
+    "own_article": false,
+    "found": true,
+    "from_parent": true,
+    "ki_bindings": [],
+    "unresolved_ki": [],
+    "action_candidates": [
+      "The drug is a prodrug of methylergometrine (methylergonovine), which circulates at levels about 10 times higher than those of methysergide. Whereas methysergide is a mixed agonist of some serotonin receptors (e.g., the serotonin 5-HT 1 receptors ) and antagonist of other serotonin receptors (e.g., the serotonin 5-HT 2 receptors ), methylergonovine is a non-selective agonist of most of the serotonin receptors, including of both the serotonin 5-HT 1 and 5-HT 2 receptor subgroups. Methysergide and methylergometrine are ergolines and lysergamides and are related to the ergot alkaloids .",
+      "Methysergide antagonizes the effects of serotonin in blood vessels and gastrointestinal smooth muscle, but has few of the properties of other ergot alkaloids. It is thought that metabolism of methysergide into its active metabolite methylergonovine is responsible for the antimigraine effects of methysergide. Methylergonovine appears to be 10 times more potent than methysergide as an agonist of the 5-HT 1B and 5-HT 1D receptors and has higher intrinsic efficacy in activating these receptors. The antimigraine activity of methysergide might be specifically due to serotonin 5-HT 2B receptor antagonism.",
+      "Metabolism of methysergide into methylergonovine, which is a potent serotonin 5-HT 2A receptor agonist, is considered to be responsible for the psychedelic effects of methysergide at high doses. The psychedelic effects can specifically be attributed to activation of the serotonin 5-HT 2A receptor . The drug can activate the serotonin 5-HT 2B receptor due to metabolism into methylergonovine and for this reason has been associated with cardiac valvulopathy . It is thought that the serotonin receptor antagonism of methysergide is not able to overcome the serotonin receptor agonism of methylergonovine due to the much higher levels of methylergonovine during methysergide therapy."
+    ],
+    "pages": [
+      "methysergide"
+    ],
+    "pdsp_targets": [
+      {
+        "target": "5ht1e",
+        "ki_id": 6640,
+        "value_nm": 89.0
+      },
+      {
+        "target": "5ht1f",
+        "ki_id": 6751,
+        "value_nm": 31.0
+      },
+      {
+        "target": "5ht2a",
+        "ki_id": 39661,
+        "value_nm": 0.35481338923358
+      },
+      {
+        "target": "5ht2b",
+        "ki_id": 14121,
+        "value_nm": 0.49
+      },
+      {
+        "target": "5ht2c",
+        "ki_id": 39709,
+        "value_nm": 4.5708818961488
+      },
+      {
+        "target": "5ht7",
+        "ki_id": 6286,
+        "value_nm": 10.96
+      }
+    ]
   }
 ]
