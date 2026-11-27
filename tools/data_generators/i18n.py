@@ -86,6 +86,11 @@ FR: dict[str, str] = {
     "Ventral tegmental area": "Aire tegmentale ventrale",
     "Tuberomammillary nucleus": "Noyau tubéromammillaire",
     "Nucleus basalis of Meynert": "Noyau basal de Meynert",
+    "Pedunculopontine nucleus": "Noyau pédonculopontin",
+    "Laterodorsal tegmental nucleus": "Noyau tegmental latérodorsal",
+    "Suprachiasmatic nucleus": "Noyau suprachiasmatique",
+    "Periaqueductal gray": "Substance grise périaqueducale",
+    "Area postrema": "Area postrema",
     # Circuit names
     "Direct pathway (motor)": "Voie directe (motrice)",
     "Indirect pathway": "Voie indirecte",
@@ -242,10 +247,16 @@ FR: dict[str, str] = {
         "Histaminergique descendante (bulbaire)",
     "Descending histaminergic (cerebellar)":
         "Histaminergique descendante (cérébelleuse)",
-    "Mesopontine cholinergic (thalamic)":
-        "Cholinergique mésopontine (thalamique)",
-    "Mesopontine cholinergic (VTA)":
-        "Cholinergique mésopontine (ATV)",
+    "Pedunculopontine cholinergic (thalamic)":
+        "Cholinergique pédonculopontine (thalamique)",
+    "Laterodorsal tegmental cholinergic (thalamic)":
+        "Cholinergique tegmentale latérodorsale (thalamique)",
+    "Pedunculopontine cholinergic (VTA)":
+        "Cholinergique pédonculopontine (ATV)",
+    "Laterodorsal tegmental cholinergic (VTA)":
+        "Cholinergique tegmentale latérodorsale (ATV)",
+    "Periaqueductal gray to raphe (pain control)":
+        "Substance grise périaqueducale vers le raphé (contrôle de la douleur)",
     "Mesopontine cholinergic (nigral)":
         "Cholinergique mésopontine (nigrale)",
     "Descending serotonergic (cerebellar)":
@@ -318,10 +329,18 @@ FR: dict[str, str] = {
         "La dopamine de l'ATV (A10) atteint le noyau du raphé dorsal.",
     "VTA (A10) dopamine reaches the locus coeruleus.":
         "La dopamine de l'ATV (A10) atteint le locus coeruleus.",
-    "Pedunculopontine and laterodorsal tegmental cholinergic neurons excite the "
-    "dopamine neurons of the VTA.":
-        "Les neurones cholinergiques pédonculopontins et tegmentaux latérodorsaux "
-        "excitent les neurones dopaminergiques de l'ATV.",
+    "Pedunculopontine cholinergic neurons excite the dopamine neurons of the VTA.":
+        "Les neurones cholinergiques pédonculopontins excitent les neurones "
+        "dopaminergiques de l'ATV.",
+    "Laterodorsal tegmental cholinergic neurons excite the dopamine neurons of "
+    "the VTA.":
+        "Les neurones cholinergiques tegmentaux latérodorsaux excitent les neurones "
+        "dopaminergiques de l'ATV.",
+    "The periaqueductal gray drives the nucleus raphe magnus, the first relay of "
+    "the descending pain-control system where opioids act.":
+        "La substance grise périaqueducale active le noyau du raphé magnus, premier "
+        "relais du système descendant de contrôle de la douleur, où agissent les "
+        "opioïdes.",
     "Pedunculopontine cholinergic neurons excite the substantia nigra.":
         "Les neurones cholinergiques pédonculopontins excitent la substance noire.",
     "Pineal melatonin (suprachiasmatic)":
@@ -473,12 +492,12 @@ FR: dict[str, str] = {
         "La mélatonine de la glande pinéale atteint les récepteurs MT1 et MT2 du "
         "noyau suprachiasmatique, l'horloge biologique. Une voie hormonale par le "
         "liquide céphalo-rachidien et le sang, non un faisceau axonal.",
-    "Pedunculopontine and laterodorsal tegmental cholinergic neurons in the "
-    "pons innervate the thalamus, gating what it relays to the cortex across "
-    "the sleep-wake cycle.":
-        "Les neurones cholinergiques pédonculopontins et tegmentaux "
-        "latérodorsaux du pont innervent le thalamus, filtrant ce qu'il relaie "
-        "vers le cortex au fil du cycle veille-sommeil.",
+    "Pedunculopontine cholinergic neurons innervate the thalamus, gating what "
+    "it relays to the cortex across the sleep-wake cycle.":
+        "Les neurones cholinergiques pédonculopontins innervent le thalamus, "
+        "filtrant ce qu'il relaie vers le cortex au fil du cycle veille-sommeil.",
+    "Laterodorsal tegmental cholinergic neurons innervate the thalamus.":
+        "Les neurones cholinergiques tegmentaux latérodorsaux innervent le thalamus.",
     "Nucleus basalis cholinergic neurons innervate the frontal cortex, "
     "sustaining attention and cortical activation.":
         "Les neurones cholinergiques du noyau basal innervent le cortex frontal, "

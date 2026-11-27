@@ -205,4 +205,9 @@ WIKIPEDIA: dict[str, str] = {
     "vta": "https://en.wikipedia.org/wiki/Ventral_tegmental_area",
     "tuberomammillary": "https://en.wikipedia.org/wiki/Tuberomammillary_nucleus",
     "nucleus_basalis": "https://en.wikipedia.org/wiki/Nucleus_basalis",
+    "pedunculopontine": "https://en.wikipedia.org/wiki/Pedunculopontine_nucleus",
+    "laterodorsal_tegmental": "https://en.wikipedia.org/wiki/Laterodorsal_tegmental_nucleus",
+    "suprachiasmatic": "https://en.wikipedia.org/wiki/Suprachiasmatic_nucleus",
+    "periaqueductal_gray": "https://en.wikipedia.org/wiki/Periaqueductal_gray",
+    "area_postrema": "https://en.wikipedia.org/wiki/Area_postrema",
 }

@@ -37,6 +37,15 @@ PAIRED: list[dict[str, Any]] = [
          # blob, kept just clear of the hypothalamus so they don't fuse. Position
          # is a guess: tune in a browser.
          radii=(0.18, 0.17, 0.2), seed=71, detail=4, noise=0.04),
+    dict(base="suprachiasmatic", name="Suprachiasmatic nucleus", group="diencephalon",
+         pos=(0.1, -0.82, 0.62), color="#e39ac4",
+         scale=0.28,  # anatomical: under 1 mm3, the smallest modeled structure
+         # The body's master clock (Kandel p.1137): a tiny pair of hypothalamic
+         # nuclei sitting right above the optic chiasm, on either side of the third
+         # ventricle. Where melatonin acts (MT1/MT2), so the pineal arrow lands
+         # here. Tiny smooth blob tucked under the front of the hypothalamus.
+         # Position/size are an anatomical guess: tune in a browser. Provenance: llm.
+         radii=(0.13, 0.12, 0.15), seed=73, detail=4, noise=0.03),
 ]
 
 MIDLINE: list[dict[str, Any]] = [

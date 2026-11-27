@@ -63,6 +63,23 @@ PAIRED: list[dict[str, Any]] = [
          # slung under the pallidum; cholinergic-yellow to echo its arrows.
          # Position/size are an anatomical guess: tune in a browser.
          radii=(0.30, 0.14, 0.22), seed=85, detail=5, noise=0.05),
+    # --- Mesopontine cholinergic nuclei (the brainstem's acetylcholine source,
+    #     Kandel p.1047: a ventrolateral pedunculopontine cluster and a dorsomedial
+    #     laterodorsal tegmental one). They drive the thalamic and VTA cholinergic
+    #     arrows and the REM-sleep switch (p.1135), and are what an anticholinergic
+    #     acts on in the brainstem. Small blobs at the midbrain-pons junction,
+    #     cholinergic-yellow like the nucleus basalis. Position/size are an
+    #     anatomical guess: tune in a browser. Provenance: llm. ---
+    dict(base="pedunculopontine", name="Pedunculopontine nucleus",
+         group="brainstem_nuclei",
+         pos=(0.36, -0.9, -0.72), color="#c9a227",
+         scale=0.3,  # anatomical: ~5mm column lateral to the superior cerebellar peduncle
+         radii=(0.2, 0.16, 0.24), seed=86, detail=5, noise=0.05),
+    dict(base="laterodorsal_tegmental", name="Laterodorsal tegmental nucleus",
+         group="brainstem_nuclei",
+         pos=(0.14, -0.95, -1.02), color="#dcc06a",
+         scale=0.25,  # anatomical: small dorsomedial nucleus in the pontine central grey
+         radii=(0.18, 0.16, 0.2), seed=87, detail=5, noise=0.05),
 ]
 
 MIDLINE: list[dict[str, Any]] = [

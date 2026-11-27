@@ -123,5 +123,24 @@ MIDLINE: list[dict[str, Any]] = [
                  ]),
              ])),
          ),
+    # The periaqueductal gray: the grey matter encircling the midbrain's cerebral
+    # aqueduct (Nolte p.292), the hub of the descending pain-control system where
+    # opioids act (it drives the raphe magnus). Midline, never mirrored: a slim
+    # tube along the aqueduct in the dorsal midbrain, under the colliculi.
+    # Position/size are an anatomical guess: tune in a browser. Provenance: llm.
+    dict(base="periaqueductal_gray", name="Periaqueductal gray", group="hindbrain",
+         fr_gender="f",
+         pos=(0.0, -0.5, -0.92), color="#8f8fa3",
+         scale=0.5,  # anatomical: ~4mm-thick sleeve, ~14mm long
+         radii=(0.16, 0.24, 0.14), seed=33, detail=5, noise=0.04),
+    # The area postrema: a circumventricular organ at the floor of the fourth
+    # ventricle, outside the blood-brain barrier, that samples the blood for toxins
+    # and triggers vomiting (Kandel p.1041). The chemoreceptor trigger zone an
+    # antiemetic's D2 / 5-HT3 / NK1 block reaches. Midline, small flattened blob on
+    # the dorsal medulla at the obex. Position/size are an anatomical guess.
+    # Provenance: llm.
+    dict(base="area_postrema", name="Area postrema", group="hindbrain", fr_gender="f",
+         pos=(0.0, -2.12, -1.05), color="#c96a5f",
+         scale=0.3,  # anatomical: ~2mm paired swelling meeting at the obex
+         radii=(0.2, 0.1, 0.14), seed=34, detail=4, noise=0.04),
 ]
-

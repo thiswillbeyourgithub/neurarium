@@ -53,6 +53,11 @@ STRUCTURE_ALIASES: dict[str, list[str]] = {
     "nucleus_basalis": ["NBM", "nbM"],
     "raphe": ["DRN", "dorsal raphe", "raphé dorsal"],
     "hypothalamus": ["HPA axis"],
+    "suprachiasmatic": ["SCN", "NSC", "master clock", "horloge biologique"],
+    "periaqueductal_gray": ["PAG", "SGPA", "periaqueductal grey"],
+    "area_postrema": ["CTZ", "chemoreceptor trigger zone", "zone gâchette chimioréceptrice"],
+    "pedunculopontine": ["PPN", "PPTg"],
+    "laterodorsal_tegmental": ["LDT", "LDTg"],
 }
 
 

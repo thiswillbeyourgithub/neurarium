@@ -47,7 +47,7 @@ brain radially apart to reveal the deep nuclei.
 
 Region `group` values (`lobe`, `basal_ganglia`, `diencephalon`, `limbic`,
 `hindbrain`, `brainstem_nuclei` for the diffuse source nuclei raphe / locus
-coeruleus / VTA / tuberomammillary / nucleus basalis) drive the legend headings + ordering via `GROUP_LABELS` in
+coeruleus / VTA / tuberomammillary / nucleus basalis / pedunculopontine / laterodorsal tegmental) drive the legend headings + ordering via `GROUP_LABELS` in
 `tools/generate_data.py` (emitted into `meta.json`, read by the viewer). Adding a
 group means adding it there or its structures drop from the legend.
 
