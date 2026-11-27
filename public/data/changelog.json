@@ -1,6 +1,93 @@
 {
   "versions": [
     {
+      "version": "3.188.0",
+      "date": "2026-11-27",
+      "entries": [
+        {
+          "category": "added",
+          "text": "46 new drugs, each with its receptor bindings and as many sourced facts as the references give (half-life, time to peak, metabolism, brands, approval, holders, excretion, checks the French label asks for, brain entry, molecule drawing)",
+          "commits": [
+            "34e44aba",
+            "20305777"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Antiemetics: palonosetron, tropisetron, metopimazine, alizapride, cyclizine, chlorphenamine, plus aprepitant and its injectable prodrug fosaprepitant",
+          "commits": [
+            "a16221b3",
+            "697b43cb"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Anaesthesia: remimazolam, methohexital, desflurane, remifentanil, sufentanil, alfentanil",
+          "commits": [
+            "4fca2aec"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Opioids and muscle relaxants: oxymorphone, levomethadone, dihydrocodeine (with its active metabolite dihydromorphine), nalbuphine, butorphanol, cyclobenzaprine, orphenadrine, carisoprodol (with meprobamate as its metabolite), tolperisone, thiocolchicoside, dantrolene",
+          "commits": [
+            "8057888b",
+            "347379fb",
+            "697b43cb"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Antiseizure and neurology: opicapone, cenobamate, rufinamide, felbamate, fosphenytoin, ganaxolone, riluzole, physostigmine, mirogabalin, ziconotide",
+          "commits": [
+            "347379fb",
+            "2472304b"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Migraine: zolmitriptan (with its active metabolite), eletriptan, naratriptan, almotriptan, frovatriptan, lasmiditan, ubrogepant, atogepant, ergotamine, dihydroergotamine, methysergide (with methylergonovine as its active metabolite)",
+          "commits": [
+            "fcb19ac9",
+            "7a927186",
+            "30ba7efc",
+            "62d19170"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "New receptor NK1, the substance P receptor aprepitant blocks, with its brain regions, expression density and antiemetic effect, and the muscle ryanodine receptor RyR1 as a peripheral drug target, the site of dantrolene",
+          "commits": [
+            "cb5cfe1f",
+            "3174d31e"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "Racemic methadone's affinity table can no longer be overwritten by its single enantiomer levomethadone",
+          "commits": [
+            "4fd0fea0",
+            "0ac3b1dd"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "French labels spelling \"fèces\" now count as a fecal excretion route, and heptahydrate salts are recognised in the French drug database",
+          "commits": [
+            "cf037592",
+            "7e1ee7a1"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "Tolperisone shows no single half-life, since its source gives two phases (2 h and 12 h)",
+          "commits": [
+            "8252309b"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.187.1",
       "date": "2026-11-27",
       "entries": [
