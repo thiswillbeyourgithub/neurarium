@@ -1609,6 +1609,48 @@
     "value": "fecal"
    }
   ],
+  "carisoprodol": [
+   {
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "carisoprodol",
+      "provenance": "verified",
+      "quote": "Carisoprodol is metabolized by the liver and excreted by the kidneys, so it must be used with caution by patients with impaired hepatic or renal function ."
+     }
+    ],
+    "value": "renal"
+   }
+  ],
+  "cenobamate": [
+   {
+    "amount": "87.8%",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "dailymed",
+      "page": "565c2126-57ae-4e29-b443-723bbe7e2072",
+      "provenance": "verified",
+      "quote": "Following administration of radiolabeled cenobamate, a mean of 93.0% of the total radioactive dose was recovered in urine (87.8%) and feces (5.2%)."
+     }
+    ],
+    "value": "renal"
+   },
+   {
+    "amount": "5.2%",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "dailymed",
+      "page": "565c2126-57ae-4e29-b443-723bbe7e2072",
+      "provenance": "verified",
+      "quote": "Following administration of radiolabeled cenobamate, a mean of 93.0% of the total radioactive dose was recovered in urine (87.8%) and feces (5.2%)."
+     }
+    ],
+    "value": "fecal"
+   }
+  ],
   "chloral_hydrate": [
    {
     "aspect": "route",
@@ -3106,6 +3148,34 @@
       "page": "63444171",
       "provenance": "verified",
       "quote": "Seuls 2 % de la dose administrée sont excrétés dans les urines sous forme inchangée."
+     }
+    ],
+    "value": "urine"
+   }
+  ],
+  "felbamate": [
+   {
+    "amount": "Over 90%",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "dailymed",
+      "page": "1aa40de5-c02d-49d6-8722-ed88c40c3ba6",
+      "provenance": "verified",
+      "quote": "Over 90% of the radioactivity after a dose of 1,000 mg 14 C felbamate was found in the urine."
+     }
+    ],
+    "value": "renal"
+   },
+   {
+    "amount": "40% to 50%",
+    "aspect": "unchanged",
+    "sources": [
+     {
+      "corpus": "dailymed",
+      "page": "1aa40de5-c02d-49d6-8722-ed88c40c3ba6",
+      "provenance": "verified",
+      "quote": "About 40% to 50% of absorbed dose appears unchanged in urine, and an additional 40% is present as unidentified metabolites and conjugates."
      }
     ],
     "value": "urine"
@@ -5908,6 +5978,34 @@
     "value": "renal"
    }
   ],
+  "opicapone": [
+   {
+    "amount": "67%",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "opicapone",
+      "provenance": "verified",
+      "quote": "It is mainly excreted via the faeces (67%), and in form of the glucuronide also via the kidney (13%)."
+     }
+    ],
+    "value": "fecal"
+   },
+   {
+    "amount": "13%",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "opicapone",
+      "provenance": "verified",
+      "quote": "It is mainly excreted via the faeces (67%), and in form of the glucuronide also via the kidney (13%)."
+     }
+    ],
+    "value": "renal"
+   }
+  ],
   "opipramol": [
    {
     "amount": "About 70%",
@@ -7646,6 +7744,21 @@
     "value": "fecal"
    }
   ],
+  "rufinamide": [
+   {
+    "amount": "85%",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "dailymed",
+      "page": "e2ba061a-49f0-4330-b0f0-00f2c3725625",
+      "provenance": "verified",
+      "quote": "Renal excretion is the predominant route of elimination for drug related material, accounting for 85% of the dose based on a radio-labeled study."
+     }
+    ],
+    "value": "renal"
+   }
+  ],
   "safinamide": [
    {
     "amount": "76%",
@@ -8334,6 +8447,34 @@
     "value": "renal"
    }
   ],
+  "thiocolchicoside": [
+   {
+    "amount": "79 %",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "bdpm",
+      "page": "65617572",
+      "provenance": "verified",
+      "quote": "Après administration orale de thiocolchicoside radiomarqué, la radioactivité totale est principalement excrétée dans les fèces (79 %) alors que l’excrétion urinaire ne représente que 20 %."
+     }
+    ],
+    "value": "fecal"
+   },
+   {
+    "amount": "20 %",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "bdpm",
+      "page": "65617572",
+      "provenance": "verified",
+      "quote": "Après administration orale de thiocolchicoside radiomarqué, la radioactivité totale est principalement excrétée dans les fèces (79 %) alors que l’excrétion urinaire ne représente que 20 %."
+     }
+    ],
+    "value": "renal"
+   }
+  ],
   "thioridazine": [
    {
     "aspect": "route",
@@ -8599,6 +8740,20 @@
      }
     ],
     "value": "urine"
+   }
+  ],
+  "tolperisone": [
+   {
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "tolperisone",
+      "provenance": "verified",
+      "quote": "The substance is excreted via the kidneys in two phases;"
+     }
+    ],
+    "value": "renal"
    }
   ],
   "topiramate": [

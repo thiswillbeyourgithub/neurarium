@@ -6089,5 +6089,94 @@
    "qid": "f3133baf",
    "value": "fecal"
   }
+ ],
+ "carisoprodol": [
+  {
+   "index": 1,
+   "qid": "195e3563",
+   "aspect": "route",
+   "value": "renal"
+  }
+ ],
+ "tolperisone": [
+  {
+   "index": 1,
+   "qid": "fe12cded",
+   "aspect": "route",
+   "value": "renal"
+  }
+ ],
+ "thiocolchicoside": [
+  {
+   "index": 0,
+   "qid": "dae7d633",
+   "aspect": "route",
+   "value": "fecal",
+   "amount": "79 %"
+  },
+  {
+   "index": 0,
+   "qid": "dae7d633",
+   "aspect": "route",
+   "value": "renal",
+   "amount": "20 %"
+  }
+ ],
+ "opicapone": [
+  {
+   "index": 1,
+   "qid": "51963282",
+   "aspect": "route",
+   "value": "fecal",
+   "amount": "67%"
+  },
+  {
+   "index": 1,
+   "qid": "51963282",
+   "aspect": "route",
+   "value": "renal",
+   "amount": "13%"
+  }
+ ],
+ "cenobamate": [
+  {
+   "index": 3,
+   "qid": "d2924d2e",
+   "aspect": "route",
+   "value": "renal",
+   "amount": "87.8%"
+  },
+  {
+   "index": 3,
+   "qid": "d2924d2e",
+   "aspect": "route",
+   "value": "fecal",
+   "amount": "5.2%"
+  }
+ ],
+ "rufinamide": [
+  {
+   "index": 5,
+   "qid": "72381ab6",
+   "aspect": "route",
+   "value": "renal",
+   "amount": "85%"
+  }
+ ],
+ "felbamate": [
+  {
+   "index": 0,
+   "qid": "0e9f6802",
+   "aspect": "route",
+   "value": "renal",
+   "amount": "Over 90%"
+  },
+  {
+   "index": 1,
+   "qid": "5549b374",
+   "aspect": "unchanged",
+   "value": "urine",
+   "amount": "40% to 50%"
+  }
  ]
 }

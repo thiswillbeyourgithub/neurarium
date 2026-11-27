@@ -3779,7 +3779,8 @@
     "page": "64729383",
     "line": "Suivant l’administration IV de dexmédétomidine marquée par un agent radioactif, environ 95 % de la radioactivité était retrouvée dans les urines et 4 % dans les fèces après neuf jours.",
     "named": [
-     "route:renal"
+     "route:renal",
+     "route:fecal"
     ],
     "qid": "2c7f9fe1"
    },
@@ -4315,6 +4316,7 @@
     "line": "Environ 57 % de la radioactivité totale a été retrouvée dans les urines (17 % sous forme inchangée) et 14,5 % dans les fèces, ce qui suggère que la voie d'élimination principale se fonde sur la biotransformation et l'excrétion urinaire.",
     "named": [
      "route:renal",
+     "route:fecal",
      "unchanged:urine"
     ],
     "qid": "af46ffa6"
@@ -5005,7 +5007,8 @@
     "page": "67248985",
     "line": "Le médicament radiomarqué est totalement éliminé au bout de 72 heures, avec 90 à 95% de radioactivité apparaissant dans les urines et 5 à 10% dans les fèces.",
     "named": [
-     "route:renal"
+     "route:renal",
+     "route:fecal"
     ],
     "qid": "2c8d217d"
    }
@@ -6019,7 +6022,8 @@
     "page": "67117128",
     "line": "80 % des conjugués hydrosolubles sont excrétés dans l'urine et 20% dans les fèces.",
     "named": [
-     "route:renal"
+     "route:renal",
+     "route:fecal"
     ],
     "qid": "41c13981"
    },
@@ -8510,7 +8514,8 @@
     "page": "60854845",
     "line": "Ces métabolites sont excrétés (en moyenne à 70 %) dans l’urine et le reste dans les fèces (jusqu'à 30 %).",
     "named": [
-     "route:renal"
+     "route:renal",
+     "route:fecal"
     ],
     "qid": "5153f079"
    }
@@ -11654,7 +11659,8 @@
     "page": "60155788",
     "line": "La sertraline et la N-desméthylsertraline sont toutes les deux fortement métabolisées chez l'homme, et les métabolites résultants sont excrétés dans les fèces et dans l'urine en quantités équivalentes.",
     "named": [
-     "route:renal"
+     "route:renal",
+     "route:fecal"
     ],
     "qid": "d94d1c69"
    },
@@ -11726,7 +11732,8 @@
     "page": "61021436",
     "line": "Après administration orale ou intraveineuse, le sildénafil est éliminé sous forme de métabolites, principalement dans les fèces (environ 80% de la dose orale administrée) et, dans une moindre mesure, dans les urines (environ 13% de la dose orale administrée).",
     "named": [
-     "route:renal"
+     "route:renal",
+     "route:fecal"
     ],
     "qid": "ec6b8bb1"
    },
@@ -12061,7 +12068,8 @@
     "page": "62463044",
     "line": "Environ 75% de la dose est excrétée dans les urines et 7 à 16% sont retrouvés dans les fèces.",
     "named": [
-     "route:renal"
+     "route:renal",
+     "route:fecal"
     ],
     "qid": "2ea2d978"
    },
@@ -13842,7 +13850,8 @@
     "page": "69671845",
     "line": "Dix jours après l'administration, environ 18 % et 72 % de la dose sont respectivement éliminés dans les urines et dans les fèces.",
     "named": [
-     "route:renal"
+     "route:renal",
+     "route:fecal"
     ],
     "qid": "4194247a"
    },
@@ -13953,6 +13962,7 @@
     "line": "Les études effectuées avec le bumétanide marqué au C14 ont montré que 65 % de la dose absorbée est éliminée sous forme inchangée dans les urines et 18 % dans les fèces.",
     "named": [
      "route:renal",
+     "route:fecal",
      "unchanged:urine"
     ],
     "qid": "660fbf1a"
@@ -14333,6 +14343,15 @@
      "route:renal"
     ],
     "qid": "e6c2fdc8"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "60477650",
+    "line": "Le reste est éliminé dans les fèces.",
+    "named": [
+     "route:fecal"
+    ],
+    "qid": "bafb00b3"
    },
    {
     "corpus": "bdpm",
@@ -14908,6 +14927,15 @@
      "unchanged:urine"
     ],
     "qid": "0c289866"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "63420868",
+    "line": "Le reste est excrété dans les fèces sous forme de métabolites.",
+    "named": [
+     "route:fecal"
+    ],
+    "qid": "fd538553"
    }
   ]
  },
@@ -15755,7 +15783,8 @@
     "page": "60575525",
     "line": "Après administration orale et intraveineuse de lacosamide radiomarqué, environ 95 % de la radioactivité administrée est retrouvée dans l’urine, et moins de 0,5 % dans les fèces.",
     "named": [
-     "route:renal"
+     "route:renal",
+     "route:fecal"
     ],
     "qid": "1e8480c3"
    },
@@ -16111,6 +16140,15 @@
      "route:renal"
     ],
     "qid": "8d3ea3d9"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "65562898",
+    "line": "Il est estimé qu’environ 80 à 90 % de la dose est excrétée dans les fèces, bien que ceci n’ait pas été démontré chez l’Homme.",
+    "named": [
+     "route:fecal"
+    ],
+    "qid": "0a46a8ec"
    },
    {
     "corpus": "bdpm",
@@ -17497,7 +17535,8 @@
     "page": "69768949",
     "line": "Après une dose unique, 40% de la dose administrée est retrouvée dans les urines et 46% dans les fèces.",
     "named": [
-     "route:renal"
+     "route:renal",
+     "route:fecal"
     ],
     "qid": "92cfb6d6"
    }
@@ -17571,6 +17610,7 @@
     "line": "1 % seulement de la dose est éliminée sous forme inchangée dans l'urine, et 11 % dans les fèces.",
     "named": [
      "route:renal",
+     "route:fecal",
      "unchanged:urine"
     ],
     "qid": "4df14091"
@@ -18255,6 +18295,345 @@
      "route:renal"
     ],
     "qid": "53622f4e"
+   }
+  ]
+ },
+ "carisoprodol": {
+  "name": "Carisoprodol",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "carisoprodol",
+    "line": "Excretion | Kidney",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "d15d14e0"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "carisoprodol",
+    "line": "Carisoprodol is metabolized by the liver and excreted by the kidneys, so it must be used with caution by patients with impaired hepatic or renal function .",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "195e3563"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "carisoprodol",
+    "line": "It is metabolized in the liver via the cytochrome P450 oxidase isozyme CYP2C19 , excreted by the kidneys, and has about an eight-hour half-life.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "6cbbbd91"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "carisoprodol",
+    "line": "The drug's solubility is practically independent of pH .",
+    "named": [
+     "urine_ph:dependent"
+    ],
+    "qid": "f6705c71"
+   }
+  ]
+ },
+ "tolperisone": {
+  "name": "Tolperisone",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "tolperisone",
+    "line": "Excretion | Renal",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "aab9a100"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "tolperisone",
+    "line": "The substance is excreted via the kidneys in two phases;",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "fe12cded"
+   }
+  ]
+ },
+ "thiocolchicoside": {
+  "name": "Thiocolchicoside",
+  "candidates": [
+   {
+    "corpus": "bdpm",
+    "page": "65617572",
+    "line": "Après administration orale de thiocolchicoside radiomarqué, la radioactivité totale est principalement excrétée dans les fèces (79 %) alors que l’excrétion urinaire ne représente que 20 %.",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "dae7d633"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "65617572",
+    "line": "Le thiocolchicoside inchangé n’est pas excrété dans l’urine ni dans les fèces.",
+    "named": [
+     "route:renal",
+     "route:fecal",
+     "unchanged:urine"
+    ],
+    "qid": "ae8c222e"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "65617572",
+    "line": "SL18.0740 et SL59.0955 sont retrouvés dans l’urine et les fèces alors que le didéméthyl-thiocolchicine n’est retrouvé que dans les fèces.",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "b18aeff1"
+   }
+  ]
+ },
+ "opicapone": {
+  "name": "Opicapone",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "opicapone",
+    "line": "Excretion | Feces (67%), urine (13%)",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "5dd3cfa8"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "opicapone",
+    "line": "It is mainly excreted via the faeces (67%), and in form of the glucuronide also via the kidney (13%).",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "51963282"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "a511a531-112e-43f8-a43f-5334b0efe979",
+    "line": "After administration of a single dose of radiolabeled opicapone 100 mg (2 times the recommended dosage) to healthy subjects, approximately 70% of the dose was recovered in feces (22% as unchanged), 20% in expired air, and 5% in urine (<1% as unchanged).",
+    "named": [
+     "route:renal",
+     "route:fecal",
+     "unchanged:urine"
+    ],
+    "qid": "1e8b6884"
+   }
+  ]
+ },
+ "cenobamate": {
+  "name": "Cenobamate",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "cenobamate",
+    "line": "Excretion | Mainly via urine",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "f99a96a4"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "cenobamate",
+    "line": "Cenobamate and its metabolites are mostly eliminated via the urine and only to 5.2% via the faeces.",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "355efa8b"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "565c2126-57ae-4e29-b443-723bbe7e2072",
+    "line": "Unchanged cenobamate accounted for 6.8% of the dose which was mainly excreted in the urine (6.4%).",
+    "named": [
+     "route:renal",
+     "unchanged:urine"
+    ],
+    "qid": "7646abb4"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "565c2126-57ae-4e29-b443-723bbe7e2072",
+    "line": "Following administration of radiolabeled cenobamate, a mean of 93.0% of the total radioactive dose was recovered in urine (87.8%) and feces (5.2%).",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "d2924d2e"
+   }
+  ]
+ },
+ "rufinamide": {
+  "name": "Rufinamide",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "rufinamide",
+    "line": "Excretion | Urine (85%)",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "5514179b"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "e2ba061a-49f0-4330-b0f0-00f2c3725625",
+    "line": "Most elimination of rufinamide is via metabolism, with the primary metabolite resulting from enzymatic hydrolysis of the carboxamide moiety to form the carboxylic acid.",
+    "named": [
+     "urine_ph:acidic_faster"
+    ],
+    "qid": "4a9044dd"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "e2ba061a-49f0-4330-b0f0-00f2c3725625",
+    "line": "Based on urinary excretion, the extent of absorption was at least 85% following oral administration of a single dose of 600 mg rufinamide tablet under fed conditions.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "2eade0b5"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "e2ba061a-49f0-4330-b0f0-00f2c3725625",
+    "line": "Following a radio-labeled dose of rufinamide, less than 2% of the dose was recovered unchanged in urine.",
+    "named": [
+     "route:renal",
+     "unchanged:urine"
+    ],
+    "qid": "24f7256e"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "e2ba061a-49f0-4330-b0f0-00f2c3725625",
+    "line": "A few minor additional metabolites were detected in urine, which appeared to be acyl-glucuronides of CGP 47292.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "c7a26e83"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "e2ba061a-49f0-4330-b0f0-00f2c3725625",
+    "line": "Renal excretion is the predominant route of elimination for drug related material, accounting for 85% of the dose based on a radio-labeled study.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "72381ab6"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "e2ba061a-49f0-4330-b0f0-00f2c3725625",
+    "line": "Of the metabolites identified in urine, at least 66% of the rufinamide dose was excreted as the acid metabolite CGP 47292, with 2% of the dose excreted as rufinamide.",
+    "named": [
+     "route:renal",
+     "urine_ph:acidic_faster"
+    ],
+    "qid": "f02d06d6"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "e2ba061a-49f0-4330-b0f0-00f2c3725625",
+    "line": "Rufinamide pharmacokinetics in 9 patients with severe renal impairment (creatinine clearance < 30 mL per min) was similar to that of healthy subjects.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "640858db"
+   }
+  ]
+ },
+ "felbamate": {
+  "name": "Felbamate",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "1aa40de5-c02d-49d6-8722-ed88c40c3ba6",
+    "line": "Over 90% of the radioactivity after a dose of 1,000 mg 14 C felbamate was found in the urine.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "0e9f6802"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "1aa40de5-c02d-49d6-8722-ed88c40c3ba6",
+    "line": "About 40% to 50% of absorbed dose appears unchanged in urine, and an additional 40% is present as unidentified metabolites and conjugates.",
+    "named": [
+     "route:renal",
+     "unchanged:urine"
+    ],
+    "qid": "5549b374"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "1aa40de5-c02d-49d6-8722-ed88c40c3ba6",
+    "line": "Felbamate is excreted with a terminal half-life of 20 to 23 hours, which is unaltered after multiple doses.",
+    "named": [
+     "unchanged:urine"
+    ],
+    "qid": "f41b7b1a"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "1aa40de5-c02d-49d6-8722-ed88c40c3ba6",
+    "line": "There was a 40% to 50% reduction in total body clearance and 9 to 15 hours prolongation of half-life in renally impaired subjects compared to that in subjects with normal renal function.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "c273581d"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "1aa40de5-c02d-49d6-8722-ed88c40c3ba6",
+    "line": "Reduced felbamate clearance and a longer half-life were associated with diminishing renal function.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "47d24f03"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "60223278",
+    "line": "Après administration orale de felbamate 14C à des volontaires sains, 90 % environ de chaque dose sont retrouvés dans l'urine, et moins de 5 % dans les fèces.",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "e431b6ff"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "60223278",
+    "line": "Outre le felbamate inchangé, les métabolites suivants ont pu être identifiés dans l'urine : le p-hydroxy felbamate, le 2-hydroxy felbamate, des dérivés monocarbamates du felbamate et des métabolites polaires du felbamate (notamment des dérivés conjugués).",
+    "named": [
+     "route:renal",
+     "unchanged:urine"
+    ],
+    "qid": "ee01c773"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "60223278",
+    "line": "Lors d’un essai de pharmacocinétique à dose unique, la clairance et l’excrétion du felbamate ont été diminuées et la demi-vie augmentée en fonction du degré d’insuffisance rénale.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "8f4a13a3"
    }
   ]
  }
