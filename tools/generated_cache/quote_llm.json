@@ -246,6 +246,7 @@
 },
 "q_049cea99200a": {
 "drug:fluoxetine/originator_country": "opus",
+"drug:lasmiditan/originator_country": "opus",
 "drug:memantine/originator_country": "opus",
 "drug:nabilone/originator_country": "opus"
 },
@@ -295,6 +296,9 @@
 "q_053b0373eb8a": {
 "drug:mirtazapine/excretion[route:fecal]": "opus",
 "drug:mirtazapine/excretion[route:renal]": "opus"
+},
+"q_0549f60db2d8": {
+"drug:eletriptan/first_approval": "opus"
 },
 "q_054e46039e4e": {
 "drug:cenobamate/seizure_threshold[raises]": "opus"
@@ -365,6 +369,9 @@
 },
 "q_066666bc7f7b": {
 "drug:donepezil/brands[Aricept]": "sonnet"
+},
+"q_0681795311d6": {
+"drug:zolmitriptan/brands[Zomig]": "opus"
 },
 "q_068f922c8dd1": {
 "drug:loflazepate/excretion[route:renal]": "opus"
@@ -847,6 +854,9 @@
 "drug:aripiprazole/excretion[route:fecal]": "opus",
 "drug:aripiprazole/excretion[route:renal]": "opus"
 },
+"q_0dfb04fd5cb2": {
+"drug:lasmiditan/excretion[route:renal]": "opus"
+},
 "q_0e03f0a51bf4": {
 "drug:hydroxyzine/half_life": "sonnet"
 },
@@ -917,6 +927,9 @@
 },
 "q_0f696f0e76e9": {
 "drug:ketamine/bindings[nmda:antagonist]": "sonnet"
+},
+"q_0f7af7335f29": {
+"drug:lasmiditan/excretion[unchanged:urine]": "opus"
 },
 "q_0f86e6c22f27": {
 "drug:guanfacine/first_approval": "opus"
@@ -1792,6 +1805,9 @@
 "q_1d6319c9cf6b": {
 "drug:cyclobarbital/excretion[route:renal]": "opus"
 },
+"q_1d6da1f02bb1": {
+"drug:zolmitriptan/excretion[renal_process:tubular_secretion]": "opus"
+},
 "q_1dadd94d5735": {
 "drug:benperidol/categories": "sonnet"
 },
@@ -1869,6 +1885,9 @@
 },
 "q_1ed14ce985d4": {
 "drug:loxapine/excretion[route:renal]": "opus"
+},
+"q_1ed1b490e66f": {
+"drug:lasmiditan/categories": "opus"
 },
 "q_1edf30183c4f": {
 "drug:alimemazine/categories": "sonnet"
@@ -2146,6 +2165,9 @@
 "q_2267ea037a33": {
 "drug:xenon/bindings[nmda:antagonist]": "opus"
 },
+"q_2278689f3b14": {
+"drug:frovatriptan/formulations[ir]/half_life": "opus"
+},
 "q_227a871d47a9": {
 "drug:solriamfetol/categories": "sonnet"
 },
@@ -2366,6 +2388,9 @@
 "receptor:beta2/classification[family]": "sonnet",
 "receptor:beta3/classification[family]": "sonnet",
 "target:alpha2/classification": "sonnet"
+},
+"q_25f5c7517b85": {
+"drug:lasmiditan/originator": "opus"
 },
 "q_25fd98ca21bd": {
 "drug:zolmitriptan/bindings[5ht1b:agonist]": "opus",
@@ -3220,6 +3245,9 @@
 "drug:safinamide/excretion[route:fecal]": "opus",
 "drug:safinamide/excretion[route:renal]": "opus"
 },
+"q_34d92d69eec2": {
+"drug:frovatriptan/brands[Tigreat]": "opus"
+},
 "q_34e1b80721ef": {
 "metabolite:6_hydroxybupropion/bindings[dat:reuptake_inhibitor]": "sonnet"
 },
@@ -3251,6 +3279,9 @@
 },
 "q_3539a85fcca6": {
 "drug:lasmiditan/bindings[5ht1f:agonist]": "opus"
+},
+"q_3541c9678c90": {
+"drug:zolmitriptan/brands[Zomigoro]": "opus"
 },
 "q_354a2aee1678": {
 "drug:galantamine/categories": "sonnet"
@@ -3840,6 +3871,9 @@
 "q_3fa1449c6c92": {
 "drug:lofepramine/nbn": "sonnet"
 },
+"q_3fa28f449e43": {
+"drug:zolmitriptan/brands[AscoTop]": "opus"
+},
 "q_3fa72c6e94ee": {
 "drug:vortioxetine/tmax": "sonnet"
 },
@@ -4060,6 +4094,9 @@
 "receptor:d1/locations[caudate]": "sonnet",
 "receptor:d1/locations[olfactory_bulb]": "sonnet",
 "receptor:d1/locations[putamen]": "sonnet"
+},
+"q_43372595253e": {
+"drug:eletriptan/categories": "opus"
 },
 "q_433abf911893": {
 "projection:occipital_L->occipital_R": "opus",
@@ -4389,6 +4426,9 @@
 "q_490ce9de4ce9": {
 "drug:mescaline/bindings[5ht2a:agonist]": "sonnet"
 },
+"q_490ea3c9ebb7": {
+"drug:zolmitriptan/categories": "opus"
+},
 "q_490ebda9a3d0": {
 "drug:morphine/first_approval": "opus"
 },
@@ -4613,6 +4653,9 @@
 "q_4c5501b3b100": {
 "functional_area:ba5": "opus"
 },
+"q_4c762d320993": {
+"drug:frovatriptan/formulations[ir]/tmax": "opus"
+},
 "q_4c78f92729f7": {
 "drug:hydromorphone/half_life": "sonnet"
 },
@@ -4794,6 +4837,9 @@
 "q_4f74cca1d2c1": {
 "drug:lsd/excretion[route:renal]": "opus",
 "drug:lsd/excretion[unchanged:urine]": "opus"
+},
+"q_4f7f30b14e23": {
+"drug:lasmiditan/first_approval": "opus"
 },
 "q_4f9945b7f381": {
 "drug:solriamfetol/bindings[dat:reuptake_inhibitor]": "sonnet"
@@ -5135,6 +5181,9 @@
 "q_55835bcf6c7a": {
 "receptor:sigma1/classification[family]": "sonnet"
 },
+"q_5593db926ff4": {
+"drug:zolmitriptan/brands[Zomigon]": "opus"
+},
 "q_559a83a9796c": {
 "drug:prazepam/brands[Lysanxia]": "sonnet"
 },
@@ -5204,6 +5253,9 @@
 },
 "q_57004abe6d70": {
 "drug:ramelteon/half_life": "sonnet"
+},
+"q_5727de0aafd0": {
+"drug:frovatriptan/first_approval": "opus"
 },
 "q_574979af9e3a": {
 "drug:clotiazepam/categories": "sonnet"
@@ -5386,6 +5438,9 @@
 "q_5ac9f0452cb8": {
 "drug:amoxapine/excretion[route:renal]": "opus"
 },
+"q_5aceb34bfd27": {
+"drug:frovatriptan/brands[Isimig]": "opus"
+},
 "q_5ade5a557f3b": {
 "drug:amoxapine/half_life": "sonnet"
 },
@@ -5447,6 +5502,9 @@
 },
 "q_5bfdc96ebb06": {
 "circuit:bg_indirect": "sonnet"
+},
+"q_5c01f8a3c32f": {
+"drug:lasmiditan/withdrawals[us:2026]": "opus"
 },
 "q_5c047eeaad13": {
 "target:dat/demographics[sex:higher_in_female:-]": "opus"
@@ -7077,6 +7135,9 @@
 "drug:amphetamine_d/formulations[ir]/tmax": "opus",
 "drug:amphetamine_d/tmax": "opus"
 },
+"q_76375dbebd4d": {
+"metabolite:n_desmethylzolmitriptan/half_life": "opus"
+},
 "q_763e0d417cd5": {
 "drug:flunitrazepam/categories": "sonnet"
 },
@@ -7397,6 +7458,9 @@
 "q_7c5363034c5a": {
 "drug:cocaine/categories": "opus"
 },
+"q_7c61a8d2a28d": {
+"drug:zolmitriptan/tmax": "opus"
+},
 "q_7c6b86c46f7f": {
 "drug:tasimelteon/brands[Hetlioz]": "sonnet"
 },
@@ -7548,6 +7612,9 @@
 },
 "q_7f24d4449238": {
 "drug:cyproheptadine/excretion[route:fecal]": "opus"
+},
+"q_7f271be9271f": {
+"drug:naratriptan/categories": "opus"
 },
 "q_7f37376fe007": {
 "drug:desflurane/bindings[gaba_a:pam]": "opus",
@@ -8778,6 +8845,9 @@
 "drug:fluphenazine/excretion[route:fecal]": "opus",
 "drug:fluphenazine/excretion[route:renal]": "opus"
 },
+"q_92cd54c5a62c": {
+"drug:almotriptan/formulations[ir]/tmax": "opus"
+},
 "q_92d1cf2303d2": {
 "drug:caffeine/categories": "opus"
 },
@@ -8946,6 +9016,9 @@
 },
 "q_9554560ddabc": {
 "drug:viloxazine/excretion[route:renal]": "opus"
+},
+"q_95632316a195": {
+"drug:zolmitriptan/half_life": "opus"
 },
 "q_95675ae0c9f8": {
 "drug:nefopam/excretion[route:fecal]": "opus",
@@ -9698,6 +9771,9 @@
 },
 "q_9fe1188ba824": {
 "drug:ethosuximide/bindings[cav_t:blocker]": "sonnet"
+},
+"q_9fe5d2f2365e": {
+"drug:lasmiditan/brands[Reyvow]": "opus"
 },
 "q_9ff6a9a942d0": {
 "receptor:kappa/effects[agonism:prolactin_elevation]": "opus"
@@ -10657,6 +10733,10 @@
 "q_b0831b33f955": {
 "drug:blonanserin/bindings[alpha1:antagonist]": "opus"
 },
+"q_b089d181e2a9": {
+"drug:frovatriptan/excretion[route:fecal]": "opus",
+"drug:frovatriptan/excretion[route:renal]": "opus"
+},
 "q_b0a0c61dd392": {
 "drug:iloperidone/half_life": "sonnet"
 },
@@ -11438,6 +11518,9 @@
 "q_bd43aa56bafd": {
 "drug:fosphenytoin/excretion[route:renal]": "opus"
 },
+"q_bd504494791c": {
+"drug:zolmitriptan/metabolites[n_desmethylzolmitriptan]": "opus"
+},
 "q_bd64ce87227d": {
 "drug:pipothiazine/formulations[depot]/half_life": "opus",
 "drug:pipothiazine/formulations[depot]/release": "opus",
@@ -11739,6 +11822,10 @@
 "q_c24b41c24742": {
 "receptor:mu/demographics[age:increase:-]": "opus"
 },
+"q_c256b92902bf": {
+"drug:frovatriptan/categories": "opus",
+"drug:frovatriptan/originator": "opus"
+},
 "q_c2672a4a573b": {
 "drug:pizotifen/bindings[5ht2a:antagonist]": "sonnet",
 "drug:pizotifen/bindings[5ht2b:antagonist]": "sonnet",
@@ -11807,6 +11894,9 @@
 "drug:loxapine/bindings[m3:antagonist]": "sonnet",
 "drug:loxapine/bindings[m4:antagonist]": "sonnet",
 "drug:loxapine/bindings[m5:antagonist]": "sonnet"
+},
+"q_c2c69c377e4a": {
+"drug:naratriptan/formulations[ir]/half_life": "opus"
 },
 "q_c2d7b8f222ac": {
 "drug:lorazepam/bindings[gaba_a:pam]": "sonnet"
@@ -11894,6 +11984,10 @@
 "q_c40059d706b0": {
 "drug:loflazepate/excretion[route:renal]": "opus"
 },
+"q_c40be8fccc98": {
+"drug:zolmitriptan/excretion[route:fecal]": "opus",
+"drug:zolmitriptan/excretion[route:renal]": "opus"
+},
 "q_c41a1dad0524": {
 "drug:physostigmine/bindings[ache:enzyme_inhibitor]": "opus",
 "drug:physostigmine/bindings[bche:enzyme_inhibitor]": "opus"
@@ -11921,6 +12015,9 @@
 },
 "q_c4664ec983ea": {
 "drug:aripiprazole/bindings[vmat2:vesicular_inhibitor]": "opus"
+},
+"q_c4695d99eb62": {
+"drug:almotriptan/categories": "opus"
 },
 "q_c476383a4e4c": {
 "drug:methylphenidate_dl/bindings[dat:reuptake_inhibitor]": "sonnet",
@@ -12155,6 +12252,9 @@
 "q_c86f6ad60912": {
 "drug:midazolam/excretion[unchanged:urine]": "opus"
 },
+"q_c87080c9d303": {
+"drug:almotriptan/first_approval": "opus"
+},
 "q_c87863a1a276": {
 "drug:trimipramine/excretion[route:renal]": "opus"
 },
@@ -12169,6 +12269,9 @@
 },
 "q_c90a769d2390": {
 "receptor:nachr_a4b2/effects[agonism:euphoria]": "opus"
+},
+"q_c910e03e3077": {
+"drug:almotriptan/originator": "opus"
 },
 "q_c922d44517fc": {
 "drug:palonosetron/bindings[5ht3:antagonist]": "opus"
@@ -12210,6 +12313,10 @@
 "q_c9eb4ce48e64": {
 "metabolite:8_hydroxyamoxapine/bindings[net:reuptake_inhibitor]": "sonnet",
 "metabolite:8_hydroxyamoxapine/bindings[sert:reuptake_inhibitor]": "sonnet"
+},
+"q_c9f31540bd17": {
+"drug:almotriptan/excretion[route:renal]": "opus",
+"drug:almotriptan/excretion[unchanged:urine]": "opus"
 },
 "q_ca0a6fe5b2ae": {
 "drug:levomepromazine/excretion[route:fecal]": "opus",
@@ -12313,6 +12420,9 @@
 },
 "q_cbcd1b11b3fd": {
 "drug:quazepam/metabolites[2_oxoquazepam]": "opus"
+},
+"q_cbd101c97e80": {
+"drug:almotriptan/formulations[ir]/half_life": "opus"
 },
 "q_cbd667e4ef67": {
 "drug:thioridazine/bindings[alpha1a:antagonist]": "sonnet",
@@ -12567,8 +12677,15 @@
 "q_cf91f5967096": {
 "drug:phencyclidine/half_life": "opus"
 },
+"q_cf9aa68587c1": {
+"drug:naratriptan/excretion[route:renal]": "opus",
+"drug:naratriptan/excretion[unchanged:urine]": "opus"
+},
 "q_cfd8f134b48b": {
 "drug:istradefylline/bindings[a2a:antagonist]": "sonnet"
+},
+"q_cfe893c0e5a7": {
+"drug:lasmiditan/formulations[ir]/tmax": "opus"
 },
 "q_cfeb3fbad379": {
 "receptor:alpha1b/locations[cerebellum]": "sonnet",
@@ -12750,6 +12867,9 @@
 "receptor:alpha1b/locations[hippocampus]": "sonnet",
 "receptor:alpha1b/locations[midbrain]": "sonnet",
 "receptor:alpha1b/locations[thalamus]": "sonnet"
+},
+"q_d3fa2dc9e25c": {
+"drug:naratriptan/first_approval": "opus"
 },
 "q_d3fd20a7b689": {
 "drug:opipramol/excretion[route:renal]": "opus",
@@ -12954,6 +13074,9 @@
 "drug:metopimazine/bindings[alpha1:antagonist]": "opus",
 "drug:metopimazine/bindings[h1:antagonist]": "opus"
 },
+"q_d770fc088187": {
+"drug:lasmiditan/formulations[ir]/half_life": "opus"
+},
 "q_d7742bf75970": {
 "drug:mirogabalin/first_approval": "opus"
 },
@@ -13038,11 +13161,17 @@
 "q_d8faf1587146": {
 "drug:trazodone/half_life": "sonnet"
 },
+"q_d8fde0e0776d": {
+"drug:eletriptan/formulations[ir]/tmax": "opus"
+},
 "q_d905ed3a16cc": {
 "receptor:5ht2b/release_modulation[autoreceptor:-:cell_body:serotonin:increase]": "opus"
 },
 "q_d928c3d3dee8": {
 "drug:alprazolam/excretion[route:renal]": "opus"
+},
+"q_d92e79948306": {
+"drug:frovatriptan/excretion[unchanged:urine]": "opus"
 },
 "q_d939e924b4b0": {
 "drug:zuranolone/first_approval": "opus"
@@ -13276,6 +13405,9 @@
 "q_dd5bd9f6e4e8": {
 "drug:clozapine/brands[Leponex]": "sonnet"
 },
+"q_dd5dfc646ebf": {
+"drug:zolmitriptan/first_approval": "opus"
+},
 "q_dd6d3ec3a1a0": {
 "drug:cocaine/excretion[route:renal]": "opus"
 },
@@ -13409,6 +13541,9 @@
 },
 "q_df6cfb7f2880": {
 "drug:amitriptyline/categories": "sonnet"
+},
+"q_df7176406f81": {
+"drug:naratriptan/formulations[ir]/tmax": "opus"
 },
 "q_df73ae1fd24c": {
 "drug:2cb/bindings[5ht2a:partial_agonist]": "sonnet",
@@ -13699,6 +13834,9 @@
 "drug:maprotiline/bindings[alpha1b:antagonist]": "sonnet",
 "drug:maprotiline/bindings[alpha1c:antagonist]": "sonnet",
 "drug:maprotiline/bindings[alpha1d:antagonist]": "sonnet"
+},
+"q_e48e991e445f": {
+"drug:naratriptan/excretion[renal_process:tubular_secretion]": "opus"
 },
 "q_e49221b05a41": {
 "drug:loprazolam/half_life": "sonnet"
@@ -14689,6 +14827,9 @@
 "q_f49b52209e46": {
 "drug:loxapine/brands[Adasuve (Staccato loxapine, inhaled loxapine)]": "sonnet"
 },
+"q_f4a5de522bc5": {
+"drug:eletriptan/half_life": "opus"
+},
 "q_f4ab2ded15c5": {
 "drug:nortriptyline/brands[Pamelor]": "sonnet"
 },
@@ -15227,6 +15368,9 @@
 "drug:flupenthixol/bindings[m3:antagonist]": "sonnet",
 "drug:flupenthixol/bindings[m4:antagonist]": "sonnet",
 "drug:flupenthixol/bindings[m5:antagonist]": "sonnet"
+},
+"q_fcd2a4ca7436": {
+"drug:almotriptan/excretion[route:fecal]": "opus"
 },
 "q_fcf754e9065c": {
 "drug:fentanyl/originator": "opus"
