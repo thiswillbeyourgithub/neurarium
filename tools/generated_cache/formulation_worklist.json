@@ -2505,6 +2505,32 @@
      ]
     }
    }
+  },
+  "dihydroergotamine": {
+   "name": "Dihydroergotamine",
+   "items": {
+    "tmax": {
+     "value": {
+      "hours": 0.75
+     },
+     "candidates": [
+      {
+       "corpus": "bdpm",
+       "page": "62455371",
+       "line": "Après administration nasale, la dihydroergotamine est rapidement absorbée (Tmax d’environ 45 min).",
+       "releases": [
+        "nasal"
+       ],
+       "durations": [
+        {
+         "hours": 0.75
+        }
+       ],
+       "qid": "70179ef4"
+      }
+     ]
+    }
+   }
   }
  }
 }
