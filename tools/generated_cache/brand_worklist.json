@@ -46,6 +46,14 @@
       "L' alimémazine, commercialisé sous le nom de Théralène, est une substance dérivée de la phénothiazine ."
     ]
   },
+  "almotriptan": {
+    "fr_slug": "almotriptan",
+    "fr_title": "Almotriptan",
+    "name": "Almotriptan",
+    "sentences": [
+      "Identification"
+    ]
+  },
   "alpidem": {
     "fr_slug": "alpidem",
     "fr_title": "Alpidem",
@@ -1054,6 +1062,15 @@
       "Fosphénytoïne"
     ]
   },
+  "frovatriptan": {
+    "fr_slug": "frovatriptan",
+    "fr_title": "Frovatriptan",
+    "name": "Frovatriptan",
+    "sentences": [
+      "Cet article est une ébauche concernant la pharmacie .",
+      "En France, il est commercialisé et remboursé sous forme de comprimés de 2.5mg, conditionné en boite de 2, 6 ou 12 comprimés sous les noms de Tigreat, Isimig ou comme médicaments génériques ."
+    ]
+  },
   "furosemide": {
     "fr_slug": "furos_mide",
     "fr_title": "Furosémide",
@@ -1213,6 +1230,15 @@
     "name": "Lamotrigine",
     "sentences": [
       "Informations générales"
+    ]
+  },
+  "lasmiditan": {
+    "fr_slug": "lasmiditan",
+    "fr_title": "Lasmiditan",
+    "name": "Lasmiditan",
+    "sentences": [
+      "Informations générales",
+      "Le Lasmiditan est un médicament antimigraineux vendu sous le nom de marque Reyvow ."
     ]
   },
   "lemborexant": {
@@ -1651,6 +1677,14 @@
     "sentences": [
       "Naltrexone/bupropion",
       "La naltrexone/bupropion , vendue notamment sous le nom de marque Contrave , est un médicament combiné utilisé pour traiter l'obésité en complément d'un régime alimentaire et d'exercice physique ."
+    ]
+  },
+  "naratriptan": {
+    "fr_slug": "naratriptan",
+    "fr_title": "Naratriptan",
+    "name": "Naratriptan",
+    "sentences": [
+      "Cet article est une ébauche concernant la pharmacie ."
     ]
   },
   "niaprazine": {
@@ -2707,6 +2741,15 @@
       "La ziprasidone , commercialisée notamment sous le nom de Geodon , est un antipsychotique atypique utilisé pour traiter la schizophrénie ainsi que les troubles bipolaires .",
       "En septembre 2009 , le ministère de la Justice américain a annoncé que Pfizer avait été condamné à payer une amende historique de 2,3 milliards de dollars à titre de pénalité pour la commercialisation frauduleuse de plusieurs médicaments, dont Geodon .",
       "Aux États-Unis, Geodon est commercialisé par Viatris après la séparation d'Upjohn de Pfizer , ."
+    ]
+  },
+  "zolmitriptan": {
+    "fr_slug": "zolmitriptan",
+    "fr_title": "Zolmitriptan",
+    "name": "Zolmitriptan",
+    "sentences": [
+      "Zolmitriptan",
+      "Le zolmitriptan est commercialisé par AstraZeneca sous les noms de Zomig, Zomigon (Argentine, Canada et Grèce), AscoTop (Allemagne) et Zomigoro (France)."
     ]
   },
   "zolpidem": {
