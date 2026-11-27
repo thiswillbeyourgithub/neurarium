@@ -8342,6 +8342,14 @@
 "structure:vta_L": "sonnet",
 "structure:vta_R": "sonnet"
 },
+"q_92fa1ecbbaf0": {
+"network:central_executive": "opus",
+"network:default_mode": "opus",
+"network:dorsal_attention": "opus",
+"network:salience": "opus",
+"network:sensorimotor": "opus",
+"network:visual": "opus"
+},
 "q_92fd8df5333d": {
 "drug:methylphenidate_dl/formulations[ir]/release": "opus"
 },
@@ -8643,6 +8651,9 @@
 },
 "q_98435feb7377": {
 "drug:amphetamine_dl/brands[Attentin]": "sonnet"
+},
+"q_9868710b0f22": {
+"network:salience": "opus"
 },
 "q_98692cd2bc5c": {
 "drug:milnacipran/brands[Savella]": "sonnet"
@@ -13699,6 +13710,9 @@
 "drug:amitriptyline/bindings[alpha1c:antagonist]": "sonnet",
 "drug:amitriptyline/bindings[alpha1d:antagonist]": "sonnet"
 },
+"q_f0c91e540217": {
+"network:central_executive": "opus"
+},
 "q_f0d3707fe8c7": {
 "drug:yohimbine/seizure_threshold[lowers]": "opus",
 "drug:yohimbine/seizure_threshold[possibly_lowers]": "opus"
@@ -14005,6 +14019,9 @@
 },
 "q_f5c61f25aa34": {
 "drug:suvorexant/categories": "sonnet"
+},
+"q_f5d22777dff7": {
+"network:default_mode": "opus"
 },
 "q_f5e41f00a4c0": {
 "drug:oxycodone/categories": "sonnet"

@@ -4077,6 +4077,11 @@
       "Dosing and use",
       "Pharmacokinetics"
     ],
+    "q_9868710b0f22": [
+      "61 Disorders of Mood and Anxiety",
+      "Dysfunctions of Human Brain Structures and Circuits Involved in Mood and Anxiety Disorders Can Be Identified by Neuroimaging",
+      "Identification of Abnormally Functioning Neural Circuits Helps Explain Symptoms and May Suggest Treatments"
+    ],
     "q_98692cd2bc5c": [
       "Milnacipran",
       "Therapeutics",
@@ -6457,6 +6462,11 @@
       "Side effects",
       "How Drug Causes Side Effects"
     ],
+    "q_f0c91e540217": [
+      "61 Disorders of Mood and Anxiety",
+      "Dysfunctions of Human Brain Structures and Circuits Involved in Mood and Anxiety Disorders Can Be Identified by Neuroimaging",
+      "Identification of Abnormally Functioning Neural Circuits Helps Explain Symptoms and May Suggest Treatments"
+    ],
     "q_f0ed12ee5d4b": [
       "Methylphenidate (D)",
       "Therapeutics",
@@ -6613,6 +6623,11 @@
       "Suvorexant",
       "Therapeutics",
       "Class"
+    ],
+    "q_f5d22777dff7": [
+      "6 Imaging and Behavior",
+      "Functional MRI Data Can Be Analyzed in Several Ways",
+      "fMRI Can Be Used to Measure Correlated Activity Across Brain Networks"
     ],
     "q_f5f466ba4a55": [
       "15. Telencephalon Neocortex"
