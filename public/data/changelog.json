@@ -1,6 +1,51 @@
 {
   "versions": [
     {
+      "version": "3.184.0",
+      "date": "2026-11-27",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Every list of effects (a receptor's Functional effects, a drug's Predicted effects, the Simulation's clinical-effects plot and the Effects section) has an All / Central / Peripheral switch, remembered across visits; an effect felt in both places, such as nausea, shows under either",
+          "commits": [
+            "39bd2c5e",
+            "c10488f3",
+            "2d45c41b",
+            "60e4809f",
+            "527da4ca"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "The pages for AI agents now say where each effect arises: centrally, peripherally or both",
+          "commits": [
+            "e0232ebe"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "In the Simulation drug picker, Enter adds the first matching drug and the arrow keys pick another",
+          "commits": [
+            "84eb7451"
+          ]
+        },
+        {
+          "category": "improved",
+          "text": "Simulation bar-plot labels are easier to read: full ink, larger, and tilted 30 degrees instead of 50",
+          "commits": [
+            "f84900f5"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "The beta tag of the Functional areas heading sits right after the word instead of in the middle of the row",
+          "commits": [
+            "d37a5aa7"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.183.0",
       "date": "2026-11-22",
       "entries": [
