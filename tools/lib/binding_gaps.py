@@ -86,6 +86,8 @@ FR_ALIASES: dict[str, list[str]] = {
     "sert": ["recapture de la sérotonine"],
     "net": ["recapture de la noradrénaline"],
     "dat": ["recapture de la dopamine"],
+    "nav": ["canal sodique", "canaux sodiques"],
+    "cav": ["canal calcique", "canaux calciques"],
 }
 # "adrénolytique" names the adrenoceptors at large; a label means α1 by it only when it
 # says so, or names the orthostatic hypotension α1 blockade causes.

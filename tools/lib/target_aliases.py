@@ -137,6 +137,10 @@ EXTRA_ALIASES: dict[str, list[str]] = {
     "nachr_a4b2": ["alpha4beta2", "alpha4beta2 nicotinic", "alpha4beta2 nAChR"],
     # GABA-A-rho's older name, still the usual one in anaesthetic pharmacology prose.
     "gaba_a_rho": ["GABA-C", "GABAC receptor"],
+    # The channels by their plain name; "sodium and calcium channels" names both at once
+    # (tolperisone), which neither single-channel alias reaches.
+    "nav": ["sodium channel", "sodium channels", "sodium and calcium channels"],
+    "cav": ["calcium channel", "calcium channels", "sodium and calcium channels"],
     # The coarse group target. The boundary rule already keeps "alpha2" off "alpha2A".
     "alpha2": ["alpha2 adrenergic", "alpha2 autoreceptor", "alpha2 adrenoceptor"],
 }

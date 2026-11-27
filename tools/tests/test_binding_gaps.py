@@ -154,6 +154,13 @@ class FrenchPredicateTest(unittest.TestCase):
         for target in ("dopamine", "muscarinic", "alpha1"):
             self.assertTrue(fr_claims(ALIM, target), target)
 
+    def test_channels_go_by_their_plain_name(self):
+        en = "It acts by blocking voltage-gated sodium and calcium channels."
+        for target in ("nav", "cav"):
+            self.assertTrue(bg.claims_target(en, target, AL[target], bg.WIKI_CORPUS), target)
+        fr = "Le rufinamide module l’activité des canaux sodiques."
+        self.assertTrue(fr_claims(fr, "nav"))
+
     def test_french_words_count_on_the_rcp_input_only(self):
         self.assertFalse(bg.claims_target(ALIM, "muscarinic", AL["muscarinic"], bg.WIKI_CORPUS))
 

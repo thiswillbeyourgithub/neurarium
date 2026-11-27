@@ -123,14 +123,14 @@ OWN_ARTICLE = {
 # handing to the judge. Broad on purpose; the judge + quote gate are the real filter.
 ACTION_RE = re.compile(
     r"\b(agonist|antagonist|inhibitor|inhibits?|inhibition|reuptake|"
-    r"releaser|releases?|partial agonist|inverse agonist|blocker|blocks?|"
+    r"releaser|releases?|partial agonist|inverse agonist|blocker|blocks?|blocking|"
     r"modulator|antagonism|agonism|affinity|binds?|potent)\b", re.I)
 # A receptor/target-ish token in a line, so we prefer lines that actually name a site
 # (a bare "potent inhibitor" with no target is useless to the judge).
 TARGET_HINT_RE = re.compile(
     r"\b(5-?HT|receptor|transporter|SERT|NET|DAT|adrenerg|dopamin|serotonin|"
     r"histamin|muscarinic|H1|H2|D[1-5]\b|M[1-5]\b|alpha|beta|α|β|MAO|"
-    r"NMDA|sigma|opioid|GABA|nicotinic|cholinerg|channel)\b", re.I)
+    r"NMDA|sigma|opioid|GABA|nicotinic|cholinerg|channels?)\b", re.I)
 
 MAX_ACTION_LINES = 14   # cap candidate lines per metabolite (keeps the worklist compact)
 
