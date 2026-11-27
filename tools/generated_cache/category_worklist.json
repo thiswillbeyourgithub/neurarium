@@ -431,6 +431,390 @@
      "qid": "ec042707"
     }
    ]
+  },
+  "fosphenytoin": {
+   "name": "Fosphenytoin",
+   "categories": [
+    "anticonvulsant"
+   ],
+   "labels": [
+    "Anticonvulsant"
+   ],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "fosphenytoin",
+     "line": "IUPAC name (2,5-Dioxo-4,4-diphenyl-imidazolidin-1-yl)methoxyphosphonic acid",
+     "qid": "21144406"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "fosphenytoin",
+     "line": "Fosphenytoin , also known as fosphenytoin sodium , and sold under the brand name Cerebyx among others, is a water-soluble phenytoin prodrug that is administered intravenously to deliver phenytoin, potentially more safely than intravenous phenytoin .",
+     "qid": "f03ab9bd"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "fosphenytoin",
+     "line": "It is used in the acute treatment of convulsive status epilepticus .",
+     "qid": "e0f49c83"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "fosphenytoin",
+     "line": "Fosphenytoin was developed in 1996.",
+     "qid": "cc5dda83"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "fosph_nyto_ne",
+     "line": "La fosphénytoïne est un médicament antiépileptique .",
+     "qid": "9b339985"
+    }
+   ]
+  },
+  "ganaxolone": {
+   "name": "Ganaxolone",
+   "categories": [
+    "anticonvulsant"
+   ],
+   "labels": [
+    "Anticonvulsant"
+   ],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "ganaxolone",
+     "line": "Drug class | Neurosteroid",
+     "qid": "b3215707"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "ganaxolone",
+     "line": "This scientific article needs additional citations to secondary or tertiary sources .",
+     "qid": "7836e999"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "ganaxolone",
+     "line": "Help add sources such as review articles, monographs, or textbooks.",
+     "qid": "956f7b37"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "ganaxolone",
+     "line": "Please also establish the relevance for any primary research articles cited.",
+     "qid": "55dea940"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "ganaxolone",
+     "line": "Unsourced or poorly sourced material may be challenged and removed. ( May 2017 ) ( Learn how and when to remove this message )",
+     "qid": "aafd5da0"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "ganaxolone",
+     "line": "IUPAC name 1-phenanthren-17-yl]ethanone",
+     "qid": "201f9894"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "ganaxolone",
+     "line": "Ganaxolone , sold under the brand name Ztalmy , is a medication used to treat seizures in people with cyclin-dependent kinase-like 5 (CDKL5) deficiency disorder .",
+     "qid": "d115a16c"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "ganaxolone",
+     "line": "Ganaxolone is a neuroactive steroid gamma-aminobutyric acid (GABA) A receptor positive modulator .",
+     "qid": "e981d573"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "ganaxolone",
+     "line": "The most common side effects of treatment with ganaxolone include somnolence (sleepiness), fever, excessive saliva or drooling, and seasonal allergy.",
+     "qid": "41c2952d"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "ganaxolone",
+     "line": "Ganaxolone was approved for medical use in the United States in March 2022, and in the European Union in July 2023.",
+     "qid": "ba152832"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "ganaxolone",
+     "line": "The US Food and Drug Administration (FDA) considers it to be a first-in-class medication .",
+     "qid": "aa5a332c"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "ganaxolone",
+     "line": "La ganaxolone , vendue sous le nom de marque Ztalmy, est un médicament utilisé pour traiter les crises d'épilepsie des patients porteurs d'un trouble déficitaire en kinase cycline-dépendante de type 5",
+     "qid": "d9428b57"
+    }
+   ]
+  },
+  "riluzole": {
+   "name": "Riluzole",
+   "categories": [
+    "other"
+   ],
+   "labels": [
+    "Other"
+   ],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "riluzole",
+     "line": "IUPAC name 6-(trifluoromethoxy)benzothiazol-2-amine",
+     "qid": "07eac6a6"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "riluzole",
+     "line": "Riluzole is a medication used to treat amyotrophic lateral sclerosis (ALS) and other motor neuron diseases .",
+     "qid": "dd5102e1"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "riluzole",
+     "line": "Riluzole delays the onset of ventilator -dependence or tracheostomy in some people and may increase survival by two to three months.",
+     "qid": "39c15c30"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "riluzole",
+     "line": "Riluzole is available in tablet and liquid form.",
+     "qid": "aa070c4b"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "riluzole",
+     "line": "A thin film version of riluzole which dissolves on the tongue (commercially known as Exservan or Emylif ) is available in the United States and United Kingdom.",
+     "qid": "c04d0f58"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "riluzole",
+     "line": "Toxique en cas d'ingestion P301+P310 :",
+     "qid": "804c5d98"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "riluzole",
+     "line": "En cas d'ingestion : appeler immédiatement un CENTRE ANTIPOISON ou un médecin.",
+     "qid": "cd4be085"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "riluzole",
+     "line": "Unités du SI et CNTP , sauf indication contraire.",
+     "qid": "658ec01e"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "riluzole",
+     "line": "2-amino-6-(trifluorométhoxy)benzothiazole",
+     "qid": "7d145651"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "riluzole",
+     "line": "Le riluzole est un médicament utilisé pour traiter la sclérose latérale amyotrophique .",
+     "qid": "ddba469b"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "riluzole",
+     "line": "Il interfère dans l'utilisation du glutamate , mais son mode d'action n'est pas clairement élucidé.",
+     "qid": "484aa049"
+    }
+   ]
+  },
+  "physostigmine": {
+   "name": "Physostigmine",
+   "categories": [
+    "other"
+   ],
+   "labels": [
+    "Other"
+   ],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "physostigmine",
+     "line": "Drug class | Cholinesterase inhibitor",
+     "qid": "5de5bef1"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "physostigmine",
+     "line": "IUPAC name (3a S ,8a R )-1,3a,8-Trimethyl-1,2,3,3a,8,8a-hexahydropyrroloindol-5-yl methylcarbamate",
+     "qid": "dfe43553"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "physostigmine",
+     "line": "Physostigmine (also known as eserine from éséré , the West African name for the Calabar bean ) is a highly toxic parasympathomimetic alkaloid , specifically, a reversible cholinesterase inhibitor .",
+     "qid": "f84180d7"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "physostigmine",
+     "line": "It occurs naturally in the Calabar bean and the fruit of the Manchineel tree .",
+     "qid": "66ca0d77"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "physostigmine",
+     "line": "The chemical was synthesized for the first time in 1935 by Percy Lavon Julian and Josef Pikl.",
+     "qid": "258d2fdb"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "physostigmine",
+     "line": "It is available in the U.S. under the trade names Antilirium and Isopto Eserine , and as eserine salicylate and eserine sulfate.",
+     "qid": "14a3d76d"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "physostigmine",
+     "line": "Today, physostigmine is most commonly used for its medicinal value.",
+     "qid": "382c74a1"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "physostigmine",
+     "line": "However, before its discovery by Sir Robert Christison in 1846, it was much more prevalent as an ordeal poison .",
+     "qid": "92b6fb4a"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "physostigmine",
+     "line": "The positive medical applications of the drug were first suggested in the gold medal-winning final thesis of Thomas Richard Fraser at the University of Edinburgh in 1862.",
+     "qid": "3b1b5108"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "physostigmine",
+     "line": "Mortel en cas d'ingestion H330 :",
+     "qid": "cbaa84c9"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "physostigmine",
+     "line": "Unités du SI et CNTP , sauf indication contraire.",
+     "qid": "658ec01e"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "physostigmine",
+     "line": "La physostigmine est un alcaloïde de la famille des Stigmines dont il est le chef de file historique.",
+     "qid": "6ac0d7af"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "physostigmine",
+     "line": "Ce composé est également connu sous le nom d' ésérine .",
+     "qid": "61f071ec"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "physostigmine",
+     "line": "Elle fut isolée la première fois en 1864 par Amédée Vée et Manuel Leven et synthétisée en 1935 par Percy Lavon Julian .",
+     "qid": "924c8e55"
+    }
+   ]
+  },
+  "mirogabalin": {
+   "name": "Mirogabalin",
+   "categories": [
+    "other"
+   ],
+   "labels": [
+    "Other"
+   ],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "mirogabalin",
+     "line": "Drug class | Gabapentinoid ; Analgesic",
+     "qid": "0be633fa"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "mirogabalin",
+     "line": "IUPAC name (1 R ,5 S ,6 S )-6-(aminomethyl)-3-ethyl-bicyclo(3.2.0)hept-3-ene-6-acetic acid",
+     "qid": "dcc79a9e"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "mirogabalin",
+     "line": "Mirogabalin (brand name Tarlige ; developmental code name DS-5565 ) is a gabapentinoid medication developed by Daiichi Sankyo .",
+     "qid": "25528bc5"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "mirogabalin",
+     "line": "Gabapentin and pregabalin are also members of this class.",
+     "qid": "053bada8"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "mirogabalin",
+     "line": "As a gabapentinoid, mirogabalin binds to the α 2 δ subunit of voltage-gated calcium channel ( 1 and 2 ), but with significantly higher potency than pregabalin.",
+     "qid": "18058e34"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "mirogabalin",
+     "line": "It has shown promising results in Phase II clinical trials for the treatment of diabetic peripheral neuropathic pain .",
+     "qid": "20be5348"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "mirogabalin",
+     "line": "In Japan, the company submitted a marketing application for treatment of peripheral neuropathic pain.",
+     "qid": "a75f755c"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "mirogabalin",
+     "line": "The medication was approved for neuropathic pain and postherpetic neuralgia in Japan in January 2019.",
+     "qid": "a9888620"
+    }
+   ]
+  },
+  "ziconotide": {
+   "name": "Ziconotide",
+   "categories": [
+    "other"
+   ],
+   "labels": [
+    "Other"
+   ],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "ziconotide",
+     "line": "Ziconotide , sold under the brand name Prialt , also called intrathecal ziconotide (ITZ) because of its administration route, is an atypical analgesic agent for the amelioration of severe and chronic pain .",
+     "qid": "377b628c"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "ziconotide",
+     "line": "Derived from Conus magus , a cone snail, it is the synthetic form of an ω- conotoxin peptide .",
+     "qid": "4e5a882a"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "ziconotide",
+     "line": "In December 2004 the US Food and Drug Administration (FDA) approved ziconotide when delivered as an infusion into the cerebrospinal fluid using an intrathecal pump system .",
+     "qid": "25a7aab3"
+    }
+   ]
   }
  }
 }
