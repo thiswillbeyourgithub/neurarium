@@ -284,6 +284,15 @@ export function createSimulation({ body, data, deps, ui }) {
         b.addEventListener("click", () => { onPick(it); close(); });
         hits.appendChild(b);
       }
+      setActive(0);
+    };
+    // Enter picks the highlighted hit (the first one until an arrow key moves it).
+    let active = -1;
+    const hitButtons = () => [...hits.querySelectorAll(".sim-hit")];
+    const setActive = (i) => {
+      const all = hitButtons();
+      active = all.length ? (i + all.length) % all.length : -1;
+      all.forEach((b, j) => b.classList.toggle("active", j === active));
     };
     open.addEventListener("click", () => {
       open.hidden = true;
@@ -294,6 +303,13 @@ export function createSimulation({ body, data, deps, ui }) {
     input.addEventListener("input", refresh);
     input.addEventListener("keydown", (ev) => {
       if (ev.key === "Escape") { ev.stopPropagation(); close(); }
+      else if (ev.key === "ArrowDown" || ev.key === "ArrowUp") {
+        ev.preventDefault();
+        setActive(active + (ev.key === "ArrowDown" ? 1 : -1));
+      } else if (ev.key === "Enter") {
+        ev.preventDefault();
+        hitButtons()[active]?.click();
+      }
     });
     return wrap;
   };

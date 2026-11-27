@@ -133,7 +133,8 @@
   border-radius: 999px;
   cursor: pointer;
 }
-.sim-hit:hover { background: var(--accent-soft); }
+.sim-hit:hover, .sim-hit.active { background: var(--accent-soft); }
+.sim-hit.active { border-color: var(--accent); }
 .sim-nohit { color: var(--muted); font-size: 11px; }
 .sim-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 6px; }
 .sim-slider { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--muted); }
