@@ -1566,6 +1566,46 @@
     "value": 1.7
    }
   },
+  "butorphanol": {
+   "bbb": {
+    "label": "BBB+",
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "5361092",
+      "provenance": "verified",
+      "quote": "B3DB row 2557: butorphanol | CID 5361092 | logBB - | BBB+ | group B | references R1, R6, R15, R27, R27, R30, R30"
+     }
+    ]
+   },
+   "cid": 5361092,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "5361092",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 43.7 Å²"
+     }
+    ],
+    "value": 43.7
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "5361092",
+      "provenance": "verified",
+      "quote": "XLogP3: 3.8"
+     }
+    ],
+    "value": 3.8
+   }
+  },
   "cabergoline": {
    "bbb": {
     "label": "BBB+",
@@ -2679,6 +2719,47 @@
     "value": 1.8
    }
   },
+  "cyclobenzaprine": {
+   "bbb": {
+    "label": "BBB+",
+    "logbb": 1.06,
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "2895",
+      "provenance": "verified",
+      "quote": "B3DB row 1009: cyclobenzaprine | CID 2895 | logBB 1.06 | BBB+ | group A | references R18, R26, R27"
+     }
+    ]
+   },
+   "cid": 2895,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "2895",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 3.2 Å²"
+     }
+    ],
+    "value": 3.2
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "2895",
+      "provenance": "verified",
+      "quote": "XLogP3: 5.2"
+     }
+    ],
+    "value": 5.2
+   }
+  },
   "cyproheptadine": {
    "bbb": {
     "label": "BBB+",
@@ -3009,6 +3090,47 @@
      }
     ],
     "value": 3.0
+   }
+  },
+  "dihydrocodeine": {
+   "bbb": {
+    "label": "BBB+",
+    "logbb": 0.55,
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "5284543",
+      "provenance": "verified",
+      "quote": "B3DB row 839: dihydrocodeine | CID 5284543 | logBB 0.55 | BBB+ | group A | references R2, R2, R20, R25, R27, R46"
+     }
+    ]
+   },
+   "cid": 5284543,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "5284543",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 41.9 Å²"
+     }
+    ],
+    "value": 41.9
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "5284543",
+      "provenance": "verified",
+      "quote": "XLogP3: 2.2"
+     }
+    ],
+    "value": 2.2
    }
   },
   "diphenhydramine": {
@@ -5272,6 +5394,33 @@
     "value": 4.7
    }
   },
+  "levomethadone": {
+   "cid": 22267,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "22267",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 20.3 Å²"
+     }
+    ],
+    "value": 20.3
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "22267",
+      "provenance": "verified",
+      "quote": "XLogP3: 3.9"
+     }
+    ],
+    "value": 3.9
+   }
+  },
   "levomilnacipran": {
    "cid": 6917779,
    "tpsa": {
@@ -6746,6 +6895,46 @@
     "value": 6.4
    }
   },
+  "nalbuphine": {
+   "bbb": {
+    "label": "BBB+",
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "5311304",
+      "provenance": "verified",
+      "quote": "B3DB row 5010: nalbuphine | CID 5311304 | logBB - | BBB+ | group C | references R6, R15"
+     }
+    ]
+   },
+   "cid": 5311304,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "5311304",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 73.2 Å²"
+     }
+    ],
+    "value": 73.2
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "5311304",
+      "provenance": "verified",
+      "quote": "XLogP3: 0.2"
+     }
+    ],
+    "value": 0.2
+   }
+  },
   "nalmefene": {
    "bbb": {
     "label": "BBB+",
@@ -7326,6 +7515,36 @@
     "value": 3.6
    }
   },
+  "orphenadrine": {
+   "b3db_refused": [
+    3845
+   ],
+   "cid": 4601,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "4601",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 12.5 Å²"
+     }
+    ],
+    "value": 12.5
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "4601",
+      "provenance": "verified",
+      "quote": "XLogP3: 3.8"
+     }
+    ],
+    "value": 3.8
+   }
+  },
   "oxazepam": {
    "bbb": {
     "label": "BBB+",
@@ -7473,6 +7692,47 @@
      }
     ],
     "value": 1.2
+   }
+  },
+  "oxymorphone": {
+   "bbb": {
+    "label": "BBB+",
+    "logbb": 0.35,
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "5284604",
+      "provenance": "verified",
+      "quote": "B3DB row 745: oxymorphone | CID 5284604 | logBB 0.35 | BBB+ | group A | references R25"
+     }
+    ]
+   },
+   "cid": 5284604,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "5284604",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 70 Å²"
+     }
+    ],
+    "value": 70.0
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "5284604",
+      "provenance": "verified",
+      "quote": "XLogP3: 0.8"
+     }
+    ],
+    "value": 0.8
    }
   },
   "paliperidone": {
