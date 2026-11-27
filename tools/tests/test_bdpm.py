@@ -79,6 +79,11 @@ class JoinTest(unittest.TestCase):
         self.assertEqual(B.molecule_key("BENZOATE DE RIZATRIPTAN")[0], "RIZATRIPTAN")
         self.assertEqual(B.molecule_key("PALMITATE DE PALIPÉRIDONE")[0], "PALIPERIDONE")
 
+    def test_heptahydrate_is_a_salt_word(self):
+        """Fosphenytoin's BDPM line missed the join on its hydrate word."""
+        self.assertEqual(B.molecule_key("FOSPHÉNYTOÏNE SODIQUE HEPTAHYDRATÉ")[0],
+                         "FOSPHENYTOINE")
+
     def test_stereo_qualified_name_joins_only_by_alias(self):
         """"Methylphenidate (D)" must not reduce to METHYLPHENIDATE (the racemate)."""
         keys = B.drug_keys({"id": "methylphenidate_d", "name": "Methylphenidate (D)"}, {})
