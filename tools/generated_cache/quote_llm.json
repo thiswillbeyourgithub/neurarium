@@ -234,6 +234,10 @@
 "q_0403a0ba9cc7": {
 "drug:nefopam/excretion[unchanged:urine]": "opus"
 },
+"q_043557190f0c": {
+"drug:eletriptan/bindings[5ht1b:agonist]": "opus",
+"drug:eletriptan/bindings[5ht1d:agonist]": "opus"
+},
 "q_0439d1a62162": {
 "metabolite:nordoxepin/half_life": "opus"
 },
@@ -2363,6 +2367,10 @@
 "receptor:beta3/classification[family]": "sonnet",
 "target:alpha2/classification": "sonnet"
 },
+"q_25fd98ca21bd": {
+"drug:zolmitriptan/bindings[5ht1b:agonist]": "opus",
+"drug:zolmitriptan/bindings[5ht1d:agonist]": "opus"
+},
 "q_2603805ffa64": {
 "drug:dextromethorphanbupropion/first_approval": "opus"
 },
@@ -3240,6 +3248,9 @@
 },
 "q_3535ae498bb2": {
 "drug:pregabalin/categories": "opus"
+},
+"q_3539a85fcca6": {
+"drug:lasmiditan/bindings[5ht1f:agonist]": "opus"
 },
 "q_354a2aee1678": {
 "drug:galantamine/categories": "sonnet"
@@ -4754,6 +4765,9 @@
 "q_4ebe5fdeda18": {
 "drug:bromazepam/excretion[route:renal]": "opus"
 },
+"q_4ec837f14f18": {
+"drug:eletriptan/bindings[5ht2a:agonist]": "opus"
+},
 "q_4ed435d22bfa": {
 "drug:quazepam/excretion[route:fecal]": "opus",
 "drug:quazepam/excretion[route:renal]": "opus"
@@ -5254,6 +5268,10 @@
 },
 "q_58b75257e8db": {
 "drug:flupenthixol/categories": "sonnet"
+},
+"q_58da5ed0b172": {
+"drug:almotriptan/bindings[5ht1b:agonist]": "opus",
+"drug:almotriptan/bindings[5ht1d:agonist]": "opus"
 },
 "q_59020f17a538": {
 "receptor:m3/effects[agonism:bronchoconstriction]": "opus"
@@ -7866,6 +7884,9 @@
 "projection:occipital_R->thalamus_R": "opus",
 "projection:occipital_R->thalamus_R/sign": "opus"
 },
+"q_847619d1bf70": {
+"drug:frovatriptan/bindings[5ht7:agonist]": "opus"
+},
 "q_84959c7066da": {
 "drug:modafinil/enzymes[cyp2c9:inhibitor]/uncertainty[contradicted]": "opus"
 },
@@ -8091,6 +8112,11 @@
 "q_886c64bed770": {
 "drug:tianeptine/excretion[route:fecal]": "opus",
 "drug:tianeptine/excretion[route:renal]": "opus"
+},
+"q_888094b7ef4e": {
+"drug:frovatriptan/bindings[5ht1b:agonist]": "opus",
+"drug:frovatriptan/bindings[5ht1d:agonist]": "opus",
+"drug:frovatriptan/bindings[5ht1f:agonist]": "opus"
 },
 "q_888a0bf496f1": {
 "drug:trihexyphenidyl/bindings[m1:antagonist]": "sonnet",

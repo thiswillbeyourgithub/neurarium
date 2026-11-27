@@ -161,6 +161,46 @@
     "value": 1.5
    }
   },
+  "almotriptan": {
+   "bbb": {
+    "label": "BBB+",
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "123606",
+      "provenance": "verified",
+      "quote": "B3DB row 5256: almotriptan | CID 123606 | logBB - | BBB+ | group C | references R14, R26, R27"
+     }
+    ]
+   },
+   "cid": 123606,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "123606",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 64.8 Å²"
+     }
+    ],
+    "value": 64.8
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "123606",
+      "provenance": "verified",
+      "quote": "XLogP3: 1.6"
+     }
+    ],
+    "value": 1.6
+   }
+  },
   "alpidem": {
    "bbb": {
     "label": "BBB+",
@@ -3661,6 +3701,46 @@
     "value": 4.3
    }
   },
+  "eletriptan": {
+   "bbb": {
+    "label": "BBB+",
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "77993",
+      "provenance": "verified",
+      "quote": "B3DB row 7730: eletriptan | CID 77993 | logBB - | BBB+ | group C | references R34"
+     }
+    ]
+   },
+   "cid": 77993,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "77993",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 61.6 Å²"
+     }
+    ],
+    "value": 61.6
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "77993",
+      "provenance": "verified",
+      "quote": "XLogP3: 4.1"
+     }
+    ],
+    "value": 4.1
+   }
+  },
   "entacapone": {
    "bbb": {
     "label": "BBB+",
@@ -4662,6 +4742,33 @@
     "value": 0.6
    }
   },
+  "frovatriptan": {
+   "cid": 77992,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "77992",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 70.9 Å²"
+     }
+    ],
+    "value": 70.9
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "77992",
+      "provenance": "verified",
+      "quote": "XLogP3: 1.2"
+     }
+    ],
+    "value": 1.2
+   }
+  },
   "furosemide": {
    "bbb": {
     "label": "BBB-",
@@ -5536,6 +5643,33 @@
      }
     ],
     "value": 1.4
+   }
+  },
+  "lasmiditan": {
+   "cid": 11610526,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "11610526",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 62.3 Å²"
+     }
+    ],
+    "value": 62.3
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "11610526",
+      "provenance": "verified",
+      "quote": "XLogP3: 2.8"
+     }
+    ],
+    "value": 2.8
    }
   },
   "lemborexant": {
@@ -7376,6 +7510,47 @@
      }
     ],
     "value": 1.9
+   }
+  },
+  "naratriptan": {
+   "bbb": {
+    "label": "BBB+",
+    "logbb": -0.46,
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "4440",
+      "provenance": "verified",
+      "quote": "B3DB row 294: naratriptan | CID 4440 | logBB -0.46 | BBB+ | group A | references R18, R26, R27, R47"
+     }
+    ]
+   },
+   "cid": 4440,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "4440",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 73.6 Å²"
+     }
+    ],
+    "value": 73.6
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "4440",
+      "provenance": "verified",
+      "quote": "XLogP3: 2"
+     }
+    ],
+    "value": 2.0
    }
   },
   "nefazodone": {
@@ -12470,6 +12645,47 @@
      }
     ],
     "value": 4.0
+   }
+  },
+  "zolmitriptan": {
+   "bbb": {
+    "label": "BBB-",
+    "logbb": -1.04,
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "60857",
+      "provenance": "verified",
+      "quote": "B3DB row 124: zolmitriptan | CID 60857 | logBB -1.04 | BBB- | group A | references R18, R26, R27"
+     }
+    ]
+   },
+   "cid": 60857,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "60857",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 57.4 Å²"
+     }
+    ],
+    "value": 57.4
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "60857",
+      "provenance": "verified",
+      "quote": "XLogP3: 2.2"
+     }
+    ],
+    "value": 2.2
    }
   },
   "zolpidem": {
