@@ -1028,6 +1028,14 @@
       "Structure de la fluvoxamine"
     ]
   },
+  "fosphenytoin": {
+    "fr_slug": "fosph_nyto_ne",
+    "fr_title": "Fosphénytoïne",
+    "name": "Fosphenytoin",
+    "sentences": [
+      "Fosphénytoïne"
+    ]
+  },
   "furosemide": {
     "fr_slug": "furos_mide",
     "fr_title": "Furosémide",
@@ -1053,6 +1061,15 @@
     "sentences": [
       "Structure de la galantamine",
       "La galantamine, commercialisée sous le nom de Réminyl par le laboratoire Janssen Cilag , est utilisée pour traiter les formes légères à modérées de la maladie d'Alzheimer en en améliorant les symptômes mais pas la dégradation des fonctions supérieures ."
+    ]
+  },
+  "ganaxolone": {
+    "fr_slug": "ganaxolone",
+    "fr_title": "Ganaxolone",
+    "name": "Ganaxolone",
+    "sentences": [
+      "Informations générales",
+      "La ganaxolone , vendue sous le nom de marque Ztalmy, est un médicament utilisé pour traiter les crises d'épilepsie des patients porteurs d'un trouble déficitaire en kinase cycline-dépendante de type 5"
     ]
   },
   "granisetron": {
@@ -1872,6 +1889,16 @@
       "Identification"
     ]
   },
+  "physostigmine": {
+    "fr_slug": "physostigmine",
+    "fr_title": "Physostigmine",
+    "name": "Physostigmine",
+    "sentences": [
+      "Physostigmine",
+      "Ce composé est également connu sous le nom d' ésérine .",
+      "Du fait de son passage de la barrière hémato-encéphalique et de ses trop nombreux effets secondaires, la physostigmine n'est plus commercialisée."
+    ]
+  },
   "pimavanserin": {
     "fr_slug": "pimavans_rine",
     "fr_title": "Pimavansérine",
@@ -2076,6 +2103,15 @@
     "name": "Reserpine",
     "sentences": [
       "Identification"
+    ]
+  },
+  "riluzole": {
+    "fr_slug": "riluzole",
+    "fr_title": "Riluzole",
+    "name": "Riluzole",
+    "sentences": [
+      "Identification",
+      "Le riluzole est commercialisé par Sanofi sous le nom de marque Rilutek."
     ]
   },
   "rimegepant": {
@@ -2625,6 +2661,15 @@
     "sentences": [
       "Identification",
       "Il n'est pas commercialisé en France."
+    ]
+  },
+  "ziconotide": {
+    "fr_slug": "ziconotide",
+    "fr_title": "Ziconotide",
+    "name": "Ziconotide",
+    "sentences": [
+      "Structure chimique semi-développée du Ziconotide (représentation de Cram) et modèle 3D de la molécule avec ses différentes chaînes.",
+      "Il a été approuvé pour la vente sous le nom de Prialt par la Food and Drug Administration des États-Unis le 28 décembre 2004 et par la Commission européenne le 22 février 2005 ."
     ]
   },
   "zimelidine": {
