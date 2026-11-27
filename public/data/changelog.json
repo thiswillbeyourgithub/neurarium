@@ -1,6 +1,43 @@
 {
   "versions": [
     {
+      "version": "3.187.1",
+      "date": "2026-11-27",
+      "entries": [
+        {
+          "category": "fixed",
+          "text": "The guided tour's highlight ring now stays on its target when the panel reflows without scrolling, instead of drifting onto a neighbouring link",
+          "commits": [
+            "11ef128c",
+            "29233e73"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "Seizure-threshold and monitoring claims picked against an older candidate list are re-mapped onto the rebuilt one, and a test now refuses any pick that no longer lands on a fresh build",
+          "commits": [
+            "1d0d571e",
+            "a904c1f2"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "Current marketing holders and US approval records for the recently added drugs",
+          "commits": [
+            "54c5c6e2"
+          ]
+        },
+        {
+          "category": "docs",
+          "text": "Removed outdated guidance pointing at a retired status file, and refreshed the sourcing figures",
+          "commits": [
+            "9ce832e2",
+            "47f6b347"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.187.0",
       "date": "2026-11-27",
       "entries": [
