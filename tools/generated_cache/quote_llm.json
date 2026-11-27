@@ -72,6 +72,9 @@
 "projection:hippocampus_R->septal_nuclei_R": "opus",
 "projection:hippocampus_R->septal_nuclei_R/sign": "opus"
 },
+"q_0198a5d59747": {
+"drug:opicapone/first_approval": "opus"
+},
 "q_01af50fcd075": {
 "drug:bromocriptine/half_life": "opus"
 },
@@ -283,6 +286,9 @@
 "drug:mirtazapine/excretion[route:fecal]": "opus",
 "drug:mirtazapine/excretion[route:renal]": "opus"
 },
+"q_054e46039e4e": {
+"drug:cenobamate/seizure_threshold[raises]": "opus"
+},
 "q_054f0b33f7e1": {
 "receptor:nachr_a7/release_modulation[autoreceptor:-:presynaptic_terminal:acetylcholine:increase]": "opus"
 },
@@ -435,6 +441,9 @@
 },
 "q_07a10248b755": {
 "drug:mirtazapine/nbn": "sonnet"
+},
+"q_07a404868e6a": {
+"drug:opicapone/half_life": "opus"
 },
 "q_07a5a0d2c816": {
 "drug:levetiracetam/excretion[unchanged:urine]": "opus"
@@ -1218,6 +1227,9 @@
 "q_14c9384440a5": {
 "drug:chlordiazepoxide/brands[Librium]": "sonnet"
 },
+"q_14cbb68acb29": {
+"drug:felbamate/half_life": "opus"
+},
 "q_14d70f7f9135": {
 "receptor:alpha1a/effects[antagonism:orthostatic_hypotension]": "opus",
 "receptor:alpha1a/effects[antagonism:sedation]": "opus",
@@ -1262,6 +1274,9 @@
 },
 "q_15a04382b7c0": {
 "drug:promethazine/originator": "opus"
+},
+"q_15a9b46df47b": {
+"drug:thiocolchicoside/categories": "opus"
 },
 "q_15bfd0966d6c": {
 "receptor:alpha2a/locations[frontal]": "sonnet"
@@ -1362,6 +1377,9 @@
 },
 "q_1749d1c625f4": {
 "metabolite:licarbazepine/bindings[nav:blocker]": "opus"
+},
+"q_174bc0d70f1f": {
+"drug:opicapone/brands[Ongentys]": "opus"
 },
 "q_1757d51ea706": {
 "drug:prothipendyl/bindings[h1:antagonist]": "sonnet"
@@ -1789,7 +1807,8 @@
 "drug:lithium/brands[Téralithe]": "sonnet"
 },
 "q_1e5b83b9a8b6": {
-"drug:thiocolchicoside/bindings[gaba_a:antagonist]": "opus"
+"drug:thiocolchicoside/bindings[gaba_a:antagonist]": "opus",
+"drug:thiocolchicoside/seizure_threshold[lowers]": "opus"
 },
 "q_1e7f2bab7325": {
 "drug:desipramine/brands[Norpramin]": "sonnet"
@@ -2108,6 +2127,9 @@
 "q_228525d72e41": {
 "drug:amitriptyline/tmax": "sonnet"
 },
+"q_229311a36000": {
+"drug:cenobamate/tmax": "opus"
+},
 "q_229b5be5a92b": {
 "drug:pramipexole/categories": "opus"
 },
@@ -2421,6 +2443,9 @@
 "structure:hippocampus_L": "sonnet",
 "structure:hippocampus_R": "sonnet"
 },
+"q_28351eaea094": {
+"drug:carisoprodol/withdrawals[eu:2008]": "opus"
+},
 "q_284500735cee": {
 "drug:pizotifen/categories": "opus"
 },
@@ -2481,6 +2506,9 @@
 },
 "q_29024a5a7546": {
 "receptor:gaba_a/effects[agonism:sleep_promotion]": "opus"
+},
+"q_2904cba8aee2": {
+"drug:felbamate/workup[liver_function:during]": "opus"
 },
 "q_290b12cbb0f9": {
 "drug:clozapine/bindings[alpha2c:antagonist]": "opus"
@@ -2739,6 +2767,9 @@
 },
 "q_2d61cba53241": {
 "drug:alfentanil/originator": "opus"
+},
+"q_2d8529e3e721": {
+"drug:carisoprodol/half_life": "opus"
 },
 "q_2d8aea981e9d": {
 "receptor:ampa/effects[antagonism:anticonvulsant]": "opus"
@@ -3222,6 +3253,9 @@
 "q_361423d97632": {
 "drug:valproate/bindings[nav:blocker]": "sonnet"
 },
+"q_36159cae474e": {
+"drug:cenobamate/brands[Xcopri]": "opus"
+},
 "q_361ad22c927c": {
 "drug:doxepin/sleep[total_sleep_increase]": "opus"
 },
@@ -3402,6 +3436,9 @@
 "q_39b4650b84e8": {
 "receptor:5ht2a/release_modulation[heteroreceptor:-:glutamatergic_neuron:glutamate:increase]": "opus"
 },
+"q_39bc290ccf4b": {
+"drug:rufinamide/excretion[route:renal]": "opus"
+},
 "q_39d69b602247": {
 "drug:desflurane/bindings[glutamate:antagonist]": "opus"
 },
@@ -3438,6 +3475,9 @@
 },
 "q_3a8ac75000e4": {
 "drug:amphetamine_dl/bindings[5ht1a:agonist]": "opus"
+},
+"q_3a9e39a0d01f": {
+"drug:rufinamide/first_approval": "opus"
 },
 "q_3a9ec195dbeb": {
 "drug:zaleplon/originator_country": "opus"
@@ -3809,6 +3849,9 @@
 "projection:vta_R->parietal_R": "opus",
 "projection:vta_R->parietal_R/transmitter": "opus"
 },
+"q_40903cc2875b": {
+"drug:carisoprodol/categories": "opus"
+},
 "q_409d122e9a2a": {
 "drug:nitrous_oxide/bindings[5ht3:antagonist]": "opus",
 "drug:nitrous_oxide/bindings[ampa:antagonist]": "opus",
@@ -4070,6 +4113,9 @@
 "q_44f09f0969e2": {
 "receptor:m1/effects[antagonism:sedation]": "opus"
 },
+"q_44fd60244e5f": {
+"drug:thiocolchicoside/brands[Coltramyl]": "opus"
+},
 "q_450c0c54b727": {
 "drug:pimozide/nbn": "sonnet"
 },
@@ -4078,6 +4124,9 @@
 },
 "q_45266602ee69": {
 "drug:mianserin/bindings[d2:antagonist]": "opus"
+},
+"q_4534f02c1377": {
+"drug:cenobamate/half_life": "opus"
 },
 "q_453982111075": {
 "drug:risperidone/metabolites[paliperidone]/formed_by[cyp2d6]": "sonnet"
@@ -4282,6 +4331,9 @@
 },
 "q_48f362cbc3da": {
 "drug:pipothiazine/first_approval": "opus"
+},
+"q_4901b5f892b3": {
+"drug:carisoprodol/originator": "opus"
 },
 "q_490ce9de4ce9": {
 "drug:mescaline/bindings[5ht2a:agonist]": "sonnet"
@@ -4527,6 +4579,10 @@
 },
 "q_4ca865185f07": {
 "drug:levomilnacipran/excretion[route:renal]": "opus"
+},
+"q_4cb4c3403145": {
+"drug:felbamate/workup[blood_count:before]": "opus",
+"drug:felbamate/workup[blood_count:during]": "opus"
 },
 "q_4cc043c4c105": {
 "projection:temporal_L->temporal_R": "opus"
@@ -5173,6 +5229,9 @@
 "q_5927db6de65f": {
 "drug:olanzapine/excretion[route:renal]": "opus"
 },
+"q_59403d1dd24c": {
+"drug:opicapone/categories": "opus"
+},
 "q_59555415c621": {
 "projection:frontal_L->frontal_R": "opus",
 "projection:frontal_L->frontal_R/transmitter": "opus"
@@ -5210,6 +5269,10 @@
 },
 "q_5a00d6b6b3b9": {
 "drug:diazepam/excretion[unchanged:urine]": "opus"
+},
+"q_5a1b75f9893c": {
+"drug:cenobamate/excretion[route:fecal]": "opus",
+"drug:cenobamate/excretion[route:renal]": "opus"
 },
 "q_5a225cac6128": {
 "drug:lemborexant/excretion[route:fecal]": "opus",
@@ -5323,6 +5386,9 @@
 },
 "q_5c07ce29823a": {
 "metabolite:7_hydroxyamoxapine/bindings[d2:antagonist]": "sonnet"
+},
+"q_5c19d2a3457e": {
+"drug:rufinamide/tmax": "opus"
 },
 "q_5c2d9342c172": {
 "drug:desipramine/bindings[alpha1a:antagonist]": "sonnet",
@@ -5739,6 +5805,9 @@
 "q_6323580aa74c": {
 "drug:tofisopam/excretion[route:renal]": "opus"
 },
+"q_6352ad437b30": {
+"drug:tolperisone/categories": "opus"
+},
 "q_63559b4e983f": {
 "drug:tianeptine/brands[Stablon]": "sonnet"
 },
@@ -5903,6 +5972,9 @@
 "q_65493c35e5df": {
 "receptor:beta2/effects[agonism:cardiovascular]": "opus"
 },
+"q_65619c2a3825": {
+"drug:thiocolchicoside/brands[Miorel]": "opus"
+},
 "q_6561a31210b0": {
 "drug:levomepromazine/half_life": "sonnet"
 },
@@ -6007,6 +6079,9 @@
 "q_677be5fcbc94": {
 "receptor:d5/locations[hypothalamus]": "sonnet",
 "receptor:d5/locations[thalamus]": "sonnet"
+},
+"q_677cac4fc9e5": {
+"drug:carisoprodol/tmax": "opus"
 },
 "q_677cace8b2d0": {
 "drug:valpromide/categories": "opus"
@@ -6273,6 +6348,9 @@
 "q_6bea9963d64a": {
 "drug:mdma/originator_country": "opus",
 "drug:vilazodone/originator_country": "opus"
+},
+"q_6c0614a4df64": {
+"drug:tolperisone/tmax": "opus"
 },
 "q_6c19ec788c29": {
 "drug:amitriptyline/nbn": "sonnet"
@@ -6748,6 +6826,9 @@
 "q_7378d390d957": {
 "drug:caffeine/excretion[route:renal]": "opus"
 },
+"q_73806b12de67": {
+"drug:felbamate/tmax": "opus"
+},
 "q_7391ffde1e80": {
 "drug:lamotrigine/bindings[nav:blocker]": "sonnet"
 },
@@ -7050,6 +7131,9 @@
 },
 "q_78c655d333b0": {
 "drug:nortriptyline/bindings[5ht2a:antagonist]": "sonnet"
+},
+"q_78c9045136e0": {
+"drug:cenobamate/seizure_threshold[withdrawal]": "opus"
 },
 "q_78d7968865a2": {
 "drug:amphetamine_d/formulations[transdermal]/release": "opus"
@@ -7486,6 +7570,10 @@
 "q_80a173f0edb3": {
 "drug:vigabatrin/seizure_threshold[withdrawal]": "opus"
 },
+"q_80adc2d6f2ca": {
+"drug:cenobamate/workup[liver_function:before]": "opus",
+"drug:cenobamate/workup[liver_function:during]": "opus"
+},
 "q_80ea06fb63ef": {
 "drug:paliperidone/bindings[alpha1a:antagonist]": "sonnet",
 "drug:paliperidone/bindings[alpha1b:antagonist]": "sonnet",
@@ -7517,6 +7605,9 @@
 },
 "q_81897e19c36d": {
 "drug:zopiclone/seizure_threshold[withdrawal]": "opus"
+},
+"q_81a33d240a6f": {
+"drug:carisoprodol/first_approval": "opus"
 },
 "q_81a9ab279162": {
 "drug:tiagabine/brands[Gabitril]": "sonnet"
@@ -7886,6 +7977,9 @@
 "structure:fornix_L": "sonnet",
 "structure:fornix_R": "sonnet"
 },
+"q_88315dd86803": {
+"drug:rufinamide/half_life": "opus"
+},
 "q_886073ea133a": {
 "drug:clozapine/metabolites[norclozapine]": "opus"
 },
@@ -8109,6 +8203,9 @@
 },
 "q_8b7016ba0b20": {
 "target:mao_b/classification": "sonnet"
+},
+"q_8b7dd19ef233": {
+"drug:rufinamide/categories": "opus"
 },
 "q_8b801b9db0df": {
 "drug:metoclopramide/bindings[5ht3:antagonist]": "sonnet",
@@ -8603,6 +8700,9 @@
 "q_93f34b7f7ae9": {
 "drug:diazepam/seizure_threshold[withdrawal]": "opus"
 },
+"q_93f99e743ee8": {
+"drug:carisoprodol/metabolites[meprobamate]": "opus"
+},
 "q_940ae2f8be40": {
 "receptor:5ht1a/effects[agonism:pro_cognitive]": "opus"
 },
@@ -8678,6 +8778,9 @@
 },
 "q_9518f8721acf": {
 "drug:lamotrigine/brands[Lamictin]": "sonnet"
+},
+"q_951930ad2364": {
+"drug:felbamate/seizure_threshold[withdrawal]": "opus"
 },
 "q_952a42076feb": {
 "drug:mianserin/bindings[kappa:partial_agonist]": "opus"
@@ -9032,6 +9135,10 @@
 },
 "q_99f044edfcb0": {
 "drug:opipramol/excretion[route:fecal]": "opus"
+},
+"q_9a1125c03c26": {
+"drug:thiocolchicoside/excretion[route:fecal]": "opus",
+"drug:thiocolchicoside/excretion[route:renal]": "opus"
 },
 "q_9a18311cb1e2": {
 "drug:psilocybin/first_approval": "opus"
@@ -9513,6 +9620,9 @@
 "q_a1647089e7a6": {
 "drug:iloperidone/bindings[d2:antagonist]": "sonnet"
 },
+"q_a182e0ea0917": {
+"drug:tolperisone/excretion[route:renal]": "opus"
+},
 "q_a184dc135768": {
 "drug:pregabalin/half_life": "sonnet"
 },
@@ -9590,6 +9700,9 @@
 },
 "q_a2aac0b15aed": {
 "receptor:a2a/locations[accumbens]": "opus"
+},
+"q_a2b0ca2a4d9c": {
+"drug:rufinamide/seizure_threshold[withdrawal]": "opus"
 },
 "q_a2ba0f69d96a": {
 "drug:lisdexamfetamine/excretion[urine_ph:dependent]": "opus"
@@ -10119,6 +10232,9 @@
 "drug:pimozide/enzymes[cyp1a2:substrate]": "opus",
 "drug:pimozide/enzymes[cyp1a2:substrate]/strength": "opus"
 },
+"q_ac2647f469b9": {
+"drug:felbamate/originator": "opus"
+},
 "q_ac276b341fc1": {
 "drug:sevoflurane/workup[renal_function:during]": "opus"
 },
@@ -10128,6 +10244,9 @@
 },
 "q_ac380ddcd558": {
 "receptor:mu/effects[agonism:analgesia]": "opus"
+},
+"q_ac44f866a82a": {
+"drug:cenobamate/categories": "opus"
 },
 "q_ac5a46596b72": {
 "target:cgrp/classification": "opus"
@@ -10178,6 +10297,9 @@
 },
 "q_ad9c0f125e1e": {
 "drug:trazodone/bindings[h1:antagonist]": "sonnet"
+},
+"q_ada65639ad19": {
+"drug:cenobamate/brands[Ontozry]": "opus"
 },
 "q_ada8a8c35a7f": {
 "drug:isocarboxazid/bindings[mao_b:enzyme_inhibitor]": "sonnet",
@@ -10614,6 +10736,9 @@
 "q_b5110f60650a": {
 "target:dat/effects[inhibition:appetite_decrease]": "opus"
 },
+"q_b51e04e0d2bd": {
+"drug:felbamate/excretion[unchanged:urine]": "opus"
+},
 "q_b524f6c6a176": {
 "drug:baclofen/excretion[route:renal]": "opus"
 },
@@ -10995,6 +11120,9 @@
 },
 "q_bb0b93fffa8d": {
 "drug:sevoflurane/half_life": "sonnet"
+},
+"q_bb0cd8ae8567": {
+"drug:rufinamide/seizure_threshold[raises]": "opus"
 },
 "q_bb10d95d5401": {
 "drug:sodium_oxybate/first_approval": "opus"
@@ -11879,6 +12007,9 @@
 },
 "q_c9ab3fad7fad": {
 "drug:acamprosate/half_life": "sonnet"
+},
+"q_c9b9de12ab8f": {
+"drug:felbamate/categories": "opus"
 },
 "q_c9bf0ea3b855": {
 "drug:clotiazepam/bindings[gaba_a:pam]": "sonnet"
@@ -12783,6 +12914,9 @@
 "q_da4d3eecb5fe": {
 "drug:pimozide/originator": "opus"
 },
+"q_da4fc982d22a": {
+"drug:carisoprodol/excretion[route:renal]": "opus"
+},
 "q_da6161cb9aad": {
 "drug:quetiapine/brands[Xeroquel]": "sonnet"
 },
@@ -12812,6 +12946,9 @@
 "receptor:alpha2a/release_modulation[autoreceptor:-:presynaptic_terminal:norepinephrine:decrease]": "opus",
 "receptor:alpha2b/release_modulation[autoreceptor:-:presynaptic_terminal:norepinephrine:decrease]": "opus",
 "receptor:alpha2c/release_modulation[autoreceptor:-:presynaptic_terminal:norepinephrine:decrease]": "opus"
+},
+"q_dad6a501d241": {
+"drug:felbamate/workup[liver_function:before]": "opus"
 },
 "q_dad8283319a3": {
 "drug:maprotiline/seizure_threshold[lowers]": "opus"
@@ -13458,6 +13595,9 @@
 "drug:tiapride/seizure_threshold[lowers]": "opus",
 "drug:tiapride/seizure_threshold[possibly_lowers]": "opus"
 },
+"q_e5d937f77dbc": {
+"drug:thiocolchicoside/half_life": "opus"
+},
 "q_e5d95cf4d52d": {
 "drug:topiramate/brands[Qsymia]": "sonnet"
 },
@@ -13763,6 +13903,9 @@
 "receptor:alpha2a/classification[synaptic]": "opus",
 "receptor:alpha2b/classification[synaptic]": "opus"
 },
+"q_ea878ac3a51d": {
+"drug:rufinamide/originator": "opus"
+},
 "q_eaa7ec1a6780": {
 "drug:dothiepin/excretion[route:fecal]": "opus",
 "drug:dothiepin/excretion[route:renal]": "opus"
@@ -13848,6 +13991,9 @@
 "drug:tolcapone/excretion[route:fecal]": "opus",
 "drug:tolcapone/excretion[route:renal]": "opus"
 },
+"q_ec9446ca0762": {
+"drug:felbamate/excretion[route:renal]": "opus"
+},
 "q_ecb67164bdb9": {
 "drug:trifluoperazine/first_approval": "opus"
 },
@@ -13862,6 +14008,9 @@
 },
 "q_eceb40276b0e": {
 "drug:opipramol/originator": "opus"
+},
+"q_ecf5362d2ceb": {
+"drug:felbamate/seizure_threshold[raises]": "opus"
 },
 "q_ecf5c0c3268c": {
 "drug:imipramine/first_approval": "opus"
@@ -14110,6 +14259,9 @@
 "q_f0df1281a669": {
 "drug:amantadine/formulations[ir]/tmax": "opus",
 "drug:amantadine/tmax": "opus"
+},
+"q_f0ea1b262d42": {
+"drug:cenobamate/first_approval": "opus"
 },
 "q_f0ed12ee5d4b": {
 "drug:methylphenidate_d/brands[Focalin]": "sonnet"
@@ -14513,6 +14665,9 @@
 "drug:yohimbine/bindings[alpha1d:antagonist]": "sonnet",
 "drug:yohimbine/bindings[alpha2:antagonist]": "sonnet",
 "drug:yohimbine/bindings[d2:antagonist]": "sonnet"
+},
+"q_f7400d9ef94b": {
+"drug:opicapone/originator": "opus"
 },
 "q_f744199b8308": {
 "drug:fluoxetine/first_approval": "opus"
@@ -14928,6 +15083,10 @@
 },
 "q_fdf7a4252081": {
 "drug:valbenazine/first_approval": "opus"
+},
+"q_fe0e48fdee54": {
+"drug:opicapone/excretion[route:fecal]": "opus",
+"drug:opicapone/excretion[route:renal]": "opus"
 },
 "q_fe150a85b71a": {
 "projection:amygdala_R->accumbens_R": "opus",
