@@ -2,6 +2,7 @@
 // buildBrowseList over its dataset slice.
 
 import { buildBrowseList } from "./item.js";
+import { buildEffectSiteSwitch, loadEffectSite, siteShown } from "../effect-site.js";
 
 const { t } = window.__I18N__;
 
@@ -36,9 +37,22 @@ export function buildEffectLegend(data, onPick) {
   // banner): hide the whole section rather than show an empty, clickable header.
   const section = document.getElementById("effects");
   if (section) section.hidden = !(data.effects || []).length;
-  return buildBrowseList({ section: "effects", captionKey: "effects.legendHint", kind: "effect",
-    items: data.effects || [], count: (effect) => effect.drugs.length,
-    tagTitle: t("effects.legendTag"), onPick });
+  const items = data.effects || [];
+  const reflect = buildBrowseList({ section: "effects", captionKey: "effects.legendHint", kind: "effect",
+    items, count: (effect) => effect.drugs.length, tagTitle: t("effects.legendTag"), onPick });
+  // The central / peripheral switch (js/effect-site.js) hides rows in place, after the caption.
+  const body = document.getElementById("effects-body");
+  if (body && items.length) {
+    const siteById = new Map(items.map((e) => [e.id, e.site]));
+    const apply = (mode) => {
+      for (const row of body.querySelectorAll('[data-tour-id^="effect:"]')) {
+        row.hidden = !siteShown(siteById.get(row.dataset.tourId.slice("effect:".length)), mode);
+      }
+    };
+    body.firstElementChild.after(buildEffectSiteSwitch(apply).el);
+    apply(loadEffectSite());
+  }
+  return reflect;
 }
 
 /**
