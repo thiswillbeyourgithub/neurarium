@@ -704,7 +704,13 @@
   },
   "iproniazid": null,
   "nefopam": null,
-  "opium": null
+  "opium": null,
+  "droperidol": {
+   "index": 0,
+   "name": "Janssen Pharmaceutica",
+   "company": "janssen_pharmaceuticals",
+   "qid": "702d13d6"
+  }
  },
  "companies": {
   "novartis": {

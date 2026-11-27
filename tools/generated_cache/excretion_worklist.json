@@ -17552,5 +17552,29 @@
     "qid": "595c5a62"
    }
   ]
+ },
+ "droperidol": {
+  "name": "Droperidol",
+  "candidates": [
+   {
+    "corpus": "bdpm",
+    "page": "61646847",
+    "line": "L'élimination se fait principalement par métabolisme, et 75 % de la dose est excrétée par voie rénale ;",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "bac442e2"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "61646847",
+    "line": "1 % seulement de la dose est éliminée sous forme inchangée dans l'urine, et 11 % dans les fèces.",
+    "named": [
+     "route:renal",
+     "unchanged:urine"
+    ],
+    "qid": "4df14091"
+   }
+  ]
  }
 }

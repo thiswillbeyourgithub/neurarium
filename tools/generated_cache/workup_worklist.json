@@ -2808,6 +2808,45 @@
    }
   ]
  },
+ "droperidol": {
+  "page": "61646847",
+  "denomination": "DROLEPTAN 1,25 mg/2,5 ml, solution injectable",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.2",
+    "under": "Prévention des nausées et vomissements induits par les morphiniques administrées en analgésie auto-contrôlée, en postopératoire (PCA).",
+    "quote": "Chez les patients pouvant présenter un risque d'arythmies ventriculaires, une oxymétrie du pouls doit être effectuée pendant l'administration et pendant les 30 minutes qui suivent une injection intraveineuse unique.",
+    "tests": [
+     "heart_rate"
+    ],
+    "qid": "606597ad"
+   },
+   {
+    "index": 1,
+    "section": "4.4",
+    "under": "Appareil cardio-vasculaire",
+    "quote": "Chez les patients à risque d'arythmies cardiaques, les taux sériques d'électrolytes et de créatinine doivent être mesurés et il convient de s'assurer de l'absence d'un allongement de l'intervalle QT avant toute administration de dropéridol.",
+    "tests": [
+     "ecg",
+     "electrolytes",
+     "renal_function",
+     "drug_level"
+    ],
+    "qid": "04db4773"
+   },
+   {
+    "index": 2,
+    "section": "4.4",
+    "under": "Appareil cardio-vasculaire",
+    "quote": "Chez les patients à risque réels ou potentiels d'arythmies ventriculaires, une surveillance continue de l'oxymétrie du pouls doit être effectuée pendant l'administration et pendant les 30 minutes qui suivent une injection intraveineuse unique.",
+    "tests": [
+     "heart_rate"
+    ],
+    "qid": "bedea7f9"
+   }
+  ]
+ },
  "duloxetine": {
   "page": "60299831",
   "denomination": "DULOXETINE ALMUS 60 mg, gélule gastro-résistante",

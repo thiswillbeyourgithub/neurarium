@@ -5038,6 +5038,17 @@
      "qid": "81e364df"
     }
    ]
+  },
+  "droperidol": {
+   "name": "Droperidol",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "droperidol",
+     "line": "Discovered at Janssen Pharmaceutica in 1961, droperidol is a butyrophenone which acts as a potent D 2 (dopamine receptor) antagonist with some histamine and serotonin antagonist activity.",
+     "qid": "702d13d6"
+    }
+   ]
   }
  },
  "companies": {

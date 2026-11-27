@@ -5910,5 +5910,21 @@
    "amount": "40%"
   }
  ],
- "opium": []
+ "opium": [],
+ "droperidol": [
+  {
+   "amount": "75 %",
+   "aspect": "route",
+   "index": 0,
+   "qid": "bac442e2",
+   "value": "renal"
+  },
+  {
+   "amount": "1 %",
+   "aspect": "unchanged",
+   "index": 1,
+   "qid": "4df14091",
+   "value": "urine"
+  }
+ ]
 }

@@ -1066,6 +1066,53 @@
     "timing": "during"
    }
   ],
+  "droperidol": [
+   {
+    "conditions": [
+     "Chez les patients à risque d'arythmies cardiaques"
+    ],
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61646847",
+      "provenance": "verified",
+      "quote": "Chez les patients à risque d'arythmies cardiaques, les taux sériques d'électrolytes et de créatinine doivent être mesurés et il convient de s'assurer de l'absence d'un allongement de l'intervalle QT avant toute administration de dropéridol."
+     }
+    ],
+    "test": "ecg",
+    "timing": "before"
+   },
+   {
+    "conditions": [
+     "Chez les patients à risque d'arythmies cardiaques"
+    ],
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61646847",
+      "provenance": "verified",
+      "quote": "Chez les patients à risque d'arythmies cardiaques, les taux sériques d'électrolytes et de créatinine doivent être mesurés et il convient de s'assurer de l'absence d'un allongement de l'intervalle QT avant toute administration de dropéridol."
+     }
+    ],
+    "test": "electrolytes",
+    "timing": "before"
+   },
+   {
+    "conditions": [
+     "Chez les patients à risque d'arythmies cardiaques"
+    ],
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61646847",
+      "provenance": "verified",
+      "quote": "Chez les patients à risque d'arythmies cardiaques, les taux sériques d'électrolytes et de créatinine doivent être mesurés et il convient de s'assurer de l'absence d'un allongement de l'intervalle QT avant toute administration de dropéridol."
+     }
+    ],
+    "test": "renal_function",
+    "timing": "before"
+   }
+  ],
   "duloxetine": [
    {
     "conditions": [

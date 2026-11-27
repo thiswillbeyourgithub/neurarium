@@ -1311,6 +1311,18 @@
    }
   ]
  },
+ "droperidol": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "61646847",
+    "section": "4.4",
+    "quote": "La prudence s'impose chez les patients souffrant d'épilepsie (ou ayant des antécédents d'épilepsie) ou de pathologies prédisposant à l'épilepsie ou aux convulsions.",
+    "qid": "88914bad"
+   }
+  ]
+ },
  "duloxetine": {
   "candidates": [
    {

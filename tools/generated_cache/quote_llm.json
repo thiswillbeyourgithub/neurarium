@@ -1783,6 +1783,9 @@
 "receptor:kappa/locations[midbrain]": "sonnet",
 "receptor:kappa/locations[putamen]": "sonnet"
 },
+"q_1ec47ebb708f": {
+"drug:droperidol/half_life": "opus"
+},
 "q_1ec741d72575": {
 "drug:ramelteon/metabolites[m_ii]": "sonnet"
 },
@@ -2224,6 +2227,9 @@
 },
 "q_255287c1b271": {
 "drug:lithium/excretion[route:renal]": "opus"
+},
+"q_25580a807902": {
+"drug:droperidol/categories": "opus"
 },
 "q_255c82433f9c": {
 "functional_area:ba7": "opus"
@@ -4190,6 +4196,7 @@
 "drug:benperidol/originator/now": "opus",
 "drug:bromperidol/originator/now": "opus",
 "drug:domperidone/originator/now": "opus",
+"drug:droperidol/originator/now": "opus",
 "drug:etomidate/originator/now": "opus",
 "drug:fentanyl/originator/now": "opus",
 "drug:flunarizine/originator/now": "opus",
@@ -7822,7 +7829,8 @@
 "projection:pons->cerebellum/transmitter": "opus"
 },
 "q_8a19162f7972": {
-"drug:droperidol/bindings[d2:antagonist]": "opus"
+"drug:droperidol/bindings[d2:antagonist]": "opus",
+"drug:droperidol/originator": "opus"
 },
 "q_8a1c870681d8": {
 "structure:locus_coeruleus_L": "sonnet",
@@ -9311,6 +9319,9 @@
 "q_a1f53f1e88fa": {
 "drug:sodium_oxybate/excretion[unchanged:urine]": "opus"
 },
+"q_a1feb163936b": {
+"drug:droperidol/excretion[route:renal]": "opus"
+},
 "q_a2013005e481": {
 "drug:triiodothyronine/categories": "sonnet"
 },
@@ -10388,6 +10399,9 @@
 "q_b5eedac721fc": {
 "drug:mdma/bindings[5ht1b:partial_agonist]": "opus",
 "drug:mdma/bindings[5ht1d:partial_agonist]": "opus"
+},
+"q_b5f75f25b30d": {
+"drug:droperidol/excretion[unchanged:urine]": "opus"
 },
 "q_b5ffda82e0cc": {
 "receptor:5ht1b/classification[synaptic]": "sonnet",
@@ -11876,6 +11890,7 @@
 "drug:benperidol/originator_country": "opus",
 "drug:bromperidol/originator_country": "opus",
 "drug:domperidone/originator_country": "opus",
+"drug:droperidol/originator_country": "opus",
 "drug:etomidate/originator_country": "opus",
 "drug:fentanyl/originator_country": "opus",
 "drug:flunarizine/originator_country": "opus",
@@ -12285,6 +12300,9 @@
 },
 "q_d702b6b68e45": {
 "receptor:5ht1a/locations[amygdala]": "sonnet"
+},
+"q_d7098ff288e8": {
+"drug:droperidol/categories": "opus"
 },
 "q_d749b6423126": {
 "drug:cannabidiol/workup[weight:during]": "opus"
@@ -13774,6 +13792,11 @@
 },
 "q_f1bf3bf50f90": {
 "drug:ondansetron/categories": "opus"
+},
+"q_f1f224bc8050": {
+"drug:droperidol/workup[ecg:before]": "opus",
+"drug:droperidol/workup[electrolytes:before]": "opus",
+"drug:droperidol/workup[renal_function:before]": "opus"
 },
 "q_f2082e546024": {
 "drug:brexpiprazole/bindings[alpha2c:antagonist]": "sonnet"

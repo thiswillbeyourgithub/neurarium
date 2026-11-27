@@ -507,6 +507,12 @@
    ],
    "status": "undated"
   },
+  "droperidol": {
+   "application": "NDA016796",
+   "class": "Type 3 - New Dosage Form",
+   "date": "1970-06-11",
+   "status": "superseded"
+  },
   "duloxetine": {
    "application": "NDA021427",
    "applications": 6,

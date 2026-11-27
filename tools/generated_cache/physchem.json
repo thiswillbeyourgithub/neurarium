@@ -3125,6 +3125,46 @@
     "value": 2.5
    }
   },
+  "droperidol": {
+   "bbb": {
+    "label": "BBB+",
+    "match": "cid",
+    "sources": [
+     {
+      "corpus": "b3db",
+      "extraction": "code",
+      "page": "3168",
+      "provenance": "verified",
+      "quote": "B3DB row 2363: droperidol | CID 3168 | logBB - | BBB+ | group B | references R1, R13, R19, R6, R14, R15, R23, R24, R26, R27, R27, R27, R30, R30"
+     }
+    ]
+   },
+   "cid": 3168,
+   "tpsa": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "3168",
+      "provenance": "verified",
+      "quote": "Topological polar surface area: 52.7 Å²"
+     }
+    ],
+    "value": 52.7
+   },
+   "xlogp": {
+    "sources": [
+     {
+      "corpus": "pubchem",
+      "extraction": "code",
+      "page": "3168",
+      "provenance": "verified",
+      "quote": "XLogP3: 3.5"
+     }
+    ],
+    "value": 3.5
+   }
+  },
   "duloxetine": {
    "bbb": {
     "label": "BBB+",

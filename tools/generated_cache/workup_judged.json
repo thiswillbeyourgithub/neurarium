@@ -2173,5 +2173,28 @@
    "timing": "during",
    "qid": "34281a0e"
   }
+ ],
+ "droperidol": [
+  {
+   "index": 1,
+   "test": "ecg",
+   "timing": "before",
+   "qid": "04db4773",
+   "condition": "Chez les patients à risque d'arythmies cardiaques"
+  },
+  {
+   "index": 1,
+   "test": "electrolytes",
+   "timing": "before",
+   "qid": "04db4773",
+   "condition": "Chez les patients à risque d'arythmies cardiaques"
+  },
+  {
+   "index": 1,
+   "test": "renal_function",
+   "timing": "before",
+   "qid": "04db4773",
+   "condition": "Chez les patients à risque d'arythmies cardiaques"
+  }
  ]
 }

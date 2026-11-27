@@ -6091,5 +6091,43 @@
     "qid": "2e8cc713"
    }
   ]
+ },
+ "droperidol": {
+  "name": "Droperidol",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "droperidol",
+    "line": "Elimination half-life | 2.3 hours",
+    "durations": [
+     {
+      "hours": 2.3
+     }
+    ],
+    "qid": "2c2cea6f"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "61646847",
+    "line": "La clairance plasmatique est de 0,8 (0,4 - 1,8) l/min, et la demi-vie d'élimination (t1/2ß) de 134 ± 13 min.",
+    "durations": [
+     {
+      "hours": 0.217
+     }
+    ],
+    "qid": "e97fe228"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "61646847",
+    "line": "La demi-vie d'élimination (101,5 ± 26,4 min) est semblable à celle observée chez les adultes.",
+    "durations": [
+     {
+      "hours": 0.44
+     }
+    ],
+    "qid": "b72ac4b4"
+   }
+  ]
  }
 }

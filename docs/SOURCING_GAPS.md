@@ -16,12 +16,12 @@ Every node is graded (see `docs/PROVENANCE.md`); a bare `llm` grade and NOSOURCE
 | `receptor_synaptic` | 56 | 42 | 0 | 0 | 14 | 0 | 0 |
 | `projection_sign` | 42 | 17 | 13 | 0 | 12 | 0 | 0 |
 | `drug_enzyme_strength` | 148 | 135 | 3 | 0 | 10 | 0 | 0 |
-| `drug_categories` | 315 | 307 | 0 | 0 | 8 | 0 | 0 |
 | `functional_areas` | 43 | 35 | 0 | 0 | 0 | 8 | 0 |
-| `drug_half_life` | 283 | 272 | 6 | 0 | 0 | 5 | 0 |
+| `drug_categories` | 315 | 308 | 0 | 0 | 7 | 0 | 0 |
+| `drug_half_life` | 284 | 273 | 6 | 0 | 0 | 5 | 0 |
 | `receptor_sign` | 56 | 51 | 0 | 0 | 5 | 0 | 0 |
 | `projections` | 123 | 88 | 34 | 0 | 0 | 1 | 0 |
-| `drug_brands` | 579 | 578 | 0 | 0 | 0 | 1 | 0 |
+| `drug_brands` | 580 | 579 | 0 | 0 | 0 | 1 | 0 |
 | `references` | 470 | 0 | 0 | 470 | 0 | 0 | 0 |
 | `receptor_effect` | 207 | 182 | 25 | 0 | 0 | 0 | 10 |
 | `drug_metabolite_bindings` | 205 | 191 | 14 | 0 | 0 | 0 | 0 |
@@ -32,7 +32,7 @@ Every node is graded (see `docs/PROVENANCE.md`); a bare `llm` grade and NOSOURCE
 Facts no stored source states yet (absent, so outside the tally), over the 315 roster drugs:
 
 - 146 carry no time-to-peak (`tmax`).
-- 34 carry no half-life (`half_life`).
+- 33 carry no half-life (`half_life`).
 - 82 carry no first approval (`first_approval`).
 - 56 of 73 drug -> active-metabolite links name no forming enzyme.
 - 19 of 24 modeled enzymes carry no metabolizer-phenotype profile.

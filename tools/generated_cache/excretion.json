@@ -2579,6 +2579,34 @@
     "value": "fecal"
    }
   ],
+  "droperidol": [
+   {
+    "amount": "75 %",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "bdpm",
+      "page": "61646847",
+      "provenance": "verified",
+      "quote": "L'élimination se fait principalement par métabolisme, et 75 % de la dose est excrétée par voie rénale ;"
+     }
+    ],
+    "value": "renal"
+   },
+   {
+    "amount": "1 %",
+    "aspect": "unchanged",
+    "sources": [
+     {
+      "corpus": "bdpm",
+      "page": "61646847",
+      "provenance": "verified",
+      "quote": "1 % seulement de la dose est éliminée sous forme inchangée dans l'urine, et 11 % dans les fèces."
+     }
+    ],
+    "value": "urine"
+   }
+  ],
   "duloxetine": [
    {
     "amount": "70%",

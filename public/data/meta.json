@@ -12503,8 +12503,8 @@
         "unknown": 0
       },
       "drug_brands": {
-        "total": 579,
-        "verified": 578,
+        "total": 580,
+        "verified": 579,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -12514,17 +12514,17 @@
       },
       "drug_categories": {
         "total": 315,
-        "verified": 307,
+        "verified": 308,
         "uncertain": 0,
         "sourced": 0,
-        "llm": 8,
+        "llm": 7,
         "nosource": 0,
-        "missing": 8,
+        "missing": 7,
         "unknown": 0
       },
       "drug_half_life": {
-        "total": 283,
-        "verified": 272,
+        "total": 284,
+        "verified": 273,
         "uncertain": 6,
         "sourced": 0,
         "llm": 0,
@@ -12573,8 +12573,8 @@
         "unknown": 0
       },
       "drug_holders": {
-        "total": 305,
-        "verified": 305,
+        "total": 306,
+        "verified": 306,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -12583,8 +12583,8 @@
         "unknown": 0
       },
       "drug_originator": {
-        "total": 117,
-        "verified": 117,
+        "total": 118,
+        "verified": 118,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -12593,8 +12593,8 @@
         "unknown": 0
       },
       "drug_originator_country": {
-        "total": 82,
-        "verified": 82,
+        "total": 83,
+        "verified": 83,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -12643,8 +12643,8 @@
         "unknown": 0
       },
       "drug_lipophilicity": {
-        "total": 298,
-        "verified": 298,
+        "total": 299,
+        "verified": 299,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -12653,8 +12653,8 @@
         "unknown": 0
       },
       "drug_polar_surface": {
-        "total": 298,
-        "verified": 298,
+        "total": 299,
+        "verified": 299,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -12663,8 +12663,8 @@
         "unknown": 0
       },
       "drug_bbb": {
-        "total": 245,
-        "verified": 245,
+        "total": 246,
+        "verified": 246,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -12673,8 +12673,8 @@
         "unknown": 0
       },
       "drug_workup": {
-        "total": 263,
-        "verified": 263,
+        "total": 266,
+        "verified": 266,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -12683,8 +12683,8 @@
         "unknown": 0
       },
       "drug_excretion": {
-        "total": 534,
-        "verified": 534,
+        "total": 536,
+        "verified": 536,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -13004,15 +13004,15 @@
       }
     },
     "nodes": {
-      "total": 11271,
-      "verified": 10445,
+      "total": 11284,
+      "verified": 10459,
       "uncertain": 442,
       "sourced": 0,
-      "llm": 239,
+      "llm": 238,
       "nosource": 145,
-      "missing": 384,
+      "missing": 383,
       "unknown": 594,
-      "backed": 10887,
+      "backed": 10901,
       "pct_backed": 97
     },
     "ki_coverage": {
