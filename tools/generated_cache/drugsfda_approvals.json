@@ -28,6 +28,14 @@
   "alizapride": {
    "status": "none"
   },
+  "almotriptan": {
+   "application": "NDA021001",
+   "applications": 1,
+   "date": "2001-05-07",
+   "quote": "NDA021001 | AXERT | ALMOTRIPTAN MALATE | TABLET | ORIG approved 2001-05-07",
+   "status": "found",
+   "year": 2001
+  },
   "alpidem": {
    "status": "none"
   },
@@ -606,6 +614,14 @@
    "status": "found",
    "year": 2004
   },
+  "eletriptan": {
+   "application": "NDA021016",
+   "applications": 1,
+   "date": "2002-12-26",
+   "quote": "NDA021016 | RELPAX | ELETRIPTAN HYDROBROMIDE | TABLET | ORIG approved 2002-12-26",
+   "status": "found",
+   "year": 2002
+  },
   "entacapone": {
    "application": "NDA020796",
    "applications": 1,
@@ -772,6 +788,14 @@
    "status": "found",
    "year": 1996
   },
+  "frovatriptan": {
+   "application": "NDA021006",
+   "applications": 1,
+   "date": "2001-11-08",
+   "quote": "NDA021006 | FROVA | FROVATRIPTAN SUCCINATE | TABLET | ORIG approved 2001-11-08",
+   "status": "found",
+   "year": 2001
+  },
   "furosemide": {
    "applications": [
     "NDA018370",
@@ -931,6 +955,14 @@
    "quote": "NDA020241 | LAMICTAL | LAMOTRIGINE | TABLET | ORIG approved 1994-12-27",
    "status": "found",
    "year": 1994
+  },
+  "lasmiditan": {
+   "application": "NDA211280",
+   "applications": 1,
+   "date": "2019-10-11",
+   "quote": "NDA211280 | REYVOW | LASMIDITAN SUCCINATE | TABLET | ORIG approved 2019-10-11",
+   "status": "found",
+   "year": 2019
   },
   "lemborexant": {
    "application": "NDA212028",
@@ -1248,6 +1280,14 @@
   },
   "naltrexonebupropion": {
    "status": "combo"
+  },
+  "naratriptan": {
+   "application": "NDA020763",
+   "applications": 1,
+   "date": "1998-02-10",
+   "quote": "NDA020763 | AMERGE | NARATRIPTAN HYDROCHLORIDE | TABLET | ORIG approved 1998-02-10",
+   "status": "found",
+   "year": 1998
   },
   "nefazodone": {
    "application": "NDA020152",
@@ -2147,6 +2187,14 @@
    "quote": "NDA020825 | GEODON | ZIPRASIDONE HYDROCHLORIDE | CAPSULE | ORIG approved 2001-02-05",
    "status": "found",
    "year": 2001
+  },
+  "zolmitriptan": {
+   "application": "NDA020768",
+   "applications": 3,
+   "date": "1997-11-25",
+   "quote": "NDA020768 | ZOMIG | ZOLMITRIPTAN | TABLET | ORIG approved 1997-11-25",
+   "status": "found",
+   "year": 1997
   },
   "zolpidem": {
    "application": "NDA019908",
