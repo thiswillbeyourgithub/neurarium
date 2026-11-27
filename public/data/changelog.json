@@ -1,6 +1,26 @@
 {
   "versions": [
     {
+      "version": "3.185.0",
+      "date": "2026-11-27",
+      "entries": [
+        {
+          "category": "added",
+          "text": "Five new brain structures, each sourced: the area postrema (the vomiting centre that antiemetics act on), the suprachiasmatic nucleus (the body clock melatonin acts on), the periaqueductal gray (pain control), and the pedunculopontine and laterodorsal tegmental nuclei (the brainstem's acetylcholine sources)",
+          "commits": [
+            "1e4c06cf"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "The brainstem cholinergic pathways to the thalamus, VTA and substantia nigra now leave the pedunculopontine and laterodorsal tegmental nuclei instead of the whole pons; a sourced periaqueductal gray to raphe pathway is added, and pineal melatonin now targets the suprachiasmatic nucleus",
+          "commits": [
+            "e96b65ef"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.184.0",
       "date": "2026-11-27",
       "entries": [
