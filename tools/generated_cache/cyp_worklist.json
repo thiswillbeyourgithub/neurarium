@@ -37,6 +37,27 @@
    ],
    "name": "Agomelatine"
   },
+  "almotriptan": {
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Interactions",
+     "n": 0,
+     "page": "almotriptan",
+     "qid": "ddebba90",
+     "quote": "Almotriptan is metabolized mainly by monoamine oxidase A (MAO-A) and to lesser extent by CYP3A4 and CYP2D6 ."
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Pharmacokinetics",
+     "n": 1,
+     "page": "almotriptan",
+     "qid": "c0518531",
+     "quote": "Metabolism is mediated through the enzymes MAO-A and CYP3A4 and CYP2D6 oxidation."
+    }
+   ],
+   "name": "Almotriptan"
+  },
   "alprazolam": {
    "candidates": [
     {
@@ -2675,6 +2696,35 @@
     }
    ],
    "name": "Duloxetine"
+  },
+  "eletriptan": {
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "(lead)",
+     "n": 0,
+     "page": "eletriptan",
+     "qid": "1f9e0930",
+     "quote": "Metabolism | Mainly CYP3A4"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Contraindications",
+     "n": 1,
+     "page": "eletriptan",
+     "qid": "29732d7f",
+     "quote": "It is also contraindicated in severe kidney (renal) or liver (hepatic) impairment due to its extensive liver metabolism through CYP3A4 ."
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Interactions",
+     "n": 2,
+     "page": "eletriptan",
+     "qid": "f02a562a",
+     "quote": "Strong inhibitors of the liver enzyme CYP3A4, such as erythromycin and ketoconazole , significantly increase blood plasma concentration of eletriptan and should be separated by at least 72 hours."
+    }
+   ],
+   "name": "Eletriptan"
   },
   "entacapone": {
    "candidates": [
@@ -7678,6 +7728,27 @@
     }
    ],
    "name": "Ziprasidone"
+  },
+  "zolmitriptan": {
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "(lead)",
+     "n": 0,
+     "page": "zolmitriptan",
+     "qid": "7b1a99c8",
+     "quote": "Metabolism | Liver ( CYP1A2 -mediated, to active metabolite; also MAO-A"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Metabolism",
+     "n": 1,
+     "page": "zolmitriptan",
+     "qid": "87b599c8",
+     "quote": "Zolmitriptan is metabolized into three major metabolites by the human hepatic cytochrome P450 enzymes —primarily CYP1A2 ."
+    }
+   ],
+   "name": "Zolmitriptan"
   },
   "zolpidem": {
    "candidates": [

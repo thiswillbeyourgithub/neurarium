@@ -40,6 +40,36 @@
    ]
   }
  ],
+ "almotriptan": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "almotriptan",
+     "provenance": "verified",
+     "quote": "Almotriptan is metabolized mainly by monoamine oxidase A (MAO-A) and to lesser extent by CYP3A4 and CYP2D6 ."
+    }
+   ],
+   "strength": "minor"
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "almotriptan",
+     "provenance": "verified",
+     "quote": "Almotriptan is metabolized mainly by monoamine oxidase A (MAO-A) and to lesser extent by CYP3A4 and CYP2D6 ."
+    }
+   ],
+   "strength": "minor"
+  }
+ ],
  "alprazolam": [
   {
    "enzyme": "cyp3a4",
@@ -1925,6 +1955,22 @@
      "quote": "Duloxetine undergoes predominately hepatic metabolism via two cytochrome P450 isozymes, CYP2D6 and CYP1A2 ."
     }
    ]
+  }
+ ],
+ "eletriptan": [
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "eletriptan",
+     "provenance": "verified",
+     "quote": "Metabolism | Mainly CYP3A4"
+    }
+   ],
+   "strength": "major"
   }
  ],
  "escitalopram": [
@@ -5861,6 +5907,22 @@
     }
    ],
    "strength": "minor"
+  }
+ ],
+ "zolmitriptan": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "zolmitriptan",
+     "provenance": "verified",
+     "quote": "Zolmitriptan is metabolized into three major metabolites by the human hepatic cytochrome P450 enzymes —primarily CYP1A2 ."
+    }
+   ],
+   "strength": "major"
   }
  ],
  "zolpidem": [

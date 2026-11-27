@@ -4218,5 +4218,39 @@
    "strength": "moderate",
    "qid": "9e50f475"
   }
+ ],
+ "zolmitriptan": [
+  {
+   "enzyme": "cyp1a2",
+   "n": 1,
+   "role": "substrate",
+   "strength": "major",
+   "qid": "87b599c8"
+  }
+ ],
+ "eletriptan": [
+  {
+   "enzyme": "cyp3a4",
+   "n": 0,
+   "role": "substrate",
+   "strength": "major",
+   "qid": "1f9e0930"
+  }
+ ],
+ "almotriptan": [
+  {
+   "enzyme": "cyp3a4",
+   "n": 0,
+   "role": "substrate",
+   "strength": "minor",
+   "qid": "ddebba90"
+  },
+  {
+   "enzyme": "cyp2d6",
+   "n": 0,
+   "role": "substrate",
+   "strength": "minor",
+   "qid": "ddebba90"
+  }
  ]
 }
