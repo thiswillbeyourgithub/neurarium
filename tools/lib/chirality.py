@@ -50,6 +50,7 @@ STEREO = {
     "lsd": "+",               # LSD is (+)-LSD (d-lysergic acid diethylamide)
     "cytisine": "-",          # natural cytisine is (-)-cytisine
     "methamphetamine": "+",   # the modeled substance is (+)/d-methamphetamine
+    "levomethadone": "-",     # levomethadone is (R)-(-)-methadone
 }
 
 # A trailing or leading optical-rotation tag: "(-)-baclofen", "PENTAZOCINE (+)",

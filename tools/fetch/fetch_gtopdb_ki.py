@@ -111,6 +111,8 @@ _RAW_ALIASES: dict[str, str] = {
     "Benztropine": "benzatropine", "Pipothiazine": "pipotiazine",
     "Norquetiapine": "N-desalkylquetiapine",
     "Meta-chlorophenylpiperazine": "mCPP",
+    # Joins the methadone stem; chirality.STEREO keeps only the (-)-tagged rows.
+    "Levomethadone": "methadone",
 }
 
 # Affinity parameters, most to least directly comparable to a Ki. pKi/pKd are true

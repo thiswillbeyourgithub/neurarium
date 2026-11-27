@@ -293,6 +293,9 @@ ALIAS = {
     "quazepam": (["2-Oxoquazepam"], "metabolite", "2-oxoquazepam"),
     "lofexidine": (["Levlofexidine"], "enantiomer", "levlofexidine"),
     "pethidine": (["Meperidine"], "identity", "meperidine"),
+    # Levomethadone IS (R)-(-)-methadone: only the levo-tagged rows, never the racemate's.
+    "levomethadone": (["Methadone-HCL,(-)", "Methadone,(R)(-)"], "identity",
+                      "(R)-(-)-methadone"),
     # Active metabolites (keyed by their metabolite-store id, see rows_by_name). The
     # levo isomers must take ONLY their own tagged rows: PDSP's untagged "Amphetamine"
     # is the racemate (see amphetamine_dl), so a stem synonym would leak it in.
