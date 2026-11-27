@@ -310,8 +310,22 @@
    "status": "found",
    "year": 2015
   },
+  "carisoprodol": {
+   "applications": [
+    "NDA012155"
+   ],
+   "status": "undated"
+  },
   "carpipramine": {
    "status": "none"
+  },
+  "cenobamate": {
+   "application": "NDA212839",
+   "applications": 1,
+   "date": "2019-11-21",
+   "quote": "NDA212839 | XCOPRI | CENOBAMATE | TABLET | ORIG approved 2019-11-21",
+   "status": "found",
+   "year": 2019
   },
   "chloral_hydrate": {
    "status": "none"
@@ -650,6 +664,14 @@
    "quote": "NDA018227 | AMIDATE | ETOMIDATE | INJECTABLE | ORIG approved 1982-09-07",
    "status": "found",
    "year": 1982
+  },
+  "felbamate": {
+   "application": "NDA020189",
+   "applications": 1,
+   "date": "1993-07-29",
+   "quote": "NDA020189 | FELBATOL | FELBAMATE | SUSPENSION | ORIG approved 1993-07-29",
+   "status": "found",
+   "year": 1993
   },
   "fenfluramine": {
    "application": "NDA212102",
@@ -1253,6 +1275,14 @@
    "status": "found",
    "year": 1991
   },
+  "opicapone": {
+   "application": "NDA212489",
+   "applications": 1,
+   "date": "2020-04-24",
+   "quote": "NDA212489 | ONGENTYS | OPICAPONE | CAPSULE | ORIG approved 2020-04-24",
+   "status": "found",
+   "year": 2020
+  },
   "opipramol": {
    "status": "none"
   },
@@ -1654,6 +1684,14 @@
   "rubidium_chloride": {
    "status": "none"
   },
+  "rufinamide": {
+   "application": "NDA021911",
+   "applications": 2,
+   "date": "2008-11-14",
+   "quote": "NDA021911 | BANZEL | RUFINAMIDE | TABLET | ORIG approved 2008-11-14",
+   "status": "found",
+   "year": 2008
+  },
   "safinamide": {
    "application": "NDA207145",
    "applications": 1,
@@ -1817,6 +1855,9 @@
    "status": "found",
    "year": 1985
   },
+  "thiocolchicoside": {
+   "status": "none"
+  },
   "thiopental": {
    "application": "NDA011679",
    "applications": 1,
@@ -1873,6 +1914,9 @@
    "quote": "NDA020697 | TASMAR | TOLCAPONE | TABLET | ORIG approved 1998-01-29",
    "status": "found",
    "year": 1998
+  },
+  "tolperisone": {
+   "status": "none"
   },
   "topiramate": {
    "application": "NDA020505",
