@@ -79,6 +79,20 @@
     "value": "urine"
    }
   ],
+  "alizapride": [
+   {
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "alizapride",
+      "provenance": "verified",
+      "quote": "Excretion | Renal"
+     }
+    ],
+    "value": "renal"
+   }
+  ],
   "alpidem": [
    {
     "aspect": "route",
@@ -1603,6 +1617,20 @@
      }
     ],
     "value": "urine"
+   }
+  ],
+  "chlorphenamine": [
+   {
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "chlorphenamine",
+      "provenance": "verified",
+      "quote": "Excretion | Kidney"
+     }
+    ],
+    "value": "renal"
    }
   ],
   "chlorpromazine": [
@@ -5015,6 +5043,21 @@
     "value": "fecal"
    }
   ],
+  "metopimazine": [
+   {
+    "amount": "30%",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "bdpm",
+      "page": "61183089",
+      "provenance": "verified",
+      "quote": "30% de la dose administrée sont retrouvés dans les urines de 24 h, essentiellement sous forme de métabolite acide."
+     }
+    ],
+    "value": "renal"
+   }
+  ],
   "mianserin": [
    {
     "amount": "70 %",
@@ -5985,6 +6028,40 @@
       "page": "71985eb4-07df-41c9-8b9a-85f39e92b7d0",
       "provenance": "verified",
       "quote": "One week following administration of a single oral dose of 1 mg immediate-release 14 C-paliperidone to 5 healthy volunteers, 59% (range 51% to 67%) of the dose was excreted unchanged into urine, 32% (26% to 41%) of the dose was recovered as metabolites, and 6% to 12% of the dose was not recovered."
+     }
+    ],
+    "value": "urine"
+   }
+  ],
+  "palonosetron": [
+   {
+    "amount": "80%",
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "palonosetron",
+      "provenance": "verified",
+      "quote": "Excretion | Kidney , 80% (of which 49% unchanged);"
+     }
+    ],
+    "value": "renal"
+   },
+   {
+    "amount": "49% unchanged",
+    "aspect": "unchanged",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "palonosetron",
+      "provenance": "verified",
+      "quote": "Excretion | Kidney , 80% (of which 49% unchanged);"
+     },
+     {
+      "corpus": "dailymed",
+      "page": "d53aad46-1dc6-4b09-a44c-8c175ffa53e6",
+      "provenance": "verified",
+      "quote": "The amount of unchanged palonosetron excreted in the urine represented approximately 40% of the administered dose."
      }
     ],
     "value": "urine"
@@ -8534,6 +8611,32 @@
      }
     ],
     "value": "renal"
+   }
+  ],
+  "tropisetron": [
+   {
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "tropisetron",
+      "provenance": "verified",
+      "quote": "Excretion | Kidney , Feces"
+     }
+    ],
+    "value": "renal"
+   },
+   {
+    "aspect": "route",
+    "sources": [
+     {
+      "corpus": "wikipedia_pharm",
+      "page": "tropisetron",
+      "provenance": "verified",
+      "quote": "Excretion | Kidney , Feces"
+     }
+    ],
+    "value": "fecal"
    }
   ],
   "valbenazine": [

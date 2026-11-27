@@ -1333,6 +1333,19 @@
    ],
    "name": "Chloral hydrate"
   },
+  "chlorphenamine": {
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "(lead)",
+     "n": 0,
+     "page": "chlorphenamine",
+     "qid": "bd7f6f66",
+     "quote": "Metabolism | Liver ( CYP2D6 )"
+    }
+   ],
+   "name": "Chlorphenamine"
+  },
   "chlorpromazine": {
    "candidates": [
     {
@@ -4787,6 +4800,27 @@
    ],
    "name": "Oxycodone"
   },
+  "palonosetron": {
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "(lead)",
+     "n": 0,
+     "page": "palonosetron",
+     "qid": "0e542e5a",
+     "quote": "Metabolism | Liver , 50% (mostly CYP2D6 -mediated, CYP3A4 and CYP1A2 also involved)"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Pharmacokinetics",
+     "n": 1,
+     "page": "palonosetron",
+     "qid": "4f9a8f61",
+     "quote": "40% of the substance are eliminated in the unchanged form, and a further 45–50% are metabolized by the liver enzyme CYP2D6 and to a lesser extent by CYP3A4 and CYP1A2 ."
+    }
+   ],
+   "name": "Palonosetron"
+  },
   "pargyline": {
    "candidates": [
     {
@@ -6899,6 +6933,19 @@
     }
    ],
    "name": "Trimipramine"
+  },
+  "tropisetron": {
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "(lead)",
+     "n": 0,
+     "page": "tropisetron",
+     "qid": "09762bca",
+     "quote": "Metabolism | Liver ( CYP3A4 , CYP1A2 , CYP2D6 )"
+    }
+   ],
+   "name": "Tropisetron"
   },
   "valbenazine": {
    "candidates": [

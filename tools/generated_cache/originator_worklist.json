@@ -5049,6 +5049,75 @@
      "qid": "702d13d6"
     }
    ]
+  },
+  "palonosetron": {
+   "name": "Palonosetron",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "palonosetron",
+     "line": "Palonosetron was developed by Helsinn around 2001.",
+     "qid": "e607b026"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "palonosetron",
+     "line": "While developing the drug, Helsinn entered into a confidential licensing agreement with a company called MGI to sell palonosetron in the United States.",
+     "qid": "e1a7d6e3"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "palonosetron",
+     "line": "This conclusion results from the language of the America Invents Act , which bars patents on inventions, which were \"in public use, on sale, or otherwise available to the public before the effective filing date of the claimed invention,\" 35 U.",
+     "qid": "e7804c98"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "palonosetron",
+     "line": "The Federal Circuit reversed, holding that the sale was publicly disclosed, regardless of whether the details of the invention were publicly disclosed in the terms of the sale agreements.",
+     "qid": "54d7f947"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "palonosetron",
+     "line": "The SCOTUS agreed with the Federal Circuit , that in this case a commercial sale to a third party, who is required to keep the invention confidential, nevertheless placed the invention \"on sale\" under USC §102(a).",
+     "qid": "5ee0dd01"
+    }
+   ]
+  },
+  "metopimazine": {
+   "name": "Metopimazine",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "metopimazine",
+     "line": "As of August 2020, metopimazine has been repurposed and is additionally under development for use in the United States for the treatment of gastroparesis .",
+     "qid": "10d2b126"
+    }
+   ]
+  },
+  "cyclizine": {
+   "name": "Cyclizine",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "cyclizine",
+     "line": "It may also be used for nausea after general anaesthesia or that which developed from opioid use.",
+     "qid": "919eb94f"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "cyclizine",
+     "line": "Cyclizine was discovered in 1947.",
+     "qid": "8cb47961"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "cyclizine",
+     "line": "Cyclizine was developed in the American division of pharmacy company Burroughs Wellcome (today GlaxoSmithKline ) during a research study involving many drugs of the antihistamine group.",
+     "qid": "f33476ac"
+    }
+   ]
   }
  },
  "companies": {

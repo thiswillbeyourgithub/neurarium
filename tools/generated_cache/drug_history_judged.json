@@ -2455,5 +2455,23 @@
  "opium": {
   "approval": null,
   "withdrawals": []
+ },
+ "tropisetron": {
+  "approval": {
+   "agency": null,
+   "country": null,
+   "index": 0,
+   "year": 1992,
+   "qid": "167d894a"
+  },
+  "withdrawals": []
+ },
+ "palonosetron": {
+  "approval": null,
+  "withdrawals": []
+ },
+ "cyclizine": {
+  "approval": null,
+  "withdrawals": []
  }
 }

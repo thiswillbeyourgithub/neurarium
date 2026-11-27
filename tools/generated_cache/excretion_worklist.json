@@ -17576,5 +17576,270 @@
     "qid": "4df14091"
    }
   ]
+ },
+ "palonosetron": {
+  "name": "Palonosetron",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "palonosetron",
+    "line": "Excretion | Kidney , 80% (of which 49% unchanged);",
+    "named": [
+     "route:renal",
+     "unchanged:urine"
+    ],
+    "qid": "da6a03dc"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "palonosetron",
+    "line": "40% of the substance are eliminated in the unchanged form, and a further 45–50% are metabolized by the liver enzyme CYP2D6 and to a lesser extent by CYP3A4 and CYP1A2 .",
+    "named": [
+     "unchanged:urine"
+    ],
+    "qid": "4f9a8f61"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "palonosetron",
+    "line": "Palonosetron and its metabolites are mainly (to 80–93%) eliminated via the kidney.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "2e0fdcb8"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "d53aad46-1dc6-4b09-a44c-8c175ffa53e6",
+    "line": "After a single oral administration of [ 14 C]­netupitant, approximately half the administered radioactivity was recovered from urine and feces within 120 hours of dosing.",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "63df75fc"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "d53aad46-1dc6-4b09-a44c-8c175ffa53e6",
+    "line": "The total of 3.95% and 70.7% of the radioactive dose was recovered in the urine and feces collected over 336 hours, respectively, and the mean fraction of an oral dose of netupitant excreted unchanged in urine is less than 1% suggesting renal clearance is not a significant elimination route for the netupitant-related entities.",
+    "named": [
+     "route:renal",
+     "route:fecal",
+     "unchanged:urine"
+    ],
+    "qid": "13613c3f"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "d53aad46-1dc6-4b09-a44c-8c175ffa53e6",
+    "line": "About 86.5% and 4.7% of administered radioactivity was estimated to be excreted via the feces and urine within 30 days post-dose.",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "3638e103"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "d53aad46-1dc6-4b09-a44c-8c175ffa53e6",
+    "line": "After a single intravenous palonosetron dose of 10 mcg/kg (approximately 3 times the recommended dose in AKYNZEO for injection), the mean ± SD of total body clearance (CL) of palonosetron in healthy subjects was 12.1 ± 3.7 L/h, and renal clearance (CL R ) was 5.1 ± 2.1 L/h.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "9ae65e82"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "d53aad46-1dc6-4b09-a44c-8c175ffa53e6",
+    "line": "Following administration of a single oral 0.75 mg dose of [ 14 C]­palonosetron (1.5 times the recommended dose in AZKYNZEO capsules) to six healthy subjects, 85% to 93% of the total radioactivity was excreted in urine, and 5% to 8% was eliminated in feces.",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "a14bbc18"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "d53aad46-1dc6-4b09-a44c-8c175ffa53e6",
+    "line": "The amount of unchanged palonosetron excreted in the urine represented approximately 40% of the administered dose.",
+    "named": [
+     "route:renal",
+     "unchanged:urine"
+    ],
+    "qid": "4d778a2c"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "d53aad46-1dc6-4b09-a44c-8c175ffa53e6",
+    "line": "Population pharmacokinetic analysis showed that mild and moderate renal impairment (creatinine clearance 30 to 60 mL/min) did not significantly affect the pharmacokinetics of netupitant in cancer patients.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "d52883f2"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "d53aad46-1dc6-4b09-a44c-8c175ffa53e6",
+    "line": "Netupitant has not been studied in patients with severe renal impairment (creatinine clearance less than 30 mL/min).",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "b73dda83"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "d53aad46-1dc6-4b09-a44c-8c175ffa53e6",
+    "line": "The pharmacokinetics of palonosetron and netupitant have not been studied in subjects with end-stage renal disease (creatinine clearance < 15 mL/min not on dialysis) [see Use in Specific Populations ( 8.7 )] .",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "89e7e7c3"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "d53aad46-1dc6-4b09-a44c-8c175ffa53e6",
+    "line": "Co-administration of oral netupitant 450 mg (1.5 times the recommended dose in AKYNZEO capsules) did not significantly affect the systemic exposure (4% increase of AUC 0-24 at steady state) and urinary excretion (2% increase) of oral digoxin, a substrate of P-gp, at steady-state.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "f807c994"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "67044648",
+    "line": "Le palonosétron est éliminé par deux voies : environ 40 % sont éliminés par le rein et environ 50% sont métabolisés pour former deux métabolites principaux qui ont moins de 1 % de l'activité antagoniste du récepteur 5HT3 du palonosétron.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "0828e066"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "67044648",
+    "line": "Après une dose intraveineuse unique de 10 microgrammes/kg de [14C]-palonosétron, près de 80 % de la dose ont été récupérés dans l'urine dans les 144 heures, le palonosétron représentant 40 % environ de la dose administrée, sous forme de substance active inchangée.",
+    "named": [
+     "route:renal",
+     "unchanged:urine"
+    ],
+    "qid": "d98a4ff9"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "67044648",
+    "line": "Après une administration unique en bolus intraveineux chez des sujets sains, la clairance corporelle totale du palonosétron a été de 173 ± 73 ml/m et la clairance rénale de 53 ± 29 ml/mn.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "441a3264"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "67044648",
+    "line": "En cas d'insuffisance rénale sévère, la clairance rénale est diminuée mais la clairance corporelle totale est similaire à celle observée chez des sujets sains.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "b4ca1626"
+   }
+  ]
+ },
+ "tropisetron": {
+  "name": "Tropisetron",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "tropisetron",
+    "line": "Excretion | Kidney , Feces",
+    "named": [
+     "route:renal",
+     "route:fecal"
+    ],
+    "qid": "b57f4f15"
+   }
+  ]
+ },
+ "metopimazine": {
+  "name": "Metopimazine",
+  "candidates": [
+   {
+    "corpus": "bdpm",
+    "page": "61183089",
+    "line": "30% de la dose administrée sont retrouvés dans les urines de 24 h, essentiellement sous forme de métabolite acide.",
+    "named": [
+     "route:renal",
+     "urine_ph:acidic_faster"
+    ],
+    "qid": "d39ea538"
+   }
+  ]
+ },
+ "alizapride": {
+  "name": "Alizapride",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "alizapride",
+    "line": "Excretion | Renal",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "aab9a100"
+   }
+  ]
+ },
+ "cyclizine": {
+  "name": "Cyclizine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "cyclizine",
+    "line": "More serious side effects include low blood pressure and urinary retention .",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "b78692d8"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "cyclizine",
+    "line": "Its antimuscarinic action warrants caution in patients with prostatic hypertrophy , urinary retention, or angle-closure glaucoma .",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "4796d471"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "cyclizine",
+    "line": "Uncommon (1% to 10%) — Headache, psychomotor impairment, dermatitis, and antimuscarinic effects such as diplopia (double vision), tachycardia , constipation , urinary retention and gastro-intestinal disturbances.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "d74507a0"
+   }
+  ]
+ },
+ "chlorphenamine": {
+  "name": "Chlorphenamine",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "chlorphenamine",
+    "line": "Excretion | Kidney",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "d15d14e0"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "chlorphenamine",
+    "line": "The adverse effects include drowsiness, dizziness, confusion, constipation, anxiety, nausea, blurred vision, restlessness, decreased coordination, dry mouth, shallow breathing, hallucinations, irritability, problems with memory or concentration, tinnitus and trouble urinating.",
+    "named": [
+     "route:renal"
+    ],
+    "qid": "26da43e8"
+   }
+  ]
  }
 }

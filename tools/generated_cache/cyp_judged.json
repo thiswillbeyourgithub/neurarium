@@ -3941,5 +3941,54 @@
    "role": "inhibitor",
    "qid": "228f4ab1"
   }
+ ],
+ "palonosetron": [
+  {
+   "enzyme": "cyp2d6",
+   "n": 1,
+   "role": "substrate",
+   "strength": "major",
+   "qid": "4f9a8f61"
+  },
+  {
+   "enzyme": "cyp3a4",
+   "n": 1,
+   "role": "substrate",
+   "qid": "4f9a8f61"
+  },
+  {
+   "enzyme": "cyp1a2",
+   "n": 1,
+   "role": "substrate",
+   "qid": "4f9a8f61"
+  }
+ ],
+ "tropisetron": [
+  {
+   "enzyme": "cyp3a4",
+   "n": 0,
+   "role": "substrate",
+   "qid": "09762bca"
+  },
+  {
+   "enzyme": "cyp1a2",
+   "n": 0,
+   "role": "substrate",
+   "qid": "09762bca"
+  },
+  {
+   "enzyme": "cyp2d6",
+   "n": 0,
+   "role": "substrate",
+   "qid": "09762bca"
+  }
+ ],
+ "chlorphenamine": [
+  {
+   "enzyme": "cyp2d6",
+   "n": 0,
+   "role": "substrate",
+   "qid": "bd7f6f66"
+  }
  ]
 }

@@ -710,6 +710,18 @@
    "name": "Janssen Pharmaceutica",
    "company": "janssen_pharmaceuticals",
    "qid": "702d13d6"
+  },
+  "palonosetron": {
+   "index": 0,
+   "name": "Helsinn",
+   "company": null,
+   "qid": "e607b026"
+  },
+  "cyclizine": {
+   "index": 2,
+   "name": "Burroughs Wellcome",
+   "company": null,
+   "qid": "f33476ac"
   }
  },
  "companies": {

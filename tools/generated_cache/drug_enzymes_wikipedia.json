@@ -685,6 +685,21 @@
    ]
   }
  ],
+ "chlorphenamine": [
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "chlorphenamine",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP2D6 )"
+    }
+   ]
+  }
+ ],
  "chlorpromazine": [
   {
    "enzyme": "cyp1a2",
@@ -3408,6 +3423,48 @@
    "strength": "major"
   }
  ],
+ "palonosetron": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "palonosetron",
+     "provenance": "verified",
+     "quote": "40% of the substance are eliminated in the unchanged form, and a further 45–50% are metabolized by the liver enzyme CYP2D6 and to a lesser extent by CYP3A4 and CYP1A2 ."
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "palonosetron",
+     "provenance": "verified",
+     "quote": "40% of the substance are eliminated in the unchanged form, and a further 45–50% are metabolized by the liver enzyme CYP2D6 and to a lesser extent by CYP3A4 and CYP1A2 ."
+    }
+   ],
+   "strength": "major"
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "palonosetron",
+     "provenance": "verified",
+     "quote": "40% of the substance are eliminated in the unchanged form, and a further 45–50% are metabolized by the liver enzyme CYP2D6 and to a lesser extent by CYP3A4 and CYP1A2 ."
+    }
+   ]
+  }
+ ],
  "pargyline": [
   {
    "enzyme": "cyp2e1",
@@ -4900,6 +4957,47 @@
      "page": "trimipramine",
      "provenance": "verified",
      "quote": "CYP2D6 also metabolizes (L)-trimipramine into (L)-2-hydroxytrimipramine."
+    }
+   ]
+  }
+ ],
+ "tropisetron": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "tropisetron",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP3A4 , CYP1A2 , CYP2D6 )"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2d6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "tropisetron",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP3A4 , CYP1A2 , CYP2D6 )"
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "tropisetron",
+     "provenance": "verified",
+     "quote": "Metabolism | Liver ( CYP3A4 , CYP1A2 , CYP2D6 )"
     }
    ]
   }

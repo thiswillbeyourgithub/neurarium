@@ -8008,6 +8008,56 @@
      "qid": "3d50b8be"
     }
    ]
+  },
+  "palonosetron": {
+   "name": "Palonosetron",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "palonosetron",
+     "line": "The oral formulation was approved on in August 2008, for prevention of acute CINV alone, as a large clinical trial did not show oral administration to be as effective as intravenous use against delayed CINV.",
+     "context": "It has a longer duration of action than other 5-HT 3 antagonists.",
+     "qid": "fe3a3bda"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "palonos_tron",
+     "line": "La voie orale a été approuvée le 22 août 2008 pour la prévention de graves problèmes de chimiothérapie induisant nausées et vomissements .",
+     "context": "Le palonosétron est administré soit par voie intraveineuse , une seule dose, 30 minutes avant la chimiothérapie, soit comme une seule gélule par voie orale une heure avant la chimiothérapie .",
+     "qid": "ba25b11d"
+    }
+   ]
+  },
+  "tropisetron": {
+   "name": "Tropisetron",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "tropisetron",
+     "line": "It was patented in 1982 and approved for medical use in 1992.",
+     "context": "Tropisetron is a serotonin 5-HT 3 receptor antagonist used mainly as an antiemetic to treat nausea and vomiting following chemotherapy , although it has been used experimentally as an analgesic in cases of fibromyalgia .",
+     "qid": "167d894a"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "tropis_tron",
+     "line": "Il est commercialisé en France sous le nom de Navoban par le laboratoire Novartis depuis le 17 février 1995 .",
+     "context": "Cependant il a été utilisé expérimentalement comme analgésique dans des cas de fibromyalgie .",
+     "qid": "24e52495"
+    }
+   ]
+  },
+  "cyclizine": {
+   "name": "Cyclizine",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "cyclizine",
+     "line": "Cyclizine was marketed as Bonine for Kids in the US, but was discontinued in 2012, and replaced with meclizine.",
+     "context": "As cyclizine hydrochloride tablets and cyclizine lactate solution for intramuscular or intravenous injection (brand names: Valoid in UK and South Africa and Marezine, Marzine and Emoquil in US).",
+     "qid": "844c9264"
+    }
+   ]
   }
  }
 }

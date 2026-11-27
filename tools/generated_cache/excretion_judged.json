@@ -5926,5 +5926,67 @@
    "qid": "4df14091",
    "value": "urine"
   }
+ ],
+ "palonosetron": [
+  {
+   "amount": "80%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "da6a03dc",
+   "value": "renal"
+  },
+  {
+   "amount": "49% unchanged",
+   "aspect": "unchanged",
+   "index": 0,
+   "qid": "da6a03dc",
+   "value": "urine"
+  },
+  {
+   "amount": "approximately 40% of the administered dose",
+   "aspect": "unchanged",
+   "index": 8,
+   "qid": "4d778a2c",
+   "value": "urine"
+  }
+ ],
+ "tropisetron": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "b57f4f15",
+   "value": "renal"
+  },
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "b57f4f15",
+   "value": "fecal"
+  }
+ ],
+ "metopimazine": [
+  {
+   "amount": "30%",
+   "aspect": "route",
+   "index": 0,
+   "qid": "d39ea538",
+   "value": "renal"
+  }
+ ],
+ "alizapride": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "aab9a100",
+   "value": "renal"
+  }
+ ],
+ "chlorphenamine": [
+  {
+   "aspect": "route",
+   "index": 0,
+   "qid": "d15d14e0",
+   "value": "renal"
+  }
  ]
 }
