@@ -142,6 +142,7 @@
   "NDA021169": "https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=021169",
   "NDA021196": "https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=021196",
   "NDA021264": "https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=021264",
+  "NDA021372": "https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=021372",
   "NDA021411": "https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=021411",
   "NDA021427": "https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=021427",
   "NDA021431": "https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=021431",
@@ -1791,7 +1792,10 @@
   "zolpidem": "https://fr.wikipedia.org/w/index.php?oldid=237104440",
   "zonisamide": "https://fr.wikipedia.org/w/index.php?oldid=237078080",
   "zopiclone": "https://fr.wikipedia.org/w/index.php?oldid=236218344",
-  "zuclopenthixol": "https://fr.wikipedia.org/w/index.php?oldid=237516352"
+  "zuclopenthixol": "https://fr.wikipedia.org/w/index.php?oldid=237516352",
+  "cyclizine": "https://fr.wikipedia.org/w/index.php?oldid=234811897",
+  "palonos_tron": "https://fr.wikipedia.org/w/index.php?oldid=226037279",
+  "tropis_tron": "https://fr.wikipedia.org/w/index.php?oldid=232823177"
  },
  "wikipedia_pharm": {
   "2c_b": "https://en.wikipedia.org/w/index.php?oldid=1375574978",
@@ -2237,6 +2241,12 @@
   "zopiclone": "https://en.wikipedia.org/w/index.php?oldid=1369948564",
   "zotepine": "https://en.wikipedia.org/w/index.php?oldid=1374201974",
   "zuclopenthixol": "https://en.wikipedia.org/w/index.php?oldid=1358444199",
-  "zuranolone": "https://en.wikipedia.org/w/index.php?oldid=1364099628"
+  "zuranolone": "https://en.wikipedia.org/w/index.php?oldid=1364099628",
+  "alizapride": "https://en.wikipedia.org/w/index.php?oldid=1340001566",
+  "chlorphenamine": "https://en.wikipedia.org/w/index.php?oldid=1360097031",
+  "cyclizine": "https://en.wikipedia.org/w/index.php?oldid=1373292557",
+  "metopimazine": "https://en.wikipedia.org/w/index.php?oldid=1383462099",
+  "palonosetron": "https://en.wikipedia.org/w/index.php?oldid=1333743869",
+  "tropisetron": "https://en.wikipedia.org/w/index.php?oldid=1374431947"
  }
 }
