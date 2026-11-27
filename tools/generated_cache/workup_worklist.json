@@ -11012,5 +11012,405 @@
     "qid": "06c45c50"
    }
   ]
+ },
+ "fosphenytoin": {
+  "page": "60771794",
+  "denomination": "PRODILANTIN 75 mg/mL, solution à diluer pour perfusion/solution injectable",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.2",
+    "under": "Mode d’administration",
+    "quote": "PRODILANTIN peut être administré en perfusion intraveineuse (IV) ou en injection intramusculaire (IM). La voie IM doit être envisagée chez les patients adultes lorsqu’il n’y a pas un besoin urgent de contrôler les crises. Si le principal objectif est d’administrer une dose de charge rapide de phénytoïne, une administration IV de PRODILANTIN doit être privilégiée car les concentrations plasmatiques thérapeutiques de phénytoïne sont plus rapidement atteintes après une administration IV qu’après une administration IM.",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "66ad3148"
+   },
+   {
+    "index": 1,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Pour une perfusion IV, diluer la fosphénytoïne dans une solution de glucose à 5% ou de chlorure de sodium à 0,9 %. La concentration doit être comprise entre 1,5 et 25 mg d'EP/mL.",
+    "tests": [
+     "glycaemia"
+    ],
+    "qid": "9c96d73d"
+   },
+   {
+    "index": 2,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Une surveillance continue de l'électrocardiogramme, de la pression artérielle et des fonctions respiratoires doit impérativement être mise en œuvre pendant toute la durée de la perfusion. Il faut également surveiller étroitement le patient pendant la période où les concentrations plasmatiques de phénytoïne sont maximales, c'est-à-dire environ 30 minutes après la fin de la perfusion de fosphénytoïne.",
+    "tests": [
+     "ecg",
+     "blood_pressure",
+     "drug_level"
+    ],
+    "qid": "e08fa2dc"
+   },
+   {
+    "index": 3,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Exemples de doses de charge IV de 15 mg d’EP/kg et recommandations en matière de dilution (à 25 mg d’EP/mL) et de temps de perfusion IV (à un débit maximal de 150 mg d’EP/min, en fonction du poids corporel.)",
+    "tests": [
+     "weight"
+    ],
+    "qid": "d97d50b0"
+   },
+   {
+    "index": 4,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Remarque : la dose, le volume d’administration, le nombre de flacons de PRODILANTIN, le volume de diluant et le temps minimal de perfusion appropriés doivent toujours être calculés en fonction du poids corporel exact du patient quand celui-ci n’est pas inclus dans les exemples mentionnés.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "05667f31"
+   },
+   {
+    "index": 5,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Il faut ajuster les doses d’entretien en fonction de la réponse du patient et des concentrations plasmatiques résiduelles de phénytoïne (voir Surveillance du traitement).",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "41f69037"
+   },
+   {
+    "index": 6,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Remarque : la dose, le volume d’administration, le nombre de flacons de PRODILANTIN, le volume de diluant et le temps minimal de perfusion appropriés doivent toujours être calculés en fonction du poids corporel exact du patient quand celui-ci n’est pas inclus dans les exemples mentionnés.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "05667f31"
+   },
+   {
+    "index": 7,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Exemples de doses de charge IV de 10 mg d’EP/kg et recommandations en matière de dilution* (à 25 mg d’EP/mL ou à 1,5 mg d’EP/mL) et de temps de perfusion IV (à un débit maximal de 100 mg d’EP/min), en fonction du poids corporel.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "4c4c46e7"
+   },
+   {
+    "index": 8,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Remarque : la dose, le volume d’administration, le nombre de flacons de PRODILANTIN, le volume de diluant et le temps minimal de perfusion appropriés doivent toujours être calculés en fonction du poids corporel exact du patient quand celui-ci n’est pas inclus dans les exemples mentionnés.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "05667f31"
+   },
+   {
+    "index": 9,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Il faut ajuster les doses d’entretien en fonction de la réponse du patient et des concentrations plasmatiques résiduelles de phénytoïne (voir Surveillance du traitement).",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "41f69037"
+   },
+   {
+    "index": 10,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Exemples de doses maximales d’entretien IV de 5 mg d’EP/kg et recommandations en matière de dilution* (à 25 mg d’EP/mL ou à 1,5 mg d’EP/mL) et de temps de perfusion IV (à un débit maximal de 100 mg d’EP/min), en fonction du poids corporel.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "da0bf2f7"
+   },
+   {
+    "index": 11,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Remarque : la dose, le volume d’administration, le nombre de flacons de PRODILANTIN, le volume de diluant et le temps minimal de perfusion appropriés doivent toujours être calculés en fonction du poids corporel exact du patient quand celui-ci n’est pas inclus dans les exemples mentionnés.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "05667f31"
+   },
+   {
+    "index": 12,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Il peut être utile de surveiller la concentration du médicament en cas de substitution des produits et/ou de changement des voies d’administration. Il faut ajuster les doses en fonction de la réponse du patient et des concentrations plasmatiques résiduelles de phénytoïne (voir Surveillance du traitement).",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "cd7628e6"
+   },
+   {
+    "index": 13,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Remarque : la dose, le volume d’administration, le nombre de flacons de PRODILANTIN, le volume de diluant et le temps minimal de perfusion appropriés doivent toujours être calculés en fonction du poids corporel exact du patient quand celui-ci n’est pas inclus dans les exemples mentionnés.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "05667f31"
+   },
+   {
+    "index": 14,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Exemples de doses de charge IV de 15 mg d’EP/kg et recommandations en matière de dilution (à 25 mg d’EP/mL) et de temps de perfusion IV (à un débit maximal de 3 mg d’EP/kg/min), en fonction du poids corporel.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "d1f17b8f"
+   },
+   {
+    "index": 15,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Remarque : la dose, le volume d’administration, le nombre de flacons de PRODILANTIN, le volume de diluant et le temps minimal de perfusion appropriés doivent toujours être calculés en fonction du poids corporel exact du patient quand celui-ci n’est pas inclus dans les exemples mentionnés.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "05667f31"
+   },
+   {
+    "index": 16,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Il faut ajuster les doses d’entretien en fonction de la réponse du patient et des concentrations plasmatiques résiduelles de phénytoïne (voir Surveillance du traitement).",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "41f69037"
+   },
+   {
+    "index": 17,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Exemples de doses maximales d’entretien IV de 5 mg d’EP/kg et recommandations en matière de dilution* (à 25 mg d’EP/mL ou à 1,5 mg d’EP/mL) et de temps de perfusion IV (à un débit maximal de 2 mg d’EP/kg/min), en fonction du poids corporel.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "15a84399"
+   },
+   {
+    "index": 18,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Remarque : la dose, le volume d’administration, le nombre de flacons de PRODILANTIN, le volume de diluant et le temps minimal de perfusion appropriés doivent toujours être calculés en fonction du poids corporel exact du patient quand celui-ci n’est pas inclus dans les exemples mentionnés.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "05667f31"
+   },
+   {
+    "index": 19,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Exemples de doses de charge IV de 10 mg d’EP/kg et recommandations en matière de dilution* (à 25 mg d’EP/mL ou à 1,5 mg d’EP/mL) et de temps de perfusion IV (à un débit maximal de 2 mg d’EP/kg/min), en fonction du poids corporel.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "bd6384be"
+   },
+   {
+    "index": 20,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Remarque : la dose, le volume d’administration, le nombre de flacons de PRODILANTIN, le volume de diluant et le temps minimal de perfusion appropriés doivent toujours être calculés en fonction du poids corporel exact du patient quand celui-ci n’est pas inclus dans les exemples mentionnés.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "05667f31"
+   },
+   {
+    "index": 21,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Il faut ajuster les doses d’entretien en fonction de la réponse du patient et des concentrations plasmatiques résiduelles de phénytoïne (voir Surveillance du traitement).",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "41f69037"
+   },
+   {
+    "index": 22,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Exemples de doses maximales d’entretien IV de 5 mg d’EP/kg et recommandations en matière de dilution* (à 25 mg d’EP/mL ou à 1,5 mg d’EP/mL) et de temps de perfusion IV (à un débit maximal de 2 mg d’EP/kg/min), en fonction du poids corporel.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "15a84399"
+   },
+   {
+    "index": 23,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Remarque : la dose, le volume d’administration, le nombre de flacons de PRODILANTIN, le volume de diluant et le temps minimal de perfusion appropriés doivent toujours être calculés en fonction du poids corporel exact du patient quand celui-ci n’est pas inclus dans les exemples mentionnés.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "05667f31"
+   },
+   {
+    "index": 24,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Il peut être utile de surveiller la concentration du médicament en cas de substitution des produits et/ou de changement des voies d’administration. Il faut ajuster les doses en fonction de la réponse du patient et des concentrations plasmatiques résiduelles de phénytoïne (voir Surveillance du traitement).",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "cd7628e6"
+   },
+   {
+    "index": 25,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Chez ces patients, la vitesse de transformation de fosphénytoïne IV en phénytoïne peut être augmentée. Alors que le taux de clairance de la phénytoïne totale n’est pas affecté, les concentrations plasmatiques de phénytoïne libre peuvent quant à elles être élevées. La concentration de phénytoïne libre peut être élevée chez les patients avec une hyperbilirubinémie (voir rubrique 4.4). Chez ces patients, il est donc préférable de mesurer les concentrations plasmatiques de phénytoïne libre plutôt que les concentrations plasmatiques totales de phénytoïne (voir rubrique 5.2).",
+    "tests": [
+     "renal_function",
+     "liver_function",
+     "drug_level"
+    ],
+    "qid": "bb6b665b"
+   },
+   {
+    "index": 26,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Avant biotransformation complète, les techniques immuno-analytiques risquent de surestimer notablement les concentrations plasmatiques de phénytoïne en raison d'une réactivité croisée avec la fosphénytoïne. Les méthodes de dosage par chromatographie (par exemple CLHP) permettent un dosage exact de la phénytoïne dans les liquides biologiques en présence de fosphénytoïne. Il est recommandé d'attendre au moins 2 heures après la perfusion IV de fosphénytoïne, ou 4 heures après l'injection IM, avant de prélever du sang en vue du dosage de la phénytoïne.",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "da6bc0b9"
+   },
+   {
+    "index": 27,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Par voie orale, la biodisponibilité de la phénytoïne (en gélules) est d'environ 90%. La phénytoïne contenue dans la fosphénytoïne a une biodisponibilité de 100 % par voie IM et IV. C'est pourquoi les concentrations plasmatiques de phénytoïne peuvent augmenter quand on remplace la phénytoïne sodique orale par la fosphénytoïne par voie IM ou IV. Il est toutefois inutile d'ajuster les doses initiales lors de la substitution de la phénytoïne orale par la fosphénytoïne ou vice versa.",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "ed9bc02a"
+   },
+   {
+    "index": 28,
+    "section": "4.4",
+    "under": "",
+    "quote": "Une surveillance continue de l’électrocardiogramme, de la pression artérielle et de la fonction respiratoire doit impérativement être mise en œuvre pendant toute la durée de la perfusion. Il faut également surveiller étroitement le patient durant la période où les concentrations plasmatiques de phénytoïne sont maximales, c’est-à-dire environ 30 minutes après la fin de la perfusion de PRODILANTIN. Le matériel nécessaire pour une réanimation cardiaque doit être disponible.",
+    "tests": [
+     "ecg",
+     "blood_pressure",
+     "drug_level"
+    ],
+    "qid": "41771aed"
+   },
+   {
+    "index": 29,
+    "section": "4.4",
+    "under": "",
+    "quote": "Généralement mais pas toujours, le SHS/DRESS inclut une fièvre, une éruption cutanée et/ou une lymphadénopathie en association avec d’autres atteintes d’organes, comme une hépatite, une néphrite, des anomalies hématologiques, une myocardite, une myosite ou une pneumopathie. Les premiers symptômes peuvent ressembler à une infection virale aiguë. D’autres manifestations courantes incluent une arthralgie, une jaunisse, une hépatomégalie, une leucocytose et une éosinophilie. L’intervalle entre la première exposition au médicament et les symptômes est généralement de 2 à 4 semaines de traitement, mais ils ont également été rapportés chez des patients traités par des anticonvulsivants pendant 3 mois ou plus. Si ces signes et symptômes apparaissent, le patient doit être examiné immédiatement. La fosphénytoïne doit être arrêtée s’il est impossible d’établir une autre étiologie des signes et symptômes.",
+    "tests": [
+     "blood_count"
+    ],
+    "qid": "8ec3869f"
+   },
+   {
+    "index": 30,
+    "section": "4.4",
+    "under": "",
+    "quote": "La phénytoïne est métabolisée par l’enzyme CYP2C9 du CYP450. Les patients porteurs des variants CYP2C9*2 ou CYP2C9*3 à activité enzymatique diminuée (métaboliseurs intermédiaires ou lents des substrats du CYP2C9) peuvent présenter un risque d’augmentation des concentrations plasmatiques de phénytoïne et de toxicité ultérieure. Chez les patients connus pour être porteurs des allèles CYP2C9*2 ou *3 à activité enzymatique diminuée, une surveillance étroite de la réponse clinique est conseillée et une surveillance des concentrations plasmatiques de phénytoïne peut être nécessaire.",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "073584c5"
+   },
+   {
+    "index": 31,
+    "section": "4.4",
+    "under": "",
+    "quote": "Si les concentrations plasmatiques de phénytoïne dépassent durablement la zone thérapeutique optimale et/ou si la phénytoine est utilisée à long terme, peuvent survenir des états confusionnels décrits comme un \"délire\", une \"psychose\" ou une \"encéphalopathie\" ou, rarement, des perturbations irréversibles des fonctions cérébelleuses et/ou une atrophie cérébelleuse. Dès l'apparition du premier signe de toxicité aiguë, le taux plasmatique de phénytoïne doit être contrôlé (voir rubrique 4.2 paragraphe « Surveillance du traitement »). Si les concentrations plasmatiques de phénytoïne sont excessives, il faut réduire la dose de fosphénytoïne. Si les symptômes persistent, il faut arrêter l'administration de fosphénytoïne.",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "13860927"
+   },
+   {
+    "index": 32,
+    "section": "4.4",
+    "under": "",
+    "quote": "En raison de l’augmentation de la fraction libre de phénytoïne chez les patients atteints d’une maladie rénale ou hépatique ou chez ceux qui souffrent d’hypoalbuminémie, l’interprétation des concentrations plasmatiques en phénytoïne totale doit être faite avec précaution car elle peut ne pas refléter la concentration libre pharmacologiquement active. La concentration de phénytoïne libre peut être élevée chez les patients atteints d’hyperbilirubinémie. Les concentrations de phénitoïne libre sont plus pertinentes chez ces patients (voir rubriques 4.2 et 5.2). Il peut être nécessaire de modifier les doses en cas de perturbation de la fonction rénale ou hépatique, chez les patients âgés et chez les patients atteints de maladies graves (voir rubrique 4.2). Ces patients peuvent présenter précocement des signes de toxicité de la phénytoïne ou des événements indésirables plus sévères dus aux modifications de la pharmacocinétique de la fosphénytoïne et de la phénytoïne.",
+    "tests": [
+     "renal_function",
+     "liver_function",
+     "drug_level"
+    ],
+    "qid": "0b7bfce5"
+   }
+  ]
+ },
+ "riluzole": {
+  "page": "68413596",
+  "denomination": "TEGLUTIK 5 mg/ml, suspension buvable",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.3",
+    "under": "",
+    "quote": "Maladie hépatique ou taux de transaminases supérieur à 3 fois la limite supérieure de la normale avant la mise en route du traitement.",
+    "tests": [
+     "liver_function"
+    ],
+    "qid": "af7388e8"
+   },
+   {
+    "index": 1,
+    "section": "4.4",
+    "under": "Insuffisance hépatique",
+    "quote": "Le riluzole doit être utilisé avec prudence chez les patients ayant des antécédents de dysfonctionnement hépatique, ou chez les patients présentant une légère élévation des transaminases sériques (ALAT/SGPT; ASAT/SGOT jusqu’à 3 fois la limite supérieure de la normale), de la bilirubine et/ou des gamma-glutamyl transférases (GGT). Une perturbation de plusieurs paramètres hépatiques (en particulier taux de bilirubine élevé) doit faire déconseiller l’utilisation de riluzole (voir rubrique 4.8).",
+    "tests": [
+     "liver_function"
+    ],
+    "qid": "c3943cc2"
+   },
+   {
+    "index": 2,
+    "section": "4.4",
+    "under": "Insuffisance hépatique",
+    "quote": "Du fait du risque d’hépatite, le taux de transaminases sériques, dont les ALAT (SGPT), doit être contrôlé avant la mise sous traitement et pendant la durée du traitement par le riluzole. Les ALAT doivent être dosées tous les mois pendant les 3 premiers mois, puis tous les 3 mois pendant la première année et périodiquement ensuite. Ce suivi devra être plus fréquent chez les patients dont le taux d’ALAT s'élève sous traitement.",
+    "tests": [
+     "liver_function"
+    ],
+    "qid": "4e005cb1"
+   },
+   {
+    "index": 3,
+    "section": "4.4",
+    "under": "Insuffisance hépatique",
+    "quote": "Le traitement par le riluzole devra être interrompu si les taux d’ALAT augmentent jusqu’à 5 fois la limite supérieure de la normale ou au-delà. Les effets d'une réduction posologique ou d'une réadministration ultérieure chez les patients dont le taux de ALAT a atteint ou dépassé 5 fois la limite supérieure de la normale, ne sont pas connus.",
+    "tests": [
+     "liver_function"
+    ],
+    "qid": "3ecb1027"
+   },
+   {
+    "index": 4,
+    "section": "4.4",
+    "under": "Neutropénie",
+    "quote": "Les patients doivent être avertis qu’il convient d’informer leur médecin de toute maladie fébrile. La survenue d’une maladie fébrile doit entraîner un contrôle de la numération formule sanguine et une interruption du traitement par riluzole en cas de neutropénie (voir rubrique 4.8).",
+    "tests": [
+     "blood_count"
+    ],
+    "qid": "76b609e7"
+   }
+  ]
  }
 }

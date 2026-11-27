@@ -2260,5 +2260,46 @@
    "timing": "during",
    "qid": "9ead01d6"
   }
+ ],
+ "fosphenytoin": [
+  {
+   "index": 28,
+   "test": "ecg",
+   "timing": "during",
+   "qid": "41771aed"
+  },
+  {
+   "index": 28,
+   "test": "blood_pressure",
+   "timing": "during",
+   "qid": "41771aed"
+  },
+  {
+   "index": 5,
+   "test": "drug_level",
+   "timing": "during",
+   "qid": "41f69037"
+  }
+ ],
+ "riluzole": [
+  {
+   "index": 2,
+   "test": "liver_function",
+   "timing": "before",
+   "qid": "4e005cb1"
+  },
+  {
+   "index": 2,
+   "test": "liver_function",
+   "timing": "during",
+   "qid": "4e005cb1"
+  },
+  {
+   "index": 4,
+   "test": "blood_count",
+   "timing": "during",
+   "condition": "La survenue d’une maladie fébrile",
+   "qid": "76b609e7"
+  }
  ]
 }

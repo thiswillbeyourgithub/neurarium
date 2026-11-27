@@ -1481,6 +1481,44 @@
     "timing": "before"
    }
   ],
+  "fosphenytoin": [
+   {
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60771794",
+      "provenance": "verified",
+      "quote": "Une surveillance continue de l’électrocardiogramme, de la pression artérielle et de la fonction respiratoire doit impérativement être mise en œuvre pendant toute la durée de la perfusion. Il faut également surveiller étroitement le patient durant la période où les concentrations plasmatiques de phénytoïne sont maximales, c’est-à-dire environ 30 minutes après la fin de la perfusion de PRODILANTIN. Le matériel nécessaire pour une réanimation cardiaque doit être disponible."
+     }
+    ],
+    "test": "ecg",
+    "timing": "during"
+   },
+   {
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60771794",
+      "provenance": "verified",
+      "quote": "Une surveillance continue de l’électrocardiogramme, de la pression artérielle et de la fonction respiratoire doit impérativement être mise en œuvre pendant toute la durée de la perfusion. Il faut également surveiller étroitement le patient durant la période où les concentrations plasmatiques de phénytoïne sont maximales, c’est-à-dire environ 30 minutes après la fin de la perfusion de PRODILANTIN. Le matériel nécessaire pour une réanimation cardiaque doit être disponible."
+     }
+    ],
+    "test": "blood_pressure",
+    "timing": "during"
+   },
+   {
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60771794",
+      "provenance": "verified",
+      "quote": "Il faut ajuster les doses d’entretien en fonction de la réponse du patient et des concentrations plasmatiques résiduelles de phénytoïne (voir Surveillance du traitement)."
+     }
+    ],
+    "test": "drug_level",
+    "timing": "during"
+   }
+  ],
   "furosemide": [
    {
     "sources": [
@@ -3255,6 +3293,47 @@
      }
     ],
     "test": "weight",
+    "timing": "during"
+   }
+  ],
+  "riluzole": [
+   {
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "68413596",
+      "provenance": "verified",
+      "quote": "Du fait du risque d’hépatite, le taux de transaminases sériques, dont les ALAT (SGPT), doit être contrôlé avant la mise sous traitement et pendant la durée du traitement par le riluzole. Les ALAT doivent être dosées tous les mois pendant les 3 premiers mois, puis tous les 3 mois pendant la première année et périodiquement ensuite. Ce suivi devra être plus fréquent chez les patients dont le taux d’ALAT s'élève sous traitement."
+     }
+    ],
+    "test": "liver_function",
+    "timing": "before"
+   },
+   {
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "68413596",
+      "provenance": "verified",
+      "quote": "Du fait du risque d’hépatite, le taux de transaminases sériques, dont les ALAT (SGPT), doit être contrôlé avant la mise sous traitement et pendant la durée du traitement par le riluzole. Les ALAT doivent être dosées tous les mois pendant les 3 premiers mois, puis tous les 3 mois pendant la première année et périodiquement ensuite. Ce suivi devra être plus fréquent chez les patients dont le taux d’ALAT s'élève sous traitement."
+     }
+    ],
+    "test": "liver_function",
+    "timing": "during"
+   },
+   {
+    "conditions": [
+     "La survenue d’une maladie fébrile"
+    ],
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "68413596",
+      "provenance": "verified",
+      "quote": "Les patients doivent être avertis qu’il convient d’informer leur médecin de toute maladie fébrile. La survenue d’une maladie fébrile doit entraîner un contrôle de la numération formule sanguine et une interruption du traitement par riluzole en cas de neutropénie (voir rubrique 4.8)."
+     }
+    ],
+    "test": "blood_count",
     "timing": "during"
    }
   ],
