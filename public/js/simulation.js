@@ -21,6 +21,7 @@
 import { loadFlag, saveFlag } from "./prefs.js";
 import { el, btn } from "./panel/dom.js";
 import { feedbackFooter } from "./panel/feedback.js";
+import { buildEffectSiteSwitch, filterBySite, loadEffectSite } from "./effect-site.js";
 import {
   receptorProfile, ligandsOf, pkFlags, solveCombination,
   toAxis, fromAxis, TMAX_HOURS, P_FLOOR, ASSUMED_PKI, parseRatio,
@@ -736,6 +737,8 @@ export function createSimulation({ body, data, deps, ui }) {
     const h = plotSummary(t("sim.fxTitle"));
     h.appendChild(el("span", "beta-tag", t("sim.beta")));
     fxSec.appendChild(h);
+    // Central / peripheral filter (js/effect-site.js), shared with every effect listing.
+    fxSec.appendChild(buildEffectSiteSwitch(() => renderRx()).el);
     fxSec.appendChild(fxHost);
     fxSec.appendChild(el("p", "sim-caption", t("sim.fxCaption")));
   };
@@ -747,7 +750,7 @@ export function createSimulation({ body, data, deps, ui }) {
   const effectsOf = (rows) => {
     const out = new Map(); // effect -> {label, value, via: [{target, value}]}
     for (const [target, m] of rows) {
-      for (const e of data.effectsByTarget?.get(target) || []) {
+      for (const e of filterBySite(data.effectsByTarget?.get(target))) {
         const v = modeAxis(e.mode, m);
         if (!(v > 0)) continue;
         const cur = out.get(e.effect) || { effect: e.effect, label: e.label, value: 0, via: [] };
@@ -765,7 +768,8 @@ export function createSimulation({ body, data, deps, ui }) {
     }]);
     const nowFx = effectsOf(nowRows);
     if (!peakFx.size) {
-      fxHost.appendChild(el("p", "sim-empty", t("sim.fxNone")));
+      fxHost.appendChild(el("p", "sim-empty",
+        t(loadEffectSite() === "all" ? "sim.fxNone" : "effects.siteEmpty")));
       return;
     }
     const cols = [...peakFx.values()].map((p) => {
