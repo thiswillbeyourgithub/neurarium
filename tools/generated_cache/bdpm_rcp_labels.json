@@ -743,6 +743,20 @@
    "5.1"
   ]
  },
+ "droperidol": {
+  "cis": "61646847",
+  "date_source": "file mtime",
+  "denomination": "DROLEPTAN 1,25 mg/2,5 ml, solution injectable",
+  "fetched": "2026-11-27",
+  "page": "61646847",
+  "sections": [
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
  "duloxetine": {
   "cis": "60299831",
   "date_source": "justelesRCP scrape manifest last_fetch",

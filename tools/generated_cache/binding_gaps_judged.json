@@ -1890,5 +1890,28 @@
    "pick": false,
    "reason": "peripheral vascular bed"
   }
+ ],
+ "droperidol": [
+  {
+   "index": 0,
+   "target": "d2",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "702d13d6"
+  },
+  {
+   "index": 1,
+   "target": "dopamine",
+   "pick": false,
+   "reason": "class-wide; the specific D2 antagonism is picked from candidate 0",
+   "qid": "838cb6f8"
+  },
+  {
+   "index": 2,
+   "target": "alpha1",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "1596ce31"
+  }
  ]
 }

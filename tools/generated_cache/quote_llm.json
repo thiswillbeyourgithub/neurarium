@@ -850,6 +850,9 @@
 "q_0ef328ab65f6": {
 "drug:sertindole/half_life": "sonnet"
 },
+"q_0f045dbc75d2": {
+"drug:droperidol/bindings[alpha1:antagonist]": "opus"
+},
 "q_0f092dca8467": {
 "receptor:5ht7/release_modulation[heteroreceptor:raphe:gaba_interneuron:serotonin:decrease]": "opus"
 },
@@ -7817,6 +7820,9 @@
 "q_8a0968f09b4e": {
 "projection:pons->cerebellum": "opus",
 "projection:pons->cerebellum/transmitter": "opus"
+},
+"q_8a19162f7972": {
+"drug:droperidol/bindings[d2:antagonist]": "opus"
 },
 "q_8a1c870681d8": {
 "structure:locus_coeruleus_L": "sonnet",

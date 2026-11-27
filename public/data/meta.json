@@ -11475,6 +11475,7 @@
         "dosulepin": "https://en.wikipedia.org/w/index.php?oldid=1367472996",
         "doxepin": "https://en.wikipedia.org/w/index.php?oldid=1357572789",
         "doxylamine": "https://en.wikipedia.org/w/index.php?oldid=1374112637",
+        "droperidol": "https://en.wikipedia.org/w/index.php?oldid=1384038718",
         "duloxetine": "https://en.wikipedia.org/w/index.php?oldid=1371441880",
         "eisai_company": "https://en.wikipedia.org/w/index.php?oldid=1374845217",
         "eli_lilly_and_company": "https://en.wikipedia.org/w/index.php?oldid=1380023574",
@@ -12037,6 +12038,7 @@
         "2896323": "https://doi.org/10.1016/0304-3940(88)90174-7",
         "29678723": "https://doi.org/10.1016/j.ygcen.2018.04.022",
         "30361678": "https://doi.org/10.1038/s41598-018-33740-0",
+        "31707621": "https://doi.org/10.1007/s10548-019-00744-6",
         "32019": "https://doi.org/10.1002/9780470720394.ch5",
         "32769158": "https://doi.org/10.1523/eneuro.0256-20.2020",
         "32943948": "https://doi.org/10.2147/jep.s256586",
@@ -12471,8 +12473,8 @@
         "unknown": 0
       },
       "drug_bindings": {
-        "total": 1943,
-        "verified": 1737,
+        "total": 1945,
+        "verified": 1739,
         "uncertain": 189,
         "sourced": 0,
         "llm": 0,
@@ -12481,8 +12483,8 @@
         "unknown": 0
       },
       "drug_binding_action": {
-        "total": 1564,
-        "verified": 1200,
+        "total": 1566,
+        "verified": 1202,
         "uncertain": 119,
         "sourced": 0,
         "llm": 132,
@@ -12511,13 +12513,13 @@
         "unknown": 0
       },
       "drug_categories": {
-        "total": 314,
+        "total": 315,
         "verified": 307,
         "uncertain": 0,
         "sourced": 0,
-        "llm": 7,
+        "llm": 8,
         "nosource": 0,
-        "missing": 7,
+        "missing": 8,
         "unknown": 0
       },
       "drug_half_life": {
@@ -12991,10 +12993,10 @@
         "unknown": 0
       },
       "references": {
-        "total": 469,
+        "total": 470,
         "verified": 0,
         "uncertain": 0,
-        "sourced": 469,
+        "sourced": 470,
         "llm": 0,
         "nosource": 0,
         "missing": 0,
@@ -13002,22 +13004,22 @@
       }
     },
     "nodes": {
-      "total": 11266,
-      "verified": 10441,
+      "total": 11271,
+      "verified": 10445,
       "uncertain": 442,
       "sourced": 0,
-      "llm": 238,
+      "llm": 239,
       "nosource": 145,
-      "missing": 383,
+      "missing": 384,
       "unknown": 594,
-      "backed": 10883,
+      "backed": 10887,
       "pct_backed": 97
     },
     "ki_coverage": {
-      "bindings_total": 1924,
-      "bindings_with_ki": 1627,
+      "bindings_total": 1926,
+      "bindings_with_ki": 1628,
       "pct_bindings_with_ki": 85,
-      "drugs_total": 283,
+      "drugs_total": 284,
       "drugs_without_ki": 78,
       "drugs_without_ki_ids": [
         "acamprosate",

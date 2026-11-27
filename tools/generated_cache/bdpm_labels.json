@@ -489,6 +489,18 @@
    }
   ]
  },
+ "droperidol": {
+  "brands": [
+   {
+    "cis": "61646847",
+    "name": "Droleptan",
+    "quote": "DROLEPTAN"
+   }
+  ],
+  "cis": "61646847",
+  "denomination": "DROLEPTAN 1,25 mg/2,5 ml, solution injectable",
+  "why": "no plain-oral product; non-modified-release intraveineuse, brand-name product"
+ },
  "duloxetine": {
   "brands": []
  },

@@ -549,6 +549,39 @@
   ]
  },
  {
+  "drug": "droperidol",
+  "name": "Droperidol",
+  "slug": "droperidol",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "d2",
+    "target_name": "D2",
+    "origin": "prose",
+    "line": "Discovered at Janssen Pharmaceutica in 1961, droperidol is a butyrophenone which acts as a potent D 2 (dopamine receptor) antagonist with some histamine and serotonin antagonist activity.",
+    "qid": "702d13d6"
+   },
+   {
+    "target": "dopamine",
+    "target_name": "Dopamine receptors",
+    "origin": "rcp_5.1",
+    "line": "L'action inhibitrice du dropéridol sur les récepteurs dopaminergiques de la zone gâchette dite « chémosensible » de l'area postrema lui confère un effet antiémétique puissant particulièrement efficace dans la prévention et le traitement des nausées et vomissements post-opératoires et/ou induits par les analgésiques opioïdes.",
+    "corpus": "bdpm_rcp",
+    "page": "61646847",
+    "qid": "838cb6f8"
+   },
+   {
+    "target": "alpha1",
+    "target_name": "α1 adrenergic receptors",
+    "origin": "rcp_5.1",
+    "line": "Du fait de sa faible activité α1-adrénolytique, le dropéridol peut entraîner une légère hypotension et une diminution des résistances vasculaires périphériques, et éventuellement une baisse de la pression artérielle pulmonaire (notamment si elle est anormalement élevée). Le dropéridol peut également réduire l'incidence des arythmies induites par l'épinéphrine, mais il n'empêche pas la survenue d'autres formes d'arythmies cardiaques.",
+    "corpus": "bdpm_rcp",
+    "page": "61646847",
+    "qid": "1596ce31"
+   }
+  ]
+ },
+ {
   "drug": "ethosuximide",
   "name": "Ethosuximide",
   "slug": "ethosuximide",
