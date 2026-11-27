@@ -141,7 +141,7 @@
 .sim-slider input[type="range"] { flex: 1 1 90px; min-width: 70px; }
 .sim-slider-val { font-variant-numeric: tabular-nums; color: var(--text); }
 .sim-readout { color: var(--muted); font-size: 11px; margin: 2px 2px 4px; min-height: 14px; }
-.sim-legend { display: flex; flex-wrap: wrap; gap: 8px; font-size: 11px; color: var(--muted); }
+.sim-legend { display: flex; flex-wrap: wrap; gap: 8px; font-size: 11px; color: var(--text); }
 .sim-legend-item { display: inline-flex; align-items: center; gap: 4px; }
 .sim-legend-dot { width: 14px; height: 3px; border-radius: 2px; }
 /* A metabolite's line is dashed in the plot; its legend key says so with the
@@ -164,7 +164,7 @@
 .sim-grid { stroke: rgba(var(--ink), 0.12); stroke-width: 1; }
 .sim-axis { stroke: rgba(var(--ink), 0.4); stroke-width: 1; }
 .sim-axis-tick { stroke: rgba(var(--ink), 0.25); stroke-width: 1; }
-.sim-tick { fill: var(--muted); font-size: 9px; }
+.sim-tick { fill: var(--text); font-size: 10px; }
 .sim-axis-name { font-style: italic; }
 .sim-line { fill: none; stroke-width: 1.8; stroke-linejoin: round; }
 .sim-cursor { stroke: var(--accent); stroke-width: 1; stroke-dasharray: 3 3; }
@@ -174,8 +174,8 @@
 .sim-net { stroke: var(--text-strong); stroke-width: 1.6; }
 .sim-unknown-bg { fill: rgba(var(--ink), 0.06); }
 .sim-unknown-line { stroke: var(--muted); stroke-width: 1.5; }
-.sim-col { fill: var(--muted); font-size: 9px; }
-.sim-group { fill: var(--muted); font-size: 10px; font-weight: 600; }
+.sim-col { fill: var(--text); font-size: 10.5px; }
+.sim-group { fill: var(--text); font-size: 11px; font-weight: 600; }
 .sim-sysbar { fill: var(--muted); }
 /* The transparent per-column pointer target in the receptor plot. Named apart
    from the picker's .sim-hit chips: one is an SVG rect, the other a button. */

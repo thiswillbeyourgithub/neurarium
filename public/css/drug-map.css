@@ -215,7 +215,7 @@
 .dm-j-num { color: var(--sem-sourced); }
 .dm-j-lit { color: var(--sem-unknown); }
 .dm-j-punct { color: var(--muted); }
-.dm-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; font-size: 11px; color: var(--muted); }
+.dm-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; font-size: 11px; color: var(--text); }
 .dm-key { display: inline-flex; align-items: center; gap: 5px; }
 .dm-ramp {
   width: 160px;

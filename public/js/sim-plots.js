@@ -148,6 +148,7 @@ export function buildPkPlot({ lines, tEnd, t }) {
 
 const COL_W = 26;      // one target column
 const GROUP_GAP = 12;  // the breathing space between two neurotransmitter systems
+const LABEL_ANGLE = 30; // column-label tilt in degrees: shallow to read, but neighbours 26 px apart sit only COL_W*sin(angle) = 13 px apart
 // How far a stack's successive ligands step down in opacity, strongest first. It stops
 // at four because a fifth contributor to ONE receptor is already unreadable as a band,
 // and the tooltip is what answers there; every step past the fourth reuses the last.
@@ -183,9 +184,12 @@ export function buildRxPlot({ cols, showUnknown, t, segTitle, domain = null, onL
   ariaKey = "sim.rxTitle" }) {
   const M = { left: 46, right: 14, top: 12 };
   // The rotated labels need room in proportion to the longest one (an effect name is
-  // much longer than a receptor's): ~4.2 px per 9 px character at -50 degrees.
-  const longest = Math.max(0, ...cols.map((c) => String(c.name).length));
-  const plotH = 230, labelBand = Math.max(40, Math.ceil(longest * 4.2) + 16), systemBand = 20;
+  // much longer than a receptor's): a 10.5 px character is ~5.2 px wide, tilted by
+  // LABEL_ANGLE it spans charW*sin down and charW*cos to the left of its column.
+  const rad = (LABEL_ANGLE * Math.PI) / 180, charW = 5.2;
+  const labelLen = (c) => String(c.name).length * charW;
+  const longest = Math.max(0, ...cols.map(labelLen));
+  const plotH = 230, labelBand = Math.max(40, Math.ceil(longest * Math.sin(rad)) + 22), systemBand = 20;
   // Each group opens with a gap, so a column's x is its index plus the groups before it.
   let x = M.left;
   for (const col of cols) {
@@ -195,8 +199,11 @@ export function buildRxPlot({ cols, showUnknown, t, segTitle, domain = null, onL
   }
   const W = Math.max(320, x + M.right);
   const H = M.top + plotH + labelBand + systemBand;
+  // A shallow tilt reaches far left, so the first labels may start before x = 0: the
+  // viewBox opens early enough to keep them whole.
+  const minX = Math.min(0, ...cols.map((c) => c.x + COL_W / 2 - labelLen(c) * Math.cos(rad) - 4));
   const root = svg("svg", {
-    class: "sim-plot sim-rx", viewBox: `0 0 ${W} ${H}`,
+    class: "sim-plot sim-rx", viewBox: `${minX} 0 ${W - minX} ${H}`,
     preserveAspectRatio: "xMidYMid meet", role: "img",
     "aria-label": t(ariaKey),
     // Never scaled past 1.5x its drawn size: a plot with few columns in a wide pane
@@ -309,7 +316,7 @@ export function buildRxPlot({ cols, showUnknown, t, segTitle, domain = null, onL
     }));
     const label = svg("text", {
       class: onLabel ? "sim-col sim-col-link" : "sim-col", "text-anchor": "end",
-      transform: `rotate(-50 ${col.x + COL_W / 2} ${M.top + plotH + 12})`,
+      transform: `rotate(-${LABEL_ANGLE} ${col.x + COL_W / 2} ${M.top + plotH + 12})`,
       x: col.x + COL_W / 2, y: M.top + plotH + 12,
     }, col.name);
     if (onLabel) label.addEventListener("click", () => onLabel(col));
