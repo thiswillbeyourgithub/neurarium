@@ -298,6 +298,7 @@ def nm_from(row: dict) -> tuple[float, float, float] | None:
 # name-only join pooled the S-enantiomer's rows into racemic propranolol.
 LIGAND_ID_STEREO: dict[str, str] = {
     "63": "-",  # (-)-propranolol; the racemate is ligand 564
+    "5458": "+-",  # untagged "methadone" is the racemate; (-)-methadone is ligand 1605
 }
 
 
