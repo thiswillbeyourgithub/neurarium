@@ -5507,5 +5507,172 @@
     "qid": "2b4c5133"
    }
   ]
+ },
+ "carisoprodol": {
+  "name": "Carisoprodol",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "1f08f4af-37c2-49b5-a4e3-284414f866fa",
+    "line": "The mean time to peak plasma concentrations (Tmax) of carisoprodol was approximately 1.5 to 2 hours.",
+    "durations": [
+     {
+      "hours": 1.5,
+      "hours_max": 2.0
+     }
+    ],
+    "qid": "c9cdd719"
+   }
+  ]
+ },
+ "tolperisone": {
+  "name": "Tolperisone",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "tolperisone",
+    "line": "Tolperisone is absorbed nearly completely from the gut and reaches its peak blood plasma concentration after 1.5 hours.",
+    "durations": [
+     {
+      "hours": 1.5
+     }
+    ],
+    "qid": "aac091d1"
+   }
+  ]
+ },
+ "thiocolchicoside": {
+  "name": "Thiocolchicoside",
+  "candidates": [
+   {
+    "corpus": "bdpm",
+    "page": "65617572",
+    "line": "Pour ces deux métabolites, les concentrations plasmatiques maximales surviennent 1 heure après administration de thiocolchicoside.",
+    "durations": [
+     {
+      "hours": 1.0
+     }
+    ],
+    "qid": "1bcde0e4"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "65617572",
+    "line": "Pour SL59.0955 ces valeurs sont beaucoup plus faibles : Cmax d’environ 13 ng/mL et AUC allant de 15,5 ng.h/mL (AUC calculée jusqu’à 3 h) à 39,7 ng.h/mL (AUC jusqu’à 24 h).",
+    "durations": [
+     {
+      "hours": 3.0
+     },
+     {
+      "hours": 24.0
+     }
+    ],
+    "qid": "2ebc9e5f"
+   }
+  ]
+ },
+ "opicapone": {
+  "name": "Opicapone",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "a511a531-112e-43f8-a43f-5334b0efe979",
+    "line": "Following a moderate fat/moderate calorie meal, the mean peak plasma concentration (C max ) for opicapone decreased 62%, the mean overall plasma exposure (AUC) decreased 31%, and the T max was delayed by 4 hours.",
+    "durations": [
+     {
+      "hours": 4.0
+     }
+    ],
+    "qid": "2acfb967"
+   }
+  ]
+ },
+ "cenobamate": {
+  "name": "Cenobamate",
+  "candidates": [
+   {
+    "corpus": "dailymed",
+    "page": "565c2126-57ae-4e29-b443-723bbe7e2072",
+    "line": "At least 88% of XCOPRI is absorbed following oral administration, with median T max ranging from 1 to 4 hours.",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 4.0
+     }
+    ],
+    "qid": "87a048ed"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "565c2126-57ae-4e29-b443-723bbe7e2072",
+    "line": "The median T max for crushed tablets is 0.5 hours.",
+    "durations": [
+     {
+      "hours": 0.5
+     }
+    ],
+    "qid": "a94d5802"
+   }
+  ]
+ },
+ "rufinamide": {
+  "name": "Rufinamide",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "rufinamide",
+    "line": "t max = 4–6 hours",
+    "durations": [
+     {
+      "hours": 4.0,
+      "hours_max": 6.0
+     }
+    ],
+    "qid": "2a342a16"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "e2ba061a-49f0-4330-b0f0-00f2c3725625",
+    "line": "Following oral administration of rufinamide, peak plasma concentrations occur between 4 and 6 hours (T",
+    "durations": [
+     {
+      "hours": 6.0
+     }
+    ],
+    "qid": "580dc9a6"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "e2ba061a-49f0-4330-b0f0-00f2c3725625",
+    "line": "Given the dosing frequency of every 12 hours and the half-life of 6 to 10 hours, the observed steady-state peak concentration of about two to three times the peak concentration after a single dose is expected.",
+    "durations": [
+     {
+      "hours": 12.0
+     },
+     {
+      "hours": 6.0,
+      "hours_max": 10.0
+     }
+    ],
+    "qid": "b099def4"
+   }
+  ]
+ },
+ "felbamate": {
+  "name": "Felbamate",
+  "candidates": [
+   {
+    "corpus": "bdpm",
+    "page": "60223278",
+    "line": "Des études à doses uniques et multiples conduites chez des sujets sains et chez des patients épileptiques ont montré que le Tmax apparaissait 2 à 6 heures après la prise.",
+    "durations": [
+     {
+      "hours": 2.0,
+      "hours_max": 6.0
+     }
+    ],
+    "qid": "e292e8c8"
+   }
+  ]
  }
 }

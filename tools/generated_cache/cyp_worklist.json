@@ -1312,6 +1312,80 @@
    ],
    "name": "Cariprazine"
   },
+  "carisoprodol": {
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "(lead)",
+     "n": 0,
+     "page": "carisoprodol",
+     "qid": "6993d8a3",
+     "quote": "Metabolism | Liver ( CYP2C19 -mediated)"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Pharmacokinetics",
+     "n": 1,
+     "page": "carisoprodol",
+     "qid": "6cbbbd91",
+     "quote": "It is metabolized in the liver via the cytochrome P450 oxidase isozyme CYP2C19 , excreted by the kidneys, and has about an eight-hour half-life."
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Pharmacokinetics",
+     "n": 2,
+     "page": "carisoprodol",
+     "qid": "783499e2",
+     "quote": "In patients with low levels of CYP2C19 (poor metabolizers), standard doses can lead to increased concentrations of carisoprodol (up to a fourfold increase)."
+    }
+   ],
+   "name": "Carisoprodol"
+  },
+  "cenobamate": {
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "(lead)",
+     "n": 0,
+     "page": "cenobamate",
+     "qid": "73e77f2c",
+     "quote": "Metabolism | Mainly glucuronidation via UGT2B7"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Interactions",
+     "n": 1,
+     "page": "cenobamate",
+     "qid": "74fe0a77",
+     "quote": "Cenobamate induces the enzymes CYP3A4 and CYP2B6 and can therefore decrease blood concentrations of drugs that are metabolized by these enzymes (for example midazolam and bupropion , respectively)."
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Interactions",
+     "n": 2,
+     "page": "cenobamate",
+     "qid": "d2106a47",
+     "quote": "Conversely, it inhibits the enzyme CYP2C19 , potentially increasing concentrations of drugs metabolized by this enzyme (for example clobazam and phenytoin )."
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Pharmacokinetics",
+     "n": 3,
+     "page": "cenobamate",
+     "qid": "ffde0e8b",
+     "quote": "Cenobamate is inactivated mainly by glucuronidation via the enzyme UGT2B7 and to a lesser extent UGT2B4 ."
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Pharmacokinetics",
+     "n": 4,
+     "page": "cenobamate",
+     "qid": "950b75e7",
+     "quote": "The enzymes CYP2E1 , CYP2A6 , CYP2B6 , CYP2C19 and CYP3A4 play smaller roles in the drug's metabolism."
+    }
+   ],
+   "name": "Cenobamate"
+  },
   "chloral_hydrate": {
    "candidates": [
     {
@@ -2791,6 +2865,19 @@
     }
    ],
    "name": "Ethosuximide"
+  },
+  "felbamate": {
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Drug interactions",
+     "n": 0,
+     "page": "felbamate",
+     "qid": "af047631",
+     "quote": "Felbamate is an inhibitor of CYP2C19 – an enzyme involved in the metabolism of several commonly used medications."
+    }
+   ],
+   "name": "Felbamate"
   },
   "fentanyl": {
    "candidates": [
@@ -4671,6 +4758,51 @@
     }
    ],
    "name": "Ondansetron"
+  },
+  "opicapone": {
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "(lead)",
+     "n": 0,
+     "page": "opicapone",
+     "qid": "6c0b3ccb",
+     "quote": "Metabolism | Mainly sulfation , also reduction , glucuronidation , methylation"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Interactions",
+     "n": 1,
+     "page": "opicapone",
+     "qid": "cf852031",
+     "quote": "Possible pharmacokinetic interactions are with substrates of the liver enzyme CYP2C8 , such as repaglinide , and the transporter protein SLCO1B1 , such as simvastatin ."
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Pharmacokinetics",
+     "n": 2,
+     "page": "opicapone",
+     "qid": "5e1cdc3f",
+     "quote": "Opicapone is a weak inhibitor of the liver enzymes CYP1A2 , CYP2B6 , CYP2C8, and CYP2C9 ."
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Pharmacokinetics",
+     "n": 3,
+     "page": "opicapone",
+     "qid": "ec81e43f",
+     "quote": "The only CYP interaction found in studies that is somewhat likely to be relevant is that with repaglinide, which is metabolised by CYP2C8."
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "heading": "Pharmacokinetics",
+     "n": 4,
+     "page": "opicapone",
+     "qid": "31c23aa3",
+     "quote": "The metabolism of warfarin, a CYP2C9 substrate, is not measurably affected."
+    }
+   ],
+   "name": "Opicapone"
   },
   "opipramol": {
    "candidates": [

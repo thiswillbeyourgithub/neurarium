@@ -657,6 +657,161 @@
    "strength": "major"
   }
  ],
+ "carisoprodol": [
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "carisoprodol",
+     "provenance": "verified",
+     "quote": "It is metabolized in the liver via the cytochrome P450 oxidase isozyme CYP2C19 , excreted by the kidneys, and has about an eight-hour half-life."
+    }
+   ],
+   "strength": "major"
+  }
+ ],
+ "cenobamate": [
+  {
+   "enzyme": "cyp2a6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "cenobamate",
+     "provenance": "verified",
+     "quote": "The enzymes CYP2E1 , CYP2A6 , CYP2B6 , CYP2C19 and CYP3A4 play smaller roles in the drug's metabolism."
+    }
+   ],
+   "strength": "minor"
+  },
+  {
+   "enzyme": "cyp2b6",
+   "role": "inducer",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "cenobamate",
+     "provenance": "verified",
+     "quote": "Cenobamate induces the enzymes CYP3A4 and CYP2B6 and can therefore decrease blood concentrations of drugs that are metabolized by these enzymes (for example midazolam and bupropion , respectively)."
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2b6",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "cenobamate",
+     "provenance": "verified",
+     "quote": "The enzymes CYP2E1 , CYP2A6 , CYP2B6 , CYP2C19 and CYP3A4 play smaller roles in the drug's metabolism."
+    }
+   ],
+   "strength": "minor"
+  },
+  {
+   "enzyme": "cyp2c19",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "cenobamate",
+     "provenance": "verified",
+     "quote": "Conversely, it inhibits the enzyme CYP2C19 , potentially increasing concentrations of drugs metabolized by this enzyme (for example clobazam and phenytoin )."
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp2c19",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "cenobamate",
+     "provenance": "verified",
+     "quote": "The enzymes CYP2E1 , CYP2A6 , CYP2B6 , CYP2C19 and CYP3A4 play smaller roles in the drug's metabolism."
+    }
+   ],
+   "strength": "minor"
+  },
+  {
+   "enzyme": "cyp2e1",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "cenobamate",
+     "provenance": "verified",
+     "quote": "The enzymes CYP2E1 , CYP2A6 , CYP2B6 , CYP2C19 and CYP3A4 play smaller roles in the drug's metabolism."
+    }
+   ],
+   "strength": "minor"
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "inducer",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "cenobamate",
+     "provenance": "verified",
+     "quote": "Cenobamate induces the enzymes CYP3A4 and CYP2B6 and can therefore decrease blood concentrations of drugs that are metabolized by these enzymes (for example midazolam and bupropion , respectively)."
+    }
+   ]
+  },
+  {
+   "enzyme": "cyp3a4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "cenobamate",
+     "provenance": "verified",
+     "quote": "The enzymes CYP2E1 , CYP2A6 , CYP2B6 , CYP2C19 and CYP3A4 play smaller roles in the drug's metabolism."
+    }
+   ],
+   "strength": "minor"
+  },
+  {
+   "enzyme": "ugt2b4",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "cenobamate",
+     "provenance": "verified",
+     "quote": "Cenobamate is inactivated mainly by glucuronidation via the enzyme UGT2B7 and to a lesser extent UGT2B4 ."
+    }
+   ],
+   "strength": "minor"
+  },
+  {
+   "enzyme": "ugt2b7",
+   "role": "substrate",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "cenobamate",
+     "provenance": "verified",
+     "quote": "Cenobamate is inactivated mainly by glucuronidation via the enzyme UGT2B7 and to a lesser extent UGT2B4 ."
+    }
+   ],
+   "strength": "major"
+  }
+ ],
  "chloral_hydrate": [
   {
    "enzyme": "adh",
@@ -1877,6 +2032,21 @@
      "page": "ethosuximide",
      "provenance": "verified",
      "quote": "Metabolism | liver ( CYP3A4 , CYP2E1 )"
+    }
+   ]
+  }
+ ],
+ "felbamate": [
+  {
+   "enzyme": "cyp2c19",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "felbamate",
+     "provenance": "verified",
+     "quote": "Felbamate is an inhibitor of CYP2C19 – an enzyme involved in the metabolism of several commonly used medications."
     }
    ]
   }
@@ -3421,6 +3591,64 @@
      "quote": "Metabolism | Liver ( CYP3A4 , CYP1A2 , CYP2D6 )"
     }
    ]
+  }
+ ],
+ "opicapone": [
+  {
+   "enzyme": "cyp1a2",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "opicapone",
+     "provenance": "verified",
+     "quote": "Opicapone is a weak inhibitor of the liver enzymes CYP1A2 , CYP2B6 , CYP2C8, and CYP2C9 ."
+    }
+   ],
+   "strength": "weak"
+  },
+  {
+   "enzyme": "cyp2b6",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "opicapone",
+     "provenance": "verified",
+     "quote": "Opicapone is a weak inhibitor of the liver enzymes CYP1A2 , CYP2B6 , CYP2C8, and CYP2C9 ."
+    }
+   ],
+   "strength": "weak"
+  },
+  {
+   "enzyme": "cyp2c8",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "opicapone",
+     "provenance": "verified",
+     "quote": "Opicapone is a weak inhibitor of the liver enzymes CYP1A2 , CYP2B6 , CYP2C8, and CYP2C9 ."
+    }
+   ],
+   "strength": "weak"
+  },
+  {
+   "enzyme": "cyp2c9",
+   "role": "inhibitor",
+   "sources": [
+    {
+     "corpus": "wikipedia_pharm",
+     "llm": "opus",
+     "page": "opicapone",
+     "provenance": "verified",
+     "quote": "Opicapone is a weak inhibitor of the liver enzymes CYP1A2 , CYP2B6 , CYP2C8, and CYP2C9 ."
+    }
+   ],
+   "strength": "weak"
   }
  ],
  "opipramol": [

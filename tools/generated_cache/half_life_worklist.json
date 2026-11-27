@@ -6802,5 +6802,308 @@
     "qid": "b8d4d5bb"
    }
   ]
+ },
+ "carisoprodol": {
+  "name": "Carisoprodol",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "carisoprodol",
+    "line": "Elimination half-life | 2.5 hours ]",
+    "durations": [
+     {
+      "hours": 2.5
+     }
+    ],
+    "qid": "ff9ab042"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "carisoprodol",
+    "line": "^ At least 25% of the carisoprodol in the body is transformed by the liver into meprobamate , its main active metabolite, which in turn has a half-life of 10 hours.",
+    "durations": [
+     {
+      "hours": 10.0
+     }
+    ],
+    "qid": "465f4d3a"
+   }
+  ]
+ },
+ "tolperisone": {
+  "name": "Tolperisone",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "tolperisone",
+    "line": "Elimination half-life | 1st phase: 2 hrs 2nd phase: 12 hrs",
+    "durations": [
+     {
+      "hours": 2.0
+     },
+     {
+      "hours": 12.0
+     }
+    ],
+    "qid": "d13a025e"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "tolperisone",
+    "line": "the first with a half-life of two hours, and the second with a half-life of 12 hours.",
+    "durations": [
+     {
+      "hours": 12.0
+     }
+    ],
+    "qid": "ae49beeb"
+   }
+  ]
+ },
+ "thiocolchicoside": {
+  "name": "Thiocolchicoside",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "thiocolchicoside",
+    "line": "Elimination half-life | 5-6 hours",
+    "durations": [
+     {
+      "hours": 5.0,
+      "hours_max": 6.0
+     }
+    ],
+    "qid": "94e053eb"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "65617572",
+    "line": "Après administration orale de thiocolchicoside, le métabolite SL18.0740 est éliminé avec un t1/2 apparent allant de 3,2 à 7 heures, et le métabolite SL59.0955 à un t1/2 d’environ 0,8 h.",
+    "durations": [
+     {
+      "hours": 3.2,
+      "hours_max": 7.0
+     },
+     {
+      "hours": 0.8
+     }
+    ],
+    "qid": "d4fc2b48"
+   }
+  ]
+ },
+ "opicapone": {
+  "name": "Opicapone",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "opicapone",
+    "line": "Elimination half-life | 0.7 to 3.2 hours",
+    "durations": [
+     {
+      "hours": 0.7,
+      "hours_max": 3.2
+     }
+    ],
+    "qid": "eaf15033"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "opicapone",
+    "line": "It dissociates slowly from COMT, resulting in a duration of action longer than 24 hours despite its short blood plasma half-life.",
+    "durations": [
+     {
+      "hours": 24.0
+     }
+    ],
+    "qid": "e253ca80"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "opicapone",
+    "line": "Opicapone is eliminated with a terminal half-life of 0.7 to 3.2 hours.",
+    "durations": [
+     {
+      "hours": 0.7,
+      "hours_max": 3.2
+     }
+    ],
+    "qid": "b251ff14"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "opicapone",
+    "line": "The sulfate has a much longer half-life of 94 to 122 hours.",
+    "durations": [
+     {
+      "hours": 94.0,
+      "hours_max": 122.0
+     }
+    ],
+    "qid": "5fbe545e"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "a511a531-112e-43f8-a43f-5334b0efe979",
+    "line": "The mean elimination half-life of opicapone is 1 to 2 hours.",
+    "durations": [
+     {
+      "hours": 1.0,
+      "hours_max": 2.0
+     }
+    ],
+    "qid": "e7974a7f"
+   }
+  ]
+ },
+ "cenobamate": {
+  "name": "Cenobamate",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "cenobamate",
+    "line": "Elimination half-life | 50–60 hours",
+    "durations": [
+     {
+      "hours": 50.0,
+      "hours_max": 60.0
+     }
+    ],
+    "qid": "a60a531b"
+   },
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "cenobamate",
+    "line": "The terminal half-life is 50 to 60 hours.",
+    "durations": [
+     {
+      "hours": 50.0,
+      "hours_max": 60.0
+     }
+    ],
+    "qid": "1910b144"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "565c2126-57ae-4e29-b443-723bbe7e2072",
+    "line": "The apparent terminal half-life of cenobamate is 50-60 hours and apparent oral clearance is approximately 0.45-0.63 L/hour over a dose range from 100 mg/day to 400 mg/day.",
+    "durations": [
+     {
+      "hours": 50.0,
+      "hours_max": 60.0
+     }
+    ],
+    "qid": "8574ec89"
+   }
+  ]
+ },
+ "rufinamide": {
+  "name": "Rufinamide",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "rufinamide",
+    "line": "Elimination half-life | 6–10 hours",
+    "durations": [
+     {
+      "hours": 6.0,
+      "hours_max": 10.0
+     }
+    ],
+    "qid": "0b201732"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "e2ba061a-49f0-4330-b0f0-00f2c3725625",
+    "line": "Plasma half-life of rufinamide is approximately 6 to 10 hours.",
+    "durations": [
+     {
+      "hours": 6.0,
+      "hours_max": 10.0
+     }
+    ],
+    "qid": "625865b0"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "e2ba061a-49f0-4330-b0f0-00f2c3725625",
+    "line": "Given the dosing frequency of every 12 hours and the half-life of 6 to 10 hours, the observed steady-state peak concentration of about two to three times the peak concentration after a single dose is expected.",
+    "durations": [
+     {
+      "hours": 12.0
+     },
+     {
+      "hours": 6.0,
+      "hours_max": 10.0
+     }
+    ],
+    "qid": "b099def4"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "e2ba061a-49f0-4330-b0f0-00f2c3725625",
+    "line": "The plasma elimination half-life is approximately 6 to 10 hours in healthy subjects and patients with epilepsy.",
+    "durations": [
+     {
+      "hours": 6.0,
+      "hours_max": 10.0
+     }
+    ],
+    "qid": "716cde66"
+   }
+  ]
+ },
+ "felbamate": {
+  "name": "Felbamate",
+  "candidates": [
+   {
+    "corpus": "wikipedia_pharm",
+    "page": "felbamate",
+    "line": "Elimination half-life | 20–23 hours",
+    "durations": [
+     {
+      "hours": 20.0,
+      "hours_max": 23.0
+     }
+    ],
+    "qid": "a0ec1796"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "1aa40de5-c02d-49d6-8722-ed88c40c3ba6",
+    "line": "Felbamate is excreted with a terminal half-life of 20 to 23 hours, which is unaltered after multiple doses.",
+    "durations": [
+     {
+      "hours": 20.0,
+      "hours_max": 23.0
+     }
+    ],
+    "qid": "f41b7b1a"
+   },
+   {
+    "corpus": "dailymed",
+    "page": "1aa40de5-c02d-49d6-8722-ed88c40c3ba6",
+    "line": "There was a 40% to 50% reduction in total body clearance and 9 to 15 hours prolongation of half-life in renally impaired subjects compared to that in subjects with normal renal function.",
+    "durations": [
+     {
+      "hours": 9.0,
+      "hours_max": 15.0
+     }
+    ],
+    "qid": "c273581d"
+   },
+   {
+    "corpus": "bdpm",
+    "page": "60223278",
+    "line": "La demi-vie d'élimination terminale du felbamate est comprise entre 15 et 23 heures.",
+    "durations": [
+     {
+      "hours": 15.0,
+      "hours_max": 23.0
+     }
+    ],
+    "qid": "284f17bb"
+   }
+  ]
  }
 }

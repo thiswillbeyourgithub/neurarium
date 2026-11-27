@@ -419,5 +419,45 @@
   "hours_max": 20.0,
   "index": 0,
   "qid": "b8d4d5bb"
+ },
+ "carisoprodol": {
+  "index": 0,
+  "qid": "ff9ab042",
+  "hours": 2.5
+ },
+ "tolperisone": {
+  "index": 0,
+  "qid": "d13a025e",
+  "hours": 2.0
+ },
+ "thiocolchicoside": {
+  "index": 0,
+  "qid": "94e053eb",
+  "hours": 5.0,
+  "hours_max": 6.0
+ },
+ "opicapone": {
+  "index": 2,
+  "qid": "b251ff14",
+  "hours": 0.7,
+  "hours_max": 3.2
+ },
+ "cenobamate": {
+  "index": 1,
+  "qid": "1910b144",
+  "hours": 50.0,
+  "hours_max": 60.0
+ },
+ "rufinamide": {
+  "index": 1,
+  "qid": "625865b0",
+  "hours": 6.0,
+  "hours_max": 10.0
+ },
+ "felbamate": {
+  "index": 1,
+  "qid": "f41b7b1a",
+  "hours": 20.0,
+  "hours_max": 23.0
  }
 }

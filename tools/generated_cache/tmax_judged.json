@@ -946,5 +946,34 @@
   "hours": 0.333,
   "hours_max": 0.667,
   "qid": "0bf9e669"
+ },
+ "carisoprodol": {
+  "index": 0,
+  "qid": "c9cdd719",
+  "hours": 1.5,
+  "hours_max": 2.0
+ },
+ "tolperisone": {
+  "index": 0,
+  "qid": "aac091d1",
+  "hours": 1.5
+ },
+ "cenobamate": {
+  "index": 0,
+  "qid": "87a048ed",
+  "hours": 1.0,
+  "hours_max": 4.0
+ },
+ "rufinamide": {
+  "index": 0,
+  "qid": "2a342a16",
+  "hours": 4.0,
+  "hours_max": 6.0
+ },
+ "felbamate": {
+  "index": 0,
+  "qid": "e292e8c8",
+  "hours": 2.0,
+  "hours_max": 6.0
  }
 }

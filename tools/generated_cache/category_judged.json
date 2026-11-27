@@ -622,5 +622,47 @@
    "index": 2,
    "qid": "e24349e3"
   }
+ ],
+ "carisoprodol": [
+  {
+   "index": 0,
+   "qid": "b0059757"
+  }
+ ],
+ "tolperisone": [
+  {
+   "index": 3,
+   "qid": "a0811130"
+  }
+ ],
+ "thiocolchicoside": [
+  {
+   "index": 1,
+   "qid": "e32c15cd"
+  }
+ ],
+ "opicapone": [
+  {
+   "index": 1,
+   "qid": "1d4a9c0d"
+  }
+ ],
+ "cenobamate": [
+  {
+   "index": 0,
+   "qid": "9c77466b"
+  }
+ ],
+ "rufinamide": [
+  {
+   "index": 1,
+   "qid": "539c1019"
+  }
+ ],
+ "felbamate": [
+  {
+   "index": 5,
+   "qid": "25868ca4"
+  }
  ]
 }

@@ -1291,6 +1291,19 @@
      "qid": "2bada7fb"
     }
    ]
+  },
+  "carisoprodol": {
+   "name": "Carisoprodol",
+   "bindings": 1,
+   "metabolites": [],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "carisoprodol",
+     "line": "Reports from Norway have shown carisoprodol has addictive potential as a prodrug of meprobamate and/or potentiator of hydrocodone , oxycodone , codeine , and similar drugs.",
+     "qid": "93cbe03b"
+    }
+   ]
   }
  }
 }

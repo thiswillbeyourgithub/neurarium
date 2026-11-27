@@ -431,6 +431,455 @@
      "qid": "ec042707"
     }
    ]
+  },
+  "carisoprodol": {
+   "name": "Carisoprodol",
+   "categories": [
+    "other"
+   ],
+   "labels": [
+    "Other"
+   ],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "carisoprodol",
+     "line": "Drug class | Muscle relaxant",
+     "qid": "b0059757"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "carisoprodol",
+     "line": "Molecular structure of carisoprodol",
+     "qid": "8242e2ab"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "carisoprodol",
+     "line": "3D representation of a carisoprodol molecule",
+     "qid": "aae065ee"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "carisoprodol",
+     "line": "IUPAC name ( RS )-2-{methyl}-2-methylpentyl isopropylcarbamate",
+     "qid": "fe6343d5"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "carisoprodol",
+     "line": "Carisoprodol , sold under the brand name Soma among others, is an oral medication used for musculoskeletal pain.",
+     "qid": "04a7f95c"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "carisoprodol",
+     "line": "Effects generally begin within half an hour and last up to six hours.",
+     "qid": "30a6efcc"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "carisoprodol",
+     "line": "Common side effects include headache, dizziness, and sleepiness.",
+     "qid": "7d8ce61c"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "carisoprodol",
+     "line": "Serious side effects may include addiction , allergic reactions , and seizures .",
+     "qid": "a5b9d00e"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "carisoprodol",
+     "line": "In people with a sulfa allergy certain formulations may cause problems.",
+     "qid": "ff605fa4"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "carisoprodol",
+     "line": "Safety during pregnancy and breastfeeding is not clear.",
+     "qid": "bb46e5a1"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "carisoprodol",
+     "line": "Some of its effects are believed to occur after metabolic conversion into meprobamate , carisoprodol's main active metabolite.",
+     "qid": "b4961a35"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "carisoprodol",
+     "line": "Carisoprodol was approved for medical use in the United States in 1959.",
+     "qid": "4812ca00"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "carisoprodol",
+     "line": "Its approval in the European Union was withdrawn in 2008.",
+     "qid": "790b0380"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "carisoprodol",
+     "line": "It is available as a generic medication .",
+     "qid": "f060e08b"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "carisoprodol",
+     "line": "In 2019, it was the 343rd most commonly prescribed medication in the United States, with more than 800,000 prescriptions.",
+     "qid": "d5fc186d"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "carisoprodol",
+     "line": "In the United States, it was unscheduled until 2012, when it became a Schedule IV controlled substance.",
+     "qid": "47a74087"
+    }
+   ]
+  },
+  "tolperisone": {
+   "name": "Tolperisone",
+   "categories": [
+    "other"
+   ],
+   "labels": [
+    "Other"
+   ],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "tolperisone",
+     "line": "Molecular structure of tolperisone",
+     "qid": "ee7b2348"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "tolperisone",
+     "line": "3D representation of a tolperisone molecule",
+     "qid": "9f8248b1"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "tolperisone",
+     "line": "IUPAC name 2-methyl-1-(4-methylphenyl)-3-(1-piperidyl)propan-1-one",
+     "qid": "b3219da6"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "tolperisone",
+     "line": "Tolperisone (trade name Mydocalm among others) is a centrally acting skeletal muscle relaxant used for the treatment of increased muscle tone associated with neurological diseases .",
+     "qid": "a0811130"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "tolperisone",
+     "line": "It has been used since the 1960s.",
+     "qid": "109f5f61"
+    }
+   ]
+  },
+  "thiocolchicoside": {
+   "name": "Thiocolchicoside",
+   "categories": [
+    "other"
+   ],
+   "labels": [
+    "Other"
+   ],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "thiocolchicoside",
+     "line": "IUPAC name N -heptalen-7-yl]ethanamide",
+     "qid": "5b98b52b"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "thiocolchicoside",
+     "line": "Thiocolchicoside ( Muscoril , Myoril , Neoflax ) is a semi-synthetic derivative of colchicine , used as muscle relaxant with anti-inflammatory and analgesic effects.",
+     "qid": "e32c15cd"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "thiocolchicoside",
+     "line": "Its mechanism of action is unknown, but it is believed to act via antagonism of nicotinic acetylcholine receptors (nAchRs).",
+     "qid": "7265a49e"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "thiocolchicoside",
+     "line": "However, it also appears to be a competitive antagonist of GABA A and glycine receptors .",
+     "qid": "c7049dce"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "thiocolchicoside",
+     "line": "As such, it has powerful convulsant activity and should not be used in seizure -prone individuals.",
+     "qid": "1cdb685e"
+    }
+   ]
+  },
+  "opicapone": {
+   "name": "Opicapone",
+   "categories": [
+    "antiparkinson"
+   ],
+   "labels": [
+    "Antiparkinson"
+   ],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opicapone",
+     "line": "IUPAC name 5--3-nitrobenzene-1,2-diol",
+     "qid": "a0bba49d"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opicapone",
+     "line": "Opicapone , sold under the brand name Ongentys , is a medication which is administered together with levodopa in people with Parkinson's disease .",
+     "qid": "1d4a9c0d"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opicapone",
+     "line": "Opicapone is a catechol-O-methyltransferase (COMT) inhibitor .",
+     "qid": "b2903eae"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opicapone",
+     "line": "The most common side effects are dyskinesia (difficulty controlling movement), constipation , increased blood creatine kinase , hypotension / syncope , and decreased weight .",
+     "qid": "954ca95d"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opicapone",
+     "line": "Opicapone, works to restore the levels of dopamine in the parts of the brain that control movement and coordination.",
+     "qid": "22c14bb0"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opicapone",
+     "line": "It enhances the effects of levodopa, a precursor of the neurotransmitter dopamine that can be taken by mouth .",
+     "qid": "f5ec569e"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opicapone",
+     "line": "Opicapone blocks an enzyme that breaks down levodopa in the body called catechol-O-methyltransferase (COMT).",
+     "qid": "f1465aa3"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opicapone",
+     "line": "It is peripherally selective and does not inhibit COMT in the brain.",
+     "qid": "9cd4c768"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opicapone",
+     "line": "As a result of its COMT inhibition, levodopa remains active for longer.",
+     "qid": "4035fce6"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opicapone",
+     "line": "This helps to improve the symptoms of Parkinson's disease, such as stiffness and slowness of movement.",
+     "qid": "b8577133"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opicapone",
+     "line": "In June 2016, it was authorised for use in the European Union.",
+     "qid": "abeb93f7"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "opicapone",
+     "line": "It was authorised for use in the United States in April 2020.",
+     "qid": "803d9e72"
+    }
+   ]
+  },
+  "cenobamate": {
+   "name": "Cenobamate",
+   "categories": [
+    "anticonvulsant"
+   ],
+   "labels": [
+    "Anticonvulsant"
+   ],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "cenobamate",
+     "line": "Cenobamate , sold under the brand names Xcopri (US) and Ontozry (EU), is a medication used for the treatment of focal onset seizures , a kind of epilepsy , in adults.",
+     "qid": "9c77466b"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "cenobamate",
+     "line": "Cenobamate was approved for medical use in the United States in November 2019, and placed in Schedule V of the Controlled Substances Act in March 2020.",
+     "qid": "fa2e8f4a"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "cenobamate",
+     "line": "Cenobamate was authorized for medical use in the European Union in March 2021, approved for use in the UK in December 2021, and approved for use in Canada in June 2023.",
+     "qid": "a88a2438"
+    }
+   ]
+  },
+  "rufinamide": {
+   "name": "Rufinamide",
+   "categories": [
+    "anticonvulsant"
+   ],
+   "labels": [
+    "Anticonvulsant"
+   ],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "rufinamide",
+     "line": "IUPAC name 1-(2,6-Difluorobenzyl)-1 H -1,2,3-triazole-4-carboxamide",
+     "qid": "4cb67573"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "rufinamide",
+     "line": "Rufinamide is an anticonvulsant medication.",
+     "qid": "539c1019"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "rufinamide",
+     "line": "It is used in combination with other medication and therapy to treat Lennox–Gastaut syndrome and various other seizure disorders .",
+     "qid": "a45fe1df"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "rufinamide",
+     "line": "Rufinamide, a triazole derivative, was developed in 2004 by Novartis Pharma, AG , and is manufactured by Eisai .",
+     "qid": "b98c99cd"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "rufinamide",
+     "line": "Rufinamide was approved by the US Food and Drug Administration (FDA) in November 2008, as adjunctive treatment of seizures associated with Lennox-Gastaut syndrome in children four years and older and adults.",
+     "qid": "7e0b88c1"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "rufinamide",
+     "line": "Its official FDA-approved labeling does not mention use in the treatment of partial seizures inasmuch as clinical trials submitted to the FDA were marginal.",
+     "qid": "c2cb8592"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "rufinamide",
+     "line": "However, several recent clinical trials suggest that the drug has efficacy for partial seizures It is marketed under the brand name Banzel .",
+     "qid": "9ea7848c"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "rufinamide",
+     "line": "It is also marketed in the European Union under the brand name Inovelon .",
+     "qid": "e0226693"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "rufinamide",
+     "line": "It is available as a generic medication .",
+     "qid": "f060e08b"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "rufinamide",
+     "line": "The mechanism of action of rufinamide is not fully understood.",
+     "qid": "859de944"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "rufinamide",
+     "line": "There is some evidence that rufinamide can modulate the gating of voltage-gated sodium channels , a common target for antiepileptic drugs.",
+     "qid": "e39b507e"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "rufinamide",
+     "line": "A recent study indicates subtle effects on the voltage-dependence of gating and the time course of inactivation in some sodium channel isoforms that could reduce neuronal excitability.",
+     "qid": "21e80ba2"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "rufinamide",
+     "line": "However, this action cannot explain the unique spectrum of activity of rufinamide.",
+     "qid": "f4a06c76"
+    }
+   ]
+  },
+  "felbamate": {
+   "name": "Felbamate",
+   "categories": [
+    "anticonvulsant"
+   ],
+   "labels": [
+    "Anticonvulsant"
+   ],
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "felbamate",
+     "line": "This article needs more citations .",
+     "qid": "d8072db2"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "felbamate",
+     "line": "Please help improve this article by adding citations to reliable sources .",
+     "qid": "975f01e5"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "felbamate",
+     "line": "Unsourced material may be challenged and removed .",
+     "qid": "34cb7efd"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "felbamate",
+     "line": "Find sources: \"Felbamate\" – news · newspapers · books · scholar · JSTOR ( June 2026 ) ( Learn how and when to remove this message )",
+     "qid": "1631f02e"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "felbamate",
+     "line": "IUPAC name (3-carbamoyloxy-2-phenylpropyl) carbamate",
+     "qid": "f60c2b7c"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "felbamate",
+     "line": "Felbamate sold under the brand name Felbatol , is an anticonvulsant used in the treatment of epilepsy .",
+     "qid": "25868ca4"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "felbamate",
+     "line": "It is used to treat partial seizures (with and without generalization) in adults and partial and generalized seizures associated with Lennox–Gastaut syndrome in children.",
+     "qid": "f9517361"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "felbamate",
+     "line": "However, an increased risk of potentially fatal aplastic anemia or liver failure limit the drug's usage to severe refractory epilepsy.",
+     "qid": "594a12dd"
+    }
+   ]
   }
  }
 }

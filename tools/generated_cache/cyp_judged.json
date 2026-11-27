@@ -4058,5 +4058,121 @@
    "strength": "minor",
    "qid": "3753a3cc"
   }
+ ],
+ "carisoprodol": [
+  {
+   "enzyme": "cyp2c19",
+   "n": 1,
+   "role": "substrate",
+   "strength": "major",
+   "qid": "6cbbbd91"
+  }
+ ],
+ "opicapone": [
+  {
+   "enzyme": "cyp1a2",
+   "n": 2,
+   "role": "inhibitor",
+   "strength": "weak",
+   "qid": "5e1cdc3f"
+  },
+  {
+   "enzyme": "cyp2b6",
+   "n": 2,
+   "role": "inhibitor",
+   "strength": "weak",
+   "qid": "5e1cdc3f"
+  },
+  {
+   "enzyme": "cyp2c8",
+   "n": 2,
+   "role": "inhibitor",
+   "strength": "weak",
+   "qid": "5e1cdc3f"
+  },
+  {
+   "enzyme": "cyp2c9",
+   "n": 2,
+   "role": "inhibitor",
+   "strength": "weak",
+   "qid": "5e1cdc3f"
+  }
+ ],
+ "cenobamate": [
+  {
+   "enzyme": "cyp3a4",
+   "n": 1,
+   "role": "inducer",
+   "qid": "74fe0a77"
+  },
+  {
+   "enzyme": "cyp2b6",
+   "n": 1,
+   "role": "inducer",
+   "qid": "74fe0a77"
+  },
+  {
+   "enzyme": "cyp2c19",
+   "n": 2,
+   "role": "inhibitor",
+   "qid": "d2106a47"
+  },
+  {
+   "enzyme": "ugt2b7",
+   "n": 3,
+   "role": "substrate",
+   "strength": "major",
+   "qid": "ffde0e8b"
+  },
+  {
+   "enzyme": "ugt2b4",
+   "n": 3,
+   "role": "substrate",
+   "strength": "minor",
+   "qid": "ffde0e8b"
+  },
+  {
+   "enzyme": "cyp2e1",
+   "n": 4,
+   "role": "substrate",
+   "strength": "minor",
+   "qid": "950b75e7"
+  },
+  {
+   "enzyme": "cyp2a6",
+   "n": 4,
+   "role": "substrate",
+   "strength": "minor",
+   "qid": "950b75e7"
+  },
+  {
+   "enzyme": "cyp2b6",
+   "n": 4,
+   "role": "substrate",
+   "strength": "minor",
+   "qid": "950b75e7"
+  },
+  {
+   "enzyme": "cyp2c19",
+   "n": 4,
+   "role": "substrate",
+   "strength": "minor",
+   "qid": "950b75e7"
+  },
+  {
+   "enzyme": "cyp3a4",
+   "n": 4,
+   "role": "substrate",
+   "strength": "minor",
+   "qid": "950b75e7"
+  }
+ ],
+ "felbamate": [
+  {
+   "enzyme": "cyp2c19",
+   "n": 0,
+   "role": "inhibitor",
+   "qid": "af047631"
+  }
  ]
 }
