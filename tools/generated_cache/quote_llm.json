@@ -296,6 +296,9 @@
 "q_0570bda2d992": {
 "drug:sulpiride/excretion[renal_process:filtration]": "opus"
 },
+"q_057e85bb302c": {
+"drug:methohexital/categories": "opus"
+},
 "q_058417e5da43": {
 "drug:citalopram/brands[Celexa]": "sonnet"
 },
@@ -595,6 +598,9 @@
 },
 "q_0a5217b8530d": {
 "drug:naloxone/excretion[route:renal]": "opus"
+},
+"q_0a53255646f2": {
+"drug:alfentanil/categories": "opus"
 },
 "q_0a5934ee3f11": {
 "drug:valbenazine/brands[Ingrezza]": "sonnet"
@@ -1976,6 +1982,9 @@
 "q_20edaa302bc7": {
 "target:glutamate/classification": "sonnet"
 },
+"q_20f4bbb1c3b7": {
+"drug:alfentanil/excretion[unchanged:urine]": "opus"
+},
 "q_20ffe1a548c7": {
 "receptor:5ht7/release_modulation[heteroreceptor:raphe:gaba_interneuron:serotonin:decrease]": "opus"
 },
@@ -2043,6 +2052,9 @@
 "q_2201b348ba37": {
 "drug:citalopram/seizure_threshold[lowers]": "opus",
 "drug:citalopram/seizure_threshold[possibly_lowers]": "opus"
+},
+"q_2201fee0adfb": {
+"drug:sufentanil/categories": "opus"
 },
 "q_22205c66a6f3": {
 "drug:propofol/seizure_threshold[lowers]": "opus"
@@ -2490,6 +2502,10 @@
 "q_2946e7cb7bd7": {
 "drug:clonidine/excretion[route:renal]": "opus"
 },
+"q_2948503a6c55": {
+"drug:desflurane/workup[blood_pressure:during]": "opus",
+"drug:desflurane/workup[heart_rate:during]": "opus"
+},
 "q_295a3509450b": {
 "drug:clonazepam/excretion[route:renal]": "opus"
 },
@@ -2670,6 +2686,9 @@
 "q_2c7985760623": {
 "drug:prazepam/bindings[gaba_a:pam]": "sonnet"
 },
+"q_2c8802d0b080": {
+"drug:remimazolam/half_life": "opus"
+},
 "q_2c8a2818f1b1": {
 "drug:iproniazid/first_approval": "opus"
 },
@@ -2693,6 +2712,9 @@
 },
 "q_2d5f547776b4": {
 "receptor:5ht2c/effects[antagonism:weight_gain]": "opus"
+},
+"q_2d61cba53241": {
+"drug:alfentanil/originator": "opus"
 },
 "q_2d8aea981e9d": {
 "receptor:ampa/effects[antagonism:anticonvulsant]": "opus"
@@ -3504,6 +3526,10 @@
 "drug:loflazepate/metabolites[n_desalkylflurazepam]": "opus",
 "drug:loflazepate/prodrug": "opus"
 },
+"q_3c52007fc99e": {
+"drug:desflurane/categories": "opus",
+"drug:desflurane/first_approval": "opus"
+},
 "q_3c5f8d310370": {
 "receptor:kappa/release_modulation[heteroreceptor:-:presynaptic_terminal:dopamine:decrease]": "opus"
 },
@@ -3815,6 +3841,9 @@
 },
 "q_41c6793cd88f": {
 "receptor:beta2/effects[agonism:cardiovascular]": "opus"
+},
+"q_41c75713b6b4": {
+"drug:remifentanil/half_life": "opus"
 },
 "q_41ca7968b335": {
 "drug:asenapine/bindings[d2:antagonist]": "sonnet"
@@ -4235,6 +4264,7 @@
 "drug:lithium/workup[ecg:before]": "opus"
 },
 "q_49425dc36fb8": {
+"drug:alfentanil/originator/now": "opus",
 "drug:benperidol/originator/now": "opus",
 "drug:bromperidol/originator/now": "opus",
 "drug:domperidone/originator/now": "opus",
@@ -4247,7 +4277,8 @@
 "drug:ketanserin/originator/now": "opus",
 "drug:penfluridol/originator/now": "opus",
 "drug:pimozide/originator/now": "opus",
-"drug:pipamperone/originator/now": "opus"
+"drug:pipamperone/originator/now": "opus",
+"drug:sufentanil/originator/now": "opus"
 },
 "q_49589ed1614c": {
 "drug:loprazolam/brands[Dormonoct]": "sonnet"
@@ -4497,6 +4528,9 @@
 "q_4d65f11ee108": {
 "drug:loflazepate/bindings[gaba_a:pam]": "sonnet"
 },
+"q_4d6e7a6bdfb6": {
+"drug:sufentanil/originator": "opus"
+},
 "q_4d7760becebe": {
 "receptor:mglur3/locations[hippocampus]": "sonnet",
 "receptor:mglur3/locations[thalamus]": "sonnet"
@@ -4517,6 +4551,9 @@
 },
 "q_4db7ffbe7575": {
 "drug:carbamazepine/metabolites[carbamazepine_10_11_epoxide]/formed_by[cyp3a4]": "sonnet"
+},
+"q_4de4f00f7ee8": {
+"drug:remifentanil/sleep[rem_suppression]": "opus"
 },
 "q_4de92a1d1652": {
 "drug:nitrazepam/half_life": "sonnet"
@@ -4995,6 +5032,9 @@
 "drug:ethanol/bindings[gaba_a:pam]": "sonnet",
 "drug:ethanol/bindings[gaba_b:pam]": "sonnet"
 },
+"q_56bd3b9d29f7": {
+"drug:remifentanil/categories": "opus"
+},
 "q_56fc8e37ecca": {
 "drug:tiagabine/excretion[route:fecal]": "opus",
 "drug:tiagabine/excretion[route:renal]": "opus",
@@ -5243,6 +5283,9 @@
 "q_5c731f3d6776": {
 "drug:chlorpromazine/bindings[h2:antagonist]": "sonnet",
 "drug:chlorpromazine/bindings[m2:antagonist]": "sonnet"
+},
+"q_5c8e8e0aba96": {
+"drug:remifentanil/excretion[route:renal]": "opus"
 },
 "q_5cd56743b3e8": {
 "receptor:nmda/effects[antagonism:antidepressant]": "opus"
@@ -7332,6 +7375,9 @@
 "q_7fe34f8049d2": {
 "drug:lacosamide/excretion[route:renal]": "opus"
 },
+"q_7ffa761a1528": {
+"drug:alfentanil/half_life": "opus"
+},
 "q_7ffedfa00dd1": {
 "receptor:d2/locations[caudate]": "sonnet",
 "receptor:d2/locations[putamen]": "sonnet"
@@ -7927,6 +7973,9 @@
 "q_8a736b9681ce": {
 "drug:sumatriptan/first_approval": "opus"
 },
+"q_8a8fee7aabe1": {
+"drug:alfentanil/categories": "opus"
+},
 "q_8aace6b47e86": {
 "drug:lormetazepam/categories": "sonnet"
 },
@@ -8062,6 +8111,9 @@
 "drug:asenapine/bindings[d3:antagonist]": "sonnet",
 "drug:asenapine/bindings[d4:antagonist]": "sonnet",
 "drug:asenapine/bindings[h2:antagonist]": "sonnet"
+},
+"q_8c7c4f990855": {
+"drug:remimazolam/first_approval": "opus"
 },
 "q_8c8dbdf40de6": {
 "receptor:5ht3/locations[amygdala]": "sonnet",
@@ -8299,6 +8351,9 @@
 },
 "q_909dc7c26aed": {
 "drug:stiripentol/bindings[gaba_a:pam]": "opus"
+},
+"q_90b99d65e401": {
+"drug:remifentanil/first_approval": "opus"
 },
 "q_90c0a3380d7e": {
 "drug:zuclopenthixol/brands[Clopixol-Acuphase]": "sonnet"
@@ -8710,6 +8765,10 @@
 },
 "q_97b5f6304f38": {
 "drug:armodafinil/bindings[dat:reuptake_inhibitor]": "sonnet"
+},
+"q_97e9939e8c9a": {
+"drug:desflurane/enzymes[cyp2e1:substrate]": "opus",
+"drug:desflurane/enzymes[cyp2e1:substrate]/strength": "opus"
 },
 "q_97f42d8e24b2": {
 "drug:eslicarbazepine_acetate/metabolites[eslicarbazepine]": "opus"
@@ -9459,6 +9518,9 @@
 },
 "q_a301f47d59ff": {
 "drug:ramelteon/tmax": "sonnet"
+},
+"q_a302db674963": {
+"drug:remifentanil/categories": "opus"
 },
 "q_a30656cc557f": {
 "drug:clotiazepam/seizure_threshold[withdrawal]": "opus"
@@ -10360,6 +10422,9 @@
 },
 "q_b3eabdef7040": {
 "drug:lamotrigine/tmax": "sonnet"
+},
+"q_b3edab5da733": {
+"drug:methohexital/excretion[route:fecal]": "opus"
 },
 "q_b40b56b49785": {
 "drug:pregabalin/seizure_threshold[withdrawal]": "opus"
@@ -11962,6 +12027,9 @@
 "q_cec45188267d": {
 "drug:methylphenidate_dl/brands[Daytrana]": "sonnet"
 },
+"q_cecfd48a3c4b": {
+"drug:remimazolam/categories": "opus"
+},
 "q_ceed55698d41": {
 "drug:methadone/workup[ecg:before]": "opus",
 "drug:methadone/workup[ecg:during]": "opus"
@@ -11981,6 +12049,7 @@
 "drug:indalpine/first_approval": "opus"
 },
 "q_cf4579ca662f": {
+"drug:alfentanil/originator_country": "opus",
 "drug:benperidol/originator_country": "opus",
 "drug:bromperidol/originator_country": "opus",
 "drug:domperidone/originator_country": "opus",
@@ -11993,7 +12062,8 @@
 "drug:ketanserin/originator_country": "opus",
 "drug:penfluridol/originator_country": "opus",
 "drug:pimozide/originator_country": "opus",
-"drug:pipamperone/originator_country": "opus"
+"drug:pipamperone/originator_country": "opus",
+"drug:sufentanil/originator_country": "opus"
 },
 "q_cf4af48bd668": {
 "drug:moclobemide/tmax": "sonnet"
@@ -12306,6 +12376,9 @@
 },
 "q_d554071abfff": {
 "receptor:h3/effects[antagonism:wakefulness]": "opus"
+},
+"q_d557ea26f085": {
+"drug:alfentanil/excretion[route:renal]": "opus"
 },
 "q_d5807d49aea7": {
 "drug:quazepam/bindings[gaba_a:pam]": "sonnet"
@@ -13667,6 +13740,9 @@
 "q_ed9aedaf285b": {
 "drug:bromazepam/seizure_threshold[withdrawal]": "opus"
 },
+"q_ed9ec43146fb": {
+"drug:remifentanil/brands[Ultiva]": "opus"
+},
 "q_edacd7b199a0": {
 "drug:naltrexone/workup[liver_function:before]": "opus",
 "drug:naltrexone/workup[liver_function:during]": "opus"
@@ -14552,6 +14628,9 @@
 "q_fc323f7350cc": {
 "receptor:kappa/effects[agonism:analgesia]": "opus"
 },
+"q_fc41f5e3220c": {
+"drug:desflurane/categories": "opus"
+},
 "q_fc439ad06b60": {
 "receptor:kainate/classification[sign]": "opus"
 },
@@ -14593,6 +14672,9 @@
 "q_fc90954e1b6a": {
 "drug:clozapine/bindings[5ht1a:antagonist]": "sonnet",
 "drug:clozapine/bindings[5ht2c:antagonist]": "sonnet"
+},
+"q_fc93594eca09": {
+"drug:sufentanil/half_life": "opus"
 },
 "q_fca19889661b": {
 "drug:tasimelteon/excretion[unchanged:urine]": "opus"

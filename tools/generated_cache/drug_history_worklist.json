@@ -8094,6 +8094,20 @@
      "line": "It was developed in the 1980s and approved by the FDA in 1992 as a faster acting and clearing inhalant anesthetic compared to previously used inhalant anesthetics.",
      "context": "Desflurane , sold under the brand name Suprane , is a highly fluorinated methyl ethyl ether used for induction and maintenance of general anesthesia .",
      "qid": "f873ec6c"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "desflurane",
+     "line": "Le desflurane est un des plus récents anesthésiques halogénés : il a été introduit dans les années 1980.",
+     "context": "Son potentiel de réchauffement global étant de 2720⁣ , la société française d'anesthésie et de réanimation (SFAR) recommande de réduire son utilisation au profit d'alternatives bas-carbone .",
+     "qid": "07f7182c"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "desflurane",
+     "line": "Cependant, en raison de son puissant effet de serre, et de l'existence d'alternatives efficaces et parfois moins chères, son utilisation a été interdite en 2026 en Écosse, dans l’Union européenne, à Terre-Neuve-et-Labrador et au Québec .",
+     "context": "Le desflurane est un des plus récents anesthésiques halogénés : il a été introduit dans les années 1980.",
+     "qid": "9daf73b7"
     }
    ]
   },
