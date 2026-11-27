@@ -1,6 +1,28 @@
 {
   "versions": [
     {
+      "version": "3.186.0",
+      "date": "2026-11-27",
+      "entries": [
+        {
+          "category": "added",
+          "text": "New Networks section (beta): the six large-scale brain networks (default mode, salience, central executive, dorsal attention, sensorimotor, visual), each a set of functional areas; focusing one lights the structures it spans and draws every member area at once, with its own panel, search entries and node browser rows",
+          "commits": [
+            "c3e858ad",
+            "aa1e28bd"
+          ]
+        },
+        {
+          "category": "data",
+          "text": "The networks are sourced from Kandel and from the Uddin, Yeo and Spreng 2019 taxonomy review (Europe PMC abstract), every quote checked on its page and judged",
+          "commits": [
+            "c3e858ad",
+            "95670530"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.185.0",
       "date": "2026-11-27",
       "entries": [
