@@ -953,5 +953,24 @@
    "qid": "1a9400ff",
    "effect": "withdrawal"
   }
+ ],
+ "fosphenytoin": [
+  {
+   "index": 35,
+   "qid": "a9006943",
+   "effect": "withdrawal"
+  },
+  {
+   "index": 42,
+   "qid": "fc4617a5",
+   "effect": "raises"
+  }
+ ],
+ "ganaxolone": [
+  {
+   "index": 0,
+   "qid": "55c85dc0",
+   "effect": "raises"
+  }
  ]
 }

@@ -661,6 +661,30 @@
     ]
    }
   ],
+  "fosphenytoin": [
+   {
+    "effect": "withdrawal",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60771794",
+      "provenance": "verified",
+      "quote": "Un arrêt brutal des antiépileptiques peut augmenter la fréquence des crises et provoquer un état de mal épileptique."
+     }
+    ]
+   },
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60771794",
+      "provenance": "verified",
+      "quote": "La fosphénytoïne est une pro-drogue de la phénytoïne et ses effets antiépileptiques sont imputables à la phénytoïne."
+     }
+    ]
+   }
+  ],
   "gabapentin": [
    {
     "effect": "raises",
@@ -683,6 +707,19 @@
       "page": "63358402",
       "provenance": "verified",
       "quote": "Des crises convulsives ont été rapportées avec la galantamine (voir rubrique 4.8). L’activité épileptiforme peut également être une manifestation de la maladie d’Alzheimer. Une augmentation de l’activité cholinergique peut aggraver les symptômes liés aux troubles extrapyramidaux (voir rubrique 4.8)."
+     }
+    ]
+   }
+  ],
+  "ganaxolone": [
+   {
+    "effect": "raises",
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "EMEA-H-C-005825",
+      "provenance": "verified",
+      "quote": "ZTALMY est indiqué dans le traitement adjuvant des crises d’épilepsie associées au trouble du déficit en kinases dépendantes des cyclines 5 (CDKL5) (CDD) chez les patients âgés de 2 à 17 ans. Ce traitement peut être poursuivi chez les patients âgés de 18 ans et plus."
      }
     ]
    }

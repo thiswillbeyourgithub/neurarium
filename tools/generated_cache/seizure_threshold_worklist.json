@@ -5524,5 +5524,445 @@
     "qid": "7ce7260d"
    }
   ]
+ },
+ "fosphenytoin": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.1",
+    "quote": "pour le contrôle de l'état de mal épileptique de type tonico-clonique (grand mal) (voir rubrique 4.2).",
+    "qid": "b9895a2a"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.1",
+    "quote": "pour la prévention et le traitement des crises convulsives survenant après une intervention neurochirurgicale et/ou un traumatisme crânien.",
+    "qid": "6f27dd4a"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.2",
+    "quote": "PRODILANTIN ne doit pas être administré par voie IM dans les situations d'urgence telles que l'état de mal épileptique.",
+    "qid": "1b10c2a6"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.2",
+    "quote": "Mal épileptique",
+    "qid": "4abb1c9f"
+   },
+   {
+    "index": 4,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.2",
+    "quote": "A.1.Etat de mal épileptique",
+    "qid": "ea6d361b"
+   },
+   {
+    "index": 5,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.2",
+    "quote": "L’administration intramusculaire (IM) de fosphénytoïne n’est pas recommandée pour traiter l'état de mal épileptique.",
+    "qid": "810a5323"
+   },
+   {
+    "index": 6,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.2",
+    "quote": "Pour maîtriser rapidement les crises en cas d'état de mal épileptique, administrer du diazépam ou du lorazépam par voie IV avant d'administrer de la fosphénytoïne.",
+    "qid": "3c7e68ee"
+   },
+   {
+    "index": 7,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.2",
+    "quote": "Si l’administration de fosphénytoïne ne permet pas d’arrêter les crises, il faut envisager d'utiliser d'autres antiépileptiques.",
+    "qid": "0a4e1d62"
+   },
+   {
+    "index": 8,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.2",
+    "quote": "Tableau 1: Dose de charge à administrer dans l’état de mal épileptique chez l’adulte",
+    "qid": "510f2ec8"
+   },
+   {
+    "index": 9,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.2",
+    "quote": "Tableau 1 DOSE DE CHARGE : état de mal épileptique (Adultes)",
+    "qid": "ce8da1bb"
+   },
+   {
+    "index": 10,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.2",
+    "quote": "Tableau 2 : Dose d’entretien à administrer dans l’état de mal épileptique chez l’adulte",
+    "qid": "7779b4cb"
+   },
+   {
+    "index": 11,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.2",
+    "quote": "Tableau 2 DOSE D’ENTRETIEN : état de mal épileptique (Adultes)",
+    "qid": "44f7328b"
+   },
+   {
+    "index": 12,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.2",
+    "quote": "A.2. Traitement ou prévention des crises d'épilepsie",
+    "qid": "6d06ffa0"
+   },
+   {
+    "index": 13,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.2",
+    "quote": "Tableau 3: Dose de charge à administrer dans le traitement ou la prévention des crises d’épilepsie chez l’adulte",
+    "qid": "3dbd54f7"
+   },
+   {
+    "index": 14,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.2",
+    "quote": "Tableau 3 DOSE DE CHARGE : traitement ou prévention des crises d’épilepsie (Adultes)",
+    "qid": "ec148d07"
+   },
+   {
+    "index": 15,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.2",
+    "quote": "Tableau 4 : Dose d’entretien à administrer dans le traitement ou la prévention des crises d’épilepsie chez l’adulte",
+    "qid": "3629b297"
+   },
+   {
+    "index": 16,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.2",
+    "quote": "Tableau 4 DOSE D’ENTRETIEN : traitement ou prévention des crises d’épilepsie (Adultes)",
+    "qid": "90286cbc"
+   },
+   {
+    "index": 17,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.2",
+    "quote": "B.1. Etat de mal épileptique",
+    "qid": "ff8c3e82"
+   },
+   {
+    "index": 18,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.2",
+    "quote": "Pour maîtriser rapidement les crises en cas d'état de mal épileptique, il faut administrer du diazépam ou du lorazépam par voie IV avant administration de fosphénytoïne.",
+    "qid": "fa26a18c"
+   },
+   {
+    "index": 19,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.2",
+    "quote": "Si l’administration de fosphénytoïne ne permet pas de contrôler les crises, il faut envisager d'utiliser d'autres antiépileptiques.",
+    "qid": "076bd66e"
+   },
+   {
+    "index": 20,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.2",
+    "quote": "Tableau 6: Dose de charge à administrer dans l’état de mal épileptique chez l’enfant âgé de 5 ans et plus",
+    "qid": "a8939991"
+   },
+   {
+    "index": 21,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.2",
+    "quote": "Tableau 6 DOSE DE CHARGE : état de mal épileptique (enfants âgés de 5 ans et plus)",
+    "qid": "db292aa0"
+   },
+   {
+    "index": 22,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.2",
+    "quote": "Tableau 7: Dose d’entretien à administrer dans l’état de mal épileptique chez l’enfant âgé de 5 ans et plus",
+    "qid": "7d302093"
+   },
+   {
+    "index": 23,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.2",
+    "quote": "Tableau 7 DOSE D’ENTRETIEN : état de mal épileptique (enfants âgés de 5 ans et plus)",
+    "qid": "5e818ffd"
+   },
+   {
+    "index": 24,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.2",
+    "quote": "B.2. Traitement ou prévention des crises d’épilepsie",
+    "qid": "cb236bb4"
+   },
+   {
+    "index": 25,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.2",
+    "quote": "Tableau 8 : Dose de charge à administrer dans le traitement ou la prévention des crises d’épilepsie chez l’enfant âgé de 5 ans et plus",
+    "qid": "505d5782"
+   },
+   {
+    "index": 26,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.2",
+    "quote": "Tableau 8 DOSE DE CHARGE : traitement ou prévention des crises d’épilepsie (enfants âgés de 5 ans et plus)",
+    "qid": "750da2b3"
+   },
+   {
+    "index": 27,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.2",
+    "quote": "Tableau 9: Dose d’entretien à administrer dans le traitement ou la prévention des crises d’épilepsie chez l’enfant âgé de 5 ans et plus",
+    "qid": "bdc3ff65"
+   },
+   {
+    "index": 28,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.2",
+    "quote": "Tableau 9 DOSE D’ENTRETIEN : traitement ou prévention des crises d’épilepsie (enfants âgés de 5 ans et plus)",
+    "qid": "292e494a"
+   },
+   {
+    "index": 29,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.2",
+    "quote": "Sauf en cas d'état de mal épileptique, il peut être nécessaire de diminuer la dose de charge et/ou le débit de la perfusion et d'utiliser des doses d'entretien de fosphénytoïne plus faibles ou moins fréquentes en cas de maladie rénale et/ou hépatique et en cas d'hypoalbuminémie. Il faut envisager une réduction de 10 à 25 % de la dose ou du débit, et une surveillance médicale attentive est nécessaire.",
+    "qid": "0f3e8713"
+   },
+   {
+    "index": 30,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.2",
+    "quote": "Un effet antiépileptique optimal sans signes cliniques de toxicité est généralement obtenu pour des concentrations plasmatiques totales de phénytoïne comprises entre 10 et 20 mg/l (40 et 80 micromoles/l) ou pour des concentrations plasmatiques de phénytoïne libre comprises entre 1 et 2 mg/l (4 et 8 micromoles/l).",
+    "qid": "1a85e8b3"
+   },
+   {
+    "index": 31,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.4",
+    "quote": "La phénytoïne est inefficace sur les épilepsies de type absences. S'il existe en même temps des crises tonico-cloniques et des absences, il est recommandé d'utiliser une association de médicaments.",
+    "qid": "4920990d"
+   },
+   {
+    "index": 32,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.4",
+    "quote": "Epilepsies de type absences",
+    "qid": "0d438eab"
+   },
+   {
+    "index": 33,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.4",
+    "quote": "La phénytoïne est inefficace sur les épilepsies de type absences. S’il existe en même temps des crises tonico-cloniques et des absences, il est recommandé d'utiliser une association de médicaments.",
+    "qid": "eaf3c27e"
+   },
+   {
+    "index": 34,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.4",
+    "quote": "Crises ou état de mal épileptique déclenchés par le sevrage",
+    "qid": "fc6c7d49"
+   },
+   {
+    "index": 35,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.4",
+    "quote": "Un arrêt brutal des antiépileptiques peut augmenter la fréquence des crises et provoquer un état de mal épileptique.",
+    "qid": "a9006943"
+   },
+   {
+    "index": 36,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.4",
+    "quote": "Des idées et un comportement suicidaires ont été rapportés chez des patients traités avec des antiépileptiques dans plusieurs indications. Une méta-analyse d’essais randomisés, contrôlés contre placebo de médicaments antiépileptiques a également montré un risque légèrement accru d’idées et de comportements suicidaires. Le mécanisme de ce risque n’est pas connu et les données disponibles n’excluent pas la possibilité d’un risque plus élevé pour la fosphénytoïne.",
+    "qid": "7e0d26bb"
+   },
+   {
+    "index": 37,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.4",
+    "quote": "Le syndrome d’hypersensibilité (SHS) ou réaction médicamenteuse avec éosinophilie et symptômes systémiques (DRESS) a été signalé chez les patients prenant des antiépileptiques, y compris la phénytoïne et la fosphénytoïne. Certaines de ces réactions ont provoqué la mort ou engagé le pronostic vital.",
+    "qid": "602b0097"
+   },
+   {
+    "index": 38,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.4",
+    "quote": "Généralement mais pas toujours, le SHS/DRESS inclut une fièvre, une éruption cutanée et/ou une lymphadénopathie en association avec d’autres atteintes d’organes, comme une hépatite, une néphrite, des anomalies hématologiques, une myocardite, une myosite ou une pneumopathie. Les premiers symptômes peuvent ressembler à une infection virale aiguë. D’autres manifestations courantes incluent une arthralgie, une jaunisse, une hépatomégalie, une leucocytose et une éosinophilie. L’intervalle entre la première exposition au médicament et les symptômes est généralement de 2 à 4 semaines de traitement, mais ils ont également été rapportés chez des patients traités par des anticonvulsivants pendant 3 mois ou plus. Si ces signes et symptômes apparaissent, le patient doit être examiné immédiatement. La fosphénytoïne doit être arrêtée s’il est impossible d’établir une autre étiologie des signes et symptômes.",
+    "qid": "8ec3869f"
+   },
+   {
+    "index": 39,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.4",
+    "quote": "L’incidence de SHS/DRESS est plus élevée chez les patients noirs, les patients qui ont présenté ce syndrome dans le passé (avec la phénytoïne, la fosphénytoïne ou d’autres antiépileptiques), les patients ayant des antécédents familiaux et les patients immunodéprimés. Le syndrome est plus sévère chez les individus déjà sensibilisés.",
+    "qid": "ec58d404"
+   },
+   {
+    "index": 40,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "4.4",
+    "quote": "On a signalé des adénopathies (locales ou généralisées), notamment hyperplasie ganglionnaire bénigne, pseudolymphome, lymphome et maladie de Hodgkin, sous traitement par la phénytoïne mais le lien de causalité n'est pas établi. Avant d'arrêter un traitement par la fosphénytoïne, il faut donc exclure d'autres types de pathologie ganglionnaire. Les adénopathies peuvent survenir avec ou sans symptômes et signes évoquant un SHS/DRESS décrit ci-dessus. Dans tous les cas, en présence d'adénopathies, un suivi prolongé doit être mis en œuvre et il faut s'efforcer de maîtriser les crises d'épilepsie par d'autres antiépileptiques.",
+    "qid": "5083ac6e"
+   },
+   {
+    "index": 41,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "5.1",
+    "quote": "Classe pharmacothérapeutique : anti-épileptique, Code ATC : N03AB05.",
+    "qid": "584e5b8a"
+   },
+   {
+    "index": 42,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "5.1",
+    "quote": "La fosphénytoïne est une pro-drogue de la phénytoïne et ses effets antiépileptiques sont imputables à la phénytoïne.",
+    "qid": "fc4617a5"
+   },
+   {
+    "index": 43,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "5.1",
+    "quote": "Les effets antiépileptiques de la phénytoïne sont probablement dus aux mécanismes cellulaires suivants : modulation des canaux sodiques voltage-dépendants des neurones, inhibition du flux de calcium à travers les membranes des neurones, modulation des canaux calciques voltage-dépendants des neurones et stimulation de l'activité sodium-potassium ATPase des neurones et cellules gliales.",
+    "qid": "5506051d"
+   },
+   {
+    "index": 44,
+    "corpus": "bdpm_rcp",
+    "page": "60771794",
+    "section": "5.1",
+    "quote": "La modulation des canaux sodiques est probablement le principal mécanisme de l'activité antiépileptique car il est partagé par plusieurs antiépileptiques autres que la phénytoïne.",
+    "qid": "e63041e7"
+   }
+  ]
+ },
+ "ganaxolone": {
+  "candidates": [
+   {
+    "index": 0,
+    "corpus": "bdpm_rcp",
+    "page": "EMEA-H-C-005825",
+    "section": "4.1",
+    "quote": "ZTALMY est indiqué dans le traitement adjuvant des crises d’épilepsie associées au trouble du déficit en kinases dépendantes des cyclines 5 (CDKL5) (CDD) chez les patients âgés de 2 à 17 ans. Ce traitement peut être poursuivi chez les patients âgés de 18 ans et plus.",
+    "qid": "55c85dc0"
+   },
+   {
+    "index": 1,
+    "corpus": "bdpm_rcp",
+    "page": "EMEA-H-C-005825",
+    "section": "4.2",
+    "quote": "Le traitement doit être instauré et supervisé par des médecins expérimentés dans le traitement de l’épilepsie.",
+    "qid": "189d7554"
+   },
+   {
+    "index": 2,
+    "corpus": "bdpm_rcp",
+    "page": "EMEA-H-C-005825",
+    "section": "4.2",
+    "quote": "Si le traitement par ZTALMY doit être arrêté, la dose doit être réduite progressivement. Chez les patients pesant 28 kg ou moins, la diminution de la dose quotidienne totale doit être de 15 mg/kg tous les quatre jours. Pour les patients pesant plus de 28 kg, la diminution de la dose quotidienne totale doit être de 450 mg tous les quatre jours. ZTALMY peut être arrêté immédiatement et sans diminution graduelle de la dose en cas d’urgence; toutefois, une diminution graduelle de la dose est recommandée afin de minimiser le risque d’augmentation de la fréquence des crises et de l’état de mal épileptique.",
+    "qid": "fdf97449"
+   },
+   {
+    "index": 3,
+    "corpus": "bdpm_rcp",
+    "page": "EMEA-H-C-005825",
+    "section": "4.4",
+    "quote": "D’autres dépresseurs du système nerveux central (SNC), y compris des médicaments anticonvulsivants, des opioïdes, des antidépresseurs et de l’alcool utilisés de manière concomitante pourraient potentialiser l’effet de somnolence et de sédation.",
+    "qid": "d5b50d97"
+   },
+   {
+    "index": 4,
+    "corpus": "bdpm_rcp",
+    "page": "EMEA-H-C-005825",
+    "section": "4.4",
+    "quote": "Des comportements et idées suicidaires ont été rapportés chez les patients traités par des médicaments antiépileptiques (MAE) dans plusieurs indications. Une méta-analyse d’essais randomisés contrôlés contre placebo portant sur les MAE a montré une légère augmentation du risque de comportement et d’idées suicidaires. Le mécanisme de ce risque n’est pas connu. Les données disponibles n’excluent pas la possibilité d’un risque accru avec la ganaxolone.",
+    "qid": "d4e8c2d5"
+   },
+   {
+    "index": 5,
+    "corpus": "bdpm_rcp",
+    "page": "EMEA-H-C-005825",
+    "section": "5.1",
+    "quote": "Classe pharmacothérapeutique: antiépileptiques, autres antiépileptiques, Code ATC: N03AX27.",
+    "qid": "41668318"
+   },
+   {
+    "index": 6,
+    "corpus": "bdpm_rcp",
+    "page": "EMEA-H-C-005825",
+    "section": "5.1",
+    "quote": "Le mécanisme précis par lequel la ganaxolone exerce ses effets thérapeutiques dans le traitement des crises associées au CDD n’est pas connu, mais ses effets anticonvulsivants seraient dus à cette modulation de la fonction du récepteur GABAA qui assure une modulation constante, ou tonique, de la neurotransmission inhibitrice induite par le GABA.",
+    "qid": "1bfb8d47"
+   },
+   {
+    "index": 7,
+    "corpus": "bdpm_rcp",
+    "page": "EMEA-H-C-005825",
+    "section": "5.1",
+    "quote": "Les patients inclus dans l’étude 1042-CDD-3001 présentaient une confirmation moléculaire du variant CDKL5, pathogène ou probablement pathogène, leurs crises n’étant pas contrôlées de manière adéquate par au moins deux médicaments antiépileptiques concomitants antérieurs, et ils présentaient au moins 16 crises motrices par période de 28 jours au cours des deux mois précédant le dépistage.",
+    "qid": "3f536174"
+   },
+   {
+    "index": 8,
+    "corpus": "bdpm_rcp",
+    "page": "EMEA-H-C-005825",
+    "section": "5.1",
+    "quote": "Au total, 101 patients ont été inclus dans l’étude (51 sous placebo et 50 recevant le médicament). Les patients étaient majoritairement des femmes (79,2 %, ce qui correspond aux caractéristiques démographiques du CDD) et des patients âgés de 2 à 19 ans [moyenne [écart type (ET)]: 7,26 [4,55]), la majorité étant pédiatrique (enfants âgés de 2 à 11 ans [82,2 %], adolescents [16,8 %]), et 96 % des patients recevaient des médicaments antiépileptiques concomitants. Le nombre moyen (ET) de médicaments antiépileptiques concomitants utilisés par les sujets était de 2,2 (1,14) dans le groupe placebo et de 2,6 (1,40) dans le groupe ganaxolone. Les médicaments antiépileptiques concomitants les plus fréquemment utilisés (≥ 10 patients) étaient le valproate, le lévétiracétam, le clobazam et la vigabatrine.",
+    "qid": "00297650"
+   }
+  ]
  }
 }
