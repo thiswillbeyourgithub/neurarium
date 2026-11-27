@@ -2482,5 +2482,117 @@
    "action": "reuptake_inhibitor",
    "qid": "487b7a98"
   }
+ ],
+ "carisoprodol": [
+  {
+   "index": 0,
+   "target": "gaba_a",
+   "pick": true,
+   "action": "agonist",
+   "qid": "35c498aa"
+  }
+ ],
+ "cenobamate": [
+  {
+   "index": 0,
+   "target": "nav",
+   "pick": true,
+   "action": "blocker",
+   "qid": "99baf703"
+  }
+ ],
+ "felbamate": [
+  {
+   "index": 0,
+   "target": "nmda",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "d8a80280"
+  }
+ ],
+ "opicapone": [
+  {
+   "index": 0,
+   "target": "comt",
+   "pick": false,
+   "reason": "drug-interaction sentence about other drugs metabolised by COMT, not opicapone's action",
+   "qid": "202ef0ff"
+  },
+  {
+   "index": 1,
+   "target": "net",
+   "pick": false,
+   "reason": "names antidepressant classes in an interaction warning, not an opicapone target",
+   "qid": "202ef0ff"
+  },
+  {
+   "index": 2,
+   "target": "comt",
+   "pick": true,
+   "action": "enzyme_inhibitor",
+   "qid": "b2feee33"
+  },
+  {
+   "index": 3,
+   "target": "comt",
+   "pick": false,
+   "reason": "describes COMT's role in levodopa metabolism; the inhibition itself is stated by index 2",
+   "qid": "242683ee"
+  },
+  {
+   "index": 4,
+   "target": "comt",
+   "pick": false,
+   "reason": "redundant with index 2, which states the mechanism directly",
+   "qid": "d9028c4f"
+  }
+ ],
+ "thiocolchicoside": [
+  {
+   "index": 0,
+   "target": "gaba_a",
+   "pick": false,
+   "reason": "hedged claim (appears); index 2 states the GABA-A antagonism directly",
+   "qid": "c7049dce"
+  },
+  {
+   "index": 1,
+   "target": "glycine",
+   "pick": false,
+   "reason": "hedged claim (appears), and the French RCP 5.1 describes glycine-receptor agonism instead",
+   "qid": "c7049dce"
+  },
+  {
+   "index": 2,
+   "target": "gaba_a",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "7ce7260d"
+  }
+ ],
+ "rufinamide": [
+  {
+   "index": 0,
+   "target": "nav",
+   "pick": true,
+   "action": "modulator",
+   "qid": "36811994"
+  }
+ ],
+ "tolperisone": [
+  {
+   "index": 0,
+   "target": "cav",
+   "pick": true,
+   "action": "blocker",
+   "qid": "4ba93c35"
+  },
+  {
+   "index": 1,
+   "target": "nav",
+   "pick": true,
+   "action": "blocker",
+   "qid": "4ba93c35"
+  }
  ]
 }

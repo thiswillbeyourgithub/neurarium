@@ -290,6 +290,15 @@
   "denomination": "TEGRETOL 200 mg, comprimé sécable",
   "why": "plain oral, brand-name product"
  },
+ "cenobamate": {
+  "brands": [
+   {
+    "cis": "61025114",
+    "name": "Ontozry",
+    "quote": "ONTOZRY"
+   }
+  ]
+ },
  "chlorpromazine": {
   "brands": [
    {
@@ -637,6 +646,18 @@
   "cis": "63444171",
   "denomination": "HYPNOMIDATE 2 mg/ml, solution injectable",
   "why": "no plain-oral product; non-modified-release intraveineuse, brand-name product"
+ },
+ "felbamate": {
+  "brands": [
+   {
+    "cis": "60223278",
+    "name": "Taloxa",
+    "quote": "TALOXA"
+   }
+  ],
+  "cis": "60223278",
+  "denomination": "TALOXA 600 mg, comprimé",
+  "why": "plain oral, brand-name product"
  },
  "fenfluramine": {
   "brands": [
@@ -1266,6 +1287,15 @@
   "denomination": "ZOPHREN 4 mg, comprimé pelliculé",
   "why": "plain oral, brand-name product"
  },
+ "opicapone": {
+  "brands": [
+   {
+    "cis": "62847721",
+    "name": "Ongentys",
+    "quote": "ONGENTYS"
+   }
+  ]
+ },
  "oxazepam": {
   "brands": [
    {
@@ -1615,6 +1645,15 @@
    }
   ]
  },
+ "rufinamide": {
+  "brands": [
+   {
+    "cis": "62205873",
+    "name": "Inovelon",
+    "quote": "INOVELON"
+   }
+  ]
+ },
  "safinamide": {
   "brands": [
    {
@@ -1776,6 +1815,18 @@
   ],
   "cis": "62463044",
   "denomination": "XENAZINE 25 mg, comprimé sécable",
+  "why": "plain oral, brand-name product"
+ },
+ "thiocolchicoside": {
+  "brands": [
+   {
+    "cis": "65617572",
+    "name": "Miorel",
+    "quote": "MIOREL"
+   }
+  ],
+  "cis": "65617572",
+  "denomination": "MIOREL 4 mg, gélule",
   "why": "plain oral, brand-name product"
  },
  "tiagabine": {

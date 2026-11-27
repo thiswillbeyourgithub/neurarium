@@ -1788,6 +1788,9 @@
 "q_1e5b0a98b237": {
 "drug:lithium/brands[Téralithe]": "sonnet"
 },
+"q_1e5b83b9a8b6": {
+"drug:thiocolchicoside/bindings[gaba_a:antagonist]": "opus"
+},
 "q_1e7f2bab7325": {
 "drug:desipramine/brands[Norpramin]": "sonnet"
 },
@@ -3607,6 +3610,9 @@
 },
 "q_3d05b36d5def": {
 "drug:nefazodone/bindings[sert:reuptake_inhibitor]": "sonnet"
+},
+"q_3d0a37101949": {
+"drug:felbamate/bindings[nmda:antagonist]": "opus"
 },
 "q_3d1da076c521": {
 "drug:desvenlafaxine/half_life": "sonnet"
@@ -5841,6 +5847,9 @@
 },
 "q_64a9dd663d00": {
 "drug:thioridazine/bindings[h1:antagonist]": "sonnet"
+},
+"q_64b837546463": {
+"drug:opicapone/bindings[comt:enzyme_inhibitor]": "opus"
 },
 "q_64c220dfde9a": {
 "drug:pentazocine/first_approval": "opus"
@@ -8562,6 +8571,9 @@
 "q_93500de080b2": {
 "receptor:5ht1a/effects[agonism:antipsychotic]": "opus"
 },
+"q_936028c71b31": {
+"drug:rufinamide/bindings[nav:modulator]": "opus"
+},
 "q_936a43f62aef": {
 "drug:fluspirilene/originator": "opus"
 },
@@ -8577,6 +8589,10 @@
 },
 "q_93ca70f343a6": {
 "drug:lsd/first_approval": "opus"
+},
+"q_93d29c933a2e": {
+"drug:tolperisone/bindings[cav:blocker]": "opus",
+"drug:tolperisone/bindings[nav:blocker]": "opus"
 },
 "q_93de208829dd": {
 "drug:lemborexant/categories": "sonnet"
@@ -8730,6 +8746,9 @@
 },
 "q_964f2e0923a7": {
 "drug:trazodone/excretion[route:renal]": "opus"
+},
+"q_96545f042086": {
+"drug:carisoprodol/bindings[gaba_a:agonist]": "opus"
 },
 "q_9654a40bfb4b": {
 "drug:isoflurane/bindings[nmda:antagonist]": "opus"
@@ -13647,6 +13666,9 @@
 "q_e9095de614a9": {
 "drug:midazolam/brands[Hypnovel]": "sonnet",
 "drug:midazolam/formulations[injection]/brands[Hypnovel]": "opus"
+},
+"q_e91ab98410b5": {
+"drug:cenobamate/bindings[nav:blocker]": "opus"
 },
 "q_e922d4175153": {
 "drug:cannabidiol/tmax": "sonnet"

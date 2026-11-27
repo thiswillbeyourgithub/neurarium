@@ -3172,5 +3172,169 @@
     "qid": "487b7a98"
    }
   ]
+ },
+ {
+  "drug": "carisoprodol",
+  "name": "Carisoprodol",
+  "slug": "carisoprodol",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "gaba_a",
+    "target_name": "GABA-A",
+    "origin": "prose",
+    "line": "Carisoprodol's structural similarity to meprobamate indicates GABAergic activity, including GABA A agonism, similar to the mechanism of benzodiazepines but distinct (benzodiazepines are positive allosteric modulators of the GABA A receptor, and have no direct agonist activity but rather increase the potency of the endogenous agonist GABA at this receptor).",
+    "qid": "35c498aa"
+   }
+  ]
+ },
+ {
+  "drug": "cenobamate",
+  "name": "Cenobamate",
+  "slug": "cenobamate",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "nav",
+    "target_name": "Voltage-gated sodium channel",
+    "origin": "prose",
+    "line": "Cenobamate is a voltage-gated sodium channel (VGSC) blocker .",
+    "qid": "99baf703"
+   }
+  ]
+ },
+ {
+  "drug": "felbamate",
+  "name": "Felbamate",
+  "slug": "felbamate",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "nmda",
+    "target_name": "NMDA",
+    "origin": "prose",
+    "line": "Although it is clear that felbamate does cause pharmacological inhibition of NMDA receptors, the relevance of NMDA receptor blockade as a strategy for the treatment of human epilepsy has been questioned.",
+    "qid": "d8a80280"
+   }
+  ]
+ },
+ {
+  "drug": "opicapone",
+  "name": "Opicapone",
+  "slug": "opicapone",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "comt",
+    "target_name": "Catechol-O-methyltransferase (COMT)",
+    "origin": "prose",
+    "line": "Potentially, there are also interactions with drugs being metabolised by COMT (for example isoprenaline , epinephrine, dopamine , or dobutamine ), tricyclic antidepressants and antidepressants of the norepinephrine reuptake inhibitor type.",
+    "qid": "202ef0ff"
+   },
+   {
+    "target": "net",
+    "target_name": "Norepinephrine transporter (NET)",
+    "origin": "prose",
+    "line": "Potentially, there are also interactions with drugs being metabolised by COMT (for example isoprenaline , epinephrine, dopamine , or dobutamine ), tricyclic antidepressants and antidepressants of the norepinephrine reuptake inhibitor type.",
+    "qid": "202ef0ff"
+   },
+   {
+    "target": "comt",
+    "target_name": "Catechol-O-methyltransferase (COMT)",
+    "origin": "rcp_5.1",
+    "line": "L’opicapone est un inhibiteur périphérique, sélectif et réversible de la catéchol-O-méthyltransférase (COMT) doté d’une affinité de liaison élevée (sous-picomolaire) qui se traduit par une constante de dissociation du complexe lente et une longue durée d’action (> 24 heures) in vivo.",
+    "corpus": "bdpm_rcp",
+    "page": "62847721",
+    "qid": "b2feee33"
+   },
+   {
+    "target": "comt",
+    "target_name": "Catechol-O-methyltransferase (COMT)",
+    "origin": "rcp_5.1",
+    "line": "En présence d’un inhibiteur de la DOPA décarboxylase (IDDC), la COMT devient l’enzyme principale du métabolisme de la lévodopa et catalyse sa conversion en 3-O-méthyldopa (3-OMD) dans le cerveau et à la périphérie. Chez les patients prenant de la lévodopa et un IDDC périphérique, tel que la cardidopa ou le bensérazide, l’opicapone augmente les taux plasmatiques de lévodopa, améliorant ainsi la réponse clinique à la lévodopa.",
+    "corpus": "bdpm_rcp",
+    "page": "62847721",
+    "qid": "242683ee"
+   },
+   {
+    "target": "comt",
+    "target_name": "Catechol-O-methyltransferase (COMT)",
+    "origin": "rcp_5.1",
+    "line": "L’opicapone a démontré une inhibition prononcée (> 90%) de longue durée (> 24 heures) de la COMT chez des sujets sains après une administration de 50 mg d’opicapone.",
+    "corpus": "bdpm_rcp",
+    "page": "62847721",
+    "qid": "d9028c4f"
+   }
+  ]
+ },
+ {
+  "drug": "rufinamide",
+  "name": "Rufinamide",
+  "slug": "rufinamide",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "nav",
+    "target_name": "Voltage-gated sodium channel",
+    "origin": "rcp_5.1",
+    "line": "Le rufinamide module l’activité des canaux sodiques, prolongeant leur état inactif. Le rufinamide est actif chez divers modèles animaux d’épilepsie.",
+    "corpus": "bdpm_rcp",
+    "page": "62205873",
+    "qid": "36811994"
+   }
+  ]
+ },
+ {
+  "drug": "thiocolchicoside",
+  "name": "Thiocolchicoside",
+  "slug": "thiocolchicoside",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "gaba_a",
+    "target_name": "GABA-A",
+    "origin": "prose",
+    "line": "However, it also appears to be a competitive antagonist of GABA A and glycine receptors .",
+    "qid": "c7049dce"
+   },
+   {
+    "target": "glycine",
+    "target_name": "Glycine",
+    "origin": "prose",
+    "line": "However, it also appears to be a competitive antagonist of GABA A and glycine receptors .",
+    "qid": "c7049dce"
+   },
+   {
+    "target": "gaba_a",
+    "target_name": "GABA-A",
+    "origin": "rcp_5.1",
+    "line": "Enfin, le thiocolchicoside agit également comme un antagoniste des récepteurs de type GABAA (principalement situés au niveau du cortex cérébral), cette action pharmacologique étant connue pour avoir des propriétés convulsivantes ou proconvulsivantes.",
+    "corpus": "bdpm_rcp",
+    "page": "65617572",
+    "qid": "7ce7260d"
+   }
+  ]
+ },
+ {
+  "drug": "tolperisone",
+  "name": "Tolperisone",
+  "slug": "tolperisone",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "cav",
+    "target_name": "Voltage-gated calcium channel",
+    "origin": "prose",
+    "line": "Tolperisone is a centrally acting skeletal muscle relaxant that acts at the reticular formation in the brainstem by blocking voltage-gated sodium and calcium channels .",
+    "qid": "4ba93c35"
+   },
+   {
+    "target": "nav",
+    "target_name": "Voltage-gated sodium channel",
+    "origin": "prose",
+    "line": "Tolperisone is a centrally acting skeletal muscle relaxant that acts at the reticular formation in the brainstem by blocking voltage-gated sodium and calcium channels .",
+    "qid": "4ba93c35"
+   }
+  ]
  }
 ]

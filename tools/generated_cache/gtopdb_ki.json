@@ -2926,6 +2926,19 @@
     }
    }
   },
+  "cenobamate": {
+   "gaba_a": {
+    "action": "pam",
+    "pmid": "32325146",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "cenobamate",
+     "provenance": "verified",
+     "quote": "cenobamate at GABAA receptor α4 subunit (GABRA4, Human): Allosteric modulator / Positive, pEC50 4.38 [PMID 32325146]",
+     "species": "Human"
+    }
+   }
+  },
   "chlorpromazine": {
    "5ht1a": {
     "action": "antagonist",
@@ -9287,6 +9300,27 @@
      "page": "ondansetron",
      "provenance": "verified",
      "quote": "ondansetron at 5-HT3A (HTR3A, Human): Antagonist / Antagonist, pKi 7.8-8.3 [PMID 7565620]",
+     "species": "Human"
+    }
+   }
+  },
+  "opicapone": {
+   "comt": {
+    "action": "blocker",
+    "ki": {
+     "max": 1.0,
+     "median": 1.0,
+     "min": 1.0,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "24847974",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "opicapone",
+     "provenance": "verified",
+     "quote": "opicapone at Catechol-O-methyltransferase (COMT, Human): Inhibitor / Inhibition, pKi 9 [PMID 24847974]",
      "species": "Human"
     }
    }

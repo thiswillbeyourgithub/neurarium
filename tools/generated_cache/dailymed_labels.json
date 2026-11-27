@@ -71,6 +71,18 @@
   "spl_version": 5,
   "title": "CARBIDOPA, LEVODOPA AND ENTACAPONE TABLET, FILM COATED [ALEMBIC PHARMACEUTICALS INC.]"
  },
+ "carisoprodol": {
+  "published_date": "Nov 05, 2026",
+  "setid": "1f08f4af-37c2-49b5-a4e3-284414f866fa",
+  "spl_version": 7,
+  "title": "CARISOPRODOL TABLETS, USP, 350 MG (CARISOPRODOL) TABLET [PD-RX PHARMACEUTICALS, INC.]"
+ },
+ "cenobamate": {
+  "published_date": "Aug 27, 2026",
+  "setid": "565c2126-57ae-4e29-b443-723bbe7e2072",
+  "spl_version": 46,
+  "title": "XCOPRI TITRATION PACK (CENOBAMATE) KIT XCOPRI (CENOBAMATE) TABLET, FILM COATED XCOPRI MAINTENANCE PACK (CENOBAMATE) KIT XCOPRI (CENOBAMATE) TABLET [SK LIFE SCIENCE, INC.]"
+ },
  "chlordiazepoxide": {
   "published_date": "Jul 13, 2026",
   "setid": "9aba3135-00ff-47ba-b926-55eb16b361bf",
@@ -136,6 +148,12 @@
   "setid": "9dfe774a-2c7a-4e10-bedd-cde64ad28676",
   "spl_version": 2,
   "title": "ESZOPICLONE TABLET, FILM COATED [REMEDYREPACK INC.]"
+ },
+ "felbamate": {
+  "published_date": "Jun 30, 2026",
+  "setid": "1aa40de5-c02d-49d6-8722-ed88c40c3ba6",
+  "spl_version": 4,
+  "title": "FELBAMATE TABLET [AMNEAL PHARMACEUTICALS OF NEW YORK LLC]"
  },
  "fentanyl": {
   "published_date": "Jan 14, 2015",
@@ -269,6 +287,12 @@
   "spl_version": 10,
   "title": "OLANZAPINE TABLET, FILM COATED [REMEDYREPACK INC.]"
  },
+ "opicapone": {
+  "published_date": "Oct 30, 2026",
+  "setid": "a511a531-112e-43f8-a43f-5334b0efe979",
+  "spl_version": 12,
+  "title": "ONGENTYS (OPICAPONE) CAPSULE [AMNEAL PHARMACEUTICALS LLC]"
+ },
  "oxazepam": {
   "published_date": "Nov 17, 2025",
   "setid": "a0d5a4c1-ec79-42e6-8e8f-ae4d144edb43",
@@ -346,6 +370,12 @@
   "setid": "939e28c5-f3a9-42c0-9a2d-8d471d82a6e0",
   "spl_version": 22,
   "title": "NEUPRO (ROTIGOTINE) PATCH, EXTENDED RELEASE NEUPRO (ROTIGOTINE) KIT [UCB, INC.]"
+ },
+ "rufinamide": {
+  "published_date": "Nov 18, 2026",
+  "setid": "e2ba061a-49f0-4330-b0f0-00f2c3725625",
+  "spl_version": 13,
+  "title": "RUFINAMIDE SUSPENSION [BIONPHARMA INC.]"
  },
  "sertraline": {
   "published_date": "Sep 14, 2026",

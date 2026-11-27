@@ -438,6 +438,20 @@
    "5.1"
   ]
  },
+ "cenobamate": {
+  "cis": "61025114",
+  "date_source": "justelesRCP EMA scrape manifest last_fetch",
+  "denomination": "ONTOZRY 100 mg, comprimé pelliculé",
+  "fetched": "2026-09-30",
+  "page": "61025114",
+  "sections": [
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
  "chlorpromazine": {
   "cis": "62184888",
   "date_source": "justelesRCP scrape manifest last_fetch",
@@ -945,6 +959,20 @@
   "denomination": "HYPNOMIDATE 2 mg/ml, solution injectable",
   "fetched": "2026-10-15",
   "page": "63444171",
+  "sections": [
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
+ "felbamate": {
+  "cis": "60223278",
+  "date_source": "file mtime",
+  "denomination": "TALOXA 600 mg, comprimé",
+  "fetched": "2026-11-27",
+  "page": "60223278",
   "sections": [
    "4.1",
    "4.2",
@@ -1745,6 +1773,20 @@
    "5.1"
   ]
  },
+ "opicapone": {
+  "cis": "62847721",
+  "date_source": "justelesRCP EMA scrape manifest last_fetch",
+  "denomination": "ONGENTYS 50 mg, gélule",
+  "fetched": "2026-09-30",
+  "page": "62847721",
+  "sections": [
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
  "oxazepam": {
   "cis": "60351986",
   "date_source": "justelesRCP scrape manifest last_fetch",
@@ -2233,6 +2275,20 @@
    "5.1"
   ]
  },
+ "rufinamide": {
+  "cis": "62205873",
+  "date_source": "justelesRCP EMA scrape manifest last_fetch",
+  "denomination": "INOVELON 40 mg/ml, suspension buvable",
+  "fetched": "2026-09-30",
+  "page": "62205873",
+  "sections": [
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
  "safinamide": {
   "cis": "61882445",
   "date_source": "justelesRCP EMA scrape manifest last_fetch",
@@ -2432,6 +2488,20 @@
   "denomination": "XENAZINE 25 mg, comprimé sécable",
   "fetched": "2026-10-10",
   "page": "62463044",
+  "sections": [
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
+ "thiocolchicoside": {
+  "cis": "65617572",
+  "date_source": "file mtime",
+  "denomination": "MIOREL 4 mg, gélule",
+  "fetched": "2026-11-27",
+  "page": "65617572",
   "sections": [
    "4.1",
    "4.2",
