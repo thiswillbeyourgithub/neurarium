@@ -66,6 +66,11 @@ TAB_KIND = {"drug": "drug", "receptor": "target", "target": "target", "structure
 # What JS encodeURIComponent leaves unescaped, so a page URL matches the viewer's byte for byte.
 URI_SAFE = "-_.!~*'()"
 API = "/api"  # absolute links, so a page reads the same served at any address (the 404)
+# meta.receptor_effect_sites value -> the effect page's "Arises:" wording (the viewer's
+# central / peripheral switch, js/effect-site.js).
+SITE_WORDS = {"central": "centrally (brain, spinal cord)",
+              "peripheral": "peripherally (outside the brain)",
+              "both": "centrally and peripherally"}
 NOT_FOUND = ("**No page at this address.** Page paths are `/api/<kind>/<id>` with a singular "
              "kind and the record id (lowercase, underscores, e.g. `/api/drug/sertraline`, "
              "`/api/drug/amphetamine_dl`, `/api/structure/putamen_R`); a pathway id is "
@@ -170,6 +175,7 @@ class Renderer:
             "group": {r["id"]: r for r in data["projection_groups"]},
         }
         self.modes = data["meta"].get("receptor_effect_modes") or {}
+        self.effect_sites = data["meta"].get("receptor_effect_sites") or {}
         self.effects = {e["id"]: e for e in effect_index.build(
             data["receptors"], data["drugs"], data["metabolites"], data["meta"])}
         self.pages["effect"] = {eid: {"name": e["label"]} for eid, e in self.effects.items()}
@@ -310,7 +316,8 @@ class Renderer:
     def effect_page(self, ident: str) -> str:
         """An effect's page (BETA): its stored owners by mode, then the derived drugs."""
         e = self.effects[ident]
-        lines = [f"# {e['label']}", "", f"Kind: effect (BETA). Id: `{ident}`.",
+        lines = [f"# {e['label']}", "", f"Kind: effect (BETA). Id: `{ident}`. Arises: "
+                 f"{SITE_WORDS[self.effect_sites.get(ident, 'both')]}.",
                  f"Open in the viewer: {llms_txt.SITE_URL}/#tabs=effect:{ident}",
                  "Derived, not medical advice. The receptors and targets below carry a sourced "
                  "receptor_effect node for this effect (a statement about acting on the receptor "
