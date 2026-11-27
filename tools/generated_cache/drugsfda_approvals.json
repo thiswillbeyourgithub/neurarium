@@ -291,6 +291,9 @@
    "status": "found",
    "year": 2015
   },
+  "carpipramine": {
+   "status": "none"
+  },
   "chloral_hydrate": {
    "status": "none"
   },
@@ -550,6 +553,14 @@
    "date": "2019-03-05",
    "status": "superseded"
   },
+  "eslicarbazepine_acetate": {
+   "application": "NDA022416",
+   "applications": 1,
+   "date": "2013-11-08",
+   "quote": "NDA022416 | APTIOM | ESLICARBAZEPINE ACETATE | TABLET | ORIG approved 2013-11-08",
+   "status": "found",
+   "year": 2013
+  },
   "estazolam": {
    "application": "NDA019080",
    "applications": 1,
@@ -576,6 +587,9 @@
    "quote": "NDA012380 | ZARONTIN | ETHOSUXIMIDE | CAPSULE | ORIG approved 1960-11-02",
    "status": "found",
    "year": 1960
+  },
+  "etifoxine": {
+   "status": "none"
   },
   "etomidate": {
    "application": "NDA018227",
@@ -753,6 +767,9 @@
    "year": 1959
   },
   "indalpine": {
+   "status": "none"
+  },
+  "iproniazid": {
    "status": "none"
   },
   "isocarboxazid": {
@@ -1106,6 +1123,9 @@
    "status": "found",
    "year": 1994
   },
+  "nefopam": {
+   "status": "none"
+  },
   "niaprazine": {
    "status": "none"
   },
@@ -1128,6 +1148,9 @@
    "class": "Medical Gas",
    "date": "2013-06-16",
    "status": "superseded"
+  },
+  "nordazepam": {
+   "status": "none"
   },
   "nortriptyline": {
    "application": "NDA014684",
@@ -1159,6 +1182,9 @@
   "opipramol": {
    "status": "none"
   },
+  "opium": {
+   "status": "none"
+  },
   "oxazepam": {
    "application": "NDA015539",
    "applications": 1,
@@ -1174,6 +1200,9 @@
    "quote": "NDA021014 | TRILEPTAL | OXCARBAZEPINE | TABLET | ORIG approved 2000-01-14",
    "status": "found",
    "year": 2000
+  },
+  "oxetorone": {
+   "status": "none"
   },
   "oxycodone": {
    "application": "NDA020932",
@@ -1203,6 +1232,9 @@
    "status": "found",
    "year": 1992
   },
+  "penfluridol": {
+   "status": "none"
+  },
   "pentazocine": {
    "application": "NDA016194",
    "applications": 2,
@@ -1223,6 +1255,9 @@
    "year": 2012
   },
   "perazine": {
+   "status": "none"
+  },
+  "periciazine": {
    "status": "none"
   },
   "perospirone": {
@@ -1298,6 +1333,9 @@
    "status": "none"
   },
   "pipothiazine": {
+   "status": "none"
+  },
+  "piribedil": {
    "status": "none"
   },
   "pitolisant": {
@@ -1589,6 +1627,14 @@
    "status": "found",
    "year": 2019
   },
+  "stiripentol": {
+   "application": "NDA206709",
+   "applications": 2,
+   "date": "2018-08-20",
+   "quote": "NDA206709 | DIACOMIT | STIRIPENTOL | CAPSULE | ORIG approved 2018-08-20",
+   "status": "found",
+   "year": 2018
+  },
   "sulfonmethane": {
    "status": "none"
   },
@@ -1798,6 +1844,9 @@
    "quote": "NDA018081 | DEPAKENE | VALPROIC ACID | CAPSULE | ORIG approved 1978-02-28",
    "status": "found",
    "year": 1978
+  },
+  "valpromide": {
+   "status": "none"
   },
   "varenicline": {
    "application": "NDA021928",
