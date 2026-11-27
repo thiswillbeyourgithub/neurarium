@@ -432,130 +432,6 @@
     }
    ]
   },
-  "fosphenytoin": {
-   "name": "Fosphenytoin",
-   "categories": [
-    "anticonvulsant"
-   ],
-   "labels": [
-    "Anticonvulsant"
-   ],
-   "candidates": [
-    {
-     "corpus": "wikipedia_pharm",
-     "page": "fosphenytoin",
-     "line": "IUPAC name (2,5-Dioxo-4,4-diphenyl-imidazolidin-1-yl)methoxyphosphonic acid",
-     "qid": "21144406"
-    },
-    {
-     "corpus": "wikipedia_pharm",
-     "page": "fosphenytoin",
-     "line": "Fosphenytoin , also known as fosphenytoin sodium , and sold under the brand name Cerebyx among others, is a water-soluble phenytoin prodrug that is administered intravenously to deliver phenytoin, potentially more safely than intravenous phenytoin .",
-     "qid": "f03ab9bd"
-    },
-    {
-     "corpus": "wikipedia_pharm",
-     "page": "fosphenytoin",
-     "line": "It is used in the acute treatment of convulsive status epilepticus .",
-     "qid": "e0f49c83"
-    },
-    {
-     "corpus": "wikipedia_pharm",
-     "page": "fosphenytoin",
-     "line": "Fosphenytoin was developed in 1996.",
-     "qid": "cc5dda83"
-    },
-    {
-     "corpus": "wikipedia_fr",
-     "page": "fosph_nyto_ne",
-     "line": "La fosphénytoïne est un médicament antiépileptique .",
-     "qid": "9b339985"
-    }
-   ]
-  },
-  "ganaxolone": {
-   "name": "Ganaxolone",
-   "categories": [
-    "anticonvulsant"
-   ],
-   "labels": [
-    "Anticonvulsant"
-   ],
-   "candidates": [
-    {
-     "corpus": "wikipedia_pharm",
-     "page": "ganaxolone",
-     "line": "Drug class | Neurosteroid",
-     "qid": "b3215707"
-    },
-    {
-     "corpus": "wikipedia_pharm",
-     "page": "ganaxolone",
-     "line": "This scientific article needs additional citations to secondary or tertiary sources .",
-     "qid": "7836e999"
-    },
-    {
-     "corpus": "wikipedia_pharm",
-     "page": "ganaxolone",
-     "line": "Help add sources such as review articles, monographs, or textbooks.",
-     "qid": "956f7b37"
-    },
-    {
-     "corpus": "wikipedia_pharm",
-     "page": "ganaxolone",
-     "line": "Please also establish the relevance for any primary research articles cited.",
-     "qid": "55dea940"
-    },
-    {
-     "corpus": "wikipedia_pharm",
-     "page": "ganaxolone",
-     "line": "Unsourced or poorly sourced material may be challenged and removed. ( May 2017 ) ( Learn how and when to remove this message )",
-     "qid": "aafd5da0"
-    },
-    {
-     "corpus": "wikipedia_pharm",
-     "page": "ganaxolone",
-     "line": "IUPAC name 1-phenanthren-17-yl]ethanone",
-     "qid": "201f9894"
-    },
-    {
-     "corpus": "wikipedia_pharm",
-     "page": "ganaxolone",
-     "line": "Ganaxolone , sold under the brand name Ztalmy , is a medication used to treat seizures in people with cyclin-dependent kinase-like 5 (CDKL5) deficiency disorder .",
-     "qid": "d115a16c"
-    },
-    {
-     "corpus": "wikipedia_pharm",
-     "page": "ganaxolone",
-     "line": "Ganaxolone is a neuroactive steroid gamma-aminobutyric acid (GABA) A receptor positive modulator .",
-     "qid": "e981d573"
-    },
-    {
-     "corpus": "wikipedia_pharm",
-     "page": "ganaxolone",
-     "line": "The most common side effects of treatment with ganaxolone include somnolence (sleepiness), fever, excessive saliva or drooling, and seasonal allergy.",
-     "qid": "41c2952d"
-    },
-    {
-     "corpus": "wikipedia_pharm",
-     "page": "ganaxolone",
-     "line": "Ganaxolone was approved for medical use in the United States in March 2022, and in the European Union in July 2023.",
-     "qid": "ba152832"
-    },
-    {
-     "corpus": "wikipedia_pharm",
-     "page": "ganaxolone",
-     "line": "The US Food and Drug Administration (FDA) considers it to be a first-in-class medication .",
-     "qid": "aa5a332c"
-    },
-    {
-     "corpus": "wikipedia_fr",
-     "page": "ganaxolone",
-     "line": "La ganaxolone , vendue sous le nom de marque Ztalmy, est un médicament utilisé pour traiter les crises d'épilepsie des patients porteurs d'un trouble déficitaire en kinase cycline-dépendante de type 5",
-     "qid": "d9428b57"
-    }
-   ]
-  },
   "riluzole": {
    "name": "Riluzole",
    "categories": [
@@ -813,6 +689,36 @@
      "page": "ziconotide",
      "line": "In December 2004 the US Food and Drug Administration (FDA) approved ziconotide when delivered as an infusion into the cerebrospinal fluid using an intrathecal pump system .",
      "qid": "25a7aab3"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "ziconotide",
+     "line": "Structure chimique semi-développée du Ziconotide (représentation de Cram) et modèle 3D de la molécule avec ses différentes chaînes.",
+     "qid": "44100888"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "ziconotide",
+     "line": "Prialt ), également appelé ziconotide intrathécal (ITZ) en raison de sa voie d’administration, est un analgésique atypique pour l’amélioration de la douleur sévère et chronique .",
+     "qid": "32adb8ea"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "ziconotide",
+     "line": "Dérivé du Conus magus , un escargot conique, c'est la forme synthétique d'un peptide ω- conotoxine .",
+     "qid": "7dbc1c39"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "ziconotide",
+     "line": "Il est 1000 fois plus puissant que la morphine .",
+     "qid": "99390b6e"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "ziconotide",
+     "line": "En décembre 2004 , la Food and Drug Administration a approuvé le ziconotide lorsqu'il est administré sous forme d'infusion dans le liquide céphalo-rachidien à l'aide d'un système de pompe intrathécale .",
+     "qid": "2a2b009d"
     }
    ]
   }
