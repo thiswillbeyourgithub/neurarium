@@ -745,6 +745,14 @@
    "status": "found",
    "year": 1994
   },
+  "fosphenytoin": {
+   "application": "NDA020450",
+   "applications": 2,
+   "date": "1996-08-05",
+   "quote": "NDA020450 | CEREBYX | FOSPHENYTOIN SODIUM | INJECTABLE | ORIG approved 1996-08-05",
+   "status": "found",
+   "year": 1996
+  },
   "furosemide": {
    "applications": [
     "NDA018370",
@@ -772,6 +780,14 @@
    "quote": "NDA021169 | RAZADYNE | GALANTAMINE HYDROBROMIDE | TABLET | ORIG approved 2001-02-28",
    "status": "found",
    "year": 2001
+  },
+  "ganaxolone": {
+   "application": "NDA215904",
+   "applications": 1,
+   "date": "2022-03-18",
+   "quote": "NDA215904 | ZTALMY | GANAXOLONE | SUSPENSION | ORIG approved 2022-03-18",
+   "status": "found",
+   "year": 2022
   },
   "glutethimide": {
    "application": "NDA009519",
@@ -1135,6 +1151,9 @@
    "status": "found",
    "year": 2009
   },
+  "mirogabalin": {
+   "status": "none"
+  },
   "mirtazapine": {
    "application": "NDA020415",
    "applications": 2,
@@ -1439,6 +1458,9 @@
    "date": "1953-01-06",
    "status": "superseded"
   },
+  "physostigmine": {
+   "status": "none"
+  },
   "pimavanserin": {
    "application": "NDA207318",
    "applications": 2,
@@ -1629,6 +1651,14 @@
     "NDA011185"
    ],
    "status": "undated"
+  },
+  "riluzole": {
+   "application": "NDA020599",
+   "applications": 3,
+   "date": "1995-12-12",
+   "quote": "NDA020599 | RILUTEK | RILUZOLE | TABLET | ORIG approved 1995-12-12",
+   "status": "found",
+   "year": 1995
   },
   "rimegepant": {
    "application": "NDA212728",
@@ -2079,6 +2109,14 @@
    "quote": "NDA020859 | SONATA | ZALEPLON | CAPSULE | ORIG approved 1999-08-13",
    "status": "found",
    "year": 1999
+  },
+  "ziconotide": {
+   "application": "NDA021060",
+   "applications": 1,
+   "date": "2004-12-28",
+   "quote": "NDA021060 | PRIALT | ZICONOTIDE ACETATE | INJECTABLE | ORIG approved 2004-12-28",
+   "status": "found",
+   "year": 2004
   },
   "zimelidine": {
    "status": "none"
