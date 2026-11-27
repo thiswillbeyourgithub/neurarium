@@ -8417,6 +8417,106 @@
      "qid": "7e0b88c1"
     }
    ]
+  },
+  "fosphenytoin": {
+   "name": "Fosphenytoin",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "fosphenytoin",
+     "line": "Fosphenytoin was approved by the US Food and Drug Administration (FDA) in August 1996, for use in epilepsy.",
+     "context": "One solution was to develop a prodrug that did not have these drawbacks.",
+     "qid": "e844e39c"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "fosph_nyto_ne",
+     "line": "La fosphénytoïne a été approuvée pour un usage médical aux États-Unis en 1996 .",
+     "context": "La fosphénytoïne est un médicament antiépileptique .",
+     "qid": "d20c59ac"
+    }
+   ]
+  },
+  "ganaxolone": {
+   "name": "Ganaxolone",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "ganaxolone",
+     "line": "Ganaxolone was approved for medical use in the United States in March 2022, and in the European Union in July 2023.",
+     "context": "The most common side effects of treatment with ganaxolone include somnolence (sleepiness), fever, excessive saliva or drooling, and seasonal allergy.",
+     "qid": "ba152832"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "ganaxolone",
+     "line": "Le médicament a été approuvé pour un usage médical aux États-Unis en 2022 .",
+     "context": "La ganaxolone , vendue sous le nom de marque Ztalmy, est un médicament utilisé pour traiter les crises d'épilepsie des patients porteurs d'un trouble déficitaire en kinase cycline-dépendante de type 5",
+     "qid": "08d6260d"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "ganaxolone",
+     "line": "Il s'agit d'un médicament orphelin en Europe et non approuvé au Royaume-Uni en 2022 .",
+     "context": "Le médicament a été approuvé pour un usage médical aux États-Unis en 2022 .",
+     "qid": "ea7dcaf3"
+    }
+   ]
+  },
+  "riluzole": {
+   "name": "Riluzole",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "riluzole",
+     "line": "Riluzole was approved for medical use in the European Union in October 1996.",
+     "context": "A thin film version of riluzole which dissolves on the tongue (commercially known as Exservan or Emylif ) is available in the United States and United Kingdom.",
+     "qid": "cd8ced5e"
+    }
+   ]
+  },
+  "physostigmine": {
+   "name": "Physostigmine",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "physostigmine",
+     "line": "Her article explaining the first case of myasthenia gravis being successfully treated with physostigmine was published in The Lancet in June 1934.",
+     "context": "She had noted that the symptoms and signs of myasthenia were similar to those found in curare poisoning, and physostigmine was used as an antidote to curare poisoning at that time.",
+     "qid": "9ee12553"
+    }
+   ]
+  },
+  "mirogabalin": {
+   "name": "Mirogabalin",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "mirogabalin",
+     "line": "The medication was approved for neuropathic pain and postherpetic neuralgia in Japan in January 2019.",
+     "context": "In Japan, the company submitted a marketing application for treatment of peripheral neuropathic pain.",
+     "qid": "a9888620"
+    }
+   ]
+  },
+  "ziconotide": {
+   "name": "Ziconotide",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "ziconotide",
+     "line": "In December 2004 the US Food and Drug Administration (FDA) approved ziconotide when delivered as an infusion into the cerebrospinal fluid using an intrathecal pump system .",
+     "context": "Derived from Conus magus , a cone snail, it is the synthetic form of an ω- conotoxin peptide .",
+     "qid": "25a7aab3"
+    },
+    {
+     "corpus": "wikipedia_fr",
+     "page": "ziconotide",
+     "line": "En décembre 2004 , la Food and Drug Administration a approuvé le ziconotide lorsqu'il est administré sous forme d'infusion dans le liquide céphalo-rachidien à l'aide d'un système de pompe intrathécale .",
+     "context": "Il est 1000 fois plus puissant que la morphine .",
+     "qid": "2a2b009d"
+    }
+   ]
   }
  }
 }

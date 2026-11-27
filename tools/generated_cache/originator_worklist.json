@@ -5337,6 +5337,87 @@
      "qid": "3d7954a7"
     }
    ]
+  },
+  "fosphenytoin": {
+   "name": "Fosphenytoin",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "fosphenytoin",
+     "line": "Fosphenytoin was developed in 1996.",
+     "qid": "cc5dda83"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "fosphenytoin",
+     "line": "One solution was to develop a prodrug that did not have these drawbacks.",
+     "qid": "c9740512"
+    }
+   ]
+  },
+  "physostigmine": {
+   "name": "Physostigmine",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "physostigmine",
+     "line": "The chemical was synthesized for the first time in 1935 by Percy Lavon Julian and Josef Pikl.",
+     "qid": "258d2fdb"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "physostigmine",
+     "line": "However, before its discovery by Sir Robert Christison in 1846, it was much more prevalent as an ordeal poison .",
+     "qid": "92b6fb4a"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "physostigmine",
+     "line": "During his studies, Loewi discovered acetylcholine and that physostigmine acted by preventing acetylcholine inhibition.",
+     "qid": "3e1bf728"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "physostigmine",
+     "line": "In 1936, Loewi was awarded the Nobel Prize for his work on discovering acetylcholine and biological chemical transmitters.",
+     "qid": "385fdf33"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "physostigmine",
+     "line": "Other important discoveries surrounding physostigmine were made at the University of Edinburgh in 1925.",
+     "qid": "1366af4f"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "physostigmine",
+     "line": "In 1935 Percy Lavon Julian was later the first to synthesize physostigmine.",
+     "qid": "681711b9"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "physostigmine",
+     "line": "English scientist Robert Robinson was also working on the synthesis of physostigmine, but surprisingly Julian, a relatively unknown scientist at the time, was the successful one.",
+     "qid": "c53f80af"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "physostigmine",
+     "line": "In 1934, while working at St Alfege's Hospital in London, Dr Mary Walker discovered that a subcutaneous injection of physostigmine could temporarily reverse the muscle weakness found in patients with myasthenia gravis .",
+     "qid": "bcaa8b0a"
+    }
+   ]
+  },
+  "mirogabalin": {
+   "name": "Mirogabalin",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "mirogabalin",
+     "line": "developmental code name DS-5565 ) is a gabapentinoid medication developed by Daiichi Sankyo .",
+     "qid": "bc5ff3c7"
+    }
+   ]
   }
  },
  "companies": {

@@ -2611,5 +2611,59 @@
    "qid": "7e0b88c1"
   },
   "withdrawals": []
+ },
+ "fosphenytoin": {
+  "approval": {
+   "agency": "fda",
+   "country": "us",
+   "index": 0,
+   "year": 1996,
+   "qid": "e844e39c"
+  },
+  "withdrawals": []
+ },
+ "ganaxolone": {
+  "approval": {
+   "agency": null,
+   "country": "us",
+   "index": 0,
+   "year": 2022,
+   "qid": "ba152832"
+  },
+  "withdrawals": []
+ },
+ "riluzole": {
+  "approval": {
+   "agency": null,
+   "country": "eu",
+   "index": 0,
+   "year": 1996,
+   "qid": "cd8ced5e"
+  },
+  "withdrawals": []
+ },
+ "physostigmine": {
+  "approval": null,
+  "withdrawals": []
+ },
+ "mirogabalin": {
+  "approval": {
+   "agency": null,
+   "country": "jp",
+   "index": 0,
+   "year": 2019,
+   "qid": "a9888620"
+  },
+  "withdrawals": []
+ },
+ "ziconotide": {
+  "approval": {
+   "agency": "fda",
+   "country": "us",
+   "index": 0,
+   "year": 2004,
+   "qid": "25a7aab3"
+  },
+  "withdrawals": []
  }
 }

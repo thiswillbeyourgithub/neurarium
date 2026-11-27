@@ -769,7 +769,13 @@
    "company": null,
    "qid": "697d8caa"
   },
-  "tolperisone": null
+  "tolperisone": null,
+  "mirogabalin": {
+   "index": 0,
+   "name": "Daiichi Sankyo",
+   "company": null,
+   "qid": "bc5ff3c7"
+  }
  },
  "companies": {
   "novartis": {
