@@ -29,6 +29,14 @@
       "En mars 2006 , Novartis acquiert les droits pour développer et commercialiser le produit aux États-Unis , mais abandonne le développement pour ce marché en octobre 2011 ."
     ]
   },
+  "alfentanil": {
+    "fr_slug": "alfentanil",
+    "fr_title": "Alfentanil",
+    "name": "Alfentanil",
+    "sentences": [
+      "Identification"
+    ]
+  },
   "alimemazine": {
     "fr_slug": "alim_mazine",
     "fr_title": "Alimémazine",
@@ -623,6 +631,14 @@
     "sentences": [
       "Daridorexant",
       "Le daridorexant , vendu sous le nom de marque Quviviq , est un médicament antagoniste de l' orexine utilisé pour le traitement de l'insomnie , , , ."
+    ]
+  },
+  "desflurane": {
+    "fr_slug": "desflurane",
+    "fr_title": "Desflurane",
+    "name": "Desflurane",
+    "sentences": [
+      "Identification"
     ]
   },
   "desipramine": {
@@ -1380,6 +1396,15 @@
       "Il a souvent été fait référence à la méthaqualone (sous les noms Quaalude ou Lude) dans la culture populaire d'Europe de l'Ouest et des États-Unis, en particulier au cours des années 1960 et 1970 , ."
     ]
   },
+  "methohexital": {
+    "fr_slug": "m_thohexital",
+    "fr_title": "Méthohexital",
+    "name": "Methohexital",
+    "sentences": [
+      "Cet article ne cite pas suffisamment ses sources ( mars 2026 ).",
+      "Methohexital ou methohexitone (commercialisé sous les noms de marque Brevital et Brietal) est un médicament qui est un dérivé barbiturique."
+    ]
+  },
   "methylfolate_l": {
     "fr_slug": "acide_5_m_thylt_trahydrofolique",
     "fr_title": "Acide 5-méthyltétrahydrofolique",
@@ -1954,6 +1979,15 @@
       "La réboxétine a été commercialisée dans plusieurs pays d'Europe en 1997 mais son autorisation de mise sur le marché (AMM) a été refusée aux États-Unis en 2001 et elle n'est pas non plus commercialisée en France ."
     ]
   },
+  "remifentanil": {
+    "fr_slug": "r_mifentanil",
+    "fr_title": "Rémifentanil",
+    "name": "Remifentanil",
+    "sentences": [
+      "Rémifentanil",
+      "Il est commercialisé sous forme de chlorhydrate de rémifentanil (Ultiva)."
+    ]
+  },
   "reserpine": {
     "fr_slug": "r_serpine",
     "fr_title": "Réserpine",
@@ -2157,6 +2191,14 @@
       "Le solriamfétol , vendu sous le nom de marque Sunosi , est un médicament favorisant l'éveil utilisé dans le traitement de la somnolence excessive liée à la narcolepsie et à l' apnée du sommeil , , .",
       "Le médicament a été découvert par une filiale du groupe SK , qui a accordé des droits de commercialisation pour une utilisation en dehors de onze pays d'Asie à Aerial Pharma en 2011 .",
       "Le médicament a été découvert par une filiale du groupe SK , qui a accordé des droits de commercialisation en dehors de onze pays d'Asie à Aerial Pharma en 2011 ."
+    ]
+  },
+  "sufentanil": {
+    "fr_slug": "sufentanil",
+    "fr_title": "Sufentanil",
+    "name": "Sufentanil",
+    "sentences": [
+      "Identification"
     ]
   },
   "sulpiride": {

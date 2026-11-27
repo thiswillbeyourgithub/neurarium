@@ -14,6 +14,14 @@
   "agomelatine": {
    "status": "none"
   },
+  "alfentanil": {
+   "application": "NDA019353",
+   "applications": 1,
+   "date": "1986-12-29",
+   "quote": "NDA019353 | ALFENTA | ALFENTANIL HYDROCHLORIDE | INJECTABLE | ORIG approved 1986-12-29",
+   "status": "found",
+   "year": 1986
+  },
   "alimemazine": {
    "status": "none"
   },
@@ -433,6 +441,14 @@
    "quote": "NDA214985 | QUVIVIQ | DARIDOREXANT HYDROCHLORIDE | TABLET | ORIG approved 2022-01-07",
    "status": "found",
    "year": 2022
+  },
+  "desflurane": {
+   "application": "NDA020118",
+   "applications": 1,
+   "date": "1992-09-18",
+   "quote": "NDA020118 | SUPRANE | DESFLURANE | LIQUID | ORIG approved 1992-09-18",
+   "status": "found",
+   "year": 1992
   },
   "desipramine": {
    "application": "NDA014399",
@@ -1022,6 +1038,14 @@
   "methaqualone": {
    "status": "none"
   },
+  "methohexital": {
+   "application": "NDA011559",
+   "applications": 1,
+   "date": "1960-06-27",
+   "quote": "NDA011559 | BREVITAL SODIUM | METHOHEXITAL SODIUM | INJECTABLE | ORIG approved 1960-06-27",
+   "status": "found",
+   "year": 1960
+  },
   "methylfolate_l": {
    "status": "none"
   },
@@ -1498,6 +1522,22 @@
   "reboxetine": {
    "status": "none"
   },
+  "remifentanil": {
+   "application": "NDA020630",
+   "applications": 1,
+   "date": "1996-07-12",
+   "quote": "NDA020630 | ULTIVA | REMIFENTANIL HYDROCHLORIDE | INJECTABLE | ORIG approved 1996-07-12",
+   "status": "found",
+   "year": 1996
+  },
+  "remimazolam": {
+   "application": "NDA212295",
+   "applications": 1,
+   "date": "2020-07-02",
+   "quote": "NDA212295 | BYFAVO | REMIMAZOLAM BESYLATE | POWDER | ORIG approved 2020-07-02",
+   "status": "found",
+   "year": 2020
+  },
   "reserpine": {
    "applications": [
     "NDA009357",
@@ -1662,6 +1702,14 @@
    "quote": "NDA206709 | DIACOMIT | STIRIPENTOL | CAPSULE | ORIG approved 2018-08-20",
    "status": "found",
    "year": 2018
+  },
+  "sufentanil": {
+   "application": "NDA019050",
+   "applications": 2,
+   "date": "1984-05-04",
+   "quote": "NDA019050 | SUFENTA PRESERVATIVE FREE | SUFENTANIL CITRATE | INJECTABLE | ORIG approved 1984-05-04",
+   "status": "found",
+   "year": 1984
   },
   "sulfonmethane": {
    "status": "none"
