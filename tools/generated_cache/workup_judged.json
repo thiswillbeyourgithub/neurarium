@@ -2217,5 +2217,48 @@
   }
  ],
  "dihydrocodeine": [],
- "nalbuphine": []
+ "nalbuphine": [],
+ "thiocolchicoside": [],
+ "opicapone": [],
+ "rufinamide": [],
+ "cenobamate": [
+  {
+   "index": 3,
+   "test": "liver_function",
+   "timing": "before",
+   "qid": "8a815d6e"
+  },
+  {
+   "index": 3,
+   "test": "liver_function",
+   "timing": "during",
+   "qid": "8a815d6e"
+  }
+ ],
+ "felbamate": [
+  {
+   "index": 3,
+   "test": "blood_count",
+   "timing": "before",
+   "qid": "d196b5cc"
+  },
+  {
+   "index": 3,
+   "test": "blood_count",
+   "timing": "during",
+   "qid": "d196b5cc"
+  },
+  {
+   "index": 6,
+   "test": "liver_function",
+   "timing": "before",
+   "qid": "86172737"
+  },
+  {
+   "index": 7,
+   "test": "liver_function",
+   "timing": "during",
+   "qid": "9ead01d6"
+  }
+ ]
 }

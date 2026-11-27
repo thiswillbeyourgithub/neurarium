@@ -10771,5 +10771,246 @@
     "qid": "a7d65d3d"
    }
   ]
+ },
+ "cenobamate": {
+  "page": "61025114",
+  "denomination": "ONTOZRY 100 mg, comprimé pelliculé",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.2",
+    "under": "Personnes âgées (65 ans et plus)",
+    "quote": "Les études cliniques sur le cénobamate n’ont pas inclus suffisamment de patients âgés de 65 ans et plus pour déterminer si leur réponse au traitement est différente de celle des patients plus jeunes. Les sujets âgés traités par antiépileptiques semblent présenter une plus grande incidence de réactions indésirables tels que fatigue, troubles de la marche, chutes, ataxie, troubles de l’équilibre, étourdissements et somnolence. En général, il convient d’être prudent dans l’adaptation posologique pour un patient âgé et commencer par la limite basse de l’intervalle posologique, afin de tenir compte de la diminution des fonctions rénale et hépatique, plus fréquente dans cette population ainsi que des comorbidités et interactions potentielles chez ces patients polymédiqués (voir rubrique 4.4).",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "07d483b7"
+   },
+   {
+    "index": 1,
+    "section": "4.2",
+    "under": "Insuffisance rénale",
+    "quote": "Il convient d’être prudent et d’envisager une réduction de la dose cible lors de l’utilisation du cénobamate chez les patients présentant une insuffisance rénale légère à modérée (clairance de la créatinine de 30 à < 90 ml/min) ou sévère (clairance de la créatinine < 30 ml/min). La dose maximale recommandée pour les patients atteints d’insuffisance rénale légère, modérée ou sévère est de 300 mg/jour. L’utilisation du cénobamate n’est pas recommandée chez les patients atteints d’insuffisance rénale terminale ou chez les patients sous hémodialyse.",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "14476236"
+   },
+   {
+    "index": 2,
+    "section": "4.4",
+    "under": "Idées suicidaires",
+    "quote": "Une réaction médicamenteuse avec éosinophilie et symptômes systémiques (syndrome DRESS [Drug Reaction with Eosinophilia and Systemic Symptoms]), qui peut engager le pronostic vital ou être mortelle, a été rapportée avec le cénobamate lorsque le traitement a été instauré à des doses plus élevées puis soumis à une augmentation rapide (hebdomadaire ou plus rapprochée) (voir rubrique 4.8). Aucun cas de syndrome DRESS n’a été rapporté dans une étude de sécurité en ouvert menée auprès de 1 340 patients épileptiques lorsque le cénobamate était instauré à 12,5 mg/jour avec augmentation de la dose toutes les deux semaines. Au moment de la prescription, les patients doivent être informés des signes et symptômes du syndrome DRESS et la survenue de réactions cutanées doit être étroitement surveillée. Les symptômes du syndrome DRESS comprennent généralement, mais non exclusivement, de la fièvre, une éruption cutanée associée à l’atteinte d’autres systèmes d’organes, une lymphadénopathie, des anomalies des tests de la fonction hépatique et une éosinophilie. Il est important de noter que des manifestations précoces d’hypersensibilité, telles que la fièvre ou une lymphadénopathie peuvent être présentes même si l’éruption cutanée n’est pas visible. Si des signes et symptômes évocateurs de ces réactions apparaissent, le cénobamate doit être immédiatement arrêté et un autre traitement doit être envisagé (le cas échéant).",
+    "tests": [
+     "liver_function"
+    ],
+    "qid": "729c9714"
+   },
+   {
+    "index": 3,
+    "section": "4.4",
+    "under": "Atteinte hépatique",
+    "quote": "Des élévations des enzymes hépatiques ainsi que de rares cas d’atteinte hépatique sévère avec insuffisance hépatique ont été rapportés chez des patients traités par le cénobamate. De nombreux cas sont survenus dans le contexte clinique d’une polythérapie avec d’autres médicaments antiépileptiques (voir rubrique 4.8). Les transaminases sériques (ALAT et ASAT), la gamma-glutamyl-transférase (GGT), les phosphatases alcalines et la bilirubine totale doivent être évaluées avant l’initiation du cénobamate et surveillées pendant le traitement. En cas de suspicion ou de découverte d’une atteinte hépatique, une réduction de la dose ou l’arrêt du cénobamate doit être envisagé.",
+    "tests": [
+     "liver_function"
+    ],
+    "qid": "8a815d6e"
+   },
+   {
+    "index": 4,
+    "section": "4.4",
+    "under": "Raccourcissement de l’intervalle QT",
+    "quote": "Un raccourcissement dose-dépendant de l’intervalle QTcF a été observé avec le cénobamate. Aucun raccourcissement de l’intervalle QTcF en dessous de 340 ms n’a été observé (voir rubrique 5.1). Les études cliniques n’ont pas montré que l’association du cénobamate avec d’autres antiépileptiques intensifiait le raccourcissement de l’intervalle QT. Les cliniciens doivent faire preuve de prudence lors de la prescription de cénobamate en association avec d’autres médicaments connus pour raccourcir l’intervalle QT.",
+    "tests": [
+     "ecg"
+    ],
+    "qid": "405a80b5"
+   },
+   {
+    "index": 5,
+    "section": "4.4",
+    "under": "Raccourcissement de l’intervalle QT",
+    "quote": "Le syndrome du QT court familial est un syndrome génétique rare, associé à un risque accru de mort subite et d’arythmies ventriculaires, en particulier de fibrillation ventriculaire. Le cénobamate ne doit pas être utilisé chez les patients présentant le syndrome du QT court familial (voir rubrique 4.3).",
+    "tests": [
+     "ecg"
+    ],
+    "qid": "eaf69e81"
+   }
+  ]
+ },
+ "felbamate": {
+  "page": "60223278",
+  "denomination": "TALOXA 600 mg, comprimé",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "La posologie quotidienne du felbamate peut alors être augmentée par paliers de 600 à 1 200 mg à intervalles d'environ une semaine, jusqu'à un maximum de 3 600 mg/jour administrés en 3 à 4 prises. Une adaptation des doses de carbamazépine, de phénytoïne, de phénobarbital, et d'acide valproïque peut être nécessaire en fonction de l'augmentation de la posologie du felbamate. Cependant, les interactions médicamenteuses sont dose-dépendantes et sont sujettes à variabilité inter-individuelle. Par conséquent, tout ajustement de posologie des antiépileptiques associés doit être basé non seulement sur les taux plasmatiques à l'état d’équilibre, mais aussi sur l'observation clinique.",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "49b187db"
+   },
+   {
+    "index": 1,
+    "section": "4.2",
+    "under": "Population pédiatrique",
+    "quote": "En association avec d'autres antiépileptiques : le felbamate administré en association avec la carbamazépine, la phénytoïne, le phénobarbital ou l'acide valproïque peut augmenter l'incidence de leurs effets indésirables respectifs (voir rubrique 4.5). La posologie initiale recommandée pour le felbamate est de 7,5 mg/kg/jour à 15 mg/kg/jour, administrés en 2 ou 3 prises. Chez les patients déjà traités par carbamazépine, phénytoïne, phénobarbital et/ou acide valproïque, la posologie de ces produits doit être réduite de 20 % à 30 % lors de l'introduction du felbamate. La posologie quotidienne du felbamate peut alors être augmentée par paliers de 7,5 mg/kg à 15 mg/kg à intervalle d'une semaine au moins, jusqu'à un maximum de 45 mg/kg/jour (sans dépasser 3 600 mg/jour) administrés en 3 à 4 prises. Une adaptation des doses de carbamazépine, de phénytoïne, de phénobarbital et/ou d'acide valproïque peut être nécessaire en fonction de l'augmentation de la posologie du felbamate. Cependant, les interactions médicamenteuses sont dose-dépendantes et sont sujettes à variabilité inter-individuelle. Par conséquent, tout ajustement de posologie des antiépileptiques associés doit être basé non seulement sur les taux plasmatiques à l'état d’équilibre, mais aussi sur l'observation clinique.",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "b47160a0"
+   },
+   {
+    "index": 2,
+    "section": "4.4",
+    "under": "",
+    "quote": "Les cas d'aplasie médullaire sont survenus 2 à 12 mois après le début du traitement par le felbamate. Cependant, l'atteinte des cellules de la moelle osseuse conduisant finalement à l'aplasie peut se produire plusieurs semaines à plusieurs mois plus tôt. De même, le risque de survenue d'une aplasie médullaire peut persister pendant plusieurs mois après l'arrêt du traitement par le felbamate. On ne sait pas s'il existe une corrélation entre le risque de survenue d'aplasie médullaire et la durée du traitement. On ne peut donc être certain qu'un patient traité par le felbamate pendant plusieurs mois sans signe d'anomalies hématologiques soit exempté de risque.",
+    "tests": [
+     "blood_count"
+    ],
+    "qid": "a672f01f"
+   },
+   {
+    "index": 3,
+    "section": "4.4",
+    "under": "",
+    "quote": "Une numération formule sanguine/plaquettes doit être pratiquée avant le début du traitement par le felbamate et toutes les 2 semaines pendant le traitement.",
+    "tests": [
+     "blood_count"
+    ],
+    "qid": "d196b5cc"
+   },
+   {
+    "index": 4,
+    "section": "4.4",
+    "under": "",
+    "quote": "En présence d'une neutropénie (polynucléaires neutrophiles 3) et/ou d'une thrombopénie (plaquettes 3), le traitement par le felbamate doit être arrêté et des investigations doivent être menées afin de rechercher une aplasie médullaire.",
+    "tests": [
+     "blood_count"
+    ],
+    "qid": "a74cc682"
+   },
+   {
+    "index": 5,
+    "section": "4.4",
+    "under": "",
+    "quote": "Une surveillance clinique soigneuse à la recherche des symptômes tels qu’ecchymoses, pétéchies, saignement ou signes d'infection et/ou d'anémie (fatigue, faiblesse, etc.) doit être effectuée. Si ces symptômes sont retrouvés, une numération formule sanguine/plaquettes doit être pratiquée immédiatement.",
+    "tests": [
+     "blood_count"
+    ],
+    "qid": "6ecbc532"
+   },
+   {
+    "index": 6,
+    "section": "4.4",
+    "under": "",
+    "quote": "Un bilan hépatique (ASAT, ALAT, bilirubine) doit être pratiqué avant le début du traitement par le felbamate. Les patients avec une fonction hépatique anormale ne doivent pas être traités par le felbamate.",
+    "tests": [
+     "liver_function"
+    ],
+    "qid": "86172737"
+   },
+   {
+    "index": 7,
+    "section": "4.4",
+    "under": "",
+    "quote": "Pendant toute la durée du traitement par le felbamate, un bilan hépatique doit être effectué toutes les 2 semaines. Le traitement par le felbamate doit être interrompu chez les patients présentant des anomalies cliniquement significatives de la fonction hépatique.",
+    "tests": [
+     "liver_function"
+    ],
+    "qid": "9ead01d6"
+   },
+   {
+    "index": 8,
+    "section": "4.4",
+    "under": "",
+    "quote": "L'apparition de signes cliniques tels qu’ictère, anorexie, nausées, vomissements et douleurs abdominales devra conduire à un bilan hépatique immédiat.",
+    "tests": [
+     "liver_function"
+    ],
+    "qid": "583d99f1"
+   },
+   {
+    "index": 9,
+    "section": "4.4",
+    "under": "",
+    "quote": "Comme rapporté avec les autres antiépileptiques, certains patients peuvent présenter une augmentation de la fréquence des crises ou l’apparition de nouveaux types de crises (voir rubrique 4.8). Ces phénomènes peuvent résulter d’un surdosage, d’une diminution des concentrations plasmatiques du traitement antiépileptique administré parallèlement, ou d’un effet paradoxal.",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "a1c60abf"
+   }
+  ]
+ },
+ "opicapone": {
+  "page": "62847721",
+  "denomination": "ONGENTYS 50 mg, gélule",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.4",
+    "under": "Autres",
+    "quote": "Des augmentations d’enzymes hépatiques ont été rapportées dans des études portant sur des inhibiteurs de type nitrocatéchol de la catéchol-O-méthyltransférase (COMT). Un examen médical général, y compris de la fonction hépatique, doit être envisagé chez les patients souffrant d’anorexie, d’asthénie et de baisse de poids d’apparition progressive au cours d’une période relativement brève.",
+    "tests": [
+     "liver_function",
+     "weight"
+    ],
+    "qid": "3858ad1f"
+   }
+  ]
+ },
+ "rufinamide": {
+  "page": "62205873",
+  "denomination": "INOVELON 40 mg/ml, suspension buvable",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.2",
+    "under": "Patients recevant du valproate :",
+    "quote": "Le valproate diminuant significativement la clairance du rufinamide, il est recommandé de diminuer la dose maximale d’Inovelon chez les patients recevant un traitement concomitant par le valproate. Le traitement doit être instauré à une posologie de 10 mg/kg/jour divisée en deux doses égales administrées à 12 heures d'intervalle environ. En fonction de la réponse clinique et de la tolérance, la posologie peut être augmentée de 10 mg/kg/jour au maximum tous les trois jours jusqu'à une posologie cible de 30 mg/kg/jour divisée en deux doses égales administrées à 12 heures d'intervalle environ. Pour cette population de patients, la posologie maximale recommandée est de 30 mg/kg/jour.",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "fe84afac"
+   },
+   {
+    "index": 1,
+    "section": "4.2",
+    "under": "Patients pesant moins de 30 kg recevant également du valproate :",
+    "quote": "Le valproate diminuant significativement la clairance du rufinamide, il est recommandé de diminuer la dose maximale d’Inovelon chez les patients de moins de 30 kg recevant un traitement concomitant par le valproate. Le traitement doit être instauré à la posologie journalière de 200 mg. En fonction de la réponse clinique et de la tolérance, après un intervalle de temps d’au moins deux jours, la posologie peut être augmentée de 200 mg/jour, jusqu’à la dose maximale recommandée de 600 mg/jour.",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "131bd30c"
+   },
+   {
+    "index": 2,
+    "section": "4.4",
+    "under": "Raccourcissement de l’intervalle QT",
+    "quote": "Dans le cadre d’une étude approfondie portant sur l’intervalle QT, le rufinamide a entraîné un raccourcissement de l’intervalle QTc, proportionnel à sa concentration. Bien que le mécanisme sous-jacent et la pertinence de ce résultat en terme d’innocuité ne soient pas connus, les cliniciens doivent utiliser leur jugement clinique avant de prescrire du rufinamide à des patients exposés à un risque accru de raccourcissement de l’intervalle QTc (par exemple, dans le cas d’un syndrome congénital du QT court ou chez les patients ayant des antécédents familiaux de ce syndrome).",
+    "tests": [
+     "ecg"
+    ],
+    "qid": "427af6c1"
+   }
+  ]
+ },
+ "thiocolchicoside": {
+  "page": "65617572",
+  "denomination": "MIOREL 4 mg, gélule",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.4",
+    "under": "",
+    "quote": "Les patients (hommes et femmes) doivent être soigneusement informés du risque potentiel d’une éventuelle grossesse et des mesures de contraception efficaces à suivre (voir rubriques 4.3 et 4.6).",
+    "tests": [
+     "pregnancy_test"
+    ],
+    "qid": "06c45c50"
+   }
+  ]
  }
 }

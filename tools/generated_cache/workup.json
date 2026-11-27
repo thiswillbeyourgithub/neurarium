@@ -730,6 +730,32 @@
     "timing": "during"
    }
   ],
+  "cenobamate": [
+   {
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61025114",
+      "provenance": "verified",
+      "quote": "Des élévations des enzymes hépatiques ainsi que de rares cas d’atteinte hépatique sévère avec insuffisance hépatique ont été rapportés chez des patients traités par le cénobamate. De nombreux cas sont survenus dans le contexte clinique d’une polythérapie avec d’autres médicaments antiépileptiques (voir rubrique 4.8). Les transaminases sériques (ALAT et ASAT), la gamma-glutamyl-transférase (GGT), les phosphatases alcalines et la bilirubine totale doivent être évaluées avant l’initiation du cénobamate et surveillées pendant le traitement. En cas de suspicion ou de découverte d’une atteinte hépatique, une réduction de la dose ou l’arrêt du cénobamate doit être envisagé."
+     }
+    ],
+    "test": "liver_function",
+    "timing": "before"
+   },
+   {
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "61025114",
+      "provenance": "verified",
+      "quote": "Des élévations des enzymes hépatiques ainsi que de rares cas d’atteinte hépatique sévère avec insuffisance hépatique ont été rapportés chez des patients traités par le cénobamate. De nombreux cas sont survenus dans le contexte clinique d’une polythérapie avec d’autres médicaments antiépileptiques (voir rubrique 4.8). Les transaminases sériques (ALAT et ASAT), la gamma-glutamyl-transférase (GGT), les phosphatases alcalines et la bilirubine totale doivent être évaluées avant l’initiation du cénobamate et surveillées pendant le traitement. En cas de suspicion ou de découverte d’une atteinte hépatique, une réduction de la dose ou l’arrêt du cénobamate doit être envisagé."
+     }
+    ],
+    "test": "liver_function",
+    "timing": "during"
+   }
+  ],
   "chlorpromazine": [
    {
     "sources": [
@@ -1274,6 +1300,56 @@
       "page": "63136857",
       "provenance": "verified",
       "quote": "Depuis la mise sur le marché, des cas graves de cytolyse hépatique ont été rapportés lors de traitements avec de l’étifoxine, à une fréquence très rare. D’après les données collectées depuis la mise sur le marché du produit, les réactions hépatiques liées à l’étifoxine surviennent généralement 2 à 4 semaines après l’initiation du traitement. Des précautions doivent être prises avec les patients présentant des facteurs de risque de troubles hépatiques, tels que la population âgée, les patients ayant des antécédents médicaux d’hépatite virale ou de toute autre pathologie identifiée individuellement par le médecin. Les troubles hépatiques peuvent être asymptomatiques et uniquement détectés lors d’analyses biologiques. Chez les patients présentant des facteurs de risque, des analyses biologiques de la fonction hépatique doivent être effectuées avant l’introduction d’un traitement à base d’étifoxine et environ un mois après le début du traitement. En cas de survenue de troubles hépatiques sous étifoxine, le traitement doit être immédiatement interrompu et ne doit jamais être réintroduit."
+     }
+    ],
+    "test": "liver_function",
+    "timing": "during"
+   }
+  ],
+  "felbamate": [
+   {
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60223278",
+      "provenance": "verified",
+      "quote": "Une numération formule sanguine/plaquettes doit être pratiquée avant le début du traitement par le felbamate et toutes les 2 semaines pendant le traitement."
+     }
+    ],
+    "test": "blood_count",
+    "timing": "before"
+   },
+   {
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60223278",
+      "provenance": "verified",
+      "quote": "Une numération formule sanguine/plaquettes doit être pratiquée avant le début du traitement par le felbamate et toutes les 2 semaines pendant le traitement."
+     }
+    ],
+    "test": "blood_count",
+    "timing": "during"
+   },
+   {
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60223278",
+      "provenance": "verified",
+      "quote": "Un bilan hépatique (ASAT, ALAT, bilirubine) doit être pratiqué avant le début du traitement par le felbamate. Les patients avec une fonction hépatique anormale ne doivent pas être traités par le felbamate."
+     }
+    ],
+    "test": "liver_function",
+    "timing": "before"
+   },
+   {
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "60223278",
+      "provenance": "verified",
+      "quote": "Pendant toute la durée du traitement par le felbamate, un bilan hépatique doit être effectué toutes les 2 semaines. Le traitement par le felbamate doit être interrompu chez les patients présentant des anomalies cliniquement significatives de la fonction hépatique."
      }
     ],
     "test": "liver_function",
