@@ -12185,6 +12185,27 @@
     }
    }
   },
+  "sufentanil": {
+   "mu": {
+    "action": "agonist",
+    "ki": {
+     "max": 0.1259,
+     "median": 0.1259,
+     "min": 0.1259,
+     "n_human": 1,
+     "n_nonhuman": 0,
+     "param": "pKi"
+    },
+    "pmid": "21215785",
+    "source": {
+     "corpus": "gtopdb_ki",
+     "page": "sufentanil",
+     "provenance": "verified",
+     "quote": "sufentanil at μ receptor (OPRM1, Human): Agonist / Full agonist, pKi 9.9 [PMID 21215785]",
+     "species": "Human"
+    }
+   }
+  },
   "sulpiride": {
    "d2": {
     "action": "antagonist",

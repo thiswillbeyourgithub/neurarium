@@ -2773,5 +2773,88 @@
     "qid": "367b8289"
    }
   ]
+ },
+ {
+  "drug": "alfentanil",
+  "name": "Alfentanil",
+  "slug": "alfentanil",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "mu",
+    "target_name": "μ (MOR)",
+    "origin": "prose",
+    "line": "It is an agonist of the μ-opioid receptor .",
+    "qid": "71ee4504"
+   }
+  ]
+ },
+ {
+  "drug": "desflurane",
+  "name": "Desflurane",
+  "slug": "desflurane",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "gaba_a",
+    "target_name": "GABA-A",
+    "origin": "prose",
+    "line": "Desflurane is known to act as a positive allosteric modulator of the inhibitory GABA A and an agonist of the inhibitory glycine receptors .",
+    "qid": "a35ca58c"
+   },
+   {
+    "target": "glycine",
+    "target_name": "Glycine",
+    "origin": "prose",
+    "line": "Desflurane is known to act as a positive allosteric modulator of the inhibitory GABA A and an agonist of the inhibitory glycine receptors .",
+    "qid": "a35ca58c"
+   },
+   {
+    "target": "glutamate",
+    "target_name": "Glutamate receptors",
+    "origin": "prose",
+    "line": "In addition, desflurane acts as an antagonist on excitatory glutamate receptors , as a negative allosteric modulator of the nicotinic acetylcholine receptor , as well as affecting other ligand-gated ion channels .",
+    "qid": "451c414e"
+   }
+  ]
+ },
+ {
+  "drug": "remifentanil",
+  "name": "Remifentanil",
+  "slug": "remifentanil",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "mu",
+    "target_name": "μ (MOR)",
+    "origin": "prose",
+    "line": "Remifentanil is a specific μ-receptor agonist.",
+    "qid": "c4491261"
+   },
+   {
+    "target": "mu",
+    "target_name": "μ (MOR)",
+    "origin": "prose",
+    "line": "Remifentanil, being a μ-receptor agonist , functions like other μ-receptor agonists, such as morphine and codeine ; it can cause euphoria and has the potential for abuse.",
+    "qid": "fb193cfd"
+   }
+  ]
+ },
+ {
+  "drug": "remimazolam",
+  "name": "Remimazolam",
+  "slug": "remimazolam",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "gaba_a",
+    "target_name": "GABA-A",
+    "origin": "rcp_5.1",
+    "line": "Le rémimazolam est un sédatif de type benzodiazépine à action ultra-courte. Les effets du rémimazolam sur le SNC dépendent de la dose administrée par voie intraveineuse et de la présence ou non d’autres médicaments. Le rémimazolam se lie aux sites benzodiazépine des récepteurs de l’acide gamma-aminobutyrique de type A [GABAA] avec une affinité élevée, tandis que son métabolite, l’acide carboxylique (CNS7054), présente une affinité environ 300 fois plus faible pour ces récepteurs. Le rémimazolam ne présente pas de sélectivité claire aux sous-types de récepteur GABA A.",
+    "corpus": "bdpm_rcp",
+    "page": "68722379",
+    "qid": "40ee36d2"
+   }
+  ]
  }
 ]

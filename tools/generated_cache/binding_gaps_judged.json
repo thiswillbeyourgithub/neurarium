@@ -2142,5 +2142,62 @@
    "reason": "hedged 'possible co-agonist or other modulatory action'; candidate 2 states the action",
    "qid": "f7ee6fc4"
   }
+ ],
+ "alfentanil": [
+  {
+   "index": 0,
+   "target": "mu",
+   "pick": true,
+   "action": "agonist",
+   "qid": "71ee4504"
+  }
+ ],
+ "desflurane": [
+  {
+   "index": 0,
+   "target": "gaba_a",
+   "pick": true,
+   "action": "pam",
+   "qid": "a35ca58c"
+  },
+  {
+   "index": 1,
+   "target": "glycine",
+   "pick": true,
+   "action": "agonist",
+   "qid": "a35ca58c"
+  },
+  {
+   "index": 2,
+   "target": "glutamate",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "451c414e"
+  }
+ ],
+ "remifentanil": [
+  {
+   "index": 0,
+   "target": "mu",
+   "pick": true,
+   "action": "agonist",
+   "qid": "c4491261"
+  },
+  {
+   "index": 1,
+   "target": "mu",
+   "pick": false,
+   "reason": "same claim as candidate 0, which is picked",
+   "qid": "fb193cfd"
+  }
+ ],
+ "remimazolam": [
+  {
+   "index": 0,
+   "target": "gaba_a",
+   "pick": true,
+   "action": "pam",
+   "qid": "40ee36d2"
+  }
  ]
 }

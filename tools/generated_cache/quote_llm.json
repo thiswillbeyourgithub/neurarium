@@ -3347,6 +3347,9 @@
 "q_39b4650b84e8": {
 "receptor:5ht2a/release_modulation[heteroreceptor:-:glutamatergic_neuron:glutamate:increase]": "opus"
 },
+"q_39d69b602247": {
+"drug:desflurane/bindings[glutamate:antagonist]": "opus"
+},
 "q_39f455bf919d": {
 "drug:brexpiprazole/bindings[5ht2a:antagonist]": "sonnet"
 },
@@ -5102,6 +5105,9 @@
 "q_599435d0fc6d": {
 "drug:sulpiride/formulations[ir]/tmax": "opus",
 "drug:sulpiride/tmax": "opus"
+},
+"q_59a4cbff955b": {
+"drug:methohexital/bindings[gaba_a:pam]": "opus"
 },
 "q_59ca22362f70": {
 "projection:insula_R->cingulate_R": "sonnet"
@@ -7245,6 +7251,10 @@
 },
 "q_7f24d4449238": {
 "drug:cyproheptadine/excretion[route:fecal]": "opus"
+},
+"q_7f37376fe007": {
+"drug:desflurane/bindings[gaba_a:pam]": "opus",
+"drug:desflurane/bindings[glycine:agonist]": "opus"
 },
 "q_7f4ed916ae5e": {
 "drug:sertraline/enzymes[cyp2c19:substrate]": "opus",
@@ -11148,6 +11158,9 @@
 "q_c0feddabbbdb": {
 "receptor:d2/release_modulation[heteroreceptor:-:cell_body:acetylcholine:decrease]": "opus"
 },
+"q_c10fe432f427": {
+"drug:alfentanil/bindings[mu:agonist]": "opus"
+},
 "q_c131432adf3f": {
 "drug:serdexmethylphenidate/brands[Azstarys]": "sonnet"
 },
@@ -13510,6 +13523,9 @@
 "q_ea2f23ec1980": {
 "drug:phenterminetopiramate/first_approval": "opus"
 },
+"q_ea3096481d4a": {
+"drug:sufentanil/bindings[mu:agonist]": "opus"
+},
 "q_ea32c15e5d74": {
 "metabolite:desmethylselegiline/bindings[mao_b:enzyme_inhibitor]": "sonnet"
 },
@@ -13579,6 +13595,9 @@
 },
 "q_eb8bec3e9e3a": {
 "drug:donepezil/bindings[ache:enzyme_inhibitor]": "sonnet"
+},
+"q_eb8de1c78b85": {
+"drug:remimazolam/bindings[gaba_a:pam]": "opus"
 },
 "q_ebd82d442fcc": {
 "drug:citalopram/brands[Zetalo]": "sonnet"
@@ -13800,6 +13819,9 @@
 },
 "q_efb98b2cf3f5": {
 "drug:amphetamine_d/bindings[vmat2:vesicular_releaser]": "opus"
+},
+"q_efc21ab42b2a": {
+"drug:remifentanil/bindings[mu:agonist]": "opus"
 },
 "q_efcbe3a15874": {
 "drug:levomepromazine/brands[Levoprome]": "sonnet"

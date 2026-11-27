@@ -20,6 +20,18 @@
   "denomination": "AGOMELATINE ZENTIVA 25 mg, comprimé pelliculé",
   "why": "plain oral"
  },
+ "alfentanil": {
+  "brands": [
+   {
+    "cis": "63670722",
+    "name": "Rapifen",
+    "quote": "RAPIFEN"
+   }
+  ],
+  "cis": "63670722",
+  "denomination": "RAPIFEN 5 mg (0,5 mg/ml), solution injectable",
+  "why": "no plain-oral product; non-modified-release intraveineuse, brand-name product"
+ },
  "alimemazine": {
   "brands": [
    {
@@ -412,6 +424,15 @@
     "cis": "67801165",
     "name": "Quviviq",
     "quote": "QUVIVIQ"
+   }
+  ]
+ },
+ "desflurane": {
+  "brands": [
+   {
+    "cis": "65421851",
+    "name": "Suprane",
+    "quote": "SUPRANE"
    }
   ]
  },
@@ -1515,6 +1536,18 @@
    }
   ]
  },
+ "remifentanil": {
+  "brands": [
+   {
+    "cis": "64569231",
+    "name": "Ultiva",
+    "quote": "ULTIVA"
+   }
+  ],
+  "cis": "64569231",
+  "denomination": "ULTIVA 2 mg, poudre pour solution injectable ou pour perfusion",
+  "why": "no plain-oral product; non-modified-release intraveineuse, brand-name product"
+ },
  "rimegepant": {
   "brands": [
    {
@@ -1674,6 +1707,23 @@
     "quote": "DIACOMIT"
    }
   ]
+ },
+ "sufentanil": {
+  "brands": [
+   {
+    "cis": "61562566",
+    "name": "Sufenta",
+    "quote": "SUFENTA"
+   },
+   {
+    "cis": "68968587",
+    "name": "Dzuveo",
+    "quote": "DZUVEO"
+   }
+  ],
+  "cis": "61562566",
+  "denomination": "SUFENTA 10 microgrammes/2 ml, solution injectable (I.V. ou péridurale)",
+  "why": "no plain-oral product; non-modified-release intraveineuse;péridurale, brand-name product"
  },
  "sulpiride": {
   "brands": [

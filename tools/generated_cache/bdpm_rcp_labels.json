@@ -27,6 +27,20 @@
    "5.1"
   ]
  },
+ "alfentanil": {
+  "cis": "63670722",
+  "date_source": "file mtime",
+  "denomination": "RAPIFEN 5 mg (0,5 mg/ml), solution injectable",
+  "fetched": "2026-11-27",
+  "page": "63670722",
+  "sections": [
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
  "alimemazine": {
   "cis": "66801066",
   "date_source": "file mtime",
@@ -598,6 +612,20 @@
   "denomination": "QUVIVIQ 25 mg, comprimé pelliculé",
   "fetched": "2026-09-30",
   "page": "67801165",
+  "sections": [
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
+ "desflurane": {
+  "cis": "65421851",
+  "date_source": "file mtime",
+  "denomination": "SUPRANE, liquide pour inhalation par vapeur",
+  "fetched": "2026-11-27",
+  "page": "65421851",
   "sections": [
    "4.1",
    "4.2",
@@ -2053,6 +2081,46 @@
    "5.1"
   ]
  },
+ "remifentanil": {
+  "cis": "64569231",
+  "date_source": "file mtime",
+  "denomination": "ULTIVA 2 mg, poudre pour solution injectable ou pour perfusion",
+  "fetched": "2026-11-27",
+  "page": "64569231",
+  "sections": [
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
+ "remimazolam": {
+  "cis": "68722379",
+  "date_source": "justelesRCP EMA scrape manifest last_fetch",
+  "denomination": "Byfavo (EMEA/H/C/005246)",
+  "ema": {
+   "authorised": "2021-03-26",
+   "epar": "https://www.ema.europa.eu/en/medicines/human/EPAR/byfavo",
+   "generic": false,
+   "holder": "Paion Pharma GmbH",
+   "language": "fr",
+   "number": "EMEA/H/C/005246",
+   "pdf": "https://www.ema.europa.eu/fr/documents/product-information/byfavo-epar-product-information_fr.pdf",
+   "pi_updated": "2026-08-26",
+   "product": "Byfavo",
+   "status": "Authorised"
+  },
+  "fetched": "2026-09-30",
+  "page": "68722379",
+  "sections": [
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
  "rimegepant": {
   "cis": "65899221",
   "date_source": "justelesRCP EMA scrape manifest last_fetch",
@@ -2255,6 +2323,20 @@
   "denomination": "DIACOMIT 250 mg, poudre pour suspension buvable en sachet",
   "fetched": "2026-09-30",
   "page": "61501691",
+  "sections": [
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
+ "sufentanil": {
+  "cis": "61562566",
+  "date_source": "file mtime",
+  "denomination": "SUFENTA 10 microgrammes/2 ml, solution injectable (I.V. ou péridurale)",
+  "fetched": "2026-11-27",
+  "page": "61562566",
   "sections": [
    "4.1",
    "4.2",
