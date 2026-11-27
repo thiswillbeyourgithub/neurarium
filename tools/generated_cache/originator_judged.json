@@ -782,7 +782,26 @@
    "company": "merck_co",
    "qid": "8b183e9b"
   },
-  "dantrolene": null
+  "dantrolene": null,
+  "zolmitriptan": null,
+  "almotriptan": {
+   "index": 0,
+   "name": "Almirall-Prodesfarma",
+   "company": null,
+   "qid": "692e233e"
+  },
+  "frovatriptan": {
+   "index": 0,
+   "name": "Vernalis",
+   "company": null,
+   "qid": "e9d709fc"
+  },
+  "lasmiditan": {
+   "index": 1,
+   "name": "Eli Lilly and Company",
+   "company": "eli_lilly_and_company",
+   "qid": "51197fa0"
+  }
  },
  "companies": {
   "novartis": {

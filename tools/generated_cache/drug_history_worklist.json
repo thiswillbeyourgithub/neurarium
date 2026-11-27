@@ -8574,6 +8574,134 @@
      "qid": "d66c772d"
     }
    ]
+  },
+  "zolmitriptan": {
+   "name": "Zolmitriptan",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "zolmitriptan",
+     "line": "It was patented in 1990 and was approved for medical use in 1997.",
+     "context": "Structurally , it is a triptan and a tryptamine derivative .",
+     "qid": "b489abc0"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "zolmitriptan",
+     "line": "It was first introduced for medical use in the United States in 1997.",
+     "context": "Zolmitriptan was patented in 1990 and was first described in the scientific literature by 1994.",
+     "qid": "d64c6e3f"
+    }
+   ]
+  },
+  "eletriptan": {
+   "name": "Eletriptan",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "eletriptan",
+     "line": "Eletriptan was approved for medical use in the United States in 2002.",
+     "context": "Eletriptan is a therapeutic alternative on the World Health Organization's List of Essential Medicines .",
+     "qid": "d23536d2"
+    }
+   ]
+  },
+  "naratriptan": {
+   "name": "Naratriptan",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "naratriptan",
+     "line": "It was patented in 1987 and approved for medical use in 1997.",
+     "context": "It is a selective serotonin 5-HT 1 receptor family agonist .",
+     "qid": "42f38684"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "naratriptan",
+     "line": "Naratriptan was patented in 1987 and was introduced for medical use in 1997.",
+     "context": "It was patented in 1987 and approved for medical use in 1997.",
+     "qid": "1cad2cf6"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "naratriptan",
+     "line": "In the United States, the Food and Drug Administration (FDA) approved naratriptan on February 11, 1998.",
+     "context": "Naratriptan was patented in 1987 and was introduced for medical use in 1997.",
+     "qid": "5c11b7d9"
+    }
+   ]
+  },
+  "almotriptan": {
+   "name": "Almotriptan",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "almotriptan",
+     "line": "Almotriptan was patented in 1992 and approved for medical use in 2000.",
+     "context": "Almotriptan , sold under the brand names Axert and Almogran among others, is a triptan medication used in the treatment of heavy migraine headache .",
+     "qid": "6a66ea67"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "almotriptan",
+     "line": "Almotriptan was patented in 1992 and was approved for medical use in 2000.",
+     "context": "It was discovered and developed by Almirall-Prodesfarma .",
+     "qid": "a77b88e2"
+    }
+   ]
+  },
+  "frovatriptan": {
+   "name": "Frovatriptan",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "frovatriptan",
+     "line": "It was approved for medical use in the United States in 2001.",
+     "context": "Frovatriptan was first described in the scientific literature by 1997.",
+     "qid": "b5b014e8"
+    }
+   ]
+  },
+  "lasmiditan": {
+   "name": "Lasmiditan",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "lasmiditan",
+     "line": "Lasmiditan was approved in the United States in October 2019 and became available in February 2020.",
+     "context": "Common side effects include sleepiness , dizziness , tiredness , and numbness .",
+     "qid": "5695c2fc"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "lasmiditan",
+     "line": "In August 2026, the FDA withdrew approval of Reyvow at the request of Eli Lilly after the company notified the agency that the drug was no longer marketed.",
+     "context": "Lasmiditan is a Schedule V controlled substance in the United States.",
+     "qid": "e0831d7a"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "lasmiditan",
+     "line": "The FDA approved the drug in October 2019.",
+     "context": "Trials were conducted at 224 sites in the United States, the United Kingdom, and Germany.",
+     "qid": "b2902d5c"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "lasmiditan",
+     "line": "On 23 June 2022, the Committee for Medicinal Products for Human Use (CHMP) of the European Medicines Agency (EMA) adopted a positive opinion, recommending the granting of a marketing authorization for the medicinal product Rayvow, intended for the treatment of migraine.",
+     "context": "It was placed into Schedule V in January 2020.",
+     "qid": "e6b6b13b"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "lasmiditan",
+     "line": "Rayvow was approved for medical use in the European Union in August 2022.",
+     "context": "The applicant for this medicinal product is Eli Lilly Nederland B.V.",
+     "qid": "33ae18f3"
+    }
+   ]
   }
  }
 }

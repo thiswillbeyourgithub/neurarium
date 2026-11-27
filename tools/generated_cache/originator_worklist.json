@@ -5452,6 +5452,62 @@
      "qid": "1ae6f9d5"
     }
    ]
+  },
+  "zolmitriptan": {
+   "name": "Zolmitriptan",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "zolmitriptan",
+     "line": "Zolmitriptan was patented in 1990 and was first described in the scientific literature by 1994.",
+     "qid": "44807760"
+    }
+   ]
+  },
+  "almotriptan": {
+   "name": "Almotriptan",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "almotriptan",
+     "line": "It was discovered and developed by Almirall-Prodesfarma .",
+     "qid": "692e233e"
+    }
+   ]
+  },
+  "frovatriptan": {
+   "name": "Frovatriptan",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "frovatriptan",
+     "line": "Frovatriptan , sold under the brand name Frova among others, is a triptan medication developed by Vernalis for the treatment of migraine headaches and for short term prevention of menstrual migraine .",
+     "qid": "e9d709fc"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "frovatriptan",
+     "line": "Frovatriptan was first described in the scientific literature by 1997.",
+     "qid": "f84dfa87"
+    }
+   ]
+  },
+  "lasmiditan": {
+   "name": "Lasmiditan",
+   "candidates": [
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "lasmiditan",
+     "line": "It was developed by Eli Lilly .",
+     "qid": "52090986"
+    },
+    {
+     "corpus": "wikipedia_pharm",
+     "page": "lasmiditan",
+     "line": "Lasmiditan was discovered by Eli Lilly and Company and was then relicensed to CoLucid Pharmaceuticals in 2006, until CoLucid was bought by Eli Lilly in 2017, to allow Eli Lilly to reacquire the drug's intellectual property.",
+     "qid": "51197fa0"
+    }
+   ]
   }
  },
  "companies": {

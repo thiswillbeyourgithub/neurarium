@@ -2689,5 +2689,73 @@
  "dantrolene": {
   "approval": null,
   "withdrawals": []
+ },
+ "zolmitriptan": {
+  "approval": {
+   "agency": null,
+   "country": null,
+   "index": 0,
+   "year": 1997,
+   "qid": "b489abc0"
+  },
+  "withdrawals": []
+ },
+ "eletriptan": {
+  "approval": {
+   "agency": null,
+   "country": "us",
+   "index": 0,
+   "year": 2002,
+   "qid": "d23536d2"
+  },
+  "withdrawals": []
+ },
+ "naratriptan": {
+  "approval": {
+   "agency": null,
+   "country": null,
+   "index": 0,
+   "year": 1997,
+   "qid": "42f38684"
+  },
+  "withdrawals": []
+ },
+ "almotriptan": {
+  "approval": {
+   "agency": null,
+   "country": null,
+   "index": 0,
+   "year": 2000,
+   "qid": "6a66ea67"
+  },
+  "withdrawals": []
+ },
+ "frovatriptan": {
+  "approval": {
+   "agency": null,
+   "country": "us",
+   "index": 0,
+   "year": 2001,
+   "qid": "b5b014e8"
+  },
+  "withdrawals": []
+ },
+ "lasmiditan": {
+  "approval": {
+   "agency": "fda",
+   "country": "us",
+   "index": 2,
+   "year": 2019,
+   "qid": "b2902d5c"
+  },
+  "withdrawals": [
+   {
+    "country": "us",
+    "index": 1,
+    "reason": "unstated",
+    "year": 2026,
+    "qid": "e0831d7a"
+   }
+  ]
  }
 }
