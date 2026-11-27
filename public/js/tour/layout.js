@@ -60,6 +60,31 @@ export function clearHole(st) {
   st.blocker.style.clipPath = "none";
 }
 
+// The ring's box around targets `els`: their union rect padded by RING_PAD.
+function ringBox(els) {
+  const r = unionRect(els);
+  return {
+    x: Math.max(0, r.left - RING_PAD),
+    y: Math.max(0, r.top - RING_PAD),
+    w: r.width + RING_PAD * 2,
+    h: r.height + RING_PAD * 2,
+  };
+}
+
+// Whether the shown ring no longer sits on its target: a target can move with no
+// scroll event at all (a Wikipedia lead or image arriving above it reflows the panel),
+// and nothing else would re-run layout then, leaving the ring a few px off the row.
+export function ringStale(st, step) {
+  const { ring } = st;
+  if (!ring || ring.hidden) return false;
+  const els = resolveTargets(step);
+  if (!els.length) return false;
+  const b = ringBox(els);
+  const off = (css, v) => Math.abs((parseFloat(css) || 0) - v) > 1;
+  return off(ring.style.left, b.x) || off(ring.style.top, b.y)
+    || off(ring.style.width, b.w) || off(ring.style.height, b.h);
+}
+
 // Ring + blocker + bubble for the current step (the veils and the scroll arrow are
 // the caller's, see layout() in js/tour/index.js).
 export function layoutStep(st, step) {
@@ -80,11 +105,7 @@ export function layoutStep(st, step) {
   blocker.classList.toggle("modal", dim && !spotlight);
 
   if (spotlight) {
-    const r = unionRect(els);
-    const x = Math.max(0, r.left - RING_PAD);
-    const y = Math.max(0, r.top - RING_PAD);
-    const w = r.width + RING_PAD * 2;
-    const h = r.height + RING_PAD * 2;
+    const { x, y, w, h } = ringBox(els);
     ring.hidden = false;
     ring.classList.toggle("interactive", interactive);
     // spotlightOnly: keep the accent ring but drop the page-dimming box-shadow, so

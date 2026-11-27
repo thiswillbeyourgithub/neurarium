@@ -81,7 +81,7 @@
 
 import { loadString, saveString } from "../prefs.js";
 import { applyVeil, buildOverlay, removeVeils } from "./overlay.js";
-import { clearHole, layoutStep, primaryTarget, tapTarget } from "./layout.js";
+import { clearHole, layoutStep, primaryTarget, ringStale, tapTarget } from "./layout.js";
 import { SCROLL_RECHECK_MS, createTourScroll, targetArrived } from "./scroll.js";
 
 const ADVANCE_MS = 360; // let the tapped action (open a tab, spread) settle first
@@ -126,6 +126,7 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
   let gateCleanup = null; // the current gate's teardown (removes its listeners)
   let shownOnce = false; // false until the first step paints (snap it, don't fly in)
   let revealTimer = null; // the setTimeout that ends a step's opening beat + fades in the overlay
+  let driftWatch = null; // the setInterval re-laying out a ring its target moved away from
 
   // Storage blocked reads as unseen (no worse than a re-show); the mark is best-effort.
   const seen = () => !!seenKey && loadString(seenKey) === "1";
@@ -198,6 +199,7 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
       gateCleanup = null;
     }
     gateFired = false;
+    if (driftWatch) { clearInterval(driftWatch); driftWatch = null; }
     removeVeils(st);
   }
 
@@ -332,6 +334,13 @@ export function createTour({ steps, labels, onEnd, seenKey }) {
     // so re-settle a couple of times: the bubble must track the target's final
     // spot, or it can end up covering the very control the user must tap.
     scheduleLayout();
+
+    // Then keep the ring glued to its target for as long as the step shows: a reflow
+    // with no scroll event (content arriving above the row after the last scheduled
+    // layout) would otherwise leave it stale, and a tap on the ring would miss the row.
+    driftWatch = setInterval(() => {
+      if (st.active && st.index === i && !st.scrolling && ringStale(st, step)) layout();
+    }, SCROLL_RECHECK_MS);
 
     // After the opening beat, drop pre-reveal so the (already positioned, still
     // invisible) dim + highlight fade in over the settled scene. A scrollTo step also
