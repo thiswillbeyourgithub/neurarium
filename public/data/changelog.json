@@ -1,6 +1,67 @@
 {
   "versions": [
     {
+      "version": "3.189.0",
+      "date": "2026-11-28",
+      "entries": [
+        {
+          "category": "added",
+          "text": "The interface now uses Atkinson Hyperlegible Next, a typeface designed by the Braille Institute to keep similar letters (I, l, 1) apart for readers with low vision",
+          "commits": [
+            "50e0e1df"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Missing bindings: orphenadrine blocks muscarinic receptors, riluzole blocks sodium channels, thiocolchicoside acts on glycine receptors, levomethadone activates the mu opioid receptor and cenobamate enhances GABA-A receptors",
+          "commits": [
+            "5962f225",
+            "9b593083",
+            "23e8a096"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Caffeine activates the muscle ryanodine receptor RyR1",
+          "commits": [
+            "786b9235"
+          ]
+        },
+        {
+          "category": "added",
+          "text": "Fosaprepitant now reads its European label: the clotting checks it asks for under long-term warfarin, plus its US holder and first US approval",
+          "commits": [
+            "8448247a",
+            "28548e8a"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "Dihydroergotamine's 45 minute time to peak belongs to its nasal spray, so it now sits on that formulation instead of the molecule",
+          "commits": [
+            "f9fa4754",
+            "9989638a"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "Felbamate's NMDA antagonism and methysergide's 5-HT2B antagonism are flagged as contradicted, by the French label and by a human assay respectively",
+          "commits": [
+            "22fce030",
+            "8a810ed0"
+          ]
+        },
+        {
+          "category": "fixed",
+          "text": "Ergotamine's 5-HT1A and D2 bindings now carry their direction (agonist), read off a table the reader used to skip",
+          "commits": [
+            "aca83a60",
+            "4d077d64"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.188.0",
       "date": "2026-11-27",
       "entries": [
