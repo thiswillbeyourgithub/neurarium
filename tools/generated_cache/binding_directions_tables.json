@@ -521,5 +521,24 @@
     "action": "antagonist"
    }
   ]
+ },
+ "ergotamine": {
+  "slug": "ergotamine",
+  "rows": [
+   {
+    "target": "5ht1a",
+    "wiki_name": "5-HT 1A",
+    "cell": "Full agonist",
+    "quote": "5-HT 1A | 0.17–0.3 | ? | Full agonist",
+    "action": "agonist"
+   },
+   {
+    "target": "d2",
+    "wiki_name": "D 2",
+    "cell": "Agonist",
+    "quote": "D 2 | 4.0–>10,000 | – | Agonist",
+    "action": "agonist"
+   }
+  ]
  }
 }
