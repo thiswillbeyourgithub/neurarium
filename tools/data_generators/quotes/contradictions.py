@@ -72,6 +72,13 @@ def _dailymed(setid: str, quote: str) -> dict[str, Any]:
             "provenance": "verified", "llm": "opus"}
 
 
+def _bdpm_rcp(cis: str, quote: str) -> dict[str, Any]:
+    """A denial read off a stored French RCP section 4.x / 5.1 (corpus #24, ``page`` =
+    product CIS), judged like any LLM-picked quote."""
+    return {"corpus": "bdpm_rcp", "page": cis, "quote": quote,
+            "provenance": "verified", "llm": "opus"}
+
+
 def _gtopdb_class(target_id: int, quote: str) -> dict[str, Any]:
     """A transduction row read off the GtoPdb classification page (corpus #12): a table
     row copied by code, so it needs no judge (the corpus is ``machine``)."""
@@ -211,6 +218,16 @@ CONTRADICTIONS: dict[str, dict[str, Any] | list[dict[str, Any]]] = {
             "Amisulpride functions primarily as a dopamine D 2 and D 3 receptor "
             "antagonist"),
     ],
+
+    # Wikipedia (citing Kleckner 1999, NR2B-selective block) says felbamate "does cause
+    # pharmacological inhibition of NMDA receptors"; the French RCP 5.1 (Taloxa) reports
+    # in vitro assays where it did not antagonise NMDA neurotoxicity and concludes the
+    # opposite in so many words. Two graded sources, opposite verdicts on one binding.
+    "drug:felbamate/bindings[nmda:antagonist]": _bdpm_rcp(
+        "60223278",
+        "le felbamate est dénué de propriétés excito-toxiques et n'antagonise pas les "
+        "effets neuro-toxiques du NMDA, du kaïnate ou du quisqualate in vitro ; ce n'est "
+        "donc pas un antagoniste du NMDA."),
 
     # --- active-metabolite links another corpus denies. The link and its own sources
     # stay; the bullet quotes the denial underneath it. ---
