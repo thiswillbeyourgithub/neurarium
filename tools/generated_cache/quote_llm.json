@@ -1267,6 +1267,7 @@
 "drug:chlordiazepoxide/brands[Librium]": "sonnet"
 },
 "q_14cbb68acb29": {
+"drug:felbamate/formulations[ir]/half_life": "opus",
 "drug:felbamate/half_life": "opus"
 },
 "q_14d70f7f9135": {
@@ -1493,6 +1494,7 @@
 "drug:ramelteon/bindings[mt2:agonist]": "sonnet"
 },
 "q_18d5a02da990": {
+"drug:prazepam/formulations[ir]/half_life": "opus",
 "drug:prazepam/half_life": "opus"
 },
 "q_18e2779cde70": {
@@ -2978,6 +2980,7 @@
 "drug:selegiline/brands[Emsam]": "sonnet"
 },
 "q_30a827237c42": {
+"drug:eslicarbazepine_acetate/formulations[ir]/tmax": "opus",
 "drug:eslicarbazepine_acetate/tmax": "opus"
 },
 "q_30ad1829f2a3": {
@@ -4046,6 +4049,7 @@
 "receptor:beta2/effects[agonism:cardiovascular]": "opus"
 },
 "q_41c75713b6b4": {
+"drug:remifentanil/formulations[injection]/half_life": "opus",
 "drug:remifentanil/half_life": "opus"
 },
 "q_41ca7968b335": {
@@ -5122,6 +5126,7 @@
 "drug:phenobarbital/workup[pregnancy_test:before]": "opus"
 },
 "q_5396ce63d8c9": {
+"drug:ubrogepant/formulations[ir]/tmax": "opus",
 "drug:ubrogepant/tmax": "opus"
 },
 "q_53998494f953": {
@@ -5782,6 +5787,7 @@
 "receptor:alpha1d/effects[antagonism:orthostatic_hypotension]": "opus"
 },
 "q_5fc636147a44": {
+"drug:fosphenytoin/formulations[injection]/tmax": "opus",
 "drug:fosphenytoin/tmax": "opus"
 },
 "q_5fc9770dfcc1": {
@@ -6116,6 +6122,7 @@
 "drug:phenytoin/first_approval": "opus"
 },
 "q_649afaf8d289": {
+"drug:ubrogepant/formulations[ir]/half_life": "opus",
 "drug:ubrogepant/half_life": "opus"
 },
 "q_64a1b3a2c066": {
@@ -6291,6 +6298,7 @@
 "receptor:d5/locations[thalamus]": "sonnet"
 },
 "q_677cac4fc9e5": {
+"drug:carisoprodol/formulations[ir]/tmax": "opus",
 "drug:carisoprodol/tmax": "opus"
 },
 "q_677cace8b2d0": {
@@ -7049,6 +7057,7 @@
 "drug:caffeine/excretion[route:renal]": "opus"
 },
 "q_73806b12de67": {
+"drug:felbamate/formulations[ir]/tmax": "opus",
 "drug:felbamate/tmax": "opus"
 },
 "q_7391ffde1e80": {
@@ -7435,6 +7444,7 @@
 "receptor:m2/locations[occipital]": "opus"
 },
 "q_7a2adc8e4ae3": {
+"drug:dantrolene/formulations[ir]/tmax": "opus",
 "drug:dantrolene/tmax": "opus"
 },
 "q_7a2db16a3eb8": {
@@ -7773,6 +7783,7 @@
 "drug:lacosamide/excretion[route:renal]": "opus"
 },
 "q_7ffa761a1528": {
+"drug:alfentanil/formulations[injection]/half_life": "opus",
 "drug:alfentanil/half_life": "opus"
 },
 "q_7ffedfa00dd1": {
@@ -8134,6 +8145,7 @@
 "receptor:gaba_a/effects[antagonism:seizures]": "opus"
 },
 "q_863af3706133": {
+"drug:riluzole/formulations[ir]/half_life": "opus",
 "drug:riluzole/half_life": "opus"
 },
 "q_86535085b5d0": {
@@ -10461,6 +10473,7 @@
 "drug:quetiapine/seizure_threshold[lowers]": "opus"
 },
 "q_a9e1bd23bf3c": {
+"drug:dantrolene/formulations[ir]/half_life": "opus",
 "drug:dantrolene/half_life": "opus"
 },
 "q_a9e5e1238da5": {
@@ -12939,6 +12952,7 @@
 "drug:phenobarbital/enzymes[cyp2c19:substrate]/strength": "opus"
 },
 "q_d35d57fcb4d7": {
+"drug:riluzole/formulations[ir]/tmax": "opus",
 "drug:riluzole/tmax": "opus"
 },
 "q_d361082354cf": {
@@ -14356,6 +14370,7 @@
 "metabolite:desmethylselegiline/bindings[mao_b:enzyme_inhibitor]": "sonnet"
 },
 "q_ea461dfa2a65": {
+"drug:oxetorone/formulations[ir]/half_life": "opus",
 "drug:oxetorone/half_life": "opus"
 },
 "q_ea4d6fba3563": {
@@ -14686,6 +14701,7 @@
 "drug:furosemide/excretion[route:renal]": "opus"
 },
 "q_f007ac98d282": {
+"drug:fosphenytoin/formulations[injection]/half_life": "opus",
 "drug:fosphenytoin/half_life": "opus"
 },
 "q_f02329429198": {
@@ -15487,6 +15503,7 @@
 "drug:clozapine/bindings[5ht2c:antagonist]": "sonnet"
 },
 "q_fc93594eca09": {
+"drug:sufentanil/formulations[injection]/half_life": "opus",
 "drug:sufentanil/half_life": "opus"
 },
 "q_fca19889661b": {
