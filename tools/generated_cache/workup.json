@@ -1524,6 +1524,23 @@
     "timing": "before"
    }
   ],
+  "fosaprepitant": [
+   {
+    "conditions": [
+     "Chez les patients traités au long cours par la warfarine"
+    ],
+    "sources": [
+     {
+      "corpus": "bdpm_rcp",
+      "page": "EMEA-H-C-000743",
+      "provenance": "verified",
+      "quote": "Chez les patients traités au long cours par la warfarine, l’INR (International Normalised Ratio) doit être étroitement surveillé pendant 14 jours après l'utilisation du fosaprépitant (voir rubrique 4.5)."
+     }
+    ],
+    "test": "coagulation",
+    "timing": "during"
+   }
+  ],
   "fosphenytoin": [
    {
     "sources": [

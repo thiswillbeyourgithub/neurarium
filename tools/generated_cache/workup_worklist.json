@@ -95,6 +95,72 @@
    }
   ]
  },
+ "alfentanil": {
+  "page": "63670722",
+  "denomination": "RAPIFEN 5 mg (0,5 mg/ml), solution injectable",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "La posologie sera individualisée. Les facteurs à prendre en compte pour déterminer la posologie sont l'âge, le poids corporel, l'état physique, les maladies sous-jacentes (voir rubrique 4.4), l'utilisation d'autres médicaments (voir rubrique 4.5), le type d'anesthésie employé et le type et la durée de l'intervention chirurgicale.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "5effec94"
+   },
+   {
+    "index": 1,
+    "section": "4.2",
+    "under": "Population pédiatrique",
+    "quote": "Les paramètres pharmacocinétiques sont très variables chez les nouveau-nés, particulièrement chez les prématurés. La clairance et la liaison aux protéines sont plus faibles et une dose plus faible de RAPIFEN peut être nécessaire. Les nouveau-nés doivent être étroitement surveillés et la dose d’alfentanil doit être adaptée en fonction de la réponse.",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "52403fbd"
+   },
+   {
+    "index": 2,
+    "section": "4.2",
+    "under": "Population pédiatrique",
+    "quote": "La clairance peut être supérieure à celle de l’adulte. Il peut être nécessaire d’augmenter la vitesse de perfusion de RAPIFEN pour maintenir l’analgésie.",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "629a7a35"
+   },
+   {
+    "index": 3,
+    "section": "4.2",
+    "under": "Population pédiatrique",
+    "quote": "La clairance peut être légèrement supérieure chez l’enfant et il peut être nécessaire d’augmenter la vitesse de perfusion.",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "9d5ba3ac"
+   },
+   {
+    "index": 4,
+    "section": "4.4",
+    "under": "Précautions d’emploi",
+    "quote": "L'administration d'alfentanil en bolus IV rapides doit être évitée chez les patients présentant des troubles de la circulation intracérébrale : chez ces patients, une diminution transitoire de la pression artérielle a parfois été associée à une réduction de courte durée de la pression cérébrale de perfusion.",
+    "tests": [
+     "blood_pressure"
+    ],
+    "qid": "28cece67"
+   },
+   {
+    "index": 5,
+    "section": "4.4",
+    "under": "Précautions d’emploi",
+    "quote": "En cas d'hypothyroïdie non contrôlée, de rares cas de chutes tensionnelles ont été rapportés. En conséquence, la dose initiale sera diminuée et la surveillance post-opératoire doit être prolongée.",
+    "tests": [
+     "thyroid_function"
+    ],
+    "qid": "c896eb24"
+   }
+  ]
+ },
  "alimemazine": {
   "page": "66801066",
   "denomination": "THERALENE 5 mg, comprimé pelliculé sécable",
@@ -118,6 +184,22 @@
      "blood_count"
     ],
     "qid": "f19a7fe0"
+   }
+  ]
+ },
+ "almotriptan": {
+  "page": "64165648",
+  "denomination": "ALMOTRIPTAN ARROW 12,5 mg, comprimé pelliculé",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.4",
+    "under": "",
+    "quote": "Dans de très rares cas, comme avec les autres agonistes des récepteurs 5HT1B/1D, des vasospasmes des artères coronaires et des infarctus du myocarde ont été rapportés, par conséquent l’almotriptan ne doit pas être administré aux patients qui pourraient être atteints d’une pathologie coronarienne non diagnostiquée sans la recherche préalable d’une potentielle pathologie cardio-vasculaire sous-jacente. Ces patients incluent les femmes ménopausées, les hommes de plus de 40 ans et les patients présentant d’autres facteurs de risques de pathologie coronarienne tels que l’hypertension non contrôlée, l’hypercholestérolémie, l’obésité, le diabète, le tabagisme ou des antécédents familiaux clairs de pathologies cardiaques.",
+    "tests": [
+     "lipids"
+    ],
+    "qid": "5b836622"
    }
   ]
  },
@@ -479,6 +561,22 @@
    }
   ]
  },
+ "aprepitant": {
+  "page": "66046596",
+  "denomination": "ATANTO 80 mg, gélule",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.4",
+    "under": "Co-administration avec la warfarine (un substrat du CYP2C9)",
+    "quote": "Chez les patients traités au long cours par la warfarine, l’INR (International Normalised Ratio) doit être étroitement surveillé au cours du traitement par ATANTO et pendant 14 jours après chaque cure de 3 jours d’ATANTO (voir rubrique 4.5).",
+    "tests": [
+     "coagulation"
+    ],
+    "qid": "e380732c"
+   }
+  ]
+ },
  "aripiprazole": {
   "page": "60031071",
   "denomination": "ARIPIPRAZOLE SANDOZ 10 mg, comprimé orodispersible",
@@ -621,6 +719,22 @@
      "glycaemia"
     ],
     "qid": "0e28124f"
+   }
+  ]
+ },
+ "atogepant": {
+  "page": "67880725",
+  "denomination": "AQUIPTA 10 mg, comprimé",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.2",
+    "under": "Insuffisance rénale",
+    "quote": "Aucun ajustement posologique n’est recommandé chez les patients présentant une insuffisance rénale légère ou modérée (voir rubrique 5.2). Chez les patients présentant une insuffisance rénale sévère (clairance de la créatinine [ClCr] de 15 à 29 mL/min) et chez les patients atteints d’insuffisance rénale terminale (IRT) (ClCr < 15 mL/min), la dose recommandée est de 10 mg une fois par jour. Chez les patients atteints d’IRT sous hémodialyse intermittente, AQUIPTA doit être pris de préférence après la séance de dialyse.",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "a06c521e"
    }
   ]
  },
@@ -1750,6 +1864,72 @@
    }
   ]
  },
+ "cenobamate": {
+  "page": "61025114",
+  "denomination": "ONTOZRY 100 mg, comprimé pelliculé",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.2",
+    "under": "Personnes âgées (65 ans et plus)",
+    "quote": "Les études cliniques sur le cénobamate n’ont pas inclus suffisamment de patients âgés de 65 ans et plus pour déterminer si leur réponse au traitement est différente de celle des patients plus jeunes. Les sujets âgés traités par antiépileptiques semblent présenter une plus grande incidence de réactions indésirables tels que fatigue, troubles de la marche, chutes, ataxie, troubles de l’équilibre, étourdissements et somnolence. En général, il convient d’être prudent dans l’adaptation posologique pour un patient âgé et commencer par la limite basse de l’intervalle posologique, afin de tenir compte de la diminution des fonctions rénale et hépatique, plus fréquente dans cette population ainsi que des comorbidités et interactions potentielles chez ces patients polymédiqués (voir rubrique 4.4).",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "07d483b7"
+   },
+   {
+    "index": 1,
+    "section": "4.2",
+    "under": "Insuffisance rénale",
+    "quote": "Il convient d’être prudent et d’envisager une réduction de la dose cible lors de l’utilisation du cénobamate chez les patients présentant une insuffisance rénale légère à modérée (clairance de la créatinine de 30 à < 90 ml/min) ou sévère (clairance de la créatinine < 30 ml/min). La dose maximale recommandée pour les patients atteints d’insuffisance rénale légère, modérée ou sévère est de 300 mg/jour. L’utilisation du cénobamate n’est pas recommandée chez les patients atteints d’insuffisance rénale terminale ou chez les patients sous hémodialyse.",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "14476236"
+   },
+   {
+    "index": 2,
+    "section": "4.4",
+    "under": "Idées suicidaires",
+    "quote": "Une réaction médicamenteuse avec éosinophilie et symptômes systémiques (syndrome DRESS [Drug Reaction with Eosinophilia and Systemic Symptoms]), qui peut engager le pronostic vital ou être mortelle, a été rapportée avec le cénobamate lorsque le traitement a été instauré à des doses plus élevées puis soumis à une augmentation rapide (hebdomadaire ou plus rapprochée) (voir rubrique 4.8). Aucun cas de syndrome DRESS n’a été rapporté dans une étude de sécurité en ouvert menée auprès de 1 340 patients épileptiques lorsque le cénobamate était instauré à 12,5 mg/jour avec augmentation de la dose toutes les deux semaines. Au moment de la prescription, les patients doivent être informés des signes et symptômes du syndrome DRESS et la survenue de réactions cutanées doit être étroitement surveillée. Les symptômes du syndrome DRESS comprennent généralement, mais non exclusivement, de la fièvre, une éruption cutanée associée à l’atteinte d’autres systèmes d’organes, une lymphadénopathie, des anomalies des tests de la fonction hépatique et une éosinophilie. Il est important de noter que des manifestations précoces d’hypersensibilité, telles que la fièvre ou une lymphadénopathie peuvent être présentes même si l’éruption cutanée n’est pas visible. Si des signes et symptômes évocateurs de ces réactions apparaissent, le cénobamate doit être immédiatement arrêté et un autre traitement doit être envisagé (le cas échéant).",
+    "tests": [
+     "liver_function"
+    ],
+    "qid": "729c9714"
+   },
+   {
+    "index": 3,
+    "section": "4.4",
+    "under": "Atteinte hépatique",
+    "quote": "Des élévations des enzymes hépatiques ainsi que de rares cas d’atteinte hépatique sévère avec insuffisance hépatique ont été rapportés chez des patients traités par le cénobamate. De nombreux cas sont survenus dans le contexte clinique d’une polythérapie avec d’autres médicaments antiépileptiques (voir rubrique 4.8). Les transaminases sériques (ALAT et ASAT), la gamma-glutamyl-transférase (GGT), les phosphatases alcalines et la bilirubine totale doivent être évaluées avant l’initiation du cénobamate et surveillées pendant le traitement. En cas de suspicion ou de découverte d’une atteinte hépatique, une réduction de la dose ou l’arrêt du cénobamate doit être envisagé.",
+    "tests": [
+     "liver_function"
+    ],
+    "qid": "8a815d6e"
+   },
+   {
+    "index": 4,
+    "section": "4.4",
+    "under": "Raccourcissement de l’intervalle QT",
+    "quote": "Un raccourcissement dose-dépendant de l’intervalle QTcF a été observé avec le cénobamate. Aucun raccourcissement de l’intervalle QTcF en dessous de 340 ms n’a été observé (voir rubrique 5.1). Les études cliniques n’ont pas montré que l’association du cénobamate avec d’autres antiépileptiques intensifiait le raccourcissement de l’intervalle QT. Les cliniciens doivent faire preuve de prudence lors de la prescription de cénobamate en association avec d’autres médicaments connus pour raccourcir l’intervalle QT.",
+    "tests": [
+     "ecg"
+    ],
+    "qid": "405a80b5"
+   },
+   {
+    "index": 5,
+    "section": "4.4",
+    "under": "Raccourcissement de l’intervalle QT",
+    "quote": "Le syndrome du QT court familial est un syndrome génétique rare, associé à un risque accru de mort subite et d’arythmies ventriculaires, en particulier de fibrillation ventriculaire. Le cénobamate ne doit pas être utilisé chez les patients présentant le syndrome du QT court familial (voir rubrique 4.3).",
+    "tests": [
+     "ecg"
+    ],
+    "qid": "eaf69e81"
+   }
+  ]
+ },
  "chlorpromazine": {
   "page": "62184888",
   "denomination": "LARGACTIL 25 mg/5 ml, solution injectable en ampoule",
@@ -2602,6 +2782,102 @@
    }
   ]
  },
+ "dantrolene": {
+  "page": "60385682",
+  "denomination": "DANTRIUM 100 mg, gélule",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Une fois que la posologie optimale est atteinte, la dose quotidienne totale du patient devra être divisée en 2 à 4 doses individuelles afin d’obtenir des taux plasmatiques aussi uniformes que possible et de minimiser les effets indésirables.",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "110d6685"
+   },
+   {
+    "index": 1,
+    "section": "4.4",
+    "under": "",
+    "quote": "Avant le début et pendant le traitement par DANTRIUM, les enzymes hépatiques doivent être surveillées à intervalles réguliers ; en particulier, l'ASAT et l'ALAT qui doivent être dosées fréquemment. Les patients pour lesquels le risque de lésions hépatiques est accru doivent faire l'objet d'une surveillance particulièrement étroite. Si les valeurs sont en dehors de la norme ou si des symptômes de lésions hépatiques apparaissent, DANTRIUM doit être arrêté.",
+    "tests": [
+     "liver_function"
+    ],
+    "qid": "58b89ee2"
+   }
+  ]
+ },
+ "desflurane": {
+  "page": "65421851",
+  "denomination": "SUPRANE, liquide pour inhalation par vapeur",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Durant l'entretien, la pression artérielle et la fréquence cardiaque doivent être surveillées avec attention dans le cadre de l'évaluation de la profondeur de l'anesthésie (voir rubrique 4.4).",
+    "tests": [
+     "blood_pressure",
+     "heart_rate"
+    ],
+    "qid": "4283a388"
+   },
+   {
+    "index": 1,
+    "section": "4.4",
+    "under": "",
+    "quote": "Les puissants agents anesthésiques par inhalation peuvent déclencher chez les sujets prédisposés (antécédents d'hyperthermie maligne d'effort, myopathies telles que les dystrophies musculaires, syndrome de King, myotonie, myopathies à noyau central) un état d'hypermétabolisme des muscles squelettiques entraînant un important besoin en oxygène et induisant les signes cliniques d'un syndrome connu sous le nom d'hyperthermie maligne. Il a été démontré que le desflurane est un inducteur potentiel d'hyperthermie maligne. Ce syndrome se manifeste par une hypercapnie et peut aussi inclure une rigidité musculaire, une tachycardie, une tachypnée, une cyanose, des arythmies, et/ou une pression artérielle instable. Certains signes non spécifiques pourraient aussi apparaître au cours d'une anesthésie légère : hypoxie aigüe, hypercapnie, et hypovolémie. Le traitement de l'hyperthermie maligne consiste en l'arrêt des agents inducteurs, l'administration intraveineuse de dantrolène sodique et la mise en place d'un traitement symptomatique. Une insuffisance rénale peut survenir secondairement, et la diurèse doit être surveillée et facilitée si possible. Il est déconseillé d'utiliser le desflurane chez les sujets susceptibles de présenter une hyperthermie maligne. Des cas d'hyperthermie maligne avec une issue fatale ont été rapportés avec le desflurane.",
+    "tests": [
+     "blood_pressure"
+    ],
+    "qid": "7eb034b9"
+   },
+   {
+    "index": 2,
+    "section": "4.4",
+    "under": "",
+    "quote": "De rares augmentations de la kaliémie ont été associées à l'utilisation d'agents anesthésiques inhalés, incluant le desflurane, provoquant ainsi des arythmies cardiaques, certaines fatales, chez les patients au cours de la période postopératoire. Les patients présentant des dystrophies musculaires aussi bien latentes que symptomatiques, particulièrement la dystrophie musculaire de Duchenne, apparaissent être plus vulnérables. L'utilisation concomitante de succinylcholine a été associée dans la majorité de ces cas. Ces patients ont également présenté une augmentation significative des taux sériques de créatine phosphokinase et, dans certains cas, une modification de la composition de l'urine avec myoglobinurie. Malgré la similarité avec l'hyperthermie maligne, aucun de ces patients n'a montré de signe ou de symptôme de rigidité musculaire ou d'état hypermétabolique. Un traitement précoce et intensif pour traiter l'hyperkaliémie et les arythmies résistantes est recommandé, ainsi que la recherche post-opératoire d'une maladie neuromusculaire latente.",
+    "tests": [
+     "electrolytes",
+     "drug_level"
+    ],
+    "qid": "972cacfe"
+   },
+   {
+    "index": 3,
+    "section": "4.4",
+    "under": "Précautions d'emploi",
+    "quote": "Le desflurane, comme les autres agents anesthésiques inhalés, est susceptible d'augmenter la pression du liquide céphalo-rachidien et la pression intracrânienne et de diminuer la pression de perfusion cérébrale chez les patients présentant une masse intracérébrale. Chez ces patients, l'anesthésie peut être maintenue par le desflurane à une concentration alvéolaire inférieure à 0,8 CAM, en maintenant un certain degré d'hyperventilation alvéolaire (hypocapnie modérée de l'ordre de 35 mm Hg) durant la période précédant l'ouverture de la boîte crânienne. Le maintien de la pression de perfusion cérébrale (et donc de la pression artérielle moyenne) doit être assuré avec la plus grande attention.",
+    "tests": [
+     "blood_pressure"
+    ],
+    "qid": "eb04ebe3"
+   },
+   {
+    "index": 4,
+    "section": "4.4",
+    "under": "Précautions d'emploi",
+    "quote": "Chez les patients souffrant d'une maladie coronarienne, le maintien de la pression artérielle et de la fréquence cardiaque est important pour éviter l'ischémie myocardique. Des augmentations transitoires marquées de la fréquence cardiaque, de la pression artérielle moyenne et des concentrations en éphédrine et en noréphédrine sont associées à une augmentation rapide des concentrations en desflurane. Le desflurane ne doit pas être utilisé seul comme agent inducteur d'anesthésie chez des patients à risque de maladie coronarienne ou chez des patients chez lesquels une augmentation de la fréquence cardiaque ou de la pression artérielle est indésirable. Il doit être utilisé avec d'autres médicaments, de préférence des opiacés et des hypnotiques par voie intraveineuse.",
+    "tests": [
+     "blood_pressure",
+     "heart_rate"
+    ],
+    "qid": "105f8360"
+   },
+   {
+    "index": 5,
+    "section": "4.4",
+    "under": "Précautions d'emploi",
+    "quote": "Au cours de l'entretien de l'anesthésie, une augmentation de la fréquence cardiaque et de la pression artérielle, apparaissant après une augmentation rapide de la concentration en desflurane, ne sont pas les signes d'une anesthésie inadaptée. Le changement dû à l'activation sympathique se résout approximativement en 4 minutes. L'augmentation de la fréquence cardiaque et de la pression artérielle apparaissant avant ou en l'absence d'une augmentation rapide de la concentration en desflurane peut être interprétée comme le signe d'une anesthésie légère.",
+    "tests": [
+     "blood_pressure",
+     "heart_rate"
+    ],
+    "qid": "85bcbbf6"
+   }
+  ]
+ },
  "deutetrabenazine": {
   "page": "EMEA-H-C-006371",
   "denomination": "Austedo (EMEA/H/C/006371)",
@@ -2668,6 +2944,38 @@
      "drug_level"
     ],
     "qid": "8a244966"
+   }
+  ]
+ },
+ "dihydrocodeine": {
+  "page": "67482372",
+  "denomination": "DICODIN L.P. 60 mg, comprimé à libération prolongée",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.4",
+    "under": "Précautions particulières d’emploi",
+    "quote": "Les opioïdes, comme la dihydrocodéine, peuvent avoir une action pharmacologique sur l’axe hypothalamo-hypophysaire ou gonadique. Certaines modifications ont été observées telles qu’une augmentation de la prolactinémie et une diminution du cortisol plasmatique, de la testostérone, de l'hormone lutéinisante et de l'hormone folliculo-stimulante. Ces modifications hormonales peuvent se manifester par des symptômes cliniques.",
+    "tests": [
+     "prolactin"
+    ],
+    "qid": "e3c7fa9a"
+   }
+  ]
+ },
+ "dihydroergotamine": {
+  "page": "62455371",
+  "denomination": "DIERGOSPRAY 4 mg/ml, solution pour pulvérisation nasale",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.3",
+    "under": "",
+    "quote": "Conditions prédisposant à des réactions angiospastiques : insuffisance coronaire (en particulier angor instable ou spastique), états infectieux sévères (septicémie), choc, maladie vasculaire oblitérante, maladies vasculaires périphériques telles que syndrome de Raynaud, antécédents d’accident ischémique transitoire ou de souffrance cérébrale ou d’hypertension artérielle mal contrôlée.",
+    "tests": [
+     "blood_pressure"
+    ],
+    "qid": "66c40eda"
    }
   ]
  },
@@ -2911,6 +3219,42 @@
      "liver_function"
     ],
     "qid": "98e24faa"
+   }
+  ]
+ },
+ "eletriptan": {
+  "page": "63476564",
+  "denomination": "RELPAX 40 mg, comprimé pelliculé",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.2",
+    "under": "Patients présentant une insuffisance rénale",
+    "quote": "Les effets de RELPAX sur la tension artérielle étant amplifiés en cas d'insuffisance rénale (voir rubrique 4.4), il est recommandé d'instaurer le traitement à une posologie initiale de 20 mg chez les patients souffrant d'insuffisance rénale légère ou modérée. La posologie quotidienne maximale ne devra pas dépasser 40 mg. RELPAX est contre-indiqué chez les patients présentant une insuffisance rénale sévère.",
+    "tests": [
+     "blood_pressure"
+    ],
+    "qid": "69722fb0"
+   },
+   {
+    "index": 1,
+    "section": "4.4",
+    "under": "Patients présentant une insuffisance cardiaque",
+    "quote": "RELPAX ne doit pas être administré sans évaluation préalable dans les cas suivants : patients chez lesquels une cardiopathie asymptomatique est possible, patients ayant un risque de maladie coronarienne (par exemple patients souffrant d'hypertension artérielle, de diabète, patients fumeurs ou utilisant un traitement de substitution à la nicotine, hommes âgés de plus de 40 ans, femmes ménopausées et patients présentant des antécédents familiaux importants de maladie coronarienne). Le bilan cardiovasculaire peut ne pas identifier tous les patients qui ont une maladie cardiovasculaire et, dans de très rares cas, des accidents cardiaques graves sont survenus chez des patients sans affection cardiaque sous-jacente, à la suite de l'administration d'agonistes 5-HT1. Les patients chez lesquels une maladie coronarienne a été diagnostiquée ne doivent pas être traités par RELPAX (voir rubrique 4.3).",
+    "tests": [
+     "blood_pressure"
+    ],
+    "qid": "ff0f7f63"
+   },
+   {
+    "index": 2,
+    "section": "4.4",
+    "under": "Patients présentant une insuffisance cardiaque",
+    "quote": "Des augmentations légères et transitoires de la tension artérielle ont été observées avec des doses supérieures ou égales à 60 mg d'élétriptan (doses utilisées en clinique). Cependant, ces augmentations n'ont pas été accompagnées de manifestations cliniques dans les études cliniques réalisées. Ce type d'effets a été nettement plus marqué chez des sujets âgés ou présentant une insuffisance rénale. Chez les patients présentant une insuffisance rénale, on a observé une augmentation maximale moyenne de la pression artérielle systolique comprise entre 14 et 17 mmHg (normal : 3 mmHg) et de la pression artérielle diastolique de 14 à 21 mmHg (normal : 4 mmHg). Chez les sujets âgés, on a observé une augmentation maximale moyenne de la pression artérielle systolique de 23 mmHg en comparaison à 13 mmHg chez l'adulte jeune (placebo 8 mmHg). Après la mise sur le marché, des augmentations de la tension artérielle ont été rapportées chez des patients recevant des doses de 20 et 40 mg d'élétriptan, ainsi que chez des patients sans insuffisance rénale et des sujets non-âgés.",
+    "tests": [
+     "blood_pressure"
+    ],
+    "qid": "5f103610"
    }
   ]
  },
@@ -3267,6 +3611,112 @@
    }
   ]
  },
+ "felbamate": {
+  "page": "60223278",
+  "denomination": "TALOXA 600 mg, comprimé",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "La posologie quotidienne du felbamate peut alors être augmentée par paliers de 600 à 1 200 mg à intervalles d'environ une semaine, jusqu'à un maximum de 3 600 mg/jour administrés en 3 à 4 prises. Une adaptation des doses de carbamazépine, de phénytoïne, de phénobarbital, et d'acide valproïque peut être nécessaire en fonction de l'augmentation de la posologie du felbamate. Cependant, les interactions médicamenteuses sont dose-dépendantes et sont sujettes à variabilité inter-individuelle. Par conséquent, tout ajustement de posologie des antiépileptiques associés doit être basé non seulement sur les taux plasmatiques à l'état d’équilibre, mais aussi sur l'observation clinique.",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "49b187db"
+   },
+   {
+    "index": 1,
+    "section": "4.2",
+    "under": "Population pédiatrique",
+    "quote": "En association avec d'autres antiépileptiques : le felbamate administré en association avec la carbamazépine, la phénytoïne, le phénobarbital ou l'acide valproïque peut augmenter l'incidence de leurs effets indésirables respectifs (voir rubrique 4.5). La posologie initiale recommandée pour le felbamate est de 7,5 mg/kg/jour à 15 mg/kg/jour, administrés en 2 ou 3 prises. Chez les patients déjà traités par carbamazépine, phénytoïne, phénobarbital et/ou acide valproïque, la posologie de ces produits doit être réduite de 20 % à 30 % lors de l'introduction du felbamate. La posologie quotidienne du felbamate peut alors être augmentée par paliers de 7,5 mg/kg à 15 mg/kg à intervalle d'une semaine au moins, jusqu'à un maximum de 45 mg/kg/jour (sans dépasser 3 600 mg/jour) administrés en 3 à 4 prises. Une adaptation des doses de carbamazépine, de phénytoïne, de phénobarbital et/ou d'acide valproïque peut être nécessaire en fonction de l'augmentation de la posologie du felbamate. Cependant, les interactions médicamenteuses sont dose-dépendantes et sont sujettes à variabilité inter-individuelle. Par conséquent, tout ajustement de posologie des antiépileptiques associés doit être basé non seulement sur les taux plasmatiques à l'état d’équilibre, mais aussi sur l'observation clinique.",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "b47160a0"
+   },
+   {
+    "index": 2,
+    "section": "4.4",
+    "under": "",
+    "quote": "Les cas d'aplasie médullaire sont survenus 2 à 12 mois après le début du traitement par le felbamate. Cependant, l'atteinte des cellules de la moelle osseuse conduisant finalement à l'aplasie peut se produire plusieurs semaines à plusieurs mois plus tôt. De même, le risque de survenue d'une aplasie médullaire peut persister pendant plusieurs mois après l'arrêt du traitement par le felbamate. On ne sait pas s'il existe une corrélation entre le risque de survenue d'aplasie médullaire et la durée du traitement. On ne peut donc être certain qu'un patient traité par le felbamate pendant plusieurs mois sans signe d'anomalies hématologiques soit exempté de risque.",
+    "tests": [
+     "blood_count"
+    ],
+    "qid": "a672f01f"
+   },
+   {
+    "index": 3,
+    "section": "4.4",
+    "under": "",
+    "quote": "Une numération formule sanguine/plaquettes doit être pratiquée avant le début du traitement par le felbamate et toutes les 2 semaines pendant le traitement.",
+    "tests": [
+     "blood_count"
+    ],
+    "qid": "d196b5cc"
+   },
+   {
+    "index": 4,
+    "section": "4.4",
+    "under": "",
+    "quote": "En présence d'une neutropénie (polynucléaires neutrophiles 3) et/ou d'une thrombopénie (plaquettes 3), le traitement par le felbamate doit être arrêté et des investigations doivent être menées afin de rechercher une aplasie médullaire.",
+    "tests": [
+     "blood_count"
+    ],
+    "qid": "a74cc682"
+   },
+   {
+    "index": 5,
+    "section": "4.4",
+    "under": "",
+    "quote": "Une surveillance clinique soigneuse à la recherche des symptômes tels qu’ecchymoses, pétéchies, saignement ou signes d'infection et/ou d'anémie (fatigue, faiblesse, etc.) doit être effectuée. Si ces symptômes sont retrouvés, une numération formule sanguine/plaquettes doit être pratiquée immédiatement.",
+    "tests": [
+     "blood_count"
+    ],
+    "qid": "6ecbc532"
+   },
+   {
+    "index": 6,
+    "section": "4.4",
+    "under": "",
+    "quote": "Un bilan hépatique (ASAT, ALAT, bilirubine) doit être pratiqué avant le début du traitement par le felbamate. Les patients avec une fonction hépatique anormale ne doivent pas être traités par le felbamate.",
+    "tests": [
+     "liver_function"
+    ],
+    "qid": "86172737"
+   },
+   {
+    "index": 7,
+    "section": "4.4",
+    "under": "",
+    "quote": "Pendant toute la durée du traitement par le felbamate, un bilan hépatique doit être effectué toutes les 2 semaines. Le traitement par le felbamate doit être interrompu chez les patients présentant des anomalies cliniquement significatives de la fonction hépatique.",
+    "tests": [
+     "liver_function"
+    ],
+    "qid": "9ead01d6"
+   },
+   {
+    "index": 8,
+    "section": "4.4",
+    "under": "",
+    "quote": "L'apparition de signes cliniques tels qu’ictère, anorexie, nausées, vomissements et douleurs abdominales devra conduire à un bilan hépatique immédiat.",
+    "tests": [
+     "liver_function"
+    ],
+    "qid": "583d99f1"
+   },
+   {
+    "index": 9,
+    "section": "4.4",
+    "under": "",
+    "quote": "Comme rapporté avec les autres antiépileptiques, certains patients peuvent présenter une augmentation de la fréquence des crises ou l’apparition de nouveaux types de crises (voir rubrique 4.8). Ces phénomènes peuvent résulter d’un surdosage, d’une diminution des concentrations plasmatiques du traitement antiépileptique administré parallèlement, ou d’un effet paradoxal.",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "a1c60abf"
+   }
+  ]
+ },
  "fenfluramine": {
   "page": "62154820",
   "denomination": "FINTEPLA 2,2 mg/mL, solution buvable",
@@ -3599,6 +4049,382 @@
      "drug_level"
     ],
     "qid": "17763280"
+   }
+  ]
+ },
+ "fosaprepitant": {
+  "page": "EMEA-H-C-000743",
+  "denomination": "Ivemend (EMEA/H/C/000743)",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.4",
+    "under": "Co-administration avec la warfarine (un substrat du CYP2C9)",
+    "quote": "Chez les patients traités au long cours par la warfarine, l’INR (International Normalised Ratio) doit être étroitement surveillé pendant 14 jours après l'utilisation du fosaprépitant (voir rubrique 4.5).",
+    "tests": [
+     "coagulation"
+    ],
+    "qid": "9e6f3b5a"
+   }
+  ]
+ },
+ "fosphenytoin": {
+  "page": "60771794",
+  "denomination": "PRODILANTIN 75 mg/mL, solution à diluer pour perfusion/solution injectable",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.2",
+    "under": "Mode d’administration",
+    "quote": "PRODILANTIN peut être administré en perfusion intraveineuse (IV) ou en injection intramusculaire (IM). La voie IM doit être envisagée chez les patients adultes lorsqu’il n’y a pas un besoin urgent de contrôler les crises. Si le principal objectif est d’administrer une dose de charge rapide de phénytoïne, une administration IV de PRODILANTIN doit être privilégiée car les concentrations plasmatiques thérapeutiques de phénytoïne sont plus rapidement atteintes après une administration IV qu’après une administration IM.",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "66ad3148"
+   },
+   {
+    "index": 1,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Pour une perfusion IV, diluer la fosphénytoïne dans une solution de glucose à 5% ou de chlorure de sodium à 0,9 %. La concentration doit être comprise entre 1,5 et 25 mg d'EP/mL.",
+    "tests": [
+     "glycaemia"
+    ],
+    "qid": "9c96d73d"
+   },
+   {
+    "index": 2,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Une surveillance continue de l'électrocardiogramme, de la pression artérielle et des fonctions respiratoires doit impérativement être mise en œuvre pendant toute la durée de la perfusion. Il faut également surveiller étroitement le patient pendant la période où les concentrations plasmatiques de phénytoïne sont maximales, c'est-à-dire environ 30 minutes après la fin de la perfusion de fosphénytoïne.",
+    "tests": [
+     "ecg",
+     "blood_pressure",
+     "drug_level"
+    ],
+    "qid": "e08fa2dc"
+   },
+   {
+    "index": 3,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Exemples de doses de charge IV de 15 mg d’EP/kg et recommandations en matière de dilution (à 25 mg d’EP/mL) et de temps de perfusion IV (à un débit maximal de 150 mg d’EP/min, en fonction du poids corporel.)",
+    "tests": [
+     "weight"
+    ],
+    "qid": "d97d50b0"
+   },
+   {
+    "index": 4,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Remarque : la dose, le volume d’administration, le nombre de flacons de PRODILANTIN, le volume de diluant et le temps minimal de perfusion appropriés doivent toujours être calculés en fonction du poids corporel exact du patient quand celui-ci n’est pas inclus dans les exemples mentionnés.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "05667f31"
+   },
+   {
+    "index": 5,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Il faut ajuster les doses d’entretien en fonction de la réponse du patient et des concentrations plasmatiques résiduelles de phénytoïne (voir Surveillance du traitement).",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "41f69037"
+   },
+   {
+    "index": 6,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Remarque : la dose, le volume d’administration, le nombre de flacons de PRODILANTIN, le volume de diluant et le temps minimal de perfusion appropriés doivent toujours être calculés en fonction du poids corporel exact du patient quand celui-ci n’est pas inclus dans les exemples mentionnés.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "05667f31"
+   },
+   {
+    "index": 7,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Exemples de doses de charge IV de 10 mg d’EP/kg et recommandations en matière de dilution* (à 25 mg d’EP/mL ou à 1,5 mg d’EP/mL) et de temps de perfusion IV (à un débit maximal de 100 mg d’EP/min), en fonction du poids corporel.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "4c4c46e7"
+   },
+   {
+    "index": 8,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Remarque : la dose, le volume d’administration, le nombre de flacons de PRODILANTIN, le volume de diluant et le temps minimal de perfusion appropriés doivent toujours être calculés en fonction du poids corporel exact du patient quand celui-ci n’est pas inclus dans les exemples mentionnés.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "05667f31"
+   },
+   {
+    "index": 9,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Il faut ajuster les doses d’entretien en fonction de la réponse du patient et des concentrations plasmatiques résiduelles de phénytoïne (voir Surveillance du traitement).",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "41f69037"
+   },
+   {
+    "index": 10,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Exemples de doses maximales d’entretien IV de 5 mg d’EP/kg et recommandations en matière de dilution* (à 25 mg d’EP/mL ou à 1,5 mg d’EP/mL) et de temps de perfusion IV (à un débit maximal de 100 mg d’EP/min), en fonction du poids corporel.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "da0bf2f7"
+   },
+   {
+    "index": 11,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Remarque : la dose, le volume d’administration, le nombre de flacons de PRODILANTIN, le volume de diluant et le temps minimal de perfusion appropriés doivent toujours être calculés en fonction du poids corporel exact du patient quand celui-ci n’est pas inclus dans les exemples mentionnés.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "05667f31"
+   },
+   {
+    "index": 12,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Il peut être utile de surveiller la concentration du médicament en cas de substitution des produits et/ou de changement des voies d’administration. Il faut ajuster les doses en fonction de la réponse du patient et des concentrations plasmatiques résiduelles de phénytoïne (voir Surveillance du traitement).",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "cd7628e6"
+   },
+   {
+    "index": 13,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Remarque : la dose, le volume d’administration, le nombre de flacons de PRODILANTIN, le volume de diluant et le temps minimal de perfusion appropriés doivent toujours être calculés en fonction du poids corporel exact du patient quand celui-ci n’est pas inclus dans les exemples mentionnés.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "05667f31"
+   },
+   {
+    "index": 14,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Exemples de doses de charge IV de 15 mg d’EP/kg et recommandations en matière de dilution (à 25 mg d’EP/mL) et de temps de perfusion IV (à un débit maximal de 3 mg d’EP/kg/min), en fonction du poids corporel.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "d1f17b8f"
+   },
+   {
+    "index": 15,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Remarque : la dose, le volume d’administration, le nombre de flacons de PRODILANTIN, le volume de diluant et le temps minimal de perfusion appropriés doivent toujours être calculés en fonction du poids corporel exact du patient quand celui-ci n’est pas inclus dans les exemples mentionnés.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "05667f31"
+   },
+   {
+    "index": 16,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Il faut ajuster les doses d’entretien en fonction de la réponse du patient et des concentrations plasmatiques résiduelles de phénytoïne (voir Surveillance du traitement).",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "41f69037"
+   },
+   {
+    "index": 17,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Exemples de doses maximales d’entretien IV de 5 mg d’EP/kg et recommandations en matière de dilution* (à 25 mg d’EP/mL ou à 1,5 mg d’EP/mL) et de temps de perfusion IV (à un débit maximal de 2 mg d’EP/kg/min), en fonction du poids corporel.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "15a84399"
+   },
+   {
+    "index": 18,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Remarque : la dose, le volume d’administration, le nombre de flacons de PRODILANTIN, le volume de diluant et le temps minimal de perfusion appropriés doivent toujours être calculés en fonction du poids corporel exact du patient quand celui-ci n’est pas inclus dans les exemples mentionnés.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "05667f31"
+   },
+   {
+    "index": 19,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Exemples de doses de charge IV de 10 mg d’EP/kg et recommandations en matière de dilution* (à 25 mg d’EP/mL ou à 1,5 mg d’EP/mL) et de temps de perfusion IV (à un débit maximal de 2 mg d’EP/kg/min), en fonction du poids corporel.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "bd6384be"
+   },
+   {
+    "index": 20,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Remarque : la dose, le volume d’administration, le nombre de flacons de PRODILANTIN, le volume de diluant et le temps minimal de perfusion appropriés doivent toujours être calculés en fonction du poids corporel exact du patient quand celui-ci n’est pas inclus dans les exemples mentionnés.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "05667f31"
+   },
+   {
+    "index": 21,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Il faut ajuster les doses d’entretien en fonction de la réponse du patient et des concentrations plasmatiques résiduelles de phénytoïne (voir Surveillance du traitement).",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "41f69037"
+   },
+   {
+    "index": 22,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Exemples de doses maximales d’entretien IV de 5 mg d’EP/kg et recommandations en matière de dilution* (à 25 mg d’EP/mL ou à 1,5 mg d’EP/mL) et de temps de perfusion IV (à un débit maximal de 2 mg d’EP/kg/min), en fonction du poids corporel.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "15a84399"
+   },
+   {
+    "index": 23,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Remarque : la dose, le volume d’administration, le nombre de flacons de PRODILANTIN, le volume de diluant et le temps minimal de perfusion appropriés doivent toujours être calculés en fonction du poids corporel exact du patient quand celui-ci n’est pas inclus dans les exemples mentionnés.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "05667f31"
+   },
+   {
+    "index": 24,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Il peut être utile de surveiller la concentration du médicament en cas de substitution des produits et/ou de changement des voies d’administration. Il faut ajuster les doses en fonction de la réponse du patient et des concentrations plasmatiques résiduelles de phénytoïne (voir Surveillance du traitement).",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "cd7628e6"
+   },
+   {
+    "index": 25,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Chez ces patients, la vitesse de transformation de fosphénytoïne IV en phénytoïne peut être augmentée. Alors que le taux de clairance de la phénytoïne totale n’est pas affecté, les concentrations plasmatiques de phénytoïne libre peuvent quant à elles être élevées. La concentration de phénytoïne libre peut être élevée chez les patients avec une hyperbilirubinémie (voir rubrique 4.4). Chez ces patients, il est donc préférable de mesurer les concentrations plasmatiques de phénytoïne libre plutôt que les concentrations plasmatiques totales de phénytoïne (voir rubrique 5.2).",
+    "tests": [
+     "renal_function",
+     "liver_function",
+     "drug_level"
+    ],
+    "qid": "bb6b665b"
+   },
+   {
+    "index": 26,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Avant biotransformation complète, les techniques immuno-analytiques risquent de surestimer notablement les concentrations plasmatiques de phénytoïne en raison d'une réactivité croisée avec la fosphénytoïne. Les méthodes de dosage par chromatographie (par exemple CLHP) permettent un dosage exact de la phénytoïne dans les liquides biologiques en présence de fosphénytoïne. Il est recommandé d'attendre au moins 2 heures après la perfusion IV de fosphénytoïne, ou 4 heures après l'injection IM, avant de prélever du sang en vue du dosage de la phénytoïne.",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "da6bc0b9"
+   },
+   {
+    "index": 27,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "Par voie orale, la biodisponibilité de la phénytoïne (en gélules) est d'environ 90%. La phénytoïne contenue dans la fosphénytoïne a une biodisponibilité de 100 % par voie IM et IV. C'est pourquoi les concentrations plasmatiques de phénytoïne peuvent augmenter quand on remplace la phénytoïne sodique orale par la fosphénytoïne par voie IM ou IV. Il est toutefois inutile d'ajuster les doses initiales lors de la substitution de la phénytoïne orale par la fosphénytoïne ou vice versa.",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "ed9bc02a"
+   },
+   {
+    "index": 28,
+    "section": "4.4",
+    "under": "",
+    "quote": "Une surveillance continue de l’électrocardiogramme, de la pression artérielle et de la fonction respiratoire doit impérativement être mise en œuvre pendant toute la durée de la perfusion. Il faut également surveiller étroitement le patient durant la période où les concentrations plasmatiques de phénytoïne sont maximales, c’est-à-dire environ 30 minutes après la fin de la perfusion de PRODILANTIN. Le matériel nécessaire pour une réanimation cardiaque doit être disponible.",
+    "tests": [
+     "ecg",
+     "blood_pressure",
+     "drug_level"
+    ],
+    "qid": "41771aed"
+   },
+   {
+    "index": 29,
+    "section": "4.4",
+    "under": "",
+    "quote": "Généralement mais pas toujours, le SHS/DRESS inclut une fièvre, une éruption cutanée et/ou une lymphadénopathie en association avec d’autres atteintes d’organes, comme une hépatite, une néphrite, des anomalies hématologiques, une myocardite, une myosite ou une pneumopathie. Les premiers symptômes peuvent ressembler à une infection virale aiguë. D’autres manifestations courantes incluent une arthralgie, une jaunisse, une hépatomégalie, une leucocytose et une éosinophilie. L’intervalle entre la première exposition au médicament et les symptômes est généralement de 2 à 4 semaines de traitement, mais ils ont également été rapportés chez des patients traités par des anticonvulsivants pendant 3 mois ou plus. Si ces signes et symptômes apparaissent, le patient doit être examiné immédiatement. La fosphénytoïne doit être arrêtée s’il est impossible d’établir une autre étiologie des signes et symptômes.",
+    "tests": [
+     "blood_count"
+    ],
+    "qid": "8ec3869f"
+   },
+   {
+    "index": 30,
+    "section": "4.4",
+    "under": "",
+    "quote": "La phénytoïne est métabolisée par l’enzyme CYP2C9 du CYP450. Les patients porteurs des variants CYP2C9*2 ou CYP2C9*3 à activité enzymatique diminuée (métaboliseurs intermédiaires ou lents des substrats du CYP2C9) peuvent présenter un risque d’augmentation des concentrations plasmatiques de phénytoïne et de toxicité ultérieure. Chez les patients connus pour être porteurs des allèles CYP2C9*2 ou *3 à activité enzymatique diminuée, une surveillance étroite de la réponse clinique est conseillée et une surveillance des concentrations plasmatiques de phénytoïne peut être nécessaire.",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "073584c5"
+   },
+   {
+    "index": 31,
+    "section": "4.4",
+    "under": "",
+    "quote": "Si les concentrations plasmatiques de phénytoïne dépassent durablement la zone thérapeutique optimale et/ou si la phénytoine est utilisée à long terme, peuvent survenir des états confusionnels décrits comme un \"délire\", une \"psychose\" ou une \"encéphalopathie\" ou, rarement, des perturbations irréversibles des fonctions cérébelleuses et/ou une atrophie cérébelleuse. Dès l'apparition du premier signe de toxicité aiguë, le taux plasmatique de phénytoïne doit être contrôlé (voir rubrique 4.2 paragraphe « Surveillance du traitement »). Si les concentrations plasmatiques de phénytoïne sont excessives, il faut réduire la dose de fosphénytoïne. Si les symptômes persistent, il faut arrêter l'administration de fosphénytoïne.",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "13860927"
+   },
+   {
+    "index": 32,
+    "section": "4.4",
+    "under": "",
+    "quote": "En raison de l’augmentation de la fraction libre de phénytoïne chez les patients atteints d’une maladie rénale ou hépatique ou chez ceux qui souffrent d’hypoalbuminémie, l’interprétation des concentrations plasmatiques en phénytoïne totale doit être faite avec précaution car elle peut ne pas refléter la concentration libre pharmacologiquement active. La concentration de phénytoïne libre peut être élevée chez les patients atteints d’hyperbilirubinémie. Les concentrations de phénitoïne libre sont plus pertinentes chez ces patients (voir rubriques 4.2 et 5.2). Il peut être nécessaire de modifier les doses en cas de perturbation de la fonction rénale ou hépatique, chez les patients âgés et chez les patients atteints de maladies graves (voir rubrique 4.2). Ces patients peuvent présenter précocement des signes de toxicité de la phénytoïne ou des événements indésirables plus sévères dus aux modifications de la pharmacocinétique de la fosphénytoïne et de la phénytoïne.",
+    "tests": [
+     "renal_function",
+     "liver_function",
+     "drug_level"
+    ],
+    "qid": "0b7bfce5"
+   }
+  ]
+ },
+ "frovatriptan": {
+  "page": "60435263",
+  "denomination": "TIGREAT 2,5 mg, comprimé pelliculé",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.3",
+    "under": "",
+    "quote": "Hypertension artérielle modérée ou sévère, hypertension légère non contrôlée.",
+    "tests": [
+     "blood_pressure"
+    ],
+    "qid": "4e7e0830"
    }
   ]
  },
@@ -4450,6 +5276,22 @@
      "ecg"
     ],
     "qid": "694fa81d"
+   }
+  ]
+ },
+ "lasmiditan": {
+  "page": "EMEA-H-C-005332",
+  "denomination": "Rayvow (EMEA/H/C/005332)",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.4",
+    "under": "Syndrome sérotoninergique",
+    "quote": "Un syndrome sérotoninergique a été rapporté et peut survenir avec le lasmiditan seul ou co-administré avec d’autres médicaments sérotoninergiques [par exemple, les inhibiteurs sélectifs de la recapture de la sérotonine (ISRSs), les inhibiteurs de la recapture de la sérotonine et de la noradrénaline (IRSNAs), les antidépresseurs tricycliques (ATCs), et les inhibiteurs de la monoamine oxydase (IMAOs)]. L’expérience clinique de l’utilisation du lasmiditan et des triptans dans un intervalle de temps rapproché est limitée. Les risques de développer un syndrome sérotoninergique peuvent s’additionner. Les symptômes d’un syndrome sérotoninergique peuvent comprendre des modifications de l’état mental (par exemple agitation, hallucinations, coma), une instabilité du système nerveux autonome (par exemple tachycardie, tension artérielle instable, hyperthermie), des signes neuromusculaires (par exemple hyperréflexie, incoordination), et/ou des signes et symptômes gastro-intestinaux (par exemple nausées, vomissements, diarrhées). Ces réactions peuvent être sévères. L’apparition des symptômes survient généralement quelques minutes à quelques heures après l’administration d’une nouvelle prise, ou d’une dose plus élevée, d’un médicament sérotoninergique. Si un traitement concomitant avec d’autres médicaments sérotoninergiques est justifié sur le plan clinique, une surveillance attentive du patient est recommandée, tout particulièrement pendant l’instauration du traitement, et lors de l’augmentation des doses. Le lasmiditan doit être interrompu en cas de suspicion de syndrome sérotoninergique.",
+    "tests": [
+     "blood_pressure"
+    ],
+    "qid": "4fab945c"
    }
   ]
  },
@@ -6063,6 +6905,42 @@
    }
   ]
  },
+ "nalbuphine": {
+  "page": "61214830",
+  "denomination": "NALBUPHINE RENAUDIN 20 mg/2 mL, solution injectable",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.2",
+    "under": "Posologie",
+    "quote": "La dose à administrer est basée sur le poids du patient. Il convient d’éviter les erreurs de dosage dues à la confusion entre milligramme (mg) et millilitre (mL), lesquelles pourraient entraîner un surdosage accidentel (voir le tableau 1 [adultes] ou le tableau 2 [patients pédiatriques] des doses ci-dessous).",
+    "tests": [
+     "weight"
+    ],
+    "qid": "5e808d61"
+   },
+   {
+    "index": 1,
+    "section": "4.2",
+    "under": "Chez l'adulte :",
+    "quote": "la dose recommandée est de 10 à 20 mg de chlorhydrate de nalbuphine pour les patients de 70 kg, ce qui équivaut à 0,1 à 0,3 mg/kg de poids corporel, par voie intraveineuse, intramusculaire ou sous-cutanée. La dose unique maximale chez l’adulte ne doit pas dépasser 20 mg. La dose peut être répétée après 3 à 6 heures, si nécessaire, la dose quotidienne totale maximale étant de 160 mg.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "bc15e971"
+   },
+   {
+    "index": 2,
+    "section": "4.2",
+    "under": "Population pédiatrique (enfant de 18 mois à 15 ans) :",
+    "quote": "la dose recommandée est de 0,1 à 0,2 mg/kg de poids corporel par voie intraveineuse, intramusculaire ou sous-cutanée. La dose unique maximale est de 0,2 mg de chlorhydrate de nalbuphine par kilogramme de poids corporel. La dose peut être répétée après 4 à 6 heures, si nécessaire, la dose quotidienne totale maximale étant de 1,2 mg/kg. La voie intraveineuse ou sous-cutanée doit être préférée chez l'enfant.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "a7d65d3d"
+   }
+  ]
+ },
  "nalmefene": {
   "page": "63957761",
   "denomination": "SELINCRO 18 mg, comprimé pelliculé",
@@ -6148,6 +7026,22 @@
      "liver_function"
     ],
     "qid": "80248bf7"
+   }
+  ]
+ },
+ "naratriptan": {
+  "page": "67586588",
+  "denomination": "NARAMIG 2,5 mg, comprimé pelliculé",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.3",
+    "under": "",
+    "quote": "Hypertension artérielle modérée ou sévère, hypertension légère non contrôlée.",
+    "tests": [
+     "blood_pressure"
+    ],
+    "qid": "4e7e0830"
    }
   ]
  },
@@ -6334,6 +7228,23 @@
      "electrolytes"
     ],
     "qid": "5d9bc0e2"
+   }
+  ]
+ },
+ "opicapone": {
+  "page": "62847721",
+  "denomination": "ONGENTYS 50 mg, gélule",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.4",
+    "under": "Autres",
+    "quote": "Des augmentations d’enzymes hépatiques ont été rapportées dans des études portant sur des inhibiteurs de type nitrocatéchol de la catéchol-O-méthyltransférase (COMT). Un examen médical général, y compris de la fonction hépatique, doit être envisagé chez les patients souffrant d’anorexie, d’asthénie et de baisse de poids d’apparition progressive au cours d’une période relativement brève.",
+    "tests": [
+     "liver_function",
+     "weight"
+    ],
+    "qid": "3858ad1f"
    }
   ]
  },
@@ -7920,6 +8831,195 @@
    }
   ]
  },
+ "remifentanil": {
+  "page": "64569231",
+  "denomination": "ULTIVA 2 mg, poudre pour solution injectable ou pour perfusion",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.2",
+    "under": "",
+    "quote": "En cas d’administration en mode « AIVOC », ULTIVA doit être utilisé en association avec un agent hypnotique administré par voie inhalée ou intraveineuse, au cours de l’induction et de l’entretien de l’anesthésie chez les patients adultes ventilés (voir tableau 1). En association avec ces agents, une analgésie appropriée pour l’induction de l’anesthésie et la chirurgie peut généralement être obtenue avec des concentrations plasmatiques cibles en rémifentanil allant de 3 à 8 nanogrammes/ml. La dose d'ULTIVA doit être adaptée (titration) en fonction de la réponse individuelle du patient. Certains actes chirurgicaux particulièrement algiques peuvent nécessiter des concentrations sanguines cibles allant jusqu’à 15 nanogrammes/ml.",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "0a859be7"
+   },
+   {
+    "index": 1,
+    "section": "4.2",
+    "under": "",
+    "quote": "Les données issues des essais cliniques sur l’utilisation du rémifentanil chez les nouveau-nés et les nourrissons âgés de moins de 1 an sont limitées (voir rubrique 5.1). Le profil pharmacocinétique du rémifentanil chez les nouveau-nés et les nourrissons âgés de moins de 1 an est comparable à celui observé chez l'adulte après ajustement en fonction du poids corporel (voir rubrique 5.2). Néanmoins, les données cliniques disponibles étant insuffisantes, l’administration d’ULTIVA n’est pas recommandée dans cette classe d’âge.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "37d251ba"
+   },
+   {
+    "index": 2,
+    "section": "4.2",
+    "under": "",
+    "quote": "En cas d’administration en mode « AIVOC », ULTIVA doit être utilisé en association avec un agent hypnotique inhalé ou administré par voie intraveineuse au cours de l’induction et de l’entretien de l’anesthésie chez les patients adultes ventilés (voir tableau 3). En association avec ces agents, une analgésie appropriée à la chirurgie cardiaque est généralement atteinte pour des concentrations sanguines cibles de rémifentanil plus élevées que celles utilisées pour les actes de chirurgie générale. Des concentrations sanguines allant jusqu’à 20 nanogrammes/ml ont été utilisées dans le cadre des études cliniques avec titrage en fonction de la réponse individuelle du patient. Aux doses recommandées ci-dessus, le rémifentanil réduit de façon significative la quantité d’agent hypnotique requise pour maintenir l’anesthésie. En conséquence, l’isoflurane et le propofol doivent être administrés selon les recommandations préalablement énoncées afin d’éviter une augmentation des effets hémodynamiques tels qu’une hypotension et une bradycardie (voir rubrique 4.2.2 : Tableau et paragraphe concernant les Médicaments associés).",
+    "tests": [
+     "drug_level"
+    ],
+    "qid": "d71c0c0e"
+   },
+   {
+    "index": 3,
+    "section": "4.2",
+    "under": "",
+    "quote": "Aucun ajustement des doses recommandées ci-dessus n’est nécessaire chez les patients insuffisants rénaux y compris ceux sous dialyse. Cependant, la clairance du métabolite acide carboxylique est diminuée chez les insuffisants rénaux (voir rubrique 5.2).",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "44285b36"
+   },
+   {
+    "index": 4,
+    "section": "4.2",
+    "under": "",
+    "quote": "En cas d’obésité, la posologie de rémifentanil doit être réduite et basée sur le poids idéal théorique du patient car la clairance et le volume de distribution du rémifentanil sont mieux corrélés au poids idéal théorique qu’au poids réel.",
+    "tests": [
+     "renal_function",
+     "weight"
+    ],
+    "qid": "13c14620"
+   },
+   {
+    "index": 5,
+    "section": "4.2",
+    "under": "",
+    "quote": "Sur la base du calcul de la masse maigre corporelle (LBM) utilisé dans le modèle de Minto, le LBM peut être sous évalué chez les femmes présentant un index de masse corporelle (BMI) supérieur à 35 kg/m2 et chez les hommes présentant un BMI supérieur à 40 kg/m2. Afin d’éviter un sous-dosage chez ces patients, le rémifentanil doit être soigneusement adapté (titration) à la réponse individuelle.",
+    "tests": [
+     "weight"
+    ],
+    "qid": "c00517bc"
+   },
+   {
+    "index": 6,
+    "section": "4.2",
+    "under": "",
+    "quote": "Sur la base des données disponibles à ce jour, une adaptation posologique chez les patients ayant une altération de la fonction rénale n'est pas nécessaire y compris chez les patients en Unité de Soins Intensifs.",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "9ba10bbd"
+   },
+   {
+    "index": 7,
+    "section": "4.2",
+    "under": "",
+    "quote": "Les résultats observés au cours des études menées sur un nombre limité de patients présentant une altération des fonctions hépatiques, ne justifient pas d’adaptation posologique dans cette population. Toutefois, les patients atteints d’une insuffisance hépatique sévère peuvent être légèrement plus sensibles aux effets dépresseurs respiratoires du rémifentanil (voir rubrique 4.4). Ces patients nécessitent donc une surveillance étroite et la posologie de rémifentanil doit être adaptée aux besoins individuels de chaque patient.",
+    "tests": [
+     "liver_function"
+    ],
+    "qid": "781e324f"
+   }
+  ]
+ },
+ "remimazolam": {
+  "page": "68722379",
+  "denomination": "Byfavo (EMEA/H/C/005246)",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.2",
+    "under": "Populations particulières",
+    "quote": "Personnes âgées, patients avec un statut physique évalué selon la classification de la Société américaine des anesthésistes (American Society of Anesthesiologists Physical Status, ASA-PS) de III ou IV et patients dont le poids corporel est inférieur à 50 kg Les patients âgés et les patients présentant un score ASA de III ou IV peuvent être plus sensibles aux effets des sédatifs. Avant l’administration de rémimazolam, une évaluation minutieuse de l’état général des patients âgés de 65 ans ou plus et/ou présentant un score ASA de III ou IV, en particulier ceux de faible poids corporel (<50 kg), est par conséquent particulièrement pertinente lorsqu’il s’agit de décider d’ajustements posologiques individualisés pour ces patients (voir rubrique 4.4).",
+    "tests": [
+     "weight"
+    ],
+    "qid": "4b0687ab"
+   },
+   {
+    "index": 1,
+    "section": "4.2",
+    "under": "Insuffisance rénale",
+    "quote": "Aucun ajustement de la dose n’est nécessaire, quel que soit le degré d’insuffisance rénale (y compris chez les patients dont le débit de filtration glomérulaire [DFG] est inférieur à 15 ml/min).",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "f9634ec8"
+   },
+   {
+    "index": 2,
+    "section": "4.2",
+    "under": "Insuffisance hépatique",
+    "quote": "L’enzyme de métabolisation (carboxylestérase-1 [CES-1]) du rémimazolam est principalement située dans le foie et la clairance du rémimazolam est proportionnellement affectée en fonction du stade d’insuffisance hépatique (voir rubrique 5.2). Aucun ajustement posologique n’est recommandé pour les patients présentant une insuffisance hépatique légère (scores de Child-Pugh 5 et 6) ou modérée (scores de Child-Pugh 7 à 9). Chez les patients présentant une insuffisance hépatique sévère (scores de Child-Pugh de 10 à 15 ; données obtenues auprès de 3 sujets seulement lors des essais cliniques), les effets cliniques peuvent être plus marqués et durer plus longtemps que chez les sujets sains. Aucun ajustement posologique n’est nécessaire, mais une attention particulière est recommandée lors de l’administration des doses de titration et le rémimazolam doit être augmenté de façon très progressive jusqu’à obtenir un effet chez ces patients (voir rubrique 4.4).",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "e35ed297"
+   },
+   {
+    "index": 3,
+    "section": "4.4",
+    "under": "Insuffisance hépatique",
+    "quote": "Les effets cliniques peuvent être plus prononcés et plus longs chez les patients présentant une insuffisance hépatique sévère en raison d’une clairance réduite (voir rubrique 5.2). Une attention particulière doit être accordée lors de l’administration des doses de titration (voir rubrique 4.2). Ces patients peuvent être plus sensibles à une dépression respiratoire (voir rubrique 4.8).",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "fb5d81d8"
+   }
+  ]
+ },
+ "riluzole": {
+  "page": "68413596",
+  "denomination": "TEGLUTIK 5 mg/ml, suspension buvable",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.3",
+    "under": "",
+    "quote": "Maladie hépatique ou taux de transaminases supérieur à 3 fois la limite supérieure de la normale avant la mise en route du traitement.",
+    "tests": [
+     "liver_function"
+    ],
+    "qid": "af7388e8"
+   },
+   {
+    "index": 1,
+    "section": "4.4",
+    "under": "Insuffisance hépatique",
+    "quote": "Le riluzole doit être utilisé avec prudence chez les patients ayant des antécédents de dysfonctionnement hépatique, ou chez les patients présentant une légère élévation des transaminases sériques (ALAT/SGPT; ASAT/SGOT jusqu’à 3 fois la limite supérieure de la normale), de la bilirubine et/ou des gamma-glutamyl transférases (GGT). Une perturbation de plusieurs paramètres hépatiques (en particulier taux de bilirubine élevé) doit faire déconseiller l’utilisation de riluzole (voir rubrique 4.8).",
+    "tests": [
+     "liver_function"
+    ],
+    "qid": "c3943cc2"
+   },
+   {
+    "index": 2,
+    "section": "4.4",
+    "under": "Insuffisance hépatique",
+    "quote": "Du fait du risque d’hépatite, le taux de transaminases sériques, dont les ALAT (SGPT), doit être contrôlé avant la mise sous traitement et pendant la durée du traitement par le riluzole. Les ALAT doivent être dosées tous les mois pendant les 3 premiers mois, puis tous les 3 mois pendant la première année et périodiquement ensuite. Ce suivi devra être plus fréquent chez les patients dont le taux d’ALAT s'élève sous traitement.",
+    "tests": [
+     "liver_function"
+    ],
+    "qid": "4e005cb1"
+   },
+   {
+    "index": 3,
+    "section": "4.4",
+    "under": "Insuffisance hépatique",
+    "quote": "Le traitement par le riluzole devra être interrompu si les taux d’ALAT augmentent jusqu’à 5 fois la limite supérieure de la normale ou au-delà. Les effets d'une réduction posologique ou d'une réadministration ultérieure chez les patients dont le taux de ALAT a atteint ou dépassé 5 fois la limite supérieure de la normale, ne sont pas connus.",
+    "tests": [
+     "liver_function"
+    ],
+    "qid": "3ecb1027"
+   },
+   {
+    "index": 4,
+    "section": "4.4",
+    "under": "Neutropénie",
+    "quote": "Les patients doivent être avertis qu’il convient d’informer leur médecin de toute maladie fébrile. La survenue d’une maladie fébrile doit entraîner un contrôle de la numération formule sanguine et une interruption du traitement par riluzole en cas de neutropénie (voir rubrique 4.8).",
+    "tests": [
+     "blood_count"
+    ],
+    "qid": "76b609e7"
+   }
+  ]
+ },
  "rimegepant": {
   "page": "65899221",
   "denomination": "VYDURA 75 mg, lyophilisat oral",
@@ -8238,6 +9338,42 @@
      "eye_exam"
     ],
     "qid": "0c07fb43"
+   }
+  ]
+ },
+ "rufinamide": {
+  "page": "62205873",
+  "denomination": "INOVELON 40 mg/ml, suspension buvable",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.2",
+    "under": "Patients recevant du valproate :",
+    "quote": "Le valproate diminuant significativement la clairance du rufinamide, il est recommandé de diminuer la dose maximale d’Inovelon chez les patients recevant un traitement concomitant par le valproate. Le traitement doit être instauré à une posologie de 10 mg/kg/jour divisée en deux doses égales administrées à 12 heures d'intervalle environ. En fonction de la réponse clinique et de la tolérance, la posologie peut être augmentée de 10 mg/kg/jour au maximum tous les trois jours jusqu'à une posologie cible de 30 mg/kg/jour divisée en deux doses égales administrées à 12 heures d'intervalle environ. Pour cette population de patients, la posologie maximale recommandée est de 30 mg/kg/jour.",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "fe84afac"
+   },
+   {
+    "index": 1,
+    "section": "4.2",
+    "under": "Patients pesant moins de 30 kg recevant également du valproate :",
+    "quote": "Le valproate diminuant significativement la clairance du rufinamide, il est recommandé de diminuer la dose maximale d’Inovelon chez les patients de moins de 30 kg recevant un traitement concomitant par le valproate. Le traitement doit être instauré à la posologie journalière de 200 mg. En fonction de la réponse clinique et de la tolérance, après un intervalle de temps d’au moins deux jours, la posologie peut être augmentée de 200 mg/jour, jusqu’à la dose maximale recommandée de 600 mg/jour.",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "131bd30c"
+   },
+   {
+    "index": 2,
+    "section": "4.4",
+    "under": "Raccourcissement de l’intervalle QT",
+    "quote": "Dans le cadre d’une étude approfondie portant sur l’intervalle QT, le rufinamide a entraîné un raccourcissement de l’intervalle QTc, proportionnel à sa concentration. Bien que le mécanisme sous-jacent et la pertinence de ce résultat en terme d’innocuité ne soient pas connus, les cliniciens doivent utiliser leur jugement clinique avant de prescrire du rufinamide à des patients exposés à un risque accru de raccourcissement de l’intervalle QTc (par exemple, dans le cas d’un syndrome congénital du QT court ou chez les patients ayant des antécédents familiaux de ce syndrome).",
+    "tests": [
+     "ecg"
+    ],
+    "qid": "427af6c1"
    }
   ]
  },
@@ -8693,6 +9829,42 @@
    }
   ]
  },
+ "sufentanil": {
+  "page": "61562566",
+  "denomination": "SUFENTA 10 microgrammes/2 ml, solution injectable (I.V. ou péridurale)",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.4",
+    "under": "",
+    "quote": "Les opioïdes peuvent induire une hypotension, particulièrement chez les patients présentant une hypovolémie. Des mesures appropriées permettant de maintenir une pression artérielle stable doivent être prises. En cas d'hypovolémie non corrigée ou d'insuffisance cardiaque non compensée, la dose d'induction devra être adaptée et administrée lentement afin d'éviter une dépression cardio-vasculaire souvent majorée par l'administration concomitante d'autres drogues anesthésiques.",
+    "tests": [
+     "blood_pressure"
+    ],
+    "qid": "75255c88"
+   },
+   {
+    "index": 1,
+    "section": "4.4",
+    "under": "",
+    "quote": "L’administration de sufentanil en bolus IV rapide doit être évitée chez les patients présentant des troubles de la circulation intracérébrale : chez ces patients, une diminution transitoire de la pression artérielle moyenne a parfois été associée à une réduction de courte durée de la pression de perfusion cérébrale.",
+    "tests": [
+     "blood_pressure"
+    ],
+    "qid": "05e3b02a"
+   },
+   {
+    "index": 2,
+    "section": "4.4",
+    "under": "",
+    "quote": "Une diminution de la posologie est recommandée chez les patients présentant : une hypothyroïdie non contrôlée ; une maladie pulmonaire ; une capacité respiratoire diminuée ; une insuffisance hépatique ou rénale et chez les patients alcooliques. Chez ces patients, la surveillance post-opératoire doit être prolongée.",
+    "tests": [
+     "thyroid_function"
+    ],
+    "qid": "75d30549"
+   }
+  ]
+ },
  "sulpiride": {
   "page": "62344129",
   "denomination": "DOGMATIL 50 mg, gélule",
@@ -8867,6 +10039,22 @@
      "liver_function"
     ],
     "qid": "caafd4b5"
+   }
+  ]
+ },
+ "thiocolchicoside": {
+  "page": "65617572",
+  "denomination": "MIOREL 4 mg, gélule",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.4",
+    "under": "",
+    "quote": "Les patients (hommes et femmes) doivent être soigneusement informés du risque potentiel d’une éventuelle grossesse et des mesures de contraception efficaces à suivre (voir rubriques 4.3 et 4.6).",
+    "tests": [
+     "pregnancy_test"
+    ],
+    "qid": "06c45c50"
    }
   ]
  },
@@ -10190,6 +11378,32 @@
    }
   ]
  },
+ "zolmitriptan": {
+  "page": "68232350",
+  "denomination": "ZOMIG 2,5 mg, comprimé pelliculé",
+  "candidates": [
+   {
+    "index": 0,
+    "section": "4.2",
+    "under": "Insuffisant rénal",
+    "quote": "Aucun ajustement de dose n’est nécessaire chez les patients ayant une clairance de la créatinine supérieure à 15 ml/min (voir rubriques 4.3 et 5.2).",
+    "tests": [
+     "renal_function"
+    ],
+    "qid": "8fc34bf1"
+   },
+   {
+    "index": 1,
+    "section": "4.4",
+    "under": "",
+    "quote": "Le zolmitriptan ne doit pas être administré aux patients ayant des facteurs de risque de maladie cardiaque ischémique par exemple tabagisme, utilisation de thérapies de substitution à base de nicotine, hypertension, hyperlipidémie, diabète, hérédité) sans un bilan cardio-vasculaire préalable (voir rubrique 4.3).",
+    "tests": [
+     "lipids"
+    ],
+    "qid": "54ab87d7"
+   }
+  ]
+ },
  "zolpidem": {
   "page": "63179285",
   "denomination": "STILNOX 10 mg, comprimé pelliculé sécable",
@@ -10412,1204 +11626,6 @@
      "renal_function"
     ],
     "qid": "96aaa096"
-   }
-  ]
- },
- "alfentanil": {
-  "page": "63670722",
-  "denomination": "RAPIFEN 5 mg (0,5 mg/ml), solution injectable",
-  "candidates": [
-   {
-    "index": 0,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "La posologie sera individualisée. Les facteurs à prendre en compte pour déterminer la posologie sont l'âge, le poids corporel, l'état physique, les maladies sous-jacentes (voir rubrique 4.4), l'utilisation d'autres médicaments (voir rubrique 4.5), le type d'anesthésie employé et le type et la durée de l'intervention chirurgicale.",
-    "tests": [
-     "weight"
-    ],
-    "qid": "5effec94"
-   },
-   {
-    "index": 1,
-    "section": "4.2",
-    "under": "Population pédiatrique",
-    "quote": "Les paramètres pharmacocinétiques sont très variables chez les nouveau-nés, particulièrement chez les prématurés. La clairance et la liaison aux protéines sont plus faibles et une dose plus faible de RAPIFEN peut être nécessaire. Les nouveau-nés doivent être étroitement surveillés et la dose d’alfentanil doit être adaptée en fonction de la réponse.",
-    "tests": [
-     "renal_function"
-    ],
-    "qid": "52403fbd"
-   },
-   {
-    "index": 2,
-    "section": "4.2",
-    "under": "Population pédiatrique",
-    "quote": "La clairance peut être supérieure à celle de l’adulte. Il peut être nécessaire d’augmenter la vitesse de perfusion de RAPIFEN pour maintenir l’analgésie.",
-    "tests": [
-     "renal_function"
-    ],
-    "qid": "629a7a35"
-   },
-   {
-    "index": 3,
-    "section": "4.2",
-    "under": "Population pédiatrique",
-    "quote": "La clairance peut être légèrement supérieure chez l’enfant et il peut être nécessaire d’augmenter la vitesse de perfusion.",
-    "tests": [
-     "renal_function"
-    ],
-    "qid": "9d5ba3ac"
-   },
-   {
-    "index": 4,
-    "section": "4.4",
-    "under": "Précautions d’emploi",
-    "quote": "L'administration d'alfentanil en bolus IV rapides doit être évitée chez les patients présentant des troubles de la circulation intracérébrale : chez ces patients, une diminution transitoire de la pression artérielle a parfois été associée à une réduction de courte durée de la pression cérébrale de perfusion.",
-    "tests": [
-     "blood_pressure"
-    ],
-    "qid": "28cece67"
-   },
-   {
-    "index": 5,
-    "section": "4.4",
-    "under": "Précautions d’emploi",
-    "quote": "En cas d'hypothyroïdie non contrôlée, de rares cas de chutes tensionnelles ont été rapportés. En conséquence, la dose initiale sera diminuée et la surveillance post-opératoire doit être prolongée.",
-    "tests": [
-     "thyroid_function"
-    ],
-    "qid": "c896eb24"
-   }
-  ]
- },
- "desflurane": {
-  "page": "65421851",
-  "denomination": "SUPRANE, liquide pour inhalation par vapeur",
-  "candidates": [
-   {
-    "index": 0,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "Durant l'entretien, la pression artérielle et la fréquence cardiaque doivent être surveillées avec attention dans le cadre de l'évaluation de la profondeur de l'anesthésie (voir rubrique 4.4).",
-    "tests": [
-     "blood_pressure",
-     "heart_rate"
-    ],
-    "qid": "4283a388"
-   },
-   {
-    "index": 1,
-    "section": "4.4",
-    "under": "",
-    "quote": "Les puissants agents anesthésiques par inhalation peuvent déclencher chez les sujets prédisposés (antécédents d'hyperthermie maligne d'effort, myopathies telles que les dystrophies musculaires, syndrome de King, myotonie, myopathies à noyau central) un état d'hypermétabolisme des muscles squelettiques entraînant un important besoin en oxygène et induisant les signes cliniques d'un syndrome connu sous le nom d'hyperthermie maligne. Il a été démontré que le desflurane est un inducteur potentiel d'hyperthermie maligne. Ce syndrome se manifeste par une hypercapnie et peut aussi inclure une rigidité musculaire, une tachycardie, une tachypnée, une cyanose, des arythmies, et/ou une pression artérielle instable. Certains signes non spécifiques pourraient aussi apparaître au cours d'une anesthésie légère : hypoxie aigüe, hypercapnie, et hypovolémie. Le traitement de l'hyperthermie maligne consiste en l'arrêt des agents inducteurs, l'administration intraveineuse de dantrolène sodique et la mise en place d'un traitement symptomatique. Une insuffisance rénale peut survenir secondairement, et la diurèse doit être surveillée et facilitée si possible. Il est déconseillé d'utiliser le desflurane chez les sujets susceptibles de présenter une hyperthermie maligne. Des cas d'hyperthermie maligne avec une issue fatale ont été rapportés avec le desflurane.",
-    "tests": [
-     "blood_pressure"
-    ],
-    "qid": "7eb034b9"
-   },
-   {
-    "index": 2,
-    "section": "4.4",
-    "under": "",
-    "quote": "De rares augmentations de la kaliémie ont été associées à l'utilisation d'agents anesthésiques inhalés, incluant le desflurane, provoquant ainsi des arythmies cardiaques, certaines fatales, chez les patients au cours de la période postopératoire. Les patients présentant des dystrophies musculaires aussi bien latentes que symptomatiques, particulièrement la dystrophie musculaire de Duchenne, apparaissent être plus vulnérables. L'utilisation concomitante de succinylcholine a été associée dans la majorité de ces cas. Ces patients ont également présenté une augmentation significative des taux sériques de créatine phosphokinase et, dans certains cas, une modification de la composition de l'urine avec myoglobinurie. Malgré la similarité avec l'hyperthermie maligne, aucun de ces patients n'a montré de signe ou de symptôme de rigidité musculaire ou d'état hypermétabolique. Un traitement précoce et intensif pour traiter l'hyperkaliémie et les arythmies résistantes est recommandé, ainsi que la recherche post-opératoire d'une maladie neuromusculaire latente.",
-    "tests": [
-     "electrolytes",
-     "drug_level"
-    ],
-    "qid": "972cacfe"
-   },
-   {
-    "index": 3,
-    "section": "4.4",
-    "under": "Précautions d'emploi",
-    "quote": "Le desflurane, comme les autres agents anesthésiques inhalés, est susceptible d'augmenter la pression du liquide céphalo-rachidien et la pression intracrânienne et de diminuer la pression de perfusion cérébrale chez les patients présentant une masse intracérébrale. Chez ces patients, l'anesthésie peut être maintenue par le desflurane à une concentration alvéolaire inférieure à 0,8 CAM, en maintenant un certain degré d'hyperventilation alvéolaire (hypocapnie modérée de l'ordre de 35 mm Hg) durant la période précédant l'ouverture de la boîte crânienne. Le maintien de la pression de perfusion cérébrale (et donc de la pression artérielle moyenne) doit être assuré avec la plus grande attention.",
-    "tests": [
-     "blood_pressure"
-    ],
-    "qid": "eb04ebe3"
-   },
-   {
-    "index": 4,
-    "section": "4.4",
-    "under": "Précautions d'emploi",
-    "quote": "Chez les patients souffrant d'une maladie coronarienne, le maintien de la pression artérielle et de la fréquence cardiaque est important pour éviter l'ischémie myocardique. Des augmentations transitoires marquées de la fréquence cardiaque, de la pression artérielle moyenne et des concentrations en éphédrine et en noréphédrine sont associées à une augmentation rapide des concentrations en desflurane. Le desflurane ne doit pas être utilisé seul comme agent inducteur d'anesthésie chez des patients à risque de maladie coronarienne ou chez des patients chez lesquels une augmentation de la fréquence cardiaque ou de la pression artérielle est indésirable. Il doit être utilisé avec d'autres médicaments, de préférence des opiacés et des hypnotiques par voie intraveineuse.",
-    "tests": [
-     "blood_pressure",
-     "heart_rate"
-    ],
-    "qid": "105f8360"
-   },
-   {
-    "index": 5,
-    "section": "4.4",
-    "under": "Précautions d'emploi",
-    "quote": "Au cours de l'entretien de l'anesthésie, une augmentation de la fréquence cardiaque et de la pression artérielle, apparaissant après une augmentation rapide de la concentration en desflurane, ne sont pas les signes d'une anesthésie inadaptée. Le changement dû à l'activation sympathique se résout approximativement en 4 minutes. L'augmentation de la fréquence cardiaque et de la pression artérielle apparaissant avant ou en l'absence d'une augmentation rapide de la concentration en desflurane peut être interprétée comme le signe d'une anesthésie légère.",
-    "tests": [
-     "blood_pressure",
-     "heart_rate"
-    ],
-    "qid": "85bcbbf6"
-   }
-  ]
- },
- "remifentanil": {
-  "page": "64569231",
-  "denomination": "ULTIVA 2 mg, poudre pour solution injectable ou pour perfusion",
-  "candidates": [
-   {
-    "index": 0,
-    "section": "4.2",
-    "under": "",
-    "quote": "En cas d’administration en mode « AIVOC », ULTIVA doit être utilisé en association avec un agent hypnotique administré par voie inhalée ou intraveineuse, au cours de l’induction et de l’entretien de l’anesthésie chez les patients adultes ventilés (voir tableau 1). En association avec ces agents, une analgésie appropriée pour l’induction de l’anesthésie et la chirurgie peut généralement être obtenue avec des concentrations plasmatiques cibles en rémifentanil allant de 3 à 8 nanogrammes/ml. La dose d'ULTIVA doit être adaptée (titration) en fonction de la réponse individuelle du patient. Certains actes chirurgicaux particulièrement algiques peuvent nécessiter des concentrations sanguines cibles allant jusqu’à 15 nanogrammes/ml.",
-    "tests": [
-     "drug_level"
-    ],
-    "qid": "0a859be7"
-   },
-   {
-    "index": 1,
-    "section": "4.2",
-    "under": "",
-    "quote": "Les données issues des essais cliniques sur l’utilisation du rémifentanil chez les nouveau-nés et les nourrissons âgés de moins de 1 an sont limitées (voir rubrique 5.1). Le profil pharmacocinétique du rémifentanil chez les nouveau-nés et les nourrissons âgés de moins de 1 an est comparable à celui observé chez l'adulte après ajustement en fonction du poids corporel (voir rubrique 5.2). Néanmoins, les données cliniques disponibles étant insuffisantes, l’administration d’ULTIVA n’est pas recommandée dans cette classe d’âge.",
-    "tests": [
-     "weight"
-    ],
-    "qid": "37d251ba"
-   },
-   {
-    "index": 2,
-    "section": "4.2",
-    "under": "",
-    "quote": "En cas d’administration en mode « AIVOC », ULTIVA doit être utilisé en association avec un agent hypnotique inhalé ou administré par voie intraveineuse au cours de l’induction et de l’entretien de l’anesthésie chez les patients adultes ventilés (voir tableau 3). En association avec ces agents, une analgésie appropriée à la chirurgie cardiaque est généralement atteinte pour des concentrations sanguines cibles de rémifentanil plus élevées que celles utilisées pour les actes de chirurgie générale. Des concentrations sanguines allant jusqu’à 20 nanogrammes/ml ont été utilisées dans le cadre des études cliniques avec titrage en fonction de la réponse individuelle du patient. Aux doses recommandées ci-dessus, le rémifentanil réduit de façon significative la quantité d’agent hypnotique requise pour maintenir l’anesthésie. En conséquence, l’isoflurane et le propofol doivent être administrés selon les recommandations préalablement énoncées afin d’éviter une augmentation des effets hémodynamiques tels qu’une hypotension et une bradycardie (voir rubrique 4.2.2 : Tableau et paragraphe concernant les Médicaments associés).",
-    "tests": [
-     "drug_level"
-    ],
-    "qid": "d71c0c0e"
-   },
-   {
-    "index": 3,
-    "section": "4.2",
-    "under": "",
-    "quote": "Aucun ajustement des doses recommandées ci-dessus n’est nécessaire chez les patients insuffisants rénaux y compris ceux sous dialyse. Cependant, la clairance du métabolite acide carboxylique est diminuée chez les insuffisants rénaux (voir rubrique 5.2).",
-    "tests": [
-     "renal_function"
-    ],
-    "qid": "44285b36"
-   },
-   {
-    "index": 4,
-    "section": "4.2",
-    "under": "",
-    "quote": "En cas d’obésité, la posologie de rémifentanil doit être réduite et basée sur le poids idéal théorique du patient car la clairance et le volume de distribution du rémifentanil sont mieux corrélés au poids idéal théorique qu’au poids réel.",
-    "tests": [
-     "renal_function",
-     "weight"
-    ],
-    "qid": "13c14620"
-   },
-   {
-    "index": 5,
-    "section": "4.2",
-    "under": "",
-    "quote": "Sur la base du calcul de la masse maigre corporelle (LBM) utilisé dans le modèle de Minto, le LBM peut être sous évalué chez les femmes présentant un index de masse corporelle (BMI) supérieur à 35 kg/m2 et chez les hommes présentant un BMI supérieur à 40 kg/m2. Afin d’éviter un sous-dosage chez ces patients, le rémifentanil doit être soigneusement adapté (titration) à la réponse individuelle.",
-    "tests": [
-     "weight"
-    ],
-    "qid": "c00517bc"
-   },
-   {
-    "index": 6,
-    "section": "4.2",
-    "under": "",
-    "quote": "Sur la base des données disponibles à ce jour, une adaptation posologique chez les patients ayant une altération de la fonction rénale n'est pas nécessaire y compris chez les patients en Unité de Soins Intensifs.",
-    "tests": [
-     "renal_function"
-    ],
-    "qid": "9ba10bbd"
-   },
-   {
-    "index": 7,
-    "section": "4.2",
-    "under": "",
-    "quote": "Les résultats observés au cours des études menées sur un nombre limité de patients présentant une altération des fonctions hépatiques, ne justifient pas d’adaptation posologique dans cette population. Toutefois, les patients atteints d’une insuffisance hépatique sévère peuvent être légèrement plus sensibles aux effets dépresseurs respiratoires du rémifentanil (voir rubrique 4.4). Ces patients nécessitent donc une surveillance étroite et la posologie de rémifentanil doit être adaptée aux besoins individuels de chaque patient.",
-    "tests": [
-     "liver_function"
-    ],
-    "qid": "781e324f"
-   }
-  ]
- },
- "remimazolam": {
-  "page": "68722379",
-  "denomination": "Byfavo (EMEA/H/C/005246)",
-  "candidates": [
-   {
-    "index": 0,
-    "section": "4.2",
-    "under": "Populations particulières",
-    "quote": "Personnes âgées, patients avec un statut physique évalué selon la classification de la Société américaine des anesthésistes (American Society of Anesthesiologists Physical Status, ASA-PS) de III ou IV et patients dont le poids corporel est inférieur à 50 kg Les patients âgés et les patients présentant un score ASA de III ou IV peuvent être plus sensibles aux effets des sédatifs. Avant l’administration de rémimazolam, une évaluation minutieuse de l’état général des patients âgés de 65 ans ou plus et/ou présentant un score ASA de III ou IV, en particulier ceux de faible poids corporel (<50 kg), est par conséquent particulièrement pertinente lorsqu’il s’agit de décider d’ajustements posologiques individualisés pour ces patients (voir rubrique 4.4).",
-    "tests": [
-     "weight"
-    ],
-    "qid": "4b0687ab"
-   },
-   {
-    "index": 1,
-    "section": "4.2",
-    "under": "Insuffisance rénale",
-    "quote": "Aucun ajustement de la dose n’est nécessaire, quel que soit le degré d’insuffisance rénale (y compris chez les patients dont le débit de filtration glomérulaire [DFG] est inférieur à 15 ml/min).",
-    "tests": [
-     "renal_function"
-    ],
-    "qid": "f9634ec8"
-   },
-   {
-    "index": 2,
-    "section": "4.2",
-    "under": "Insuffisance hépatique",
-    "quote": "L’enzyme de métabolisation (carboxylestérase-1 [CES-1]) du rémimazolam est principalement située dans le foie et la clairance du rémimazolam est proportionnellement affectée en fonction du stade d’insuffisance hépatique (voir rubrique 5.2). Aucun ajustement posologique n’est recommandé pour les patients présentant une insuffisance hépatique légère (scores de Child-Pugh 5 et 6) ou modérée (scores de Child-Pugh 7 à 9). Chez les patients présentant une insuffisance hépatique sévère (scores de Child-Pugh de 10 à 15 ; données obtenues auprès de 3 sujets seulement lors des essais cliniques), les effets cliniques peuvent être plus marqués et durer plus longtemps que chez les sujets sains. Aucun ajustement posologique n’est nécessaire, mais une attention particulière est recommandée lors de l’administration des doses de titration et le rémimazolam doit être augmenté de façon très progressive jusqu’à obtenir un effet chez ces patients (voir rubrique 4.4).",
-    "tests": [
-     "renal_function"
-    ],
-    "qid": "e35ed297"
-   },
-   {
-    "index": 3,
-    "section": "4.4",
-    "under": "Insuffisance hépatique",
-    "quote": "Les effets cliniques peuvent être plus prononcés et plus longs chez les patients présentant une insuffisance hépatique sévère en raison d’une clairance réduite (voir rubrique 5.2). Une attention particulière doit être accordée lors de l’administration des doses de titration (voir rubrique 4.2). Ces patients peuvent être plus sensibles à une dépression respiratoire (voir rubrique 4.8).",
-    "tests": [
-     "renal_function"
-    ],
-    "qid": "fb5d81d8"
-   }
-  ]
- },
- "sufentanil": {
-  "page": "61562566",
-  "denomination": "SUFENTA 10 microgrammes/2 ml, solution injectable (I.V. ou péridurale)",
-  "candidates": [
-   {
-    "index": 0,
-    "section": "4.4",
-    "under": "",
-    "quote": "Les opioïdes peuvent induire une hypotension, particulièrement chez les patients présentant une hypovolémie. Des mesures appropriées permettant de maintenir une pression artérielle stable doivent être prises. En cas d'hypovolémie non corrigée ou d'insuffisance cardiaque non compensée, la dose d'induction devra être adaptée et administrée lentement afin d'éviter une dépression cardio-vasculaire souvent majorée par l'administration concomitante d'autres drogues anesthésiques.",
-    "tests": [
-     "blood_pressure"
-    ],
-    "qid": "75255c88"
-   },
-   {
-    "index": 1,
-    "section": "4.4",
-    "under": "",
-    "quote": "L’administration de sufentanil en bolus IV rapide doit être évitée chez les patients présentant des troubles de la circulation intracérébrale : chez ces patients, une diminution transitoire de la pression artérielle moyenne a parfois été associée à une réduction de courte durée de la pression de perfusion cérébrale.",
-    "tests": [
-     "blood_pressure"
-    ],
-    "qid": "05e3b02a"
-   },
-   {
-    "index": 2,
-    "section": "4.4",
-    "under": "",
-    "quote": "Une diminution de la posologie est recommandée chez les patients présentant : une hypothyroïdie non contrôlée ; une maladie pulmonaire ; une capacité respiratoire diminuée ; une insuffisance hépatique ou rénale et chez les patients alcooliques. Chez ces patients, la surveillance post-opératoire doit être prolongée.",
-    "tests": [
-     "thyroid_function"
-    ],
-    "qid": "75d30549"
-   }
-  ]
- },
- "dihydrocodeine": {
-  "page": "67482372",
-  "denomination": "DICODIN L.P. 60 mg, comprimé à libération prolongée",
-  "candidates": [
-   {
-    "index": 0,
-    "section": "4.4",
-    "under": "Précautions particulières d’emploi",
-    "quote": "Les opioïdes, comme la dihydrocodéine, peuvent avoir une action pharmacologique sur l’axe hypothalamo-hypophysaire ou gonadique. Certaines modifications ont été observées telles qu’une augmentation de la prolactinémie et une diminution du cortisol plasmatique, de la testostérone, de l'hormone lutéinisante et de l'hormone folliculo-stimulante. Ces modifications hormonales peuvent se manifester par des symptômes cliniques.",
-    "tests": [
-     "prolactin"
-    ],
-    "qid": "e3c7fa9a"
-   }
-  ]
- },
- "nalbuphine": {
-  "page": "61214830",
-  "denomination": "NALBUPHINE RENAUDIN 20 mg/2 mL, solution injectable",
-  "candidates": [
-   {
-    "index": 0,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "La dose à administrer est basée sur le poids du patient. Il convient d’éviter les erreurs de dosage dues à la confusion entre milligramme (mg) et millilitre (mL), lesquelles pourraient entraîner un surdosage accidentel (voir le tableau 1 [adultes] ou le tableau 2 [patients pédiatriques] des doses ci-dessous).",
-    "tests": [
-     "weight"
-    ],
-    "qid": "5e808d61"
-   },
-   {
-    "index": 1,
-    "section": "4.2",
-    "under": "Chez l'adulte :",
-    "quote": "la dose recommandée est de 10 à 20 mg de chlorhydrate de nalbuphine pour les patients de 70 kg, ce qui équivaut à 0,1 à 0,3 mg/kg de poids corporel, par voie intraveineuse, intramusculaire ou sous-cutanée. La dose unique maximale chez l’adulte ne doit pas dépasser 20 mg. La dose peut être répétée après 3 à 6 heures, si nécessaire, la dose quotidienne totale maximale étant de 160 mg.",
-    "tests": [
-     "weight"
-    ],
-    "qid": "bc15e971"
-   },
-   {
-    "index": 2,
-    "section": "4.2",
-    "under": "Population pédiatrique (enfant de 18 mois à 15 ans) :",
-    "quote": "la dose recommandée est de 0,1 à 0,2 mg/kg de poids corporel par voie intraveineuse, intramusculaire ou sous-cutanée. La dose unique maximale est de 0,2 mg de chlorhydrate de nalbuphine par kilogramme de poids corporel. La dose peut être répétée après 4 à 6 heures, si nécessaire, la dose quotidienne totale maximale étant de 1,2 mg/kg. La voie intraveineuse ou sous-cutanée doit être préférée chez l'enfant.",
-    "tests": [
-     "weight"
-    ],
-    "qid": "a7d65d3d"
-   }
-  ]
- },
- "cenobamate": {
-  "page": "61025114",
-  "denomination": "ONTOZRY 100 mg, comprimé pelliculé",
-  "candidates": [
-   {
-    "index": 0,
-    "section": "4.2",
-    "under": "Personnes âgées (65 ans et plus)",
-    "quote": "Les études cliniques sur le cénobamate n’ont pas inclus suffisamment de patients âgés de 65 ans et plus pour déterminer si leur réponse au traitement est différente de celle des patients plus jeunes. Les sujets âgés traités par antiépileptiques semblent présenter une plus grande incidence de réactions indésirables tels que fatigue, troubles de la marche, chutes, ataxie, troubles de l’équilibre, étourdissements et somnolence. En général, il convient d’être prudent dans l’adaptation posologique pour un patient âgé et commencer par la limite basse de l’intervalle posologique, afin de tenir compte de la diminution des fonctions rénale et hépatique, plus fréquente dans cette population ainsi que des comorbidités et interactions potentielles chez ces patients polymédiqués (voir rubrique 4.4).",
-    "tests": [
-     "renal_function"
-    ],
-    "qid": "07d483b7"
-   },
-   {
-    "index": 1,
-    "section": "4.2",
-    "under": "Insuffisance rénale",
-    "quote": "Il convient d’être prudent et d’envisager une réduction de la dose cible lors de l’utilisation du cénobamate chez les patients présentant une insuffisance rénale légère à modérée (clairance de la créatinine de 30 à < 90 ml/min) ou sévère (clairance de la créatinine < 30 ml/min). La dose maximale recommandée pour les patients atteints d’insuffisance rénale légère, modérée ou sévère est de 300 mg/jour. L’utilisation du cénobamate n’est pas recommandée chez les patients atteints d’insuffisance rénale terminale ou chez les patients sous hémodialyse.",
-    "tests": [
-     "renal_function"
-    ],
-    "qid": "14476236"
-   },
-   {
-    "index": 2,
-    "section": "4.4",
-    "under": "Idées suicidaires",
-    "quote": "Une réaction médicamenteuse avec éosinophilie et symptômes systémiques (syndrome DRESS [Drug Reaction with Eosinophilia and Systemic Symptoms]), qui peut engager le pronostic vital ou être mortelle, a été rapportée avec le cénobamate lorsque le traitement a été instauré à des doses plus élevées puis soumis à une augmentation rapide (hebdomadaire ou plus rapprochée) (voir rubrique 4.8). Aucun cas de syndrome DRESS n’a été rapporté dans une étude de sécurité en ouvert menée auprès de 1 340 patients épileptiques lorsque le cénobamate était instauré à 12,5 mg/jour avec augmentation de la dose toutes les deux semaines. Au moment de la prescription, les patients doivent être informés des signes et symptômes du syndrome DRESS et la survenue de réactions cutanées doit être étroitement surveillée. Les symptômes du syndrome DRESS comprennent généralement, mais non exclusivement, de la fièvre, une éruption cutanée associée à l’atteinte d’autres systèmes d’organes, une lymphadénopathie, des anomalies des tests de la fonction hépatique et une éosinophilie. Il est important de noter que des manifestations précoces d’hypersensibilité, telles que la fièvre ou une lymphadénopathie peuvent être présentes même si l’éruption cutanée n’est pas visible. Si des signes et symptômes évocateurs de ces réactions apparaissent, le cénobamate doit être immédiatement arrêté et un autre traitement doit être envisagé (le cas échéant).",
-    "tests": [
-     "liver_function"
-    ],
-    "qid": "729c9714"
-   },
-   {
-    "index": 3,
-    "section": "4.4",
-    "under": "Atteinte hépatique",
-    "quote": "Des élévations des enzymes hépatiques ainsi que de rares cas d’atteinte hépatique sévère avec insuffisance hépatique ont été rapportés chez des patients traités par le cénobamate. De nombreux cas sont survenus dans le contexte clinique d’une polythérapie avec d’autres médicaments antiépileptiques (voir rubrique 4.8). Les transaminases sériques (ALAT et ASAT), la gamma-glutamyl-transférase (GGT), les phosphatases alcalines et la bilirubine totale doivent être évaluées avant l’initiation du cénobamate et surveillées pendant le traitement. En cas de suspicion ou de découverte d’une atteinte hépatique, une réduction de la dose ou l’arrêt du cénobamate doit être envisagé.",
-    "tests": [
-     "liver_function"
-    ],
-    "qid": "8a815d6e"
-   },
-   {
-    "index": 4,
-    "section": "4.4",
-    "under": "Raccourcissement de l’intervalle QT",
-    "quote": "Un raccourcissement dose-dépendant de l’intervalle QTcF a été observé avec le cénobamate. Aucun raccourcissement de l’intervalle QTcF en dessous de 340 ms n’a été observé (voir rubrique 5.1). Les études cliniques n’ont pas montré que l’association du cénobamate avec d’autres antiépileptiques intensifiait le raccourcissement de l’intervalle QT. Les cliniciens doivent faire preuve de prudence lors de la prescription de cénobamate en association avec d’autres médicaments connus pour raccourcir l’intervalle QT.",
-    "tests": [
-     "ecg"
-    ],
-    "qid": "405a80b5"
-   },
-   {
-    "index": 5,
-    "section": "4.4",
-    "under": "Raccourcissement de l’intervalle QT",
-    "quote": "Le syndrome du QT court familial est un syndrome génétique rare, associé à un risque accru de mort subite et d’arythmies ventriculaires, en particulier de fibrillation ventriculaire. Le cénobamate ne doit pas être utilisé chez les patients présentant le syndrome du QT court familial (voir rubrique 4.3).",
-    "tests": [
-     "ecg"
-    ],
-    "qid": "eaf69e81"
-   }
-  ]
- },
- "felbamate": {
-  "page": "60223278",
-  "denomination": "TALOXA 600 mg, comprimé",
-  "candidates": [
-   {
-    "index": 0,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "La posologie quotidienne du felbamate peut alors être augmentée par paliers de 600 à 1 200 mg à intervalles d'environ une semaine, jusqu'à un maximum de 3 600 mg/jour administrés en 3 à 4 prises. Une adaptation des doses de carbamazépine, de phénytoïne, de phénobarbital, et d'acide valproïque peut être nécessaire en fonction de l'augmentation de la posologie du felbamate. Cependant, les interactions médicamenteuses sont dose-dépendantes et sont sujettes à variabilité inter-individuelle. Par conséquent, tout ajustement de posologie des antiépileptiques associés doit être basé non seulement sur les taux plasmatiques à l'état d’équilibre, mais aussi sur l'observation clinique.",
-    "tests": [
-     "drug_level"
-    ],
-    "qid": "49b187db"
-   },
-   {
-    "index": 1,
-    "section": "4.2",
-    "under": "Population pédiatrique",
-    "quote": "En association avec d'autres antiépileptiques : le felbamate administré en association avec la carbamazépine, la phénytoïne, le phénobarbital ou l'acide valproïque peut augmenter l'incidence de leurs effets indésirables respectifs (voir rubrique 4.5). La posologie initiale recommandée pour le felbamate est de 7,5 mg/kg/jour à 15 mg/kg/jour, administrés en 2 ou 3 prises. Chez les patients déjà traités par carbamazépine, phénytoïne, phénobarbital et/ou acide valproïque, la posologie de ces produits doit être réduite de 20 % à 30 % lors de l'introduction du felbamate. La posologie quotidienne du felbamate peut alors être augmentée par paliers de 7,5 mg/kg à 15 mg/kg à intervalle d'une semaine au moins, jusqu'à un maximum de 45 mg/kg/jour (sans dépasser 3 600 mg/jour) administrés en 3 à 4 prises. Une adaptation des doses de carbamazépine, de phénytoïne, de phénobarbital et/ou d'acide valproïque peut être nécessaire en fonction de l'augmentation de la posologie du felbamate. Cependant, les interactions médicamenteuses sont dose-dépendantes et sont sujettes à variabilité inter-individuelle. Par conséquent, tout ajustement de posologie des antiépileptiques associés doit être basé non seulement sur les taux plasmatiques à l'état d’équilibre, mais aussi sur l'observation clinique.",
-    "tests": [
-     "drug_level"
-    ],
-    "qid": "b47160a0"
-   },
-   {
-    "index": 2,
-    "section": "4.4",
-    "under": "",
-    "quote": "Les cas d'aplasie médullaire sont survenus 2 à 12 mois après le début du traitement par le felbamate. Cependant, l'atteinte des cellules de la moelle osseuse conduisant finalement à l'aplasie peut se produire plusieurs semaines à plusieurs mois plus tôt. De même, le risque de survenue d'une aplasie médullaire peut persister pendant plusieurs mois après l'arrêt du traitement par le felbamate. On ne sait pas s'il existe une corrélation entre le risque de survenue d'aplasie médullaire et la durée du traitement. On ne peut donc être certain qu'un patient traité par le felbamate pendant plusieurs mois sans signe d'anomalies hématologiques soit exempté de risque.",
-    "tests": [
-     "blood_count"
-    ],
-    "qid": "a672f01f"
-   },
-   {
-    "index": 3,
-    "section": "4.4",
-    "under": "",
-    "quote": "Une numération formule sanguine/plaquettes doit être pratiquée avant le début du traitement par le felbamate et toutes les 2 semaines pendant le traitement.",
-    "tests": [
-     "blood_count"
-    ],
-    "qid": "d196b5cc"
-   },
-   {
-    "index": 4,
-    "section": "4.4",
-    "under": "",
-    "quote": "En présence d'une neutropénie (polynucléaires neutrophiles 3) et/ou d'une thrombopénie (plaquettes 3), le traitement par le felbamate doit être arrêté et des investigations doivent être menées afin de rechercher une aplasie médullaire.",
-    "tests": [
-     "blood_count"
-    ],
-    "qid": "a74cc682"
-   },
-   {
-    "index": 5,
-    "section": "4.4",
-    "under": "",
-    "quote": "Une surveillance clinique soigneuse à la recherche des symptômes tels qu’ecchymoses, pétéchies, saignement ou signes d'infection et/ou d'anémie (fatigue, faiblesse, etc.) doit être effectuée. Si ces symptômes sont retrouvés, une numération formule sanguine/plaquettes doit être pratiquée immédiatement.",
-    "tests": [
-     "blood_count"
-    ],
-    "qid": "6ecbc532"
-   },
-   {
-    "index": 6,
-    "section": "4.4",
-    "under": "",
-    "quote": "Un bilan hépatique (ASAT, ALAT, bilirubine) doit être pratiqué avant le début du traitement par le felbamate. Les patients avec une fonction hépatique anormale ne doivent pas être traités par le felbamate.",
-    "tests": [
-     "liver_function"
-    ],
-    "qid": "86172737"
-   },
-   {
-    "index": 7,
-    "section": "4.4",
-    "under": "",
-    "quote": "Pendant toute la durée du traitement par le felbamate, un bilan hépatique doit être effectué toutes les 2 semaines. Le traitement par le felbamate doit être interrompu chez les patients présentant des anomalies cliniquement significatives de la fonction hépatique.",
-    "tests": [
-     "liver_function"
-    ],
-    "qid": "9ead01d6"
-   },
-   {
-    "index": 8,
-    "section": "4.4",
-    "under": "",
-    "quote": "L'apparition de signes cliniques tels qu’ictère, anorexie, nausées, vomissements et douleurs abdominales devra conduire à un bilan hépatique immédiat.",
-    "tests": [
-     "liver_function"
-    ],
-    "qid": "583d99f1"
-   },
-   {
-    "index": 9,
-    "section": "4.4",
-    "under": "",
-    "quote": "Comme rapporté avec les autres antiépileptiques, certains patients peuvent présenter une augmentation de la fréquence des crises ou l’apparition de nouveaux types de crises (voir rubrique 4.8). Ces phénomènes peuvent résulter d’un surdosage, d’une diminution des concentrations plasmatiques du traitement antiépileptique administré parallèlement, ou d’un effet paradoxal.",
-    "tests": [
-     "drug_level"
-    ],
-    "qid": "a1c60abf"
-   }
-  ]
- },
- "opicapone": {
-  "page": "62847721",
-  "denomination": "ONGENTYS 50 mg, gélule",
-  "candidates": [
-   {
-    "index": 0,
-    "section": "4.4",
-    "under": "Autres",
-    "quote": "Des augmentations d’enzymes hépatiques ont été rapportées dans des études portant sur des inhibiteurs de type nitrocatéchol de la catéchol-O-méthyltransférase (COMT). Un examen médical général, y compris de la fonction hépatique, doit être envisagé chez les patients souffrant d’anorexie, d’asthénie et de baisse de poids d’apparition progressive au cours d’une période relativement brève.",
-    "tests": [
-     "liver_function",
-     "weight"
-    ],
-    "qid": "3858ad1f"
-   }
-  ]
- },
- "rufinamide": {
-  "page": "62205873",
-  "denomination": "INOVELON 40 mg/ml, suspension buvable",
-  "candidates": [
-   {
-    "index": 0,
-    "section": "4.2",
-    "under": "Patients recevant du valproate :",
-    "quote": "Le valproate diminuant significativement la clairance du rufinamide, il est recommandé de diminuer la dose maximale d’Inovelon chez les patients recevant un traitement concomitant par le valproate. Le traitement doit être instauré à une posologie de 10 mg/kg/jour divisée en deux doses égales administrées à 12 heures d'intervalle environ. En fonction de la réponse clinique et de la tolérance, la posologie peut être augmentée de 10 mg/kg/jour au maximum tous les trois jours jusqu'à une posologie cible de 30 mg/kg/jour divisée en deux doses égales administrées à 12 heures d'intervalle environ. Pour cette population de patients, la posologie maximale recommandée est de 30 mg/kg/jour.",
-    "tests": [
-     "renal_function"
-    ],
-    "qid": "fe84afac"
-   },
-   {
-    "index": 1,
-    "section": "4.2",
-    "under": "Patients pesant moins de 30 kg recevant également du valproate :",
-    "quote": "Le valproate diminuant significativement la clairance du rufinamide, il est recommandé de diminuer la dose maximale d’Inovelon chez les patients de moins de 30 kg recevant un traitement concomitant par le valproate. Le traitement doit être instauré à la posologie journalière de 200 mg. En fonction de la réponse clinique et de la tolérance, après un intervalle de temps d’au moins deux jours, la posologie peut être augmentée de 200 mg/jour, jusqu’à la dose maximale recommandée de 600 mg/jour.",
-    "tests": [
-     "renal_function"
-    ],
-    "qid": "131bd30c"
-   },
-   {
-    "index": 2,
-    "section": "4.4",
-    "under": "Raccourcissement de l’intervalle QT",
-    "quote": "Dans le cadre d’une étude approfondie portant sur l’intervalle QT, le rufinamide a entraîné un raccourcissement de l’intervalle QTc, proportionnel à sa concentration. Bien que le mécanisme sous-jacent et la pertinence de ce résultat en terme d’innocuité ne soient pas connus, les cliniciens doivent utiliser leur jugement clinique avant de prescrire du rufinamide à des patients exposés à un risque accru de raccourcissement de l’intervalle QTc (par exemple, dans le cas d’un syndrome congénital du QT court ou chez les patients ayant des antécédents familiaux de ce syndrome).",
-    "tests": [
-     "ecg"
-    ],
-    "qid": "427af6c1"
-   }
-  ]
- },
- "thiocolchicoside": {
-  "page": "65617572",
-  "denomination": "MIOREL 4 mg, gélule",
-  "candidates": [
-   {
-    "index": 0,
-    "section": "4.4",
-    "under": "",
-    "quote": "Les patients (hommes et femmes) doivent être soigneusement informés du risque potentiel d’une éventuelle grossesse et des mesures de contraception efficaces à suivre (voir rubriques 4.3 et 4.6).",
-    "tests": [
-     "pregnancy_test"
-    ],
-    "qid": "06c45c50"
-   }
-  ]
- },
- "fosphenytoin": {
-  "page": "60771794",
-  "denomination": "PRODILANTIN 75 mg/mL, solution à diluer pour perfusion/solution injectable",
-  "candidates": [
-   {
-    "index": 0,
-    "section": "4.2",
-    "under": "Mode d’administration",
-    "quote": "PRODILANTIN peut être administré en perfusion intraveineuse (IV) ou en injection intramusculaire (IM). La voie IM doit être envisagée chez les patients adultes lorsqu’il n’y a pas un besoin urgent de contrôler les crises. Si le principal objectif est d’administrer une dose de charge rapide de phénytoïne, une administration IV de PRODILANTIN doit être privilégiée car les concentrations plasmatiques thérapeutiques de phénytoïne sont plus rapidement atteintes après une administration IV qu’après une administration IM.",
-    "tests": [
-     "drug_level"
-    ],
-    "qid": "66ad3148"
-   },
-   {
-    "index": 1,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "Pour une perfusion IV, diluer la fosphénytoïne dans une solution de glucose à 5% ou de chlorure de sodium à 0,9 %. La concentration doit être comprise entre 1,5 et 25 mg d'EP/mL.",
-    "tests": [
-     "glycaemia"
-    ],
-    "qid": "9c96d73d"
-   },
-   {
-    "index": 2,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "Une surveillance continue de l'électrocardiogramme, de la pression artérielle et des fonctions respiratoires doit impérativement être mise en œuvre pendant toute la durée de la perfusion. Il faut également surveiller étroitement le patient pendant la période où les concentrations plasmatiques de phénytoïne sont maximales, c'est-à-dire environ 30 minutes après la fin de la perfusion de fosphénytoïne.",
-    "tests": [
-     "ecg",
-     "blood_pressure",
-     "drug_level"
-    ],
-    "qid": "e08fa2dc"
-   },
-   {
-    "index": 3,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "Exemples de doses de charge IV de 15 mg d’EP/kg et recommandations en matière de dilution (à 25 mg d’EP/mL) et de temps de perfusion IV (à un débit maximal de 150 mg d’EP/min, en fonction du poids corporel.)",
-    "tests": [
-     "weight"
-    ],
-    "qid": "d97d50b0"
-   },
-   {
-    "index": 4,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "Remarque : la dose, le volume d’administration, le nombre de flacons de PRODILANTIN, le volume de diluant et le temps minimal de perfusion appropriés doivent toujours être calculés en fonction du poids corporel exact du patient quand celui-ci n’est pas inclus dans les exemples mentionnés.",
-    "tests": [
-     "weight"
-    ],
-    "qid": "05667f31"
-   },
-   {
-    "index": 5,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "Il faut ajuster les doses d’entretien en fonction de la réponse du patient et des concentrations plasmatiques résiduelles de phénytoïne (voir Surveillance du traitement).",
-    "tests": [
-     "drug_level"
-    ],
-    "qid": "41f69037"
-   },
-   {
-    "index": 6,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "Remarque : la dose, le volume d’administration, le nombre de flacons de PRODILANTIN, le volume de diluant et le temps minimal de perfusion appropriés doivent toujours être calculés en fonction du poids corporel exact du patient quand celui-ci n’est pas inclus dans les exemples mentionnés.",
-    "tests": [
-     "weight"
-    ],
-    "qid": "05667f31"
-   },
-   {
-    "index": 7,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "Exemples de doses de charge IV de 10 mg d’EP/kg et recommandations en matière de dilution* (à 25 mg d’EP/mL ou à 1,5 mg d’EP/mL) et de temps de perfusion IV (à un débit maximal de 100 mg d’EP/min), en fonction du poids corporel.",
-    "tests": [
-     "weight"
-    ],
-    "qid": "4c4c46e7"
-   },
-   {
-    "index": 8,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "Remarque : la dose, le volume d’administration, le nombre de flacons de PRODILANTIN, le volume de diluant et le temps minimal de perfusion appropriés doivent toujours être calculés en fonction du poids corporel exact du patient quand celui-ci n’est pas inclus dans les exemples mentionnés.",
-    "tests": [
-     "weight"
-    ],
-    "qid": "05667f31"
-   },
-   {
-    "index": 9,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "Il faut ajuster les doses d’entretien en fonction de la réponse du patient et des concentrations plasmatiques résiduelles de phénytoïne (voir Surveillance du traitement).",
-    "tests": [
-     "drug_level"
-    ],
-    "qid": "41f69037"
-   },
-   {
-    "index": 10,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "Exemples de doses maximales d’entretien IV de 5 mg d’EP/kg et recommandations en matière de dilution* (à 25 mg d’EP/mL ou à 1,5 mg d’EP/mL) et de temps de perfusion IV (à un débit maximal de 100 mg d’EP/min), en fonction du poids corporel.",
-    "tests": [
-     "weight"
-    ],
-    "qid": "da0bf2f7"
-   },
-   {
-    "index": 11,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "Remarque : la dose, le volume d’administration, le nombre de flacons de PRODILANTIN, le volume de diluant et le temps minimal de perfusion appropriés doivent toujours être calculés en fonction du poids corporel exact du patient quand celui-ci n’est pas inclus dans les exemples mentionnés.",
-    "tests": [
-     "weight"
-    ],
-    "qid": "05667f31"
-   },
-   {
-    "index": 12,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "Il peut être utile de surveiller la concentration du médicament en cas de substitution des produits et/ou de changement des voies d’administration. Il faut ajuster les doses en fonction de la réponse du patient et des concentrations plasmatiques résiduelles de phénytoïne (voir Surveillance du traitement).",
-    "tests": [
-     "drug_level"
-    ],
-    "qid": "cd7628e6"
-   },
-   {
-    "index": 13,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "Remarque : la dose, le volume d’administration, le nombre de flacons de PRODILANTIN, le volume de diluant et le temps minimal de perfusion appropriés doivent toujours être calculés en fonction du poids corporel exact du patient quand celui-ci n’est pas inclus dans les exemples mentionnés.",
-    "tests": [
-     "weight"
-    ],
-    "qid": "05667f31"
-   },
-   {
-    "index": 14,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "Exemples de doses de charge IV de 15 mg d’EP/kg et recommandations en matière de dilution (à 25 mg d’EP/mL) et de temps de perfusion IV (à un débit maximal de 3 mg d’EP/kg/min), en fonction du poids corporel.",
-    "tests": [
-     "weight"
-    ],
-    "qid": "d1f17b8f"
-   },
-   {
-    "index": 15,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "Remarque : la dose, le volume d’administration, le nombre de flacons de PRODILANTIN, le volume de diluant et le temps minimal de perfusion appropriés doivent toujours être calculés en fonction du poids corporel exact du patient quand celui-ci n’est pas inclus dans les exemples mentionnés.",
-    "tests": [
-     "weight"
-    ],
-    "qid": "05667f31"
-   },
-   {
-    "index": 16,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "Il faut ajuster les doses d’entretien en fonction de la réponse du patient et des concentrations plasmatiques résiduelles de phénytoïne (voir Surveillance du traitement).",
-    "tests": [
-     "drug_level"
-    ],
-    "qid": "41f69037"
-   },
-   {
-    "index": 17,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "Exemples de doses maximales d’entretien IV de 5 mg d’EP/kg et recommandations en matière de dilution* (à 25 mg d’EP/mL ou à 1,5 mg d’EP/mL) et de temps de perfusion IV (à un débit maximal de 2 mg d’EP/kg/min), en fonction du poids corporel.",
-    "tests": [
-     "weight"
-    ],
-    "qid": "15a84399"
-   },
-   {
-    "index": 18,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "Remarque : la dose, le volume d’administration, le nombre de flacons de PRODILANTIN, le volume de diluant et le temps minimal de perfusion appropriés doivent toujours être calculés en fonction du poids corporel exact du patient quand celui-ci n’est pas inclus dans les exemples mentionnés.",
-    "tests": [
-     "weight"
-    ],
-    "qid": "05667f31"
-   },
-   {
-    "index": 19,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "Exemples de doses de charge IV de 10 mg d’EP/kg et recommandations en matière de dilution* (à 25 mg d’EP/mL ou à 1,5 mg d’EP/mL) et de temps de perfusion IV (à un débit maximal de 2 mg d’EP/kg/min), en fonction du poids corporel.",
-    "tests": [
-     "weight"
-    ],
-    "qid": "bd6384be"
-   },
-   {
-    "index": 20,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "Remarque : la dose, le volume d’administration, le nombre de flacons de PRODILANTIN, le volume de diluant et le temps minimal de perfusion appropriés doivent toujours être calculés en fonction du poids corporel exact du patient quand celui-ci n’est pas inclus dans les exemples mentionnés.",
-    "tests": [
-     "weight"
-    ],
-    "qid": "05667f31"
-   },
-   {
-    "index": 21,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "Il faut ajuster les doses d’entretien en fonction de la réponse du patient et des concentrations plasmatiques résiduelles de phénytoïne (voir Surveillance du traitement).",
-    "tests": [
-     "drug_level"
-    ],
-    "qid": "41f69037"
-   },
-   {
-    "index": 22,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "Exemples de doses maximales d’entretien IV de 5 mg d’EP/kg et recommandations en matière de dilution* (à 25 mg d’EP/mL ou à 1,5 mg d’EP/mL) et de temps de perfusion IV (à un débit maximal de 2 mg d’EP/kg/min), en fonction du poids corporel.",
-    "tests": [
-     "weight"
-    ],
-    "qid": "15a84399"
-   },
-   {
-    "index": 23,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "Remarque : la dose, le volume d’administration, le nombre de flacons de PRODILANTIN, le volume de diluant et le temps minimal de perfusion appropriés doivent toujours être calculés en fonction du poids corporel exact du patient quand celui-ci n’est pas inclus dans les exemples mentionnés.",
-    "tests": [
-     "weight"
-    ],
-    "qid": "05667f31"
-   },
-   {
-    "index": 24,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "Il peut être utile de surveiller la concentration du médicament en cas de substitution des produits et/ou de changement des voies d’administration. Il faut ajuster les doses en fonction de la réponse du patient et des concentrations plasmatiques résiduelles de phénytoïne (voir Surveillance du traitement).",
-    "tests": [
-     "drug_level"
-    ],
-    "qid": "cd7628e6"
-   },
-   {
-    "index": 25,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "Chez ces patients, la vitesse de transformation de fosphénytoïne IV en phénytoïne peut être augmentée. Alors que le taux de clairance de la phénytoïne totale n’est pas affecté, les concentrations plasmatiques de phénytoïne libre peuvent quant à elles être élevées. La concentration de phénytoïne libre peut être élevée chez les patients avec une hyperbilirubinémie (voir rubrique 4.4). Chez ces patients, il est donc préférable de mesurer les concentrations plasmatiques de phénytoïne libre plutôt que les concentrations plasmatiques totales de phénytoïne (voir rubrique 5.2).",
-    "tests": [
-     "renal_function",
-     "liver_function",
-     "drug_level"
-    ],
-    "qid": "bb6b665b"
-   },
-   {
-    "index": 26,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "Avant biotransformation complète, les techniques immuno-analytiques risquent de surestimer notablement les concentrations plasmatiques de phénytoïne en raison d'une réactivité croisée avec la fosphénytoïne. Les méthodes de dosage par chromatographie (par exemple CLHP) permettent un dosage exact de la phénytoïne dans les liquides biologiques en présence de fosphénytoïne. Il est recommandé d'attendre au moins 2 heures après la perfusion IV de fosphénytoïne, ou 4 heures après l'injection IM, avant de prélever du sang en vue du dosage de la phénytoïne.",
-    "tests": [
-     "drug_level"
-    ],
-    "qid": "da6bc0b9"
-   },
-   {
-    "index": 27,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "Par voie orale, la biodisponibilité de la phénytoïne (en gélules) est d'environ 90%. La phénytoïne contenue dans la fosphénytoïne a une biodisponibilité de 100 % par voie IM et IV. C'est pourquoi les concentrations plasmatiques de phénytoïne peuvent augmenter quand on remplace la phénytoïne sodique orale par la fosphénytoïne par voie IM ou IV. Il est toutefois inutile d'ajuster les doses initiales lors de la substitution de la phénytoïne orale par la fosphénytoïne ou vice versa.",
-    "tests": [
-     "drug_level"
-    ],
-    "qid": "ed9bc02a"
-   },
-   {
-    "index": 28,
-    "section": "4.4",
-    "under": "",
-    "quote": "Une surveillance continue de l’électrocardiogramme, de la pression artérielle et de la fonction respiratoire doit impérativement être mise en œuvre pendant toute la durée de la perfusion. Il faut également surveiller étroitement le patient durant la période où les concentrations plasmatiques de phénytoïne sont maximales, c’est-à-dire environ 30 minutes après la fin de la perfusion de PRODILANTIN. Le matériel nécessaire pour une réanimation cardiaque doit être disponible.",
-    "tests": [
-     "ecg",
-     "blood_pressure",
-     "drug_level"
-    ],
-    "qid": "41771aed"
-   },
-   {
-    "index": 29,
-    "section": "4.4",
-    "under": "",
-    "quote": "Généralement mais pas toujours, le SHS/DRESS inclut une fièvre, une éruption cutanée et/ou une lymphadénopathie en association avec d’autres atteintes d’organes, comme une hépatite, une néphrite, des anomalies hématologiques, une myocardite, une myosite ou une pneumopathie. Les premiers symptômes peuvent ressembler à une infection virale aiguë. D’autres manifestations courantes incluent une arthralgie, une jaunisse, une hépatomégalie, une leucocytose et une éosinophilie. L’intervalle entre la première exposition au médicament et les symptômes est généralement de 2 à 4 semaines de traitement, mais ils ont également été rapportés chez des patients traités par des anticonvulsivants pendant 3 mois ou plus. Si ces signes et symptômes apparaissent, le patient doit être examiné immédiatement. La fosphénytoïne doit être arrêtée s’il est impossible d’établir une autre étiologie des signes et symptômes.",
-    "tests": [
-     "blood_count"
-    ],
-    "qid": "8ec3869f"
-   },
-   {
-    "index": 30,
-    "section": "4.4",
-    "under": "",
-    "quote": "La phénytoïne est métabolisée par l’enzyme CYP2C9 du CYP450. Les patients porteurs des variants CYP2C9*2 ou CYP2C9*3 à activité enzymatique diminuée (métaboliseurs intermédiaires ou lents des substrats du CYP2C9) peuvent présenter un risque d’augmentation des concentrations plasmatiques de phénytoïne et de toxicité ultérieure. Chez les patients connus pour être porteurs des allèles CYP2C9*2 ou *3 à activité enzymatique diminuée, une surveillance étroite de la réponse clinique est conseillée et une surveillance des concentrations plasmatiques de phénytoïne peut être nécessaire.",
-    "tests": [
-     "drug_level"
-    ],
-    "qid": "073584c5"
-   },
-   {
-    "index": 31,
-    "section": "4.4",
-    "under": "",
-    "quote": "Si les concentrations plasmatiques de phénytoïne dépassent durablement la zone thérapeutique optimale et/ou si la phénytoine est utilisée à long terme, peuvent survenir des états confusionnels décrits comme un \"délire\", une \"psychose\" ou une \"encéphalopathie\" ou, rarement, des perturbations irréversibles des fonctions cérébelleuses et/ou une atrophie cérébelleuse. Dès l'apparition du premier signe de toxicité aiguë, le taux plasmatique de phénytoïne doit être contrôlé (voir rubrique 4.2 paragraphe « Surveillance du traitement »). Si les concentrations plasmatiques de phénytoïne sont excessives, il faut réduire la dose de fosphénytoïne. Si les symptômes persistent, il faut arrêter l'administration de fosphénytoïne.",
-    "tests": [
-     "drug_level"
-    ],
-    "qid": "13860927"
-   },
-   {
-    "index": 32,
-    "section": "4.4",
-    "under": "",
-    "quote": "En raison de l’augmentation de la fraction libre de phénytoïne chez les patients atteints d’une maladie rénale ou hépatique ou chez ceux qui souffrent d’hypoalbuminémie, l’interprétation des concentrations plasmatiques en phénytoïne totale doit être faite avec précaution car elle peut ne pas refléter la concentration libre pharmacologiquement active. La concentration de phénytoïne libre peut être élevée chez les patients atteints d’hyperbilirubinémie. Les concentrations de phénitoïne libre sont plus pertinentes chez ces patients (voir rubriques 4.2 et 5.2). Il peut être nécessaire de modifier les doses en cas de perturbation de la fonction rénale ou hépatique, chez les patients âgés et chez les patients atteints de maladies graves (voir rubrique 4.2). Ces patients peuvent présenter précocement des signes de toxicité de la phénytoïne ou des événements indésirables plus sévères dus aux modifications de la pharmacocinétique de la fosphénytoïne et de la phénytoïne.",
-    "tests": [
-     "renal_function",
-     "liver_function",
-     "drug_level"
-    ],
-    "qid": "0b7bfce5"
-   }
-  ]
- },
- "riluzole": {
-  "page": "68413596",
-  "denomination": "TEGLUTIK 5 mg/ml, suspension buvable",
-  "candidates": [
-   {
-    "index": 0,
-    "section": "4.3",
-    "under": "",
-    "quote": "Maladie hépatique ou taux de transaminases supérieur à 3 fois la limite supérieure de la normale avant la mise en route du traitement.",
-    "tests": [
-     "liver_function"
-    ],
-    "qid": "af7388e8"
-   },
-   {
-    "index": 1,
-    "section": "4.4",
-    "under": "Insuffisance hépatique",
-    "quote": "Le riluzole doit être utilisé avec prudence chez les patients ayant des antécédents de dysfonctionnement hépatique, ou chez les patients présentant une légère élévation des transaminases sériques (ALAT/SGPT; ASAT/SGOT jusqu’à 3 fois la limite supérieure de la normale), de la bilirubine et/ou des gamma-glutamyl transférases (GGT). Une perturbation de plusieurs paramètres hépatiques (en particulier taux de bilirubine élevé) doit faire déconseiller l’utilisation de riluzole (voir rubrique 4.8).",
-    "tests": [
-     "liver_function"
-    ],
-    "qid": "c3943cc2"
-   },
-   {
-    "index": 2,
-    "section": "4.4",
-    "under": "Insuffisance hépatique",
-    "quote": "Du fait du risque d’hépatite, le taux de transaminases sériques, dont les ALAT (SGPT), doit être contrôlé avant la mise sous traitement et pendant la durée du traitement par le riluzole. Les ALAT doivent être dosées tous les mois pendant les 3 premiers mois, puis tous les 3 mois pendant la première année et périodiquement ensuite. Ce suivi devra être plus fréquent chez les patients dont le taux d’ALAT s'élève sous traitement.",
-    "tests": [
-     "liver_function"
-    ],
-    "qid": "4e005cb1"
-   },
-   {
-    "index": 3,
-    "section": "4.4",
-    "under": "Insuffisance hépatique",
-    "quote": "Le traitement par le riluzole devra être interrompu si les taux d’ALAT augmentent jusqu’à 5 fois la limite supérieure de la normale ou au-delà. Les effets d'une réduction posologique ou d'une réadministration ultérieure chez les patients dont le taux de ALAT a atteint ou dépassé 5 fois la limite supérieure de la normale, ne sont pas connus.",
-    "tests": [
-     "liver_function"
-    ],
-    "qid": "3ecb1027"
-   },
-   {
-    "index": 4,
-    "section": "4.4",
-    "under": "Neutropénie",
-    "quote": "Les patients doivent être avertis qu’il convient d’informer leur médecin de toute maladie fébrile. La survenue d’une maladie fébrile doit entraîner un contrôle de la numération formule sanguine et une interruption du traitement par riluzole en cas de neutropénie (voir rubrique 4.8).",
-    "tests": [
-     "blood_count"
-    ],
-    "qid": "76b609e7"
-   }
-  ]
- },
- "aprepitant": {
-  "page": "66046596",
-  "denomination": "ATANTO 80 mg, gélule",
-  "candidates": [
-   {
-    "index": 0,
-    "section": "4.4",
-    "under": "Co-administration avec la warfarine (un substrat du CYP2C9)",
-    "quote": "Chez les patients traités au long cours par la warfarine, l’INR (International Normalised Ratio) doit être étroitement surveillé au cours du traitement par ATANTO et pendant 14 jours après chaque cure de 3 jours d’ATANTO (voir rubrique 4.5).",
-    "tests": [
-     "coagulation"
-    ],
-    "qid": "e380732c"
-   }
-  ]
- },
- "dantrolene": {
-  "page": "60385682",
-  "denomination": "DANTRIUM 100 mg, gélule",
-  "candidates": [
-   {
-    "index": 0,
-    "section": "4.2",
-    "under": "Posologie",
-    "quote": "Une fois que la posologie optimale est atteinte, la dose quotidienne totale du patient devra être divisée en 2 à 4 doses individuelles afin d’obtenir des taux plasmatiques aussi uniformes que possible et de minimiser les effets indésirables.",
-    "tests": [
-     "drug_level"
-    ],
-    "qid": "110d6685"
-   },
-   {
-    "index": 1,
-    "section": "4.4",
-    "under": "",
-    "quote": "Avant le début et pendant le traitement par DANTRIUM, les enzymes hépatiques doivent être surveillées à intervalles réguliers ; en particulier, l'ASAT et l'ALAT qui doivent être dosées fréquemment. Les patients pour lesquels le risque de lésions hépatiques est accru doivent faire l'objet d'une surveillance particulièrement étroite. Si les valeurs sont en dehors de la norme ou si des symptômes de lésions hépatiques apparaissent, DANTRIUM doit être arrêté.",
-    "tests": [
-     "liver_function"
-    ],
-    "qid": "58b89ee2"
-   }
-  ]
- },
- "almotriptan": {
-  "page": "64165648",
-  "denomination": "ALMOTRIPTAN ARROW 12,5 mg, comprimé pelliculé",
-  "candidates": [
-   {
-    "index": 0,
-    "section": "4.4",
-    "under": "",
-    "quote": "Dans de très rares cas, comme avec les autres agonistes des récepteurs 5HT1B/1D, des vasospasmes des artères coronaires et des infarctus du myocarde ont été rapportés, par conséquent l’almotriptan ne doit pas être administré aux patients qui pourraient être atteints d’une pathologie coronarienne non diagnostiquée sans la recherche préalable d’une potentielle pathologie cardio-vasculaire sous-jacente. Ces patients incluent les femmes ménopausées, les hommes de plus de 40 ans et les patients présentant d’autres facteurs de risques de pathologie coronarienne tels que l’hypertension non contrôlée, l’hypercholestérolémie, l’obésité, le diabète, le tabagisme ou des antécédents familiaux clairs de pathologies cardiaques.",
-    "tests": [
-     "lipids"
-    ],
-    "qid": "5b836622"
-   }
-  ]
- },
- "eletriptan": {
-  "page": "63476564",
-  "denomination": "RELPAX 40 mg, comprimé pelliculé",
-  "candidates": [
-   {
-    "index": 0,
-    "section": "4.2",
-    "under": "Patients présentant une insuffisance rénale",
-    "quote": "Les effets de RELPAX sur la tension artérielle étant amplifiés en cas d'insuffisance rénale (voir rubrique 4.4), il est recommandé d'instaurer le traitement à une posologie initiale de 20 mg chez les patients souffrant d'insuffisance rénale légère ou modérée. La posologie quotidienne maximale ne devra pas dépasser 40 mg. RELPAX est contre-indiqué chez les patients présentant une insuffisance rénale sévère.",
-    "tests": [
-     "blood_pressure"
-    ],
-    "qid": "69722fb0"
-   },
-   {
-    "index": 1,
-    "section": "4.4",
-    "under": "Patients présentant une insuffisance cardiaque",
-    "quote": "RELPAX ne doit pas être administré sans évaluation préalable dans les cas suivants : patients chez lesquels une cardiopathie asymptomatique est possible, patients ayant un risque de maladie coronarienne (par exemple patients souffrant d'hypertension artérielle, de diabète, patients fumeurs ou utilisant un traitement de substitution à la nicotine, hommes âgés de plus de 40 ans, femmes ménopausées et patients présentant des antécédents familiaux importants de maladie coronarienne). Le bilan cardiovasculaire peut ne pas identifier tous les patients qui ont une maladie cardiovasculaire et, dans de très rares cas, des accidents cardiaques graves sont survenus chez des patients sans affection cardiaque sous-jacente, à la suite de l'administration d'agonistes 5-HT1. Les patients chez lesquels une maladie coronarienne a été diagnostiquée ne doivent pas être traités par RELPAX (voir rubrique 4.3).",
-    "tests": [
-     "blood_pressure"
-    ],
-    "qid": "ff0f7f63"
-   },
-   {
-    "index": 2,
-    "section": "4.4",
-    "under": "Patients présentant une insuffisance cardiaque",
-    "quote": "Des augmentations légères et transitoires de la tension artérielle ont été observées avec des doses supérieures ou égales à 60 mg d'élétriptan (doses utilisées en clinique). Cependant, ces augmentations n'ont pas été accompagnées de manifestations cliniques dans les études cliniques réalisées. Ce type d'effets a été nettement plus marqué chez des sujets âgés ou présentant une insuffisance rénale. Chez les patients présentant une insuffisance rénale, on a observé une augmentation maximale moyenne de la pression artérielle systolique comprise entre 14 et 17 mmHg (normal : 3 mmHg) et de la pression artérielle diastolique de 14 à 21 mmHg (normal : 4 mmHg). Chez les sujets âgés, on a observé une augmentation maximale moyenne de la pression artérielle systolique de 23 mmHg en comparaison à 13 mmHg chez l'adulte jeune (placebo 8 mmHg). Après la mise sur le marché, des augmentations de la tension artérielle ont été rapportées chez des patients recevant des doses de 20 et 40 mg d'élétriptan, ainsi que chez des patients sans insuffisance rénale et des sujets non-âgés.",
-    "tests": [
-     "blood_pressure"
-    ],
-    "qid": "5f103610"
-   }
-  ]
- },
- "frovatriptan": {
-  "page": "60435263",
-  "denomination": "TIGREAT 2,5 mg, comprimé pelliculé",
-  "candidates": [
-   {
-    "index": 0,
-    "section": "4.3",
-    "under": "",
-    "quote": "Hypertension artérielle modérée ou sévère, hypertension légère non contrôlée.",
-    "tests": [
-     "blood_pressure"
-    ],
-    "qid": "4e7e0830"
-   }
-  ]
- },
- "lasmiditan": {
-  "page": "EMEA-H-C-005332",
-  "denomination": "Rayvow (EMEA/H/C/005332)",
-  "candidates": [
-   {
-    "index": 0,
-    "section": "4.4",
-    "under": "Syndrome sérotoninergique",
-    "quote": "Un syndrome sérotoninergique a été rapporté et peut survenir avec le lasmiditan seul ou co-administré avec d’autres médicaments sérotoninergiques [par exemple, les inhibiteurs sélectifs de la recapture de la sérotonine (ISRSs), les inhibiteurs de la recapture de la sérotonine et de la noradrénaline (IRSNAs), les antidépresseurs tricycliques (ATCs), et les inhibiteurs de la monoamine oxydase (IMAOs)]. L’expérience clinique de l’utilisation du lasmiditan et des triptans dans un intervalle de temps rapproché est limitée. Les risques de développer un syndrome sérotoninergique peuvent s’additionner. Les symptômes d’un syndrome sérotoninergique peuvent comprendre des modifications de l’état mental (par exemple agitation, hallucinations, coma), une instabilité du système nerveux autonome (par exemple tachycardie, tension artérielle instable, hyperthermie), des signes neuromusculaires (par exemple hyperréflexie, incoordination), et/ou des signes et symptômes gastro-intestinaux (par exemple nausées, vomissements, diarrhées). Ces réactions peuvent être sévères. L’apparition des symptômes survient généralement quelques minutes à quelques heures après l’administration d’une nouvelle prise, ou d’une dose plus élevée, d’un médicament sérotoninergique. Si un traitement concomitant avec d’autres médicaments sérotoninergiques est justifié sur le plan clinique, une surveillance attentive du patient est recommandée, tout particulièrement pendant l’instauration du traitement, et lors de l’augmentation des doses. Le lasmiditan doit être interrompu en cas de suspicion de syndrome sérotoninergique.",
-    "tests": [
-     "blood_pressure"
-    ],
-    "qid": "4fab945c"
-   }
-  ]
- },
- "naratriptan": {
-  "page": "67586588",
-  "denomination": "NARAMIG 2,5 mg, comprimé pelliculé",
-  "candidates": [
-   {
-    "index": 0,
-    "section": "4.3",
-    "under": "",
-    "quote": "Hypertension artérielle modérée ou sévère, hypertension légère non contrôlée.",
-    "tests": [
-     "blood_pressure"
-    ],
-    "qid": "4e7e0830"
-   }
-  ]
- },
- "zolmitriptan": {
-  "page": "68232350",
-  "denomination": "ZOMIG 2,5 mg, comprimé pelliculé",
-  "candidates": [
-   {
-    "index": 0,
-    "section": "4.2",
-    "under": "Insuffisant rénal",
-    "quote": "Aucun ajustement de dose n’est nécessaire chez les patients ayant une clairance de la créatinine supérieure à 15 ml/min (voir rubriques 4.3 et 5.2).",
-    "tests": [
-     "renal_function"
-    ],
-    "qid": "8fc34bf1"
-   },
-   {
-    "index": 1,
-    "section": "4.4",
-    "under": "",
-    "quote": "Le zolmitriptan ne doit pas être administré aux patients ayant des facteurs de risque de maladie cardiaque ischémique par exemple tabagisme, utilisation de thérapies de substitution à base de nicotine, hypertension, hyperlipidémie, diabète, hérédité) sans un bilan cardio-vasculaire préalable (voir rubrique 4.3).",
-    "tests": [
-     "lipids"
-    ],
-    "qid": "54ab87d7"
-   }
-  ]
- },
- "atogepant": {
-  "page": "67880725",
-  "denomination": "AQUIPTA 10 mg, comprimé",
-  "candidates": [
-   {
-    "index": 0,
-    "section": "4.2",
-    "under": "Insuffisance rénale",
-    "quote": "Aucun ajustement posologique n’est recommandé chez les patients présentant une insuffisance rénale légère ou modérée (voir rubrique 5.2). Chez les patients présentant une insuffisance rénale sévère (clairance de la créatinine [ClCr] de 15 à 29 mL/min) et chez les patients atteints d’insuffisance rénale terminale (IRT) (ClCr < 15 mL/min), la dose recommandée est de 10 mg une fois par jour. Chez les patients atteints d’IRT sous hémodialyse intermittente, AQUIPTA doit être pris de préférence après la séance de dialyse.",
-    "tests": [
-     "renal_function"
-    ],
-    "qid": "a06c521e"
-   }
-  ]
- },
- "dihydroergotamine": {
-  "page": "62455371",
-  "denomination": "DIERGOSPRAY 4 mg/ml, solution pour pulvérisation nasale",
-  "candidates": [
-   {
-    "index": 0,
-    "section": "4.3",
-    "under": "",
-    "quote": "Conditions prédisposant à des réactions angiospastiques : insuffisance coronaire (en particulier angor instable ou spastique), états infectieux sévères (septicémie), choc, maladie vasculaire oblitérante, maladies vasculaires périphériques telles que syndrome de Raynaud, antécédents d’accident ischémique transitoire ou de souffrance cérébrale ou d’hypertension artérielle mal contrôlée.",
-    "tests": [
-     "blood_pressure"
-    ],
-    "qid": "66c40eda"
    }
   ]
  }

@@ -1149,6 +1149,31 @@
    "5.1"
   ]
  },
+ "fosaprepitant": {
+  "date_source": "download date",
+  "denomination": "Ivemend (EMEA/H/C/000743)",
+  "ema": {
+   "authorised": "2008-01-11",
+   "epar": "https://www.ema.europa.eu/en/medicines/human/EPAR/ivemend",
+   "generic": false,
+   "holder": "Merck Sharp & Dohme B.V.",
+   "language": "fr",
+   "number": "EMEA/H/C/000743",
+   "pdf": "https://www.ema.europa.eu/fr/documents/product-information/ivemend-epar-product-information_fr.pdf",
+   "pi_updated": "2025-11-05",
+   "product": "Ivemend",
+   "status": "Authorised"
+  },
+  "fetched": "2026-11-28",
+  "page": "EMEA-H-C-000743",
+  "sections": [
+   "4.1",
+   "4.2",
+   "4.3",
+   "4.4",
+   "5.1"
+  ]
+ },
  "fosphenytoin": {
   "cis": "60771794",
   "date_source": "file mtime",

@@ -2311,6 +2311,15 @@
    "condition": "Chez les patients traités au long cours par la warfarine"
   }
  ],
+ "fosaprepitant": [
+  {
+   "index": 0,
+   "test": "coagulation",
+   "timing": "during",
+   "qid": "9e6f3b5a",
+   "condition": "Chez les patients traités au long cours par la warfarine"
+  }
+ ],
  "dantrolene": [
   {
    "index": 1,

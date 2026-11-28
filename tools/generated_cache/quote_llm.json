@@ -6394,6 +6394,9 @@
 "q_693614ac8cde": {
 "drug:alprazolam/brands[Xanax XR]": "sonnet"
 },
+"q_6953751c1fec": {
+"drug:fosaprepitant/workup[coagulation:during]": "opus"
+},
 "q_695d910e5495": {
 "drug:daridorexant/half_life": "sonnet"
 },
@@ -10307,6 +10310,7 @@
 "receptor:5ht1b/effects[agonism:vasoconstriction]": "opus"
 },
 "q_a71c2fedc8ed": {
+"drug:dihydroergotamine/formulations[nasal]/half_life": "opus",
 "drug:dihydroergotamine/half_life": "opus"
 },
 "q_a7575ff07e02": {
@@ -10349,6 +10353,7 @@
 },
 "q_a80b8239b2b6": {
 "drug:dihydroergotamine/formulations[nasal]/release": "opus",
+"drug:dihydroergotamine/formulations[nasal]/tmax": "opus",
 "drug:dihydroergotamine/tmax": "opus"
 },
 "q_a81440c0755d": {
