@@ -12065,6 +12065,7 @@
         "64617815": "https://www.ema.europa.eu/fr/documents/product-information/sunosi-epar-product-information_fr.pdf",
         "67077388": "https://www.ema.europa.eu/fr/documents/product-information/tasmar-epar-product-information_fr.pdf",
         "68722379": "https://www.ema.europa.eu/fr/documents/product-information/byfavo-epar-product-information_fr.pdf",
+        "EMEA-H-C-000743": "https://www.ema.europa.eu/fr/documents/product-information/ivemend-epar-product-information_fr.pdf",
         "EMEA-H-C-001177": "https://www.ema.europa.eu/fr/documents/product-information/sycrest-epar-product-information_fr.pdf",
         "EMEA-H-C-002713": "https://www.ema.europa.eu/fr/documents/product-information/latuda-epar-product-information_fr.pdf",
         "EMEA-H-C-002770": "https://www.ema.europa.eu/fr/documents/product-information/reagila-epar-product-information_fr.pdf",
@@ -12371,6 +12372,7 @@
         "NDA021977": "https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=021977",
         "NDA021992": "https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=021992",
         "NDA021999": "https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=021999",
+        "NDA022023": "https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=022023",
         "NDA022075": "https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=022075",
         "NDA022117": "https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=022117",
         "NDA022192": "https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=022192",
@@ -12616,9 +12618,9 @@
         "unknown": 0
       },
       "drug_bindings": {
-        "total": 2069,
-        "verified": 1862,
-        "uncertain": 190,
+        "total": 2075,
+        "verified": 1867,
+        "uncertain": 191,
         "sourced": 0,
         "llm": 0,
         "nosource": 17,
@@ -12626,13 +12628,13 @@
         "unknown": 0
       },
       "drug_binding_action": {
-        "total": 1698,
-        "verified": 1308,
-        "uncertain": 119,
+        "total": 1704,
+        "verified": 1314,
+        "uncertain": 121,
         "sourced": 0,
         "llm": 132,
-        "nosource": 139,
-        "missing": 271,
+        "nosource": 137,
+        "missing": 269,
         "unknown": 584
       },
       "drug_nbn": {
@@ -12686,8 +12688,8 @@
         "unknown": 0
       },
       "drug_formulations": {
-        "total": 199,
-        "verified": 199,
+        "total": 200,
+        "verified": 200,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -12716,8 +12718,8 @@
         "unknown": 0
       },
       "drug_holders": {
-        "total": 370,
-        "verified": 370,
+        "total": 371,
+        "verified": 371,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -12816,8 +12818,8 @@
         "unknown": 0
       },
       "drug_workup": {
-        "total": 283,
-        "verified": 283,
+        "total": 284,
+        "verified": 284,
         "uncertain": 0,
         "sourced": 0,
         "llm": 0,
@@ -13147,23 +13149,23 @@
       }
     },
     "nodes": {
-      "total": 12127,
-      "verified": 11260,
-      "uncertain": 445,
+      "total": 12142,
+      "verified": 11274,
+      "uncertain": 448,
       "sourced": 1,
       "llm": 250,
-      "nosource": 171,
-      "missing": 421,
+      "nosource": 169,
+      "missing": 419,
       "unknown": 594,
-      "backed": 11706,
+      "backed": 11723,
       "pct_backed": 97
     },
     "ki_coverage": {
-      "bindings_total": 2050,
-      "bindings_with_ki": 1706,
+      "bindings_total": 2056,
+      "bindings_with_ki": 1707,
       "pct_bindings_with_ki": 83,
       "drugs_total": 326,
-      "drugs_without_ki": 101,
+      "drugs_without_ki": 100,
       "drugs_without_ki_ids": [
         "acamprosate",
         "alfentanil",
@@ -13213,7 +13215,6 @@
         "lacosamide",
         "lamotrigine",
         "levodopa",
-        "levomethadone",
         "loprazolam",
         "lorazepam",
         "meprobamate",
