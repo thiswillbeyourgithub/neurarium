@@ -3170,6 +3170,22 @@
     "line": "NDRI ( norepinephrine and dopamine reuptake inhibitor )",
     "lead": "Orphenadrine is known to have these pharmacological properties:",
     "qid": "487b7a98"
+   },
+   {
+    "target": "nav",
+    "target_name": "Voltage-gated sodium channel",
+    "origin": "prose_list",
+    "line": "Na v 1.7 , Na v 1.8 , and Na v 1.9 sodium channel blocker",
+    "lead": "Orphenadrine is known to have these pharmacological properties:",
+    "qid": "e595d62d"
+   },
+   {
+    "target": "muscarinic",
+    "target_name": "Muscarinic acetylcholine receptors",
+    "origin": "prose_list",
+    "line": "Nonselective mACh receptor antagonist ( anticholinergic , 58% as potent as atropine) Various monographs and package inserts, nursing manuals, journal articles and so forth have proposed the theory that this anticholinergic (atropine-like) activity, NMDA antagonism and possible local anaesthetic and miscellaneous analgesic effects may be the reason for orphenadrine's efficacy against muscle and other pain. These reasons are behind the use of orphenadrine and other drugs of a number of types which are used with paracetamol, aspirin, naproxen, and similar agents with or without opioid analgesics to more effectively manage pain of various types.",
+    "lead": "Orphenadrine is known to have these pharmacological properties:",
+    "qid": "5d8a08e4"
    }
   ]
  },
@@ -3312,6 +3328,15 @@
     "corpus": "bdpm_rcp",
     "page": "65617572",
     "qid": "7ce7260d"
+   },
+   {
+    "target": "glycine",
+    "target_name": "Glycine",
+    "origin": "rcp_5.1",
+    "line": "Par contre, le thiocolchicoside est dépourvu de tout effet curarisant : c’est en effet par l’intermédiaire du système nerveux central et non par une paralysie de la plaque motrice qu’il agit. Le mode d’action pharmacologique du thiocolchicoside est partiellement élucidé : de récents travaux (2003 et 2007) ont montré que l’activité myorelaxante résulterait d’une action agoniste sur les récepteurs glycinergiques situés principalement au niveau du tronc cérébral et de la moelle épinière. Il n’altère donc pas la motilité volontaire, ne provoque pas de paralysie et évite, de ce fait, tout risque respiratoire.",
+    "corpus": "bdpm_rcp",
+    "page": "65617572",
+    "qid": "39bfc029"
    }
   ]
  },
@@ -3467,6 +3492,13 @@
     "origin": "prose",
     "line": "Rather, its ability to stimulate glutamate uptake seems to mediate many of its effects.",
     "qid": "328fbbd9"
+   },
+   {
+    "target": "nav",
+    "target_name": "Voltage-gated sodium channel",
+    "origin": "prose",
+    "line": "Riluzole preferentially blocks TTX -sensitive sodium channels , which are associated with damaged neurons .",
+    "qid": "1813d335"
    }
   ]
  },

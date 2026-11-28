@@ -2481,6 +2481,20 @@
    "pick": true,
    "action": "reuptake_inhibitor",
    "qid": "487b7a98"
+  },
+  {
+   "index": 3,
+   "target": "nav",
+   "pick": false,
+   "qid": "e595d62d",
+   "reason": "Nav1.7 / 1.8 / 1.9 are peripheral (nociceptor) subtypes, while the modeled nav target lights cortical and thalamic regions"
+  },
+  {
+   "index": 4,
+   "target": "muscarinic",
+   "pick": true,
+   "action": "antagonist",
+   "qid": "5d8a08e4"
   }
  ],
  "carisoprodol": [
@@ -2568,6 +2582,13 @@
    "pick": true,
    "action": "antagonist",
    "qid": "7ce7260d"
+  },
+  {
+   "index": 3,
+   "target": "glycine",
+   "pick": true,
+   "action": "agonist",
+   "qid": "39bfc029"
   }
  ],
  "rufinamide": [
@@ -2704,6 +2725,13 @@
    "pick": false,
    "reason": "glutamate uptake is a downstream effect, not a receptor binding",
    "qid": "328fbbd9"
+  },
+  {
+   "index": 4,
+   "target": "nav",
+   "pick": true,
+   "action": "blocker",
+   "qid": "1813d335"
   }
  ],
  "ziconotide": [

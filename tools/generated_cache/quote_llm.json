@@ -2627,6 +2627,9 @@
 "drug:cariprazine/metabolites[didesmethyl_cariprazine]": "sonnet",
 "metabolite:didesmethyl_cariprazine/half_life": "sonnet"
 },
+"q_29449ec2f2ec": {
+"drug:thiocolchicoside/bindings[glycine:agonist]": "opus"
+},
 "q_2946e7cb7bd7": {
 "drug:clonidine/excretion[route:renal]": "opus"
 },
@@ -5619,6 +5622,9 @@
 },
 "q_5dae12d3a253": {
 "drug:clobazam/brands[Frisium]": "sonnet"
+},
+"q_5dc5c05f01a8": {
+"drug:orphenadrine/bindings[muscarinic:antagonist]": "opus"
 },
 "q_5dc6706c70b6": {
 "drug:zonisamide/brands[Zonegran]": "sonnet"
@@ -14911,6 +14917,9 @@
 "drug:biperiden/bindings[m3:antagonist]": "sonnet",
 "drug:biperiden/bindings[m4:antagonist]": "sonnet",
 "drug:biperiden/bindings[m5:antagonist]": "sonnet"
+},
+"q_f405e6bc2541": {
+"drug:riluzole/bindings[nav:blocker]": "opus"
 },
 "q_f40ae47ca035": {
 "drug:methylphenidate_dl/brands[Relexxii]": "sonnet"
