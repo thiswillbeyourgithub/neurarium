@@ -334,6 +334,15 @@
    "qid": "21f62c4b"
   }
  ],
+ "caffeine": [
+  {
+   "index": 0,
+   "target": "ryr1",
+   "pick": true,
+   "action": "modulator",
+   "qid": "cb766fe6"
+  }
+ ],
  "cannabinol": [
   {
    "index": 0,

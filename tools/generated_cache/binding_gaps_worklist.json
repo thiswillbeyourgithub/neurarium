@@ -422,6 +422,21 @@
   ]
  },
  {
+  "drug": "caffeine",
+  "name": "Caffeine",
+  "slug": "caffeine",
+  "stahl": false,
+  "candidates": [
+   {
+    "target": "ryr1",
+    "target_name": "Ryanodine receptor 1 (RyR1)",
+    "origin": "prose",
+    "line": "In addition to its activity at adenosine receptors, caffeine is an inositol trisphosphate receptor 1 antagonist and a voltage-independent activator of the ryanodine receptors ( RYR1 , RYR2 , and RYR3 ).",
+    "qid": "cb766fe6"
+   }
+  ]
+ },
+ {
   "drug": "cannabinol",
   "name": "Cannabinol",
   "slug": "cannabinol",

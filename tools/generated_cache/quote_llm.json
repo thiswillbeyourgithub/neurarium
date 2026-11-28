@@ -6878,6 +6878,9 @@
 "q_71287a023c0f": {
 "drug:eslicarbazepine_acetate/originator": "opus"
 },
+"q_712dc6689637": {
+"drug:caffeine/bindings[ryr1:modulator]": "opus"
+},
 "q_7130eac6d510": {
 "drug:atropine/half_life": "sonnet"
 },
