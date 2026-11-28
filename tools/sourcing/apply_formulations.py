@@ -35,6 +35,7 @@ Usage (from the repo root)::
 
     python tools/sourcing/apply_formulations.py --dry-run
     python tools/sourcing/apply_formulations.py
+    python tools/sourcing/apply_formulations.py --only dihydroergotamine
 
 Stdlib only; author-side (needs the gitignored ``data_sources/`` tree).
 
@@ -186,6 +187,7 @@ def main() -> int:
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--judged", type=Path, default=JUDGED_PATH)
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--only", help="comma-separated drug ids (every other drug is left as is)")
     args = ap.parse_args()
     if not PAGES["wikipedia_pharm"].is_dir():
         print("[error] data_sources/ absent: the quote gate cannot run.", file=sys.stderr)
@@ -193,7 +195,9 @@ def main() -> int:
     judged = worklist_io.read(args.judged, required=False, default={})
     offered = W.build()["drugs"]                       # freshly re-derived
     drugs = drugs_io.load_drugs()
-    stats = apply(drugs, judged, offered, PageGate(PAGES))
+    only = set(args.only.split(",")) if args.only else None
+    stats = apply([d for d in drugs if only is None or d["id"] in only],
+                  judged, offered, PageGate(PAGES))
     n_drugs = sum(1 for d in drugs if d.get("formulations"))
     n_multi = sum(1 for d in drugs if len(d.get("formulations") or []) > 1)
     verb = "[dry-run] would place" if args.dry_run else "[ok] placed"
