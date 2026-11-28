@@ -161,6 +161,37 @@ class FrenchPredicateTest(unittest.TestCase):
         fr = "Le rufinamide module l’activité des canaux sodiques."
         self.assertTrue(fr_claims(fr, "nav"))
 
+    def test_glycine_receptors_go_by_their_french_adjective(self):
+        line = ("l'activité myorelaxante résulterait d'une action agoniste sur les récepteurs "
+                "glycinergiques situés principalement au niveau du tronc cérébral.")
+        self.assertTrue(fr_claims(line, "glycine"))
+
+    def test_a_denial_in_the_next_sentence_does_not_cancel_the_claim(self):
+        line = ("Le mode d’action est partiellement élucidé : l’activité résulterait d’une "
+                "action agoniste sur les récepteurs glycinergiques situés dans la moelle. "
+                "Il n’altère donc pas la motilité volontaire.")
+        self.assertTrue(fr_claims(line, "glycine"))
+        self.assertFalse(fr_claims("Il n’altère pas les récepteurs glycinergiques. Il agit.",
+                                   "glycine"))
+
+    def test_the_muscarinic_abbreviation_names_the_group_not_nicotinic(self):
+        line = "Nonselective mACh receptor antagonist ( anticholinergic )"
+        self.assertTrue(bg.claims_target(line, "muscarinic", AL["muscarinic"], bg.WIKI_CORPUS))
+        self.assertFalse(bg.claims_target("A nAChR antagonist.", "muscarinic", AL["muscarinic"],
+                                          bg.WIKI_CORPUS))
+
+    def test_a_list_item_running_into_a_hedged_paragraph_keeps_its_claim(self):
+        """The stored orphenadrine item glues the next paragraph on after its ")"; that
+        paragraph's "proposed" / "may" must not deny the item, while a lowercase word
+        after a bracket ("(>10,000 nM) for the ...") stays inside the clause."""
+        line = ("Nonselective mACh receptor antagonist ( anticholinergic , 58% as potent as "
+                "atropine) Various monographs have proposed the theory that this activity may "
+                "be the reason for its efficacy.")
+        self.assertTrue(bg.claims_target(line, "muscarinic", AL["muscarinic"], bg.WIKI_CORPUS))
+        self.assertFalse(bg.claims_target(
+            "It may block (weakly) mACh receptors.", "muscarinic", AL["muscarinic"],
+            bg.WIKI_CORPUS))
+
     def test_french_words_count_on_the_rcp_input_only(self):
         self.assertFalse(bg.claims_target(ALIM, "muscarinic", AL["muscarinic"], bg.WIKI_CORPUS))
 

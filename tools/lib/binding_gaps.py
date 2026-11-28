@@ -45,7 +45,12 @@ NEGATION_RE = re.compile(
 # target the other clause names. Commas and brackets are deliberately NOT breaks: a
 # list "negligible affinity (>10,000 nM) for the D1, D5 and H1 receptors" denies every
 # target it enumerates, so cutting it at a comma would offer D5 and H1 as claims.
-CLAUSE_SPLIT_RE = re.compile(r";|\b(?:but|whereas|while|although|though|however)\b", re.I)
+# One exception: a ")" followed by a capitalised word is where a stored list item runs on
+# into the next paragraph with no full stop between them ("Nonselective mACh receptor
+# antagonist ( anticholinergic , 58% as potent as atropine) Various monographs ... have
+# proposed ..."), so the next paragraph's hedge does not reach back into the item.
+CLAUSE_SPLIT_RE = re.compile(
+    r";|\b(?:but|whereas|while|although|though|however)\b|(?<=\))\s+(?=(?-i:[A-Z][a-z]))", re.I)
 
 # An explicit stereo descriptor in prose, "(S)-ketamine", "(+)-nicotine", "(R,S)-",
 # reusing the PDSP / GtoPdb tag grammar `chirality` reads (rotation signs), plus the
@@ -65,8 +70,11 @@ FR_NEGATION_RE = re.compile(
     r"pourrai\w*|semble\w*|probablement|hypothes\w*|contrairement)(?![a-z])")
 # No ";" here, unlike `CLAUSE_SPLIT_RE`: a label runs one denial over a ";" list ("peu ou
 # pas d'effet sur les récepteurs 5-HT2 ; sur les récepteurs alpha1, alpha2 ...").
+# A sentence end is a break: an RCP unit is a whole paragraph, so without it the "Il
+# n'altère donc pas la motilité" after a glycine-receptor claim would deny that claim.
 FR_CLAUSE_SPLIT_RE = re.compile(
-    r"(?<![a-z])(?:mais|alors que|tandis que|cependant|toutefois|en revanche)(?![a-z])")
+    r"(?<![a-z])(?:mais|alors que|tandis que|cependant|toutefois|en revanche)(?![a-z])"
+    r"|(?<=[a-z0-9)])\.\s+")
 
 # The class words a French label names a receptor family by. Most name no subtype
 # ("antidopaminergique", "anticholinergique (atropinique)"), hence the receptor-group
@@ -86,6 +94,7 @@ FR_ALIASES: dict[str, list[str]] = {
     "sert": ["recapture de la sérotonine"],
     "net": ["recapture de la noradrénaline"],
     "dat": ["recapture de la dopamine"],
+    "glycine": ["récepteurs glycinergiques", "récepteur glycinergique"],
     "nav": ["canal sodique", "canaux sodiques"],
     "cav": ["canal calcique", "canaux calciques"],
 }

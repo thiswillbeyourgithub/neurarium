@@ -129,6 +129,9 @@ EXTRA_ALIASES: dict[str, list[str]] = {
     # abbreviation, so only the spelled-out compounds are added here. A bare "delta"
     # can in principle fire on "delta-9-THC"; harmless, because no drug in the roster
     # carries both a delta-opioid binding and a cannabinoid article.
+    # The muscarinic group by its abbreviation ("Nonselective mACh receptor antagonist",
+    # orphenadrine); the "m" keeps it apart from nAChR, a different family.
+    "muscarinic": ["mACh receptor", "mACh receptors", "mAChR", "mAChRs"],
     "mu": ["mu opioid", "mu receptor"],
     "kappa": ["kappa opioid", "kappa receptor"],
     "delta": ["delta opioid", "delta receptor"],
