@@ -800,7 +800,12 @@
    "year": 1994
   },
   "fosaprepitant": {
-   "status": "none"
+   "application": "NDA022023",
+   "applications": 4,
+   "date": "2008-01-25",
+   "quote": "NDA022023 | EMEND | FOSAPREPITANT DIMEGLUMINE | POWDER | ORIG approved 2008-01-25",
+   "status": "found",
+   "year": 2008
   },
   "fosphenytoin": {
    "application": "NDA020450",

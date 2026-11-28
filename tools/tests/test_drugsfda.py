@@ -79,6 +79,13 @@ class SelectTest(unittest.TestCase):
         # A (-)-tagged ingredient never joins a racemate we model.
         self.assertIsNone(F.ingredient_key("(-)-SERTRALINE", "sertraline"))
 
+    def test_meglumine_salt_is_stripped(self):
+        """Regression: Emend for injection lists FOSAPREPITANT DIMEGLUMINE, which never
+        joined fosaprepitant while DIMEGLUMINE was missing from the salt words."""
+        self.assertEqual(F.ingredient_key("FOSAPREPITANT DIMEGLUMINE", "fosaprepitant"),
+                         "fosaprepitant")
+        self.assertEqual(F.ingredient_key("X MEGLUMINE", "x"), "x")
+
     def test_roster_combination_is_skipped(self):
         self.assertEqual(F.first_approval({"id": "x", "name": "Naltrexone + Bupropion"}, [])
                          ["status"], "combo")
