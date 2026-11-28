@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "3.189.1",
+      "date": "2026-11-28",
+      "entries": [
+        {
+          "category": "data",
+          "text": "The 22 most recently added drugs now file their brands, time to peak and half-life under the formulation their source names (tablet, prolonged release, injection, sublingual, orodispersible), as the rest of the roster already does",
+          "commits": [
+            "03c0ff8e"
+          ]
+        }
+      ]
+    },
+    {
       "version": "3.189.0",
       "date": "2026-11-28",
       "entries": [
