@@ -229,6 +229,15 @@ CONTRADICTIONS: dict[str, dict[str, Any] | list[dict[str, Any]]] = {
         "effets neuro-toxiques du NMDA, du kaïnate ou du quisqualate in vitro ; ce n'est "
         "donc pas un antagoniste du NMDA."),
 
+    # Wikipedia (prose and its Ki table) calls methysergide a 5-HT2B antagonist; GtoPdb's
+    # curated human assay records it as a (partial) agonist. The agonism is often credited
+    # to its metabolite methylergonovine (modeled as such), so the parent's own direction
+    # is genuinely disputed: the binding keeps its source, the bullet shows the other.
+    "drug:methysergide/bindings[5ht2b:antagonist]": _gtopdb_ki(
+        "methysergide",
+        "methysergide at 5-HT2B receptor (HTR2B, Human): Agonist / Partial agonist, pKi "
+        "8-9.4 [PMID 15322733]"),
+
     # --- active-metabolite links another corpus denies. The link and its own sources
     # stay; the bullet quotes the denial underneath it. ---
     # Stahl p.604 lists both samidorphan metabolites as active ("function as a mu opioid
