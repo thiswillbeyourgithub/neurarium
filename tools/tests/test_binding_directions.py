@@ -472,6 +472,31 @@ class TableProposalsReproducibleTest(unittest.TestCase):
         ]), [])
 
 
+@unittest.skipUnless(HAS_BS4, "the table fetcher imports bs4 at module level")
+class TableAffinityHeaderTest(unittest.TestCase):
+    """The direction pass only locates its table by the affinity column, never publishing
+    a value from it, so a mixed "Affinity (K i /IC 50 )" header (ergotamine's article)
+    counts, while a column naming only a functional constant still does not."""
+
+    def test_a_mixed_ki_ic50_header_locates_the_table(self):
+        self.assertEqual(T.affinity_col(
+            ["site", "affinity (k i /ic 50 )", "efficacy (e max )", "action"]), 1)
+
+    def test_an_ic50_only_header_does_not(self):
+        self.assertIsNone(T.affinity_col(["target", "ic 50 (nm)", "action"]))
+
+    def test_a_mixed_header_table_yields_its_directions(self):
+        import collections
+        html = ("<table><tr><th>Site</th><th>Affinity (K i /IC 50 )</th>"
+                "<th>Efficacy (E max )</th><th>Action</th></tr>"
+                "<tr><td>5-HT 1A</td><td>0.17-0.3</td><td>?</td><td>Full agonist</td></tr>"
+                "</table>")
+        drug = {"id": "testdrug", "bindings": [{"target": "5ht1a", "affinity_only": True}]}
+        rows = T.proposals_for(html, drug, {"5ht1a"}, {"5ht1a": "receptor"},
+                               collections.Counter())
+        self.assertEqual([(r["target"], r["action"]) for r in rows], [("5ht1a", "agonist")])
+
+
 class SearchTest(unittest.TestCase):
     """The UNKNOWN search's applier (``apply_search``) and its log (``unknown_log``)."""
 

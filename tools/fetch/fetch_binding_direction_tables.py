@@ -73,6 +73,21 @@ import fetch_wikipedia_pharmacology as wiki  # noqa: E402 (grid, headers, resolv
 
 OUT = os.path.join(REPO, "tools", "generated_cache", "binding_directions_tables.json")
 
+# The affinity column here only locates a pharmacodynamics table and feeds the
+# no-activity guard below: its values are never published by this pass. So a mixed
+# "Affinity (K i /IC 50 )" header (ergotamine's, dihydroergotamine's) counts as long as
+# it names Ki, unlike for the Ki extractor, which must not publish an IC50 as a Ki. A
+# column naming only a functional / log-unit constant still does not.
+KI_TOKEN_RE = re.compile(r"\bk\s*i\b")
+
+
+def affinity_col(labels: list[str]) -> int | None:
+    """Index of the first affinity column in ``labels`` (lower-cased header labels)."""
+    return next((i for i, lab in enumerate(labels)
+                 if wiki.KI_HEAD_RE.search(lab)
+                 and (not wiki.NOT_KI_RE.search(lab) or KI_TOKEN_RE.search(lab))), None)
+
+
 # The Action column: a header that says so, and is not one of the numeric neighbours a
 # pharmacodynamics table also carries (an efficacy / intrinsic-activity column is a
 # percentage, not a direction; the same word "action" never labels those, but "IA" and
@@ -132,8 +147,7 @@ def table_rows(table, valid_ids: set[str]) -> list[dict]:
     if len(grid) < 2:
         return []
     n_head, labels = wiki._header_split(grid)
-    ki_col = next((i for i, lab in enumerate(labels)
-                   if wiki.KI_HEAD_RE.search(lab) and not wiki.NOT_KI_RE.search(lab)), None)
+    ki_col = affinity_col(labels)
     if ki_col is None:
         return []
     act_col = next((i for i, lab in enumerate(labels)
