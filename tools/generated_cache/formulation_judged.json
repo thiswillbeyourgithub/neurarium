@@ -196,6 +196,17 @@
    "qid": "4f6ce94b"
   }
  },
+ "dihydroergotamine": {
+  "tmax": {
+   "picks": [
+    {
+     "release": "nasal",
+     "hours": 0.75
+    }
+   ],
+   "qid": "70179ef4"
+  }
+ },
  "donepezil": {
   "brand:Adlarity": {
    "index": 0,
