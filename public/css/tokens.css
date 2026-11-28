@@ -1,4 +1,5 @@
 :root {
+  --font-ui: "Atkinson Hyperlegible Next", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   /* Declare the page's own (dark) colour scheme so the browser's automatic
      "force dark" / night mode leaves it alone instead of double-inverting it
      (which turned the inverted molecule SVGs back to black-on-grey). Mirrors

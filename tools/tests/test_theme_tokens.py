@@ -26,7 +26,7 @@ from viewer_source import viewer_css  # noqa: E402
 # Tokens that are deliberately not a colour, so the day theme has nothing to say
 # about them.
 THEME_FREE = {"--panel-w", "--sp-xs", "--sp-s", "--sp-m", "--sp-l", "--sp-xl",
-              "--sp-indent"}
+              "--sp-indent", "--font-ui"}
 
 # A literal `color:` is honest only where the ground under it does not flip with the
 # theme. Each entry is the value plus the reason it is allowed to stay literal.
